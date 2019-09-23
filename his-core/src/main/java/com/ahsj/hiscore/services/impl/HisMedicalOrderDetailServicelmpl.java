@@ -171,6 +171,7 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
                 hisMedicationDetails.setIsPay(2);
                 hisMedicationDetails.setIsBack(2);
                 hisMedicationDetails.setIsDel(2);
+                hisMedicationDetails.setDescription(hisMedicalOrderDetail.getUsages());
                 hisMedicationDetailsService.insert(hisMedicationDetails);
             }else if(hisMedicalOrderDetail.getMedicalOrderType() == 3){
                 HisProject hisProject = hisProjectService.selectByPrimaryKey(hisMedicalOrderDetail.getTargetId());
