@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisRegisteredMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisRegistered">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="number" property="number" jdbcType="VARCHAR"/>
+        <result column="serial" property="serial" jdbcType="BIGINT"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="patient_name" property="patientName" jdbcType="VARCHAR"/>
+        <result column="registered_category" property="registeredCategory" jdbcType="INTEGER"/>
+        <result column="money" property="money" jdbcType="DECIMAL"/>
+        <result column="patient_id" property="patientId" jdbcType="BIGINT"/>
+        <result column="create_user_id" property="createUserId" jdbcType="BIGINT"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="BIGINT"/>
+        <result column="is_pay" property="isPay" jdbcType="INTEGER"/>
+        <result column="department_id" property="departmentId" jdbcType="BIGINT"/>
+        <result column="is_print" property="isPrint" jdbcType="INTEGER"/>
+        <result column="is_obsolete" property="isObsolete" jdbcType="INTEGER"/>
+        <result column="is_settlement" property="isSettlement" jdbcType="INTEGER"/>
+        <result column="is_received" property="isReceived" jdbcType="INTEGER"/>
+        <result column="medical_record_card_id" property="medicalRecordCardId" jdbcType="BIGINT"/>
+        <result column="idcard" property="idcard" jdbcType="VARCHAR"/>
+        <result column="department_name" property="departmentName" jdbcType="VARCHAR"/>
+        <result column="paid_amount" property="paidAmount" jdbcType="DECIMAL"/>
+        <result column="retrieve_amount" property="retrieveAmount" jdbcType="DECIMAL"/>
+        <result column="register_type" property="registerType" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, number, serial, remark, registered_category, money, patient_id, create_user_id, create_date,
+    update_user_id, update_date, is_pay, department_id, is_print, is_obsolete, is_settlement,
+    medical_record_card_id,is_received,register_type
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+           select  r.*,o.name as department_name
+        from his_registered  r left join  `his-userinfo`.organization o on o.id = r.department_id
+        where r.id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_registered
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.ahsj.hiscore.entity.HisRegistered">
+    insert into his_registered (id, number, serial, 
+      remark, registered_category, money, 
+      patient_id, create_user_id, create_date,
+      update_user_id, update_date, is_pay,
+      department_id, is_print, is_obsolete, 
+      is_settlement, medical_record_card_id,is_received,register_type)
+    values (#{id,jdbcType=BIGINT}, #{number,jdbcType=VARCHAR}, #{serial,jdbcType=BIGINT},
+      #{remark,jdbcType=VARCHAR}, #{registeredCategory,jdbcType=INTEGER}, #{money,jdbcType=DECIMAL}, 
+      #{patientId,jdbcType=BIGINT}, #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP},
+      #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, #{isPay,jdbcType=INTEGER},
+      #{departmentId,jdbcType=BIGINT}, #{isPrint,jdbcType=INTEGER}, #{isObsolete,jdbcType=INTEGER}, 
+      #{isSettlement,jdbcType=INTEGER}, #{medicalRecordCardId,jdbcType=BIGINT}, #{isReceived,jdbcType=BIGINT},#{registerType,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.ahsj.hiscore.entity.HisRegistered">
+        insert into his_registered
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="number != null">
+                number,
+            </if>
+            <if test="serial != null">
+                serial,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="registeredCategory != null">
+                registered_category,
+            </if>
+            <if test="money != null">
+                money,
+            </if>
+            <if test="patientId != null">
+                patient_id,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="isPay != null">
+                is_pay,
+            </if>
+            <if test="departmentId != null">
+                department_id,
+            </if>
+            <if test="isPrint != null">
+                is_print,
+            </if>
+            <if test="isObsolete != null">
+                is_obsolete,
+            </if>
+            <if test="isSettlement != null">
+                is_settlement,
+            </if>
+            <if test="medicalRecordCardId != null">
+                medical_record_card_id,
+            </if>
+            <if test="isReceived != null">
+                is_received,
+            </if>
+            <if test="registerType != null">
+                register_type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="number != null">
+                #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="serial != null">
+                #{serial,jdbcType=BIGINT},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="registeredCategory != null">
+                #{registeredCategory,jdbcType=INTEGER},
+            </if>
+            <if test="money != null">
+                #{money,jdbcType=DECIMAL},
+            </if>
+            <if test="patientId != null">
+                #{patientId,jdbcType=BIGINT},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isPay != null">
+                #{isPay,jdbcType=INTEGER},
+            </if>
+            <if test="departmentId != null">
+                #{departmentId,jdbcType=BIGINT},
+            </if>
+            <if test="isPrint != null">
+                #{isPrint,jdbcType=INTEGER},
+            </if>
+            <if test="isObsolete != null">
+                #{isObsolete,jdbcType=INTEGER},
+            </if>
+            <if test="isSettlement != null">
+                #{isSettlement,jdbcType=INTEGER},
+            </if>
+            <if test="medicalRecordCardId != null">
+                #{medicalRecordCardId,jdbcType=BIGINT},
+            </if>
+            <if test="isReceived != null">
+                #{isReceived,jdbcType=BIGINT}
+            </if>
+            <if test="registerType != null">
+                #{registerType,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisRegistered">
+        update his_registered
+        <set>
+            <if test="number != null">
+                number = #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="serial != null">
+                serial = #{serial,jdbcType=BIGINT},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="registeredCategory != null">
+                registered_category = #{registeredCategory,jdbcType=INTEGER},
+            </if>
+            <if test="money != null">
+                money = #{money,jdbcType=DECIMAL},
+            </if>
+            <if test="patientId != null">
+                patient_id = #{patientId,jdbcType=BIGINT},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isPay != null">
+                is_pay = #{isPay,jdbcType=INTEGER},
+            </if>
+            <if test="departmentId != null">
+                department_id = #{departmentId,jdbcType=BIGINT},
+            </if>
+            <if test="isPrint != null">
+                is_print = #{isPrint,jdbcType=INTEGER},
+            </if>
+            <if test="isObsolete != null">
+                is_obsolete = #{isObsolete,jdbcType=INTEGER},
+            </if>
+            <if test="isSettlement != null">
+                is_settlement = #{isSettlement,jdbcType=INTEGER},
+            </if>
+            <if test="medicalRecordCardId != null">
+                medical_record_card_id = #{medicalRecordCardId,jdbcType=BIGINT},
+            </if>
+            <if test="isReceived != null">
+                is_received = #{isReceived,jdbcType=BIGINT}
+            </if>
+            <if test="registerType != null">
+                register_type = #{registerType,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisRegistered">
+    update his_registered
+    set number = #{number,jdbcType=VARCHAR},
+      serial = #{serial,jdbcType=BIGINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      registered_category = #{registeredCategory,jdbcType=INTEGER},
+      money = #{money,jdbcType=DECIMAL},
+      patient_id = #{patientId,jdbcType=BIGINT},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      is_pay = #{isPay,jdbcType=INTEGER},
+      department_id = #{departmentId,jdbcType=BIGINT},
+      is_print = #{isPrint,jdbcType=INTEGER},
+      is_obsolete = #{isObsolete,jdbcType=INTEGER},
+      is_settlement = #{isSettlement,jdbcType=INTEGER},
+      medical_record_card_id = #{medicalRecordCardId,jdbcType=BIGINT},
+      is_received =  #{isReceived,jdbcType=BIGINT},
+        register_type = #{registerType,jdbcType=INTEGER}
+
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <!--自定义sql-->
+    <!--查询已经挂号的数量-->
+    <select id="selectNumbCount" resultType="int" parameterType="java.lang.String">
+    select
+      count(*)
+    from his_registered
+    where his_registered.number LIKE CONCAT('%',#{number},'%')
+  </select>
+
+    <!--自定义sql-->
+    <select id="selectBynumber" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from his_registered
+        where `number` = #{numer,jdbcType=VARCHAR}
+    </select>
+    <!--自定义sql-->
+    <select id="selectBypatientid" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from his_registered
+        where `patient_id` = #{patientId,jdbcType=BIGINT}
+    </select>
+
+    <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select a.*,
+        b.name as patient_name,
+        d.name as depart_name
+        from his_registered as a
+        left join his_patient_info as b on a.patient_id =b.id
+        left join `his-userinfo`.organization as d on d.id = a.department_id
+        where
+        1= 1
+        <if test="parameter.patientName != null and parameter.patientName != ''">
+            and b.name like concat('%' #{parameter.patientName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.number != null and parameter.number != ''">
+            and a.number like concat('%' #{parameter.number,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.serial != null and parameter.serial != ''">
+            and a.serial like concat('%' #{parameter.serial,jdbcType=BIGINT},'%')
+        </if>
+        <if test="parameter.registeredCategory != null and parameter.registeredCategory != ''">
+            and a.registered_category =#{parameter.registeredCategory,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.isPay != null and parameter.isPay != ''">
+            and a.is_pay =#{parameter.isPay,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.isPrint != null and parameter.isPrint != ''">
+            and a.is_print =#{parameter.isPrint,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.isObsolete != null and parameter.isObsolete != ''">
+            and a.is_obsolete =#{parameter.isObsolete,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.isSettlement != null and parameter.isSettlement != ''">
+            and a.is_settlement =#{parameter.isSettlement,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.isToday != null ">
+            and a.create_date &gt;= CURRENT_DATE
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+    <!--RegisterdCount-->
+    <resultMap id="CounttMap" type="com.ahsj.hiscore.entity.RegisterdCount">
+        <result column="totalMoney" property="totalMoney" jdbcType="DECIMAL"/>
+        <result column="count" property="count" jdbcType="INTEGER"/>
+    </resultMap>
+    <select id="countForToday" resultMap="CounttMap" parameterType="java.lang.Long">
+   select
+    count(id) as count,
+    SUM(money) as totalmoney
+   from his_registered
+   where
+        is_obsolete = 2
+        and is_settlement = 2
+        and is_pay = 1
+        and create_date &gt; CURDATE()
+        and create_date &lt; CURDATE() +1
+  </select>
+    <!--查询需要作废的注册单-->
+    <select id="selectForObsolete" resultMap="BaseResultMap">
+        select
+        his_registered.*
+        from his_registered
+        where
+        <foreach collection="array" item="item" index="index">
+            <if test="index == 0">
+                id = #{item,jdbcType=BIGINT}
+            </if>
+            or id = #{item,jdbcType=BIGINT}
+        </foreach>
+    </select>
+    <!--作废挂号单-->
+    <update id="updateForObsolete" parameterType="java.util.List">
+        update his_registered
+        set is_obsolete = 1
+        where
+        <foreach collection="list" item="item" index="index" separator="">
+            <if test="index == 0">
+                id = #{item.id,jdbcType=BIGINT}
+            </if>
+            and id = #{item.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <select id="detailInit" parameterType="java.lang.Long" resultMap="BaseResultMap">
+       select
+           a.*,
+           b.name as patient_name,
+           b.idcard as idcard,
+           c.amount_receivable as money,
+           c.retrieve_amount as retrieve_amount,
+           c.paid_amount as paid_amount,
+           d.name as depart_name
+           from his_registered as a
+           left join his_patient_info as b on a.patient_id = b.id
+           left join his_registeredpay as c on c.registered_id = a.id
+           left join `his-userinfo`.organization as d on d.id = a.department_id
+           where
+              a.id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectForDaily" resultMap="BaseResultMap">
+        select
+        a.*
+        from
+        (
+        select
+        his_registered.*
+        from his_registered
+        where
+
+        is_obsolete = 2
+        and is_settlement = 2
+        ) a
+        where
+        <foreach collection="array" separator="or" index="index" item="item">
+            id = #{item,jdbcType=BIGINT}
+        </foreach>
+    </select>
+    <!--    批量更新-->
+    <update id="updateBatchForDaily" parameterType="list">
+        update his_registered
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="is_settlement=case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.isSettlement!=null">
+                        when id=#{item.id} then #{item.isSettlement}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where
+        <foreach collection="list" separator="or" item="item" index="index">
+            id=#{item.id}
+        </foreach>
+    </update>
+    <select id="selectByReistDataCount" resultMap="BaseResultMap" parameterType="java.util.Date">
+	SELECT
+    his_registered.*
+	FROM his_registered
+	WHERE
+      is_pay = 1
+     and create_date &gt;= #{createDate,jdbcType=TIMESTAMP}
+     and create_date &lt; #{endDate,jdbcType=TIMESTAMP}
+         order by create_date asc
+    </select>
+</mapper>

@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisMedicineInfoMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisMedicineInfo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="drugs_numb" property="drugsNumb" jdbcType="VARCHAR"/>
+        <result column="drugs_name" property="drugsName" jdbcType="VARCHAR"/>
+        <result column="drugs_alias" property="drugsAlias" jdbcType="VARCHAR"/>
+        <result column="drugs_spec" property="drugsSpec" jdbcType="VARCHAR"/>
+        <result column="prescription" property="prescription" jdbcType="INTEGER"/>
+        <result column="mental_medicine" property="mentalMedicine" jdbcType="INTEGER"/>
+        <result column="large_unit" property="largeUnit" jdbcType="VARCHAR"/>
+        <result column="small_unit" property="smallUnit" jdbcType="VARCHAR"/>
+        <result column="conversion_rate" property="conversionRate" jdbcType="DECIMAL"/>
+        <result column="disable" property="disable" jdbcType="INTEGER"/>
+        <result column="level" property="level" jdbcType="INTEGER"/>
+        <result column="medical_insurance_sign" property="medicalInsuranceSign" jdbcType="INTEGER"/>
+        <result column="placeOrigin" property="placeorigin" jdbcType="INTEGER"/>
+        <result column="base_medicine" property="baseMedicine" jdbcType="INTEGER"/>
+        <result column="narcotic_drugs" property="narcoticDrugs" jdbcType="INTEGER"/>
+        <result column="create_user_id" property="createUserId" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="enter_price" property="enterPrice" jdbcType="DOUBLE"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        ,
+        drugs_numb,
+        drugs_name,
+        drugs_alias,
+        drugs_spec,
+        prescription,
+        mental_medicine,
+        large_unit,
+        small_unit,
+        conversion_rate,
+        disable,
+        level,
+        medical_insurance_sign,
+        placeOrigin,
+        base_medicine,
+        narcotic_drugs,
+        remarks,
+        create_user_id,
+        create_date,
+        update_user_id,
+        update_date,
+        enter_price
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from his_medicine_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from his_medicine_info
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisMedicineInfo" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into his_medicine_info (id, drugs_numb, drugs_name,
+                                       drugs_alias, drugs_spec, prescription,
+                                       mental_medicine, large_unit, small_unit,
+                                       conversion_rate, disable, level,
+                                       medical_insurance_sign, placeOrigin, base_medicine,
+                                       narcotic_drugs, remarks, create_user_id, create_date, update_user_id,
+                                       update_date,enter_price)
+        values (#{id,jdbcType=BIGINT}, #{drugsNumb,jdbcType=VARCHAR}, #{drugsName,jdbcType=VARCHAR},
+                #{drugsAlias,jdbcType=VARCHAR}, #{drugsSpec,jdbcType=VARCHAR}, #{prescription,jdbcType=INTEGER},
+                #{mentalMedicine,jdbcType=INTEGER}, #{largeUnit,jdbcType=VARCHAR}, #{smallUnit,jdbcType=VARCHAR},
+                #{conversionRate,jdbcType=DECIMAL}, #{disable,jdbcType=INTEGER}, #{level,jdbcType=INTEGER},
+                #{medicalInsuranceSign,jdbcType=INTEGER}, #{placeorigin,jdbcType=INTEGER},
+                #{baseMedicine,jdbcType=INTEGER},
+                #{narcoticDrugs,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR},
+                #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP},#{enterPrice,jdbcType=DOUBLE})
+    </insert>
+    <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisMedicineInfo">
+        insert into his_medicine_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="drugsNumb != null">
+                drugs_numb,
+            </if>
+            <if test="drugsName != null">
+                drugs_name,
+            </if>
+            <if test="drugsAlias != null">
+                drugs_alias,
+            </if>
+            <if test="drugsSpec != null">
+                drugs_spec,
+            </if>
+            <if test="prescription != null">
+                prescription,
+            </if>
+            <if test="mentalMedicine != null">
+                mental_medicine,
+            </if>
+            <if test="largeUnit != null">
+                large_unit,
+            </if>
+            <if test="smallUnit != null">
+                small_unit,
+            </if>
+            <if test="conversionRate != null">
+                conversion_rate,
+            </if>
+            <if test="disable != null">
+                disable,
+            </if>
+            <if test="level != null">
+                level,
+            </if>
+            <if test="medicalInsuranceSign != null">
+                medical_insurance_sign,
+            </if>
+            <if test="placeorigin != null">
+                placeOrigin,
+            </if>
+            <if test="baseMedicine != null">
+                base_medicine,
+            </if>
+            <if test="narcoticDrugs != null">
+                narcotic_drugs,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="enterPrice != null">
+                enter_price,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="drugsNumb != null">
+                #{drugsNumb,jdbcType=VARCHAR},
+            </if>
+            <if test="drugsName != null">
+                #{drugsName,jdbcType=VARCHAR},
+            </if>
+            <if test="drugsAlias != null">
+                #{drugsAlias,jdbcType=VARCHAR},
+            </if>
+            <if test="drugsSpec != null">
+                #{drugsSpec,jdbcType=VARCHAR},
+            </if>
+            <if test="prescription != null">
+                #{prescription,jdbcType=INTEGER},
+            </if>
+            <if test="mentalMedicine != null">
+                #{mentalMedicine,jdbcType=INTEGER},
+            </if>
+            <if test="largeUnit != null">
+                #{largeUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="smallUnit != null">
+                #{smallUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="conversionRate != null">
+                #{conversionRate,jdbcType=DECIMAL},
+            </if>
+            <if test="disable != null">
+                #{disable,jdbcType=INTEGER},
+            </if>
+            <if test="level != null">
+                #{level,jdbcType=INTEGER},
+            </if>
+            <if test="medicalInsuranceSign != null">
+                #{medicalInsuranceSign,jdbcType=INTEGER},
+            </if>
+            <if test="placeorigin != null">
+                #{placeorigin,jdbcType=INTEGER},
+            </if>
+            <if test="baseMedicine != null">
+                #{baseMedicine,jdbcType=INTEGER},
+            </if>
+            <if test="narcoticDrugs != null">
+                #{narcoticDrugs,jdbcType=INTEGER},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="enterPrice != null">
+                #{enterPrice,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisMedicineInfo">
+        update his_medicine_info
+        <set>
+            <if test="drugsNumb != null">
+                drugs_numb = #{drugsNumb,jdbcType=VARCHAR},
+            </if>
+            <if test="drugsName != null">
+                drugs_name = #{drugsName,jdbcType=VARCHAR},
+            </if>
+            <if test="drugsAlias != null">
+                drugs_alias = #{drugsAlias,jdbcType=VARCHAR},
+            </if>
+            <if test="drugsSpec != null">
+                drugs_spec = #{drugsSpec,jdbcType=VARCHAR},
+            </if>
+            <if test="prescription != null">
+                prescription = #{prescription,jdbcType=INTEGER},
+            </if>
+            <if test="mentalMedicine != null">
+                mental_medicine = #{mentalMedicine,jdbcType=INTEGER},
+            </if>
+            <if test="largeUnit != null">
+                large_unit = #{largeUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="smallUnit != null">
+                small_unit = #{smallUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="conversionRate != null">
+                conversion_rate = #{conversionRate,jdbcType=DECIMAL},
+            </if>
+            <if test="disable != null">
+                disable = #{disable,jdbcType=INTEGER},
+            </if>
+            <if test="level != null">
+                level = #{level,jdbcType=INTEGER},
+            </if>
+            <if test="medicalInsuranceSign != null">
+                medical_insurance_sign = #{medicalInsuranceSign,jdbcType=INTEGER},
+            </if>
+            <if test="placeorigin != null">
+                placeOrigin = #{placeorigin,jdbcType=INTEGER},
+            </if>
+            <if test="baseMedicine != null">
+                base_medicine = #{baseMedicine,jdbcType=INTEGER},
+            </if>
+            <if test="narcoticDrugs != null">
+                narcotic_drugs = #{narcoticDrugs,jdbcType=INTEGER},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="enterPrice != null">
+                enter_price = #{enterPrice,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisMedicineInfo">
+        update his_medicine_info
+        set drugs_numb             = #{drugsNumb,jdbcType=VARCHAR},
+            drugs_name             = #{drugsName,jdbcType=VARCHAR},
+            drugs_alias            = #{drugsAlias,jdbcType=VARCHAR},
+            drugs_spec             = #{drugsSpec,jdbcType=VARCHAR},
+            prescription           = #{prescription,jdbcType=INTEGER},
+            mental_medicine        = #{mentalMedicine,jdbcType=INTEGER},
+            large_unit             = #{largeUnit,jdbcType=VARCHAR},
+            small_unit             = #{smallUnit,jdbcType=VARCHAR},
+            conversion_rate        = #{conversionRate,jdbcType=DECIMAL},
+            disable                = #{disable,jdbcType=INTEGER},
+            level                  = #{level,jdbcType=INTEGER},
+            medical_insurance_sign = #{medicalInsuranceSign,jdbcType=INTEGER},
+            placeOrigin            = #{placeorigin,jdbcType=INTEGER},
+            base_medicine          = #{baseMedicine,jdbcType=INTEGER},
+            narcotic_drugs         = #{narcoticDrugs,jdbcType=INTEGER},
+            remarks                = #{remarks,jdbcType=VARCHAR},
+            create_user_id         = #{createUserId,jdbcType=VARCHAR},
+            create_date            = #{createDate,jdbcType=TIMESTAMP},
+            update_user_id         = #{updateUserId,jdbcType=VARCHAR},
+            update_date            = #{updateDate,jdbcType=TIMESTAMP},
+            enter_price            = #{enterPrice,jdbcType=DOUBLE}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <!--自定义sql-->
+    <select id="selectForInsert" parameterType="com.ahsj.hiscore.entity.HisMedicineInfo" resultMap="BaseResultMap">
+        select his_medicine_info.*
+        from his_medicine_info
+        where
+            drugs_name = #{drugsName,jdbcType=VARCHAR}
+          and drugs_spec = #{drugsSpec}
+    </select>
+    <!--根据id查询-->
+    <select id="selectByIds" resultMap="BaseResultMap">
+        select his_medicine_info.*
+        from his_medicine_info
+        where
+        <foreach collection="array" item="id" index="index"
+                 open="" close=";" separator="or">
+            his_medicine_info.id = #{id,jdbcType=BIGINT}
+        </foreach>
+    </select>
+    <!--设置失效-->
+    <update id="setDisable">
+        update his_medicine_info
+        set disable = #{disable,jdbcType=INTEGER}
+        where
+        <foreach collection="list" item="item" index="index"
+                 open="" close=";" separator="or">
+            id = #{item.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select
+        his_medicine_info.*
+        from his_medicine_info
+        where
+        1 =1
+        <if test="parameter.drugsNumb != null and parameter.drugsNumb != ''">
+            and drugs_numb like concat('%' #{parameter.drugsNumb,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.drugsName != null and parameter.drugsName != ''">
+            and drugs_name like concat('%' #{parameter.drugsName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.drugsSpec != null and parameter.drugsSpec != ''">
+            and drugs_spec like concat('%' #{parameter.drugsSpec,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.drugsAlias != null and parameter.drugsAlias != ''">
+            and drugs_alias like concat('%' #{parameter.drugsAlias,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.disable != null and parameter.disable != ''">
+            and disable = #{parameter.disable,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.prescription != null and parameter.prescription != ''">
+            and prescription = #{parameter.prescription,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.mentalMedicine != null and parameter.mentalMedicine != ''">
+            and mental_medicine = #{parameter.mentalMedicine,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.level != null and parameter.level != ''">
+            and level = #{parameter.level,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.medicalInsuranceSign != null and parameter.medicalInsuranceSign != ''">
+            and medical_insurance_sign = #{parameter.medicalInsuranceSign,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.baseMedicine != null and parameter.baseMedicine != ''">
+            and base_medicine = #{parameter.baseMedicine,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.narcoticDrugs != null and parameter.narcoticDrugs != ''">
+            and narcotic_drugs = #{parameter.narcoticDrugs,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+    <!--根据药品编号查找-->
+    <select id="selectByDrugsNumb" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+            his_medicine_info.*
+        FROM
+            his_medicine_info
+        where
+            drugs_numb = #{drugsNumb,jdbcType=VARCHAR}
+    </select>
+
+    <!--根据药品名称和规格查找-->
+    <select id="selectByDrugsNameAndSpec" parameterType="com.ahsj.hiscore.entity.HisMedicineInfo"
+            resultMap="BaseResultMap">
+        SELECT
+            his_medicine_info.*
+        FROM
+            his_medicine_info
+        where
+            drugs_name = #{drugsName,jdbcType=VARCHAR}
+          and drugs_spec = #{drugsSpec,jdbcType=VARCHAR}
+    </select>
+
+
+
+
+    <select id="queryTranslateInfoByDate" resultMap="BaseResultMap">
+        select  <include refid="Base_Column_List"/> from his_medicine_info as his
+        where    <![CDATA[ (DATE_FORMAT(his.update_date, '%Y-%m-%d') =  DATE_FORMAT( #{updateDate}, '%Y-%m-%d'))]]>
+    </select>
+
+    <select id="queryAll" resultMap="BaseResultMap" >
+        select <include refid="Base_Column_List"/> from  his_medicine_info
+     </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select his_medicine_info.*
+from his_medicine_info
+    </select>
+
+
+    <select id="queryListExportAll"  resultMap="BaseResultMap">
+        select
+            a.*,b.id as prescriptionId,b.value as precriptionName,c.id as mentalMedicineId,c.value as mentalmedicine,d.id as levelId,d.value as leveld,
+               e.id as medicalInsuranceSignId,e.value as medicalinsurancesign,f.id as placeoriginId,f.value as placeoriginName,g.id as baseMedicineId,g.value as basemedicine,h.id as narcoticDrugsId,h.value as narcoticdrugs
+        from his_medicine_info as a
+            left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'prescription' ) as b on a.prescription = b.code
+            left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'mental_medicine' ) as c on a.mental_medicine = c.code
+            left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'level' ) as d on a.level = d.code
+            left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'medical_insurance_sign' ) as e on a.medical_insurance_sign = e.code
+            left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'placeOrigin' ) as f on a.placeorigin = f.code
+            left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'base_medicine' ) as g on a.base_medicine = g.code
+            left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'narcotic_drugs' ) as h on a.narcotic_drugs = h.code
+    </select>
+
+    <select id="queryListExportAndByIdsAll"  resultMap="BaseResultMap" parameterType="java.util.List">
+        select
+        a.*,b.id as prescriptionId,b.value as precriptionName,c.id as mentalMedicineId,c.value as mentalmedicine,d.id as levelId,d.value as leveld,
+        e.id as medicalInsuranceSignId,e.value as medicalinsurancesign,f.id as placeoriginId,f.value as placeoriginName,g.id as baseMedicineId,g.value as basemedicine,h.id as narcoticDrugsId,h.value as narcoticdrugs
+        from his_medicine_info as a
+        left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'prescription' ) as b on a.prescription = b.code
+        left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'mental_medicine' ) as c on a.mental_medicine = c.code
+        left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'level' ) as d on a.level = d.code
+        left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'medical_insurance_sign' ) as e on a.medical_insurance_sign = e.code
+        left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'placeOrigin' ) as f on a.placeorigin = f.code
+        left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'base_medicine' ) as g on a.base_medicine = g.code
+        left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'narcotic_drugs' ) as h on a.narcotic_drugs = h.code
+        where
+        <foreach collection="list" separator="or" item="item" index="index">
+            a.id=#{item.id}
+        </foreach>
+    </select>
+
+    <select id="queryForCode"  resultMap="BaseResultMap" parameterType="java.lang.String">
+        select DISTINCT
+            b.id as prescriptionId,c.id as mentalMedicineId,d.id as levelId,
+            e.id as medicalInsuranceSignId,f.id as placeoriginId,g.id as baseMedicineId,h.id as narcoticDrugsId
+        from his_medicine_info as a
+                 left join (SELECT  c.id  from  `his-userinfo`.sys_code c   WHERE c.type = 'prescription' ) as b on true
+                 left join (SELECT c.id from  `his-userinfo`.sys_code c   WHERE c.type = 'mental_medicine' ) as c on true
+                 left join (SELECT c.id from  `his-userinfo`.sys_code c    WHERE c.type = 'level' ) as d on true
+                 left join (SELECT c.id from  `his-userinfo`.sys_code c    WHERE c.type = 'medical_insurance_sign' ) as e on true
+                 left join (SELECT c.id from  `his-userinfo`.sys_code c    WHERE c.type = 'placeOrigin' ) as f on true
+                 left join (SELECT c.id from  `his-userinfo`.sys_code c    WHERE c.type = 'base_medicine' ) as g on true
+                 left join (SELECT c.id from  `his-userinfo`.sys_code c    WHERE c.type = 'narcotic_drugs' ) as h on true
+    </select>
+
+    <select id="queryMedicineInfoAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_medicine_info order by create_date desc
+    </select>
+
+    <select id="queryHisMedicineInfoByDrugsNumb" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_medicine_info
+        where drugs_numb =#{drugsNumb,jdbcType=VARCHAR}
+    </select>
+
+    <update id="updateHisMedicineInfo" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update his_medicine_info
+            <set>
+
+                <if test="item.drugsName != null">
+                    drugs_name = #{item.drugsName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.drugsAlias != null">
+                    drugs_alias = #{item.drugsAlias,jdbcType=VARCHAR},
+                </if>
+                <if test="item.drugsSpec != null">
+                    drugs_spec = #{item.drugsSpec,jdbcType=VARCHAR},
+                </if>
+                <if test="item.prescription != null">
+                    prescription = #{item.prescription,jdbcType=INTEGER},
+                </if>
+                <if test="item.mentalMedicine != null">
+                    mental_medicine = #{item.mentalMedicine,jdbcType=INTEGER},
+                </if>
+                <if test="item.largeUnit != null">
+                    large_unit = #{item.largeUnit,jdbcType=VARCHAR},
+                </if>
+                <if test="item.smallUnit != null">
+                    small_unit = #{item.smallUnit,jdbcType=VARCHAR},
+                </if>
+                <if test="item.conversionRate != null">
+                    conversion_rate = #{item.conversionRate,jdbcType=DECIMAL},
+                </if>
+                <if test="item.level != null">
+                    level = #{item.level,jdbcType=INTEGER},
+                </if>
+                <if test="item.medicalInsuranceSign != null">
+                    medical_insurance_sign = #{item.medicalInsuranceSign,jdbcType=INTEGER},
+                </if>
+                <if test="item.placeorigin != null">
+                    placeOrigin = #{item.placeorigin,jdbcType=INTEGER},
+                </if>
+                <if test="item.baseMedicine != null">
+                    base_medicine = #{item.baseMedicine,jdbcType=INTEGER},
+                </if>
+                <if test="item.narcoticDrugs != null">
+                    narcotic_drugs = #{item.narcoticDrugs,jdbcType=INTEGER},
+                </if>
+                <if test="item.remarks != null">
+                    remarks = #{item.remarks,jdbcType=VARCHAR},
+                </if>
+                <if test="item.enterPrice != null">
+                    enter_price = #{item.enterPrice,jdbcType=DOUBLE},
+                </if>
+            </set>
+            where drugs_numb = #{item.drugsNumb,jdbcType=VARCHAR}
+        </foreach>
+    </update>
+
+
+    <insert id="importHisMedicineInfo"  useGeneratedKeys="true" keyProperty="id" parameterType="com.ahsj.hiscore.entity.HisMedicineInfo">
+        insert into his_medicine_info (  id ,
+        drugs_numb,
+        drugs_name,
+        drugs_alias,
+        drugs_spec,
+        prescription,
+        mental_medicine,
+        large_unit,
+        small_unit,
+        conversion_rate,
+        disable,
+        level,
+        medical_insurance_sign,
+        placeOrigin,
+        base_medicine,
+        narcotic_drugs,
+        remarks,
+        create_user_id,
+        create_date,
+        update_user_id,
+        update_date,
+        enter_price)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id,jdbcType=BIGINT}, #{item.drugsNumb,jdbcType=VARCHAR}, #{item.drugsName,jdbcType=VARCHAR},
+            #{item.drugsAlias,jdbcType=VARCHAR}, #{item.drugsSpec,jdbcType=VARCHAR}, #{item.prescription,jdbcType=INTEGER},
+            #{item.mentalMedicine,jdbcType=INTEGER}, #{item.largeUnit,jdbcType=VARCHAR}, #{item.smallUnit,jdbcType=VARCHAR},
+            #{item.conversionRate,jdbcType=DECIMAL}, #{item.disable,jdbcType=INTEGER}, #{item.level,jdbcType=INTEGER},
+            #{item.medicalInsuranceSign,jdbcType=INTEGER}, #{item.placeorigin,jdbcType=INTEGER},
+            #{item.baseMedicine,jdbcType=INTEGER},
+            #{item.narcoticDrugs,jdbcType=INTEGER}, #{item.remarks,jdbcType=VARCHAR}, #{item.createUserId,jdbcType=VARCHAR},
+            #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP},#{item.enterPrice,jdbcType=DOUBLE})
+        </foreach>
+    </insert>
+
+
+    <select id="selectByExportExcel" parameterType="com.ahsj.hiscore.entity.HisMedicineInfo" resultMap="BaseResultMap">
+        select
+        his_medicine_info.*
+        from his_medicine_info
+        where
+        1 =1
+        <if test="drugsNumb != null and drugsNumb != ''">
+            and drugs_numb like concat('%' #{drugsNumb,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="drugsName != null and drugsName != ''">
+            and drugs_name like concat('%' #{drugsName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="drugsAlias != null and drugsAlias != ''">
+            and drugs_alias like concat('%' #{drugsAlias,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="disable != null and disable != 0">
+            and disable = #{disable,jdbcType=INTEGER}
+        </if>
+        <if test="prescription != null and prescription != 0">
+            and prescription = #{prescription,jdbcType=INTEGER}
+        </if>
+        <if test="mentalMedicine != null and mentalMedicine != 0">
+            and mental_medicine = #{mentalMedicine,jdbcType=INTEGER}
+        </if>
+        <if test="level != null and level != 0">
+            and level = #{level,jdbcType=INTEGER}
+        </if>
+        <if test="medicalInsuranceSign != null and medicalInsuranceSign != 0">
+            and medical_insurance_sign = #{medicalInsuranceSign,jdbcType=INTEGER}
+        </if>
+        <if test="baseMedicine != null and baseMedicine != 0">
+            and base_medicine = #{baseMedicine,jdbcType=INTEGER}
+        </if>
+        <if test="narcoticDrugs != null and narcoticDrugs != 0">
+            and narcotic_drugs = #{narcoticDrugs,jdbcType=INTEGER}
+        </if>
+    </select>
+
+</mapper>

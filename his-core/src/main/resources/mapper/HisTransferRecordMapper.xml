@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisTransferRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisTransferRecord" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="hosptal_manage_id" property="hosptalManageId" jdbcType="BIGINT" />
+    <result column="patient_id" property="patientId" jdbcType="BIGINT" />
+    <result column="department_id" property="departmentId" jdbcType="BIGINT" />
+    <result column="doctor_id" property="doctorId" jdbcType="BIGINT" />
+    <result column="nurse_id" property="nurseId" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="transfer_date" property="transferDate" jdbcType="TIMESTAMP" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="transfer_diagnosis" property="transferDiagnosis" jdbcType="VARCHAR" />
+    <result column="admission_situation" property="admissionSituation" jdbcType="VARCHAR" />
+    <result column="medical_treatment" property="medicalTreatment" jdbcType="VARCHAR" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="current_situation" property="currentSituation" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="treatment_plan" property="treatmentPlan" jdbcType="VARCHAR" />
+    <result column="doctor_signature" property="doctorSignature" jdbcType="VARCHAR" />
+    <result column="transfer_type" property="transferType" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, hosptal_manage_id, patient_id, department_id, doctor_id, nurse_id, create_date, 
+    update_date, transfer_date, create_user_id, transfer_diagnosis, admission_situation, 
+    medical_treatment, update_user_id, current_situation, remarks, is_sign,treatment_plan, doctor_signature,
+    transfer_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from his_transfer_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from his_transfer_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisTransferRecord" useGeneratedKeys="true" keyProperty="id" >
+    insert into his_transfer_record (id, hosptal_manage_id, patient_id, 
+      department_id, doctor_id, nurse_id, 
+      create_date, update_date, transfer_date, 
+      create_user_id, transfer_diagnosis, admission_situation, 
+      medical_treatment, update_user_id, current_situation, 
+      remarks, treatment_plan, is_sign, admission_diagnosis, doctor_signature,
+      transfer_type)
+    values (#{id,jdbcType=BIGINT}, #{hosptalManageId,jdbcType=BIGINT}, #{patientId,jdbcType=BIGINT}, 
+      #{departmentId,jdbcType=BIGINT}, #{doctorId,jdbcType=BIGINT}, #{nurseId,jdbcType=BIGINT}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{transferDate,jdbcType=TIMESTAMP}, 
+      #{createUserId,jdbcType=BIGINT}, #{transferDiagnosis,jdbcType=VARCHAR}, #{admissionSituation,jdbcType=VARCHAR}, 
+      #{medicalTreatment,jdbcType=VARCHAR}, #{updateUserId,jdbcType=BIGINT}, #{currentSituation,jdbcType=VARCHAR}, 
+      #{remarks,jdbcType=VARCHAR}, #{treatmentPlan,jdbcType=VARCHAR}, #{isSign,jdbcType=INTEGER}, #{admissionDiagnosis,jdbcType=VARCHAR}, #{doctorSignature,jdbcType=VARCHAR},
+      #{transferType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisTransferRecord" >
+    insert into his_transfer_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="hosptalManageId != null" >
+        hosptal_manage_id,
+      </if>
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="departmentId != null" >
+        department_id,
+      </if>
+      <if test="doctorId != null" >
+        doctor_id,
+      </if>
+      <if test="nurseId != null" >
+        nurse_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="transferDate != null" >
+        transfer_date,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="transferDiagnosis != null" >
+        transfer_diagnosis,
+      </if>
+      <if test="admissionSituation != null" >
+        admission_situation,
+      </if>
+      <if test="medicalTreatment != null" >
+        medical_treatment,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="currentSituation != null" >
+        current_situation,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="treatmentPlan != null" >
+        treatment_plan,
+      </if>
+      <if test="doctorSignature != null" >
+        doctor_signature,
+      </if>
+      <if test="transferType != null" >
+        transfer_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="hosptalManageId != null" >
+        #{hosptalManageId,jdbcType=BIGINT},
+      </if>
+      <if test="patientId != null" >
+        #{patientId,jdbcType=BIGINT},
+      </if>
+      <if test="departmentId != null" >
+        #{departmentId,jdbcType=BIGINT},
+      </if>
+      <if test="doctorId != null" >
+        #{doctorId,jdbcType=BIGINT},
+      </if>
+      <if test="nurseId != null" >
+        #{nurseId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transferDate != null" >
+        #{transferDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="transferDiagnosis != null" >
+        #{transferDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="admissionSituation != null" >
+        #{admissionSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalTreatment != null" >
+        #{medicalTreatment,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="currentSituation != null" >
+        #{currentSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="treatmentPlan != null" >
+        #{treatmentPlan,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorSignature != null" >
+        #{doctorSignature,jdbcType=VARCHAR},
+      </if>
+      <if test="transferType != null" >
+        #{transferType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisTransferRecord" >
+    update his_transfer_record
+    <set >
+      <if test="hosptalManageId != null" >
+        hosptal_manage_id = #{hosptalManageId,jdbcType=BIGINT},
+      </if>
+      <if test="patientId != null" >
+        patient_id = #{patientId,jdbcType=BIGINT},
+      </if>
+      <if test="departmentId != null" >
+        department_id = #{departmentId,jdbcType=BIGINT},
+      </if>
+      <if test="doctorId != null" >
+        doctor_id = #{doctorId,jdbcType=BIGINT},
+      </if>
+      <if test="nurseId != null" >
+        nurse_id = #{nurseId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transferDate != null" >
+        transfer_date = #{transferDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="transferDiagnosis != null" >
+        transfer_diagnosis = #{transferDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="admissionSituation != null" >
+        admission_situation = #{admissionSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalTreatment != null" >
+        medical_treatment = #{medicalTreatment,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="currentSituation != null" >
+        current_situation = #{currentSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="treatmentPlan != null" >
+        treatment_plan = #{treatmentPlan,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorSignature != null" >
+        doctor_signature = #{doctorSignature,jdbcType=VARCHAR},
+      </if>
+      <if test="transferType != null" >
+        transfer_type = #{transferType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisTransferRecord" >
+    update his_transfer_record
+    set hosptal_manage_id = #{hosptalManageId,jdbcType=BIGINT},
+      patient_id = #{patientId,jdbcType=BIGINT},
+      department_id = #{departmentId,jdbcType=BIGINT},
+      doctor_id = #{doctorId,jdbcType=BIGINT},
+      nurse_id = #{nurseId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      transfer_date = #{transferDate,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      transfer_diagnosis = #{transferDiagnosis,jdbcType=VARCHAR},
+      admission_situation = #{admissionSituation,jdbcType=VARCHAR},
+      medical_treatment = #{medicalTreatment,jdbcType=VARCHAR},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      current_situation = #{currentSituation,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      treatment_plan = #{treatmentPlan,jdbcType=VARCHAR},
+      is_sign = #{isSign,jdbcType=INTEGER},
+      doctor_signature = #{doctorSignature,jdbcType=VARCHAR},
+      transfer_type = #{transferType,jdbcType=INTEGER},
+      admission_diagnosis = #{admissionDiagnosis,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+<!--  自定义sql-->
+  <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    select a.*,
+    b.create_date as create_time
+    from his_transfer_record as a
+    LEFT JOIN his_hospital_manage as b on b.id = a.hosptal_manage_id
+    where
+    b.id = #{parameter.ids,jdbcType=BIGINT}
+    <if test="parameter.transferType != null and parameter.transferType != ''">
+      and a.transfer_type = #{parameter.transferType,jdbcType=BIGINT}
+    </if>
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+</mapper>

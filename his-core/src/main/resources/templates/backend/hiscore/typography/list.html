@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://mybatis.org/schema/mybatis-mapper">
+
+<style>
+    .fc-event {
+        border-radius: 5px;
+        text-align: center;
+    }
+</style>
+<div th:replace="public/base_calendar :: html"></div>
+<div th:replace="public/base_list :: html"></div>
+<body>
+
+<div id="app-calendar">
+    <div class="row">
+        <div class="col s12">
+            <div class="card">
+                <div class="card-content">
+
+                    <div class="row">
+                        <div class="row">
+                            <div class="col m3">
+                                <h4 class="card-title">
+                                    External Dragging
+                                   <button id="anniu">按钮</button>
+                                </h4>
+                            </div>
+                            <!--                            <div class="col m1"><input type="text" class="datepicker"/></div>-->
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="row">
+                            <div class="col  s1 m1 l1 xl1">
+                                <select ahsj:select name="departmentId" id="id" type="depart" typeKey="2" departKbn="1">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col  s1 m1 l1 xl1">
+                                <select ahsj:select name="departmentId" id="data-id" type="depart" typeKey="2"
+                                        departKbn="2">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col m3">
+                            <div id='external-events'>
+                                <h5><span id="dept_name"></span> 待选人员值班列表</h5>
+                                <div class="fc-events-container">
+                                    <!-- <div class="fc_count fc-events-container"></div>-->
+                                    <!--                                  <div th:each="hisNurse:${hisNurses}" th:text="${hisNurse.getName()}" th:attr="data_id=${hisNurse.getId()}" class='fc-event'style="background-color: #009688" data-color='#009688'>All Day Event</div>-->
+                                </div>
+                                <p>
+                                    <label>
+                                        <input type="checkbox"/>
+                                        <span>Remove After Drop</span>
+                                    </label>
+                                </p>
+
+                                <ul class="pagination">
+                                    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a>
+                                    </li>
+                                    <!-- <li class="active"><a href="#!">1</a></li>
+                                     <li class="waves-effect"><a href="#!">2</a></li>
+                                   -->
+                                    <li class="waves-effect"><a href="#!"><i
+                                            class="material-icons">chevron_right</i></a></li>
+                                </ul>
+
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <button id="send_btn" class="btn cyan waves-effect waves-light right"
+                                                type="submit"
+                                                name="action">提 交
+                                            <i class="material-icons right">send</i>
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col m9">
+                            <div id='fc-external-drag'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="public/base_calendar_script :: html"></div>
+
+<div th:replace="public/base_list_script :: html"></div>
+
+<script th:inline="javascript">
+
+    var firsteventArr = [];
+
+    function initCanleder() {
+        var deptId = $("#id").val();
+        var typographyUserInfoList = [];
+        $("tr").each(function (i) {
+            $(this).children(".fc-day-top").each(function (j) {
+                typographyUserInfoList.push(
+                    $(this).attr("data-date")
+                );
+            });
+        });
+        var hisTypographyDateModel = {
+            "typographyUserInfoListdate": typographyUserInfoList,
+            "deptId": deptId
+        }
+        hisTypographyDateModel = JSON.stringify(hisTypographyDateModel);
+
+        $.ahsjajax(
+            CTX + "/api/typography/query/queryHisTypographyUserInfoList.ahsj",
+            hisTypographyDateModel
+            ,
+            function (msg) {
+                var initData = msg.data;
+                for (var i = 0; i < initData.length; i++) {
+                    firsteventArr.push({
+                        title: initData[i].userLogin + ":" + initData[i].typographyUserName,
+                        start: initData[i].startDate,
+                        end: initData[i].endDate
+                    });
+                }
+                localStorage.setItem("firsteventArr", JSON.stringify(firsteventArr));
+
+                if (msg.success) {
+                    M.toast({html: msg.message});
+                    return false;
+                } else {
+                    M.toast({html: msg.message});
+                    return false;
+                }
+            },
+            null, null, null, function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }, "application/json; charset=UTF-8"
+        );
+    }
+
+    $(document).ready(function () {
+        "use strict";
+
+        var firsteventArr = localStorage.getItem("firsteventArr");
+        var testeventArr = JSON.parse(firsteventArr);
+        /* *********************
+         * Basic Calendar      *
+         * *********************/
+        $('#fc-external-drag').fullCalendar({
+            header: {
+                left: 'prev, next, today',
+                center: 'title',
+                right: 'month, agendaWeek, agendaDay'
+            },
+            lang: 'zh-cn',
+            buttonText: {//对应顶部操作按钮的名称自定义
+                prev: '<上一页',
+                next: '下一页>',
+                today: '今天',
+                month: '月',
+                week: '周',
+                day: '日',
+                listWeek: '列表'
+            },
+            aspectRatio: 2,        //宽度:高度 比例，默认1.35，可自定义
+            handleWindowResize: true,   //是否随浏览器窗口大小变化而自动变化。
+            firstDay: 0,           //视图从每周几开始，默认0为周日，1为周1，2为周2，依此类推
+            unselectAuto: true,		//当点击页面日历以外的位置时，是否自动取消当前的选中状态。
+            axisFormat: 'H(:mm)tt',  //设置日历agenda视图下左侧的时间显示格式，默认显示如：5:30pm
+            nowIndicator: false,            //周/日视图中显示今天当前时间点（以红线标记），默认false不显示
+            timeFormat: "YYYY-MM-DD HH:mm:ss",           //全局的日期显示格式(自定义成如12:00或12am等)
+            titleFormat: "YYYY" + "年" + "MM" + "月",     //顶部title区域格式化
+            monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"], //月份自定义命名
+            monthNamesShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"], //月份缩略命名（英语比较实用：全称January可设置缩略为Jan）
+            dayNames: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],       //同理monthNames
+            dayNamesShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],  //同理monthNamesShort
+            weekNumberTitle: "周",         //周的国际化,默认为"W"
+            eventLimit: true,
+            allDayDefault: false,
+
+            editable: true,
+            droppable: true,
+            dropAccept: '.fc-event',
+            events: testeventArr,
+            //这个下落的回调
+            drop: function (dropInfo) {
+                console.log(dropInfo.date);
+                //{ userId:"59",deptId: "10" }
+                var dataeventstr = $(this).attr("data-event");
+                //console.log(dataeventstr);
+                //取值deptId
+                var dataeventjson = eval("(" + dataeventstr + ")");
+                var deptId = dataeventjson.deptId;
+                localStorage.setItem("deptId", deptId);
+
+                // is the "remove after drop" checkbox checked?
+                if ($('#drop-remove').is(':checked')) {
+                    // if so, remove the element from the "Draggable Events" list
+                    $(this).remove();
+                }
+
+            },
+
+            eventDrop: function (info) {
+                alert(info.event.title + " was dropped on " + info.event.start.toISOString());
+
+                if (!confirm("Are you sure about this change?")) {
+                    info.revert();
+                }
+            },
+            // 这个是事件接收的回调
+            eventReceive: function (info) {
+
+            },
+
+            dayClick: function (date, jsEvent, view, resourceObj) {
+
+                //alert('Clicked on: ' + date.format());
+
+                //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+                //alert('Date: ' + date.format());
+                //alert('Resource ID: ' + resourceObj.id);
+                //alert('Current view: ' + view.name);
+
+                // change the day's background color just for fun
+                //$(this).css('background-color', 'red');
+
+            }
+
+        });
+
+        $('#external-events .fc-event').each(function () {
+
+            // Different colors for events
+            $(this).css({'backgroundColor': $(this).data('color'), 'borderColor': $(this).data('color')});
+
+            // store data so the calendar knows to render an event upon drop
+            $(this).data('event', {
+                title: $.trim($(this).text()), // use the element's text as the event title
+                color: $(this).data('color'),
+                stick: true // maintain when user navigates (see docs on the renderEvent method)
+            });
+
+            // make the event draggable using jQuery UI
+            $(this).draggable({
+                zIndex: 999,
+                revert: true,      // will cause the event to go back to its
+                revertDuration: 0  //  original position after the drag
+            });
+
+        });
+
+        $("#id").change(function () {
+
+            var id = $(this).val();
+            $.ahsjajax(CTX + "/api/typography/select/organization/typography.ahsj",
+                {"id": id},
+                function (msg) {
+                    var data = msg.data;
+                    $("#dept_name").html(msg.msg)
+                    $(".fc-events-container").html("");
+                    var count = "";
+                    $.each(data, function (index, item) {
+                        count += "<div data-event='{ userId:\"" + item.userId + "\",deptId: \"" + item.deptId + "\" }'  class=\"fc-event ui-draggable ui-draggable-handle\" style=\"background-color: rgb(0, 150, 136); border-color: rgb(0, 150, 136); z-index: auto; left: 0px; top: 0px;\" data-color =\"#009688\">" + item.userLoginId + " : " + item.userName + "</div>"
+                        $(".fc-events-container").html(count)
+                    })
+                    $(function () {
+                        // $('#basic-calendar').fullCalendar({
+                        //     defaultView: 'month',
+                        //     editable: true,
+                        //     eventLimit: true,
+                        //     resources: {
+                        //         url: CTX + '/api/typography/typographyUserInfoList.ahsj',
+                        //         method: 'POST'
+                        //     },
+                        //     events: [
+                        //         {
+                        //             title: 'All day event2',
+                        //             start: '2019-07-20'
+                        //         }
+                        //     ],
+                        // });
+
+                        // $('#fc-external-drag').fullCalendar({
+                        //     header: {
+                        //         left: 'prev, next, today',
+                        //         center: 'title',
+                        //         right: 'month, agendaWeek, agendaDay'
+                        //     },
+                        //     lang: 'zh-cn',
+                        //     buttonText: {//对应顶部操作按钮的名称自定义
+                        //         prev: '<上一页',
+                        //         next: '下一页>',
+                        //         today: '今天',
+                        //         month: '月',
+                        //         week: '周',
+                        //         day: '日',
+                        //         listWeek: '列表'
+                        //     },
+                        //     aspectRatio: 2,        //宽度:高度 比例，默认1.35，可自定义
+                        //     handleWindowResize: true,   //是否随浏览器窗口大小变化而自动变化。
+                        //     firstDay: 0,           //视图从每周几开始，默认0为周日，1为周1，2为周2，依此类推
+                        //     unselectAuto: true,		//当点击页面日历以外的位置时，是否自动取消当前的选中状态。
+                        //     axisFormat: 'H(:mm)tt',  //设置日历agenda视图下左侧的时间显示格式，默认显示如：5:30pm
+                        //     nowIndicator: false,            //周/日视图中显示今天当前时间点（以红线标记），默认false不显示
+                        //     timeFormat: "YYYY-MM-DD HH:mm:ss",           //全局的日期显示格式(自定义成如12:00或12am等)
+                        //     titleFormat: "YYYY" + "年" + "MM" + "月",     //顶部title区域格式化
+                        //     monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"], //月份自定义命名
+                        //     monthNamesShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"], //月份缩略命名（英语比较实用：全称January可设置缩略为Jan）
+                        //     dayNames: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],       //同理monthNames
+                        //     dayNamesShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],  //同理monthNamesShort
+                        //     weekNumberTitle: "周",         //周的国际化,默认为"W"
+                        //     eventLimit: true,
+                        //     allDayDefault: false,
+                        //
+                        //     editable: true,
+                        //     droppable: true,
+                        //     dropAccept: '.fc-event',
+                        //     events: [
+                        //         {
+                        //             title: 'All day event3',
+                        //             start: '2019-07-21'
+                        //         }
+                        //     ],
+                        //     drop: function () {
+                        //         // is the "remove after drop" checkbox checked?
+                        //         if ($('#drop-remove').is(':checked')) {
+                        //             // if so, remove the element from the "Draggable Events" list
+                        //             $(this).remove();
+                        //         }
+                        //     },
+                        //     eventDrop: function (info) {
+                        //         alert(info.event.title + " was dropped on " + info.event.start.toISOString());
+                        //
+                        //         if (!confirm("Are you sure about this change?")) {
+                        //             info.revert();
+                        //         }
+                        //     },
+                        //
+                        //
+                        // })
+
+
+                        $('#external-events .fc-event').each(function () {
+
+                            // Different colors for events
+                            $(this).css({
+                                'backgroundColor': $(this).data('color'),
+                                'borderColor': $(this).data('color')
+                            });
+
+                            // store data so the calendar knows to render an event upon drop
+                            $(this).data('event', {
+                                title: $.trim($(this).text()), // use the element's text as the event title
+                                color: $(this).data('color'),
+                                stick: true // maintain when user navigates (see docs on the renderEvent method)
+                            });
+
+                            // make the event draggable using jQuery UI
+                            $(this).draggable({
+                                zIndex: 999,
+                                revert: true,      // will cause the event to go back to its
+                                revertDuration: 0  //  original position after the drag
+                            });
+
+                        });
+                    })
+                },
+                function (data) {
+                    M.toast({
+                        html: "网络异常", completeCallback: function () {
+                        }
+                    });
+                }
+            );
+        });
+
+        $("#data-id").change(function () {
+            // $('#fc-external-drag').fullCalendar({
+            //     header: {
+            //         left: 'prev, next, today',
+            //         center: 'title',
+            //         right: 'month, agendaWeek, agendaDay'
+            //     },
+            //     lang: 'zh-cn',
+            //     buttonText: {//对应顶部操作按钮的名称自定义
+            //         prev: '<上一页',
+            //         next: '下一页>',
+            //         today: '今天',
+            //         month: '月',
+            //         week: '周',
+            //         day: '日',
+            //         listWeek: '列表'
+            //     },
+            //     aspectRatio: 2,        //宽度:高度 比例，默认1.35，可自定义
+            //     handleWindowResize: true,   //是否随浏览器窗口大小变化而自动变化。
+            //     firstDay: 0,           //视图从每周几开始，默认0为周日，1为周1，2为周2，依此类推
+            //     unselectAuto: true,		//当点击页面日历以外的位置时，是否自动取消当前的选中状态。
+            //     axisFormat: 'H(:mm)tt',  //设置日历agenda视图下左侧的时间显示格式，默认显示如：5:30pm
+            //     nowIndicator: false,            //周/日视图中显示今天当前时间点（以红线标记），默认false不显示
+            //     timeFormat: "YYYY-MM-DD HH:mm:ss",           //全局的日期显示格式(自定义成如12:00或12am等)
+            //     titleFormat: "YYYY" + "年" + "MM" + "月",     //顶部title区域格式化
+            //     monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"], //月份自定义命名
+            //     monthNamesShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"], //月份缩略命名（英语比较实用：全称January可设置缩略为Jan）
+            //     dayNames: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],       //同理monthNames
+            //     dayNamesShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],  //同理monthNamesShort
+            //     weekNumberTitle: "周",         //周的国际化,默认为"W"
+            //     eventLimit: true,
+            //     allDayDefault: false,
+            //
+            //     editable: true,
+            //     droppable: true,
+            //     dropAccept: '.fc-event',
+            //     events: [
+            //         {
+            //             title: 'All Day Event4',
+            //             start: '2019-07-22'
+            //         }
+            //     ],
+            //
+            //
+            //     drop: function () {
+            //         // is the "remove after drop" checkbox checked?
+            //         if ($('#drop-remove').is(':checked')) {
+            //             // if so, remove the element from the "Draggable Events" list
+            //             $(this).remove();
+            //         }
+            //     },
+            //     eventDrop: function (info) {
+            //         alert(info.event.title + " was dropped on " + info.event.start.toISOString());
+            //
+            //         if (!confirm("Are you sure about this change?")) {
+            //             info.revert();
+            //         }
+            //     },
+            //
+            //
+            // })
+            var id = $(this).val();
+            $.ahsjajax(CTX + "/api/typography/select/organization/typography.ahsj",
+                {"id": id},
+                function (msgs) {
+                    var data = msgs.data;
+                    $("#dept_name").html(msg.msg)
+                    $(".fc-events-container").html("");
+                    var count = "";
+                    each(data, function (index, item) {
+                        count += "<div data-event='{ userId:\"" + item.userId + "\",deptId: \"" + item.deptId + "\" }'  class=\"fc-event ui-draggable ui-draggable-handle\" style=\"background-color: rgb(0, 150, 136); border-color: rgb(0, 150, 136); z-index: auto; left: 0px; top: 0px;\" data-color =\"#009688\">" + item.deptName + " : " + item.userName + "</div>"
+                        $(".fc-events-container").html(count)
+                    })
+
+                    $(function () {
+                        // $('#fc-external-drag').fullCalendar({
+                        //     header: {
+                        //         left: 'prev, next, today',
+                        //         center: 'title',
+                        //         right: 'month, agendaWeek, agendaDay'
+                        //     },
+                        //     lang: 'zh-cn',
+                        //     buttonText: {//对应顶部操作按钮的名称自定义
+                        //         prev: '<上一页',
+                        //         next: '下一页>',
+                        //         today: '今天',
+                        //         month: '月',
+                        //         week: '周',
+                        //         day: '日',
+                        //         listWeek: '列表'
+                        //     },
+                        //     aspectRatio: 2,        //宽度:高度 比例，默认1.35，可自定义
+                        //     handleWindowResize: true,   //是否随浏览器窗口大小变化而自动变化。
+                        //     firstDay: 0,           //视图从每周几开始，默认0为周日，1为周1，2为周2，依此类推
+                        //     unselectAuto: true,		//当点击页面日历以外的位置时，是否自动取消当前的选中状态。
+                        //     axisFormat: 'H(:mm)tt',  //设置日历agenda视图下左侧的时间显示格式，默认显示如：5:30pm
+                        //     nowIndicator: false,            //周/日视图中显示今天当前时间点（以红线标记），默认false不显示
+                        //     timeFormat: "YYYY-MM-DD HH:mm:ss",           //全局的日期显示格式(自定义成如12:00或12am等)
+                        //     titleFormat: "YYYY" + "年" + "MM" + "月",     //顶部title区域格式化
+                        //     monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"], //月份自定义命名
+                        //     monthNamesShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"], //月份缩略命名（英语比较实用：全称January可设置缩略为Jan）
+                        //     dayNames: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],       //同理monthNames
+                        //     dayNamesShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],  //同理monthNamesShort
+                        //     weekNumberTitle: "周",         //周的国际化,默认为"W"
+                        //     eventLimit: true,
+                        //     allDayDefault: false,
+                        //
+                        //     editable: true,
+                        //     droppable: true,
+                        //     dropAccept: '.fc-event',
+                        //     events: [
+                        //         {
+                        //             title: 'All Day Event5',
+                        //             start: '2019-07-23'
+                        //         }
+                        //     ],
+                        //     drop: function () {
+                        //         // is the "remove after drop" checkbox checked?
+                        //         if ($('#drop-remove').is(':checked')) {
+                        //             // if so, remove the element from the "Draggable Events" list
+                        //             $(this).remove();
+                        //         }
+                        //     },
+                        //     eventDrop: function (info) {
+                        //         alert(info.event.title + " was dropped on " + info.event.start.toISOString());
+                        //
+                        //         if (!confirm("Are you sure about this change?")) {
+                        //             info.revert();
+                        //         }
+                        //     },
+                        // })
+
+                        $('#external-events .fc-event').each(function () {
+
+                            // Different colors for events
+                            $(this).css({
+                                'backgroundColor': $(this).data('color'),
+                                'borderColor': $(this).data('color')
+                            });
+
+                            // store data so the calendar knows to render an event upon drop
+                            $(this).data('event', {
+                                title: $.trim($(this).text()), // use the element's text as the event title
+                                color: $(this).data('color'),
+                                stick: true // maintain when user navigates (see docs on the renderEvent method)
+                            });
+
+                            // make the event draggable using jQuery UI
+                            $(this).draggable({
+                                zIndex: 999,
+                                revert: true,      // will cause the event to go back to its
+                                revertDuration: 0  //  original position after the drag
+                            });
+
+                        });
+                    })
+                },
+                function (data) {
+                    M.toast({
+                        html: "网络异常", completeCallback: function () {
+                        }
+                    });
+                }
+            );
+        });
+
+        initBtn();
+
+        initCanleder();
+
+    });
+
+    function initBtn() {
+
+        $("#send_btn").click(function () {
+            //获取日按钮
+            var fab = $(".fc-agendaDay-button");
+            var judge = fab.hasClass("fc-state-active");
+
+            //判断是否在日按钮当前页面-if(judge)-
+            if (judge) {
+                //最终数组
+                var hisTypographyUserInfoRep = [];
+                //时间数组
+                var timeDataArr = [];
+                var startDate = [];
+                var endDate = [];
+
+                var userIdArr = [];
+                var typographyUserNameArr = [];
+
+                $(".fc-content").each(function (i) {
+                    $(this).children(".fc-time").each(function (j) {
+                        timeDataArr.push({
+                            fctime: $(this).text()
+                        });
+                    });
+                });
+
+                //处理获取到的时间格式
+                for (var i = 0; i < timeDataArr.length; i++) {
+                    //日期按照空格分成前半段年月日和后半段时分秒数组内包含两个数据
+                    var fctimeArr = timeDataArr[i].fctime.split(" ");
+
+                    //获得年月日2019-07-16 10位
+                    var yeartoday = fctimeArr[0].replace(/\s*/g, "");
+
+                    //获得时分秒11:12:40 大于等于8位
+                    var hourminutesecond = fctimeArr[1].replace(/\s*/g, "");
+
+                    //处理后半段获得starttime的小时分钟秒钟
+                    var hourdata = hourminutesecond.substring(0, 2);
+                    var minutedata = hourminutesecond.substring(3, 5);
+                    var seconddata = hourminutesecond.substring(6, 8);
+
+                    //判断日期长度大于19位拼凑endtime
+                    if (timeDataArr[i].fctime.length > 19) {
+                        var newstarttime = timeDataArr[i].fctime.substring(0, 19);
+                        startDate.push(
+                            newstarttime
+                        );
+                        var onenewendtime = timeDataArr[i].fctime.substring(22, 30);
+                        var newendtimearr = new Array(2);
+                        newendtimearr[0] = yeartoday;
+                        newendtimearr[1] = onenewendtime;
+                        var newendtime = newendtimearr.join(" ");
+                        endDate.push(
+                            newendtime
+                        )
+                    }
+                    //判断日期长度等于19位加一个半小时进行计算endtime
+                    else {
+                        startDate.push(
+                            timeDataArr[i].fctime
+                        );
+
+                        if (parseInt(minutedata) == 30) {
+                            //2019-07-18 06:30:00+1.5h=2019-07-18 08:00:00
+                            var newhourdata2 = parseInt(hourdata) + 2;
+                            var newhourdata = newhourdata2.toString();
+                            var newminutedata = "00";
+
+                            var endhourminutesecondarr = new Array(3);
+                            endhourminutesecondarr[0] = newhourdata;
+                            endhourminutesecondarr[1] = newminutedata;
+                            endhourminutesecondarr[2] = seconddata;
+                            var endhourminutesecond = endhourminutesecondarr.join(":");
+
+                            var newendarr2 = new Array(2);
+                            newendarr2[0] = yeartoday;
+                            newendarr2[1] = endhourminutesecond;
+                            var newendata2 = newendarr2.join(" ");
+
+                            endDate.push(
+                                newendata2
+                            )
+                        } else {
+                            //2019-07-18 06:00:00+1.5h=2019-07-18 07:30:00
+                            var newhourdata1 = parseInt(hourdata) + 1;
+                            if (newhourdata1 >= 10) {
+                                var newhourdata = newhourdata1.toString();
+                            } else {
+                                var newhourdata = "0" + newhourdata1.toString();
+                            }
+
+                            var newminutedata1 = parseInt(minutedata) + 30;
+                            var newminutedata = newminutedata1.toString();
+
+                            var endhourminutesecondarr = new Array(3);
+                            endhourminutesecondarr[0] = newhourdata;
+                            endhourminutesecondarr[1] = newminutedata;
+                            endhourminutesecondarr[2] = seconddata;
+                            var endhourminutesecond = endhourminutesecondarr.join(":");
+
+                            var newendarr = new Array(2);
+                            newendarr[0] = yeartoday;
+                            newendarr[1] = endhourminutesecond;
+                            var newendata = newendarr.join(" ");
+                            endDate.push(
+                                newendata
+                            )
+                        }
+                    }
+                }
+                //console.log(startDate);
+                //console.log(endDate);
+
+                var contentDataArr = [];
+
+                $(".fc-content").each(function (i) {
+                    $(this).children(".fc-title").each(function (j) {
+                        contentDataArr.push({
+                            fctitle: $(this).text()
+
+                        });
+                    });
+                });
+                //console.log(contentDataArr);
+
+                for (var i = 0; i < contentDataArr.length; i++) {
+                    var fctitleArr = contentDataArr[i].fctitle.split(":");
+                    var fctitlenumber = fctitleArr[0].replace(/\s*/g, "");
+                    var fctitlename = fctitleArr[1].replace(/\s*/g, "");
+                    userIdArr.push(
+                        fctitlenumber
+                    );
+                    typographyUserNameArr.push(
+                        fctitlename
+                    );
+                }
+                //console.log(userIdArr);
+                //console.log(typographyUserNameArr);
+
+                $(".fc-content").each(function (i) {
+                    hisTypographyUserInfoRep.push({
+                        typographyUserName: typographyUserNameArr[i],
+                        userId: userIdArr[i],
+                        startDate: startDate[i],
+                        endDate: endDate [i]
+                    });
+                });
+                //console.log(hisTypographyUserInfoRep);
+
+                var deptId = localStorage.getItem("deptId");
+                var hisTypographyModel = {
+                    "hisTypographyUserInfoRep": hisTypographyUserInfoRep,
+                    "deptId": deptId
+                }
+                var jsonData = JSON.stringify(hisTypographyModel);
+                $.ahsjajax(
+                    CTX + "/api/typography/save/Typography.ahsj",
+                    jsonData
+                    ,
+                    function (msg) {
+                        console.log(msg);
+                        if (msg.success) {
+                            M.toast({html: msg.message});
+                            return false;
+                        } else {
+                            M.toast({html: msg.message});
+                            return false;
+                        }
+                    },
+                    null, null, null, function () {
+                        M.toast({html: "网络异常"});
+                        return false;
+                    }, "application/json; charset=UTF-8"
+                );
+            } else {
+                console.log(judge);
+                dialog.warn("排班失败！请点击日进行排班！");
+                return false;
+            }
+        });
+
+        $(".fc-agendaWeek-button").click(function () {
+            weekCanleder();
+        })
+    }
+
+    function weekCanleder() {
+        var departmentName = $("#id").val();
+        var weekArr = [];
+        $("tr").each(function (i) {
+            $(this).children(".fc-day-header").each(function (j) {
+                weekArr.push(
+                    $(this).attr("data-date")
+                );
+            });
+        });
+        console.log(departmentName);
+        console.log(weekArr);
+    }
+
+    function strToObj(str) {
+        str = str.replace(/&/g, "','");
+        str = str.replace(/=/g, "':'");
+        str = "({'" + str + "'})";
+        obj = eval(str);
+        return obj;
+    }
+
+    // 提下代码即将注释   忽略不计
+
+    $(function () {
+
+
+        $("#anniu").click(function () {
+            signature();
+            /*   var id  = 12;
+               var ids = [1,2];
+               var nums = [4,8];
+               $.ahsjajax(CTX + "/api/hisconsumablesdetails/save/hisConsumablesDetails/byIds/nums.ahsj",
+                   {"ids": ids,"nums":nums,"id":id},
+                   function (msg) {
+                     var data  = msg.msg;
+                     console.log(data)
+                   },
+                   function (data) {
+                       M.toast({
+                           html: "网络异常", completeCallback: function () {
+                           }
+                       });
+                   }
+               );*/
+        })
+        /* $("#send_btn").click(function () {
+             $(".fc-content:nth-child(1)").each(function () {
+              var value =   $(this).attr("data-full");
+               console.log(value);
+           })
+         })
+         $("#id").change(function () {
+            var id = $(this).val();
+             $.ahsjajax(CTX + "/api/typography/select/organization/typography.ahsj",
+                 {"id": id},
+                 function (msg) {
+                     var data  = msg.data;
+                     $(".fc-events-container").html("");
+                     var count = "";
+                     $.each(data,function (index,item) {
+                      count += "<div user-id=\""+item.userId+"\" dept-id=\""+item.deptId+"\"   class=\"fc-event\" style=\"background-color: #009688\" data-color =\"#009688\">"+ item.deptName  +" : "+item.userName+"</div>"
+                     $(".fc-events-container").html(count)
+                     })
+                 },
+                 function (data) {
+                     M.toast({
+                         html: "网络异常", completeCallback: function () {
+                         }
+                     });
+                 }
+             );
+         });
+         $("#data-id").change(function () {
+             var id = $(this).val();
+             $.ahsjajax(CTX + "/api/typography/select/organization/typography.ahsj",
+                 {"id": id},
+                 function (msg) {
+                     var data  = msg.data;
+                     $(".fc-events-container").html("");
+                     var count = "";
+                     $.each(data,function (index,item) {
+                         count += "<div user-id=\""+item.userId+"\" dept-id=\""+item.deptId+"\"   class=\"fc-event\" style=\"background-color: #009688\" data-color =\"#009688\">"+ item.deptName  +" : "+item.userName+"</div>"
+                         $(".fc-events-container").html(count)
+                     })
+
+                 },
+                 function (data) {
+                     M.toast({
+                         html: "网络异常", completeCallback: function () {
+                         }
+                     });
+                 }
+             );
+         });*/
+    })
+    $("input").change(function () {
+        $(this).val($(this).val().trim());
+    });
+
+
+  function signature() {
+       // var medicalNumber = 'HR2019091500001';
+      //   var medicalNumber = 'HM2019091500001';
+       var id = 1;
+      // var url = CTX + "/api/surgicalRecord/add/index.ahsj?token=" + TOKEN + "&medicalNumber=" + medicalNumber +"&id="+id;
+      // dialog.show(url, "手术记录");
+      var url =   CTX + "/api/consultation/word.ahsj?token="+ TOKEN+"&id="+id;
+      window.location=url;
+  }
+
+   /* function signature() {
+        var id = 1;
+        $.ahsjajax(
+            CTX +"/api/hisdiagnosistreatment/signature/HisDiagnosisTreatment.ahsj",
+            {"id":id},
+            function (msg) {
+                if (msg.success) {
+                    swal.close();
+                    M.toast({
+                        html: msg.message, completeCallback: function () {
+                        }
+                    });
+                    grid.search();
+                    dialog.parentclose();
+
+                } else {
+                    M.toast({
+                        html: msg.message, completeCallback: function () {
+                        }
+                    });
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            })
+    }*/
+</script>
+<div th:replace="public/base_list_script :: html"></div>
+</body>
+</html>
+

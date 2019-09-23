@@ -1,0 +1,681 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisMedicationDetailsMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisMedicationDetails">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="medication_id" property="medicationId" jdbcType="BIGINT"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="is_pay" property="isPay" jdbcType="INTEGER"/>
+        <result column="is_back" property="isBack" jdbcType="INTEGER"/>
+        <result column="is_del" property="isDel" jdbcType="INTEGER"/>
+        <result column="count" property="count" jdbcType="INTEGER"/>
+        <result column="drugs_numb" property="drugsNumb" jdbcType="VARCHAR"/>
+        <result column="drugs_name" property="drugsName" jdbcType="VARCHAR"/>
+        <result column="drugs_alias" property="drugsAlias" jdbcType="VARCHAR"/>
+        <result column="drugs_spec" property="drugsSpec" jdbcType="VARCHAR"/>
+        <result column="prescription" property="prescription" jdbcType="INTEGER"/>
+        <result column="mental_medicine" property="mentalMedicine" jdbcType="INTEGER"/>
+        <result column="large_unit" property="largeUnit" jdbcType="VARCHAR"/>
+        <result column="small_unit" property="smallUnit" jdbcType="VARCHAR"/>
+        <result column="conversion_rate" property="conversionRate" jdbcType="DECIMAL"/>
+        <result column="disable" property="disable" jdbcType="INTEGER"/>
+        <result column="level" property="level" jdbcType="INTEGER"/>
+        <result column="medical_insurance_sign" property="medicalInsuranceSign" jdbcType="INTEGER"/>
+        <result column="placeOrigin" property="placeorigin" jdbcType="VARCHAR"/>
+        <result column="base_medicine" property="baseMedicine" jdbcType="INTEGER"/>
+        <result column="narcotic_drugs" property="narcoticDrugs" jdbcType="INTEGER"/>
+        <result column="create_user_id" property="createUserId" jdbcType="BIGINT"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="BIGINT"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="total_price" property="totalPrice" jdbcType="DECIMAL"/>
+        <result column="medical_record_id" property="medicalRecordId" jdbcType="BIGINT"/>
+        <result column="is_out" property="isOut" jdbcType="INTEGER"/>
+        <result column="exit_id" property="exitId" jdbcType="BIGINT"/>
+        <result column="sale_price" property="salePrice" jdbcType="DECIMAL"/>
+        <result column="price" property="price" jdbcType="DECIMAL"/>
+        <result column="mId" property="mId" jdbcType="BIGINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, medication_id, description, remarks, is_pay, is_back, is_del, count, drugs_numb, 
+    drugs_name, drugs_alias, drugs_spec, prescription, mental_medicine, large_unit, small_unit, 
+    conversion_rate, disable, level, medical_insurance_sign, placeOrigin, base_medicine, 
+    narcotic_drugs, create_user_id, create_date, update_user_id, update_date, total_price,medical_record_id,is_out,exit_id
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from his_medication_details
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_medication_details
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisMedicationDetails">
+    insert into his_medication_details (id, medication_id, description, 
+      remarks, is_pay, is_back, 
+      is_del, count, drugs_numb, 
+      drugs_name, drugs_alias, drugs_spec, 
+      prescription, mental_medicine, large_unit, 
+      small_unit, conversion_rate, disable, 
+      level, medical_insurance_sign, placeOrigin, 
+      base_medicine, narcotic_drugs, create_user_id, 
+      create_date, update_user_id, update_date, 
+      total_price,medical_record_id,is_out,exit_id)
+    values (#{id,jdbcType=BIGINT}, #{medicationId,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, 
+      #{remarks,jdbcType=VARCHAR}, #{isPay,jdbcType=INTEGER}, #{isBack,jdbcType=INTEGER}, 
+      #{isDel,jdbcType=INTEGER}, #{count,jdbcType=INTEGER}, #{drugsNumb,jdbcType=VARCHAR}, 
+      #{drugsName,jdbcType=VARCHAR}, #{drugsAlias,jdbcType=VARCHAR}, #{drugsSpec,jdbcType=VARCHAR}, 
+      #{prescription,jdbcType=INTEGER}, #{mentalMedicine,jdbcType=INTEGER}, #{largeUnit,jdbcType=VARCHAR}, 
+      #{smallUnit,jdbcType=VARCHAR}, #{conversionRate,jdbcType=DECIMAL}, #{disable,jdbcType=INTEGER}, 
+      #{level,jdbcType=INTEGER}, #{medicalInsuranceSign,jdbcType=INTEGER}, #{placeorigin,jdbcType=VARCHAR}, 
+      #{baseMedicine,jdbcType=INTEGER}, #{narcoticDrugs,jdbcType=INTEGER}, #{createUserId,jdbcType=BIGINT}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{totalPrice,jdbcType=DECIMAL}, #{medicalRecordId,jdbcType=BIGINT},#{isOut,jdbcType=INTEGER},#{exitId,jdbcType=BIGINT})
+  </insert>
+    <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisMedicationDetails">
+        insert into his_medication_details
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="medicationId != null">
+                medication_id,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="isPay != null">
+                is_pay,
+            </if>
+            <if test="isBack != null">
+                is_back,
+            </if>
+            <if test="isDel != null">
+                is_del,
+            </if>
+            <if test="count != null">
+                count,
+            </if>
+            <if test="drugsNumb != null">
+                drugs_numb,
+            </if>
+            <if test="drugsName != null">
+                drugs_name,
+            </if>
+            <if test="drugsAlias != null">
+                drugs_alias,
+            </if>
+            <if test="drugsSpec != null">
+                drugs_spec,
+            </if>
+            <if test="prescription != null">
+                prescription,
+            </if>
+            <if test="mentalMedicine != null">
+                mental_medicine,
+            </if>
+            <if test="largeUnit != null">
+                large_unit,
+            </if>
+            <if test="smallUnit != null">
+                small_unit,
+            </if>
+            <if test="conversionRate != null">
+                conversion_rate,
+            </if>
+            <if test="disable != null">
+                disable,
+            </if>
+            <if test="level != null">
+                level,
+            </if>
+            <if test="medicalInsuranceSign != null">
+                medical_insurance_sign,
+            </if>
+            <if test="placeorigin != null">
+                placeOrigin,
+            </if>
+            <if test="baseMedicine != null">
+                base_medicine,
+            </if>
+            <if test="narcoticDrugs != null">
+                narcotic_drugs,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="totalPrice != null">
+                total_price,
+            </if>
+            <if test="medicalRecordId != null">
+                medical_record_id,
+            </if>
+            <if test="isOut != null">
+                is_out,
+            </if>
+            <if test="exitId != null">
+                exit_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="medicationId != null">
+                #{medicationId,jdbcType=BIGINT},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="isPay != null">
+                #{isPay,jdbcType=INTEGER},
+            </if>
+            <if test="isBack != null">
+                #{isBack,jdbcType=INTEGER},
+            </if>
+            <if test="isDel != null">
+                #{isDel,jdbcType=INTEGER},
+            </if>
+            <if test="count != null">
+                #{count,jdbcType=INTEGER},
+            </if>
+            <if test="drugsNumb != null">
+                #{drugsNumb,jdbcType=VARCHAR},
+            </if>
+            <if test="drugsName != null">
+                #{drugsName,jdbcType=VARCHAR},
+            </if>
+            <if test="drugsAlias != null">
+                #{drugsAlias,jdbcType=VARCHAR},
+            </if>
+            <if test="drugsSpec != null">
+                #{drugsSpec,jdbcType=VARCHAR},
+            </if>
+            <if test="prescription != null">
+                #{prescription,jdbcType=INTEGER},
+            </if>
+            <if test="mentalMedicine != null">
+                #{mentalMedicine,jdbcType=INTEGER},
+            </if>
+            <if test="largeUnit != null">
+                #{largeUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="smallUnit != null">
+                #{smallUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="conversionRate != null">
+                #{conversionRate,jdbcType=DECIMAL},
+            </if>
+            <if test="disable != null">
+                #{disable,jdbcType=INTEGER},
+            </if>
+            <if test="level != null">
+                #{level,jdbcType=INTEGER},
+            </if>
+            <if test="medicalInsuranceSign != null">
+                #{medicalInsuranceSign,jdbcType=INTEGER},
+            </if>
+            <if test="placeorigin != null">
+                #{placeorigin,jdbcType=VARCHAR},
+            </if>
+            <if test="baseMedicine != null">
+                #{baseMedicine,jdbcType=INTEGER},
+            </if>
+            <if test="narcoticDrugs != null">
+                #{narcoticDrugs,jdbcType=INTEGER},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="totalPrice != null">
+                #{totalPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="medicalRecordId != null">
+                #{medicalRecordId,jdbcType=BIGINT},
+            </if>
+            <if test="isOut != null">
+                #{isOut,jdbcType=INTEGER},
+            </if>
+            <if test="exitId != null">
+                #{exitId,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisMedicationDetails">
+        update his_medication_details
+        <set>
+            <if test="medicationId != null">
+                medication_id = #{medicationId,jdbcType=BIGINT},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="isPay != null">
+                is_pay = #{isPay,jdbcType=INTEGER},
+            </if>
+            <if test="isBack != null">
+                is_back = #{isBack,jdbcType=INTEGER},
+            </if>
+            <if test="isDel != null">
+                is_del = #{isDel,jdbcType=INTEGER},
+            </if>
+            <if test="count != null">
+                count = #{count,jdbcType=INTEGER},
+            </if>
+            <if test="drugsNumb != null">
+                drugs_numb = #{drugsNumb,jdbcType=VARCHAR},
+            </if>
+            <if test="drugsName != null">
+                drugs_name = #{drugsName,jdbcType=VARCHAR},
+            </if>
+            <if test="drugsAlias != null">
+                drugs_alias = #{drugsAlias,jdbcType=VARCHAR},
+            </if>
+            <if test="drugsSpec != null">
+                drugs_spec = #{drugsSpec,jdbcType=VARCHAR},
+            </if>
+            <if test="prescription != null">
+                prescription = #{prescription,jdbcType=INTEGER},
+            </if>
+            <if test="mentalMedicine != null">
+                mental_medicine = #{mentalMedicine,jdbcType=INTEGER},
+            </if>
+            <if test="largeUnit != null">
+                large_unit = #{largeUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="smallUnit != null">
+                small_unit = #{smallUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="conversionRate != null">
+                conversion_rate = #{conversionRate,jdbcType=DECIMAL},
+            </if>
+            <if test="disable != null">
+                disable = #{disable,jdbcType=INTEGER},
+            </if>
+            <if test="level != null">
+                level = #{level,jdbcType=INTEGER},
+            </if>
+            <if test="medicalInsuranceSign != null">
+                medical_insurance_sign = #{medicalInsuranceSign,jdbcType=INTEGER},
+            </if>
+            <if test="placeorigin != null">
+                placeOrigin = #{placeorigin,jdbcType=VARCHAR},
+            </if>
+            <if test="baseMedicine != null">
+                base_medicine = #{baseMedicine,jdbcType=INTEGER},
+            </if>
+            <if test="narcoticDrugs != null">
+                narcotic_drugs = #{narcoticDrugs,jdbcType=INTEGER},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="totalPrice != null">
+                total_price = #{totalPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="medicalRecordId != null">
+                medical_record_id = #{medicalRecordId,jdbcType=BIGINT},
+            </if>
+            <if test="isOut != null">
+                is_out = #{isOut,jdbcType=INTEGER},
+            </if>
+            <if test="exitId != null">
+                exit_id = #{exitId,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisMedicationDetails">
+    update his_medication_details
+    set medication_id = #{medicationId,jdbcType=BIGINT},
+      description = #{description,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      is_pay = #{isPay,jdbcType=INTEGER},
+      is_back = #{isBack,jdbcType=INTEGER},
+      is_del = #{isDel,jdbcType=INTEGER},
+      count = #{count,jdbcType=INTEGER},
+      drugs_numb = #{drugsNumb,jdbcType=VARCHAR},
+      drugs_name = #{drugsName,jdbcType=VARCHAR},
+      drugs_alias = #{drugsAlias,jdbcType=VARCHAR},
+      drugs_spec = #{drugsSpec,jdbcType=VARCHAR},
+      prescription = #{prescription,jdbcType=INTEGER},
+      mental_medicine = #{mentalMedicine,jdbcType=INTEGER},
+      large_unit = #{largeUnit,jdbcType=VARCHAR},
+      small_unit = #{smallUnit,jdbcType=VARCHAR},
+      conversion_rate = #{conversionRate,jdbcType=DECIMAL},
+      disable = #{disable,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
+      medical_insurance_sign = #{medicalInsuranceSign,jdbcType=INTEGER},
+      placeOrigin = #{placeorigin,jdbcType=VARCHAR},
+      base_medicine = #{baseMedicine,jdbcType=INTEGER},
+      narcotic_drugs = #{narcoticDrugs,jdbcType=INTEGER},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      total_price = #{totalPrice,jdbcType=DECIMAL},
+      medical_record_id = #{medicalRecordId,jdbcType=BIGINT},
+      is_out = #{isOut,jdbcType=INTEGER},
+      exit_id = #{exitId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <!--自定义sql-->
+    <!--根据就诊记录编号查询出用药明细，以及出库时对应的有效期，id为用药明细表与出库表关联的的主键ID-->
+    <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select a.drugs_numb,a.drugs_name,a.drugs_spec ,b.id as id,c.medical_record_id as recordNumber,b.count as
+        actualCount,b.validity_period as validityPeriod
+        ,a.is_pay,a.is_back,a.is_out,b.create_date as create_date, d.user_name as exitCreateUserName
+        from his_medication_details as a
+        left join his_related_medicationandexit as b on a.id = b.medication_detail_id
+        left join his_medical_record as c on a.medical_record_id = c.id
+        left join `his-userinfo`.user_info as d on b.create_user_id = d.id
+        where c.medical_record_id = #{parameter.recordNumber,jdbcType=VARCHAR} and a.is_pay=1 and a.is_out=1 and
+        a.is_back=2
+        UNION ALL
+        select a.drugs_numb,a.drugs_name,a.drugs_spec ,b.id as id,c.medical_record_id as recordNumber,b.count as
+        actualCount,b.validity_period as validityPeriod
+        ,a.is_pay,a.is_back,a.is_out,b.create_date as create_date, d.user_name as exitCreateUserName
+        from his_medication_details as a
+        left join his_related_medicationandexit as b on a.id = b.medication_detail_id
+        left join his_medical_record as c on a.medical_record_id = c.id
+        left join `his-userinfo`.user_info as d on b.create_user_id = d.id
+        left join his_toll_details as e on a.id = e.target_id
+        left join his_toll_record as f on e.toll_record_id = f.id
+        where  f.number = #{parameter.recordNumber,jdbcType=VARCHAR}  and a.is_back = 2 and a.is_pay=1 and a.is_out=1
+        <if test="parameter.drugsNumb != null and parameter.drugsNumb != ''">
+            and a.drugs_numb like concat('%' #{parameter.drugsNumb,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.drugsName != null and parameter.drugsName != ''">
+            and a.drugs_name like concat('%' #{parameter.drugsName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+    <!--根据就诊记录删除所有对应的用药记录-->
+    <delete id="deleteByMedicalRecordId" parameterType="java.lang.Long">
+    delete
+    from his_medication_details
+    where medical_record_id =#{medicalRecordId,jdbcType=BIGINT}
+  </delete>
+
+    <delete id="deleteByMedicalRecordIdNotIsOutOrIspay" parameterType="java.lang.Long">
+        delete
+        from his_medication_details
+        where medical_record_id =#{medicalRecordId,jdbcType=BIGINT} and his_medication_details.is_pay = 2 and his_medication_details.is_out = 2
+    </delete>
+
+    <!--批量插入-->
+    <!--useGeneratedKeys对于支持主键自增的数据库 此关键字支持在执行添加记录之后可以获取到数据库自动生成的主键ID-->
+    <!--selectKey  会将 SELECT LAST_INSERT_ID()的结果放入到传入的model的主键里面，
+          keyProperty 对应的model中的主键的属性名，这里是 his_medication_details 中的id，因为它跟数据库的主键对应
+          order AFTER 表示 SELECT LAST_INSERT_ID() 在insert执行之后执行,多用与自增主键，
+                BEFORE 表示 SELECT LAST_INSERT_ID() 在insert执行之前执行，这样的话就拿不到主键了，
+                      这种适合那种主键不是自增的类型
+          resultType 主键类型 -->
+    <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List" keyProperty="id">
+
+        insert into his_medication_details(id, medication_id, description, remarks, is_pay, is_back, is_del, count,
+        drugs_numb,
+        drugs_name, drugs_alias, drugs_spec, prescription, mental_medicine, large_unit, small_unit,
+        conversion_rate, disable, level, medical_insurance_sign, placeOrigin, base_medicine,
+        narcotic_drugs, create_user_id, create_date, update_user_id, update_date, total_price,medical_record_id,is_out)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id,jdbcType=BIGINT}, #{item.medicationId,jdbcType=BIGINT}, #{item.description,jdbcType=VARCHAR},
+            #{item.remarks,jdbcType=VARCHAR}, #{item.isPay,jdbcType=INTEGER}, #{item.isBack,jdbcType=INTEGER},
+            #{item.isDel,jdbcType=INTEGER}, #{item.count,jdbcType=INTEGER}, #{item.drugsNumb,jdbcType=VARCHAR},
+            #{item.drugsName,jdbcType=VARCHAR}, #{item.drugsAlias,jdbcType=VARCHAR}, #{item.drugsSpec,jdbcType=VARCHAR},
+            #{item.prescription,jdbcType=INTEGER}, #{item.mentalMedicine,jdbcType=INTEGER},
+            #{item.largeUnit,jdbcType=VARCHAR},
+            #{item.smallUnit,jdbcType=VARCHAR}, #{item.conversionRate,jdbcType=DECIMAL},
+            #{item.disable,jdbcType=INTEGER},
+            #{item.level,jdbcType=INTEGER}, #{item.medicalInsuranceSign,jdbcType=INTEGER},
+            #{item.placeorigin,jdbcType=VARCHAR},
+            #{item.baseMedicine,jdbcType=INTEGER}, #{item.narcoticDrugs,jdbcType=INTEGER},
+            #{item.createUserId,jdbcType=BIGINT},
+            #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=BIGINT},
+            #{item.updateDate,jdbcType=TIMESTAMP},
+            #{item.totalPrice,jdbcType=DECIMAL}, #{item.medicalRecordId,jdbcType=BIGINT},#{item.isOut,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+    <select id="selectByRecordId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select *
+    from
+    his_medication_details
+    where his_medication_details.medical_record_id = #{id,jdbcType=BIGINT};
+  </select>
+
+    <select id="selectByRecordIdNotIsOutOrIsPay" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select *
+        from
+            his_medication_details
+        where his_medication_details.medical_record_id = #{id,jdbcType=BIGINT} and his_medication_details.is_pay = 2 and his_medication_details.is_out = 2;
+    </select>
+
+
+    <update id="setPayBatch" parameterType="list">
+        update his_medication_details
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="is_pay=case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.isPay!=null">
+                        when id=#{item.id} then #{item.isPay}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where
+        <foreach collection="list" separator="or" item="item" index="index">
+            id=#{item.id}
+        </foreach>
+    </update>
+
+    <!--根据就诊编号查看用药明细-->
+    <select id="listForMedicationDetailsByNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select distinct a.drugs_numb,a.drugs_name,a.drugs_spec,a.count,a.total_price,a.is_pay,a.is_out,a.id,z.surplus as surplus,
+           z.validity_period as validityPeriod,z.id as mediEnterId,z.medical_record_id as recordNumber,d.number as tollNumber
+    FROM his_medication_details as a
+           left join his_medical_record as b on a.medical_record_id = b.id
+           left join(
+        select b.drugs_numb as drugs_numb,b.validity_period as validity_period,b.id as id,c.medical_record_id as medical_record_id,b.surplus as surplus
+        FROM his_medication_details as a
+               left join his_medi_enter_details as b on a.drugs_numb = b.drugs_numb
+               left join his_medical_record as c  on c.id = a.medical_record_id
+        WHERE c.medical_record_id =#{medicalRecordId,jdbcType=VARCHAR} and b.surplus &gt; 0 and b.validity_period &gt;= CURRENT_DATE
+      )z on z.drugs_numb =a.drugs_numb
+           left join his_toll_details as c on a.id = c.target_id
+           left join his_toll_record as d on c.toll_record_id = d.id
+    WHERE a.is_out = 2 and a.is_pay=1 and b.medical_record_id = #{medicalRecordId,jdbcType=VARCHAR}
+    order by a.drugs_numb,z.validity_period
+  </select>
+    <!--批量更新-->
+    <update id="updateBatch" parameterType="list">
+        update his_medication_details
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="is_out=case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.isOut!=null">
+                        when id=#{item.id} then #{item.isOut}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="is_pay=case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.isPay!=null">
+                        when id=#{item.id} then #{item.isPay}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where
+        <foreach collection="list" separator="or" item="item" index="index">
+            id=#{item.id}
+        </foreach>
+    </update>
+
+    <!--批量更新-->
+    <update id="updateBatchForIsBack" parameterType="list">
+        update his_medication_details
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="is_back=case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.isBack!=null">
+                        when id=#{item.id} then #{item.isBack}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where
+        <foreach collection="list" separator="or" item="item" index="index">
+            id=#{item.id}
+        </foreach>
+    </update>
+    <select id="selectMedicationDetailsDataCount" resultMap="BaseResultMap" parameterType="java.util.Date">
+	SELECT
+    his_medication_details.*
+	FROM his_medication_details
+	WHERE
+        is_out = 1
+            and create_date &gt;= #{createDate,jdbcType=TIMESTAMP}
+            and create_date &lt; #{endDate,jdbcType=TIMESTAMP}
+            order by create_date asc
+    </select>
+    <select id="useDrug" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select
+        h.id, h.medication_id, h.description, h.remarks, h.is_pay, h.is_back, h.is_del, h.count, h.drugs_numb,
+        h.drugs_name, h.drugs_alias, h.drugs_spec, h.prescription, h.mental_medicine, h.large_unit, h.small_unit,
+        h.conversion_rate, h.disable, h.level, h.medical_insurance_sign, h.placeOrigin, h.base_medicine,
+        h.narcotic_drugs, h.create_user_id, h.create_date, h.update_user_id, h.update_date,
+        h.total_price,h.medical_record_id,h.is_out,h.exit_id
+        ,p.sale_price,(h.count*p.sale_price) as price
+        from his_medication_details as h
+        LEFT JOIN his_pharmacy_detail as p
+        on p.id = h.medication_id
+        where h.medical_record_id
+        = (
+        select r.id
+        from his_medical_record as r where r.medical_record_id = #{parameter.medicalNumber}
+        )
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+    <select id="queryTranslateInfoByDate" resultMap="BaseResultMap"
+            parameterType="com.ahsj.hiscore.entity.HisMedicationDetails">
+        select
+        <include refid="Base_Column_List"/>
+        from his_medication_details as his
+        where   <![CDATA[ (DATE_FORMAT(his.update_date, '%Y-%m-%d') =  DATE_FORMAT( #{updateDate}, '%Y-%m-%d'))]]>
+    </select>
+
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_medication_details
+    </select>
+   <select id="selectByMedicalNumber" resultMap="BaseResultMap" parameterType="java.lang.String">
+         select
+        h.id, h.medication_id, h.description, h.remarks, h.is_pay, h.is_back, h.is_del, h.count, h.drugs_numb,
+        h.drugs_name, h.drugs_alias, h.drugs_spec, h.prescription, h.mental_medicine, h.large_unit, h.small_unit,
+        h.conversion_rate, h.disable, h.level, h.medical_insurance_sign, h.placeOrigin, h.base_medicine,
+        h.narcotic_drugs, h.create_user_id, h.create_date, h.update_user_id, h.update_date,
+        h.total_price,h.medical_record_id,h.is_out,h.exit_id
+        ,p.sale_price,(h.count*p.sale_price) as price,m.id as mId
+        from his_medication_details as h
+        LEFT JOIN his_pharmacy_detail as p
+        on p.id = h.medication_id
+				left join his_medicine_info as m on m.drugs_numb = h.drugs_numb
+        where h.medical_record_id
+        = (
+        select r.id
+        from his_medical_record as r where r.medical_record_id =#{parameter.medicalNumber}
+        )
+   </select>
+    <select id="selectOutpatientInfusionByMedicalRecordId" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
+        select
+        a.*,
+        c.sale_price
+        from his_medication_details as a
+        left join his_medical_record as b on b.id = a.medical_record_id
+        LEFT JOIN his_pharmacy_detail as c on c.id = a.medication_id
+            where
+            a.is_pay = 1 and
+            a.is_back = 2 and
+            a.medical_record_id  = #{parameter.medicalRecordId,jdbcType=BIGINT}
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+    <select id="selectPrint" parameterType="java.lang.String" resultMap="BaseResultMap">
+
+select d.drugs_name,d.count,i.id as id,a.sale_price as price ,a.sale_price*d.count as total_price
+from his_medication_details as d
+LEFT JOIN his_medicine_info as i on i.drugs_numb = d.drugs_numb
+
+LEFT JOIN his_pharmacy_detail as a on a.id = d.medication_id
+where d.medical_record_id =(
+
+select m.id from his_medical_record as m where m.registered_id=(
+
+select  r.id from his_registered as r where r.number =#{number,jdbcType=VARCHAR}))
+
+
+    </select>
+
+    <select id="selectByRecordIdNotIsPay" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select a.*,b.sale_price*a.count as medicineTotalPrice
+from his_medication_details as a
+left join his_pharmacy_detail as b on a.drugs_numb = b.drugs_numb
+where a.medical_record_id  = #{medicalRecordId,jdbcType=BIGINT} and is_pay = 2
+    </select>
+
+    <update id="updateRemarks" parameterType="com.ahsj.hiscore.entity.HisMedicationDetails">
+        update his_medication_details
+        set remarks = #{remarks,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+</mapper>

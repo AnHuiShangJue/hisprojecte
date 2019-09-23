@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisRefundProjectInfoMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisRefundProjectInfo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="voucher" property="voucher" jdbcType="VARCHAR"/>
+        <result column="vouchers" property="vouchers" jdbcType="VARCHAR"/>
+        <result column="refund_sum_proce" property="refundSumProce" jdbcType="DECIMAL"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="create_user_id" property="createUserId" jdbcType="BIGINT"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="BIGINT"/>
+        <result column="application_time" property="applicationTime" jdbcType="TIMESTAMP"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="toll_record_number" property="tollRecordNumber" jdbcType="VARCHAR"/>
+        <result column="patient_name" property="patientName" jdbcType="VARCHAR"/>
+        <result column="record_number" property="recordNumber" jdbcType="VARCHAR"/>
+        <result column="user_name" property="userNames" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, voucher, refund_sum_proce, create_date, update_date, create_user_id, update_user_id, 
+    application_time, remarks,toll_record_number
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from his_refund_project_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_refund_project_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisRefundProjectInfo" keyProperty="id"
+            useGeneratedKeys="true">
+    insert into his_refund_project_info (id, voucher, refund_sum_proce, 
+      create_date, update_date, create_user_id, 
+      update_user_id, application_time, remarks,toll_record_number
+      )
+    values (#{id,jdbcType=BIGINT}, #{voucher,jdbcType=VARCHAR}, #{refundSumProce,jdbcType=DECIMAL},
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, 
+      #{updateUserId,jdbcType=BIGINT}, #{applicationTime,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, #{tollRecordNumber,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisRefundProjectInfo">
+        insert into his_refund_project_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="voucher != null">
+                voucher,
+            </if>
+            <if test="refundSumProce != null">
+                refund_sum_proce,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="applicationTime != null">
+                application_time,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="voucher != null">
+                #{voucher,jdbcType=VARCHAR},
+            </if>
+            <if test="refundSumProce != null">
+                #{refundSumProce,jdbcType=DECIMAL},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="applicationTime != null">
+                #{applicationTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisRefundProjectInfo">
+        update his_refund_project_info
+        <set>
+            <if test="voucher != null">
+                voucher = #{voucher,jdbcType=VARCHAR},
+            </if>
+            <if test="refundSumProce != null">
+                refund_sum_proce = #{refundSumProce,jdbcType=DECIMAL},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="applicationTime != null">
+                application_time = #{applicationTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisRefundProjectInfo">
+    update his_refund_project_info
+    set voucher = #{voucher,jdbcType=VARCHAR},
+      refund_sum_proce = #{refundSumProce,jdbcType=DECIMAL},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      application_time = #{applicationTime,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="queryHisRefundProjectInfo" resultMap="BaseResultMap"
+            parameterType="com.ahsj.hiscore.entity.HisRefundProjectInfo">
+        select
+        <include refid="Base_Column_List"/>
+        from his_refund_project_info h where h.voucher = #{voucher,jdbcType=VARCHAR}
+    </select>
+
+    <select id="list" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
+ 			  select DISTINCT h.voucher as vouchers  , h.* ,hp.name as patient_name,hr.record_number as record_number , u.user_name as user_name from his_refund_project_info h left join his_refund_project hr on h.toll_record_number = hr.toll_record_number left join  his_medical_record hm
+    on hr.record_number = hm.medical_record_id left join his_patient_info hp on hm.patient_id = hp.id left join  `his-userinfo`.user_info as  u  on u.id = h.create_user_id  where  1=1
+
+        <if test="parameter.voucher != null and parameter.voucher != ''">
+            and h.voucher = #{parameter.voucher,jdbcType=VARCHAR}
+        </if>
+        <if test="parameter.patientName != null and parameter.patientName != ''">
+            and hp.name= #{parameter.patientName,jdbcType=VARCHAR}
+        </if>
+        <if test="parameter.tollRecordNumber != null and parameter.tollRecordNumber != ''">
+            and h.toll_record_number = #{parameter.tollRecordNumber,jdbcType=VARCHAR}
+        </if>
+        <if test="parameter.consumablesDetailsCreateDate != null">
+            and h.application_time &lt;= #{parameter.consumablesDetailsCreateDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="parameter.consumablesDetailsCreateDates != null">
+            and h.application_time &gt;= #{parameter.consumablesDetailsCreateDates,jdbcType=TIMESTAMP}
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+  </select>
+    <select id="printlylist" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
+ 			  select DISTINCT h.voucher as vouchers  , h.* ,hp.name as patient_name,hr.record_number as record_number , u.user_name as user_name from his_refund_project_info h left join his_refund_project hr on h.toll_record_number = hr.toll_record_number left join  his_medical_record hm
+    on hr.record_number = hm.medical_record_id left join his_patient_info hp on hm.patient_id = hp.id left join  `his-userinfo`.user_info as  u  on u.id = h.create_user_id  where  1=1
+        <if test="tollRecordNumber != null and tollRecordNumber != ''">
+            and h.toll_record_number = #{tollRecordNumber,jdbcType=VARCHAR}
+        </if>
+
+  </select>
+</mapper>

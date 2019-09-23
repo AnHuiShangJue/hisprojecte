@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="public/base_list :: html"></div>
+<!-- Start Page Loading -->
+<div id="loader-wrapper">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+</div>
+
+<section id="content">
+    <input type="hidden" id="mainIframeName" name="mainIframeName" th:value="${parentName}">
+    <!--在这个地方实现查询重置类的操作-->
+    <div class="container">
+        <div class="section">
+            <form id="searchForm" class="row" action="">
+                <div class="row">
+                    <div class="col input-field s3 m3 l3">
+                        <input id="fileName" name="fileName" type="text"/>
+                        <label for="fileName">文件名称</label>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <a class="waves-effect waves-light btn" id="searchBtn">搜索</a>
+        <a class="waves-effect waves-light btn" id="resetBtn">重置</a>
+        <div class="row">
+            <div class="col s4 m4 l4 xl4">
+                <a id="createBtn" class="waves-effect waves-light btn">新增</a>
+            </div>
+        </div>
+        <div class="divider"></div>
+    </div>
+    <!--start container-->
+    <div class="container">
+        <div class="section">
+
+            <p class="caption" th:text="${notice}"></p>
+
+            <div class="divider"></div>
+        </div>
+    </div>
+
+    <!--Form Advance-->
+    <div class="row">
+
+        <div id="refreshtable" class="col l11 m8 l9">
+            <table id="data-table-simple" class="responsive-table display">
+            </table>
+        </div>
+    </div>
+</section>
+
+<script th:inline="javascript">
+
+    var grid = new Datatable();
+
+    $(document).ready(function () {
+        initBtn();
+        initTable();
+    });
+
+    function initTable() {
+        grid.init({
+            src: $("#data-table-simple"),
+            onSuccess: function (grid) {
+            },
+            onError: function (grid) {
+            },
+            onDataLoad: function (grid) {
+                initDataTableToolTip("data-table-simple", [1, 2, 3]);
+            },
+            loadingMessage: 'Loading...',
+            dataTable: {
+                "ajax": {
+                    "url": "/back/uploadFile/list", // ajax source
+                },
+                "columns": [
+                    {
+                        "title": "<input type='checkbox' class='icheck' id='checkAll'>",
+                        "render": function (data, type, row) {
+                            return "<label><input type=\"checkbox\" value=\"" + row.id + "\" class=\"icheck\" value=\"1\" /></label>";
+                        },
+                        "width": "18px",
+                        "orderable": false,
+                        "className": "centered"
+                    }, {
+                        "title": "文件名称",
+                        "data": "fileName",
+                        "name": "file_name"
+                    }, {
+                        "title": "文件位置",
+                        "data": "fileLocation",
+                        "name": "file_location"
+                    }, {
+                        "title": "文件下载次数",
+                        "data": "downloadTimes",
+                        "name": "download_times"
+                    },
+                    {
+                        "title": "操作",
+                        "width": "60px",
+                        "className": "centered",
+                        "orderable": false,
+                        "render": function (data, type, row) {
+                            var rtnBtn = "";
+                            //如果获取字符串，必须在参数外反转"
+                            rtnBtn = rtnBtn + "<a href='javascript:;' onclick='use(" + row.id + ',\"' + row.fileName + "\");'> <i class='mdi-content-add' title='使用'></i></a>" +
+                                "<a href='javascript:;' onclick='deleteInit(" + row.id + ");'> <i class='mdi-action-delete' title='删除'></i></a>" +
+                                "<a href='javascript:;' onclick='downloadfile(" + data + ");'> <i class='mdi-file-cloud-download' title='下载'></i></a>"
+                            ;
+                            // 返回自定义内容
+                            return rtnBtn;
+                        }
+                    }
+                ],
+                "order" : [ [ 3, "asc" ] ]
+            }
+        });
+
+    }
+
+
+    function use(id, fileName) {
+        $.ajax({
+            type: "post",
+            data: {"id": id, "relatedId": [[${dynmaiclistId}]]},
+            url: "/back/uploadFile/set",
+            dataType: "json",
+            success: function (msg) {
+                if (msg.success) {
+                    Materialize.toast(msg.message, 3000);
+                    parent.$(".fileId").val(id);
+                    parent.$(".filedName").val(fileName);
+                    if ( null == [[${dynmaiclistId}]]) {
+                        dialog
+                            .parentclose(false);
+                    }
+                    else {
+                        dialog
+                            .parentclose(true);
+                    }
+                } else {
+                    Materialize.toast(msg.message, 3000);
+                }
+            },
+            error: function (data) {
+                Materialize.toast("网络异常");
+            }
+        });
+
+    }
+
+    function initBtn() {
+        $("#createBtn").click(function () {
+            var url = "/back/uploadFile/saveInit";
+            dialog.show(url, "新增文件")
+        });
+    }
+
+    function deleteInit(id) {
+        layer.confirm('确定删除?', {
+            btn: ['确定', '取消'] //可以无限个按钮
+        }, function (index, layero) {
+            $.ajax({
+                type: "post",
+                data: {"id": id},
+                url: "/back/uploadFile/delete",
+                dataType: "json",
+                success: function (msg) {
+                    if (msg.success) {
+                        Materialize.toast(msg.message, 3000);
+                        layer.close(index);
+                        grid.reset()
+                    } else {
+                        Materialize.toast(msg.message, 3000);
+                        layer.close(index);
+                    }
+                },
+                error: function (data) {
+                    layer.close(index);
+                    Materialize.toast("网络异常");
+                }
+            });
+        }, function (index) {
+            layer.close(index);
+        });
+    }
+
+    function saveInit() {
+        window.location.href = "/back/uploadFile/download?id=" + id;
+
+    }
+
+    function downloadfile(id) {
+        window.location.href = "/back/uploadFile/download?id=" + id;
+    }
+
+    /**
+     * 初始化datatable col tooltip
+     * @param controlName datatable对象名
+     * @param colNo 需要展示tip的列序号数组
+     */
+    function initDataTableToolTip(controlName, colNo) {
+        //initTooltip(controlName);
+        $('#' + controlName + ' tbody tr').each(function () {
+            var nTds = $('td', this);
+
+            for (var i = 0; i < colNo.length; i++) {
+                var col = colNo[i];
+                if ($(nTds[col])[0] != undefined) {
+                    //console.debug("initDataTableToolTip col[" + col + "]=" + $(nTds[col]).text());
+
+                    $(nTds[col])[0].setAttribute('title', $(nTds[col]).text());
+                }
+            }
+        });
+        tooltip();
+    }
+
+    function tooltip() {
+        jQuery(document).ready(function ($) {
+            var sweetTitles = {
+                x: 10,
+                y: 20,
+                tipElementsI: "i",
+                noTitle: false,
+                init: function () {
+                    var noTitle = this.noTitle;
+                    $(this.tipElementsI).each(function () {
+                        $(this).mouseover(function (e) {
+                            if (noTitle) {
+                                isTitle = true;
+                            } else {
+                                isTitle = $.trim(this.title) != '';
+                            }
+                            if (isTitle) {
+                                this.myTitle = this.title;
+                                this.title = "";
+                                var tooltip = "<div class='tooltip'><div class='tipsy-arrow tipsy-arrow-n'></div><div class='tipsy-btu'>" + this.myTitle + "</div></div>";
+                                $('body').append(tooltip);
+                                $('.tooltip').css({
+                                    "top": (e.pageY + 20) + "px",
+                                    "left": (e.pageX - 20) + "px"
+                                }).show('fast');
+                            }
+                        }).mouseout(function () {
+                            if (this.myTitle != null) {
+                                this.title = this.myTitle;
+                                $('.tooltip').remove();
+                            }
+                        }).mousemove(function (e) {
+                            $('.tooltip').css({
+                                "top": (e.pageY + 20) + "px",
+                                "left": (e.pageX - 20) + "px"
+                            });
+                        });
+                    });
+
+
+                }
+            };
+            $(function () {
+                sweetTitles.init();
+            });
+
+
+        });
+    }
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+</body>
+</html>
+

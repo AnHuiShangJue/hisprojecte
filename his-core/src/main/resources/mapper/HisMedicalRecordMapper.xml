@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisMedicalRecordMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisMedicalRecord">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="medical_record_id" property="medicalRecordId" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="create_user_id" property="createUserId" jdbcType="BIGINT"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="BIGINT"/>
+        <result column="patient_id" property="patientId" jdbcType="BIGINT"/>
+        <result column="nurse_id" property="nurseId" jdbcType="BIGINT"/>
+        <result column="doctor_id" property="doctorId" jdbcType="BIGINT"/>
+        <result column="registered_id" property="registeredId" jdbcType="BIGINT"/>
+        <result column="chief_complaint" property="chiefComplaint" jdbcType="VARCHAR"/>
+        <result column="current_condition" property="currentCondition" jdbcType="VARCHAR"/>
+        <result column="past_condition" property="pastCondition" jdbcType="VARCHAR"/>
+        <result column="patient_name" property="patientName" jdbcType="VARCHAR"/>
+        <result column="doctor_name" property="doctorName" jdbcType="VARCHAR"/>
+        <result column="is_re" property="isRe" jdbcType="INTEGER"/>
+        <result column="regist" property="regist" jdbcType="INTEGER"/>
+        <result column="serials" property="serials" jdbcType="TIMESTAMP"/>
+        <result column="numbers" property="numbers" jdbcType="VARCHAR"/>
+        <result column="patient_age" property="patientAge" jdbcType="INTEGER"/>
+        <result column="department_id" property="departmentId" jdbcType="BIGINT"/>
+        <result column="is_rel" property="isRel" jdbcType="INTEGER"/>
+        <result column="ids" property="ids" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="idcard" property="idCard" jdbcType="VARCHAR"/>
+        <result column="date" property="date" jdbcType="TIMESTAMP"/>
+        <result column="sex" property="sex" jdbcType="INTEGER"/>
+        <result column="bid" property="bid" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        ,
+        medical_record_id,
+        create_date,
+        create_user_id,
+        update_date,
+        update_user_id,
+        is_re,
+        patient_id,
+        nurse_id,
+        doctor_id,
+        registered_id,
+        chief_complaint,
+        current_condition,
+        past_condition
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from his_medical_record
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from his_medical_record
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisMedicalRecord">
+        insert into his_medical_record (id,
+                                        medical_record_id, create_date,
+                                        create_user_id, update_date, update_user_id,
+                                        patient_id, nurse_id, doctor_id,
+                                        registered_id, chief_complaint, current_condition, is_re,
+                                        past_condition, type)
+        values (#{id,jdbcType=BIGINT}, #{
+medicalRecordId,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+                #{createUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT},
+                #{patientId,jdbcType=BIGINT}, #{nurseId,jdbcType=BIGINT}, #{doctorId,jdbcType=BIGINT},
+                #{registeredId,jdbcType=BIGINT}, #{chiefComplaint,jdbcType=VARCHAR}, #{isRe,jdbcType=INTEGER},
+                #{currentCondition,jdbcType=VARCHAR},
+                #{pastCondition,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisMedicalRecord">
+        insert into his_medical_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="
+medicalRecordId != null">
+
+                medical_record_id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="patientId != null">
+                patient_id,
+            </if>
+            <if test="nurseId != null">
+                nurse_id,
+            </if>
+            <if test="doctorId != null">
+                doctor_id,
+            </if>
+            <if test="registeredId != null">
+                registered_id,
+            </if>
+            <if test="isRe != null">
+                is_re,
+            </if>
+            <if test="chiefComplaint != null">
+                chief_complaint,
+            </if>
+            <if test="currentCondition != null">
+                current_condition,
+            </if>
+            <if test="pastCondition != null">
+                past_condition,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="
+medicalRecordId != null">
+                #{
+        medicalRecordId,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="patientId != null">
+                #{patientId,jdbcType=BIGINT},
+            </if>
+            <if test="nurseId != null">
+                #{nurseId,jdbcType=BIGINT},
+            </if>
+            <if test="doctorId != null">
+                #{doctorId,jdbcType=BIGINT},
+            </if>
+            <if test="registeredId != null">
+                #{registeredId,jdbcType=BIGINT},
+            </if>
+            <if test="isRe != null">
+                #{isRe,jdbcType=INTEGER},
+            </if>
+            <if test="chiefComplaint != null">
+                #{chiefComplaint,jdbcType=VARCHAR},
+            </if>
+            <if test="currentCondition != null">
+                #{currentCondition,jdbcType=VARCHAR},
+            </if>
+            <if test="pastCondition != null">
+                #{pastCondition,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisMedicalRecord">
+        update his_medical_record
+        <set>
+            <if test="medicalRecordId != null">
+                medical_record_id = #{medicalRecordId,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="patientId != null">
+                patient_id = #{patientId,jdbcType=BIGINT},
+            </if>
+            <if test="nurseId != null">
+                nurse_id = #{nurseId,jdbcType=BIGINT},
+            </if>
+            <if test="doctorId != null">
+                doctor_id = #{doctorId,jdbcType=BIGINT},
+            </if>
+            <if test="registeredId != null">
+                registered_id = #{registeredId,jdbcType=BIGINT},
+            </if>
+            <if test="isRe != null">
+                is_re = #{isRe,jdbcType=INTEGER},
+            </if>
+            <if test="chiefComplaint != null">
+                chief_complaint = #{chief_complaint,jdbcType=VARCHAR},
+            </if>
+            <if test="currentCondition != null">
+                current_condition = #{current_condition,jdbcType=VARCHAR},
+            </if>
+            <if test="pastCondition != null">
+                past_condition = #{past_condition,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisMedicalRecord">
+        update his_medical_record
+        set
+            medical_record_id = #{medicalRecordId,jdbcType=VARCHAR},
+            create_date       = #{createDate,jdbcType=TIMESTAMP},
+            create_user_id    = #{createUserId,jdbcType=BIGINT},
+            update_date       = #{updateDate,jdbcType=TIMESTAMP},
+            update_user_id    = #{updateUserId,jdbcType=BIGINT},
+            patient_id        = #{patientId,jdbcType=BIGINT},
+            nurse_id          = #{nurseId,jdbcType=BIGINT},
+            doctor_id         = #{doctorId,jdbcType=BIGINT},
+            registered_id     = #{registeredId,jdbcType=BIGINT},
+            is_re             = #{isRe,jdbcType=INTEGER},
+            chief_complaint   = #{chiefComplaint,jdbcType=VARCHAR},
+            current_condition = #{currentCondition,jdbcType=VARCHAR},
+            past_condition    = #{pastCondition,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <!--自定义sql语句-->
+    <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select
+        t.*
+        from (
+        select
+        a.id as id,
+        a.number as numbers,a.registered_category as regist,a.serial as
+        serials,a.department_id,a.create_date as date,a.patient_id as patient_id,
+        b.id as ids,a.is_pay,
+        c.name as patient_name,c.age AS patient_age,c.idcard as idcard,
+        d.user_name as name,
+        case when b.id is null then 1 else 2 end as is_rel
+        from `his-rpac`.his_registered as a
+        left join `his-rpac`.his_medical_record as b on b.registered_id = a.id
+        LEFT JOIN `his-rpac`.his_patient_info as c ON c.id = a.patient_id
+        LEFT JOIN `his-userinfo`.user_info as d on d.id = b.doctor_id
+        where
+        a.is_pay =1
+        and a.is_obsolete = 2
+        <if test="parameter.patientName != null and parameter.patientName != ''">
+            and c.name like concat('%' #{parameter.patientName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.numbers != null and parameter.numbers != ''">
+            and a.number like concat('%' #{parameter.numbers,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.serials != null and parameter.serials != ''">
+            and a.serial =#{parameter.serials,jdbcType=VARCHAR}
+        </if>
+        <if test="parameter.isToday != null ">
+            and a.create_date &gt;= CURDATE()
+        </if>
+        <if test="parameter.departmentId != null and parameter.departmentId != ''">
+            and a.department_id = #{parameter.departmentId,jdbcType=BIGINT}
+        </if>
+        <if test="parameter.date != null and parameter.date != ''">
+            and a.create_date like concat('%' #{parameter.date,jdbcType=TIMESTAMP},'%')
+        </if>
+        ) as t
+        where
+        1 =1
+        <if test="parameter.isRel != null and parameter.isRel != ''">
+            and is_rel = #{parameter.isRel,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+    <select id="selectByPatientId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select his_medical_record.*
+        from his_medical_record
+        where patient_id = #{patientId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByRegisterId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select his_medical_record.*
+        from his_medical_record
+        where registered_id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="medicalrecordlist" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        SELECT
+        a.*,
+        b.number AS numbers,b.department_id,b.serial AS serials,
+        c.name AS patient_name,c.age AS patient_age,c.sex AS sex,c.idcard AS idcard,
+        d.user_name AS name,
+        case when b.id is null then 1 else 2 end as is_rel
+        FROM `his-rpac`.his_medical_record AS a
+        LEFT JOIN `his-rpac`.his_registered AS b ON b.id = a.registered_id
+        LEFT JOIN `his-rpac`.his_patient_info AS c ON c.id = a.patient_id
+        LEFT JOIN `his-userinfo`.user_info AS d ON d.id = a.doctor_id
+        LEFT JOIN `his-rpac`.his_medical AS e ON e.record_id = a.id
+        WHERE
+        a.type = 1
+        <if test="parameter.patientName != null and parameter.patientName != ''">
+            and c.name like concat('%' #{parameter.patientName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.numbers != null and parameter.numbers != ''">
+            and b.number like concat('%' #{parameter.numbers,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.idCard != null and parameter.idCard != ''">
+            and c.idcard like concat('%' #{parameter.idCard,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.highTime != null">
+            and date(a.create_date) &lt;= #{parameter.highTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="parameter.lowTime != null">
+            and date(a.create_date) &gt;= #{parameter.lowTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="parameter.departmentId != null and parameter.departmentId != ''">
+            and b.department_id = #{parameter.departmentId,jdbcType=BIGINT}
+        </if>
+        <if test="parameter.isRel != null and parameter.isRel != ''">
+            and is_rel = #{parameter.isRel,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+    <select id="selectMedicalCount" resultType="int" parameterType="java.lang.String">
+        select
+            count(*)
+        from his_medical_record
+        where his_medical_record.medical_record_id LIKE CONCAT('%', #{medical_record_id}, '%')
+    </select>
+
+
+    <select id="selectByMedicalRecordId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+            a.*,
+            b.name          as pName,
+            b.sex           as sex,
+            c.department_id as departmentIdForToll,
+            d.name          as doctorName
+        from his_medical_record as a
+                 left join his_patient_info as b on a.patient_id = b.id
+                 left join his_registered as c on a.registered_id = c.id
+                 left join his_doctor_info as d on a.doctor_id = d.id
+        where medical_record_id = #{medicalRecordId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="listForMedicalHistoryByPatientId" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
+        select a.*,
+        b.name as pName,
+        b.id as bid,
+        b.idcard as idCard,
+        c1.name as nurseName,
+        c1.number as nurseNumber,
+        d1.name as doctorName,
+        d1.numb as doctorNumber,
+        f.id as hospitalManageId,
+        f.number as hosNumber,
+        f.nurse_id as fnurseId,
+        f.is_discharged as isDischarge,
+        e.now_condition as nowCondition,
+        e.hiscondition as hisCondition,
+        e.chiefcomplaint as chiefComplaintForMedical,
+        g1.user_name as receiveDoctorName
+        from his_medical_record as a
+        left join his_patient_info as b on a.patient_id = b.id
+        left join his_medical as e on a.medical_record_id = e.record_id
+        left join his_hospital_manage f on a.medical_record_id = f.medical_number
+        left join his_user_nurse as c on f.nurse_id = c.user_id
+        left join his_nurse as c1 on c.nurse_id = c1.id
+        left join his_user_doctor as d on f.doctor_id = d.user_id
+        left join his_doctor_info as d1 on d.doctor_id = d1.id
+        left join `his-userinfo`.user_info as g1 on a.doctor_id = g1.id
+        where 1=1 and a.patient_id = #{parameter.patientId,jdbcType=BIGINT} order by f.is_discharged desc
+        <if test="parameter.nurseName != null and parameter.nurseName != ''">
+            and c1.name like concat('%' #{parameter.nurseName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.nurseNumber != null and parameter.nurseNumber != ''">
+            and c1.number like concat('%' #{parameter.nurseNumber,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.doctorName != null and parameter.doctorName != ''">
+            and d1.name like concat('%' #{parameter.doctorName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.doctorNumber != null and parameter.doctorNumber != ''">
+            and d1.numb like concat('%' #{parameter.doctorNumber,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.highCreateDate != null">
+            and a.create_date &lt;= #{parameter.highCreateDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="parameter.lowCreateDate != null">
+            and a.create_date &gt;= #{parameter.lowCreateDate,jdbcType=TIMESTAMP}
+        </if>
+    </select>
+
+    <select id="selectByMedicalRecordOrder" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select his_medical_record.*
+        from his_medical_record
+        where his_medical_record.patient_id = #{patientId,jdbcType=BIGINT}
+        order by his_medical_record.create_date desc
+    </select>
+
+
+    <select id="listForAllMedicalHistoryByPatientId" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
+        select a.*,
+        b.name as pName,
+        b.idcard as idCard,
+        c1.name as nurseName,
+        c1.number as nurseNumber,
+        d1.name as doctorName,
+        d1.numb as doctorNumber,
+        f.id as hospitalManageId,
+        f.number as hosNumber,
+        f.nurse_id as fnurseId,
+        f.is_discharged as isDischarge,
+        e.now_condition as nowCondition,
+        e.hiscondition as hisCondition,
+        e.chiefcomplaint as chiefComplaintForMedical,
+        g1.user_name as receiveDoctorName
+        from his_medical_record as a
+        left join his_patient_info as b on a.patient_id = b.id
+        left join his_medical as e on a.medical_record_id = e.record_id
+        left join his_hospital_manage f on a.medical_record_id = f.medical_number
+        left join his_user_nurse as c on f.nurse_id = c.user_id
+        left join his_nurse as c1 on c.nurse_id = c1.id
+        left join his_user_doctor as d on f.doctor_id = d.user_id
+        left join his_doctor_info as d1 on d.doctor_id = d1.id
+        left join `his-userinfo`.user_info as g1 on a.doctor_id = g1.id
+        where 1=1 and a.patient_id = #{parameter.patientId,jdbcType=BIGINT} order by a.create_date desc
+        <if test="parameter.medicalRecordId != null and parameter.medicalRecordId != ''">
+            and a.medical_record_id like concat('%' #{parameter.medicalRecordId,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.highCreateDate != null">
+            and a.create_date &lt;= #{parameter.highCreateDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="parameter.lowCreateDate != null">
+            and a.create_date &gt;= #{parameter.lowCreateDate,jdbcType=TIMESTAMP}
+        </if>
+    </select>
+    <select id="selectPrint" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select m.create_date,
+               m.medical_record_id,
+               u.`name`    as `name`
+                ,
+               i.user_name as doctor_name
+        from his_medical_record as m
+
+                 LEFT JOIN `his-userinfo`.user_info as i on i.id = m.doctor_id
+                 LEFT JOIN his_patient_info as u on u.id = m.patient_id
+
+        where m.registered_id =
+              (select r.id from his_registered as r where r.number = #{numbers})
+
+    </select>
+
+    <select id="selectTheLastRecordByPatientId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select his_medical_record.*
+        from his_medical_record
+        where patient_id = #{patientId,jdbcType=BIGINT}
+        order by create_date desc
+                 LIMIT 0,1
+    </select>
+</mapper>

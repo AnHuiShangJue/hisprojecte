@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisAnkleDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisAnkleDetail" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="is_skin_test" property="isSkinTest" jdbcType="INTEGER" />
+    <result column="specification" property="specification" jdbcType="VARCHAR" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="usages" property="usages" jdbcType="VARCHAR" />
+    <result column="dosage" property="dosage" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="intervals" property="intervals" jdbcType="INTEGER" />
+    <result column="proofreading_nurse_id" property="proofreadingNurseId" jdbcType="BIGINT" />
+    <result column="approved_nurse_id" property="approvedNurseId" jdbcType="BIGINT" />
+    <result column="is_stop" property="isStop" jdbcType="INTEGER" />
+    <result column="stop_date" property="stopDate" jdbcType="TIMESTAMP" />
+    <result column="stop_user_id" property="stopUserId" jdbcType="BIGINT" />
+    <result column="stop_prfing_nurse_id" property="stopPrfingNurseId" jdbcType="BIGINT" />
+    <result column="stop_apd_nurse_id" property="stopApdNurseId" jdbcType="BIGINT" />
+    <result column="total_amount" property="totalAmount" jdbcType="DOUBLE" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="order_num" property="orderNum" jdbcType="INTEGER" />
+    <result column="is_proofreading" property="isProofreading" jdbcType="INTEGER" />
+    <result column="is_approved" property="isApproved" jdbcType="INTEGER" />
+    <result column="is_stop_proofreading" property="isStopProofreading" jdbcType="INTEGER" />
+    <result column="isstopapproved" property="isstopapproved" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, number, name, is_skin_test, specification, unit, usages, dosage, remarks, intervals,
+    proofreading_nurse_id, approved_nurse_id, is_stop, stop_date, stop_user_id, stop_prfing_nurse_id, 
+    stop_apd_nurse_id, total_amount, create_user_id, create_date, update_user_id, update_date,order_num,is_proofreading,is_approved,is_stop_proofreading,isstopapproved
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from his_ankle_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from his_ankle_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisAnkleDetail" >
+    insert into his_ankle_detail (id, number, name, 
+      is_skin_test, specification, unit, 
+      usages, dosage, remarks,
+      intervals, proofreading_nurse_id, approved_nurse_id,
+      is_stop, stop_date, stop_user_id, 
+      stop_prfing_nurse_id, stop_apd_nurse_id, total_amount, 
+      create_user_id, create_date, update_user_id,
+      update_date,order_num,is_proofreading,is_approved,is_stop_proofreading,isstopapproved)
+    values (#{id,jdbcType=BIGINT}, #{number,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+      #{isSkinTest,jdbcType=INTEGER}, #{specification,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, 
+      #{usages,jdbcType=VARCHAR}, #{dosage,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR},
+      #{intervals,jdbcType=INTEGER}, #{proofreadingNurseId,jdbcType=BIGINT}, #{approvedNurseId,jdbcType=BIGINT},
+      #{isStop,jdbcType=INTEGER}, #{stopDate,jdbcType=TIMESTAMP}, #{stopUserId,jdbcType=BIGINT}, 
+      #{stopPrfingNurseId,jdbcType=BIGINT}, #{stopApdNurseId,jdbcType=BIGINT}, #{totalAmount,jdbcType=DOUBLE},
+      #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, 
+      #{updateDate,jdbcType=TIMESTAMP},#{orderNum,jdbcType=INTEGER},#{isProofreading,jdbcType=INTEGER},#{isApproved,jdbcType=INTEGER},#{isStopProofreading,jdbcType=INTEGER},#{isstopapproved,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisAnkleDetail" >
+    insert into his_ankle_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="isSkinTest != null" >
+        is_skin_test,
+      </if>
+      <if test="specification != null" >
+        specification,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="usages != null" >
+        usages,
+      </if>
+      <if test="dosage != null" >
+        dosage,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="intervals != null" >
+        intervals,
+      </if>
+      <if test="proofreadingNurseId != null" >
+        proofreading_nurse_id,
+      </if>
+      <if test="approvedNurseId != null" >
+        approved_nurse_id,
+      </if>
+      <if test="isStop != null" >
+        is_stop,
+      </if>
+      <if test="stopDate != null" >
+        stop_date,
+      </if>
+      <if test="stopUserId != null" >
+        stop_user_id,
+      </if>
+      <if test="stopPrfingNurseId != null" >
+        stop_prfing_nurse_id,
+      </if>
+      <if test="stopApdNurseId != null" >
+        stop_apd_nurse_id,
+      </if>
+      <if test="totalAmount != null" >
+        total_amount,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="orderNum != null" >
+        order_num,
+      </if>
+      <if test="isProofreading != null" >
+        is_proofreading,
+      </if>
+      <if test="isApproved != null" >
+        is_approved,
+      </if>
+      <if test="isStopProofreading != null" >
+        is_stop_proofreading,
+      </if>
+      <if test="isstopapproved != null" >
+        isstopapproved,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="isSkinTest != null" >
+        #{isSkinTest,jdbcType=INTEGER},
+      </if>
+      <if test="specification != null" >
+        #{specification,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="usages != null" >
+        #{usages,jdbcType=VARCHAR},
+      </if>
+      <if test="dosage != null" >
+        #{dosage,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="intervals != null" >
+        #{intervals,jdbcType=INTEGER},
+      </if>
+      <if test="proofreadingNurseId != null" >
+        #{proofreadingNurseId,jdbcType=BIGINT},
+      </if>
+      <if test="approvedNurseId != null" >
+        #{approvedNurseId,jdbcType=BIGINT},
+      </if>
+      <if test="isStop != null" >
+        #{isStop,jdbcType=INTEGER},
+      </if>
+      <if test="stopDate != null" >
+        #{stopDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stopUserId != null" >
+        #{stopUserId,jdbcType=BIGINT},
+      </if>
+      <if test="stopPrfingNurseId != null" >
+        #{stopPrfingNurseId,jdbcType=BIGINT},
+      </if>
+      <if test="stopApdNurseId != null" >
+        #{stopApdNurseId,jdbcType=BIGINT},
+      </if>
+      <if test="totalAmount != null" >
+        #{totalAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isProofreading != null" >
+        #{isProofreading,jdbcType=INTEGER},
+      </if>
+      <if test="isApproved != null" >
+        #{isApproved,jdbcType=INTEGER},
+      </if>
+      <if test="isStopProofreading != null" >
+        #{isStopProofreading,jdbcType=INTEGER},
+      </if>
+      <if test="isstopapproved != null" >
+        #{isstopapproved,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisAnkleDetail" >
+    update his_ankle_detail
+    <set >
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="isSkinTest != null" >
+        is_skin_test = #{isSkinTest,jdbcType=INTEGER},
+      </if>
+      <if test="specification != null" >
+        specification = #{specification,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="usages != null" >
+        usages = #{usages,jdbcType=VARCHAR},
+      </if>
+      <if test="dosage != null" >
+        dosage = #{dosage,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="intervals != null" >
+        intervals = #{intervals,jdbcType=INTEGER},
+      </if>
+      <if test="proofreadingNurseId != null" >
+        proofreading_nurse_id = #{proofreadingNurseId,jdbcType=BIGINT},
+      </if>
+      <if test="approvedNurseId != null" >
+        approved_nurse_id = #{approvedNurseId,jdbcType=BIGINT},
+      </if>
+      <if test="isStop != null" >
+        is_stop = #{isStop,jdbcType=INTEGER},
+      </if>
+      <if test="stopDate != null" >
+        stop_date = #{stopDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stopUserId != null" >
+        stop_user_id = #{stopUserId,jdbcType=BIGINT},
+      </if>
+      <if test="stopPrfingNurseId != null" >
+        stop_prfing_nurse_id = #{stopPrfingNurseId,jdbcType=BIGINT},
+      </if>
+      <if test="stopApdNurseId != null" >
+        stop_apd_nurse_id = #{stopApdNurseId,jdbcType=BIGINT},
+      </if>
+      <if test="totalAmount != null" >
+        total_amount = #{totalAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderNum != null" >
+        order_num = #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="isProofreading != null" >
+        is_proofreading = #{isProofreading,jdbcType=INTEGER},
+      </if>
+      <if test="isApproved != null" >
+        is_approved = #{isApproved,jdbcType=INTEGER},
+      </if>
+      <if test="isStopProofreading != null" >
+        is_stop_proofreading = #{isStopProofreading,jdbcType=INTEGER},
+      </if>
+      <if test="isstopapproved != null" >
+        isstopapproved = #{isstopapproved,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisAnkleDetail" >
+    update his_ankle_detail
+    set number = #{number,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      is_skin_test = #{isSkinTest,jdbcType=INTEGER},
+      specification = #{specification,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      usages = #{usages,jdbcType=VARCHAR},
+      dosage = #{dosage,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      intervals = #{intervals,jdbcType=INTEGER},
+      proofreading_nurse_id = #{proofreadingNurseId,jdbcType=BIGINT},
+      approved_nurse_id = #{approvedNurseId,jdbcType=BIGINT},
+      is_stop = #{isStop,jdbcType=INTEGER},
+      stop_date = #{stopDate,jdbcType=TIMESTAMP},
+      stop_user_id = #{stopUserId,jdbcType=BIGINT},
+      stop_prfing_nurse_id = #{stopPrfingNurseId,jdbcType=BIGINT},
+      stop_apd_nurse_id = #{stopApdNurseId,jdbcType=BIGINT},
+      total_amount = #{totalAmount,jdbcType=DOUBLE},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      order_num = #{orderNum,jdbcType=INTEGER},
+      is_proofreading = #{isProofreading,jdbcType=INTEGER},
+      is_approved = #{isApproved,jdbcType=INTEGER},
+      is_stop_proofreading = #{isStopProofreading,jdbcType=INTEGER},
+        isstopapproved = #{isstopapproved,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--自定义sql-->
+  <select id="listByNumber" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    SELECT
+    a.*,
+    b.user_name as proofreadingNurseName,
+    c.user_name as approvedNurseName,
+    d.user_name as stopApdNurseName,
+    e.user_name as stopPrfingNurseName
+    FROM
+    his_ankle_detail as a
+    left join `his-userinfo`.user_info as b on a.proofreading_nurse_id = b.id
+--       left join his_nurse as b on b1.nurse_id = b.id
+    left join `his-userinfo`.user_info as c on a.approved_nurse_id = c.id
+--       left join his_nurse as c on c1.nurse_id = c.id
+    left join `his-userinfo`.user_info as d on a.stop_apd_nurse_id = d.id
+--       left join his_nurse as d on  d1.nurse_id = d.id
+    left join `his-userinfo`.user_info as e on a.stop_prfing_nurse_id = e.id
+--       left join his_nurse as e on  e1.nurse_id = e.id
+    where
+    a.number = #{parameter.number,jdbcType=VARCHAR} order by order_num asc
+  </select>
+
+  <select id="selectWithNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+    a.*,
+    b.name as proofreadingNurseName,
+    c.name as approvedNurseName,
+    d.name as stopApdNurseName,
+    e.name as stopPrfingNurseName
+    FROM
+    his_ankle_detail as a
+    left join his_user_nurse as b1 on a.proofreading_nurse_id = b1.user_id
+      left join his_nurse as b on b1.nurse_id = b.id
+    left join his_user_nurse as c1 on a.approved_nurse_id = c1.user_id
+      left join his_nurse as c on c1.nurse_id = c.id
+    left join his_user_nurse as d1 on a.stop_apd_nurse_id = d1.user_id
+      left join his_nurse as d on  d1.nurse_id = d.id
+    left join his_user_nurse as e1 on a.stop_prfing_nurse_id = e1.user_id
+      left join his_nurse as e on  e1.nurse_id = e.id
+    where
+    a.number = #{parameter.number,jdbcType=VARCHAR} order by order_num asc
+  </select>
+  <!--根据编号number查找-->
+  <select id="selectByNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from his_ankle_detail
+    where number = #{number,jdbcType=VARCHAR}
+  </select>
+
+  <!--根据number查找list-->
+  <select id="selectListByNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from his_ankle_detail
+    where number = #{number,jdbcType=VARCHAR} order by order_num asc
+  </select>
+
+  <!--    批量更新-->
+  <update id="updateBatch" parameterType="list">
+    update his_ankle_detail
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="order_num=case" suffix="end,">
+        <foreach collection="list" item="item" index="index">
+          <if test="item.orderNum!=null">
+            when id=#{item.id} then #{item.orderNum}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="is_proofreading=case" suffix="end,">
+        <foreach collection="list" item="item" index="index">
+          <if test="item.isProofreading!=null">
+            when id=#{item.id} then #{item.isProofreading}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="is_approved=case" suffix="end,">
+        <foreach collection="list" item="item" index="index">
+          <if test="item.isApproved!=null">
+            when id=#{item.id} then #{item.isApproved}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where
+    <foreach collection="list" separator="or" item="item" index="index">
+      id=#{item.id}
+    </foreach>
+  </update>
+
+  <!--根据number删除-->
+  <delete id="deleteByNumber" parameterType="java.lang.String" >
+    delete from his_ankle_detail
+    where number = #{number,jdbcType=VARCHAR}
+  </delete>
+
+</mapper>

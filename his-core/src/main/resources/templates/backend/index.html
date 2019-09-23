@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<div th:replace="public/back_baselayout :: html"></div>
+
+<!--<script >-->
+<!--    $(document).ready(function(){-->
+<!--        $("a.navbar-toggler").click(function(){-->
+<!--            $("li").slideToggle("slow");-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+
+</head>
+
+<body>
+
+
+
+
+<!-- 页面加载 -->
+<div id="loader-wrapper">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+</div>
+<!-- 页面加载结束 -->
+
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+
+<div th:replace="public/backheader :: html"></div>
+
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+
+<!-- 主内容区域 -->
+<div id="main">
+    <!-- START WRAPPER -->
+    <div class="wrapper">
+        <!--引入左边栏区域-->
+        <div th:replace="public/left-aside :: html"></div>
+
+        <!-- //////////////////////////////////////////////////////////////////////////// -->
+
+        <!-- START CONTENT -->
+        <section id="content">
+
+            <!--start container-->
+
+                <iframe id="frameContainer" name="frameContainerName" class="framecontent" frameborder="0" height="1000px" width="100%" scrolling="auto" src=""></iframe>
+            <!--end container-->
+        </section>
+        <!-- END CONTENT -->
+
+
+    </div>
+    <!-- END WRAPPER -->
+
+</div>
+<!-- END MAIN -->
+<!-- START FOOTER -->
+<div th:replace="public/footer :: html"></div>
+
+<!-- Toast Notification -->
+
+<script th:inline="javascript" >
+
+    function initSlideStape() {
+        $("a.navbar-toggler").click(function () {
+            alert(222222);
+            if($("aside.navbar-full").hasClass("nav-lock"))
+            {
+                $("aside.navbar-full").removeClass("nav-lock");
+            }
+            else{
+                $("aside.navbar-full").addClass("nav-lock");
+            }
+        })
+    }
+
+    // Toast Notification
+    $(window).load(function() {
+        setTimeout(function() {
+            Materialize.toast('<span>欢迎使用鸠兹广场后端管理系统.</span>', 1500);
+        }, 3000);
+
+        window.onresize = function () {
+            var contentHeight = $(window).height() - $(".page-topbar").height() -$(".page-footer").height();
+            $('#frameContainer').height(contentHeight);
+        };
+        //侧边栏切换按钮初始化
+        initSlideStape();
+    });
+
+    initMenu();
+    function initMenu() {
+        $.ajax({
+            type: "post",
+            url: CTX+"/api/menu/layout/lstMenu.ahsj",
+            dataType: "json",
+            headers:{
+                Authorization:"Bearer "+TOKEN
+            },
+            success: function (msg) {
+                //$('#headerMenu').append(msg['header']);
+                if (msg['leftMenu'] == null || msg['leftMenu'] == '') {
+                    dialog.warn("沒有菜单权限，请联系管理员设置权限！");
+                    return;
+                }
+                $('#leftMenu').append(msg['leftMenu']);
+                $('.collapsible').collapsible();
+                $('.collapsible li ul li').click(function () {
+                    $("#frameContainer").attr("src",$(this).find("a").attr("rel")+"?token="+TOKEN);
+                });
+
+                // $('.collapsible li').click(function() {
+                // if ("/kcppc-oa" == $(this).find("a").attr("rel")) {
+                //     alert("开发中");
+                //     return;
+                // }
+
+
+                // $("#leftMenu").find("li:gt(0)").attr("class","");
+                // $("#selectData").remove();
+                // $(this).attr("class","active");
+
+                // $(this).parents("li").attr("class","active open");
+                // $(this).parents("li").find("a:first").append("<span id='selectData' class='selected'></span>");
+                //
+                // $("#menuName").html($(this).parents("li").find("span").html());
+                // $("#subMenuName").html($(this).find("a").html());
+                // });
+
+                $(".sub-menu li:first").trigger("click");
+            },
+            error: function (data) {
+                Materialize.toast("网络异常");
+            }
+        });
+
+        // $.ahsjajax(CTX+"/api/menu/layout/lstMenu.ahsj",
+        //       function (msg) {
+        //         //$('#headerMenu').append(msg['header']);
+        //         if (msg['leftMenu'] == null || msg['leftMenu'] == '') {
+        //             dialog.warn("沒有菜单权限，请联系管理员设置权限！");
+        //             return;
+        //         }
+        //         $('#leftMenu').append(msg['leftMenu']);
+        //         $('.collapsible').collapsible();
+        //         $('.collapsible li ul li').click(function () {
+        //             $("#frameContainer").attr("src",$(this).find("a").attr("rel")+"?token="+TOKEN);
+        //         });
+        //
+        //         // $('.collapsible li').click(function() {
+        //         // if ("/kcppc-oa" == $(this).find("a").attr("rel")) {
+        //         //     alert("开发中");
+        //         //     return;
+        //         // }
+        //
+        //
+        //         // $("#leftMenu").find("li:gt(0)").attr("class","");
+        //         // $("#selectData").remove();
+        //         // $(this).attr("class","active");
+        //
+        //         // $(this).parents("li").attr("class","active open");
+        //         // $(this).parents("li").find("a:first").append("<span id='selectData' class='selected'></span>");
+        //         //
+        //         // $("#menuName").html($(this).parents("li").find("span").html());
+        //         // $("#subMenuName").html($(this).find("a").html());
+        //         // });
+        //
+        //         $(".sub-menu li:first").trigger("click");
+        //     },
+        //    function (data) {
+        //         Materialize.toast("网络异常");
+        //     }
+        // );
+    }
+    // 初始化左边的菜单栏
+    // initLeftMenu();
+    // function initLeftMenu() {
+    //     $('.leftside-navigation li').click(function () {
+    //         $("#frameContainer").attr("src",$(this).find("a").attr("rel")+"?token="+TOKEN);
+    //     });
+    //     $('.index-index').click(function () {
+    //         $('#frameContainer').attr('src',"/squarenavigationsys/back/calculateIndex");
+    //     });
+    //     $('.index-index').trigger('click');
+    // }
+
+</script>
+</body>
+
+</html>

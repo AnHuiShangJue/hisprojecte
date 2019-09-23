@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisAnkleMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisAnkle" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="hosptalregist_id" property="hosptalregistId" jdbcType="BIGINT" />
+    <result column="patient_id" property="patientId" jdbcType="BIGINT" />
+    <result column="record_id" property="recordId" jdbcType="VARCHAR" />
+    <result column="hosptalregist_number" property="hosptalregistNumber" jdbcType="BIGINT" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="order_num" property="orderNum" jdbcType="INTEGER" />
+    <result column="is_proofreading" property="isProofreading" jdbcType="INTEGER" />
+    <result column="is_approved" property="isApproved" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, hosptalregist_id, patient_id, record_id, hosptalregist_number, number, type, 
+    create_user_id, create_date, update_user_id, update_date,order_num,is_proofreading,is_approved
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from his_ankle
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from his_ankle
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisAnkle" >
+    insert into his_ankle (id, hosptalregist_id, patient_id, 
+      record_id, hosptalregist_number, number, 
+      type, create_user_id, create_date, 
+      update_user_id, update_date,order_num,is_proofreading,is_approved)
+    values (#{id,jdbcType=BIGINT}, #{hosptalregistId,jdbcType=BIGINT}, #{patientId,jdbcType=BIGINT}, 
+      #{recordId,jdbcType=VARCHAR}, #{hosptalregistNumber,jdbcType=BIGINT}, #{number,jdbcType=VARCHAR},
+      #{type,jdbcType=INTEGER}, #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP},#{orderNum,jdbcType=INTEGER},#{isProofreading,jdbcType=INTEGER},#{isApproved,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisAnkle" >
+    insert into his_ankle
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="hosptalregistId != null" >
+        hosptalregist_id,
+      </if>
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="recordId != null" >
+        record_id,
+      </if>
+      <if test="hosptalregistNumber != null" >
+        hosptalregist_number,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="orderNum != null" >
+        order_num,
+      </if>
+      <if test="isProofreading != null" >
+        is_proofreading,
+      </if>
+      <if test="isApproved != null" >
+        is_approved,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="hosptalregistId != null" >
+        #{hosptalregistId,jdbcType=BIGINT},
+      </if>
+      <if test="patientId != null" >
+        #{patientId,jdbcType=BIGINT},
+      </if>
+      <if test="recordId != null" >
+        #{recordId,jdbcType=VARCHAR},
+      </if>
+      <if test="hosptalregistNumber != null" >
+        #{hosptalregistNumber,jdbcType=BIGINT},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderNum != null" >
+        #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="isProofreading != null" >
+        #{isProofreading,jdbcType=INTEGER},
+      </if>
+      <if test="isApproved != null" >
+        #{isApproved,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisAnkle" >
+    update his_ankle
+    <set >
+      <if test="hosptalregistId != null" >
+        hosptalregist_id = #{hosptalregistId,jdbcType=BIGINT},
+      </if>
+      <if test="patientId != null" >
+        patient_id = #{patientId,jdbcType=BIGINT},
+      </if>
+      <if test="recordId != null" >
+        record_id = #{recordId,jdbcType=VARCHAR},
+      </if>
+      <if test="hosptalregistNumber != null" >
+        hosptalregist_number = #{hosptalregistNumber,jdbcType=BIGINT},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderNum != null" >
+        order_num = #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="isProofreading != null" >
+        is_proofreading = #{isProofreading,jdbcType=INTEGER},
+      </if>
+      <if test="isApproved != null" >
+        is_approved = #{isApproved,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisAnkle" >
+    update his_ankle
+    set hosptalregist_id = #{hosptalregistId,jdbcType=BIGINT},
+      patient_id = #{patientId,jdbcType=BIGINT},
+      record_id = #{recordId,jdbcType=VARCHAR},
+      hosptalregist_number = #{hosptalregistNumber,jdbcType=BIGINT},
+      number = #{number,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      order_num = #{orderNum,jdbcType=INTEGER},
+      is_proofreading = #{isProofreading,jdbcType=INTEGER},
+      is_approved = #{isApproved,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--自定义sql-->
+  <!--根据就诊记录编号record_id 查出所有对应护嘱信息-->
+  <select id="listByRecordId" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    SELECT
+    his_ankle.*
+    FROM
+    his_ankle
+    where
+    1= 1 and record_id = #{parameter.recordId,jdbcType = VARCHAR}
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+  <select id="listByMedicalRecordId" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    SELECT
+    a.*,e.name as patientName,c.number as wardNumber,d.number as bedNumber
+    FROM
+    his_ankle as a
+    left join his_hospital_manage as b on a.hosptalregist_number = b.hosptal_regist_id
+    left join his_ward as c on b.ward_id = c.id
+    left join his_bed as d on b.bed_id = d.id
+    left join his_patient_info as e on a.patient_id = e.id
+    where
+    1= 1 and a.record_id = #{parameter.recordId,jdbcType = VARCHAR}
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+</select>
+  <select id="selectByMedicalRecordId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from his_ankle
+    where record_id = #{parameter.recordId,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectNumberByRecordId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from his_ankle
+    where record_id = #{parameter.recordId,jdbcType=VARCHAR}
+    order by order_num asc
+  </select>
+
+  <!--    批量更新-->
+  <update id="updateBatch" parameterType="list">
+    update his_ankle
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="order_num=case" suffix="end,">
+        <foreach collection="list" item="item" index="index">
+          <if test="item.orderNum!=null">
+            when id=#{item.id} then #{item.orderNum}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="is_proofreading=case" suffix="end,">
+        <foreach collection="list" item="item" index="index">
+          <if test="item.isProofreading!=null">
+            when id=#{item.id} then #{item.isProofreading}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="is_approved=case" suffix="end,">
+        <foreach collection="list" item="item" index="index">
+          <if test="item.isApproved!=null">
+            when id=#{item.id} then #{item.isApproved}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where
+    <foreach collection="list" separator="or" item="item" index="index">
+      id=#{item.id}
+    </foreach>
+  </update>
+</mapper>

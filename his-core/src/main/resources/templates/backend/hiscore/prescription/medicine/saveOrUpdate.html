@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="public/base_list :: html"></div>
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+<!-- Start Page Loading -->
+<div class="row">
+    <div class="breadcrumbs-inline pt-3 pb-1" id="breadcrumbs-wrapper">
+        <!-- Search for small screen-->
+        <div class="container">
+            <div class="row">
+                <div class="col s10 m6 l6 breadcrumbs-left">
+                    <h5 class="breadcrumbs-title mt-0 mb-0 display-inline hide-on-small-and-down">DataTable</h5>
+                    <ol class="breadcrumbs mb-0">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#">Table</a>
+                        </li>
+                        <li class="breadcrumb-item active">DataTable
+                        </li>
+                    </ol>
+                </div>
+                <div class="col s2 m6 l6"><a
+                        class="btn btn-floating dropdown-settings waves-effect waves-light breadcrumbs-btn right"
+                        href="#!" data-target="dropdown1"><i class="material-icons">expand_more </i><i
+                        class="material-icons right">arrow_drop_down</i></a>
+                    <ul class="dropdown-content" id="dropdown1" tabindex="0">
+                        <li tabindex="0"><a class="grey-text text-darken-2"
+                                            href="user-profile-page.html">Profile<span
+                                class="new badge red">2</span></a></li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="app-contacts.html">Contacts</a>
+                        </li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="page-faq.html">FAQ</a></li>
+                        <li class="divider" tabindex="-1"></li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="user-login.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 x12 l12 xl12">
+        <div class="container">
+            <div class="section section-data-tables">
+                <div class="card">
+                    <div class="card-content">
+                        <form id="searchForm" class="row" action="">
+                            <div class="row">
+                                <div>
+                                    <input id="prescriptionId" type="hidden" th:value="${prescriptionId}">
+                                </div>
+                                <div class="col input-field s3 m3 l3">
+                                    <input id="number" name="drugsNumb" type="text"/>
+                                    <label for="number">药品编号</label>
+                                </div>
+                                <div class="col input-field s3 m3 l3">
+                                    <input id="name" name="drugsName" type="text"/>
+                                    <label for="name">药品名称</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <div class="col s2 m2 l2 xl2 offset-l1">
+                            <a class="waves-effect waves-light btn" id="searchBtn"><i
+                                    class="material-icons  white-text tooltipped " data-position="bottom"
+                                    data-delay="50" data-tooltip="搜索">search</i></a>
+                            <a id="resetBtn" class="waves-effect waves-light btn"><i
+                                    class="material-icons  white-text tooltipped " data-position="bottom"
+                                    data-delay="50" data-tooltip="重置">youtube_searched_for</i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 x12 l12 xl12">
+                    <div class="card">
+                        <div class="card-content">
+                            <h4 class="card-title">药品选择
+                            </h4>
+                            <div class="row">
+                                <div class="col s2 m2 l2 xl2 offset-xl10">
+                                    <a id="btnAddtoList" class="btn waves-effect waves-light red">
+                                        <i class="material-icons  white-text tooltipped " data-position="bottom"
+                                           data-delay="50" data-tooltip="新增">playlist_add</i>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--Form Advance-->
+                            <div class="row">
+                                <div id="medicine_list" class="col l12 m12 l12 xl12">
+                                    <table id="data-table-simple" class="display">
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 x12 l12 xl12">
+                    <div class="card">
+                        <div class="card-content">
+                            <h4 class="card-title">待组成列表
+                            </h4>
+                            <div class="row">
+                                <div class="col s2 m2 l2 xl2 offset-xl10">
+                                    <a id="btnDeleteFromList"
+                                       class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1">
+                                        <i class="material-icons white-text tooltipped" data-position="bottom"
+                                           data-delay="50"
+                                           data-tooltip="批量移除">remove</i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="enter_medicine_list" class="col l12 m12 l12 xl12">
+                                <table id="data-table-simple-enter">
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="row">
+    <div class="input-field col s12">
+        <button id="BtnMediEnter" class="btn cyan waves-effect waves-light right" type="submit" name="action">确认药方信息
+            <i class="mdi-content-send right"></i>
+        </button>
+    </div>
+</div>
+
+
+<div th:replace="public/base_list_script :: html"></div>
+<script type="text/javascript" th:src="@{/hiscore/assets/global/js/ahsj.selfdatatable.js}"></script>
+<script th:inline="javascript">
+    var gridEnterList = new AHSJDT();
+    var grid = new Datatable();
+    $(document).ready(function () {
+        initBtn();
+        initTable();
+    });
+
+    function initTable() {
+        //选择列表
+        grid.init({
+            src: $("#data-table-simple"),
+            onSuccess: function (grid) {
+            },
+            onError: function (grid) {
+            },
+            onDataLoad: function (grid) {
+            },
+            loadingMessage: 'Loading...',
+            dataTable: {
+                "ajax": {
+                    "url": CTX + "/api/pharmacy/listForIsDisableAndObtained.ahsj?token=" + TOKEN, // ajax source
+                },
+                "columns": [
+                    {
+                        "title": "<label><input type=\"checkbox\"  id=\"checkAll\" class=\"select-all\" > <span></span></label> ",
+                        "render": function (data, type, row, meta) {
+                            return " <label> <input type=\"checkbox\" value=\"" + row.id + "\"> <span></span> </label>";
+                        },
+                        "width": "18px",
+                        "orderable": false,
+                        "className": "centered"
+                    },
+                    {
+                        "title": "药品编号",
+                        "data": "drugsNumb",
+                        "name": "drugs_numb"
+                    },
+                    {
+                        "title": "药品名称",
+                        "data": "drugsName",
+                        "name": "drugs_name"
+                    },
+                    {
+                        "title": "药品别名",
+                        "data": "drugsAlias",
+                        "name": "drugs_alias",
+                        "orderable": false//取消排序功能
+                    },
+                    {
+                        "title": "药品规格",
+                        "data": "drugsSpec",
+                        "name": "drugs_spec"
+                    },
+                    {
+                        "title": "处方药",
+                        "data": "precriptionName",
+                        "name": "prescription"
+                    },
+                    {
+                        "title": "精神药品",
+                        "data": "mentalmedicine",
+                        "name": "mental_medicine"
+                    },
+                    {
+                        "title": "药品级别",
+                        "data": "leveld",
+                        "name": "level"
+                    },
+                    {
+                        "title": "药品类型",
+                        "data": "medicalinsurancesign",
+                        "name": "medical_insurance_sign"
+                    },
+                    {
+                        "title": "是否基药",
+                        "data": "basemedicine",
+                        "name": "base_medicine"
+                    },
+                    {
+                        "title": "是否麻醉药品",
+                        "data": "narcoticdrugs",
+                        "name": "narcotic_drugs"
+                    },
+                    {
+                        "title": "操作",
+                        "width": "60px",
+                        "className": "centered",
+                        "orderable": false,
+                        "render": function (data, type, row) {
+                            var rtnBtn = "";
+                            //如果获取字符串，必须在参数外反转"
+                            rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"添加至药方中\" href='javascript:;' onclick=add("
+                                + row.id + ",'" + row.drugsNumb + "','" + row.drugsName + "','"+row.drugsAlias+"','" + row.drugsSpec + "');>" +
+                                " <i class='material-icons'>add</i></a>";
+                            // 返回自定义内容
+                            return rtnBtn;
+                        }
+                    }
+                ],
+                "order": [
+                    [1, 'asc']
+                ]
+            }
+        });
+
+// 待添加列表
+        gridEnterList.init({
+            src: $("#data-table-simple-enter"),
+            theads: [
+                {
+                    "title": "药品编号",
+                    "data": "drugsNumb",
+                    "name": "drugs_numb"
+                },
+                {
+                    "title": "药品名称",
+                    "data": "drugsName",
+                    "name": "drugs_name"
+                },
+                {
+                    "title": "药品别名",
+                    "data": "drugsAlias",
+                    "name": "drugs_alias",
+                    "orderable": false//取消排序功能
+                },
+                {
+                    "title": "药品规格",
+                    "data": "drugsSpec",
+                    "name": "drugs_spec"
+                },
+                {
+                    "title": "药品数量",
+                    "width": "80px",
+                    "className": "centered",
+                    "render": function (row) {
+                        var rtnBtn = "";
+                        //如果获取字符串，必须在参数外反转"
+                        rtnBtn = rtnBtn +
+                            " <input id='num' name='num' type='number' value=\"" + row.count+ "\" onkeyup=\"value=value.replace(/^(0+)|[^\\d]+/g,'')\" />"
+                        // 返回自定义内容
+                        return rtnBtn;
+                    }
+                },
+                {
+                    "title": "用法用量",
+                    "width": "160px",
+                    "className": "centered",
+                    "render": function (row) {
+
+                        var rtnBtn = "";
+                        //如果获取字符串，必须在参数外反转"
+                        var description=row.description;
+                        if(typeof(description) == "undefined"){
+                            description="";
+                        }
+
+                        if (!isNullOrEmpty(row.description)) {
+                            rtnBtn = rtnBtn +
+                                "<input id='description' name='description'  type='text' value='" + description + "' >";
+                        } else {
+                            rtnBtn = rtnBtn +
+                                "<input id='description' name='description'  type='text' value='" + "' >";
+                        }
+
+                        // 返回自定义内容
+                        return rtnBtn;
+                    }
+                },
+                {
+                    "title": "备注",
+                    "width": "160px",
+                    "className": "centered",
+                    "render": function (row) {
+
+                        var rtnBtn = "";
+                        //如果获取字符串，必须在参数外反转"
+                        var remarks=row.remarks;
+                        if(typeof(remarks) == "undefined"){
+                            remarks="";
+                        }
+
+                        if (!isNullOrEmpty(row.remarks)) {
+                            rtnBtn = rtnBtn +
+                                "<input id='remarks' name='remarks'  type='text' value='" + remarks + "' >";
+                        } else {
+                            rtnBtn = rtnBtn +
+                                "<input id='remarks' name='remarks'  type='text' value='" + "' >";
+                        }
+
+                        // 返回自定义内容
+                        return rtnBtn;
+                    }
+                },
+                {
+                    "title": "操作",
+                    "width": "120px",
+                    "className": "centered",
+                    "render": function (row) {
+                        var rtnBtn = "";
+                        //如果获取字符串，必须在参数外反转"
+                        rtnBtn = rtnBtn +
+                            "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"移除\" onclick='remove(" + row.id + ");'> <i class='material-icons'>remove</i></a>";
+                        // 返回自定义内容
+                        return rtnBtn;
+                    },
+                }
+            ],
+            datas: [[${hisPrescriptionMedicineList}]],
+        });
+
+
+    }
+
+    //添加到list里
+    function add(id, drugsNumb, drugsName, drugsAlias,drugsSpec) {
+        var selectRowsIds = gridEnterList.getIds();
+        if (selectRowsIds.length !== 0) {
+            for (var k = 0; k < selectRowsIds.length; k++) {
+                if (id == selectRowsIds[k]) {
+                    id = null;
+                }
+            }
+        }
+        if (null !== id) {
+            gridEnterList.addRow({"id": id, "drugsNumb": drugsNumb, "drugsName": drugsName,"drugsAlias": drugsAlias, "drugsSpec": drugsSpec });
+        }
+    }
+
+    //移除一列
+    function remove(id) {
+        gridEnterList.removeRow(id);
+    }
+
+    function initBtn() {
+        //批量添加按钮
+        $("#btnAddtoList").click(function () {
+            var ids = grid.getSelectedRows();
+            if (ids.length == 0) {
+                dialog.warn("请至少选择一条数据");
+                return;
+            }
+            var json = grid.getDataTable().ajax.json();
+            var selectRowsIds = gridEnterList.getIds();
+            var tmps = [];
+            if (selectRowsIds.length !== 0) {
+                for (var i = 0; i < ids.length; i++) {
+                    for (var k = 0; k < selectRowsIds.length; k++) {
+                        if (ids[i] == selectRowsIds[k]) {
+                            delete (ids[i]);
+                        }
+                    }
+                }
+            }
+            for (var i = 0; i < ids.length; ++i) {
+                for (var j = 0; j < json.data.length; j++) {
+                    if (undefined !== ids[i] && '' !== ids[i] && null != ids[i] && json.data[j].id == ids[i]) {
+                        tmps[i] = {
+                            "id": json.data[j].id,
+                            "drugsNumb": json.data[j].drugsNumb,
+                            "drugsName": json.data[j].drugsName,
+                            "drugsAlias": json.data[j].drugsAlias,
+                            "drugsSpec": json.data[j].drugsSpec
+                        }
+                    }
+                }
+            }
+            gridEnterList.addRows(tmps);
+            grid.initCheckbox();
+        });
+        $("#btnDeleteFromList").click(function () {
+            var ids = gridEnterList.getSelectedRows();
+            if (ids.length == 0) {
+                dialog.warn("请至少选择一条数据");
+                return;
+            }
+            gridEnterList.removeRows(ids);
+        });
+        //搜索按钮
+        $('#searchBtn').click(function () {
+            grid.search();
+        });
+        $('#resetBtn').click(function () {
+            grid.reset();
+        });
+
+        //提交按钮
+        $("#BtnMediEnter").click(function () {
+            dialog.confirm('确定提交吗?', function (index, layero){
+            ids = gridEnterList.getIds();
+            nums = gridEnterList.gernums();
+            descriptions = gridEnterList.getDescription();
+            remark = gridEnterList.getRemarks();
+            var prescriptionId = $('#prescriptionId').val();
+            $.ahsjajax(CTX + "/api/prescription/medicine/saveOrUpdateForDetails.ahsj",
+                {
+                    "ids": ids.join(','),
+                    "prescriptionId":prescriptionId,
+                    "nums":nums.join(','),
+                    "descriptions":descriptions.join(','),
+                    "remark":remark.join(',')
+                },
+                function (msg) {
+                    if (msg.success) {
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                        parent.grid.search();
+                        dialog.parentclose();
+                    } else {
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                    }
+                },
+                function (data) {
+                    M.toast({
+                        html: "网络异常", completeCallback: function () {
+                        }
+                    });
+                }
+            );});
+        });
+    }
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+</body>
+</html>

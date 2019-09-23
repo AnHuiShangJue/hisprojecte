@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+<head>
+    <style>
+        .fontsize01 {
+            font-size: 14px;
+        }
+
+        .fontsize02 {
+            font-size: 12px;
+        }
+
+    </style>
+</head>
+<div th:replace="public/base_print :: html"></div>
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<div class="row">
+
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4 ">
+            <label class="black-text fontsize01">就诊编号</label></br>
+            <label class="black-text fontsize02">Visit number</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text"><span id="recordNumber"></span></label>
+        </div>
+        <input type="hidden" id="ids" th:value="${ids}">
+
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4 ">
+            <label class="black-text fontsize01">交易流水号</label></br>
+            <label class="black-text fontsize02">Transaction flow number</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text"><span id="tollNumber"></span></label>
+        </div>
+    </div>
+
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4 ">
+            <label class="black-text fontsize01">出药人</label></br>
+            <label class="black-text fontsize02">Drug person</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text"><span id="userName"></span></label>
+        </div>
+
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4 ">
+            <label class="black-text fontsize01">出药时间</label></br>
+            <label class="black-text fontsize02">Drug delivery time</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text"><span id="createDate"></span></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12">
+            <h6 class="black-text">出药明细</h6>
+            <label class="black-text fontsize02">Drug detail</label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12">
+            <table id="table_id" style="font-size: 14px"></table>
+        </div>
+    </div>
+</div>
+
+<!-- ================================================
+Scripts
+================================================ -->
+<div th:replace="public/base_print_script :: html"></div>
+<script th:inline="javascript">
+    $(document).ready(function () {
+        printShow();
+    });
+
+    function printShow() {
+        var ids = $("#ids").val();
+        $.ahsjajax(
+            CTX + "/api/mediexit/getDrug.ahsj?token=" + TOKEN,
+            {"ids": ids},
+            function (data) {
+                var jsons = data[0];
+                if (!isNullOrEmpty(jsons)) {//有
+                    var trs = "<tr><td><h6 class='black-text'>名称(name)</h6></td><td><h6 class='black-text'>数目(number)</h6></td><td><h6 class='black-text'>规格(specification)</h6></td><td><h6 class='black-text'>有效期(Validity period)</h6></td></tr>";
+                    $.each(data, function (index, item) {
+                        trs += "<tr><td><p class='black-text fontsize03'> " + item.drugsName + "(" + item.tdrugsName + ")" + "</p></td><td ><p class='black-text fontsize03'> " + item.exitCount + "</p></td><td ><p class='black-text fontsize03'> " + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</p></td><td ><p class='black-text fontsize03'> " + item.validityPeriod + "</p></td></tr >";
+                    });
+                    var jsons = data[0];
+                    $("#recordNumber").html(jsons.recordNumber);
+                    $("#createDate").html(jsons.createDate);
+                    $("#userName").html(jsons.userName);
+                    $("#patientName").html(jsons.patientName);
+                    $("#tollNumber").html(jsons.tollNumber);
+                    $("#table_id").append(trs);
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }
+        );
+    }
+
+    function doOk() {
+        $('body  div div.row.valign-wrapper').printThis({
+            importCSS: true,
+            debug: true,
+            afterPrint: function () {
+                dialog.confirm('确定打印?', function (index, layero) {
+
+
+                });
+            }
+        });
+    }
+
+    $("input").change(function () {
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</body>
+
+</html>

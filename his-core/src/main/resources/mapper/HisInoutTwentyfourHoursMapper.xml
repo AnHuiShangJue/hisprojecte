@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisInoutTwentyfourHoursMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisInoutTwentyfourHours" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <id column="patientId" property="patientId" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="INTEGER" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="phonenumber" property="phonenumber" jdbcType="BIGINT" />
+    <result column="idcard" property="idcard" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="height" property="height" jdbcType="INTEGER" />
+    <result column="weight" property="weight" jdbcType="DOUBLE" />
+    <result column="is_married" property="isMarried" jdbcType="INTEGER" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="birthplace" property="birthplace" jdbcType="VARCHAR" />
+    <result column="career" property="career" jdbcType="VARCHAR" />
+    <result column="employer" property="employer" jdbcType="VARCHAR" />
+    <result column="medicalhistory" property="medicalhistory" jdbcType="VARCHAR" />
+    <result column="complaint" property="complaint" jdbcType="VARCHAR" />
+    <result column="inhospitaltime" property="inhospitaltime" jdbcType="VARCHAR" />
+    <result column="insituation" property="insituation" jdbcType="VARCHAR" />
+    <result column="indiagnosis" property="indiagnosis" jdbcType="VARCHAR" />
+    <result column="treatment" property="treatment" jdbcType="VARCHAR" />
+    <result column="outhospitaltime" property="outhospitaltime" jdbcType="VARCHAR" />
+    <result column="outsituation" property="outsituation" jdbcType="VARCHAR" />
+    <result column="outdiagnosis" property="outdiagnosis" jdbcType="VARCHAR" />
+    <result column="outinstructions" property="outinstructions" jdbcType="VARCHAR" />
+    <result column="hospitalnumber" property="hospitalnumber" jdbcType="VARCHAR" />
+    <result column="doctorId" property="doctorid" jdbcType="BIGINT" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id,patientId, name, birthday, location, age, phonenumber, idcard, remarks, height, weight,
+    is_married, job, sex, birthplace, career, employer, medicalhistory, complaint, inhospitaltime, 
+    insituation, indiagnosis, treatment, outhospitaltime, outsituation, outdiagnosis, 
+    outinstructions, hospitalnumber,doctorId, create_user_id, create_date, update_user_id, update_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from his_inout_twentyfour_hours
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from his_inout_twentyfour_hours
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisInoutTwentyfourHours" useGeneratedKeys="true" keyProperty="id"  >
+    insert into his_inout_twentyfour_hours (id, patientId,name, birthday,
+      location, age, phonenumber, 
+      idcard, remarks, height, 
+      weight, is_married, job, 
+      sex, birthplace, career, 
+      employer, medicalhistory, complaint, 
+      inhospitaltime, insituation, indiagnosis, 
+      treatment, outhospitaltime, outsituation, 
+      outdiagnosis, outinstructions,hospitalnumber, doctorId,
+      create_user_id, create_date, update_user_id, 
+      update_date)
+    values (#{id,jdbcType=BIGINT},#{patientId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{birthday,jdbcType=INTEGER},
+      #{location,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{phonenumber,jdbcType=BIGINT}, 
+      #{idcard,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, #{height,jdbcType=INTEGER}, 
+      #{weight,jdbcType=DOUBLE}, #{isMarried,jdbcType=INTEGER}, #{job,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{birthplace,jdbcType=VARCHAR}, #{career,jdbcType=VARCHAR}, 
+      #{employer,jdbcType=VARCHAR}, #{medicalhistory,jdbcType=VARCHAR}, #{complaint,jdbcType=VARCHAR}, 
+      #{inhospitaltime,jdbcType=VARCHAR}, #{insituation,jdbcType=VARCHAR}, #{indiagnosis,jdbcType=VARCHAR}, 
+      #{treatment,jdbcType=VARCHAR}, #{outhospitaltime,jdbcType=VARCHAR}, #{outsituation,jdbcType=VARCHAR}, 
+      #{outdiagnosis,jdbcType=VARCHAR}, #{outinstructions,jdbcType=VARCHAR},#{hospitalnumber,jdbcType=VARCHAR}, #{doctorid,jdbcType=BIGINT},
+      #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, 
+      #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisInoutTwentyfourHours" >
+    insert into his_inout_twentyfour_hours
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="patientId != null" >
+        patientId,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="location != null" >
+        location,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="phonenumber != null" >
+        phonenumber,
+      </if>
+      <if test="idcard != null" >
+        idcard,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="height != null" >
+        height,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="isMarried != null" >
+        is_married,
+      </if>
+      <if test="job != null" >
+        job,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="birthplace != null" >
+        birthplace,
+      </if>
+      <if test="career != null" >
+        career,
+      </if>
+      <if test="employer != null" >
+        employer,
+      </if>
+      <if test="medicalhistory != null" >
+        medicalhistory,
+      </if>
+      <if test="complaint != null" >
+        complaint,
+      </if>
+      <if test="inhospitaltime != null" >
+        inhospitaltime,
+      </if>
+      <if test="insituation != null" >
+        insituation,
+      </if>
+      <if test="indiagnosis != null" >
+        indiagnosis,
+      </if>
+      <if test="treatment != null" >
+        treatment,
+      </if>
+      <if test="outhospitaltime != null" >
+        outhospitaltime,
+      </if>
+      <if test="outsituation != null" >
+        outsituation,
+      </if>
+      <if test="outdiagnosis != null" >
+        outdiagnosis,
+      </if>
+      <if test="outinstructions != null" >
+        outinstructions,
+      </if>
+      <if test="hospitalnumber != null" >
+        hospitalnumber,
+      </if>
+      <if test="doctorid != null" >
+        doctorId,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="patientId != null" >
+        #{patientId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=INTEGER},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="phonenumber != null" >
+        #{phonenumber,jdbcType=BIGINT},
+      </if>
+      <if test="idcard != null" >
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null" >
+        #{height,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="isMarried != null" >
+        #{isMarried,jdbcType=INTEGER},
+      </if>
+      <if test="job != null" >
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="birthplace != null" >
+        #{birthplace,jdbcType=VARCHAR},
+      </if>
+      <if test="career != null" >
+        #{career,jdbcType=VARCHAR},
+      </if>
+      <if test="employer != null" >
+        #{employer,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalhistory != null" >
+        #{medicalhistory,jdbcType=VARCHAR},
+      </if>
+      <if test="complaint != null" >
+        #{complaint,jdbcType=VARCHAR},
+      </if>
+      <if test="inhospitaltime != null" >
+        #{inhospitaltime,jdbcType=VARCHAR},
+      </if>
+      <if test="insituation != null" >
+        #{insituation,jdbcType=VARCHAR},
+      </if>
+      <if test="indiagnosis != null" >
+        #{indiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="treatment != null" >
+        #{treatment,jdbcType=VARCHAR},
+      </if>
+      <if test="outhospitaltime != null" >
+        #{outhospitaltime,jdbcType=VARCHAR},
+      </if>
+      <if test="outsituation != null" >
+        #{outsituation,jdbcType=VARCHAR},
+      </if>
+      <if test="outdiagnosis != null" >
+        #{outdiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="outinstructions != null" >
+        #{outinstructions,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalnumber != null" >
+        #{hospitalnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorid != null" >
+        #{doctorid,jdbcType=BIGINT},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisInoutTwentyfourHours" >
+    update his_inout_twentyfour_hours
+    <set >
+      <if test="patientId != null" >
+        name = #{patientId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=INTEGER},
+      </if>
+      <if test="location != null" >
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="phonenumber != null" >
+        phonenumber = #{phonenumber,jdbcType=BIGINT},
+      </if>
+      <if test="idcard != null" >
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null" >
+        height = #{height,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="isMarried != null" >
+        is_married = #{isMarried,jdbcType=INTEGER},
+      </if>
+      <if test="job != null" >
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="birthplace != null" >
+        birthplace = #{birthplace,jdbcType=VARCHAR},
+      </if>
+      <if test="career != null" >
+        career = #{career,jdbcType=VARCHAR},
+      </if>
+      <if test="employer != null" >
+        employer = #{employer,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalhistory != null" >
+        medicalhistory = #{medicalhistory,jdbcType=VARCHAR},
+      </if>
+      <if test="complaint != null" >
+        complaint = #{complaint,jdbcType=VARCHAR},
+      </if>
+      <if test="inhospitaltime != null" >
+        inhospitaltime = #{inhospitaltime,jdbcType=VARCHAR},
+      </if>
+      <if test="insituation != null" >
+        insituation = #{insituation,jdbcType=VARCHAR},
+      </if>
+      <if test="indiagnosis != null" >
+        indiagnosis = #{indiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="treatment != null" >
+        treatment = #{treatment,jdbcType=VARCHAR},
+      </if>
+      <if test="outhospitaltime != null" >
+        outhospitaltime = #{outhospitaltime,jdbcType=VARCHAR},
+      </if>
+      <if test="outsituation != null" >
+        outsituation = #{outsituation,jdbcType=VARCHAR},
+      </if>
+      <if test="outdiagnosis != null" >
+        outdiagnosis = #{outdiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="outinstructions != null" >
+        outinstructions = #{outinstructions,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalnumber != null" >
+        hospitalnumber = #{hospitalnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorid != null" >
+        doctorId = #{doctorid,jdbcType=BIGINT},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisInoutTwentyfourHours" >
+    update his_inout_twentyfour_hours
+    set patientId = #{patientId,jdbcType=BIGINT}
+      name = #{name,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=INTEGER},
+      location = #{location,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      phonenumber = #{phonenumber,jdbcType=BIGINT},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      height = #{height,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=DOUBLE},
+      is_married = #{isMarried,jdbcType=INTEGER},
+      job = #{job,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      birthplace = #{birthplace,jdbcType=VARCHAR},
+      career = #{career,jdbcType=VARCHAR},
+      employer = #{employer,jdbcType=VARCHAR},
+      medicalhistory = #{medicalhistory,jdbcType=VARCHAR},
+      complaint = #{complaint,jdbcType=VARCHAR},
+      inhospitaltime = #{inhospitaltime,jdbcType=VARCHAR},
+      insituation = #{insituation,jdbcType=VARCHAR},
+      indiagnosis = #{indiagnosis,jdbcType=VARCHAR},
+      treatment = #{treatment,jdbcType=VARCHAR},
+      outhospitaltime = #{outhospitaltime,jdbcType=VARCHAR},
+      outsituation = #{outsituation,jdbcType=VARCHAR},
+      outdiagnosis = #{outdiagnosis,jdbcType=VARCHAR},
+      outinstructions = #{outinstructions,jdbcType=VARCHAR},
+      hospitalnumber = #{hospitalnumber,jdbcType=VARCHAR},
+      doctorId = #{doctorid,jdbcType=BIGINT},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

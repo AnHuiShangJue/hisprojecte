@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.translate.dao.TranslateMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.translate.entity.Translate" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="translate_id" property="translateId" jdbcType="BIGINT" />
+    <result column="translate_type" property="translateType" jdbcType="VARCHAR" />
+    <result column="translate_china" property="translateChina" jdbcType="VARCHAR" />
+    <result column="translate_Khmer" property="translateKhmer" jdbcType="VARCHAR" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="translate_join" property="translateJoin" jdbcType="VARCHAR" />
+    <result column="translate_join2" property="translateJoin" jdbcType="VARCHAR" />
+    <result column="translate_join3" property="translateJoin" jdbcType="VARCHAR" />
+    <result column="translate_column" property="translateColumn" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, translate_id, translate_type, translate_china, translate_Khmer, create_user_id, 
+    create_date, update_user_id, update_date, translate_join, translate_join2,translate_join3,translate_column
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from translate
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from translate
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.translate.entity.Translate" >
+    insert into translate (id, translate_id, translate_type, 
+      translate_china, translate_Khmer, create_user_id, 
+      create_date, update_user_id, update_date, 
+      translate_join, translate_join2,translate_join3,translate_column)
+    values (#{id,jdbcType=BIGINT}, #{translateId,jdbcType=BIGINT}, #{translateType,jdbcType=VARCHAR}, 
+      #{translateChina,jdbcType=VARCHAR}, #{translateKhmer,jdbcType=VARCHAR}, #{createUserId,jdbcType=BIGINT}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{translateJoin,jdbcType=VARCHAR},#{translateJoin2,jdbcType=VARCHAR},#{translateJoin3,jdbcType=VARCHAR}, #{translateColumn,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.translate.entity.Translate" >
+    insert into translate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="translateId != null" >
+        translate_id,
+      </if>
+      <if test="translateType != null" >
+        translate_type,
+      </if>
+      <if test="translateChina != null" >
+        translate_china,
+      </if>
+      <if test="translateKhmer != null" >
+        translate_Khmer,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="translateJoin != null" >
+        translate_join,
+      </if>
+      <if test="translateJoin2 != null" >
+        translate_join2,
+      </if>
+      <if test="translateJoin3 != null" >
+        translate_join3,
+      </if>
+      <if test="translateColumn != null" >
+        translate_column,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="translateId != null" >
+        #{translateId,jdbcType=BIGINT},
+      </if>
+      <if test="translateType != null" >
+        #{translateType,jdbcType=VARCHAR},
+      </if>
+      <if test="translateChina != null" >
+        #{translateChina,jdbcType=VARCHAR},
+      </if>
+      <if test="translateKhmer != null" >
+        #{translateKhmer,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="translateJoin != null" >
+        #{translateJoin,jdbcType=VARCHAR},
+      </if>
+      <if test="translateJoin2 != null" >
+        #{translateJoin2,jdbcType=VARCHAR},
+      </if>
+      <if test="translateJoin3 != null" >
+        #{translateJoin3,jdbcType=VARCHAR},
+      </if>
+      <if test="translateColumn != null" >
+        #{translateColumn,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.translate.entity.Translate" >
+    update translate
+    <set >
+      <if test="translateId != null" >
+        translate_id = #{translateId,jdbcType=BIGINT},
+      </if>
+      <if test="translateType != null" >
+        translate_type = #{translateType,jdbcType=VARCHAR},
+      </if>
+      <if test="translateChina != null" >
+        translate_china = #{translateChina,jdbcType=VARCHAR},
+      </if>
+      <if test="translateKhmer != null" >
+        translate_Khmer = #{translateKhmer,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="translateJoin != null" >
+        translate_join = #{translateJoin,jdbcType=VARCHAR},
+      </if>
+      <if test="translateJoin2 != null" >
+        translate_join2 = #{translateJoin2,jdbcType=VARCHAR},
+      </if>
+      <if test="translateJoin3 != null" >
+        translate_join3 = #{translateJoin3,jdbcType=VARCHAR},
+      </if>
+      <if test="translateColumn != null" >
+        translate_column = #{translateColumn,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.translate.entity.Translate" >
+    update translate
+    set translate_id = #{translateId,jdbcType=BIGINT},
+      translate_type = #{translateType,jdbcType=VARCHAR},
+      translate_china = #{translateChina,jdbcType=VARCHAR},
+      translate_Khmer = #{translateKhmer,jdbcType=VARCHAR},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      translate_join = #{translateJoin,jdbcType=VARCHAR},
+      translate_join2 = #{translateJoin2,jdbcType=VARCHAR},
+      translate_join3 = #{translateJoin3,jdbcType=VARCHAR},
+      translate_column = #{translateColumn,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+
+  <!--自定义sql -->
+  <insert id="addTranslateList" parameterType="java.util.List" keyProperty="id" useGeneratedKeys="true">
+
+    insert into translate (id, translate_id, translate_type,
+    translate_china, translate_Khmer, create_user_id,
+    create_date, update_user_id, update_date, translate_join,translate_join2,translate_join3,translate_column
+    )
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.id,jdbcType=BIGINT}, #{item.translateId,jdbcType=BIGINT}, #{item.translateType,jdbcType=VARCHAR},
+      #{item.translateChina,jdbcType=VARCHAR}, #{item.translateKhmer,jdbcType=VARCHAR},
+      #{item.createUserId,jdbcType=BIGINT},
+      #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=BIGINT},
+      #{item.updateDate,jdbcType=TIMESTAMP},
+      #{item.translateJoin,jdbcType=VARCHAR},
+      #{item.translateJoin2,jdbcType=VARCHAR},
+      #{item.translateJoin3,jdbcType=VARCHAR},
+      #{item.translateColumn,jdbcType=VARCHAR}
+      )
+    </foreach>
+  </insert>
+
+  <select id="queryTranslateList" resultMap="BaseResultMap" parameterType="com.ahsj.translate.entity.Translate">
+    select <include refid="Base_Column_List"/> from  translate
+
+    <trim prefix="WHERE" prefixOverrides="AND |OR">
+      <if test="translateId != null and translateId != ''">
+        and  translate_id = #{translateId,jdbcType=BIGINT}
+      </if>
+      <if test="translateType != null and translateType != ''">
+        and   translate_type = #{translateType,jdbcType=VARCHAR}
+      </if>
+      <if test="translateColumn != null and translateColumn != ''">
+        and  translate_column =  #{translateColumn,jdbcType=VARCHAR}
+      </if>
+    </trim>
+
+  </select>
+
+  <select id="queryTranslateListAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>  from  translate
+  </select>
+
+
+  <select id="queryTranslate" resultMap="BaseResultMap" parameterType="com.ahsj.translate.entity.Translate">
+    select <include refid="Base_Column_List"/> from  translate
+    where  translate_id = #{translateId,jdbcType=BIGINT} and
+    translate_type = #{translateType,jdbcType=VARCHAR} and  translate_column =  #{translateColumn,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByTranslate" parameterType="com.ahsj.translate.entity.Translate">
+    delete  from translate where   translate_id = #{translateId,jdbcType=BIGINT} and
+    translate_type = #{translateType,jdbcType=VARCHAR}
+  </delete>
+</mapper>
+

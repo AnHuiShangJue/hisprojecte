@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+<div th:replace="public/base_list :: html"></div>
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+<!-- Start Page Loading -->
+<div class="row">
+    <div class="breadcrumbs-inline pt-3 pb-1" id="breadcrumbs-wrapper">
+        <!-- Search for small screen-->
+        <div class="container">
+            <div class="row">
+                <div class="col s10 m6 l6 breadcrumbs-left">
+                    <h5 class="breadcrumbs-title mt-0 mb-0 display-inline hide-on-small-and-down">DataTable</h5>
+                    <ol class="breadcrumbs mb-0">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#">Table</a>
+                        </li>
+                        <li class="breadcrumb-item active">DataTable
+                        </li>
+                    </ol>
+                </div>
+                <div class="col s2 m6 l6"><a
+                        class="btn btn-floating dropdown-settings waves-effect waves-light breadcrumbs-btn right"
+                        href="#!" data-target="dropdown1"><i class="material-icons">expand_more </i><i
+                        class="material-icons right">arrow_drop_down</i></a>
+                    <ul class="dropdown-content" id="dropdown1" tabindex="0">
+                        <li tabindex="0"><a class="grey-text text-darken-2"
+                                            href="user-profile-page.html">Profile<span
+                                class="new badge red">2</span></a></li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="app-contacts.html">Contacts</a>
+                        </li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="page-faq.html">FAQ</a></li>
+                        <li class="divider" tabindex="-1"></li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="user-login.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 x12 l12 xl12">
+        <div class="container">
+            <div class="section section-data-tables">
+                <div class="card">
+                    <div class="card-content">
+                        <form id="searchForm" class="row" action="">
+                            <div class="input-field col s4 l4 xl4">
+                                <input id="medicalRecordId" name="medicalRecordId" type="text"
+                                       data-error=".errorTxt1">
+                                <div class="errorTxt1"></div>
+                                <label for="medicalRecordId">请输入就诊编号</label>
+                            </div>
+                            <div class="input-field col s4 l4 xl4">
+                                <input id="number" name="number" type="text"
+                                       data-error=".errorTxt1">
+                                <div class="errorTxt1"></div>
+                                <label for="number">请输入交易流水号</label>
+                            </div>
+                            <div class="input-field col s4 l4 xl4">
+                                <input id="createDate1" name="createDate" type="text"  class="datepicker"
+                                       data-error=".errorTxt1">
+                                <div class="errorTxt1"></div>
+                                <label for="createDate1">请输入交易时间上区间</label>
+                            </div>
+                            <div class="input-field col s4 l4 xl4">
+                                <input id="createDate2" name="createDate" type="text"  class="datepicker"
+                                       data-error=".errorTxt1">
+                                <div class="errorTxt1"></div>
+                                <label for="createDate2">请输入交易时间下区间</label>
+                            </div>
+                        </form>
+                        <div class="row">
+                            <div class="col s2 m2 l2 xl2 offset-l1">
+                                <a class="waves-effect waves-light btn" id="searchBtn"><i
+                                        class="material-icons  white-text tooltipped " data-position="bottom"
+                                        data-delay="50" data-tooltip="搜索">search</i></a>
+                                <a id="resetBtn" class="waves-effect waves-light btn"><i
+                                        class="material-icons  white-text tooltipped " data-position="bottom"
+                                        data-delay="50" data-tooltip="重置">youtube_searched_for</i></a>
+                            </div>
+                        </div>
+                        <p></p>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input readonly id="loginName" type="text"
+                                   th:value="${loginName}">
+                            <label for="loginName">操作人</label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input readonly type="text" id="patientName"/>
+                            <label class="active" for="patientName">病人姓名:</label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input readonly type="text" id="sex"/>
+                            <label class="active" for="sex">性 别:</label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input readonly type="text" id="department_id"/>
+                            <label class="active"   for="department_id">就诊科室:</label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input type="text" readonly  id="doctorName">
+                            <label class="active" for="doctorName">接诊医生:</label>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 x12 l12 xl12">
+                        <div class="card">
+                            <div class="card-content">
+                                <h4 class="card-title">门诊收费
+                                </h4>
+                                <!--Form Advance-->
+                                <div class="row">
+                                    <div id="refreshtable" class="col l12 m12 l12 xl12">
+                                        <table id="data-table-simple" class="display">
+                                        </table>
+                                    </div>
+                                </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                                <div class="row">
+                                    <div class="col s12 x12 l12 xl12">
+                                        <div class="card">
+                                            <div class="card-content">
+                                                <div class="input-field col s4 l4 xl4">
+                                                    <input readonly type="number" id="amountPrice">
+                                                    <label class="active" for="amountPrice">总应收金额:</label>
+                                                </div>
+                                                <form class="col s12" id="sendForm" action="#">
+                                                    <div class="input-field col s4 l4 xl4">
+                                                        <input type="number" name="actualCharge" id="actualCharge"
+                                                               data-error=".errorTxt2">
+                                                        <div class="errorTxt2"></div>
+                                                        <label for="actualCharge">实际收款金额</label>
+                                                    </div>
+                                                    <div class="input-field col s4 l4 xl4">
+                                                        <input type="number" readonly  id="change">
+                                                        <label class="active" for="change">实际找零金额 :</label>
+                                                        <input hidden name="money" id="money">
+                                                        <input hidden name="recoverTheFee" id="recoverTheFee">
+                                                    </div>
+                                                    <div>
+                                                        <textarea id="remark" name="remark"
+                                                                  class="materialize-textarea">  </textarea>
+                                                        <label for="remark">备注</label>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="input-field col s12">
+                                                            <button id="send_btn1"
+                                                                    class="btn cyan waves-effect waves-light right"
+                                                                    type="sumbit"
+                                                                    name="action">打 印
+                                                                <i class="mdi-content-send right"></i>
+                                                            </button>
+                                                            <button id="send_btn"
+                                                                    class="btn cyan waves-effect waves-light right"
+                                                                    type="sumbit"
+                                                                    name="action">提 交
+                                                                <i class="mdi-content-send right"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div th:replace="public/base_list_script :: html"></div>
+        <script type="text/javascript">
+            var grid = new Datatable();
+            var sumbit1 = false;
+            $(document).ready(function () {
+                initTable();
+                initBtn();
+            });
+            $(function () {
+                formCheck();
+            });
+
+            function initBtn() {
+                //搜索按钮
+                $('#searchBtn').click(function () {
+                    grid.search();
+                    getCharge();
+                });
+
+            }
+
+            function initTable() {
+                grid.init({
+                    src: $("#data-table-simple"),
+                    onSuccess: function (grid) {
+                    },
+                    onError: function (grid) {
+                    },
+                    onDataLoad: function (grid) {
+                    },
+                    loadingMessage: 'Loading...',
+                    dataTable: {
+                        "ajax": {
+                            "url": CTX + "/api/hisCharge/list.ahsj?token="+TOKEN,
+                        },
+                        "columns": [
+                            {
+                                "title": "<label><input type=\"checkbox\"  id=\"checkAll\" class=\"select-all\" > <span></span></label> ",
+                                "render": function (data, type, row, meta) {
+                                    return " <label> <input type=\"checkbox\" value=\"" + row.id + "\"> <span></span> </label>";
+                                },
+                                "width": "18px",
+                                "orderable": false,
+                                "className": "centered"
+                            }, {
+                                "title": "名称",
+                                "data": "recordName", //实体字段
+                                "name": "record_name"   //库中字段
+                            }, {
+                                "title": "类别",
+                                "data": "recordTypes",
+                                "name": "record_type"
+                            }, {
+                                "title": "数量",
+                                "data": "count",
+                                "name": "count"
+                            }, {
+                                "title": "单价",
+                                "data": "price",
+                                "name": "price"
+                            }, {
+                                "title": "单项总价",
+                                "data": "totalPrice",
+                                "name": "total_price"
+                            }, {
+                                "title": "是否付费",
+                                "data": "isPays",
+                                "name": "is_pay"
+                            }
+                        ],
+                        "order" : [ [ 1, 'asc' ] ]
+                    }
+                });
+            }
+            function formCheck() {
+                $("#sendForm").validate({
+                    rules: {
+                        actualCharge: {
+                            required: true,
+                            number: true,
+                            minlength: 1
+                        },
+                        medicalRecordId: {
+                            required: true,
+                            minlength: 1
+                        }
+                    },
+                    messages: {
+                        actualCharge: {
+                            required: "请输入实际付款金额",
+                            minlength: "最少包含1个字符"
+                        },
+                        medicalRecordId: {
+                            required: "请输入就诊编号",
+                            minlength: "最少包含1个字符"
+                        }
+                    },
+                    errorElement: 'div',
+                    errorPlacement: function (error, element) {
+                        var placement = $(element).data('error');
+                        if (placement) {
+                            $(placement).append(error)
+                        } else {
+                            error.insertAfter(element);
+                        }
+                    },
+                    submitHandler: function (form) {
+                        var send_form = $('#sendForm').serialize();
+                        var medicalRecordId = $("#medicalRecordId").val();
+                        if (sumbit1) {
+                            $.ahsjajax(
+                                CTX + "/api/hisCharge/sumbit.ahsj?token=" + TOKEN + "&medicalRecordId=" + medicalRecordId,
+                                send_form,
+                                function (msg) {
+                                    if (msg.success) {
+                                        M.toast({html: msg.message});
+                                        grid.search();
+                                        return true;
+                                    } else {
+                                        M.toast({html: msg.message});
+                                        return false;
+                                    }
+                                },
+                                function () {
+                                    Materialize.toast("网络异常");
+                                    return false;
+                                }
+                            );
+                        } else {
+                            dialog.warn("没有收费明细,不可以提交!!!")
+                        }
+                    }
+
+                });
+            }
+
+            var amountPrice = $("#amountPrice")
+            var actualCharge = $("#actualCharge");
+
+            function getCharge() {
+                var medicalRecordId = $("#medicalRecordId").val();
+                var patientName = $("#patientName");
+                var sex = $("#sex");
+                var doctorName = $("#doctorName");
+                var department_id = $("#department_id");
+                amountPrice.val("");
+                patientName.val("");
+                sex.val("");
+                doctorName.val("");
+                department_id.val("");
+                $("#money").val("");
+                $("#change").val("");
+                $("#recoverTheFee").val("");
+                $("#remark").val("");
+                $("#actualCharge").val("");
+                if (medicalRecordId != null && medicalRecordId != '' && medicalRecordId != undefined) {
+                    $.getJSON(CTX + "/api/hisTollRecord/pullData.ahsj?medicalRecordId=" + medicalRecordId + "&token=" + TOKEN, function (result) {
+                        sumbit1 = false;//提交前初始化
+                        if (result == "-1"){
+                            dialog.warn(medicalRecordId+"号没有收费信息，请重新输入!!!")
+                        }
+                        if (result == "-2"){
+                            dialog.warn(medicalRecordId+"号不存在，请重新输入!!!")
+                        }
+                        else {//-1代表没有数据
+                            // amountPrice.val(result.amountPrice.toFixed(2));
+                            patientName.val(result.patientName);
+                            sex.val(result.sexName);
+                            doctorName.val(result.doctorName);
+                            department_id.val(result.departmentIdName);
+                            // $("#money").val(result.amountPrice.toFixed(2));
+                            sumbit1 = true;//有数据才可以提交
+                            M.updateTextFields();
+                        }
+                    })
+                }
+            }
+            actualCharge.blur(function () {
+                var amountPrices = amountPrice.val();
+                var proceedsFor = actualCharge.val();
+                if (proceedsFor.length > 0) {
+                    if (amountPrices != null && amountPrices != '' && amountPrices != undefined) {
+                        var pf = parseFloat(proceedsFor);
+                        var am = parseFloat(amountPrices);
+                        if (pf >= am) {
+                            var price = pf - am;
+                            $("#change").val(price.toFixed(2));
+                            $("#recoverTheFee").val(price.toFixed(2));
+                            M.updateTextFields();
+                        } else {
+                            dialog.warn("您输入的金额小于应收金额，请重新输入!!!")
+                        }
+                    }
+                }
+            })
+
+     $("#send_btn1").click(
+            function() {
+                var url = CTX + "/api/hisCharge/print/index.ahsj?token=" + TOKEN;
+                dialog.showDialog(url, "打印凭证预览","700px","700px");
+            })
+            $("input").change(function(){
+                $(this).val($(this).val().trim());
+            });
+        </script>
+    </div>
+</div>
+</body>
+</html>
+

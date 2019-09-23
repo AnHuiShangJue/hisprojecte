@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisVitalSignsMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisVitalSigns" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="hospital_manage_id" property="hospitalManageId" jdbcType="BIGINT" />
+    <result column="date" property="date" jdbcType="TIMESTAMP" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="body_temperature" property="bodyTemperature" jdbcType="DOUBLE" />
+    <result column="heart_rate" property="heartRate" jdbcType="INTEGER" />
+    <result column="consciousness_level" property="consciousnessLevel" jdbcType="INTEGER" />
+    <result column="blood_pressure" property="bloodPressure" jdbcType="VARCHAR" />
+    <result column="breathe" property="breathe" jdbcType="INTEGER" />
+    <result column="degree_pain" property="degreePain" jdbcType="INTEGER" />
+    <result column="early_warning_score" property="earlyWarningScore" jdbcType="VARCHAR" />
+    <result column="urine_volume" property="urineVolume" jdbcType="DOUBLE" />
+    <result column="stool" property="stool" jdbcType="INTEGER" />
+    <result column="oxygen_saturation" property="oxygenSaturation" jdbcType="VARCHAR" />
+    <result column="weight" property="weight" jdbcType="DOUBLE" />
+    <result column="drug_allergy" property="drugAllergy" jdbcType="INTEGER" />
+    <result column="drainage" property="drainage" jdbcType="DOUBLE" />
+    <result column="hospital_manage_number" property="hospitalManageNumber" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, hospital_manage_id, date, time, body_temperature, heart_rate, consciousness_level, 
+    blood_pressure, breathe, degree_pain, early_warning_score, urine_volume, stool, oxygen_saturation, 
+    weight, drug_allergy, drainage, hospital_manage_number, create_date, create_user_id, 
+    update_date, update_user_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from his_vital_signs
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from his_vital_signs
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisVitalSigns" >
+    insert into his_vital_signs (id, hospital_manage_id, date, 
+      time, body_temperature, heart_rate, 
+      consciousness_level, blood_pressure, breathe, 
+      degree_pain, early_warning_score, urine_volume, 
+      stool, oxygen_saturation, weight, 
+      drug_allergy, drainage, hospital_manage_number, 
+      create_date, create_user_id, update_date, 
+      update_user_id)
+    values (#{id,jdbcType=BIGINT}, #{hospitalManageId,jdbcType=BIGINT}, #{date,jdbcType=TIMESTAMP}, 
+      #{time,jdbcType=TIMESTAMP}, #{bodyTemperature,jdbcType=DOUBLE}, #{heartRate,jdbcType=INTEGER}, 
+      #{consciousnessLevel,jdbcType=INTEGER}, #{bloodPressure,jdbcType=VARCHAR}, #{breathe,jdbcType=INTEGER}, 
+      #{degreePain,jdbcType=INTEGER}, #{earlyWarningScore,jdbcType=VARCHAR}, #{urineVolume,jdbcType=DOUBLE},
+      #{stool,jdbcType=INTEGER}, #{oxygenSaturation,jdbcType=VARCHAR}, #{weight,jdbcType=DOUBLE}, 
+      #{drugAllergy,jdbcType=INTEGER}, #{drainage,jdbcType=DOUBLE}, #{hospitalManageNumber,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{updateUserId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisVitalSigns" >
+    insert into his_vital_signs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="hospitalManageId != null" >
+        hospital_manage_id,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="bodyTemperature != null" >
+        body_temperature,
+      </if>
+      <if test="heartRate != null" >
+        heart_rate,
+      </if>
+      <if test="consciousnessLevel != null" >
+        consciousness_level,
+      </if>
+      <if test="bloodPressure != null" >
+        blood_pressure,
+      </if>
+      <if test="breathe != null" >
+        breathe,
+      </if>
+      <if test="degreePain != null" >
+        degree_pain,
+      </if>
+      <if test="earlyWarningScore != null" >
+        early_warning_score,
+      </if>
+      <if test="urineVolume != null" >
+        urine_volume,
+      </if>
+      <if test="stool != null" >
+        stool,
+      </if>
+      <if test="oxygenSaturation != null" >
+        oxygen_saturation,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="drugAllergy != null" >
+        drug_allergy,
+      </if>
+      <if test="drainage != null" >
+        drainage,
+      </if>
+      <if test="hospitalManageNumber != null" >
+        hospital_manage_number,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="hospitalManageId != null" >
+        #{hospitalManageId,jdbcType=BIGINT},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bodyTemperature != null" >
+        #{bodyTemperature,jdbcType=DOUBLE},
+      </if>
+      <if test="heartRate != null" >
+        #{heartRate,jdbcType=INTEGER},
+      </if>
+      <if test="consciousnessLevel != null" >
+        #{consciousnessLevel,jdbcType=INTEGER},
+      </if>
+      <if test="bloodPressure != null" >
+        #{bloodPressure,jdbcType=VARCHAR},
+      </if>
+      <if test="breathe != null" >
+        #{breathe,jdbcType=INTEGER},
+      </if>
+      <if test="degreePain != null" >
+        #{degreePain,jdbcType=INTEGER},
+      </if>
+      <if test="earlyWarningScore != null" >
+        #{earlyWarningScore,jdbcType=VARCHAR},
+      </if>
+      <if test="urineVolume != null" >
+        #{urineVolume,jdbcType=DOUBLE},
+      </if>
+      <if test="stool != null" >
+        #{stool,jdbcType=INTEGER},
+      </if>
+      <if test="oxygenSaturation != null" >
+        #{oxygenSaturation,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="drugAllergy != null" >
+        #{drugAllergy,jdbcType=INTEGER},
+      </if>
+      <if test="drainage != null" >
+        #{drainage,jdbcType=DOUBLE},
+      </if>
+      <if test="hospitalManageNumber != null" >
+        #{hospitalManageNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisVitalSigns" >
+    update his_vital_signs
+    <set >
+      <if test="hospitalManageId != null" >
+        hospital_manage_id = #{hospitalManageId,jdbcType=BIGINT},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bodyTemperature != null" >
+        body_temperature = #{bodyTemperature,jdbcType=DOUBLE},
+      </if>
+      <if test="heartRate != null" >
+        heart_rate = #{heartRate,jdbcType=INTEGER},
+      </if>
+      <if test="consciousnessLevel != null" >
+        consciousness_level = #{consciousnessLevel,jdbcType=INTEGER},
+      </if>
+      <if test="bloodPressure != null" >
+        blood_pressure = #{bloodPressure,jdbcType=VARCHAR},
+      </if>
+      <if test="breathe != null" >
+        breathe = #{breathe,jdbcType=INTEGER},
+      </if>
+      <if test="degreePain != null" >
+        degree_pain = #{degreePain,jdbcType=INTEGER},
+      </if>
+      <if test="earlyWarningScore != null" >
+        early_warning_score = #{earlyWarningScore,jdbcType=VARCHAR},
+      </if>
+      <if test="urineVolume != null" >
+        urine_volume = #{urineVolume,jdbcType=DOUBLE},
+      </if>
+      <if test="stool != null" >
+        stool = #{stool,jdbcType=INTEGER},
+      </if>
+      <if test="oxygenSaturation != null" >
+        oxygen_saturation = #{oxygenSaturation,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="drugAllergy != null" >
+        drug_allergy = #{drugAllergy,jdbcType=INTEGER},
+      </if>
+      <if test="drainage != null" >
+        drainage = #{drainage,jdbcType=DOUBLE},
+      </if>
+      <if test="hospitalManageNumber != null" >
+        hospital_manage_number = #{hospitalManageNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisVitalSigns" >
+    update his_vital_signs
+    set hospital_manage_id = #{hospitalManageId,jdbcType=BIGINT},
+      date = #{date,jdbcType=TIMESTAMP},
+      time = #{time,jdbcType=TIMESTAMP},
+      body_temperature = #{bodyTemperature,jdbcType=DOUBLE},
+      heart_rate = #{heartRate,jdbcType=INTEGER},
+      consciousness_level = #{consciousnessLevel,jdbcType=INTEGER},
+      blood_pressure = #{bloodPressure,jdbcType=VARCHAR},
+      breathe = #{breathe,jdbcType=INTEGER},
+      degree_pain = #{degreePain,jdbcType=INTEGER},
+      early_warning_score = #{earlyWarningScore,jdbcType=VARCHAR},
+      urine_volume = #{urineVolume,jdbcType=DOUBLE},
+      stool = #{stool,jdbcType=INTEGER},
+      oxygen_saturation = #{oxygenSaturation,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=DOUBLE},
+      drug_allergy = #{drugAllergy,jdbcType=INTEGER},
+      drainage = #{drainage,jdbcType=DOUBLE},
+      hospital_manage_number = #{hospitalManageNumber,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+<!--  自定义sql-->
+
+  <select id="list" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
+    select
+    his_vital_signs.*
+    from his_vital_signs
+    where
+    his_vital_signs.hospital_manage_id = #{parameter.hospitalManageId,jdbcType=BIGINT}
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+</mapper>

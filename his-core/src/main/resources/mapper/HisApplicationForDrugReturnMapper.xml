@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisApplicationForDrugReturnMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisApplicationForDrugReturn">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="patient_name" property="patientName" jdbcType="VARCHAR"/>
+        <result column="phonenumber" property="phonenumber" jdbcType="BIGINT"/>
+        <result column="idcard" property="idcard" jdbcType="VARCHAR"/>
+        <result column="reason" property="reason" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="create_user_id" property="createUserId" jdbcType="BIGINT"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="BIGINT"/>
+        <result column="date_of_application" property="dateOfApplication" jdbcType="TIMESTAMP"/>
+        <result column="is_review" property="isReview" jdbcType="INTEGER"/>
+        <result column="record_number" property="recordNumber" jdbcType="VARCHAR"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="voucher" property="voucher" jdbcType="VARCHAR"/>
+        <result column="is_payed" property="isPayed" jdbcType="INTEGER"/>
+        <result column="total_price" property="totalPrice" jdbcType="DECIMAL" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, patient_name,
+    phonenumber, idcard, reason, create_date, update_date, create_user_id,
+    update_user_id, date_of_application, is_review, record_number, remarks, voucher,is_payed
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from his_application_for_drug_return
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_application_for_drug_return
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisApplicationForDrugReturn">
+    insert into his_application_for_drug_return (id,
+      patient_name, phonenumber, idcard, 
+       reason, create_date,
+      update_date, create_user_id, update_user_id, 
+      date_of_application, is_review, record_number,
+      remarks, voucher,is_payed)
+    values (#{id,jdbcType=BIGINT},
+      #{patientName,jdbcType=VARCHAR}, #{phonenumber,jdbcType=BIGINT}, #{idcard,jdbcType=VARCHAR}, 
+     #{reason,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+      #{updateDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{updateUserId,jdbcType=BIGINT}, 
+      #{dateOfApplication,jdbcType=TIMESTAMP}, #{isReview,jdbcType=INTEGER}, #{recordNumber,jdbcType=VARCHAR},
+      #{remarks,jdbcType=VARCHAR}, #{voucher,jdbcType=VARCHAR},#{isPayed,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisApplicationForDrugReturn">
+        insert into his_application_for_drug_return
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="patientName != null">
+                patient_name,
+            </if>
+            <if test="phonenumber != null">
+                phonenumber,
+            </if>
+            <if test="idcard != null">
+                idcard,
+            </if>
+            <if test="reason != null">
+                reason,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="dateOfApplication != null">
+                date_of_application,
+            </if>
+            <if test="isReview != null">
+                is_review,
+            </if>
+            <if test="recordNumber != null">
+                record_number,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="voucher != null">
+                voucher,
+            </if>
+            <if test="isPayed != null">
+                is_payed,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="patientName != null">
+                #{patientName,jdbcType=VARCHAR},
+            </if>
+            <if test="phonenumber != null">
+                #{phonenumber,jdbcType=BIGINT},
+            </if>
+            <if test="idcard != null">
+                #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="reason != null">
+                #{reason,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="dateOfApplication != null">
+                #{dateOfApplication,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isReview != null">
+                #{isReview,jdbcType=INTEGER},
+            </if>
+            <if test="recordNumber != null">
+                #{recordNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="voucher != null">
+                #{voucher,jdbcType=VARCHAR},
+            </if>
+            <if test="isPayed != null">
+                #{isPayed,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisApplicationForDrugReturn">
+        update his_application_for_drug_return
+        <set>
+            <if test="patientName != null">
+                patient_name = #{patientName,jdbcType=VARCHAR},
+            </if>
+            <if test="phonenumber != null">
+                phonenumber = #{phonenumber,jdbcType=BIGINT},
+            </if>
+            <if test="idcard != null">
+                idcard = #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="reason != null">
+                reason = #{reason,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="dateOfApplication != null">
+                date_of_application = #{dateOfApplication,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isReview != null">
+                is_review = #{isReview,jdbcType=INTEGER},
+            </if>
+            <if test="recordNumber != null">
+                record_number = #{recordNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="voucher != null">
+                voucher = #{voucher,jdbcType=VARCHAR},
+            </if>
+            <if test="isPayed != null">
+                is_payed =#{isPayed,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisApplicationForDrugReturn">
+    update his_application_for_drug_return
+    set
+      patient_name = #{patientName,jdbcType=VARCHAR},
+      phonenumber = #{phonenumber,jdbcType=BIGINT},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      reason = #{reason,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      date_of_application = #{dateOfApplication,jdbcType=TIMESTAMP},
+      is_review = #{isReview,jdbcType=INTEGER},
+      record_number = #{recordNumber,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      voucher = #{voucher,jdbcType=VARCHAR},
+      is_payed =#{isPayed,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <!--自定义sql-->
+    <!--list查询-->
+    <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        SELECT
+        his_application_for_drug_return.*
+        FROM
+        his_application_for_drug_return
+        where
+        1= 1
+        <if test="parameter.recordNumber != null and parameter.recordNumber != ''">
+            and record_number = #{parameter.recordNumber,jdbcType=VARCHAR}
+        </if>
+        <if test="parameter.voucher != null and parameter.voucher != ''">
+            and voucher = #{parameter.voucher,jdbcType=VARCHAR}
+        </if>
+        <if test="parameter.phonenumber != null and parameter.phonenumber != ''">
+            and phonenumber =#{parameter.phonenumber,jdbcType=BIGINT}
+        </if>
+        <if test="parameter.idcard != null and parameter.idcard != ''">
+            and idcard =#{parameter.idcard,jdbcType=VARCHAR}
+        </if>
+        <if test="parameter.patientName != null and parameter.patientName != ''">
+            and patient_name like concat('%' #{parameter.patientName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+    <!--为药品审核的list查询 只查询出未审核的申请-->
+    <select id="listForReview" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        SELECT
+        his_application_for_drug_return.*
+        FROM
+        his_application_for_drug_return
+        where
+        1= 1 and is_review=3
+        <if test="parameter.recordNumber != null and parameter.recordNumber != ''">
+            and record_number = #{parameter.recordNumber,jdbcType=VARCHAR}
+        </if>
+        <if test="parameter.voucher != null and parameter.voucher != ''">
+            and voucher = #{parameter.voucher,jdbcType=VARCHAR}
+        </if>
+        <if test="parameter.phonenumber != null and parameter.phonenumber != ''">
+            and phonenumber =#{parameter.phonenumber,jdbcType=BIGINT}
+        </if>
+        <if test="parameter.idcard != null and parameter.idcard != ''">
+            and idcard =#{parameter.idcard,jdbcType=VARCHAR}
+        </if>
+        <if test="parameter.patientName != null and parameter.patientName != ''">
+            and patient_name like concat('%' #{parameter.patientName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+    <select id="selectByVoucher" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select his_application_for_drug_return.*
+   from his_application_for_drug_return
+where  voucher = #{voucher,jdbcType=VARCHAR}
+  </select>
+    <select id="getByNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+select a.total_price, i.name as patient_name ,i.idcard,i.phonenumber,i.sex,i.id from ( select
+COALESCE(sum(d.total_price),0) as total_price from his_application_for_drug_return_details
+as d where d.voucher in ( select r.voucher from his_application_for_drug_return as r where
+r.record_number =(select h.medical_record_id
+from his_toll_record h where h.number =#{number,jdbcType=VARCHAR}) and r.is_review='1' and r.is_payed='2' )) as a CROSS JOIN
+(select i.name,i.idcard,i.phonenumber,i.sex,i.id from his_patient_info as i where i.id = (select
+e.patient_id from his_medical_record as e where e.medical_record_id= (select h.medical_record_id
+from his_toll_record h where h.number =#{number,jdbcType=VARCHAR}) )) as i
+  </select>
+    <select id="count" parameterType="java.lang.String" resultMap="BaseResultMap">
+select count(1)  from his_application_for_drug_return as d  where  d.is_payed='2'
+and
+ d.record_number =(
+select
+h.medical_record_id from his_toll_record h where h.number =#{number,jdbcType=VARCHAR})
+    </select>
+
+    <!--查询当日已经申请退药的次数-->
+    <select id="selectNumbCount" resultType="int" parameterType="java.lang.String">
+        select
+            count(*)
+        from his_application_for_drug_return
+        where his_application_for_drug_return.voucher LIKE CONCAT('%',#{voucher},'%')
+    </select>
+    <select id="showDrugByRecordNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+       select i.name as patient_name ,i.phonenumber, i.idcard,b.total_price ,i.id from
+(select i.id,i.name ,i.phonenumber, i.idcard from  his_patient_info as i where i.id  = (
+select r.patient_id from  his_medical_record  as r  where r.medical_record_id = #{recordNumber})) as i
+ CROSS JOIN
+(select  COALESCE(sum(t.total_price),0) as total_price  from his_application_for_drug_return_details as t
+where t.voucher in (select d.voucher from his_application_for_drug_return as d where d.record_number = #{recordNumber} and  d.is_payed='1' )) as b
+    </select>
+    <select id="selectByRecordNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+select a.total_price, i.name as patient_name ,i.idcard,i.phonenumber,i.sex,i.id from  (
+select   COALESCE(sum(d.total_price),0) as total_price from his_application_for_drug_return_details as d
+where d.voucher in (
+select  r.voucher from his_application_for_drug_return as r where  r.record_number = #{recordNumber,jdbcType=VARCHAR}
+and r.is_review='1' and r.is_payed='2'
+)) as a
+CROSS JOIN (select  i.name,i.idcard,i.phonenumber,i.sex,i.id
+from  his_patient_info as i
+where i.id = (select e.patient_id from his_medical_record as e where e.medical_record_id= #{recordNumber,jdbcType=VARCHAR} )) as i
+</select>
+
+    <select id="selectByRecordNumberNotIsReview" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select his_application_for_drug_return.*
+from his_application_for_drug_return
+where record_number = #{recordNumber,jdbcType=VARCHAR} and is_review = 3
+    </select>
+
+</mapper>

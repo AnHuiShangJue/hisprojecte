@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+<head>
+    <style>
+        .fontsize01 {
+            font-size: 14px;
+        }
+
+        .fontsize02 {
+            font-size: 12px;
+        }
+
+        .fontsize03 {
+            font-size: 10px;
+        }
+
+    </style>
+</head>
+<div th:replace="public/base_print :: html"></div>
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<div class="row">
+
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4">
+            <label class="black-text fontsize01">交易流水号</label></br>
+            <label class="black-text fontsize02">Transaction flow number</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text" th:text="${number}"></label>
+        </div>
+        <input type="hidden" id="number" th:value="${number}">
+
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4">
+            <label class="black-text fontsize01">收费人</label></br>
+            <label class="black-text fontsize02">Charger</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text"><span id="createName"></span></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4">
+            <label class="black-text fontsize01">执卡人</label></br>
+            <label class="black-text fontsize02">Card holder</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text"><span id="name"></span></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4">
+            <label class="black-text fontsize01">就诊卡号</label></br>
+            <label class="black-text fontsize02">Visit card number</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text"><span id="numbers"></span></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4 ">
+            <label class="black-text fontsize01">充值金额</label></br>
+            <label class="black-text fontsize02">Recharge amount</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text"><span id="totalPrices"></span></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4">
+            <label class="black-text fontsize01">卡内余额</label></br>
+            <label class="black-text fontsize02">Card balance</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text"><span id="balance"></span></label>
+        </div>
+</div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4 ">
+            <label class="black-text fontsize01">收费时间</label></br>
+            <label class="black-text fontsize02">Charging time</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text"><span id="createDate"></span></label>
+        </div>
+    </div>
+</div>
+
+
+<!-- ================================================
+Scripts
+================================================ -->
+<div th:replace="public/base_print_script :: html"></div>
+<script th:inline="javascript">
+    $(document).ready(function () {
+        printShow();
+    });
+    var number = $("#number").val();
+
+    function printShow() {
+        $.ahsjajax(
+            CTX + "/api/visitCard/printShow/index.ahsj",
+            {"number": number},
+            function (data) {
+                changeInputValue("balance", data.balance);
+                changeInputValue("totalPrices", data.money);
+                changeInputValue("numbers", data.medicalRecordId);
+                changeInputValue("createDate", data.createDate);
+                changeInputValue("name", data.patientName);
+                changeInputValue("createName", data.name);
+                M.updateTextFields();
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }
+        );
+    }
+
+    function doOk() {
+        $('body  div div.row.valign-wrapper').printThis({
+            importCSS: true,
+            debug: true,
+            afterPrint: function () {
+                dialog.confirm('确定打印?', function (index, layero) {
+                });
+            }
+        });
+    }
+
+    $("input").change(function () {
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</body>
+
+</html>

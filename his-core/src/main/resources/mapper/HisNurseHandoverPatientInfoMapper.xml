@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisNurseHandoverPatientInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisNurseHandoverPatientInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="handover_id" property="handoverId" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="patient_id" property="patientId" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="bed" property="bed" jdbcType="BIGINT" />
+    <result column="hospitalmanage" property="hospitalmanage" jdbcType="VARCHAR" />
+    <result column="diagnosis" property="diagnosis" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, handover_id, type, patient_id, name, sex, bed, hospitalmanage, diagnosis, content, 
+    create_user_id, create_date, update_date, update_user_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from his_nurse_handover_patient_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from his_nurse_handover_patient_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisNurseHandoverPatientInfo" >
+    insert into his_nurse_handover_patient_info (id, handover_id, type, 
+      patient_id, name, sex, 
+      bed, hospitalmanage, diagnosis, 
+      content, create_user_id, create_date, 
+      update_date, update_user_id)
+    values (#{id,jdbcType=BIGINT}, #{handoverId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, 
+      #{patientId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
+      #{bed,jdbcType=BIGINT}, #{hospitalmanage,jdbcType=VARCHAR}, #{diagnosis,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisNurseHandoverPatientInfo" >
+    insert into his_nurse_handover_patient_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="handoverId != null" >
+        handover_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="bed != null" >
+        bed,
+      </if>
+      <if test="hospitalmanage != null" >
+        hospitalmanage,
+      </if>
+      <if test="diagnosis != null" >
+        diagnosis,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="handoverId != null" >
+        #{handoverId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="patientId != null" >
+        #{patientId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="bed != null" >
+        #{bed,jdbcType=BIGINT},
+      </if>
+      <if test="hospitalmanage != null" >
+        #{hospitalmanage,jdbcType=VARCHAR},
+      </if>
+      <if test="diagnosis != null" >
+        #{diagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisNurseHandoverPatientInfo" >
+    update his_nurse_handover_patient_info
+    <set >
+      <if test="handoverId != null" >
+        handover_id = #{handoverId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="patientId != null" >
+        patient_id = #{patientId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="bed != null" >
+        bed = #{bed,jdbcType=BIGINT},
+      </if>
+      <if test="hospitalmanage != null" >
+        hospitalmanage = #{hospitalmanage,jdbcType=VARCHAR},
+      </if>
+      <if test="diagnosis != null" >
+        diagnosis = #{diagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisNurseHandoverPatientInfo" >
+    update his_nurse_handover_patient_info
+    set handover_id = #{handoverId,jdbcType=BIGINT},
+      type = #{type,jdbcType=INTEGER},
+      patient_id = #{patientId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      bed = #{bed,jdbcType=BIGINT},
+      hospitalmanage = #{hospitalmanage,jdbcType=VARCHAR},
+      diagnosis = #{diagnosis,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--批量插入-->
+  <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">
+    <selectKey resultType="long" keyProperty="id" order="AFTER">
+      SELECT
+      LAST_INSERT_ID()
+    </selectKey>
+    insert into his_nurse_handover_patient_info (id, handover_id, type,
+    patient_id, name, sex,
+    bed, hospitalmanage, diagnosis,
+    content, create_user_id, create_date,
+    update_date, update_user_id
+    )
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.id,jdbcType=BIGINT}, #{item.handoverId,jdbcType=BIGINT}, #{item.type,jdbcType=INTEGER},
+      #{item.patientId,jdbcType=BIGINT}, #{item.name,jdbcType=VARCHAR}, #{item.sex,jdbcType=INTEGER},
+      #{item.bed,jdbcType=BIGINT}, #{item.hospitalmanage,jdbcType=VARCHAR}, #{item.diagnosis,jdbcType=VARCHAR},
+      #{item.content,jdbcType=VARCHAR}, #{item.createUserId,jdbcType=BIGINT}, #{item.createDate,jdbcType=TIMESTAMP},
+      #{item.updateDate,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=BIGINT})
+    </foreach>
+  </insert>
+
+
+
+</mapper>

@@ -1,0 +1,71 @@
+server:
+  port: 8003
+
+eureka:
+  client:
+    #    表示是否将自己注册到Eureka Server，默认为true，
+    registerWithEureka: true
+    #    表示是否从Eureka Server获取注册信息，默认为true。
+    fetchRegistry: true
+    #    设置与Eureka Server交互的地址，查询服务和注册服务都需要依赖这个地址。默认是http://localhost:8761/eureka ；多个地址可使用 , 分隔。
+    serviceUrl:
+      #      defaultZone: http://47.92.192.210:8760/eureka/,http://47.92.192.210:8761/eureka/
+      #      defaultZone: http://192.168.0.99:8760/eureka/
+      defaultZone: http://127.0.0.1:8760/eureka/,http://127.0.0.1:8761/eureka/
+      #客户端缓存时间 默认环境下是30秒，生产环境下改成5s
+      # 定时刷新本地缓存时间
+    registry-fetch-interval-seconds: 5
+spring:
+  application:
+    name:  eureka-zuul-inner
+
+#在网关层配置单点登录所访问的域名以及信息
+#访问微服务的授权认证中心，以及微服务的资源认证中心
+security:
+  oauth2:
+    client:
+      clientId: bd1c0a783ccdd1c9b9e4
+      clientSecret: 1a9030fbca47a5b2c28e92f19050bb77824b5ad1
+      accessTokenUri:  http://localhost:7000/uaa/oauth/token
+      userAuthorizationUri: http://localhost:7000/uaa/oauth/authorize
+      clientAuthenticationScheme: form
+    resource:
+      userInfoUri: http://localhost:7000/uaa/user
+      preferTokenInfo: false
+
+zuul:
+  host:
+    connect-timeout-millis: 10000
+    socket-timeout-millis: 60000
+  #    配置路由规则,配置这些规则之后HystrixCommand和Ribbon并不会对这些URL做处理，需要重新进行配置
+  routes:
+    #    配置授权中心的路径
+    uaa:
+      path: /uaa/**
+      sensitiveHeaders: "*"
+      serviceId: security
+    order:
+      path: /accounts/**
+      sensitiveHeaders: "*"
+      serviceId: eureka-userinfo
+    maps:
+      path: /maps/**
+      sensitiveHeaders: "*"
+      serviceId: map
+    his-core:
+      path: /hiscore/**
+      sensitiveHeaders: "*"
+      serviceId: his-core
+  retryable: true #让Ribbon客户端自动重试失败的请求
+  add-proxy-headers: true #添加代理头
+
+ribbon:
+  ReadTimeout: 120000
+  ConnectTimeout: 30000
+
+#proxy:
+#  auth:
+#    routes:
+#      uaa: oauth2
+#      accounts: passthru
+#      recommendations: none

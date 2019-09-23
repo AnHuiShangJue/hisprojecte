@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.smartparkcore.dao.SiteMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.smartparkcore.entity.po.Site" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="site_name" property="siteName" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="area" property="area" jdbcType="DOUBLE" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="is_enable" property="isEnable" jdbcType="SMALLINT" />
+    <result column="capacity" property="capacity" jdbcType="VARCHAR" />
+    <result column="environmental_label" property="environmentalLabel" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="DATE" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="update_date" property="updateDate" jdbcType="DATE" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="is_lease" property="isLease" jdbcType="INTEGER" />
+    <result column="is_verify" property="isVerify" jdbcType="INTEGER" />
+    <result column="enterprise_id" property="enterpriseId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, site_name, title, location, price, area, name, phone_number, description, is_enable, 
+    capacity, environmental_label, create_date, create_user_id, update_date, update_user_id, 
+    is_lease, is_verify, enterprise_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from site
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from site
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.smartparkcore.entity.po.Site" >
+    insert into site (id, site_name, title, 
+      location, price, area, 
+      name, phone_number, description, 
+      is_enable, capacity, environmental_label, 
+      create_date, create_user_id, update_date, 
+      update_user_id, is_lease, is_verify, 
+      enterprise_id)
+    values (#{id,jdbcType=BIGINT}, #{siteName,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{location,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{area,jdbcType=DOUBLE}, 
+      #{name,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{isEnable,jdbcType=SMALLINT}, #{capacity,jdbcType=VARCHAR}, #{environmentalLabel,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=DATE}, #{createUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=DATE}, 
+      #{updateUserId,jdbcType=BIGINT}, #{isLease,jdbcType=INTEGER}, #{isVerify,jdbcType=INTEGER}, 
+      #{enterpriseId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.smartparkcore.entity.po.Site" >
+    insert into site
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="siteName != null" >
+        site_name,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="location != null" >
+        location,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="phoneNumber != null" >
+        phone_number,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="isEnable != null" >
+        is_enable,
+      </if>
+      <if test="capacity != null" >
+        capacity,
+      </if>
+      <if test="environmentalLabel != null" >
+        environmental_label,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="isLease != null" >
+        is_lease,
+      </if>
+      <if test="isVerify != null" >
+        is_verify,
+      </if>
+      <if test="enterpriseId != null" >
+        enterprise_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="siteName != null" >
+        #{siteName,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=DOUBLE},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null" >
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=SMALLINT},
+      </if>
+      <if test="capacity != null" >
+        #{capacity,jdbcType=VARCHAR},
+      </if>
+      <if test="environmentalLabel != null" >
+        #{environmentalLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="isLease != null" >
+        #{isLease,jdbcType=INTEGER},
+      </if>
+      <if test="isVerify != null" >
+        #{isVerify,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseId != null" >
+        #{enterpriseId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.smartparkcore.entity.po.Site" >
+    update site
+    <set >
+      <if test="siteName != null" >
+        site_name = #{siteName,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=DOUBLE},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null" >
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnable != null" >
+        is_enable = #{isEnable,jdbcType=SMALLINT},
+      </if>
+      <if test="capacity != null" >
+        capacity = #{capacity,jdbcType=VARCHAR},
+      </if>
+      <if test="environmentalLabel != null" >
+        environmental_label = #{environmentalLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=DATE},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="isLease != null" >
+        is_lease = #{isLease,jdbcType=INTEGER},
+      </if>
+      <if test="isVerify != null" >
+        is_verify = #{isVerify,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseId != null" >
+        enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.smartparkcore.entity.po.Site" >
+    update site
+    set site_name = #{siteName,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      location = #{location,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      area = #{area,jdbcType=DOUBLE},
+      name = #{name,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      is_enable = #{isEnable,jdbcType=SMALLINT},
+      capacity = #{capacity,jdbcType=VARCHAR},
+      environmental_label = #{environmentalLabel,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=DATE},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=DATE},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      is_lease = #{isLease,jdbcType=INTEGER},
+      is_verify = #{isVerify,jdbcType=INTEGER},
+      enterprise_id = #{enterpriseId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!--自定义sql-->
+  <select id="selectSite" parameterType="core.entity.PageBean" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from site
+   where 1=1
+    <if test="parameter.siteName != null and parameter.siteName != ''">
+      and site_name like concat('%', #{parameter.siteName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.location != null and parameter.location != ''">
+      and location  like concat('%', #{parameter.location,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.lowPrice != null and parameter.lowPrice != ''">
+      and price &gt;=  #{parameter.lowPrice,jdbcType=DECIMAL}
+    </if>
+    <if test="parameter.upPrice != null and parameter.upPrice != ''">
+      and price &lt;=  #{parameter.upPrice,jdbcType=DECIMAL}
+    </if>
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+
+  </select>
+<select id="selectBySiteName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+  <include refid="Base_Column_List" />
+  from site  where
+  site_name = #{siteName,jdbcType=VARCHAR}
+</select>
+  <select id="setEnable" resultMap="BaseResultMap" parameterType="com.ahsj.smartparkcore.entity.po.Site">
+ update site
+    set  is_enable = #{isEnable,jdbcType=SMALLINT}
+		where id in
+    <foreach collection="ids" item="id" index="index"
+             open="(" close=")" separator=",">
+      #{id,jdbcType=BIGINT}
+    </foreach>
+  </select>
+</mapper>

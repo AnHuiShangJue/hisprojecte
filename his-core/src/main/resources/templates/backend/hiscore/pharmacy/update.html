@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title">药库药品信息修改</h4><label style="color:black">Drug library drug information modification
+
+            </label>
+                <form class="col s12" id="sendForm" action="#">
+                    <input type="hidden" id="id" name="id" th:value="${hisPharmacyDetail.id}">
+                    <input type="hidden" id="medicine_id" name="medicineId" th:value="${hisPharmacyDetail.medicineId}">
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="drugs_numb" name="drugsNumb" type="text"
+                                   th:value="${hisPharmacyDetail.drugsNumb}"
+                                   th:readonly="true"
+                                 />
+                            <label for="drugs_numb">药品编号<span style="font-size: 12px">(Drug number
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="drugs_name" name="drugsName" type="text"
+                                   th:value="${hisPharmacyDetail.drugsName}"
+                                   th:readonly="true"
+                                  />
+                            <label for="drugs_name">药品名称<span style="font-size: 12px">(Drug Name)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="drugs_alias" name="drugsAlias" type="text"
+                                   th:value="${hisPharmacyDetail.drugsAlias}"
+                                   th:readonly="true"/>
+                            <label for="drugs_alias">药品别名<span style="font-size: 12px">(Drug alias
+)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="stock" name="stock" type="number"
+                                   th:value="${hisPharmacyDetail.stock}"
+                                   th:readonly="true"/>
+                            <label for="stock">库 存<span style="font-size: 12px">(stock
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="drugs_spec" name="drugsSpec" type="text"
+                                   th:value="${hisPharmacyDetail.drugsSpec}"
+                                   th:readonly="true"/>
+                            <label for="drugs_spec">药品规格<span style="font-size: 12px">(Drug specifications
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="sale_counts" name="saleCounts" type="text"
+                                   th:value="${hisPharmacyDetail.saleCounts}"
+                                   th:readonly="true"/>
+                            <label for="sale_counts">已售<span style="font-size: 12px">(Sold)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input ahsj:select name="isObtained" id="is_obtained" type="code" typeKey="is_obtained"
+                                   th:value="${hisPharmacyDetail.isObtained}"/>
+                            <label for="is_obtained">是否下架<span style="font-size: 12px">(Whether it is off the shelf
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="sale_price" name="salePrice" type="number"
+                                   th:value="${hisPharmacyDetail.salePrice}"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label for="sale_price">售 价<span style="font-size: 12px">(Price
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="stockWarn" name="stockWarn" type="number" th:value="${hisPharmacyDetail.stockWarn}"
+                                   data-error=".errorTxt2">
+                            <div class="errorTxt2"></div>
+                            <label for="stockWarn">库存预警值<span style="font-size: 12px">(Inventory warning value
+)</span></label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="normalStock" name="normalStock" type="number" th:value="${hisPharmacyDetail.normalStock}"
+                                   data-error=".errorTxt3">
+                            <div class="errorTxt3"></div>
+                            <label for="normalStock">固定库存<span style="font-size: 12px">(Fixed stock
+)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button id="send_btn" class="btn cyan waves-effect waves-light right" type="submit"
+                                    name="action">提 交(submit
+                                )
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ================================================
+Scripts
+================================================ -->
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+    $(function () {
+        formCheck();
+
+    });
+
+    function formCheck() {
+        $("#sendForm").validate({
+            rules: {
+                salePrice: {
+                    required: true,
+                    minlength: 1
+                },
+                stockWarn: {
+                    required: true,
+                    minlength: 1
+                },
+                normalStock: {
+                    required: true,
+                    minlength: 1
+                },
+
+
+            },
+            messages: {
+                salePrice: {
+                    required: "请输入药品售价",
+                    minlength: "最少输入1个字符"
+                },
+                stockWarn: {
+                    required: "请输入库存预警值",
+                    minlength: "最少输入1个字符"
+                },
+                normalStock: {
+                    required: "请输入固定库存值",
+                    minlength: "最少输入1个字符"
+                }
+
+            },
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+                dialog.confirm('确定提交吗?', function (index, layero){
+                var queryString = $('#sendForm').serialize();
+                console.log("queryString is" + queryString);
+
+                $.ahsjajax(
+                    CTX + "/api/pharmacy/saveOrUpdate.ahsj?token=" + TOKEN,
+                    queryString,
+                    function (msg) {
+                        if (msg.success) {
+                            M.toast({html: msg.message});
+                            parent.grid.search();
+                            dialog.parentclose();
+                            return false;
+                        } else {
+                            M.toast({html: msg.message});
+                            return false;
+                        }
+                    },
+                    function () {
+                        M.toast({html: "网络异常"});
+                        return false;
+                    }
+                );});
+            }
+        });
+    }
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</body>
+
+</html>

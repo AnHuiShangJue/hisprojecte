@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title" th:value="${title}">挂号信息查看</h4><label style="color:black">Registered information view
+
+            </label>
+                <form class="col s12" id="sendForm" action="#">
+                    <div class="row">
+                        <div class="row">
+                            <div class="input-field col s4 l4 xl4">
+                                <input id="patientName" name="patientName" type="text"
+                                       th:value="${hisRegistered.patientName}" readonly/>
+                                <label for="patientName">姓 名<span style="font-size: 12px">(name)</span></label>
+                            </div>
+                            <div class="input-field col s4 l4 xl4">
+                                <input id="idcard" name="idcard" type="text" th:value="${hisRegistered.idcard}"
+                                       readonly/>
+                                <label for="idcard">身 份 证 号 码<span style="font-size: 12px">(id card)</span></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s4 l4 xl4">
+                                <input id="categoryName" name="categoryName" type="text"
+                                       th:value="${hisRegistered.categoryName}" readonly/>
+                                <label for="categoryName">挂 号 类 别<span style="font-size: 12px">(Registered category
+)</span></label>
+                            </div>
+                            <div class="input-field col s4 l4 xl4">
+                                <input id="payName" name="payName" type="text" th:value="${hisRegistered.payName}"
+                                       readonly/>
+                                <label for="payName">支 付 方 式<span style="font-size: 12px">(payment method
+)</span></label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col input-field s3 m3 l3">
+                                <select ahsj:select name="orgId" id="orgId" type="depart" typeKey="2" departKbn="1">
+                                </select>
+                                <label for="orgId">科 室<span style="font-size: 12px">(Department
+)</span></label>
+                                <input id="money" name="money" type="number" th:value="${hisRegistered.departmentId}" readonly/>
+                                <label for="money">应 收 金 额<span style="font-size: 12px">(Amount receivable
+)</span></label>
+                            </div>
+                            <div class="input-field col s4 l4 xl4">
+                                <input id="money" name="money" type="number" th:value="${hisRegistered.money}" readonly/>
+                                <label for="money">应 收 金 额<span style="font-size: 12px">(Amount receivable
+)</span></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s4 l4 xl4">
+                                <input id="paidAmount" name="paidAmount" type="number"
+                                       th:value="${hisRegistered.paidAmount}" readonly/>
+                                <label for="paidAmount">实 际 收 款 金 额<span style="font-size: 12px">(Actual collection amount
+)</span></label>
+                            </div>
+                            <div class="input-field col s4 l4 xl4">
+                                <input id="retrieveAmount" name="retrieveAmount" type="number"
+                                       th:value="${hisRegistered.retrieveAmount}" readonly/>
+                                <label for="retrieveAmount">找 零 金 额<span style="font-size: 12px">(Change amount
+)</span></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s4 l4 xl4">
+                                <input id="createDate" name="createDate" type="text"
+                                       th:value="${#dates.format(hisRegistered.createDate, 'yyyy-MM-dd HH:mm:ss')}" readonly/>
+                                <label for="createDate">创 建 时 间<span style="font-size: 12px">(Creation time
+)</span></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s4 l4 xl4">
+                                <input id="remark" name="remark" type="text" th:value="${hisRegistered.retrieveAmount}"
+                                       readonly/>
+                                <label for="remark">备 注<span style="font-size: 12px">(remark)</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="public/base_update_script :: html"></div>
+</body>
+
+</html>

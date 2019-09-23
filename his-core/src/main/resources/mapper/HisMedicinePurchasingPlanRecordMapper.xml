@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisMedicinePurchasingPlanRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisMedicinePurchasingPlanRecord" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="plan_number" property="planNumber" jdbcType="VARCHAR" />
+    <result column="person_in_charge" property="personInCharge" jdbcType="VARCHAR" />
+    <result column="expected_time" property="expectedTime" jdbcType="TIMESTAMP" />
+    <result column="budget" property="budget" jdbcType="DECIMAL" />
+    <result column="completion" property="completion" jdbcType="INTEGER" />
+    <result column="completion_time" property="completionTime" jdbcType="TIMESTAMP" />
+    <result column="actual_expenditure" property="actualExpenditure" jdbcType="DECIMAL" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, plan_number, person_in_charge, expected_time, budget, completion, completion_time, 
+    actual_expenditure, create_user_id, create_date, update_user_id, update_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from his_medicine_purchasing_plan_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from his_medicine_purchasing_plan_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisMedicinePurchasingPlanRecord" >
+    insert into his_medicine_purchasing_plan_record (id, plan_number, person_in_charge, 
+      expected_time, budget, completion, 
+      completion_time, actual_expenditure, create_user_id, 
+      create_date, update_user_id, update_date
+      )
+    values (#{id,jdbcType=BIGINT}, #{planNumber,jdbcType=VARCHAR}, #{personInCharge,jdbcType=VARCHAR},
+      #{expectedTime,jdbcType=TIMESTAMP}, #{budget,jdbcType=DECIMAL}, #{completion,jdbcType=INTEGER}, 
+      #{completionTime,jdbcType=TIMESTAMP}, #{actualExpenditure,jdbcType=DECIMAL}, #{createUserId,jdbcType=BIGINT}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisMedicinePurchasingPlanRecord" >
+    insert into his_medicine_purchasing_plan_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="planNumber != null" >
+        plan_number,
+      </if>
+      <if test="personInCharge != null" >
+        person_in_charge,
+      </if>
+      <if test="expectedTime != null" >
+        expected_time,
+      </if>
+      <if test="budget != null" >
+        budget,
+      </if>
+      <if test="completion != null" >
+        completion,
+      </if>
+      <if test="completionTime != null" >
+        completion_time,
+      </if>
+      <if test="actualExpenditure != null" >
+        actual_expenditure,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="planNumber != null" >
+        #{planNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="personInCharge != null" >
+        #{personInCharge,jdbcType=VARCHAR},
+      </if>
+      <if test="expectedTime != null" >
+        #{expectedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="budget != null" >
+        #{budget,jdbcType=DECIMAL},
+      </if>
+      <if test="completion != null" >
+        #{completion,jdbcType=INTEGER},
+      </if>
+      <if test="completionTime != null" >
+        #{completionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actualExpenditure != null" >
+        #{actualExpenditure,jdbcType=DECIMAL},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisMedicinePurchasingPlanRecord" >
+    update his_medicine_purchasing_plan_record
+    <set >
+      <if test="planNumber != null" >
+        plan_number = #{planNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="personInCharge != null" >
+        person_in_charge = #{personInCharge,jdbcType=VARCHAR},
+      </if>
+      <if test="expectedTime != null" >
+        expected_time = #{expectedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="budget != null" >
+        budget = #{budget,jdbcType=DECIMAL},
+      </if>
+      <if test="completion != null" >
+        completion = #{completion,jdbcType=INTEGER},
+      </if>
+      <if test="completionTime != null" >
+        completion_time = #{completionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actualExpenditure != null" >
+        actual_expenditure = #{actualExpenditure,jdbcType=DECIMAL},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisMedicinePurchasingPlanRecord" >
+    update his_medicine_purchasing_plan_record
+    set plan_number = #{planNumber,jdbcType=VARCHAR},
+      person_in_charge = #{personInCharge,jdbcType=VARCHAR},
+      expected_time = #{expectedTime,jdbcType=TIMESTAMP},
+      budget = #{budget,jdbcType=DECIMAL},
+      completion = #{completion,jdbcType=INTEGER},
+      completion_time = #{completionTime,jdbcType=TIMESTAMP},
+      actual_expenditure = #{actualExpenditure,jdbcType=DECIMAL},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--自定义sql-->
+  <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    select
+    his_medicine_purchasing_plan_record.*
+    from his_medicine_purchasing_plan_record
+    where
+      1= 1
+    <if test="parameter.planNumber != null and parameter.planNumber != ''">
+      and plan_number like concat('%' #{parameter.planNumber,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.personInCharge != null and parameter.personInCharge != ''">
+      and person_in_charge like concat('%' #{parameter.personInCharge,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.lowexpectedTime != null" >
+    and expected_time &gt;= #{parameter.lowexpectedTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="parameter.highexpectedTime != null" >
+    and expected_time  &lt;=#{parameter.highexpectedTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="parameter.lowCreateDate != null" >
+      and date(create_date) &gt;= #{parameter.lowCreateDate,jdbcType=TIMESTAMP}
+    </if>
+    <if test="parameter.highCreateDate != null" >
+      and date(create_date)  &lt;=#{parameter.highCreateDate,jdbcType=TIMESTAMP}
+    </if>
+    <if test="parameter.lowBudget != null and parameter.lowBudget != '' " >
+      and budget &gt;= #{parameter.lowBudget,jdbcType=DECIMAL}
+    </if>
+    <if test="parameter.highBudget != null and parameter.highBudget != ''">
+      and budget &lt;= #{parameter.highBudget,jdbcType=DECIMAL}
+    </if>
+    <if test="parameter.completion != null and parameter.completion != ''">
+      and completion = #{parameter.completion,jdbcType=INTEGER}
+    </if>
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+
+  </select>
+
+<select id="selectByPlanNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+  select his_medicine_purchasing_plan_record.*
+  from  his_medicine_purchasing_plan_record
+  where plan_number=#{parameter.planNumber,jdbcType=VARCHAR}
+
+</select>
+
+</mapper>

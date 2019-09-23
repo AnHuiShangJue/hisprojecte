@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anhuishangjue.map.dao.MarkerMapper">
+  <resultMap id="BaseResultMap" type="com.anhuishangjue.map.entity.Marker">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="x" jdbcType="VARCHAR" property="x" />
+    <result column="y" jdbcType="VARCHAR" property="y" />
+    <result column="offset_x" jdbcType="VARCHAR" property="offsetX" />
+    <result column="offset_y" jdbcType="VARCHAR" property="offsetY" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="image_offset_x" jdbcType="VARCHAR" property="imageOffsetX" />
+    <result column="image_offset_y" jdbcType="VARCHAR" property="imageOffsetY" />
+    <result column="create_id" jdbcType="BIGINT" property="createId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_id" jdbcType="BIGINT" property="updateId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="visible" jdbcType="TINYINT" property="visible" />
+    <result column="animation" jdbcType="VARCHAR" property="animation" />
+    <result column="clickable" jdbcType="TINYINT" property="clickable" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, x, y, offset_x, offset_y, icon, title, image_offset_x, image_offset_y, create_id, 
+    create_time, update_id, update_time, visible, animation, clickable
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from marker
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from marker
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.anhuishangjue.map.entity.Marker">
+    insert into marker (id, x, y, offset_x, 
+      offset_y, icon, title, 
+      image_offset_x, image_offset_y, create_id, 
+      create_time, update_id, update_time, 
+      visible, animation, clickable
+      )
+    values (#{id,jdbcType=BIGINT}, #{x,jdbcType=VARCHAR}, #{y,jdbcType=VARCHAR}, #{offsetX,jdbcType=VARCHAR}, 
+      #{offsetY,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{imageOffsetX,jdbcType=VARCHAR}, #{imageOffsetY,jdbcType=VARCHAR}, #{createId,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateId,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{visible,jdbcType=TINYINT}, #{animation,jdbcType=VARCHAR}, #{clickable,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.anhuishangjue.map.entity.Marker">
+    insert into marker
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="x != null">
+        x,
+      </if>
+      <if test="y != null">
+        y,
+      </if>
+      <if test="offsetX != null">
+        offset_x,
+      </if>
+      <if test="offsetY != null">
+        offset_y,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="imageOffsetX != null">
+        image_offset_x,
+      </if>
+      <if test="imageOffsetY != null">
+        image_offset_y,
+      </if>
+      <if test="createId != null">
+        create_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateId != null">
+        update_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="visible != null">
+        visible,
+      </if>
+      <if test="animation != null">
+        animation,
+      </if>
+      <if test="clickable != null">
+        clickable,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="x != null">
+        #{x,jdbcType=VARCHAR},
+      </if>
+      <if test="y != null">
+        #{y,jdbcType=VARCHAR},
+      </if>
+      <if test="offsetX != null">
+        #{offsetX,jdbcType=VARCHAR},
+      </if>
+      <if test="offsetY != null">
+        #{offsetY,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imageOffsetX != null">
+        #{imageOffsetX,jdbcType=VARCHAR},
+      </if>
+      <if test="imageOffsetY != null">
+        #{imageOffsetY,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null">
+        #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null">
+        #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visible != null">
+        #{visible,jdbcType=TINYINT},
+      </if>
+      <if test="animation != null">
+        #{animation,jdbcType=VARCHAR},
+      </if>
+      <if test="clickable != null">
+        #{clickable,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.anhuishangjue.map.entity.Marker">
+    update marker
+    <set>
+      <if test="x != null">
+        x = #{x,jdbcType=VARCHAR},
+      </if>
+      <if test="y != null">
+        y = #{y,jdbcType=VARCHAR},
+      </if>
+      <if test="offsetX != null">
+        offset_x = #{offsetX,jdbcType=VARCHAR},
+      </if>
+      <if test="offsetY != null">
+        offset_y = #{offsetY,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imageOffsetX != null">
+        image_offset_x = #{imageOffsetX,jdbcType=VARCHAR},
+      </if>
+      <if test="imageOffsetY != null">
+        image_offset_y = #{imageOffsetY,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null">
+        create_id = #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null">
+        update_id = #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visible != null">
+        visible = #{visible,jdbcType=TINYINT},
+      </if>
+      <if test="animation != null">
+        animation = #{animation,jdbcType=VARCHAR},
+      </if>
+      <if test="clickable != null">
+        clickable = #{clickable,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.anhuishangjue.map.entity.Marker">
+    update marker
+    set x = #{x,jdbcType=VARCHAR},
+      y = #{y,jdbcType=VARCHAR},
+      offset_x = #{offsetX,jdbcType=VARCHAR},
+      offset_y = #{offsetY,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      image_offset_x = #{imageOffsetX,jdbcType=VARCHAR},
+      image_offset_y = #{imageOffsetY,jdbcType=VARCHAR},
+      create_id = #{createId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_id = #{updateId,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      visible = #{visible,jdbcType=TINYINT},
+      animation = #{animation,jdbcType=VARCHAR},
+      clickable = #{clickable,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.anhuishangjue.map.entity.Marker">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="x" jdbcType="VARCHAR" property="x" />
+    <result column="y" jdbcType="VARCHAR" property="y" />
+    <result column="offset_x" jdbcType="VARCHAR" property="offsetX" />
+    <result column="offset_y" jdbcType="VARCHAR" property="offsetY" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="image_offset_x" jdbcType="VARCHAR" property="imageOffsetX" />
+    <result column="image_offset_y" jdbcType="VARCHAR" property="imageOffsetY" />
+    <result column="create_id" jdbcType="BIGINT" property="createId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_id" jdbcType="BIGINT" property="updateId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="visible" jdbcType="TINYINT" property="visible" />
+    <result column="animation" jdbcType="VARCHAR" property="animation" />
+    <result column="clickable" jdbcType="TINYINT" property="clickable" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, x, y, offset_x, offset_y, icon, title, image_offset_x, image_offset_y, create_id, 
+    create_time, update_id, update_time, visible, animation, clickable
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from marker
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from marker
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.anhuishangjue.map.entity.Marker">
+    insert into marker (id, x, y, offset_x, 
+      offset_y, icon, title, 
+      image_offset_x, image_offset_y, create_id, 
+      create_time, update_id, update_time, 
+      visible, animation, clickable
+      )
+    values (#{id,jdbcType=BIGINT}, #{x,jdbcType=VARCHAR}, #{y,jdbcType=VARCHAR}, #{offsetX,jdbcType=VARCHAR}, 
+      #{offsetY,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{imageOffsetX,jdbcType=VARCHAR}, #{imageOffsetY,jdbcType=VARCHAR}, #{createId,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateId,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{visible,jdbcType=TINYINT}, #{animation,jdbcType=VARCHAR}, #{clickable,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.anhuishangjue.map.entity.Marker">
+    insert into marker
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="x != null">
+        x,
+      </if>
+      <if test="y != null">
+        y,
+      </if>
+      <if test="offsetX != null">
+        offset_x,
+      </if>
+      <if test="offsetY != null">
+        offset_y,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="imageOffsetX != null">
+        image_offset_x,
+      </if>
+      <if test="imageOffsetY != null">
+        image_offset_y,
+      </if>
+      <if test="createId != null">
+        create_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateId != null">
+        update_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="visible != null">
+        visible,
+      </if>
+      <if test="animation != null">
+        animation,
+      </if>
+      <if test="clickable != null">
+        clickable,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="x != null">
+        #{x,jdbcType=VARCHAR},
+      </if>
+      <if test="y != null">
+        #{y,jdbcType=VARCHAR},
+      </if>
+      <if test="offsetX != null">
+        #{offsetX,jdbcType=VARCHAR},
+      </if>
+      <if test="offsetY != null">
+        #{offsetY,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imageOffsetX != null">
+        #{imageOffsetX,jdbcType=VARCHAR},
+      </if>
+      <if test="imageOffsetY != null">
+        #{imageOffsetY,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null">
+        #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null">
+        #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visible != null">
+        #{visible,jdbcType=TINYINT},
+      </if>
+      <if test="animation != null">
+        #{animation,jdbcType=VARCHAR},
+      </if>
+      <if test="clickable != null">
+        #{clickable,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.anhuishangjue.map.entity.Marker">
+    update marker
+    <set>
+      <if test="x != null">
+        x = #{x,jdbcType=VARCHAR},
+      </if>
+      <if test="y != null">
+        y = #{y,jdbcType=VARCHAR},
+      </if>
+      <if test="offsetX != null">
+        offset_x = #{offsetX,jdbcType=VARCHAR},
+      </if>
+      <if test="offsetY != null">
+        offset_y = #{offsetY,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imageOffsetX != null">
+        image_offset_x = #{imageOffsetX,jdbcType=VARCHAR},
+      </if>
+      <if test="imageOffsetY != null">
+        image_offset_y = #{imageOffsetY,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null">
+        create_id = #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null">
+        update_id = #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visible != null">
+        visible = #{visible,jdbcType=TINYINT},
+      </if>
+      <if test="animation != null">
+        animation = #{animation,jdbcType=VARCHAR},
+      </if>
+      <if test="clickable != null">
+        clickable = #{clickable,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.anhuishangjue.map.entity.Marker">
+    update marker
+    set x = #{x,jdbcType=VARCHAR},
+      y = #{y,jdbcType=VARCHAR},
+      offset_x = #{offsetX,jdbcType=VARCHAR},
+      offset_y = #{offsetY,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      image_offset_x = #{imageOffsetX,jdbcType=VARCHAR},
+      image_offset_y = #{imageOffsetY,jdbcType=VARCHAR},
+      create_id = #{createId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_id = #{updateId,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      visible = #{visible,jdbcType=TINYINT},
+      animation = #{animation,jdbcType=VARCHAR},
+      clickable = #{clickable,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+</mapper>

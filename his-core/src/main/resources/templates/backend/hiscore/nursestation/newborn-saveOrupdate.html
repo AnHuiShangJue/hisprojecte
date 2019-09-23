@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<!-- Form with validation -->
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title">新生儿信息</h4>
+                <label style="color:black">Newborn information</label>
+                <form class="col s12" id="sendForm" action="#">
+                    <input type="hidden" id="id" name="id" th:value="${hisNewborn.id}">
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                        <input id="bornName" name="bornName" type="text" class="validate" th:value="${hisNewborn.bornName}"
+                               data-error=".errorTxt1"><div class="errorTxt1"></div>
+                        <label for="bornName">姓 名<span style="font-size: 12px">(name)</span></label>
+                    </div>
+           <!--         </div>
+                    <div class="row">-->
+                        <div class="input-field col s4 l4 xl4"  th:if="${one == 0}">
+                            <select ahsj:select name="bornSex" id="bornSex" type="code" typeKey="sex" >
+                            </select>
+                            <!-- <input id="sex" name="sex" type="text" th:value="${hisNurse.sex}"/>-->
+                            <label for="bornSex">性 别<span style="font-size: 12px">(sex)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4"  th:if="${one == 1}">
+                            <select ahsj:select name="bornSex" id="bornSex1" type="code" typeKey="sex" th:value="${hisNewborn.bornSex}">
+                            </select>
+                            <!-- <input id="sex" name="sex" type="text" th:value="${hisNurse.sex}"/>-->
+                            <label for="bornSex1">性 别<span style="font-size: 12px">(sex)</span></label>
+                        </div>
+              <!--      </div>
+                    <div class="row">-->
+                        <div class="input-field col s4 l4 xl4"  th:if="${one == 0}">
+                            <select  name="bedNumber" id="bedNumber">
+                                <option>选择病床编号</option>
+                            </select>
+                        </div>
+                        <div class="input-field col s4 l4 xl4"  th:if="${one == 1}">
+                          <input id="bedNumber1" name="bedNumber" readonly="readonly" type="number" th:value="${hisNewborn.bedNumber}"
+                                   data-error=".errorTxt2"/>
+                            <div class="errorTxt2"></div>
+                            <label for="bedNumber1">床位号<span style="font-size: 12px">(Bed number)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="bornAddress" name="bornAddress" type="text" th:value="${hisNewborn.bornAddress}"/>
+                            <label for="bornAddress">新生儿户口地址<span style="font-size: 12px">(Newborn account address)</span></label>
+                        </div>
+                  <!--  </div>
+
+                    <div class="row">-->
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="height" name="height" type="number" th:value="${hisNewborn.height}"/>
+                            <label for="height">身高（单位：厘米）<span style="font-size: 12px">(height(unit:cm))</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="weight" name="weight" type="number" th:value="${hisNewborn.weight}"/>
+                            <label for="weight">体重<span style="font-size: 12px">(weight)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="headCircumference" name="headCircumference" type="number" th:value="${hisNewborn.headCircumference}"/>
+                            <label for="headCircumference">头围<span style="font-size: 12px">(Head circumference)</span></label>
+                        </div>
+
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="national" name="national" type="text" th:value="${hisNewborn.national}"/>
+                            <label for="national">民族<span style="font-size: 12px">(Nationality)</span></label>
+                        </div>
+                <!--    </div>
+                    <div class="row">-->
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="pName" name="pName" type="text" class="validate" th:value="${hisNewborn.pName}"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label for="pName">父母姓名<span style="font-size: 12px">(Parent's name)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="idCard" name="idCard" type="text" th:value="${hisNewborn.idCard}"/>
+                            <label for="idCard">父母身份证号<span style="font-size: 12px">(Parent ID number)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="parentAddress" name="parentAddress" type="text" th:value="${hisNewborn.parentAddress}"/>
+                            <label for="parentAddress">父母居住地址<span style="font-size: 12px">(Parental residence address)</span></label>
+                        </div>
+                    </div>
+
+                    <div class="row" th:if="${hisNewborn.param == 2}" >
+                        <div class="input-field col s4 l4 xl4" >
+                            <input id="apprarance" name="apprarance" type="number" readonly="readonly" th:value="${hisNewborn.apprarance}"
+                                   data-error=".errorTxt2"/>
+                            <div class="errorTxt2"></div>
+                            <label for="apprarance">肤色<span style="font-size: 12px">(Color of skin)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="activity" name="activity" type="number" readonly="readonly"  th:value="${hisNewborn.activity}"/>
+                            <label for="activity">肌肉张力<span style="font-size: 12px">(Muscle tension)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="pulse" name="pulse" type="number" readonly="readonly"  th:value="${hisNewborn.pulse}"/>
+                            <label for="pulse">脉搏<span style="font-size: 12px">(pulse)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="respiration" name="respiration" type="number" readonly="readonly"  th:value="${hisNewborn.respiration}"/>
+                            <label for="respiration">呼吸<span style="font-size: 12px">(breathing)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="grimaceResponse" name="grimaceResponse" readonly="readonly"  type="number" th:value="${hisNewborn.grimaceResponse}"/>
+                            <label for="grimaceResponse">刺激反射<span style="font-size: 12px">(Stimulate the reflection)</span></label>
+                        </div>
+                    </div>
+                    <div class="row"  th:if="${hisNewborn.param == null}">
+                        <div class="input-field col s4 l4 xl4" >
+                            <input id="apprarance1" name="apprarance" type="text" th:value="${hisNewborn.apprarance}"
+                                   data-error=".errorTxt2"/>
+                            <div class="errorTxt2"></div>
+                            <label for="apprarance1">肤色<span style="font-size: 12px">(Color of skin)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="activity1" name="activity" type="number" th:value="${hisNewborn.activity}"/>
+                            <label for="activity1">肌肉张力<span style="font-size: 12px">(Muscle tension)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="pulse1" name="pulse" type="number" th:value="${hisNewborn.pulse}"/>
+                            <label for="pulse1">脉搏<span style="font-size: 12px">(pulse)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="respiration1" name="respiration" type="number" th:value="${hisNewborn.respiration}"/>
+                            <label for="respiration1">呼吸<span style="font-size: 12px">(breathing)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="grimaceResponse1" name="grimaceResponse" type="number" th:value="${hisNewborn.grimaceResponse}"/>
+                            <label for="grimaceResponse1">刺激反射<span style="font-size: 12px">(Stimulate the reflection)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4" th:if="${hisNewborn.id != null}">
+                            <input id="health_standards" name="health_standards" readonly="readonly" type="text" th:value="${hisNewborn.healthStandards}"/>
+                            <label for="health_standards">健康标准<span style="font-size: 12px">(Health standards)</span></label>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="description" name="description" type="text" th:value="${hisNewborn.remark}"/>
+                            <label for="description">备 注<span style="font-size: 12px">(remark)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12"  th:if="${hisNewborn.hidden == null}">
+                            <button id="send_btn" class="btn cyan waves-effect waves-light right" type="submit"
+                                    name="action">提 交
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <h6 style="font-size:10px">注释:<br>
+                    <br>
+                    下面将介绍如何通过这些项目来对宝宝进行测评：<br>
+                    肌张力（肌肉紧张性）<br>
+                    0——无力；不动<br>
+                    1——四肢略呈弯曲<br>
+                    2——四肢屈曲、动作活跃<br>
+                    脉搏（心率）<br>
+                    0——无心率<br>
+                    1——每分钟跳动不到100次<br>
+                    2——每分钟跳动至少100次<br>
+                    皱眉动作（反射性反应）<br>
+                    0——对插鼻管无反应<br>
+                    1——在抽吸口鼻腔时有皱眉动作<br>
+                    2——在抽吸口鼻腔时皱眉、躲闪、咳嗽或打喷嚏<br>
+                    外貌（肤色）<br>
+                    0——宝宝整个身体呈青灰色，或者很苍白<br>
+                    1——身体颜色正常，但手足青紫<br>
+                    2——全身肤色正常<br>
+                    呼吸（呼吸作用）<br>
+                    0——无呼吸<br>
+                    1——哭声微弱，像是呜咽的声音；呼吸缓慢，而且不规则<br>
+                    2——哭声良好响亮；呼吸的频率和力度均匀、正常<br>
+<!--                    简介-->
+<!--                    新生儿评分又称Apgar评分法、阿氏评分，是孩子出生后立即检查他身体状况的标准评估方法。在孩子出生后，根据皮肤颜色、心搏速率、呼吸、肌张力及运动、反射五项体征进行评分。满10分者为正常新生儿，评分7分以下的新生儿考虑患有轻度窒息，评分在4分以下考虑患有重度窒息。大部分新生儿的评分多在7- 10分之间。-->
+                    评分具体标准是：<br>
+                    1．皮肤颜色：评估新生儿肺部血氧交换的情况。全身皮肤呈粉红色为2分，手脚末梢呈青紫色为1分，全身呈青紫色为0分。<br>
+                    2．心搏速率：评估新生儿心脏跳动的强度和节律性。心搏有力大于100次/分钟为2分，心搏微弱小于100次/分钟为1分，听不到心音为0分。<br>
+                    3．呼吸：评估新生儿中枢和肺脏的成熟度。呼吸规律为2分，呼吸节律不齐（如浅而不规则或急促费力）为1分，没有呼吸为0分。<br>
+                    4．肌张力及运动：评估新生儿中枢反射及肌肉强健度。肌张力正常为2分，肌张力异常亢进或低下为1分，肌张力松弛为0分。<br>
+                    5．反射：评估新生儿对外界刺激的反应能力。对弹足底或其他刺激大声啼哭为2分，低声抽泣或皱眉为1分，毫无反应为0分。<br>
+                    以这五项体征为依据，满10分者为正常新生儿，评分7分以下的新生儿考虑患有轻度窒息，评分在4分以下考虑患有重度窒息。<br>
+                    大部分新生儿的评分多在7- 10分之间，医生会根据孩子的评分予以相应的处理。轻度窒息的新生儿一般经清理呼吸道、吸氧等措施后会很快好转，预后良好。</br>
+                    <br>
+                </h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+
+    var wardIdSelect=$("#bedNumber");
+    $(function () {
+        formCheck();
+        getSelectHome();
+    });
+
+    function formCheck() {
+        $("#sendForm").validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 2
+                },
+                number: {
+                    required: true,
+                    minlength: 3
+                },
+                idCard: {
+                    required: true,
+                    minlength: 11
+                },
+            },
+            messages: {
+                name: {
+                    required: "请输入名称",
+                    minlength: "最少包含2个字符"
+                },
+                number: {
+                    required: "请输入工号",
+                    minlength: "最少输入3个字符"
+                },
+                idCard: {
+                    required: "请输入身份证号码",
+                    minlength: "最少输入11个字符"
+                }
+
+            },
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+                dialog.confirm('确定提交吗?', function (index, layero){
+                    var queryString = $('#sendForm').serialize();
+                    $.ahsjajax(
+                        CTX + "/api/hisNewborn/add/hisNewborn.ahsj?token=" + TOKEN,
+                        queryString,
+                        function (msg) {
+                            if (msg.success) {
+                                M.toast({html: msg.message});
+                                parent.grid.search();
+                                dialog.parentclose();
+                                return false;
+                            } else {
+                                M.toast({html: msg.message});
+                                return false;
+                            }
+                        },
+                        function () {
+                            M.toast({html: "网络异常"});
+                            return false;
+                        }
+                    );});
+            }
+
+        });
+    }
+
+    function getSelectHome() {
+        $.ahsjajax(
+            CTX + "/api/hisNewborn/add/getHisHospitalManageBed.ahsj",
+            null,
+            function (msg) {
+                data=msg;
+                console.log(data);
+                $(data).each(function (i) {
+                    wardIdSelect.append(
+                        "<option value='" + this.bedsNumber + "'>" + this.bedsNumber + "</option>")
+                });
+                wardIdSelect.formSelect();
+                if (msg.success) {
+                    M.toast({html: msg.message});
+                    return false;
+                } else {
+                    //M.toast({html: msg.message});
+                    return false;
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            })
+    }
+
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+
+</body>
+
+</html>

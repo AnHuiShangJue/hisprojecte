@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+<div th:replace="public/base_list :: html"></div>
+<!--vertical-layout：垂直居中 vertical-menu-collapsible：可折叠导航菜单 page-header-light：浅色标题 data-open="click"：点击时打开你的数据-->
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<!--在这个地方实现查询重置类的操作-->
+<div class="row">
+    <div class="breadcrumbs-inline pt-3 pb-1" id="breadcrumbs-wrapper">
+        <!--这个div的作用是将Home Table 以及DataTable从竖着排列变为横着排列且有一定的格式-->
+        <!-- Search for small screen-->
+        <div class="container"><!--container是一个容器-->
+            <div class="row"><!--row代表一行 一行有12列 s代表小屏幕一般指手机 m代表平板设备 l代表桌面设备一般指电脑 xl代表大型桌面设备一般指屏幕分辨率较大的电脑，这种叫响应式布局。-->
+                <div class="col s10 m6 l6 breadcrumbs-left">
+                    <!--col s10 m6 l6 行中一定要有列col s10 m6 l6 代表在各个类型的设备所占的位置（总共位置为12）-->
+                    <h5 class="breadcrumbs-title mt-0 mb-0 display-inline hide-on-small-and-down">DataTable</h5>
+                    <!--hide-on-small-and-down：隐藏小型设备（手机）以及一下屏幕的内容-->
+                    <ol class="breadcrumbs mb-0">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#">Table</a>
+                        </li>
+                        <li class="breadcrumb-item active">DataTable
+                        </li>
+                    </ol>
+                </div>
+                <div class="col s2 m6 l6"><!--这个col s2 m6 l6与上面的对应要保证加起来一行12列被占满--><a
+                        class="btn btn-floating dropdown-settings waves-effect waves-light breadcrumbs-btn right"
+                        href="#!" data-target="dropdown1"><i class="material-icons">expand_more </i><i
+                        class="material-icons right">arrow_drop_down</i></a>
+                    <!--dropdown下拉   material-icons按钮凸起  btn-floating按钮漂浮-->
+                    <ul class="dropdown-content" id="dropdown1" tabindex="0">
+                        <li tabindex="0"><a class="grey-text text-darken-2"
+                                            href="user-profile-page.html">Profile<span
+                                class="new badge red">2</span></a></li>
+                        <!--badge：徽章 用于通知您有新的或未读的消息或通知 将new类添加 到徽章以为其提供背景 red标识背景为红色-->
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="app-contacts.html">Contacts</a>
+                        </li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="page-faq.html">FAQ</a></li>
+                        <li class="divider" tabindex="-1"></li><!--divider：分割线-->
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="user-login.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div><!--这个container是存放最上一行的DataTable-->
+    </div>
+    <div class="col s12 x12 l12 xl12">
+        <div class="container">
+            <div class="section section-data-tables"><!--section类用于简单的顶部和底部填充，即分成一小节-->
+                <div class="card">
+                    <div class="card-content">
+                        <form id="searchForm" class="row" action="">
+                            <div class="row">
+                                <div class="col  s1 m1 l1 xl1">
+                                    <h6>模糊搜索</h6><label style="color:black">Fuzzy search</label>
+                                </div>
+                                <div class="col input-field s2 m2 l2 xl2">
+                                    <input id="number" name="drugsNumb" type="text"/>
+                                    <label for="number">药品编号<span style="font-size: 12px">(Drug number
+)</span></label>
+                                </div>
+                                <div class="col input-field s2 m2 l2 xl2">
+                                    <input id="name" name="drugsName" type="text"/>
+                                    <label for="name">药品名称<span style="font-size: 12px">(Drug Name)</span></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col  s1 m1 l1 xl1">
+                                    <div ahsj:radio name="medicalInsuranceSign" id="medicalInsuranceSign" type="code" typeKey="medical_insurance_sign"
+                                         title="药品类型" cssdefault="radiotdefault" haveDefault="true" value="0"></div>
+                                </div>
+                                <div class="col  s1 m1 l1 xl1">
+                                    <div ahsj:radio name="level" id="level" type="code" typeKey="level"
+                                         title="药品级别" cssdefault="radiotdefault" haveDefault="true" value="0"></div>
+                                </div>
+                                <div class="col  s1 m1 l1 xl1">
+                                    <div ahsj:radio name="prescription" id="prescription" type="code"
+                                         typeKey="prescription"
+                                         title="处方类药品" cssdefault="radiotdefault" haveDefault="true" value="0"></div>
+                                </div>
+                                <div class="col  s1 m1 l1 xl1">
+                                    <div ahsj:radio name="mentalMedicine" id="mentalMedicine" type="code" typeKey="mental_medicine"
+                                         title="精神类药品" cssdefault="radiotdefault" haveDefault="true" value="0"></div>
+                                </div>
+                                <div class="col  s1 m1 l1 xl1">
+                                    <div ahsj:radio name="baseMedicine" id="baseMedicine" type="code"
+                                         typeKey="base_medicine"
+                                         title="是否基药" cssdefault="radiotdefault" haveDefault="true" value="0"></div>
+                                </div>
+                                <div class="col  s1 m1 l1 xl1">
+                                    <div ahsj:radio name="narcoticDrugs" id="narcoticDrugs" type="code" typeKey="narcotic_drugs"
+                                         title="麻醉类药品" cssdefault="radiotdefault" haveDefault="true" value="0"></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s2 m2 l2 xl2 offset-l1"><!--offset-l1代表在l屏幕内偏移一位-->
+                            <a class="waves-effect waves-light btn" id="searchBtn"><i
+                                    class="material-icons  white-text tooltipped " data-position="bottom"
+                                    data-delay="50" data-tooltip="搜索">search</i></a>
+                            <a id="resetBtn" class="waves-effect waves-light btn"><i
+                                    class="material-icons  white-text tooltipped " data-position="bottom"
+                                    data-delay="50" data-tooltip="重置">youtube_searched_for</i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 x12 l12 xl12">
+                    <div class="card">
+                        <div class="card-content">
+                            <h4 class="card-title">操作台
+                            </h4><label style="color:black">Console</label>
+                            <div class="row">
+                                <div class="col s4 m4 l4 xl4 right" th:if="${medicalOrderNumber} eq null">
+                                        <a id="selectForTreamentBtn"
+                                           class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
+                                                class="material-icons white-text tooltipped" data-position="bottom"
+                                                data-delay="50" data-tooltip="批量选择药品添加">playlist_add_check</i></a>
+                                </div>
+                                <div class="col s4 m4 l4 xl4 right" th:if="${medicalOrderNumber} ne null">
+                                    <a id="selectForMedicineBtn"
+                                       class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
+                                            class="material-icons white-text tooltipped" data-position="bottom"
+                                            data-delay="50" data-tooltip="批量选择药品添加（Batch selection medicine addition）">playlist_add_check</i></a>
+                                </div>
+                            </div>
+                            <!--Form Advance-->
+                            <div class="row">
+                                <div id="refreshtable" class="col l12 m12 l12 xl12">
+                                    <table id="data-table-simple" class="display">
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input id="medicalOrderNumber" type="hidden" th:value="${medicalOrderNumber}">
+
+<div th:replace="public/base_list_script :: html"></div>
+
+<script th:inline="javascript">
+    var isSameDepart = [[${isSameDepart}]];
+    var grid = new Datatable();
+    $(document).ready(function () {
+        initBtn();
+        initTable();
+    });
+
+    function initTable() {
+        grid.init({
+            src: $("#data-table-simple"),
+            onSuccess: function (grid) {
+            },
+            onError: function (grid) {
+            },
+            onDataLoad: function (grid) {
+
+            },
+            loadingMessage: 'Loading...',
+            dataTable: {
+                "ajax": {
+                    "url": CTX + "/api/pharmacy/listForMedication.ahsj?token=" + TOKEN, // ajax source
+                },
+                "columns": [
+                    {
+                        "title": "<label><input type=\"checkbox\"  id=\"checkAll\" class=\"select-all\" > <span></span></label> ",
+                        "render": function (data, type, row, meta) {
+                            return " <label> <input type=\"checkbox\" value=\"" + row.id + "\"> <span></span> </label>";
+                        },
+                        "width": "18px",
+                        "orderable": false,//取消排序功能
+                        "className": "center-align"/*center-align代表中心对齐*/
+                    },
+                    {
+                        "title": "药品编号",
+                        "data": "drugsNumb",
+                        "name": "drugs_numb"
+                    },
+                    {
+                        "title": "药品名称",
+                        "data": "drugsName",
+                        "name": "drugs_name",
+                        "orderable": false//取消排序功能
+                    },
+                    {
+                        "title": "药品规格",
+                        "data": "drugsSpec",
+                        "name": "drugs_spec",
+                        "orderable": false
+                    },
+                    {
+                        "title": "售价",
+                        "data": "salePrice",
+                        "name": "sale_price"
+                    }, {
+                        "title": "库存",
+                        "data": "stock",
+                        "name": "stock"
+                    },
+                    {
+                        "title": "库存警告值",
+                        "data": "stockWarn",
+                        "name": "stock_warn"
+                    },
+                    {
+                        "title": "固定库存",
+                        "data": "normalStock",
+                        "name": "normal_stock"
+                    }, {
+                        "title": "已售",
+                        "data": "saleCounts",
+                        "name": "sale_counts"
+                    },
+                    {
+                        "title": "处方药",
+                        "data": "precriptionName",
+                        "name": "prescription"
+                    },
+                    {
+                        "title": "精神药品",
+                        "data": "mentalmedicine",
+                        "name": "mental_medicine"
+                    },
+                    {
+                        "title": "药品级别",
+                        "data": "leveld",
+                        "name": "level"
+                    },
+                    {
+                        "title": "药品类型",
+                        "data": "medicalinsurancesign",
+                        "name": "medical_insurance_sign"
+                    },
+                   /* {
+                        "title": "原产地",
+                        "data": "placeoriginName",
+                        "name": "placeOrigin",
+                        "orderable": false
+                    },*/
+                    {
+                        "title": "是否停用",
+                        "data": "disabled",
+                        "name": "disable"
+                    },
+                    {
+                        "title": "是否下架",
+                        "data": "obtained",
+                        "name": "is_obtained"
+                    },
+                    {
+                        "title": "是否基药",
+                        "data": "basemedicine",
+                        "name": "base_medicine"
+                    },
+                    {
+                        "title": "是否麻醉药品",
+                        "data": "narcoticdrugs",
+                        "name": "narcotic_drugs"
+                    },
+                    {
+                        "title": "备注",
+                        "data": "remarks",
+                        "name": "remarks",
+                        "orderable": false
+                    },
+                    {
+                        "title": "操作",
+                        "width": "240px",
+                        "className": "centered",
+                        "orderable": false,
+                        "render": function (data, type, row) {
+                            var rtnBtn = "";
+                            if(isNullOrEmpty($("#medicalOrderNumber").val())) {
+                                rtnBtn = rtnBtn +
+                                    "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"选取药品(Select medicine)\" onclick='select(" + row.id +
+                                    ",\"" + row.drugsNumb +
+                                    "\",\"" + row.drugsName +
+                                    "\",\"" + row.drugsSpec +
+                                    "\",\"" + row.stock +
+                                    "\");'><i class='material-icons'>add</i></a>  ";
+                            }else {
+                                rtnBtn = rtnBtn +
+                                    "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"选取药品(Select medicine)\" onclick='selectForMedicalOrder(" + row.id +
+                                    ",\"" + row.drugsNumb +
+                                    "\",\"" + $("#medicalOrderNumber").val() +
+                                    "\");'><i class='material-icons'>add</i></a>  ";
+                            }
+                            // 返回自定义内容
+                            return rtnBtn;
+                        }
+                    }
+                ],
+                "order": [
+                    [1, 'asc']
+                ],
+            }
+        });
+    }
+
+
+    function select(id, drugsNumb, drugsName, drugsSpec, count, description, remarks,stock) {
+        parent.addRowForMedicineList(id, drugsNumb, drugsName, drugsSpec, count, description, remarks,stock);
+        dialog.parentclose();
+    }
+
+    //为医嘱添加药品
+    function selectForMedicalOrder(id, drugsNumb, medicalOrderNumber) {
+        parent.addMedicine(id,medicalOrderNumber);
+        parent.grid.search();
+        dialog.parentclose();
+    }
+
+
+
+    function initBtn() {
+            //批量返回药品
+            $("#selectForTreamentBtn").click(function () {
+                var ids = grid.getSelectedRows();
+                if (ids.length == 0) {
+                    dialog.warn("请至少选择一条数据");
+                    return;
+                }
+                var json = grid.getDataTable().ajax.json();
+                parent.addRowsForMedicineList(ids,json.data);
+                dialog.parentclose();
+            });
+
+        //医嘱  批量新增 药品
+        $("#selectForMedicineBtn").click(function () {
+            var ids = grid.getSelectedRows();
+            if (ids.length == 0) {
+                dialog.warn("请至少选择一条数据");
+                return;
+            }
+            parent.addMedicine(ids.join(','),$("#medicalOrderNumber").val());
+            parent.grid.search();
+            dialog.parentclose();
+        });
+        //搜索按钮
+        $('#searchBtn').click(function () {
+            grid.search();
+        });
+        $('#resetBtn').click(function () {
+            grid.reset();
+            $('#noSelectWarning').prop("checked", true);
+        });
+        $("#searchForm .row .col input[type='radio']").click(function () {
+            grid.search();
+        });
+    }
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+</body>
+</html>
+

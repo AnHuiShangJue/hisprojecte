@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title">入院记录(Discharge information audit)</h4><label style="color:black">
+            </label>
+                <div class="input-field col s4 l4 xl4">
+                    <input id="loginName" readonly type="text" th:value=" ${loginName}"/>
+                    <label for="loginName">操 作 人(operator)<span style="font-size: 12px">(Operator
+)</span>：</label>
+                </div>
+                <input id="number" name="number" type="hidden" th:value="${number}">
+                <div class="row">
+                    <div class="input-field col s3 l3 xl3">
+                        <input id="name1" name="name1" type="text"
+                               data-error=".errorTxt1">
+                        <div class="errorTxt1"></div>
+                        <label class="active" for="name1">姓名<span style="font-size: 12px">(name)</span></label>
+                    </div>
+                    <div class="input-field col s3 l3 xl3">
+                        <input id="department" name="department" type="text"
+                               data-error=".errorTxt3">
+                        <div class="errorTxt3"></div>
+                        <label class="active" for="department">科室<span
+                                style="font-size: 12px">(department)</span></label>
+                    </div>
+                    <div class="input-field col s3 l3 xl3">
+                        <input id="ward" name="ward" type="text"
+                               data-error=".errorTxt2">
+                        <div class="errorTxt2"></div>
+                        <label class="active" for="ward">病房<span style="font-size: 12px">(ward)</span></label>
+                    </div>
+                    <div class="input-field col s3 l3 xl3">
+                        <input id="bed" name="bed" type="text"
+                               data-error=".errorTxt2">
+                        <div class="errorTxt2"></div>
+                        <label class="active" for="bed">床号<span style="font-size: 12px">(bed)</span></label>
+                    </div>
+                    <div class="input-field col s3 l3 xl3">
+                        <input id="hospital" name="hospital" type="text"
+                               data-error=".errorTxt2">
+                        <div class="errorTxt2"></div>
+                        <label class="active" for="hospital">住院编号<span
+                                style="font-size: 12px">(The hospital number)</span></label>
+                    </div>
+                    <div class="input-field col s3 l3 xl3">
+                        <input id="createDate" name="createDate" type="text"
+                               data-error=".errorTxt2">
+                        <div class="errorTxt2"></div>
+                        <label class="active" for="createDate">入院日期<span style="font-size: 12px">(admission date)</span></label>
+                    </div>
+                    <form class="col s12" id="sendForm" action="#">
+                        <div class="input-field col s3 l3 xl3">
+                            <input id="count" name="count" type="text"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label class="active" for="count">第几次入院记录<span
+                                    style="font-size: 12px">(Admission records)</span></label>
+                        </div>
+                        <div class="input-field col s3 l3 xl3">
+                            <input id="name" name="name" type="text"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label class="active" for="name">姓名<span style="font-size: 12px">(name)</span></label>
+                        </div>
+                        <div class="input-field col s3 l3 xl3">
+                            <input id="job" name="job" type="text"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label class="active" for="job">职业<span style="font-size: 12px">(job)</span></label>
+                        </div>
+                        <div class="input-field col s3 l3 xl3">
+                            <select ahsj:select name="sex" id="sex" type="code" typeKey="sex"  >
+                            </select>
+                            <label >性 别<span style="font-size: 12px">(sex
+)</span></label>
+                        </div>
+                        <div class="input-field col s3 l3 xl3">
+                            <input id="workUnit" name="workUnit" type="text"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label class="active" for="workUnit">工作单位<span
+                                    style="font-size: 12px">(work unit)</span></label>
+                        </div>
+                        <div class="input-field col s3 l3 xl3">
+                            <input id="age" name="age" type="text"
+                                   data-error=".errorTxt2">
+                            <div class="errorTxt2"></div>
+                            <label class="active" for="age">年龄<span style="font-size: 12px">(age)</span></label>
+                        </div>
+                        <div class="input-field col s3 l3 xl3">
+                            <input id="address" name="address" type="text"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label class="active" for="address">住址<span style="font-size: 12px">(address)</span></label>
+                        </div>
+                        <div class="input-field col s3 l3 xl3">
+                            <select ahsj:select name="isMarried" id="is_married" type="code" typeKey="is_married">
+                            </select>
+                            <label for="is_married">婚姻状况<span style="font-size: 12px">(marital status
+)</span></label>
+                        </div>
+                        <input id="idcard" name="idcard" type="hidden" >
+                        <div class="input-field col s3 l3 xl3">
+                            <input id="forHistory" name="forHistory" type="text"
+                                   data-error=".errorTxt2">
+                            <div class="errorTxt2"></div>
+                            <label class="active" for="forHistory">供史者<span style="font-size: 12px">(For history)</span></label>
+                        </div>
+                        <div class="input-field col s3 l3 xl3">
+                            <input id="reliabilityLevel" name="reliabilityLevel" type="text"
+                                   data-error=".errorTxt2">
+                            <div class="errorTxt2"></div>
+                            <label class="active" for="reliabilityLevel">可靠程度<span
+                                    style="font-size: 12px">(degree of reliability)</span></label>
+                        </div>
+                        <div class="input-field col s3 l3 xl3">
+                            <input id="birthplace" name="birthplace" type="text"
+                                   data-error=".errorTxt2">
+                            <div class="errorTxt2"></div>
+                            <label class="active" for="birthplace">出生地<span
+                                    style="font-size: 12px">(birthplace)</span></label>
+                        </div>
+                        <div class="input-field col s6 l6 xl6 m6 jeinpbox">
+                            <input id="admissionDate" class="jeinput" name="admissionDate" type="text"
+                                   data-error=".errorTxt1"
+                            >
+                            <div class="errorTxt1"></div>
+                            <label for="admissionDate">入院时间<span style="font-size: 12px">(admission time)</span></label>
+                        </div>
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="nation" name="nation" type="text"
+                                   data-error=".errorTxt8">
+                            <div class="errorTxt8"></div>
+                            <label for="nation" class="active">民族<span style="font-size: 12px">(nation
+)</span></label>
+                        </div>
+                        <div class="input-field col s6 l6 xl6 m6 jeinpbox">
+                            <input id="recordDate" class="jeinput" name="recordDate" type="text" data-error=".errorTxt1"
+                            >
+                            <div class="errorTxt1"></div>
+                            <label for="recordDate">记录时间<span style="font-size: 12px">(Recording time)</span></label>
+                        </div>
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="complaint" name="complaint" type="text"
+                                   data-error=".errorTxt8">
+                            <div class="errorTxt8"></div>
+                            <label class="active" for="complaint">主诉<span style="font-size: 12px">(principle action)
+)</span></label>
+                        </div>
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="historyPresentIllness" name="historyPresentIllness" type="text"
+                                   data-error=".errorTxt8">
+                            <div class="errorTxt8"></div>
+                            <label class="active" for="historyPresentIllness">现病史<span style="font-size: 12px">(history of present illness
+)</span></label>
+                        </div>
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="personalHistory" name="personalHistory" type="text"
+                                   data-error=".errorTxt8">
+                            <div class="errorTxt8"></div>
+                            <label class="active" for="personalHistory">个人史<span style="font-size: 12px">(personal history
+)</span></label>
+                        </div>
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="maritalHistory" name="maritalHistory" type="text"
+                                   data-error=".errorTxt8">
+                            <div class="errorTxt8"></div>
+                            <label class="active" for="maritalHistory">月经及婚育史<span
+                                    style="font-size: 12px">(Menstruation and marital history
+)</span></label>
+                        </div>
+
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="familyHistory" name="familyHistory" type="text"
+                                   data-error=".errorTxt8">
+                            <div class="errorTxt8"></div>
+                            <label class="active" for="familyHistory">家族史<span style="font-size: 12px">(familyHistory)
+</span></label>
+                        </div>
+
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="healthCheckup" name="healthCheckup" type="text"
+                                   data-error=".errorTxt8">
+                            <div class="errorTxt8"></div>
+                            <label class="active" for="healthCheckup">体格检查<span style="font-size: 12px">(healthCheckup
+)</span></label>
+                        </div>
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="specialityCheckup" name="specialityCheckup" type="text"
+                                   data-error=".errorTxt8">
+                            <div class="errorTxt8"></div>
+                            <label class="active" for="specialityCheckup">专科检查<span
+                                    style="font-size: 12px">(speciality check-up
+)</span></label>
+                        </div>
+
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="auxiliaryExamination" name="auxiliaryExamination" type="text"
+                                   data-error=".errorTxt8">
+                            <div class="errorTxt8"></div>
+                            <label class="active" for="auxiliaryExamination">辅助检查<span style="font-size: 12px">(auxiliary examination
+)</span></label>
+                        </div>
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="tentativeDiagnosis" name="tentativeDiagnosis" type="text"
+                                   data-error=".errorTxt8">
+                            <div class="errorTxt8"></div>
+                            <label class="active" for="tentativeDiagnosis">初步诊断<span style="font-size: 12px">(tentative diagnosis)
+</span></label>
+                        </div>
+                    </form>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <button id="send_btn" class="btn cyan waves-effect waves-light right" type="button"
+                                name="action">提 交(submit
+                            )
+                            <i class="mdi-content-send right"></i>
+                        </button>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ================================================
+Scripts
+================================================ -->
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+    $(document).ready(function () {
+        getHospital();
+        // getHisLeaveHospital();
+    });
+    $(function () {
+        var enLang = {
+            name: "en",
+            month: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
+            weeks: ["SUN", "MON", "TUR", "WED", "THU", "FRI", "SAT"],
+            times: ["Hour", "Minute", "Second"],
+            timetxt: ["Time", "Start Time", "End Time"],
+            backtxt: "Back",
+            clear: "Clear",
+            today: "Now",
+            yes: "Confirm",
+            close: "Close"
+        };
+        jeDate("#recordDate", {
+            theme: {bgcolor: "#00A1CB", pnColor: "#00CCFF"},
+            minDate: "1900-01-01",              //最小日期
+            maxDate: "2099-12-31",              //最大日期
+            method: {
+                choose: function (params) {
+
+                }
+            },
+            format: "YYYY-MM-DD hh:mm:ss"
+        });
+        jeDate("#admissionDate", {
+            theme: {bgcolor: "#00A1CB", pnColor: "#00CCFF"},
+            minDate: "1900-01-01",              //最小日期
+            maxDate: "2099-12-31",              //最大日期
+            method: {
+                choose: function (params) {
+
+                }
+            },
+            format: "YYYY-MM-DD hh:mm:ss"
+        });
+        formCheck();
+    });
+
+    function getHospital() {
+        var number = $("#number").val();
+        if (!isNullOrEmpty(number)) {
+            //获取基本信息
+            $.ahsjajax(
+                CTX + "/api/hishospitalmanage/getHospital/index.ahsj",
+                {"number": number},
+                function (data) {
+                    if (!isNullOrEmpty(data)) {
+                        changeInputValue("name1", data.patientName);
+                        changeInputValue("age", data.age);
+                        changeInputValue("idcard", data.idcard);
+                        changeInputValue("createDate", data.createDate);
+                        changeInputValue("hospital", data.number);
+                        changeInputValue("bed", data.bedsNumber);
+                        changeInputValue("ward", data.wardsNumber);
+                        changeInputValue("department", data.departmentIdName);
+                        changeInputValue("hisHospitalManageId", data.id);
+                        M.updateTextFields();//重新初始化页面上的内容
+                        return true;
+                    } else {
+                        dialog.warn(number + "号不存在！");
+                        return false;
+                    }
+                },
+                function () {
+                    Materialize.toast("网络异常");
+                    return false;
+                }
+            );
+        }
+    }
+
+
+    function getHisLeaveHospital() {
+        var number = $("#number").val();
+        if (!isNullOrEmpty(number)) {
+            //获取基本信息
+            $.ahsjajax(
+                CTX + "/api/HisLeaveHospital/getHisLeaveHospital/index.ahsj",
+                {"number": number},
+                function (data) {
+                    if (!isNullOrEmpty(data.id)) {
+                        changeInputValue("diagnose", data.diagnose);
+                        changeInputValue("feature", data.feature);
+                        changeInputValue("result", data.result);
+                        changeInputValue("inspect", data.inspect);
+                        changeInputValue("cure", data.cure);
+                        changeInputValue("situation", data.situation);
+                        changeInputValue("pathology", data.pathology);
+                        changeInputValue("examine", data.examine);
+                        changeInputValue("advice", data.advice);
+                        changeInputValue("id", data.id);
+                        M.updateTextFields();//重新初始化页面上的内容
+                        return true;
+                    } else {
+                        return true;
+                    }
+                },
+                function () {
+                    Materialize.toast("网络异常");
+                    return false;
+                }
+            );
+        }
+    }
+
+    $('#send_btn').click(function () {
+        dialog.confirm('确定提交吗?', function (index, layero) {
+            var hisHospitalizedRecord = $("#sendForm").serialize();
+            $.ahsjajax(CTX + "/api/hisHospitalizedRecord/saveOrUpdate/index.ahsj",
+                hisHospitalizedRecord,
+                function (msg) {
+                    if (msg.success) {
+                        dialog.warn(msg.message)
+                        swal.close();
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                    } else {
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                    }
+                },
+                function (data) {
+                    M.toast({
+                        html: "网络异常", completeCallback: function () {
+                        }
+                    });
+                }
+            );
+        });
+    })
+    $("input").change(function () {
+        $(this).val($(this).val().trim());
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+<!--Form Advance-->
+<div class="row">
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title">就诊记录查看</h4><label style="color:black">Visit record
+            </label>
+                <form class="col s12" id="sendForm" action="#">
+                    <input type="hidden" id="id" name="id" th:value="${hisMedicalRecord.id}">
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="medicalRecordId" name="medicalRecordId" type="text" th:value="${hisMedicalRecord.medicalRecordId}"
+                                   th:readonly="true"/>
+                            <label for="medicalRecordId">就诊记录编号<span style="font-size: 12px">(Visit record number
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="number" name="number" type="text" th:value="${hisRegistered.number}"
+                                   th:readonly="true"/>
+                            <label for="number">挂号编号<span style="font-size: 12px">(Registered number
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="name" name="name" type="text" th:value="${hisPatientInfo.name}"
+                                   th:readonly="true"/>
+                            <label for="name">姓 名<span style="font-size: 12px">(name
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input name="sex" id="sex" type="text" typeKey="sex"
+                                    th:value="${hisPatientInfo.sexName}"
+                                   th:readonly="true"/>
+                            <label for="sex">性 别<span style="font-size: 12px">(sex
+)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="age" name="age" type="number" th:value="${hisPatientInfo.age}"
+                                   th:readonly="true"/>
+                            <label for="age">年 龄<span style="font-size: 12px">(age)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="idcard" name="idcard" type="text"  th:value="${hisPatientInfo.idcard}"
+                            th:readonly="true"/>
+                            <label for="idcard">身份证号码<span style="font-size: 12px">(id card)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="departmentId" name="departmentId" type="text" th:value="${hisRegistered.departmentId}"
+                                   th:readonly="true"/>
+                            <label for="departmentId">部门<span style="font-size: 12px">(department
+)</span></label>
+                        </div>
+                    </div>
+                                        <div class="row">
+                                            <div class="input-field col s2 x2 m2 l2 xl2">
+                                                <input type="text" id="noSetDate" class="datepicker" name="noSetDate" th:readonly="true"/>
+                                                <label for="noSetDate">发 病 时 间<span style="font-size: 12px">(Time of onset
+)</span></label>
+                                            </div>
+                                            <div class="input-field col s2 x2 m2 l2 xl2">
+                                                <input type="text" id="bloodPressure" class="text" name="bloodPressure"
+                                                    th:value="${hisMedical.bloodPressure}"
+                                                       th:readonly="true"/>
+                                                <label for="bloodPressure">血 压<span style="font-size: 12px">(blood pressure
+)</span></label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12 x12 m12 l12 xl12">
+                                                <textarea type="text" id="chiefcomplaint" class="materialize-textarea"  th:value="${hisMedical.chiefcomplaint}" th:readonly="true"
+                                                          name="chiefcomplaint" data-length="255"></textarea>
+                                                <label for="chiefcomplaint">主 诉<span style="font-size: 12px">(Chief complaint
+)</span></label>
+                                            </div>
+                                            <div class="input-field col s12 x12 m12 l12 xl12">
+                                                <textarea type="text" id="hiscondition" class="materialize-textarea"
+                                                th:value="${hisMedical.hiscondition}" th:readonly="true" name="hiscondition" data-length="255">
+                                                </textarea>
+                                                <label for="hiscondition">既 往 病 史<span style="font-size: 12px">(Past medical history
+)</span></label>
+                                            </div>
+                                            <div class="input-field col s12 x12 m12 l12 xl12">
+                                                <textarea type="text" id="nowCondition" class="materialize-textarea"
+                                                    th:value="${hisMedical.nowCondition}" th:readonly="true"
+                                                    name="nowCondition"
+                                                    data-length="255">
+                                                </textarea>
+                                                    <label for="nowCondition">现 在 病 史<span style="font-size: 12px">(Current medical history
+)</span></label>
+                                            </div>
+                                            <div class="input-field col s12 x12 m12 l12 xl12">
+                                                <textarea type="text" id="remarks" class="materialize-textarea" name="remarks"
+                                                    th:value="${hisMedical.remarks}" th:readonly="true"
+                                                    data-length="255">
+                                                </textarea>
+                                                    <label for="remarks">备 注<span style="font-size: 12px">(remark)</span></label>
+                                            </div>
+                                         </div>
+                                        <div class="row">
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</body>
+
+</html>

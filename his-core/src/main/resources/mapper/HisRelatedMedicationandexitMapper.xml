@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahsj.hiscore.dao.HisRelatedMedicationandexitMapper">
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisRelatedMedicationandexit">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="medication_detail_id" jdbcType="BIGINT" property="medicationDetailId" />
+    <result column="exit_id" jdbcType="BIGINT" property="exitId" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_user_id" jdbcType="BIGINT" property="updateUserId" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="drugs_numb" jdbcType="VARCHAR" property="drugsNumb" />
+    <result column="validity_period" jdbcType="TIMESTAMP" property="validityPeriod" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, medication_detail_id, exit_id, count, create_user_id, create_date, update_user_id, 
+    update_date, drugs_numb, validity_period,price
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from his_related_medicationandexit
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_related_medicationandexit
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisRelatedMedicationandexit">
+    insert into his_related_medicationandexit (id, medication_detail_id, exit_id, 
+      count, create_user_id, create_date, 
+      update_user_id, update_date, drugs_numb, 
+      validity_period,price)
+    values (#{id,jdbcType=BIGINT}, #{medicationDetailId,jdbcType=BIGINT}, #{exitId,jdbcType=BIGINT}, 
+      #{count,jdbcType=INTEGER}, #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, #{drugsNumb,jdbcType=VARCHAR}, 
+      #{validityPeriod,jdbcType=TIMESTAMP}, #{price,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisRelatedMedicationandexit">
+    insert into his_related_medicationandexit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="medicationDetailId != null">
+        medication_detail_id,
+      </if>
+      <if test="exitId != null">
+        exit_id,
+      </if>
+      <if test="count != null">
+        count,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateUserId != null">
+        update_user_id,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="drugsNumb != null">
+        drugs_numb,
+      </if>
+      <if test="validityPeriod != null">
+        validity_period,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="medicationDetailId != null">
+        #{medicationDetailId,jdbcType=BIGINT},
+      </if>
+      <if test="exitId != null">
+        #{exitId,jdbcType=BIGINT},
+      </if>
+      <if test="count != null">
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="drugsNumb != null">
+        #{drugsNumb,jdbcType=VARCHAR},
+      </if>
+      <if test="validityPeriod != null">
+        #{validityPeriod,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisRelatedMedicationandexit">
+    update his_related_medicationandexit
+    <set>
+      <if test="medicationDetailId != null">
+        medication_detail_id = #{medicationDetailId,jdbcType=BIGINT},
+      </if>
+      <if test="exitId != null">
+        exit_id = #{exitId,jdbcType=BIGINT},
+      </if>
+      <if test="count != null">
+        count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="drugsNumb != null">
+        drugs_numb = #{drugsNumb,jdbcType=VARCHAR},
+      </if>
+      <if test="validityPeriod != null">
+        validity_period = #{validityPeriod,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisRelatedMedicationandexit">
+    update his_related_medicationandexit
+    set medication_detail_id = #{medicationDetailId,jdbcType=BIGINT},
+      exit_id = #{exitId,jdbcType=BIGINT},
+      count = #{count,jdbcType=INTEGER},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      drugs_numb = #{drugsNumb,jdbcType=VARCHAR},
+      validity_period = #{validityPeriod,jdbcType=TIMESTAMP},
+        price = #{price,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">
+    <selectKey resultType="long" keyProperty="id" order="AFTER">
+      SELECT
+      LAST_INSERT_ID()
+    </selectKey>
+
+    insert into his_related_medicationandexit(id, medication_detail_id, exit_id, count, create_user_id, create_date, update_user_id,
+    update_date, drugs_numb, validity_period,price)
+    values
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.id,jdbcType=BIGINT}, #{item.medicationDetailId,jdbcType=BIGINT}, #{item.exitId,jdbcType=BIGINT},
+      #{item.count,jdbcType=INTEGER}, #{item.createUserId,jdbcType=BIGINT}, #{item.createDate,jdbcType=TIMESTAMP},
+      #{item.updateUserId,jdbcType=BIGINT}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.drugsNumb,jdbcType=VARCHAR},
+      #{item.validityPeriod,jdbcType=TIMESTAMP},#{item.price,jdbcType=DECIMAL})
+    </foreach>
+  </insert>
+</mapper>

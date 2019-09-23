@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+<!-- Form with validation -->
+<div class="row">
+    <div class="col s12 m12 l12 xl12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title">住院信息审核</h4>
+                <form class="col s12" id="sendForm" action="#">
+                    <input type="hidden" id="id" name="id" th:value="${hisHospitalManage.id}"/>
+                    <input type="hidden" id="id1" name="patientId" th:value="${hisHospitalManage.patientId}"/>
+                    <input type="hidden" id="id2" name="hosptalRegistId" th:value="${hisHospitalManage.hosptalRegistId}"/>
+                    <div class="input-field col s4 l4 xl4">
+                        <input id="name" name="patientName" type="text" th:value="${hisHospitalManage.patientName}"
+                               th:readonly="true"/>
+                        <label for="name">姓 名</label>
+                    </div>
+                    <div class="input-field col s4 l4 xl4">
+                        <input id="age" name="age" type="number" th:value="${hisHospitalManage.age}"
+                               th:readonly="true"/>
+                        <label for="age">年 龄</label>
+                    </div>
+                    <div class="input-field col s4 l4 xl4">
+                        <input  name="sexName" id="sex" type="text" typeKey="sex"
+                                th:value="${hisHospitalManage.sexName}"
+                                th:readonly="true"/>
+                        <label for="sex">性 别</label>
+                    </div>
+                    <div class="input-field col s6 l6 xl6">
+                        <input id="idcard" name="idcard" type="text" th:value="${hisHospitalManage.idcard}"
+                               th:readonly="true"/>
+                        <label for="idcard">身 份 证 号</label>
+                    </div>
+                    <div class="input-field col s6 l6 xl6">
+                        <input id="phoneNumber" name="phoneNumber" type="text" th:value="${hisHospitalManage.phoneNumber}"
+                               th:readonly="true"/>
+                        <label for="phoneNumber">手 机 号</label>
+                    </div>
+                    <div class="input-field col s4 l4 xl4">
+                        <input id="number" name="number" type="text" th:value="${hisHospitalManage.number}"
+                               th:readonly="true"/>
+                        <label for="number">住 院 编 号</label>
+                    </div>
+                    <div class="input-field col s4 l4 xl4">
+                        <input id="medicalNumber" name="medicalNumber" type="text" th:value="${hisHospitalManage.medicalNumber}"
+                               th:readonly="true"/>
+                        <label for="number">就诊记录编号</label>
+                    </div>
+                    <div class="input-field col s4 l4 xl4">
+                        <select ahsj:select name="careLevel" id="careLevel" type="code" typeKey="care_level" th:value="${hisHospitalManage.careLevel}">
+                        </select>
+                        <label for="careLevel">护 理 级 别</label>
+                    </div>
+                    <div class="input-field col s4 l4 xl4">
+                        <input type="hidden" id="myNurseId" th:value="${hisHospitalManage.nurseId}">
+                        <select name="nurseId" id="nurseId">
+                        </select>
+                        <label for="nurseId">护 士</label>
+                    </div>
+                    <div class="input-field col s4 l4 xl4" >
+                        <input type="hidden" id="mywardId" th:value="${hisHospitalManage.wardId}">
+                        <select name="wardId" id="wardId">
+                        </select>
+                        <label for="wardId">病房编号</label>
+                    </div>
+                    <div class="input-field col s4 l4 xl4">
+                        <select   name="bedId" id="bedId"
+                                  data-error=".errorTxt4"  th:value="${hisHospitalManage.bedId}">
+                            <div class="errorTxt4"></div>
+                            <option th:value="0"> 选择病床 </option>
+                        </select>
+
+                        <label for="bedId">病床编号</label>
+                    </div>
+                    <div class="input-field col s4 l4 xl4">
+                        <input id="depositWarning" name="depositWarning" type="text" th:value="${hisHospitalManage.depositWarning}"/>
+                        <label for="depositWarning">押金预警值</label>
+                    </div>
+                    <div class="input-field col s4 l4 xl4">
+                        <input id="diseaseRegion" name="diseaseRegion" type="text" th:value="${hisHospitalManage.diseaseRegion}"/>
+                        <label for="diseaseRegion">病区</label>
+                    </div>
+                    <div class="input-field col s12 l12 xl12">
+                        <input id="outpatientDiagnosis" name="outpatientDiagnosis" type="text" th:value="${hisHospitalManage.outpatientDiagnosis}"/>
+                        <label for="outpatientDiagnosis">门诊诊断</label>
+                    </div>
+                    <div class="input-field col s12 l12 xl12">
+                        <input id="inpatientDiagnosis" name="inpatientDiagnosis" type="text" th:value="${hisHospitalManage.inpatientDiagnosis}"/>
+                        <label for="inpatientDiagnosis">住院诊断</label>
+                    </div>
+                    <div class="input-field col s12 l12 xl12">
+                        <input id="remarks" name="remarks" type="text" th:value="${hisHospitalManage.remarks}"/>
+                        <label for="remarks">备 注</label>
+                    </div>
+                    <div class="row" style="margin-bottom: 40px">
+                        <button id="send_btn" class="btn cyan waves-effect waves-light right" type="submit"
+                                name="action">保存
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ================================================
+Scripts
+================================================ -->
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+    var wardNumber;
+
+    $("select[name='departmentId']").change(function () {
+        getDoctor()
+    });
+    var wardSel = $("#wardId");
+
+    $(document).ready(function() {
+        getDoctor();
+        getNurse();
+        getWard();
+
+
+    });
+
+    var docSelect = $("#doctorId");
+    var wardIdSelect = $("#wardId");
+    var nurIdSelect  = $("#nurseId");
+
+    function getNurse() {
+        var nurIdSelect  = $("#nurseId");
+
+        var flag = $('#myNurseId').val();
+
+        $.getJSON(CTX+"/api/nurse/getNurse.ahsj?&token="+TOKEN, function (result){
+            if (flag == null || flag == "" ){
+                nurIdSelect.prepend("<option value='0'>选择护士</option>");
+
+                $(result).each(function (i) {
+                    nurIdSelect.append("<option value='" + this.userId + "'>" + this.name + "</option>")
+                });
+
+            }else {
+                for (var j = 0;j<result.length;++j){
+                    if (flag == result[j].userId){
+
+                        nurIdSelect.append("<option value='" + result[j].userId + "'>" + result[j].name + "</option>");
+                    }
+                }
+                $(result).each(function (i) {
+                    nurIdSelect.append("<option value='" + this.userId + "'>" + this.name + "</option>")
+                })
+            }
+
+            nurIdSelect.formSelect();
+        })
+    }
+
+    function getWard() {
+
+        var nurIdSelect  = $("#wardId");
+
+        var flag = $('#mywardId').val();
+
+        $.getJSON(CTX + "/api/hosptalregist/getHisWard.ahsj?&token=" + TOKEN, function (result) {
+            if (flag == null || flag == "" ){
+                nurIdSelect.prepend("<option value='0'>选择病房</option>");
+
+                $(result).each(function (i) {
+                    nurIdSelect.append("<option value='" + this.id + "'>" + this.number + "</option>")
+                });
+
+            }else {
+                for (var j = 0;j<result.length;++j){
+                    if (flag == result[j].id){
+                        nurIdSelect.append("<option value='" + result[j].id + "'>" + result[j].number + "</option>");
+                        wardNumber = result[j].number;
+                    }
+                }
+                $(result).each(function (i) {
+                    nurIdSelect.append("<option value='" + this.id + "'>" + this.number + "</option>")
+                })
+            }
+
+            nurIdSelect.formSelect();
+        })
+    }
+
+    function getDoctor() {
+        departmentId = $("select[name='departmentId']").val();
+
+        var nurIdSelect  = $("#doctorId");
+
+        var flag = $('#myDoctorId').val();
+
+        $.getJSON(CTX + "/api/doctor/getDoctor.ahsj?departmentId=" + departmentId + "&token=" + TOKEN, function (result) {
+            if (flag == null || flag == "" ){
+                nurIdSelect.prepend("<option value='0'>选择医生</option>");
+
+                $(result).each(function (i) {
+                    nurIdSelect.append("<option value='" + this.id + "'>" + this.name + "</option>")
+                });
+
+            }else {
+                for (var j = 0;j<result.length;++j){
+                    if (flag == result[j].id){
+
+                        nurIdSelect.append("<option value='" + result[j].id + "'>" + result[j].name + "</option>");
+                    }
+                }
+                $(result).each(function (i) {
+                    nurIdSelect.append("<option value='" + this.id + "'>" + this.name + "</option>")
+                })
+            }
+
+            nurIdSelect.formSelect();
+        })
+
+    }
+
+    var doctorId = docSelect.val();
+
+    var bedIdSelect = $("#bedId");
+    wardSel.change(function () {
+        if (wardSel.val() == 0) {
+            bedIdSelect.empty();
+            bedIdSelect.append(" <option value='0'>选择病床</option>");
+            bedIdSelect.formSelect();
+        }
+        //病床
+        else {
+            var wardNumber = $("#wardId").find("option:selected").text();
+            getBed(wardNumber);
+        }
+    });
+
+    function getBed(wardNumber) {
+
+        $.getJSON(CTX + "/api/hisbeds/getBed.ahsj?wardNumber=" + wardNumber + "&token=" + TOKEN, function (result) {
+            bedIdSelect.empty();
+            $(result).each(function (i) {
+                bedIdSelect.append(
+                    "<option value='" + this.id + "'>" + this.number + "</option>")
+            });
+            bedIdSelect.formSelect();
+        })
+    }
+
+    $(function () {
+        formCheck();
+    });
+
+    function formCheck() {
+        $("#sendForm").validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 2
+                },
+                phonenumber: {
+                    required: true,
+                    minlength: 1
+                },
+                idcard: {
+                    required: true,
+                    minlength: 1
+                },
+                bedId: {
+                    required: true,
+                    minlength: 1
+                }
+
+
+            },
+            messages: {
+                name: {
+                    required: "请输入名称",
+                    minlength: "最少包含2个字符"
+                },
+                phonenumber: {
+                    required: "请输入手机号",
+                    minlength: "最少输入1个字符"
+                },
+                idcard: {
+                    required: "请输入身份证号码",
+                    minlength: "最少输入1个字符"
+                },
+                bedId: {
+                    required: "请选择病房",
+                    minlength: "最少选择一个病床"
+                }
+
+            },
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+                var bedIds = $("#bedId").val();
+                console.log("值是"+bedIds);
+                dialog.confirm('确定提交吗?', function (index, layero) {
+                    if (bedIds != null ){
+                        var queryString = $('#sendForm').serialize();
+                        console.log("queryString is" + queryString);
+
+                        $.ahsjajax(
+                            CTX + "/api/hishospitalmanage/saveOrUpdate.ahsj?token=" + TOKEN,
+                            queryString,
+                            function (msg) {
+                                if (msg.success) {
+                                    M.toast({html: msg.message});
+                                    parent.grid.reset();
+                                    dialog.parentclose();
+                                    return false;
+                                } else {
+                                    M.toast({html: msg.message});
+                                    return false;
+                                }
+                            },
+                            function () {
+                                M.toast({html: "网络异常"});
+                                return false;
+                            }
+                        );
+                    }else {
+                        dialog.warn("该病房已无剩余病床，审核失败！！");
+                    }
+                });
+
+            }
+
+        });
+    }
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</body>
+
+</html>

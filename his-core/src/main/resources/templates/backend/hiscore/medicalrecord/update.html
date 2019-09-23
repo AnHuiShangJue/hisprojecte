@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+<!-- Form with validation -->
+<div class="row">
+    <div class="col s12 m12 l12 xl12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title">病人信息查看</h4><label style="color:black">Patient information view
+
+            </label>
+                <form class="col s12" id="sendForm" action="#">
+                    <input type="hidden" id="id" name="id" th:value="${hisPatientInfo.id}">
+                    <input type="hidden" id="number" name="id" th:value="${numbers}">
+                    <div class="row">
+                        <div class="input-field col s3 l3 xl3">
+                            <input id="name" name="name" type="text" th:value="${hisPatientInfo.name}"
+                                   th:readonly="${hisMedicalRecord.doctorId  != userId}"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label for="name">姓 名<span style="font-size: 12px">(name
+)</span></label>
+                        </div>
+                        <div class="input-field col s9 l9 xl9">
+                            <input id="location" name="location" type="text"  th:value="${hisPatientInfo.location}"
+                                   th:readonly="${hisMedicalRecord.doctorId  != userId}"/>
+                            <label for="location">地 址<span style="font-size: 12px">(address
+)</span></label>
+                        </div>
+                   </div>
+                    <div class="row">
+                        <div class="input-field col s7 l7 xl7">
+                            <input id="phonenumber" name="phonenumber" type="text"
+                                   th:value="${hisPatientInfo.phonenumber}"
+                                   th:readonly="${hisMedicalRecord.doctorId  != userId}"
+                                   data-error=".errorTxt2">
+                            <div class="errorTxt2"></div>
+                            <label for="phonenumber">手机号<span style="font-size: 12px">(手机号
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="age" name="age" type="number"
+                                   th:value="${hisPatientInfo.age}"
+                                   th:readonly="${hisMedicalRecord.doctorId  != userId}"
+                                   data-error=".errorTxt4">
+                            <div class="errorTxt4"></div>
+                            <label for="age">年 龄<span style="font-size: 12px">(age
+)</span></label>
+                        </div>
+                        <div class="input-field col s8 l8 xl8">
+                            <input id="id_card" name="idcard" type="text" th:value="${hisPatientInfo.idcard}"
+                                   th:readonly="true"/>
+                            <label for="id_card">身份证号<span style="font-size: 12px">(id card
+)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="height" name="height" type="number"  th:value="${hisPatientInfo.height}"
+                                   th:readonly="${hisMedicalRecord.doctorId  != userId}"/>
+                            <label for="height">身 高<span style="font-size: 12px">(height
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="weight" name="weight" type="number"  th:value="${hisPatientInfo.weight}"
+                                   th:readonly="${hisMedicalRecord.doctorId  != userId}"/>
+                            <label for="weight">体 重<span style="font-size: 12px">(weight
+
+)</span></label>
+                        </div>
+
+                        <div th:if="${hisMedicalRecord.doctorId != userId}">
+                        <div class="input-field col s4 l4 xl4">
+                            <input  name="isMarried" id="is_married1" type="text" typeKey="is_married"
+                                    th:value="${hisPatientInfo.married}"
+                                    th:readonly="true"/>
+                            <label for="is_married">婚姻状况<span style="font-size: 12px">(marital status
+
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input  name="sex" id="sex1" type="text" typeKey="sex"
+                                    th:value="${hisPatientInfo.sexName}"
+                                    th:readonly="true"/>
+                            <label for="sex">性别<span style="font-size: 12px">(sex
+)</span></label>
+                        </div>
+                        </div>
+
+                        <div class="row" th:if="${hisMedicalRecord.doctorId == userId}">
+                            <div class="input-field col s4 l4 xl4">
+
+                            <select ahsj:select name="isMarried" id="is_married" type="code" typeKey="is_married"
+                                        th:value="${hisPatientInfo.isMarried}">
+                                </select>
+                                <label for="is_married">婚姻状况<span style="font-size: 12px">(marital status
+
+)</span></label>
+                            </div>
+                            <div class="input-field col s4 l4 xl4">
+
+                            <select ahsj:select name="sex" id="sex" type="code" typeKey="sex"
+                                        th:value="${hisPatientInfo.sex}">
+                                </select>
+                                <label for="sex">性别<span style="font-size: 12px">(sex
+)</span></label>
+                            </div>
+                        </div>
+                    </div>
+
+                 <div class="row">
+                    <div class="col m4 s12 mb-3">
+                       <div th:if="${hisMedicalRecord.doctorId  == userId}">
+                            <button class="waves-effect waves dark btn btn-primary next-step"
+                                    type="submit">保存
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+                <div class="col m4 s12 mb-3">
+                    <div th:if="${hisMedicalRecord.doctorId  != userId}">
+                        <a id="ViewBtn"
+                           class="waves-effect waves dark btn btn-primary next-step">查 看
+                            <i class="material-icons white-text tooltipped" data-position="bottom"
+                               data-delay="50"
+                               data-tooltip=""></i>
+                        </a>
+                    </div>
+                    </div>
+                    <div class="col m4 s12 mb-3">
+                     <div th:if="${hisMedicalRecord.doctorId  == userId}">
+                     <a id="NextBtn"
+                           class="waves-effect waves dark btn btn-primary next-step">下一步
+                            <i class="material-icons white-text tooltipped" data-position="bottom"
+                               data-delay="50"
+                               data-tooltip="">arrow_forward</i>
+                        </a>
+                     </div>
+                    </div>
+                 </div>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+<!-- ================================================
+Scripts
+================================================ -->
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+
+    $(function () {
+        formCheck();
+        initBtn();
+    });
+
+    function formCheck() {
+        $("#sendForm").validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 2
+                },
+                phonenumber: {
+                    required: true,
+                    minlength: 1
+                },
+                idcard: {
+                    required: true,
+                    minlength: 1
+                },age: {
+                    required: true,
+                    minlength: 1
+                }
+
+
+            },
+            messages: {
+                name: {
+                    required: "请输入名称",
+                    minlength: "最少包含2个字符"
+                },
+                phonenumber: {
+                    required: "请输入手机号",
+                    minlength: "最少输入1个字符"
+                },
+                idcard: {
+                    required: "请输入身份证号码",
+                    minlength: "最少输入1个字符"
+                },age: {
+                    required: "请输入年龄",
+                    minlength: "最少输入1个字符"
+                }
+
+            },
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+                dialog.confirm('确定提交吗?', function (index, layero){
+                var queryString = $('#sendForm').serialize();
+                console.log("queryString is" + queryString);
+
+                $.ahsjajax(
+                    CTX + "/api/patient/saveOrUpdate.ahsj?token=" + TOKEN,
+                    queryString,
+                    function (msg) {
+                        if (msg.success) {
+                            M.toast({html: msg.message});
+                            parent.grid.search();
+                            dialog.parentclose();
+                            return false;
+                        } else {
+                            M.toast({html: msg.message});
+                            return false;
+                        }
+                    },
+                    function () {
+                        M.toast({html: "网络异常"});
+                        return false;
+                    }
+                );});
+            }
+
+        });
+    }
+
+
+    function initBtn() {
+
+        //查看按钮
+        $("#NextBtn").click(function () {
+            var url = CTX + "/api/treatmentplan/plan/index.ahsj?token=" + TOKEN +"&number="+$("#number").val()
+                + "&id=" + [[${hisMedicalRecord.id}]]+"&doctorId="+[[${hisMedicalRecord.doctorId }]];
+            parent.dialog.show(url, "")
+        });
+        $("#ViewBtn").click(function () {
+            var url = CTX + "/api/treatmentplan/plan/index.ahsj?token=" + TOKEN+ "&id=" + [[${hisMedicalRecord.id}]]+"&doctorId="+[[${hisMedicalRecord.doctorId }]];
+            parent.dialog.show(url, "")
+        });
+    }
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+
+</script>
+
+</body>
+
+</html>

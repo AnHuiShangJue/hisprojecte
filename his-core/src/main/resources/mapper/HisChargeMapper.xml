@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisChargeMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisCharge">
+        <result column="medical_record_id" property="medicalRecordId"/>
+        <result column="department_id" property="departmentId"/>
+        <result column="doctor_name" property="doctorName"/>
+        <result column="count" property="count"/>
+        <result column="is_pay" property="isPay"/>
+        <result column="record_name" property="recordName"/>
+        <result column="record_type" property="recordType"/>
+        <result column="price" property="price"/>
+        <result column="patient_name" property="patientName"/>
+        <result column="sex" property="sex"/>
+        <result column="id" property="id"/>
+        <!--xjp添加 开始-->
+        <result column="number" property="number"/>
+        <result column="create_date" property="createDate"/>
+        <!--xjp添加 结束-->
+    </resultMap>
+
+    <select id="getAllHisCharge" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        SELECT p.id as id, r.medical_record_id as medical_record_id , p.num as count, p.is_payed as is_pay,p.price as
+        price,  i.`name` as doctor_name , g.department_id as department_id , s.`name` as patient_name ,s.sex as sex,
+        p.`name` as record_name, p.type as record_type
+        FROM his_record_project as p LEFT JOIN `his_medical_record` as r on p.record_id=r.id
+        LEFT JOIN his_doctor_info as i on i.id =r.doctor_id
+        LEFT JOIN his_patient_info s on s.id = r.patient_id
+        LEFT JOIN his_registered AS g on g.id = r.registered_id
+        where r.medical_record_id = #{parameter.medicalRecordId}
+
+        <!--xjp添加 开始-->
+        <!--<if test="number != null and parameter.number != ''">
+            and tr.number =#{parameter.number}
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            and tr.create_date #{parameter.createDate}
+        </if>-->
+        <!--xjp添加  结束-->
+
+        UNION ALL
+        SELECT d.id as id, r.medical_record_id as medical_record_id , d.count as count ,d.is_pay as is_pay ,
+        y.sale_price as price ,
+        i.`name` as doctor_name , g.department_id as department_id , p.`name` as patient_name ,p.sex as sex,
+        y.drugs_name as record_name,d.record_type as record_type
+        FROM `his_medication_details` as d LEFT JOIN `his_medical_record` as r on d.medical_record_id=r.id
+        LEFT JOIN his_doctor_info as i on i.id =r.doctor_id
+        LEFT JOIN his_patient_info p on p.id = r.patient_id
+        LEFT JOIN his_medicine_info m on m.id =d.medication_id
+        LEFT JOIN his_registered AS g on g.id = r.registered_id
+        LEFT JOIN his_pharmacy_detail as y on d.medication_id=y.id
+        where r.medical_record_id = #{parameter.medicalRecordId}
+        <!--xjp添加 开始-->
+      <!-- <if test="number != null and parameter.number != ''">
+          and tr.number =#{parameter.number}
+        </if>
+        <if test="createDate != null and parameter.createDate != ''">
+            and tr.create_date #{parameter.createDate}
+        </if>-->
+        <!--xjp添加  结束-->
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+</mapper>

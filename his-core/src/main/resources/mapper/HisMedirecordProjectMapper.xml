@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisMedirecordProjectMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisMedirecordProject" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="record_id" property="recordId" jdbcType="BIGINT" />
+    <result column="project_id" property="projectId" jdbcType="BIGINT" />
+    <result column="is_pay" property="isPay" jdbcType="INTEGER" />
+    <result column="is_print" property="isPrint" jdbcType="INTEGER" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="DATE" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="update_date" property="updateDate" jdbcType="DATE" />
+    <result column="is_check" property="isCheck" jdbcType="INTEGER" />
+    <result column="proceeds" property="proceeds" jdbcType="DECIMAL" />
+    <result column="change" property="change" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, record_id, project_id, is_pay, is_print, create_user_id, create_date, update_user_id, 
+    update_date, is_check, proceeds, change
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from his_medirecord_project
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from his_medirecord_project
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisMedirecordProject" >
+    insert into his_medirecord_project (id, record_id, project_id, 
+      is_pay, is_print, create_user_id, 
+      create_date, update_user_id, update_date, 
+      is_check, proceeds, change
+      )
+    values (#{id,jdbcType=BIGINT}, #{recordId,jdbcType=BIGINT}, #{projectId,jdbcType=BIGINT}, 
+      #{isPay,jdbcType=INTEGER}, #{isPrint,jdbcType=INTEGER}, #{createUserId,jdbcType=BIGINT}, 
+      #{createDate,jdbcType=DATE}, #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=DATE}, 
+      #{isCheck,jdbcType=INTEGER}, #{proceeds,jdbcType=DECIMAL}, #{change,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisMedirecordProject" >
+    insert into his_medirecord_project
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="recordId != null" >
+        record_id,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="isPay != null" >
+        is_pay,
+      </if>
+      <if test="isPrint != null" >
+        is_print,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="isCheck != null" >
+        is_check,
+      </if>
+      <if test="proceeds != null" >
+        proceeds,
+      </if>
+      <if test="change != null" >
+        change,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="recordId != null" >
+        #{recordId,jdbcType=BIGINT},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="isPay != null" >
+        #{isPay,jdbcType=INTEGER},
+      </if>
+      <if test="isPrint != null" >
+        #{isPrint,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="isCheck != null" >
+        #{isCheck,jdbcType=INTEGER},
+      </if>
+      <if test="proceeds != null" >
+        #{proceeds,jdbcType=DECIMAL},
+      </if>
+      <if test="change != null" >
+        #{change,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisMedirecordProject" >
+    update his_medirecord_project
+    <set >
+      <if test="recordId != null" >
+        record_id = #{recordId,jdbcType=BIGINT},
+      </if>
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="isPay != null" >
+        is_pay = #{isPay,jdbcType=INTEGER},
+      </if>
+      <if test="isPrint != null" >
+        is_print = #{isPrint,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=DATE},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="isCheck != null" >
+        is_check = #{isCheck,jdbcType=INTEGER},
+      </if>
+      <if test="proceeds != null" >
+        proceeds = #{proceeds,jdbcType=DECIMAL},
+      </if>
+      <if test="change != null" >
+        change = #{change,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisMedirecordProject" >
+    update his_medirecord_project
+    set record_id = #{recordId,jdbcType=BIGINT},
+      project_id = #{projectId,jdbcType=BIGINT},
+      is_pay = #{isPay,jdbcType=INTEGER},
+      is_print = #{isPrint,jdbcType=INTEGER},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=DATE},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=DATE},
+      is_check = #{isCheck,jdbcType=INTEGER},
+      proceeds = #{proceeds,jdbcType=DECIMAL},
+      change = #{change,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://mybatis.org/schema/mybatis-mapper">
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+<!-- Form with validation -->
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title">病床信息修改</h4><label style="color:black">Bed information modification</label>
+                <form class="col s12" id="sendForm" action="#">
+                    <input type="hidden" id="id" name="id" th:value="${hisBed.id}">
+                    <input type="hidden" id="wardId" name="wardId" th:value="${hisBed.wardId}">
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input  name="number"  type="number" th:value="${hisBed.number}" min="1" max="10000000000" >
+                            <label >编号<span style="font-size: 12px">(Number)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <select ahsj:select name="type"  type="code" typeKey="hospital_bed" th:value="${hisBed.type}">
+                            </select>
+                            <label >病床类型<span style="font-size: 12px">(Bed type)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input   name="price" type="number"  th:value="${hisBed.price}" min="1" max="100000"/>
+                            <label >病床价格<span style="font-size: 12px">(Bed cost)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <select ahsj:select name="isEnable"  type="code" typeKey="is_enable" th:value="${hisBed.isEnable}">
+                            </select>
+                            <label >是否启用<span style="font-size: 12px">(Whether to enable)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input   readonly="true"  name="createUserId" type="text" th:value="${createName}"/>
+                            <label >创建人<span style="font-size: 12px">(founder)</span></label>
+                        </div>
+                   <div class="input-field col s4 l4 xl4">
+                            <input   readonly="true"  type="text" th:value="${#dates.format(hisBed.createDate, 'yyyy-MM-dd HH:mm:ss')}"/>
+
+                            <label >创建时间<span style="font-size: 12px">(Creation time)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input   readonly="true" name="updateUserId" type="text" th:value="${updateName}"/>
+                            <label >修改人<span style="font-size: 12px">(Modifier)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input   readonly="true"   type="text" th:value="${#dates.format(hisBed.updateDate, 'yyyy-MM-dd HH:mm:ss')}"/>
+                            <label >修改时间<span style="font-size: 12px">(Change the time)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button id="send_btn" class="btn cyan waves-effect waves-light right" type="sumbit" name="action"> 修 改（modify）
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ================================================
+Scripts
+================================================ -->
+<div th:replace="public/base_update_script :: html" ></div>
+<<script th:inline="javascript">
+    $(function () {
+        formCheck();
+    });
+
+    function formCheck() {
+        $("#sendForm").validate({
+            rules: {
+                number: {
+                    required: true,
+                },
+                price: {
+                    required:true,
+                },
+            },
+            messages: {
+                number: {
+                    required: "请输入编号",
+                },
+                price: {
+                    required: "请输入病房费用",
+                },
+            },
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+                dialog.confirm('确定修改吗?', function (index, layero){
+                var send_form = $('#sendForm').serialize();
+                $.ahsjajax(
+                    CTX+"/api/hisbeds/toaddHisbed/index.ahsj?token="+TOKEN,
+                    send_form,
+                    function (msg) {
+                        if (msg.success) {
+                            M.toast({html: msg.message});
+                            parent.grid.search();
+                            parent.gridFor.search();
+                            dialog.parentclose();
+                            return true;
+                        } else {
+                            M.toast({html: msg.message});
+                            return false;
+                        }
+                    },
+                    function ( ) {
+                        Materialize.toast("网络异常");
+                        return false;
+                    }
+                );});
+            }
+
+        });
+    }
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</body>
+
+</html>

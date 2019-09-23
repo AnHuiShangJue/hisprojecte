@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisBedMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisBed">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="number" property="number" jdbcType="INTEGER"/>
+        <result column="ward_id" property="wardId" jdbcType="BIGINT"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="price" property="price" jdbcType="DOUBLE"/>
+        <result column="create_user_id" property="createUserId" jdbcType="BIGINT"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="BIGINT"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="is_enable" property="isEnable" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, number, ward_id, type, price, create_user_id, create_date, update_user_id, update_date, 
+    is_enable
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from his_bed
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_bed
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisBed" useGeneratedKeys="true" keyProperty="id">
+    insert into his_bed (id, number, ward_id, 
+      type, price, create_user_id, 
+      create_date, update_user_id, update_date, 
+      is_enable)
+    values (#{id,jdbcType=BIGINT}, #{number,jdbcType=INTEGER}, #{wardId,jdbcType=BIGINT}, 
+      #{type,jdbcType=INTEGER}, #{price,jdbcType=DOUBLE}, #{createUserId,jdbcType=BIGINT}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{isEnable,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisBed">
+        insert into his_bed
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="number != null">
+                number,
+            </if>
+            <if test="wardId != null">
+                ward_id,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="isEnable != null">
+                is_enable,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="number != null">
+                #{number,jdbcType=INTEGER},
+            </if>
+            <if test="wardId != null">
+                #{wardId,jdbcType=BIGINT},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=DOUBLE},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isEnable != null">
+                #{isEnable,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisBed">
+        update his_bed
+        <set>
+            <if test="number != null">
+                number = #{number,jdbcType=INTEGER},
+            </if>
+            <if test="wardId != null">
+                ward_id = #{wardId,jdbcType=BIGINT},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=DOUBLE},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isEnable != null">
+                is_enable = #{isEnable,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisBed">
+    update his_bed
+    set number = #{number,jdbcType=INTEGER},
+      ward_id = #{wardId,jdbcType=BIGINT},
+      type = #{type,jdbcType=INTEGER},
+      price = #{price,jdbcType=DOUBLE},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      is_enable = #{isEnable,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <!--  自定义-->
+    <select id="getHisBedAll" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_Bed
+        where
+        1=1
+        <if test="parameter.wardId != null and parameter.wardId != ''">
+            and ward_id = #{parameter.wardId,jdbcType=BIGINT}
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+    <select id="getHisBed" parameterType="java.lang.Long" resultMap="BaseResultMap">
+      SELECT *
+      FROM his_bed
+      where is_enable = 1
+      AND ward_id = #{wardId,jdbcType=BIGINT}
+      AND id NOT
+      IN(
+      SELECT bed_id
+      FROM his_hospital_manage
+      where is_discharged = 1
+      )
+  </select>
+    <select id="countBedByWardId" parameterType="java.lang.Long" resultType="java.lang.Integer">
+   SELECT count(1) FROM `his_bed` where ward_id =#{wardId,jdbcType=BIGINT};
+  </select>
+    <select id="getBed" parameterType="com.ahsj.hiscore.entity.HisBed" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `his_bed`
+        where number = #{number,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByWardId" parameterType="java.lang.Long">
+    delete from his_bed
+   where ward_id =#{wardId,jdbcType=BIGINT}
+  </delete>
+    <select id="countBed" resultType="java.lang.Integer">
+    select count(id) as Num from his_bed
+  </select>
+    <select id="selectHisBedAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `his_bed`
+    </select>
+
+</mapper>

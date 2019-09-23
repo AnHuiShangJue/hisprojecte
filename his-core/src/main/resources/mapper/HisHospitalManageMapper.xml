@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisHospitalManageMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisHospitalManage">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="hosptal_regist_id" property="hosptalRegistId" jdbcType="BIGINT"/>
+        <result column="patient_id" property="patientId" jdbcType="BIGINT"/>
+        <result column="doctor_id" property="doctorId" jdbcType="BIGINT"/>
+        <result column="nurse_id" property="nurseId" jdbcType="BIGINT"/>
+        <result column="bed_id" property="bedId" jdbcType="BIGINT"/>
+        <result column="ward_id" property="wardId" jdbcType="BIGINT"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="join_date" property="joinDate" jdbcType="TIMESTAMP"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="create_user_id" property="createUserId" jdbcType="BIGINT"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="ages" property="ages" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="patient_name" property="patientName" jdbcType="VARCHAR"/>
+        <result column="names" property="names" jdbcType="VARCHAR"/>
+        <result column="number" property="number" jdbcType="VARCHAR"/>
+        <result column="numbers" property="numbers" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="INTEGER"/>
+        <result column="sexs" property="sexs" jdbcType="INTEGER"/>
+        <result column="is_discharged" property="isDischarged" jdbcType="INTEGER"/>
+        <result column="idcard" property="idcard" jdbcType="VARCHAR"/>
+        <result column="idcards" property="idcards" jdbcType="VARCHAR"/>
+        <result column="is_re" property="isRe" jdbcType="INTEGER"/>
+        <result column="is_hos" property="isHos" jdbcType="INTEGER"/>
+        <result column="is_discharged" property="isDischarged" jdbcType="INTEGER"/>
+        <result column="department_id" property="departmentId" jdbcType="BIGINT"/>
+        <result column="medical_number" property="medicalNumber" jdbcType="VARCHAR"/>
+        <result column="medical_numbers" property="medicalNumbers" jdbcType="VARCHAR"/>
+        <result column="outpatient_diagnosis" property="outpatientDiagnosis" jdbcType="VARCHAR"/>
+        <result column="inpatient_diagnosis" property="inpatientDiagnosis" jdbcType="VARCHAR"/>
+        <result column="nurse_name" property="nurseName" jdbcType="VARCHAR"/>
+        <result column="care_level" property="careLevel" jdbcType="INTEGER"/>
+        <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR"/>
+        <result column="hospitalization_day" property="hospitalizationDay" jdbcType="VARCHAR"/>
+        <result column="disease_region" property="diseaseRegion" jdbcType="VARCHAR"/>
+        <result column="pay_hospitalization_day" property="payHospitalizationDay" jdbcType="VARCHAR"/>
+        <result column="toll_details_id" property="tollDetailsId" jdbcType="VARCHAR"/>
+        <result column="bed_number" property="bedsNumber"/>
+        <result column="ward_number" property="wardsNumber"/>
+        <result column="rest_deposit" property="restDeposit" jdbcType="DECIMAL"/>
+        <result column="price" property="price" jdbcType="DOUBLE"/>
+        <result column="deposit_warning" property="depositWarning" jdbcType="DECIMAL"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, hosptal_regist_id,department_id, patient_id, doctor_id, nurse_id,care_level, bed_id, ward_id, create_date,disease_region,
+    update_date, remarks, create_user_id,outpatient_diagnosis,inpatient_diagnosis,sex,idcard,number,patient_name,age,is_discharged,hospitalization_day,pay_hospitalization_day,toll_details_id,rest_deposit,medical_number,deposit_warning
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from his_hospital_manage
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_hospital_manage
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisHospitalManage">
+    insert into his_hospital_manage (id, hosptal_regist_id, patient_id, 
+      doctor_id, nurse_id, bed_id, 
+      ward_id, create_date, update_date, 
+      remarks, create_user_id,outpatient_diagnosis,disease_region,
+      inpatient_diagnosis,sex,idcard,
+      number,patient_name,age,is_discharged,nurse_name,phone_number,department_id,care_level,medical_number,hospitalization_day,pay_hospitalization_day,toll_details_id,rest_deposit,deposit_warning)
+    values (#{id,jdbcType=BIGINT}, #{hosptalRegistId,jdbcType=BIGINT}, #{patientId,jdbcType=BIGINT}, 
+      #{doctorId,jdbcType=BIGINT}, #{nurseId,jdbcType=BIGINT}, #{bedId,jdbcType=BIGINT}, 
+      #{wardId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{remarks,jdbcType=VARCHAR}, #{createUserId,jdbcType=BIGINT}, #{outpatientDiagnosis,jdbcType=VARCHAR}, #{diseaseRegion,jdbcType=VARCHAR}, #{inpatientDiagnosis,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{idcard,jdbcType=VARCHAR},
+      #{number,jdbcType=VARCHAR}, #{patientName,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER},#{isDischarged,jdbcType=INTEGER}, #{nurseName,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR},
+      #{departmentId,jdbcType=BIGINT}, #{careLevel,jdbcType=INTEGER},#{medicalNumber,jdbcType=VARCHAR},#{hospitalizationDay,jdbcType=VARCHAR},#{payHospitalizationDay,jdbcType=VARCHAR},#{tollDetailsId,jdbcType=VARCHAR},#{restDeposit,jdbcType=DECIMAL},#{depositWarning,jdbcType=DECIMAL})
+  </insert>
+    <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisHospitalManage">
+        insert into his_hospital_manage
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="hosptalRegistId != null">
+                hosptal_regist_id,
+            </if>
+            <if test="patientId != null">
+                patient_id,
+            </if>
+            <if test="doctorId != null">
+                doctor_id,
+            </if>
+            <if test="nurseId != null">
+                nurse_id,
+            </if>
+            <if test="bedId != null">
+                bed_id,
+            </if>
+            <if test="wardId != null">
+                ward_id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="hospitalizationDay != null">
+                hospitalization_day ,
+            </if>
+            <if test="payHospitalizationDay != null">
+                pay_hospitalization_day ,
+            </if>
+            <if test="tollDetailsId != null">
+                toll_details_id ,
+            </if>
+            <if test="restDeposit != null">
+                rest_deposit ,
+            </if>
+            <if test="depositWarning != null">
+                deposit_warning ,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="hosptalRegistId != null">
+                #{hosptalRegistId,jdbcType=BIGINT},
+            </if>
+            <if test="patientId != null">
+                #{patientId,jdbcType=BIGINT},
+            </if>
+            <if test="doctorId != null">
+                #{doctorId,jdbcType=BIGINT},
+            </if>
+            <if test="nurseId != null">
+                #{nurseId,jdbcType=BIGINT},
+            </if>
+            <if test="bedId != null">
+                #{bedId,jdbcType=BIGINT},
+            </if>
+            <if test="wardId != null">
+                #{wardId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="hospitalizationDay != null">
+                #{hospitalizationDay,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payHospitalizationDay != null">
+                #{payHospitalizationDay,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tollDetailsId != null">
+                #{tollDetailsId,jdbcType=TIMESTAMP},
+            </if>
+            <if test="restDeposit != null">
+                #{restDeposit,jdbcType=TIMESTAMP},
+            </if>
+            <if test="depositWarning != null">
+                #{depositWarning,jdbcType=DECIMAL}
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisHospitalManage">
+        update his_hospital_manage
+        <set>
+            <if test="hosptalRegistId != null">
+                hosptal_regist_id = #{hosptalRegistId,jdbcType=BIGINT},
+            </if>
+            <if test="patientId != null">
+                patient_id = #{patientId,jdbcType=BIGINT},
+            </if>
+            <if test="doctorId != null">
+                doctor_id = #{doctorId,jdbcType=BIGINT},
+            </if>
+            <if test="nurseId != null">
+                nurse_id = #{nurseId,jdbcType=BIGINT},
+            </if>
+            <if test="bedId != null">
+                bed_id = #{bedId,jdbcType=BIGINT},
+            </if>
+            <if test="wardId != null">
+                ward_id = #{wardId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="hospitalizationDay != null">
+                hospitalization_day = #{hospitalizationDay,jdbcType=VARCHAR},
+            </if>
+            <if test="payHospitalizationDay != null">
+                pay_hospitalization_day = #{payHospitalizationDay,jdbcType=VARCHAR},
+            </if>
+            <if test="tollDetailsId != null">
+                toll_details_id = #{tollDetailsId,jdbcType=VARCHAR},
+            </if>
+            <if test="restDeposit != null">
+                rest_deposit = #{restDeposit,jdbcType=DECIMAL}
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisHospitalManage">
+    update his_hospital_manage
+    set hosptal_regist_id = #{hosptalRegistId,jdbcType=BIGINT},
+      patient_id = #{patientId,jdbcType=BIGINT},
+      department_id = #{departmentId,jdbcType=BIGINT},
+      doctor_id = #{doctorId,jdbcType=BIGINT},
+      care_level = #{careLevel,jdbcType=INTEGER},
+      nurse_id = #{nurseId,jdbcType=BIGINT},
+      bed_id = #{bedId,jdbcType=BIGINT},
+      ward_id = #{wardId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      outpatient_diagnosis= #{outpatientDiagnosis,jdbcType=VARCHAR},
+      disease_region= #{diseaseRegion,jdbcType=VARCHAR},
+      inpatient_diagnosis = #{inpatientDiagnosis,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      number = #{number,jdbcType=VARCHAR},
+      patient_name = #{patientName,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      is_discharged = #{isDischarged,jdbcType=INTEGER},
+          hospitalization_day = #{hospitalizationDay,jdbcType=VARCHAR},
+      pay_hospitalization_day = #{payHospitalizationDay,jdbcType=VARCHAR},
+      toll_details_id = #{tollDetailsId,jdbcType=VARCHAR},
+      rest_deposit = #{restDeposit,jdbcType=DECIMAL},
+      deposit_warning = #{depositWarning,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <!--  自定义sql-->
+
+    <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select
+        t.*
+        from (
+        SELECT
+        a.id as ids,a.create_date AS join_date,a.medical_number as
+        medical_numbers,a.patient_id as patient_id,
+        a.doctor_id as doctor_id,a.ward_id,a.bed_id,a.care_level as care_level,a.number as number,a.nurse_id as
+        nurse_id,
+        b.id,b.hosptal_regist_id,b.is_discharged,b.create_date,b.medical_number,b.department_id as department_id,
+        c.name AS name,
+        e.name AS names,e.age AS ages,e.idcard AS idcards,e.sex AS sexs,e.phonenumber as phone_number,
+        case when a.medical_number is null then 1 else 2 end as is_re,
+        case when b.id is null and a.is_fail is null then 1
+        when b.id is null and a.is_fail = 3 then 2 else 3 end as is_hos
+        FROM his_hosptalregist AS a
+        LEFT JOIN his_hospital_manage AS b ON b.hosptal_regist_id = a.id
+        LEFT JOIN his_doctor_info AS c ON c.id = a.doctor_id
+        LEFT JOIN his_nurse AS d ON d.id = a.nurse_id
+        LEFT JOIN his_patient_info AS e ON e.id =a.patient_id
+        left join his_ward as f on f.id = a.ward_id
+        left join his_bed as g on g.id = a.bed_id
+        WHERE
+        1=1
+        <if test="parameter.names != null and parameter.names != ''">
+            and e.name like concat('%' #{parameter.names,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.idcards != null and parameter.idcards != ''">
+            and e.idcard like concat('%' #{parameter.idcards,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.number != null and parameter.number != ''">
+            and a.number like concat('%' #{parameter.number,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.departmentId != null and parameter.departmentId != ''">
+            and a.department_id = #{parameter.departmentId,jdbcType=BIGINT}
+        </if>
+        <if test="parameter.isDischarged != null and parameter.isDischarged != ''">
+            and is_discharged = #{parameter.isDischarged,jdbcType=INTEGER}
+        </if>
+        ) as t
+        where
+        1 =1
+        <if test="parameter.isRe != null and parameter.isRe != ''">
+            and is_re = #{parameter.isRe,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.isHos != null and parameter.isHos != ''">
+            and is_hos = #{parameter.isHos,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+    <select id="selectByPatientId" resultMap="BaseResultMap" parameterType="com.ahsj.hiscore.entity.HisHospitalManage">
+    select his_hospital_manage.*
+    from his_hospital_manage
+    where
+      patient_id = #{patientId,jdbcType=BIGINT}
+  </select>
+    <select id="selectByHosptalRegistId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+          select his_hospital_manage .*
+        from his_hospital_manage
+        where hosptal_regist_id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="selectByHosOrder" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select his_hospital_manage.*
+    from his_hospital_manage
+    where his_hospital_manage.patient_id = #{patientId,jdbcType=BIGINT}
+    order by his_hospital_manage.create_date desc
+  </select>
+
+    <!--查看正在医院住院的病人信息-->
+    <select id="listForDetails" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        SELECT
+        a.*, b.name as doctorName,c.name as nurseNames,d.number as wardsNumber,e.number as bedsNumber
+        FROM
+        his_hospital_manage as a
+        left join his_user_doctor as b1 on a.doctor_id = b1.user_id
+        left join his_doctor_info as b on b1.doctor_id = b.id
+        left join his_user_nurse as c1 on a.nurse_id = c1.user_id
+        left join his_nurse as c on c1.nurse_id = c.id
+        left join his_ward as d on a.ward_id = d.id
+        left join his_bed as e on a.bed_id = e.id
+        where
+        1= 1 and a.is_discharged = 1
+        <if test="parameter.medicalNumber != null and parameter.medicalNumber != ''">
+            and a.medical_number like concat('%' #{parameter.medicalNumber,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.number != null and parameter.number != ''">
+            and a.number like concat('%' #{parameter.number,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.idcard != null and parameter.idcard != ''">
+            and a.idcard like concat('%' #{parameter.idcard,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.phoneNumber != null and parameter.phoneNumber != ''">
+            and a.phone_number like concat('%' #{parameter.phoneNumber,jdbcType=BIGINT},'%')
+        </if>
+        <if test="parameter.patientName != null and parameter.patientName != ''">
+            and a.patient_name like concat('%' #{parameter.patientName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.wardsNumber != null and parameter.wardsNumber != ''">
+            and d.number = #{parameter.wardsNumber,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.bedsNumber != null and parameter.bedsNumber != ''">
+            and e.number = #{parameter.bedsNumber,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.doctorName != null and parameter.doctorName != ''">
+            and b.name like concat('%' #{parameter.doctorName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.nurseNames != null and parameter.nurseNames != ''">
+            and c.name like concat('%' #{parameter.nurseNames,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+    <select id="selectByNumber" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    SELECT
+    a.*, b.name as doctorName,b.numb as doctorNumber, c.name as nurseNames,c.number as nurseNumber,d.number as wardsNumber,e.number as bedsNumber
+    FROM
+    his_hospital_manage as a
+    left join his_doctor_info as b on a.doctor_id = b.id
+    left join his_nurse as c on a.nurse_id = c.id
+    left join his_ward as d on a.ward_id = d.id
+    left join his_bed as e on a.bed_id = e.id
+    where
+    a.medical_number = #{parameter.medicalRecordId,jdbcType = VARCHAR}
+  </select>
+    <select id="selectManageCount" resultType="int" parameterType="java.lang.String">
+        select
+            count(1)
+        from his_hospital_manage
+        where his_hospital_manage.number LIKE CONCAT(#{his_hospital_manage}, '%')
+  </select>
+    <select id="selectByDate" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_hospital_manage
+        where
+        is_discharged = 1
+    </select>
+    <!--根据住院编号查询-->
+    <select id="selectByHospNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    b.name as departmentName,
+    a.*,
+    c.number as bedsNumber,
+    d.number as wardsNumber
+    from his_hospital_manage as a
+      LEFT JOIN `his-userinfo`.organization as b on a.department_id = b.id
+      LEFT JOIN his_bed as c on c.id = a.bed_id
+      LEFT JOIN his_ward as d on d.id = a.ward_id
+    where a.number = #{number,jdbcType=VARCHAR}
+  </select>
+    <!--    批量更新-->
+    <update id="updateBatchForDaily" parameterType="list">
+        update his_hospital_manage
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="hospitalization_day=case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.hospitalizationDay!=null">
+                        when id=#{item.id} then #{item.hospitalizationDay}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where
+        <foreach collection="list" separator="or" item="item" index="index">
+            id=#{item.id}
+        </foreach>
+    </update>
+
+    <select id="selectHospitalManageDataCount" resultMap="BaseResultMap"
+            parameterType="com.ahsj.hiscore.entity.HisHospitalManage">
+	SELECT
+	COUNT(*) as count
+	FROM his_hospital_manage as a
+	WHERE
+        is_discharged = 1
+    order by a.create_date asc
+    </select>
+    <select id="selectForCalculateDate" parameterType="java.util.Date" resultMap="BaseResultMap">
+    select his_hospital_manage.*
+    from his_hospital_manage
+    where
+    create_date &gt;=  #{createDate,jdbcType=TIMESTAMP}
+    and
+    create_date &lt; #{endDate,jdbcType=TIMESTAMP}
+    order by create_date asc
+  </select>
+    <select id="countUseBed" resultType="java.lang.Integer">
+select count(id) as userNum from his_hospital_manage where is_discharged=1
+  </select>
+    <select id="getHisHospitalManageAll" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
+        select o.name as patient_name ,o.phonenumber as phone_number,o.sex as sex,
+        o.idcard as idcard ,o.age as age,m.care_level,
+        i.user_name as doctor_name, b.number as number,
+        b.price as price,e.user_name as nurse_name,m.create_date as create_date
+        from his_hospital_manage as m
+        LEFT JOIN `his-userinfo`.user_info as i on i.id = m.doctor_id
+        LEFT JOIN his_patient_info as o on o.id = m.patient_id
+        LEFT JOIN `his-userinfo`.user_info as e on e.id = m.nurse_id
+        left JOIN his_bed as b on b.id = m.bed_id
+        left join his_ward as w on w.id = m.ward_id
+        where m.is_discharged=1
+        <if test="wardId != null and wardId != ''">
+            and m.ward_id = #{wardId,jdbcType=BIGINT}
+        </if>
+        <if test="careLevel != null and careLevel != ''">
+            and care_level = #{careLevel}
+        </if>
+
+    </select>
+    <select id="getHisHospitalManageByNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+select o.name as patient_name ,o.phonenumber as phone_number,o.sex as sex,
+o.idcard as idcard ,o.age as age,m.care_level ,
+i.user_name as doctor_name, b.number as number,
+b.price as price,e.user_name as nurse_name,m.create_date as create_date
+from his_hospital_manage as m
+LEFT JOIN `his-userinfo`.user_info  as i on i.id = m.doctor_id
+LEFT JOIN his_patient_info as o on o.id = m.patient_id
+LEFT JOIN `his-userinfo`.user_info  as e  on e.id = m.nurse_id
+left JOIN his_bed as b on b.id = m.bed_id
+where m.is_discharged=1 AND  B.number =#{number,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getHisHospitalManageBed" resultMap="BaseResultMap">
+    select hm.* , b.number as bed_number from his_hospital_manage hm left join his_bed b on hm.bed_id = b.id where
+    hm.is_discharged = 1 </select>
+
+    <select id="selectByPatientIdAndInpatient" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select his_hospital_manage.*
+from his_hospital_manage
+where patient_id = #{patientId,jdbcType=BIGINT} and is_discharged = 1
+order by create_date desc
+limit 0,1
+    </select>
+    <select id="selectNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select m.*,b.number as bed_number,w.number as ward_number
+from his_hospital_manage as m
+LEFT JOIN his_bed as b on b.id = m.bed_id
+LEFT JOIN his_ward as  w on w.id = m.ward_id
+where m.number =  #{number,jdbcType=VARCHAR}</select>
+
+</mapper>

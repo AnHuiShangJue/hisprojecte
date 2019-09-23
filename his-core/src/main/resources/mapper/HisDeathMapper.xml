@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisDeathMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisDeath" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="his_hospital_manage_id" property="hisHospitalManageId" jdbcType="BIGINT" />
+    <result column="pathology" property="pathology" jdbcType="VARCHAR" />
+    <result column="examine" property="examine" jdbcType="VARCHAR" />
+    <result column="admitting_diagnosis" property="admittingDiagnosis" jdbcType="VARCHAR" />
+    <result column="postmortem_diagnsis" property="postmortemDiagnsis" jdbcType="VARCHAR" />
+    <result column="situation" property="situation" jdbcType="VARCHAR" />
+    <result column="details" property="details" jdbcType="VARCHAR" />
+    <result column="autopsy" property="autopsy" jdbcType="VARCHAR" />
+    <result column="signatory" property="signatory" jdbcType="VARCHAR" />
+    <result column="signatory_date" property="signatoryDate" jdbcType="TIMESTAMP" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="major_id" property="majorId" jdbcType="BIGINT" />
+    <result column="doctor_id" property="doctorId" jdbcType="BIGINT" />
+    <result column="archiater_id" property="archiaterId" jdbcType="BIGINT" />
+    <result column="death_time" property="deathTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, his_hospital_manage_id, pathology, examine, admitting_diagnosis, postmortem_diagnsis, 
+    situation, details, autopsy, signatory, signatory_date, create_user_id, create_date, 
+    update_date, update_user_id, major_id, doctor_id, archiater_id, death_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from his_death
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from his_death
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisDeath" useGeneratedKeys="true" keyProperty="id"  >
+    insert into his_death (id, his_hospital_manage_id, pathology, 
+      examine, admitting_diagnosis, postmortem_diagnsis, 
+      situation, details, autopsy, 
+      signatory, signatory_date, create_user_id, 
+      create_date, update_date, update_user_id, 
+      major_id, doctor_id, archiater_id, 
+      death_time)
+    values (#{id,jdbcType=BIGINT}, #{hisHospitalManageId,jdbcType=BIGINT}, #{pathology,jdbcType=VARCHAR}, 
+      #{examine,jdbcType=VARCHAR}, #{admittingDiagnosis,jdbcType=VARCHAR}, #{postmortemDiagnsis,jdbcType=VARCHAR}, 
+      #{situation,jdbcType=VARCHAR}, #{details,jdbcType=VARCHAR}, #{autopsy,jdbcType=VARCHAR}, 
+      #{signatory,jdbcType=VARCHAR}, #{signatoryDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, 
+      #{majorId,jdbcType=BIGINT}, #{doctorId,jdbcType=BIGINT}, #{archiaterId,jdbcType=BIGINT}, 
+      #{deathTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisDeath" >
+    insert into his_death
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="hisHospitalManageId != null" >
+        his_hospital_manage_id,
+      </if>
+      <if test="pathology != null" >
+        pathology,
+      </if>
+      <if test="examine != null" >
+        examine,
+      </if>
+      <if test="admittingDiagnosis != null" >
+        admitting_diagnosis,
+      </if>
+      <if test="postmortemDiagnsis != null" >
+        postmortem_diagnsis,
+      </if>
+      <if test="situation != null" >
+        situation,
+      </if>
+      <if test="details != null" >
+        details,
+      </if>
+      <if test="autopsy != null" >
+        autopsy,
+      </if>
+      <if test="signatory != null" >
+        signatory,
+      </if>
+      <if test="signatoryDate != null" >
+        signatory_date,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="majorId != null" >
+        major_id,
+      </if>
+      <if test="doctorId != null" >
+        doctor_id,
+      </if>
+      <if test="archiaterId != null" >
+        archiater_id,
+      </if>
+      <if test="deathTime != null" >
+        death_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="hisHospitalManageId != null" >
+        #{hisHospitalManageId,jdbcType=BIGINT},
+      </if>
+      <if test="pathology != null" >
+        #{pathology,jdbcType=VARCHAR},
+      </if>
+      <if test="examine != null" >
+        #{examine,jdbcType=VARCHAR},
+      </if>
+      <if test="admittingDiagnosis != null" >
+        #{admittingDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="postmortemDiagnsis != null" >
+        #{postmortemDiagnsis,jdbcType=VARCHAR},
+      </if>
+      <if test="situation != null" >
+        #{situation,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null" >
+        #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="autopsy != null" >
+        #{autopsy,jdbcType=VARCHAR},
+      </if>
+      <if test="signatory != null" >
+        #{signatory,jdbcType=VARCHAR},
+      </if>
+      <if test="signatoryDate != null" >
+        #{signatoryDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="majorId != null" >
+        #{majorId,jdbcType=BIGINT},
+      </if>
+      <if test="doctorId != null" >
+        #{doctorId,jdbcType=BIGINT},
+      </if>
+      <if test="archiaterId != null" >
+        #{archiaterId,jdbcType=BIGINT},
+      </if>
+      <if test="deathTime != null" >
+        #{deathTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisDeath" >
+    update his_death
+    <set >
+      <if test="hisHospitalManageId != null" >
+        his_hospital_manage_id = #{hisHospitalManageId,jdbcType=BIGINT},
+      </if>
+      <if test="pathology != null" >
+        pathology = #{pathology,jdbcType=VARCHAR},
+      </if>
+      <if test="examine != null" >
+        examine = #{examine,jdbcType=VARCHAR},
+      </if>
+      <if test="admittingDiagnosis != null" >
+        admitting_diagnosis = #{admittingDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="postmortemDiagnsis != null" >
+        postmortem_diagnsis = #{postmortemDiagnsis,jdbcType=VARCHAR},
+      </if>
+      <if test="situation != null" >
+        situation = #{situation,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null" >
+        details = #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="autopsy != null" >
+        autopsy = #{autopsy,jdbcType=VARCHAR},
+      </if>
+      <if test="signatory != null" >
+        signatory = #{signatory,jdbcType=VARCHAR},
+      </if>
+      <if test="signatoryDate != null" >
+        signatory_date = #{signatoryDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="majorId != null" >
+        major_id = #{majorId,jdbcType=BIGINT},
+      </if>
+      <if test="doctorId != null" >
+        doctor_id = #{doctorId,jdbcType=BIGINT},
+      </if>
+      <if test="archiaterId != null" >
+        archiater_id = #{archiaterId,jdbcType=BIGINT},
+      </if>
+      <if test="deathTime != null" >
+        death_time = #{deathTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisDeath" >
+    update his_death
+    set his_hospital_manage_id = #{hisHospitalManageId,jdbcType=BIGINT},
+      pathology = #{pathology,jdbcType=VARCHAR},
+      examine = #{examine,jdbcType=VARCHAR},
+      admitting_diagnosis = #{admittingDiagnosis,jdbcType=VARCHAR},
+      postmortem_diagnsis = #{postmortemDiagnsis,jdbcType=VARCHAR},
+      situation = #{situation,jdbcType=VARCHAR},
+      details = #{details,jdbcType=VARCHAR},
+      autopsy = #{autopsy,jdbcType=VARCHAR},
+      signatory = #{signatory,jdbcType=VARCHAR},
+      signatory_date = #{signatoryDate,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      major_id = #{majorId,jdbcType=BIGINT},
+      doctor_id = #{doctorId,jdbcType=BIGINT},
+      archiater_id = #{archiaterId,jdbcType=BIGINT},
+      death_time = #{deathTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+       select
+   h.*
+    from his_death as h
+    where h.his_hospital_manage_id =(
+    select id from  his_hospital_manage as m where  m.number =#{number}
+    )
+  </select>
+</mapper>

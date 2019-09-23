@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisInspectionCombinationMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisInspectionCombination" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="ordernum" property="ordernum" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="record" property="record" jdbcType="VARCHAR" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="is_enable" property="isEnable" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, create_date, update_date, create_user_id, update_user_id, ordernum, name, number,
+    description, record, money, is_enable
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from his_inspection_combination
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+
+
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from his_inspection_combination
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisInspectionCombination" useGeneratedKeys="true" keyProperty="id" >
+    insert into his_inspection_combination (id, create_date, update_date,
+                                            create_user_id, update_user_id, ordernum,
+                                            name, number, description,
+                                            record, money, is_enable
+    )
+    values (#{id,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP},
+            #{createUserId,jdbcType=BIGINT}, #{updateUserId,jdbcType=BIGINT}, #{ordernum,jdbcType=INTEGER},
+            #{name,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+            #{record,jdbcType=VARCHAR}, #{money,jdbcType=DECIMAL}, #{isEnable,jdbcType=INTEGER}
+           )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisInspectionCombination" >
+    insert into his_inspection_combination
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="ordernum != null" >
+        ordernum,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="record != null" >
+        record,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="isEnable != null" >
+        is_enable,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="ordernum != null" >
+        #{ordernum,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="record != null" >
+        #{record,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisInspectionCombination" >
+    update his_inspection_combination
+    <set >
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="ordernum != null" >
+        ordernum = #{ordernum,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="record != null" >
+        record = #{record,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="isEnable != null" >
+        is_enable = #{isEnable,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisInspectionCombination" >
+    update his_inspection_combination
+    set create_date = #{createDate,jdbcType=TIMESTAMP},
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+        ordernum = #{ordernum,jdbcType=INTEGER},
+        name = #{name,jdbcType=VARCHAR},
+        number = #{number,jdbcType=VARCHAR},
+        description = #{description,jdbcType=VARCHAR},
+        record = #{record,jdbcType=VARCHAR},
+        money = #{money,jdbcType=DECIMAL},
+        is_enable = #{isEnable,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--自定义SQL-->
+
+  <select id="queryList" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
+    select
+    his.*
+    from his_inspection_combination his
+    where 1=1
+    <if test="parameter.name != null and parameter.name != ''">
+      and  name like concat('%', #{parameter.name,jdbcType=INTEGER},'%')
+    </if>
+    <if test="parameter.isEnable != null and parameter.isEnable != ''">
+      and is_enable = #{parameter.isEnable,jdbcType=INTEGER}
+    </if>
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+
+  <select id="selectByNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from his_inspection_combination
+    where number = #{number,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectByhisInspectionCombinationName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from his_inspection_combination
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="selectCombineProject"  resultMap="BaseResultMap" >
+    SELECT
+      his_inspection_combination.*
+    FROM his_inspection_combination
+    where is_enable = 1
+  </select>
+
+  <select id="viewDetailInMedicalTemplate" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    select c.*,
+           case when c.is_enable = 1 then '项目可用' else '项目不可用' end as isusable
+    from his_inspection_combination as a
+    left join his_inspec_project as b on a.id = b.inspection_id
+    left join his_project as c on b.project_id = c.id
+    where a.id = #{parameter.combineId,jdbcType=BIGINT}
+  </select>
+
+</mapper>

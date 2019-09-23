@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisMediExitDetailsMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisMediExitDetails">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="pharmacy_id" property="pharmacyId" jdbcType="BIGINT"/>
+        <result column="exit_count" property="exitCount" jdbcType="INTEGER"/>
+        <result column="validity_period" property="validityPeriod" jdbcType="TIMESTAMP"/>
+        <result column="create_user_id" property="createUserId" jdbcType="BIGINT"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="BIGINT"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="is_pay" property="isPay" jdbcType="INTEGER"/>
+        <result column="is_back" property="isBack" jdbcType="INTEGER"/>
+        <result column="is_del" property="isDel" jdbcType="INTEGER"/>
+        <result column="count" property="count" jdbcType="INTEGER"/>
+        <result column="total_price" property="totalPrice" jdbcType="DECIMAL"/>
+        <result column="drugs_numb" property="drugsNumb" jdbcType="VARCHAR"/>
+        <result column="drugs_name" property="drugsName" jdbcType="VARCHAR"/>
+        <result column="drugs_alias" property="drugsAlias" jdbcType="VARCHAR"/>
+        <result column="drugs_spec" property="drugsSpec" jdbcType="VARCHAR"/>
+        <result column="exit_number" property="exitNumber" jdbcType="VARCHAR"/>
+        <result column="record_number" property="recordNumber" jdbcType="VARCHAR"/>
+        <result column="patient_Name" property="patientName" jdbcType="VARCHAR"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="toll_number" property="tollNumber" jdbcType="VARCHAR"/>
+        <result column="medi_enter_id" property="mediEnterId" jdbcType="BIGINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, pharmacy_id, exit_count, validity_period, create_user_id, create_date, update_user_id, 
+    update_date, description, remarks, is_pay, is_back, is_del, count, total_price, drugs_numb, 
+    drugs_name, drugs_alias, drugs_spec,exit_number,record_number,toll_number,medi_enter_id
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from his_medi_exit_details
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_medi_exit_details
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisMediExitDetails">
+    insert into his_medi_exit_details (id, pharmacy_id, exit_count, 
+      validity_period, create_user_id, create_date, 
+      update_user_id, update_date, description, 
+      remarks, is_pay, is_back, 
+      is_del, count, total_price, 
+      drugs_numb, drugs_name, drugs_alias, 
+      drugs_spec,exit_number,record_number,toll_number,medi_enter_id)
+    values (#{id,jdbcType=BIGINT}, #{pharmacyId,jdbcType=BIGINT}, #{exitCount,jdbcType=INTEGER}, 
+      #{validityPeriod,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, #{description,jdbcType=VARCHAR}, 
+      #{remarks,jdbcType=VARCHAR}, #{isPay,jdbcType=INTEGER}, #{isBack,jdbcType=INTEGER}, 
+      #{isDel,jdbcType=INTEGER}, #{count,jdbcType=INTEGER}, #{totalPrice,jdbcType=DECIMAL}, 
+      #{drugsNumb,jdbcType=VARCHAR}, #{drugsName,jdbcType=VARCHAR}, #{drugsAlias,jdbcType=VARCHAR}, 
+      #{drugsSpec,jdbcType=VARCHAR},#{exitNumber,jdbcType=VARCHAR},#{recordNumber,jdbcType=VARCHAR},#{tollNumber,jdbcType=VARCHAR},#{mediEnterId,jdbcType=BIGINT})
+  </insert>
+    <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisMediExitDetails">
+        insert into his_medi_exit_details
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="pharmacyId != null">
+                pharmacy_id,
+            </if>
+            <if test="exitCount != null">
+                exit_count,
+            </if>
+            <if test="validityPeriod != null">
+                validity_period,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="isPay != null">
+                is_pay,
+            </if>
+            <if test="isBack != null">
+                is_back,
+            </if>
+            <if test="isDel != null">
+                is_del,
+            </if>
+            <if test="count != null">
+                count,
+            </if>
+            <if test="totalPrice != null">
+                total_price,
+            </if>
+            <if test="drugsNumb != null">
+                drugs_numb,
+            </if>
+            <if test="drugsName != null">
+                drugs_name,
+            </if>
+            <if test="drugsAlias != null">
+                drugs_alias,
+            </if>
+            <if test="drugsSpec != null">
+                drugs_spec,
+            </if>
+            <if test="exitNumber != null">
+                exit_number,
+            </if>
+            <if test="recordNumber != null">
+                record_number,
+            </if>
+            <if test="tollNumber != null">
+                toll_number,
+            </if>
+            <if test="mediEnterId != null">
+                medi_enter_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="pharmacyId != null">
+                #{pharmacyId,jdbcType=BIGINT},
+            </if>
+            <if test="exitCount != null">
+                #{exitCount,jdbcType=INTEGER},
+            </if>
+            <if test="validityPeriod != null">
+                #{validityPeriod,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="isPay != null">
+                #{isPay,jdbcType=INTEGER},
+            </if>
+            <if test="isBack != null">
+                #{isBack,jdbcType=INTEGER},
+            </if>
+            <if test="isDel != null">
+                #{isDel,jdbcType=INTEGER},
+            </if>
+            <if test="count != null">
+                #{count,jdbcType=INTEGER},
+            </if>
+            <if test="totalPrice != null">
+                #{totalPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="drugsNumb != null">
+                #{drugsNumb,jdbcType=VARCHAR},
+            </if>
+            <if test="drugsName != null">
+                #{drugsName,jdbcType=VARCHAR},
+            </if>
+            <if test="drugsAlias != null">
+                #{drugsAlias,jdbcType=VARCHAR},
+            </if>
+            <if test="drugsSpec != null">
+                #{drugsSpec,jdbcType=VARCHAR},
+            </if>
+            <if test="exitNumber != null">
+                #{exitNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="recordNumber != null">
+                #{recordNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="tollNumber != null">
+                #{tollNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="mediEnterId != null">
+                #{mediEnterId,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisMediExitDetails">
+        update his_medi_exit_details
+        <set>
+            <if test="pharmacyId != null">
+                pharmacy_id = #{pharmacyId,jdbcType=BIGINT},
+            </if>
+            <if test="exitCount != null">
+                exit_count = #{exitCount,jdbcType=INTEGER},
+            </if>
+            <if test="validityPeriod != null">
+                validity_period = #{validityPeriod,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="isPay != null">
+                is_pay = #{isPay,jdbcType=INTEGER},
+            </if>
+            <if test="isBack != null">
+                is_back = #{isBack,jdbcType=INTEGER},
+            </if>
+            <if test="isDel != null">
+                is_del = #{isDel,jdbcType=INTEGER},
+            </if>
+            <if test="count != null">
+                count = #{count,jdbcType=INTEGER},
+            </if>
+            <if test="totalPrice != null">
+                total_price = #{totalPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="drugsNumb != null">
+                drugs_numb = #{drugsNumb,jdbcType=VARCHAR},
+            </if>
+            <if test="drugsName != null">
+                drugs_name = #{drugsName,jdbcType=VARCHAR},
+            </if>
+            <if test="drugsAlias != null">
+                drugs_alias = #{drugsAlias,jdbcType=VARCHAR},
+            </if>
+            <if test="drugsSpec != null">
+                drugs_spec = #{drugsSpec,jdbcType=VARCHAR},
+            </if>
+            <if test="exitNumber != null">
+                exit_number = #{exitNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="recordNumber != null">
+                record_number = #{recordNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="tollNumber != null">
+                toll_number = #{tollNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="mediEnterId != null">
+                medi_enter_id = #{mediEnterId,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisMediExitDetails">
+    update his_medi_exit_details
+    set pharmacy_id = #{pharmacyId,jdbcType=BIGINT},
+      exit_count = #{exitCount,jdbcType=INTEGER},
+      validity_period = #{validityPeriod,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      description = #{description,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      is_pay = #{isPay,jdbcType=INTEGER},
+      is_back = #{isBack,jdbcType=INTEGER},
+      is_del = #{isDel,jdbcType=INTEGER},
+      count = #{count,jdbcType=INTEGER},
+      total_price = #{totalPrice,jdbcType=DECIMAL},
+      drugs_numb = #{drugsNumb,jdbcType=VARCHAR},
+      drugs_name = #{drugsName,jdbcType=VARCHAR},
+      drugs_alias = #{drugsAlias,jdbcType=VARCHAR},
+      drugs_spec = #{drugsSpec,jdbcType=VARCHAR},
+      exit_number = #{exitNumber,jdbcType=VARCHAR},
+        record_number = #{recordNumber,jdbcType=VARCHAR},
+        toll_number = #{tollNumber,jdbcType=VARCHAR},
+        medi_enter_id = #{mediEnterId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <!--自定义sql-->
+    <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+
+        insert into his_medi_exit_details(id, pharmacy_id, exit_count, validity_period, create_user_id, create_date,
+        update_user_id,
+        update_date, description, remarks, is_pay, is_back, is_del, count, total_price, drugs_numb,
+        drugs_name, drugs_alias, drugs_spec,exit_number,record_number,toll_number,medi_enter_id)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id,jdbcType=BIGINT}, #{item.pharmacyId,jdbcType=BIGINT}, #{item.exitCount,jdbcType=INTEGER},
+            #{item.validityPeriod,jdbcType=TIMESTAMP}, #{item.createUserId,jdbcType=BIGINT},
+            #{item.createDate,jdbcType=TIMESTAMP},
+            #{item.updateUserId,jdbcType=BIGINT}, #{item.updateDate,jdbcType=TIMESTAMP},
+            #{item.description,jdbcType=VARCHAR},
+            #{item.remarks,jdbcType=VARCHAR}, #{item.isPay,jdbcType=INTEGER}, #{item.isBack,jdbcType=INTEGER},
+            #{item.isDel,jdbcType=INTEGER}, #{item.count,jdbcType=INTEGER}, #{item.totalPrice,jdbcType=DECIMAL},
+            #{item.drugsNumb,jdbcType=VARCHAR}, #{item.drugsName,jdbcType=VARCHAR}, #{item.drugsAlias,jdbcType=VARCHAR},
+            #{item.drugsSpec,jdbcType=VARCHAR},#{item.exitNumber,jdbcType=VARCHAR},
+            #{item.recordNumber,jdbcType=VARCHAR},#{item.tollNumber,jdbcType=VARCHAR},
+            #{item.mediEnterId,jdbcType=BIGINT})
+        </foreach>
+    </insert>
+
+
+    <select id="selectByRecordNumberAndDrugsnumbAndValidityPeriod"
+            parameterType="com.ahsj.hiscore.entity.HisRelatedMedicationandexit" resultMap="BaseResultMap">
+    select his_medi_exit_details.*
+    FROM his_medi_exit_details
+    where record_number =#{recordNumber,jdbcType=VARCHAR}
+      and drugs_numb=#{drugsNumb,jdbcType=VARCHAR} and validity_period =#{validityPeriod,jdbcType=TIMESTAMP}
+order by his_medi_exit_details.create_date desc
+  </select>
+
+    <select id="listByIds" resultMap="BaseResultMap">
+        select m.id ,e.toll_number,
+        e.drugs_name,e.drugs_spec,e.exit_count,e.create_date,i.user_name,e.record_number,o.`name` as
+        patient_Name,e.validity_period
+        from his_medi_exit_details as e
+        LEFT JOIN his_medicine_info as m on m.drugs_numb = e.drugs_numb
+        LEFT JOIN `his-userinfo`.user_info as i on i.id = e.create_user_id
+        LEFT JOIN his_medical_record as r on r.medical_record_id = e.record_number
+        LEFT JOIN his_patient_info as o on o.id =r.patient_id
+        where e.id in
+        (select r.exit_id from his_related_medicationandexit as r where r.medication_detail_id in
+        <foreach collection="array" item="id" index="index"
+                 open="(" close=")" separator=",">
+            #{id,jdbcType=BIGINT}
+        </foreach>)
+    </select>
+
+    <select id="listByIdsHistory" resultMap="BaseResultMap">
+select m.id ,e.toll_number, e.drugs_name,e.drugs_spec,e.exit_count,e.create_date,i.user_name,e.record_number,o.`name`
+as patient_Name,e.validity_period from his_medi_exit_details as e LEFT JOIN his_medicine_info
+as m on m.drugs_numb = e.drugs_numb LEFT JOIN `his-userinfo`.user_info as i on i.id = e.create_user_id
+LEFT JOIN his_medical_record as r on r.medical_record_id = e.record_number LEFT JOIN his_patient_info
+as o on o.id =r.patient_id where e.id in (select r.exit_id from his_related_medicationandexit
+as r where r.medication_detail_id  in (
+select  d.id from his_medication_details as d where d.medical_record_id = (
+
+select distinct h.medical_record_id from his_medication_details  as h where h.id in <foreach collection="array" item="id" index="index"
+                                                                                             open="(" close=")" separator=",">
+        #{id,jdbcType=BIGINT}
+    </foreach>
+
+)
+and  d.id not in<foreach collection="array" item="id" index="index"
+                         open="(" close=")" separator=",">
+        #{id,jdbcType=BIGINT}
+    </foreach> ) )
+    </select>
+</mapper>

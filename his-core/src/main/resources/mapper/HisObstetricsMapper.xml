@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisObstetricsMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisObstetrics" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="his_hospital_manage_id" property="hisHospitalManageId" jdbcType="BIGINT" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="is_married" property="isMarried" jdbcType="INTEGER" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+    <result column="education" property="education" jdbcType="VARCHAR" />
+    <result column="cause" property="cause" jdbcType="VARCHAR" />
+    <result column="way" property="way" jdbcType="VARCHAR" />
+    <result column="admitting_diagnosis" property="admittingDiagnosis" jdbcType="VARCHAR" />
+    <result column="weight" property="weight" jdbcType="DOUBLE" />
+    <result column="body_temperature" property="bodyTemperature" jdbcType="DOUBLE" />
+    <result column="pulse" property="pulse" jdbcType="VARCHAR" />
+    <result column="breathe" property="breathe" jdbcType="VARCHAR" />
+    <result column="blood_pressure" property="bloodPressure" jdbcType="VARCHAR" />
+    <result column="is_mind" property="isMind" jdbcType="INTEGER" />
+    <result column="is_face" property="isFace" jdbcType="INTEGER" />
+    <result column="is_feeling" property="isFeeling" jdbcType="INTEGER" />
+    <result column="skin" property="skin" jdbcType="VARCHAR" />
+    <result column="competence" property="competence" jdbcType="VARCHAR" />
+    <result column="self" property="self" jdbcType="VARCHAR" />
+    <result column="previous_history" property="previousHistory" jdbcType="VARCHAR" />
+    <result column="allergic_history" property="allergicHistory" jdbcType="VARCHAR" />
+    <result column="other" property="other" jdbcType="VARCHAR" />
+    <result column="gestation" property="gestation" jdbcType="VARCHAR" />
+    <result column="breast" property="breast" jdbcType="VARCHAR" />
+    <result column="lmp" property="lmp" jdbcType="VARCHAR" />
+    <result column="due_date" property="dueDate" jdbcType="TIMESTAMP" />
+    <result column="bleeding_during_pregnancy" property="bleedingDuringPregnancy" jdbcType="VARCHAR" />
+    <result column="drug_pregnancy" property="drugPregnancy" jdbcType="VARCHAR" />
+    <result column="fetal_position" property="fetalPosition" jdbcType="VARCHAR" />
+    <result column="fetal_heart" property="fetalHeart" jdbcType="VARCHAR" />
+    <result column="quickening" property="quickening" jdbcType="VARCHAR" />
+    <result column="abnormal_quickening" property="abnormalQuickening" jdbcType="VARCHAR" />
+    <result column="caul" property="caul" jdbcType="VARCHAR" />
+    <result column="colporrhagia" property="colporrhagia" jdbcType="VARCHAR" />
+    <result column="uterine_contraction" property="uterineContraction" jdbcType="VARCHAR" />
+    <result column="law_contractions" property="lawContractions" jdbcType="VARCHAR" />
+    <result column="breast_development" property="breastDevelopment" jdbcType="VARCHAR" />
+    <result column="obstetrics_other" property="obstetricsOther" jdbcType="VARCHAR" />
+    <result column="oedema_circumstance" property="oedemaCircumstance" jdbcType="VARCHAR" />
+    <result column="pro" property="pro" jdbcType="VARCHAR" />
+    <result column="urine_sugar" property="urineSugar" jdbcType="VARCHAR" />
+    <result column="educations" property="educations" jdbcType="VARCHAR" />
+    <result column="plan" property="plan" jdbcType="VARCHAR" />
+    <result column="teval_date" property="tevalDate" jdbcType="TIMESTAMP" />
+    <result column="doctor_id" property="doctorId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, his_hospital_manage_id, create_user_id, create_date, update_user_id, update_date, 
+    is_married, location, telephone, job, education, cause, way, admitting_diagnosis, 
+    weight, body_temperature, pulse, breathe, blood_pressure, is_mind, is_face, is_feeling, 
+    skin, competence, self, previous_history, allergic_history, other, gestation, breast, 
+    lmp, due_date, bleeding_during_pregnancy, drug_pregnancy, fetal_position, fetal_heart, 
+    quickening, abnormal_quickening, caul, colporrhagia, uterine_contraction, law_contractions, 
+    breast_development, obstetrics_other, oedema_circumstance, pro, urine_sugar, educations, 
+    plan, teval_date, doctor_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from his_obstetrics
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from his_obstetrics
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisObstetrics"  useGeneratedKeys="true" keyProperty="id">
+    insert into his_obstetrics (id, his_hospital_manage_id, create_user_id, 
+      create_date, update_user_id, update_date, 
+      is_married, location, telephone, 
+      job, education, cause, 
+      way, admitting_diagnosis, weight, 
+      body_temperature, pulse, breathe, 
+      blood_pressure, is_mind, is_face, 
+      is_feeling, skin, competence, 
+      self, previous_history, allergic_history, 
+      other, gestation, breast, 
+      lmp, due_date, bleeding_during_pregnancy, 
+      drug_pregnancy, fetal_position, fetal_heart, 
+      quickening, abnormal_quickening, caul, 
+      colporrhagia, uterine_contraction, law_contractions, 
+      breast_development, obstetrics_other, oedema_circumstance, 
+      pro, urine_sugar, educations, 
+      plan, teval_date, doctor_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{hisHospitalManageId,jdbcType=BIGINT}, #{createUserId,jdbcType=BIGINT}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{isMarried,jdbcType=INTEGER}, #{location,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
+      #{job,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, #{cause,jdbcType=VARCHAR}, 
+      #{way,jdbcType=VARCHAR}, #{admittingDiagnosis,jdbcType=VARCHAR}, #{weight,jdbcType=DOUBLE}, 
+      #{bodyTemperature,jdbcType=DOUBLE}, #{pulse,jdbcType=VARCHAR}, #{breathe,jdbcType=VARCHAR}, 
+      #{bloodPressure,jdbcType=VARCHAR}, #{isMind,jdbcType=INTEGER}, #{isFace,jdbcType=INTEGER}, 
+      #{isFeeling,jdbcType=INTEGER}, #{skin,jdbcType=VARCHAR}, #{competence,jdbcType=VARCHAR}, 
+      #{self,jdbcType=VARCHAR}, #{previousHistory,jdbcType=VARCHAR}, #{allergicHistory,jdbcType=VARCHAR}, 
+      #{other,jdbcType=VARCHAR}, #{gestation,jdbcType=VARCHAR}, #{breast,jdbcType=VARCHAR}, 
+      #{lmp,jdbcType=VARCHAR}, #{dueDate,jdbcType=TIMESTAMP}, #{bleedingDuringPregnancy,jdbcType=VARCHAR}, 
+      #{drugPregnancy,jdbcType=VARCHAR}, #{fetalPosition,jdbcType=VARCHAR}, #{fetalHeart,jdbcType=VARCHAR}, 
+      #{quickening,jdbcType=VARCHAR}, #{abnormalQuickening,jdbcType=VARCHAR}, #{caul,jdbcType=VARCHAR}, 
+      #{colporrhagia,jdbcType=VARCHAR}, #{uterineContraction,jdbcType=VARCHAR}, #{lawContractions,jdbcType=VARCHAR}, 
+      #{breastDevelopment,jdbcType=VARCHAR}, #{obstetricsOther,jdbcType=VARCHAR}, #{oedemaCircumstance,jdbcType=VARCHAR}, 
+      #{pro,jdbcType=VARCHAR}, #{urineSugar,jdbcType=VARCHAR}, #{educations,jdbcType=VARCHAR}, 
+      #{plan,jdbcType=VARCHAR}, #{tevalDate,jdbcType=TIMESTAMP}, #{doctorId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisObstetrics" >
+    insert into his_obstetrics
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="hisHospitalManageId != null" >
+        his_hospital_manage_id,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="isMarried != null" >
+        is_married,
+      </if>
+      <if test="location != null" >
+        location,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="job != null" >
+        job,
+      </if>
+      <if test="education != null" >
+        education,
+      </if>
+      <if test="cause != null" >
+        cause,
+      </if>
+      <if test="way != null" >
+        way,
+      </if>
+      <if test="admittingDiagnosis != null" >
+        admitting_diagnosis,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="bodyTemperature != null" >
+        body_temperature,
+      </if>
+      <if test="pulse != null" >
+        pulse,
+      </if>
+      <if test="breathe != null" >
+        breathe,
+      </if>
+      <if test="bloodPressure != null" >
+        blood_pressure,
+      </if>
+      <if test="isMind != null" >
+        is_mind,
+      </if>
+      <if test="isFace != null" >
+        is_face,
+      </if>
+      <if test="isFeeling != null" >
+        is_feeling,
+      </if>
+      <if test="skin != null" >
+        skin,
+      </if>
+      <if test="competence != null" >
+        competence,
+      </if>
+      <if test="self != null" >
+        self,
+      </if>
+      <if test="previousHistory != null" >
+        previous_history,
+      </if>
+      <if test="allergicHistory != null" >
+        allergic_history,
+      </if>
+      <if test="other != null" >
+        other,
+      </if>
+      <if test="gestation != null" >
+        gestation,
+      </if>
+      <if test="breast != null" >
+        breast,
+      </if>
+      <if test="lmp != null" >
+        lmp,
+      </if>
+      <if test="dueDate != null" >
+        due_date,
+      </if>
+      <if test="bleedingDuringPregnancy != null" >
+        bleeding_during_pregnancy,
+      </if>
+      <if test="drugPregnancy != null" >
+        drug_pregnancy,
+      </if>
+      <if test="fetalPosition != null" >
+        fetal_position,
+      </if>
+      <if test="fetalHeart != null" >
+        fetal_heart,
+      </if>
+      <if test="quickening != null" >
+        quickening,
+      </if>
+      <if test="abnormalQuickening != null" >
+        abnormal_quickening,
+      </if>
+      <if test="caul != null" >
+        caul,
+      </if>
+      <if test="colporrhagia != null" >
+        colporrhagia,
+      </if>
+      <if test="uterineContraction != null" >
+        uterine_contraction,
+      </if>
+      <if test="lawContractions != null" >
+        law_contractions,
+      </if>
+      <if test="breastDevelopment != null" >
+        breast_development,
+      </if>
+      <if test="obstetricsOther != null" >
+        obstetrics_other,
+      </if>
+      <if test="oedemaCircumstance != null" >
+        oedema_circumstance,
+      </if>
+      <if test="pro != null" >
+        pro,
+      </if>
+      <if test="urineSugar != null" >
+        urine_sugar,
+      </if>
+      <if test="educations != null" >
+        educations,
+      </if>
+      <if test="plan != null" >
+        plan,
+      </if>
+      <if test="tevalDate != null" >
+        teval_date,
+      </if>
+      <if test="doctorId != null" >
+        doctor_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="hisHospitalManageId != null" >
+        #{hisHospitalManageId,jdbcType=BIGINT},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isMarried != null" >
+        #{isMarried,jdbcType=INTEGER},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="cause != null" >
+        #{cause,jdbcType=VARCHAR},
+      </if>
+      <if test="way != null" >
+        #{way,jdbcType=VARCHAR},
+      </if>
+      <if test="admittingDiagnosis != null" >
+        #{admittingDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="bodyTemperature != null" >
+        #{bodyTemperature,jdbcType=DOUBLE},
+      </if>
+      <if test="pulse != null" >
+        #{pulse,jdbcType=VARCHAR},
+      </if>
+      <if test="breathe != null" >
+        #{breathe,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodPressure != null" >
+        #{bloodPressure,jdbcType=VARCHAR},
+      </if>
+      <if test="isMind != null" >
+        #{isMind,jdbcType=INTEGER},
+      </if>
+      <if test="isFace != null" >
+        #{isFace,jdbcType=INTEGER},
+      </if>
+      <if test="isFeeling != null" >
+        #{isFeeling,jdbcType=INTEGER},
+      </if>
+      <if test="skin != null" >
+        #{skin,jdbcType=VARCHAR},
+      </if>
+      <if test="competence != null" >
+        #{competence,jdbcType=VARCHAR},
+      </if>
+      <if test="self != null" >
+        #{self,jdbcType=VARCHAR},
+      </if>
+      <if test="previousHistory != null" >
+        #{previousHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="allergicHistory != null" >
+        #{allergicHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="other != null" >
+        #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="gestation != null" >
+        #{gestation,jdbcType=VARCHAR},
+      </if>
+      <if test="breast != null" >
+        #{breast,jdbcType=VARCHAR},
+      </if>
+      <if test="lmp != null" >
+        #{lmp,jdbcType=VARCHAR},
+      </if>
+      <if test="dueDate != null" >
+        #{dueDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bleedingDuringPregnancy != null" >
+        #{bleedingDuringPregnancy,jdbcType=VARCHAR},
+      </if>
+      <if test="drugPregnancy != null" >
+        #{drugPregnancy,jdbcType=VARCHAR},
+      </if>
+      <if test="fetalPosition != null" >
+        #{fetalPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="fetalHeart != null" >
+        #{fetalHeart,jdbcType=VARCHAR},
+      </if>
+      <if test="quickening != null" >
+        #{quickening,jdbcType=VARCHAR},
+      </if>
+      <if test="abnormalQuickening != null" >
+        #{abnormalQuickening,jdbcType=VARCHAR},
+      </if>
+      <if test="caul != null" >
+        #{caul,jdbcType=VARCHAR},
+      </if>
+      <if test="colporrhagia != null" >
+        #{colporrhagia,jdbcType=VARCHAR},
+      </if>
+      <if test="uterineContraction != null" >
+        #{uterineContraction,jdbcType=VARCHAR},
+      </if>
+      <if test="lawContractions != null" >
+        #{lawContractions,jdbcType=VARCHAR},
+      </if>
+      <if test="breastDevelopment != null" >
+        #{breastDevelopment,jdbcType=VARCHAR},
+      </if>
+      <if test="obstetricsOther != null" >
+        #{obstetricsOther,jdbcType=VARCHAR},
+      </if>
+      <if test="oedemaCircumstance != null" >
+        #{oedemaCircumstance,jdbcType=VARCHAR},
+      </if>
+      <if test="pro != null" >
+        #{pro,jdbcType=VARCHAR},
+      </if>
+      <if test="urineSugar != null" >
+        #{urineSugar,jdbcType=VARCHAR},
+      </if>
+      <if test="educations != null" >
+        #{educations,jdbcType=VARCHAR},
+      </if>
+      <if test="plan != null" >
+        #{plan,jdbcType=VARCHAR},
+      </if>
+      <if test="tevalDate != null" >
+        #{tevalDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="doctorId != null" >
+        #{doctorId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisObstetrics" >
+    update his_obstetrics
+    <set >
+      <if test="hisHospitalManageId != null" >
+        his_hospital_manage_id = #{hisHospitalManageId,jdbcType=BIGINT},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isMarried != null" >
+        is_married = #{isMarried,jdbcType=INTEGER},
+      </if>
+      <if test="location != null" >
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="cause != null" >
+        cause = #{cause,jdbcType=VARCHAR},
+      </if>
+      <if test="way != null" >
+        way = #{way,jdbcType=VARCHAR},
+      </if>
+      <if test="admittingDiagnosis != null" >
+        admitting_diagnosis = #{admittingDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="bodyTemperature != null" >
+        body_temperature = #{bodyTemperature,jdbcType=DOUBLE},
+      </if>
+      <if test="pulse != null" >
+        pulse = #{pulse,jdbcType=VARCHAR},
+      </if>
+      <if test="breathe != null" >
+        breathe = #{breathe,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodPressure != null" >
+        blood_pressure = #{bloodPressure,jdbcType=VARCHAR},
+      </if>
+      <if test="isMind != null" >
+        is_mind = #{isMind,jdbcType=INTEGER},
+      </if>
+      <if test="isFace != null" >
+        is_face = #{isFace,jdbcType=INTEGER},
+      </if>
+      <if test="isFeeling != null" >
+        is_feeling = #{isFeeling,jdbcType=INTEGER},
+      </if>
+      <if test="skin != null" >
+        skin = #{skin,jdbcType=VARCHAR},
+      </if>
+      <if test="competence != null" >
+        competence = #{competence,jdbcType=VARCHAR},
+      </if>
+      <if test="self != null" >
+        self = #{self,jdbcType=VARCHAR},
+      </if>
+      <if test="previousHistory != null" >
+        previous_history = #{previousHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="allergicHistory != null" >
+        allergic_history = #{allergicHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="other != null" >
+        other = #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="gestation != null" >
+        gestation = #{gestation,jdbcType=VARCHAR},
+      </if>
+      <if test="breast != null" >
+        breast = #{breast,jdbcType=VARCHAR},
+      </if>
+      <if test="lmp != null" >
+        lmp = #{lmp,jdbcType=VARCHAR},
+      </if>
+      <if test="dueDate != null" >
+        due_date = #{dueDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bleedingDuringPregnancy != null" >
+        bleeding_during_pregnancy = #{bleedingDuringPregnancy,jdbcType=VARCHAR},
+      </if>
+      <if test="drugPregnancy != null" >
+        drug_pregnancy = #{drugPregnancy,jdbcType=VARCHAR},
+      </if>
+      <if test="fetalPosition != null" >
+        fetal_position = #{fetalPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="fetalHeart != null" >
+        fetal_heart = #{fetalHeart,jdbcType=VARCHAR},
+      </if>
+      <if test="quickening != null" >
+        quickening = #{quickening,jdbcType=VARCHAR},
+      </if>
+      <if test="abnormalQuickening != null" >
+        abnormal_quickening = #{abnormalQuickening,jdbcType=VARCHAR},
+      </if>
+      <if test="caul != null" >
+        caul = #{caul,jdbcType=VARCHAR},
+      </if>
+      <if test="colporrhagia != null" >
+        colporrhagia = #{colporrhagia,jdbcType=VARCHAR},
+      </if>
+      <if test="uterineContraction != null" >
+        uterine_contraction = #{uterineContraction,jdbcType=VARCHAR},
+      </if>
+      <if test="lawContractions != null" >
+        law_contractions = #{lawContractions,jdbcType=VARCHAR},
+      </if>
+      <if test="breastDevelopment != null" >
+        breast_development = #{breastDevelopment,jdbcType=VARCHAR},
+      </if>
+      <if test="obstetricsOther != null" >
+        obstetrics_other = #{obstetricsOther,jdbcType=VARCHAR},
+      </if>
+      <if test="oedemaCircumstance != null" >
+        oedema_circumstance = #{oedemaCircumstance,jdbcType=VARCHAR},
+      </if>
+      <if test="pro != null" >
+        pro = #{pro,jdbcType=VARCHAR},
+      </if>
+      <if test="urineSugar != null" >
+        urine_sugar = #{urineSugar,jdbcType=VARCHAR},
+      </if>
+      <if test="educations != null" >
+        educations = #{educations,jdbcType=VARCHAR},
+      </if>
+      <if test="plan != null" >
+        plan = #{plan,jdbcType=VARCHAR},
+      </if>
+      <if test="tevalDate != null" >
+        teval_date = #{tevalDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="doctorId != null" >
+        doctor_id = #{doctorId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisObstetrics" >
+    update his_obstetrics
+    set his_hospital_manage_id = #{hisHospitalManageId,jdbcType=BIGINT},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      is_married = #{isMarried,jdbcType=INTEGER},
+      location = #{location,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      cause = #{cause,jdbcType=VARCHAR},
+      way = #{way,jdbcType=VARCHAR},
+      admitting_diagnosis = #{admittingDiagnosis,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=DOUBLE},
+      body_temperature = #{bodyTemperature,jdbcType=DOUBLE},
+      pulse = #{pulse,jdbcType=VARCHAR},
+      breathe = #{breathe,jdbcType=VARCHAR},
+      blood_pressure = #{bloodPressure,jdbcType=VARCHAR},
+      is_mind = #{isMind,jdbcType=INTEGER},
+      is_face = #{isFace,jdbcType=INTEGER},
+      is_feeling = #{isFeeling,jdbcType=INTEGER},
+      skin = #{skin,jdbcType=VARCHAR},
+      competence = #{competence,jdbcType=VARCHAR},
+      self = #{self,jdbcType=VARCHAR},
+      previous_history = #{previousHistory,jdbcType=VARCHAR},
+      allergic_history = #{allergicHistory,jdbcType=VARCHAR},
+      other = #{other,jdbcType=VARCHAR},
+      gestation = #{gestation,jdbcType=VARCHAR},
+      breast = #{breast,jdbcType=VARCHAR},
+      lmp = #{lmp,jdbcType=VARCHAR},
+      due_date = #{dueDate,jdbcType=TIMESTAMP},
+      bleeding_during_pregnancy = #{bleedingDuringPregnancy,jdbcType=VARCHAR},
+      drug_pregnancy = #{drugPregnancy,jdbcType=VARCHAR},
+      fetal_position = #{fetalPosition,jdbcType=VARCHAR},
+      fetal_heart = #{fetalHeart,jdbcType=VARCHAR},
+      quickening = #{quickening,jdbcType=VARCHAR},
+      abnormal_quickening = #{abnormalQuickening,jdbcType=VARCHAR},
+      caul = #{caul,jdbcType=VARCHAR},
+      colporrhagia = #{colporrhagia,jdbcType=VARCHAR},
+      uterine_contraction = #{uterineContraction,jdbcType=VARCHAR},
+      law_contractions = #{lawContractions,jdbcType=VARCHAR},
+      breast_development = #{breastDevelopment,jdbcType=VARCHAR},
+      obstetrics_other = #{obstetricsOther,jdbcType=VARCHAR},
+      oedema_circumstance = #{oedemaCircumstance,jdbcType=VARCHAR},
+      pro = #{pro,jdbcType=VARCHAR},
+      urine_sugar = #{urineSugar,jdbcType=VARCHAR},
+      educations = #{educations,jdbcType=VARCHAR},
+      plan = #{plan,jdbcType=VARCHAR},
+      teval_date = #{tevalDate,jdbcType=TIMESTAMP},
+      doctor_id = #{doctorId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from his_obstetrics
+    where  his_hospital_manage_id= (
+    select id from his_hospital_manage where number =#{number}
+    )
+  </select>
+
+  <select id="selectByhisHospitalManageId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from his_obstetrics
+    where  his_hospital_manage_id= #{hisHospitalManageId,jdbcType=BIGINT}
+  </select>
+</mapper>

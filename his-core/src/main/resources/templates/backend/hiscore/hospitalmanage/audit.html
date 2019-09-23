@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title">出院信息审核(Discharge information audit)</h4><label style="color:black">
+            </label>
+                <div class="input-field col s4 l4 xl4">
+                    <input id="loginName" readonly type="text" th:value=" ${loginName}"/>
+                    <label for="loginName">操 作 人(operator)<span style="font-size: 12px">(Operator
+)</span>：</label>
+                </div>
+                <input id="number" name="number" type="hidden" th:value="${number}">
+                <div class="row">
+                    <div class="input-field col s3 l3 xl3">
+                        <input id="name" name="name" type="text"
+                               data-error=".errorTxt1">
+                        <div class="errorTxt1"></div>
+                        <label class="active" for="name">姓名<span style="font-size: 12px">(name)</span></label>
+                    </div>
+                    <div class="input-field col s3 l3 xl3">
+                        <input id="age" name="age" type="text"
+                               data-error=".errorTxt2">
+                        <div class="errorTxt2"></div>
+                        <label class="active" for="age">年龄<span style="font-size: 12px">(age)</span></label>
+                    </div>
+                    <div class="input-field col s3 l3 xl3">
+                        <input id="sex" name="sex" type="text"
+                               data-error=".errorTxt2">
+                        <div class="errorTxt2"></div>
+                        <label class="active" for="sex">性别<span style="font-size: 12px">(sex)</span></label>
+                    </div>
+                    <div class="input-field col s3 l3 xl3">
+                        <input id="department" name="department" type="text"
+                               data-error=".errorTxt3">
+                        <div class="errorTxt3"></div>
+                        <label class="active" for="department">科室<span style="font-size: 12px">(department)</span></label>
+                    </div>
+                    <div class="input-field col s3 l3 xl3">
+                        <input id="ward" name="ward" type="text"
+                               data-error=".errorTxt2">
+                        <div class="errorTxt2"></div>
+                        <label class="active" for="ward">病房<span style="font-size: 12px">(ward)</span></label>
+                    </div>
+                    <div class="input-field col s3 l3 xl3">
+                        <input id="bed" name="bed" type="text"
+                               data-error=".errorTxt2">
+                        <div class="errorTxt2"></div>
+                        <label class="active" for="bed">床号<span style="font-size: 12px">(bed)</span></label>
+                    </div>
+                    <div class="input-field col s3 l3 xl3">
+                        <input id="hospital" name="hospital" type="text"
+                               data-error=".errorTxt2">
+                        <div class="errorTxt2"></div>
+                        <label class="active" for="hospital">住院编号<span style="font-size: 12px">(The hospital number)</span></label>
+                    </div>
+                    <div class="input-field col s3 l3 xl3">
+                        <input id="createDate" name="createDate" type="text"
+                               data-error=".errorTxt2">
+                        <div class="errorTxt2"></div>
+                        <label class="active" for="createDate">入院日期<span style="font-size: 12px">(admission date)</span></label>
+                    </div>
+                    <form class="col s12" id="sendForm" action="#">
+                        <div class="input-field col s3 l3 xl3">
+                            <input id="pathology" name="pathology" type="text"
+                                   data-error=".errorTxt2">
+                            <div class="errorTxt2"></div>
+                            <label class="active" for="pathology">病理号<span style="font-size: 12px">(pathology)</span></label>
+                        </div>
+                        <div class="input-field col s3 l3 xl3">
+                            <input id="examine" name="examine" type="text"
+                                   data-error=".errorTxt2">
+                            <div class="errorTxt2"></div>
+                            <label class="active" for="examine">影像检查号<span style="font-size: 12px">(examine)</span></label>
+                        </div>
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="result" name="result" type="text"
+                                   data-error=".errorTxt8">
+                            <div class="errorTxt8"></div>
+                            <label for="result" class="active">主要化验结果<span style="font-size: 12px">(Major laboratory results
+)</span></label>
+                        </div>
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="inspect" name="inspect" type="text"
+                                   data-error=".errorTxt8">
+                            <div class="errorTxt8"></div>
+                            <label class="active" for="inspect">特殊检查及重要会诊（注明日期和检查号）<span style="font-size: 12px">(Special examination and important consultation (date and examination number)
+)</span></label>
+                        </div>
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="diagnose" name="diagnose" type="text"
+                                   data-error=".errorTxt8">
+                            <div class="errorTxt8"></div>
+                            <label class="active" for="diagnose">诊断<span style="font-size: 12px">(diagnose
+)</span></label>
+                        </div>
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="feature" name="feature" type="text"
+                                   data-error=".errorTxt8">
+                            <div class="errorTxt8"></div>
+                            <label class="active" for="feature">入院时主要症状及特征<span style="font-size: 12px">(Main symptoms and characteristics at admission
+)</span></label>
+                        </div>
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="cure" name="cure" type="text"
+                                   data-error=".errorTxt8">
+                            <div class="errorTxt8"></div>
+                            <label class="active" for="cure">住院治疗简要过程及主要治疗措施（注明手术名称，日期，输血量及抢救情况）<span
+                                    style="font-size: 12px">(Brief process of hospitalization and main treatment measures (indicate operation name, date, amount of blood transfusion and rescue situation)
+)</span></label>
+                        </div>
+
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="situation" name="situation" type="text"
+                                   data-error=".errorTxt8">
+                            <div class="errorTxt8"></div>
+                            <label class="active" for="situation">出院情况<span style="font-size: 12px">(The hospital is
+)</span></label>
+                        </div>
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="advice" name="advice" type="text"
+                                   data-error=".errorTxt8">
+                            <div class="errorTxt8"></div>
+                            <label class="active" for="advice">出院医嘱<span style="font-size: 12px">(discharge instruction for patients leaving hospital )
+</span></label>
+                        </div>
+                        <input id="hisHospitalManageId" name="hisHospitalManageId" type="hidden">
+                        <input id="id" name="id" type="hidden">
+                    </form>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <button id="send_btn" class="btn cyan waves-effect waves-light right" type="button"
+                                name="action">出 院（Out of the hospital
+                            ）
+                            <i class="mdi-content-send right"></i>
+                        </button>
+                    </div>
+                </div>
+                </form>
+                <div class="row">
+                    <div class="input-field col s12" th:if="${flag}">
+                        <button id="send_btn2" class="btn cyan waves-effect waves-light right" type="button"
+                                name="action">主治医师确认（Confirmation by attending physician
+                            ）
+                            <i class="mdi-content-send right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12" th:if="${flag}">
+                        <button id="send_btn3" class="btn cyan waves-effect waves-light right" type="button"
+                                name="action">住院医师确认（Confirmation by resident
+                            ）
+                            <i class="mdi-content-send right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12" th:if="${flag}">
+                        <button id="send_btn4" class="btn cyan waves-effect waves-light right" type="button"
+                                name="action">实习医师确认（Intern confirmation
+                            ）
+                            <i class="mdi-content-send right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ================================================
+Scripts
+================================================ -->
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+    $(document).ready(function () {
+        getHospital();
+        getHisLeaveHospital();
+        $("#send_btn").attr("disabled", true);
+        $("#send_btn2").attr("disabled", true);
+        $("#send_btn3").attr("disabled", true);
+        $("#send_btn4").attr("disabled", true);
+    });
+    $('#resetBtn').click(function reset() {
+
+        $('#searchForm')[0].reset();
+        $("#name").attr("value", "");
+        $("#age").attr("value", "");
+        $("#idcard").attr("value", "");
+        $("#phonenumber").attr("value", "");
+        $("#height").attr("value", "");
+        $("#weight").attr("value", "");
+        $("#location").attr("value", "");
+        $("#departmentId").attr("value", "");
+        $("#doctorId").attr("value", "");
+        $("#chiefcomplaint").attr("value", "");
+        $("#inpatientDiagnosis").attr("value", "");
+        $("#remark").attr("value", "");
+        changeSelectValue("sex", 1);
+        changeSelectValue("is_married", 1);
+        M.updateTextFields();//重新初始化页面上的内容
+
+    });
+
+    function getHospital() {
+        var number = $("#number").val();
+        if (!isNullOrEmpty(number)) {
+            //获取基本信息
+            $.ahsjajax(
+                CTX + "/api/hishospitalmanage/getHospital/index.ahsj",
+                {"number": number},
+                function (data) {
+                    if (!isNullOrEmpty(data)) {
+                        changeInputValue("name", data.patientName);
+                        changeInputValue("age", data.age);
+                        changeInputValue("createDate", data.createDate);
+                        changeInputValue("hospital", data.number);
+                        changeInputValue("bed", data.bedsNumber);
+                        changeInputValue("ward", data.wardsNumber);
+                        changeInputValue("sex", data.sexName);
+                        changeInputValue("department", data.departmentIdName);
+                        changeInputValue("hisHospitalManageId", data.id);
+                        M.updateTextFields();//重新初始化页面上的内容
+                        return true;
+                    } else {
+                        dialog.warn(number + "号不存在！");
+                        return false;
+                    }
+                },
+                function () {
+                    Materialize.toast("网络异常");
+                    return false;
+                }
+            );
+        }
+    }
+
+
+    function getHisLeaveHospital() {
+        var number = $("#number").val();
+        if (!isNullOrEmpty(number)) {
+            //获取基本信息
+            $.ahsjajax(
+                CTX + "/api/HisLeaveHospital/getHisLeaveHospital/index.ahsj",
+                {"number": number},
+                function (data) {
+                    if (!isNullOrEmpty(data.id)) {
+                        changeInputValue("diagnose", data.diagnose);
+                        changeInputValue("feature", data.feature);
+                        changeInputValue("result", data.result);
+                        changeInputValue("inspect", data.inspect);
+                        changeInputValue("cure", data.cure);
+                        changeInputValue("situation", data.situation);
+                        changeInputValue("pathology", data.pathology);
+                        changeInputValue("examine", data.examine);
+                        changeInputValue("advice", data.advice);
+                        changeInputValue("id", data.id);
+                        M.updateTextFields();//重新初始化页面上的内容
+                        $("#send_btn").attr("disabled", true);
+                        if (isNullOrEmpty(data.majorId)) {
+                            $("#send_btn2").attr("disabled", false);
+                        }
+                        if (isNullOrEmpty(data.doctorId)) {
+                            $("#send_btn3").attr("disabled", false);
+                        }
+                        if (isNullOrEmpty(data.internshipId)) {
+                            $("#send_btn4").attr("disabled", false);
+                        }
+                        M.updateTextFields();//重新初始化页面上的内容
+                        return true;
+                    } else {
+                        $("#send_btn").attr("disabled", false);
+                        return true;
+                    }
+                },
+                function () {
+                    Materialize.toast("网络异常");
+                    return false;
+                }
+            );
+        }
+    }
+
+    $('#send_btn').click(function () {
+        dialog.confirm('确定出院吗?', function (index, layero) {
+            var hisLeaveHospital = $("#sendForm").serialize();
+            $.ahsjajax(CTX + "/api/HisLeaveHospital/getHospital/index.ahsj",
+                hisLeaveHospital,
+                function (msg) {
+                    if (msg.success) {
+                        dialog.warn(msg.message)
+                        $("#send_btn").attr("disabled", true);
+                        $("#send_btn2").attr("disabled", false);
+                        $("#send_btn3").attr("disabled", false);
+                        $("#send_btn4").attr("disabled", false);
+                        swal.close();
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                        gridFor.search();
+                    } else {
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                    }
+                },
+                function (data) {
+                    M.toast({
+                        html: "网络异常", completeCallback: function () {
+                        }
+                    });
+                }
+            );
+        });
+    })
+
+    $('#send_btn2').click(function () {
+        dialog.confirm('主治医师确定?', function (index, layero) {
+            var number = $("#number").val()
+            doctor = 1;
+            $.ahsjajax(CTX + "/api/HisLeaveHospital/updateHospital/index.ahsj",
+                {"number": number, "doctor": doctor, "token": TOKEN},
+                function (msg) {
+                    if (msg.success) {
+                        swal.close();
+                        dialog.warn("主治医师" + msg.message)
+                        $("#send_btn2").attr("disabled", true);
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                    } else {
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                    }
+                }
+                ,
+                function (data) {
+                    M.toast({
+                        html: "网络异常", completeCallback: function () {
+                        }
+                    });
+                }
+            )
+            ;
+        });
+    });
+    $('#send_btn3').click(function () {
+        dialog.confirm('住院医生确定?', function (index, layero) {
+            var number = $("#number").val();
+            doctor = 2;
+            $.ahsjajax(CTX + "/api/HisLeaveHospital/updateHospital/index.ahsj",
+                {"number": number, "doctor": doctor, "token": TOKEN},
+                function (msg) {
+                    if (msg.success) {
+                        dialog.warn("住院医生"+msg.message)
+                        $("#send_btn3").attr("disabled", true);
+                        swal.close();
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                        gridFor.search();
+                    } else {
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                    }
+                },
+                function (data) {
+                    M.toast({
+                        html: "网络异常", completeCallback: function () {
+                        }
+                    });
+                }
+            );
+        });
+    });
+    $('#send_btn4').click(function () {
+        dialog.confirm('实习医生确定?', function (index, layero) {
+            var number = $("#number").val();
+            doctor = 3;
+            $.ahsjajax(CTX + "/api/HisLeaveHospital/updateHospital/index.ahsj",
+                {"number": number, "doctor": doctor, "token": TOKEN},
+                function (msg) {
+                    if (msg.success) {
+                        dialog.warn("实习医生"+msg.message)
+                        $("#send_btn4").attr("disabled", true);
+                        swal.close();
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                        gridFor.search();
+                    } else {
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                    }
+                },
+                function (data) {
+                    M.toast({
+                        html: "网络异常", completeCallback: function () {
+                        }
+                    });
+                }
+            );
+        });
+    });
+    $("input").change(function () {
+        $(this).val($(this).val().trim());
+    });
+</script>
+</body>
+</html>

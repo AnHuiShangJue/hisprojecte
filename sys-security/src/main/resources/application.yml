@@ -1,0 +1,139 @@
+server:
+  port: 9002
+
+eureka:
+  instance:
+    hostname: 192.168.1.1
+    prefer-ip-address: true
+  client:
+    #    表示是否将自己注册到Eureka Server，默认为true
+    registerWithEureka: true
+    #    表示是否从Eureka Server获取注册信息，默认为true。
+    fetchRegistry: true
+    #    设置与Eureka Server交互的地址，查询服务和注册服务都需要依赖这个地址。默认是http://localhost:8761/eureka ；多个地址可使用 , 分隔。
+    serviceUrl:
+      #      defaultZone: http://47.92.192.210:8760/eureka/, http://47.92.192.210:8761/eureka/
+      defaultZone: http://127.0.0.1:8760/eureka/,http://127.0.0.1:8761/eureka/
+  # 注册中心的自我保护，当注册应用下线时立即下线，开发环境使用，生产环境不使用
+#  server:
+#    enable-self-preservation: true
+
+#security:
+#  ignored: /
+#   sessions: never   # session策略
+
+#security:
+#  oauth2:
+#    sso:
+#      loginPath: /login   # 登录路径
+#    client:
+#       clientId: 70d9f2ce6494bbc74aee
+#       clientSecret: f0a4ceb63747c17308fbc19fdebe2af735c87b58
+#       accessTokenUri: https://github.com/login/oauth/access_token
+#       userAuthorizationUri: https://github.com/login/oauth/authorize
+#    resource:
+#      userInfoUri: https://api.github.com/user
+#      preferTokenInfo: false
+spring:
+  redis:
+    host: 127.0.0.1
+    database: 0
+  application:
+    name: security
+  datasource:
+    url: jdbc:log4jdbc:mysql://192.168.0.105:3306/his-security?useUnicode=true&characterEncoding=utf8&useSSL=true
+    #     url: jdbc:log4jdbc:mysql://127.0.0.1:3306/his-security?useUnicode=true&characterEncoding=utf8&useSSL=true
+    username: root
+    password: 123456
+    driver-class-name: net.sf.log4jdbc.DriverSpy
+    type: com.zaxxer.hikari.HikariDataSource
+#  second-datasource:
+#   url: jdbc:log4jdbc:mysql://127.0.0.1:3306/his-userinfo?useUnicode=true&characterEncoding=utf8&useSSL=true
+#   username: root
+#   password: 123456
+#   driver-class-name: net.sf.log4jdbc.DriverSpy
+#   type: com.zaxxer.hikari.HikariDataSource
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+
+#在网关层配置单点登录所访问的域名以及信息
+#访问本地的授权认证中心，以及本地的资源认证中心
+#security:
+#  oauth2:
+#    client:
+#      clientId: bd1c0a783ccdd1c9b9e4
+#      clientSecret: 1a9030fbca47a5b2c28e92f19050bb77824b5ad1
+#      accessTokenUri: http://localhost:8001/security/oauth/token
+#      userAuthorizationUri: http://localhost:8001/security/oauth/authorize
+#      clientAuthenticationScheme: form
+#    resource:
+#      userInfoUri: http://localhost:8001/security/userinfo/search
+#      preferTokenInfo: false
+#Mybatis扫描
+mybatis:
+  mapperLocations: classpath:mapper/**/*.xml
+  configuration:
+    cache-enabled: true   #使全局的映射器启用或禁用缓存
+    lazy-loading-enabled: true  #全局启用或禁用延迟加载。当禁用时，所有关联对象都会即时加载
+    aggressive-lazy-loading: true  #当启用时，有延迟加载属性的对象在被调用时将会完全加载任意属性。否则，每种属性将会按需要加载
+    multiple-result-sets-enabled: true #是否允许单条sql 返回多个数据集  (取决于驱动的兼容性) default:true
+    use-generated-keys: false #允许JDBC 生成主键。需要驱动器支持。如果设为了true，这个设置将强制使用被生成的主键，有一些驱动器不兼容不过仍然可以执行。  default:false
+    use-column-label: true # 是否可以使用列的别名 (取决于驱动的兼容性) default:true
+    auto-mapping-behavior: full #指定 MyBatis 如何自动映射 数据基表的列 NONE：不隐射　PARTIAL:部分  FULL:全部
+    default-executor-type: simple #这是默认的执行类型  （SIMPLE: 简单； REUSE: 执行器可能重复使用prepared statements语句；BATCH: 执行器可以重复执行语句和批量更新）
+    map-underscore-to-camel-case: true #使用驼峰命名法转换字段
+    local-cache-scope: session #设置本地缓存范围 session:就会有数据的共享  statement:语句范围 (这样就不会有数据的共享 ) defalut:session
+    jdbc-type-for-null: null #设置但JDBC类型为空时,某些驱动程序 要指定值,default:OTHER，插入空值时不需要指定类型
+    interceptors: #设置插件
+
+ribbon:
+  ReadTimeout: 120000  # 请求处理的超时时间
+  ConnectTimeout: 30000 # 请求连接的超时时间
+#feign远程调用配置
+feign:
+  httpclient:
+    enabled: true #启用httpclient
+  compression:
+    request:
+      enable: true  #配置请求支持GZIP压缩，默认为false
+      mime-types: text/xml, application/xml, application/json  #配置压缩支持的Mime Type
+      min-request-size: 2048 #配置压缩数据大小的上下限
+    reponse:
+      enable: true #配置响应支持GZIP压缩，默认为false
+  client:
+    config:
+      eureka-userinfo:
+        connectTimeout: 120000
+        readTimeout: 30000
+        loggerLevel: full
+  hystrix:
+    enabled: true  #开启熔断
+
+hystrix:
+  shareSecurityContext: true    # 设置这个值会自动配置一个Hystrix并发策略会把securityContext从主线程传输到你使用的Hystrix command
+  command:
+    default:
+      execution:
+        #        timeout:
+        #           enabled: false  #禁用hystrix超时时间
+        isolation:
+          strategy: SEMAPHORE
+          thread:
+            timeoutInMillisecond: 100000   # hystrix超时时间调整 默认为1s
+      circuitBreaker:
+        sleepWindowInMilliseconds: 10000     # 短路多久以后开始尝试是否恢复，默认5s
+        forceClosed: false # 是否允许熔断器忽略错误,默认false, 不开启
+turbine:
+  app-config: security
+  cluster-name-expression: "default"
+  combine-host-port: true
+
+#这个必须要添加，否则dashboard查找不到/actuator/hystrix.stream
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

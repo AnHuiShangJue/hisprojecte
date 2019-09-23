@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisHosptalregistMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisHosptalregist" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="patient_id" property="patientId" jdbcType="BIGINT" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="doctor_id" property="doctorId" jdbcType="BIGINT" />
+    <result column="nurse_id" property="nurseId" jdbcType="BIGINT" />
+    <result column="ward_id" property="wardId" jdbcType="BIGINT" />
+    <result column="bed_id" property="bedId" jdbcType="BIGINT" />
+    <result column="department_id" property="departmentId" jdbcType="BIGINT" />
+    <result column="department_name" property="departmentName" jdbcType="VARCHAR" />
+    <result column="fee_type" property="feeType" jdbcType="INTEGER" />
+    <result column="care_level" property="careLevel" jdbcType="INTEGER" />
+    <result column="outpatient_diagnosis" property="outpatientDiagnosis" jdbcType="VARCHAR" />
+    <result column="inpatient_diagnosis" property="inpatientDiagnosis" jdbcType="VARCHAR" />
+    <result column="jointime" property="jointime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="is_pay" property="isPay" jdbcType="INTEGER" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="medical_number"  property="medicalNumber"  jdbcType="VARCHAR"></result>
+  </resultMap>
+
+
+
+  <sql id="Base_Column_List" >
+    id, patient_id, number, doctor_id, nurse_id, ward_id, bed_id, department_id, fee_type, 
+    care_level, outpatient_diagnosis, inpatient_diagnosis, jointime, remark, is_pay, 
+    create_user_id, create_date, update_user_id, update_date,medical_number
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from his_hosptalregist
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from his_hosptalregist
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisHosptalregist" >
+    insert into his_hosptalregist (id, patient_id, number, 
+      doctor_id, nurse_id, ward_id, 
+      bed_id, department_id, fee_type, 
+      care_level, outpatient_diagnosis, inpatient_diagnosis, 
+      jointime, remark, is_pay, 
+      create_user_id, create_date, update_user_id, 
+      update_date,medical_number)
+    values (#{id,jdbcType=BIGINT}, #{patientId,jdbcType=BIGINT}, #{number,jdbcType=VARCHAR}, 
+      #{doctorId,jdbcType=BIGINT}, #{nurseId,jdbcType=BIGINT}, #{wardId,jdbcType=BIGINT}, 
+      #{bedId,jdbcType=BIGINT}, #{departmentId,jdbcType=BIGINT}, #{feeType,jdbcType=INTEGER}, 
+      #{careLevel,jdbcType=INTEGER}, #{outpatientDiagnosis,jdbcType=VARCHAR}, #{inpatientDiagnosis,jdbcType=VARCHAR}, 
+      #{jointime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{isPay,jdbcType=INTEGER}, 
+      #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{medicalNumber,jdbcType=VARCHAR} )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisHosptalregist" >
+    insert into his_hosptalregist
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="medicalNumber != null" >
+        medical_number,
+      </if>
+      <if test="doctorId != null" >
+        doctor_id,
+      </if>
+      <if test="nurseId != null" >
+        nurse_id,
+      </if>
+      <if test="wardId != null" >
+        ward_id,
+      </if>
+      <if test="bedId != null" >
+        bed_id,
+      </if>
+      <if test="departmentId != null" >
+        department_id,
+      </if>
+      <if test="feeType != null" >
+        fee_type,
+      </if>
+      <if test="careLevel != null" >
+        care_level,
+      </if>
+      <if test="outpatientDiagnosis != null" >
+        outpatient_diagnosis,
+      </if>
+      <if test="inpatientDiagnosis != null" >
+        inpatient_diagnosis,
+      </if>
+      <if test="jointime != null" >
+        jointime,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="isPay != null" >
+        is_pay,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="patientId != null" >
+        #{patientId,jdbcType=BIGINT},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalNumber != null" >
+        #{medical_number},
+      </if>
+      <if test="doctorId != null" >
+        #{doctorId,jdbcType=BIGINT},
+      </if>
+      <if test="nurseId != null" >
+        #{nurseId,jdbcType=BIGINT},
+      </if>
+      <if test="wardId != null" >
+        #{wardId,jdbcType=BIGINT},
+      </if>
+      <if test="bedId != null" >
+        #{bedId,jdbcType=BIGINT},
+      </if>
+      <if test="departmentId != null" >
+        #{departmentId,jdbcType=BIGINT},
+      </if>
+      <if test="feeType != null" >
+        #{feeType,jdbcType=INTEGER},
+      </if>
+      <if test="careLevel != null" >
+        #{careLevel,jdbcType=INTEGER},
+      </if>
+      <if test="outpatientDiagnosis != null" >
+        #{outpatientDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="inpatientDiagnosis != null" >
+        #{inpatientDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="jointime != null" >
+        #{jointime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isPay != null" >
+        #{isPay,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisHosptalregist" >
+    update his_hosptalregist
+    <set >
+      <if test="patientId != null" >
+        patient_id = #{patientId,jdbcType=BIGINT},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalNumber != null" >
+        medical_number=#{medicalNumber},
+      </if>
+      <if test="doctorId != null" >
+        doctor_id = #{doctorId,jdbcType=BIGINT},
+      </if>
+      <if test="nurseId != null" >
+        nurse_id = #{nurseId,jdbcType=BIGINT},
+      </if>
+      <if test="wardId != null" >
+        ward_id = #{wardId,jdbcType=BIGINT},
+      </if>
+      <if test="bedId != null" >
+        bed_id = #{bedId,jdbcType=BIGINT},
+      </if>
+      <if test="departmentId != null" >
+        department_id = #{departmentId,jdbcType=BIGINT},
+      </if>
+      <if test="feeType != null" >
+        fee_type = #{feeType,jdbcType=INTEGER},
+      </if>
+      <if test="careLevel != null" >
+        care_level = #{careLevel,jdbcType=INTEGER},
+      </if>
+      <if test="outpatientDiagnosis != null" >
+        outpatient_diagnosis = #{outpatientDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="inpatientDiagnosis != null" >
+        inpatient_diagnosis = #{inpatientDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="jointime != null" >
+        jointime = #{jointime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isPay != null" >
+        is_pay = #{isPay,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisHosptalregist" >
+    update his_hosptalregist
+    set patient_id = #{patientId,jdbcType=BIGINT},
+      number = #{number,jdbcType=VARCHAR},
+      doctor_id = #{doctorId,jdbcType=BIGINT},
+      nurse_id = #{nurseId,jdbcType=BIGINT},
+      ward_id = #{wardId,jdbcType=BIGINT},
+      bed_id = #{bedId,jdbcType=BIGINT},
+      department_id = #{departmentId,jdbcType=BIGINT},
+      fee_type = #{feeType,jdbcType=INTEGER},
+      care_level = #{careLevel,jdbcType=INTEGER},
+      outpatient_diagnosis = #{outpatientDiagnosis,jdbcType=VARCHAR},
+      inpatient_diagnosis = #{inpatientDiagnosis,jdbcType=VARCHAR},
+      jointime = #{jointime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      is_pay = #{isPay,jdbcType=INTEGER},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+         medical_number=#{medicalNumber},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!--自定义-->
+  <select id="getHisHosptalregist" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from his_hosptalregist
+    where   medical_number = #{medicalNumber}
+  </select>
+  <select id="selectNumCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+     select
+      count(1)
+    from  his_hosptalregist
+    where number LIKE CONCAT('%',#{number},'%')
+  </select>
+  <insert id="updateIsFail" parameterType="com.ahsj.hiscore.entity.HisHosptalregist" >
+    update his_hosptalregist
+    set is_fail = #{isFail,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </insert>
+  <select id="selectByDepartmentId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+      a.*,
+      b.name as department_name
+      from `his-rpac`.his_hosptalregist as a
+      LEFT JOIN `his-userinfo`.organization as b on b.id = a.department_id
+      where a.id = #{id,jdbcType=BIGINT}
+  </select>
+</mapper>

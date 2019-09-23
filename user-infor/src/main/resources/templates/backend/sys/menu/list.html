@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <div th:replace="public/tree_layout :: html"></div>
+
+    <body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+          data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+        <!--在这个地方实现查询重置类的操作-->
+        <div class="row">
+            <div class="breadcrumbs-inline pt-3 pb-1" id="breadcrumbs-wrapper">
+                <!-- Search for small screen-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col s10 m6 l6 breadcrumbs-left">
+                            <h5 class="breadcrumbs-title mt-0 mb-0 display-inline hide-on-small-and-down">DataTable</h5>
+                            <ol class="breadcrumbs mb-0">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="#">Table</a>
+                                </li>
+                                <li class="breadcrumb-item active">DataTable
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="col s2 m6 l6"><a
+                                class="btn btn-floating dropdown-settings waves-effect waves-light breadcrumbs-btn right"
+                                href="#!" data-target="dropdown1"><i class="material-icons">expand_more </i><i
+                                class="material-icons right">arrow_drop_down</i></a>
+                            <ul class="dropdown-content" id="dropdown1" tabindex="0">
+                                <li tabindex="0"><a class="grey-text text-darken-2"
+                                                    href="user-profile-page.html">Profile<span
+                                        class="new badge red">2</span></a></li>
+                                <li tabindex="0"><a class="grey-text text-darken-2" href="app-contacts.html">Contacts</a>
+                                </li>
+                                <li tabindex="0"><a class="grey-text text-darken-2" href="page-faq.html">FAQ</a></li>
+                                <li class="divider" tabindex="-1"></li>
+                                <li tabindex="0"><a class="grey-text text-darken-2" href="user-login.html">Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class=" col s4 l4 xl4 m4 xl4 ">
+                    <div class="container">
+                        <div class="section">
+                            <div class="card">
+                                <div class="card-content">
+                                <div class="portlet light card-content">
+                                    <h4 class="card-title">菜单结构信息
+                                    </h4><label style="color:black">Menu structure information</label>
+                                    <div class="row">
+                                        <div class="col s2 m2 l2 xl2 offset-xl10">
+                                            <a id="SearchBtn" class=" btn-small waves-effect waves-light orange"
+                                               href="javascript:;"><i class="material-icons white-text tooltipped"
+                                                                      data-position="bottom" data-delay="50"
+                                                                      data-tooltip="查询">search</i></a>
+                                        </div>
+                                    </div>
+                                    <div class="actions">
+
+                                    </div>
+                                    <div class="portlet-body form">
+                                        <div id="scroller">
+                                            <input id="searchKey" type="text" class="form-control" AUTOCOMPLETE="off"
+                                                   placeholder="请先展开需要查找的节点然后输入关键字!">
+                                            <div id="treeDemo" class="ztree">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class=" col m8 s8 l8 xl8 ">
+                    <!--在这个地方实现查询重置类的操作-->
+                    <div class="container">
+                        <div class="section">
+                            <div class="card">
+                                <div class="card-content">
+                                    <h4 class="card-title">菜单详细信息<span id="codeName" style="color:#e3b708"></span><input
+                                            type="hidden" id="nodeId"
+                                            name="nodeId" value="${nodeId}">
+                                    </h4><label style="color:black">Menu details</label>
+                                    <div class="col s12 xl12 m12 l12 xl12 offset-xl10  ">
+                                        <a id="btnAddCodeDetail" class="btn waves-effect waves-light red"><i
+                                                class="material-icons  white-text tooltipped " data-position="bottom"
+                                                data-delay="50" data-tooltip="新增字典详细">add</i></a>
+                                        <a id="btnDeleteMany"
+                                           class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
+                                                class="material-icons white-text tooltipped" data-position="bottom"
+                                                data-delay="50" data-tooltip="批量删除">delete</i></a>
+                                    </div>
+
+                                    <div class="divider"></div>
+                                    <!--Form Advance-->
+                                    <div class="row">
+                                        <div id="refreshtable" class="col m12 s12 l12 xl12 ">
+                                            <table id="data-table-simple" class="display">
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div th:replace="public/tree_script :: html"></div>
+        <script type="text/javascript">
+            var grid = new Datatable();
+            var ztree;
+            $(document).ready(function () {
+                // var contentHeight = $(window).height() - 40;
+                // $('.portlet').height(contentHeight);
+                // $("#scroller").height(contentHeight-60);
+                initButton();
+                initTree();
+                initTable();
+
+            });
+            // 按钮事件初始化
+            function initButton() {
+                // 新增字典详细
+                $("#btnAddCodeDetail").click(function() {
+                    var node = ztree.getSelectedNodes();
+                    if (node == null || node ==''||node.length == 0) {
+                        dialog.warn("请选择左边的菜单！");
+                        return;
+                    }
+                    var url = CTX + "/api/menu/update/index.ahsj?parentId="+node[0].id +"&parentName="+encodeURI(node[0].name)+"&token="+TOKEN;
+                    dialog.show(url,"菜单信息添加");
+                });
+                // 批量删除
+                $("#btnDeleteMany").click(function() {
+                    var ids = grid.getSelectedRows();
+                    if (ids.length == 0) {
+                        dialog.warn("请至少选择一条数据");
+                        return;
+                    }
+                    deleteDetailRow(ids.join(','));
+                });
+            }
+
+            var setting = {
+                view: {
+                    selectedMulti: false
+                },
+                async: {
+                    enable: true,
+                    url: CTX+"/api/menu/treeCode.ahsj?token="+TOKEN,
+                    autoParam:["id", "name=n", "level=lv"],
+                    headers:{
+                        Authorization:"Bearer "+TOKEN
+                    }
+                },
+                data: {
+                    simpleData: {
+                        enable: true
+                    }
+                },
+                callback: {
+                    onClick:treeClick,
+                    beforeExpand:treeBeforeExpand
+                }
+            };
+            var rootNode = [
+                {id:1, pId:0001, name: "三维建筑变形监测系统菜单"}];
+            function initTree() {
+                ztree = $.fn.zTree.init($("#treeDemo"), setting);
+            }
+
+            // 单击事件
+            function treeClick(event,treeId,treeNode) {
+                $("#codeName").html("("+treeNode.name+")");
+                grid.setAjaxParam("parentId",treeNode.id);
+                grid.search();
+            }
+            // 节点展开事件
+            function treeBeforeExpand(treeId, treeNode) {
+                var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+                treeObj.selectNode(treeNode);
+                $("#codeName").html("("+treeNode.name+")");
+                grid.setAjaxParam("parentId",treeNode.id);
+                grid.search();
+            }
+
+
+            function initTable() {
+                grid.init({
+                    src: $("#data-table-simple"),
+                    onSuccess: function (grid) {
+                    },
+                    onError: function (grid) {
+                    },
+                    onDataLoad: function (grid) {
+                    },
+                    loadingMessage: 'Loading...',
+                    dataTable: {
+                        "ajax": {
+                            "url":CTX+ "/api/menu/list.ahsj", // ajax source
+                        },
+                        "columns": [
+                            {
+                                "title": "<label><input type=\"checkbox\"  id=\"checkAll\" class=\"select-all\" > <span></span></label> ",
+                                "render": function (data, type, row, meta) {
+                                    return " <label> <input type=\"checkbox\" value=\"" + row.id + "\"> <span></span> </label>";
+                                },
+                                "width": "18px",
+                                "orderable": false,
+                                "className": "center-align"
+                            },{
+                                "title":"菜单ID",
+                                "data" : "menuId"
+                            }, {
+                                "title":"菜单名称",
+                                "data" : "menuName"
+                            }, {
+                                "title":"菜单Url",
+                                "data" : "menuUrl",
+                            }, {
+                                "title":"图标",
+                                "data" : "iconCls",
+                                "width":"20px",
+                                "className" : "table_center",
+                                "render" : function(data, type, row) {
+                                    return "<i class='material-icons'>"+row.iconCls+"</i>";
+                                }
+                            }, {
+                                "title":"排序",
+                                "data" : "orderNum",
+                                "width":"20px",
+                                "className" : "table_center",
+                            },{
+                                "title":"操作",
+                                "width":"80px",
+                                "className" : "table_center",
+                                "render" : function(data, type, row) {
+                                    var rtnBtn = "";
+                                    //如果获取字符串，必须在参数外反转"
+                                    rtnBtn = rtnBtn +
+                                        "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='edit(" + row.id + ");'> <i class='material-icons'>edit</i></a>" +
+                                        "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick='deleteDetailRow(" + row.id + ");'> <i class='material-icons'>delete</i></a>"+
+                                        "<a class='tooltipped' data-position='bottom' data-delay='50' data-tooltip='添加功能点' href='javascript:;' class='table_operate' onclick='addoperate("+row.id+",\""+row.permission+"\");'><i class='material-icons'>perm_data_setting</i></a>";
+                                    // 返回自定义内容
+                                    return rtnBtn;
+                                }
+                            }
+                        ],
+                        "order": [
+                            [1, 'asc']
+                        ],
+                    }
+                });
+
+            }
+            // 修改
+            function edit(id) {
+                var url = CTX+"/api/menu/update/index.ahsj?token="+TOKEN+"&id="+id;
+                dialog.show(url, "菜单信息修改");
+            }
+            // 功能点
+            function addoperate(id,permission) {
+                var url= CTX +  "/api/menu/addOperate/index.ahsj?id="+id + "&permission="+permission+"&token="+TOKEN;
+                dialog.show(url,"功能点添加");
+            }
+
+            // 删除信息
+            function deleteDetailRow(id) {
+                dialog.confirm("确定要移除吗？",function(){
+                    $.ahsjajax(CTX + "/api/menu/delete.ahsj",
+                        {id:id},
+                        function(msg) {//msg为返回的数据，在这里做数据绑定
+                            if (msg.success) {
+                                dialog.success(msg.message,
+                                    function(){
+                                        afterMenuChange();
+                                    }
+                                );
+                            } else {
+                                dialog.warn(msg.message);
+                            }
+                        });
+                });
+            }
+
+            function afterMenuChange() {
+                var node = ztree.getSelectedNodes();
+                if (node == null || node ==''||node.length == 0) {
+                    return;
+                }
+                node[0].isParent = true;
+                ztree.updateNode(node[0]);
+                ztree.reAsyncChildNodes(node[0],"refresh");
+                grid.setAjaxParam("parentId",node[0].id);
+                grid.search();
+            }
+
+
+
+
+
+            $("input").change(function(){
+                $(this).val($(this).val().trim());
+            });
+        </script>
+
+    </body>
+
+</html>
+

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisDoctorRoundsMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisDoctorRounds" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="rounddoctor" property="rounddoctor" jdbcType="BIGINT" />
+    <result column="recorddoctor" property="recorddoctor" jdbcType="BIGINT" />
+    <result column="roundtime" property="roundtime" jdbcType="TIMESTAMP" />
+    <result column="technicaljob" property="technicaljob" jdbcType="VARCHAR" />
+    <result column="condition" property="condition" jdbcType="VARCHAR" />
+    <result column="diagnosis" property="diagnosis" jdbcType="VARCHAR" />
+    <result column="differentialdiagnosis" property="differentialdiagnosis" jdbcType="VARCHAR" />
+    <result column="opinion" property="opinion" jdbcType="VARCHAR" />
+    <result column="analysis" property="analysis" jdbcType="VARCHAR" />
+    <result column="sign" property="sign" jdbcType="VARCHAR" />
+    <result column="illhistory" property="illhistory" jdbcType="VARCHAR" />
+    <result column="doctorsign" property="doctorsign" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="hoptipalrecord" property="hoptipalrecord" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, rounddoctor, recorddoctor, roundtime, technicaljob, condition, diagnosis, differentialdiagnosis, 
+    opinion, analysis, sign, illhistory, doctorsign, create_date, update_date, create_user_id, 
+    update_user_id, remark, hoptipalrecord
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from his_doctor_rounds
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from his_doctor_rounds
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisDoctorRounds" >
+    insert into his_doctor_rounds (id, rounddoctor, recorddoctor, 
+      roundtime, technicaljob, condition, 
+      diagnosis, differentialdiagnosis, opinion, 
+      analysis, sign, illhistory, 
+      doctorsign, create_date, update_date, 
+      create_user_id, update_user_id, remark, 
+      hoptipalrecord)
+    values (#{id,jdbcType=BIGINT}, #{rounddoctor,jdbcType=BIGINT}, #{recorddoctor,jdbcType=BIGINT}, 
+      #{roundtime,jdbcType=TIMESTAMP}, #{technicaljob,jdbcType=VARCHAR}, #{condition,jdbcType=VARCHAR}, 
+      #{diagnosis,jdbcType=VARCHAR}, #{differentialdiagnosis,jdbcType=VARCHAR}, #{opinion,jdbcType=VARCHAR}, 
+      #{analysis,jdbcType=VARCHAR}, #{sign,jdbcType=VARCHAR}, #{illhistory,jdbcType=VARCHAR}, 
+      #{doctorsign,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{createUserId,jdbcType=BIGINT}, #{updateUserId,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, 
+      #{hoptipalrecord,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisDoctorRounds" >
+    insert into his_doctor_rounds
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="rounddoctor != null" >
+        rounddoctor,
+      </if>
+      <if test="recorddoctor != null" >
+        recorddoctor,
+      </if>
+      <if test="roundtime != null" >
+        roundtime,
+      </if>
+      <if test="technicaljob != null" >
+        technicaljob,
+      </if>
+      <if test="condition != null" >
+        condition,
+      </if>
+      <if test="diagnosis != null" >
+        diagnosis,
+      </if>
+      <if test="differentialdiagnosis != null" >
+        differentialdiagnosis,
+      </if>
+      <if test="opinion != null" >
+        opinion,
+      </if>
+      <if test="analysis != null" >
+        analysis,
+      </if>
+      <if test="sign != null" >
+        sign,
+      </if>
+      <if test="illhistory != null" >
+        illhistory,
+      </if>
+      <if test="doctorsign != null" >
+        doctorsign,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="hoptipalrecord != null" >
+        hoptipalrecord,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="rounddoctor != null" >
+        #{rounddoctor,jdbcType=BIGINT},
+      </if>
+      <if test="recorddoctor != null" >
+        #{recorddoctor,jdbcType=BIGINT},
+      </if>
+      <if test="roundtime != null" >
+        #{roundtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="technicaljob != null" >
+        #{technicaljob,jdbcType=VARCHAR},
+      </if>
+      <if test="condition != null" >
+        #{condition,jdbcType=VARCHAR},
+      </if>
+      <if test="diagnosis != null" >
+        #{diagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="differentialdiagnosis != null" >
+        #{differentialdiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="opinion != null" >
+        #{opinion,jdbcType=VARCHAR},
+      </if>
+      <if test="analysis != null" >
+        #{analysis,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="illhistory != null" >
+        #{illhistory,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorsign != null" >
+        #{doctorsign,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="hoptipalrecord != null" >
+        #{hoptipalrecord,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisDoctorRounds" >
+    update his_doctor_rounds
+    <set >
+      <if test="rounddoctor != null" >
+        rounddoctor = #{rounddoctor,jdbcType=BIGINT},
+      </if>
+      <if test="recorddoctor != null" >
+        recorddoctor = #{recorddoctor,jdbcType=BIGINT},
+      </if>
+      <if test="roundtime != null" >
+        roundtime = #{roundtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="technicaljob != null" >
+        technicaljob = #{technicaljob,jdbcType=VARCHAR},
+      </if>
+      <if test="condition != null" >
+        condition = #{condition,jdbcType=VARCHAR},
+      </if>
+      <if test="diagnosis != null" >
+        diagnosis = #{diagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="differentialdiagnosis != null" >
+        differentialdiagnosis = #{differentialdiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="opinion != null" >
+        opinion = #{opinion,jdbcType=VARCHAR},
+      </if>
+      <if test="analysis != null" >
+        analysis = #{analysis,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        sign = #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="illhistory != null" >
+        illhistory = #{illhistory,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorsign != null" >
+        doctorsign = #{doctorsign,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="hoptipalrecord != null" >
+        hoptipalrecord = #{hoptipalrecord,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisDoctorRounds" >
+    update his_doctor_rounds
+    set rounddoctor = #{rounddoctor,jdbcType=BIGINT},
+      recorddoctor = #{recorddoctor,jdbcType=BIGINT},
+      roundtime = #{roundtime,jdbcType=TIMESTAMP},
+      technicaljob = #{technicaljob,jdbcType=VARCHAR},
+      condition = #{condition,jdbcType=VARCHAR},
+      diagnosis = #{diagnosis,jdbcType=VARCHAR},
+      differentialdiagnosis = #{differentialdiagnosis,jdbcType=VARCHAR},
+      opinion = #{opinion,jdbcType=VARCHAR},
+      analysis = #{analysis,jdbcType=VARCHAR},
+      sign = #{sign,jdbcType=VARCHAR},
+      illhistory = #{illhistory,jdbcType=VARCHAR},
+      doctorsign = #{doctorsign,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      hoptipalrecord = #{hoptipalrecord,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

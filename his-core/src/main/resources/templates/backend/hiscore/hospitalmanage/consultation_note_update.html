@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title">院内会诊记录单修改(Discharge information audit update)</h4><label style="color:black">
+            </label>
+                <div class="input-field col s4 l4 xl4">
+                    <input id="loginName" readonly type="text" th:value=" ${loginName}"/>
+                    <label for="loginName">操 作 人(operator)<span style="font-size: 12px">(Operator
+)</span>：</label>
+                </div>
+                <input id="number" name="number" type="hidden" th:value="${number}">
+                <div class="row">
+                    <div class="input-field col s3 l3 xl3">
+                        <input id="name" name="name" type="text"
+                               data-error=".errorTxt1">
+                        <div class="errorTxt1"></div>
+                        <label class="active" for="name">姓名<span style="font-size: 12px">(name)</span></label>
+                    </div>
+                    <div class="input-field col s3 l3 xl3">
+                        <input id="age" name="age" type="text"
+                               data-error=".errorTxt2">
+                        <div class="errorTxt2"></div>
+                        <label class="active" for="age">年龄<span style="font-size: 12px">(age)</span></label>
+                    </div>
+                    <div class="input-field col s3 l3 xl3">
+                        <input id="sex" name="sex" type="text"
+                               data-error=".errorTxt2">
+                        <div class="errorTxt2"></div>
+                        <label class="active" for="sex">性别<span style="font-size: 12px">(sex)</span></label>
+                    </div>
+                    <div class="input-field col s3 l3 xl3">
+                        <input id="department" name="department" type="text"
+                               data-error=".errorTxt3">
+                        <div class="errorTxt3"></div>
+                        <label class="active" for="department">科室<span
+                                style="font-size: 12px">(department)</span></label>
+                    </div>
+                    <div class="input-field col s3 l3 xl3">
+                        <input id="ward" name="ward" type="text"
+                               data-error=".errorTxt2">
+                        <div class="errorTxt2"></div>
+                        <label class="active" for="ward">病房<span style="font-size: 12px">(ward)</span></label>
+                    </div>
+                    <div class="input-field col s3 l3 xl3">
+                        <input id="bed" name="bed" type="text"
+                               data-error=".errorTxt2">
+                        <div class="errorTxt2"></div>
+                        <label class="active" for="bed">床号<span style="font-size: 12px">(bed)</span></label>
+                    </div>
+                    <div class="input-field col s3 l3 xl3">
+                        <input id="hospital" name="hospital" type="text"
+                               data-error=".errorTxt2">
+                        <div class="errorTxt2"></div>
+                        <label class="active" for="hospital">住院编号<span
+                                style="font-size: 12px">(The hospital number)</span></label>
+                    </div>
+                    <div class="input-field col s3 l3 xl3">
+                        <input id="createDate" name="createDate" type="text"
+                               data-error=".errorTxt2">
+                        <div class="errorTxt2"></div>
+                        <label class="active" for="createDate">入院日期<span style="font-size: 12px">(admission date)</span></label>
+                    </div>
+                    <form class="col s12" id="sendForm" action="#">
+
+                        <div class="col input-field s3 m3 l3">
+                            <select ahsj:select name="applicantDepartmentId" id="applicantDepartmentId" type="depart"
+                                    typeKey="2"
+                                    departKbn="1">
+                            </select> <!--departKbn="1"  1是医疗 2是非医疗 -->   <!--typeKey="2"   1是部门 2是科室-->
+                            <label for="applicantDepartmentId">申请会诊科室<span style="font-size: 12px">(Apply for consultation department
+)</span></label>
+                        </div>
+                        <div class="col input-field s3 m3 l3">
+                            <select ahsj:select name="inviteeDepartmentId" id="inviteeDepartmentId" type="depart"
+                                    typeKey="2"
+                                    departKbn="1">
+                            </select> <!--departKbn="1"  1是医疗 2是非医疗 -->   <!--typeKey="2"   1是部门 2是科室-->
+                            <label for="inviteeDepartmentId">被邀请会诊科室科室<span style="font-size: 12px">(Be invited to consult the department
+)</span></label>
+                        </div>
+                        <div class="col  input-field s2 m2 l2 xl2">
+                            <input id="applicantDate" name="applicantDate" type="text" class="datepicker"/>
+                            <label for="applicantDate">申请会诊时间<span
+                                    style="font-size: 12px">(Request consultation time)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <select ahsj:select name="meetingFormat" id="meetingFormat" type="code"
+                                    typeKey="meeting_format">
+                            </select>
+                            <label for="meetingFormat">会诊类型<span style="font-size: 12px">(Consultation type
+)</span></label>
+                        </div>
+
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="medicalHistory" name="medicalHistory" type="text"
+                                   data-error=".errorTxt8">
+                            <div class="errorTxt8"></div>
+                            <label for="medicalHistory" class="active">患者简要病史<span style="font-size: 12px">(Brief patient history
+)</span></label>
+                        </div>
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="consultationPurposes" name="consultationPurposes" type="text"
+                                   data-error=".errorTxt8">
+                            <div class="errorTxt8"></div>
+                            <label class="active" for="consultationPurposes">会诊目的<span style="font-size: 12px">(Consultation purposes)
+)</span></label>
+                        </div>
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="admittingDiagnosis" name="admittingDiagnosis" type="text"
+                                   data-error=".errorTxt8">
+                            <div class="errorTxt8"></div>
+                            <label class="active" for="admittingDiagnosis">入院诊断<span style="font-size: 12px">(admitting diagnosis
+)</span></label>
+                        </div>
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="consultationOpinion" name="consultationOpinion" type="text"
+                                   data-error=".errorTxt8">
+                            <div class="errorTxt8"></div>
+                            <label class="active" for="consultationOpinion">会诊意见<span style="font-size: 12px">(Consultation opinion
+)</span></label>
+                        </div>
+                        <div class="col  input-field s2 m2 l2 xl2">
+                            <input id="consultationDate" name="consultationDate" type="text" class="datepicker"/>
+                            <label for="consultationDate">申请会诊时间<span
+                                    style="font-size: 12px">(Request consultation time)</span></label>
+                        </div>
+                        <input id="hisHospitalManageId" name="hisHospitalManageId" type="hidden">
+                        <input id="id" name="id" type="hidden" th:value="${id}">
+                    </form>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <button id="send_btn" class="btn cyan waves-effect waves-light right" type="button"
+                                name="action">提 交（submit
+                            ）
+                            <i class="mdi-content-send right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<!-- ================================================
+Scripts
+================================================ -->
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+    $(document).ready(function () {
+        getHospital();
+         getHisConsultationNote();
+    });
+
+    function getHospital() {
+        var number = $("#number").val();
+        if (!isNullOrEmpty(number)) {
+            //获取基本信息
+            $.ahsjajax(
+                CTX + "/api/hishospitalmanage/getHospital/index.ahsj",
+                {"number": number},
+                function (data) {
+                    if (!isNullOrEmpty(data)) {
+                        changeInputValue("name", data.patientName);
+                        changeInputValue("age", data.age);
+                        changeInputValue("createDate", data.createDate);
+                        changeInputValue("hospital", data.number);
+                        changeInputValue("bed", data.bedsNumber);
+                        changeInputValue("ward", data.wardsNumber);
+                        changeInputValue("sex", data.sexName);
+                        changeInputValue("department", data.departmentIdName);
+                        changeInputValue("hisHospitalManageId", data.id);
+                        M.updateTextFields();//重新初始化页面上的内容
+                        return true;
+                    } else {
+                        dialog.warn(number + "号不存在！");
+                        return false;
+                    }
+                },
+                function () {
+                    Materialize.toast("网络异常");
+                    return false;
+                }
+            );
+        }
+    }
+
+
+    function getHisConsultationNote() {
+        var id = $("#id").val();
+        if (!isNullOrEmpty(id)) {
+            //获取基本信息
+            $.ahsjajax(
+                CTX + "/api/hisConsultationNote/getHisConsultationNote/index.ahsj",
+                {"id": id},
+                function (data) {
+                    if (!isNullOrEmpty(data.id)) {
+                        changeSelectValue("applicantDepartmentId",data.applicantDepartmentId);
+                        changeSelectValue("inviteeDepartmentId",data.inviteeDepartmentId);
+                        changeInputValue("applicantDate", data.applicantDate);
+                        changeSelectValue("meetingFormat", data.meetingFormat);
+                        changeInputValue("medicalHistory", data.medicalHistory);
+                        changeInputValue("consultationPurposes", data.consultationPurposes);
+                        changeInputValue("consultationDate", data.consultationDate);
+                        changeInputValue("admittingDiagnosis", data.admittingDiagnosis);
+                        changeInputValue("consultationOpinion", data.consultationOpinion);
+                        M.updateTextFields();//重新初始化页面上的内容
+                        return true;
+                    } else {
+                        return true;
+                    }
+                },
+                function () {
+                    Materialize.toast("网络异常");
+                    return false;
+                }
+            );
+        }
+    }
+
+    $('#send_btn').click(function () {
+        dialog.confirm('确定提交吗?', function (index, layero) {
+            var hisConsultationNote = $("#sendForm").serialize();
+            $.ahsjajax(CTX + "/api/hisConsultationNote/saveOrUpdate/index.ahsj",
+                hisConsultationNote,
+                function (msg) {
+                    if (msg.success) {
+                        dialog.warn(msg.message)
+                        swal.close();
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                    } else {
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                    }
+                },
+                function (data) {
+                    M.toast({
+                        html: "网络异常", completeCallback: function () {
+                        }
+                    });
+                }
+            );
+        });
+    })
+
+
+    $("input").change(function () {
+        $(this).val($(this).val().trim());
+    });
+</script>
+</body>
+</html>

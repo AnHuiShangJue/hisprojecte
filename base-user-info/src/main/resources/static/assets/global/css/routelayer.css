@@ -1,0 +1,22 @@
+body .addFri .layui-layer-title{
+    height: 30px;
+    line-height: 30px;
+    /*background: #5AC4FF;*/
+    background-color: #4e342e !important;
+    font: 14px Helvetica Neue,Helvetica,PingFang SC,Tahoma,Arial,sans-serif;
+    color: #fff;
+    border: 0;
+    padding-top: 5px;
+    padding-bottom: 8px;
+}
+body .addFri .layui-layer-content{
+    padding: 3rem 3rem 3rem 3rem;
+    text-align: center;
+    font-size: 19px;
+    font-weight: normal;
+    filter:alpha(opacity=20);
+    height: 60px;
+}
+body .addFri #i_size {
+    height: 20px;
+ }

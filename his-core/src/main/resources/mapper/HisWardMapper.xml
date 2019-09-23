@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisWardMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisWard">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="number" property="number" jdbcType="INTEGER"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="create_user_id" property="createUserId" jdbcType="BIGINT"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="BIGINT"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="count" property="count" jdbcType="INTEGER"/>
+        <result column="current_count" property="currentCount" jdbcType="INTEGER"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="is_enable" property="isEnable" jdbcType="INTEGER"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, number, type, create_user_id, create_date, update_user_id, update_date, count,
+    current_count, remark, is_enable
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from his_ward
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_ward
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisWard">
+    insert into his_ward (id, number, type,
+      create_user_id, create_date, update_user_id,
+      update_date, count, current_count,
+      remark, is_enable)
+    values (#{id,jdbcType=BIGINT}, #{number,jdbcType=INTEGER}, #{type,jdbcType=INTEGER},
+      #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT},
+      #{updateDate,jdbcType=TIMESTAMP}, #{count,jdbcType=INTEGER}, #{currentCount,jdbcType=INTEGER},
+      #{remark,jdbcType=VARCHAR}, #{isEnable,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisWard">
+        insert into his_ward
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="number != null">
+                number,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="count != null">
+                count,
+            </if>
+            <if test="currentCount != null">
+                current_count,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="isEnable != null">
+                is_enable,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="number != null">
+                #{number,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="count != null">
+                #{count,jdbcType=INTEGER},
+            </if>
+            <if test="currentCount != null">
+                #{currentCount,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="isEnable != null">
+                #{isEnable,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisWard">
+        update his_ward
+        <set>
+            <if test="number != null">
+                number = #{number,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="count != null">
+                count = #{count,jdbcType=INTEGER},
+            </if>
+            <if test="currentCount != null">
+                current_count = #{currentCount,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="isEnable != null">
+                is_enable = #{isEnable,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisWard">
+    update his_ward
+    set number = #{number,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      count = #{count,jdbcType=INTEGER},
+      current_count = #{currentCount,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      is_enable = #{isEnable,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <!--自定义-->
+    <select id="getHisWardAll" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_ward
+        where
+        1=1
+        <if test="parameter.number != null and parameter.number != ''">
+            and number like concat('%', #{parameter.number,jdbcType=INTEGER},'%')
+        </if>
+        <if test="parameter.isEnable != null and parameter.isEnable != ''">
+            and is_enable = #{parameter.isEnable,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+
+    </select>
+
+    <select id="gethisWardByNumber" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_ward
+        where number = #{number}
+    </select>
+    <select id="getUserName" parameterType="java.lang.Long" resultType="java.lang.String">
+    select user_name from `his-userInfo`.user_info  where id=#{id}
+  </select>
+    <select id="selectHisWard" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_ward
+    </select>
+    <select id="getHisWardList" resultType="com.ahsj.hiscore.entity.HisWard"
+            parameterType="com.ahsj.hiscore.entity.HisWard">
+        select
+        w.id, w.number, w.type, w.create_user_id, w.create_date, w.update_user_id, w.update_date, w.count,
+        w.current_count, w.remark, w.is_enable,i.user_name,s.id as typeId ,d.id as enableId
+        from his_ward as w
+        LEFT JOIN `his-userinfo`.user_info as i on i.id = w.create_user_id
+        LEFT JOIN `his-userinfo`.sys_code_detail as s on s.code = w.type
+        LEFT JOIN `his-userinfo`.sys_code_detail as d on d.code = w.is_enable
+        where s.type_id = (select id from `his-userinfo`.sys_code where type = 'room_type')
+        and d.type_id = (select id from `his-userinfo`.sys_code where type = 'is_enable')
+        <if test="number != null and number != ''">
+            and number like concat('%', #{number,jdbcType=INTEGER},'%')
+        </if>
+        <if test="isEnable != null and isEnable != ''">
+            and is_enable = #{isEnable,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <insert id="importHisWard" useGeneratedKeys="true" keyProperty="id" parameterType="com.ahsj.hiscore.entity.HisWard">
+        insert into his_ward (id, number, type,
+        create_user_id, create_date, update_user_id,
+        update_date, count, current_count,
+        is_enable)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id,jdbcType=BIGINT}, #{item.number,jdbcType=INTEGER}, #{item.type,jdbcType=INTEGER},
+            #{item.createUserId,jdbcType=BIGINT}, #{item.createDate,jdbcType=TIMESTAMP},
+            #{item.updateUserId,jdbcType=BIGINT},
+            #{item.updateDate,jdbcType=TIMESTAMP}, #{item.count,jdbcType=INTEGER},
+            #{item.currentCount,jdbcType=INTEGER},
+           #{item.isEnable,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+
+    <select id="selectByIds" resultType="com.ahsj.hiscore.entity.HisWard">
+        select
+        w.id, w.number, w.type, w.create_user_id, w.create_date, w.update_user_id, w.update_date, w.count,
+        w.current_count, w.remark, w.is_enable,i.user_name,s.id as typeid ,d.id as is_enableId
+        from his_ward as w
+        LEFT JOIN `his-userinfo`.user_info as i on i.id = w.create_user_id
+        LEFT JOIN `his-userinfo`.sys_code_detail as s on s.code = w.type
+        LEFT JOIN `his-userinfo`.sys_code_detail as d on d.code = w.is_enable
+        where s.type_id = (select id from `his-userinfo`.sys_code where type = 'room_type')
+        and d.type_id = (select id from `his-userinfo`.sys_code where type = 'is_enable')
+        and w.id in
+        <foreach collection="array" item="id" index="index"
+                 open="(" close=")" separator=",">
+            #{id,jdbcType=BIGINT}
+        </foreach>
+    </select>
+
+</mapper>

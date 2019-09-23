@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahsj.hiscore.dao.HisDoctorInfoMapper">
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisDoctorInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="numb" jdbcType="VARCHAR" property="numb" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="relam" jdbcType="VARCHAR" property="relam" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+    <result column="department_id" jdbcType="BIGINT" property="department_id" />
+    <result column="image_url" jdbcType="VARCHAR" property="imageUrl" />
+    <result column="image_id" jdbcType="BIGINT" property="imageId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="update_user_id" jdbcType="BIGINT" property="updateUserId" />
+    <result column="join_date" jdbcType="TIMESTAMP" property="joinDate" />
+    <result column="leave_date" jdbcType="TIMESTAMP" property="leaveDate" />
+    <result column="graduation_date" jdbcType="TIMESTAMP" property="graduationDate" />
+    <result column="graduation_major" jdbcType="VARCHAR" property="graduationMajor" />
+    <result column="graduated_school" jdbcType="VARCHAR" property="graduatedSchool" />
+    <result column="is_leave" jdbcType="SMALLINT" property="isLeave" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, numb, name, sex, idcard, relam, remarks, introduction, department_id, image_url, 
+    image_id, create_date, update_date, create_user_id, update_user_id, join_date, leave_date, 
+    graduation_date, graduation_major, graduated_school, is_leave
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from his_doctor_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_doctor_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.ahsj.hiscore.entity.HisDoctorInfo">
+    insert into his_doctor_info (id, numb, name, 
+      sex, idcard, relam, 
+      remarks, introduction, department_id, 
+      image_url, image_id, create_date, 
+      update_date, create_user_id, update_user_id, 
+      join_date, leave_date, graduation_date, 
+      graduation_major, graduated_school, is_leave
+      )
+    values (#{id,jdbcType=BIGINT}, #{numb,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{idcard,jdbcType=VARCHAR}, #{relam,jdbcType=VARCHAR}, 
+      #{remarks,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, #{department_id,jdbcType=BIGINT},
+      #{imageUrl,jdbcType=VARCHAR}, #{imageId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{updateUserId,jdbcType=BIGINT}, 
+      #{joinDate,jdbcType=TIMESTAMP}, #{leaveDate,jdbcType=TIMESTAMP}, #{graduationDate,jdbcType=TIMESTAMP}, 
+      #{graduationMajor,jdbcType=VARCHAR}, #{graduatedSchool,jdbcType=VARCHAR}, #{isLeave,jdbcType=SMALLINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisDoctorInfo">
+    insert into his_doctor_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="numb != null">
+        numb,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="idcard != null">
+        idcard,
+      </if>
+      <if test="relam != null">
+        relam,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="introduction != null">
+        introduction,
+      </if>
+      <if test="department_id != null">
+        department_id,
+      </if>
+      <if test="imageUrl != null">
+        image_url,
+      </if>
+      <if test="imageId != null">
+        image_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="updateUserId != null">
+        update_user_id,
+      </if>
+      <if test="joinDate != null">
+        join_date,
+      </if>
+      <if test="leaveDate != null">
+        leave_date,
+      </if>
+      <if test="graduationDate != null">
+        graduation_date,
+      </if>
+      <if test="graduationMajor != null">
+        graduation_major,
+      </if>
+      <if test="graduatedSchool != null">
+        graduated_school,
+      </if>
+      <if test="isLeave != null">
+        is_leave,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="numb != null">
+        #{numb,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="relam != null">
+        #{relam,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="department_id != null">
+        #{department_id,jdbcType=BIGINT},
+      </if>
+      <if test="imageUrl != null">
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imageId != null">
+        #{imageId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateUserId != null">
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="joinDate != null">
+        #{joinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaveDate != null">
+        #{leaveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="graduationDate != null">
+        #{graduationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="graduationMajor != null">
+        #{graduationMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="graduatedSchool != null">
+        #{graduatedSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="isLeave != null">
+        #{isLeave,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisDoctorInfo">
+    update his_doctor_info
+    <set>
+      <if test="numb != null">
+        numb = #{numb,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="idcard != null">
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="relam != null">
+        relam = #{relam,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="department_id != null">
+        department_id = #{department_id,jdbcType=BIGINT},
+      </if>
+      <if test="imageUrl != null">
+        image_url = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imageId != null">
+        image_id = #{imageId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateUserId != null">
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="joinDate != null">
+        join_date = #{joinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaveDate != null">
+        leave_date = #{leaveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="graduationDate != null">
+        graduation_date = #{graduationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="graduationMajor != null">
+        graduation_major = #{graduationMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="graduatedSchool != null">
+        graduated_school = #{graduatedSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="isLeave != null">
+        is_leave = #{isLeave,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisDoctorInfo">
+    update his_doctor_info
+    set numb = #{numb,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      relam = #{relam,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      image_url = #{imageUrl,jdbcType=VARCHAR},
+      image_id = #{imageId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      join_date = #{joinDate,jdbcType=TIMESTAMP},
+      leave_date = #{leaveDate,jdbcType=TIMESTAMP},
+      graduation_date = #{graduationDate,jdbcType=TIMESTAMP},
+      graduation_major = #{graduationMajor,jdbcType=VARCHAR},
+      graduated_school = #{graduatedSchool,jdbcType=VARCHAR},
+      is_leave = #{isLeave,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--自定义sql-->
+  <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    SELECT
+    a.* ,
+    e.name  as depart_name
+    FROM
+    `his-rpac`.his_doctor_info as a
+    LEFT JOIN `his-rpac`.his_user_doctor as b ON a.id = b.doctor_id
+    LEFT JOIN `his-userinfo`.user_info as c ON c.id = b.user_id
+    LEFT JOIN `his-userinfo`.user_org_rel as d ON d.user_id = c.id
+    LEFT JOIN `his-userinfo`.organization as e ON e.tree_id = d.dept_id
+    where
+    1= 1
+    <if test="parameter.name != null and parameter.name != ''">
+      and a.name like concat('%' #{parameter.name,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.idcard != null and parameter.idcard != ''">
+      and a.idcard like concat('%' #{parameter.idcard,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.numb != null and parameter.numb != ''">
+      and a.numb like concat('%' #{parameter.numb,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.sex != null and parameter.sex != ''">
+      and a.sex like concat('%' #{parameter.sex,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.joinDate != null ">
+      and a.join_date &gt;= #{parameter.joinDate,jdbcType=TIMESTAMP}
+    </if>
+    <if test="parameter.joinLowDate != null ">
+      and a.join_date &lt;= #{parameter.joinLowDate,jdbcType=TIMESTAMP}
+    </if>
+    <if test="parameter.leaveDate != null ">
+      and a.leave_date &gt;= #{parameter.leaveDate,jdbcType=TIMESTAMP}
+    </if>
+    <if test="parameter.leaveLowDate != null ">
+      and a.leave_date &lt;= #{parameter.leaveLowDate,jdbcType=TIMESTAMP}
+    </if>
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+  <select id="selectForInsert"  parameterType="com.ahsj.hiscore.entity.HisDoctorInfo" resultMap="BaseResultMap">
+          select his_doctor_info.*
+    from his_doctor_info
+    where
+      idcard = #{idcard,jdbcType=VARCHAR}
+      or numb = #{numb,jdbcType=VARCHAR}
+  </select>
+  <select id="getHisDoctorInfoBydepartmentId"  parameterType="java.lang.Long" resultMap="BaseResultMap">
+    SELECT
+    b.user_id AS id,
+    c.user_name AS name
+    FROM `his-rpac`.his_doctor_info AS a
+    LEFT JOIN `his-rpac`.his_user_doctor AS b ON a.id = b.doctor_id
+    LEFT JOIN `his-userinfo`.user_info AS c ON c.id = b.user_id
+    where a.leave_date IS NULL AND c.dept_id =  #{deptId,jdbcType=VARCHAR}
+  </select>
+  <!--查询医生总数-->
+  <select id="selectNumberCount" resultType="int">
+    select count(*)
+from his_doctor_info
+  </select>
+
+  <select id="selectByNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select his_doctor_info.*
+from his_doctor_info
+where numb = #{doctorNumber,jdbcType=VARCHAR}
+  </select>
+  <insert id="insertList"  parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+    insert into his_doctor_info (id, name, sexName,
+    numb, idcard, relam,
+    departmentIdName, joinDate, leaveDate
+    )
+    values
+    <foreach collection="list" item="item" index="index" separator="," >
+
+      (
+      #{item.id,jdbcType=INTEGER}, #{item.name,jdbcType=VARCHAR}, #{item.sexName,jdbcType=VARCHAR},
+      #{item.numb,jdbcType=VARCHAR}, #{item.idcard,jdbcType=VARCHAR}, #{item.relam,jdbcType=VARCHAR},
+      #{item.departmentIdName,jdbcType=VARCHAR}, #{item.joinDate,jdbcType=TIMESTAMP}, #{item.leaveDate,jdbcType=TIMESTAMP}
+      )
+    </foreach>
+  </insert>
+  <select id="queryListExportAll"  resultMap="BaseResultMap">
+      select
+        p.* ,o.name as dept_name ,sys.`value` as sex_name ,sys.id as sys_code_id
+        from his_doctor_info p left join `his-userinfo`.organization as o on p.department_id = o.id LEFT JOIN
+
+				(SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'sex' ) as sys on p.sex = sys.code
+
+			where 1=1
+    <if test="name != null and name != ''">
+      and p.name like concat('%' #{name,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="idcard != null and idcard != ''">
+      and p.idcard like concat('%' #{idcard,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="numb != null and numb != ''">
+      and p.numb like concat('%' #{numb,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="sex != null and sex != ''">
+      and p.sex like concat('%' #{sex,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="joinDate != null ">
+      and p.join_date &gt;= #{joinDate,jdbcType=TIMESTAMP}
+    </if>
+    <if test="joinLowDate != null ">
+      and p.join_date &lt;= #{joinLowDate,jdbcType=TIMESTAMP}
+    </if>
+    <if test="leaveDate != null ">
+      and p.leave_date &gt;= #{leaveDate,jdbcType=TIMESTAMP}
+    </if>
+    <if test="leaveLowDate != null ">
+      and p.leave_date &lt;= #{leaveLowDate,jdbcType=TIMESTAMP}
+    </if>
+    </select>
+  <select id="queryListExportAndByIdsAll"  resultMap="BaseResultMap" parameterType="java.util.List">
+    select
+    p.* ,o.name as dept_name ,sys.`value` as sex_name ,sys.id as sys_code_id
+    from his_doctor_info p left join `his-userinfo`.organization as o on p.department_id = o.id LEFT JOIN
+
+    (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'sex' ) as sys on p.sex = sys.code
+
+    where
+    <foreach collection="list" separator="or" item="item" index="index">
+      p.id=#{item.id}
+    </foreach>
+  </select>
+
+  <insert id="importHisDoctorInfo"  useGeneratedKeys="true" keyProperty="id" parameterType="com.ahsj.hiscore.entity.HisDoctorInfo">
+    insert into his_doctor_info (id, create_date, create_user_id,
+    update_date, update_user_id, name,
+    sex, numb, idcard,department_id,
+    join_date)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.id,jdbcType=BIGINT}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.createUserId,jdbcType=BIGINT},
+      #{item.updateDate,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=BIGINT}, #{item.name,jdbcType=VARCHAR},
+      #{item.sex,jdbcType=INTEGER}, #{item.numb,jdbcType=VARCHAR}, #{item.idcard,jdbcType=VARCHAR},
+      #{item.department_id,jdbcType=BIGINT}, #{item.joinDate,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+
+  <select id="queryDoctorAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from his_doctor_info order by create_date desc
+  </select>
+
+  <select id="queryDoctorDescIdAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from his_doctor_info order by id desc
+  </select>
+
+  <select id="queryHisDoctorByIdCard" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from his_doctor_info
+    where idcard =#{idcard,jdbcType=VARCHAR}
+  </select>
+
+  <update id="updateHisDoctor" parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+      update his_doctor_info
+      <set>
+
+
+        <if test="item.sex != null">
+          sex = #{item.sex,jdbcType=INTEGER},
+        </if>
+        <if test="item.idcard != null">
+          idcard = #{item.idcard,jdbcType=VARCHAR},
+        </if>
+
+        <if test="item.numb != null">
+          numb = #{item.numb,jdbcType=VARCHAR},
+        </if>
+        <if test="item.name != null">
+          name = #{item.name,jdbcType=VARCHAR},
+        </if>
+        <if test="item.department_id != null">
+          department_id = #{item.department_id,jdbcType=BIGINT}
+        </if>
+      </set>
+      where idcard = #{item.idcard}
+    </foreach>
+  </update>
+
+  <select id="getAllDoctor" resultMap="BaseResultMap">
+SELECT
+  a.id,
+b.user_id as userId,
+c.user_name AS name
+FROM `his-rpac`.his_doctor_info AS a
+LEFT JOIN `his-rpac`.his_user_doctor AS b ON a.id = b.doctor_id
+LEFT JOIN `his-userinfo`.user_info AS c ON c.id = b.user_id
+where a.leave_date IS NULL
+  </select>
+
+</mapper>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<div th:replace="public/back_baselayout :: html"></div>
+<style>
+  .chart{
+    color: #0C0C0C;
+  }
+</style>
+<body>
+<div id="card-stats">
+    <div class="row">
+        <div class="col s12 m6 l3">
+            <div class="card">
+                <div class="card-content  purple white-text">
+                    <p class="card-stats-title"><i class="mdi-social-group-add"></i> 今天的浏览量</p>
+                    <h4 class="card-stats-number" th:text="${#numbers.formatDecimal(todaycount,0,0)}"></h4>
+                    <p class="card-stats-compare" ><i class="mdi-hardware-keyboard-arrow-up"></i>
+                        <span th:if="${yesterdayvisitcount} eq 0"><span th:text="${todaycount}"></span></span>
+                        <span th:if="${yesterdayvisitcount} ne 0">
+                            <span th:if="${todaycount} eq 0"><span>0%</span></span>
+                            <span th:if="${todaycount} ne 0"> <span th:text="${#numbers.formatDecimal(todaycount/yesterdayvisitcount,0,2)}*100"></span></span>
+                        </span>
+                        % <span class="green-text text-lighten-5">与昨天相比</span>
+                    </p>
+                </div>
+                <div class="card-action  green darken-2">
+                    <div id="clients-bar"></div>`
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m6 l3">
+            <div class="card">
+                <div class="card-content purple white-text">
+                    <p class="card-stats-title"><i class="mdi-editor-attach-money"></i>总的访问量</p>
+                    <h4 class="card-stats-number" th:text="${totalCount}"></h4>
+                    </p>
+                    <p class="card-stats-compare">
+                        <span class="blue-grey-text text-lighten-5">
+                    如果我变小了，那么一定是库表中数据被删了
+                        </span>
+                    </p>
+                </div>
+                <div class="card-action  green darken-2">
+                    <div id="clients-bar-2"></div>`
+                </div>
+            </div>
+        </div>
+    </div>
+ <!-- <div class="move-up cyan darken-1">
+    <div>
+      <span class="chart-title white-text">访问量月变化</span>
+      <div class="chart-revenue cyan darken-2 white-text">
+        <p class="chart-revenue-total">总访问量</p>
+        <p class="chart-revenue-per"><i class="mdi-navigation-arrow-drop-up"></i> 增长比</p>
+      </div>
+    </div>
+    <div class="trending-line-chart-wrapper">
+      <canvas id="chart_month" height="400" width="600" style="width: 900px; height: 400px;"></canvas>
+    </div>
+  </div>-->
+    <div class="move-up cyan darken-1">
+    <div>
+        <span class="chart-title white-text">访问量日变化</span>
+        <div class="chart-revenue cyan darken-2 white-text">
+            <p class="chart-revenue-total">总访问量</p>
+            <p class="chart-revenue-per"><i class="mdi-navigation-arrow-drop-up"></i> 增长比</p>
+        </div>
+    </div>
+    <div class="trending-line-chart-wrapper">
+        <canvas id="chart_day" height="400" width="600" style="width: 900px; height: 400px;"></canvas>
+    </div>
+</div>
+</div>
+</body>
+<script th:inline="javascript">
+
+/*  var data1 = {
+      labels : ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],
+      datasets : [
+          {
+              label: "First dataset",
+              fillColor : "rgba(128, 222, 234, 0.6)",
+              strokeColor : "#ffffff",
+              pointColor : "#00bcd4",
+              pointStrokeColor : "#ffffff",
+              pointHighlightFill : "#ffffff",
+              pointHighlightStroke : "#ffffff",
+              data: [[${everymonth}]]
+
+          }
+      ]
+  };*/
+  var data2 = {
+      labels : ["0点","1点","2点","3点","4点","5点","6点","7点","8点","9点","10点","11点","12点","13点","14点","15点","16点","17点","18点",
+          "19点","20点","21点","22点","23点"],
+      datasets : [
+          {
+              label: "First dataset",
+              fillColor : "rgba(128, 222, 234, 0.6)",
+              strokeColor : "#ffffff",
+              pointColor : "#00bcd4",
+              pointStrokeColor : "#ffffff",
+              pointHighlightFill : "#ffffff",
+              pointHighlightStroke : "#ffffff",
+              data:[[${everytime}]]
+            }
+      ]
+  };
+
+  window.onload=function () {
+     /* var trendingLineChart = document.getElementById("chart_month").getContext("2d");
+      window.trendingLineChart = new Chart(trendingLineChart).Line(data1, {
+          scaleShowGridLines : true,///Boolean - Whether grid lines are shown across the chart
+          scaleGridLineColor : "rgba(255,255,255,0.4)",//String - Colour of the grid lines
+          scaleGridLineWidth : 1,//Number - Width of the grid lines
+          scaleShowHorizontalLines: true,//Boolean - Whether to show horizontal lines (except X axis)
+          scaleShowVerticalLines: false,//Boolean - Whether to show vertical lines (except Y axis)
+          bezierCurve : true,//Boolean - Whether the line is curved between points
+          bezierCurveTension : 0.4,//Number - Tension of the bezier curve between points
+          pointDot : true,//Boolean - Whether to show a dot for each point
+          pointDotRadius : 5,//Number - Radius of each point dot in pixels
+          pointDotStrokeWidth : 2,//Number - Pixel width of point dot stroke
+          pointHitDetectionRadius : 20,//Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+          datasetStroke : true,//Boolean - Whether to show a stroke for datasets
+          datasetStrokeWidth : 3,//Number - Pixel width of dataset stroke
+          datasetFill : true,//Boolean - Whether to fill the dataset with a colour
+          animationSteps: 60,// Number - Number of animation steps
+          animationEasing: "easeOutQuart",// String - Animation easing effect
+          tooltipTitleFontFamily: "'Roboto','Helvetica Neue', 'Helvetica', 'Arial', sans-serif",// String - Tooltip title font declaration for the scale label
+          scaleFontSize: 12,// Number - Scale label font size in pixels
+          scaleFontStyle: "normal",// String - Scale label font weight style
+          scaleFontColor: "#fff",// String - Scale label font colour
+          tooltipEvents: ["mousemove", "touchstart", "touchmove"],// Array - Array of string names to attach tooltip events
+          tooltipFillColor: "rgba(255,255,255,0.8)",// String - Tooltip background colour
+          tooltipTitleFontFamily: "'Roboto','Helvetica Neue', 'Helvetica', 'Arial', sans-serif",// String - Tooltip title font declaration for the scale label
+          tooltipFontSize: 12,// Number - Tooltip label font size in pixels
+          tooltipFontColor: "#000",// String - Tooltip label font colour
+          tooltipTitleFontFamily: "'Roboto','Helvetica Neue', 'Helvetica', 'Arial', sans-serif",// String - Tooltip title font declaration for the scale label
+          tooltipTitleFontSize: 14,// Number - Tooltip title font size in pixels
+          tooltipTitleFontStyle: "bold",// String - Tooltip title font weight style
+          tooltipTitleFontColor: "#000",// String - Tooltip title font colour
+          tooltipYPadding: 8,// Number - pixel width of padding around tooltip text
+          tooltipXPadding: 16,// Number - pixel width of padding around tooltip text
+          tooltipCaretSize: 10,// Number - Size of the caret on the tooltip
+          tooltipCornerRadius: 6,// Number - Pixel radius of the tooltip border
+          tooltipXOffset: 10,// Number - Pixel offset from point x to tooltip edge
+          responsive: true
+      });*/
+
+      var trendingLineChart = document.getElementById("chart_day").getContext("2d");
+      window.trendingLineChart = new Chart(trendingLineChart).Line(data2, {
+          scaleShowGridLines : true,///Boolean - Whether grid lines are shown across the chart
+          scaleGridLineColor : "rgba(255,255,255,0.4)",//String - Colour of the grid lines
+          scaleGridLineWidth : 1,//Number - Width of the grid lines
+          scaleShowHorizontalLines: true,//Boolean - Whether to show horizontal lines (except X axis)
+          scaleShowVerticalLines: false,//Boolean - Whether to show vertical lines (except Y axis)
+          bezierCurve : true,//Boolean - Whether the line is curved between points
+          bezierCurveTension : 0.4,//Number - Tension of the bezier curve between points
+          pointDot : true,//Boolean - Whether to show a dot for each point
+          pointDotRadius : 5,//Number - Radius of each point dot in pixels
+          pointDotStrokeWidth : 2,//Number - Pixel width of point dot stroke
+          pointHitDetectionRadius : 20,//Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+          datasetStroke : true,//Boolean - Whether to show a stroke for datasets
+          datasetStrokeWidth : 3,//Number - Pixel width of dataset stroke
+          datasetFill : true,//Boolean - Whether to fill the dataset with a colour
+          animationSteps: 60,// Number - Number of animation steps
+          animationEasing: "easeOutQuart",// String - Animation easing effect
+          tooltipTitleFontFamily: "'Roboto','Helvetica Neue', 'Helvetica', 'Arial', sans-serif",// String - Tooltip title font declaration for the scale label
+          scaleFontSize: 12,// Number - Scale label font size in pixels
+          scaleFontStyle: "normal",// String - Scale label font weight style
+          scaleFontColor: "#fff",// String - Scale label font colour
+          tooltipEvents: ["mousemove", "touchstart", "touchmove"],// Array - Array of string names to attach tooltip events
+          tooltipFillColor: "rgba(255,255,255,0.8)",// String - Tooltip background colour
+          tooltipTitleFontFamily: "'Roboto','Helvetica Neue', 'Helvetica', 'Arial', sans-serif",// String - Tooltip title font declaration for the scale label
+          tooltipFontSize: 12,// Number - Tooltip label font size in pixels
+          tooltipFontColor: "#000",// String - Tooltip label font colour
+          tooltipTitleFontFamily: "'Roboto','Helvetica Neue', 'Helvetica', 'Arial', sans-serif",// String - Tooltip title font declaration for the scale label
+          tooltipTitleFontSize: 14,// Number - Tooltip title font size in pixels
+          tooltipTitleFontStyle: "bold",// String - Tooltip title font weight style
+          tooltipTitleFontColor: "#000",// String - Tooltip title font colour
+          tooltipYPadding: 8,// Number - pixel width of padding around tooltip text
+          tooltipXPadding: 16,// Number - pixel width of padding around tooltip text
+          tooltipCaretSize: 10,// Number - Size of the caret on the tooltip
+          tooltipCornerRadius: 6,// Number - Pixel radius of the tooltip border
+          tooltipXOffset: 10,// Number - Pixel offset from point x to tooltip edge
+          responsive: true
+      });
+
+
+      $("#clients-bar").sparkline([[${everyday}]], {
+          type: 'bar',
+          height: '25',
+          width: '100%',
+          barWidth: 10,
+          barSpacing: 4,
+          barColor: '#C7FCC9',
+          negBarColor: '#81d4fa',
+          zeroColor: '#81d4fa',
+          //tooltipFormat: $.spformat('{{value}}', 'tooltip-class')
+      });
+      $("#clients-bar-2").sparkline([[${everymonth}]], {
+          type: 'bar',
+          height: '25',
+          width: '100%',
+          barWidth: 10,
+          barSpacing: 4,
+          barColor: '#C7FCC9',
+          negBarColor: '#81d4fa',
+          zeroColor: '#81d4fa',
+          //tooltipFormat: $.spformat('{{value}}', 'tooltip-class')
+      });
+  }
+</script>
+</html>

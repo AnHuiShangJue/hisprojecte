@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:ahsj="http://www.anhuishangjue.com">
+
+<div th:replace="public/base_list :: html"></div>
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<div class="row">
+    <div class="breadcrumbs-inline pt-3 pb-1" id="breadcrumbs-wrapper">
+        <!-- Search for small screen-->
+        <div class="container">
+            <div class="row">
+                <div class="col s10 m6 l6 breadcrumbs-left">
+                    <h5 class="breadcrumbs-title mt-0 mb-0 display-inline hide-on-small-and-down">DataTable</h5>
+                    <ol class="breadcrumbs mb-0">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#">Table</a>
+                        </li>
+                        <li class="breadcrumb-item active">DataTable
+                        </li>
+                    </ol>
+                </div>
+                <div class="col s2 m6 l6"><a
+                        class="btn btn-floating dropdown-settings waves-effect waves-light breadcrumbs-btn right"
+                        href="#!" data-target="dropdown1"><i class="material-icons">expand_more </i><i
+                        class="material-icons right">arrow_drop_down</i></a>
+                    <ul class="dropdown-content" id="dropdown1" tabindex="0">
+                        <li tabindex="0"><a class="grey-text text-darken-2"
+                                            href="user-profile-page.html">Profile<span
+                                class="new badge red">2</span></a></li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="app-contacts.html">Contacts</a>
+                        </li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="page-faq.html">FAQ</a></li>
+                        <li class="divider" tabindex="-1"></li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="user-login.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 x12 l12 xl12">
+        <div class="container">
+            <div class="section section-data-tables">
+                <div class="card">
+                    <div class="card-content">
+                        <form id="searchForm" class="row" action="">
+                            <div class="row">
+                                <div class="col  s1 m1 l1 xl1">
+                                    <h6>模糊搜索</h6><label style="color:black">Fuzzy search
+                                </label>
+                                </div>
+                                <div>
+                                    <input id="planDetail" type="hidden" th:value="${planNumber}">
+                                </div>
+                                <div class="col input-field s2 m2 l2 xl2">
+                                    <input id="planNumber" name="planNumber" type="text"/>
+                                    <label for="planNumber">计划编号<span style="font-size: 12px">(Plan number
+)</span></label>
+                                </div>
+                                <div class="col input-field s2 m2 l2 xl2">
+                                    <input id="personInCharge" name="personInCharge" type="text"/>
+                                    <label for="personInCharge">负责人<span style="font-size: 12px">(principal
+)</span></label>
+                                </div>
+                                <div class="col  s1 m1 l1 xl1">
+                                    <h6>预采购时间区间</h6><label style="color:black">Pre-purchase time interval
+                                </label>
+                                </div>
+                                <div class="col  input-field s2 m2 l2 xl2">
+                                    <input id="lowexpectedTime" name="lowexpectedTime" type="text" class="datepicker"/>
+                                    <label for="lowexpectedTime">下区间<span style="font-size: 12px">(Lower interval)</span></label>
+                                </div>
+                                <div class="col input-field s2 m2 l2 xl2">
+                                    <input id="highexpectedTime" name="highexpectedTime" type="text"
+                                           class="datepicker"/>
+                                    <label for="highexpectedTime">上区间<span style="font-size: 12px">(upper interval)</span></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col  s1 m1 l1 xl1">
+                                    <h6>预算区间</h6><label style="color:black">Budget interval
+                                </label>
+                                </div>
+                                <div class="col  input-field s2 m2 l2 xl2">
+                                    <input id="lowBudget" name="lowBudget" type="number"/>
+                                    <label for="lowBudget">下区间<span style="font-size: 12px">(Lower interval)</span></label>
+                                </div>
+                                <div class="col input-field s2 m2 l2 xl2">
+                                    <input id="highBudget" name="highBudget" type="number"/>
+                                    <label for="highBudget">上区间<span style="font-size: 12px">(upper interval)</span></label>
+                                </div>
+                                <div class="col  s1 m1 l1 xl1">
+                                    <h6>计划生成时间区间</h6><label style="color:black">Plan generation time interval
+                                </label>
+                                </div>
+                                <div class="col  input-field s2 m2 l2 xl2">
+                                    <input id="lowCreateDate" name="lowCreateDate" type="text" class="datepicker"/>
+                                    <label for="lowCreateDate">下区间<span style="font-size: 12px">(Lower interval
+)</span></label>
+                                </div>
+                                <div class="col input-field s2 m2 l2 xl2">
+                                    <input id="highCreateDate" name="highCreateDate" type="text"
+                                           class="datepicker"/>
+                                    <label for="highCreateDate">上区间<span style="font-size: 12px">(upper interval
+)</span></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col  s3 m3 l3 xl3">
+                                    <div ahsj:radio name="completion" id="completion" type="code" typeKey="completion"
+                                         title="完成情况Completion
+" cssdefault="radiotdefault" haveDefault="true" value="0"></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s2 m2 l2 xl2 offset-l1">
+                            <a class="waves-effect waves-light btn" id="searchBtn"><i
+                                    class="material-icons  white-text tooltipped " data-position="bottom"
+                                    data-delay="50" data-tooltip="搜索">search</i></a>
+                            <a id="resetBtn" class="waves-effect waves-light btn"><i
+                                    class="material-icons  white-text tooltipped " data-position="bottom"
+                                    data-delay="50" data-tooltip="重置">youtube_searched_for</i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 x12 l12 xl12">
+                    <div class="card">
+                        <div class="card-content">
+                            <h4 class="card-title">操作台
+                            </h4><label style="color:black">Console</label>
+                            <div class="row">
+                                <div class="col s2 m2 l2 xl2 offset-xl10">
+                                    <a id="createBtn" class="btn waves-effect waves-light red"><i
+                                            class="material-icons  white-text tooltipped " data-position="bottom"
+                                            data-delay="50" data-tooltip="增加新的采购计划">add</i></a>
+                                    <a id="deleteManyBtn"
+                                       class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
+                                            class="material-icons white-text tooltipped" data-position="bottom"
+                                            data-delay="50" data-tooltip="批量删除">delete</i></a>
+                                </div>
+                            </div>
+                            <!--Form Advance-->
+                            <div class="row">
+                                <div id="refreshtable" class="col l12 m12 l12 xl12">
+                                    <table id="data-table-simple" class="display">
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="public/base_list_script :: html"></div>
+
+<script type="text/javascript">
+    var grid = new Datatable();
+    $(document).ready(function () {
+        initBtn();
+        initTable();
+    });
+
+    function initTable() {
+        grid.init({
+            src: $("#data-table-simple"),
+            onSuccess: function (grid) {
+            },
+            onError: function (grid) {
+            },
+            onDataLoad: function (grid) {
+                var planNumberData = $("td:nth-child(2)", $(this)).html();
+            },
+            loadingMessage: 'Loading...',
+            dataTable: {
+                "ajax": {
+                    "url": CTX + "/api/planRecord/list.ahsj?token=" + TOKEN, // ajax source
+                },
+                "columns": [
+                    {
+                        "title": "<label><input type=\"checkbox\"  id=\"checkAll\" class=\"select-all\" > <span></span></label> ",
+                        "render": function (data, type, row, meta) {
+                            return " <label> <input type=\"checkbox\" value=\"" + row.id + "\"> <span></span> </label>";
+                        },
+                        "width": "18px",
+                        "orderable": false,
+                        "className": "center-align"
+                    }, {
+                        "title": "计划编号",
+                        "data": "planNumber", //实体字段
+                        "name": "plan_number"   //库中字段
+                    }, {
+                        "title": "负责人",
+                        "data": "personInCharge",
+                        "name": "person_in_charge",
+                        "orderable": false
+                    }, {
+                        "title": "预期采购时间",
+                        "data": "expectedTime",
+                        "name": "expected_time"
+                    },
+                    {
+                        "title": "预算",
+                        "data": "budget",
+                        "name": "budget"
+                    }, {
+                        "title": "完成情况",
+                        "data": "completionName",
+                        "name": "completion"
+                    }, {
+                        "title": "完成时间",
+                        "data": "completionTime",
+                        "name": "completion_time"
+                    }, {
+                        "title": "实际支出",
+                        "data": "actualExpenditure",
+                        "name": "actual_expenditure"
+                    }, {
+                        "title": "采购计划生成时间",
+                        "data": "createDate",
+                        "name": "create_date"
+                    },
+                    {
+                        "title": "操作",
+                        "width": "120px",
+                        "className": "centered",
+                        "orderable": false,
+                        "render": function (data, type, row) {
+                            var rtnBtn = "";
+
+                            //如果获取字符串，必须在参数外反转"
+                            rtnBtn = rtnBtn +
+                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick='deleteInit(" + row.id + ");'> <i class='material-icons'>delete</i></a>" +
+                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看明细\" onclick='visitDetail(\"" + row.planNumber + "\");'> <i class='material-icons'>visibility</i></a>";
+                            if (row.completion == 2) {
+                                rtnBtn = rtnBtn +  "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='edit(" + row.id + ");'> <i class='material-icons'>edit</i></a>" +
+                                    "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"入库确认\" onclick='mediEnter(\"" + row.planNumber + "\");'> <i class='material-icons'>input</i></a>";
+                            }
+                            // 返回自定义内容
+                            return rtnBtn;
+                        }
+                    }
+                ],
+                "order": [
+                    [8, 'asc']
+                ],
+            }
+        });
+    }
+
+
+    function edit(id) {
+        var url = CTX + "/api/planRecord/update/index.ahsj?token=" + TOKEN + "&id=" + id;
+        dialog.show(url, "修改采购计划基本信息");
+    }
+
+    function mediEnter(planNumber) {
+        var url = CTX + "/api/medienter/mediEnterSure/index.ahsj?token=" + TOKEN + "&planNumber=" + planNumber;
+        dialog.show(url, "药品入库确认");
+    }
+
+
+    function visitDetail(planNumber) {
+        var url = CTX + "/api/purchasingplan/details/index.ahsj?token=" + TOKEN + "&planNumber=" + planNumber;
+        dialog.show(url, "采购计划详细信息");
+    }
+
+    function deleteInit(ids) {
+        dialog.confirm('确定删除?', function (index, layero) {
+            $.ahsjajax(CTX + "/api/planRecord/delete.ahsj",
+                {"ids": ids},
+                function (msg) {
+                    if (msg.success) {
+                        swal.close();
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                        grid.search();
+                        dialog.parentclose();
+
+                    } else {
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                    }
+                },
+                function (data) {
+                    M.toast({
+                        html: "网络异常", completeCallback: function () {
+                        }
+                    });
+                }
+            );
+        });
+    }
+
+    function initBtn() {
+        //新增按钮
+        $("#createBtn").click(function () {
+            var url = CTX + "/api/planRecord/add/index.ahsj?token=" + TOKEN;
+            dialog.show(url, "药品采购计划添加")
+        });
+        $("#deleteManyBtn").click(function () {
+            var ids = grid.getSelectedRows();
+            if (ids.length == 0) {
+                dialog.warn("请至少选择一条数据");
+                return;
+            }
+            deleteInit(ids.join(','));
+        });
+        //搜索按钮
+        $('#searchBtn').click(function () {
+            grid.search();
+        });
+        $('#resetBtn').click(function () {
+            grid.reset();
+        });
+        $("#searchForm .row .col input[type='radio']").click(function () {
+            grid.search();
+        });
+    }
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+</body>
+</html>
+

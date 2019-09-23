@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahsj.hiscore.dao.HisDrugLossReportingMapper">
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisDrugLossReporting">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="loss_date" jdbcType="TIMESTAMP" property="lossDate" />
+    <result column="pharmacy_id" jdbcType="BIGINT" property="pharmacyId" />
+    <result column="drugs_numb" jdbcType="VARCHAR" property="drugsNumb" />
+    <result column="drugs_name" jdbcType="VARCHAR" property="drugsName" />
+    <result column="drugs_spec" jdbcType="VARCHAR" property="drugsSpec" />
+    <result column="sale_price" jdbcType="DOUBLE" property="salePrice" />
+    <result column="validity_period" jdbcType="TIMESTAMP" property="validityPeriod" />
+    <result column="enter_price" jdbcType="DOUBLE" property="enterPrice" />
+    <result column="manufacturers" jdbcType="INTEGER" property="manufacturers" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="large_unit" jdbcType="VARCHAR" property="largeUnit" />
+    <result column="small_unit" jdbcType="VARCHAR" property="smallUnit" />
+    <result column="treatment_measures" jdbcType="VARCHAR" property="treatmentMeasures" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="update_user_id" jdbcType="BIGINT" property="updateUserId" />
+    <result column="is_review" jdbcType="INTEGER" property="isReview" />
+    <result column="medi_enter_id" jdbcType="BIGINT" property="mediEnterId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, type, reason, loss_date, pharmacy_id, drugs_numb, drugs_name, drugs_spec, sale_price, 
+    validity_period, enter_price, manufacturers, number, remarks, large_unit, small_unit, 
+    treatment_measures, create_date, update_date, create_user_id, update_user_id,is_review,medi_enter_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from his_drug_loss_reporting
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_drug_loss_reporting
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisDrugLossReporting">
+    insert into his_drug_loss_reporting (id, type, reason, 
+      loss_date, pharmacy_id, drugs_numb, 
+      drugs_name, drugs_spec, sale_price, 
+      validity_period, enter_price, manufacturers, 
+      number, remarks, large_unit, 
+      small_unit, treatment_measures, create_date, 
+      update_date, create_user_id, update_user_id,is_review,medi_enter_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, #{reason,jdbcType=VARCHAR}, 
+      #{lossDate,jdbcType=TIMESTAMP}, #{pharmacyId,jdbcType=BIGINT}, #{drugsNumb,jdbcType=VARCHAR}, 
+      #{drugsName,jdbcType=VARCHAR}, #{drugsSpec,jdbcType=VARCHAR}, #{salePrice,jdbcType=DOUBLE}, 
+      #{validityPeriod,jdbcType=TIMESTAMP}, #{enterPrice,jdbcType=DOUBLE}, #{manufacturers,jdbcType=INTEGER},
+      #{number,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}, #{largeUnit,jdbcType=VARCHAR}, 
+      #{smallUnit,jdbcType=VARCHAR}, #{treatmentMeasures,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{updateUserId,jdbcType=BIGINT}, #{isReview,jdbcType=INTEGER},#{mediEnterId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisDrugLossReporting">
+    insert into his_drug_loss_reporting
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="lossDate != null">
+        loss_date,
+      </if>
+      <if test="pharmacyId != null">
+        pharmacy_id,
+      </if>
+      <if test="drugsNumb != null">
+        drugs_numb,
+      </if>
+      <if test="drugsName != null">
+        drugs_name,
+      </if>
+      <if test="drugsSpec != null">
+        drugs_spec,
+      </if>
+      <if test="salePrice != null">
+        sale_price,
+      </if>
+      <if test="validityPeriod != null">
+        validity_period,
+      </if>
+      <if test="enterPrice != null">
+        enter_price,
+      </if>
+      <if test="manufacturers != null">
+        manufacturers,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="largeUnit != null">
+        large_unit,
+      </if>
+      <if test="smallUnit != null">
+        small_unit,
+      </if>
+      <if test="treatmentMeasures != null">
+        treatment_measures,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="updateUserId != null">
+        update_user_id,
+      </if>
+      <if test="isReview != null">
+        is_review,
+      </if>
+      <if test="mediEnterId != null">
+        medi_enter_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="lossDate != null">
+        #{lossDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pharmacyId != null">
+        #{pharmacyId,jdbcType=BIGINT},
+      </if>
+      <if test="drugsNumb != null">
+        #{drugsNumb,jdbcType=VARCHAR},
+      </if>
+      <if test="drugsName != null">
+        #{drugsName,jdbcType=VARCHAR},
+      </if>
+      <if test="drugsSpec != null">
+        #{drugsSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="salePrice != null">
+        #{salePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="validityPeriod != null">
+        #{validityPeriod,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enterPrice != null">
+        #{enterPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="manufacturers != null">
+        #{manufacturers,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="largeUnit != null">
+        #{largeUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="smallUnit != null">
+        #{smallUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="treatmentMeasures != null">
+        #{treatmentMeasures,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateUserId != null">
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="isReview != null">
+        #{isReview,jdbcType=INTEGER},
+      </if>
+      <if test="mediEnterId != null">
+        #{mediEnterId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisDrugLossReporting">
+    update his_drug_loss_reporting
+    <set>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null">
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="lossDate != null">
+        loss_date = #{lossDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pharmacyId != null">
+        pharmacy_id = #{pharmacyId,jdbcType=BIGINT},
+      </if>
+      <if test="drugsNumb != null">
+        drugs_numb = #{drugsNumb,jdbcType=VARCHAR},
+      </if>
+      <if test="drugsName != null">
+        drugs_name = #{drugsName,jdbcType=VARCHAR},
+      </if>
+      <if test="drugsSpec != null">
+        drugs_spec = #{drugsSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="salePrice != null">
+        sale_price = #{salePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="validityPeriod != null">
+        validity_period = #{validityPeriod,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enterPrice != null">
+        enter_price = #{enterPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="manufacturers != null">
+        manufacturers = #{manufacturers,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="largeUnit != null">
+        large_unit = #{largeUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="smallUnit != null">
+        small_unit = #{smallUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="treatmentMeasures != null">
+        treatment_measures = #{treatmentMeasures,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateUserId != null">
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="isReview != null">
+        is_review = #{isReview,jdbcType=INTEGER},
+      </if>
+      <if test="mediEnterId != null">
+        medi_enter_id = #{mediEnterId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisDrugLossReporting">
+    update his_drug_loss_reporting
+    set type = #{type,jdbcType=INTEGER},
+      reason = #{reason,jdbcType=VARCHAR},
+      loss_date = #{lossDate,jdbcType=TIMESTAMP},
+      pharmacy_id = #{pharmacyId,jdbcType=BIGINT},
+      drugs_numb = #{drugsNumb,jdbcType=VARCHAR},
+      drugs_name = #{drugsName,jdbcType=VARCHAR},
+      drugs_spec = #{drugsSpec,jdbcType=VARCHAR},
+      sale_price = #{salePrice,jdbcType=DOUBLE},
+      validity_period = #{validityPeriod,jdbcType=TIMESTAMP},
+      enter_price = #{enterPrice,jdbcType=DOUBLE},
+      manufacturers = #{manufacturers,jdbcType=INTEGER},
+      number = #{number,jdbcType=INTEGER},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      large_unit = #{largeUnit,jdbcType=VARCHAR},
+      small_unit = #{smallUnit,jdbcType=VARCHAR},
+      treatment_measures = #{treatmentMeasures,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      is_review = #{isReview,jdbcType=INTEGER},
+      medi_enter_id = #{mediEnterId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--自定义sql-->
+  <!--list查询-->
+  <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    SELECT
+    his_drug_loss_reporting.*
+    FROM
+    his_drug_loss_reporting
+    where
+    1= 1
+    <if test="parameter.drugsNumb != null and parameter.drugsNumb != ''">
+      and drugs_numb like concat('%' #{parameter.drugsNumb,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.drugsName != null and parameter.drugsName != ''">
+      and drugs_name like concat('%' #{parameter.drugsName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+
+  <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List" keyProperty="id">
+    <selectKey resultType="long" keyProperty="id" order="AFTER">
+      SELECT
+      LAST_INSERT_ID()
+    </selectKey>
+
+    insert into his_drug_loss_reporting(id, type, reason, loss_date, pharmacy_id, drugs_numb, drugs_name, drugs_spec, sale_price,
+    validity_period, enter_price, manufacturers, number, remarks, large_unit, small_unit,
+    treatment_measures, create_date, update_date, create_user_id, update_user_id,is_review,medi_enter_id)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.id,jdbcType=BIGINT}, #{item.type,jdbcType=INTEGER}, #{item.reason,jdbcType=VARCHAR},
+      #{item.lossDate,jdbcType=TIMESTAMP}, #{item.pharmacyId,jdbcType=BIGINT}, #{item.drugsNumb,jdbcType=VARCHAR},
+      #{item.drugsName,jdbcType=VARCHAR}, #{item.drugsSpec,jdbcType=VARCHAR}, #{item.salePrice,jdbcType=DOUBLE},
+      #{item.validityPeriod,jdbcType=TIMESTAMP}, #{item.enterPrice,jdbcType=DOUBLE}, #{item.manufacturers,jdbcType=INTEGER},
+      #{item.number,jdbcType=INTEGER}, #{item.remarks,jdbcType=VARCHAR}, #{item.largeUnit,jdbcType=VARCHAR},
+      #{item.smallUnit,jdbcType=VARCHAR}, #{item.treatmentMeasures,jdbcType=VARCHAR}, #{item.createDate,jdbcType=TIMESTAMP},
+      #{item.updateDate,jdbcType=TIMESTAMP}, #{item.createUserId,jdbcType=BIGINT}, #{item.updateUserId,jdbcType=BIGINT}, #{item.isReview,jdbcType=INTEGER},#{item.mediEnterId,jdbcType=BIGINT}
+      )
+    </foreach>
+  </insert>
+</mapper>

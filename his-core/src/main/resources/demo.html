@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="static/assets/global/js/jquery.min.js"></script>
+    <script src="static/assets/global/js/plugins/adamwdraper-Numeral-js-7de892f/min/numeral.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="static/assets/global/js/ahsj.template.js"></script>
+</head>
+<body>
+<div class="container">
+    <canvas id="ahsjTemeplateCanvas" width="1800" height="1200" style="border:1px solid #d3d3d3;">
+        您的浏览器不支持画布插件，请升级浏览器内核至IE8+
+    </canvas>
+</div>
+<script>
+
+
+    var ahsjTemeplate = new Templates();
+    ahsjTemeplate.init({
+        src: document.getElementById("ahsjTemeplateCanvas"),
+        paddingLeft:10,
+        paddingTop:10,
+        paddingRight:10,
+        paddingBottom:10,
+        mPaintWidth:1
+    });
+</script>
+</body>
+</html>

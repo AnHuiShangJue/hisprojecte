@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahsj.hiscore.dao.HisMedicalTemplateMapper">
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisMedicalTemplate">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="update_user_id" jdbcType="BIGINT" property="updateUserId" />
+    <result column="now_condition" jdbcType="VARCHAR" property="nowCondition" />
+    <result column="hiscondition" jdbcType="VARCHAR" property="hiscondition" />
+    <result column="chiefcomplaint" jdbcType="VARCHAR" property="chiefcomplaint" />
+    <result column="personal_history" jdbcType="VARCHAR" property="personalHistory" />
+    <result column="allergies" jdbcType="VARCHAR" property="allergies" />
+    <result column="family_history" jdbcType="VARCHAR" property="familyHistory" />
+    <result column="other" jdbcType="VARCHAR" property="other" />
+    <result column="prescription_id" jdbcType="VARCHAR" property="prescriptionId" />
+    <result column="tree_id" jdbcType="VARCHAR" property="treeId" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="descrption" jdbcType="VARCHAR" property="descrption" />
+    <result column="is_last_code" jdbcType="INTEGER" property="isLastCode" />
+    <result column="combine_id" jdbcType="INTEGER" property="combineId" />
+    <result column="permission_type" jdbcType="INTEGER" property="permissionType" />
+    <result column="target_id" jdbcType="BIGINT" property="targetId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, create_date, create_user_id, update_date, update_user_id, now_condition, hiscondition, 
+    chiefcomplaint, personal_history, allergies, family_history, other, prescription_id, 
+    tree_id, parent_id, name, descrption, is_last_code,combine_id,permission_type,target_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from his_medical_template
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_medical_template
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisMedicalTemplate" useGeneratedKeys="true" keyProperty="id">
+    insert into his_medical_template (id, create_date, create_user_id, 
+      update_date, update_user_id, now_condition, 
+      hiscondition, chiefcomplaint, personal_history, 
+      allergies, family_history, other, 
+      prescription_id, tree_id, parent_id, 
+      name, descrption, is_last_code,combine_id,permission_type,target_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{nowCondition,jdbcType=VARCHAR}, 
+      #{hiscondition,jdbcType=VARCHAR}, #{chiefcomplaint,jdbcType=VARCHAR}, #{personalHistory,jdbcType=VARCHAR}, 
+      #{allergies,jdbcType=VARCHAR}, #{familyHistory,jdbcType=VARCHAR}, #{other,jdbcType=VARCHAR}, 
+      #{prescriptionId,jdbcType=VARCHAR}, #{treeId,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{descrption,jdbcType=VARCHAR}, #{isLastCode,jdbcType=INTEGER},#{combineId,jdbcType=INTEGER},#{permissionType,jdbcType=INTEGER},#{targetId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisMedicalTemplate">
+    insert into his_medical_template
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="updateUserId != null">
+        update_user_id,
+      </if>
+      <if test="nowCondition != null">
+        now_condition,
+      </if>
+      <if test="hiscondition != null">
+        hiscondition,
+      </if>
+      <if test="chiefcomplaint != null">
+        chiefcomplaint,
+      </if>
+      <if test="personalHistory != null">
+        personal_history,
+      </if>
+      <if test="allergies != null">
+        allergies,
+      </if>
+      <if test="familyHistory != null">
+        family_history,
+      </if>
+      <if test="other != null">
+        other,
+      </if>
+      <if test="prescriptionId != null">
+        prescription_id,
+      </if>
+      <if test="treeId != null">
+        tree_id,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="descrption != null">
+        descrption,
+      </if>
+      <if test="isLastCode != null">
+        is_last_code,
+      </if>
+      <if test="combineId != null">
+        combine_id,
+      </if>
+      <if test="permissionType != null">
+        permission_type,
+      </if>
+      <if test="targetId != null">
+        target_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="nowCondition != null">
+        #{nowCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="hiscondition != null">
+        #{hiscondition,jdbcType=VARCHAR},
+      </if>
+      <if test="chiefcomplaint != null">
+        #{chiefcomplaint,jdbcType=VARCHAR},
+      </if>
+      <if test="personalHistory != null">
+        #{personalHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="allergies != null">
+        #{allergies,jdbcType=VARCHAR},
+      </if>
+      <if test="familyHistory != null">
+        #{familyHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="other != null">
+        #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="prescriptionId != null">
+        #{prescriptionId,jdbcType=VARCHAR},
+      </if>
+      <if test="treeId != null">
+        #{treeId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="descrption != null">
+        #{descrption,jdbcType=VARCHAR},
+      </if>
+      <if test="isLastCode != null">
+        #{isLastCode,jdbcType=INTEGER},
+      </if>
+      <if test="combineId != null">
+        #{combineId,jdbcType=INTEGER},
+      </if>
+      <if test="permissionType != null">
+        #{permissionType,jdbcType=INTEGER},
+      </if>
+      <if test="targetId != null">
+        #{targetId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisMedicalTemplate">
+    update his_medical_template
+    <set>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="nowCondition != null">
+        now_condition = #{nowCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="hiscondition != null">
+        hiscondition = #{hiscondition,jdbcType=VARCHAR},
+      </if>
+      <if test="chiefcomplaint != null">
+        chiefcomplaint = #{chiefcomplaint,jdbcType=VARCHAR},
+      </if>
+      <if test="personalHistory != null">
+        personal_history = #{personalHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="allergies != null">
+        allergies = #{allergies,jdbcType=VARCHAR},
+      </if>
+      <if test="familyHistory != null">
+        family_history = #{familyHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="other != null">
+        other = #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="prescriptionId != null">
+        prescription_id = #{prescriptionId,jdbcType=VARCHAR},
+      </if>
+      <if test="treeId != null">
+        tree_id = #{treeId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="descrption != null">
+        descrption = #{descrption,jdbcType=VARCHAR},
+      </if>
+      <if test="isLastCode != null">
+        is_last_code = #{isLastCode,jdbcType=INTEGER},
+      </if>
+      <if test="combineId != null">
+        combine_id = #{combineId,jdbcType=INTEGER},
+      </if>
+      <if test="permissionType != null">
+        permission_type = #{permissionType,jdbcType=INTEGER},
+      </if>
+      <if test="targetId != null">
+        target_id = #{targetId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisMedicalTemplate">
+    update his_medical_template
+    set create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      now_condition = #{nowCondition,jdbcType=VARCHAR},
+      hiscondition = #{hiscondition,jdbcType=VARCHAR},
+      chiefcomplaint = #{chiefcomplaint,jdbcType=VARCHAR},
+      personal_history = #{personalHistory,jdbcType=VARCHAR},
+      allergies = #{allergies,jdbcType=VARCHAR},
+      family_history = #{familyHistory,jdbcType=VARCHAR},
+      other = #{other,jdbcType=VARCHAR},
+      prescription_id = #{prescriptionId,jdbcType=VARCHAR},
+      tree_id = #{treeId,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      descrption = #{descrption,jdbcType=VARCHAR},
+      is_last_code = #{isLastCode,jdbcType=INTEGER},
+        combine_id = #{combineId,jdbcType=INTEGER},
+        permission_type = #{permissionType,jdbcType=INTEGER},
+        target_id = #{targetId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!--自定义sql-->
+  <resultMap id="TreeResultMap" type="com.ahsj.hiscore.entity.TreeEntity">
+    <id column="id" jdbcType="VARCHAR" property="id"/>
+    <result column="name" jdbcType="VARCHAR" property="name"/>
+    <result column="isParent" jdbcType="BOOLEAN" property="isParent"/>
+    <result column="open" jdbcType="BOOLEAN" property="open"/>
+  </resultMap>
+
+  <select id="selectByTreeId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"/>
+    from his_medical_template
+    where tree_id = #{treeId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByName" parameterType="com.ahsj.hiscore.entity.HisMedicalTemplate" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from his_medical_template
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectMaxTreeId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+      max(tree_id) as tree_id
+    from his_medical_template
+    where parent_id = #{parentId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectTreeCode" resultMap="TreeResultMap">
+    SELECT
+      tree_id as id,
+      parent_id as pId,
+      name as name,
+      false as isParent,
+      false as open
+    FROM his_medical_template
+  </select>
+
+  <!--根据父节点搜索-->
+  <select id="selectByParentId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"/>
+    from his_medical_template
+    where parent_id = #{parentId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="listForMedical" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    select a.*,b.name as prescriptionName,b.descrption as prescriptionDescrption,c.name as combineName,c.description as combineDescrption,
+           case when a.permission_type = 3 then '全体成员' when a.permission_type = 2 then CONCAT(e.name,'所有人员') when a.permission_type = 1 then d.user_name else '无权限要求' end as canUserName,
+           case when b.is_available = 1 and a.prescription_id != 0 then '可正常使用' when a.prescription_id = 0 then '无匹配药方' else '不可正常使用' end as prescriptionIsusable,
+           case when c.is_enable = 1 then '可正常使用' when a.combine_id = 0 then '无匹配组合项目' else '不可正常使用' end as combineIsusable
+    from his_medical_template as a
+           left join his_prescription as b on a.prescription_id = b.id
+           left join his_inspection_combination as c on a.combine_id = c.id
+           left join `his-userinfo`.user_info as d on  d.id = #{parameter.loginUserId}
+           left join `his-userinfo`.organization as e on e.id = #{parameter.departmentId}
+    where 1=1
+    <if test="parameter.permissionType != null and parameter.permissionType == 1">
+      and a.target_id = #{parameter.loginUserId} and a.permission_type = 1 and a.is_last_code = 1
+    </if>
+    <if test="parameter.permissionType != null and parameter.permissionType == 2">
+      and a.target_id = #{parameter.departmentId} and a.permission_type = 2 and a.is_last_code = 1
+    </if>
+    <if test="parameter.permissionType == null or parameter.permissionType == 0">
+      and (a.is_last_code = 1 and a.target_id = #{parameter.departmentId} and a.permission_type = 2) or (a.is_last_code = 1 and a.target_id = #{parameter.loginUserId} and a.permission_type = 1)or
+      (a.is_last_code = 1 and a.permission_type = 3)
+    </if>
+    <if test="parameter.name != null and parameter.name != ''">
+      and a.name like concat('%' #{parameter.name,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.prescriptionName != null and parameter.prescriptionName != ''">
+      and b.name like concat('%' #{parameter.prescriptionName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.combineName != null and parameter.combineName != ''">
+      and c.name like concat('%' #{parameter.combineName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.permissionType != null and parameter.permissionType != 0">
+      and a.permission_type = #{parameter.permissionType,jdbcType=INTEGER}
+    </if>
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+
+  </select>
+
+  <delete id="deleteByTreeId" parameterType="java.lang.String">
+    delete from his_medical_template
+    where tree_id = #{treeId,jdbcType=VARCHAR}
+  </delete>
+
+  <!--根据父节点删除其下所有子节点-->
+  <delete id="deleteByParentId" parameterType="java.lang.String">
+    delete from his_medical_template
+    where parent_id = #{parentId,jdbcType=VARCHAR}
+  </delete>
+</mapper>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+<head>
+    <meta charset="UTF-8">
+    <div th:replace="public/base_print :: html"></div>
+</head>
+<body>
+<div class="container">
+    <div class="row  valign-wrapper">
+        <div class="col s12 m12 l12 center">
+            <h4>中柬第一医院住院催款单 <span></span></h4>
+            <p>China and Cambodia First Hospital Hospitalization Collection<span>No.</span></p>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s3 m3 l3 offset-l1 offset-m1 offset-s1" style="text-align: left">
+            <p>编号：</p>
+            <p>number:</p>
+        </div>
+        <div class="col s3 m3 l3" style="text-align: left">
+            <p th:text="${number}"></p>
+        </div>
+        <div class="col s5 m5 l5" style="text-align: left">
+
+        </div>
+    </div>
+
+    <div class="row valign-wrapper">
+        <div class="col s2 m2 l2 offset-l1 offset-m1 offset-s1 left">
+            <p>姓名：</p>
+            <label>name</label>
+        </div>
+        <div class="col s3 m3 l3 left">
+            <p th:text="${patientName}"></p>
+        </div>
+        <div class="col s2 m2 l2 left">
+            <p>住院编号：</p>
+            <label>Hospital number</label>
+        </div>
+        <div class="col s4 m4 l4 left">
+            <p th:text="${MedicalRecordId}"></p>
+        </div>
+    </div>
+    <hr>
+
+    <div class="row valign-wrapper">
+        <div class="col s10 m10 l10 offset-l1 offset-m1 offset-s1">
+            <p>剩余押金为<span th:text="${restDeposit}"></span>元，最低缴纳押金为<span th:text="${money}"></span>元</p>
+            <p>押金不足，请你速续交住院押金，请缴纳不少于 <span th:text="${shouldPay}"></span>元。</p>
+            <p>The remaining deposit is<span th:text="${restDeposit}"></span>Yuan ， Minimum deposit is<span th:text="${money}"></span>Yuan</p>
+            <p>The deposit is insufficient. Please continue to pay the hospital deposit. Please pay no less than <span th:text="${shouldPay}"></span>Yuan</p>
+<!--            <p>大写人民币：<span id="rmb"></span></p>-->
+<!--            <p>រេមីនមីន<span id="translationRmb"></span></p>-->
+        </div>
+    </div>
+
+    <div  class="row valign-wrapper">
+        <div class="col s2 m2 l2 offset-l1 offset-m1 offset-s1 left">
+            <p>操作员：</p>
+            <label>Operator</label>
+        </div>
+        <div class="col s3 m3 l3 left">
+            <p th:text="${operator}"></p>
+        </div>
+        <div class="col s2 m2 l2 left">
+            <p>日期：</p>
+            <label>Date</label>
+        </div>
+        <div class="col s4 m4 l4 left">
+            <p th:text="${date}"></p>
+        </div>
+
+    </div>
+</div>
+
+<div th:replace="public/base_list_script :: html"></div>
+<div th:replace="public/base_print_script :: html"></div>
+
+<script th:inline="javascript">
+    var id = [[${id}]];
+    function doOk() {
+        $('body  div .row.valign-wrapper').printThis({
+            importCSS: true,
+            // debug: true,
+            afterPrint: function () {
+                dialog.confirm('确定打印?', function (index, layero) {
+
+
+                    var MedicalRecordId = [[${MedicalRecordId}]];
+                    var money = [[${money}]];
+                    var number = [[${number}]];
+                    // var restDeposit = [[${restDeposit}]];
+                    // var patientName = [[${patientName}]];
+                    // var date = [[${date}]];
+                    // var operator = [[${operator}]];
+
+                    $.ahsjajax(
+                        CTX + "/api/hisdunninglist/save.ahsj",
+                        {
+                            "MedicalRecordId":MedicalRecordId,
+                            "money":money,
+                            "number":number
+                        }
+                        ,
+                        function (msg) {
+                            console.log(msg);
+                            if (msg.success) {
+                                M.toast({html: msg.message});
+                                return false;
+                            } else {
+                                M.toast({html: msg.message});
+                                return false;
+                            }
+                        },
+                        function () {
+                            M.toast({html: "网络异常"});
+                            return false;
+                        }
+                    );
+
+
+
+                    // $.ahsjajax(
+                    //     CTX + "/api/nursestation/reminder/index.ahsj",
+                    //     {"MedicalRecordId":MedicalRecordId}
+                    //     ,
+                    //     function (msg) {
+                    //         console.log(msg);
+                    //         if (msg.success) {
+                    //             M.toast({html: msg.message});
+                    //             return false;
+                    //         } else {
+                    //             M.toast({html: msg.message});
+                    //             return false;
+                    //         }
+                    //     },
+                    //     function () {
+                    //         M.toast({html: "网络异常"});
+                    //         return false;
+                    //     }
+                    // );
+                })
+
+                }
+        })
+    }
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+</body>
+</html>

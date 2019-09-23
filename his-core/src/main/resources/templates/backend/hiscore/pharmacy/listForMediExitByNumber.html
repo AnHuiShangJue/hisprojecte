@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:replace="public/base_list :: html"></div>
+<!--vertical-layout：垂直居中 vertical-menu-collapsible：可折叠导航菜单 page-header-light：浅色标题 data-open="click"：点击时打开你的数据-->
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<!--在这个地方实现查询重置类的操作-->
+<div class="row">
+    <div class="breadcrumbs-inline pt-3 pb-1" id="breadcrumbs-wrapper">
+        <!--这个div的作用是将Home Table 以及DataTable从竖着排列变为横着排列且有一定的格式-->
+        <!-- Search for small screen-->
+        <div class="container"><!--container是一个容器-->
+            <div class="row"><!--row代表一行 一行有12列 s代表小屏幕一般指手机 m代表平板设备 l代表桌面设备一般指电脑 xl代表大型桌面设备一般指屏幕分辨率较大的电脑，这种叫响应式布局。-->
+                <div class="col s10 m6 l6 breadcrumbs-left">
+                    <!--col s10 m6 l6 行中一定要有列col s10 m6 l6 代表在各个类型的设备所占的位置（总共位置为12）-->
+                    <h5 class="breadcrumbs-title mt-0 mb-0 display-inline hide-on-small-and-down">DataTable</h5>
+                    <!--hide-on-small-and-down：隐藏小型设备（手机）以及一下屏幕的内容-->
+                    <ol class="breadcrumbs mb-0">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#">Table</a>
+                        </li>
+                        <li class="breadcrumb-item active">DataTable
+                        </li>
+                    </ol>
+                </div>
+                <div class="col s2 m6 l6"><!--这个col s2 m6 l6与上面的对应要保证加起来一行12列被占满--><a
+                        class="btn btn-floating dropdown-settings waves-effect waves-light breadcrumbs-btn right"
+                        href="#!" data-target="dropdown1"><i class="material-icons">expand_more </i><i
+                        class="material-icons right">arrow_drop_down</i></a>
+                    <!--dropdown下拉   material-icons按钮凸起  btn-floating按钮漂浮-->
+                    <ul class="dropdown-content" id="dropdown1" tabindex="0">
+                        <li tabindex="0"><a class="grey-text text-darken-2"
+                                            href="user-profile-page.html">Profile<span
+                                class="new badge red">2</span></a></li>
+                        <!--badge：徽章 用于通知您有新的或未读的消息或通知 将new类添加 到徽章以为其提供背景 red标识背景为红色-->
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="app-contacts.html">Contacts</a>
+                        </li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="page-faq.html">FAQ</a></li>
+                        <li class="divider" tabindex="-1"></li><!--divider：分割线-->
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="user-login.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div><!--这个container是存放最上一行的DataTable-->
+    </div>
+    <div class="col s12 x12 l12 xl12">
+        <div class="container">
+            <div class="section section-data-tables"><!--section类用于简单的顶部和底部填充，即分成一小节-->
+                <div class="card">
+                    <div class="card-content">
+                        <form id="searchForm" class="row" action="">
+                            <div class="row">
+                                <div class="col input-field s5 m5 l5">
+                                    <input id="number" name="number" type="text"/>
+                                    <label for="number">就诊编号/住院编号/交易流水号<span style="font-size: 12px">(លេខទូរស័ព្ទ / លេខមន្ទីរពេទ្យ / លេខប្រតិបត្តិការចុះហត្ថលេខា
+)</span></label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s2 m2 l2 xl2 offset-l1"><!--offset-l1代表在l屏幕内偏移一位-->
+                            <a class="waves-effect waves-light btn" id="searchBtn"><i
+                                    class="material-icons  white-text tooltipped " data-position="bottom"
+                                    data-delay="50" data-tooltip="搜索">search</i></a>
+                            <a id="resetBtn" class="waves-effect waves-light btn"><i
+                                    class="material-icons  white-text tooltipped " data-position="bottom"
+                                    data-delay="50" data-tooltip="重置">youtube_searched_for</i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 x12 l12 xl12">
+                    <div class="card">
+                        <div class="card-content">
+                            <!--Form Advance-->
+                            <div class="row">
+                                <div id="refreshtable" class="col l12 m12 l12 xl12">
+                                    <table id="data-table-simple" class="display">
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <button id="print_btn"
+                            class="btn cyan waves-effect waves-light right"
+                            type="button"
+                            name="action"
+                            hidden="true">打 印(print
+                        )
+                        <i class="mdi-content-send right"></i>
+                    </button>
+                    <button id="send_btn"
+                            class="btn cyan waves-effect waves-light right"
+                            type="button"
+                            name="action"
+                            hidden="true">提 交(submit
+                        )
+                        <i class="mdi-content-send right"></i>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div th:replace="public/base_list_script :: html"></div>
+<script type="text/javascript" th:src="@{/hiscore/assets/global/js/ahsj.selfdatatable.js}"></script>
+<script type="text/javascript">
+    var grid = new AHSJDT();
+    $(document).ready(function () {
+        initBtn();
+        initTable();
+        $("#print_btn").attr("disabled", true);
+    });
+
+    function initTable() {
+        grid.init({
+            src: $("#data-table-simple"),
+            theads: [
+                {
+                    "title": "药品编号",
+                    "data": "drugsNumb",
+                    "name": "drugs_numb"
+                },
+                {
+                    "title": "药品名称",
+                    "data": "drugsName",
+                    "name": "drugs_name"
+                },
+                {
+                    "title": "药品规格",
+                    "data": "drugsSpec",
+                    "name": "drugs_spec"
+                },
+                {
+                    "title": "应出药品数目",
+                    "data": "count",
+                    "name": "count"
+                },
+                {
+                    "title": "实际出药数目",
+                    "data": "actualCount",
+                    "name": ""
+                },
+                {
+                    "title": "当前药库剩余量",
+                    "data": "surplus",
+                    "name": ""
+                },
+                {
+                    "title": "是否付费",
+                    "data": "isPayName",
+                    "name": "is_pay"
+                },
+                {
+                    "title": "是否出药",
+                    "data": "isOutName",
+                    "name": "is_out"
+                },
+                {
+                    "title": "有效期",
+                    "data": "validityPeriod",
+                    "name": ""
+                },
+                {
+                    "title": "交易流水号",
+                    "data": "tollNumber",
+                    "name": ""
+                }
+            ],
+        });
+
+    }
+
+    //根据就诊编号手动出库
+    function Manual(id) {
+        var url = CTX + "/api/pharmacy/mannulExitforMedicationRecord/index.ahsj?token=" + TOKEN + "&id=" + id;
+        dialog.show(url, "根据就诊编号手动出库");
+    }
+
+    function initBtn() {
+        //搜索按钮
+        $('#searchBtn').click(function () {
+            //就诊编号
+            var reg1 = new RegExp(/^HM\d{13}$/);
+            var reg2 = new RegExp(/^HHM\d{13}$/);
+            //交易流水号
+            var reg3 = new RegExp(/^HTR\d{13}$/);
+            //住院编号
+            var reg4 = new RegExp(/^HR\d{13}$/);
+            var number = $("#number").val();
+            if (reg1.test(number) ||
+                reg2.test(number) ||
+                reg3.test(number) ||
+                reg4.test(number)
+            ) {
+                ids = grid.getIds();
+                grid.removeRows(ids);
+                getMedicationDetail();
+                $("#send_btn").attr("disabled", false);
+            } else {
+                dialog.warn("所输入的数据不符合格式要求！请输入HM/HHM/HR/HTR开头的编号")
+            }
+        });
+
+        $('#resetBtn').click(function () {
+            ids = grid.getIds();
+            grid.removeRows(ids);
+            $("#send_btn").attr("disabled", false);
+        });
+    }
+
+    var a=[];
+    //刷新表格显示对应的用药明细
+    function getMedicationDetail() {
+        var number = $("#number").val();
+        if (!isNullOrEmpty(number)) {
+            //获取基本信息
+            $.ahsjajax(
+                CTX + "/api/pharmacy/listForMedicationDetailsByNumber.ahsj",
+                {"number": number},
+                function (data) {
+                    if (!isNullOrEmpty(data)) {
+                        $.each(data,function (index,item) {
+                            a.push(item.id);
+                        });
+                        grid.addRows(data);
+                        return true;
+                    } else {
+                        dialog.warn(number + "号不存在或已出药！")
+                        return false;
+                    }
+                },
+                function () {
+                    Materialize.toast("网络异常");
+                    return false;
+                }
+            );
+        }
+    }
+
+    //提交按钮
+    $("#send_btn").click(function () {
+        handleTextArea();
+        dialog.confirm('确定出库?', function (index, layero) {
+            // var number = $("#number").val();
+            var getDatas = grid.getTableDatas();
+            var mediDetail = [];
+            $("#data-table-simple > tbody > tr").each(function () {
+                var tmp = {
+                    "id": $("input[name='id']", this).val(),
+                };
+                mediDetail.push(tmp);
+            });
+            var hisMedicalModel = {
+                "mediDetail": getDatas,
+            };
+            var jsonData = JSON.stringify(hisMedicalModel);
+            $.ahsjajax(
+                CTX + "/api/mediexit/mediExitByNumber.ahsj",
+                jsonData,
+                function (msg) {
+                    if (msg.success) {
+                        M.toast({html: msg.message});
+                        ids = grid.getIds();
+                        $("#send_btn").attr("disabled", true);
+                        $("#print_btn").attr("disabled", false);
+                        return false;
+                    } else {
+                        M.toast({html: msg.message});
+                        return false;
+                    }
+                },
+                null, null, null, function () {
+                    M.toast({html: "网络异常"});
+                    return false;
+                }, "application/json; charset=UTF-8"
+            );
+        });
+    });
+    $("#print_btn").click(
+    function() {
+        dialog.confirm('确定打印吗?', function (index, layero) {
+            ids = a.join(",");//数组装字符串用-分割
+            if (ids != null && ids != undefined) {
+               var url = CTX + "/api/mediexit/printDrug.ahsj?ids=" + ids + "&token=" + TOKEN;
+                dialog.showDialog(url, "打印凭证预览", "700px", "700px");
+            } else {
+                dialog.warn("没有需要打印的内容！")
+            }
+            grid.removeRows(ids);
+        });
+    })
+
+    $("input").change(function () {
+        $(this).val($(this).val().trim());
+    });
+</script>
+</body>
+</html>
+

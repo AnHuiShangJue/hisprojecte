@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="hisprojecte.AHSJTemp.main" target="1.8" />
+      <module name="hisprojecte.AHSJTemp.node_modules.acorn-globals.main" target="1.8" />
+      <module name="hisprojecte.AHSJTemp.node_modules.acorn-globals.node_modules.acorn.main" target="1.8" />
+      <module name="hisprojecte.AHSJTemp.node_modules.acorn-globals.node_modules.acorn.test" target="1.8" />
+      <module name="hisprojecte.AHSJTemp.node_modules.acorn-globals.node_modules.main" target="1.8" />
+      <module name="hisprojecte.AHSJTemp.node_modules.acorn-globals.node_modules.test" target="1.8" />
+      <module name="hisprojecte.AHSJTemp.node_modules.acorn-globals.test" target="1.8" />
+      <module name="hisprojecte.AHSJTemp.node_modules.acorn.main" target="1.8" />
+      <module name="hisprojecte.AHSJTemp.node_modules.acorn.test" target="1.8" />
+      <module name="hisprojecte.AHSJTemp.node_modules.constantinople.main" target="1.8" />
+      <module name="hisprojecte.AHSJTemp.node_modules.constantinople.test" target="1.8" />
+      <module name="hisprojecte.AHSJTemp.node_modules.debug.main" target="1.8" />
+      <module name="hisprojecte.AHSJTemp.node_modules.debug.test" target="1.8" />
+      <module name="hisprojecte.AHSJTemp.node_modules.has.main" target="1.8" />
+      <module name="hisprojecte.AHSJTemp.node_modules.has.test" target="1.8" />
+      <module name="hisprojecte.AHSJTemp.node_modules.is-expression.main" target="1.8" />
+      <module name="hisprojecte.AHSJTemp.node_modules.is-expression.node_modules.acorn.main" target="1.8" />
+      <module name="hisprojecte.AHSJTemp.node_modules.is-expression.node_modules.acorn.test" target="1.8" />
+      <module name="hisprojecte.AHSJTemp.node_modules.is-expression.node_modules.main" target="1.8" />
+      <module name="hisprojecte.AHSJTemp.node_modules.is-expression.node_modules.test" target="1.8" />
+      <module name="hisprojecte.AHSJTemp.node_modules.is-expression.test" target="1.8" />
+      <module name="hisprojecte.AHSJTemp.node_modules.main" target="1.8" />
+      <module name="hisprojecte.AHSJTemp.node_modules.promise.main" target="1.8" />
+      <module name="hisprojecte.AHSJTemp.node_modules.promise.test" target="1.8" />
+      <module name="hisprojecte.AHSJTemp.node_modules.test" target="1.8" />
+      <module name="hisprojecte.AHSJTemp.test" target="1.8" />
+      <module name="hisprojecte.sys-user-info.main" target="1.8" />
+      <module name="hisprojecte.sys-user-info.test" target="1.8" />
+      <module name="hisprojecte.zuulsmartpark.main" target="1.8" />
+      <module name="zuulsmartpark.main" target="1.8" />
+      <module name="zuulsmartpark.test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

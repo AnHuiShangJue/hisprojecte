@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://mybatis.org/schema/mybatis-mapper">
+<div th:replace="public/base_list :: html"></div>
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+<div class="row">
+    <div class="input-field">
+        <input id="date" class="datepicker" name="datepicker" type="text" onchange="getdatesval()"/>
+        <label for="date">选择日期（Select date）<span style="font-size: 12px"></span></label>
+    </div>
+    <div class="card">
+        <div class="card-content">
+
+            <div id="main1" style="width: 100%;height: 300px;"></div>
+
+            <div id="main2" style="width: 100%;height: 300px;"></div>
+
+            <div id="main3" style="width: 100%;height: 300px;"></div>
+
+            <div id="main4" style="width: 100%;height: 300px;"></div>
+        </div>
+    </div>
+
+</div>
+<div th:replace="public/base_list_script :: html"></div>
+<script type="text/javascript" th:src="@{/hiscore/assets/global/js/plugins/echarts.min.js}"></script>
+<script type="text/javascript">
+
+    function getdatesval() {
+        var dates = $("#date").val();
+        var datehms = dates+' 00:00:00';
+        $.ahsjajax(
+            CTX + "/api/hisdatastatistics/selectByReistDataCount.ahsj",
+            {"createDate": datehms}
+            ,
+            function (data) {
+                if (data.length !== 0) {
+                    initChart(1,data);
+                } else {
+                    M.toast({html: "后台获取数据为空，请联系管理员"});
+                }
+            }, function () {
+                M.toast({html: "网络异常"});
+                return false;
+            });
+        $.ahsjajax(
+            CTX + "/api/hisdatastatistics/selectHospitalManageDataCount.ahsj",
+            {"createDate": datehms}
+            ,
+            function (data) {
+                if (data.length !== 0) {
+                    initChart(2,data);
+                } else {
+                    M.toast({html: "后台获取数据为空，请联系管理员"});
+                }
+            }, function () {
+                M.toast({html: "网络异常"});
+                return false;
+            });
+        $.ahsjajax(
+            CTX + "/api/hisdatastatistics/selectTollRecordDataCount.ahsj",
+            {"createDate": datehms}
+            ,
+            function (data) {
+                if (data.length !== 0) {
+                    initChart(3,data);
+                } else {
+                    M.toast({html: "后台获取数据为空，请联系管理员"});
+                }
+            }, function () {
+                M.toast({html: "网络异常"});
+                return false;
+            });
+        $.ahsjajax(
+            CTX + "/api/hisdatastatistics/selectMedicationDetailsDataCount.ahsj",
+            {"createDate": datehms}
+            ,
+            function (data) {
+                if (data.length !== 0) {
+                    initChart(4,data);
+                } else {
+                    M.toast({html: "后台获取数据为空，请联系管理员"});
+                }
+            }, function () {
+                M.toast({html: "网络异常"});
+                return false;
+            });
+        initChart();
+    }
+
+    $(document).ready(function () {
+        var myDate = new Date();
+        var year = myDate.getFullYear();
+        var month = myDate.getMonth() + 1;
+        var date = myDate.getDate();
+        var now = year + "-" + month + "-" + date + " 00:00:00";
+        console.log(now);
+        $.ahsjajax(
+            CTX + "/api/hisdatastatistics/selectByReistDataCount.ahsj",
+            {"createDate": now}
+            ,
+            function (data) {
+                if (data.length !== 0) {
+                    for (var i = 0; i < data.length; i++) {
+                    }
+                    initChart(1,data);
+                } else {
+                    M.toast({html: "后台获取数据为空，请联系管理员"});
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }
+        );
+        $.ahsjajax(
+            CTX + "/api/hisdatastatistics/selectHospitalManageDataCount.ahsj",
+            {"createDate": now}
+            ,
+            function (data) {
+                if (data.length !== 0) {
+                    initChart(2,data);
+                } else {
+                    M.toast({html: "后台获取数据为空，请联系管理员"});
+                }
+            }, function () {
+                M.toast({html: "网络异常"});
+                return false;
+            });
+        $.ahsjajax(
+            CTX + "/api/hisdatastatistics/selectTollRecordDataCount.ahsj",
+            {"createDate": now}
+            ,
+            function (data) {
+                if (data.length !== 0) {
+                    initChart(3,data);
+                } else {
+                    M.toast({html: "后台获取数据为空，请联系管理员"});
+                }
+            }, function () {
+                M.toast({html: "网络异常"});
+                return false;
+            });
+        $.ahsjajax(
+            CTX + "/api/hisdatastatistics/selectMedicationDetailsDataCount.ahsj",
+            {"createDate": now}
+            ,
+            function (data) {
+                if (data.length !== 0) {
+                    initChart(4,data);
+                } else {
+                    M.toast({html: "后台获取数据为空，请联系管理员"});
+                }
+            }, function () {
+                M.toast({html: "网络异常"});
+                return false;
+            });
+        initChart();
+    })
+
+    function initChart(type, value) {
+        switch (type) {
+            case 1 :
+                var myChart1 = echarts.init(document.getElementById('main1'));
+                var option1 = {
+                    title: {
+                        text: '挂号数目统计（Register number statistics）',
+                        x: 'center',
+                        top: 10
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    xAxis: [
+                        {
+                            type: 'category',
+                            axisTick: {
+                                alignWithLabel: true
+                            },
+                            data: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00',
+                                '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00',
+                                '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00']
+                        }
+                    ],
+                    yAxis: {
+                        type: 'value',
+                        name: '数目（number）'
+
+                    },
+                    series: [{
+                        name: '挂号数目',
+                        data: value,
+                        type: 'line'
+                    }]
+                };
+                myChart1.setOption(option1);
+                break;
+            case 2 :
+                var myChart2 = echarts.init(document.getElementById('main2'));
+                var option2 = {
+                    title: {
+                        text: '住院数目统计（Hospitalization statistics）',
+                        x: 'center',
+                        top: 10
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    xAxis: [
+                        {
+                            type: 'category',
+                            axisTick: {
+                                alignWithLabel: true
+                            },
+                            data: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00',
+                                '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00',
+                                '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00']
+                        }
+                    ],
+                    yAxis: {
+                        type: 'value',
+                        name: '数目（number）'
+
+                    },
+                    series: [{
+                        name: '住院数目',
+                        data: value,
+                        type: 'line'
+                    }]
+                };
+                myChart2.setOption(option2);
+                break;
+            case 3:
+                var myChart3 = echarts.init(document.getElementById('main3'));
+                var option3 = {
+                    title: {
+                        text: '收费数目统计（Number of charges）',
+                        x: 'center',
+                        top: 10
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    xAxis: [
+                        {
+                            type: 'category',
+                            axisTick: {
+                                alignWithLabel: true
+                            },
+                            // name:'2019-07-29',
+                            data: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00',
+                                '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00',
+                                '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00']
+                        }
+                    ],
+                    yAxis: {
+                        type: 'value',
+                        name: '数目（number）'
+
+                    },
+                    series: [{
+                        name: '收费数目',
+                        data: value,
+                        type: 'line'
+                    }]
+                };
+                myChart3.setOption(option3);
+                break;
+            case 4:
+                var myChart4 = echarts.init(document.getElementById('main4'));
+                var option4 = {
+                    title: {
+                        text: '售药数目统计（Statistics on the number of drugs sold）',
+                        x: 'center',
+                        top: 10
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    xAxis: [
+                        {
+                            type: 'category',
+                            axisTick: {
+                                alignWithLabel: true
+                            },
+                            data: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00',
+                                '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00',
+                                '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00']
+                        }
+                    ],
+                    yAxis: {
+                        type: 'value',
+                        name: '数目（number）'
+
+                    },
+                    series: [{
+                        name: '售药数目',
+                        data: value,
+                        type: 'line'
+                    }]
+                };
+                myChart4.setOption(option4);
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+</body>
+
+</html>

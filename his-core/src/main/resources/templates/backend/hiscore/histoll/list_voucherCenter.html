@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+<div th:replace="public/base_list :: html"></div>
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+<!-- Start Page Loading -->
+<div class="row">
+    <div class="breadcrumbs-inline pt-3 pb-1" id="breadcrumbs-wrapper">
+        <!-- Search for small screen-->
+        <div class="container">
+            <div class="row">
+                <div class="col s10 m6 l6 breadcrumbs-left">
+                    <h5 class="breadcrumbs-title mt-0 mb-0 display-inline hide-on-small-and-down">DataTable</h5>
+                    <ol class="breadcrumbs mb-0">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#">Table</a>
+                        </li>
+                        <li class="breadcrumb-item active">DataTable
+                        </li>
+                    </ol>
+                </div>
+                <div class="col s2 m6 l6"><a
+                        class="btn btn-floating dropdown-settings waves-effect waves-light breadcrumbs-btn right"
+                        href="#!" data-target="dropdown1"><i class="material-icons">expand_more </i><i
+                        class="material-icons right">arrow_drop_down</i></a>
+                    <ul class="dropdown-content" id="dropdown1" tabindex="0">
+                        <li tabindex="0"><a class="grey-text text-darken-2"
+                                            href="user-profile-page.html">Profile<span
+                                class="new badge red">2</span></a></li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="app-contacts.html">Contacts</a>
+                        </li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="page-faq.html">FAQ</a></li>
+                        <li class="divider" tabindex="-1"></li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="user-login.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 x12 l12 xl12">
+        <div class="container">
+            <div class="section section-data-tables">
+                <div class="card">
+                    <div class="card-content">
+                        <form id="searchForm" class="row" action="">
+                            <div class="input-field col s4 l4 xl4">
+                                <input id="number" name="number" type="text"
+                                       data-error=".errorTxt1">
+                                <div class="errorTxt1"></div>
+                                <label for="number">请输入就诊卡号<span style="font-size: 12px">(Please enter the doctor card number
+
+)</span></label>
+                            </div>
+                        </form>
+                        <div class="row">
+                            <div class="col s2 m2 l2 xl2 offset-l1">
+                                <a class="waves-effect waves-light btn" id="searchBtn"><i
+                                        class="material-icons  white-text tooltipped " data-position="bottom"
+                                        data-delay="50" data-tooltip="搜索">search</i></a>
+                                <a id="resetBtn" class="waves-effect waves-light btn"><i
+                                        class="material-icons  white-text tooltipped " data-position="bottom"
+                                        data-delay="50" data-tooltip="重置">youtube_searched_for</i></a>
+                            </div>
+                        </div>
+                        <p></p>
+                        <div class="row">
+                            <div class="input-field col s4 l4 xl4">
+                                <input readonly id="loginName" type="text"
+                                       th:value="${loginName}">
+                                <label for="loginName">操作人<span style="font-size: 12px">(Operator
+
+)</span></label>
+                            </div>
+                            <div class="input-field col s4 l4 xl4">
+                                <input readonly type="text" id="patientName"/>
+                                <label class="active" for="patientName">姓名<span style="font-size: 12px">(name
+
+)</span>:</label>
+                            </div>
+                            <div class="input-field col s4 l4 xl4">
+                                <input readonly type="text" id="idcard"/>
+                                <label class="active" for="idcard">身份证号<span style="font-size: 12px">(ID card
+
+)</span>:</label>
+                            </div>
+                            <div class="input-field col s4 l4 xl4">
+                                <input readonly type="text" id="phonenumber"/>
+                                <label class="active" for="phonenumber">手机号<span style="font-size: 12px">(phone number
+
+)</span>:</label>
+                            </div>
+                            <div class="input-field col s4 l4 xl4">
+                                <input readonly type="text" id="money"/>
+                                <label class="active" for="money">卡内余额<span style="font-size: 12px">(Card balance
+                                 <input hidden id="id" name="id">
+)</span>:</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 x12 l12 xl12">
+                    <div class="card">
+                        <div class="card-content">
+                            <form class="col s12" id="sendForm" action="#">
+                                <div class="input-field col s4 l4 xl4">
+                                    <input type="number" id="balance" name="balance">
+                                    <label class="active" for="balance">充值金额<span style="font-size: 12px">(Recharge amount
+
+)</span>:</label>
+                                </div>
+                            </form>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <button id="print_btn"
+                                            class="btn cyan waves-effect waves-light right"
+                                            type="button"
+                                            name="action"
+                                            hidden="true">打 印（print）
+                                        <i class="mdi-content-send right"></i>
+                                    </button>
+                                    <button id="send_btn"
+                                            class="btn cyan waves-effect waves-light right"
+                                            type="button"
+                                            name="action"
+                                            hidden="true">充 值(Recharge
+                                        )
+                                        <i class="mdi-content-send right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+<div th:replace="public/base_list_script :: html"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        initBtn();
+        initTable();
+        $("#print_btn").attr("disabled", true);
+    });
+
+    //搜索按钮
+    function initBtn() {
+        $('#searchBtn').click(function () {
+            getNumber();
+            $("#print_btn").attr("disabled", true);
+        });
+        //重置按钮
+        $('#resetBtn').click(function reset() {
+            resetNumber();
+            $("#print_btn").attr("disabled", true);
+        });
+    }
+
+    function resetNumber() {
+        $("#patientName").attr("value", "");
+        $("#phonenumber").attr("value", "");
+        $("#idcard").attr("value", "");
+        $("#money").attr("value", "");
+        $("#id").attr("value", "");
+
+        document.getElementById('searchForm').reset();
+        document.getElementById('sendForm').reset();
+    }
+    function getNumber() {
+        var number = $("#number").val();
+        $.ahsjajax(
+            CTX + "/api/visitCard/getHisVisitCard.ahsj",
+            {"number": number},
+            function (data) {
+                if (!isNullOrEmpty(data.id)) {
+                    changeInputValue("patientName", data.name);
+                    changeInputValue("phonenumber", data.phonenumber);
+                    changeInputValue("idcard", data.idcard);
+                    changeInputValue("money", data.balance);
+                    changeInputValue("id", data.id);
+                    M.updateTextFields();
+                    return true;
+                } else {
+                    resetNumber();
+                    dialog.warn("卡号为" + number + "不存在或已退回")
+                    return false;
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }
+        );
+    }
+
+    var number; //交易流水号
+    $('#send_btn').click(function () {
+        dialog.confirm('确定充值吗?', function (index, layero) {
+            var balance = $("#balance").val();
+            var idcard = $("#idcard").val();
+            var id = $("#id").val();
+            if(balance!=null &&balance!="" &&balance!=undefined){
+            if (idcard != "" && idcard != null && idcard != undefined) {
+                $.ahsjajax(CTX + "/api/visitCard/voucherCenter.ahsj?balance=" + balance,
+                    {"id": id},
+                    function (msg) {
+                        if (msg.success) {
+                            data = msg.message.substring(0, 5);//截取成功信息
+                            number = msg.message.substring(5); //截取交易流水号
+                            swal.close();
+                            M.toast({
+                                html: data, completeCallback: function () {
+                                }
+                            });
+                            dialog.success(data);
+                            getNumber();
+                            changeInputValue("balance","");
+                            $("#print_btn").attr("disabled", false);
+                        } else {
+                            M.toast({
+                                html: msg.message, completeCallback: function () {
+                                }
+                            });
+                        }
+                    },
+                    function (data) {
+                        M.toast({
+                            html: "网络异常", completeCallback: function () {
+                            }
+                        });
+                    }
+                );
+            }}
+            else{
+                dialog.warn("请填写充值金额")
+            }
+        });
+    })
+    $("#print_btn").click(function () {
+        dialog.confirm('确定打印吗?', function (index, layero) {
+            if (number != "" && number != null && number != undefined) {
+                var url = CTX + "/api/visitCard/printDrug/index.ahsj?number=" + number + "&token=" + TOKEN;
+                dialog.showDialog(url, "打印凭证预览", "700px", "700px");
+            } else {
+                dialog.warn("没有需要打印的内容！")
+            }
+        });
+    })
+
+    $("input").change(function () {
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</div>
+</div>
+</body>
+</html>
+

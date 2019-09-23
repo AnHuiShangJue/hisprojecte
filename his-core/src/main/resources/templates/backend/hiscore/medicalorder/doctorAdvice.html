@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+<head>
+    <style>
+        .fontsize01 {
+            font-size: 14px;
+        }
+
+        .fontsize02 {
+            font-size: 12px;
+        }
+
+    </style>
+</head>
+<div th:replace="public/base_print :: html"></div>
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<div class="row">
+
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12" style="height: 110px;" th:if="${hisMedicalOrder.type} == 1">
+            <label class="black-text fontsize01">长期医嘱单</label></br>
+            <label class="black-text fontsize02">Long-term medical order</label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12" style="height: 110px;" th:if="${hisMedicalOrder.type} == 2">
+            <label class="black-text fontsize01">临时医嘱单</label></br>
+            <label class="black-text fontsize02">Temporary medical order</label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s2 m2 l2 xl2" style="height: 110px;">
+            <label class="black-text fontsize01">姓名(name)</label></br>
+        </div>
+        <div class="col s2 m2 l2 xl2" style="height: 110px;">
+            <label class="black-text" th:text="${hisHospitalManage.patientName}"></label>
+        </div>
+        <div class="col s2 m2 l2 xl2" style="height: 110px;">
+            <label class="black-text fontsize01">性别(sex)</label></br>
+        </div>
+        <div class="col s2 m2 l2 xl2" style="height: 110px;">
+            <label class="black-text" th:text="${hisHospitalManage.sexName}"></label>
+        </div>
+        <div class="col s2 m2 l2 xl2" style="height: 110px;">
+            <label class="black-text fontsize01">年龄(age)</label></br>
+        </div>
+        <div class="col s2 m2 l2 xl2" style="height: 110px;">
+            <label class="black-text" th:text="${hisHospitalManage.age}"></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s2 m2 l2 xl2" style="height: 110px;">
+            <label class="black-text fontsize01">科室(Department)</label></br>
+        </div>
+        <div class="col s2 m2 l2 xl2" style="height: 110px;">
+            <label class="black-text" th:text="${hisHospitalManage.departmentName}"></label>
+        </div>
+        <div class="col s2 m2 l2 xl2" style="height: 110px;">
+            <label class="black-text fontsize01">床号(Bed No)</label></br>
+        </div>
+        <div class="col s2 m2 l2 xl2" style="height: 110px;">
+            <label class="black-text" th:text="${hisHospitalManage.bedsNumber}"></label>
+        </div>
+        <div class="col s2 m2 l2 xl2" style="height: 110px;">
+            <label class="black-text fontsize01">住院编号(Hospital number)</label></br>
+        </div>
+        <div class="col s2 m2 l2 xl2" style="height: 110px;">
+            <label class="black-text" th:text="${hisHospitalManage.number}"></label>
+        </div>
+    </div>
+    <input id="hosptalregistNumber" th:value="${hisMedicalOrder.hosptalregistNumber}" type="hidden">
+    <input id="medicalOrderNumber" th:value="${hisMedicalOrder.number}" type="hidden">
+    <input id="type" th:value="${hisMedicalOrder.type}" type="hidden">
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12">
+            <table id="table_id" style="font: 15px 'Roboto Condensed',Sans-serif"></table>
+        </div>
+    </div>
+</div>
+
+<!-- ================================================
+Scripts
+================================================ -->
+
+<div th:replace="public/base_print_script :: html"></div>
+<script th:inline="javascript">
+    $(document).ready(function () {
+        printShow();
+    });
+    var hosptalregistNumber = $("#hosptalregistNumber").val();
+    var number = $("#medicalOrderNumber").val();
+
+    function printShow() {
+        $.ahsjajax(
+            CTX + "/api/hisMedicalOrder/printDoctorAdvice/index.ahsj",
+            {"number": number},
+            function (data) {
+                var jsons = data[0];
+                if (!isNullOrEmpty(jsons)) {//有
+                    var type = $("#type").val();
+                    var trs
+                    if (type == 1) {
+                        trs = "<tr><td><h6 class='black-text'>序号(Serial number)</h6></td><td><h6 class='black-text'>开始时间(Starting time)</h6></td><td><h6 class='black-text'>医嘱内容(Medical content)</h6></td><td><h6 class='black-text'>用法(usage)</h6></td><td><h6 class='black-text'>间隔(interval)</h6></td><td><h6 class='black-text'>总量(Total amount</h6></td><td><h6 class='black-text'>校对护士(Proofreading nurse )</h6></td>" +
+                            "<td><h6 class='black-text'>执行护士(Executive nurse )</h6></td><td><h6 class='black-text'>停嘱医生(Stop doctor )</h6></td><td><h6 class='black-text'>停嘱时间(Stop time)</h6></td><td><h6 class='black-text'>停嘱校对护士(Stop signing proofreading nurse)</h6></td></tr>";
+                    } else {
+                        trs = "<tr><td><h6 class='black-text'>序号(Serial number)</h6></td><td><h6 class='black-text'>开始时间(Starting time)</h6></td><td><h6 class='black-text'>医嘱内容(Medical content)</h6></td><td><h6 class='black-text'>用法(usage)</h6></td><td><h6 class='black-text'>间隔(interval)</h6></td>  <td><h6 class='black-text'>总量(Total amount</h6></td><td><h6 class='black-text'>校对护士(Proofreading nurse )</h6></td>" +
+                            "<td><h6 class='black-text'>执行护士(Executive nurse )</h6></td></tr>";
+                    }
+
+
+                    $.each(data, function (index, item) {
+                        if (isNullOrEmpty(item.startTime)) {
+                            item.startTime = "";
+                        }
+                        if (isNullOrEmpty(item.stopDate)) {
+                            item.stopDate = "";
+                        }
+                        if (isNullOrEmpty(item.usages)) {
+                            item.usages = "";
+                        }
+                        if (isNullOrEmpty(item.dosage)) {
+                            item.dosage = "";
+                        }
+                        if (isNullOrEmpty(item.intervals)) {
+                            item.intervals = "";
+                        }
+
+
+                        if (type == 1) {
+                            trs += "<tr><td><p class='black-text fontsize03'>" + item.orderNum + "</p></td><td ><p class='black-text fontsize03'>" + item.startTime + "</p></td><td ><p class='black-text fontsize03'>" + item.name + "</p></td><td ><p class='black-text fontsize03'>" + item.usages + "</p></td><td ><p class='black-text fontsize03'>" + item.intervalsName + "</p></td><td ><p class='black-text fontsize03'>" + item.totalAmount + "</p></td><td ><p class='black-text fontsize03'>" + item.pnName + "</p></td><td ><p class='black-text fontsize03'>" + item.anName + "</p></td><td ><p class='black-text fontsize03'>" + item.stopUserName + "</p></td>" +
+                                "<td ><p class='black-text fontsize03'>" + item.stopDate + "</p></td><td ><p class='black-text fontsize03'>" + item.spnName + "</p></td></tr >";
+                        } else {
+                            trs += "<tr><td><p class='black-text fontsize03'>" + item.orderNum + "</p></td><td ><p class='black-text fontsize03'>" + item.startTime + "</p></td><td ><p class='black-text fontsize03'>" + item.name + "</p></td><td ><p class='black-text fontsize03'>" + item.usages + "</p></td><td ><p class='black-text fontsize03'>" + item.intervalsName + "</p></td><td ><p class='black-text fontsize03'>" + item.totalAmount + "</p></td><td ><p class='black-text fontsize03'>" + item.pnName + "</p></td><td ><p class='black-text fontsize03'>" + item.anName + "</p></td></tr>";
+                        }
+                    });
+                    var jsons = data[0]
+                    $("#table_id").append(trs);
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }
+        );
+    }
+
+    function doOk() {
+        $('body  div div.row.valign-wrapper').printThis({
+            importCSS: true,
+            debug: true,
+            afterPrint: function () {
+                dialog.confirm('确定打印?', function (index, layero) {
+
+
+                });
+            }
+        });
+    }
+
+    $("input").change(function () {
+        $(this).val($(this).val().trim());
+    });
+</script>
+<div th:replace="public/base_print_script :: html"></div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahsj.hiscore.dao.HisAnkleTemplateMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisAnkleTemplate">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="template_number" jdbcType="VARCHAR" property="templateNumber"/>
+        <result column="template_name" jdbcType="VARCHAR" property="templateName"/>
+        <result column="order_num" jdbcType="INTEGER" property="orderNum"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="is_skin_test" jdbcType="INTEGER" property="isSkinTest"/>
+        <result column="specification" jdbcType="VARCHAR" property="specification"/>
+        <result column="unit" jdbcType="VARCHAR" property="unit"/>
+        <result column="usages" jdbcType="VARCHAR" property="usages"/>
+        <result column="dosage" jdbcType="VARCHAR" property="dosage"/>
+        <result column="total_amount" jdbcType="DOUBLE" property="totalAmount"/>
+        <result column="remarks" jdbcType="VARCHAR" property="remarks"/>
+        <result column="intervals" jdbcType="INTEGER" property="intervals"/>
+        <result column="proofreading_nurse_id" jdbcType="BIGINT" property="proofreadingNurseId"/>
+        <result column="approved_nurse_id" jdbcType="BIGINT" property="approvedNurseId"/>
+        <result column="is_stop" jdbcType="INTEGER" property="isStop"/>
+        <result column="stop_date" jdbcType="TIMESTAMP" property="stopDate"/>
+        <result column="stop_user_id" jdbcType="BIGINT" property="stopUserId"/>
+        <result column="stop_prfing_nurse_id" jdbcType="BIGINT" property="stopPrfingNurseId"/>
+        <result column="stop_apd_nurse_id" jdbcType="BIGINT" property="stopApdNurseId"/>
+        <result column="create_user_id" jdbcType="BIGINT" property="createUserId"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="update_user_id" jdbcType="BIGINT" property="updateUserId"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, template_number, template_name,order_num, name, is_skin_test, specification, unit, usages,
+    dosage, total_amount, remarks, intervals, proofreading_nurse_id, approved_nurse_id, 
+    is_stop, stop_date, stop_user_id, stop_prfing_nurse_id, stop_apd_nurse_id, create_user_id, 
+    create_date, update_user_id, update_date
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_ankle_template
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_ankle_template
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisAnkleTemplate" keyProperty="id"
+            useGeneratedKeys="true">
+    insert into his_ankle_template (id, template_number, template_name,order_num,
+      name, is_skin_test, specification, 
+      unit, usages, dosage, 
+      total_amount, remarks, intervals, 
+      proofreading_nurse_id, approved_nurse_id, is_stop, 
+      stop_date, stop_user_id, stop_prfing_nurse_id, 
+      stop_apd_nurse_id, create_user_id, create_date, 
+      update_user_id, update_date)
+    values (#{id,jdbcType=BIGINT}, #{templateNumber,jdbcType=VARCHAR}, #{templateName,jdbcType=VARCHAR}, #{orderNum,jdbcType=INTEGER},
+      #{name,jdbcType=VARCHAR}, #{isSkinTest,jdbcType=INTEGER}, #{specification,jdbcType=VARCHAR}, 
+      #{unit,jdbcType=VARCHAR}, #{usages,jdbcType=VARCHAR}, #{dosage,jdbcType=VARCHAR}, 
+      #{totalAmount,jdbcType=DOUBLE}, #{remarks,jdbcType=VARCHAR}, #{intervals,jdbcType=INTEGER}, 
+      #{proofreadingNurseId,jdbcType=BIGINT}, #{approvedNurseId,jdbcType=BIGINT}, #{isStop,jdbcType=INTEGER}, 
+      #{stopDate,jdbcType=TIMESTAMP}, #{stopUserId,jdbcType=BIGINT}, #{stopPrfingNurseId,jdbcType=BIGINT}, 
+      #{stopApdNurseId,jdbcType=BIGINT}, #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisAnkleTemplate">
+        insert into his_ankle_template
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="templateNumber != null">
+                template_number,
+            </if>
+            <if test="templateNumber != null">
+                template_name,
+            </if>
+            <if test="orderNum != null">
+                order_num,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="isSkinTest != null">
+                is_skin_test,
+            </if>
+            <if test="specification != null">
+                specification,
+            </if>
+            <if test="unit != null">
+                unit,
+            </if>
+            <if test="usages != null">
+                usages,
+            </if>
+            <if test="dosage != null">
+                dosage,
+            </if>
+            <if test="totalAmount != null">
+                total_amount,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="intervals != null">
+                intervals,
+            </if>
+            <if test="proofreadingNurseId != null">
+                proofreading_nurse_id,
+            </if>
+            <if test="approvedNurseId != null">
+                approved_nurse_id,
+            </if>
+            <if test="isStop != null">
+                is_stop,
+            </if>
+            <if test="stopDate != null">
+                stop_date,
+            </if>
+            <if test="stopUserId != null">
+                stop_user_id,
+            </if>
+            <if test="stopPrfingNurseId != null">
+                stop_prfing_nurse_id,
+            </if>
+            <if test="stopApdNurseId != null">
+                stop_apd_nurse_id,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="templateNumber != null">
+                #{templateNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="templateNumber != null">
+                #{templateName,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNum != null">
+                #{orderNum,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="isSkinTest != null">
+                #{isSkinTest,jdbcType=INTEGER},
+            </if>
+            <if test="specification != null">
+                #{specification,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null">
+                #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="usages != null">
+                #{usages,jdbcType=VARCHAR},
+            </if>
+            <if test="dosage != null">
+                #{dosage,jdbcType=VARCHAR},
+            </if>
+            <if test="totalAmount != null">
+                #{totalAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="intervals != null">
+                #{intervals,jdbcType=INTEGER},
+            </if>
+            <if test="proofreadingNurseId != null">
+                #{proofreadingNurseId,jdbcType=BIGINT},
+            </if>
+            <if test="approvedNurseId != null">
+                #{approvedNurseId,jdbcType=BIGINT},
+            </if>
+            <if test="isStop != null">
+                #{isStop,jdbcType=INTEGER},
+            </if>
+            <if test="stopDate != null">
+                #{stopDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="stopUserId != null">
+                #{stopUserId,jdbcType=BIGINT},
+            </if>
+            <if test="stopPrfingNurseId != null">
+                #{stopPrfingNurseId,jdbcType=BIGINT},
+            </if>
+            <if test="stopApdNurseId != null">
+                #{stopApdNurseId,jdbcType=BIGINT},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisAnkleTemplate">
+        update his_ankle_template
+        <set>
+            <if test="templateNumber != null">
+                template_number = #{templateNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="templateNumber != null">
+                template_name = #{templateName,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNum != null">
+                order_num = #{orderNum,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="isSkinTest != null">
+                is_skin_test = #{isSkinTest,jdbcType=INTEGER},
+            </if>
+            <if test="specification != null">
+                specification = #{specification,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null">
+                unit = #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="usages != null">
+                usages = #{usages,jdbcType=VARCHAR},
+            </if>
+            <if test="dosage != null">
+                dosage = #{dosage,jdbcType=VARCHAR},
+            </if>
+            <if test="totalAmount != null">
+                total_amount = #{totalAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="intervals != null">
+                intervals = #{intervals,jdbcType=INTEGER},
+            </if>
+            <if test="proofreadingNurseId != null">
+                proofreading_nurse_id = #{proofreadingNurseId,jdbcType=BIGINT},
+            </if>
+            <if test="approvedNurseId != null">
+                approved_nurse_id = #{approvedNurseId,jdbcType=BIGINT},
+            </if>
+            <if test="isStop != null">
+                is_stop = #{isStop,jdbcType=INTEGER},
+            </if>
+            <if test="stopDate != null">
+                stop_date = #{stopDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="stopUserId != null">
+                stop_user_id = #{stopUserId,jdbcType=BIGINT},
+            </if>
+            <if test="stopPrfingNurseId != null">
+                stop_prfing_nurse_id = #{stopPrfingNurseId,jdbcType=BIGINT},
+            </if>
+            <if test="stopApdNurseId != null">
+                stop_apd_nurse_id = #{stopApdNurseId,jdbcType=BIGINT},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisAnkleTemplate">
+    update his_ankle_template
+    set template_number = #{templateNumber,jdbcType=VARCHAR},
+      template_name = #{templateName,jdbcType=VARCHAR},
+      order_num = #{orderNum,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      is_skin_test = #{isSkinTest,jdbcType=INTEGER},
+      specification = #{specification,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      usages = #{usages,jdbcType=VARCHAR},
+      dosage = #{dosage,jdbcType=VARCHAR},
+      total_amount = #{totalAmount,jdbcType=DOUBLE},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      intervals = #{intervals,jdbcType=INTEGER},
+      proofreading_nurse_id = #{proofreadingNurseId,jdbcType=BIGINT},
+      approved_nurse_id = #{approvedNurseId,jdbcType=BIGINT},
+      is_stop = #{isStop,jdbcType=INTEGER},
+      stop_date = #{stopDate,jdbcType=TIMESTAMP},
+      stop_user_id = #{stopUserId,jdbcType=BIGINT},
+      stop_prfing_nurse_id = #{stopPrfingNurseId,jdbcType=BIGINT},
+      stop_apd_nurse_id = #{stopApdNurseId,jdbcType=BIGINT},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <!--自定义sql-->
+    <!--合并同name-->
+    <select id="listWithName" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select distinct
+        his_ankle_template.template_number,
+        his_ankle_template.template_name,
+        his_ankle_template.create_user_id,
+        his_ankle_template.update_user_id
+        from his_ankle_template
+        where 1 = 1
+        <if test="parameter.name != null and parameter.name != ''">
+            and name = #{parameter.name,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+    <select id="list" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *
+    from his_ankle_template
+    where his_ankle_template.template_number = #{templateNumber,jdbcType=VARCHAR} order by order_num asc
+  </select>
+
+    <!--根据number查找list-->
+    <select id="selectListByNumber" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from his_ankle_template
+        where template_number = #{templateNumber,jdbcType=VARCHAR} order by order_num asc
+    </select>
+
+    <select id="selectTemplate" resultMap="BaseResultMap">
+  select distinct
+  his_ankle_template.template_number,
+  his_ankle_template.template_name
+  from his_ankle_template
+  where 1 = 1
+  </select>
+
+
+    <!--    批量更新-->
+    <update id="updateBatch" parameterType="list">
+        update his_ankle_template
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="order_num=case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.orderNum!=null">
+                        when id=#{item.id} then #{item.orderNum}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where
+        <foreach collection="list" separator="or" item="item" index="index">
+            id=#{item.id}
+        </foreach>
+    </update>
+
+
+    <select id="queryTranslateInfoByDate" resultMap="BaseResultMap"
+            parameterType="com.ahsj.hiscore.entity.HisAnkleTemplate">
+        select
+        <include refid="Base_Column_List"/>
+        from his_ankle_template as his
+        where   <![CDATA[ (DATE_FORMAT(his.update_date, '%Y-%m-%d') =  DATE_FORMAT( #{updateDate}, '%Y-%m-%d'))]]>
+    </select>
+
+    <select id="queryHisAnkleTemplateAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_ankle_template
+    </select>
+
+    <!--删除整个模板(模板编号)-->
+    <delete id="deletetemp" parameterType="java.lang.String">
+    delete from his_ankle_template
+    where template_number = #{templateNumber,jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deletetempdetails" parameterType="java.lang.Long">
+    delete from his_ankle_template
+    where id = #{id,jdbcType=BIGINT}
+    </delete>
+</mapper>

@@ -1,0 +1,149 @@
+configurations {
+    mybatisGenerator
+}
+
+dependencies {
+//    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.0.0'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    //引入服务消费者
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    //安全认证组件
+    implementation 'org.springframework.cloud:spring-cloud-starter-oauth2'
+    implementation 'org.springframework.cloud:spring-cloud-starter-security'
+
+    //熔断器
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
+
+    //Thymeleaf组件
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+// https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity4
+    compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '3.0.4.RELEASE'
+
+
+    compile('org.apache.commons:commons-lang3:3.8')
+    compile('com.auth0:java-jwt:3.4.0')
+    compile('com.alibaba:fastjson:1.2.47')
+    //持久层
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    runtime('mysql:mysql-connector-java')
+
+    //mybatis
+    compile "org.mybatis.generator:mybatis-generator-core:1.3.2"
+
+    compile group: 'net.sf.dozer', name: 'dozer', version: '5.5.1'
+
+    compile 'com.google.cloud:google-cloud-translate:1.61.0'
+
+
+    //批量导入导入依赖
+    // https://mvnrepository.com/artifact/org.apache.poi/poi
+    compile group: 'org.apache.poi', name: 'poi', version: '3.13'
+
+    // https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
+    compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.13'
+
+    // https://mvnrepository.com/artifact/org.apache.poi/ooxml-schemas
+    compile group: 'org.apache.poi', name: 'ooxml-schemas', version: '1.1'
+
+    // https://mvnrepository.com/artifact/io.github.openfeign/feign-httpclient
+    compile group: 'io.github.openfeign', name: 'feign-httpclient', version: '9.5.1'
+
+ /*   // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-amqp
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-amqp', version: '2.0.4.RELEASE'*/
+
+
+/*    // https://mvnrepository.com/artifact/cn.afterturn/easypoi-base
+    compile group: 'cn.afterturn', name: 'easypoi-base', version: '3.1.0'
+
+    // https://mvnrepository.com/artifact/cn.afterturn/easypoi-web
+    compile group: 'cn.afterturn', name: 'easypoi-web', version: '3.1.0'
+
+    // https://mvnrepository.com/artifact/cn.afterturn/easypoi-annotation
+    compile group: 'cn.afterturn', name: 'easypoi-annotation', version: '3.1.0'*/
+
+
+    //    log4
+    compile 'com.googlecode.log4jdbc:log4jdbc:1.2'
+    //MyBatis提供了拦截器接口，我们可以实现自己的拦截器， 将其作为一个plugin装入到SqlSessionFactory中。
+    //Github上有位开发者写了一个分页插件，我觉得使用起来还可以，挺方便的。 Github项目地址： https://github.com/pagehelper/Mybatis-PageHelper
+    implementation "com.github.pagehelper:pagehelper:4.1.0"
+    //    fastjson json处理工具
+    implementation 'com.alibaba:fastjson:1.2.47'
+    implementation 'com.alibaba:druid:1.1.4'
+
+    //mybatis gradle版本下的逆向工程
+    mybatisGenerator 'org.mybatis.generator:mybatis-generator-core:1.3.2'
+    mybatisGenerator 'mysql:mysql-connector-java:5.1.30'
+    mybatisGenerator 'tk.mybatis:mapper:3.3.9'
+
+
+    //kotlin所需要的文件
+    compile("org.jetbrains.kotlin:kotlin-reflect")
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.5"
+    // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.9'
+    // https://mvnrepository.com/artifact/com.netflix.feign/feign-httpclient
+    compile group: 'com.netflix.feign', name: 'feign-httpclient', version: '8.18.0'
+
+}
+sourceSets {
+    main {
+        java {
+            srcDir 'src/java'
+        }
+        resources {
+            srcDir 'src/resources'
+        }
+    }
+}
+
+def getDbProperties = {
+    def properties = new Properties()
+    file("src/main/resources/jdbc.properties").withInputStream { inputStream ->
+        properties.load(inputStream)
+    }
+    properties
+}
+task mybatisGenerate << {
+    def properties = getDbProperties()
+    ant.properties['targetProject'] = projectDir.path
+    ant.properties['driverClass'] = properties.getProperty("jdbc.driver")
+    ant.properties['connectionURL'] = properties.getProperty("jdbc.url")
+    ant.properties['userId'] = properties.getProperty("jdbc.username")
+    ant.properties['password'] = properties.getProperty("jdbc.password")
+    ant.properties['src_main_java'] = sourceSets.main.java.srcDirs[0].path
+    ant.properties['src_main_resources'] = sourceSets.main.resources.srcDirs[0].path
+    ant.properties['modelPackage'] = properties.getProperty("package.model")
+    ant.properties['mapperPackage'] = properties.getProperty("package.mapper")
+    ant.properties['sqlMapperPackage'] = properties.getProperty("package.xml")
+    ant.properties['tableName'] = properties.getProperty("package.tableName")
+    ant.properties['entityName'] = properties.getProperty("package.entityName")
+    ant.taskdef(
+            name: 'mbgenerator',
+            classname: 'org.mybatis.generator.ant.GeneratorAntTask',
+            classpath: configurations.mybatisGenerator.asPath
+    )
+    ant.mbgenerator(overwrite: true,
+            configfile: 'src/main/resources/generatorConfigpatent.xml', verbose: true) {
+        propertyset {
+            propertyref(name: 'targetProject')
+            propertyref(name: 'userId')
+            propertyref(name: 'driverClass')
+            propertyref(name: 'connectionURL')
+            propertyref(name: 'password')
+            propertyref(name: 'src_main_java')
+            propertyref(name: 'src_main_resources')
+            propertyref(name: 'modelPackage')
+            propertyref(name: 'mapperPackage')
+            propertyref(name: 'sqlMapperPackage')
+            propertyref(name: 'tableName')
+            propertyref(name: 'entityName')
+        }
+    }
+}

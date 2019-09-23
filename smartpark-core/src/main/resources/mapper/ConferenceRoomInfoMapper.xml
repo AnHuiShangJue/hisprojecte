@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahsj.smartparkcore.dao.ConferenceRoomInfoMapper">
+  <resultMap id="BaseResultMap" type="com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="area" jdbcType="DOUBLE" property="area" />
+    <result column="environmental_label" jdbcType="VARCHAR" property="environmentalLabel" />
+    <result column="capacity" jdbcType="VARCHAR" property="capacity" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="is_enable" jdbcType="INTEGER" property="isEnable" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="update_user_id" jdbcType="BIGINT" property="updateUserId" />
+    <result column="is_lease" jdbcType="INTEGER" property="isLease" />
+    <result column="enterprise_id" jdbcType="BIGINT" property="enterpriseId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="conference_name" jdbcType="VARCHAR" property="conferenceName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, location, price, area, environmental_label, capacity, description, is_enable, 
+    name, phone_number, create_date, create_user_id, update_date, update_user_id, is_lease, 
+    enterprise_id, user_id, conference_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from conference_room_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from conference_room_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo">
+    insert into conference_room_info (id, location, price, 
+      area, environmental_label, capacity, 
+      description, is_enable, name, 
+      phone_number, create_date, create_user_id, 
+      update_date, update_user_id, is_lease, 
+      enterprise_id, user_id, conference_name
+      )
+    values (#{id,jdbcType=BIGINT}, #{location,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      #{area,jdbcType=DOUBLE}, #{environmentalLabel,jdbcType=VARCHAR}, #{capacity,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{isEnable,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{phoneNumber,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{isLease,jdbcType=INTEGER}, 
+      #{enterpriseId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{conferenceName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo">
+    insert into conference_room_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="location != null">
+        location,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="environmentalLabel != null">
+        environmental_label,
+      </if>
+      <if test="capacity != null">
+        capacity,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="isEnable != null">
+        is_enable,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="phoneNumber != null">
+        phone_number,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="updateUserId != null">
+        update_user_id,
+      </if>
+      <if test="isLease != null">
+        is_lease,
+      </if>
+      <if test="enterpriseId != null">
+        enterprise_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="conferenceName != null">
+        conference_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=DOUBLE},
+      </if>
+      <if test="environmentalLabel != null">
+        #{environmentalLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="capacity != null">
+        #{capacity,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnable != null">
+        #{isEnable,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null">
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="isLease != null">
+        #{isLease,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseId != null">
+        #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="conferenceName != null">
+        #{conferenceName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo">
+    update conference_room_info
+    <set>
+      <if test="location != null">
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=DOUBLE},
+      </if>
+      <if test="environmentalLabel != null">
+        environmental_label = #{environmentalLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="capacity != null">
+        capacity = #{capacity,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnable != null">
+        is_enable = #{isEnable,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null">
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="isLease != null">
+        is_lease = #{isLease,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseId != null">
+        enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="conferenceName != null">
+        conference_name = #{conferenceName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo">
+    update conference_room_info
+    set location = #{location,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      area = #{area,jdbcType=DOUBLE},
+      environmental_label = #{environmentalLabel,jdbcType=VARCHAR},
+      capacity = #{capacity,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      is_enable = #{isEnable,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      is_lease = #{isLease,jdbcType=INTEGER},
+      enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      conference_name = #{conferenceName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!--自定义sql-->
+
+  <resultMap id="BaseResultMapVO" type="com.ahsj.smartparkcore.entity.vo.ConferenceRoomInfoVO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="area" jdbcType="DOUBLE" property="area" />
+    <result column="environmental_label" jdbcType="VARCHAR" property="environmentalLabel" />
+    <result column="capacity" jdbcType="VARCHAR" property="capacity" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="is_enable" jdbcType="INTEGER" property="isEnable" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+    <result column="is_lease" jdbcType="INTEGER" property="isLease" />
+    <result column="enterprise_id" jdbcType="BIGINT" property="enterpriseId" />
+    <result column="conference_name" jdbcType="VARCHAR" property="conferenceName" />
+  </resultMap>
+
+  <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMapVO">
+    select conference_room_info.*
+from conference_room_info
+  </select>
+</mapper>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<!-- Form with validation -->
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title">术前记录</h4>
+                <label style="color:black">Preoperative record</label>
+                <form class="col s12" id="sendForm" action="#">
+                    <input type="hidden" id="id" name="id" th:value="${preoperativeSummaryRecord.id}">
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="medicalNumber" name="medicalNumber" type="text" class="validate" readonly="readonly" th:value="${preoperativeSummaryRecord.medicalNumber}"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label for="medicalNumber">住院编号<span style="font-size: 12px">(hospital number)</span></label>
+                        </div>
+                        <div class="input-field col s12 x12 m12 l12 xl12">
+                            <textarea id="briefCondition" name="briefCondition" class="materialize-textarea validate" type="text"  th:value="${preoperativeSummaryRecord.briefCondition}"
+                                      data-error=".errorTxt1"></textarea>
+                            <div class="errorTxt1"></div>
+                            <label for="briefCondition" class="active">入院简要病情<span style="font-size: 12px">(Brief information on admission)</span></label>
+                        </div>
+                        <div class="input-field col s12 x12 m12 l12 xl12">
+                            <textarea id="preoperativeDiagnosis" name="preoperativeDiagnosis" class="materialize-textarea validate" type="text"  th:value="${preoperativeSummaryRecord.preoperativeDiagnosis}"
+                                   data-error=".errorTxt1"></textarea>
+                            <div class="errorTxt1"></div>
+                            <label for="preoperativeDiagnosis" class="active">术前诊断<span style="font-size: 12px">(Preoperative diagnosis)</span></label>
+                        </div>
+
+                        <div class="input-field col s12 x12 m12 l12 xl12">
+                            <textarea id="surgicalIndication" name="surgicalIndication" class="materialize-textarea" type="text" th:value="${preoperativeSummaryRecord.surgicalIndication}"
+                                   data-error=".errorTxt2"></textarea>
+                            <div class="errorTxt2"></div>
+                            <label for="surgicalIndication" class="active">手术指征<span style="font-size: 12px">(Surgical indications)</span></label>
+                        </div>
+                        <div class="input-field col s12 x12 m12 l12 xl12">
+                            <textarea id="prposedSurgeryNamemethod" name="prposedSurgeryNamemethod" class="materialize-textarea" type="text" th:value="${preoperativeSummaryRecord.prposedSurgeryNamemethod}"
+                                   data-error=".errorTxt2"></textarea>
+                            <div class="errorTxt2"></div>
+                            <label for="prposedSurgeryNamemethod" class="active">拟定手术名称和方式<span style="font-size: 12px">(Formulate the name and method of the operation)</span></label>
+                        </div>
+                        <div class="input-field col s12 x12 m12 l12 xl12">
+                            <textarea id="smulatedAnesthesia" name="smulatedAnesthesia" type="text" class="materialize-textarea" th:value="${preoperativeSummaryRecord.smulatedAnesthesia}"></textarea>
+                            <label for="smulatedAnesthesia" class="active">拟释麻醉方式<span
+                                    style="font-size: 12px">(Method of intended anesthesia)</span></label>
+                        </div>
+                        <div class="input-field col s12 x12 m12 l12 xl12">
+                            <textarea id="precautions" name="precautions" type="text" class="materialize-textarea"   th:value="${preoperativeSummaryRecord.precautions}"></textarea>
+                            <label for="precautions" class="active">注意事项<span style="font-size: 12px">(Matters needing attention)</span></label>
+                        </div>
+                        <div class="input-field col s12 x12 m12 l12 xl12">
+                            <textarea id="patientCondition" name="patientCondition" class="materialize-textarea"  type="text" th:value="${preoperativeSummaryRecord.patientCondition}"></textarea>
+                            <label for="patientCondition" class="active">患者情况<span style="font-size: 12px">(clinical situation)</span></label>
+                        </div>
+
+
+                       <div class="input-field col s4 l4 xl4 jeinpbox">
+                            <input type="text" id="joinDate" class="jeinput" name="joinDate"
+                                   readonly="readonly" autocomplete="off"
+                                   th:placeholder="${#dates.format(preoperativeSummaryRecord.joinDate, 'yyyy-MM-dd HH:mm:ss')}"
+                                   th:value="${#dates.format(preoperativeSummaryRecord.joinDate, 'yyyy-MM-dd HH:mm:ss')}">
+                            <label for="joinDate">入院日期<span style="font-size: 12px">(Date of admission)</span></label>
+                        </div>
+                     <!--  <div class="input-field col s4 l4 xl4">
+                            <select ahsj:select name="peopleIsSign" id="peopleIsSign" type="code" typeKey="yes_or_no" th:value="${hisDiagnosisTreatment.peopleIsSign}" >
+                            </select>
+                            <label for="peopleIsSign">医生签字<span style="font-size: 12px">(doctor signature)</span></label>
+                        </div>-->
+
+                      <!--  <div>
+                            <input id="bid" type="hidden" name="patientId" >
+                        </div>-->
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12" >
+                            <button id="send_btn" class="btn cyan waves-effect waves-light right" type="submit"
+                                    name="action">提 交
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+
+    var wardIdSelect = $("#bedNumber");
+    $(function () {
+       var enLang = {
+            name: "en",
+            month: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
+            weeks: ["SUN", "MON", "TUR", "WED", "THU", "FRI", "SAT"],
+            times: ["Hour", "Minute", "Second"],
+            timetxt: ["Time", "Start Time", "End Time"],
+            backtxt: "Back",
+            clear: "Clear",
+            today: "Now",
+            yes: "Confirm",
+            close: "Close"
+        }
+        jeDate("#joinDate", {
+            theme: {bgcolor: "#00A1CB", pnColor: "#00CCFF"},
+            minDate: "1900-01-01",              //最小日期
+            maxDate: "2099-12-31",              //最大日期
+            method: {
+                choose: function (params) {
+
+                }
+            },
+            format: "YYYY-MM-DD hh:mm:ss"
+        });
+        formCheck();
+        getSelectHome();
+    });
+
+    function formCheck() {
+        $("#sendForm").validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 2
+                },
+                number: {
+                    required: true,
+                    minlength: 3
+                },
+                idCard: {
+                    required: true,
+                    minlength: 11
+                },
+            },
+            messages: {
+                name: {
+                    required: "请输入名称",
+                    minlength: "最少包含2个字符"
+                },
+                number: {
+                    required: "请输入工号",
+                    minlength: "最少输入3个字符"
+                },
+                idCard: {
+                    required: "请输入身份证号码",
+                    minlength: "最少输入11个字符"
+                }
+
+            },
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+                dialog.confirm('确定提交吗?', function (index, layero) {
+                    var queryString = $('#sendForm').serialize();
+                    $.ahsjajax(
+                        CTX + "/api/preoperativesummaryrecord/addOrUpdatePreoperativeSummaryRecord.ahsj",
+                        queryString,
+                        function (msg) {
+                            if (msg.success) {
+                                M.toast({html: msg.message});
+                                parent.grid.search();
+                                dialog.parentclose();
+                                return false;
+                            } else {
+                                M.toast({html: msg.message});
+                                return false;
+                            }
+                        },
+                        function () {
+                            M.toast({html: "网络异常"});
+                            return false;
+                        }
+                    );
+                });
+            }
+
+        });
+    }
+
+    function getSelectHome() {
+        $.ahsjajax(
+            CTX + "/api/hisNewborn/add/getHisHospitalManageBed.ahsj",
+            null,
+            function (msg) {
+                data = msg;
+                console.log(data);
+                $(data).each(function (i) {
+                    wardIdSelect.append(
+                        "<option value='" + this.bedsNumber + "'>" + this.bedsNumber + "</option>")
+                });
+                wardIdSelect.formSelect();
+                if (msg.success) {
+                    M.toast({html: msg.message});
+                    return false;
+                } else {
+                    //M.toast({html: msg.message});
+                    return false;
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            })
+    }
+
+
+    $("input").change(function () {
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+
+</body>
+
+</html>

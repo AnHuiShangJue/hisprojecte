@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<!-- Form with validation -->
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title">阶段小结增加</h4>
+                <label style="color:black">Phase summary added</label>
+                <form class="col s12" id="sendForm" action="#">
+                    <input type="hidden" id="id" name="id" th:value="${medicalCrisisNotice.Id}">
+                    <input type="hidden" id="hospitalNumber" name="hospitalNumber"
+                           th:value="${medicalCrisisNotice.medicalNumber}">
+                    <div class="row">
+                        <div class="input-field col s2">
+                            <input type="text" id="joinDate" class="datepicker" name="joinDate"
+                                   th:placeholder="${#dates.format(medicalCrisisNotice.joinDate, 'yyyy-MM-dd HH:mm:ss')}"
+                                   th:value="${#dates.format(medicalCrisisNotice.joinDate, 'yyyy-MM-dd HH:mm:ss')}"/>
+                            <label for="joinDate">入 院 时 间<span style="font-size: 12px">(join Date)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                                    <textarea type="text" id="patientName" class="materialize-textarea"
+                                              th:text="${medicalCrisisNotice.patientName}"
+                                              name="patientName" data-length="255"></textarea>
+                            <label for="patientName" class="active">姓 名<span style="font-size: 12px">(name)</span></label>
+                        </div>
+                        <div class="input-field col s12">
+                            <textarea type="text" id="age" class="materialize-textarea" th:text="${medicalCrisisNotice.age}" name="age" data-length="255">
+                            </textarea>
+                            <label for="age" class="active">年 龄<span style="font-size: 12px">(age)</span></label>
+                        </div>
+                        <div class="input-field col s12">
+                            <textarea type="text" id="sex" class="materialize-textarea"
+                                      th:text="${medicalCrisisNotice.sex}"
+                                      name="sex" data-length="255"></textarea>
+                            <label for="sex" class="active">性 别<span style="font-size: 12px">(sex)</span></label>
+                        </div>
+                        <div class="input-field col s12">
+                            <textarea type="text" id="department" class="materialize-textarea"
+                                      th:text="${medicalCrisisNotice.sex}"
+                                      name="department" data-length="255"></textarea>
+                            <label for="department" class="active">科 室<span style="font-size: 12px">(department)</span></label>
+                        </div>
+                        <div class="input-field col s12">
+                            <textarea type="text" id="medicalNumber" class="materialize-textarea"
+                                      th:text="${medicalCrisisNotice.medicalNumber}"
+                                      name="medicalNumber" data-length="255"></textarea>
+                            <label for="medicalNumber" class="active">住 院 号<span style="font-size: 12px">(medical Number)</span></label>
+                        </div>
+                        <div class="input-field col s12">
+                            <textarea type="text" id="bedNo" class="materialize-textarea"
+                                      th:text="${medicalCrisisNotice.sex}"
+                                      name="bedNo" data-length="255"></textarea>
+                            <label for="bedNo" class="active">床 号<span style="font-size: 12px">(bed No)</span></label>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <textarea type="text" id="diagnosis" class="materialize-textarea"
+                                      th:text="${medicalCrisisNotice.diagnosis}"
+                                      name="diagnosis" data-length="255"></textarea>
+                            <label for="diagnosis" class="active">诊 断<span
+                                    style="font-size: 12px">(diagnosis)</span></label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12" th:if="${flag}">
+                            <button id="send_btn" class="btn cyan waves-effect waves-light right" type="submit"
+                                    name="action">提 交
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+    $(function () {
+        formCheck();
+    });
+
+    function formCheck() {
+        $("#sendForm").validate({
+            rules: {},
+            messages: {},
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+                dialog.confirm('确定提交吗?', function (index, layero) {
+                    var queryString = $('#sendForm').serialize();
+                    $.ahsjajax(
+                        CTX + "/api/hisstagesummary/saveOrUpdate.ahsj?token=" + TOKEN,
+                        queryString,
+                        function (msg) {
+                            if (msg.success) {
+                                M.toast({html: msg.message});
+                                parent.grid.search();
+                                dialog.parentclose();
+                                return false;
+                            } else {
+                                M.toast({html: msg.message});
+                                return false;
+                            }
+                        },
+                        function () {
+                            M.toast({html: "网络异常"});
+                            return false;
+                        }
+                    );
+                });
+            }
+
+        });
+    }
+
+
+    $("input").change(function () {
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+
+</body>
+
+</html>

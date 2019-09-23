@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<style>
+    input{
+        display: inline;
+        border:none;
+        border-bottom:1px solid #000;
+    }
+    table tr td{
+        border: none;
+    }
+    table tr{
+        border-bottom: none;
+    }
+</style>
+<div th:replace="public/base_print :: html"></div>
+<body>
+<div class="container">
+
+    <div  class="row valign-wrapper">
+        <div class="col s12 m12 l12 center">
+            <h4>表6 新生儿入院护理评估记录单</h4>
+        </div>
+
+    </div>
+    <div  class="row valign-wrapper">
+        <div class="col s1 m1 l1">
+            <p>姓名：</p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p></p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p>性别：</p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p></p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p>年龄：</p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p></p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p>科别：</p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p></p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p>床号：</p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p></p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p>住院号：</p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p></p>
+        </div>
+    </div>
+    <div  class="row valign-wrapper">
+        <div class="col s1 m1 l1">
+            <p>家长姓名：</p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p></p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p>病史陈述者：</p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p></p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p>联系电话：</p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p></p>
+        </div>
+
+    </div>
+    <div  class="row valign-wrapper">
+        <div class="col s1 m1 l1">
+            <p>入院时间：</p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p></p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p>收集资料时间：</p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p></p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p>联系电话：</p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p></p>
+        </div>
+
+    </div>
+
+    <div  class="row valign-wra pper">
+        <div class="col s12 m12 l12">
+            <table>
+                <tr>
+                    <td colspan="6">一、一般资料</td>
+                </tr>
+                <tr>
+                    <td>家庭社会情况：</td>
+                    <td>民族</td>
+                    <td><input type="text"></td>
+                    <td>文化程度</td>
+                    <td><input type="text"></td>
+                    <td>病史陈述者（与患儿关系）</td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td>入院时间</td>
+                    <td colspan="2"><input type="text"></td>
+                    <td>告知医师时间</td>
+                    <td colspan="2"><input type="text"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>联系地址</td>
+                    <td  colspan="2"><input type="text"></td>
+                    <td>联系人及电话</td>
+                    <td  colspan="2"><input type="text"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>入院方式</td>
+                    <td colspan="4">步行 &nbsp;&nbsp; 轮椅 &nbsp;&nbsp; 平车 &nbsp;&nbsp; 抱入</td>
+                    <td>其他 <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>入院原因</td>
+                    <td colspan="6"><input type="text"></td>
+                </tr>
+                <tr>
+                    <td>入院诊断</td>
+                    <td colspan="6"><input type="text"></td>
+                </tr>
+                <tr>
+                    <td>电话</td>
+                    <td  colspan="2"><input type="text"></td>
+                    <td>地址</td>
+                    <td  colspan="2"><input type="text"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>既往史</td>
+                    <td colspan="6"><input type="text"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div  class="row valign-wrapper">
+        <div class="col s12 m12 l12">
+            <table>
+                <tr>
+                    <td>入院原因</td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td>入院诊断</td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td>生产方式：</td>
+                    <td>顺产 &nbsp;&nbsp; 助产 &nbsp;&nbsp; 剖宫产 &nbsp;&nbsp; 其他 <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> </td>
+                </tr>
+                <tr>
+                    <td>喂养方式：</td>
+                    <td>母乳 &nbsp;&nbsp; 配方奶 &nbsp;&nbsp; 混合喂养</td>
+                </tr>
+                <tr>
+                    <td> T <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> ℃ </td>
+                    <td> P <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> 次/分</td>
+                    <td> R <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> 次/分</td>
+                    <td> BP <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u>  / <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> mmHg </td>
+                    <td> 体重 <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> kg </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12">
+
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="public/base_list_script :: html"></div>
+<div th:replace="public/base_print_script :: html"></div>
+<script th:inline="javascript">
+
+</script>
+</body>
+</html>

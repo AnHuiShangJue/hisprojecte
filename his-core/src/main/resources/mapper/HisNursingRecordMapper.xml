@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisNursingRecordMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisNursingRecord">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="manage_number" property="manageNumber" jdbcType="VARCHAR"/>
+        <result column="body_temperature" property="bodyTemperature" jdbcType="DOUBLE"/>
+        <result column="record_number" property="recordNumber" jdbcType="VARCHAR"/>
+        <result column="pulse" property="pulse" jdbcType="VARCHAR"/>
+        <result column="breathe" property="breathe" jdbcType="VARCHAR"/>
+        <result column="heart_rate" property="heartRate" jdbcType="VARCHAR"/>
+        <result column="blood_pressure" property="bloodPressure" jdbcType="VARCHAR"/>
+        <result column="pain_score" property="painScore" jdbcType="VARCHAR"/>
+        <result column="oxygen_saturation" property="oxygenSaturation" jdbcType="VARCHAR"/>
+        <result column="flow" property="flow" jdbcType="VARCHAR"/>
+        <result column="oxygen_absorption" property="oxygenAbsorption" jdbcType="VARCHAR"/>
+        <result column="sucking" property="sucking" jdbcType="VARCHAR"/>
+        <result column="venous_catheter_name" property="venousCatheterName" jdbcType="VARCHAR"/>
+        <result column="venous_catheter_care" property="venousCatheterCare" jdbcType="VARCHAR"/>
+        <result column="involvement_project" property="involvementProject" jdbcType="VARCHAR"/>
+        <result column="involvement" property="involvement" jdbcType="VARCHAR"/>
+        <result column="output_project" property="outputProject" jdbcType="VARCHAR"/>
+        <result column="output_traits" property="outputTraits" jdbcType="VARCHAR"/>
+        <result column="output" property="output" jdbcType="VARCHAR"/>
+        <result column="other" property="other" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="signature" property="signature" jdbcType="VARCHAR"/>
+        <result column="dates" property="dates" jdbcType="TIMESTAMP"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="create_user_id" property="createUserId" jdbcType="BIGINT"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="BIGINT"/>
+        <result column="weight" property="weight"/>
+        <result column="hospitalization_day" property="hospitalizationDay"  jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, manage_number, body_temperature, record_number, pulse, breathe, heart_rate, blood_pressure, 
+    pain_score, oxygen_saturation, flow, oxygen_absorption, sucking, venous_catheter_name, 
+    venous_catheter_care, involvement_project, involvement, output_project, output_traits, 
+    output, other, remark, signature, dates, create_date, create_user_id, update_date, 
+    update_user_id
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from his_nursing_record
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_nursing_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisNursingRecord">
+    insert into his_nursing_record (id, manage_number, body_temperature, 
+      record_number, pulse, breathe, 
+      heart_rate, blood_pressure, pain_score, 
+      oxygen_saturation, flow, oxygen_absorption, 
+      sucking, venous_catheter_name, venous_catheter_care, 
+      involvement_project, involvement, output_project, 
+      output_traits, output, other, 
+      remark, signature, dates, 
+      create_date, create_user_id, update_date, 
+      update_user_id)
+    values (#{id,jdbcType=BIGINT}, #{manageNumber,jdbcType=VARCHAR}, #{bodyTemperature,jdbcType=DOUBLE}, 
+      #{recordNumber,jdbcType=VARCHAR}, #{pulse,jdbcType=VARCHAR}, #{breathe,jdbcType=VARCHAR}, 
+      #{heartRate,jdbcType=VARCHAR}, #{bloodPressure,jdbcType=VARCHAR}, #{painScore,jdbcType=VARCHAR}, 
+      #{oxygenSaturation,jdbcType=VARCHAR}, #{flow,jdbcType=VARCHAR}, #{oxygenAbsorption,jdbcType=VARCHAR}, 
+      #{sucking,jdbcType=VARCHAR}, #{venousCatheterName,jdbcType=VARCHAR}, #{venousCatheterCare,jdbcType=VARCHAR}, 
+      #{involvementProject,jdbcType=VARCHAR}, #{involvement,jdbcType=VARCHAR}, #{outputProject,jdbcType=VARCHAR}, 
+      #{outputTraits,jdbcType=VARCHAR}, #{output,jdbcType=VARCHAR}, #{other,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{signature,jdbcType=VARCHAR}, #{dates,jdbcType=TIMESTAMP}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{updateUserId,jdbcType=BIGINT})
+  </insert>
+    <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisNursingRecord">
+        insert into his_nursing_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="manageNumber != null">
+                manage_number,
+            </if>
+            <if test="bodyTemperature != null">
+                body_temperature,
+            </if>
+            <if test="recordNumber != null">
+                record_number,
+            </if>
+            <if test="pulse != null">
+                pulse,
+            </if>
+            <if test="breathe != null">
+                breathe,
+            </if>
+            <if test="heartRate != null">
+                heart_rate,
+            </if>
+            <if test="bloodPressure != null">
+                blood_pressure,
+            </if>
+            <if test="painScore != null">
+                pain_score,
+            </if>
+            <if test="oxygenSaturation != null">
+                oxygen_saturation,
+            </if>
+            <if test="flow != null">
+                flow,
+            </if>
+            <if test="oxygenAbsorption != null">
+                oxygen_absorption,
+            </if>
+            <if test="sucking != null">
+                sucking,
+            </if>
+            <if test="venousCatheterName != null">
+                venous_catheter_name,
+            </if>
+            <if test="venousCatheterCare != null">
+                venous_catheter_care,
+            </if>
+            <if test="involvementProject != null">
+                involvement_project,
+            </if>
+            <if test="involvement != null">
+                involvement,
+            </if>
+            <if test="outputProject != null">
+                output_project,
+            </if>
+            <if test="outputTraits != null">
+                output_traits,
+            </if>
+            <if test="output != null">
+                output,
+            </if>
+            <if test="other != null">
+                other,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="signature != null">
+                signature,
+            </if>
+            <if test="dates != null">
+                dates,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="manageNumber != null">
+                #{manageNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="bodyTemperature != null">
+                #{bodyTemperature,jdbcType=DOUBLE},
+            </if>
+            <if test="recordNumber != null">
+                #{recordNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="pulse != null">
+                #{pulse,jdbcType=VARCHAR},
+            </if>
+            <if test="breathe != null">
+                #{breathe,jdbcType=VARCHAR},
+            </if>
+            <if test="heartRate != null">
+                #{heartRate,jdbcType=VARCHAR},
+            </if>
+            <if test="bloodPressure != null">
+                #{bloodPressure,jdbcType=VARCHAR},
+            </if>
+            <if test="painScore != null">
+                #{painScore,jdbcType=VARCHAR},
+            </if>
+            <if test="oxygenSaturation != null">
+                #{oxygenSaturation,jdbcType=VARCHAR},
+            </if>
+            <if test="flow != null">
+                #{flow,jdbcType=VARCHAR},
+            </if>
+            <if test="oxygenAbsorption != null">
+                #{oxygenAbsorption,jdbcType=VARCHAR},
+            </if>
+            <if test="sucking != null">
+                #{sucking,jdbcType=VARCHAR},
+            </if>
+            <if test="venousCatheterName != null">
+                #{venousCatheterName,jdbcType=VARCHAR},
+            </if>
+            <if test="venousCatheterCare != null">
+                #{venousCatheterCare,jdbcType=VARCHAR},
+            </if>
+            <if test="involvementProject != null">
+                #{involvementProject,jdbcType=VARCHAR},
+            </if>
+            <if test="involvement != null">
+                #{involvement,jdbcType=VARCHAR},
+            </if>
+            <if test="outputProject != null">
+                #{outputProject,jdbcType=VARCHAR},
+            </if>
+            <if test="outputTraits != null">
+                #{outputTraits,jdbcType=VARCHAR},
+            </if>
+            <if test="output != null">
+                #{output,jdbcType=VARCHAR},
+            </if>
+            <if test="other != null">
+                #{other,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="signature != null">
+                #{signature,jdbcType=VARCHAR},
+            </if>
+            <if test="dates != null">
+                #{dates,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisNursingRecord">
+        update his_nursing_record
+        <set>
+            <if test="manageNumber != null">
+                manage_number = #{manageNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="bodyTemperature != null">
+                body_temperature = #{bodyTemperature,jdbcType=DOUBLE},
+            </if>
+            <if test="recordNumber != null">
+                record_number = #{recordNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="pulse != null">
+                pulse = #{pulse,jdbcType=VARCHAR},
+            </if>
+            <if test="breathe != null">
+                breathe = #{breathe,jdbcType=VARCHAR},
+            </if>
+            <if test="heartRate != null">
+                heart_rate = #{heartRate,jdbcType=VARCHAR},
+            </if>
+            <if test="bloodPressure != null">
+                blood_pressure = #{bloodPressure,jdbcType=VARCHAR},
+            </if>
+            <if test="painScore != null">
+                pain_score = #{painScore,jdbcType=VARCHAR},
+            </if>
+            <if test="oxygenSaturation != null">
+                oxygen_saturation = #{oxygenSaturation,jdbcType=VARCHAR},
+            </if>
+            <if test="flow != null">
+                flow = #{flow,jdbcType=VARCHAR},
+            </if>
+            <if test="oxygenAbsorption != null">
+                oxygen_absorption = #{oxygenAbsorption,jdbcType=VARCHAR},
+            </if>
+            <if test="sucking != null">
+                sucking = #{sucking,jdbcType=VARCHAR},
+            </if>
+            <if test="venousCatheterName != null">
+                venous_catheter_name = #{venousCatheterName,jdbcType=VARCHAR},
+            </if>
+            <if test="venousCatheterCare != null">
+                venous_catheter_care = #{venousCatheterCare,jdbcType=VARCHAR},
+            </if>
+            <if test="involvementProject != null">
+                involvement_project = #{involvementProject,jdbcType=VARCHAR},
+            </if>
+            <if test="involvement != null">
+                involvement = #{involvement,jdbcType=VARCHAR},
+            </if>
+            <if test="outputProject != null">
+                output_project = #{outputProject,jdbcType=VARCHAR},
+            </if>
+            <if test="outputTraits != null">
+                output_traits = #{outputTraits,jdbcType=VARCHAR},
+            </if>
+            <if test="output != null">
+                output = #{output,jdbcType=VARCHAR},
+            </if>
+            <if test="other != null">
+                other = #{other,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="signature != null">
+                signature = #{signature,jdbcType=VARCHAR},
+            </if>
+            <if test="dates != null">
+                dates = #{dates,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisNursingRecord">
+    update his_nursing_record
+    set manage_number = #{manageNumber,jdbcType=VARCHAR},
+      body_temperature = #{bodyTemperature,jdbcType=DOUBLE},
+      record_number = #{recordNumber,jdbcType=VARCHAR},
+      pulse = #{pulse,jdbcType=VARCHAR},
+      breathe = #{breathe,jdbcType=VARCHAR},
+      heart_rate = #{heartRate,jdbcType=VARCHAR},
+      blood_pressure = #{bloodPressure,jdbcType=VARCHAR},
+      pain_score = #{painScore,jdbcType=VARCHAR},
+      oxygen_saturation = #{oxygenSaturation,jdbcType=VARCHAR},
+      flow = #{flow,jdbcType=VARCHAR},
+      oxygen_absorption = #{oxygenAbsorption,jdbcType=VARCHAR},
+      sucking = #{sucking,jdbcType=VARCHAR},
+      venous_catheter_name = #{venousCatheterName,jdbcType=VARCHAR},
+      venous_catheter_care = #{venousCatheterCare,jdbcType=VARCHAR},
+      involvement_project = #{involvementProject,jdbcType=VARCHAR},
+      involvement = #{involvement,jdbcType=VARCHAR},
+      output_project = #{outputProject,jdbcType=VARCHAR},
+      output_traits = #{outputTraits,jdbcType=VARCHAR},
+      output = #{output,jdbcType=VARCHAR},
+      other = #{other,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      signature = #{signature,jdbcType=VARCHAR},
+      dates = #{dates,jdbcType=TIMESTAMP},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <!--自定义sql-->
+    <select id="listByManageNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    his_nursing_record.*
+    from his_nursing_record
+    where his_nursing_record.manage_number = #{manageNumber,jdbcType=VARCHAR}
+  </select>
+    <!--  自定义sql语句-->
+    <select id="selectBodyTemperature" resultMap="BaseResultMap"
+            parameterType="com.ahsj.hiscore.entity.HisNursingRecord">
+      SELECT
+      a.body_temperature,a.dates,a.create_date,
+      b.age AS age,b.patient_name AS patient_name,b.sex AS sex,b.idcard AS idcard,b.number AS number,b.create_date AS manage_date,b.hospitalization_day AS hospitalization_day,
+      c.number AS ward_number,
+      d.number AS bed_number
+      FROM his_nursing_record AS a
+      LEFT JOIN his_hospital_manage AS b ON b.number = a.manage_number
+      LEFT JOIN his_ward AS c ON c.id = b.ward_id
+      LEFT JOIN his_bed AS d ON d.id = b.bed_id
+      WHERE a.manage_number = #{manageNumber,jdbcType=VARCHAR}
+      order by a.create_date dec
+  </select>
+    <select id="list" resultType="com.ahsj.hiscore.entity.HisNursingRecord"
+            parameterType="com.ahsj.hiscore.entity.HisNursingRecord">
+select h.id, h.manage_number, h.body_temperature, h.record_number, h.pulse, h.breathe, h.heart_rate,
+h.blood_pressure, h.pain_score, h.oxygen_saturation, h.flow, h.oxygen_absorption, h.sucking,
+h.venous_catheter_name, h.venous_catheter_care, h.involvement_project, h.involvement, h.output_project,
+h.output_traits, h.output, h.other, h.remark, h.signature, h.dates, h.create_date, h.create_user_id,
+h.update_date, h.update_user_id,i.weight,m.hospitalization_day
+from his_nursing_record as h
+LEFT JOIN his_hospital_manage as m on m.number = h.manage_number
+LEFT JOIN his_medical_record
+as r on r.medical_record_id = (select m.medical_number from his_hospital_manage as m where
+m.number = #{manageNumber,jdbcType=VARCHAR}) LEFT JOIN his_patient_info as i on i.id = r.patient_id where
+h.manage_number = #{manageNumber,jdbcType=VARCHAR}
+  </select>
+</mapper>

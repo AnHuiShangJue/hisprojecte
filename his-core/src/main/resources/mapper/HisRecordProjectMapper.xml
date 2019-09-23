@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisRecordProjectMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisRecordProject">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="record_id" property="recordId" jdbcType="BIGINT"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="create_user_id" property="createUserId" jdbcType="BIGINT"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="SMALLINT"/>
+        <result column="price" property="price" jdbcType="DECIMAL"/>
+        <result column="number" property="number" jdbcType="BIGINT"/>
+        <result column="pinyin_code" property="pinyinCode" jdbcType="VARCHAR"/>
+        <result column="unit" property="unit" jdbcType="VARCHAR"/>
+        <result column="department_id" property="departmentId" jdbcType="BIGINT"/>
+        <result column="check_description" property="checkDescription" jdbcType="VARCHAR"/>
+        <result column="his_toll_record_number" property="tollRecordNumber" jdbcType="VARCHAR"/>
+        <result column="check_number" property="checkNumber" jdbcType="BIGINT"/>
+        <result column="is_checked" property="isChecked" jdbcType="SMALLINT"/>
+        <result column="is_payed" property="isPayed" jdbcType="SMALLINT"/>
+        <result column="is_back" property="isBack" jdbcType="SMALLINT"/>
+        <result column="project_id" property="projectId" jdbcType="BIGINT"/>
+        <result column="num" property="num" jdbcType="INTEGER"/>
+        <result column="refund_num" property="refundNum" jdbcType="INTEGER"/>
+        <result column="records_id" property="recordsId" jdbcType="BIGINT"/>
+        <result column="medical_record_number" property="medicalRecordNumber" jdbcType="VARCHAR"/>
+        <result column="patient_name" property="patientName" jdbcType="VARCHAR"/>
+        <result column="patient_names" property="patientNames" jdbcType="VARCHAR"/>
+        <result column="patient_age" property="patientAge" jdbcType="INTEGER"/>
+        <result column="patient_sex" property="patientSex" jdbcType="INTEGER"/>
+        <result column="project_sum_price" property="projectSumPrice"/>
+        <result column="vouchers" property="vouchers"/>
+        <result column="price" property="price" jdbcType="DECIMAL"/>
+        <result column="total_price" property="totalPrice" jdbcType="DECIMAL"/>
+        <result column="remarks" property="remarks"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, record_id, create_date, create_user_id, update_date, update_user_id, name, description, 
+    type, price, number, pinyin_code, unit, department_id, check_description, check_number, 
+    is_checked, is_payed, project_id,num,is_back
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from his_record_project
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_record_project
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisRecordProject">
+    insert into his_record_project (id, record_id, create_date, 
+      create_user_id, update_date, update_user_id, 
+      name, description, type, 
+      price, number, pinyin_code, 
+      unit, department_id, check_description, 
+      check_number, is_checked, is_payed, 
+      project_id,num,is_back)
+    values (#{id,jdbcType=BIGINT}, #{recordId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{createUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, 
+      #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{type,jdbcType=SMALLINT}, 
+      #{price,jdbcType=DECIMAL}, #{number,jdbcType=BIGINT}, #{pinyinCode,jdbcType=VARCHAR}, 
+      #{unit,jdbcType=VARCHAR}, #{departmentId,jdbcType=BIGINT}, #{checkDescription,jdbcType=VARCHAR}, 
+      #{checkNumber,jdbcType=BIGINT}, #{isChecked,jdbcType=SMALLINT}, #{isPayed,jdbcType=SMALLINT}, 
+      #{projectId,jdbcType=BIGINT},
+      #{num,jdbcType=INTEGER},#{isBack,jdbcType=SMALLINT}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisRecordProject">
+        insert into his_record_project
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="recordId != null">
+                record_id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="number != null">
+                number,
+            </if>
+            <if test="pinyinCode != null">
+                pinyin_code,
+            </if>
+            <if test="unit != null">
+                unit,
+            </if>
+            <if test="departmentId != null">
+                department_id,
+            </if>
+            <if test="checkDescription != null">
+                check_description,
+            </if>
+            <if test="checkNumber != null">
+                check_number,
+            </if>
+            <if test="isChecked != null">
+                is_checked,
+            </if>
+            <if test="isPayed != null">
+                is_payed,
+            </if>
+            <if test="projectId != null">
+                project_id,
+            </if>
+            <if test="num != null">
+                num,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="recordId != null">
+                #{recordId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=SMALLINT},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="number != null">
+                #{number,jdbcType=BIGINT},
+            </if>
+            <if test="pinyinCode != null">
+                #{pinyinCode,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null">
+                #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentId != null">
+                #{departmentId,jdbcType=BIGINT},
+            </if>
+            <if test="checkDescription != null">
+                #{checkDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="checkNumber != null">
+                #{checkNumber,jdbcType=BIGINT},
+            </if>
+            <if test="isChecked != null">
+                #{isChecked,jdbcType=SMALLINT},
+            </if>
+            <if test="isPayed != null">
+                #{isPayed,jdbcType=SMALLINT},
+            </if>
+            <if test="projectId != null">
+                #{projectId,jdbcType=BIGINT},
+            </if>
+            <if test="num != null">
+                #{num,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisRecordProject">
+        update his_record_project
+        <set>
+            <if test="recordId != null">
+                record_id = #{recordId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=SMALLINT},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="number != null">
+                number = #{number,jdbcType=BIGINT},
+            </if>
+            <if test="pinyinCode != null">
+                pinyin_code = #{pinyinCode,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null">
+                unit = #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentId != null">
+                department_id = #{departmentId,jdbcType=BIGINT},
+            </if>
+            <if test="checkDescription != null">
+                check_description = #{checkDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="checkNumber != null">
+                check_number = #{checkNumber,jdbcType=BIGINT},
+            </if>
+            <if test="isChecked != null">
+                is_checked = #{isChecked,jdbcType=SMALLINT},
+            </if>
+            <if test="isPayed != null">
+                is_payed = #{isPayed,jdbcType=SMALLINT},
+            </if>
+            <if test="projectId != null">
+                project_id = #{projectId,jdbcType=BIGINT},
+            </if>
+            <if test="num != null">
+                num= #{num,jdbcType=INTEGER},
+            </if>
+            <if test="isBack != null">
+                is_back = #{isBack,jdbcType=SMALLINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisRecordProject">
+    update his_record_project
+    set record_id = #{recordId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      type = #{type,jdbcType=SMALLINT},
+      price = #{price,jdbcType=DECIMAL},
+      number = #{number,jdbcType=BIGINT},
+      pinyin_code = #{pinyinCode,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      department_id = #{departmentId,jdbcType=BIGINT},
+      check_description = #{checkDescription,jdbcType=VARCHAR},
+      check_number = #{checkNumber,jdbcType=BIGINT},
+      is_checked = #{isChecked,jdbcType=SMALLINT},
+      is_payed = #{isPayed,jdbcType=SMALLINT},
+      project_id = #{projectId,jdbcType=BIGINT},
+      num=   #{num,jdbcType=INTEGER}, is_back = #{isBack,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <!-- 自定义sql-->
+    <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+
+        insert into his_record_project( id, record_id, create_date, create_user_id, update_date, update_user_id, name,
+        description,
+        type, price, number, pinyin_code, unit, department_id, check_description, check_number,
+        is_checked, is_payed, project_id,num)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id,jdbcType=BIGINT}, #{item.recordId,jdbcType=BIGINT}, #{item.createDate,jdbcType=TIMESTAMP},
+            #{item.createUserId,jdbcType=BIGINT}, #{item.updateDate,jdbcType=TIMESTAMP},
+            #{item.updateUserId,jdbcType=BIGINT},
+            #{item.name,jdbcType=VARCHAR}, #{item.description,jdbcType=VARCHAR}, #{item.type,jdbcType=SMALLINT},
+            #{item.price,jdbcType=DECIMAL}, #{item.number,jdbcType=BIGINT}, #{item.pinyinCode,jdbcType=VARCHAR},
+            #{item.unit,jdbcType=VARCHAR}, #{item.departmentId,jdbcType=BIGINT},
+            #{item.checkDescription,jdbcType=VARCHAR},
+            #{item.checkNumber,jdbcType=BIGINT}, #{item.isChecked,jdbcType=SMALLINT}, #{item.isPayed,jdbcType=SMALLINT},
+            #{item.projectId,jdbcType=BIGINT},
+            #{item.num,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+    <select id="selectByMedicalRecordId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select *
+    from
+    his_record_project
+    where his_record_project.record_id = #{id,jdbcType=BIGINT};
+    </select>
+
+    <select id="selectByRecordIdNotIsCheckdOrIsPayed" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select *
+        from
+            his_record_project
+        where his_record_project.record_id = #{id,jdbcType=BIGINT} and his_record_project.is_payed = 2 and his_record_project.is_checked = 2;
+    </select>
+
+
+    <delete id="deleteByRecordId" parameterType="java.lang.Long" >
+    delete
+    from his_record_project
+    where record_id =#{id,jdbcType=BIGINT}
+  </delete>
+
+
+    <delete id="deleteByRecordIdNotIsCheckdOrIsPayed" parameterType="java.lang.Long" >
+        delete
+        from his_record_project
+        where record_id =#{id,jdbcType=BIGINT} and his_record_project.is_payed = 2 and his_record_project.is_checked = 2;
+    </delete>
+
+    <update id="setPayBatch" parameterType="list">
+        update his_record_project
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="is_payed=case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.isPayed!=null">
+                        when id=#{item.id} then #{item.isPayed}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where
+        <foreach collection="list" separator="or" item="item" index="index">
+            id=#{item.id}
+        </foreach>
+    </update>
+
+
+
+
+    <select id="queryList" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select hrp.* ,hmr.medical_record_id ,t.number as his_toll_record_number from his_record_project hrp left join  his_medical_record hmr on hrp.record_id = hmr.id left join his_toll_record t on t.medical_record_id = hmr.medical_record_id
+        where hrp.is_checked = 2 and hrp.is_back = 2 and hrp.is_payed = 1
+
+        <if test="parameter.medicalRecordId != null and parameter.medicalRecordId != ''">
+          and  hmr.medical_record_id =#{parameter.medicalRecordId,jdbcType=VARCHAR}
+        </if>
+        <if test="parameter.tollRecordNumber != null and parameter.tollRecordNumber != ''">
+          and  t.number  =#{parameter.tollRecordNumber,jdbcType=VARCHAR}
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+    <select id="queryLists" parameterType="com.ahsj.hiscore.entity.HisRecordProject" resultMap="BaseResultMap">
+        select hrp.* ,hmr.medical_record_id ,t.number as his_toll_record_number from his_record_project hrp left join  his_medical_record hmr on hrp.record_id = hmr.id left join his_toll_record t on t.medical_record_id = hmr.medical_record_id
+        where hrp.is_checked = 2 and hrp.is_back = 2 and hrp.is_payed = 1
+
+        <if test="medicalRecordId != null and medicalRecordId != ''">
+          and  hmr.medical_record_id =#{medicalRecordId,jdbcType=VARCHAR}
+        </if>
+        <if test="tollRecordNumber != null and tollRecordNumber != ''">
+          and  t.number  =#{tollRecordNumber,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+
+    <select id="projectInfo" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select hrp.* ,p.refund_num as refund_num , hrp.price * p.refund_num as project_sum_price from his_record_project hrp left join  his_refund_project p on hrp.id = p.record_project_id
+        where  p.voucher = #{parameter.voucher,jdbcType=VARCHAR}
+        <if test="parameter.name != null and parameter.name != ''">
+            and hrp.name = #{parameter.name,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.number != null and parameter.number != ''">
+            and hrp.number = #{parameter.number,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+    <select id="projectInfoList" parameterType="com.ahsj.hiscore.entity.HisRecordProject" resultMap="BaseResultMap">
+        select hrp.* ,p.refund_num as refund_num , hrp.price * p.refund_num as project_sum_price from his_record_project hrp left join  his_refund_project p on hrp.id = p.record_project_id
+        where  p.voucher = #{voucher,jdbcType=VARCHAR}
+    </select>
+
+
+
+    <select id="ItemPatientList" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        SELECT DISTINCT
+        b.id AS records_id,b.medical_record_id AS medical_record_number,b.create_date,b.type as types,
+        c.name AS patient_name,c.age AS patient_age,c.sex AS patient_sex
+        FROM his_record_project AS a
+        LEFT JOIN his_medical_record AS b ON b.id = a.record_id
+        LEFT JOIN his_patient_info AS c ON c.id = b.patient_id
+        WHERE
+        1=1
+        <if test="parameter.medicalRecordNumber !=null and parameter.medicalRecordNumber !=''">
+            and b.medical_record_id like concat ('%' #{parameter.medicalRecordNumber,jdbcType = VARCHAR},'%')
+        </if>
+        <if test="parameter.patientName !=null and parameter.patientName != ''">
+            and c.name like concat ('%' #{parameter.patientName,jdbcType = VARCHAR},'%')
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+    <select id="selectByMedicalRecordIdList" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
+        SELECT
+        a.id,a.`name`,a.is_back as is_back,a.is_checked,a.is_payed as is_payed,a.is_print,a.num,a.unit,a.create_date,
+        d.`name` AS patient_name,
+        c.department_id,
+        e.user_name AS doctor_name
+        FROM `his-rpac`.his_record_project AS a
+        LEFT JOIN `his-rpac`.his_medical_record AS b ON b.id = a.record_id
+        LEFT JOIN `his-rpac`.his_project AS c ON c.id = a.project_id
+        LEFT JOIN `his-rpac`.his_patient_info AS d ON d.id = b.patient_id
+        LEFT JOIN `his-userinfo`.user_info AS e ON e.id = b.doctor_id
+        WHERE
+        b.medical_record_id = #{parameter.medicalRecordNumber,jdbcType = VARCHAR}
+        and c.department_id = #{parameter.loginDepartmentId,jdbcType = BIGINT}
+    </select>
+
+
+    <select id="pageBeanList" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        SELECT  hrp.* ,p.refund_num as refund_num,p.toll_record_number as his_toll_record_number  ,hrp.price * p.refund_num as project_sum_price, p.patient_name as patient_names,p.remarks as remarks ,p.voucher as vouchers from his_refund_project p
+        LEFT JOIN  his_record_project hrp  on hrp.id = p.record_project_id
+        where  p.is_review = 1 and p.is_back = 2  and p.toll_record_number = #{parameter.tollRecordNumber,jdbcType=VARCHAR}
+        <if test="parameter.name != null and parameter.name != ''">
+            and hrp.name = #{parameter.name,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.number != null and parameter.number != ''">
+            and hrp.number = #{parameter.number,jdbcType=INTEGER}
+        </if>
+
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+    <select id="pricelistsBytollRecordNumber" parameterType="com.ahsj.hiscore.entity.HisRecordProject" resultMap="BaseResultMap">
+        SELECT  hrp.* ,p.refund_num as refund_num,p.toll_record_number as his_toll_record_number  ,hrp.price * p.refund_num as project_sum_price, p.patient_name as patient_names,p.remarks as remarks ,p.voucher as vouchers from his_refund_project p
+        LEFT JOIN  his_record_project hrp  on hrp.id = p.record_project_id
+        where  p.is_review = 1 and p.is_back = 2  and p.toll_record_number = #{tollRecordNumber,jdbcType=VARCHAR}
+
+    </select>
+
+    <select id="HisRecordProjectLists" parameterType="com.ahsj.hiscore.entity.HisRecordProject" resultMap="BaseResultMap">
+        SELECT  hrp.* ,p.refund_num as refund_num,t.number as his_toll_record_number  ,hrp.price * p.refund_num as project_sum_price, p.patient_name as patient_names,p.remarks as remarks ,p.voucher as vouchers from his_toll_record t
+        LEFT JOIN his_refund_project p on t.medical_record_id = p.record_number LEFT JOIN  his_record_project hrp  on hrp.id = p.record_project_id
+        where  p.is_review = 1 and p.is_back = 1  and p.toll_record_number = #{tollRecordNumber,jdbcType=VARCHAR}
+
+    </select>
+    <select id="getProjectById" resultMap="BaseResultMap" parameterType="com.ahsj.hiscore.entity.HisRecordProject">
+        SELECT
+        a.id,a.`name`,a.is_back as is_back,a.is_checked,a.is_payed as is_payed,a.is_print,a.num,a.unit,a.create_date,a.record_id,a.price,
+        b.medical_record_id,
+        d.`name` AS patient_name,
+        c.department_id,
+        e.user_name AS doctor_name
+        FROM `his-rpac`.his_record_project AS a
+        LEFT JOIN `his-rpac`.his_medical_record AS b ON b.id = a.record_id
+        LEFT JOIN `his-rpac`.his_project AS c ON c.id = a.project_id
+        LEFT JOIN `his-rpac`.his_patient_info AS d ON d.id = b.patient_id
+        LEFT JOIN `his-userinfo`.user_info AS e ON e.id = b.doctor_id
+        WHERE
+        a.id = #{parameter.id,jdbcType = BIGINT}
+    </select>
+
+    <!--    批量更新-->
+    <update id="updateByHisRefundProjectListBack" parameterType="list">
+        update his_record_project
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="is_back=case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.isBack!=null">
+                        when id=#{item.id} then #{item.isBack}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where
+        <foreach collection="list" separator="or" item="item" index="index">
+            id=#{item.id}
+        </foreach>
+    </update>
+    <select id="selectPrint" resultMap="BaseResultMap" parameterType="java.lang.String">
+select p.name ,p.price,p.num ,p.price*p.num as total_price ,o.id from his_record_project as p
+
+LEFT JOIN his_project as o on o.number = p.number
+
+where p.record_id=(
+
+select m.id from his_medical_record as m where m.registered_id=(
+
+select  r.id from his_registered as r where r.number = #{number,jdbcType=VARCHAR}))
+
+    </select>
+
+    <select id="selectByMedicalRecordIdNotIspayed" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select his_record_project.*
+from his_record_project
+where record_id =#{medicalRecordId,jdbcType=BIGINT} and is_payed = 2
+    </select>
+</mapper>

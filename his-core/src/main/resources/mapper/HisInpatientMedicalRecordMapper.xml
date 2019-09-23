@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisInpatientMedicalRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisInpatientMedicalRecord" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="medical_record_type" property="medicalRecordType" jdbcType="INTEGER" />
+    <result column="target_id" property="targetId" jdbcType="BIGINT" />
+    <result column="record_id" property="recordId" jdbcType="BIGINT" />
+    <result column="hospital_manage_id" property="hospitalManageId" jdbcType="BIGINT" />
+    <result column="must_sign_number" property="mustSignNumber" jdbcType="INTEGER" />
+    <result column="actual_sign_number" property="actualSignNumber" jdbcType="INTEGER" />
+    <result column="sign_name" property="signName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, create_user_id, create_date, update_user_id, update_date, medical_record_type, 
+    target_id, record_id, hospital_manage_id, must_sign_number, actual_sign_number, sign_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from his_inpatient_medical_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from his_inpatient_medical_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisInpatientMedicalRecord" useGeneratedKeys="true" keyProperty="id"  >
+    insert into his_inpatient_medical_record (id, create_user_id, create_date, 
+      update_user_id, update_date, medical_record_type, 
+      target_id, record_id, hospital_manage_id, 
+      must_sign_number, actual_sign_number, sign_name
+      )
+    values (#{id,jdbcType=BIGINT}, #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, #{medicalRecordType,jdbcType=INTEGER}, 
+      #{targetId,jdbcType=BIGINT}, #{recordId,jdbcType=BIGINT}, #{hospitalManageId,jdbcType=BIGINT}, 
+      #{mustSignNumber,jdbcType=INTEGER}, #{actualSignNumber,jdbcType=INTEGER}, #{signName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisInpatientMedicalRecord" >
+    insert into his_inpatient_medical_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="medicalRecordType != null" >
+        medical_record_type,
+      </if>
+      <if test="targetId != null" >
+        target_id,
+      </if>
+      <if test="recordId != null" >
+        record_id,
+      </if>
+      <if test="hospitalManageId != null" >
+        hospital_manage_id,
+      </if>
+      <if test="mustSignNumber != null" >
+        must_sign_number,
+      </if>
+      <if test="actualSignNumber != null" >
+        actual_sign_number,
+      </if>
+      <if test="signName != null" >
+        sign_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="medicalRecordType != null" >
+        #{medicalRecordType,jdbcType=INTEGER},
+      </if>
+      <if test="targetId != null" >
+        #{targetId,jdbcType=BIGINT},
+      </if>
+      <if test="recordId != null" >
+        #{recordId,jdbcType=BIGINT},
+      </if>
+      <if test="hospitalManageId != null" >
+        #{hospitalManageId,jdbcType=BIGINT},
+      </if>
+      <if test="mustSignNumber != null" >
+        #{mustSignNumber,jdbcType=INTEGER},
+      </if>
+      <if test="actualSignNumber != null" >
+        #{actualSignNumber,jdbcType=INTEGER},
+      </if>
+      <if test="signName != null" >
+        #{signName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisInpatientMedicalRecord" >
+    update his_inpatient_medical_record
+    <set >
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="medicalRecordType != null" >
+        medical_record_type = #{medicalRecordType,jdbcType=INTEGER},
+      </if>
+      <if test="targetId != null" >
+        target_id = #{targetId,jdbcType=BIGINT},
+      </if>
+      <if test="recordId != null" >
+        record_id = #{recordId,jdbcType=BIGINT},
+      </if>
+      <if test="hospitalManageId != null" >
+        hospital_manage_id = #{hospitalManageId,jdbcType=BIGINT},
+      </if>
+      <if test="mustSignNumber != null" >
+        must_sign_number = #{mustSignNumber,jdbcType=INTEGER},
+      </if>
+      <if test="actualSignNumber != null" >
+        actual_sign_number = #{actualSignNumber,jdbcType=INTEGER},
+      </if>
+      <if test="signName != null" >
+        sign_name = #{signName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisInpatientMedicalRecord" >
+    update his_inpatient_medical_record
+    set create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      medical_record_type = #{medicalRecordType,jdbcType=INTEGER},
+      target_id = #{targetId,jdbcType=BIGINT},
+      record_id = #{recordId,jdbcType=BIGINT},
+      hospital_manage_id = #{hospitalManageId,jdbcType=BIGINT},
+      must_sign_number = #{mustSignNumber,jdbcType=INTEGER},
+      actual_sign_number = #{actualSignNumber,jdbcType=INTEGER},
+      sign_name = #{signName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--自定义sql-->
+  <select id="listByHospitalManageId" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    select a.*,b.user_name as operatorName,c.number as hospitalManageNumber,
+    case
+    when (unix_timestamp(CURRENT_TIMESTAMP)-unix_timestamp(a.create_date))/(24*60*60) &lt;= 1 then 1
+    else 0
+    end as isOperate
+    from his_inpatient_medical_record as a
+    left join `his-userInfo`.user_info as b on a.create_user_id = b.id
+    left join his_hospital_manage as c on c.id = a.hospital_manage_id
+    where 1=1 and a.hospital_manage_id = #{parameter.hospitalManageId,jdbcType=BIGINT}
+    <if test="parameter.medicalRecordType != null and parameter.medicalRecordType != ''">
+      and a.medical_record_type = #{parameter.medicalRecordType,jdbcType=INTEGER}
+    </if>
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+
+    <select id="selectByTargetIdAndType" parameterType="com.ahsj.hiscore.entity.HisInpatientMedicalRecord" resultMap="BaseResultMap">
+        select his_inpatient_medical_record.*
+from his_inpatient_medical_record
+where medical_record_type = #{medicalRecordType,jdbcType=INTEGER} and target_id = #{targetId,jdbcType=BIGINT}
+    </select>
+</mapper>

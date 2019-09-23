@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://mybatis.org/schema/mybatis-mapper">
+<style>
+    body{
+        background: #f2f4f8;
+    }
+    .card-content{
+        height: 680px;
+        overflow-y: auto;
+    }
+    .card-content p{
+        font-size: 20px;
+        font-family: "微软雅黑";
+    }
+    .detail p{
+        font-size: 20px;
+        padding-top: 20px;
+    }
+    .bed{
+        width: 145px;
+        height: 120px;
+        border: 1px #ccc solid;
+        float: left;
+        margin: 12px;
+        position: relative;
+        text-align: center;
+    }
+    .element{
+        width: 0px;
+        height: 0px;
+        border-top: 20px solid #f5A623;
+        border-right: 20px solid #f5A623;
+        border-bottom: 20px solid transparent;
+        border-left: 20px solid transparent;
+        position: absolute;
+        right:-1px;
+        top:-1px;
+    }
+    .level,.careLevel{
+        padding-top: 15px;
+        font-size: 20px;
+    }
+    .bed:hover{
+        border: 2px red solid !important;
+    }
+    .barcon{
+        text-align: center;
+        height: 50px;
+    }
+</style>
+<div th:replace="public/base_list :: html"></div>
+<body>
+<div class="row" style="margin-top: 40px;margin-bottom: 20px">
+    <div class="col s3 m3 l3">
+        <div class="bedUsage">
+            <p>床位使用情况:</p>
+            <p><span th:text="${countUseBed}"></span>/<span th:text="${countBed}"></span></p>
+        </div>
+    </div>
+    <div class="col s6 m6 l6">
+        <div class="level">
+            <span>护理等级：</span>
+            <i class="material-icons" style="color: #9013FE;">brightness_1</i><span>一级护理</span>
+            <i class="material-icons" style="color: #D0021B;">brightness_1</i><span>二级护理</span>
+            <i class="material-icons" style="color: #f5A623;">brightness_1</i><span>三级护理</span>
+            <i class="material-icons" style="color: #417505;">brightness_1</i><span>四级护理</span>
+            <i class="material-icons" style="color: #4A90E2;">brightness_1</i><span>特技监护</span>
+            <i class="material-icons" style="color: #50E3C2;">brightness_1</i><span>重症监护</span>
+        </div>
+        <div class="careLevel">
+            <span>护理等级查询：</span>
+            <select ahsj:select name="careLevel" id="careLevel" type="code" typeKey="care_level" cssClass="">
+
+<!--                <div ahsj:radio name="careLevel" id="careLevel" type="code" typeKey="care_level" cssdefault="" haveDefault="true" value="0"></div>-->
+
+            </select>
+        </div>
+        <!--        <div class="features" id="careLevel">-->
+        <!--            <span>护理等级查询：</span>-->
+        <!--            <label>-->
+        <!--                <input id="first" name="careLevel" type="radio" value="0"/>-->
+        <!--                <span>一级护理</span>-->
+        <!--            </label>-->
+        <!--            <label>-->
+        <!--                <input id="second" name="careLevel" type="radio" value="1"/>-->
+        <!--                <span>二级</span>-->
+        <!--            </label>-->
+        <!--            <label>-->
+        <!--                <input id="third" name="careLevel" type="radio" value="3"/>-->
+        <!--                <span>三级护理</span>-->
+        <!--            </label>-->
+        <!--            <label>-->
+        <!--                <input id="four" name="careLevel" type="radio" value="4"/>-->
+        <!--                <span>四级护理</span>-->
+        <!--            </label>-->
+        <!--        </div>-->
+    </div>
+
+    <div class="col s3 m3 l3">
+        <div class="">
+            <span>病房查询：</span>
+            <select  name="wardId" id="wardId">
+                <option>选择病房</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s9 m9 l9">
+        <div class="card">
+            <div class="card-content" id="bed">
+                <!--                <div class="bed" id="bed1">-->
+                <!--                    <div class="element">-->
+                <!--                    </div>-->
+                <!--                    <p></p>-->
+                <!--                </div>-->
+            </div>
+<!--            <ul class="pagination">-->
+<!--                <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>-->
+<!--                <li class="active"><a href="#!">1</a></li>-->
+<!--                <li class="waves-effect"><a href="#!">2</a></li>-->
+<!--                <li class="waves-effect"><a href="#!">3</a></li>-->
+<!--                <li class="waves-effect"><a href="#!">4</a></li>-->
+<!--                <li class="waves-effect"><a href="#!">5</a></li>-->
+<!--                <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>-->
+<!--            </ul>-->
+            <div id="barcon" name="barcon" class="barcon"></div>
+        </div>
+    </div>
+
+    <div class="col s3 m3 l3">
+        <div class="card">
+            <div class="card-content detail" id="detail">
+                <!--                <span class="card-title">床位： <span></span></span>-->
+                <!--                <p style="font-size: 24px;text-align: center;padding-top: 0px">床    位： <span>1</span></p>-->
+                <!--                <p>姓    名： <span>唐杰明</span></p>-->
+                <!--                <p>性    别： <span>男</span></p>-->
+                <!--                <p>年    龄： <span>21</span></p>-->
+                <!--                <p>ID    号： <span>123456</span></p>-->
+                <!--                <p>入住时间： <span>20190812</span></p>-->
+                <!--                <p>床位医生： <span>张三</span></p>-->
+                <!--                <p>电    话： <span>177******</span></p>-->
+                <!--                <p>护理等级： <span>一等</span></p>-->
+                <!--                <p>病    情： <span>重</span></p>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="public/base_list_script :: html"></div>
+<script>
+    var data=[];
+    var wardIdSelect=$("#wardId");
+    var careLevelSelectet=$("#careLevel");
+    var careLevelId;
+
+    $(document).ready(function () {
+        initData();
+        getSelectHome();
+        //goPage(1,3);
+        //getCareLevel();
+        //getSelectWrapper();
+    });
+
+    function initData() {
+        $.ahsjajax(
+            CTX + "/api/nursestation/getBedAll/index.ahsj",
+            null,
+            function (msg) {
+
+                data=msg;
+                console.log(data);
+                //console.log(data.length);
+                var dataLength=data.length;
+
+                getContent();
+                goPage(1,10,dataLength);
+
+                //getCareLevel();
+                if (msg.success) {
+                    M.toast({html: msg.message});
+                    return false;
+                } else {
+                    //M.toast({html: msg.message});
+                    return false;
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }
+        );
+    }
+
+    function getContent() {
+        function setDiv(item){
+            var div = '<div class=\'bed\' onclick=\'getData(this)\'><div class=\'element\'><span hidden class=\'careLevelText\'>'
+                +item.careLevel
+                +'</span></div><p style=\'margin-top: 10px\'><span id="number">'
+                +item.number
+                +'</span>床</p><p>'
+                +item.patientName
+                +'</p></div>'
+            return div
+        }
+        function getAdd(){
+            var html = ''
+            for(var i = 0;i<data.length;i++){
+                html += setDiv(data[i])
+            }
+            document.getElementById("bed").innerHTML = html
+        }
+
+        getAdd();
+
+        $(".card-content .bed").each(function(i) {
+            $(this).attr("id", "bed" + (i + 1));
+        });
+
+        $(".card-content .bed .element").each(function (i) {
+
+            if ($(this).text() == "1") {
+                $(this).attr("style", "border-top: 20px solid #9013FE;border-right: 20px solid #9013FE;");
+            } else if ($(this).text() == "2") {
+                $(this).attr("style", "border-top: 20px solid #D0021B;border-right: 20px solid #D0021B;");
+            } else if ($(this).text() == "3") {
+                $(this).attr("style", "border-top: 20px solid #f5A623;border-right: 20px solid #f5A623;");
+            } else if ($(this).text() == "4") {
+                $(this).attr("style", "border-top: 20px solid #417505;border-right: 20px solid #417505;");
+            } else if ($(this).text() == "5") {
+                $(this).attr("style", "border-top: 20px solid #4A90E2;border-right: 20px solid #4A90E2;");
+            } else if ($(this).text() == "6") {
+                $(this).attr("style", "border-top: 20px solid #50E3C2;border-right: 20px solid #50E3C2;");
+            } else {
+                $(this).attr("style", "border-top: 20px solid black;border-right: 20px solid black;");
+            }
+
+        })
+    }
+
+    wardIdSelect.change(function () {
+        var wardId=wardIdSelect .val();
+        localStorage.setItem("wardId", wardId);
+        var careLevelId = localStorage.getItem("careLevelId");
+        localStorage.removeItem("careLevel");
+
+        if(careLevelId== 0)
+        {
+            careLevelId=null;
+        }
+        if(wardId== "选择病房")
+        {
+            wardId=null;
+        }
+        var hisHospitalManage = {
+            "wardId": wardId
+            ,
+            "careLevel": careLevelId
+        }
+        console.log(hisHospitalManage);
+        $.ahsjajax(
+            CTX + "/api/nursestation/getBedAll/index.ahsj",
+            hisHospitalManage,
+            function (msg) {
+                data=msg;
+                getContent();
+                var dataLength=data.length;
+                goPage(1,10,dataLength);
+
+                if (msg.success) {
+                    M.toast({html: msg.message});
+                    return false;
+                } else {
+                    //M.toast({html: msg.message});
+                    return false;
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }
+        );
+    })
+
+    careLevelSelectet.change(function () {
+        careLevelId=this.value;
+        localStorage.setItem("careLevelId", careLevelId);
+        var wardId = localStorage.getItem("wardId");
+        localStorage.removeItem("wardId");
+        if(careLevelId== 0)
+        {
+            careLevelId=null;
+        }
+        if(wardId== "选择病房")
+        {
+            wardId=null;
+        }
+        var hisHospitalManage = {
+            "wardId": wardId,
+            "careLevel": careLevelId
+        }
+        console.log(hisHospitalManage);
+        $.ahsjajax(
+            CTX + "/api/nursestation/getBedAll/index.ahsj",
+            hisHospitalManage,
+            function (msg) {
+                data=msg;
+                console.log(data);
+                getContent();
+                var dataLength=data.length;
+                goPage(1,10,dataLength);
+
+                if (msg.success) {
+                    M.toast({html: msg.message});
+                    return false;
+                } else {
+                    //M.toast({html: msg.message});
+                    return false;
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }
+        );
+
+    })
+
+    function getSelectHome() {
+        $.ahsjajax(
+            CTX + "/api/hisWards/getWardAll/index.ahsj",
+            null,
+            function (msg) {
+                //console.log(data);
+                data=msg;
+                //wardIdSelect.empty();
+                $(data).each(function (i) {
+                    wardIdSelect.append(
+                        "<option value='" + this.id + "'>" + this.number + "</option>")
+                })
+                wardIdSelect.formSelect();
+                if (msg.success) {
+                    M.toast({html: msg.message});
+                    return false;
+                } else {
+                    //M.toast({html: msg.message});
+                    return false;
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            })
+    }
+
+    function getData(obj) {
+        $(".bed").css({
+            'border': '1px solid #ccc'
+        })
+        $(obj).css({
+            'border': '2px solid red'
+        });
+
+        var number=$(obj).children("p").eq(0).children("span").eq(0).text();
+        //alert(number);
+
+        $.ahsjajax(
+            CTX + "/api/nursestation/getBedByNumber/index.ahsj",
+            {"number":number},
+            function (msg) {
+                function setDiv(item){
+                    var p = '<p style=\'font-size: 24px;text-align: center;padding-top: 0px\'>床    位： <span>'
+                        + item.number
+                        +'</span></p><p>姓    名： <span>'
+                        +item.patientName
+                        +'</span></p><p>性    别： <span>'
+                        +item.sexName
+                        +'</span></p><p>年    龄： <span>'
+                        +item.age
+                        +'</span></p><p>ID    号： <span>'
+                        +item.idcard
+                        +'</span></p><p>入住时间： <span>'
+                        +item.createDate
+                        +'</span></p><p>床位医生： <span>'
+                        +item.doctorName
+                        +'</span></p><p>床位护士： <span>'
+                        +item.nurseName
+                        +'</span></p><p>电    话： <span>'
+                        +item.phoneNumber
+                        +'</span></p><p>护理等级： <span>'
+                        +item.careLevels
+                        +'</span></p><p>价    格： <span>'
+                        +item.price
+                        +'</span></p>'
+
+                    return p
+                }
+                function getAdd(){
+                    var html = '';
+                    html += setDiv(msg);
+                    document.getElementById("detail").innerHTML = html;
+                }
+                getAdd();
+                if (msg.success) {
+                    M.toast({html: msg.message});
+                    return false;
+                } else {
+                    //M.toast({html: msg.message});
+                    return false;
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }
+        );
+    }
+
+    function goPage(pno,psize,dataLength){
+
+        var num = dataLength;//所有记录数
+
+        var totalPage = 0;//总页数
+        var pageSize = psize;//每页显示行数
+        //总共分几页
+        if(num/pageSize > parseInt(num/pageSize)){
+            totalPage=parseInt(num/pageSize)+1;
+        }else{
+            totalPage=parseInt(num/pageSize);
+        }
+        var currentPage = pno;//当前页数
+        var startRow = (currentPage - 1) * pageSize+1;//开始显示的行 31
+        var endRow = currentPage * pageSize;//结束显示的行  40
+        endRow = (endRow > num)? num : endRow;  //40
+
+        //遍历显示数据实现分页
+        for(var i=1;i<(num+1);i++){
+            var irow = $("#bed"+i);
+            if(i>=startRow && i<=endRow){
+
+                irow.css({
+                    'display': 'block'
+                })
+            }else{
+
+                irow.css({
+                    'display': 'none'
+                })
+            }
+        }
+        var tempStr = "共"+num+"条记录 分"+totalPage+"页 当前第"+currentPage+"页";
+        if(currentPage>1){
+            tempStr += "<a href=\"#\" onClick=\"goPage("+(1)+","+psize+","+dataLength+")\"> 首页 </a>";
+            tempStr += "<a href=\"#\" onClick=\"goPage("+(currentPage-1)+","+psize+","+dataLength+")\"> <上一页 </a>"
+        }else{
+            tempStr += " 首页 ";
+            tempStr += " <上一页 ";
+        }
+        if(currentPage<totalPage){
+            tempStr += "<a href=\"#\" onClick=\"goPage("+(currentPage+1)+","+psize+","+dataLength+")\"> 下一页> </a>";
+            tempStr += "<a href=\"#\" onClick=\"goPage("+(totalPage)+","+psize+","+dataLength+")\"> 尾页 </a>";
+        }else{
+            tempStr += " 下一页> ";
+            tempStr += " 尾页 ";
+        }
+        document.getElementById("barcon").innerHTML = tempStr;
+    }
+
+
+    function getSelectWrapper() {
+        $(".select-wrapper li").each(function(){
+            console.log($(this).html())
+        });
+        // var selectWrapper=$(".select-wrapper");
+        // var wrapperUl=selectWrapper.childNodes.item(0);
+        // var wrapperLi=wrapperUl.childNodes;
+        // console.log(wrapperLi.length);
+        // for(var i=0;i<wrapperLi.length;i++){
+        //     console.log(wrapperLi.item(i).innerHTML);
+        // }
+    }
+
+    function getCareLevel() {
+        var careLevel=$("#careLevel");
+        alert(careLevel.value.length);
+        for (var i = 0;i < careLevel.value.length;i ++){
+
+        }
+
+
+        // function setDiv(item){
+        //     var div = '<label><input name=\'careLevel\' type=\'radio\'/><span>'
+        //         +item.careLevel
+        //         +'</span></label>'
+        //     return div
+        // }
+        // function getData(){
+        //     var html = ''
+        //     for(var i = 0;i<data.length;i++){
+        //         html += setDiv(data[i])
+        //     }
+        //     document.getElementById("careLevel").innerHTML = html
+        // }
+        //
+        // getData();
+
+        // $(".card-content .bed").each(function(i) {
+        //     $(this).attr("id", "bed" + (i + 1));
+        // });
+    }
+
+    function changeStyle(obj) {
+        var bedArr=[];
+        $(".bed").each(function (i) {
+            bedArr.push(
+                $(this).attr("id")
+            );
+        })
+        console.log(bedArr)
+    }
+</script>
+</body>
+</html>

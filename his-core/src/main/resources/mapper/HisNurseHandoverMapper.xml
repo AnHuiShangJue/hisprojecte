@@ -1,0 +1,735 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisNurseHandoverMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisNurseHandover" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="department" property="department" jdbcType="INTEGER" />
+    <result column="date" property="date" jdbcType="TIMESTAMP" />
+    <result column="ward" property="ward" jdbcType="VARCHAR" />
+    <result column="white_info_all" property="whiteInfoAll" jdbcType="INTEGER" />
+    <result column="white_info_in" property="whiteInfoIn" jdbcType="INTEGER" />
+    <result column="white_info_transfer" property="whiteInfoTransfer" jdbcType="INTEGER" />
+    <result column="white_info_critically" property="whiteInfoCritically" jdbcType="INTEGER" />
+    <result column="white_info_sick" property="whiteInfoSick" jdbcType="INTEGER" />
+    <result column="white_info_hand" property="whiteInfoHand" jdbcType="INTEGER" />
+    <result column="white_info_wait" property="whiteInfoWait" jdbcType="INTEGER" />
+    <result column="white_info_born" property="whiteInfoBorn" jdbcType="INTEGER" />
+    <result column="white_info_waitborn" property="whiteInfoWaitborn" jdbcType="INTEGER" />
+    <result column="white_info_transferout" property="whiteInfoTransferout" jdbcType="INTEGER" />
+    <result column="white_info_out" property="whiteInfoOut" jdbcType="INTEGER" />
+    <result column="white_info_die" property="whiteInfoDie" jdbcType="INTEGER" />
+    <result column="mid_info_all" property="midInfoAll" jdbcType="INTEGER" />
+    <result column="mid_info_in" property="midInfoIn" jdbcType="INTEGER" />
+    <result column="mid_info_transfer" property="midInfoTransfer" jdbcType="INTEGER" />
+    <result column="mid_info_critically" property="midInfoCritically" jdbcType="INTEGER" />
+    <result column="mid_info_sick" property="midInfoSick" jdbcType="INTEGER" />
+    <result column="mid_info_hand" property="midInfoHand" jdbcType="INTEGER" />
+    <result column="mid_info_wait" property="midInfoWait" jdbcType="INTEGER" />
+    <result column="mid_info_born" property="midInfoBorn" jdbcType="INTEGER" />
+    <result column="mid_info_waitborn" property="midInfoWaitborn" jdbcType="INTEGER" />
+    <result column="mid_info_transferout" property="midInfoTransferout" jdbcType="INTEGER" />
+    <result column="mid_info_out" property="midInfoOut" jdbcType="INTEGER" />
+    <result column="mid_info_die" property="midInfoDie" jdbcType="INTEGER" />
+    <result column="night_info_all" property="nightInfoAll" jdbcType="INTEGER" />
+    <result column="night_info_in_" property="nightInfoIn" jdbcType="INTEGER" />
+    <result column="night_info_transfer" property="nightInfoTransfer" jdbcType="INTEGER" />
+    <result column="night_info_critically" property="nightInfoCritically" jdbcType="INTEGER" />
+    <result column="night_info_sick" property="nightInfoSick" jdbcType="INTEGER" />
+    <result column="night_info_hand" property="nightInfoHand" jdbcType="INTEGER" />
+    <result column="night_info_wait" property="nightInfoWait" jdbcType="INTEGER" />
+    <result column="night_info_born" property="nightInfoBorn" jdbcType="INTEGER" />
+    <result column="night_info_waitborn" property="nightInfoWaitborn" jdbcType="INTEGER" />
+    <result column="night_info_transferout" property="nightInfoTransferout" jdbcType="INTEGER" />
+    <result column="night_info_out" property="nightInfoOut" jdbcType="INTEGER" />
+    <result column="night_info_die" property="nightInfoDie" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="remark_mid" property="remarkMid" jdbcType="VARCHAR" />
+    <result column="remark_night" property="remarkNight" jdbcType="VARCHAR" />
+    <result column="handover" property="handover" jdbcType="BIGINT" />
+    <result column="date_handover" property="dateHandover" jdbcType="TIMESTAMP" />
+    <result column="successor" property="successor" jdbcType="BIGINT" />
+    <result column="date_successor" property="dateSuccessor" jdbcType="TIMESTAMP" />
+    <result column="handover_mid" property="handoverMid" jdbcType="BIGINT" />
+    <result column="date_handover_mid" property="dateHandoverMid" jdbcType="TIMESTAMP" />
+    <result column="successor_mid" property="successorMid" jdbcType="BIGINT" />
+    <result column="date_successor_mid" property="dateSuccessorMid" jdbcType="TIMESTAMP" />
+    <result column="handover_night" property="handoverNight" jdbcType="BIGINT" />
+    <result column="date_handover_night" property="dateHandoverNight" jdbcType="TIMESTAMP" />
+    <result column="successor_night" property="successorNight" jdbcType="BIGINT" />
+    <result column="date_successor_night" property="dateSuccessorNight" jdbcType="TIMESTAMP" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, department, date, ward, white_info_all, white_info_in, white_info_transfer, white_info_critically, 
+    white_info_sick, white_info_hand, white_info_wait, white_info_born, white_info_waitborn, 
+    white_info_transferout, white_info_out, white_info_die, mid_info_all, mid_info_in, 
+    mid_info_transfer, mid_info_critically, mid_info_sick, mid_info_hand, mid_info_wait, 
+    mid_info_born, mid_info_waitborn, mid_info_transferout, mid_info_out, mid_info_die, 
+    night_info_all, night_info_in_, night_info_transfer, night_info_critically, night_info_sick, 
+    night_info_hand, night_info_wait, night_info_born, night_info_waitborn, night_info_transferout, 
+    night_info_out, night_info_die, remark, remark_mid, remark_night, handover, date_handover, 
+    successor, date_successor, handover_mid, date_handover_mid, successor_mid, date_successor_mid, 
+    handover_night, date_handover_night, successor_night, date_successor_night, create_user_id, 
+    create_date, update_date, update_user_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from his_nurse_handover
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from his_nurse_handover
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisNurseHandover" >
+    insert into his_nurse_handover (id, department, date, 
+      ward, white_info_all, white_info_in, 
+      white_info_transfer, white_info_critically, 
+      white_info_sick, white_info_hand, white_info_wait, 
+      white_info_born, white_info_waitborn, white_info_transferout, 
+      white_info_out, white_info_die, mid_info_all, 
+      mid_info_in, mid_info_transfer, mid_info_critically, 
+      mid_info_sick, mid_info_hand, mid_info_wait, 
+      mid_info_born, mid_info_waitborn, mid_info_transferout, 
+      mid_info_out, mid_info_die, night_info_all, 
+      night_info_in_, night_info_transfer, night_info_critically, 
+      night_info_sick, night_info_hand, night_info_wait, 
+      night_info_born, night_info_waitborn, night_info_transferout, 
+      night_info_out, night_info_die, remark, 
+      remark_mid, remark_night, handover, 
+      date_handover, successor, date_successor, 
+      handover_mid, date_handover_mid, successor_mid, 
+      date_successor_mid, handover_night, date_handover_night, 
+      successor_night, date_successor_night, create_user_id, 
+      create_date, update_date, update_user_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{department,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP}, 
+      #{ward,jdbcType=VARCHAR}, #{whiteInfoAll,jdbcType=INTEGER}, #{whiteInfoIn,jdbcType=INTEGER}, 
+      #{whiteInfoTransfer,jdbcType=INTEGER}, #{whiteInfoCritically,jdbcType=INTEGER}, 
+      #{whiteInfoSick,jdbcType=INTEGER}, #{whiteInfoHand,jdbcType=INTEGER}, #{whiteInfoWait,jdbcType=INTEGER}, 
+      #{whiteInfoBorn,jdbcType=INTEGER}, #{whiteInfoWaitborn,jdbcType=INTEGER}, #{whiteInfoTransferout,jdbcType=INTEGER}, 
+      #{whiteInfoOut,jdbcType=INTEGER}, #{whiteInfoDie,jdbcType=INTEGER}, #{midInfoAll,jdbcType=INTEGER}, 
+      #{midInfoIn,jdbcType=INTEGER}, #{midInfoTransfer,jdbcType=INTEGER}, #{midInfoCritically,jdbcType=INTEGER}, 
+      #{midInfoSick,jdbcType=INTEGER}, #{midInfoHand,jdbcType=INTEGER}, #{midInfoWait,jdbcType=INTEGER}, 
+      #{midInfoBorn,jdbcType=INTEGER}, #{midInfoWaitborn,jdbcType=INTEGER}, #{midInfoTransferout,jdbcType=INTEGER}, 
+      #{midInfoOut,jdbcType=INTEGER}, #{midInfoDie,jdbcType=INTEGER}, #{nightInfoAll,jdbcType=INTEGER}, 
+      #{nightInfoIn,jdbcType=INTEGER}, #{nightInfoTransfer,jdbcType=INTEGER}, #{nightInfoCritically,jdbcType=INTEGER}, 
+      #{nightInfoSick,jdbcType=INTEGER}, #{nightInfoHand,jdbcType=INTEGER}, #{nightInfoWait,jdbcType=INTEGER}, 
+      #{nightInfoBorn,jdbcType=INTEGER}, #{nightInfoWaitborn,jdbcType=INTEGER}, #{nightInfoTransferout,jdbcType=INTEGER}, 
+      #{nightInfoOut,jdbcType=INTEGER}, #{nightInfoDie,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{remarkMid,jdbcType=VARCHAR}, #{remarkNight,jdbcType=VARCHAR}, #{handover,jdbcType=BIGINT}, 
+      #{dateHandover,jdbcType=TIMESTAMP}, #{successor,jdbcType=BIGINT}, #{dateSuccessor,jdbcType=TIMESTAMP}, 
+      #{handoverMid,jdbcType=BIGINT}, #{dateHandoverMid,jdbcType=TIMESTAMP}, #{successorMid,jdbcType=BIGINT}, 
+      #{dateSuccessorMid,jdbcType=TIMESTAMP}, #{handoverNight,jdbcType=BIGINT}, #{dateHandoverNight,jdbcType=TIMESTAMP}, 
+      #{successorNight,jdbcType=BIGINT}, #{dateSuccessorNight,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisNurseHandover" >
+    insert into his_nurse_handover
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="department != null" >
+        department,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="ward != null" >
+        ward,
+      </if>
+      <if test="whiteInfoAll != null" >
+        white_info_all,
+      </if>
+      <if test="whiteInfoIn != null" >
+        white_info_in,
+      </if>
+      <if test="whiteInfoTransfer != null" >
+        white_info_transfer,
+      </if>
+      <if test="whiteInfoCritically != null" >
+        white_info_critically,
+      </if>
+      <if test="whiteInfoSick != null" >
+        white_info_sick,
+      </if>
+      <if test="whiteInfoHand != null" >
+        white_info_hand,
+      </if>
+      <if test="whiteInfoWait != null" >
+        white_info_wait,
+      </if>
+      <if test="whiteInfoBorn != null" >
+        white_info_born,
+      </if>
+      <if test="whiteInfoWaitborn != null" >
+        white_info_waitborn,
+      </if>
+      <if test="whiteInfoTransferout != null" >
+        white_info_transferout,
+      </if>
+      <if test="whiteInfoOut != null" >
+        white_info_out,
+      </if>
+      <if test="whiteInfoDie != null" >
+        white_info_die,
+      </if>
+      <if test="midInfoAll != null" >
+        mid_info_all,
+      </if>
+      <if test="midInfoIn != null" >
+        mid_info_in,
+      </if>
+      <if test="midInfoTransfer != null" >
+        mid_info_transfer,
+      </if>
+      <if test="midInfoCritically != null" >
+        mid_info_critically,
+      </if>
+      <if test="midInfoSick != null" >
+        mid_info_sick,
+      </if>
+      <if test="midInfoHand != null" >
+        mid_info_hand,
+      </if>
+      <if test="midInfoWait != null" >
+        mid_info_wait,
+      </if>
+      <if test="midInfoBorn != null" >
+        mid_info_born,
+      </if>
+      <if test="midInfoWaitborn != null" >
+        mid_info_waitborn,
+      </if>
+      <if test="midInfoTransferout != null" >
+        mid_info_transferout,
+      </if>
+      <if test="midInfoOut != null" >
+        mid_info_out,
+      </if>
+      <if test="midInfoDie != null" >
+        mid_info_die,
+      </if>
+      <if test="nightInfoAll != null" >
+        night_info_all,
+      </if>
+      <if test="nightInfoIn != null" >
+        night_info_in_,
+      </if>
+      <if test="nightInfoTransfer != null" >
+        night_info_transfer,
+      </if>
+      <if test="nightInfoCritically != null" >
+        night_info_critically,
+      </if>
+      <if test="nightInfoSick != null" >
+        night_info_sick,
+      </if>
+      <if test="nightInfoHand != null" >
+        night_info_hand,
+      </if>
+      <if test="nightInfoWait != null" >
+        night_info_wait,
+      </if>
+      <if test="nightInfoBorn != null" >
+        night_info_born,
+      </if>
+      <if test="nightInfoWaitborn != null" >
+        night_info_waitborn,
+      </if>
+      <if test="nightInfoTransferout != null" >
+        night_info_transferout,
+      </if>
+      <if test="nightInfoOut != null" >
+        night_info_out,
+      </if>
+      <if test="nightInfoDie != null" >
+        night_info_die,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="remarkMid != null" >
+        remark_mid,
+      </if>
+      <if test="remarkNight != null" >
+        remark_night,
+      </if>
+      <if test="handover != null" >
+        handover,
+      </if>
+      <if test="dateHandover != null" >
+        date_handover,
+      </if>
+      <if test="successor != null" >
+        successor,
+      </if>
+      <if test="dateSuccessor != null" >
+        date_successor,
+      </if>
+      <if test="handoverMid != null" >
+        handover_mid,
+      </if>
+      <if test="dateHandoverMid != null" >
+        date_handover_mid,
+      </if>
+      <if test="successorMid != null" >
+        successor_mid,
+      </if>
+      <if test="dateSuccessorMid != null" >
+        date_successor_mid,
+      </if>
+      <if test="handoverNight != null" >
+        handover_night,
+      </if>
+      <if test="dateHandoverNight != null" >
+        date_handover_night,
+      </if>
+      <if test="successorNight != null" >
+        successor_night,
+      </if>
+      <if test="dateSuccessorNight != null" >
+        date_successor_night,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="department != null" >
+        #{department,jdbcType=INTEGER},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ward != null" >
+        #{ward,jdbcType=VARCHAR},
+      </if>
+      <if test="whiteInfoAll != null" >
+        #{whiteInfoAll,jdbcType=INTEGER},
+      </if>
+      <if test="whiteInfoIn != null" >
+        #{whiteInfoIn,jdbcType=INTEGER},
+      </if>
+      <if test="whiteInfoTransfer != null" >
+        #{whiteInfoTransfer,jdbcType=INTEGER},
+      </if>
+      <if test="whiteInfoCritically != null" >
+        #{whiteInfoCritically,jdbcType=INTEGER},
+      </if>
+      <if test="whiteInfoSick != null" >
+        #{whiteInfoSick,jdbcType=INTEGER},
+      </if>
+      <if test="whiteInfoHand != null" >
+        #{whiteInfoHand,jdbcType=INTEGER},
+      </if>
+      <if test="whiteInfoWait != null" >
+        #{whiteInfoWait,jdbcType=INTEGER},
+      </if>
+      <if test="whiteInfoBorn != null" >
+        #{whiteInfoBorn,jdbcType=INTEGER},
+      </if>
+      <if test="whiteInfoWaitborn != null" >
+        #{whiteInfoWaitborn,jdbcType=INTEGER},
+      </if>
+      <if test="whiteInfoTransferout != null" >
+        #{whiteInfoTransferout,jdbcType=INTEGER},
+      </if>
+      <if test="whiteInfoOut != null" >
+        #{whiteInfoOut,jdbcType=INTEGER},
+      </if>
+      <if test="whiteInfoDie != null" >
+        #{whiteInfoDie,jdbcType=INTEGER},
+      </if>
+      <if test="midInfoAll != null" >
+        #{midInfoAll,jdbcType=INTEGER},
+      </if>
+      <if test="midInfoIn != null" >
+        #{midInfoIn,jdbcType=INTEGER},
+      </if>
+      <if test="midInfoTransfer != null" >
+        #{midInfoTransfer,jdbcType=INTEGER},
+      </if>
+      <if test="midInfoCritically != null" >
+        #{midInfoCritically,jdbcType=INTEGER},
+      </if>
+      <if test="midInfoSick != null" >
+        #{midInfoSick,jdbcType=INTEGER},
+      </if>
+      <if test="midInfoHand != null" >
+        #{midInfoHand,jdbcType=INTEGER},
+      </if>
+      <if test="midInfoWait != null" >
+        #{midInfoWait,jdbcType=INTEGER},
+      </if>
+      <if test="midInfoBorn != null" >
+        #{midInfoBorn,jdbcType=INTEGER},
+      </if>
+      <if test="midInfoWaitborn != null" >
+        #{midInfoWaitborn,jdbcType=INTEGER},
+      </if>
+      <if test="midInfoTransferout != null" >
+        #{midInfoTransferout,jdbcType=INTEGER},
+      </if>
+      <if test="midInfoOut != null" >
+        #{midInfoOut,jdbcType=INTEGER},
+      </if>
+      <if test="midInfoDie != null" >
+        #{midInfoDie,jdbcType=INTEGER},
+      </if>
+      <if test="nightInfoAll != null" >
+        #{nightInfoAll,jdbcType=INTEGER},
+      </if>
+      <if test="nightInfoIn != null" >
+        #{nightInfoIn,jdbcType=INTEGER},
+      </if>
+      <if test="nightInfoTransfer != null" >
+        #{nightInfoTransfer,jdbcType=INTEGER},
+      </if>
+      <if test="nightInfoCritically != null" >
+        #{nightInfoCritically,jdbcType=INTEGER},
+      </if>
+      <if test="nightInfoSick != null" >
+        #{nightInfoSick,jdbcType=INTEGER},
+      </if>
+      <if test="nightInfoHand != null" >
+        #{nightInfoHand,jdbcType=INTEGER},
+      </if>
+      <if test="nightInfoWait != null" >
+        #{nightInfoWait,jdbcType=INTEGER},
+      </if>
+      <if test="nightInfoBorn != null" >
+        #{nightInfoBorn,jdbcType=INTEGER},
+      </if>
+      <if test="nightInfoWaitborn != null" >
+        #{nightInfoWaitborn,jdbcType=INTEGER},
+      </if>
+      <if test="nightInfoTransferout != null" >
+        #{nightInfoTransferout,jdbcType=INTEGER},
+      </if>
+      <if test="nightInfoOut != null" >
+        #{nightInfoOut,jdbcType=INTEGER},
+      </if>
+      <if test="nightInfoDie != null" >
+        #{nightInfoDie,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkMid != null" >
+        #{remarkMid,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkNight != null" >
+        #{remarkNight,jdbcType=VARCHAR},
+      </if>
+      <if test="handover != null" >
+        #{handover,jdbcType=BIGINT},
+      </if>
+      <if test="dateHandover != null" >
+        #{dateHandover,jdbcType=TIMESTAMP},
+      </if>
+      <if test="successor != null" >
+        #{successor,jdbcType=BIGINT},
+      </if>
+      <if test="dateSuccessor != null" >
+        #{dateSuccessor,jdbcType=TIMESTAMP},
+      </if>
+      <if test="handoverMid != null" >
+        #{handoverMid,jdbcType=BIGINT},
+      </if>
+      <if test="dateHandoverMid != null" >
+        #{dateHandoverMid,jdbcType=TIMESTAMP},
+      </if>
+      <if test="successorMid != null" >
+        #{successorMid,jdbcType=BIGINT},
+      </if>
+      <if test="dateSuccessorMid != null" >
+        #{dateSuccessorMid,jdbcType=TIMESTAMP},
+      </if>
+      <if test="handoverNight != null" >
+        #{handoverNight,jdbcType=BIGINT},
+      </if>
+      <if test="dateHandoverNight != null" >
+        #{dateHandoverNight,jdbcType=TIMESTAMP},
+      </if>
+      <if test="successorNight != null" >
+        #{successorNight,jdbcType=BIGINT},
+      </if>
+      <if test="dateSuccessorNight != null" >
+        #{dateSuccessorNight,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisNurseHandover" >
+    update his_nurse_handover
+    <set >
+      <if test="department != null" >
+        department = #{department,jdbcType=INTEGER},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ward != null" >
+        ward = #{ward,jdbcType=VARCHAR},
+      </if>
+      <if test="whiteInfoAll != null" >
+        white_info_all = #{whiteInfoAll,jdbcType=INTEGER},
+      </if>
+      <if test="whiteInfoIn != null" >
+        white_info_in = #{whiteInfoIn,jdbcType=INTEGER},
+      </if>
+      <if test="whiteInfoTransfer != null" >
+        white_info_transfer = #{whiteInfoTransfer,jdbcType=INTEGER},
+      </if>
+      <if test="whiteInfoCritically != null" >
+        white_info_critically = #{whiteInfoCritically,jdbcType=INTEGER},
+      </if>
+      <if test="whiteInfoSick != null" >
+        white_info_sick = #{whiteInfoSick,jdbcType=INTEGER},
+      </if>
+      <if test="whiteInfoHand != null" >
+        white_info_hand = #{whiteInfoHand,jdbcType=INTEGER},
+      </if>
+      <if test="whiteInfoWait != null" >
+        white_info_wait = #{whiteInfoWait,jdbcType=INTEGER},
+      </if>
+      <if test="whiteInfoBorn != null" >
+        white_info_born = #{whiteInfoBorn,jdbcType=INTEGER},
+      </if>
+      <if test="whiteInfoWaitborn != null" >
+        white_info_waitborn = #{whiteInfoWaitborn,jdbcType=INTEGER},
+      </if>
+      <if test="whiteInfoTransferout != null" >
+        white_info_transferout = #{whiteInfoTransferout,jdbcType=INTEGER},
+      </if>
+      <if test="whiteInfoOut != null" >
+        white_info_out = #{whiteInfoOut,jdbcType=INTEGER},
+      </if>
+      <if test="whiteInfoDie != null" >
+        white_info_die = #{whiteInfoDie,jdbcType=INTEGER},
+      </if>
+      <if test="midInfoAll != null" >
+        mid_info_all = #{midInfoAll,jdbcType=INTEGER},
+      </if>
+      <if test="midInfoIn != null" >
+        mid_info_in = #{midInfoIn,jdbcType=INTEGER},
+      </if>
+      <if test="midInfoTransfer != null" >
+        mid_info_transfer = #{midInfoTransfer,jdbcType=INTEGER},
+      </if>
+      <if test="midInfoCritically != null" >
+        mid_info_critically = #{midInfoCritically,jdbcType=INTEGER},
+      </if>
+      <if test="midInfoSick != null" >
+        mid_info_sick = #{midInfoSick,jdbcType=INTEGER},
+      </if>
+      <if test="midInfoHand != null" >
+        mid_info_hand = #{midInfoHand,jdbcType=INTEGER},
+      </if>
+      <if test="midInfoWait != null" >
+        mid_info_wait = #{midInfoWait,jdbcType=INTEGER},
+      </if>
+      <if test="midInfoBorn != null" >
+        mid_info_born = #{midInfoBorn,jdbcType=INTEGER},
+      </if>
+      <if test="midInfoWaitborn != null" >
+        mid_info_waitborn = #{midInfoWaitborn,jdbcType=INTEGER},
+      </if>
+      <if test="midInfoTransferout != null" >
+        mid_info_transferout = #{midInfoTransferout,jdbcType=INTEGER},
+      </if>
+      <if test="midInfoOut != null" >
+        mid_info_out = #{midInfoOut,jdbcType=INTEGER},
+      </if>
+      <if test="midInfoDie != null" >
+        mid_info_die = #{midInfoDie,jdbcType=INTEGER},
+      </if>
+      <if test="nightInfoAll != null" >
+        night_info_all = #{nightInfoAll,jdbcType=INTEGER},
+      </if>
+      <if test="nightInfoIn != null" >
+        night_info_in_ = #{nightInfoIn,jdbcType=INTEGER},
+      </if>
+      <if test="nightInfoTransfer != null" >
+        night_info_transfer = #{nightInfoTransfer,jdbcType=INTEGER},
+      </if>
+      <if test="nightInfoCritically != null" >
+        night_info_critically = #{nightInfoCritically,jdbcType=INTEGER},
+      </if>
+      <if test="nightInfoSick != null" >
+        night_info_sick = #{nightInfoSick,jdbcType=INTEGER},
+      </if>
+      <if test="nightInfoHand != null" >
+        night_info_hand = #{nightInfoHand,jdbcType=INTEGER},
+      </if>
+      <if test="nightInfoWait != null" >
+        night_info_wait = #{nightInfoWait,jdbcType=INTEGER},
+      </if>
+      <if test="nightInfoBorn != null" >
+        night_info_born = #{nightInfoBorn,jdbcType=INTEGER},
+      </if>
+      <if test="nightInfoWaitborn != null" >
+        night_info_waitborn = #{nightInfoWaitborn,jdbcType=INTEGER},
+      </if>
+      <if test="nightInfoTransferout != null" >
+        night_info_transferout = #{nightInfoTransferout,jdbcType=INTEGER},
+      </if>
+      <if test="nightInfoOut != null" >
+        night_info_out = #{nightInfoOut,jdbcType=INTEGER},
+      </if>
+      <if test="nightInfoDie != null" >
+        night_info_die = #{nightInfoDie,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkMid != null" >
+        remark_mid = #{remarkMid,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkNight != null" >
+        remark_night = #{remarkNight,jdbcType=VARCHAR},
+      </if>
+      <if test="handover != null" >
+        handover = #{handover,jdbcType=BIGINT},
+      </if>
+      <if test="dateHandover != null" >
+        date_handover = #{dateHandover,jdbcType=TIMESTAMP},
+      </if>
+      <if test="successor != null" >
+        successor = #{successor,jdbcType=BIGINT},
+      </if>
+      <if test="dateSuccessor != null" >
+        date_successor = #{dateSuccessor,jdbcType=TIMESTAMP},
+      </if>
+      <if test="handoverMid != null" >
+        handover_mid = #{handoverMid,jdbcType=BIGINT},
+      </if>
+      <if test="dateHandoverMid != null" >
+        date_handover_mid = #{dateHandoverMid,jdbcType=TIMESTAMP},
+      </if>
+      <if test="successorMid != null" >
+        successor_mid = #{successorMid,jdbcType=BIGINT},
+      </if>
+      <if test="dateSuccessorMid != null" >
+        date_successor_mid = #{dateSuccessorMid,jdbcType=TIMESTAMP},
+      </if>
+      <if test="handoverNight != null" >
+        handover_night = #{handoverNight,jdbcType=BIGINT},
+      </if>
+      <if test="dateHandoverNight != null" >
+        date_handover_night = #{dateHandoverNight,jdbcType=TIMESTAMP},
+      </if>
+      <if test="successorNight != null" >
+        successor_night = #{successorNight,jdbcType=BIGINT},
+      </if>
+      <if test="dateSuccessorNight != null" >
+        date_successor_night = #{dateSuccessorNight,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisNurseHandover" >
+    update his_nurse_handover
+    set department = #{department,jdbcType=INTEGER},
+      date = #{date,jdbcType=TIMESTAMP},
+      ward = #{ward,jdbcType=VARCHAR},
+      white_info_all = #{whiteInfoAll,jdbcType=INTEGER},
+      white_info_in = #{whiteInfoIn,jdbcType=INTEGER},
+      white_info_transfer = #{whiteInfoTransfer,jdbcType=INTEGER},
+      white_info_critically = #{whiteInfoCritically,jdbcType=INTEGER},
+      white_info_sick = #{whiteInfoSick,jdbcType=INTEGER},
+      white_info_hand = #{whiteInfoHand,jdbcType=INTEGER},
+      white_info_wait = #{whiteInfoWait,jdbcType=INTEGER},
+      white_info_born = #{whiteInfoBorn,jdbcType=INTEGER},
+      white_info_waitborn = #{whiteInfoWaitborn,jdbcType=INTEGER},
+      white_info_transferout = #{whiteInfoTransferout,jdbcType=INTEGER},
+      white_info_out = #{whiteInfoOut,jdbcType=INTEGER},
+      white_info_die = #{whiteInfoDie,jdbcType=INTEGER},
+      mid_info_all = #{midInfoAll,jdbcType=INTEGER},
+      mid_info_in = #{midInfoIn,jdbcType=INTEGER},
+      mid_info_transfer = #{midInfoTransfer,jdbcType=INTEGER},
+      mid_info_critically = #{midInfoCritically,jdbcType=INTEGER},
+      mid_info_sick = #{midInfoSick,jdbcType=INTEGER},
+      mid_info_hand = #{midInfoHand,jdbcType=INTEGER},
+      mid_info_wait = #{midInfoWait,jdbcType=INTEGER},
+      mid_info_born = #{midInfoBorn,jdbcType=INTEGER},
+      mid_info_waitborn = #{midInfoWaitborn,jdbcType=INTEGER},
+      mid_info_transferout = #{midInfoTransferout,jdbcType=INTEGER},
+      mid_info_out = #{midInfoOut,jdbcType=INTEGER},
+      mid_info_die = #{midInfoDie,jdbcType=INTEGER},
+      night_info_all = #{nightInfoAll,jdbcType=INTEGER},
+      night_info_in_ = #{nightInfoIn,jdbcType=INTEGER},
+      night_info_transfer = #{nightInfoTransfer,jdbcType=INTEGER},
+      night_info_critically = #{nightInfoCritically,jdbcType=INTEGER},
+      night_info_sick = #{nightInfoSick,jdbcType=INTEGER},
+      night_info_hand = #{nightInfoHand,jdbcType=INTEGER},
+      night_info_wait = #{nightInfoWait,jdbcType=INTEGER},
+      night_info_born = #{nightInfoBorn,jdbcType=INTEGER},
+      night_info_waitborn = #{nightInfoWaitborn,jdbcType=INTEGER},
+      night_info_transferout = #{nightInfoTransferout,jdbcType=INTEGER},
+      night_info_out = #{nightInfoOut,jdbcType=INTEGER},
+      night_info_die = #{nightInfoDie,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      remark_mid = #{remarkMid,jdbcType=VARCHAR},
+      remark_night = #{remarkNight,jdbcType=VARCHAR},
+      handover = #{handover,jdbcType=BIGINT},
+      date_handover = #{dateHandover,jdbcType=TIMESTAMP},
+      successor = #{successor,jdbcType=BIGINT},
+      date_successor = #{dateSuccessor,jdbcType=TIMESTAMP},
+      handover_mid = #{handoverMid,jdbcType=BIGINT},
+      date_handover_mid = #{dateHandoverMid,jdbcType=TIMESTAMP},
+      successor_mid = #{successorMid,jdbcType=BIGINT},
+      date_successor_mid = #{dateSuccessorMid,jdbcType=TIMESTAMP},
+      handover_night = #{handoverNight,jdbcType=BIGINT},
+      date_handover_night = #{dateHandoverNight,jdbcType=TIMESTAMP},
+      successor_night = #{successorNight,jdbcType=BIGINT},
+      date_successor_night = #{dateSuccessorNight,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

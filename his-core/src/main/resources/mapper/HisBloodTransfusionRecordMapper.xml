@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisBloodTransfusionRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisBloodTransfusionRecord" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="record_id" property="recordId" jdbcType="BIGINT" />
+    <result column="doctor_id" property="doctorId" jdbcType="BIGINT" />
+    <result column="is_agree" property="isAgree" jdbcType="INTEGER" />
+    <result column="is_approve" property="isApprove" jdbcType="INTEGER" />
+    <result column="approve_id" property="approveId" jdbcType="BIGINT" />
+    <result column="purpose" property="purpose" jdbcType="VARCHAR" />
+    <result column="indication_assessment" property="indicationAssessment" jdbcType="VARCHAR" />
+    <result column="blood_variety" property="bloodVariety" jdbcType="INTEGER" />
+    <result column="blood_type" property="bloodType" jdbcType="INTEGER" />
+    <result column="num" property="num" jdbcType="DOUBLE" />
+    <result column="is_bad" property="isBad" jdbcType="INTEGER" />
+    <result column="adverse_reactions" property="adverseReactions" jdbcType="VARCHAR" />
+    <result column="evaluation" property="evaluation" jdbcType="VARCHAR" />
+    <result column="is_sign" property="isSign" jdbcType="INTEGER" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="hospital_manage_id" property="hospitalManageId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, record_id, doctor_id, is_agree, is_approve, approve_id, purpose, indication_assessment, 
+    blood_variety, blood_type, num, is_bad, adverse_reactions, evaluation, is_sign, create_user_id, 
+    create_date, update_user_id, update_date, hospital_manage_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from his_blood_transfusion_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from his_blood_transfusion_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisBloodTransfusionRecord" useGeneratedKeys="true" keyProperty="id" >
+    insert into his_blood_transfusion_record (id, record_id, doctor_id, 
+      is_agree, is_approve, approve_id, 
+      purpose, indication_assessment, blood_variety, 
+      blood_type, num, is_bad, 
+      adverse_reactions, evaluation, is_sign, 
+      create_user_id, create_date, update_user_id, 
+      update_date, hospital_manage_id)
+    values (#{id,jdbcType=BIGINT}, #{recordId,jdbcType=BIGINT}, #{doctorId,jdbcType=BIGINT}, 
+      #{isAgree,jdbcType=INTEGER}, #{isApprove,jdbcType=INTEGER}, #{approveId,jdbcType=BIGINT}, 
+      #{purpose,jdbcType=VARCHAR}, #{indicationAssessment,jdbcType=VARCHAR}, #{bloodVariety,jdbcType=INTEGER}, 
+      #{bloodType,jdbcType=INTEGER}, #{num,jdbcType=DOUBLE}, #{isBad,jdbcType=INTEGER}, 
+      #{adverseReactions,jdbcType=VARCHAR}, #{evaluation,jdbcType=VARCHAR}, #{isSign,jdbcType=INTEGER}, 
+      #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{hospitalManageId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisBloodTransfusionRecord" >
+    insert into his_blood_transfusion_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="recordId != null" >
+        record_id,
+      </if>
+      <if test="doctorId != null" >
+        doctor_id,
+      </if>
+      <if test="isAgree != null" >
+        is_agree,
+      </if>
+      <if test="isApprove != null" >
+        is_approve,
+      </if>
+      <if test="approveId != null" >
+        approve_id,
+      </if>
+      <if test="purpose != null" >
+        purpose,
+      </if>
+      <if test="indicationAssessment != null" >
+        indication_assessment,
+      </if>
+      <if test="bloodVariety != null" >
+        blood_variety,
+      </if>
+      <if test="bloodType != null" >
+        blood_type,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="isBad != null" >
+        is_bad,
+      </if>
+      <if test="adverseReactions != null" >
+        adverse_reactions,
+      </if>
+      <if test="evaluation != null" >
+        evaluation,
+      </if>
+      <if test="isSign != null" >
+        is_sign,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="hospitalManageId != null" >
+        hospital_manage_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="recordId != null" >
+        #{recordId,jdbcType=BIGINT},
+      </if>
+      <if test="doctorId != null" >
+        #{doctorId,jdbcType=BIGINT},
+      </if>
+      <if test="isAgree != null" >
+        #{isAgree,jdbcType=INTEGER},
+      </if>
+      <if test="isApprove != null" >
+        #{isApprove,jdbcType=INTEGER},
+      </if>
+      <if test="approveId != null" >
+        #{approveId,jdbcType=BIGINT},
+      </if>
+      <if test="purpose != null" >
+        #{purpose,jdbcType=VARCHAR},
+      </if>
+      <if test="indicationAssessment != null" >
+        #{indicationAssessment,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodVariety != null" >
+        #{bloodVariety,jdbcType=INTEGER},
+      </if>
+      <if test="bloodType != null" >
+        #{bloodType,jdbcType=INTEGER},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=DOUBLE},
+      </if>
+      <if test="isBad != null" >
+        #{isBad,jdbcType=INTEGER},
+      </if>
+      <if test="adverseReactions != null" >
+        #{adverseReactions,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluation != null" >
+        #{evaluation,jdbcType=VARCHAR},
+      </if>
+      <if test="isSign != null" >
+        #{isSign,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hospitalManageId != null" >
+        #{hospitalManageId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisBloodTransfusionRecord" >
+    update his_blood_transfusion_record
+    <set >
+      <if test="recordId != null" >
+        record_id = #{recordId,jdbcType=BIGINT},
+      </if>
+      <if test="doctorId != null" >
+        doctor_id = #{doctorId,jdbcType=BIGINT},
+      </if>
+      <if test="isAgree != null" >
+        is_agree = #{isAgree,jdbcType=INTEGER},
+      </if>
+      <if test="isApprove != null" >
+        is_approve = #{isApprove,jdbcType=INTEGER},
+      </if>
+      <if test="approveId != null" >
+        approve_id = #{approveId,jdbcType=BIGINT},
+      </if>
+      <if test="purpose != null" >
+        purpose = #{purpose,jdbcType=VARCHAR},
+      </if>
+      <if test="indicationAssessment != null" >
+        indication_assessment = #{indicationAssessment,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodVariety != null" >
+        blood_variety = #{bloodVariety,jdbcType=INTEGER},
+      </if>
+      <if test="bloodType != null" >
+        blood_type = #{bloodType,jdbcType=INTEGER},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=DOUBLE},
+      </if>
+      <if test="isBad != null" >
+        is_bad = #{isBad,jdbcType=INTEGER},
+      </if>
+      <if test="adverseReactions != null" >
+        adverse_reactions = #{adverseReactions,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluation != null" >
+        evaluation = #{evaluation,jdbcType=VARCHAR},
+      </if>
+      <if test="isSign != null" >
+        is_sign = #{isSign,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hospitalManageId != null" >
+        hospital_manage_id = #{hospitalManageId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisBloodTransfusionRecord" >
+    update his_blood_transfusion_record
+    set record_id = #{recordId,jdbcType=BIGINT},
+      doctor_id = #{doctorId,jdbcType=BIGINT},
+      is_agree = #{isAgree,jdbcType=INTEGER},
+      is_approve = #{isApprove,jdbcType=INTEGER},
+      approve_id = #{approveId,jdbcType=BIGINT},
+      purpose = #{purpose,jdbcType=VARCHAR},
+      indication_assessment = #{indicationAssessment,jdbcType=VARCHAR},
+      blood_variety = #{bloodVariety,jdbcType=INTEGER},
+      blood_type = #{bloodType,jdbcType=INTEGER},
+      num = #{num,jdbcType=DOUBLE},
+      is_bad = #{isBad,jdbcType=INTEGER},
+      adverse_reactions = #{adverseReactions,jdbcType=VARCHAR},
+      evaluation = #{evaluation,jdbcType=VARCHAR},
+      is_sign = #{isSign,jdbcType=INTEGER},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      hospital_manage_id = #{hospitalManageId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!--自定义sql-->
+<!--isOperate = 1代表可修改   =0代表不可修改-->
+  <select id="listByHospitalManageId" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    select a.*,b.user_name as mainDoctorName,c.user_name as approveName,
+    case
+    when (unix_timestamp(CURRENT_TIMESTAMP)-unix_timestamp(a.create_date))/(24*60*60) &lt;= 1 then 1
+    else 0
+    end as isOperate
+from  his_blood_transfusion_record as a
+left join `his-userinfo`.user_info as b on a.doctor_id = b.id
+left join `his-userinfo`.user_info as c on a.approve_id = c.id
+    where a.hospital_manage_id =#{parameter.hospitalManageId,jdbcType=BIGINT}
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+</mapper>

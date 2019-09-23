@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahsj.hiscore.dao.HisPrescriptionMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisPrescription">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="descrption" jdbcType="VARCHAR" property="descrption"/>
+        <result column="tree_id" jdbcType="VARCHAR" property="treeId"/>
+        <result column="create_user_id" jdbcType="BIGINT" property="createUserId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_user_id" jdbcType="BIGINT" property="updateUserId"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="parent_id" jdbcType="VARCHAR" property="parentId"/>
+        <result column="is_available" jdbcType="INTEGER" property="isAvailable"/>
+
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, name, descrption, tree_id, create_user_id, create_time, update_user_id, update_time,
+    parent_id,is_available
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_prescription
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_prescription
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisPrescription" useGeneratedKeys="true" keyProperty="id">
+    insert into his_prescription (id, name, descrption,
+      tree_id, create_user_id, create_time,
+      update_user_id, update_time, parent_id,is_available
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{descrption,jdbcType=VARCHAR},
+      #{treeId,jdbcType=VARCHAR}, #{createUserId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP},
+      #{updateUserId,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{parentId,jdbcType=VARCHAR}, #{isAvailable,jdbcType=INTEGER}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisPrescription" keyProperty="id" useGeneratedKeys="true">
+        insert into his_prescription
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="descrption != null">
+                descrption,
+            </if>
+            <if test="treeId != null">
+                tree_id,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="isAvailable != null">
+                is_available,
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="descrption != null">
+                #{descrption,jdbcType=VARCHAR},
+            </if>
+            <if test="treeId != null">
+                #{treeId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="isAvailable != null">
+                #{isAvailable,jdbcType=INTEGER},
+            </if>
+
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisPrescription">
+        update his_prescription
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="descrption != null">
+                descrption = #{descrption,jdbcType=VARCHAR},
+            </if>
+            <if test="treeId != null">
+                tree_id = #{treeId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="isAvailable != null">
+                is_available = #{isAvailable,jdbcType=INTEGER},
+            </if>
+
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisPrescription">
+    update his_prescription
+    set name = #{name,jdbcType=VARCHAR},
+      descrption = #{descrption,jdbcType=VARCHAR},
+      tree_id = #{treeId,jdbcType=VARCHAR},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      parent_id = #{parentId,jdbcType=VARCHAR},
+        is_available = #{isAvailable,jdbcType=INTEGER}
+
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <!--自定义-->
+    <select id="selectAll" resultMap="BaseResultMap">
+    select *
+    from
+    his_prescription
+  </select>
+    <select id="selectByName" parameterType="com.ahsj.hiscore.entity.HisPrescription" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_prescription
+        where name = #{name,jdbcType=VARCHAR}
+    </select>
+    <!-- 自定义 -->
+    <resultMap id="TreeResultMap" type="com.ahsj.hiscore.entity.TreeEntity">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="isParent" jdbcType="BOOLEAN" property="isParent"/>
+        <result column="open" jdbcType="BOOLEAN" property="open"/>
+    </resultMap>
+    <select id="selectTreeCode" resultMap="TreeResultMap">
+    SELECT
+	  tree_id as id,
+      parent_id as pId,
+      name as name,
+      false as isParent,
+      false as open
+		FROM his_prescription
+
+
+
+  </select>
+    <select id="list" parameterType="com.ahsj.hiscore.entity.HisPrescription" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_prescription
+        where parent_id = #{parameter.parentId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectMaxTreeId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+      max(tree_id) as tree_id
+    from his_prescription
+    where parent_id = #{parentId,jdbcType=VARCHAR}
+  </select>
+
+    <select id="selectByTreeId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from his_prescription
+        where tree_id = #{treeId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByTreeId" parameterType="java.lang.String">
+    delete from his_prescription
+    where tree_id = #{treeId,jdbcType=VARCHAR}
+  </delete>
+
+
+    <select id="listForMedicalRecord" parameterType="com.ahsj.hiscore.entity.HisPrescription" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_prescription
+        where
+        1= 1
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+
+    </select>
+
+    <!--根据父节点搜索-->
+    <select id="selectByParentId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from his_prescription
+        where parent_id = #{parentId,jdbcType=VARCHAR}
+    </select>
+
+    <!--根据父节点删除其下所有子节点-->
+    <delete id="deleteByParentId" parameterType="java.lang.String">
+    delete from his_prescription
+    where parent_id = #{parentId,jdbcType=VARCHAR}
+  </delete>
+
+    <select id="listByTreatmentPlan" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    select his_prescription.*
+from his_prescription
+where is_available = 1
+
+  </select>
+
+    <select id="listByTreatmentPlans" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_prescription
+        where is_available = 1
+        <if test="parameter.name != null and parameter.name != ''">
+            and  name like  concat( '%',#{parameter.name},'%')
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+
+    <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List" keyProperty="id">
+
+        insert into his_prescription(id, name, descrption, tree_id, create_user_id, create_time, update_user_id, update_time,
+        parent_id,is_available)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id,jdbcType=BIGINT}, #{item.name,jdbcType=VARCHAR}, #{item.descrption,jdbcType=VARCHAR},
+            #{item.treeId,jdbcType=VARCHAR}, #{item.createUserId,jdbcType=BIGINT}, #{item.createTime,jdbcType=TIMESTAMP},
+            #{item.updateUserId,jdbcType=BIGINT}, #{item.updateTime,jdbcType=TIMESTAMP}, #{item.parentId,jdbcType=VARCHAR}, #{item.isAvailable,jdbcType=INTEGER}
+            )
+        </foreach>
+    </insert>
+
+    <update id="updateBatch" parameterType="list">
+        update his_prescription
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="descrption=case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.descrption!=null">
+                        when id=#{item.id} then #{item.descrption}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where
+        <foreach collection="list" separator="or" item="item" index="index">
+            id=#{item.id}
+        </foreach>
+    </update>
+
+
+    <select id="selectPrescription"  resultMap="BaseResultMap" >
+        SELECT
+            his_prescription.*
+        FROM his_prescription
+where is_available = 1
+    </select>
+
+
+
+</mapper>

@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisApplicationForDrugReturnDetailsMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisApplicationForDrugReturnDetails" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="drugs_numb" property="drugsNumb" jdbcType="VARCHAR" />
+    <result column="drugs_name" property="drugsName" jdbcType="VARCHAR" />
+    <result column="drugs_spec" property="drugsSpec" jdbcType="VARCHAR" />
+    <result column="validity_period" property="validityPeriod" jdbcType="TIMESTAMP" />
+    <result column="placeOrigin" property="placeorigin" jdbcType="VARCHAR" />
+    <result column="return_count" property="returnCount" jdbcType="INTEGER" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="voucher" property="voucher" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="measures" property="measures" jdbcType="INTEGER" />
+    <result column="medication_detail_id" property="medicationDetailId" jdbcType="BIGINT" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="total_price" property="totalPrice" jdbcType="DECIMAL" />
+    <result column="number" property="number" jdbcType="VARCHAR"/>
+    <result column="related_id" property="relatedId" jdbcType="BIGINT" />
+    <result column="patientName" property="patientName" jdbcType="VARCHAR"/>
+    <result column="is_review" property="isReview" jdbcType="INTEGER"/>
+    <result column="is_payed" property="isPayed" jdbcType="INTEGER"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, drugs_numb, drugs_name, drugs_spec, validity_period, placeOrigin, return_count, 
+    remarks, voucher, create_date, update_date, create_user_id, update_user_id,measures,medication_detail_id,price,total_price,related_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from his_application_for_drug_return_details
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from his_application_for_drug_return_details
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisApplicationForDrugReturnDetails" >
+    insert into his_application_for_drug_return_details (id, drugs_numb, drugs_name, 
+      drugs_spec, validity_period, placeOrigin, 
+      return_count, remarks, voucher, 
+      create_date, update_date, create_user_id, 
+      update_user_id,measures,medication_detail_id,price,total_price,related_id)
+    values (#{id,jdbcType=BIGINT}, #{drugsNumb,jdbcType=VARCHAR}, #{drugsName,jdbcType=VARCHAR}, 
+      #{drugsSpec,jdbcType=VARCHAR}, #{validityPeriod,jdbcType=TIMESTAMP}, #{placeorigin,jdbcType=VARCHAR}, 
+      #{returnCount,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}, #{voucher,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, 
+      #{updateUserId,jdbcType=BIGINT},#{measures,jdbcType=INTEGER},#{medicationDetailId,jdbcType=BIGINT},#{price,jdbcType=DECIMAL},#{totalPrice,jdbcType=DECIMAL},#{relatedId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisApplicationForDrugReturnDetails" >
+    insert into his_application_for_drug_return_details
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="drugsNumb != null" >
+        drugs_numb,
+      </if>
+      <if test="drugsName != null" >
+        drugs_name,
+      </if>
+      <if test="drugsSpec != null" >
+        drugs_spec,
+      </if>
+      <if test="validityPeriod != null" >
+        validity_period,
+      </if>
+      <if test="placeorigin != null" >
+        placeOrigin,
+      </if>
+      <if test="returnCount != null" >
+        return_count,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="voucher != null" >
+        voucher,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="measures != null" >
+        measures,
+      </if>
+      <if test="medicationDetailId != null" >
+        medication_detail_id,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="totalPrice != null" >
+        total_price,
+      </if>
+      <if test="relatedId != null" >
+        related_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="drugsNumb != null" >
+        #{drugsNumb,jdbcType=VARCHAR},
+      </if>
+      <if test="drugsName != null" >
+        #{drugsName,jdbcType=VARCHAR},
+      </if>
+      <if test="drugsSpec != null" >
+        #{drugsSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="validityPeriod != null" >
+        #{validityPeriod,jdbcType=TIMESTAMP},
+      </if>
+      <if test="placeorigin != null" >
+        #{placeorigin,jdbcType=VARCHAR},
+      </if>
+      <if test="returnCount != null" >
+        #{returnCount,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="voucher != null" >
+        #{voucher,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="measures != null" >
+        #{measures,jdbcType=INTEGER},
+      </if>
+      <if test="medicationDetailId != null" >
+        #{medicationDetailId,jdbcType=BIGINT},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="totalPrice != null" >
+        #{totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="relatedId != null" >
+        #{relatedId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisApplicationForDrugReturnDetails" >
+    update his_application_for_drug_return_details
+    <set >
+      <if test="drugsNumb != null" >
+        drugs_numb = #{drugsNumb,jdbcType=VARCHAR},
+      </if>
+      <if test="drugsName != null" >
+        drugs_name = #{drugsName,jdbcType=VARCHAR},
+      </if>
+      <if test="drugsSpec != null" >
+        drugs_spec = #{drugsSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="validityPeriod != null" >
+        validity_period = #{validityPeriod,jdbcType=TIMESTAMP},
+      </if>
+      <if test="placeorigin != null" >
+        placeOrigin = #{placeorigin,jdbcType=VARCHAR},
+      </if>
+      <if test="returnCount != null" >
+        return_count = #{returnCount,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="voucher != null" >
+        voucher = #{voucher,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="measures != null" >
+        measures = #{measures,jdbcType=INTEGER},
+      </if>
+      <if test="medicationDetailId != null" >
+        medication_detail_id = #{medicationDetailId,jdbcType=BIGINT}
+      </if>
+      <if test="price != null" >
+        price =#{price,jdbcType=DECIMAL},
+      </if>
+      <if test="totalPrice != null" >
+       total_price =#{totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="relatedId != null" >
+        related_id =#{relatedId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisApplicationForDrugReturnDetails" >
+    update his_application_for_drug_return_details
+    set drugs_numb = #{drugsNumb,jdbcType=VARCHAR},
+      drugs_name = #{drugsName,jdbcType=VARCHAR},
+      drugs_spec = #{drugsSpec,jdbcType=VARCHAR},
+      validity_period = #{validityPeriod,jdbcType=TIMESTAMP},
+      placeOrigin = #{placeorigin,jdbcType=VARCHAR},
+      return_count = #{returnCount,jdbcType=INTEGER},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      voucher = #{voucher,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      measures = #{measures,jdbcType=INTEGER},
+      medication_detail_id = #{medicationDetailId,jdbcType=BIGINT},
+        price =#{price,jdbcType=DECIMAL},
+        total_price =#{totalPrice,jdbcType=DECIMAL},
+        related_id =#{relatedId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!--自定义sql-->
+  <select id="selectByVoucher" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select a.*,d.id as mediEnterId
+from his_application_for_drug_return_details as a
+    left join his_related_medicationandexit as b on a.related_id = b.id
+     left join his_medi_exit_details as c on c.id = b.exit_id
+     left join his_medi_enter_details as d on d.id = c.medi_enter_id
+where a.voucher=#{voucher,jdbcType=VARCHAR}
+  </select>
+<!--为适应自定义表格checkbox 起别名-->
+  <select id="selectByVoucherForReturnDrug" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select a.drugs_numb,a.drugs_name,a.drugs_spec,a.validity_period,a.placeOrigin,a.return_count,a.remarks,a.voucher,a.create_date,a.update_date,a.create_user_id,a.update_user_id, a.medication_detail_id
+            ,a.related_id as id
+    from his_application_for_drug_return_details as a
+           left join his_application_for_drug_return as b on a.voucher=b.voucher
+    where a.voucher=#{voucher,jdbcType=VARCHAR}
+  </select>
+  <!--根据voucher（凭证）来查询退药明细-->
+  <select id="listForVoucher" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    select
+    his_application_for_drug_return_details.*
+    from his_application_for_drug_return_details
+    where
+    voucher =#{parameter.voucher,jdbcType=VARCHAR}
+    <if test="parameter.drugsNumb != null and parameter.drugsNumb != ''">
+      and drugs_numb like concat('%' #{parameter.drugsNumb,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.drugsName != null and parameter.drugsName != ''">
+      and drugs_name like concat('%' #{parameter.drugsName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+
+  <!--根据voucher删除所有-->
+  <delete id="deleteByVoucher" parameterType="java.lang.String" >
+    delete
+    from his_application_for_drug_return_details
+    where voucher =#{voucher,jdbcType=VARCHAR}
+  </delete>
+
+  <!--批量插入-->
+  <!--useGeneratedKeys对于支持主键自增的数据库 此关键字支持在执行添加记录之后可以获取到数据库自动生成的主键ID-->
+  <!--selectKey  会将 SELECT LAST_INSERT_ID()的结果放入到传入的model的主键里面，
+        keyProperty 对应的model中的主键的属性名，这里是 his_medication_details 中的id，因为它跟数据库的主键对应
+        order AFTER 表示 SELECT LAST_INSERT_ID() 在insert执行之后执行,多用与自增主键，
+              BEFORE 表示 SELECT LAST_INSERT_ID() 在insert执行之前执行，这样的话就拿不到主键了，
+                    这种适合那种主键不是自增的类型
+        resultType 主键类型 -->
+  <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">
+    <selectKey resultType="long" keyProperty="id" order="AFTER">
+      SELECT
+      LAST_INSERT_ID()
+    </selectKey>
+
+    insert into his_application_for_drug_return_details(id, drugs_numb, drugs_name, drugs_spec, validity_period, placeOrigin, return_count,
+    remarks, voucher, create_date, update_date, create_user_id, update_user_id,measures,medication_detail_id,price,total_price,related_id)
+    values
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.id,jdbcType=BIGINT}, #{item.drugsNumb,jdbcType=VARCHAR}, #{item.drugsName,jdbcType=VARCHAR},
+      #{item.drugsSpec,jdbcType=VARCHAR}, #{item.validityPeriod,jdbcType=TIMESTAMP}, #{item.placeorigin,jdbcType=VARCHAR},
+      #{item.returnCount,jdbcType=INTEGER}, #{item.remarks,jdbcType=VARCHAR}, #{item.voucher,jdbcType=VARCHAR},
+      #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.createUserId,jdbcType=BIGINT},
+      #{item.updateUserId,jdbcType=BIGINT},#{item.measures,jdbcType=INTEGER},#{item.medicationDetailId,jdbcType=BIGINT},#{item.price,jdbcType=DECIMAL},#{item.totalPrice,jdbcType=DECIMAL},#{item.relatedId,jdbcType=BIGINT})
+    </foreach>
+  </insert>
+  <select id="byNumber" parameterType="core.entity.PageBean" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from his_application_for_drug_return_details as d
+    where
+    1=1
+    and d.voucher in
+    ( select d.voucher from his_application_for_drug_return as d where d.record_number
+    = (select h.medical_record_id from his_toll_record h where
+    1=1
+    <if test="parameter.number != null and parameter.number !=''" >
+      and   h.number =#{parameter.number}
+    </if>
+     )
+    and d.is_payed='2'
+    and d.is_review='1'
+    )
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+
+  </select>
+<select id="ByRecordNumber"  parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+  select h.id, h.drugs_numb, h.drugs_name, h.drugs_spec, h.validity_period, h.placeOrigin,
+  h.return_count, h.remarks, h.voucher, h.create_date, h.update_date, h.create_user_id, h.update_user_id, h.measures,h.medication_detail_id,h.price,h.total_price,h.related_id ,e.is_payed,e.is_review
+  from his_application_for_drug_return_details as h
+  LEFT JOIN his_application_for_drug_return as e on e.voucher = h.voucher
+  where h.voucher in ( select r.voucher from
+  his_application_for_drug_return as r where r.record_number=#{parameter.recordNumber})
+  <if test="parameter.orders != null and parameter.orders != ''">
+    order by ${parameter.orders}
+  </if>
+</select>
+
+  <select id="byRecordNumber"  parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from his_application_for_drug_return_details as d
+    where
+    1=1
+    and d.voucher in
+    ( select d.voucher from his_application_for_drug_return as d where
+    1=1
+    <if test="parameter.recordNumber != null and parameter.recordNumber !=''" >
+      and   d.record_number =#{parameter.number}
+    </if>
+    and d.is_payed='2'
+    and d.is_review='1'
+    )
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+<select id="selectByRecordNumber" resultMap="BaseResultMap"  parameterType="java.lang.String" >
+select d.drugs_name,d.drugs_numb,d.price,d.total_price,d.return_count,o.id AS mId,i.`name` as patientName,d.create_date
+from his_application_for_drug_return_details as d
+LEFT JOIN his_medicine_info as o on o.drugs_numb = d.drugs_numb
+LEFT JOIN his_patient_info as i  on i.id =
+(select r.patient_id from
+ his_medical_record as r where r.medical_record_id = #{recordNumber})
+
+where  d.voucher in (
+select r.voucher from his_application_for_drug_return as r where r.record_number =#{recordNumber}
+)
+
+</select>
+
+</mapper>

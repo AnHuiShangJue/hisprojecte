@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<!-- Form with validation -->
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title">生命体征信息新增</h4>
+                <label style="color:black">Vital signs information add</label>
+                <form class="col s12" id="sendForm" action="#">
+                    <input type="hidden" id="id" name="id" th:value="${hisVitalSigns.Id}"/>
+                    <input type="hidden" id="hospitalManageId" name="hospitalManageId" th:value="${hospitalManageId}"/>
+                    <div class="row">
+                        <div class="col input-field s2 m2 l2 xl2 jeinput">
+                            <input id="date" name="date" type="text" class="jeinput" th:value="${#dates.format(hisVitalSigns.date,'yyyy/MM/dd')}"/>
+                            <label for="date">日期<span style="font-size: 12px">(date)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="bodyTemperature" name="bodyTemperature" type="number" th:value="${hisVitalSigns.bodyTemperature}"/>
+                            <label for="bodyTemperature">体温 (℃)<span style="font-size: 12px">(Hospitalization diagnosis)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="heartRate" name="heartRate" type="text" th:value="${hisVitalSigns.heartRate}"/>
+                            <label for="heartRate">心率/脉搏 (次/min)<span style="font-size: 12px">(Heart rate)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <select ahsj:select name="consciousnessLevel" id="consciousnessLevel" type="code" typeKey="consciousness_level"
+                                    th:value="${hisVitalSigns.consciousnessLevel}">
+                            </select>
+                            <label for="drugAllergy">意识水平<span style="font-size: 12px">(Consciousness level)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="bloodPressure" name="bloodPressure" type="number" th:value="${hisVitalSigns.bloodPressure}"/>
+                            <label for="bloodPressure">血压 (mm/Hg)<span style="font-size: 12px">(Blood pressure)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="breathe" name="breathe" type="number" th:value="${hisVitalSigns.breathe}"/>
+                            <label for="breathe">呼吸 (次/min)<span style="font-size: 12px">(breathe)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <select ahsj:select name="degreePain" id="degreePain" type="code" typeKey="degree_pain"
+                                    th:value="${hisVitalSigns.degreePain}">
+                            </select>
+                            <label for="degreePain">疼痛程度<span style="font-size: 12px">(Degree pain)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="urineVolume" name="urineVolume" type="number" th:value="${hisVitalSigns.urineVolume}"/>
+                            <label for="urineVolume">尿量 (ml)<span style="font-size: 12px">(Urine volume)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="stool" name="stool" type="number" th:value="${hisVitalSigns.stool}"/>
+                            <label for="stool">大便次数 (次)<span style="font-size: 12px">(stool)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="oxygenSaturation" name="oxygenSaturation" type="text" th:value="${hisVitalSigns.oxygenSaturation}"/>
+                            <label for="oxygenSaturation">血氧饱和度 (%)<span style="font-size: 12px">(Oxygen saturation)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="weight" name="weight" type="number" th:value="${hisVitalSigns.weight}"/>
+                            <label for="weight">体重 (kg)<span style="font-size: 12px">(weight)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <select ahsj:select name="drugAllergy" id="drugAllergy" type="code" typeKey="drug_allergy"
+                                    th:value="${hisVitalSigns.drugAllergy}">
+                            </select>
+                            <label for="drugAllergy">药物过敏<span style="font-size: 12px">(Drug allergy)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="drainage" name="drainage" type="number" th:value="${hisVitalSigns.drainage}"/>
+                            <label for="drainage">引流量 (ml)<span style="font-size: 12px">(drainage)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button id="send_btn" class="btn cyan waves-effect waves-light right" type="submit"
+                                    name="action">提 交
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+    $(function () {
+        formCheck();
+    });
+
+    //选择时间（精确
+    var enLang = {
+        name  : "en",
+        month : ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
+        weeks : [ "SUN","MON","TUR","WED","THU","FRI","SAT" ],
+        times : ["Hour","Minute","Second"],
+        timetxt: ["Time","Start Time","End Time"],
+        backtxt:"Back",
+        clear : "Clear",
+        today : "Now",
+        yes   : "Confirm",
+        close : "Close"
+    }
+    jeDate("#date",{
+        theme:{bgcolor:"#00A1CB",pnColor:"#00CCFF"},
+        // festival:true,
+        minDate:"1900-01-01",              //最小日期
+        maxDate:"2099-12-31",              //最大日期
+        format: "YYYY-MM-DD hh:mm:ss"
+    });
+
+    function formCheck() {
+        $("#sendForm").validate({
+            rules: {
+                date: {
+                    required: true,
+                    minlength: 1
+                },
+                bodyTemperature: {
+                    required: true,
+                    minlength: 1
+                },
+                heartRate: {
+                    required: true,
+                    minlength: 11
+                },
+                bloodPressure: {
+                    required: true,
+                    minlength: 11
+                },
+                breathe: {
+                    required: true,
+                    minlength: 11
+                }
+            },
+            messages: {
+                date: {
+                    required: "请选择时间",
+                    minlength: "最少包含1个字符"
+                },
+                bodyTemperature: {
+                    required: "请输入体温",
+                    minlength: "最少输入1个字符"
+                },
+                heartRate: {
+                    required: "请输入心率/脉搏",
+                    minlength: "最少输入1个字符"
+                },
+                bloodPressure: {
+                    required: "请输入血压",
+                    minlength: "最少输入1个字符"
+                }
+,
+                breathe: {
+                    required: "请输入呼吸次数",
+                    minlength: "最少输入1个字符"
+                }
+
+            },
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+                dialog.confirm('确定提交吗?', function (index, layero){
+                    var queryString = $('#sendForm').serialize();
+                    $.ahsjajax(
+                        CTX + "/api/hisvitalsigns/saveOrUpdate.ahsj?token=" + TOKEN,
+                        queryString,
+                        function (msg) {
+                            if (msg.success) {
+                                M.toast({html: msg.message});
+                                parent.grid.search();
+                                dialog.parentclose();
+                                return false;
+                            } else {
+                                M.toast({html: msg.message});
+                                return false;
+                            }
+                        },
+                        function () {
+                            M.toast({html: "网络异常"});
+                            return false;
+                        }
+                    );});
+            }
+
+        });
+    }
+
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.PostoperativeRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.PostoperativeRecord" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="DATE" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="update_date" property="updateDate" jdbcType="DATE" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="join_date" property="joinDate" jdbcType="DATE" />
+    <result column="patient_name" property="patientName" jdbcType="VARCHAR" />
+    <result column="brief_condition" property="briefCondition" jdbcType="VARCHAR" />
+    <result column="preoperative_diagnosis" property="preoperativeDiagnosis" jdbcType="VARCHAR" />
+    <result column="surgical_indication" property="surgicalIndication" jdbcType="VARCHAR" />
+    <result column="prposed_surgery_namemethod" property="prposedSurgeryNamemethod" jdbcType="VARCHAR" />
+    <result column="smulated_anesthesia" property="smulatedAnesthesia" jdbcType="VARCHAR" />
+    <result column="precautions" property="precautions" jdbcType="VARCHAR" />
+    <result column="operation_name" property="operationName" jdbcType="VARCHAR" />
+    <result column="operation_after" property="operationAfter" jdbcType="VARCHAR" />
+    <result column="surgical_considerations" property="surgicalConsiderations" jdbcType="VARCHAR" />
+    <result column="medical_number" property="medicalNumber" jdbcType="VARCHAR" />
+    <result column="operation_time" property="operationTime" jdbcType="VARCHAR" />
+    <result column="patient_condition" property="patientCondition" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="department" property="department" jdbcType="INTEGER" />
+    <result column="bed_no" property="bedNo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, create_date, create_user_id, update_date, update_user_id, join_date, patient_name, 
+    brief_condition, preoperative_diagnosis, surgical_indication, prposed_surgery_namemethod, 
+    smulated_anesthesia, precautions, operation_name, operation_after, surgical_considerations,
+    medical_number, operation_time, patient_condition, age, sex, department, bed_no
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from postoperative_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from postoperative_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.PostoperativeRecord" keyProperty="id" useGeneratedKeys="true" >
+    insert into postoperative_record (id, create_date, create_user_id, 
+      update_date, update_user_id, join_date, 
+      patient_name, brief_condition, preoperative_diagnosis, 
+      surgical_indication, prposed_surgery_namemethod, 
+      smulated_anesthesia, precautions, operation_name,
+      operation_after, surgical_considerations, 
+      medical_number, operation_time, patient_condition, 
+      age, sex, department, 
+      bed_no)
+    values (#{id,jdbcType=BIGINT}, #{createDate,jdbcType=DATE}, #{createUserId,jdbcType=BIGINT}, 
+      #{updateDate,jdbcType=DATE}, #{updateUserId,jdbcType=BIGINT}, #{joinDate,jdbcType=DATE}, 
+      #{patientName,jdbcType=VARCHAR}, #{briefCondition,jdbcType=VARCHAR}, #{preoperativeDiagnosis,jdbcType=VARCHAR}, 
+      #{surgicalIndication,jdbcType=VARCHAR}, #{prposedSurgeryNamemethod,jdbcType=VARCHAR}, 
+      #{smulatedAnesthesia,jdbcType=VARCHAR}, #{precautions,jdbcType=VARCHAR}, #{operationName,jdbcType=VARCHAR}, 
+      #{operationAfter,jdbcType=VARCHAR}, #{surgicalConsiderations,jdbcType=VARCHAR}, 
+      #{medicalNumber,jdbcType=VARCHAR}, #{operationTime,jdbcType=VARCHAR}, #{patientCondition,jdbcType=VARCHAR}, 
+      #{age,jdbcType=INTEGER}, #{sex,jdbcType=INTEGER}, #{department,jdbcType=INTEGER}, 
+      #{bedNo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.PostoperativeRecord" >
+    insert into postoperative_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="joinDate != null" >
+        join_date,
+      </if>
+      <if test="patientName != null" >
+        patient_name,
+      </if>
+      <if test="briefCondition != null" >
+        brief_condition,
+      </if>
+      <if test="preoperativeDiagnosis != null" >
+        preoperative_diagnosis,
+      </if>
+      <if test="surgicalIndication != null" >
+        surgical_indication,
+      </if>
+      <if test="prposedSurgeryNamemethod != null" >
+        prposed_surgery_namemethod,
+      </if>
+      <if test="smulatedAnesthesia != null" >
+        smulated_anesthesia,
+      </if>
+      <if test="precautions != null" >
+        precautions,
+      </if>
+      <if test="operationName != null" >
+        operation_name,
+      </if>
+      <if test="operationAfter != null" >
+        operation_after,
+      </if>
+      <if test="surgicalConsiderations != null" >
+        surgical_considerations,
+      </if>
+      <if test="medicalNumber != null" >
+        medical_number,
+      </if>
+      <if test="operationTime != null" >
+        operation_time,
+      </if>
+      <if test="patientCondition != null" >
+        patient_condition,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="department != null" >
+        department,
+      </if>
+      <if test="bedNo != null" >
+        bed_no,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="joinDate != null" >
+        #{joinDate,jdbcType=DATE},
+      </if>
+      <if test="patientName != null" >
+        #{patientName,jdbcType=VARCHAR},
+      </if>
+      <if test="briefCondition != null" >
+        #{briefCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="preoperativeDiagnosis != null" >
+        #{preoperativeDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="surgicalIndication != null" >
+        #{surgicalIndication,jdbcType=VARCHAR},
+      </if>
+      <if test="prposedSurgeryNamemethod != null" >
+        #{prposedSurgeryNamemethod,jdbcType=VARCHAR},
+      </if>
+      <if test="smulatedAnesthesia != null" >
+        #{smulatedAnesthesia,jdbcType=VARCHAR},
+      </if>
+      <if test="precautions != null" >
+        #{precautions,jdbcType=VARCHAR},
+      </if>
+      <if test="operationName != null" >
+        #{operationName,jdbcType=VARCHAR},
+      </if>
+      <if test="operationAfter != null" >
+        #{operationAfter,jdbcType=VARCHAR},
+      </if>
+      <if test="surgicalConsiderations != null" >
+        #{surgicalConsiderations,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalNumber != null" >
+        #{medicalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="operationTime != null" >
+        #{operationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="patientCondition != null" >
+        #{patientCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="department != null" >
+        #{department,jdbcType=INTEGER},
+      </if>
+      <if test="bedNo != null" >
+        #{bedNo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.PostoperativeRecord" >
+    update postoperative_record
+    <set >
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=DATE},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="joinDate != null" >
+        join_date = #{joinDate,jdbcType=DATE},
+      </if>
+      <if test="patientName != null" >
+        patient_name = #{patientName,jdbcType=VARCHAR},
+      </if>
+      <if test="briefCondition != null" >
+        brief_condition = #{briefCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="preoperativeDiagnosis != null" >
+        preoperative_diagnosis = #{preoperativeDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="surgicalIndication != null" >
+        surgical_indication = #{surgicalIndication,jdbcType=VARCHAR},
+      </if>
+      <if test="prposedSurgeryNamemethod != null" >
+        prposed_surgery_namemethod = #{prposedSurgeryNamemethod,jdbcType=VARCHAR},
+      </if>
+      <if test="smulatedAnesthesia != null" >
+        smulated_anesthesia = #{smulatedAnesthesia,jdbcType=VARCHAR},
+      </if>
+      <if test="precautions != null" >
+        precautions = #{precautions,jdbcType=VARCHAR},
+      </if>
+      <if test="operationName != null" >
+        operation_name = #{operationName,jdbcType=VARCHAR},
+      </if>
+      <if test="operationAfter != null" >
+        operation_after = #{operationAfter,jdbcType=VARCHAR},
+      </if>
+      <if test="surgicalConsiderations != null" >
+        surgical_considerations = #{surgicalConsiderations,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalNumber != null" >
+        medical_number = #{medicalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="operationTime != null" >
+        operation_time = #{operationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="patientCondition != null" >
+        patient_condition = #{patientCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="department != null" >
+        department = #{department,jdbcType=INTEGER},
+      </if>
+      <if test="bedNo != null" >
+        bed_no = #{bedNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.PostoperativeRecord" >
+    update postoperative_record
+    set create_date = #{createDate,jdbcType=DATE},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=DATE},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      join_date = #{joinDate,jdbcType=DATE},
+      patient_name = #{patientName,jdbcType=VARCHAR},
+      brief_condition = #{briefCondition,jdbcType=VARCHAR},
+      preoperative_diagnosis = #{preoperativeDiagnosis,jdbcType=VARCHAR},
+      surgical_indication = #{surgicalIndication,jdbcType=VARCHAR},
+      prposed_surgery_namemethod = #{prposedSurgeryNamemethod,jdbcType=VARCHAR},
+      smulated_anesthesia = #{smulatedAnesthesia,jdbcType=VARCHAR},
+      precautions = #{precautions,jdbcType=VARCHAR},
+      operation_name = #{operationName,jdbcType=VARCHAR},
+      operation_after = #{operationAfter,jdbcType=VARCHAR},
+      surgical_considerations = #{surgicalConsiderations,jdbcType=VARCHAR},
+      medical_number = #{medicalNumber,jdbcType=VARCHAR},
+      operation_time = #{operationTime,jdbcType=VARCHAR},
+      patient_condition = #{patientCondition,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=INTEGER},
+      department = #{department,jdbcType=INTEGER},
+      bed_no = #{bedNo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

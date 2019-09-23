@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<div th:replace="public/base_layout :: html"></div>
+
+
+</head>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+
+<!-- BEGIN: Header-->
+<div th:replace="public/base_header :: html"></div>
+<!-- END: Header-->
+<!-- BEGIN: SideNav-->
+<div th:replace="public/left-aside :: html"></div>
+<!-- END: SideNav-->
+
+<!-- BEGIN: Page Main-->
+<div id="main">
+    <div class="row">
+        <div class="content-wrapper-before blue-grey lighten-5"></div>
+        <div class="col s12">
+            <div class="container">
+                <!-- START CONTENT -->
+                <iframe id="frameContainer" name="frameContainerName" class="framecontent" frameborder="0"
+                        height="1000px"
+                        width="100%" scrolling="auto" src=""></iframe>
+                <!-- END CONTENT -->
+
+                <div th:replace="public/right-aside :: html"></div>
+            </div>
+            <!-- END WRAPPER -->
+        </div>
+    </div>
+</div>
+<!-- END MAIN -->
+<!-- START FOOTER -->
+<div th:replace="public/footer :: html"></div>
+<div th:replace="public/right-aside :: html"></div>
+
+<!-- BEGIN THEME  JS-->
+<script th:src="@{/accounts/assets/app-assets/js/plugins.js}" type="text/javascript"></script>
+<script th:src="@{/accounts/assets/app-assets/js/custom/custom-script.js}" type="text/javascript"></script>
+<!-- END THEME  JS-->
+<!-- BEGIN PAGE LEVEL JS-->
+<!--引入自定义的layer包-->
+<script type="text/javascript" th:src="@{/accounts/assets/global/js/ahsj.layer.js}"></script>
+<!--引入公司jar包-->
+<script type="text/javascript" th:src="@{/accounts/assets/global/js/anhuishangjue.ajax.js}"></script>
+
+
+<script th:inline="javascript">
+    // Toast Notification
+    $(window).on('load', function () {
+
+        setTimeout(function () {
+            M.toast({html:'<span>欢迎使用中柬第一医院信息管理系统.</span>'});
+        }, 3000);
+
+        window.onresize = function () {
+            // var contentHeight = $(window).height() - $(".page-topbar").height() - $(".page-footer").height();
+            // $('#frameContainer').height(contentHeight);
+        };
+
+    });
+
+    initMenu();
+
+    function initMenu() {
+        $.ajax({
+            type: "post",
+            url: CTX + "/api/menu/layout/lstMenu.ahsj",
+            dataType: "json",
+            headers: {
+                Authorization: "Bearer " + TOKEN
+            },
+            success: function (msg) {
+                //$('#headerMenu').append(msg['header']);
+                if (msg['leftMenu'] == null || msg['leftMenu'] == '') {
+                    dialog.warn("沒有菜单权限，请联系管理员设置权限！");
+                    return;
+                }
+                $('#slide-out').append(msg['leftMenu']);
+                $('.collapsible').collapsible();
+                $('.collapsible li ul li').click(function () {
+                    $("#frameContainer").attr("src", $(this).find("a").attr("rel") + "?token=" + TOKEN);
+                    $(".collapsible-body.active").removeClass('active');
+                    $(".collapsible li ul li").removeClass('active');
+                    //修改本项样式
+                    $(this).addClass('active');
+                    $(this).children('.collapsible-body').addClass('active');
+                });
+
+                // $('.collapsible li').click(function() {
+                // if ("/kcppc-oa" == $(this).find("a").attr("rel")) {
+                //     alert("开发中");
+                //     return;
+                // }
+
+
+                // $("#leftMenu").find("li:gt(0)").attr("class","");
+                // $("#selectData").remove();
+                // $(this).attr("class","active");
+
+                // $(this).parents("li").attr("class","active open");
+                // $(this).parents("li").find("a:first").append("<span id='selectData' class='selected'></span>");
+                //
+                // $("#menuName").html($(this).parents("li").find("span").html());
+                // $("#subMenuName").html($(this).find("a").html());
+                // });
+
+                $(".sub-menu li:first").trigger("click");
+            },
+            error: function (data) {
+                M.toast({html:"网络异常"});
+            }
+        });
+    }
+
+</script>
+</body>
+
+</html>

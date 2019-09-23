@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisHospitalizedRecordMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisHospitalizedRecord">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="create_user_id" property="createUserId" jdbcType="BIGINT"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="BIGINT"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="count" property="count" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="job" property="job" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="INTEGER"/>
+        <result column="work_unit" property="workUnit" jdbcType="VARCHAR"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="is_married" property="isMarried" jdbcType="INTEGER"/>
+        <result column="for_history" property="forHistory" jdbcType="VARCHAR"/>
+        <result column="reliability_level" property="reliabilityLevel" jdbcType="VARCHAR"/>
+        <result column="birthplace" property="birthplace" jdbcType="VARCHAR"/>
+        <result column="admission_date" property="admissionDate" jdbcType="TIMESTAMP"/>
+        <result column="nation" property="nation" jdbcType="VARCHAR"/>
+        <result column="record_date" property="recordDate" jdbcType="TIMESTAMP"/>
+        <result column="complaint" property="complaint" jdbcType="VARCHAR"/>
+        <result column="history_present_illness" property="historyPresentIllness" jdbcType="VARCHAR"/>
+        <result column="personal_history" property="personalHistory" jdbcType="VARCHAR"/>
+        <result column="marital_history" property="maritalHistory" jdbcType="VARCHAR"/>
+        <result column="family_history" property="familyHistory" jdbcType="VARCHAR"/>
+        <result column="health_checkup" property="healthCheckup" jdbcType="VARCHAR"/>
+        <result column="speciality_checkup" property="specialityCheckup" jdbcType="VARCHAR"/>
+        <result column="auxiliary_examination" property="auxiliaryExamination" jdbcType="VARCHAR"/>
+        <result column="tentative_diagnosis" property="tentativeDiagnosis" jdbcType="VARCHAR"/>
+        <result column="doctor_id" property="doctorId" jdbcType="VARCHAR"/>
+        <result column="doctor_sign" property="doctorSign" jdbcType="TIMESTAMP"/>
+        <result column="idcard" property="idcard" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, create_user_id, create_date, update_user_id, update_date, count, name, job, sex, 
+    work_unit, age, address, is_married, for_history, reliability_level, birthplace, 
+    admission_date, nation, record_date, complaint, history_present_illness, personal_history, 
+    marital_history, family_history, health_checkup, speciality_checkup, auxiliary_examination, 
+    tentative_diagnosis, doctor_id, doctor_sign, idcard
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from his_hospitalized_record
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_hospitalized_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisHospitalizedRecord">
+    insert into his_hospitalized_record (id, create_user_id, create_date, 
+      update_user_id, update_date, count, 
+      name, job, sex, work_unit, 
+      age, address, is_married, 
+      for_history, reliability_level, birthplace, 
+      admission_date, nation, record_date, 
+      complaint, history_present_illness, personal_history, 
+      marital_history, family_history, health_checkup, 
+      speciality_checkup, auxiliary_examination, 
+      tentative_diagnosis, doctor_id, doctor_sign, 
+      idcard)
+    values (#{id,jdbcType=BIGINT}, #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, #{count,jdbcType=BIGINT}, 
+      #{name,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{workUnit,jdbcType=VARCHAR}, 
+      #{age,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{isMarried,jdbcType=INTEGER}, 
+      #{forHistory,jdbcType=VARCHAR}, #{reliabilityLevel,jdbcType=VARCHAR}, #{birthplace,jdbcType=VARCHAR}, 
+      #{admissionDate,jdbcType=TIMESTAMP}, #{nation,jdbcType=VARCHAR}, #{recordDate,jdbcType=TIMESTAMP}, 
+      #{complaint,jdbcType=VARCHAR}, #{historyPresentIllness,jdbcType=VARCHAR}, #{personalHistory,jdbcType=VARCHAR}, 
+      #{maritalHistory,jdbcType=VARCHAR}, #{familyHistory,jdbcType=VARCHAR}, #{healthCheckup,jdbcType=VARCHAR}, 
+      #{specialityCheckup,jdbcType=VARCHAR}, #{auxiliaryExamination,jdbcType=VARCHAR}, 
+      #{tentativeDiagnosis,jdbcType=VARCHAR}, #{doctorId,jdbcType=VARCHAR}, #{doctorSign,jdbcType=TIMESTAMP}, 
+      #{idcard,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisHospitalizedRecord">
+        insert into his_hospitalized_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="count != null">
+                count,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="job != null">
+                job,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="workUnit != null">
+                work_unit,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="isMarried != null">
+                is_married,
+            </if>
+            <if test="forHistory != null">
+                for_history,
+            </if>
+            <if test="reliabilityLevel != null">
+                reliability_level,
+            </if>
+            <if test="birthplace != null">
+                birthplace,
+            </if>
+            <if test="admissionDate != null">
+                admission_date,
+            </if>
+            <if test="nation != null">
+                nation,
+            </if>
+            <if test="recordDate != null">
+                record_date,
+            </if>
+            <if test="complaint != null">
+                complaint,
+            </if>
+            <if test="historyPresentIllness != null">
+                history_present_illness,
+            </if>
+            <if test="personalHistory != null">
+                personal_history,
+            </if>
+            <if test="maritalHistory != null">
+                marital_history,
+            </if>
+            <if test="familyHistory != null">
+                family_history,
+            </if>
+            <if test="healthCheckup != null">
+                health_checkup,
+            </if>
+            <if test="specialityCheckup != null">
+                speciality_checkup,
+            </if>
+            <if test="auxiliaryExamination != null">
+                auxiliary_examination,
+            </if>
+            <if test="tentativeDiagnosis != null">
+                tentative_diagnosis,
+            </if>
+            <if test="doctorId != null">
+                doctor_id,
+            </if>
+            <if test="doctorSign != null">
+                doctor_sign,
+            </if>
+            <if test="idcard != null">
+                idcard,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="count != null">
+                #{count,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="job != null">
+                #{job,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="workUnit != null">
+                #{workUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="isMarried != null">
+                #{isMarried,jdbcType=INTEGER},
+            </if>
+            <if test="forHistory != null">
+                #{forHistory,jdbcType=VARCHAR},
+            </if>
+            <if test="reliabilityLevel != null">
+                #{reliabilityLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="birthplace != null">
+                #{birthplace,jdbcType=VARCHAR},
+            </if>
+            <if test="admissionDate != null">
+                #{admissionDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="nation != null">
+                #{nation,jdbcType=VARCHAR},
+            </if>
+            <if test="recordDate != null">
+                #{recordDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="complaint != null">
+                #{complaint,jdbcType=VARCHAR},
+            </if>
+            <if test="historyPresentIllness != null">
+                #{historyPresentIllness,jdbcType=VARCHAR},
+            </if>
+            <if test="personalHistory != null">
+                #{personalHistory,jdbcType=VARCHAR},
+            </if>
+            <if test="maritalHistory != null">
+                #{maritalHistory,jdbcType=VARCHAR},
+            </if>
+            <if test="familyHistory != null">
+                #{familyHistory,jdbcType=VARCHAR},
+            </if>
+            <if test="healthCheckup != null">
+                #{healthCheckup,jdbcType=VARCHAR},
+            </if>
+            <if test="specialityCheckup != null">
+                #{specialityCheckup,jdbcType=VARCHAR},
+            </if>
+            <if test="auxiliaryExamination != null">
+                #{auxiliaryExamination,jdbcType=VARCHAR},
+            </if>
+            <if test="tentativeDiagnosis != null">
+                #{tentativeDiagnosis,jdbcType=VARCHAR},
+            </if>
+            <if test="doctorId != null">
+                #{doctorId,jdbcType=VARCHAR},
+            </if>
+            <if test="doctorSign != null">
+                #{doctorSign,jdbcType=TIMESTAMP},
+            </if>
+            <if test="idcard != null">
+                #{idcard,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisHospitalizedRecord">
+        update his_hospitalized_record
+        <set>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="count != null">
+                count = #{count,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="job != null">
+                job = #{job,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="workUnit != null">
+                work_unit = #{workUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="isMarried != null">
+                is_married = #{isMarried,jdbcType=INTEGER},
+            </if>
+            <if test="forHistory != null">
+                for_history = #{forHistory,jdbcType=VARCHAR},
+            </if>
+            <if test="reliabilityLevel != null">
+                reliability_level = #{reliabilityLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="birthplace != null">
+                birthplace = #{birthplace,jdbcType=VARCHAR},
+            </if>
+            <if test="admissionDate != null">
+                admission_date = #{admissionDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="nation != null">
+                nation = #{nation,jdbcType=VARCHAR},
+            </if>
+            <if test="recordDate != null">
+                record_date = #{recordDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="complaint != null">
+                complaint = #{complaint,jdbcType=VARCHAR},
+            </if>
+            <if test="historyPresentIllness != null">
+                history_present_illness = #{historyPresentIllness,jdbcType=VARCHAR},
+            </if>
+            <if test="personalHistory != null">
+                personal_history = #{personalHistory,jdbcType=VARCHAR},
+            </if>
+            <if test="maritalHistory != null">
+                marital_history = #{maritalHistory,jdbcType=VARCHAR},
+            </if>
+            <if test="familyHistory != null">
+                family_history = #{familyHistory,jdbcType=VARCHAR},
+            </if>
+            <if test="healthCheckup != null">
+                health_checkup = #{healthCheckup,jdbcType=VARCHAR},
+            </if>
+            <if test="specialityCheckup != null">
+                speciality_checkup = #{specialityCheckup,jdbcType=VARCHAR},
+            </if>
+            <if test="auxiliaryExamination != null">
+                auxiliary_examination = #{auxiliaryExamination,jdbcType=VARCHAR},
+            </if>
+            <if test="tentativeDiagnosis != null">
+                tentative_diagnosis = #{tentativeDiagnosis,jdbcType=VARCHAR},
+            </if>
+            <if test="doctorId != null">
+                doctor_id = #{doctorId,jdbcType=VARCHAR},
+            </if>
+            <if test="doctorSign != null">
+                doctor_sign = #{doctorSign,jdbcType=TIMESTAMP},
+            </if>
+            <if test="idcard != null">
+                idcard = #{idcard,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisHospitalizedRecord">
+    update his_hospitalized_record
+    set create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      count = #{count,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      work_unit = #{workUnit,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      is_married = #{isMarried,jdbcType=INTEGER},
+      for_history = #{forHistory,jdbcType=VARCHAR},
+      reliability_level = #{reliabilityLevel,jdbcType=VARCHAR},
+      birthplace = #{birthplace,jdbcType=VARCHAR},
+      admission_date = #{admissionDate,jdbcType=TIMESTAMP},
+      nation = #{nation,jdbcType=VARCHAR},
+      record_date = #{recordDate,jdbcType=TIMESTAMP},
+      complaint = #{complaint,jdbcType=VARCHAR},
+      history_present_illness = #{historyPresentIllness,jdbcType=VARCHAR},
+      personal_history = #{personalHistory,jdbcType=VARCHAR},
+      marital_history = #{maritalHistory,jdbcType=VARCHAR},
+      family_history = #{familyHistory,jdbcType=VARCHAR},
+      health_checkup = #{healthCheckup,jdbcType=VARCHAR},
+      speciality_checkup = #{specialityCheckup,jdbcType=VARCHAR},
+      auxiliary_examination = #{auxiliaryExamination,jdbcType=VARCHAR},
+      tentative_diagnosis = #{tentativeDiagnosis,jdbcType=VARCHAR},
+      doctor_id = #{doctorId,jdbcType=VARCHAR},
+      doctor_sign = #{doctorSign,jdbcType=TIMESTAMP},
+      idcard = #{idcard,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <!--自定义-->
+    <select id="countByIdCard" parameterType="java.lang.String">
+select count(1)  from  his_hospitalized_record where   idcard = #{idcard,jdbcType=VARCHAR}
+  </select>
+</mapper>

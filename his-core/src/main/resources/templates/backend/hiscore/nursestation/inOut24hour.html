@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+<!-- Form with validation -->
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title">24小时内出入院记录</h4><label style="color:black">Admission records within 24 hours
+            </label>
+                <form class="col s12" id="sendForm" action="#">
+                    <input type="hidden" id="id" name="id" >
+                    <input type="hidden" id="patientId" name="patientId" th:value="${hisPatientInfo.id}">
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="name" name="name" type="text" th:value="${hisPatientInfo.name}"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label for="name">姓 名<span style="font-size: 12px">(name
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="location" name="location" type="text" th:value="${hisPatientInfo.location}"/>
+                            <label for="location">地 址<span style="font-size: 12px">(address)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="age" name="age" type="number" th:value="${hisPatientInfo.age}"
+                                   data-error=".errorTxt4">
+                            <div class="errorTxt4"></div>
+                            <label for="age">年龄<span style="font-size: 12px">(age)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="phonenumber" name="phonenumber" type="text" th:value="${hisPatientInfo.phonenumber}"
+                                   data-error=".errorTxt2">
+                            <div class="errorTxt2"></div>
+                            <label for="phonenumber">手机号<span style="font-size: 12px">(Phone Number
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="id_card" name="idcard" type="text" th:value="${hisPatientInfo.idcard}" th:readonly="true"
+                                   data-error=".errorTxt3">
+                            <div class="errorTxt3"></div>
+                            <label for="id_card">身份证号<span style="font-size: 12px">(id card)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <select ahsj:select name="isMarried" id="isMarried" type="code" typeKey="is_married"
+                                    th:value="${hisPatientInfo.isMarried}">
+                            </select>
+                            <label for="isMarried">婚姻状况<span style="font-size: 12px">(marital status
+)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="height" name="height" type="number" th:value="${hisPatientInfo.height}" />
+                            <label for="height">身 高<span style="font-size: 12px">(height)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="weight" name="weight" type="number" th:value="${hisPatientInfo.weight}" />
+                            <label for="weight">体 重<span style="font-size: 12px">(weight
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <select ahsj:select name="sex" id="sex" type="code" typeKey="sex"
+                                    th:value="${hisPatientInfo.sex}">
+                            </select>
+                            <label for="sex">性 别<span style="font-size: 12px">(sex
+)</span></label>
+                        </div>
+                    </div>
+
+                    <!--另外添加字段-->
+
+                    <div class="row">
+
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="birthplace" name="birthplace" type="text"/>
+                            <label for="birthplace">出生地<span style="font-size: 12px">(place of birth)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="job" name="job" type="text"/>
+                            <label for="job">职业<span style="font-size: 12px">(Career)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="employer" name="employer" type="text"/>
+                            <label for="employer">工作单位<span style="font-size: 12px">(employer)</span></label>
+                        </div>
+
+                    </div>
+
+                    <!--住院相关-->
+
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="medicalhistory" name="medicalhistory" type="text"/>
+                            <label for="medicalhistory">病史陈述者<span style="font-size: 12px">(Medical history presenter)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="complaint" name="complaint" type="text"/>
+                            <label for="complaint">主诉<span style="font-size: 12px">(Chief complaint)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="treatment" name="treatment" type="text"/>
+                            <label for="treatment">诊治经过<span style="font-size: 12px">(Diagnosis and treatment)</span></label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4 jeinput">
+                            <input id="inhospitaltime"  class="jeinput" name="inhospitaltime" type="text" data-error=".errorTxt1"/>
+                            <div class="errorTxt1"></div>
+                            <label for="inhospitaltime">入院时间<span style="font-size: 12px">(Admission time)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="insituation" name="insituation" type="text"/>
+                            <label for="insituation">入院情况<span style="font-size: 12px">(Admission situation)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="indiagnosis" name="indiagnosis" type="text"/>
+                            <label for="indiagnosis">入院诊断<span style="font-size: 12px">(Admission diagnosis)</span></label>
+                        </div>
+                    </div>
+
+
+
+                        <div class="row">
+                            <div class="input-field col s4 l4 xl4 jeinput">
+                                <input id="outhospitaltime"  class="jeinput" name="outhospitaltime" type="text" data-error=".errorTxt1"/>
+                                <div class="errorTxt1"></div>
+                                <label for="outhospitaltime">出院时间<span style="font-size: 12px">(Discharge time)</span></label>
+                            </div>
+                            <div class="input-field col s4 l4 xl4">
+                                <input id="outsituation" name="outsituation" type="text"/>
+                                <label for="outsituation">出院情况<span style="font-size: 12px">(Discharge situation)</span></label>
+                            </div>
+                            <div class="input-field col s4 l4 xl4">
+                                <input id="outdiagnosis" name="outdiagnosis" type="text"/>
+                                <label for="outdiagnosis">出院诊断<span style="font-size: 12px">(Discharge diagnosis)</span></label>
+                            </div>
+                        </div>
+
+
+
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="outinstructions" name="outinstructions" type="text"/>
+                            <label for="outinstructions">出院医嘱<span style="font-size: 12px">(Discharge Instructions)</span></label>
+                        </div>
+
+                        <div class="input-field col s4 l4 xl4">
+                            <select id="doctor" name="doctor"></select>
+                            <label for="doctor">医师签名<span style="font-size: 12px">(Physician signature)</span></label>
+                        </div>
+
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="remarks" name="remarks" type="text"/>
+                            <label for="remarks">备注<span style="font-size: 12px">(remarks)</span></label>
+                        </div>
+                        <!--按钮-->
+
+
+                    </div>
+
+                    <div class="row" style="margin-bottom: 20px">
+                        <div class="col s12 l12 xl12 " >
+                            <button id="send_btn" class="btn cyan waves-effect waves-light right" type="submit" name="action">提 交（submit ）
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="doctorId" th:value="${doctorId}"/>
+<input type="hidden" id="hospitalnumber" th:value="${hospitalnumber}"/>
+<input type="hidden" id="userId" th:value="${userId}"/>
+
+
+<!-- ================================================
+Scripts
+================================================ -->
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+
+    var enLang = {
+        name  : "en",
+        month : ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
+        weeks : [ "SUN","MON","TUR","WED","THU","FRI","SAT" ],
+        times : ["Hour","Minute","Second"],
+        timetxt: ["Time","Start Time","End Time"],
+        backtxt:"Back",
+        clear : "Clear",
+        today : "Now",
+        yes   : "Confirm",
+        close : "Close"
+    }
+    jeDate("#inhospitaltime",{
+        theme:{bgcolor:"#00A1CB",pnColor:"#00CCFF"},
+        // festival:true,
+        minDate:"1900-01-01",              //最小日期
+        maxDate:"2099-12-31",              //最大日期
+        format: "YYYY-MM-DD hh:mm:ss"
+    });
+    jeDate("#outhospitaltime",{
+        theme:{bgcolor:"#00A1CB",pnColor:"#00CCFF"},
+        // festival:true,
+        minDate:"1900-01-01",              //最小日期
+        maxDate:"2099-12-31",              //最大日期
+        format: "YYYY-MM-DD hh:mm:ss"
+    });
+
+    $(document).ready(function() {
+        //病房
+        var nurIdSelect  = $("#doctor");
+
+        var flag = $('#doctorId').val();
+
+        console.log("queryS1111tring is" + flag);
+
+
+
+
+        $.getJSON(CTX+"/api/doctor/getAllDoctor.ahsj?&token="+TOKEN, function (result){
+            if (flag == null || flag == "" ){
+                nurIdSelect.prepend("<option value='0'>选择医师</option>");
+
+
+                $(result).each(function (i) {
+                    nurIdSelect.append("<option value='" + this.userId + "'>" + this.name + "</option>")
+                });
+
+
+            }else {
+                for (var j = 0;j<result.length;++j){
+                    if (flag == result[j].userId){
+
+                        nurIdSelect.append("<option value='" + result[j].userId + "'>" + result[j].name + "</option>");
+                    }
+                }
+                $(result).each(function (i) {
+                    nurIdSelect.append("<option value='" + this.userId + "'>" + this.name + "</option>")
+                })
+            }
+
+            nurIdSelect.formSelect();
+        })
+    });
+
+
+
+
+
+    $(function () {
+        formCheck();
+
+    });
+
+    function formCheck() {
+        $("#sendForm").validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 1
+                },
+                phonenumber: {
+                    required: true,
+                    minlength: 1
+                },
+                idcard: {
+                    required: true,
+                    minlength: 1
+                },
+                age: {
+                    required: true,
+                    minlength: 1
+                },
+
+
+            },
+            messages: {
+                name: {
+                    required: "请输入名称",
+                    minlength: "最少包含1个字符"
+                },
+                phonenumber: {
+                    required: "请输入手机号",
+                    minlength: "最少输入1个字符"
+                },
+                idcard: {
+                    required: "请输入身份证号码",
+                    minlength: "最少输入1个字符"
+                },
+                age: {
+                    required: "请输入病人年龄",
+                    minlength: "最少输入1个字符"
+                }
+
+            },
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+                dialog.confirm('确定提交吗?', function (index, layero){
+                    var queryString = $('#sendForm').serialize();
+                    console.log("queryString is" + queryString);
+
+                    var userId = $("#userId").val();
+                    var doctorId = $("#doctorId").val();
+                    var hospitalnumber = $("#hospitalnumber").val();
+
+                    $.ahsjajax(
+                        CTX + "/api/nursestation/inOut24hourSave.ahsj?token=" + TOKEN+"&doctorId="+doctorId+"&hospitalnumber="+hospitalnumber,
+                        queryString,
+                        function (msg) {
+                            if (msg.success) {
+                                M.toast({html: msg.message});
+                                // parent.grid.search();
+                                dialog.parentclose();
+                                return false;
+                            } else {
+                                M.toast({html: msg.message});
+                                return false;
+                            }
+                        },
+                        function () {
+                            M.toast({html: "网络异常"});
+                            return false;
+                        }
+                    );});
+            }
+
+        });
+    }
+
+
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahsj.hiscore.dao.HisInfusionMapper">
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisInfusion">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="record_id" jdbcType="VARCHAR" property="recordId" />
+    <result column="hosptalregist_number" jdbcType="VARCHAR" property="hosptalregistNumber" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="patient_id" jdbcType="BIGINT" property="patientId" />
+    <result column="usages" jdbcType="VARCHAR" property="usages" />
+    <result column="intervals" jdbcType="INTEGER" property="intervals" />
+    <result column="speed" jdbcType="VARCHAR" property="speed" />
+    <result column="duration" jdbcType="VARCHAR" property="duration" />
+    <result column="drugs_numb" jdbcType="VARCHAR" property="drugsNumb" />
+    <result column="drugname" jdbcType="VARCHAR" property="drugname" />
+    <result column="single_dose" jdbcType="VARCHAR" property="singleDose" />
+    <result column="single_unit" jdbcType="VARCHAR" property="singleUnit" />
+    <result column="is_skin_test" jdbcType="INTEGER" property="isSkinTest" />
+    <result column="dosage" jdbcType="VARCHAR" property="dosage" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_user_id" jdbcType="BIGINT" property="updateUserId" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="project_id" jdbcType="BIGINT" property="projectId" />
+    <result column="nurse_id" jdbcType="BIGINT" property="nurseId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, record_id, hosptalregist_number, start_time, patient_id, usages, intervals, speed, 
+    duration, drugs_numb, drugname, single_dose, single_unit, is_skin_test, dosage, unit, 
+    price, create_user_id, create_date, update_user_id, update_date, remarks, number,
+    type, project_id, nurse_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from his_infusion
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_infusion
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisInfusion">
+    insert into his_infusion (id, record_id, hosptalregist_number, 
+      start_time, patient_id, usages, 
+      intervals, speed, duration, 
+      drugs_numb, drugname, single_dose, 
+      single_unit, is_skin_test, dosage, 
+      unit, price, create_user_id, 
+      create_date, update_user_id, update_date,
+      remarks, number, type, 
+      project_id, nurse_id)
+    values (#{id,jdbcType=BIGINT}, #{recordId,jdbcType=VARCHAR}, #{hosptalregistNumber,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{patientId,jdbcType=BIGINT}, #{usages,jdbcType=VARCHAR}, 
+      #{intervals,jdbcType=INTEGER}, #{speed,jdbcType=VARCHAR}, #{duration,jdbcType=VARCHAR}, 
+      #{drugsNumb,jdbcType=VARCHAR}, #{drugname,jdbcType=VARCHAR}, #{singleDose,jdbcType=VARCHAR}, 
+      #{singleUnit,jdbcType=VARCHAR}, #{isSkinTest,jdbcType=INTEGER}, #{dosage,jdbcType=VARCHAR}, 
+      #{unit,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{createUserId,jdbcType=BIGINT}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP},
+      #{remarks,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{projectId,jdbcType=BIGINT}, #{nurseId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisInfusion">
+    insert into his_infusion
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="recordId != null">
+        record_id,
+      </if>
+      <if test="hosptalregistNumber != null">
+        hosptalregist_number,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="patientId != null">
+        patient_id,
+      </if>
+      <if test="usages != null">
+        usages,
+      </if>
+      <if test="intervals != null">
+        intervals,
+      </if>
+      <if test="speed != null">
+        speed,
+      </if>
+      <if test="duration != null">
+        duration,
+      </if>
+      <if test="drugsNumb != null">
+        drugs_numb,
+      </if>
+      <if test="drugname != null">
+        drugname,
+      </if>
+      <if test="singleDose != null">
+        single_dose,
+      </if>
+      <if test="singleUnit != null">
+        single_unit,
+      </if>
+      <if test="isSkinTest != null">
+        is_skin_test,
+      </if>
+      <if test="dosage != null">
+        dosage,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateUserId != null">
+        update_user_id,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="nurseId != null">
+        nurse_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="recordId != null">
+        #{recordId,jdbcType=VARCHAR},
+      </if>
+      <if test="hosptalregistNumber != null">
+        #{hosptalregistNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientId != null">
+        #{patientId,jdbcType=BIGINT},
+      </if>
+      <if test="usages != null">
+        #{usages,jdbcType=VARCHAR},
+      </if>
+      <if test="intervals != null">
+        #{intervals,jdbcType=INTEGER},
+      </if>
+      <if test="speed != null">
+        #{speed,jdbcType=VARCHAR},
+      </if>
+      <if test="duration != null">
+        #{duration,jdbcType=VARCHAR},
+      </if>
+      <if test="drugsNumb != null">
+        #{drugsNumb,jdbcType=VARCHAR},
+      </if>
+      <if test="drugname != null">
+        #{drugname,jdbcType=VARCHAR},
+      </if>
+      <if test="singleDose != null">
+        #{singleDose,jdbcType=VARCHAR},
+      </if>
+      <if test="singleUnit != null">
+        #{singleUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="isSkinTest != null">
+        #{isSkinTest,jdbcType=INTEGER},
+      </if>
+      <if test="dosage != null">
+        #{dosage,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="nurseId != null">
+        #{nurseId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisInfusion">
+    update his_infusion
+    <set>
+      <if test="recordId != null">
+        record_id = #{recordId,jdbcType=VARCHAR},
+      </if>
+      <if test="hosptalregistNumber != null">
+        hosptalregist_number = #{hosptalregistNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientId != null">
+        patient_id = #{patientId,jdbcType=BIGINT},
+      </if>
+      <if test="usages != null">
+        usages = #{usages,jdbcType=VARCHAR},
+      </if>
+      <if test="intervals != null">
+        intervals = #{intervals,jdbcType=INTEGER},
+      </if>
+      <if test="speed != null">
+        speed = #{speed,jdbcType=VARCHAR},
+      </if>
+      <if test="duration != null">
+        duration = #{duration,jdbcType=VARCHAR},
+      </if>
+      <if test="drugsNumb != null">
+        drugs_numb = #{drugsNumb,jdbcType=VARCHAR},
+      </if>
+      <if test="drugname != null">
+        drugname = #{drugname,jdbcType=VARCHAR},
+      </if>
+      <if test="singleDose != null">
+        single_dose = #{singleDose,jdbcType=VARCHAR},
+      </if>
+      <if test="singleUnit != null">
+        single_unit = #{singleUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="isSkinTest != null">
+        is_skin_test = #{isSkinTest,jdbcType=INTEGER},
+      </if>
+      <if test="dosage != null">
+        dosage = #{dosage,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="nurseId != null">
+        nurse_id = #{nurseId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisInfusion">
+    update his_infusion
+    set record_id = #{recordId,jdbcType=VARCHAR},
+      hosptalregist_number = #{hosptalregistNumber,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      patient_id = #{patientId,jdbcType=BIGINT},
+      usages = #{usages,jdbcType=VARCHAR},
+      intervals = #{intervals,jdbcType=INTEGER},
+      speed = #{speed,jdbcType=VARCHAR},
+      duration = #{duration,jdbcType=VARCHAR},
+      drugs_numb = #{drugsNumb,jdbcType=VARCHAR},
+      drugname = #{drugname,jdbcType=VARCHAR},
+      single_dose = #{singleDose,jdbcType=VARCHAR},
+      single_unit = #{singleUnit,jdbcType=VARCHAR},
+      is_skin_test = #{isSkinTest,jdbcType=INTEGER},
+      dosage = #{dosage,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      number = #{number,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      project_id = #{projectId,jdbcType=BIGINT},
+      nurse_id = #{nurseId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--批量插入-->
+  <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">
+    <selectKey resultType="long" keyProperty="id" order="AFTER">
+      SELECT
+      LAST_INSERT_ID()
+    </selectKey>
+    insert into his_infusion (id, record_id, hosptalregist_number, start_time, patient_id, usages, intervals, speed,
+    duration, drugs_numb, drugname, single_dose, single_unit, is_skin_test, dosage, unit,
+    price, create_user_id, create_date, update_user_id, update_date, remarks, number,
+    type, project_id, nurse_id)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.id,jdbcType=BIGINT}, #{item.recordId,jdbcType=VARCHAR}, #{item.hosptalregistNumber,jdbcType=VARCHAR},
+      #{item.startTime,jdbcType=TIMESTAMP}, #{item.patientId,jdbcType=BIGINT}, #{item.usages,jdbcType=VARCHAR},
+      #{item.intervals,jdbcType=INTEGER}, #{item.speed,jdbcType=VARCHAR}, #{item.duration,jdbcType=VARCHAR},
+      #{item.drugsNumb,jdbcType=VARCHAR}, #{item.drugname,jdbcType=VARCHAR}, #{item.singleDose,jdbcType=VARCHAR},
+      #{item.singleUnit,jdbcType=VARCHAR}, #{item.isSkinTest,jdbcType=INTEGER}, #{item.dosage,jdbcType=VARCHAR},
+      #{item.unit,jdbcType=VARCHAR}, #{item.price,jdbcType=DECIMAL}, #{item.createUserId,jdbcType=BIGINT},
+      #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=BIGINT}, #{item.updateDate,jdbcType=TIMESTAMP},
+      #{item.remarks,jdbcType=VARCHAR}, #{item.number,jdbcType=VARCHAR}, #{item.type,jdbcType=INTEGER},
+      #{item.projectId,jdbcType=BIGINT}, #{item.nurseId,jdbcType=BIGINT})
+    </foreach>
+  </insert>
+
+  <!--根据HM开头编号查找输液单记录-->
+  <select id="listByHM" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
+    select distinct
+    a.record_id
+    ,a.hosptalregist_number
+    ,a.patient_id
+    ,a.nurse_id
+    ,a.number
+    ,a.start_time
+    ,a.create_date
+    ,c.name as nurseName
+    from his_infusion as a
+    LEFT JOIN his_user_nurse as b on b.user_id = a.nurse_id
+    LEFT JOIN his_nurse as c on b.nurse_id = c.id
+    LEFT JOIN his_medication_details as d on a.drugs_numb = d.id
+    where a.hosptalregist_number = #{parameter.hosptalregistNumber,jdbcType = VARCHAR}
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+  <!--根据HM开头编号查找输液单记录(不合并-->
+  <select id="listAllByHM" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
+    select
+    a.*
+    ,c.name as nurseName
+    ,d.small_unit as smallUnit
+    from his_infusion as a
+    LEFT JOIN his_user_nurse as b on b.user_id = a.nurse_id
+    LEFT JOIN his_nurse as c on b.nurse_id = c.id
+    LEFT JOIN his_medication_details as d on a.drugs_numb = d.id
+    where a.hosptalregist_number = #{parameter.hosptalregistNumber,jdbcType = VARCHAR}
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+    <!--返回list-->
+    <select id="listByHMForPrint" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        a.*
+        ,c.name as nurseName
+        ,d.count as countNumber
+        ,d.small_unit as smallUnit
+        ,e.name as patientName
+        from his_infusion as a
+        LEFT JOIN his_user_nurse as b on b.user_id = a.nurse_id
+        LEFT JOIN his_nurse as c on b.nurse_id = c.id
+        LEFT JOIN his_medication_details as d on a.drugs_numb = d.id
+        LEFT JOIN his_patient_info as e on a.patient_id = e.id
+        where a.hosptalregist_number = #{hosptalregistNumber,jdbcType = VARCHAR}
+    </select>
+
+  <select id="listByRecordForPrint" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        a.*
+        ,c.name as nurseName
+        ,d.count as countNumber
+        ,d.small_unit as smallUnit
+        ,h.sale_price
+        ,e.name as patient_name
+        ,f.medical_record_id as medical_record_number
+        from his_infusion as a
+        LEFT JOIN his_user_nurse as b on b.user_id = a.nurse_id
+        LEFT JOIN his_nurse as c on b.nurse_id = c.id
+        LEFT JOIN his_medication_details as d on a.drugs_numb = d.id
+        left join his_pharmacy_detail as h on h.drugs_numb = d.drugs_numb
+        LEFT JOIN his_patient_info as e on a.patient_id = e.id
+        left join his_medical_record as f on f.id = a.record_id
+        where a.record_id = #{recordId,jdbcType = VARCHAR}
+    </select>
+
+  <select id="selectByRecordId" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        SELECT Distinct
+            a.record_id,a.start_time,a.duration,a.number,
+			b.medical_record_id
+            FROM his_infusion AS a
+			LEFT JOIN his_medical_record AS b ON b.id = a.record_id
+			WHERE
+            a.record_id = #{parameter.recordId,jdbcType=VARCHAR}
+    </select>
+
+
+
+  <select id="infusionDrugDetailsList" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        SELECT
+            a.*,
+            c.sale_price
+            FROM his_infusion AS a
+            left join his_medication_details as b on b.id = a.drugs_numb
+            left join his_pharmacy_detail as c on c.drugs_numb = b.drugs_numb
+			WHERE
+            a.number = #{parameter.number,jdbcType=VARCHAR}
+    </select>
+
+
+  <!--通过编号删除-->
+  <delete id="deleteByNumber" parameterType="java.lang.String">
+    delete from his_infusion
+    where number = #{number,jdbcType=VARCHAR}
+  </delete>
+</mapper>

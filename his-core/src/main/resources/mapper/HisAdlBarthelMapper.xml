@@ -1,0 +1,718 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahsj.hiscore.dao.HisAdlBarthelMapper">
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisAdlBarthel">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="eat" jdbcType="INTEGER" property="eat" />
+    <result column="eatrate1" jdbcType="INTEGER" property="eatrate1" />
+    <result column="eatrate2" jdbcType="INTEGER" property="eatrate2" />
+    <result column="eatrate3" jdbcType="INTEGER" property="eatrate3" />
+    <result column="dateseat" jdbcType="TIMESTAMP" property="dateseat" />
+    <result column="shower" jdbcType="INTEGER" property="shower" />
+    <result column="showerrate1" jdbcType="INTEGER" property="showerrate1" />
+    <result column="showerrate2" jdbcType="INTEGER" property="showerrate2" />
+    <result column="datesshower" jdbcType="TIMESTAMP" property="datesshower" />
+    <result column="modification" jdbcType="INTEGER" property="modification" />
+    <result column="modificationrate1" jdbcType="INTEGER" property="modificationrate1" />
+    <result column="modificationrate2" jdbcType="INTEGER" property="modificationrate2" />
+    <result column="datesmodification" jdbcType="TIMESTAMP" property="datesmodification" />
+    <result column="wear" jdbcType="INTEGER" property="wear" />
+    <result column="wearrate1" jdbcType="INTEGER" property="wearrate1" />
+    <result column="wearrate2" jdbcType="INTEGER" property="wearrate2" />
+    <result column="wearrate3" jdbcType="INTEGER" property="wearrate3" />
+    <result column="dateswear" jdbcType="TIMESTAMP" property="dateswear" />
+    <result column="shit" jdbcType="INTEGER" property="shit" />
+    <result column="shitrate1" jdbcType="INTEGER" property="shitrate1" />
+    <result column="shitrate2" jdbcType="INTEGER" property="shitrate2" />
+    <result column="shitrate3" jdbcType="INTEGER" property="shitrate3" />
+    <result column="datesshit" jdbcType="TIMESTAMP" property="datesshit" />
+    <result column="pee" jdbcType="INTEGER" property="pee" />
+    <result column="peerate1" jdbcType="INTEGER" property="peerate1" />
+    <result column="peerate2" jdbcType="INTEGER" property="peerate2" />
+    <result column="peerate3" jdbcType="INTEGER" property="peerate3" />
+    <result column="datespee" jdbcType="TIMESTAMP" property="datespee" />
+    <result column="toilet" jdbcType="INTEGER" property="toilet" />
+    <result column="toiletrate1" jdbcType="INTEGER" property="toiletrate1" />
+    <result column="toiletrate2" jdbcType="INTEGER" property="toiletrate2" />
+    <result column="toiletrate3" jdbcType="INTEGER" property="toiletrate3" />
+    <result column="datestoilet" jdbcType="TIMESTAMP" property="datestoilet" />
+    <result column="bedsidechair" jdbcType="INTEGER" property="bedsidechair" />
+    <result column="bedsidechairrate1" jdbcType="INTEGER" property="bedsidechairrate1" />
+    <result column="bedsidechairrate2" jdbcType="INTEGER" property="bedsidechairrate2" />
+    <result column="bedsidechairrate3" jdbcType="INTEGER" property="bedsidechairrate3" />
+    <result column="bedsidechairrate4" jdbcType="INTEGER" property="bedsidechairrate4" />
+    <result column="datesbedsidechair" jdbcType="TIMESTAMP" property="datesbedsidechair" />
+    <result column="walk" jdbcType="INTEGER" property="walk" />
+    <result column="walkrate1" jdbcType="INTEGER" property="walkrate1" />
+    <result column="walkrate2" jdbcType="INTEGER" property="walkrate2" />
+    <result column="walkrate3" jdbcType="INTEGER" property="walkrate3" />
+    <result column="walkrate4" jdbcType="INTEGER" property="walkrate4" />
+    <result column="dateswalk" jdbcType="TIMESTAMP" property="dateswalk" />
+    <result column="stairs" jdbcType="INTEGER" property="stairs" />
+    <result column="stairsrate1" jdbcType="INTEGER" property="stairsrate1" />
+    <result column="stairsrate2" jdbcType="INTEGER" property="stairsrate2" />
+    <result column="stairsrate3" jdbcType="INTEGER" property="stairsrate3" />
+    <result column="datesstair" jdbcType="TIMESTAMP" property="datesstair" />
+    <result column="diagnosis" jdbcType="VARCHAR" property="diagnosis" />
+    <result column="hospitalnumber" jdbcType="VARCHAR" property="hospitalnumber" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_user_id" jdbcType="BIGINT" property="updateUserId" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, eat, eatrate1, eatrate2, eatrate3, dateseat, shower, showerrate1, showerrate2, 
+    datesshower, modification, modificationrate1, modificationrate2, datesmodification, 
+    wear, wearrate1, wearrate2, wearrate3, dateswear, shit, shitrate1, shitrate2, shitrate3, 
+    datesshit, pee, peerate1, peerate2, peerate3, datespee, toilet, toiletrate1, toiletrate2, 
+    toiletrate3, datestoilet, bedsidechair, bedsidechairrate1, bedsidechairrate2, bedsidechairrate3, 
+    bedsidechairrate4, datesbedsidechair, walk, walkrate1, walkrate2, walkrate3, walkrate4, 
+    dateswalk, stairs, stairsrate1, stairsrate2, stairsrate3, datesstair, diagnosis, 
+    hospitalnumber, create_user_id, create_date, update_user_id, update_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from his_adl_barthel
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_adl_barthel
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisAdlBarthel">
+    insert into his_adl_barthel (id, eat, eatrate1, 
+      eatrate2, eatrate3, dateseat, 
+      shower, showerrate1, showerrate2, 
+      datesshower, modification, modificationrate1, 
+      modificationrate2, datesmodification, 
+      wear, wearrate1, wearrate2, 
+      wearrate3, dateswear, shit, 
+      shitrate1, shitrate2, shitrate3, 
+      datesshit, pee, peerate1, 
+      peerate2, peerate3, datespee, 
+      toilet, toiletrate1, toiletrate2, 
+      toiletrate3, datestoilet, bedsidechair, 
+      bedsidechairrate1, bedsidechairrate2, bedsidechairrate3, 
+      bedsidechairrate4, datesbedsidechair, 
+      walk, walkrate1, walkrate2, 
+      walkrate3, walkrate4, dateswalk, 
+      stairs, stairsrate1, stairsrate2, 
+      stairsrate3, datesstair, diagnosis, 
+      hospitalnumber, create_user_id, create_date, 
+      update_user_id, update_date)
+    values (#{id,jdbcType=BIGINT}, #{eat,jdbcType=INTEGER}, #{eatrate1,jdbcType=INTEGER}, 
+      #{eatrate2,jdbcType=INTEGER}, #{eatrate3,jdbcType=INTEGER}, #{dateseat,jdbcType=TIMESTAMP}, 
+      #{shower,jdbcType=INTEGER}, #{showerrate1,jdbcType=INTEGER}, #{showerrate2,jdbcType=INTEGER},
+      #{datesshower,jdbcType=TIMESTAMP}, #{modification,jdbcType=INTEGER}, #{modificationrate1,jdbcType=INTEGER}, 
+      #{modificationrate2,jdbcType=INTEGER}, #{datesmodification,jdbcType=TIMESTAMP}, 
+      #{wear,jdbcType=INTEGER}, #{wearrate1,jdbcType=INTEGER}, #{wearrate2,jdbcType=INTEGER}, 
+      #{wearrate3,jdbcType=INTEGER}, #{dateswear,jdbcType=TIMESTAMP}, #{shit,jdbcType=INTEGER}, 
+      #{shitrate1,jdbcType=INTEGER}, #{shitrate2,jdbcType=INTEGER}, #{shitrate3,jdbcType=INTEGER}, 
+      #{datesshit,jdbcType=TIMESTAMP}, #{pee,jdbcType=INTEGER}, #{peerate1,jdbcType=INTEGER}, 
+      #{peerate2,jdbcType=INTEGER}, #{peerate3,jdbcType=INTEGER}, #{datespee,jdbcType=TIMESTAMP}, 
+      #{toilet,jdbcType=INTEGER}, #{toiletrate1,jdbcType=INTEGER}, #{toiletrate2,jdbcType=INTEGER}, 
+      #{toiletrate3,jdbcType=INTEGER}, #{datestoilet,jdbcType=TIMESTAMP}, #{bedsidechair,jdbcType=INTEGER}, 
+      #{bedsidechairrate1,jdbcType=INTEGER}, #{bedsidechairrate2,jdbcType=INTEGER}, #{bedsidechairrate3,jdbcType=INTEGER}, 
+      #{bedsidechairrate4,jdbcType=INTEGER}, #{datesbedsidechair,jdbcType=TIMESTAMP}, 
+      #{walk,jdbcType=INTEGER}, #{walkrate1,jdbcType=INTEGER}, #{walkrate2,jdbcType=INTEGER}, 
+      #{walkrate3,jdbcType=INTEGER}, #{walkrate4,jdbcType=INTEGER}, #{dateswalk,jdbcType=TIMESTAMP}, 
+      #{stairs,jdbcType=INTEGER}, #{stairsrate1,jdbcType=INTEGER}, #{stairsrate2,jdbcType=INTEGER}, 
+      #{stairsrate3,jdbcType=INTEGER}, #{datesstair,jdbcType=TIMESTAMP}, #{diagnosis,jdbcType=VARCHAR}, 
+      #{hospitalnumber,jdbcType=VARCHAR}, #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisAdlBarthel">
+    insert into his_adl_barthel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="eat != null">
+        eat,
+      </if>
+      <if test="eatrate1 != null">
+        eatrate1,
+      </if>
+      <if test="eatrate2 != null">
+        eatrate2,
+      </if>
+      <if test="eatrate3 != null">
+        eatrate3,
+      </if>
+      <if test="dateseat != null">
+        dateseat,
+      </if>
+      <if test="shower != null">
+        shower,
+      </if>
+      <if test="showerrate1 != null">
+        showerrate1,
+      </if>
+      <if test="showerrate2 != null">
+        showerrate2,
+      </if>
+      <if test="datesshower != null">
+        datesshower,
+      </if>
+      <if test="modification != null">
+        modification,
+      </if>
+      <if test="modificationrate1 != null">
+        modificationrate1,
+      </if>
+      <if test="modificationrate2 != null">
+        modificationrate2,
+      </if>
+      <if test="datesmodification != null">
+        datesmodification,
+      </if>
+      <if test="wear != null">
+        wear,
+      </if>
+      <if test="wearrate1 != null">
+        wearrate1,
+      </if>
+      <if test="wearrate2 != null">
+        wearrate2,
+      </if>
+      <if test="wearrate3 != null">
+        wearrate3,
+      </if>
+      <if test="dateswear != null">
+        dateswear,
+      </if>
+      <if test="shit != null">
+        shit,
+      </if>
+      <if test="shitrate1 != null">
+        shitrate1,
+      </if>
+      <if test="shitrate2 != null">
+        shitrate2,
+      </if>
+      <if test="shitrate3 != null">
+        shitrate3,
+      </if>
+      <if test="datesshit != null">
+        datesshit,
+      </if>
+      <if test="pee != null">
+        pee,
+      </if>
+      <if test="peerate1 != null">
+        peerate1,
+      </if>
+      <if test="peerate2 != null">
+        peerate2,
+      </if>
+      <if test="peerate3 != null">
+        peerate3,
+      </if>
+      <if test="datespee != null">
+        datespee,
+      </if>
+      <if test="toilet != null">
+        toilet,
+      </if>
+      <if test="toiletrate1 != null">
+        toiletrate1,
+      </if>
+      <if test="toiletrate2 != null">
+        toiletrate2,
+      </if>
+      <if test="toiletrate3 != null">
+        toiletrate3,
+      </if>
+      <if test="datestoilet != null">
+        datestoilet,
+      </if>
+      <if test="bedsidechair != null">
+        bedsidechair,
+      </if>
+      <if test="bedsidechairrate1 != null">
+        bedsidechairrate1,
+      </if>
+      <if test="bedsidechairrate2 != null">
+        bedsidechairrate2,
+      </if>
+      <if test="bedsidechairrate3 != null">
+        bedsidechairrate3,
+      </if>
+      <if test="bedsidechairrate4 != null">
+        bedsidechairrate4,
+      </if>
+      <if test="datesbedsidechair != null">
+        datesbedsidechair,
+      </if>
+      <if test="walk != null">
+        walk,
+      </if>
+      <if test="walkrate1 != null">
+        walkrate1,
+      </if>
+      <if test="walkrate2 != null">
+        walkrate2,
+      </if>
+      <if test="walkrate3 != null">
+        walkrate3,
+      </if>
+      <if test="walkrate4 != null">
+        walkrate4,
+      </if>
+      <if test="dateswalk != null">
+        dateswalk,
+      </if>
+      <if test="stairs != null">
+        stairs,
+      </if>
+      <if test="stairsrate1 != null">
+        stairsrate1,
+      </if>
+      <if test="stairsrate2 != null">
+        stairsrate2,
+      </if>
+      <if test="stairsrate3 != null">
+        stairsrate3,
+      </if>
+      <if test="datesstair != null">
+        datesstair,
+      </if>
+      <if test="diagnosis != null">
+        diagnosis,
+      </if>
+      <if test="hospitalnumber != null">
+        hospitalnumber,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateUserId != null">
+        update_user_id,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="eat != null">
+        #{eat,jdbcType=INTEGER},
+      </if>
+      <if test="eatrate1 != null">
+        #{eatrate1,jdbcType=INTEGER},
+      </if>
+      <if test="eatrate2 != null">
+        #{eatrate2,jdbcType=INTEGER},
+      </if>
+      <if test="eatrate3 != null">
+        #{eatrate3,jdbcType=INTEGER},
+      </if>
+      <if test="dateseat != null">
+        #{dateseat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shower != null">
+        #{shower,jdbcType=INTEGER},
+      </if>
+      <if test="showerrate1 != null">
+        #{showerrate1,jdbcType=INTEGER},
+      </if>
+      <if test="showerrate2 != null">
+        #{showerrate2,jdbcType=INTEGER},
+      </if>
+      <if test="datesshower != null">
+        #{datesshower,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modification != null">
+        #{modification,jdbcType=INTEGER},
+      </if>
+      <if test="modificationrate1 != null">
+        #{modificationrate1,jdbcType=INTEGER},
+      </if>
+      <if test="modificationrate2 != null">
+        #{modificationrate2,jdbcType=INTEGER},
+      </if>
+      <if test="datesmodification != null">
+        #{datesmodification,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wear != null">
+        #{wear,jdbcType=INTEGER},
+      </if>
+      <if test="wearrate1 != null">
+        #{wearrate1,jdbcType=INTEGER},
+      </if>
+      <if test="wearrate2 != null">
+        #{wearrate2,jdbcType=INTEGER},
+      </if>
+      <if test="wearrate3 != null">
+        #{wearrate3,jdbcType=INTEGER},
+      </if>
+      <if test="dateswear != null">
+        #{dateswear,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shit != null">
+        #{shit,jdbcType=INTEGER},
+      </if>
+      <if test="shitrate1 != null">
+        #{shitrate1,jdbcType=INTEGER},
+      </if>
+      <if test="shitrate2 != null">
+        #{shitrate2,jdbcType=INTEGER},
+      </if>
+      <if test="shitrate3 != null">
+        #{shitrate3,jdbcType=INTEGER},
+      </if>
+      <if test="datesshit != null">
+        #{datesshit,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pee != null">
+        #{pee,jdbcType=INTEGER},
+      </if>
+      <if test="peerate1 != null">
+        #{peerate1,jdbcType=INTEGER},
+      </if>
+      <if test="peerate2 != null">
+        #{peerate2,jdbcType=INTEGER},
+      </if>
+      <if test="peerate3 != null">
+        #{peerate3,jdbcType=INTEGER},
+      </if>
+      <if test="datespee != null">
+        #{datespee,jdbcType=TIMESTAMP},
+      </if>
+      <if test="toilet != null">
+        #{toilet,jdbcType=INTEGER},
+      </if>
+      <if test="toiletrate1 != null">
+        #{toiletrate1,jdbcType=INTEGER},
+      </if>
+      <if test="toiletrate2 != null">
+        #{toiletrate2,jdbcType=INTEGER},
+      </if>
+      <if test="toiletrate3 != null">
+        #{toiletrate3,jdbcType=INTEGER},
+      </if>
+      <if test="datestoilet != null">
+        #{datestoilet,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bedsidechair != null">
+        #{bedsidechair,jdbcType=INTEGER},
+      </if>
+      <if test="bedsidechairrate1 != null">
+        #{bedsidechairrate1,jdbcType=INTEGER},
+      </if>
+      <if test="bedsidechairrate2 != null">
+        #{bedsidechairrate2,jdbcType=INTEGER},
+      </if>
+      <if test="bedsidechairrate3 != null">
+        #{bedsidechairrate3,jdbcType=INTEGER},
+      </if>
+      <if test="bedsidechairrate4 != null">
+        #{bedsidechairrate4,jdbcType=INTEGER},
+      </if>
+      <if test="datesbedsidechair != null">
+        #{datesbedsidechair,jdbcType=TIMESTAMP},
+      </if>
+      <if test="walk != null">
+        #{walk,jdbcType=INTEGER},
+      </if>
+      <if test="walkrate1 != null">
+        #{walkrate1,jdbcType=INTEGER},
+      </if>
+      <if test="walkrate2 != null">
+        #{walkrate2,jdbcType=INTEGER},
+      </if>
+      <if test="walkrate3 != null">
+        #{walkrate3,jdbcType=INTEGER},
+      </if>
+      <if test="walkrate4 != null">
+        #{walkrate4,jdbcType=INTEGER},
+      </if>
+      <if test="dateswalk != null">
+        #{dateswalk,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stairs != null">
+        #{stairs,jdbcType=INTEGER},
+      </if>
+      <if test="stairsrate1 != null">
+        #{stairsrate1,jdbcType=INTEGER},
+      </if>
+      <if test="stairsrate2 != null">
+        #{stairsrate2,jdbcType=INTEGER},
+      </if>
+      <if test="stairsrate3 != null">
+        #{stairsrate3,jdbcType=INTEGER},
+      </if>
+      <if test="datesstair != null">
+        #{datesstair,jdbcType=TIMESTAMP},
+      </if>
+      <if test="diagnosis != null">
+        #{diagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalnumber != null">
+        #{hospitalnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisAdlBarthel">
+    update his_adl_barthel
+    <set>
+      <if test="eat != null">
+        eat = #{eat,jdbcType=INTEGER},
+      </if>
+      <if test="eatrate1 != null">
+        eatrate1 = #{eatrate1,jdbcType=INTEGER},
+      </if>
+      <if test="eatrate2 != null">
+        eatrate2 = #{eatrate2,jdbcType=INTEGER},
+      </if>
+      <if test="eatrate3 != null">
+        eatrate3 = #{eatrate3,jdbcType=INTEGER},
+      </if>
+      <if test="dateseat != null">
+        dateseat = #{dateseat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shower != null">
+        shower = #{shower,jdbcType=INTEGER},
+      </if>
+      <if test="showerrate1 != null">
+        showerrate1 = #{showerrate1,jdbcType=INTEGER},
+      </if>
+      <if test="showerrate2 != null">
+        showerrate2 = #{showerrate2,jdbcType=INTEGER},
+      </if>
+      <if test="datesshower != null">
+        datesshower = #{datesshower,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modification != null">
+        modification = #{modification,jdbcType=INTEGER},
+      </if>
+      <if test="modificationrate1 != null">
+        modificationrate1 = #{modificationrate1,jdbcType=INTEGER},
+      </if>
+      <if test="modificationrate2 != null">
+        modificationrate2 = #{modificationrate2,jdbcType=INTEGER},
+      </if>
+      <if test="datesmodification != null">
+        datesmodification = #{datesmodification,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wear != null">
+        wear = #{wear,jdbcType=INTEGER},
+      </if>
+      <if test="wearrate1 != null">
+        wearrate1 = #{wearrate1,jdbcType=INTEGER},
+      </if>
+      <if test="wearrate2 != null">
+        wearrate2 = #{wearrate2,jdbcType=INTEGER},
+      </if>
+      <if test="wearrate3 != null">
+        wearrate3 = #{wearrate3,jdbcType=INTEGER},
+      </if>
+      <if test="dateswear != null">
+        dateswear = #{dateswear,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shit != null">
+        shit = #{shit,jdbcType=INTEGER},
+      </if>
+      <if test="shitrate1 != null">
+        shitrate1 = #{shitrate1,jdbcType=INTEGER},
+      </if>
+      <if test="shitrate2 != null">
+        shitrate2 = #{shitrate2,jdbcType=INTEGER},
+      </if>
+      <if test="shitrate3 != null">
+        shitrate3 = #{shitrate3,jdbcType=INTEGER},
+      </if>
+      <if test="datesshit != null">
+        datesshit = #{datesshit,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pee != null">
+        pee = #{pee,jdbcType=INTEGER},
+      </if>
+      <if test="peerate1 != null">
+        peerate1 = #{peerate1,jdbcType=INTEGER},
+      </if>
+      <if test="peerate2 != null">
+        peerate2 = #{peerate2,jdbcType=INTEGER},
+      </if>
+      <if test="peerate3 != null">
+        peerate3 = #{peerate3,jdbcType=INTEGER},
+      </if>
+      <if test="datespee != null">
+        datespee = #{datespee,jdbcType=TIMESTAMP},
+      </if>
+      <if test="toilet != null">
+        toilet = #{toilet,jdbcType=INTEGER},
+      </if>
+      <if test="toiletrate1 != null">
+        toiletrate1 = #{toiletrate1,jdbcType=INTEGER},
+      </if>
+      <if test="toiletrate2 != null">
+        toiletrate2 = #{toiletrate2,jdbcType=INTEGER},
+      </if>
+      <if test="toiletrate3 != null">
+        toiletrate3 = #{toiletrate3,jdbcType=INTEGER},
+      </if>
+      <if test="datestoilet != null">
+        datestoilet = #{datestoilet,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bedsidechair != null">
+        bedsidechair = #{bedsidechair,jdbcType=INTEGER},
+      </if>
+      <if test="bedsidechairrate1 != null">
+        bedsidechairrate1 = #{bedsidechairrate1,jdbcType=INTEGER},
+      </if>
+      <if test="bedsidechairrate2 != null">
+        bedsidechairrate2 = #{bedsidechairrate2,jdbcType=INTEGER},
+      </if>
+      <if test="bedsidechairrate3 != null">
+        bedsidechairrate3 = #{bedsidechairrate3,jdbcType=INTEGER},
+      </if>
+      <if test="bedsidechairrate4 != null">
+        bedsidechairrate4 = #{bedsidechairrate4,jdbcType=INTEGER},
+      </if>
+      <if test="datesbedsidechair != null">
+        datesbedsidechair = #{datesbedsidechair,jdbcType=TIMESTAMP},
+      </if>
+      <if test="walk != null">
+        walk = #{walk,jdbcType=INTEGER},
+      </if>
+      <if test="walkrate1 != null">
+        walkrate1 = #{walkrate1,jdbcType=INTEGER},
+      </if>
+      <if test="walkrate2 != null">
+        walkrate2 = #{walkrate2,jdbcType=INTEGER},
+      </if>
+      <if test="walkrate3 != null">
+        walkrate3 = #{walkrate3,jdbcType=INTEGER},
+      </if>
+      <if test="walkrate4 != null">
+        walkrate4 = #{walkrate4,jdbcType=INTEGER},
+      </if>
+      <if test="dateswalk != null">
+        dateswalk = #{dateswalk,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stairs != null">
+        stairs = #{stairs,jdbcType=INTEGER},
+      </if>
+      <if test="stairsrate1 != null">
+        stairsrate1 = #{stairsrate1,jdbcType=INTEGER},
+      </if>
+      <if test="stairsrate2 != null">
+        stairsrate2 = #{stairsrate2,jdbcType=INTEGER},
+      </if>
+      <if test="stairsrate3 != null">
+        stairsrate3 = #{stairsrate3,jdbcType=INTEGER},
+      </if>
+      <if test="datesstair != null">
+        datesstair = #{datesstair,jdbcType=TIMESTAMP},
+      </if>
+      <if test="diagnosis != null">
+        diagnosis = #{diagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalnumber != null">
+        hospitalnumber = #{hospitalnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisAdlBarthel">
+    update his_adl_barthel
+    set eat = #{eat,jdbcType=INTEGER},
+      eatrate1 = #{eatrate1,jdbcType=INTEGER},
+      eatrate2 = #{eatrate2,jdbcType=INTEGER},
+      eatrate3 = #{eatrate3,jdbcType=INTEGER},
+      dateseat = #{dateseat,jdbcType=TIMESTAMP},
+      shower = #{shower,jdbcType=INTEGER},
+      showerrate1 = #{showerrate1,jdbcType=INTEGER},
+      showerrate2 = #{showerrate2,jdbcType=INTEGER},
+      datesshower = #{datesshower,jdbcType=TIMESTAMP},
+      modification = #{modification,jdbcType=INTEGER},
+      modificationrate1 = #{modificationrate1,jdbcType=INTEGER},
+      modificationrate2 = #{modificationrate2,jdbcType=INTEGER},
+      datesmodification = #{datesmodification,jdbcType=TIMESTAMP},
+      wear = #{wear,jdbcType=INTEGER},
+      wearrate1 = #{wearrate1,jdbcType=INTEGER},
+      wearrate2 = #{wearrate2,jdbcType=INTEGER},
+      wearrate3 = #{wearrate3,jdbcType=INTEGER},
+      dateswear = #{dateswear,jdbcType=TIMESTAMP},
+      shit = #{shit,jdbcType=INTEGER},
+      shitrate1 = #{shitrate1,jdbcType=INTEGER},
+      shitrate2 = #{shitrate2,jdbcType=INTEGER},
+      shitrate3 = #{shitrate3,jdbcType=INTEGER},
+      datesshit = #{datesshit,jdbcType=TIMESTAMP},
+      pee = #{pee,jdbcType=INTEGER},
+      peerate1 = #{peerate1,jdbcType=INTEGER},
+      peerate2 = #{peerate2,jdbcType=INTEGER},
+      peerate3 = #{peerate3,jdbcType=INTEGER},
+      datespee = #{datespee,jdbcType=TIMESTAMP},
+      toilet = #{toilet,jdbcType=INTEGER},
+      toiletrate1 = #{toiletrate1,jdbcType=INTEGER},
+      toiletrate2 = #{toiletrate2,jdbcType=INTEGER},
+      toiletrate3 = #{toiletrate3,jdbcType=INTEGER},
+      datestoilet = #{datestoilet,jdbcType=TIMESTAMP},
+      bedsidechair = #{bedsidechair,jdbcType=INTEGER},
+      bedsidechairrate1 = #{bedsidechairrate1,jdbcType=INTEGER},
+      bedsidechairrate2 = #{bedsidechairrate2,jdbcType=INTEGER},
+      bedsidechairrate3 = #{bedsidechairrate3,jdbcType=INTEGER},
+      bedsidechairrate4 = #{bedsidechairrate4,jdbcType=INTEGER},
+      datesbedsidechair = #{datesbedsidechair,jdbcType=TIMESTAMP},
+      walk = #{walk,jdbcType=INTEGER},
+      walkrate1 = #{walkrate1,jdbcType=INTEGER},
+      walkrate2 = #{walkrate2,jdbcType=INTEGER},
+      walkrate3 = #{walkrate3,jdbcType=INTEGER},
+      walkrate4 = #{walkrate4,jdbcType=INTEGER},
+      dateswalk = #{dateswalk,jdbcType=TIMESTAMP},
+      stairs = #{stairs,jdbcType=INTEGER},
+      stairsrate1 = #{stairsrate1,jdbcType=INTEGER},
+      stairsrate2 = #{stairsrate2,jdbcType=INTEGER},
+      stairsrate3 = #{stairsrate3,jdbcType=INTEGER},
+      datesstair = #{datesstair,jdbcType=TIMESTAMP},
+      diagnosis = #{diagnosis,jdbcType=VARCHAR},
+      hospitalnumber = #{hospitalnumber,jdbcType=VARCHAR},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    select
+    his_adl_barthel.*
+    from his_adl_barthel
+    where
+    his_adl_barthel.hospitalnumber = #{parameter.hospitalnumber,jdbcType=VARCHAR}
+  </select>
+
+</mapper>

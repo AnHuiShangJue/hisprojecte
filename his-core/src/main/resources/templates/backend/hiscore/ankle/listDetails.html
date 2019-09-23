@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+
+<div th:replace="public/base_list :: html"></div>
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<div class="row">
+    <div class="col s12 x12 l12 xl12">
+        <div class="card">
+            <div class="card-content">
+                <h4 class="card-title">护理嘱托（Nursing care）
+                </h4>
+                <a id="addBtn" class="waves-effect waves-light btn"><i
+                        class="material-icons  white-text tooltipped " data-position="bottom"
+                        data-delay="50" data-tooltip="新增">add</i></a>
+                <a id="deleteManyBtn" class="waves-effect waves-light btn"><i
+                        class="material-icons  white-text tooltipped " data-position="bottom"
+                        data-delay="50" data-tooltip="批量删除">delete</i></a>
+                <div class="input-field col s4 l4 xl4">
+                    <select id="chooseTemplate" name="chooseTemplate">
+                        <option th:value="0">请选择模板</option>
+                    </select>
+                    <label for="chooseTemplate">选择模板</label>
+                </div>
+                <!--Form Advance-->
+                <div class="row">
+                    <div id="refreshtable" class="col l12 m12 l12 xl12">
+                        <table id="data-table-simple-ankle" class="display">
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="number" th:value="${number}">
+<input type="hidden" id="isSameNurse" th:value="${isSameNurse}">
+<input type="hidden" id="nowUserId" th:value="${nowUserId}">
+<input type="hidden" id="nurseId" th:value="${nurseId}">
+<input type="hidden" id="recordId" th:value="${recordId}">
+
+
+<div th:replace="public/base_list_script :: html"></div>
+
+<script type="text/javascript">
+
+
+    var gridAnkle = new Datatable();
+
+
+    $(document).ready(function() {
+        //病房
+        var ankleSelect  = $("#chooseTemplate");
+
+        // var flag = $('#MyproofreadingNurseId').val();
+
+
+        $.getJSON(CTX+"/api/hisAnkleTemplate/getTemplate.ahsj?&token="+TOKEN, function (result){
+
+                $(result).each(function (i) {
+                    ankleSelect.append("<option value='" + this.templateNumber + "'>" + this.templateName + "</option>")
+                })
+                ankleSelect.formSelect();
+        })
+    });
+
+
+
+    $(document).ready(function () {
+        initBtn();
+        // initMenu()
+        initTable();
+    });
+
+    function initTable() {
+        gridAnkle.init({
+            src: $("#data-table-simple-ankle"),
+            onSuccess: function (gridAnkle) {
+            },
+            onError: function (gridAnkle) {
+            },
+            onDataLoad: function (gridAnkle) {
+            },
+            loadingMessage: 'Loading...',
+            dataTable: {
+                "ajax": {
+                    "url": CTX + "/api/hisAnkleDetail/listByNumber.ahsj?token=" + TOKEN + "&number=" + $('#number').val(),  // ajax source
+                },
+                "columns": [
+                    {
+                        "title": "<label><input type=\"checkbox\"  id=\"checkAll\" class=\"select-all\" > <span></span></label> ",
+                        "render": function (data, type, row, meta) {
+                            return " <label> <input type=\"checkbox\" value=\"" + row.id + "\"> <span></span> </label>";
+                        },
+                        "width": "60px",
+                        "orderable": false,
+                        "className": "centered"
+                    },
+                    {
+                        "title": "操作序号",
+                        "data": "orderNum",
+                        "name": "order_num"
+                    },
+                    {
+                        "title": "编号",
+                        "data": "number",
+                        "name": "number"
+                    },
+                    {
+                        "title": "护嘱名",
+                        "data": "name",
+                        "name": "name"
+                    }, {
+                        "title": "是否皮试",
+                        "data": "isSkinTestName",
+                        "name": "is_skin_test"
+                    }, {
+                        "title": "规格",
+                        "data": "specification",
+                        "name": "specification"
+                    },{
+                        "title": "单位",
+                        "data": "unit",
+                        "name": "unit"
+                    },
+                    {
+                        "title": "用法",
+                        "data": "usages",
+                        "name": "usages"
+                    },
+                    {
+                        "title": "用量",
+                        "data": "dosage",
+                        "name": "dosage"
+                    },
+                    {
+                        "title": "间隔",
+                        "data": "intervalsName",
+                        "name": "intervals"
+                    },
+                    {
+                        "title": "校对护士",
+                        "data": "proofreadingNurseName",
+                        "name": ""
+                    },
+                    {
+                        "title": "核准护士",
+                        "data": "approvedNurseName",
+                        "name": ""
+                    },
+                    {
+                        "title": "是否停嘱校对",
+                        "data": "isStopProofreadingName",
+                        "name": ""
+                    },
+                    {
+                        "title": "是否停嘱",
+                        "data": "isStopName",
+                        "name": "is_stop"
+                    },
+                    {
+                        "title": "停嘱时间",
+                        "data": "stopDate",
+                        "name": "stop_date"
+                    },
+                    {
+                        "title": "停嘱校对护士",
+                        "data": "stopPrfingNurseName",
+                        "name": ""
+                    },
+                    {
+                        "title": "停嘱核准护士",
+                        "data": "stopApdNurseName",
+                        "name": ""
+                    },
+                    {
+                        "title": "总量",
+                        "data": "totalAmount",
+                        "name": "total_amount"
+                    },
+                    {
+                        "title": "校对状态",
+                        "data": "isProofreadingName",
+                        "name": "is_Proofreading"
+                    },
+                    {
+                        "title": "核准状态",
+                        "data": "isApprovedName",
+                        "name": "is_approved"
+                    },
+                    {
+                        "title": "备注",
+                        "data": "remarks",
+                        "name": "remarks"
+                    },
+                    {
+                        "title": "操作",
+                        "width": "200px",
+                        "className": "centered",
+                        "orderable": false,
+                        "render": function (data, type, row) {
+                            var rtnBtn = "";
+                            //如果获取字符串，必须在参数外反转"
+                            // var flag = $("#isSameNurse").val();
+                            // if (flag == "true"){
+                                rtnBtn = rtnBtn +
+                                    // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"打印输液单\" onclick=\"printf(" + row.id +",'"+ row.number +"','"+row.proofreadingNurseName+"','"+row.approvedNurseName+"');\"> <i class='material-icons'>print</i></a>"+
+                                    "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"护嘱编辑\" onclick=\"edit(" + row.id +",'"+ row.number +"');\"> <i class='material-icons'>create</i></a>"+
+                                    "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick=\"deleteInit(" + row.id +",'"+ row.number +"');\"> <i class='material-icons'>delete</i></a>";
+                                // if (row.isStop == 2) {
+                                //     rtnBtn = rtnBtn +
+                                //     "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"停嘱\" onclick=\"stopAnkle(" + row.id +",'"+ row.number +"');\"> <i class='material-icons'>do_not_disturb_alt</i></a>";
+                                // }
+                                // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"护嘱明细查看\" onclick='visitDetails(" + row.id +","+ row.number + ");'> <i class='material-icons'>remove_red_eye</i></a>";
+                            // }
+
+
+                            //1是isStop == 1  已停嘱
+                            if (row.isStop == 1){
+                                    if (row.isStopProofreading != 2){
+                                        rtnBtn = rtnBtn +
+                                            "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"停嘱校对\" onclick=\"stopProofreading(" + row.id +");\"> <i class='material-icons'>close</i></a>";
+                                    }
+                                    if(row.isstopapproved != 2){
+                                        rtnBtn = rtnBtn +
+                                            "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"停嘱核准\" onclick=\"stopApproved(" + row.id +");\"> <i class='material-icons'>highlight_off</i></a>";
+
+                                    }
+
+                            }else {
+                                //未停嘱
+                                    if (row.isProofreading == 2){
+                                        rtnBtn = rtnBtn +
+                                            "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"校对\" onclick=\"proofreading(" + row.id +");\"> <i class='material-icons'>playlist_add_check</i></a>";
+                                    }
+
+                                    if (row.isApproved == 2){
+                                        rtnBtn = rtnBtn +
+                                            "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"核准\" onclick=\"isApproved(" + row.id +");\"> <i class='material-icons'>done</i></a>";
+
+                                    }
+
+                                    rtnBtn = rtnBtn +
+                                        "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"停嘱\" onclick=\"stop(" + row.id +");\"> <i class='material-icons'>alarm_off</i></a>";
+
+                            }
+
+                            return rtnBtn;
+                            // 返回自定义内容
+
+                        }
+                    }
+                ],
+                "order":  [ [1, 'asc'] ]
+            }
+        });
+    }
+
+
+    function edit(id,number) {
+        var url = CTX+"/api/hisAnkleDetail/save/index.ahsj?token=" + TOKEN + "&number=" + number + "&id=" + id;
+        dialog.show(url, "更新护嘱记录");
+
+    }
+    //打印
+    function printf(id,number,proofreadingNurseName,approvedNurseName){
+        var url = CTX+"/api/hisAnkleDetail/printf/index.ahsj?token=" + TOKEN + "&id=" + id+ "&number=" + number+"&proofreadingNurseName="+proofreadingNurseName+"&approvedNurseName="+approvedNurseName;
+        dialog.showDialog(url, "打印输液单","800px","800px");
+    }
+
+    //停嘱
+    function stop(ids) {
+        dialog.confirm('确定停嘱?', function (index, layero) {
+            $.ahsjajax(CTX + "/api/hisAnkleDetail/stop.ahsj",
+                {
+                    "ids": ids,
+                    // "userId": userId
+                },
+                function (msg) {
+                    if (msg.success) {
+                        swal.close();
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                        gridAnkle.search();
+                        // dialog.parentclose();
+
+                    } else {
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                    }
+                },
+                function (data) {
+                    M.toast({
+                        html: "网络异常", completeCallback: function () {
+                        }
+                    });
+                }
+            );
+        });
+    }
+
+    //校对
+    function proofreading(ids) {
+        dialog.confirm('确定校对?', function (index, layero) {
+            $.ahsjajax(CTX + "/api/hisAnkleDetail/proofreading.ahsj",
+                {
+                    "ids": ids,
+                    // "userId": userId
+                },
+                function (msg) {
+                    if (msg.success) {
+                        swal.close();
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                        gridAnkle.search();
+                        // dialog.parentclose();
+
+                    } else {
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                    }
+                },
+                function (data) {
+                    M.toast({
+                        html: "网络异常", completeCallback: function () {
+                        }
+                    });
+                }
+            );
+        });
+    }
+    //停嘱校对
+    function stopProofreading(ids) {
+        dialog.confirm('确定停嘱校对?', function (index, layero) {
+            $.ahsjajax(CTX + "/api/hisAnkleDetail/stopProofreading.ahsj",
+                {
+                    "ids": ids,
+                    // "userId": userId
+                },
+                function (msg) {
+                    if (msg.success) {
+                        swal.close();
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                        gridAnkle.search();
+                        // dialog.parentclose();
+
+                    } else {
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                    }
+                },
+                function (data) {
+                    M.toast({
+                        html: "网络异常", completeCallback: function () {
+                        }
+                    });
+                }
+            );
+        });
+    }
+
+
+    //核准
+    function isApproved(ids) {
+        dialog.confirm('确定核准?', function (index, layero) {
+            $.ahsjajax(CTX + "/api/hisAnkleDetail/isApproved.ahsj",
+                {
+                    "ids": ids,
+                    // "userId": userId
+                },
+                function (msg) {
+                    if (msg.success) {
+                        swal.close();
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                        gridAnkle.search();
+                        // dialog.parentclose();
+
+                    } else {
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                    }
+                },
+                function (data) {
+                    M.toast({
+                        html: "网络异常", completeCallback: function () {
+                        }
+                    });
+                }
+            );
+        });
+    }
+    //停嘱核准
+    function stopApproved(ids) {
+        dialog.confirm('确定停嘱?', function (index, layero) {
+            $.ahsjajax(CTX + "/api/hisAnkleDetail/stopApproved.ahsj",
+                {
+                    "ids": ids,
+                    // "userId": userId
+                },
+                function (msg) {
+                    if (msg.success) {
+                        swal.close();
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                        gridAnkle.search();
+                        // dialog.parentclose();
+
+                    } else {
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                    }
+                },
+                function (data) {
+                    M.toast({
+                        html: "网络异常", completeCallback: function () {
+                        }
+                    });
+                }
+            );
+        });
+    }
+
+
+    function deleteInit(ids,recordId) {
+        dialog.confirm('确定删除?', function (index, layero) {
+            $.ahsjajax(CTX + "/api/hisAnkleDetail/delete.ahsj",
+                {
+                    "ids": ids,
+                    "recordId":recordId
+                },
+                function (msg) {
+                    if (msg.success) {
+                        swal.close();
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                        gridAnkle.search();
+                        // dialog.parentclose();
+
+                    } else {
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                    }
+                },
+                function (data) {
+                    M.toast({
+                        html: "网络异常", completeCallback: function () {
+                        }
+                    });
+                }
+            );
+        });
+
+    }
+
+    function initBtn() {
+        // 批量删除
+        $("#deleteManyBtn").click(function () {
+            var ids = gridAnkle.getSelectedRows();
+            var recordId = $("#number").val();
+            if (ids.length == 0) {
+                dialog.warn("请至少选择一条数据");
+                return;
+            }
+            deleteInit(ids.join(','),recordId);
+        });
+
+        $('#addBtn').click(function () {
+            var url = CTX+"/api/hisAnkleDetail/save/index.ahsj?token=" + TOKEN + "&number=" + $("#number").val();
+            dialog.show(url, "添加护嘱记录");
+
+        });
+    }
+
+
+    //点击select后添加模板
+    $("#chooseTemplate").change(function () {
+        //获取到点击的option的值
+        var templateNumber = $("#chooseTemplate").val();
+        // var name = $("#name").val();
+        var number = $("#number").val();
+        if (templateNumber != 0){
+            dialog.confirm('确定添加该模板?', function (index, layero) {
+
+                $.ahsjajax(CTX + "/api/hisAnkleDetail/addTemplate.ahsj?=" + TOKEN,
+                {
+                    "templateNumber":templateNumber,
+                    "number":number
+                    // "name":name
+                },
+                function (msg) {
+                    if (msg.success) {
+                        // swal.close();
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                        gridAnkle.search();
+                        // dialog.parentclose();
+
+                    } else {
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                    }
+                },
+                function (data) {
+                    M.toast({
+                        html: "网络异常", completeCallback: function () {
+                        }
+                    });
+                });
+            });
+        }
+
+    })
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+</body>
+</html>
+

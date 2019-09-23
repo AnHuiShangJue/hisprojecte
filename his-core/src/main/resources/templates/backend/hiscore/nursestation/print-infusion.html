@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<style>
+    body{
+        font-size: 14px;
+        text-align: center;
+    }
+</style>
+<div th:replace="public/base_print :: html"></div>
+<body>
+<div class="container">
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 center">
+            <h4>输液卡</h4>
+            <p>Infusion</p>
+        </div>
+    </div>
+
+    <div class="row valign-wrapper">
+
+        <div class="col s1 m1 l1 offset-l1 offset-m1 offset-s1">
+            <p>NO：</p>
+            <label>Number</label>
+        </div>
+        <div class="col s4 m4 l4">
+            <p style="text-align: left" th:text="${hisAnkleDetail.number}"></p>
+        </div>
+        <div class="col s2 m2 l2">
+            <p>科别：</p>
+            <label>សាខា</label>
+        </div>
+        <div class="col s3 m3 l3">
+            <p th:text="${hisPatientInfo.departmentName}"></p>
+        </div>
+    </div>
+
+    <div  class="row valign-wrapper">
+        <div class="col s10 m10 l10 offset-l1 offset-m1 offset-s1">
+        <table border="1" cellspacing="0" class="table">
+            <tr>
+                <td style="border: 1px solid grey;">
+                    <p>姓名：</p>
+                    <label>name</label>
+                </td>
+                <td colspan="3" th:text="${hisPatientInfo.name}" style="border: 1px solid grey;"></td>
+                <td style="border: 1px solid grey;">
+                    <p>性别：</p>
+                    <label>sex</label>
+                </td>
+                <td th:text="${hisPatientInfo.sexName}" style="border: 1px solid grey;"></td>
+                <td style="border: 1px solid grey;">
+                    <p>年龄：</p>
+                    <label>age</label>
+                </td>
+                <td th:text="${hisPatientInfo.age}" style="border: 1px solid grey;"></td>
+                <td style="border: 1px solid grey;">
+                    <p>出生年月：</p>
+                    <label>Date of Birth</label>
+                </td>
+                <td colspan="1" th:text="${hisPatientInfo.birthday}" style="border: 1px solid grey;"></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid grey;width: 9%;">
+                    <p>护嘱名：</p>
+                    <label>ankle name:</label>
+                </td>
+                <td style="border: 1px solid grey;width: 9%;">
+                    <p>是否皮试：</p>
+                    <label>Whether skin test</label>
+                </td>
+                <td style="border: 1px solid grey;width: 9%;">
+                    <p>规格：</p>
+                    <label>specification</label>
+                </td>
+                <td style="border: 1px solid grey;width: 9%;">
+                    <p>单位：</p>
+                    <label>unit</label>
+                </td>
+                <td style="border: 1px solid grey;width: 9%;">
+                    <p>用法：</p>
+                    <label>usage</label>
+                </td>
+                <td style="border: 1px solid grey;width: 9%;">
+                    <p>用量：</p>
+                    <label>dosage</label>
+                </td>
+                <td style="border: 1px solid grey;width: 9%;">
+                    <p>间隔：</p>
+                    <label>Interval</label>
+                </td>
+                <td style="border: 1px solid grey;width: 9%;">
+                    <p>校对护士：</p>
+                    <label>Proofreading nurse</label>
+                </td>
+                <td style="border: 1px solid grey;width: 9%;">
+                    <p>核准护士：</p>
+                    <label>Approved nurse</label>
+                </td>
+                <td style="border: 1px solid grey;width: 19%;">
+                    <p>备注：</p>
+                    <label>remark</label>
+                </td>
+            </tr>
+
+            <tr style="height: 400px;">
+<!--                护嘱名-->
+                <td th:text="${hisAnkleDetail.name}" style="border: 1px solid grey;"></td>
+<!--                是否皮试-->
+                <td th:text="${hisAnkleDetail.isSkinTestName}" style="border: 1px solid grey;"></td>
+<!--                规格-->
+                <td th:text="${hisAnkleDetail.specification}" style="border: 1px solid grey;"></td>
+<!--                单位-->
+                <td th:text="${hisAnkleDetail.unit}" style="border: 1px solid grey;"></td>
+<!--                用法-->
+                <td th:text="${hisAnkleDetail.usages}" style="border: 1px solid grey;"></td>
+<!--                用量-->
+                <td th:text="${hisAnkleDetail.dosage}" style="border: 1px solid grey;"></td>
+<!--                间隔-->
+                <td th:text="${hisAnkleDetail.intervalsName}" style="border: 1px solid grey;"></td>
+<!--                校对护士-->
+                <td th:text="${proofreadingNurseName}"  style="border: 1px solid grey;"></td>
+<!--                核准护士-->
+                <td th:text="${approvedNurseName}" style="border: 1px solid grey;"></td>
+<!--                 备注-->
+                <td th:text="${hisAnkleDetail.remarks}" style="border: 1px solid grey;"></td>
+            </tr>
+
+
+        </table>
+        </div>
+    </div>
+
+    <div class="row valign-wrapper">
+        <div class="col s8 m8 l8 offset-l1 offset-m1 offset-s1">
+        </div>
+        <div class="col s3 m3 l3">
+            <p>医师：</p>
+            <label>Doctor</label>
+        </div>
+
+    </div>
+</div>
+
+<div th:replace="public/base_list_script :: html"></div>
+<div th:replace="public/base_print_script :: html"></div>
+<script  th:inline="javascript">
+    var id = [[${id}]];
+    function doOk() {
+        $('body  div .row.valign-wrapper').printThis({
+            importCSS: true,
+            debug: true,
+            afterPrint: function () {
+                dialog.confirm('确定打印?', function (index, layero) {
+                    var id = [[${id}]];
+                    $.ahsjajax(
+                        CTX + "/api/hisAnkleDetail/getAnkleForPrintf.ahsj",
+                        {"id":id}
+                        ,
+                        function (msg) {
+                            console.log(msg);
+                            if (msg.success) {
+                                M.toast({html: msg.message});
+                                return false;
+                            } else {
+                                M.toast({html: msg.message});
+                                return false;
+                            }
+                        },
+                        function () {
+                            M.toast({html: "网络异常"});
+                            return false;
+                        }
+                    );
+
+
+                })
+            }
+        })
+    }
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisMedicalOrderTemplateMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisMedicalOrderTemplate" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="template_number" property="templateNumber" jdbcType="VARCHAR" />
+    <result column="template_name" property="templateName" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, template_number, template_name, remarks, create_user_id, create_date, update_user_id, 
+    update_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from his_medical_order_template
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from his_medical_order_template
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisMedicalOrderTemplate" >
+    insert into his_medical_order_template (id, template_number, template_name, 
+      remarks, create_user_id, create_date, 
+      update_user_id, update_date)
+    values (#{id,jdbcType=BIGINT}, #{templateNumber,jdbcType=VARCHAR}, #{templateName,jdbcType=VARCHAR}, 
+      #{remarks,jdbcType=VARCHAR}, #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisMedicalOrderTemplate" >
+    insert into his_medical_order_template
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="templateNumber != null" >
+        template_number,
+      </if>
+      <if test="templateName != null" >
+        template_name,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="templateNumber != null" >
+        #{templateNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="templateName != null" >
+        #{templateName,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisMedicalOrderTemplate" >
+    update his_medical_order_template
+    <set >
+      <if test="templateNumber != null" >
+        template_number = #{templateNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="templateName != null" >
+        template_name = #{templateName,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisMedicalOrderTemplate" >
+    update his_medical_order_template
+    set template_number = #{templateNumber,jdbcType=VARCHAR},
+      template_name = #{templateName,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!--自定义sql-->
+  <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select a.*,b.user_name as createUserName
+from his_medical_order_template as a
+left join `his-userinfo`.user_info as b on a.create_user_id = b.id
+where 1=1
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+
+  <!--查询当日已经生成的医嘱模板的数量-->
+  <select id="selectNumbCount" resultType="int" parameterType="java.lang.String">
+    select
+      count(*)
+    from his_medical_order_template
+    where his_medical_order_template.template_number LIKE CONCAT('%',#{templateNumber},'%')
+  </select>
+
+  <!--根据医嘱模板名查询-->
+  <select id="selectByTemplateName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select his_medical_order_template.*
+from his_medical_order_template
+where template_name =#{templateName,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectTemplate" resultMap="BaseResultMap">
+    select distinct
+      his_medical_order_template.template_number,
+      his_medical_order_template.template_name
+    from his_medical_order_template
+  </select>
+
+  <select id="selectByTemplateNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select his_medical_order_template.*
+    from his_medical_order_template
+    where template_number =#{templateNumber,jdbcType=VARCHAR}
+  </select>
+
+</mapper>

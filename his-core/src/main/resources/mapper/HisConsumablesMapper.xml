@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahsj.hiscore.dao.HisConsumablesMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisConsumables">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="spec" jdbcType="VARCHAR" property="spec"/>
+        <result column="stock" jdbcType="INTEGER" property="stock"/>
+        <result column="price" jdbcType="DOUBLE" property="price"/>
+        <result column="create_user_id" jdbcType="BIGINT" property="createUserId"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="update_user_id" jdbcType="BIGINT" property="updateUserId"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="is_enable" jdbcType="INTEGER" property="isEnable"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, name, type, spec, stock, price, create_user_id, create_date, update_user_id, 
+    update_date, is_enable
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_consumables
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_consumables
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisConsumables" useGeneratedKeys="true" keyProperty="id">
+    insert into his_consumables (id, name, type,
+      spec, stock, price,
+      create_user_id, create_date, update_user_id, 
+      update_date, is_enable)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{spec,jdbcType=VARCHAR}, #{stock,jdbcType=INTEGER}, #{price,jdbcType=DOUBLE}, 
+      #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{isEnable,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisConsumables" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into his_consumables
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="spec != null">
+                spec,
+            </if>
+            <if test="stock != null">
+                stock,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="isEnable != null">
+                is_enable,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="spec != null">
+                #{spec,jdbcType=VARCHAR},
+            </if>
+            <if test="stock != null">
+                #{stock,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=DOUBLE},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isEnable != null">
+                #{isEnable,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisConsumables">
+        update his_consumables
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="spec != null">
+                spec = #{spec,jdbcType=VARCHAR},
+            </if>
+            <if test="stock != null">
+                stock = #{stock,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=DOUBLE},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isEnable != null">
+                is_enable = #{isEnable,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisConsumables">
+    update his_consumables
+    set name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      spec = #{spec,jdbcType=VARCHAR},
+      stock = #{stock,jdbcType=INTEGER},
+      price = #{price,jdbcType=DOUBLE},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      is_enable = #{isEnable,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <!--自定义sql-->
+    <select id="selectForInsert" parameterType="com.ahsj.hiscore.entity.HisConsumables" resultMap="BaseResultMap">
+    select his_consumables.id
+    from his_consumables
+    where
+      name = #{name,jdbcType=VARCHAR}
+     and spec = #{spec,jdbcType=VARCHAR}
+  </select>
+
+    <select id="selectNameAndSpecById" parameterType="com.ahsj.hiscore.entity.HisConsumables" resultMap="BaseResultMap">
+    select his_consumables.*
+    from his_consumables
+    where
+      name = #{name,jdbcType=VARCHAR}
+     and spec = #{spec,jdbcType=VARCHAR}
+  </select>
+
+    <!--根据ids查询-->
+    <select id="selectByIds" resultMap="BaseResultMap">
+        select his_consumables.*
+        from his_consumables
+        where
+        <foreach close=";" collection="array" index="index" item="id" open="" separator="or">
+            his_consumables.id = #{id,jdbcType=BIGINT}
+        </foreach>
+    </select>
+
+    <!--设置失效-->
+    <update id="setDisable">
+        update his_consumables
+        set is_enable = #{isEnable,jdbcType=INTEGER}
+        where
+        <foreach close=";" collection="list" index="index" item="item" open="" separator="or">
+            id = #{item.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select
+        his_consumables.*
+        from his_consumables
+        where
+        1 =1
+        <if test="parameter.name != null and parameter.name != ''">
+            and name like concat('%' #{parameter.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.lowPrice != null and parameter.lowPrice != '' ">
+            and price &gt;= #{parameter.lowPrice,jdbcType=DOUBLE}
+        </if>
+        <if test="parameter.highPrice != null and parameter.highPrice != ''">
+            and price &lt;= #{parameter.highPrice,jdbcType=DOUBLE}
+        </if>
+        <if test="parameter.isEnable != null and parameter.isEnable != ''">
+            and is_enable = #{parameter.isEnable,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+    <select id="listAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_consumables order by create_date desc
+    </select>
+
+    <select id="listEnable" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select
+        his_consumables.*
+        from his_consumables
+        where
+        his_consumables.is_enable=1
+        <if test="parameter.name != null and parameter.name != ''">
+            and name like concat('%' #{parameter.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.lowPrice != null and parameter.lowPrice != '' ">
+            and price &gt;= #{parameter.lowPrice,jdbcType=DOUBLE}
+        </if>
+        <if test="parameter.highPrice != null and parameter.highPrice != ''">
+            and price &lt;= #{parameter.highPrice,jdbcType=DOUBLE}
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+    <!--通过id查找价格-->
+    <select id="selectPriceById" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select his_consumables.price,his_consumables.stock
+        from his_consumables
+        where price = #{parameter.price,jdbcType=DOUBLE}
+    </select>
+
+    <!--批量导入-->
+    <insert id="importConsumables"  useGeneratedKeys="true" keyProperty="id" parameterType="com.ahsj.hiscore.entity.HisConsumables">
+        insert into his_consumables ( id, name, type,
+        spec, stock, price,
+        create_user_id, create_date, update_user_id,
+        update_date, is_enable)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id,jdbcType=BIGINT}, #{item.name,jdbcType=VARCHAR}, #{item.type,jdbcType=INTEGER},
+            #{item.spec,jdbcType=VARCHAR}, #{item.stock,jdbcType=INTEGER}, #{item.price,jdbcType=DOUBLE},
+            #{item.createUserId,jdbcType=BIGINT}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=BIGINT},
+            #{item.updateDate,jdbcType=TIMESTAMP}, #{item.isEnable,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+
+    <!--批量更新-->
+    <update id="updateConsumables" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update his_consumables
+            <set>
+
+                <if test="item.type != null">
+                    type = #{item.type,jdbcType=INTEGER},
+                </if>
+                <if test="item.spec != null">
+                    spec = #{item.spec,jdbcType=VARCHAR},
+                </if>
+                <if test="item.stock != null">
+                    stock = #{item.stock,jdbcType=INTEGER},
+                </if>
+                <if test="item.price != null">
+                    price = #{item.price,jdbcType=DOUBLE},
+                </if>
+                <if test="item.createUserId != null">
+                    create_user_id = #{item.createUserId,jdbcType=BIGINT},
+                </if>
+                <if test="item.createDate != null">
+                    create_date = #{item.createDate,jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.updateUserId != null">
+                    update_user_id = #{item.updateUserId,jdbcType=BIGINT},
+                </if>
+                <if test="item.updateDate != null">
+                    update_date = #{item.updateDate,jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.isEnable != null">
+                    is_enable = #{item.isEnable,jdbcType=INTEGER},
+                </if>
+            </set>
+            where name = #{item.name,jdbcType=VARCHAR}
+        </foreach>
+    </update>
+
+    <!--通过name 和 spec 查找-->
+    <select id="selectByNameandSpec" parameterType="com.ahsj.hiscore.entity.HisConsumables" resultMap="BaseResultMap">
+        select his_consumables.*
+        from his_consumables
+        where name = #{parameter.name,jdbcType=VARCHAR} and spec = #{parameter.name,jdbcType=VARCHAR}
+    </select>
+
+
+    <!--通过id查找规格-->
+    <select id="selectSpecById" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select his_consumables.spec
+        from his_consumables
+        where price = #{parameter.price,jdbcType=DOUBLE}
+    </select>
+
+    <!--通过入库表中的耗材id更新耗材表的stock-->
+    <!--<update id="updateStockById" parameterType="com.ahsj.hiscore.entity.HisConsumables">-->
+    <!--update his_consumables-->
+    <!--set his_consumables.stock = his_consumables.stock+ #{isEnable,jdbcType=INTEGER}-->
+    <!--where-->
+    <!--id = #{parameter.consumablesId,jdbcType=BIGINT}-->
+    <!--</update>-->
+
+
+    <select id="queryTranslateInfoByDate" resultMap="BaseResultMap"
+            parameterType="com.ahsj.hiscore.entity.HisConsumables">
+        select
+        <include refid="Base_Column_List"/>
+        from his_consumables as his
+        where   <![CDATA[ (DATE_FORMAT(his.update_date, '%Y-%m-%d') =  DATE_FORMAT( #{updateDate}, '%Y-%m-%d'))]]>
+    </select>
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_consumables
+    </select>
+
+
+    <select id="selectByExportExcel" parameterType="com.ahsj.hiscore.entity.HisMedicineInfo" resultMap="BaseResultMap">
+        select
+        his_consumables.*
+        from his_consumables
+        where
+        1 =1
+    </select>
+
+    <select id="queryListExportAll"  resultMap="BaseResultMap">
+        select
+            a.*,b.id as typeId,b.value as typeName,c.id as enableId,c.value as enable
+        from his_consumables as a
+            left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'consumable_type' ) as b on a.type = b.code
+            left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'is_enable' ) as c on a.is_enable = c.code
+    </select>
+    <select id="queryListExportAndByIdsAll"  resultMap="BaseResultMap" parameterType="java.util.List">
+        select
+        a.*,b.id as typeId,b.value as typeName,c.id as enableId,c.value as enable
+        from his_consumables as a
+        left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'consumable_type' ) as b on a.type = b.code
+        left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'is_enable' ) as c on a.is_enable = c.code
+        where
+        <foreach collection="list" separator="or" item="item" index="index">
+            a.id=#{item.id}
+        </foreach>
+    </select>
+</mapper>

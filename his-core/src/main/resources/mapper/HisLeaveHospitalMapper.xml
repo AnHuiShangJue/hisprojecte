@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahsj.hiscore.dao.HisLeaveHospitalMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisLeaveHospital">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="his_hospital_manage_id" jdbcType="BIGINT" property="hisHospitalManageId"/>
+        <result column="diagnose" jdbcType="VARCHAR" property="diagnose"/>
+        <result column="feature" jdbcType="VARCHAR" property="feature"/>
+        <result column="result" jdbcType="VARCHAR" property="result"/>
+        <result column="inspect" jdbcType="VARCHAR" property="inspect"/>
+        <result column="cure" jdbcType="VARCHAR" property="cure"/>
+        <result column="situation" jdbcType="VARCHAR" property="situation"/>
+        <result column="pathology" jdbcType="VARCHAR" property="pathology"/>
+        <result column="examine" jdbcType="VARCHAR" property="examine"/>
+        <result column="advice" jdbcType="VARCHAR" property="advice"/>
+        <result column="major_id" jdbcType="BIGINT" property="majorId"/>
+        <result column="doctor_id" jdbcType="BIGINT" property="doctorId"/>
+        <result column="internship_id" jdbcType="BIGINT" property="internshipId"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="create_user_id" jdbcType="BIGINT" property="createUserId"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="update_user_id" jdbcType="BIGINT" property="updateUserId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, his_hospital_manage_id, diagnose, feature, result, inspect, cure, situation, 
+    pathology, examine, advice, major_id, doctor_id, internship_id, create_date, create_user_id, 
+    update_date, update_user_id
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_leave_hospital
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_leave_hospital
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisLeaveHospital" useGeneratedKeys="true" keyProperty="id" >
+    insert into his_leave_hospital (id, his_hospital_manage_id, diagnose, 
+      feature, result, inspect, 
+      cure, situation, pathology, 
+      examine, advice, major_id, 
+      doctor_id, internship_id, create_date, 
+      create_user_id, update_date, update_user_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{hisHospitalManageId,jdbcType=BIGINT}, #{diagnose,jdbcType=VARCHAR}, 
+      #{feature,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR}, #{inspect,jdbcType=VARCHAR}, 
+      #{cure,jdbcType=VARCHAR}, #{situation,jdbcType=VARCHAR}, #{pathology,jdbcType=VARCHAR}, 
+      #{examine,jdbcType=VARCHAR}, #{advice,jdbcType=VARCHAR}, #{majorId,jdbcType=BIGINT}, 
+      #{doctorId,jdbcType=BIGINT}, #{internshipId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{createUserId,jdbcType=INTEGER}, #{updateDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=INTEGER}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisLeaveHospital">
+        insert into his_leave_hospital
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="hisHospitalManageId != null">
+                his_hospital_manage_id,
+            </if>
+            <if test="diagnose != null">
+                diagnose,
+            </if>
+            <if test="feature != null">
+                feature,
+            </if>
+            <if test="result != null">
+                result,
+            </if>
+            <if test="inspect != null">
+                inspect,
+            </if>
+            <if test="cure != null">
+                cure,
+            </if>
+            <if test="situation != null">
+                situation,
+            </if>
+            <if test="pathology != null">
+                pathology,
+            </if>
+            <if test="examine != null">
+                examine,
+            </if>
+            <if test="advice != null">
+                advice,
+            </if>
+            <if test="majorId != null">
+                major_id,
+            </if>
+            <if test="doctorId != null">
+                doctor_id,
+            </if>
+            <if test="internshipId != null">
+                internship_id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="hisHospitalManageId != null">
+                #{hisHospitalManageId,jdbcType=BIGINT},
+            </if>
+            <if test="diagnose != null">
+                #{diagnose,jdbcType=VARCHAR},
+            </if>
+            <if test="feature != null">
+                #{feature,jdbcType=VARCHAR},
+            </if>
+            <if test="result != null">
+                #{result,jdbcType=VARCHAR},
+            </if>
+            <if test="inspect != null">
+                #{inspect,jdbcType=VARCHAR},
+            </if>
+            <if test="cure != null">
+                #{cure,jdbcType=VARCHAR},
+            </if>
+            <if test="situation != null">
+                #{situation,jdbcType=VARCHAR},
+            </if>
+            <if test="pathology != null">
+                #{pathology,jdbcType=VARCHAR},
+            </if>
+            <if test="examine != null">
+                #{examine,jdbcType=VARCHAR},
+            </if>
+            <if test="advice != null">
+                #{advice,jdbcType=VARCHAR},
+            </if>
+            <if test="majorId != null">
+                #{majorId,jdbcType=BIGINT},
+            </if>
+            <if test="doctorId != null">
+                #{doctorId,jdbcType=BIGINT},
+            </if>
+            <if test="internshipId != null">
+                #{internshipId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=INTEGER},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisLeaveHospital">
+        update his_leave_hospital
+        <set>
+            <if test="hisHospitalManageId != null">
+                his_hospital_manage_id = #{hisHospitalManageId,jdbcType=BIGINT},
+            </if>
+            <if test="diagnose != null">
+                diagnose = #{diagnose,jdbcType=VARCHAR},
+            </if>
+            <if test="feature != null">
+                feature = #{feature,jdbcType=VARCHAR},
+            </if>
+            <if test="result != null">
+                result = #{result,jdbcType=VARCHAR},
+            </if>
+            <if test="inspect != null">
+                inspect = #{inspect,jdbcType=VARCHAR},
+            </if>
+            <if test="cure != null">
+                cure = #{cure,jdbcType=VARCHAR},
+            </if>
+            <if test="situation != null">
+                situation = #{situation,jdbcType=VARCHAR},
+            </if>
+            <if test="pathology != null">
+                pathology = #{pathology,jdbcType=VARCHAR},
+            </if>
+            <if test="examine != null">
+                examine = #{examine,jdbcType=VARCHAR},
+            </if>
+            <if test="advice != null">
+                advice = #{advice,jdbcType=VARCHAR},
+            </if>
+            <if test="majorId != null">
+                major_id = #{majorId,jdbcType=BIGINT},
+            </if>
+            <if test="doctorId != null">
+                doctor_id = #{doctorId,jdbcType=BIGINT},
+            </if>
+            <if test="internshipId != null">
+                internship_id = #{internshipId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=INTEGER},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisLeaveHospital">
+    update his_leave_hospital
+    set his_hospital_manage_id = #{hisHospitalManageId,jdbcType=BIGINT},
+      diagnose = #{diagnose,jdbcType=VARCHAR},
+      feature = #{feature,jdbcType=VARCHAR},
+      result = #{result,jdbcType=VARCHAR},
+      inspect = #{inspect,jdbcType=VARCHAR},
+      cure = #{cure,jdbcType=VARCHAR},
+      situation = #{situation,jdbcType=VARCHAR},
+      pathology = #{pathology,jdbcType=VARCHAR},
+      examine = #{examine,jdbcType=VARCHAR},
+      advice = #{advice,jdbcType=VARCHAR},
+      major_id = #{majorId,jdbcType=BIGINT},
+      doctor_id = #{doctorId,jdbcType=BIGINT},
+      internship_id = #{internshipId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=INTEGER},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectByHisHospitalManageId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+   h.*
+    from his_leave_hospital as h
+    where h.his_hospital_manage_id =(
+    select id from  his_hospital_manage as m where  m.number =#{number}
+    )
+  </select>
+</mapper>

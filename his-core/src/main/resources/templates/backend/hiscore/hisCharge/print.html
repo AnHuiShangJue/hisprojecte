@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+<head>
+    <style>
+        .fontsize01{
+            font-size: 14px;
+        }
+        .fontsize02{
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<div th:replace="public/base_print :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<div class="row">
+
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4 center-align" style="width: 100% ">
+            <h5 class="black-text ">交易凭证</h5>
+            <label class="black-text fontsize02">Transaction certificate</label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s2 m2 l2 left" style="margin-left:390px">
+            <label class="black-text fontsize01">收款时间</label></br>
+            <label class="black-text fontsize02">Collection time</label>
+        </div>
+        <div class="col s2 m2 l2" style="margin-left: 0px;">
+            <label class="black-text" style="
+    margin-left: 58.3438px;" th:text="2019"></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s2 m2 l2 left">
+            <label class="black-text fontsize01">交易流水号</label></br>
+            <label class="black-text fontsize02">Transaction flow number</label>
+        </div>
+        <div class="col s2 m2 l2">
+            <label class="black-text" th:text="12345"></label>
+        </div>
+        <div class="col s2 m2 l2 right">
+            <label class="black-text fontsize01">就诊记录编号</label></br>
+            <label class="black-text fontsize02">Visit record number</label>
+        </div>
+        <div class="col s2 m2 l2">
+            <label class="black-text" th:text="54321"></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s2 m2 l2 left">
+            <label class="black-text fontsize01">收费总金额</label></br>
+            <label class="black-text fontsize02">Total amount of charge</label>
+        </div>
+        <div class="col s2 m2 l2">
+            <label class="black-text" th:text="70"></label>
+        </div>
+        <div class="col s2 m2 l2 right">
+            <label class="black-text fontsize01">实际收款金额</label></br>
+            <label class="black-text fontsize02">Actual collection amount</label>
+        </div>
+        <div class="col s2 m2 l2">
+            <label class="black-text" th:text="67"></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s2 m2 l2 left">
+            <label class="black-text fontsize01">找回金额</label></br>
+            <label class="black-text fontsize02">Retrieve the amount</label>
+        </div>
+        <div class="col s2 m2 l2">
+            <label class="black-text"
+                   th:text="56"></label>
+        </div>
+        <div class="col s2 m2 l2 right">
+            <label class="black-text"></label>
+        </div>
+        <div class="col s2 m2 l2">
+            <label class="black-text" ></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s2 m2 l2 left">
+            <label class="black-text fontsize01">收款人姓名</label></br>
+            <label class="black-text fontsize02">Payee Name</label>
+        </div>
+        <div class="col s2 m2 l2">
+            <label class="black-text"
+                   th:text="yumfggh"></label>
+        </div>
+        <div class="col s2 m2 l2 right">
+            <label class="black-text"></label>
+        </div>
+        <div class="col s2 m2 l2">
+            <label class="black-text" ></label>
+        </div>
+    </div>
+
+
+</div>
+
+<div th:replace="public/base_print_script :: html"></div>
+
+<script th:inline="javascript">
+    function doOk() {
+        $('body  div div.row.valign-wrapper').printThis({
+            importCSS: true,
+            debug: true,
+            afterPrint: function () {
+                dialog.confirm('确定打印?', function (index, layero) {
+                    $.ahsjajax(CTX + "/api/registered/print.ahsj",
+                        {"id": [[${hisregistered.id}]]},
+                        function (msg) {
+                            if (msg.success) {
+                                M.toast({
+                                    html: msg.message, completeCallback: function () {
+                                    }
+                                });
+                                grid.search();
+                                dialog.parentclose();
+                            } else {
+                                M.toast({
+                                    html: msg.message, completeCallback: function () {
+                                    }
+                                });
+                            }
+                        },
+                        function (data) {
+                            M.toast({
+                                html: "网络异常", completeCallback: function () {
+                                }
+                            });
+                        }
+                    );
+                });
+            }
+        });
+    }
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</body>
+
+</html>
+
+

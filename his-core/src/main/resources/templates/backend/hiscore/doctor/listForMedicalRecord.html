@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="public/base_list :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<div class="row">
+    <div class="breadcrumbs-inline pt-3 pb-1" id="breadcrumbs-wrapper">
+        <!-- Search for small screen-->
+        <div class="container">
+            <div class="row">
+                <div class="col s10 m6 l6 breadcrumbs-left">
+                    <h5 class="breadcrumbs-title mt-0 mb-0 display-inline hide-on-small-and-down">DataTable</h5>
+                    <ol class="breadcrumbs mb-0">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#">Table</a>
+                        </li>
+                        <li class="breadcrumb-item active">DataTable
+                        </li>
+                    </ol>
+                </div>
+                <div class="col s2 m6 l6"><a
+                        class="btn btn-floating dropdown-settings waves-effect waves-light breadcrumbs-btn right"
+                        href="#!" data-target="dropdown1"><i class="material-icons">expand_more </i><i
+                        class="material-icons right">arrow_drop_down</i></a>
+                    <ul class="dropdown-content" id="dropdown1" tabindex="0">
+                        <li tabindex="0"><a class="grey-text text-darken-2"
+                                            href="user-profile-page.html">Profile<span
+                                class="new badge red">2</span></a></li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="app-contacts.html">Contacts</a>
+                        </li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="page-faq.html">FAQ</a></li>
+                        <li class="divider" tabindex="-1"></li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="user-login.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 xl12 m12 l12 ">
+        <div class="container">
+            <div class="section section-data-tables">
+                <div class="card">
+                    <div class="card-content">
+                        <form id="searchForm" class="row" action="">
+                            <div class="row">
+                                <div class="col  s1 m1 l1 xl1">
+                                    <h6>模糊搜索</h6><label style="color:black">Fuzzy search
+
+                                </label>
+                                </div>
+                                <div class="col input-field s2 m2 l2 xl2">
+                                    <input id="nurseName" name="nurseName" type="text"/>
+                                    <label for="nurseName">护士姓名查询<span style="font-size: 12px">(Nurse name inquiry
+
+)</span></label>
+                                </div>
+                                <div class="col input-field s2 m2 l2 xl2">
+                                    <input id="doctorName" name="doctorName" type="text"/>
+                                    <label for="doctorName">医生姓名查询<span style="font-size: 12px">(Doctor name inquiry
+
+)</span></label>
+                                </div>
+                                <div class="col  s1 m1 l1 xl1">
+                                    <h6>病历记录时间区间</h6><label style="color:black">Medical record recording time interval
+
+                                </label>
+                                </div>
+                                <div class="col input-field s2 m2 l2 xl2">
+                                    <input id="lowCreateDate" name="lowCreateDate" type="text" class="datepicker"/>
+                                    <label for="lowCreateDate">下区间<span style="font-size: 12px">(Lower interval
+
+)</span></label>
+                                </div>
+                                <div class="col input-field s2 m2 l2 xl2">
+                                    <input id="highCreateDate" name="highCreateDate" type="text" class="datepicker"/>
+                                    <label for="highCreateDate">上区间<span style="font-size: 12px">(upper interval
+
+)</span></label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <div class="col s2 m2 l2 xl2 offset-l1">
+                            <a class="waves-effect waves-light btn" id="searchBtn"><i
+                                    class="material-icons  white-text tooltipped " data-position="bottom"
+                                    data-delay="50" data-tooltip="搜索">search</i></a>
+                            <a id="resetBtn" class="waves-effect waves-light btn"><i
+                                    class="material-icons  white-text tooltipped " data-position="bottom"
+                                    data-delay="50" data-tooltip="重置">youtube_searched_for</i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col s12 x12 l12 xl12">
+            <div class="card">
+                <div class="card-content">
+                    <h4 class="card-title">以往病历查看
+                    </h4><label style="color:black">Past medical records
+                </label>
+                    <div class="row">
+                    </div>
+                    <!--Form Advance-->
+                    <div class="row">
+                        <div id="refreshtable" class="col l12 m12 l12 xl12">
+                            <table id="data-table-simple" class="display">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <input id="patientId" type="hidden" th:value="${patientId}">
+</div>
+
+<div th:replace="public/base_list_script :: html"></div>
+<div th:replace="public/base_update_script :: html"></div>
+
+
+<script th:inline="javascript">
+    var grid = new Datatable();
+    $(document).ready(function () {
+        initBtn();
+        // initMenu()
+        initTable();
+    });
+
+    function initTable() {
+        grid.init({
+            src: $("#data-table-simple"),
+            onSuccess: function (grid) {
+            },
+            onError: function (grid) {
+            },
+            onDataLoad: function (grid) {
+            },
+            loadingMessage: 'Loading...',
+            dataTable: {
+                "ajax": {
+                    "url": CTX + "/api/hismedicalrecord/listForMedicalHistoryByPatientId.ahsj?token=" + TOKEN + "&patientId=" + $('#patientId').val(),  // ajax source
+                },
+                "columns": [
+                    {
+                        "title": "病历记录时间",
+                        "data": "createDate",
+                        "name": "create_date"
+                    },
+                    {
+                        "title": "就诊记录编号",
+                        "data": "medicalRecordId",
+                        "name": "medical_record_id"
+                    },
+                    {
+                        "title": "病人姓名",
+                        "data": "pName",
+                        "name": ""
+                    },
+                    {
+                        "title": "病人身份证",
+                        "data": "idCard",
+                        "name": ""
+                    },
+                    {
+                        "title": "接诊医生姓名",
+                        "data": "receiveDoctorName",
+                        "name": ""
+                    },
+                   {
+                        "title": "住院医生姓名",
+                        "data": "doctorName",
+                        "name": ""
+                    }, {
+                        "title": "住院护士姓名",
+                        "data": "nurseName",
+                        "name": ""
+                    },
+                   {
+                        "title": "操作",
+                        "width": "200px",
+                        "className": "centered",
+                        "orderable": false,
+                        "render": function (data, type, row) {
+                            var rtnBtn = "";
+                            //如果获取字符串，必须在参数外反转"
+                            if(row.hospitalManageId != null){
+                            rtnBtn = rtnBtn +
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"对应住院信息查看\" onclick='visitInformationForInHospital(\"" + row.medicalRecordId + "\","+ row.hospitalManageId +",\""+row.pName+"\");'> <i class='material-icons'>visibility</i></a>"+
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"抢救记录\" onclick='listIndex(\"" + row.medicalRecordId +"\",\""+ row.bid + "\");'> <i class='material-icons'>local_hospital</i></a>";
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"输血记录\" onclick='bloodTransfusionRecord("+ row.hospitalManageId +");'> <i class='material-icons'>settings_input_composite</i></a>";
+
+                            }
+
+                            rtnBtn = rtnBtn +
+                                    "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"对应接诊信息查看/住院开药\" onclick='visitInformationForNotInHospital(\""+ row.medicalRecordId +"\",\""+row.pName+"\");'> <i class='material-icons'>event_note</i></a>";
+                            return rtnBtn;
+                            // 返回自定义内容
+
+                        }
+                    }
+                ],
+                "order": [
+                    [0, 'desc']
+                ],
+            }
+        });
+
+    }
+
+    function visitHospitalManage(medicalRecordId) {
+        var url = CTX + "/api/hishospitalmanage/DetailsForHospitalManageByMedicalNumber/index.ahsj?token=" + TOKEN + "&medicalRecordId=" + medicalRecordId;
+        dialog.show(url, "对应信息查看");
+    }
+
+    function visitInformationForInHospital(medicalRecordId,hospitalManageId,pName) {
+        var url = CTX + "/api/doctor/inpatientInformation/index.ahsj?token=" + TOKEN + "&medicalRecordId=" + medicalRecordId +"&hospitalManageId=" + hospitalManageId +"&patientName=" + pName;
+        dialog.show(url, "对应信息查看");
+    }
+    function listIndex(recordNumber,bid) {
+        var url = CTX + "/api/hisrescue/list/index.ahsj?token=" + TOKEN + "&recordNumber=" + recordNumber +"&bid="+bid;
+        dialog.show(url, "抢救记录");
+    }
+
+    // 接诊记录查看,有可能住院,有可能不住院
+    function visitInformationForNotInHospital(medicalRecordId,pName) {
+        var url = CTX + "/api/doctor/notInpatientInformation/index.ahsj?token=" + TOKEN + "&medicalRecordId=" + medicalRecordId +"&patientName=" + pName;
+        dialog.show(url, "对应接诊信息查看");
+    }
+    function visitAnkle(medicalRecordId) {
+        var url = CTX + "/api/hisAnkle/listByRecordId/index.ahsj?token=" + TOKEN + "&medicalRecordId=" + medicalRecordId;
+        dialog.show(url, "当次对应护嘱查看");
+    }
+
+    //管理输血记录
+    function bloodTransfusionRecord(hospitalManageId) {
+        var url = CTX + "/api/bloodTransfusionRecord/listByHospitalManageId/index.ahsj?token=" + TOKEN  +"&hospitalManageId=" + hospitalManageId;
+        dialog.show(url, "输血记录管理(Blood transfusion record management)");
+    }
+
+    function initBtn() {
+        //搜索按钮
+        $('#searchBtn').click(function () {
+            grid.search();
+        });
+        $('#resetBtn').click(function () {
+            grid.reset();
+        });
+        $("#searchForm .row .col input[type='radio']").click(function () {
+            grid.search();
+        });
+    }
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+</body>
+</html>
+

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+<!--Form Advance-->
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title" >收费项目组信息修改</h4>
+                <form class="col s12" id="sendForm" action="#">
+                    <input type="hidden" id="id" name="id"  th:value="${hisInspectionCombination.id}">
+                    <div class="row">
+
+                        <div class="input-field col s4 l4 xl4">
+                             <input id="ordernum" name="ordernum" type="text"  readonly="readonly"
+                                    data-error=".errorTxt2" th:value="${hisInspectionCombination.ordernum}">
+                             <div class="errorTxt2"></div>
+                             <label for="ordernum">项目组序号</label>
+                         </div>
+
+
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="name" name="name" type="text"
+                                   data-error=".errorTxt1" th:value="${hisInspectionCombination.name}">
+                            <div class="errorTxt1"></div>
+                            <label for="name">项目组名称</label>
+                        </div>
+
+
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="number" name="number" type="text"
+                                   data-error=".errorTxt1" th:value="${hisInspectionCombination.number}">
+                            <div class="errorTxt1"></div>
+                            <label for="number">项目组简码</label>
+                        </div>
+
+
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="money" name="money" type="number"   readonly="readonly"
+                                   data-error=".errorTxt1" th:value="${hisInspectionCombination.money}">
+                            <div class="errorTxt1"></div>
+                            <label for="money">项目总价</label>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button id="send_btn" class="btn cyan waves-effect waves-light right" type="submit"
+                                    name="action">提交
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+    $(function () {
+        formCheck();
+
+    });
+
+    function formCheck() {
+        $("#sendForm").validate({
+
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+                dialog.confirm('确定提交吗?', function (index, layero){
+                var queryString = $('#sendForm').serialize();
+                console.log("queryString is" + queryString);
+
+                $.ahsjajax(
+                    CTX + "/api/hisPproject/combination/update/HisProject/updatecombination.ahsj",
+                    queryString,
+                    function (msg) {
+                        if (msg.success) {
+                            M.toast({html: msg.message});
+                            parent.grid.search();
+                            dialog.parentclose();
+                            return false;
+                        } else {
+                            M.toast({html: msg.message});
+                            return false;
+                        }
+                    },
+                    function () {
+                        M.toast({html: "网络异常"});
+                        return false;
+                    }
+                );});
+            }
+
+        });
+    }
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</body>
+
+</html>

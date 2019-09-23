@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+<head>
+    <meta charset="UTF-8">
+    <div th:replace="public/base_print :: html"></div>
+</head>
+<body>
+<div class="container">
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 center">
+            <h4>中柬第一医院体温单</h4>
+            <p></p>
+        </div>
+    </div>
+
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 center">
+            <table style="font-size: 14px" border="none">
+                <tr>
+                    <td><p>住院编号:<span th:text="${hosNumber}"></span></p></td>
+                    <td><p>姓名:<span th:text="${name}"></span></p></td>
+                    <td><p>性别:<span th:text="${sex}"></span></p></td>
+                    <td><p>年龄:<span th:text="${age}"></span></p></td>
+                    <td><p>科室名:<span th:text="${departmentName}"></span></p></td>
+                    <td><p>床号:<span th:text="${bedsNumber}"></span></p></td>
+                    <td><p>房号:<span th:text="${wardsNumber}"></span></p></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 center" id="canvasContainer">
+            <canvas id="ahsjTemeplateCanvas" width="740" height="900" style="border:1px solid #d3d3d3;">
+                您的浏览器不支持画布插件，请升级浏览器内核至IE8+
+            </canvas>
+        </div>
+    </div>
+</div>
+<div th:replace="public/base_list_script :: html"></div>
+<div th:replace="public/base_print_script :: html"></div>
+
+<script type="text/javascript" th:src="@{/hiscore/assets/global/js/ahsj.template.js}"></script>
+
+<script type="text/javascript" th:src="@{/hiscore/assets/global/js/ahsj.template.js}"></script>
+
+<script>
+    function doOk() {
+        $('body  div .row.valign-wrapper').printThis({
+            importCSS: true,
+            //debug: true,
+            afterPrint: function () {
+                //打印之后将图片重新切换成canvas
+
+                var ahsjTemeplate = new Templates();
+                ahsjTemeplate.init({
+                    src: document.getElementById("ahsjTemeplateCanvas"),
+                    paddingLeft:10,
+                    paddingTop:10,
+                    paddingRight:10,
+                    paddingBottom:10,
+                    mPaintWidth:1
+                });
+
+                dialog.confirm('确定打印?', function (index, layero) {
+
+
+                    $.ahsjajax(
+                        CTX + "/api/nursingRecord/printTemp/index.ahsj",
+
+                        function (msg) {
+                            console.log(msg);
+                            if (msg.success) {
+                                M.toast({html: msg.message});
+                                return false;
+                            } else {
+                                M.toast({html: msg.message});
+                                return false;
+                            }
+                        },
+                        function () {
+                            M.toast({html: "网络异常"});
+                            return false;
+                        }
+                    );
+                })
+            },
+            //开始打印之前将canvas元素节点转换成图片
+            beforePrint:function(){
+                convertCanvasToImage();
+            }
+        })
+    }
+    var ahsjTemeplate = new Templates();
+    ahsjTemeplate.init({
+        src: document.getElementById("ahsjTemeplateCanvas"),
+        paddingLeft:10,
+        paddingTop:10,
+        paddingRight:10,
+        paddingBottom:10,
+        mPaintWidth:1,
+
+    });
+
+    function convertCanvasToImage() {
+        // 获取画布的对象(canvas)
+        var mycanvas = document.getElementById("ahsjTemeplateCanvas");
+        // 获取画布的父对象(div)
+        var parent = mycanvas.parentElement;
+        // 根据画布内容生成图片
+        var image = mycanvas.toDataURL("image/png");
+        // 创建一个img图片对象元素
+        var img = document.createElement("img");
+        // 将画布生成的图片内容给img图片对象元素
+        img.src = image;
+        // 将画布宽度给img图片对象元素宽度
+        img.width = mycanvas.width;
+        // 将画布高度给img图片对象元素高度
+        img.height = mycanvas.height;
+        // 将生成的图片内容加载到画布所在父元素的内容里
+        parent.appendChild(img);
+        // 从画布所在的父元素里删除画布自己的内容
+        parent.removeChild(mycanvas);
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<style>
+    input{
+        display: inline;
+        border:none;
+        border-bottom:1px solid #000;
+    }
+    table tr td{
+        border: none;
+    }
+    table tr{
+        border-bottom: none;
+    }
+</style>
+<div th:replace="public/base_print :: html"></div>
+<body>
+<div class="container">
+
+    <div  class="row valign-wrapper">
+        <div class="col s12 m12 l12 center">
+            <h4>表4 产科入院护理评估记录单</h4>
+        </div>
+
+    </div>
+    <div  class="row valign-wrapper">
+        <div class="col s1 m1 l1">
+            <p>姓名：</p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p></p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p>年龄：</p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p></p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p>科别：</p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p></p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p>床号：</p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p></p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p>住院号：</p>
+        </div>
+        <div class="col s1 m1 l1">
+            <p></p>
+        </div>
+    </div>
+    <div  class="row valign-wra pper">
+        <div class="col s12 m12 l12">
+            <table>
+                <tr>
+                    <td colspan="6">一、一般资料</td>
+                </tr>
+                <tr>
+                    <td>职业</td>
+                    <td><input type="text"></td>
+                    <td>文化程度</td>
+                    <td><input type="text"></td>
+                    <td>婚姻状况：</td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td>联系地址</td>
+                    <td colspan="2"><input type="text"></td>
+                    <td>联系人及电话</td>
+                    <td colspan="2"><input type="text"></td>
+                </tr>
+                <tr>
+                    <td>入院日期</td>
+                    <td><input type="text"></td>
+                    <td>入院时间</td>
+                    <td><input type="text"></td>
+                    <td>入院方式：</td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td>入院原因</td>
+                    <td colspan="5"></td>
+                </tr>
+                <tr>
+                    <td>入院诊断</td>
+                    <td colspan="5"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div  class="row valign-wrapper">
+        <div class="col s12 m12 l12">
+            <table>
+                <tr>
+                    <td colspan="7">二、护理评估</td>
+                </tr>
+                <tr>
+                    <td> T <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> ℃ </td>
+                    <td> P <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> 次/分</td>
+                    <td> R <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> 次/分</td>
+                    <td> BP <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u>  / <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> mmHg </td>
+                    <td> 体重 <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> kg </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>神志：</td>
+                    <td><input type="text"></td>
+                    <td>语言能力：</td>
+                    <td><input type="text"></td>
+                    <td>皮肤：</td>
+                    <td><input type="text"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>情绪状态：</td>
+                    <td><input type="text"></td>
+                    <td>自理能力：</td>
+                    <td><input type="text"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>既往史：</td>
+                    <td colspan="6"><input type="text"></td>
+                </tr>
+                <tr>
+                    <td>其他：</td>
+                    <td colspan="6"><input type="text"></td>
+                </tr>
+                <tr>
+                    <td>过敏史： <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> </td>
+                    <td>药物： <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> </td>
+                    <td>食物： <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> </td>
+                    <td>其他： <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div  class="row valign-wrapper">
+        <div class="col s12 m12 l12">
+            <table>
+                <tr>
+                    <td colspan="5">三、专科情况</td>
+                </tr>
+                <tr>
+                    <td>孕产史</td>
+                    <td>孕 <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> 次</td>
+                    <td>产 <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> 次</td>
+                    <td>人流 <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> 次</td>
+                    <td>母乳喂养知识 <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> </td>
+                </tr>
+                <tr>
+                    <td>末次月经 <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> </td>
+                    <td>预产期 <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>孕期出血 <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> </td>
+                    <td>描述 <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> </td>
+                    <td>孕期用药 <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> </td>
+                    <td>描述 <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>胎位 <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> </td>
+                    <td>胎心 <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> 次/分</td>
+                    <td>胎动 <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> </td>
+                    <td>胎动异常描述 <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>胎膜 <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> </td>
+                    <td>阴道出血 <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> </td>
+                    <td>宫缩 <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> </td>
+                    <td>宫缩规律 <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>乳房发育 <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> </td>
+                    <td>其他 <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>水肿情况 <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> </td>
+                    <td>尿蛋白 <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> </td>
+                    <td>尿糖 <u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </u> </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12">
+            <table>
+                <tr>
+                    <td colspan="5">四、入院宣教</td>
+                </tr>
+                <tr>
+                    <td>入院宣教</td>
+                    <td><input type="checkbox" /> <label>床位医生</label></td>
+                    <td><input type="checkbox" /> <label>责任护士</label></td>
+                    <td><input type="checkbox" /> <label>病房环境</label></td>
+                    <td><input type="checkbox" /> <label>病房制度</label></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="checkbox" /> <label>探视规定及时间</label></td>
+                    <td><input type="checkbox" /> <label>膳食安排</label></td>
+                    <td><input type="checkbox" /> <label>心理疏导</label></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>其他</td>
+                    <td colspan="4"><input type="text" /></td>
+                </tr>
+                <tr>
+                    <td colspan="5">五、护理计划</td>
+                </tr>
+                <tr>
+                    <td colspan="5"><input type="text"/></td>
+                </tr>
+                <tr>
+                    <td colspan="5"><input type="text"/></td>
+                </tr>
+                <tr>
+                    <td>评估时间：</td>
+                    <td></td>
+                    <td></td>
+                    <td>护士签名：</td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="public/base_list_script :: html"></div>
+<div th:replace="public/base_print_script :: html"></div>
+<script th:inline="javascript">
+
+</script>
+</body>
+</html>

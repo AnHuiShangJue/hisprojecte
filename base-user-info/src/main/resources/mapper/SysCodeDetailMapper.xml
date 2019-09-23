@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.baseuserinfo.dao.SysCodeDetailMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.baseuserinfo.entity.SysCodeDetail">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="value" property="value" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="type_id" property="typeId" jdbcType="BIGINT"/>
+        <result column="order_num" property="orderNum" jdbcType="INTEGER"/>
+        <result column="del_flag" property="delFlag" jdbcType="VARCHAR"/>
+        <result column="sys_param" property="sysParam" jdbcType="VARCHAR"/>
+        <result column="create_user_id" property="createUserId" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, code, value, remark, type_id, order_num, del_flag, create_user_id, create_date, 
+    update_user_id, update_date,sys_param
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_code_detail
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_code_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.ahsj.baseuserinfo.entity.SysCodeDetail" useGeneratedKeys="true"
+            keyProperty="id">
+    insert into sys_code_detail (id, code, value, 
+      remark, type_id, order_num, 
+      del_flag, create_user_id, create_date, 
+      update_user_id, update_date,sys_param)
+    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{typeId,jdbcType=BIGINT}, #{orderNum,jdbcType=INTEGER}, 
+      #{delFlag,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateUserId,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{sysParam,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.ahsj.baseuserinfo.entity.SysCodeDetail">
+        insert into sys_code_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="value != null">
+                value,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="typeId != null">
+                type_id,
+            </if>
+            <if test="orderNum != null">
+                order_num,
+            </if>
+            <if test="delFlag != null">
+                del_flag,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="sysParam != null">
+                sys_param,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="code != null">
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="value != null">
+                #{value,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="typeId != null">
+                #{typeId,jdbcType=BIGINT},
+            </if>
+            <if test="orderNum != null">
+                #{orderNum,jdbcType=INTEGER},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysParam != null">
+                #{sysParam,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.baseuserinfo.entity.SysCodeDetail">
+        update sys_code_detail
+        <set>
+            <if test="code != null">
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="value != null">
+                value = #{value,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="typeId != null">
+                type_id = #{typeId,jdbcType=BIGINT},
+            </if>
+            <if test="orderNum != null">
+                order_num = #{orderNum,jdbcType=INTEGER},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sysParam != null">
+                sys_param = #{sysParam,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.baseuserinfo.entity.SysCodeDetail">
+    update sys_code_detail
+    set code = #{code,jdbcType=VARCHAR},
+      value = #{value,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=BIGINT},
+      order_num = #{orderNum,jdbcType=INTEGER},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+       sys_param = #{sysParam,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <!-- 自定义 -->
+    <resultMap id="TreeResultMap" type="com.ahsj.baseuserinfo.entity.TreeEntity">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="pId" property="pId" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="isParent" property="isParent" jdbcType="BOOLEAN"/>
+        <result column="open" property="open" jdbcType="BOOLEAN"/>
+    </resultMap>
+    <select id="selectTreeCode" parameterType="java.lang.Integer" resultMap="TreeResultMap">
+    select
+      id as id,
+      type_id as pId,
+      value as name,
+      false as isParent,
+      false as open
+    from sys_code_detail
+    where type_id = #{typeId,jdbcType=INTEGER}
+    order by order_num asc
+  </select>
+    <select id="list" parameterType="com.ahsj.baseuserinfo.entity.SysCodeDetail" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_code_detail
+        where type_id = #{parameter.typeId,jdbcType=INTEGER}
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+    <select id="selectByCode" parameterType="com.ahsj.baseuserinfo.entity.SysCodeDetail" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_code_detail
+        where type_id = #{typeId,jdbcType=INTEGER}
+        and code = #{code,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByValue" parameterType="com.ahsj.baseuserinfo.entity.SysCodeDetail" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_code_detail
+        where type_id = #{typeId,jdbcType=INTEGER}
+        and value = #{value,jdbcType=VARCHAR}
+    </select>
+    <!-- 更新 -->
+    <update id="update" parameterType="com.ahsj.baseuserinfo.entity.SysCodeDetail">
+        update sys_code_detail
+        <set>
+            value = #{value,jdbcType=VARCHAR},
+            remark = #{remark,jdbcType=VARCHAR},
+            type_id = #{typeId,jdbcType=INTEGER},
+            order_num = #{orderNum,jdbcType=INTEGER}
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="lstAllSysCodeDetail" parameterType="com.ahsj.baseuserinfo.entity.SysCodeDetail" resultMap="BaseResultMap">
+    select
+      sys_code.type,
+      sys_code_detail.*
+    from
+      sys_code,
+      sys_code_detail
+    where
+      sys_code.id = sys_code_detail.type_id
+      and sys_code.del_flag = 0
+      and sys_code_detail.del_flag = 0
+    order by sys_code.type,sys_code_detail.order_num
+  </select>
+
+
+    <select id="SysCodeDetail" resultMap="BaseResultMap" parameterType="com.ahsj.baseuserinfo.entity.SysCodeDetail">
+    select d.id from sys_code_detail d left join sys_code c on d.type_id = c.id
+    where  c.type = 'registered_category' and d.code = #{code,jdbcType=VARCHAR}
+  </select>
+
+
+    <select id="queryTranslateInfoByDate" resultMap="BaseResultMap"
+            parameterType="com.ahsj.baseuserinfo.entity.SysCodeDetail">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_code_detail as his
+        where   <![CDATA[ (DATE_FORMAT(his.update_date, '%Y-%m-%d') =  DATE_FORMAT( #{updateDate}, '%Y-%m-%d'))]]>
+    </select>
+
+
+    <select id="getSysCodeName" resultMap="BaseResultMap"
+            parameterType="com.ahsj.baseuserinfo.entity.SysCodeDetail">
+        select
+        his.*
+        from sys_code_detail as his left join sys_code as sysc on sysc.id = his.type_id
+        where  his.value = #{value,jdbcType=VARCHAR}
+
+        <if test="sysCodeType != null and sysCodeType != ''">
+            and sysc.type  = #{sysCodeType,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="selectSysCode" resultMap="BaseResultMap"
+            parameterType="com.ahsj.baseuserinfo.entity.SysCodeDetail">
+        select
+     d.id, d.code, d.value, d.remark, d.type_id, d.order_num, d.del_flag, d.create_user_id, d.create_date,
+    d.update_user_id, d.update_date
+        from sys_code_detail as d
+     where d.type_id  = (
+		 select  c.id  from  sys_code as c where c.type =#{type,jdbcType=VARCHAR}
+		 )
+		 and d.`value` =#{value,jdbcType=VARCHAR}
+    </select>
+</mapper>

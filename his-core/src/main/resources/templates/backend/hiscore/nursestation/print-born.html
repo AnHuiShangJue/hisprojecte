@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<style>
+    body{
+        font-size: 14px;
+    }
+    #text-align{
+        text-align:center;
+    }
+    .test{
+        width: 90%;
+        margin-left: 5%;
+    }
+    table tr td{
+        border: 1px solid grey;
+        text-align:center;
+    }
+</style>
+<div th:replace="public/base_print :: html"></div>
+<body>
+<div class="container">
+
+    <div class="top row valign-wrapper">
+        <h5 style="margin: 0 auto">新生儿信息</h5>
+    </div>
+    <div class="top row valign-wrapper">
+        <p style="margin: 0 auto">Newborn information</p>
+    </div>
+
+    <div  class="row valign-wrapper" id="text-align">
+        <div class="test" style="width: 90%;margin-left: 5%;">
+            <table border="1" cellspacing="0" class="table">
+                <tr>
+                    <td style="border: 1px solid grey;text-align: center">
+                        <p>姓名：</p>
+                        <label>name</label>
+                    </td>
+                    <td th:text="${hisNewborn.bornName}" style="border: 1px solid grey;text-align: center"></td>
+                    <td style="border: 1px solid grey;text-align: center">
+                        <p>性别：</p>
+                        <label>gender</label>
+                    </td>
+                    <td th:text="${hisNewborn.sexName}" style="border: 1px solid grey;text-align: center"></td>
+                    <td style="border: 1px solid grey;text-align: center">
+                        <p>民族：</p>
+                        <label>Nationality</label>
+                    </td>
+                    <td th:text="${hisNewborn.national}" style="border: 1px solid grey;text-align: center"></td>
+                    <td style="border: 1px solid grey;text-align: center">
+                        <p>父母姓名：</p>
+                        <label>Parent's name</label>
+                    </td>
+                    <td th:text="${hisNewborn.pName}" style="border: 1px solid grey;text-align: center"></td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid grey;text-align: center">
+                        <p>出生年月：</p>
+                        <label>Date of birth</label>
+                    </td>
+                    <td th:text="${createDate}" style="border: 1px solid grey;text-align: center"></td>
+                    <td style="border: 1px solid grey;text-align: center">
+                        <p>身高（单位：厘米）：</p>
+                        <label>Height (unit: cm)</label>
+                    </td>
+                    <td th:text="${hisNewborn.height}" style="border: 1px solid grey;text-align: center"></td>
+                    <td style="border: 1px solid grey;text-align: center">
+                        <p>体重：</p>
+                        <label>body weight</label>
+                    </td>
+                    <td th:text="${hisNewborn.weight}" style="border: 1px solid grey;text-align: center"></td>
+                    <td style="border: 1px solid grey;text-align: center">
+                        <p>脉搏：</p>
+                        <label>pulse</label>
+                    </td>
+                    <td th:text="${hisNewborn.pulse}"  style="border: 1px solid grey;text-align: center"></td>
+                </tr>
+
+                <tr>
+                    <td style="border: 1px solid grey;text-align: center">
+                        <p>父母居住地址：</p>
+                        <label>Parental residence address</label>
+                    </td>
+                    <td th:text="${hisNewborn.parentAddress}" style="border: 1px solid grey;text-align: center"></td>
+                    <td style="border: 1px solid grey;text-align: center">
+                        <p>头围：</p>
+                        <label>Head circumference</label>
+                    </td>
+                    <td th:text="${hisNewborn.headCircumference}" style="border: 1px solid grey;text-align: center"></td>
+                    <td style="border: 1px solid grey;text-align: center">
+                        <p>是否健康：</p>
+                        <label>Is it healthy?</label>
+                    </td>
+                    <td th:text="${hisNewborn.healthStandards}" style="border: 1px solid grey;text-align: center"></td>
+                    <td style="border: 1px solid grey;text-align: center">
+                        <p>肌肉张力：</p>
+                        <label>Muscle tone</label>
+                    </td>
+                    <td th:text="${hisNewborn.activity}" style="border: 1px solid grey;text-align: center"></td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid grey;text-align: center">
+                        <p>父母身份证号：</p>
+                        <label>Parent ID number</label>
+                    </td>
+                    <td th:text="${hisNewborn.idCard}" style="border: 1px solid grey;text-align: center"></td>
+                    <td style="border: 1px solid grey;text-align: center">
+                        <p>刺激反射：</p>
+                        <label>Stimulating reflex</label>
+                    </td>
+                    <td th:text="${hisNewborn.grimaceResponse}" style="border: 1px solid grey;text-align: center"></td>
+                    <td style="border: 1px solid grey;text-align: center">
+                        <p>呼吸：</p>
+                        <label>Breathe</label>
+                    </td>
+                    <td th:text="${hisNewborn.respiration}" style="border: 1px solid grey;text-align: center"></td>
+                    <td style="border: 1px solid grey;text-align: center">
+                        <p>肤色：</p>
+                        <label>Color of skin</label>
+                    </td>
+                    <td th:text="${hisNewborn.apprarance}" style="border: 1px solid grey;text-align: center"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s10 m10 l10 offset-l1 offset-m1 offset-s1">
+            <button id="send_btn" class="btn cyan waves-effect waves-light right" type="submit"
+                    name="action">打  印
+                <i class="material-icons right">send</i>
+            </button>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="test" style="width: 90%;margin-left: 5%;">
+
+        <h6 style="font-size:10px">注释:<br>
+            <br>
+            下面将介绍如何通过这些项目来对宝宝进行测评：<br>
+            肌张力（肌肉紧张性）<br>
+            0——无力；不动
+            1——四肢略呈弯曲
+            2——四肢屈曲、动作活跃<br>
+            脉搏（心率）<br>
+            0——无心率
+            1——每分钟跳动不到100次
+            2——每分钟跳动至少100次<br>
+            皱眉动作（反射性反应）<br>
+            0——对插鼻管无反应
+            1——在抽吸口鼻腔时有皱眉动作
+            2——在抽吸口鼻腔时皱眉、躲闪、咳嗽或打喷嚏<br>
+            外貌（肤色）<br>
+            0——宝宝整个身体呈青灰色，或者很苍白 <span></span>
+            1——身体颜色正常，但手足青紫 <span></span>
+            2——全身肤色正常<br>
+            呼吸（呼吸作用）<br>
+            0——无呼吸 <span></span>
+            1——哭声微弱，像是呜咽的声音；呼吸缓慢，而且不规则 <span></span>
+            2——哭声良好响亮；呼吸的频率和力度均匀、正常<br>
+            <!--                    简介-->
+            <!--                    新生儿评分又称Apgar评分法、阿氏评分，是孩子出生后立即检查他身体状况的标准评估方法。在孩子出生后，根据皮肤颜色、心搏速率、呼吸、肌张力及运动、反射五项体征进行评分。满10分者为正常新生儿，评分7分以下的新生儿考虑患有轻度窒息，评分在4分以下考虑患有重度窒息。大部分新生儿的评分多在7- 10分之间。-->
+            评分具体标准是：<br>
+            <!--     1．皮肤颜色：评估新生儿肺部血氧交换的情况。全身皮肤呈粉红色为2分，手脚末梢呈青紫色为1分，全身呈青紫色为0分。<br>
+                 2．心搏速率：评估新生儿心脏跳动的强度和节律性。心搏有力大于100次/分钟为2分，心搏微弱小于100次/分钟为1分，听不到心音为0分。<br>
+                 3．呼吸：评估新生儿中枢和肺脏的成熟度。呼吸规律为2分，呼吸节律不齐（如浅而不规则或急促费力）为1分，没有呼吸为0分。<br>
+                 4．肌张力及运动：评估新生儿中枢反射及肌肉强健度。肌张力正常为2分，肌张力异常亢进或低下为1分，肌张力松弛为0分。<br>
+                 5．反射：评估新生儿对外界刺激的反应能力。对弹足底或其他刺激大声啼哭为2分，低声抽泣或皱眉为1分，毫无反应为0分。<br>-->
+            以这五项体征为依据，满10分者为正常新生儿，评分7分以下的新生儿考虑患有轻度窒息，评分在4分以下考虑患有重度窒息。<br>
+            大部分新生儿的评分多在7- 10分之间，医生会根据孩子的评分予以相应的处理。轻度窒息的新生儿一般经清理呼吸道、吸氧等措施后会很快好转，预后良好。</br>
+            <br>
+        </h6>
+        </div>
+    </div>
+
+
+</div>
+
+<div th:replace="public/base_list_script :: html"></div>
+<div th:replace="public/base_print_script :: html"></div>
+<script  th:inline="javascript">
+    var id = [[${id}]];
+    $(function () {
+        $("#send_btn").click(function () {
+            doOk()
+        })
+    })
+    function doOk() {
+        $('body  div .row.valign-wrapper').printThis({
+            importCSS: true,
+            // debug: true,
+            afterPrint: function () {
+                dialog.confirm('确定打印?', function (index, layero) {
+                    var id = [[${id}]];
+                    $.ahsjajax(
+                        CTX + "/api/hisAnkleDetail/getAnkleForPrintf.ahsj",
+                        {"id":id}
+                        ,
+                        function (msg) {
+                            console.log(msg);
+                            if (msg.success) {
+                                M.toast({html: msg.message});
+                                return false;
+                            } else {
+                                M.toast({html: msg.message});
+                                return false;
+                            }
+                        },
+                        function () {
+                            M.toast({html: "网络异常"});
+                            return false;
+                        }
+                    );
+
+
+                })
+            }
+        })
+    }
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://mybatis.org/schema/mybatis-mapper" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div th:replace="public/base_update :: html"></div>
+<body>
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title">护理记录</h4><label style="color:black">
+            </label>
+                <form class="col s12" id="send_Form" action="#">
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="manageNumber" name="manageNumber" type="text" th:value="${manageNumber}" th:readonly="true"/>
+                            <label for="manageNumber">住院编号<span style="font-size: 12px">(Hospital number)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4 jeinput">
+                            <input id="dates"  class="jeinput" name="dates" type="text"
+                                   th:value="${#dates.format(nursingRecord.dates, 'yyyy-MM-dd hh:mm:ss')}" data-error=".errorTxt1"/>
+                            <div class="errorTxt1"></div>
+                            <label for="dates">日期<span style="font-size: 12px">(date)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="bodyTemperature" name="bodyTemperature" type="number" th:value="${nursingRecord.bodyTemperature}"/>
+                            <label for="bodyTemperature">体温<span style="font-size: 12px">(body temperature)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="pulse" name="pulse" type="text" th:value="${nursingRecord.pulse}"/>
+                            <label for="pulse">脉搏次数<span style="font-size: 12px">(Pulse rate)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="breathe" name="breathe" type="text" th:value="${nursingRecord.breathe}"/>
+                            <label for="breathe">呼吸次数<span style="font-size: 12px">(Number of breaths)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="heartRate" name="heartRate" type="text" th:value="${nursingRecord.heartRate}"/>
+                            <label for="heartRate">心率次数<span style="font-size: 12px">(Heart rate)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="bloodPressure" name="bloodPressure" type="text" th:value="${nursingRecord.bloodPressure}"/>
+                            <label for="bloodPressure">血压<span style="font-size: 12px">(blood pressure)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="painScore" name="painScore" type="text" th:value="${nursingRecord.painScore}"/>
+                            <label for="painScore">疼痛分<span style="font-size: 12px">(Pain score)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="oxygenSaturation" name="oxygenSaturation" type="text" th:value="${nursingRecord.oxygenSaturation}"/>
+                            <label for="oxygenSaturation">血氧饱和度<span style="font-size: 12px">(Oxygen saturation)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="flow" name="flow" type="text" th:value="${nursingRecord.flow}"/>
+                            <label for="flow">吸氧流量<span style="font-size: 12px">(Oxygen inhalation flow)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="oxygenAbsorption" name="oxygenAbsorption" type="text" th:value="${nursingRecord.oxygenAbsorption}"/>
+                            <label for="oxygenAbsorption">吸氧方式<span style="font-size: 12px">(Oxygen absorption)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="sucking" name="sucking" type="text" th:value="${nursingRecord.sucking}"/>
+                            <label for="sucking">吸痰<span style="font-size: 12px">(Sucking)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="venousCatheterName" name="venousCatheterName" type="text" th:value="${nursingRecord.venousCatheterName}"/>
+                            <label for="venousCatheterName">静脉置管名称<span style="font-size: 12px">(venousCatheter name)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="venousCatheterCare" name="venousCatheterCare" type="text" th:value="${nursingRecord.venousCatheterCare}"/>
+                            <label for="venousCatheterCare">静脉置管护理<span style="font-size: 12px">(venous Catheter Care)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="involvementProject" name="involvementProject" type="text" th:value="${nursingRecord.involvementProject}"/>
+                            <label for="involvementProject">入量项目<span style="font-size: 12px">(involvement Project)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="outputProject" name="outputProject" type="text" th:value="${nursingRecord.outputProject}"/>
+                            <label for="outputProject">出量项目<span style="font-size: 12px">(output project)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="outputTraits" name="outputTraits" type="text" th:value="${nursingRecord.outputTraits}"/>
+                            <label for="outputTraits">出量性状<span style="font-size: 12px">(output traits)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="output" name="output" type="text" th:value="${nursingRecord.output}"/>
+                            <label for="output">出量<span style="font-size: 12px">(output)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="other" name="other" type="text" th:value="${nursingRecord.other}"/>
+                            <label for="other">其他<span style="font-size: 12px">(others)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="remark" name="remark" type="text" th:value="${nursingRecord.remark}"/>
+                            <label for="remark">备注<span style="font-size: 12px">(remark)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="signature" name="signature" type="text" th:value="${nursingRecord.signature}"/>
+                            <label for="signature">签名<span style="font-size: 12px">(signature)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button id="send_btn" class="btn cyan waves-effect waves-light right" type="submit" name="action">提交（commit）
+                                <i class="mdi-content-send right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input  type="hidden" id="id" name="id" th:value="${nursingRecord.id}"/>
+<!--<input  type="hidden" id="last_manageNumber" name="last_manageNumber" th:value="${last_manageNumber}"/>-->
+
+<!-- ================================================
+Scripts
+================================================ -->
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+    var enLang = {
+        name  : "en",
+        month : ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
+        weeks : [ "SUN","MON","TUR","WED","THU","FRI","SAT" ],
+        times : ["Hour","Minute","Second"],
+        timetxt: ["Time","Start Time","End Time"],
+        backtxt:"Back",
+        clear : "Clear",
+        today : "Now",
+        yes   : "Confirm",
+        close : "Close"
+    }
+    jeDate("#dates",{
+        theme:{bgcolor:"#00A1CB",pnColor:"#00CCFF"},
+        // festival:true,
+        minDate:"1900-01-01",              //最小日期
+        maxDate:"2099-12-31",              //最大日期
+        // method:{
+        //     choose:function (params) {
+        //
+        //     }
+        // },
+        format: "YYYY-MM-DD hh:mm:ss"
+    });
+
+    $(function () {
+        formCheck();
+    });
+
+    function formCheck() {
+        $("#send_Form").validate({
+            rules: {
+                dates: {//1
+                    required: true,
+                    minlength: 1
+                }
+            },
+            messages: {
+                dates: {
+                    required: "请选择日期",
+                    minlength: "最少包含1个字符"
+                }
+            },
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+                dialog.confirm('确定提交吗?', function (index, layero){
+                    var queryString = $('#send_Form').serialize();
+                    console.log("queryString is" + queryString);
+                    $.ahsjajax(
+                        CTX + "/api/nursingRecord/saveOrUpdate.ahsj?token=" + TOKEN,
+                        queryString,
+                        function (msg) {
+                            if (msg.success) {
+                                M.toast({html: msg.message});
+                                parent.grid.search();
+                                dialog.parentclose();
+                                return false;
+                            } else {
+                                M.toast({html: msg.message});
+                                return false;
+                            }
+                        },
+                        function () {
+                            M.toast({html: "网络异常"});
+                            return false;
+                        }
+                    );});
+            }
+        });
+    }
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</body>
+
+</html>

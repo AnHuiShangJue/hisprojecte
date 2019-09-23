@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisConsumablesDetailsMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisConsumablesDetails">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="consumables_id" property="consumablesId" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="spec" property="spec" jdbcType="VARCHAR"/>
+        <result column="stock" property="stock" jdbcType="INTEGER"/>
+        <result column="stock_warn" property="stockWarn" jdbcType="INTEGER"/>
+        <result column="price" property="price" jdbcType="DOUBLE"/>
+        <result column="create_user_id" property="createUserId" jdbcType="BIGINT"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="BIGINT"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="comsumables_num" property="comsumablesNum" />
+        <result column="user_names" property="userNames" />
+        <result column="out_bound_name" property="isOutbound" />
+        <result column="hospital_consumables_details_id" property="hospitalConsumablesDetailsId" />
+        <result column="consumables_details_create_date" property="consumablesDetailsCreateDate" />
+
+        <result column="medical_record_number" property="medicalRecordNumber" jdbcType="VARCHAR" />
+        <result column="consumable_number" property="consumableNumber" jdbcType="VARCHAR" />
+
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, consumables_id, name, type, spec, stock,stock_warn, price, create_user_id,
+    create_date, update_user_id, update_date
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from his_consumables_details
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_consumables_details
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisConsumablesDetails">
+    insert into his_consumables_details (id, consumables_id, name, 
+      type, spec, stock,stock_warn,
+      price, create_user_id,
+      create_date, update_user_id, update_date
+      )
+    values (#{id,jdbcType=BIGINT}, #{consumablesId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{spec,jdbcType=VARCHAR}, #{stock,jdbcType=INTEGER}, #{stockWarn,jdbcType=INTEGER},
+      #{price,jdbcType=DOUBLE}, #{createUserId,jdbcType=BIGINT},
+      #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisConsumablesDetails">
+        insert into his_consumables_details
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="consumablesId != null">
+                consumables_id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="spec != null">
+                spec,
+            </if>
+            <if test="stock != null">
+                stock,
+            </if>
+            <if test="stockWarn != null">
+                stock_warn,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="consumablesId != null">
+                #{consumablesId,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="spec != null">
+                #{spec,jdbcType=VARCHAR},
+            </if>
+            <if test="stock != null">
+                #{stock,jdbcType=INTEGER},
+            </if>
+            <if test="stockWarn != null">
+                #{stockWarn,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=DOUBLE},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisConsumablesDetails">
+        update his_consumables_details
+        <set>
+            <if test="consumablesId != null">
+                consumables_id = #{consumablesId,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="spec != null">
+                spec = #{spec,jdbcType=VARCHAR},
+            </if>
+            <if test="stock != null">
+                stock = #{stock,jdbcType=INTEGER},
+            </if>
+            <if test="stockWarn != null">
+                stock_warn = #{stockWarn,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=DOUBLE},
+            </if>
+
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisConsumablesDetails">
+    update his_consumables_details
+    set consumables_id = #{consumablesId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      spec = #{spec,jdbcType=VARCHAR},
+      stock = #{stock,jdbcType=INTEGER},
+      stock_warn = #{stockWarn,jdbcType=INTEGER},
+      price = #{price,jdbcType=DOUBLE},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <!--自定义sql-->
+    <!--更新库存（添加）-->
+    <update id="updateAddStockById" parameterType="com.ahsj.hiscore.entity.HisEnterConsumablesDetails">
+        update his_consumables_details
+        set his_consumables_details.stock = his_consumables_details.stock + #{enterCount,jdbcType=INTEGER}
+        where
+            consumables_id = #{consumablesId,jdbcType=BIGINT}
+    </update>
+
+    <!--更新库存减少-->
+    <update id="updateReduceStockById" parameterType="com.ahsj.hiscore.entity.HisEnterConsumablesDetails">
+        update his_consumables_details
+        set his_consumables_details.stock = his_consumables_details.stock - #{exitCount,jdbcType=INTEGER}
+        where
+            consumables_id = #{consumablesId,jdbcType=BIGINT}
+    </update>
+    <!--通过consumableId查找-->
+    <select id="selectConsumablesId" parameterType="com.ahsj.hiscore.entity.HisEnterConsumablesDetails"
+            resultMap="BaseResultMap">
+        select his_consumables_details.*
+        from his_consumables_details
+        where his_consumables_details.consumables_id = #{consumableId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectStockById" parameterType="com.ahsj.hiscore.entity.HisEnterConsumablesDetails"
+            resultType="integer">
+        select sum(his_consumables_details.stock)
+        from his_consumables_details
+        where his_consumables_details.consumables_id = #{consumablesId,jdbcType=BIGINT}
+  </select>
+
+
+    <select id="selectByConsumablesId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select his_consumables_details.*
+    from his_consumables_details
+    where his_consumables_details.consumables_id = #{consumablesId,jdbcType=BIGINT}
+  </select>
+
+
+    <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select a.*
+        from his_consumables_details as a
+        where 1 = 1
+        <if test="parameter.name != null and parameter.name != ''">
+            and a.name like concat('%' #{parameter.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.lowPrice != null and parameter.lowPrice != '' ">
+            and a.price &gt;= #{parameter.lowPrice,jdbcType=DOUBLE}
+        </if>
+        <if test="parameter.highPrice != null and parameter.highPrice != ''">
+            and a.price &lt;= #{parameter.highPrice,jdbcType=DOUBLE}
+        </if>
+--         库存不足
+        <if test="parameter.isWarning == 1 ">
+            and a.stock &lt;= a.stock_warn
+        </if>
+        --         库存足
+        <if test="parameter.isWarning == 2 ">
+            and a.stock &gt;= a.stock_warn
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+    <select id="onelist" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select
+        his_consumables_details.*
+        from his_consumables_details
+        where
+        consumables_id = #{parameter.consumablesId,jdbcType=BIGINT}
+        <if test="parameter.name != null and parameter.name != ''">
+            and name like concat('%' #{parameter.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.lowPrice != null and parameter.lowPrice != '' ">
+            and price &gt;= #{parameter.lowPrice,jdbcType=DOUBLE}
+        </if>
+        <if test="parameter.highPrice != null and parameter.highPrice != ''">
+            and price &lt;= #{parameter.highPrice,jdbcType=DOUBLE}
+        </if>
+        <if test="parameter.isWarning != null and parameter.isWarning != ''">
+            and (1 = #{parameter.isWarning,jdbcType=INTEGER} and stock_warn &gt;= stock)or(2 =
+            #{parameter.isWarning,jdbcType=INTEGER} and stock_warn &lt; stock)
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+
+    <!--批量插入list-->
+    <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        insert into his_consumables_details (id, consumables_id, name,
+        type, spec, stock,stock_warn,
+        price, create_user_id,
+        create_date, update_user_id, update_date
+        )
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id,jdbcType=BIGINT}, #{item.consumablesId,jdbcType=BIGINT}, #{item.name,jdbcType=VARCHAR},
+            #{item.type,jdbcType=INTEGER}, #{item.spec,jdbcType=VARCHAR}, #{item.stock,jdbcType=INTEGER},
+            #{item.stockWarn,jdbcType=INTEGER},
+            #{item.price,jdbcType=DOUBLE}, #{item.createUserId,jdbcType=BIGINT},
+            #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=BIGINT},
+            #{item.updateDate,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+
+    <select id="getHisConsumablesDetailsInfo" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+
+        SELECT u.user_name as user_names ,c.*,p.comsumables_num as comsumables_num  ,p.create_date as consumables_details_create_date ,
+        p.is_outbound as out_bound_name ,p.id as hospital_consumables_details_id ,p.medical_record_number as medical_record_number ,p.consumable_number as consumable_number
+        from his_hospital_consumables_details p
+        left join  his_consumables_details c  on c.id = p.his_consumables_details_id
+				LEFT JOIN
+        `his-userinfo`.user_info  u on u.id=p.create_user_id
+        where  p.consumable_number = #{parameter.consumableNumber}
+
+        <if test="parameter.name != null and parameter.name != ''">
+            and name like concat('%' #{parameter.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.lowPrice != null and parameter.lowPrice != '' ">
+            and price &gt;= #{parameter.lowPrice,jdbcType=DOUBLE}
+        </if>
+        <if test="parameter.highPrice != null and parameter.highPrice != ''">
+            and price &lt;= #{parameter.highPrice,jdbcType=DOUBLE}
+        </if>
+        <if test="parameter.consumablesDetailsCreateDate != null and parameter.consumablesDetailsCreateDate != ''">
+            <![CDATA[AND (DATE_FORMAT(p.create_date, '%Y-%m-%d') =  DATE_FORMAT( #{consumablesDetailsCreateDate}, '%Y-%m-%d'))]]>
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+
+  </select>
+
+
+    <select id="queryTranslateInfoByDate" resultMap="BaseResultMap" parameterType="com.ahsj.hiscore.entity.HisConsumablesDetails">
+        select  <include refid="Base_Column_List"/> from his_consumables_details as his
+        where    <![CDATA[ (DATE_FORMAT(his.update_date, '%Y-%m-%d') =  DATE_FORMAT( #{updateDate}, '%Y-%m-%d'))]]>
+    </select>
+
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        FROM  his_consumables_details
+    </select>
+
+    <!--更新stock_warn-->
+    <update id="stockwarnupdate">
+        update his_consumables_details
+        set his_consumables_details.stock_warn = #{arg0}
+        where
+            consumables_id = #{arg1}
+    </update>
+
+
+
+
+
+    <select id="lists" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select a.*
+        from his_consumables_details as a left  join his_consumables c on a.consumables_id = c.id
+        where  a.stock != 0 and c.is_enable = 1
+        <if test="parameter.name != null and parameter.name != ''">
+            and a.name like concat('%' #{parameter.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.lowPrice != null and parameter.lowPrice != '' ">
+            and a.price &gt;= #{parameter.lowPrice,jdbcType=DOUBLE}
+        </if>
+        <if test="parameter.highPrice != null and parameter.highPrice != ''">
+            and a.price &lt;= #{parameter.highPrice,jdbcType=DOUBLE}
+        </if>
+
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+
+
+
+
+    <select id="getHisConsumablesDetailsGroupBy" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        SELECT  distinct p.consumable_number as consumable_number, u.user_name as user_names , p.create_date as consumables_details_create_date ,
+        p.medical_record_number as medical_record_number
+        from his_hospital_consumables_details p
+        left join  his_consumables_details c  on c.id = p.his_consumables_details_id
+        LEFT JOIN
+        `his-userinfo`.user_info  u on u.id=p.create_user_id
+        where 1=1
+        <if test="parameter.consumableNumber != null and parameter.consumableNumber != ''">
+            and consumable_number like concat('%' #{parameter.consumableNumber,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.medicalRecordNumber != null and parameter.medicalRecordNumber != ''">
+            and medical_record_number like concat('%' #{parameter.medicalRecordNumber,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.userNames != null and parameter.userNames != ''">
+            and u.user_name like concat('%' #{parameter.userNames,jdbcType=VARCHAR},'%')
+        </if>
+
+       <if test="parameter.consumablesDetailsCreateDate != null">
+            and p.application_time &lt;= #{parameter.consumablesDetailsCreateDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="parameter.consumablesDetailsCreateDates != null">
+            and p.application_time &gt;= #{parameter.consumablesDetailsCreateDates,jdbcType=TIMESTAMP}
+        </if>
+
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+
+</mapper>

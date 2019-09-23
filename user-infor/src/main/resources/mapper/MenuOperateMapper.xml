@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.userinfor.dao.MenuOperateMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.userinfor.entity.MenuOperate" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="menu_id" property="menuId" jdbcType="BIGINT" />
+    <result column="operate_id" property="operateId" jdbcType="BIGINT" />
+    <result column="permission" property="permission" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, menu_id, operate_id, permission
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from menu_operate
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from menu_operate
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.userinfor.entity.MenuOperate" >
+    insert into menu_operate (id, menu_id, operate_id, 
+      permission)
+    values (#{id,jdbcType=BIGINT}, #{menuId,jdbcType=BIGINT}, #{operateId,jdbcType=BIGINT}, 
+      #{permission,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.userinfor.entity.MenuOperate" >
+    insert into menu_operate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="menuId != null" >
+        menu_id,
+      </if>
+      <if test="operateId != null" >
+        operate_id,
+      </if>
+      <if test="permission != null" >
+        permission,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="menuId != null" >
+        #{menuId,jdbcType=BIGINT},
+      </if>
+      <if test="operateId != null" >
+        #{operateId,jdbcType=BIGINT},
+      </if>
+      <if test="permission != null" >
+        #{permission,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.userinfor.entity.MenuOperate" >
+    update menu_operate
+    <set >
+      <if test="menuId != null" >
+        menu_id = #{menuId,jdbcType=BIGINT},
+      </if>
+      <if test="operateId != null" >
+        operate_id = #{operateId,jdbcType=BIGINT},
+      </if>
+      <if test="permission != null" >
+        permission = #{permission,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.userinfor.entity.MenuOperate" >
+    update menu_operate
+    set menu_id = #{menuId,jdbcType=BIGINT},
+      operate_id = #{operateId,jdbcType=BIGINT},
+      permission = #{permission,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!-- 自定义 -->
+
+  <!-- 根据menuid删除-->
+  <delete id="deleteByMenuId" parameterType="java.lang.Integer" >
+    delete
+    from
+      menu_operate
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </delete>
+  <!-- 批量插入 -->
+  <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">
+    <selectKey resultType="long" keyProperty="id" order="AFTER">
+      SELECT
+      LAST_INSERT_ID()
+    </selectKey>
+
+    insert into menu_operate (id, menu_id, operate_id, permission)
+    values
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.id,jdbcType=INTEGER}, #{item.menuId,jdbcType=INTEGER}, #{item.operateId,jdbcType=INTEGER},
+      #{item.permission,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <select id="listSysMenuOperate" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+      menu_operate.*
+    from menu_operate ,
+         user_role,
+         role_permission
+    where
+      menu_operate.permission = role_permission.menu_tree_id
+      and role_permission.role_id = user_role.role_id
+      and user_role.user_id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+
+   SELECT menu_id,operate_id,code as permission
+   FROM menu_operate
+    LEFT JOIN operate on menu_operate.operate_id = operate.id
+  </select>
+</mapper>

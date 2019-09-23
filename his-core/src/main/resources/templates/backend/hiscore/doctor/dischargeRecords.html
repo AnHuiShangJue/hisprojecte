@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<style>
+    table tr td{
+        border: 1px solid grey;
+
+    }
+</style>
+<div th:replace="public/base_print :: html"></div>
+<body>
+<div class="container">
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 center">
+            <h4>中柬第一医院</h4>
+            <h5>出院记录</h5>
+        </div>
+    </div>
+
+    <div  class="row valign-wrapper">
+        <div class="col s10 m10 l10 offset-l1 offset-m1 offset-s1">
+            <table border="1" cellspacing="0" class="table">
+
+                <tr>
+                    <td>姓名</td>
+                    <td>123456789963258</td>
+                    <td>性别</td>
+                    <td>nnnn</td>
+                    <td>年龄</td>
+                    <td>nnnn</td>
+                    <td>科室</td>
+                    <td>111222</td>
+                    <td>病床</td>
+                    <td>20</td>
+                    <td>床号</td>
+                    <td>123456789</td>
+                </tr>
+
+                <tr>
+                    <td>住院号</td>
+                    <td colspan="2"></td>
+                    <td colspan="2">病理号</td>
+                    <td colspan="2"></td>
+                    <td colspan="2">影像检查号(CT、X、MRI)</td>
+                    <td colspan="3"></td>
+                </tr>
+
+                <tr>
+                    <td>入院日期</td>
+                    <td colspan="4"></td>
+                    <td colspan="2">出院日期</td>
+                    <td colspan="5"></td>
+
+                </tr>
+
+                <tr>
+                    <td>诊断:</td>
+                    <td colspan="11"></td>
+                </tr>
+
+                <tr>
+                    <td>入院时主要症状及体征：</td>
+                    <td colspan="11"></td>
+                </tr>
+
+                <tr>
+                    <td>主要化验结果：</td>
+                    <td colspan="11"></td>
+                </tr>
+
+                <tr>
+                    <td colspan="4">特殊检查及重要会议（注明日期及检查号）：</td>
+                    <td colspan="8"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">住院治疗简要过程及主要治疗措施（注明手术名称、日期、输血量及抢救情况）:</td>
+                    <td colspan="8"></td>
+                </tr>
+
+                <tr>
+                    <td colspan="4">出院情况（症状、体征）:</td>
+                    <td colspan="8"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">出院医嘱（出院后治疗计划及具体带药）：</td>
+                    <td colspan="8"></td>
+                </tr>
+
+                <tr>
+                    <td>医师签名</td>
+                    <td>主治医生</td>
+                    <td colspan="3"></td>
+                    <td>住院医师</td>
+                    <td colspan="3"></td>
+                    <td>实习医生</td>
+                    <td colspan="2"></td>
+
+                </tr>
+
+
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="public/base_list_script :: html"></div>
+<div th:replace="public/base_print_script :: html"></div>
+<script th:inline="javascript">
+
+</script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="public/common :: html"></div>
+
+<!--================================================================================
+	Item Name: Materialize - Material Design Admin Template
+	Version: 1.0
+	Author: GeeksLabs
+
+================================================================================ -->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="description"
+          content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google. ">
+    <meta name="keywords"
+          content="materialize, admin template, dashboard template, flat admin template, responsive admin template,">
+    <title>注册 | 课 程 设 计 管 理 系 统</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Favicons-->
+    <link rel="icon" th:href="@{asstes/global/images/favicon/favicon-32x32.png}" sizes="32x32">
+    <!-- Favicons-->
+    <link rel="apple-touch-icon-precomposed" th:href="@{/asstes/global/images/favicon/apple-touch-icon-152x152.png}">
+    <!-- For iPhone -->
+    <meta name="msapplication-TileColor" content="#00bcd4">
+    <meta name="msapplication-TileImage" content="/asstes/global/images/favicon/mstile-144x144.png">
+    <!-- For Windows Phone -->
+
+
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/assets/global/css/materialize.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/assets/global/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/assets/global/css/page-center.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/assets/global/css/prism.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/assets/global/css/font-awesome.css}"/>
+    <link rel="stylesheet" type="text/css" media="all"
+          th:href="@{/assets/global/js/plugins/perfect-scrollbar/perfect-scrollbar.css}"/>
+    <!--Let browser know website is optimized for mobile-->
+
+    <!-- jQuery Library -->
+    <script type="text/javascript" th:src="@{/assets/global/js/jquery-1.11.2.min.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/global/js/anhuishangjue.ajax.js}"></script>
+    <!--<script type="text/javascript" th:src="@{/assets/global/js/jquery.form.js}"></script>-->
+
+    <!--materialize js-->
+    <script type="text/javascript" th:src="@{/assets/global/js/materialize.js}"></script>
+</head>
+
+<body class="cyan">
+
+
+<!-- Start Page Loading -->
+<div id="loader-wrapper">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+</div>
+<!-- End Page Loading -->
+
+
+<div id="login-page" class="row">
+    <div class="col s12 z-depth-4 card-panel">
+        <form class="login-form">
+            <div class="row">
+                <div class="input-field col s12 center">
+                    <h4>注 册</h4>
+                    <p class="center">欢迎使用 !</p>
+                </div>
+            </div>
+            <div class="row margin">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">person_outline</i>
+                    <input id="username" type="text">
+                    <label for="username" class="center-align">账 号</label>
+                </div>
+            </div>
+            <div class="row margin">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">lock_outline</i>
+                    <input id="password" type="password">
+                    <label for="password">密 码</label>
+                </div>
+            </div>
+            <div class="row margin">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">lock_outline</i>
+                    <input id="password-again" type="password">
+                    <label for="password-again">重 复 密 码</label>
+                </div>
+            </div>
+            <div class="row margin">
+                <p>
+                    <input name="type" type="radio" id="test1" value="1" checked/>
+                    <label for="test1">学生</label>
+                </p>
+                <p>
+                    <input name="type"  type="radio" id="test2" value="2"/>
+                    <label for="test2">老师</label>
+                </p>
+                <p>
+                    <input  name="type" type="radio" id="test3" value="3"/>
+                    <label for="test3">管理员</label>
+                </p>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <button type="button" id="btn_register"class="btn waves-effect waves-light col s12">注 册</button>
+                </div>
+                <div class="input-field col s12">
+                    <p class="margin center medium-small sign-up">已经有账号了? <a href="/user/login">登 录</a></p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- ================================================
+  Scripts
+  ================================================ -->
+<!--define Formcheck-->
+<script type="text/javascript">
+    function formcheck() {
+        var account = $('#username').val();
+        var password = $('#password').val();
+        var regist_repeatpassword = $('#password-again').val();
+        if (isNull(account)) {
+            Materialize.toast("请输入用户名!", 3000);
+            document.getElementById("username").focus();
+            return false;
+        }
+        if (isNull(password)) {
+            Materialize.toast("请输入密码!", 3000);
+            document.getElementById("password").focus();
+            return false;
+        }
+        if (isNull(regist_repeatpassword)) {
+            Materialize.toast("请输入重复密码!", 3000);
+            document.getElementById("password-again").focus();
+            return false;
+        }
+        if(regist_repeatpassword != password){
+            Materialize.toast("密码不一致!", 3000);
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        initBtn();
+    });
+
+    function initBtn() {
+        //验证登录
+        $('#btn_register').click(function () {
+            if (formcheck()) {
+                var username = $('#username').val();
+                var password = $('#password').val();
+
+                $.ajax({
+                    type: "post",
+                    data: {"username":username,"password":password,"type":getRadioValue("type")},
+                    url: "/user/register",
+                    dataType: "json",
+                    success: function (msg) {
+                        if (msg.success) {
+                            Materialize.toast(msg.message);
+                            window.location.href = "/user/login"
+                        } else {
+                            Materialize.toast(msg.message);
+                        }
+                    },
+                    error: function (data) {
+                        Materialize.toast("网络异常");
+                    }
+                });
+            }
+        });
+    }
+
+    function getRadioValue(radioName) {
+        var radioValue;
+        radioValue = document.getElementsByName(radioName);
+        if (radioValue != null) {
+            var i;
+            for (i = 0; i < radioValue.length; i++) {
+                if (radioValue[i].checked) {
+                    return radioValue[i].value;
+                }
+            }
+        }
+        return null;
+    }
+
+</script>
+<!--prism-->
+<script type="text/javascript" th:src="@{/assets/global/js/prism.js}"></script>
+<!--scrollbar-->
+<script type="text/javascript"
+        th:src="@{/assets/global/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js}"></script>
+
+<!--plugins.js - Some Specific JS codes for Plugin Settings-->
+<script type="text/javascript" th:src="@{/assets/global/js/plugins.js}"></script>
+
+
+</body>
+
+</html>

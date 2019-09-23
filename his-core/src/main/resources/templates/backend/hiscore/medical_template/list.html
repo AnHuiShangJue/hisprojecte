@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="public/tree_layout :: html"></div>
+
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<div class="row">
+    <div class="breadcrumbs-inline pt-3 pb-1" id="breadcrumbs-wrapper">
+        <!-- Search for small screen-->
+        <div class="container">
+            <div class="row">
+                <div class="col s10 m6 l6 breadcrumbs-left">
+                    <h5 class="breadcrumbs-title mt-0 mb-0 display-inline hide-on-small-and-down">DataTable</h5>
+                    <ol class="breadcrumbs mb-0">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#">Table</a>
+                        </li>
+                        <li class="breadcrumb-item active">DataTable
+                        </li>
+                    </ol>
+                </div>
+                <div class="col s2 m6 l6"><a
+                        class="btn btn-floating dropdown-settings waves-effect waves-light breadcrumbs-btn right"
+                        href="#!" data-target="dropdown1"><i class="material-icons">expand_more </i><i
+                        class="material-icons right">arrow_drop_down</i></a>
+                    <ul class="dropdown-content" id="dropdown1" tabindex="0">
+                        <li tabindex="0"><a class="grey-text text-darken-2"
+                                            href="user-profile-page.html">Profile<span
+                                class="new badge red">2</span></a></li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="app-contacts.html">Contacts</a>
+                        </li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="page-faq.html">FAQ</a></li>
+                        <li class="divider" tabindex="-1"></li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="user-login.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--在这个地方实现查询重置类的操作-->
+    <div class="container">
+        <div class="row">
+            <div class=" col s4 l4 xl4 m4 ">
+                <div class="container">
+                    <div class="section">
+                        <div class="card">
+                            <div class="portlet light card-content">
+                                <h4 class="card-title">病历模板信息
+                                </h4><label style="color:black">Medical record template information</label>
+                                <div class="row">
+                                    <div class="col s2 m2 l2 xl2 offset-xl10">
+                                        <a id="addMenuBtn" class=" btn-small waves-effect waves-light orange"
+                                           href="javascript:;"><i class="material-icons white-text tooltipped"
+                                                                  data-position="bottom" data-delay="50"
+                                                                  data-tooltip="新增病历模板（New medical record template）">add</i></a>
+                                    </div>
+                                </div>
+                                <div class="caption">
+
+                                </div>
+                                <div class="actions">
+
+                                </div>
+                                <div class="portlet-body form">
+                                    <div id="scroller">
+                                        <input id="searchKey" type="text" class="form-control" AUTOCOMPLETE="off"
+                                               placeholder="请先展开需要查找的节点然后输入关键字!（Please expand the node you need to find first and enter the keyword.）">
+                                        <div id="treeDemo" class="ztree">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" col m8 s8 l8 xl8">
+                <div class="row">
+                    <div class="card">
+                        <!--在这个地方实现查询重置类的操作-->
+                        <div class="container">
+                            <div class="row">
+                                <form id="searchForm" action="">
+                                    <div class="card-content">
+                                        <h6 class="card-title">病历模板详细信息<span id="codeName"
+                                                                           style="color:#e3b708"></span><input
+                                                type="hidden"
+                                                id="nodeId"
+                                                name="nodeId"
+                                                th:value="${nodeId}">
+                                        </h6><label style="color:black">Medical record template details
+                                    </label>
+                                        <div th:if="${isOperate}" class="col s2 xl2 m2 l2 right">
+                                            <a id="addMedicalTemplate" class=" btn-small waves-effect waves-light orange"
+                                               href="javascript:;"><i class="material-icons white-text tooltipped"
+                                                                      data-position="bottom" data-delay="50"
+                                                                      data-tooltip="使用病历模板（Use medical record template）" >add</i></a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <iframe id="right_frame" name="rightframeName" class="framecontent" frameborder="0" height="1000px" width="100%" scrolling="auto" src=""></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="public/tree_script :: html"></div>
+
+<script type="text/javascript">
+    var ztree;
+    $(document).ready(function () {
+        var contentHeight = $(window).height() - 40;
+        // $('.portlet').height(contentHeight);
+        $("#scroller").height(contentHeight - 60);
+        initTree();
+        initButton();
+    });
+
+    // 按钮事件初始化
+    function initButton() {
+        //添加病历模板
+        $("#addMedicalTemplate").click(function() {
+                var node = ztree.getSelectedNodes();
+                if (node == null || node == '' || node.length == 0) {
+                    dialog.warn("请选择左边的菜单！（Please select the menu on the left）");
+                    return;
+                }
+                console.log(node);
+                //或者换另一种方式将按钮隐藏也可以
+                if (node[0].isParent == true) {
+                    dialog.warn("您所选的并非是正确的病历模板！（What you selected is not the correct medical record template）");
+                    return;
+                }
+                var id = node[0].id;
+                if (id != null && id != "" && id != undefined) {
+                    $.ahsjajax(
+                        CTX + "/api/medicalTemplate/listByTreeId.ahsj?token="+TOKEN,
+                        {"treeId": id},
+                        function (data) {
+                            parent.addMedical(data);
+                            dialog.parentclose();
+                        },
+                        function () {
+                            M.toast({html: "网络异常"});
+                            return false;
+                        }
+                    );
+                } else {
+                    dialog.warn("请选择需要添加的病历模板（Please select the medical record template you want to add.）")
+                }
+            }
+
+        );
+
+
+
+
+        // 新增字典详细
+        $("#addMenuBtn").click(function () {
+            var node = ztree.getSelectedNodes();
+            console.log(node);
+            if (node == null || node == '' || node.length == 0) {
+                dialog.warn("请选择左边的菜单！（Please select the menu on the left）");
+                return;
+            }
+            var url = CTX + "/api/medicalTemplate/saveOrUpdateTemplate/index.ahsj?parentId=" + node[0].id + "&name=" + encodeURI(node[0].name) + "&token=" + TOKEN;
+            dialog.show(url, "添加新的病历模板（Add a new medical record template）");
+        });
+        //新增病历模板中详细的病历信息
+        $("#addMedicineBtn").click(function () {
+            var node = ztree.getSelectedNodes();
+            if (node == null || node == '' || node.length == 0) {
+                dialog.warn("请选择左边的菜单！（Please select the menu on the left）");
+                return;
+            }
+            console.log(node);
+            //或者换另一种方式将按钮隐藏也可以
+            if (node[0].isParent == true) {
+                dialog.warn("您所选的并非是正确的病历模板！（What you selected is not the correct medical record template）");
+                return;
+            }
+            var url = CTX + "/api/medicalTemplate/saveOrUpdateDetails/index.ahsj?parentId=" + node[0].id + "&name=" + encodeURI(node[0].name) + "&token=" + TOKEN;
+            dialog.show(url, "病历模板详细信息添加（Medical record template details added）");
+        });
+    }
+
+    var setting = {
+        view: {
+            //不能多个选择
+            selectedMulti: false
+        },
+        async: {
+            enable: true,
+            url: CTX + "/api/medicalTemplate/treeCode.ahsj?token=" + TOKEN,
+            autoParam: ["level=lv"],
+            headers: {
+                Authorization: "Bearer " + TOKEN
+            }
+        },
+        data: {
+            simpleData: {
+                enable: true
+            }
+        },
+        callback: {
+            beforeClick: treeBeforeClick,
+            onClick: treeClick,
+            beforeExpand: treeBeforeExpand,
+            beforeRemove: treeBeforeRemove,
+            beforeEditName: treeBeforeEditName,
+            onAsyncSuccess: zTreeOnAsyncSuccess
+        },
+        edit: {
+            drag: false,
+            enable: true,
+            editNameSelectAll: false,
+            showRemoveBtn: showRemoveBtn,
+            showRenameBtn: showRenameBtn,
+        }
+    };
+    var rootNode = [
+        {id: 1, pId: 0001, name: "中柬第一医院系统"}];
+
+    function initTree() {
+        ztree = $.fn.zTree.init($("#treeDemo"), setting);
+    }
+
+    function treeBeforeClick(treeId, treeNode) {
+        var nodeId = treeNode.id;
+        var pId = treeNode.pId;
+        return true;
+    }
+
+    // 单击事件
+
+    // 节点展开事件
+    function treeBeforeExpand(treeId, treeNode) {
+        var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+        treeObj.selectNode(treeNode);
+        $("#codeName").html("(" + treeNode.name + ")");
+    }
+
+    function zTreeOnAsyncSuccess() {
+        setTimeout(function () {
+            fuzzySearch('treeDemo', '#searchKey', null, false);
+        }, 1000);
+        //初始化模糊搜索方法
+    }
+
+    // 删除前
+    function treeBeforeRemove(treeId, treeNode) {
+        var pNode = treeNode.getParentNode();
+        dialog.confirm("确定要删除吗？删除时会级联删除其下的所有数据！(You sure you want to delete it? Delete all data under it when deleting)", function () {
+            $.ahsjajax(CTX + "/api/medicalTemplate/delete.ahsj",
+                {id: treeNode.id},
+                function (msg) {//msg为返回的数据，在这里做数据绑定
+                    if (msg.success) {
+                        dialog.success(msg.message,
+                            function () {
+                                afterCodeChange(pNode);
+                            }
+                        );
+                    } else {
+                        dialog.warn(msg.message);
+                    }
+                });
+        });
+        return false;
+    }
+
+    // 修改前
+    function treeBeforeEditName(treeId, treeNode) {
+        var url = CTX + "/api/medicalTemplate/saveOrUpdateTemplate/index.ahsj?token=" + TOKEN + "&id=" + treeNode.id;
+        dialog.show(url, "病历模板信息修改（Medical record template information modification）");
+        return false;
+    }
+
+    function showRemoveBtn(treeId, treeNode) {
+        return treeNode.level > 0;
+    }
+
+    function showRenameBtn(treeId, treeNode) {
+        return treeNode.level > 0;
+    }
+
+    function afterCodeChange(pNode) {
+        ztree.reAsyncChildNodes(pNode, "refresh");
+        if(treeNode.isParent == false) {
+            $("#right_frame").attr("src", url = CTX + "/api/medicalTemplate/saveOrUpdateDetails/index.ahsj?token=" + TOKEN + "&treeId=" + treeNode.id);
+        }
+    }
+
+    function treeClick(event, treeId, treeNode) {
+        $("#codeName").html("(" + treeNode.name + ")");
+        if (treeNode.isParent == false) {
+            $("#right_frame").attr("src", url = CTX + "/api/medicalTemplate/saveOrUpdateDetails/index.ahsj?token=" + TOKEN + "&treeId=" + treeNode.id);
+        }
+    }
+
+        $("input").change(function () {
+            $(this).val($(this).val().trim());
+        });
+
+
+</script>
+</body>
+</html>
+

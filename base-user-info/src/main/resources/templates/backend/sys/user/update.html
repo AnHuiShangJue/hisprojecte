@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<!-- Form with validation -->
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title">人员信息添加</h4><label style="color:black">         </label>
+                <form class="col s12" id="sendForm" action="#">
+                    <input type="hidden" id="id" name="id" th:value="${userInfo.Id}">
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="user_id" name="userId" type="text" th:value="${userInfo.userId}"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label for="user_id">用 户 ID<span style="font-size: 12px"></span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="user_name" name="userName" type="text" th:value="${userInfo.userName}"
+                                   data-error=".errorTxt2">
+                            <div class="errorTxt2"></div>
+                            <label for="user_name">用 户 名<span style="font-size: 12px"></span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="password" name="password" type="password" th:value="${userInfo.password}" data-error=".errorTxt3">
+                            <div class="errorTxt3"></div>
+                            <label for="password">密 码<span style="font-size: 12px"></span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="mail" name="mail" type="text" th:value="${userInfo.mail}" data-error=".errorTxt4">
+                            <div class="errorTxt4"></div>
+                            <label for="mail">邮 箱<span style="font-size: 12px"></span></label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="telPhone" name="telPhone" type="text" th:value="${userInfo.telPhone}" data-error=".errorTxt5">
+                            <div class="errorTxt5"></div>
+                            <label for="telPhone">电 话<span style="font-size: 12px">(ទូរស័ព្ទ)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <select ahsj:select name="sex" id="sex" type="code" typeKey="sex" cssClass=""
+                                    th:value="${userInfo.sex}">
+                            </select>
+                            <label for="sex">性 别<span style="font-size: 12px"></span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="cardNo" name="cardNo" type="text" th:value="${userInfo.cardNo}"
+                                   data-error=".errorTxt7">
+                            <div class="errorTxt7"></div>
+                            <label for="cardNo">身 份 证 号 码<span style="font-size: 12px"></span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="qq" name="qq" type="text" th:value="${userInfo.qq}">
+                            <label for="qq">QQ</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="specialty" name="specialty" type="text" th:value="${userInfo.specialty}"
+                                   data-error=".errorTxt9">
+                            <div class="errorTxt9"></div>
+                            <label for="specialty">特 长<span style="font-size: 12px"></span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button id="send_btn" class="btn cyan waves-effect waves-light right" type="submit"
+                                    name="action">提 交
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+    $(function () {
+        formCheck();
+
+    });
+
+    function formCheck() {
+        $("#sendForm").validate({
+            rules: {
+                userId: {
+                    required: true,
+                    minlength: 8
+                },
+                userName: {
+                    required: true,
+                    minlength: 3
+                },
+                password: {
+                    required: true,
+                    minlength: 6
+                },
+                mail: {
+                    required: true,
+                    email: true
+                },
+                telPhone: {
+                    required: true,
+                    minlength: 11
+                },
+                cardNo: {
+                    required: true,
+                    minlength: 18
+                },
+
+            },
+            messages: {
+                userId: {
+                    required: "请输入账号",
+                    minlength: "最少包含10个字符"
+                },
+                password: {
+                    required: "请输入密码",
+                    minlength: "最少输入6个字符"
+                },
+                userName: {
+                    required: "请输入用户名",
+                    minlength: "最少输入3个字符"
+                },
+                mail: {
+                    required: "请输入邮箱",
+                    email: "请输入xxx@xx.com/cn格式的邮箱"
+                },
+                telPhone: {
+                    required: "请输入手机号码",
+                    minlength: "最少输入11个字符"
+                },
+                cardNo: {
+                    required: "请输入身份证号码",
+                    minlength: "最少输入18个字符"
+                },
+
+            },
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+                dialog.confirm('确定提交吗?', function (index, layero){
+                var queryString = $('#sendForm').serialize();
+                console.log("queryString is"+queryString);
+
+                $.ahsjajax(
+                    CTX + "/api/user/saveOrUpdateUserInfo.ahsj",
+                    queryString,
+                    function (msg) {
+                        if (msg.success) {
+                            M.toast({html:msg.message});
+                            parent.grid.search();
+                            dialog.parentclose();
+                            return false;
+                        } else {
+                            M.toast({html:msg.message});
+                            return false;
+                        }
+                    },
+                    function () {
+                        M.toast({html:"网络异常"});
+                        return false;
+                    }
+                );});
+            }
+
+        });
+    }
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+
+</script>
+</body>
+
+</html>

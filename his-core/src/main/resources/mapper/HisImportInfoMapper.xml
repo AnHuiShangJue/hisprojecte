@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisImportInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisImportInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="upload_error_info" property="uploadErrorInfo" jdbcType="VARCHAR" />
+    <result column="upload_file_name" property="uploadFileName" jdbcType="VARCHAR" />
+    <result column="voucher" property="voucher" jdbcType="VARCHAR" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, create_date, create_user_id, update_date, upload_error_info, upload_file_name, 
+    voucher, update_user_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from his_import_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from his_import_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisImportInfo" >
+    insert into his_import_info (id, create_date, create_user_id, 
+      update_date, upload_error_info, upload_file_name, 
+      voucher, update_user_id)
+    values (#{id,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{uploadErrorInfo,jdbcType=VARCHAR}, #{uploadFileName,jdbcType=VARCHAR}, 
+      #{voucher,jdbcType=VARCHAR}, #{updateUserId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisImportInfo" >
+    insert into his_import_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="uploadErrorInfo != null" >
+        upload_error_info,
+      </if>
+      <if test="uploadFileName != null" >
+        upload_file_name,
+      </if>
+      <if test="voucher != null" >
+        voucher,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadErrorInfo != null" >
+        #{uploadErrorInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadFileName != null" >
+        #{uploadFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="voucher != null" >
+        #{voucher,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisImportInfo" >
+    update his_import_info
+    <set >
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadErrorInfo != null" >
+        upload_error_info = #{uploadErrorInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadFileName != null" >
+        upload_file_name = #{uploadFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="voucher != null" >
+        voucher = #{voucher,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisImportInfo" >
+    update his_import_info
+    set create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      upload_error_info = #{uploadErrorInfo,jdbcType=VARCHAR},
+      upload_file_name = #{uploadFileName,jdbcType=VARCHAR},
+      voucher = #{voucher,jdbcType=VARCHAR},
+      update_user_id = #{updateUserId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <insert id="inserHisImportInfo" parameterType="com.ahsj.hiscore.entity.HisImportInfo" keyProperty="id" useGeneratedKeys="true" >
+    insert into his_import_info (id, create_date, create_user_id,
+      update_date, upload_error_info, upload_file_name,
+      voucher, update_user_id)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+     (#{item.id,jdbcType=BIGINT}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.createUserId,jdbcType=BIGINT},
+      #{item.updateDate,jdbcType=TIMESTAMP}, #{item.uploadErrorInfo,jdbcType=VARCHAR}, #{item.uploadFileName,jdbcType=VARCHAR},
+      #{item.voucher,jdbcType=VARCHAR}, #{item.updateUserId,jdbcType=BIGINT})
+    </foreach>
+  </insert>
+
+  <select id="queryHisImportInfo" resultMap="BaseResultMap" parameterType="com.ahsj.hiscore.entity.HisImportInfo">
+    select <include refid="Base_Column_List"/> from  his_import_info where  voucher = #{voucher,jdbcType=VARCHAR}
+  </select>
+</mapper>

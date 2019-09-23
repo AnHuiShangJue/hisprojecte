@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+<head>
+    <meta charset="UTF-8">
+</head>
+<style>
+    table tr td{
+        border: none;
+    }
+    table tr{
+        border-bottom: none;
+    }
+</style>
+<div th:replace="public/base_print :: html"></div>
+<body>
+<div class="container">
+    <div class="row valign-wrapper">
+        <div class="col s6 m6 l6 center">
+            <h5><span id="currentDate" name="currentDate" ></span></h5>
+        </div>
+        <div class="col s6 m6 l6 center">
+            <h5>入科记录</h5>
+        </div>
+    </div>
+
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12">
+            <table>
+                <tr>
+                    <td>入院日期：</td>
+                    <td></td>
+                    <td>转入日期：</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>入院诊断：</td>
+                    <td></td>
+                    <td>入科诊断：</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>入院及目前情况：</td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td>诊疗经过：</td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td>转入诊疗计划：</td>
+                    <td colspan="3"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div  class="row valign-wrapper">
+        <div class="col s12 m12 l12 right">
+            <p>医师签名：</p>
+        </div>
+
+    </div>
+</div>
+
+<div th:replace="public/base_list_script :: html"></div>
+<div th:replace="public/base_print_script :: html"></div>
+<script th:inline="javascript">
+
+</script>
+</body>
+</html>

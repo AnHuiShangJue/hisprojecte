@@ -1,0 +1,12 @@
+
+dependencies {
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+}
+
+
+
+
+
+
+

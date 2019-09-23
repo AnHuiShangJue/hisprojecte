@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleHome" value="$USER_HOME$/SSMProjects/ssmtest" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/base-user-info" />
+            <option value="$PROJECT_DIR$/demo" />
+            <option value="$PROJECT_DIR$/eureka-server-one" />
+            <option value="$PROJECT_DIR$/eureka-server-two" />
+            <option value="$PROJECT_DIR$/his-core" />
+            <option value="$PROJECT_DIR$/his-core/build" />
+            <option value="$PROJECT_DIR$/his-core/build/resources" />
+            <option value="$PROJECT_DIR$/his-core/build/resources/main" />
+            <option value="$PROJECT_DIR$/his-core/build/resources/main/static" />
+            <option value="$PROJECT_DIR$/his-core/build/resources/main/static/assets" />
+            <option value="$PROJECT_DIR$/his-core/build/resources/main/static/assets/global" />
+            <option value="$PROJECT_DIR$/his-core/build/resources/main/static/assets/global/js" />
+            <option value="$PROJECT_DIR$/his-core/build/resources/main/static/assets/global/js/plugins" />
+            <option value="$PROJECT_DIR$/his-core/build/resources/main/static/assets/global/js/plugins/adamwdraper-Numeral-js-7de892f" />
+            <option value="$PROJECT_DIR$/his-core/out" />
+            <option value="$PROJECT_DIR$/his-core/out/production" />
+            <option value="$PROJECT_DIR$/his-core/out/production/resources" />
+            <option value="$PROJECT_DIR$/his-core/out/production/resources/static" />
+            <option value="$PROJECT_DIR$/his-core/out/production/resources/static/assets" />
+            <option value="$PROJECT_DIR$/his-core/out/production/resources/static/assets/global" />
+            <option value="$PROJECT_DIR$/his-core/out/production/resources/static/assets/global/js" />
+            <option value="$PROJECT_DIR$/his-core/out/production/resources/static/assets/global/js/plugins" />
+            <option value="$PROJECT_DIR$/his-core/out/production/resources/static/assets/global/js/plugins/adamwdraper-Numeral-js-7de892f" />
+            <option value="$PROJECT_DIR$/hystrix-dashboard" />
+            <option value="$PROJECT_DIR$/map" />
+            <option value="$PROJECT_DIR$/security-authorization-server" />
+            <option value="$PROJECT_DIR$/smartpark-core" />
+            <option value="$PROJECT_DIR$/sys-base" />
+            <option value="$PROJECT_DIR$/sys-security" />
+            <option value="$PROJECT_DIR$/sysuserinfo" />
+            <option value="$PROJECT_DIR$/translate" />
+            <option value="$PROJECT_DIR$/user-infor" />
+            <option value="$PROJECT_DIR$/zuul-his" />
+            <option value="$PROJECT_DIR$/zuul-outer-one" />
+            <option value="$PROJECT_DIR$/zuulsmartpark" />
+          </set>
+        </option>
+        <option name="useAutoImport" value="true" />
+        <option name="useQualifiedModuleNames" value="true" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

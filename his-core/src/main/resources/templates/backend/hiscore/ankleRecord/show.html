@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+<div th:replace="public/base_list :: html"></div>
+<div th:replace="public/base_update :: html"></div>
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns" data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+<input type="hidden" id="manageNumber" th:value="${manageNumber}"><!--住院编号-->
+<div class="row">
+    <div class="input-field col s4 l4 xl4">
+        <input id="name" name="name" readonly type="text" th:value="${hisPatientInfo.name}">
+        <label class="active" for="name">病人姓名</label>
+    </div>
+    <div class="input-field col s4 l4 xl4">
+        <input id="age" name="age" type="number" readonly th:value="${hisPatientInfo.age}"/>
+        <label class="active" for="age">年龄</label>
+    </div>
+    <div class="input-field col s2 l2 xl2">
+        <input id="height" name="height" type="number" readonly th:value="${hisPatientInfo.height}"/>
+        <label class="active" for="height">身 高<span style="font-size: 12px">(height)</span></label>
+    </div>
+    <div class="input-field col s4 l4 xl4">
+        <input id="weight" name="weight" type="number" readonly th:value="${hisPatientInfo.weight}"/>
+        <label class="active" for="weight">体 重<span style="font-size: 12px">(weight)</span></label>
+    </div>
+    <div class="input-field col s4 l4 xl4">
+        <input type="text" id="sex"  th:value="${hisPatientInfo.sexName}"  readonly="true"/>
+        <label for="sex">性 别<span style="font-size: 12px">(sex)</span></label></div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col s12 m12 l12 center">
+            <h4>中柬第一医院体温单</h4>
+            <p></p>
+        </div>
+        <div class="col s12 m12 l12 center">
+            <canvas id="ahsjTemeplateCanvas" width="1000" height="1200" style="border:1px solid #d3d3d3;">
+                您的浏览器不支持画布插件，请升级浏览器内核至IE8+
+            </canvas>
+        </div>
+    </div>
+    <div class="row">
+    <div class="input-field col s12">
+        <button id="printf_btn" class="btn cyan waves-effect waves-light right" type="submit" name="action">打印（print
+            ）
+            <i class="mdi-content-send right"></i>
+        </button>
+    </div>
+</div>
+
+</div>
+<div th:replace="public/base_list_script :: html"></div>
+<div th:replace="public/base_update_script :: html"></div>
+
+<script type="text/javascript" th:src="@{/hiscore/assets/global/js/ahsj.template.js}"></script>
+<script th:inline="javascript">
+    $(document).ready(function () {
+
+        initTable();
+    });
+    var ahsjTemeplate = new Templates();
+    var manageNumber = $("#manageNumber").val();
+    function initTable() {
+
+        var temperatureArr=[];
+
+        var dataDay=[];
+        var hospitalDay=[];
+        var operativeDay=[];
+
+        var breathing=[];
+        var blood=[];
+        var weight=[];
+        var number=[];
+        var inAmount=[];
+        var outAmount=[];
+        var output=[];
+
+        $.ahsjajax(
+            CTX + "/api/nursingRecord/getshow.ahsj",
+            {"manageNumber": manageNumber},
+            function (data) {
+                if (!isNullOrEmpty(data)) {
+                    $.each(data, function (index, item) {
+                        if (!item.bodyTemperature && typeof(item.bodyTemperature)!="undefined" && item.bodyTemperature!=0)
+                        {
+                            item.bodyTemperature="";
+                        }
+                        temperatureArr.push(item.bodyTemperature);
+
+                        if (!item.bloodPressure && typeof(item.bloodPressure)!="undefined" && item.bloodPressure!=0)
+                        {
+                            item.bloodPressure="";
+                        }
+                        blood.push(item.bloodPressure);
+
+                        if (!item.breathe && typeof(item.breathe)!="undefined" && item.breathe!=0)
+                        {
+                            item.breathe="";
+                        }
+                        breathing.push(item.breathe);
+
+                        if (!item.output && typeof(item.output)!="undefined" && item.output!=0)
+                        {
+                            item.output="";
+                        }
+                        outAmount.push(item.output);
+
+                        if (!item.involvement && typeof(item.involvement)!="undefined" && item.involvement!=0)
+                        {
+                            item.involvement="";
+                        }
+                        inAmount.push(item.involvement);
+
+                        if (!item.weight && typeof(item.weight)!="undefined" && item.weight!=0)
+                        {
+                            item.weight="";
+                        }
+                        weight.push(item.weight);
+
+                        if (!item.flow && typeof(item.flow)!="undefined" && item.flow!=0)
+                        {
+                            item.flow="";
+                        }
+                        number.push(item.flow);
+
+                        if (!item.oxygenSaturation && typeof(item.oxygenSaturation)!="undefined" && item.oxygenSaturation!=0)
+                        {
+                            item.oxygenSaturation="";
+                        }
+                        output.push(item.oxygenSaturation);
+
+                        if (!item.hospitalizationDay && typeof(item.hospitalizationDay)!="undefined" && item.hospitalizationDay!=0)
+                        {
+                            item.hospitalizationDay="";
+                        }
+                        hospitalDay.push(item.hospitalizationDay);
+                    });
+
+                    var dateTime=new Date(data[0].dateOther);
+                    if(!isNullOrEmpty(dateTime)){
+                        var dateString=dateTime.toLocaleDateString();
+                        dataDay.push(dateString);
+
+                        for(var i=1;i<7;i++){
+                            dateAdd=dateTime.setDate(dateTime.getDate()+1);
+                            dateTime=new Date(dateAdd);
+                            dataDay.push(dateTime.toLocaleDateString());
+                        }
+                    }
+
+
+                    ahsjTemeplate.init({
+                        src: document.getElementById("ahsjTemeplateCanvas"),
+                        paddingLeft: 10,
+                        paddingTop: 10,
+                        paddingRight: 10,
+                        paddingBottom: 10,
+                        mPaintWidth: 1,
+                        datas: {dataDay,hospitalDay,operativeDay,temperatureArr,breathing,blood,weight,number,inAmount,outAmount,output}
+                    });
+
+                }
+                else{
+                    ahsjTemeplate.init({
+                        src: document.getElementById("ahsjTemeplateCanvas"),
+                        paddingLeft: 10,
+                        paddingTop: 10,
+                        paddingRight: 10,
+                        paddingBottom: 10,
+                        mPaintWidth: 1
+                    });
+                }
+            });
+
+
+    }
+
+    $("#printf_btn").click(function () {
+        var url = CTX + "/api/nursingRecord/printTemp/index.ahsj?token=" + TOKEN + "&hosNumber=" + [[${manageNumber}]]+"&name="+$("#name").val()+"&sex="+$("#sex").val()+"&age="+$("#age").val();
+        dialog.showDialog(url, "打印体温单","700px","700px");
+    });
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+
+    function date(str)
+    {
+        var newstr = str.replace(/\s*/g, "");
+        var year = newstr.substring(0, 4);
+        var month = newstr.substring(5, 7);
+        var day = newstr.substring(8, 10);
+        var arrymd=[year,month,day];
+        return day;
+        //alert(arrymd);
+    }
+
+    function checkNull(str){
+        if (!str && typeof(str)!="undefined" && str!=0)
+        {
+            str="";
+        }
+    }
+</script>
+</body>
+</html>
+</script>
+

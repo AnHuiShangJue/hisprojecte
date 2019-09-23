@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisMediEnterDetailsMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisMediEnterDetails" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="pharmacy_id" property="pharmacyId" jdbcType="BIGINT" />
+    <result column="enter_count" property="enterCount" jdbcType="BIGINT" />
+    <result column="validity_period" property="validityPeriod" jdbcType="TIMESTAMP" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="drugs_numb" property="drugsNumb" jdbcType="VARCHAR" />
+    <result column="drugs_name" property="drugsName" jdbcType="VARCHAR" />
+    <result column="drugs_spec" property="drugsSpec" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="surplus" jdbcType="BIGINT" property="surplus" />
+    <result column="enter_number" jdbcType="VARCHAR" property="enterNumber" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, pharmacy_id, enter_count, validity_period, create_user_id, create_date, update_user_id, 
+    update_date, drugs_numb, drugs_name, drugs_spec, price,surplus,enter_number
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from his_medi_enter_details
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from his_medi_enter_details
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisMediEnterDetails" >
+    insert into his_medi_enter_details (id, pharmacy_id, enter_count, 
+      validity_period, create_user_id, create_date, 
+      update_user_id, update_date, drugs_numb, 
+      drugs_name, drugs_spec, price,surplus,enter_number
+      )
+    values (#{id,jdbcType=BIGINT}, #{pharmacyId,jdbcType=BIGINT}, #{enterCount,jdbcType=BIGINT},
+      #{validityPeriod,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, #{drugsNumb,jdbcType=VARCHAR},
+      #{drugsName,jdbcType=VARCHAR}, #{drugsSpec,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL},#{surplus,jdbcType=BIGINT},#{enterNumber,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisMediEnterDetails" >
+    insert into his_medi_enter_details
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="pharmacyId != null" >
+        pharmacy_id,
+      </if>
+      <if test="enterCount != null" >
+        enter_count,
+      </if>
+      <if test="validityPeriod != null" >
+        validity_period,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="drugsNumb != null" >
+        drugs_numb,
+      </if>
+      <if test="drugsName != null" >
+        drugs_name,
+      </if>
+      <if test="drugsSpec != null" >
+        drugs_spec,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="surplus != null" >
+        surplus,
+      </if>
+      <if test="enterNumber != null" >
+        enter_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="pharmacyId != null" >
+        #{pharmacyId,jdbcType=BIGINT},
+      </if>
+      <if test="enterCount != null" >
+        #{enterCount,jdbcType=BIGINT},
+      </if>
+      <if test="validityPeriod != null" >
+        #{validityPeriod,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="drugsNumb != null" >
+        #{drugsNumb,jdbcType=VARCHAR},
+      </if>
+      <if test="drugsName != null" >
+        #{drugsName,jdbcType=VARCHAR},
+      </if>
+      <if test="drugsSpec != null" >
+        #{drugsSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="surplus != null" >
+        #{surplus,jdbcType=BIGINT},
+      </if>
+      <if test="enterNumber != null" >
+        #{enterNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisMediEnterDetails" >
+    update his_medi_enter_details
+    <set >
+      <if test="pharmacyId != null" >
+        pharmacy_id = #{pharmacyId,jdbcType=BIGINT},
+      </if>
+      <if test="enterCount != null" >
+        enter_count = #{enterCount,jdbcType=BIGINT},
+      </if>
+      <if test="validityPeriod != null" >
+        validity_period = #{validityPeriod,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="drugsNumb != null" >
+        drugs_numb = #{drugsNumb,jdbcType=VARCHAR},
+      </if>
+      <if test="drugsName != null" >
+        drugs_name = #{drugsName,jdbcType=VARCHAR},
+      </if>
+      <if test="drugsSpec != null" >
+        drugs_spec = #{drugsSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="surplus != null" >
+        surplus = #{surplus,jdbcType=BIGINT},
+      </if>
+      <if test="enterNumber != null" >
+        enter_number = #{enterNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisMediEnterDetails" >
+    update his_medi_enter_details
+    set pharmacy_id = #{pharmacyId,jdbcType=BIGINT},
+      enter_count = #{enterCount,jdbcType=BIGINT},
+      validity_period = #{validityPeriod,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      drugs_numb = #{drugsNumb,jdbcType=VARCHAR},
+      drugs_name = #{drugsName,jdbcType=VARCHAR},
+      drugs_spec = #{drugsSpec,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL}
+      surplus = #{surplus,jdbcType=BIGINT},
+     enter_number = #{enterNumber,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--自定义sql-->
+  <select id="selectByPharmacyIdforGroupBy" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    SELECT validity_period,sum(surplus) as sumSurplus,pharmacy_id
+    FROM his_medi_enter_details
+    WHERE pharmacy_id= #{pharmacyId,jdbcType=BIGINT}
+    GROUP BY validity_period;
+  </select>
+
+  <!--根据药品id查找入库表中所有此id药品-->
+  <select id="selectByPharmacyId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select his_medi_enter_details.*
+ from his_medi_enter_details
+where pharmacy_id= #{pharmacyId,jdbcType=BIGINT}
+  </select>
+
+  <!--list查询 为出库时做表格，以及将有效期不是今天且余量为0的药筛选出-->
+  <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    SELECT
+    a.*,b.sale_price as salePrice
+    FROM
+    his_medi_enter_details as a
+    left join his_pharmacy_detail as b on a.pharmacy_id=b.medicine_id
+    where
+    1= 1 and a.validity_period &gt;= CURRENT_DATE AND a.surplus>0
+    <if test="parameter.drugsNumb != null and parameter.drugsNumb != ''">
+      and a.drugs_numb like concat('%' #{parameter.drugsNumb,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.drugsName != null and parameter.drugsName != ''">
+      and a.drugs_name like concat('%' #{parameter.drugsName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+<!--通过药品id查询入库表中所有数据以pageBean分页对象传回查到的数据，且不显示库存小于等于0的药品-->
+  <select id="listByPharmacyId" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    SELECT
+    his_medi_enter_details.*
+    FROM
+    his_medi_enter_details
+    where
+       1=1 and surplus>0
+    <if test="parameter.pharmacyId != null and parameter.pharmacyId != ''">
+      and his_medi_enter_details.pharmacy_id= #{parameter.pharmacyId,jdbcType=BIGINT}
+    </if>
+    <if test="parameter.drugsNumb != null and parameter.drugsNumb != ''">
+      and drugs_numb like concat('%' #{parameter.drugsNumb,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.drugsName != null and parameter.drugsName != ''">
+      and drugs_name like concat('%' #{parameter.drugsName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+
+
+<!--根据药品ID查找所有入库记录同时排序-->
+  <select id="selectByPharmacyIdOrder" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select his_medi_enter_details.*
+    from his_medi_enter_details
+    where his_medi_enter_details.pharmacy_id = #{pharmacyId,jdbcType=BIGINT}
+    order by his_medi_enter_details.validity_period asc
+  </select>
+
+  <!--根据药品编号以及有效期查询出该条入库记录-->
+  <select id="selectByDrugsNumbAndValidity" parameterType="com.ahsj.hiscore.entity.HisMediEnterDetails" resultMap="BaseResultMap">
+    select his_medi_enter_details.*
+    from his_medi_enter_details
+    where his_medi_enter_details.drugs_numb = #{drugsNumb,jdbcType=VARCHAR}
+and his_medi_enter_details.validity_period = #{validityPeriod,jdbcType=TIMESTAMP}
+  </select>
+
+
+  <!--批量插入-->
+  <!--useGeneratedKeys对于支持主键自增的数据库 此关键字支持在执行添加记录之后可以获取到数据库自动生成的主键ID-->
+  <!--selectKey  会将 SELECT LAST_INSERT_ID()的结果放入到传入的model的主键里面，
+        keyProperty 对应的model中的主键的属性名，这里是 his_medication_details 中的id，因为它跟数据库的主键对应
+        order AFTER 表示 SELECT LAST_INSERT_ID() 在insert执行之后执行,多用与自增主键，
+              BEFORE 表示 SELECT LAST_INSERT_ID() 在insert执行之前执行，这样的话就拿不到主键了，
+                    这种适合那种主键不是自增的类型
+        resultType 主键类型 -->
+  <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">
+    <selectKey resultType="long" keyProperty="id" order="AFTER">
+      SELECT
+      LAST_INSERT_ID()
+    </selectKey>
+
+    insert into his_medi_enter_details(id, pharmacy_id, enter_count, validity_period, create_user_id, create_date, update_user_id,
+    update_date, drugs_numb, drugs_name, drugs_spec, price,surplus,enter_number)
+    values
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.id,jdbcType=BIGINT}, #{item.pharmacyId,jdbcType=BIGINT}, #{item.enterCount,jdbcType=BIGINT},
+      #{item.validityPeriod,jdbcType=TIMESTAMP}, #{item.createUserId,jdbcType=BIGINT}, #{item.createDate,jdbcType=TIMESTAMP},
+      #{item.updateUserId,jdbcType=BIGINT}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.drugsNumb,jdbcType=VARCHAR},
+      #{item.drugsName,jdbcType=VARCHAR}, #{item.drugsSpec,jdbcType=VARCHAR}, #{item.price,jdbcType=DECIMAL},#{item.surplus,jdbcType=BIGINT},#{item.enterNumber,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+
+  <!--    批量更新-->
+  <update id="updateBatch" parameterType="list">
+    update his_medi_enter_details
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="surplus=case" suffix="end,">
+        <foreach collection="list" item="item" index="index">
+          <if test="item.surplus!=null">
+            when id=#{item.id} then #{item.surplus}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where
+    <foreach collection="list" separator="or" item="item" index="index">
+      id=#{item.id}
+    </foreach>
+  </update>
+
+  <select id="selectByDate" resultMap="BaseResultMap">
+    select his_medi_enter_details.*
+from his_medi_enter_details
+where validity_period &lt;= CURRENT_DATE and surplus > 0
+  </select>
+</mapper>

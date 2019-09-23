@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://mybatis.org/schema/mybatis-mapper" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div th:replace="public/base_update :: html"></div>
+<body>
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title">医嘱添加</h4><label style="color:black">បន្ថែមការបញ្ជាទិញវេជ្ជសាស្ត្រ
+
+            </label>
+                <form class="col s12" id="send_Form" action="#">
+                    <input  type="hidden" id="id" name="id" th:value="${hisMedicalOrder.id}">
+                    <input  type="hidden" id="hosptalregistId" name="hosptalregistId" th:value="${hisMedicalOrder.hosptalregistId}">
+                    <input  type="hidden" id="patientId" name="patientId" th:value="${hisMedicalOrder.patientId}">
+                    <input  type="hidden" id="number" name="number" th:value="${hisMedicalOrder.number}">
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="recordId" name="recordId" type="text"  th:value="${hisMedicalOrder.recordId}" th:readonly="true"/>
+                            <label for="recordId">就诊记录编号<span style="font-size: 12px">(Visit record number
+
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="hosptalregistNumber" name="hosptalregistNumber" type="text" th:value="${hisMedicalOrder.hosptalregistNumber}" th:readonly="true" />
+                            <label for="hosptalregistNumber">住院编号<span style="font-size: 12px">(Hospital number
+
+)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <select ahsj:select name="type" id="type" type="code" typeKey="medical_order_type" cssClass=""
+                                    th:value="${hisMedicalOrder.type}">
+                            </select>
+                            <label for="type">医嘱类型<span style="font-size: 12px">(Type of medical order
+
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4" th:if="${hisMedicalOrder.id} eq null">
+                            <input id="orderNum" name="orderNum" type="text" th:value="${hisMedicalOrder.orderNum}" />
+                            <label for="orderNum">操作序号<span style="font-size: 12px">(Operation number
+
+)</span>(如非插入医嘱请勿填写)</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button id="send_btn" class="btn cyan waves-effect waves-light right" type="submit" name="action">提交(submit
+                                )
+                                <i class="mdi-content-send right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================================================
+Scripts
+================================================ -->
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+
+
+    $(function () {
+        formCheck();
+    });
+
+    function formCheck() {
+        $("#send_Form").validate({
+            rules: {
+                number: {//1
+                    required: true,
+                    minlength: 1
+                }
+            },
+            messages: {
+                number: {
+                    required: "请输入医嘱编号",
+                    minlength: "最少包含1个字符"
+                }
+            },
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+                dialog.confirm('确定提交吗?', function (index, layero){
+                var queryString = $('#send_Form').serialize();
+                console.log("queryString is" + queryString);
+                $.ahsjajax(
+                    CTX + "/api/hisMedicalOrder/saveOrUpdate.ahsj?token=" + TOKEN,
+                    queryString,
+                    function (msg) {
+                        if (msg.success) {
+                            M.toast({html: msg.message});
+                            parent.gridForMedicalOrder.search();
+                            dialog.parentclose();
+                            return false;
+                        } else {
+                            M.toast({html: msg.message});
+                            return false;
+                        }
+                    },
+                    function () {
+                        M.toast({html: "网络异常"});
+                        return false;
+                    }
+                );});
+            }
+        });
+    }
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</body>
+
+</html>

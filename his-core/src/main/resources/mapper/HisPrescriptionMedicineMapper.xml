@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahsj.hiscore.dao.HisPrescriptionMedicineMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisPrescriptionMedicine">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="tree_id" jdbcType="VARCHAR" property="treeId"/>
+        <result column="prescription_id" jdbcType="VARCHAR" property="prescriptionId"/>
+        <result column="medicine_id" jdbcType="BIGINT" property="medicineId"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="drugs_numb" jdbcType="VARCHAR" property="drugsNumb"/>
+        <result column="drugs_name" jdbcType="VARCHAR" property="drugsName"/>
+        <result column="drugs_alias" jdbcType="VARCHAR" property="drugsAlias"/>
+        <result column="drugs_spec" jdbcType="VARCHAR" property="drugsSpec"/>
+        <result column="prescription" jdbcType="INTEGER" property="prescription"/>
+        <result column="mental_medicine" jdbcType="INTEGER" property="mentalMedicine"/>
+        <result column="large_unit" jdbcType="VARCHAR" property="largeUnit"/>
+        <result column="small_unit" jdbcType="VARCHAR" property="smallUnit"/>
+        <result column="conversion_rate" jdbcType="DECIMAL" property="conversionRate"/>
+        <result column="disable" jdbcType="INTEGER" property="disable"/>
+        <result column="level" jdbcType="INTEGER" property="level"/>
+        <result column="medical_insurance_sign" jdbcType="INTEGER" property="medicalInsuranceSign"/>
+        <result column="placeOrigin" jdbcType="INTEGER" property="placeorigin"/>
+        <result column="base_medicine" jdbcType="INTEGER" property="baseMedicine"/>
+        <result column="narcotic_drugs" jdbcType="INTEGER" property="narcoticDrugs"/>
+        <result column="remarks" jdbcType="VARCHAR" property="remarks"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="create_user_id" jdbcType="BIGINT" property="createUserId"/>
+        <result column="update_user_id" jdbcType="BIGINT" property="updateUserId"/>
+        <result column="pharmacy_id" jdbcType="BIGINT" property="pharmacyId"/>
+        <result column="count" jdbcType="INTEGER" property="count"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, tree_id, prescription_id, medicine_id, description, drugs_numb, drugs_name, drugs_alias, 
+    drugs_spec, prescription, mental_medicine, large_unit, small_unit, conversion_rate, 
+    disable, level, medical_insurance_sign, placeOrigin, base_medicine, narcotic_drugs, 
+    remarks, create_date, update_date, create_user_id, update_user_id,pharmacy_id,count
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_prescription_medicine
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_prescription_medicine
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisPrescriptionMedicine" keyProperty="id"
+            useGeneratedKeys="true">
+    insert into his_prescription_medicine (id, tree_id, prescription_id, 
+      medicine_id, description, drugs_numb, 
+      drugs_name, drugs_alias, drugs_spec, 
+      prescription, mental_medicine, large_unit, 
+      small_unit, conversion_rate, disable, 
+      level, medical_insurance_sign, placeOrigin, 
+      base_medicine, narcotic_drugs, remarks, 
+      create_date, update_date, create_user_id, 
+      update_user_id,pharmacy_id,count)
+    values (#{id,jdbcType=BIGINT}, #{treeId,jdbcType=VARCHAR}, #{prescriptionId,jdbcType=VARCHAR}, 
+      #{medicineId,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, #{drugsNumb,jdbcType=VARCHAR}, 
+      #{drugsName,jdbcType=VARCHAR}, #{drugsAlias,jdbcType=VARCHAR}, #{drugsSpec,jdbcType=VARCHAR}, 
+      #{prescription,jdbcType=INTEGER}, #{mentalMedicine,jdbcType=INTEGER}, #{largeUnit,jdbcType=VARCHAR}, 
+      #{smallUnit,jdbcType=VARCHAR}, #{conversionRate,jdbcType=DECIMAL}, #{disable,jdbcType=INTEGER}, 
+      #{level,jdbcType=INTEGER}, #{medicalInsuranceSign,jdbcType=INTEGER}, #{placeorigin,jdbcType=INTEGER},
+      #{baseMedicine,jdbcType=INTEGER}, #{narcoticDrugs,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, 
+      #{updateUserId,jdbcType=BIGINT}, #{pharmacyId,jdbcType=BIGINT},
+            #{count,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisPrescriptionMedicine" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into his_prescription_medicine
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="treeId != null">
+                tree_id,
+            </if>
+            <if test="prescriptionId != null">
+                prescription_id,
+            </if>
+            <if test="medicineId != null">
+                medicine_id,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="drugsNumb != null">
+                drugs_numb,
+            </if>
+            <if test="drugsName != null">
+                drugs_name,
+            </if>
+            <if test="drugsAlias != null">
+                drugs_alias,
+            </if>
+            <if test="drugsSpec != null">
+                drugs_spec,
+            </if>
+            <if test="prescription != null">
+                prescription,
+            </if>
+            <if test="mentalMedicine != null">
+                mental_medicine,
+            </if>
+            <if test="largeUnit != null">
+                large_unit,
+            </if>
+            <if test="smallUnit != null">
+                small_unit,
+            </if>
+            <if test="conversionRate != null">
+                conversion_rate,
+            </if>
+            <if test="disable != null">
+                disable,
+            </if>
+            <if test="level != null">
+                level,
+            </if>
+            <if test="medicalInsuranceSign != null">
+                medical_insurance_sign,
+            </if>
+            <if test="placeorigin != null">
+                placeOrigin,
+            </if>
+            <if test="baseMedicine != null">
+                base_medicine,
+            </if>
+            <if test="narcoticDrugs != null">
+                narcotic_drugs,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="pharmacyId != null">
+                pharmacy_id,
+            </if>
+            <if test="count != null">
+                count,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="treeId != null">
+                #{treeId,jdbcType=VARCHAR},
+            </if>
+            <if test="prescriptionId != null">
+                #{prescriptionId,jdbcType=VARCHAR},
+            </if>
+            <if test="medicineId != null">
+                #{medicineId,jdbcType=BIGINT},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="drugsNumb != null">
+                #{drugsNumb,jdbcType=VARCHAR},
+            </if>
+            <if test="drugsName != null">
+                #{drugsName,jdbcType=VARCHAR},
+            </if>
+            <if test="drugsAlias != null">
+                #{drugsAlias,jdbcType=VARCHAR},
+            </if>
+            <if test="drugsSpec != null">
+                #{drugsSpec,jdbcType=VARCHAR},
+            </if>
+            <if test="prescription != null">
+                #{prescription,jdbcType=INTEGER},
+            </if>
+            <if test="mentalMedicine != null">
+                #{mentalMedicine,jdbcType=INTEGER},
+            </if>
+            <if test="largeUnit != null">
+                #{largeUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="smallUnit != null">
+                #{smallUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="conversionRate != null">
+                #{conversionRate,jdbcType=DECIMAL},
+            </if>
+            <if test="disable != null">
+                #{disable,jdbcType=INTEGER},
+            </if>
+            <if test="level != null">
+                #{level,jdbcType=INTEGER},
+            </if>
+            <if test="medicalInsuranceSign != null">
+                #{medicalInsuranceSign,jdbcType=INTEGER},
+            </if>
+            <if test="placeorigin != null">
+                #{placeorigin,jdbcType=INTEGER},
+            </if>
+            <if test="baseMedicine != null">
+                #{baseMedicine,jdbcType=INTEGER},
+            </if>
+            <if test="narcoticDrugs != null">
+                #{narcoticDrugs,jdbcType=INTEGER},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="pharmacyId != null">
+                #{pharmacyId,jdbcType=BIGINT},
+            </if>
+            <if test="count != null">
+                #{count,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisPrescriptionMedicine">
+        update his_prescription_medicine
+        <set>
+            <if test="treeId != null">
+                tree_id = #{treeId,jdbcType=VARCHAR},
+            </if>
+            <if test="prescriptionId != null">
+                prescription_id = #{prescriptionId,jdbcType=VARCHAR},
+            </if>
+            <if test="medicineId != null">
+                medicine_id = #{medicineId,jdbcType=BIGINT},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="drugsNumb != null">
+                drugs_numb = #{drugsNumb,jdbcType=VARCHAR},
+            </if>
+            <if test="drugsName != null">
+                drugs_name = #{drugsName,jdbcType=VARCHAR},
+            </if>
+            <if test="drugsAlias != null">
+                drugs_alias = #{drugsAlias,jdbcType=VARCHAR},
+            </if>
+            <if test="drugsSpec != null">
+                drugs_spec = #{drugsSpec,jdbcType=VARCHAR},
+            </if>
+            <if test="prescription != null">
+                prescription = #{prescription,jdbcType=INTEGER},
+            </if>
+            <if test="mentalMedicine != null">
+                mental_medicine = #{mentalMedicine,jdbcType=INTEGER},
+            </if>
+            <if test="largeUnit != null">
+                large_unit = #{largeUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="smallUnit != null">
+                small_unit = #{smallUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="conversionRate != null">
+                conversion_rate = #{conversionRate,jdbcType=DECIMAL},
+            </if>
+            <if test="disable != null">
+                disable = #{disable,jdbcType=INTEGER},
+            </if>
+            <if test="level != null">
+                level = #{level,jdbcType=INTEGER},
+            </if>
+            <if test="medicalInsuranceSign != null">
+                medical_insurance_sign = #{medicalInsuranceSign,jdbcType=INTEGER},
+            </if>
+            <if test="placeorigin != null">
+                placeOrigin = #{placeorigin,jdbcType=INTEGER},
+            </if>
+            <if test="baseMedicine != null">
+                base_medicine = #{baseMedicine,jdbcType=INTEGER},
+            </if>
+            <if test="narcoticDrugs != null">
+                narcotic_drugs = #{narcoticDrugs,jdbcType=INTEGER},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="pharmacyId != null">
+                pharmacy_id = #{pharmacyId,jdbcType=BIGINT},
+            </if>
+            <if test="count != null">
+                count = #{count,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisPrescriptionMedicine">
+    update his_prescription_medicine
+    set tree_id = #{treeId,jdbcType=VARCHAR},
+      prescription_id = #{prescriptionId,jdbcType=VARCHAR},
+      medicine_id = #{medicineId,jdbcType=BIGINT},
+      description = #{description,jdbcType=VARCHAR},
+      drugs_numb = #{drugsNumb,jdbcType=VARCHAR},
+      drugs_name = #{drugsName,jdbcType=VARCHAR},
+      drugs_alias = #{drugsAlias,jdbcType=VARCHAR},
+      drugs_spec = #{drugsSpec,jdbcType=VARCHAR},
+      prescription = #{prescription,jdbcType=INTEGER},
+      mental_medicine = #{mentalMedicine,jdbcType=INTEGER},
+      large_unit = #{largeUnit,jdbcType=VARCHAR},
+      small_unit = #{smallUnit,jdbcType=VARCHAR},
+      conversion_rate = #{conversionRate,jdbcType=DECIMAL},
+      disable = #{disable,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
+      medical_insurance_sign = #{medicalInsuranceSign,jdbcType=INTEGER},
+      placeOrigin = #{placeorigin,jdbcType=INTEGER},
+      base_medicine = #{baseMedicine,jdbcType=INTEGER},
+      narcotic_drugs = #{narcoticDrugs,jdbcType=INTEGER},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      pharmacy_id = #{pharmacyId,jdbcType=BIGINT},
+        count = #{count,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <!-- 自定义 -->
+    <resultMap id="TreeResultMap" type="com.ahsj.hiscore.entity.TreeEntity">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="isParent" jdbcType="BOOLEAN" property="isParent"/>
+        <result column="open" jdbcType="BOOLEAN" property="open"/>
+    </resultMap>
+    <select id="selectTreeCode" resultMap="TreeResultMap">
+    select
+    a.id,
+    a.pId,
+    a.name,
+    a.isParent,
+    a.open
+    from
+(
+    SELECT
+	  tree_id as id,
+      parent_id as pId,
+      name as name,
+      false as isParent,
+      false as open
+		FROM his_prescription
+      where parent_id != 1
+      union all
+      select
+        his_prescription_medicine.tree_id as id,
+        prescription_id as pId,
+        drugs_name as name,
+        false as isParent,
+        false as open
+      from his_prescription_medicine
+      left join his_prescription on his_prescription_medicine.prescription_id = his_prescription.tree_id
+) a
+  </select>
+
+    <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_prescription_medicine
+        where prescription_id = #{parameter.parentId,jdbcType=VARCHAR}
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+    <select id="selectByNumb" parameterType="com.ahsj.hiscore.entity.HisPrescriptionMedicine" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_prescription_medicine
+        where drugs_numb = #{drugsNumb,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByName" parameterType="com.ahsj.hiscore.entity.HisPrescriptionMedicine" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_prescription_medicine
+        where drugs_name = #{drugsName,jdbcType=VARCHAR} and drugs_spec = #{drugsSpec,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectMaxTreeId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+      max(tree_id) as tree_id
+    from his_prescription_medicine
+    where prescription_id = #{parentId,jdbcType=VARCHAR}
+  </select>
+
+    <!--根据处方ID搜索对应药品信息，但是要将pharmacy_id 取别名为id，为适应自定义表格selfTable-->
+    <select id="selectByPrescriptionIdForTable" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+      his_prescription_medicine.pharmacy_id as id, his_prescription_medicine.tree_id, his_prescription_medicine.prescription_id, his_prescription_medicine.medicine_id, his_prescription_medicine.description,
+      his_prescription_medicine.drugs_numb, his_prescription_medicine.drugs_name, his_prescription_medicine.drugs_alias,
+      his_prescription_medicine.drugs_spec, his_prescription_medicine.prescription, his_prescription_medicine.mental_medicine,
+      his_prescription_medicine.large_unit, his_prescription_medicine.small_unit, his_prescription_medicine.conversion_rate,
+      his_prescription_medicine.disable, his_prescription_medicine.level, his_prescription_medicine.medical_insurance_sign, his_prescription_medicine.placeOrigin, his_prescription_medicine.base_medicine,
+      his_prescription_medicine.narcotic_drugs,
+      his_prescription_medicine.remarks, his_prescription_medicine.create_date, his_prescription_medicine.update_date, his_prescription_medicine.create_user_id, his_prescription_medicine.update_user_id,
+           his_prescription_medicine.count
+    from his_prescription_medicine
+    where prescription_id = #{prescriptionId,jdbcType=VARCHAR}
+  </select>
+
+    <!--批量插入-->
+    <!--useGeneratedKeys对于支持主键自增的数据库 此关键字支持在执行添加记录之后可以获取到数据库自动生成的主键ID-->
+    <!--selectKey  会将 SELECT LAST_INSERT_ID()的结果放入到传入的model的主键里面，
+          keyProperty 对应的model中的主键的属性名，这里是 his_medication_details 中的id，因为它跟数据库的主键对应
+          order AFTER 表示 SELECT LAST_INSERT_ID() 在insert执行之后执行,多用与自增主键，
+                BEFORE 表示 SELECT LAST_INSERT_ID() 在insert执行之前执行，这样的话就拿不到主键了，
+                      这种适合那种主键不是自增的类型
+          resultType 主键类型 -->
+    <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List" keyProperty="id">
+
+
+        insert into his_prescription_medicine(id, tree_id, prescription_id, medicine_id, description, drugs_numb,
+        drugs_name, drugs_alias,
+        drugs_spec, prescription, mental_medicine, large_unit, small_unit, conversion_rate,
+        disable, level, medical_insurance_sign, placeOrigin, base_medicine, narcotic_drugs,
+        remarks, create_date, update_date, create_user_id, update_user_id,pharmacy_id,count)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id,jdbcType=BIGINT}, #{item.treeId,jdbcType=VARCHAR}, #{item.prescriptionId,jdbcType=VARCHAR},
+            #{item.medicineId,jdbcType=BIGINT}, #{item.description,jdbcType=VARCHAR},
+            #{item.drugsNumb,jdbcType=VARCHAR},
+            #{item.drugsName,jdbcType=VARCHAR}, #{item.drugsAlias,jdbcType=VARCHAR}, #{item.drugsSpec,jdbcType=VARCHAR},
+            #{item.prescription,jdbcType=INTEGER}, #{item.mentalMedicine,jdbcType=INTEGER},
+            #{item.largeUnit,jdbcType=VARCHAR},
+            #{item.smallUnit,jdbcType=VARCHAR}, #{item.conversionRate,jdbcType=DECIMAL},
+            #{item.disable,jdbcType=INTEGER},
+            #{item.level,jdbcType=INTEGER}, #{item.medicalInsuranceSign,jdbcType=INTEGER},
+            #{item.placeorigin,jdbcType=INTEGER},
+            #{item.baseMedicine,jdbcType=INTEGER}, #{item.narcoticDrugs,jdbcType=INTEGER},
+            #{item.remarks,jdbcType=VARCHAR},
+            #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP},
+            #{item.createUserId,jdbcType=BIGINT},
+            #{item.updateUserId,jdbcType=BIGINT}, #{item.pharmacyId,jdbcType=BIGINT}, #{item.count,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+
+    <select id="listForDetails" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_prescription_medicine
+        where prescription_id = #{prescriptionId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrescriptionId" parameterType="java.lang.String">
+    delete
+    from his_prescription_medicine
+    where prescription_id = #{prescriptionId,jdbcType=VARCHAR}
+  </delete>
+
+    <select id="selectByPrescriptionId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+      his_prescription_medicine.*
+    from his_prescription_medicine
+    where  prescription_id = #{prescriptionId,jdbcType=VARCHAR}
+  </select>
+    <select id="listDetail" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_prescription_medicine as p
+        where p.prescription_id = (
+        select h.tree_id from his_prescription as h where h.id =#{parameter.parentId,jdbcType=VARCHAR}
+        )
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+    <select id="selectByPrescriptionIdForTables" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+      his_prescription_medicine.pharmacy_id as id, his_prescription_medicine.tree_id, his_prescription_medicine.prescription_id, his_prescription_medicine.medicine_id, his_prescription_medicine.description,
+      his_prescription_medicine.drugs_numb, his_prescription_medicine.drugs_name, his_prescription_medicine.drugs_alias,
+      his_prescription_medicine.drugs_spec, his_prescription_medicine.prescription, his_prescription_medicine.mental_medicine,
+      his_prescription_medicine.large_unit, his_prescription_medicine.small_unit, his_prescription_medicine.conversion_rate,
+      his_prescription_medicine.disable, his_prescription_medicine.level, his_prescription_medicine.medical_insurance_sign, his_prescription_medicine.placeOrigin, his_prescription_medicine.base_medicine,
+      his_prescription_medicine.narcotic_drugs,
+      his_prescription_medicine.remarks, his_prescription_medicine.create_date, his_prescription_medicine.update_date, his_prescription_medicine.create_user_id, his_prescription_medicine.update_user_id,
+           his_prescription_medicine.count
+    from his_prescription_medicine
+    where prescription_id = (
+		select h.tree_id from his_prescription as h where h.id =#{id,jdbcType=VARCHAR}
+		)
+  </select>
+    <select id="exportHisPrescriptionMedicine" resultType="com.ahsj.hiscore.entity.HisPrescriptionMedicine">
+        select
+        m.id as id, m.description, m.drugs_numb, m.drugs_name, m.drugs_alias,
+        m.drugs_spec, m.prescription, m.mental_medicine, m.large_unit, m.small_unit, m.conversion_rate,
+        m.disable, m.level, m.medical_insurance_sign, m.placeOrigin, m.base_medicine, m.narcotic_drugs,
+        m.pharmacy_id,m.count,p.id as hisPrescriptionId,p.id as pId,
+        p.`name`,p.descrption,i.id as drugsId,s.id as levelId, d.id as signId,c.id as disableId,
+        z.id as preId,y.id as mentalMedicineId,X.id as baseMedicineId ,f.id as narcoticDrugsId
+        from his_prescription_medicine as m
+        LEFT JOIN his_prescription as p on p.tree_id = m.prescription_id
+        LEFT JOIN his_medicine_info as i on i.drugs_numb = m.drugs_numb
+        LEFT JOIN `his-userinfo`.sys_code_detail as s on s.code = m.level
+        LEFT JOIN `his-userinfo`.sys_code_detail as d on d.code = m.medical_insurance_sign
+        LEFT JOIN `his-userinfo`.sys_code_detail as c on c.code = m.disable
+        LEFT JOIN `his-userinfo`.sys_code_detail as z on z.code = m.prescription
+        LEFT JOIN `his-userinfo`.sys_code_detail as y on y.code = m.mental_medicine
+        LEFT JOIN `his-userinfo`.sys_code_detail as x on x.code = m.base_medicine
+        LEFT JOIN `his-userinfo`.sys_code_detail as f on f.code = m.narcotic_drugs
+        where s.type_id = (select id from `his-userinfo`.sys_code where type = 'level')
+        and d.type_id = (select id from `his-userinfo`.sys_code where type = 'medical_insurance_sign')
+        and c.type_id = (select id from `his-userinfo`.sys_code where type = 'disable')
+        and z.type_id = (select id from `his-userinfo`.sys_code where type = 'prescription')
+        and y.type_id = (select id from `his-userinfo`.sys_code where type = 'mental_medicine')
+        and X.type_id = (select id from `his-userinfo`.sys_code where type = 'base_medicine')
+        and f.type_id = (select id from `his-userinfo`.sys_code where type = 'narcotic_drugs')
+        and
+        prescription_id = #{prescriptionId,jdbcType=VARCHAR}
+        <if test="ids != null and ids != '' ">
+            and m.id in
+            <foreach collection="ids" item="id" index="index"
+                     open="(" close=")" separator=",">
+                #{id,jdbcType=BIGINT}
+            </foreach>
+        </if>
+    </select>
+
+    <select id="viewDetailInMedicalTemplate" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select a.*,case when a.count &lt; b.stock then '药品足够' else '药品不足' end as isenough,b.stock,
+        case when b.`disable` = 1  then '药品已停用' else '药品未停用' end as disableName,
+        case when b.is_obtained = 1  then '药品已下架' else '药品未下架' end as isObtainedName,
+        case when b.`disable` = 2 and b.is_obtained = 2 and a.count &lt; b.stock then '药品可用' else '药品不可用' end as isusable
+        from his_prescription_medicine as a
+        left join his_pharmacy_detail as b on a.drugs_numb = b.drugs_numb
+        left join his_prescription as c on a.prescription_id = c.tree_id
+        where c.id = #{parameter.prescriptionId,jdbcType=BIGINT}
+    </select>
+
+</mapper>

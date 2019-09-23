@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<style>
+    body{
+        font-size: 14px;
+        text-align: center;
+    }
+</style>
+<div th:replace="public/base_print :: html"></div>
+<body>
+<div class="row">
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 center">
+            <h4>输液卡</h4>
+            <p>Infusion</p>
+        </div>
+    </div>
+
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4 ">
+            <label class="black-text fontsize01">就诊编号</label></br>
+            <label class="black-text fontsize02">Visit number</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text"><span id="recordNumber"></span></label>
+        </div>
+
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s8 m8 l8">
+            <label class="black-text"><span id="tollNumber"></span></label>
+        </div>
+    </div>
+
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4 ">
+            <label class="black-text fontsize01">病人</label></br>
+            <label class="black-text fontsize02">patient</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text"><span id="patientName"></span></label>
+        </div>
+
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4 ">
+            <label class="black-text fontsize01">执行时间</label></br>
+            <label class="black-text fontsize02">execution time</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text"><span id="startTime"></span></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4 ">
+            <label class="black-text fontsize01">用法</label></br>
+            <label class="black-text fontsize02">usage</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text"><span id="usages"></span></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4 ">
+            <label class="black-text fontsize01">连续天数</label></br>
+            <label class="black-text fontsize02">Continuous days</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text"><span id="duration"></span></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12">
+            <table id="table_id" style="font-size: 14px"></table>
+        </div>
+    </div>
+</div>
+
+<!--<input type="hidden" id="ids" th:value="${hospitalManage}">-->
+<input type="hidden" id="hospitalManage" th:value="${hospitalManage}">
+
+
+<div th:replace="public/base_list_script :: html"></div>
+<div th:replace="public/base_print_script :: html"></div>
+<script  th:inline="javascript">
+    var id = [[${id}]];
+    $(document).ready(function () {
+        printShow();
+    });
+
+    function printShow() {
+        // var ids = $("#ids").val();
+        var hospitalManage = $("#hospitalManage").val();
+        $.ahsjajax(
+            CTX + "/api/hisInfusion/listByHMForPrint.ahsj?token=" + TOKEN,
+            {"hospitalManageId": hospitalManage},
+            function (data) {
+                var jsons = data[0];
+                if (!isNullOrEmpty(jsons)) {//有
+                    var trs = "<tr><td><h6 class='black-text'>名称(name)</h6></td><td><h6 class='black-text'>单次剂量(Single dose)</h6></td><td><h6 class='black-text'>单位(unit)</h6></td><td><h6 class='black-text'>价格(price)</h6></td></tr>";
+                    $.each(data, function (index, item) {
+                        // trs += "<tr><td><p class='black-text fontsize03'> " + item.drugsName + "</p></td><td ><p class='black-text fontsize03'> " + item.singleDose + "</p></td><td ><p class='black-text fontsize03'> " + item.unit + "</p></td><td ><p class='black-text fontsize03'></p></td><td><p class='black-text fontsize03'>" +item.price+";
+                        trs += "<tr><td><p class='black-text fontsize03'> " + item.drugname  + "</p></td><td ><p class='black-text fontsize03'> " + item.singleDose + "</p></td><td ><p class='black-text fontsize03'> " + item.unit + "</p></td><td ><p class='black-text fontsize03'> " + item.price + "</p></td></tr >";
+
+                    });
+                    var jsons = data[0];
+                    $("#recordNumber").html(jsons.hosptalregistNumber);
+                    $("#patientName").html(jsons.patientName);
+                    $("#startTime").html(jsons.startTime);
+                    $("#usages").html(jsons.usages);
+                    $("#duration").html(jsons.duration);
+                    $("#table_id").append(trs);
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }
+        );
+    }
+
+
+
+
+    function doOk() {
+        $('body  div .row.valign-wrapper').printThis({
+            importCSS: true,
+            debug: false,
+            afterPrint: function () {
+                dialog.confirm('确定打印?', function (index, layero) {
+                    var id = [[${id}]];
+                    $.ahsjajax(
+                        CTX + "/api/hisAnkleDetail/getAnkleForPrintf.ahsj",
+                        {"id":id}
+                        ,
+                        function (msg) {
+                            console.log(msg);
+                            if (msg.success) {
+                                M.toast({html: msg.message});
+                                return false;
+                            } else {
+                                M.toast({html: msg.message});
+                                return false;
+                            }
+                        },
+                        function () {
+                            M.toast({html: "网络异常"});
+                            return false;
+                        }
+                    );
+
+
+                })
+            }
+        })
+    }
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</body>
+</html>

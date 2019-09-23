@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+<head>
+</head>
+<div th:replace="public/base_print :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<div class="row">
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 center">治疗诊疗单(Treatment list)</div>
+    </div>
+    <div class="row valign-wrapper">
+
+        <div class="col s6 m6 l6">
+            <label class="black-text">就诊编号(Visit number)</label>
+        </div>
+        <div class="col s6 m6 l6">
+            <label class="black-text"><span id=numbers></span></label>
+        </div>
+
+    </div>
+
+    <div class="row valign-wrapper">
+        <div class="col s6 m6 l6">
+            <label class="black-text">就诊人(Visiting person)</label>
+        </div>
+        <div class="col s6 m6 l6">
+            <label class="black-text"><span id="name"></span></label>
+        </div>
+    </div>
+
+    <div class="row valign-wrapper">
+        <div class="col s6 m6 l6">
+            <label class="black-text">诊疗医生(Medical doctor)</label>
+        </div>
+        <div class="col s6 m6 l6">
+            <label class="black-text"><span id="doctorName"></span></label>
+        </div>
+
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s6 m6 l6">
+            <label class="black-text">创建时间(Creation time)</label>
+        </div>
+        <div class="col s6 m6 l6">
+            <label class="black-text"><span id="date"></span></label>
+        </div>
+
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 center">
+            <label class="black-text">门诊诊断(Outpatient diagnosis)</label>
+        </div>
+    </div>
+
+    <div class="row valign-wrapper">
+        <div class="col s6 m6 l6">
+            <label class="black-text">现病史(Current medical history)</label>
+        </div>
+        <div class="col s6 m6 l6">
+            <label class="black-text"><span id="nowCondition"></span></label>
+        </div>
+
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s6 m6 l6">
+            <label class="black-text">既往史(Past history)</label>
+        </div>
+        <div class="col s6 m6 l6">
+            <label class="black-text"><span id="hiscondition"></span></label>
+        </div>
+
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s6 m6 l6">
+            <label class="black-text">主诉(Chief complaint)</label>
+        </div>
+        <div class="col s6 m6 l6">
+            <label class="black-text"><span id="chiefcomplaint"></span></label>
+        </div>
+    </div>
+
+    <div class="row valign-wrapper">
+        <div class="col s6 m6 l6">
+            <label class="black-text">个人史(Personal history)</label>
+        </div>
+        <div class="col s6 m6 l6">
+            <label class="black-text"><span id="personalHistory"></span></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s6 m6 l6">
+            <label class="black-text">过敏史(allergies)</label>
+        </div>
+        <div class="col s6 m6 l6">
+            <label class="black-text"><span id="allergies"></span></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s6 m6 l6">
+            <label class="black-text">家族史(Family history)</label>
+        </div>
+        <div class="col s6 m6 l6">
+            <label class="black-text"><span id="familyHistory"></span></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s6 m6 l6">
+            <label class="black-text">其他诊断(Other diagnosis)</label>
+        </div>
+        <div class="col s6 m6 l6">
+            <label class="black-text"><span id="other"></span></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s6 m6 l6">
+            <label class="black-text">血压(blood pressure)</label>
+        </div>
+        <div class="col s6 m6 l6">
+            <label class="black-text"><span id="bloodPressure"></span></label>
+        </div>
+        <div class="col s6 m6 l6">
+            <label class="black-text">体温(body temperature)</label>
+        </div>
+        <div class="col s6 m6 l6">
+            <label class="black-text"><span id="bodyTemperature"></span></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s6 m6 l6">
+            <label class="black-text">体重(weight)</label>
+        </div>
+        <div class="col s6 m6 l6">
+            <label class="black-text"><span id="bodyWeight"></span></label>
+        </div>
+        <div class="col s6 m6 l6">
+            <label class="black-text">心率(Heart rate)</label>
+        </div>
+        <div class="col s6 m6 l6">
+            <label class="black-text"><span id="heartRate"></span></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 center" id="tabledrug">
+            <label class="black-text">药物治疗方案(Drug treatment plan)</label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <table id="drug" style="font: 15px 'Roboto Condensed',Sans-serif"></table>
+    </div>
+    <input type="hidden" id="number" name="id" th:value="${number}">
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 center" id="tableP">
+            <label class="black-text">诊疗项目方案(Medical treatment plan)</label>
+        </div>
+
+    </div>
+    <div class="row valign-wrapper">
+        <table id="project" style="font: 15px 'Roboto Condensed',Sans-serif"></table>
+    </div>
+</div>
+
+<div th:replace="public/base_print_script :: html"></div>
+
+<script th:inline="javascript">
+    $(document).ready(function () {
+        printShow();
+        printShow1();
+        printShow2();
+        printShow3();
+    });
+    var number = $("#number").val();
+    console.log(number)
+
+    function printShow2() {
+        $.ahsjajax(
+            CTX + "/api/hismedicalrecord/selectPrint1.ahsj",
+            {"number": number},
+            function (data) {
+                $("#numbers").html(data.medicalRecordId);
+                $("#date").html(data.createDate);
+                $("#name").html(data.name);
+                $("#doctorName").html(data.doctorName);
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }
+        );
+    }
+
+    function printShow() {
+        $.ahsjajax(
+            CTX + "/api/medicationDetails/selectPrint.ahsj",
+            {"number": number},
+            function (data) {
+                var jsons = data[0];
+                if (!isNullOrEmpty(jsons)) {//有
+                    var trs = "<tr><td><h6 class='black-text'>名称(name)</h6></td><td><h6 class='black-text'>数目(number)</h6></td><td><h6 class='black-text'>单价(price)</h6></td><td><h6 class='black-text'>单项总价(Single item total price)</h6></td></tr>";
+                    $.each(data, function (index, item) {
+                        if (isNullOrEmpty(item.name)) {
+                            item.name = ""
+                        }
+                        if (isNullOrEmpty(item.tranName)) {
+                            item.name = ""
+                        }
+                        trs += "<tr><td><p class='black-text fontsize03'> " + item.drugsName + "(" + item.tdrugsName + ")" + "</p></td><td ><p class='black-text fontsize03'> " + item.count + "</p></td><td ><p class='black-text fontsize03'>" + item.price + "</p></td><td ><p class='black-text fontsize03'> " + item.totalPrice + "</p></td></tr >";
+                    });
+                    $("#drug").append(trs);
+                }
+                else{
+                    $("#tabledrug").attr("style","display:none;");
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }
+        );
+    }
+
+    function printShow1() {
+        $.ahsjajax(
+            CTX + "/api/hisProject/selectPrint.ahsj",
+            {"number": number},
+            function (data) {
+                var jsons = data[0];
+                if (!isNullOrEmpty(jsons)) {//有
+                    var trs = "<tr><td><h6 class='black-text'>名称(name)</h6></td><td><h6 class='black-text'>数目(number)</h6></td><td><h6 class='black-text'>单价(price)</h6></td><td><h6 class='black-text'>单项总价(Single item total price)</h6></td></tr>";
+                    $.each(data, function (index, item) {
+                        trs += "<tr><td><p class='black-text fontsize03'> " + item.name + "(" + item.tname + ")" + "</p></td><td ><p class='black-text fontsize03'> " + item.num + "</p></td><td ><p class='black-text fontsize03'>" + item.price + "</p></td><td ><p class='black-text fontsize03'> " + item.totalPrice + "</p></td></tr >";
+                    });
+                    $("#project").append(trs);
+                }
+                else{
+                    $("#tableP").attr("style","display:none;");
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }
+        );
+    }
+
+    function printShow3() {
+        $.ahsjajax(
+            CTX + "/api/hismedicalrecord/print.ahsj",
+            {"number": number},
+            function (data) {
+                console.log(data)
+                if (data.hiscondition != null && data.thiscondition != null) {
+                    $("#hiscondition").html(data.hiscondition + "(" + data.thiscondition + ")");
+                }
+                if (data.nowCondition != null && data.tnowCondition != null) {
+                    $("#nowCondition").html(data.nowCondition + "(" + data.tnowCondition + ")");
+                }
+                if (data.chiefcomplaint != null && data.tchiefcomplaint != null) {
+                    $("#chiefcomplaint").html(data.chiefcomplaint + "(" + data.tchiefcomplaint + ")");
+                }
+                if (data.personalHistory != null && data.tpersonalHistory != null) {
+                    $("#personalHistory").html(data.personalHistory + "(" + data.tpersonalHistory + ")");
+                }
+                if (data.allergies != null && data.tallergies != null) {
+                    $("#allergies").html(data.allergies + "(" + data.tallergies + ")");
+                }
+                if (data.familyHistory != null && data.tfamilyHistory != null) {
+                    $("#familyHistory").html(data.familyHistory + "(" + data.tfamilyHistory + ")");
+                }
+                if (data.other != null && data.tother != null) {
+                    $("#other").html(data.other + "(" + data.tother + ")");
+                }
+                if (data.bloodPressure != null && data.bloodPressure != "") {
+                    $("#bloodPressure").html(data.bloodPressure + " mmhg");
+                }
+                if (data.bodyTemperature != null) {
+                    $("#bodyTemperature").html(data.bodyTemperature + " ℃");
+                }
+                if (data.bodyWeight != null) {
+                    $("#bodyWeight").html(data.bodyWeight + " KG");
+                }
+                if (data.heartRate != null) {
+                    $("#heartRate").html(data.heartRate + " bmp");
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }
+        );
+    }
+
+    function doOk() {
+        $('body  div div.row.valign-wrapper').printThis({
+            importCSS: true,
+            debug: true,
+            afterPrint: function () {
+                dialog.confirm('确定打印?', function (index, layero) {
+                    parent.parent.grid.search();
+                    dialog.parentclose();
+                });
+            }
+        });
+    }
+
+    $("input").change(function () {
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+
+</body>
+
+</html>

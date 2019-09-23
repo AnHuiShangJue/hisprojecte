@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<style>
+    table tr td {
+        border: 1px solid grey;
+
+    }
+</style>
+<div th:replace="public/base_print :: html"></div>
+<body>
+<div class="container">
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 center">
+            <h4>中柬第一医院</h4>
+            <h5>死亡记录</h5>
+        </div>
+    </div>
+
+    <div class="row valign-wrapper">
+        <div class="col s10 m10 l10 offset-l1 offset-m1 offset-s1">
+            <table border="1" cellspacing="0" class="table">
+                <tr>
+                    <td>姓名</td>
+                    <td><span id = name></span></td>
+                    <td>性别</td>
+                    <td><span id = sex></span></td>
+                    <td>年龄</td>
+                    <td><span id = age></span></td>
+                    <td>科室</td>
+                    <td><span id = department></span></td>
+                    <td>病房</td>
+                    <td><span id = ward></span></td>
+                </tr>
+                <tr>
+                    <td>住院号</td>
+                    <td><span id = hospital></span></td>
+                    <td>床号</td>
+                    <td><span id = bed></span></td>
+                    <td>病理号</td>
+                    <td><span id = pathology></span></td>
+                    <td colspan="3">影像检查号(CT、X、MRI)</td>
+                    <td><span id = examine></span></td>
+                </tr>
+                <tr>
+                    <td>入院日期</td>
+                    <td colspan="3"><span id = createDate></span></td>
+                    <td>死亡时间</td>
+                    <td colspan="3"><span id = deathTime></span></td>
+                    <td>住院天数</td>
+                    <td><span id = hospitalizationDay></span></td>
+                </tr>
+
+                <tr>
+                    <td>入院诊断</td>
+                    <td colspan="3"><span id = name></span></td>
+                    <td>死亡诊断</td>
+                    <td colspan="5"><span id = name></span></td>
+                </tr>
+
+                <tr>
+                    <td colspan="6">入院时情况（主要症状、体征、有关实验室及器械检查结果）：</td>
+                    <td colspan="4"><span id = name></span></td>
+                </tr>
+
+                <tr>
+                    <td colspan="6">诊疗经过入院后病情演变及诊治情况。重点记录死亡前病情变化和抢救经过。死亡原因和死亡时间（具体到分钟）：</td>
+                    <td colspan="4"><span id = name></span></td>
+                </tr>
+                <tr>
+                    <td>与患者近亲属或代理人商谈尸检情况：</td>
+                    <td colspan="9">
+                        <p>患者近亲属或代理人同意或不同意尸检需表态并签字（注明与死者的关系）：</p>
+                        <p style="text-align: right">日期：<span id="year"></span> 年 <span id="month"></span> 月 <span id="day"></span>  日 </p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>医师签名</td>
+                    <td>科主任或正（副）主任医师</td>
+                    <td colspan="2"></td>
+                    <td>主治医师</td>
+                    <td colspan="2"></td>
+                    <td>住院医师</td>
+                    <td colspan="2"></td>
+                </tr>
+
+            </table>
+            <input id="number" name="number" type="hidden" th:value="${number}">
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="public/base_list_script :: html"></div>
+<div th:replace="public/base_print_script :: html"></div>
+<script th:inline="javascript">
+    $(document).ready(function () {
+        getHospital();
+        getHisLeaveHospital();
+    });
+    function getHospital() {
+        var number = $("#number").val();
+        if (!isNullOrEmpty(number)) {
+            //获取基本信息
+            $.ahsjajax(
+                CTX + "/api/hishospitalmanage/getHospital/index.ahsj",
+                {"number": number},
+                function (data) {
+                    if (!isNullOrEmpty(data)) {
+                        changeInputValue("name", data.patientName);
+                        changeInputValue("age", data.age);
+                        changeInputValue("createDate", data.createDate);
+                        changeInputValue("hospital", data.number);
+                        changeInputValue("bed", data.bedsNumber);
+                        changeInputValue("ward", data.wardsNumber);
+                        changeInputValue("sex", data.sexName);
+                        changeInputValue("deathTime", data.deathTime);
+                        changeInputValue("department", data.departmentIdName);
+                        changeInputValue("hisHospitalManageId", data.id);
+                        M.updateTextFields();//重新初始化页面上的内容
+                        return true;
+                    }
+                },
+                function () {
+                    Materialize.toast("网络异常");
+                    return false;
+                }
+            );
+        }
+    }
+    function getHisLeaveHospital() {
+        var number = $("#number").val();
+        if (!isNullOrEmpty(number)) {
+            //获取基本信息
+            $.ahsjajax(
+                CTX + "/api/hisDeath/getHisDeath/index.ahsj",
+                {"number": number},
+                function (data) {
+                    if (!isNullOrEmpty(data.id)) {
+                        changeInputValue("postmortemDiagnsis", data.postmortemDiagnsis);
+                        changeInputValue("admittingDiagnosis", data.admittingDiagnosis);
+                        changeInputValue("situation", data.situation);
+                        changeInputValue("details", data.details);
+                        changeInputValue("autopsy", data.autopsy);
+                        changeInputValue("pathology", data.pathology);
+                        changeInputValue("examine", data.examine);
+                        changeInputValue("id", data.id);
+                        M.updateTextFields();//重新初始化页面上的内容
+                        $("#send_btn").attr("disabled", true);
+                        if (isNullOrEmpty(data.majorId)) {
+                            $("#send_btn2").attr("disabled", false);
+                        }
+                        if (isNullOrEmpty(data.doctorId)) {
+                            $("#send_btn3").attr("disabled", false);
+                        }
+                        if (isNullOrEmpty(data.internshipId)) {
+                            $("#send_btn4").attr("disabled", false);
+                        }
+                        $("#print_btn").attr("disabled", false);
+                        M.updateTextFields();//重新初始化页面上的内容
+                        return true;
+                    } else {
+                        $("#send_btn").attr("disabled", false);
+                        return true;
+                    }
+                },
+                function () {
+                    Materialize.toast("网络异常");
+                    return false;
+                }
+            );
+        }
+    }
+
+    function doOk() {
+        $('body  div div.row.valign-wrapper').printThis({
+            importCSS: true,
+            debug: true,
+            afterPrint: function () {
+                dialog.confirm('确定打印?', function (index, layero) {
+                });
+            }
+        });
+    }
+
+    $("input").change(function () {
+        $(this).val($(this).val().trim());
+    });
+
+
+</script>
+</body>
+</html>

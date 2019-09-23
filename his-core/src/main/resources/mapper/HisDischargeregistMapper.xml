@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisDischargeregistMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisDischargeregist" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="patient_id" property="patientId" jdbcType="BIGINT" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="outtime" property="outtime" jdbcType="TIMESTAMP" />
+    <result column="jointime" property="jointime" jdbcType="TIMESTAMP" />
+    <result column="discharge_diagnosis" property="dischargeDiagnosis" jdbcType="VARCHAR" />
+    <result column="admission_situation" property="admissionSituation" jdbcType="VARCHAR" />
+    <result column="treatment" property="treatment" jdbcType="VARCHAR" />
+    <result column="discharge_instructions" property="dischargeInstructions" jdbcType="VARCHAR" />
+    <result column="treatment_effect" property="treatmentEffect" jdbcType="VARCHAR" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, patient_id, number, outtime, jointime, discharge_diagnosis, admission_situation, 
+    treatment, discharge_instructions, treatment_effect, create_user_id, create_time, 
+    update_user_id, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from his_dischargeregist
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from his_dischargeregist
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisDischargeregist" >
+    insert into his_dischargeregist (id, patient_id, number, 
+      outtime, jointime, discharge_diagnosis, 
+      admission_situation, treatment, discharge_instructions, 
+      treatment_effect, create_user_id, create_time, 
+      update_user_id, update_time)
+    values (#{id,jdbcType=BIGINT}, #{patientId,jdbcType=BIGINT}, #{number,jdbcType=VARCHAR}, 
+      #{outtime,jdbcType=TIMESTAMP}, #{jointime,jdbcType=TIMESTAMP}, #{dischargeDiagnosis,jdbcType=VARCHAR}, 
+      #{admissionSituation,jdbcType=VARCHAR}, #{treatment,jdbcType=VARCHAR}, #{dischargeInstructions,jdbcType=VARCHAR}, 
+      #{treatmentEffect,jdbcType=VARCHAR}, #{createUserId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateUserId,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisDischargeregist" >
+    insert into his_dischargeregist
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="outtime != null" >
+        outtime,
+      </if>
+      <if test="jointime != null" >
+        jointime,
+      </if>
+      <if test="dischargeDiagnosis != null" >
+        discharge_diagnosis,
+      </if>
+      <if test="admissionSituation != null" >
+        admission_situation,
+      </if>
+      <if test="treatment != null" >
+        treatment,
+      </if>
+      <if test="dischargeInstructions != null" >
+        discharge_instructions,
+      </if>
+      <if test="treatmentEffect != null" >
+        treatment_effect,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="patientId != null" >
+        #{patientId,jdbcType=BIGINT},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="outtime != null" >
+        #{outtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jointime != null" >
+        #{jointime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dischargeDiagnosis != null" >
+        #{dischargeDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="admissionSituation != null" >
+        #{admissionSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="treatment != null" >
+        #{treatment,jdbcType=VARCHAR},
+      </if>
+      <if test="dischargeInstructions != null" >
+        #{dischargeInstructions,jdbcType=VARCHAR},
+      </if>
+      <if test="treatmentEffect != null" >
+        #{treatmentEffect,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisDischargeregist" >
+    update his_dischargeregist
+    <set >
+      <if test="patientId != null" >
+        patient_id = #{patientId,jdbcType=BIGINT},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="outtime != null" >
+        outtime = #{outtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jointime != null" >
+        jointime = #{jointime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dischargeDiagnosis != null" >
+        discharge_diagnosis = #{dischargeDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="admissionSituation != null" >
+        admission_situation = #{admissionSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="treatment != null" >
+        treatment = #{treatment,jdbcType=VARCHAR},
+      </if>
+      <if test="dischargeInstructions != null" >
+        discharge_instructions = #{dischargeInstructions,jdbcType=VARCHAR},
+      </if>
+      <if test="treatmentEffect != null" >
+        treatment_effect = #{treatmentEffect,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisDischargeregist" >
+    update his_dischargeregist
+    set patient_id = #{patientId,jdbcType=BIGINT},
+      number = #{number,jdbcType=VARCHAR},
+      outtime = #{outtime,jdbcType=TIMESTAMP},
+      jointime = #{jointime,jdbcType=TIMESTAMP},
+      discharge_diagnosis = #{dischargeDiagnosis,jdbcType=VARCHAR},
+      admission_situation = #{admissionSituation,jdbcType=VARCHAR},
+      treatment = #{treatment,jdbcType=VARCHAR},
+      discharge_instructions = #{dischargeInstructions,jdbcType=VARCHAR},
+      treatment_effect = #{treatmentEffect,jdbcType=VARCHAR},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

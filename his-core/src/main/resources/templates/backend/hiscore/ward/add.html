@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title">新增病房</h4><label style="color:black">វួដថ្មី
+            </label>
+                <form class="col s12" id="sendForm" action="#">
+                    <input type="hidden" id="id" name="id" >
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="number" name="number" type="number" min="1" max="10000000000"
+                             data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label for="number">病房编号<span style="font-size: 12px">(Ward number)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <select ahsj:select name="type"  type="code"  id="room_type"  typeKey="room_type" cssClass=""
+                                    th:value="${hisWard.type}">
+                            </select>
+                            <label for="room_type" >病房类型<span style="font-size: 12px">(Ward type)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="count" name="count" type="number" min="1" max="10000000000"
+                            data-error=".errorTxt2">
+                            <div class="errorTxt2"></div>
+                            <label for="count">病房最大容纳病床数目<span style="font-size: 12px">(The maximum number of beds in the ward
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <select ahsj:select name="isEnable" id="is_enable" type="code" typeKey="is_enable" cssClass=""
+                                    th:value="${hisWard.isEnable}">
+                            </select>
+                            <label for="is_enable">是 否 启 用<span style="font-size: 12px">(Whether to enable
+)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <textarea id="remark"  name="remark" class="materialize-textarea"
+                                      data-error=".errorTxt3"></textarea>
+                            <div class="errorTxt3"></div>
+                            <label for="remark">备注<span style="font-size: 12px">(remark)</span></label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button id="send_btn" class="btn cyan waves-effect waves-light right" type="sumbit"
+                                    name="action">提交（submit
+                                ）
+                                <i class="mdi-content-send right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- ================================================
+Scripts
+================================================ -->
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+    $(function () {
+        formCheck();
+    });
+    function formCheck() {
+        $("#sendForm").validate({
+            rules: {
+                number: {
+                    required: true,
+                },
+                count: {
+                    required:true,
+                },
+            },
+            messages: {
+                number: {
+                    required: "请输入病床编号",
+                },
+                count: {
+                    required: "请输入病房最大容纳病床数目",
+                },
+            },
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+                dialog.confirm('确定提交吗?', function (index, layero){
+                var send_form = $('#sendForm').serialize();
+                $.ahsjajax(
+                    CTX+"/api/hisWards/toaddHisWard/index.ahsj?token="+TOKEN,
+                    send_form,
+                    function (msg) {
+                        if (msg.success) {
+                            M.toast({html: msg.message});
+                            parent.grid.search();
+                            dialog.parentclose();
+                            return true;
+                        } else {
+                            M.toast({html: msg.message});
+                            return false;
+                        }
+                    },
+                    function ( ) {
+                        Materialize.toast("网络异常");
+                        return false;
+                    }
+                );});
+            }
+
+        });
+    }
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+  </script>
+</body>
+</html>

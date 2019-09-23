@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisHandoverMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisHandover" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="DATE" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="update_date" property="updateDate" jdbcType="DATE" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="join_date" property="joinDate" jdbcType="DATE" />
+    <result column="admission_situation" property="admissionSituation" jdbcType="VARCHAR" />
+    <result column="admission_diagnosis" property="admissionDiagnosis" jdbcType="VARCHAR" />
+    <result column="cuurent_diagnosis" property="cuurentDiagnosis" jdbcType="VARCHAR" />
+    <result column="medi_treatment_process" property="mediTreatmentProcess" jdbcType="VARCHAR" />
+    <result column="handover_considerations" property="handoverConsiderations" jdbcType="VARCHAR" />
+    <result column="is_modified" property="isModified" jdbcType="INTEGER" />
+    <result column="hospital_number" property="hospitalNumber" jdbcType="VARCHAR" />
+    <result column="succession_user_id" property="successionUserId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, create_date, create_user_id, update_date, update_user_id, join_date, admission_situation, 
+    admission_diagnosis, cuurent_diagnosis, medi_treatment_process, handover_considerations, 
+    is_modified, hospital_number, succession_user_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from his_handover
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from his_handover
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisHandover" useGeneratedKeys="true" keyProperty="id" >
+    insert into his_handover (id, create_date, create_user_id, 
+      update_date, update_user_id, join_date, 
+      admission_situation, admission_diagnosis, 
+      cuurent_diagnosis, medi_treatment_process, 
+      handover_considerations, is_modified, hospital_number, 
+      succession_user_id)
+    values (#{id,jdbcType=BIGINT}, #{createDate,jdbcType=DATE}, #{createUserId,jdbcType=BIGINT}, 
+      #{updateDate,jdbcType=DATE}, #{updateUserId,jdbcType=BIGINT}, #{joinDate,jdbcType=DATE}, 
+      #{admissionSituation,jdbcType=VARCHAR}, #{admissionDiagnosis,jdbcType=VARCHAR}, 
+      #{cuurentDiagnosis,jdbcType=VARCHAR}, #{mediTreatmentProcess,jdbcType=VARCHAR}, 
+      #{handoverConsiderations,jdbcType=VARCHAR}, #{isModified,jdbcType=INTEGER}, #{hospitalNumber,jdbcType=VARCHAR}, 
+      #{successionUserId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisHandover" >
+    insert into his_handover
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="joinDate != null" >
+        join_date,
+      </if>
+      <if test="admissionSituation != null" >
+        admission_situation,
+      </if>
+      <if test="admissionDiagnosis != null" >
+        admission_diagnosis,
+      </if>
+      <if test="cuurentDiagnosis != null" >
+        cuurent_diagnosis,
+      </if>
+      <if test="mediTreatmentProcess != null" >
+        medi_treatment_process,
+      </if>
+      <if test="handoverConsiderations != null" >
+        handover_considerations,
+      </if>
+      <if test="isModified != null" >
+        is_modified,
+      </if>
+      <if test="hospitalNumber != null" >
+        hospital_number,
+      </if>
+      <if test="successionUserId != null" >
+        succession_user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="joinDate != null" >
+        #{joinDate,jdbcType=DATE},
+      </if>
+      <if test="admissionSituation != null" >
+        #{admissionSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="admissionDiagnosis != null" >
+        #{admissionDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="cuurentDiagnosis != null" >
+        #{cuurentDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="mediTreatmentProcess != null" >
+        #{mediTreatmentProcess,jdbcType=VARCHAR},
+      </if>
+      <if test="handoverConsiderations != null" >
+        #{handoverConsiderations,jdbcType=VARCHAR},
+      </if>
+      <if test="isModified != null" >
+        #{isModified,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalNumber != null" >
+        #{hospitalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="successionUserId != null" >
+        #{successionUserId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisHandover" >
+    update his_handover
+    <set >
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=DATE},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="joinDate != null" >
+        join_date = #{joinDate,jdbcType=DATE},
+      </if>
+      <if test="admissionSituation != null" >
+        admission_situation = #{admissionSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="admissionDiagnosis != null" >
+        admission_diagnosis = #{admissionDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="cuurentDiagnosis != null" >
+        cuurent_diagnosis = #{cuurentDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="mediTreatmentProcess != null" >
+        medi_treatment_process = #{mediTreatmentProcess,jdbcType=VARCHAR},
+      </if>
+      <if test="handoverConsiderations != null" >
+        handover_considerations = #{handoverConsiderations,jdbcType=VARCHAR},
+      </if>
+      <if test="isModified != null" >
+        is_modified = #{isModified,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalNumber != null" >
+        hospital_number = #{hospitalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="successionUserId != null" >
+        succession_user_id = #{successionUserId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisHandover" >
+    update his_handover
+    set create_date = #{createDate,jdbcType=DATE},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=DATE},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      join_date = #{joinDate,jdbcType=DATE},
+      admission_situation = #{admissionSituation,jdbcType=VARCHAR},
+      admission_diagnosis = #{admissionDiagnosis,jdbcType=VARCHAR},
+      cuurent_diagnosis = #{cuurentDiagnosis,jdbcType=VARCHAR},
+      medi_treatment_process = #{mediTreatmentProcess,jdbcType=VARCHAR},
+      handover_considerations = #{handoverConsiderations,jdbcType=VARCHAR},
+      is_modified = #{isModified,jdbcType=INTEGER},
+      hospital_number = #{hospitalNumber,jdbcType=VARCHAR},
+      succession_user_id = #{successionUserId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+<!--  自定义sql-->
+  <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    SELECT
+    a.*,
+    c.user_name as successionUserName,
+    b.createUserName as createUserName
+    FROM
+    `his-rpac`.his_handover as a
+    LEFT JOIN `his-userinfo`.user_info as c ON c.id = a.succession_user_id
+    LEFT join (
+    SELECT
+    c.user_name as createUserName,
+    c.id as createUserId
+    FROM
+    `his-rpac`.his_handover as a
+    LEFT JOIN `his-userinfo`.user_info as c ON c.id = a.create_user_id) as b ON b.createUserId = a.create_user_id
+    where
+    1= 1
+    <if test="parameter.successionUserName != null and parameter.successionUserName != ''">
+      and c.user_name like concat('%' #{parameter.successionUserName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.createUserName != null and parameter.createUserName != ''">
+      and b.createUserName like concat('%' #{parameter.createUserName,jdbcType=VARCHAR},'%')
+    </if>
+     <if test="parameter.hospitalNumber != null and parameter.hospitalNumber != ''">
+      and a.hospital_number like concat('%' #{parameter.hospitalNumber,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+  <select id="selectByHosNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    from his_handover
+    where
+    hospital_number = #{number,jdbcType=VARCHAR}
+  </select>
+</mapper>

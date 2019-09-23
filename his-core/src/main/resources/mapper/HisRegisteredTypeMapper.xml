@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahsj.hiscore.dao.HisRegisteredTypeMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisRegisteredType">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="register_id" jdbcType="BIGINT" property="registerId"/>
+        <result column="type_id" jdbcType="INTEGER" property="typeId"/>
+        <result column="org_id" jdbcType="INTEGER" property="orgId"/>
+        <result column="money" jdbcType="DECIMAL" property="money"/>
+        <result column="money_type" jdbcType="INTEGER" property="moneyType"/>
+        <result column="time_type" jdbcType="INTEGER" property="timeType"/>
+        <result column="create_user_id" jdbcType="BIGINT" property="createUserId"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, register_id, type_id, org_id, money, money_type, time_type, create_user_id, create_date, 
+    update_date
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_registered_type
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_registered_type
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisRegisteredType">
+    insert into his_registered_type (id, register_id, type_id, 
+      org_id, money, money_type, 
+      time_type, create_user_id, create_date, 
+      update_date)
+    values (#{id,jdbcType=BIGINT}, #{registerId,jdbcType=BIGINT}, #{typeId,jdbcType=INTEGER}, 
+      #{orgId,jdbcType=INTEGER}, #{money,jdbcType=DECIMAL}, #{moneyType,jdbcType=INTEGER}, 
+      #{timeType,jdbcType=INTEGER}, #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisRegisteredType">
+        insert into his_registered_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="registerId != null">
+                register_id,
+            </if>
+            <if test="typeId != null">
+                type_id,
+            </if>
+            <if test="orgId != null">
+                org_id,
+            </if>
+            <if test="money != null">
+                money,
+            </if>
+            <if test="moneyType != null">
+                money_type,
+            </if>
+            <if test="timeType != null">
+                time_type,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="registerId != null">
+                #{registerId,jdbcType=BIGINT},
+            </if>
+            <if test="typeId != null">
+                #{typeId,jdbcType=INTEGER},
+            </if>
+            <if test="orgId != null">
+                #{orgId,jdbcType=INTEGER},
+            </if>
+            <if test="money != null">
+                #{money,jdbcType=DECIMAL},
+            </if>
+            <if test="moneyType != null">
+                #{moneyType,jdbcType=INTEGER},
+            </if>
+            <if test="timeType != null">
+                #{timeType,jdbcType=INTEGER},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisRegisteredType">
+        update his_registered_type
+        <set>
+            <if test="registerId != null">
+                register_id = #{registerId,jdbcType=BIGINT},
+            </if>
+            <if test="typeId != null">
+                type_id = #{typeId,jdbcType=INTEGER},
+            </if>
+            <if test="orgId != null">
+                org_id = #{orgId,jdbcType=INTEGER},
+            </if>
+            <if test="money != null">
+                money = #{money,jdbcType=DECIMAL},
+            </if>
+            <if test="moneyType != null">
+                money_type = #{moneyType,jdbcType=INTEGER},
+            </if>
+            <if test="timeType != null">
+                time_type = #{timeType,jdbcType=INTEGER},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisRegisteredType">
+    update his_registered_type
+    set register_id = #{registerId,jdbcType=BIGINT},
+      type_id = #{typeId,jdbcType=INTEGER},
+      org_id = #{orgId,jdbcType=INTEGER},
+      money = #{money,jdbcType=DECIMAL},
+      money_type = #{moneyType,jdbcType=INTEGER},
+      time_type = #{timeType,jdbcType=INTEGER},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <!--自定义sql-->
+    <!--list-->
+    <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select
+        his_registered_type.*
+        from his_registered_type
+        where
+        1 =1
+        <if test="parameter.orgId != null and parameter.orgId != ''">
+            and org_id = #{parameter.orgId,jdbcType=INTEGER}
+        </if>
+           <if test="parameter.typeId != null and parameter.typeId != ''">
+            and type_id = #{parameter.typeId,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+
+    <select id="selectByRegisterId" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    select
+    his_registered_type.*
+    from his_registered_type
+    where register_id = #{parameter.registerId,jdbcType=BIGINT}
+  </select>
+
+    <select id="myselectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    his_registered_type.*
+    from his_registered_type
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+    <update id="updateByRegisterId" parameterType="com.ahsj.hiscore.entity.HisRegisteredType">
+    update his_registered_type
+    set register_id = #{registerId,jdbcType=BIGINT},
+      type_id = #{typeId,jdbcType=INTEGER},
+      org_id = #{orgId,jdbcType=INTEGER},
+      money = #{money,jdbcType=DECIMAL},
+      money_type = #{moneyType,jdbcType=INTEGER},
+      time_type = #{timeType,jdbcType=INTEGER},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where register_id = #{registerId,jdbcType=BIGINT}
+  </update>
+    <select id="listByAll" resultMap="BaseResultMap">
+   select
+        his_registered_type.*
+        from his_registered_type
+        where
+        1 =1
+    </select>
+</mapper>

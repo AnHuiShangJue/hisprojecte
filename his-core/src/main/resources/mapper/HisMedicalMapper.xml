@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahsj.hiscore.dao.HisMedicalMapper">
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisMedical">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="patient_idcard" jdbcType="VARCHAR" property="patientIdcard" />
+    <result column="patient_name" jdbcType="VARCHAR" property="patientName" />
+    <result column="patient_sex" jdbcType="INTEGER" property="patientSex" />
+    <result column="patient_age" jdbcType="INTEGER" property="patientAge" />
+    <result column="now_condition" jdbcType="VARCHAR" property="nowCondition" />
+    <result column="hiscondition" jdbcType="VARCHAR" property="hiscondition" />
+    <result column="chiefcomplaint" jdbcType="VARCHAR" property="chiefcomplaint" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="update_user_id" jdbcType="BIGINT" property="updateUserId" />
+    <result column="no_set_date" jdbcType="TIMESTAMP" property="noSetDate" />
+    <result column="blood_pressure" jdbcType="VARCHAR" property="bloodPressure" />
+    <result column="record_id" jdbcType="BIGINT" property="recordId" />
+    <result column="personal_history" jdbcType="VARCHAR" property="personalHistory" />
+    <result column="allergies" jdbcType="VARCHAR" property="allergies" />
+    <result column="family_history" jdbcType="VARCHAR" property="familyHistory" />
+    <result column="body_temperature" jdbcType="DOUBLE" property="bodyTemperature" />
+    <result column="body_weight" jdbcType="DOUBLE" property="bodyWeight" />
+    <result column="heart_rate" jdbcType="INTEGER" property="heartRate" />
+    <result column="other" jdbcType="VARCHAR" property="other" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, patient_idcard, patient_name, patient_sex, patient_age, now_condition, hiscondition, 
+    chiefcomplaint, create_date, remarks, update_date, create_user_id, update_user_id, 
+    no_set_date, blood_pressure, record_id, personal_history, allergies, family_history, 
+    body_temperature, body_weight, heart_rate, other
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from his_medical
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_medical
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisMedical" keyProperty="id" useGeneratedKeys="true">
+    insert into his_medical (id, patient_idcard, patient_name, 
+      patient_sex, patient_age, now_condition, 
+      hiscondition, chiefcomplaint, create_date, 
+      remarks, update_date, create_user_id, 
+      update_user_id, no_set_date, blood_pressure, 
+      record_id, personal_history, allergies, 
+      family_history, body_temperature, body_weight, 
+      heart_rate, other)
+    values (#{id,jdbcType=BIGINT}, #{patientIdcard,jdbcType=VARCHAR}, #{patientName,jdbcType=VARCHAR}, 
+      #{patientSex,jdbcType=INTEGER}, #{patientAge,jdbcType=INTEGER}, #{nowCondition,jdbcType=VARCHAR}, 
+      #{hiscondition,jdbcType=VARCHAR}, #{chiefcomplaint,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{remarks,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, 
+      #{updateUserId,jdbcType=BIGINT}, #{noSetDate,jdbcType=TIMESTAMP}, #{bloodPressure,jdbcType=VARCHAR}, 
+      #{recordId,jdbcType=BIGINT}, #{personalHistory,jdbcType=VARCHAR}, #{allergies,jdbcType=VARCHAR}, 
+      #{familyHistory,jdbcType=VARCHAR}, #{bodyTemperature,jdbcType=DOUBLE}, #{bodyWeight,jdbcType=DOUBLE}, 
+      #{heartRate,jdbcType=INTEGER}, #{other,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisMedical">
+    insert into his_medical
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="patientIdcard != null">
+        patient_idcard,
+      </if>
+      <if test="patientName != null">
+        patient_name,
+      </if>
+      <if test="patientSex != null">
+        patient_sex,
+      </if>
+      <if test="patientAge != null">
+        patient_age,
+      </if>
+      <if test="nowCondition != null">
+        now_condition,
+      </if>
+      <if test="hiscondition != null">
+        hiscondition,
+      </if>
+      <if test="chiefcomplaint != null">
+        chiefcomplaint,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="updateUserId != null">
+        update_user_id,
+      </if>
+      <if test="noSetDate != null">
+        no_set_date,
+      </if>
+      <if test="bloodPressure != null">
+        blood_pressure,
+      </if>
+      <if test="recordId != null">
+        record_id,
+      </if>
+      <if test="personalHistory != null">
+        personal_history,
+      </if>
+      <if test="allergies != null">
+        allergies,
+      </if>
+      <if test="familyHistory != null">
+        family_history,
+      </if>
+      <if test="bodyTemperature != null">
+        body_temperature,
+      </if>
+      <if test="bodyWeight != null">
+        body_weight,
+      </if>
+      <if test="heartRate != null">
+        heart_rate,
+      </if>
+      <if test="other != null">
+        other,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="patientIdcard != null">
+        #{patientIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="patientName != null">
+        #{patientName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientSex != null">
+        #{patientSex,jdbcType=INTEGER},
+      </if>
+      <if test="patientAge != null">
+        #{patientAge,jdbcType=INTEGER},
+      </if>
+      <if test="nowCondition != null">
+        #{nowCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="hiscondition != null">
+        #{hiscondition,jdbcType=VARCHAR},
+      </if>
+      <if test="chiefcomplaint != null">
+        #{chiefcomplaint,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateUserId != null">
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="noSetDate != null">
+        #{noSetDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bloodPressure != null">
+        #{bloodPressure,jdbcType=VARCHAR},
+      </if>
+      <if test="recordId != null">
+        #{recordId,jdbcType=BIGINT},
+      </if>
+      <if test="personalHistory != null">
+        #{personalHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="allergies != null">
+        #{allergies,jdbcType=VARCHAR},
+      </if>
+      <if test="familyHistory != null">
+        #{familyHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="bodyTemperature != null">
+        #{bodyTemperature,jdbcType=DOUBLE},
+      </if>
+      <if test="bodyWeight != null">
+        #{bodyWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="heartRate != null">
+        #{heartRate,jdbcType=INTEGER},
+      </if>
+      <if test="other != null">
+        #{other,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisMedical">
+    update his_medical
+    <set>
+      <if test="patientIdcard != null">
+        patient_idcard = #{patientIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="patientName != null">
+        patient_name = #{patientName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientSex != null">
+        patient_sex = #{patientSex,jdbcType=INTEGER},
+      </if>
+      <if test="patientAge != null">
+        patient_age = #{patientAge,jdbcType=INTEGER},
+      </if>
+      <if test="nowCondition != null">
+        now_condition = #{nowCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="hiscondition != null">
+        hiscondition = #{hiscondition,jdbcType=VARCHAR},
+      </if>
+      <if test="chiefcomplaint != null">
+        chiefcomplaint = #{chiefcomplaint,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateUserId != null">
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="noSetDate != null">
+        no_set_date = #{noSetDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bloodPressure != null">
+        blood_pressure = #{bloodPressure,jdbcType=VARCHAR},
+      </if>
+      <if test="recordId != null">
+        record_id = #{recordId,jdbcType=BIGINT},
+      </if>
+      <if test="personalHistory != null">
+        personal_history = #{personalHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="allergies != null">
+        allergies = #{allergies,jdbcType=VARCHAR},
+      </if>
+      <if test="familyHistory != null">
+        family_history = #{familyHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="bodyTemperature != null">
+        body_temperature = #{bodyTemperature,jdbcType=DOUBLE},
+      </if>
+      <if test="bodyWeight != null">
+        body_weight = #{bodyWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="heartRate != null">
+        heart_rate = #{heartRate,jdbcType=INTEGER},
+      </if>
+      <if test="other != null">
+        other = #{other,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisMedical">
+    update his_medical
+    set patient_idcard = #{patientIdcard,jdbcType=VARCHAR},
+      patient_name = #{patientName,jdbcType=VARCHAR},
+      patient_sex = #{patientSex,jdbcType=INTEGER},
+      patient_age = #{patientAge,jdbcType=INTEGER},
+      now_condition = #{nowCondition,jdbcType=VARCHAR},
+      hiscondition = #{hiscondition,jdbcType=VARCHAR},
+      chiefcomplaint = #{chiefcomplaint,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      no_set_date = #{noSetDate,jdbcType=TIMESTAMP},
+      blood_pressure = #{bloodPressure,jdbcType=VARCHAR},
+      record_id = #{recordId,jdbcType=BIGINT},
+      personal_history = #{personalHistory,jdbcType=VARCHAR},
+      allergies = #{allergies,jdbcType=VARCHAR},
+      family_history = #{familyHistory,jdbcType=VARCHAR},
+      body_temperature = #{bodyTemperature,jdbcType=DOUBLE},
+      body_weight = #{bodyWeight,jdbcType=DOUBLE},
+      heart_rate = #{heartRate,jdbcType=INTEGER},
+      other = #{other,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!--自定义sql-->
+  <select id="selectByRecordId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+      a.*,
+      c.name as patient_name,c.sex as patient_sex,c.idcard as patient_idcard,c.age as patient_age
+    from his_medical as a
+           left join his_medical_record as b on a.record_id = b.id
+           left join his_patient_info as c on b.patient_id = c.id
+    where
+      record_id = #{recordId,jdbcType=BIGINT}
+  </select>
+<select id="selectPrint" parameterType="java.lang.String" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from his_medical
+  as m where m.record_id =(select m.id from his_medical_record as m where m.registered_id=(
+
+  select  r.id from his_registered as r where r.number = #{number}))
+
+</select>
+
+  <select id="selectByMedicalRecordId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select his_medical.*
+from his_medical
+where record_id =#{medicalRecordid,jdbcType=BIGINT}
+  </select>
+</mapper>

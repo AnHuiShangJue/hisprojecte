@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="public/base_list :: html"></div>
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+<!-- Start Page Loading -->
+<div class="row">
+    <div class="breadcrumbs-inline pt-3 pb-1" id="breadcrumbs-wrapper">
+        <!-- Search for small screen-->
+        <div class="container">
+            <div class="row">
+                <div class="col s10 m6 l6 breadcrumbs-left">
+                    <h5 class="breadcrumbs-title mt-0 mb-0 display-inline hide-on-small-and-down">DataTable</h5>
+                    <ol class="breadcrumbs mb-0">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#">Table</a>
+                        </li>
+                        <li class="breadcrumb-item active">DataTable
+                        </li>
+                    </ol>
+                </div>
+                <div class="col s2 m6 l6"><a
+                        class="btn btn-floating dropdown-settings waves-effect waves-light breadcrumbs-btn right"
+                        href="#!" data-target="dropdown1"><i class="material-icons">expand_more </i><i
+                        class="material-icons right">arrow_drop_down</i></a>
+                    <ul class="dropdown-content" id="dropdown1" tabindex="0">
+                        <li tabindex="0"><a class="grey-text text-darken-2"
+                                            href="user-profile-page.html">Profile<span
+                                class="new badge red">2</span></a></li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="app-contacts.html">Contacts</a>
+                        </li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="page-faq.html">FAQ</a></li>
+                        <li class="divider" tabindex="-1"></li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="user-login.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 x12 l12 xl12">
+        <div class="container">
+            <div class="section section-data-tables">
+                <div class="card">
+                    <div class="card-content">
+                        <form id="searchForm" class="row" action="">
+
+                                <div class="col input-field s3 m3 l3 xl3">
+                                    <input id="tollRecordNumber" name="tollRecordNumber" type="text"/>
+                                    <label for="tollRecordNumber">请输入交易流水号<span style="font-size: 12px">(Please enter the transaction serial number
+)</span></label>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <div class="col s2 m2 l2 xl2 offset-l1">
+                            <a class="waves-effect waves-light btn" id="searchBtn"><i
+                                    class="material-icons  white-text tooltipped " data-position="bottom"
+                                    data-delay="50" data-tooltip="搜索">search</i></a>
+                            <a id="resetBtn" class="waves-effect waves-light btn"><i
+                                    class="material-icons  white-text tooltipped " data-position="bottom"
+                                    data-delay="50" data-tooltip="重置">youtube_searched_for</i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6 x6 l6 xl6">
+                    <div class="card">
+                        <div class="card-content">
+                            <h4 class="card-title">项目选择
+                            </h4><label style="color:black">Project selection</label>
+                            <div class="row">
+                                <div class="col s2 m2 l2 xl2 offset-xl10">
+                                    <a id="btnAddtoList" class="btn waves-effect waves-light red">
+                                        <i class="material-icons  white-text tooltipped " data-position="bottom"
+                                           data-delay="50" data-tooltip="批量选择">playlist_add</i>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--Form Advance-->
+                            <div class="row">
+                                <div id="medicine_list" class="col l12 m12 l12 xl12">
+                                    <table id="data-table-simple" class="display">
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s6 x6 l6 xl6">
+                    <div class="card">
+                        <div class="card-content">
+                            <h4 class="card-title">待退项目申请列表
+                            </h4><label style="color:black">Retirement project application list
+                        </label>
+                            <div class="row">
+                                <div class="col s2 m2 l2 xl2 offset-xl10">
+                                    <a id="btnDeleteFromList"
+                                       class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1">
+                                        <i class="material-icons white-text tooltipped" data-position="bottom"
+                                           data-delay="50"
+                                           data-tooltip="批量移除">remove</i>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--Form Advance-->
+                            <form id="planForm" action="">
+                                <div class="row">
+                                    <div class="col input-field s4 m4 l4 xl4">
+                                        <input id="patientName" name="patientName" type="text" th:value="${userLoginName}" readonly="readonly"
+                                               data-error=".errorTxt1">
+                                        <div class="errorTxt1"></div>
+                                        <label for="patientName">申请退项目人姓名<span style="font-size: 12px">(Application for returnee name
+
+)</span></label>
+                                    </div>
+                                  <!--  <div class="col input-field s4 m4 l4 xl4">
+                                        <input id="phonenumber" name="phonenumber" type="text"
+                                               data-error=".errorTxt2">
+                                        <div class="errorTxt2"></div>
+                                        <label for="phonenumber">退项目人手机号码<span style="font-size: 12px">(ដកហូតលេខទូរស័ព្ទ
+
+)</span></label>
+                                    </div>-->
+
+                                </div>
+                                <div class="row">
+                                <!--    <div class="col input-field s6 m6 l6 xl6">
+                                        <input id="idcard" name="idcard" type="text"
+                                               data-error=".errorTxt3">
+                                        <div class="errorTxt3"></div>
+                                        <label for="phonenumber">退项目人身份证<span style="font-size: 12px">(ប្រគល់មកវិញនូវប័ណ្ណសំគាល់ខ្លួនបុគ្គល
+
+)</span></label>
+                                    </div>-->
+                                    <div class="col input-field s5 m5 l5 xl5">
+                                        <input id="reason" name="reason" type="text"/>
+                                        <label for="reason">退项目原因<span style="font-size: 12px">(Reason for returning the project
+
+)</span></label>
+                                    </div>
+                                </div>
+                            </form>
+                            <div id="enter_medicine_list" class="col l12 m12 l12 xl12">
+                                <table id="data-table-simple-enter">
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="row">
+    <div class="input-field col s12">
+        <button id="BtnMediEnter" class="btn cyan waves-effect waves-light right" type="submit" name="action">提交退项目申请(Submit a refund application
+            )
+            <i class="mdi-content-send right"></i>
+        </button>
+    </div>
+</div>
+
+
+<div th:replace="public/base_list_script :: html"></div>
+<script type="text/javascript" th:src="@{/hiscore/assets/global/js/ahsj.selfdatatable.js}"></script>
+<script th:inline="javascript">
+    var gridEnterList = new AHSJDT();
+    var grid = new Datatable();
+    $(document).ready(function () {
+        initBtn();
+        initTable();
+    });
+    function initTable() {
+
+        $("#planForm").validate({
+            rules: {
+                personInCharge: {
+                    required: true,
+                    minlength: 1
+                },
+                expectedTime: {
+                    required: true,
+                    minlength: 1
+                },
+            },
+            messages: {
+                personInCharge: {
+                  /*  required: "请输入负责人姓名",
+                    minlength: "最少输入1个字符"*/
+                },
+                expectedTime: {
+               /*     required: "请输入预期采购时间",
+                    minlength: "最少输入1个字符"*/
+                },
+            },
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
+        //选择列表
+        grid.init({
+            src: $("#data-table-simple"),
+            onSuccess: function (grid) {
+            },
+            onError: function (grid) {
+            },
+            onDataLoad: function (grid) {
+            },
+            loadingMessage: 'Loading...',
+            dataTable: {
+                "ajax": {
+                    "url": CTX + "/api/hisProject/refund/query/list.ahsj?token=" + TOKEN // ajax source
+                },
+                "columns": [
+                    {
+                        "title": "<label><input type=\"checkbox\"  id=\"checkAll\" class=\"select-all\" > <span></span></label> ",
+                        "render": function (data, type, row, meta) {
+                            return " <label> <input type=\"checkbox\" value=\"" + row.id + "\"> <span></span> </label>";
+                        },
+                        "width": "18px",
+                        "orderable": false,
+                        "className": "centered"
+                    },
+                 /*   {
+                        "title": "就诊记录编号",
+                        "data": "recordNumber",
+                        "name": ""
+                    },*/
+                    {
+                        "title": "项目编号",
+                        "data": "number",
+                        "name": "number"
+                    },
+                    {
+                        "title": "项目名称",
+                        "data": "name",
+                        "name": "name",
+                        "orderable": false
+                    },
+                    {
+                        "title": "项目类型",
+                        "data": "assitTypeName",
+                        "name": "type",
+                        "orderable": false
+                    },
+                    {
+                        "title": "项目标准",
+                        "data": "price",
+                        "name": "price"
+                    },
+                    {
+                        "title": "项目数目",
+                        "data": "num",
+                        "name": "num",
+                        "orderable": false
+                    },
+                    {
+                        "title": "项目预约日期",
+                        "data": "createDate",
+                        "name": "create_date"
+                    },
+                    {
+                        "title": "操作",
+                        "width": "60px",
+                        "className": "centered",
+                        "orderable": false,
+                        "render": function (data, type, row) {
+                            var rtnBtn = "";
+                            //如果获取字符串，必须在参数外反转"
+                            rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"添加至待入库\" href='javascript:;' onclick=add("
+                                + row.id + ",'" + row.number + "','" + row.name + "','" + row.assitTypeName + "','"+row.price+"');>" +
+                                " <i class='material-icons'>add</i></a>";
+                            // 返回自定义内容
+                            return rtnBtn;
+                        }
+                    }
+                ],
+                "order": [
+                    [2, 'desc']
+                ]
+            }
+        });
+
+// 待添加列表
+        gridEnterList.init({
+            src: $("#data-table-simple-enter"),
+            theads: [
+                {
+                    "title": "项目编号",
+                    "data": "number",
+                    "name": "number"
+                },
+                {
+                    "title": "项目名称",
+                    "data": "name",
+                    "name": "name",
+                    "orderable": false
+                },
+                {
+                    "title": "项目类型",
+                    "data": "assitTypeName",
+                    "name": "type",
+                    "orderable": false
+                },
+                {
+                    "title": "项目标准",
+                    "data": "price",
+                    "name": "price"
+                },
+             /*   {
+                    "title": "有效期",
+                    "data": "validityPeriod",
+                    "name": ""
+                },*/
+                {
+                    "title": "项目数量",
+                    "width": "60px",
+                    "className": "centered",
+                    "render": function (row) {
+                        var rtnBtn = "";
+                        //如果获取字符串，必须在参数外反转"
+                        rtnBtn = rtnBtn +
+                            " <input id='enterCountPlan' name='num' type='number' value='0' />";
+                        // 返回自定义内容
+                        return rtnBtn;
+                    }
+                },
+                {
+                    "title": "操作",
+                    "width": "80px",
+                    "className": "centered",
+                    "render": function (row) {
+                        var rtnBtn = "";
+                        //如果获取字符串，必须在参数外反转"
+                        rtnBtn = rtnBtn +
+                            "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"移除\" onclick='remove(" + row.id + ");'> <i class='material-icons'>remove</i></a>";
+                        // 返回自定义内容
+                        return rtnBtn;
+                    },
+                }
+            ],
+        });
+
+
+    }
+
+    //添加到list里
+    function add(id, number, name, assitTypeName,price,num ) {
+        var selectRowsIds = gridEnterList.getIds();
+        if (selectRowsIds.length !== 0) {
+            for (var k = 0; k < selectRowsIds.length; k++) {
+                if (id == selectRowsIds[k]) {
+                    id = null;
+                }
+            }
+        }
+        if (null !== id) {
+            gridEnterList.addRow({"id": id, "number": number, "name": name, "assitTypeName": assitTypeName,"price":price ,"num":num  });
+        }
+    }
+
+    //移除一列
+    function remove(id) {
+        gridEnterList.removeRow(id);
+    }
+
+    function initBtn() {
+        //批量添加按钮
+        $("#btnAddtoList").click(function () {
+            var ids = grid.getSelectedRows();
+            if (ids.length == 0) {
+                dialog.warn("请至少选择一条数据");
+                return;
+            }
+            var json = grid.getDataTable().ajax.json();
+            var selectRowsIds = gridEnterList.getIds();
+            var tmps = [];
+            if (selectRowsIds.length !== 0) {
+                for (var i = 0; i < ids.length; i++) {
+                    for (var k = 0; k < selectRowsIds.length; k++) {
+                        if (ids[i] == selectRowsIds[k]) {
+                            delete (ids[i]);
+                        }
+                    }
+                }
+            }
+            for (var i = 0; i < ids.length; ++i) {
+                for (var j = 0; j < json.data.length; j++) {
+                    if (undefined !== ids[i] && '' !== ids[i] && null != ids[i] && json.data[j].id == ids[i]) {
+                        tmps[i] = {
+                            "id": json.data[j].id,
+                            "number": json.data[j].number,
+                            "name": json.data[j].name,
+                            "assitTypeName": json.data[j].assitTypeName,
+                            "price": json.data[j].price,
+                            "num": json.data[j].num
+                        }
+                    }
+                }
+            }
+            gridEnterList.addRows(tmps);
+            grid.initCheckbox();
+        });
+        $("#btnDeleteFromList").click(function () {
+            var ids = gridEnterList.getSelectedRows();
+            if (ids.length == 0) {
+                dialog.warn("请至少选择一条数据");
+                return;
+            }
+            gridEnterList.removeRows(ids);
+        });
+        //搜索按钮
+        $('#searchBtn').click(function () {
+            grid.search();
+        });
+        $('#resetBtn').click(function () {
+            grid.reset();
+            ids =gridEnterList.getIds();
+            gridEnterList.removeRows(ids);
+        });
+
+        //提交按钮
+        $("#BtnMediEnter").click(function () {
+            dialog.confirm('确定申请退项目?', function (index, layero) {
+                // var expectedTime = $('#timeForm').serialize();
+                ids = gridEnterList.getIds();
+                var nums = gridEnterList.gernums();
+                var recordNumber = $("#medicalRecordId").val();
+                var tollRecordNumber = $("#tollRecordNumber").val();
+                var patientName = $(" input[ name='patientName' ] ").val();
+                var phonenumber = $(" input[ name='phonenumber' ] ").val();
+                var idcard = $(" input[ name='idcard' ] ").val();
+                var remarks = $(" input[ name='reason' ] ").val();
+
+
+                $.ahsjajax(CTX + "/api/hisProject/refund/saveForAppEdit.ahsj",
+                    {
+                        "ids": ids.join(','),
+                        "nums": nums.join(','),
+
+                        "patientName": patientName,
+                        "recordNumber":recordNumber,
+                        "tollRecordNumber":tollRecordNumber,
+                        "remarks": remarks
+                    },
+                    function (msg) {
+                        if (msg.success) {
+                            M.toast({
+                                html: msg.message, completeCallback: function () {
+                                }
+                            });
+                            parent.grid.search();
+                            dialog.parentclose();
+                        } else {
+                            M.toast({
+                                html: msg.message, completeCallback: function () {
+                                }
+                            });
+                        }
+                    },
+                    function (data) {
+                        M.toast({
+                            html: "网络异常", completeCallback: function () {
+                            }
+                        });
+                    }
+                );
+            });
+        });
+    }
+
+</script>
+</body>
+</html>

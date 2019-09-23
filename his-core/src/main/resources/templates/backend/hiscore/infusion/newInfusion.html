@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<style>
+    body{
+        font-size: 14px;
+        text-align: center;
+    }
+    table{
+        width: 100px;
+    }
+    table tr td{
+        border: 1px solid grey;
+    }
+</style>
+<div th:replace="public/base_print :: html"></div>
+<body>
+<div class="container">
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 center">
+            <h4>输液卡</h4>
+            <p>Infusion</p>
+        </div>
+    </div>
+
+    <div  class="row valign-wrapper">
+        <div class="col s12 m12 l12">
+            <table border="1" cellspacing="0" class="table" id="table_id">
+                <tr>
+                    <td>NO：</td>
+                    <td th:text="${hisInfusionList[0].number}" colspan="3"></td>
+                    <td>科别：</td>
+                    <td th:text="${hisPatientInfo.departmentName}" colspan="2"></td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid grey;">
+                        <p>姓名：</p>
+                        <label>name</label>
+                    </td>
+                    <td style="border: 1px solid grey;" th:text="${hisPatientInfo.name}"></td>
+                    <td style="border: 1px solid grey;">
+                        <p>性别：</p>
+                        <label>sex</label>
+                    </td>
+                    <td style="border: 1px solid grey;" th:text="${sex}"></td>
+                    <td style="border: 1px solid grey;">
+                        <p>年龄：</p>
+                        <label>age</label>
+                    </td>
+                    <td style="border: 1px solid grey;" th:text="${hisPatientInfo.age}"></td>
+                    <td style="border: 1px solid grey;" th:text="${time}"></td>
+                </tr>
+                <tr>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<input type="hidden" id="hospitalManage" th:value="${hospitalManage}">
+
+
+<div th:replace="public/base_list_script :: html"></div>
+<div th:replace="public/base_print_script :: html"></div>
+<script  th:inline="javascript">
+
+
+    $(document).ready(function () {
+
+        var hospitalManage = $("#hospitalManage").val();
+        $.ahsjajax(
+            CTX + "/api/hisInfusion/listByHMForPrint.ahsj?token=" + TOKEN,
+            {"hospitalManageId": hospitalManage},
+            function (data) {
+                var jsons = data[0];
+                if (!isNullOrEmpty(jsons)) {//有
+                    var trs = "<tr><td style=\"border: 1px solid grey;\">组数(number)</td><td colspan='3' style=\"border: 1px solid grey;\">药物(medicine)</td><td colspan='2' style=\"border: 1px solid grey;\">时间(time)</td><td style=\"border: 1px solid grey;\">护士签名(Nurse signature)</td></tr>";
+                    $.each(data, function (index, item) {
+                        // trs += "<tr><td><p class='black-text fontsize03'> " + item.drugsName + "</p></td><td ><p class='black-text fontsize03'> " + item.singleDose + "</p></td><td ><p class='black-text fontsize03'> " + item.unit + "</p></td><td ><p class='black-text fontsize03'></p></td><td><p class='black-text fontsize03'>" +item.price+";
+                        trs += "<tr><td style=\"border: 1px solid grey;\"><p class='black-text fontsize03'> " + item.drugsNumb +"</p></td><td colspan='3' style=\"border: 1px solid grey;\"><p class='black-text fontsize03'> " + item.drugname + "; 持续时间："+item.duration+" 用法："+item.usages+" 间隔:"+item.intervals+ "</p></td><td colspan='2' style=\"border: 1px solid grey;\"><p class='black-text fontsize03'> " + item.startTime + "</p></td><td style=\"border: 1px solid grey;\"><p class='black-text fontsize03'> " + "      " + "</p></td></tr >";
+
+                    });
+                    $("#table_id").append(trs);
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }
+        );
+    });
+
+
+
+    function doOk() {
+        $('body  div .row.valign-wrapper').printThis({
+            importCSS: true,
+            debug: true,
+            afterPrint: function () {
+                dialog.confirm('确定打印?', function (index, layero) {
+
+
+                })
+            }
+        })
+    }
+
+</script>
+
+</body>
+</html>

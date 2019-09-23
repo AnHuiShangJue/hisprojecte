@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisTypographyUserInfoMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisTypographyUserInfo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="typography_user_name" property="typographyUserName" jdbcType="VARCHAR"/>
+        <result column="department_name" property="departmentName" jdbcType="VARCHAR"/>
+        <result column="sex_name" property="sexName" jdbcType="VARCHAR"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="user_login" property="userLogin" jdbcType="VARCHAR"/>
+        <result column="start_date" property="startDate" jdbcType="TIMESTAMP"/>
+        <result column="end_date" property="endDate" jdbcType="TIMESTAMP"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="create_user_id" property="createUserId" jdbcType="VARCHAR"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="typography_year_month" property="typographyYearMonth" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, typography_user_name, department_name, sex_name, age, phone, user_login, start_date,
+    end_date, create_date, create_user_id, update_date, update_user_id, remark, typography_year_month
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from his_typography_userinfo
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from his_typography_userinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisTypographyUserInfo">
+    insert into his_typography_userinfo (id, typography_user_name, department_name, 
+      sex_name, age, phone, 
+      user_login, start_date, end_date,
+      create_date, create_user_id, update_date, 
+      update_user_id, remark, typography_year_month
+      )
+    values (#{id,jdbcType=INTEGER}, #{typographyUserName,jdbcType=VARCHAR}, #{departmentName,jdbcType=VARCHAR}, 
+      #{sexName,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{userLogin,jdbcType=VARCHAR}, #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP},
+      #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP},
+      #{updateUserId,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{typographyYearMonth,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.ahsj.hiscore.entity.HisTypographyUserInfo">
+        insert into his_typography_userinfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="typographyUserName != null">
+                typography_user_name,
+            </if>
+            <if test="departmentName != null">
+                department_name,
+            </if>
+            <if test="sexName != null">
+                sex_name,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="userLogin != null">
+                user_login,
+            </if>
+            <if test="startDate != null">
+                start_date,
+            </if>
+            <if test="endDate != null">
+                end_date,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="typographyYearMonth != null">
+                typography_year_month,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="typographyUserName != null">
+                #{typographyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentName != null">
+                #{departmentName,jdbcType=VARCHAR},
+            </if>
+            <if test="sexName != null">
+                #{sexName,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="userLogin != null">
+                #{userLogin,jdbcType=VARCHAR},
+            </if>
+            <if test="startDate != null">
+                #{startDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endDate != null">
+                #{endDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="typographyYearMonth != null">
+                #{typographyYearMonth,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisTypographyUserInfo">
+        update his_typography_userinfo
+        <set>
+            <if test="typographyUserName != null">
+                typography_user_name = #{typographyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentName != null">
+                department_name = #{departmentName,jdbcType=VARCHAR},
+            </if>
+            <if test="sexName != null">
+                sex_name = #{sexName,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="userLogin != null">
+                user_login = #{userLogin,jdbcType=VARCHAR},
+            </if>
+            <if test="startDate != null">
+                start_date = #{startDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endDate != null">
+                end_date = #{endDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="typographyYearMonth != null">
+                typography_year_month = #{typographyYearMonth,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisTypographyUserInfo">
+    update his_typography_userinfo
+    set typography_user_name = #{typographyUserName,jdbcType=VARCHAR},
+      department_name = #{departmentName,jdbcType=VARCHAR},
+      sex_name = #{sexName,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      user_login = #{userLogin,jdbcType=VARCHAR},
+      start_date = #{startDate,jdbcType=TIMESTAMP},
+      end_date = #{endDate,jdbcType=TIMESTAMP},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      typography_year_month = #{typographyYearMonth,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+    <!--自定义sql-->
+    <select id="getHisTypographyUserInfoByStartDateAndEndDate" resultMap="BaseResultMap"
+            parameterType="com.ahsj.hiscore.entity.HisTypographyUserInfo">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from
+        (
+        SELECT
+        <include refid="Base_Column_List"/>
+        from his_typography_userinfo
+        WHERE start_date &gt;= #{startDate}
+        ) hiss
+        WHERE hiss.end_date &lt;= #{endDate}
+
+    </select>
+
+
+    <select id="getHisTypographyUserInfoByNowDate" resultMap="BaseResultMap" parameterType="date">
+        select
+        <include refid="Base_Column_List"/>
+        from his_typography_userinfo where start_date  &gt;= now()
+        union
+        select
+        <include refid="Base_Column_List"/>
+        from his_typography_userinfo where start_date &lt; now() and  end_date &gt; now()
+    </select>
+
+    <select id="getHisTypographyUserInfoByHistoryDate" resultMap="BaseResultMap" parameterType="date">
+        select
+        <include refid="Base_Column_List"/>
+        from his_typography_userinfo where end_date &lt; now()
+    </select>
+
+
+
+<update id="updateByBatch" parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+        UPDATE his_typography_userinfo
+        <set>
+        <if test="typographyUserName != null">
+            typography_user_name = #{typographyUserName,jdbcType=VARCHAR},
+        </if>
+        <if test="departmentName != null">
+            department_name = #{departmentName,jdbcType=VARCHAR},
+        </if>
+        <if test="sexName != null">
+            sex_name = #{sexName,jdbcType=VARCHAR},
+        </if>
+        <if test="age != null">
+            age = #{age,jdbcType=INTEGER},
+        </if>
+        <if test="phone != null">
+            phone = #{phone,jdbcType=VARCHAR},
+        </if>
+        <if test="userLogin != null">
+            user_login = #{userLogin,jdbcType=VARCHAR},
+        </if>
+        <if test="startDate != null">
+            start_date = #{startDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="endDate != null">
+            end_date = #{endDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="createDate != null">
+            create_date = #{createDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="createUserId != null">
+            create_user_id = #{createUserId,jdbcType=VARCHAR},
+        </if>
+        <if test="updateDate != null">
+            update_date = #{updateDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="updateUserId != null">
+            update_user_id = #{updateUserId,jdbcType=VARCHAR},
+        </if>
+        <if test="remark != null">
+            remark = #{remark,jdbcType=VARCHAR},
+        </if>
+        <if test="typographyYearMonth != null">
+            typography_year_month = #{typographyYearMonth,jdbcType=VARCHAR},
+        </if>
+    </set>
+    <where>
+        id = #{id,jdbcType=INTEGER}
+    </where>
+    </foreach>
+</update>
+
+    <delete id="deletebatchHisTypographyUserInfo"  parameterType="java.util.List" >
+    delete from his_typography_userinfo where id in
+    <foreach collection="ids" item="id" separator="," open="(" close=")">
+        #{id}
+    </foreach>
+    </delete>
+
+    <select id="queryHisTypographyUserInfoList" resultMap="BaseResultMap" parameterType="com.ahsj.hiscore.entity.HisTypographyUserInfo">
+        select  <include refid="Base_Column_List"/> from his_typography_userinfo as his
+        where   department_name = #{departmentName,jdbcType=VARCHAR}
+    <if test="startDate != null ">
+        <![CDATA[AND (DATE_FORMAT(his.start_date, '%Y-%m-%d') =  DATE_FORMAT( #{startDate}, '%Y-%m-%d'))]]>
+    </if>
+        <if test="endDate != null">
+        <![CDATA[AND (DATE_FORMAT(his.end_date, '%Y-%m-%d') =  DATE_FORMAT( #{endDate}, '%Y-%m-%d'))]]>
+        </if>
+    </select>
+
+
+    <select id="getQueryHisTypographyUserInfo" resultMap="BaseResultMap" parameterType="com.ahsj.hiscore.entity.HisTypographyUserInfo">
+        select  <include refid="Base_Column_List"/> from his_typography_userinfo as his
+        where   department_name = #{departmentName,jdbcType=VARCHAR}
+    <if test="startDate != null ">
+        <![CDATA[AND (DATE_FORMAT(his.start_date, '%Y-%m-%d') = DATE_FORMAT( #{startDate}, '%Y-%m-%d'))]]>
+    </if>
+        <if test="endDate != null">
+        <![CDATA[AND (DATE_FORMAT(his.end_date,'%Y-%m-%d') = DATE_FORMAT( #{endDate}, '%Y-%m-%d'))]]>
+        </if>
+    </select>
+
+
+
+    <insert id="insertList"  parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+    insert into his_typography_userinfo (id, typography_user_name, department_name,
+      sex_name, age, phone,
+      user_login, start_date, end_date,
+      create_date, create_user_id, update_date,
+      update_user_id, remark, typography_year_month
+      )
+    values
+        <foreach collection="list" item="item" index="index" separator="," >
+
+    (
+    #{item.id,jdbcType=INTEGER}, #{item.typographyUserName,jdbcType=VARCHAR}, #{item.departmentName,jdbcType=VARCHAR},
+      #{item.sexName,jdbcType=VARCHAR}, #{item.age,jdbcType=INTEGER}, #{item.phone,jdbcType=VARCHAR},
+      #{item.userLogin,jdbcType=VARCHAR}, #{item.startDate,jdbcType=TIMESTAMP}, #{item.endDate,jdbcType=TIMESTAMP},
+      #{item.createDate,jdbcType=TIMESTAMP}, #{item.createUserId,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP},
+      #{item.updateUserId,jdbcType=VARCHAR}, #{item.remark,jdbcType=VARCHAR}, #{item.typographyYearMonth,jdbcType=VARCHAR}
+      )
+        </foreach>
+  </insert>
+</mapper>

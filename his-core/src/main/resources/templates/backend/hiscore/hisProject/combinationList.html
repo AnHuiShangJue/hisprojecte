@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="public/base_list :: html"></div>
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+<!-- Start Page Loading -->
+<div class="row">
+
+    <div class="col s12 x12 l12 xl12">
+        <div class="container">
+           <div class="section section-data-tables">
+                <div class="card">
+                    <div class="card-content">
+                        <form id="searchForm" class="row" action="">
+                            <div class="row">
+                                <div class="col input-field s3 m3 l3">
+                                    <input id="name" name="name" type="text"/>
+                                    <label for="name">项目组合名称<span style="font-size: 12px">(Portfolio name
+                                        )</span></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s1">
+                                    <h6>启用</h6>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input id="enable" name="isEnable" type="radio" value="1" />
+                                        <span>启用</span>
+                                    </label>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input id="unEnable" name="isEnable" type="radio" value="2"/>
+                                        <span>不启用</span>
+                                    </label>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input id="noSelect" name="isEnable" type="radio" value="0" checked/>
+                                        <span>不选择</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <div class="col s2 m2 l2 xl2 offset-l1">
+                            <a class="waves-effect waves-light btn" id="searchBtn"><i
+                                    class="material-icons  white-text tooltipped " data-position="bottom"
+                                    data-delay="50" data-tooltip="搜索">search</i></a>
+                            <a id="resetBtn" class="waves-effect waves-light btn"><i
+                                    class="material-icons  white-text tooltipped " data-position="bottom"
+                                    data-delay="50" data-tooltip="重置">youtube_searched_for</i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 x12 l12 xl12">
+                    <div class="card">
+                        <div class="card-content">
+                            <h4 class="card-title">收费组合项目操作台
+                            </h4><label style="color:black">Charge combination project console
+
+                        </label>
+                            <div class="row">
+                                <div class="col s2 m2 l2 xl2 offset-xl10"   >
+                                    <a class='tooltipped' id="createBtn" data-delay="50" data-tooltip="新增收费组合项目" > <i class='material-icons'>add</i></a>
+                                    <a class='tooltipped' id="deleteManyBtn" data-delay="50" data-tooltip="批量删除" > <i class='material-icons'>delete</i></a>
+                                    <a class='tooltipped' id="setEnableBtn" data-delay="50" data-tooltip="批量设置收费组合项目启用状态" > <i class='material-icons'>info</i></a>
+                                </div>
+                            </div>
+                            <!--Form Advance-->
+                            <div class="row">
+                                <div id="consumables_list" class="col l12 m12 l12 xl12">
+                                    <table id="data-table-simple" class="display">
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+<div th:replace="public/base_list_script :: html"></div>
+<script type="text/javascript" th:src="@{/hiscore/assets/global/js/ahsj.selfdatatable.js}"></script>
+<script type="text/javascript">
+    var gridEnterList = new AHSJDT();
+    var gridFor = new Datatable();
+    var grid = new Datatable();
+
+    $(document).ready(function () {
+        initBtn();
+        initTable();
+
+    });
+
+
+    function initTable() {
+        //选择列表
+        grid.init({
+            src: $("#data-table-simple"),
+            onSuccess: function (grid) {
+            },
+            onError: function (grid) {
+            },
+            onDataLoad: function (grid) {
+               $("#data-table-simple > tbody > tr").click(function () {
+                    var id =  $("td:nth-child(1) > label > input[type='checkbox']",$(this)).attr("value");
+                    showCombination(id);
+                })
+            },
+            loadingMessage: 'Loading...',
+            dataTable: {
+                "ajax": {
+                    "url": CTX+"/api/hisPproject/combination/list.ahsj", // ajax source
+                },
+                "columns": [
+                    {
+                        "title": "<label><input type=\"checkbox\"  id=\"checkAll\" class=\"select-all\" > <span></span></label> ",
+                        "render": function (data, type, row, meta) {
+                            return " <label> <input type=\"checkbox\" value=\"" + row.id + "\"> <span></span> </label>";
+                        },
+                        "width": "18px",
+                        "orderable": false,
+                        "className": "centered"
+                    },  {
+                        "title": "序号",
+                        "data": "ordernum",
+                        "name": "ordernum"
+                    },
+                    {
+                        "title": "组合简码",
+                        "data": "number", //实体字段
+                        "name": "number"   //库中字段
+                    }, {
+                        "title": "组合名称",
+                        "data": "name",
+                        "name": "name"
+
+                    },
+                    {
+                        "title": "总价",
+                        "data": "money",
+                        "name": "money"
+                    },  {
+                        "title":"是否启用",
+                        "data": "isEnableType",
+                        "name": "is_enable"
+                    },{
+                        "title": "操作",
+                        "width": "150px",
+                        "className": "centered",
+                        "orderable": false,
+                        "render": function (data, type, row) {
+                            var rtnBtn = "";
+                            //如果获取字符串，必须在参数外反转"
+
+                            rtnBtn = rtnBtn +
+                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='edit(" + row.id + ");'> <i class='material-icons'>edit</i></a>" +
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" href='javascript:;' onclick='deleteHisCombination(" + row.id +");'><i class='material-icons'>delete</i></a>"+
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"是否启用\" href='javascript:;' onclick='setHisCombination(" + row.id +");'> <i class='material-icons'>info</i></a> "+
+                            "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看明细\" onclick='visitCombination(" + row.id + ");'> <i class='material-icons'>visibility</i></a>"
+
+                            return rtnBtn
+                        }
+                    }
+                ],
+                "order" : [ [ 1, 'asc' ] ]
+            }
+        });
+
+
+    }
+
+
+
+    function initBtn() {
+        //新增按钮
+        $("#createBtn").click(function () {
+            var url = CTX + "/api/hisPproject/combination/list/index.ahsj?token=" + TOKEN;
+            dialog.show(url, "新增收费组合项目")
+        });
+
+        //搜索按钮
+        $('#searchBtn').click(function () {
+            grid.search();
+        });
+
+        $('#resetBtn').click(function () {
+            grid.reset();
+        });
+
+        //批量删除
+        $("#deleteManyBtn").click(function () {
+            var ids = grid.getSelectedRows();
+            if (ids.length == 0) {
+                dialog.warn("请至少选择一条数据");
+                return;
+            }
+            deleteHisCombination(ids.join(','),"所选");
+        });
+
+
+
+
+        $("#deleteManyBtn1").click(function () {
+            var ids = gridFor.getSelectedRows();
+            if (ids.length == 0) {
+                dialog.warn("请至少选择一条数据");
+                return;
+            }
+            deleteHisBed(ids.join(','),"所选");
+        });
+
+
+        $("#setEnableBtn").click(function () {
+            var ids = grid.getSelectedRows();
+            if (ids.length == 0) {
+                dialog.warn("请至少选择一条数据");
+                return;
+            }
+            setHisCombination(ids.join(','));
+        });
+
+        $("#setEnableBtn1").click(function () {
+            var ids = gridFor.getSelectedRows();
+            if (ids.length == 0) {
+                dialog.warn("请至少选择一条数据");
+                return;
+            }
+            setHisCombination(ids.join(','));
+        });
+    }
+
+    function visitCombination(id) {
+        var url = CTX + "/api/hisPproject/combination/select/combinationProject.ahsj?token=" + TOKEN + "&id=" + id;
+        dialog.show(url, "收费组合项目详细信息");
+    }
+
+
+    //修改
+    function edit(id) {
+        var url = CTX + "/api/hisPproject/combination/update/combinationProjectid.ahsj?token=" + TOKEN + "&id=" + id;
+        dialog.show(url, "收费组合项目信息修改");
+    }
+
+    //收费项目组删除
+    function deleteHisCombination(id) {
+        var ids = [];
+        ids.push(id)
+        dialog.confirm('确定要删除收费项目组吗?', function (index, layero) {
+            $.ahsjajax(CTX +  "/api/hisPproject/combination/delete/HisCombination.ahsj",
+                {ids: ids},
+                function (msg) {
+                    if (msg.success) {
+                        swal.close();
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                        grid.search();
+                        dialog.parentclose();
+
+                    } else {
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                    }
+                },
+                function (data) {
+                    M.toast({
+                        html: "网络异常", completeCallback: function () {
+                        }
+                    });
+                }
+            );
+        });
+    }
+
+
+
+    //修改收费组合项目状态
+    function setHisCombination(id) {
+        var ids = [];
+        ids.push(id);
+        dialog.confirm('确定修改收费组合项目状态吗?', function (index, layero) {
+            $.ahsjajax(CTX + "/api/hisPproject/combination/setDisable.ahsj",
+                {ids: ids},
+                function (msg) {
+                    if (msg.success) {
+                        swal.close();
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                        grid.search();
+                        dialog.parentclose();
+                    } else {
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                    }
+                },
+                function (data) {
+                    M.toast({
+                        html: "网络异常", completeCallback: function () {
+                        }
+                    });
+                }
+            );
+        });
+    }
+
+    /*function showHisWard(id) {
+        var url = CTX + "/api/hisWards/showHisWard/index.ahsj?token=" + TOKEN+ "&id=" + id+"&set=show" ;
+        dialog.show(url, "病房详情")
+    }
+    function updateHisWard(id) {
+        var url = CTX + "/api/hisWards/showHisWard/index.ahsj?token=" + TOKEN+ "&id=" + id+"&set=update" ;
+        dialog.show(url, "病房修改")
+    }
+    function updateHisBed(id) {
+        var url = CTX + "/api/hisbeds/showHisBed/index.ahsj?token=" + TOKEN+ "&id=" + id ;
+        dialog.show(url, "病床修改")
+    }
+    function addHisbed(id) {
+        var url = CTX + "/api/hisbeds/addbed/index.ahsj?token=" + TOKEN+"&id=" + id ;
+        dialog.show(url, "添加病床")
+    }*/
+
+
+  /*  function showHisBed(id) {
+        gridFor.clearAjaxParams("id");
+        gridFor.addAjaxParam("id",id);
+        gridFor.searchWithOutForm();
+    }*/
+
+
+    function showCombination(id) {
+        gridFor.init({
+            src: $("#data-table-simple-enter"),
+            onSuccess: function (grid) {
+            },
+            onError: function (grid) {
+            },
+            onDataLoad: function (grid) {
+            },
+            loadingMessage: 'Loading...',
+            dataTable: {
+                "ajax": {
+                    "url": CTX+"/api/hisPproject/combination/list/query.ahsj?id="+id,
+                },
+                destroy:true,//解决重新加载内容问题
+                "columns": [
+                    {
+                        "title": "<label><input type=\"checkbox\"  id=\"checkAll\" class=\"select-all\" > <span></span></label> ",
+                        "render": function (data, type, row,meta) {
+                            return " <label> <input type=\"checkbox\" value=\"" + row.id + "\"> <span></span> </label>";
+                        },
+                        "width": "18px",
+                        "orderable": false,
+                        "className": "centered"
+                    }, {
+                        "title": "组合名称",
+                        "data": "combinationName", //实体字段
+                        "name": "combination_name"   //库中字段
+                    }, {
+                        "title": "项目简码",
+                        "data": "combinationNumber",
+                        "name": "combination_number"
+                    }, {
+                        "title": "项目名称",
+                        "data": "name",
+                        "name": "name"
+                    },{
+                        "title": "项目数量",
+                        "data": "hisProjectNum",
+                        "name": "hisProject_num"
+                    },
+                    {
+                        "title": "单价",
+                        "data": "price",
+                        "name": "price"
+                    },
+                    {
+                        "title": "项目类别",
+                        "data": "assitTypeName",
+                        "name": "type"
+                    }, {
+                        "title": "项目编码",
+                        "data": "number",
+                        "name": "number"
+                    },{
+                        "title": "操作",
+                        "width": "150px",
+                        "className": "centered",
+                        "orderable": false,
+                        "render": function (data, type, row) {
+                            var rtnBtn = "";
+                            rtnBtn = rtnBtn +
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='updateHisBed(" + row.id +");'> <i class='material-icons'>edit</i></a>" +
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" href='javascript:;' onclick=deleteHisBed(" + row.id + ",'" + row.id + "');><i class='material-icons'>delete</i></a>"+
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"是否启用\" href='javascript:;' onclick='setHisBed(" + row.id +");'> <i class='material-icons'>info</i></a> "
+
+                            return rtnBtn
+                        }
+                    },
+                ],
+                "order" : [ [ 2, 'asc' ] ]
+            }
+        });
+    }
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+</body>
+</html>
+

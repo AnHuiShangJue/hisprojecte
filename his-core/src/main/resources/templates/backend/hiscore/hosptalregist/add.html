@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title">入院登记表</h4><label style="color:black">Admission registration form
+            </label>
+                <form id="searchForm" class="row" action="">
+                    <div class="input-field col s4 l4 xl4">
+                        <input id="medicalRecordId" name="medicalRecordId" type="text">
+                        <label for="medicalRecordId">请输入就诊编号<span style="font-size: 12px">(Please enter the visit number
+)</span></label>
+                    </div>
+                    <div class="input-field col s4 l4 xl4">
+                        <input id="loginName" readonly type="text" th:value=" ${loginName}"/>
+                        <label for="loginName">操 作 人<span style="font-size: 12px">(Operator
+)</span>：</label>
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col s2 m2 l2 xl2 offset-l1">
+                        <a class="waves-effect waves-light btn" id="searchBtn"><i
+                                class="material-icons  white-text tooltipped " data-position="bottom"
+                                data-delay="50" data-tooltip="搜索">search</i></a>
+                        <a id="resetBtn" class="waves-effect waves-light btn"><i
+                                class="material-icons  white-text tooltipped " data-position="bottom"
+                                data-delay="50" data-tooltip="重置">youtube_searched_for</i></a>
+                    </div>
+                </div>
+                <form class="col s12" id="sendForm" action="#">
+                    <div class="row">
+                        <div class="input-field col s3 l3 xl3">
+                            <input id="name" name="name" type="text"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label class="active" for="name">姓名<span style="font-size: 12px">(name)</span></label>
+                        </div>
+                        <div class="input-field col s3 l3 xl3">
+                            <input id="age" name="age" type="number"
+                                   data-error=".errorTxt2">
+                            <div class="errorTxt2"></div>
+                            <label class="active" for="age">年龄<span style="font-size: 12px">(age)</span></label>
+                        </div>
+                        <div class="input-field col s3 l3 xl3">
+                            <input id="idcard" name="idcard" type="text"
+                                   data-error=".errorTxt3">
+                            <div class="errorTxt3"></div>
+                            <label class="active" for="idcard">身份证号<span
+                                    style="font-size: 12px">(id card)</span></label>
+                        </div>
+                        <input type="hidden" id="medicalNumber" name="medicalNumber">
+                        <div class="input-field col s3 l3 xl3">
+                            <input id="phonenumber" name="phonenumber" type="text"
+                                   data-error=".errorTxt4">
+                            <div class="errorTxt4"></div>
+                            <label class="active" for="phonenumber">手机号<span style="font-size: 12px">(Phone Number
+)</span></label>
+                        </div>
+                        <div class="input-field col s3 l3 xl3">
+                            <input id="height" name="height" type="number"
+                                   data-error=".errorTxt5" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')">
+                            <div class="errorTxt5"></div>
+                            <label class="active" for="height">身 高 cm<span style="font-size: 12px">(height cm)</span></label>
+                        </div>
+                        <div class="input-field col s3 l3 xl3">
+                            <input id="weight" name="weight" type="number"
+                                   data-error=".errorTxt6">
+                            <div class="errorTxt6"></div>
+                            <label class="active" for="weight">体 重<span style="font-size: 12px">(weight
+)</span></label>
+                        </div>
+                        <div class="input-field col s3 l3 xl3">
+                            <input id="location" name="location" type="text"
+                                   data-error=".errorTxt7">
+                            <div class="errorTxt7"></div>
+                            <label class="active" for="location">地 址<span
+                                    style="font-size: 12px">(address)</span></label>
+                        </div>
+                        <div class="input-field col s3 l3 xl3">
+                            <select ahsj:select name="isMarried" id="is_married" type="code"
+                                    typeKey="is_married">
+                            </select>
+                            <label for="is_married">婚姻状况<span style="font-size: 12px">(marital status
+)</span></label>
+                        </div>
+                        <div class="input-field col s3 l3 xl3">
+                            <select ahsj:select name="sex" id="sex" type="code" typeKey="sex"  >
+                            </select>
+                            <label >性 别<span style="font-size: 12px">(sex
+)</span></label>
+                        </div>
+                        <div class="col input-field s3 m3 l3">
+                            <select ahsj:select name="departmentId" id="departmentId" type="depart" typeKey="2"
+                                    departKbn="1">
+                            </select> <!--departKbn="1"  1是医疗 2是非医疗 -->   <!--typeKey="2"   1是部门 2是科室-->
+                            <label for="departmentId">科 室<span style="font-size: 12px">(Department
+)</span></label>
+                        </div>
+                        <div class="col input-field s3 m3 l3">
+                            <select id="doctorId" name="doctorId" class="js-data-example-ajax">
+                            </select>
+                            <label>医 生<span style="font-size: 12px">(Doctor
+)</span></label>
+                        </div>
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="chiefcomplaint" name="outpatientDiagnosis" type="text"
+                                   data-error=".errorTxt8">
+                            <div class="errorTxt8"></div>
+                            <label for="chiefcomplaint">门诊诊断<span style="font-size: 12px">(Outpatient diagnosis
+)</span></label>
+                        </div>
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="inpatientDiagnosis" name="inpatientDiagnosis" type="text">
+                            <label for="inpatientDiagnosis">住院诊断<span style="font-size: 12px">(Inpatient diagnosis
+)</span></label>
+                        </div>
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="remark" name="remark" type="text">
+                            <label for="remark">备注<span style="font-size: 12px">(remark)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button id="send_btn" class="btn cyan waves-effect waves-light right" type="sumbit"
+                                    name="action">提交（submit
+                                ）
+                                <i class="mdi-content-send right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ================================================
+Scripts
+================================================ -->
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+
+    $(document).ready(function () {
+        initBtn();
+        formCheck();
+        getDoctor();
+    });
+    $('#searchBtn').click(function () {
+        getPatient();
+
+    });
+
+    $('#resetBtn').click(function reset() {
+
+        $('#searchForm')[0].reset();
+        $("#name").attr("value","");
+        $("#age").attr("value","");
+        $("#idcard").attr("value","");
+        $("#phonenumber").attr("value","");
+        $("#height").attr("value","");
+        $("#weight").attr("value","");
+        $("#location").attr("value","");
+        $("#departmentId").attr("value","");
+        $("#doctorId").attr("value","");
+        $("#chiefcomplaint").attr("value","");
+        $("#inpatientDiagnosis").attr("value","");
+        $("#remark").attr("value","");
+        changeSelectValue("sex",1);
+        changeSelectValue("is_married",1);
+        M.updateTextFields();//重新初始化页面上的内容
+
+    });
+
+
+
+    $("select[name='departmentId']").change(function () {
+        getDoctor()
+    })
+    var docSelect = $("#doctorId");
+
+    function getDoctor() {
+        departmentId = $("select[name='departmentId']").val();
+        $.getJSON(CTX + "/api/doctor/getDoctor.ahsj?departmentId=" + departmentId + "&token=" + TOKEN, function (result) {
+            docSelect.empty();
+            $(result).each(function (i) {
+                docSelect.append(
+                    "<option value='" + this.id + "'>" + this.name + "</option>")
+            })
+            docSelect.formSelect();
+        })
+    }
+
+    function getPatient() {
+        var medicalRecordId = $("#medicalRecordId").val();
+        if (!isNullOrEmpty(medicalRecordId)) {
+            //获取基本信息
+            $.ahsjajax(
+                CTX + "/api/patient/getPatient.ahsj",
+                {"medicalRecordId": medicalRecordId},
+                function (data) {
+                    if (!isNullOrEmpty(data)) {
+                        var departmentId = $("#departmentId");
+                        changeInputValue("name", data.name);
+                        changeInputValue("age", data.age);
+                        changeInputValue("idcard", data.idcard);
+                        changeInputValue("phonenumber", data.phonenumber);
+                        changeInputValue("height", data.height);
+                        changeInputValue("weight", data.weight);
+                        changeSelectValue("is_married", data.isMarried);
+                        changeSelectValue("sex", data.sex);
+                        changeInputValue("location", data.location);
+                        changeInputValue("chiefcomplaint", data.chiefcomplaint);
+                        changeInputValue("medicalRecordId", data.medicalRecordId);
+                        $("#medicalNumber").attr("value", $("#medicalRecordId").val());
+                        M.updateTextFields();//重新初始化页面上的内容
+                        return true;
+                    } else {
+                        dialog.warn(medicalRecordId + "号不存在！");
+                        return false;
+                    }
+                },
+                function () {
+                    Materialize.toast("网络异常");
+                    return false;
+                }
+            );
+        }
+    }
+
+    function fun() {//提交成功跳转
+        dialog.success("新增成功！")
+    }
+
+    function formCheck() {
+        $("#sendForm").validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 2
+                },
+                age: {
+                    required: true,
+                    number: true,
+                    minlength: 1
+                },
+                idcard: {
+                    required: true,
+                    minlength: 1
+                },
+                phonenumber: {
+                    required: true,
+                    number: true,
+                    minlength: 1
+                },
+                height: {
+                    required: true,
+                    number: true,
+                    minlength: 1
+                },
+                weight: {
+                    required: true,
+                    number: true,
+                    minlength: 1
+                },
+                outpatientDiagnosis: {
+                    required: true,
+                    minlength: 1
+                },
+                location: {
+                    required: true,
+                    minlength: 1
+                }
+            },
+            messages: {
+                name: {
+                    required: "请输入名称",
+                    minlength: "最少包含2个字符"
+                },
+                age: {
+                    required: "请输入年龄",
+                    minlength: "最少包含1个数字"
+                },
+                idcard: {
+                    required: "请输入身份证号",
+                    minlength: "最少包含1个字符"
+                },
+                phonenumber: {
+                    required: "请输入手机号",
+                    minlength: "最少包含1位数字"
+                },
+                height: {
+                    required: "请输入身高",
+                    minlength: "最少包含1个数字"
+                },
+                weight: {
+                    required: "请输入体重",
+                    minlength: "最少包含1个数字"
+                },
+                outpatientDiagnosis: {
+                    required: "请输入门诊诊断",
+                    minlength: "最少包含1个字符"
+                },
+                location: {
+                    required: "请输入地址",
+                    minlength: "最少包含1个字符"
+                }
+            },
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+                dialog.confirm('确定提交吗?', function (index, layero) {
+                    var send_form = $('#sendForm').serialize();
+                    $.ahsjajax(
+                        CTX + "/api/hosptalregist/toadd.ahsj?token=" + TOKEN,
+                        send_form,
+                        function (msg) {
+                            if (msg.success) {
+                                M.toast({html: msg.message});
+                                fun();
+                                $('#searchForm')[0].reset();
+                                // $('#sendForm')[0].reset();
+                                $("#name").attr("value","");
+                                $("#age").attr("value","");
+                                $("#idcard").attr("value","");
+                                $("#phonenumber").attr("value","");
+                                $("#height").attr("value","");
+                                $("#weight").attr("value","");
+                                $("#location").attr("value","");
+                                $("#is_married").attr("value","");
+                                $("#sex").attr("value","");
+                                $("#departmentId").attr("value","");
+                                $("#doctorId").attr("value","");
+                                $("#chiefcomplaint").attr("value","");
+                                $("#inpatientDiagnosis").attr("value","");
+                                $("#remark").attr("value","");
+                                M.updateTextFields();//重新初始化页面上的内容
+                                return true;
+                            } else {
+                                M.toast({html: msg.message});
+                                return false;
+                            }
+                        },
+                        function () {
+                            Materialize.toast("网络异常");
+                            return false;
+                        }
+                    );
+                });
+            }
+
+        });
+    }
+
+
+    function initBtn() {
+        //搜索按钮
+        $('#searchBtn').click(function () {
+            var reg1 = new RegExp(/^HM\d{13}$/);
+            var reg2 = new RegExp(/^hm\d{13}$/);
+            var reg3 = new RegExp(/^HHM\d{13}$/);
+            var medicalRecordId = $("#medicalRecordId").val();
+            if (!isNullOrEmpty(medicalRecordId)) {
+                if (reg1.test(medicalRecordId) ||
+                    reg2.test(medicalRecordId) ||
+                    reg3.test(medicalRecordId)) {
+                    getPatient();
+                } else {
+                    dialog.warn("所输入的数据不符合格式要求！请输入HM/HHM开头的编号")
+                }
+            }else {
+                dialog.warn("请输入就诊编号！")
+            }
+        });
+    }
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+</body>
+</html>

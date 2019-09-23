@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahsj.hiscore.dao.HisFirstCourseRecordMapper">
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisFirstCourseRecord">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="doctor_id" jdbcType="BIGINT" property="doctorId" />
+    <result column="is_first_aid" jdbcType="INTEGER" property="isFirstAid" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_user_id" jdbcType="BIGINT" property="updateUserId" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="case_characteristics" jdbcType="VARCHAR" property="caseCharacteristics" />
+    <result column="proposed_consultation" jdbcType="VARCHAR" property="proposedConsultation" />
+    <result column="medical_plan" jdbcType="VARCHAR" property="medicalPlan" />
+    <result column="record_id" jdbcType="BIGINT" property="recordId" />
+    <result column="hospital_manage_id" jdbcType="BIGINT" property="hospitalManageId" />
+    <result column="is_sign" jdbcType="INTEGER" property="isSign" />
+    <result column="is_supplement" jdbcType="INTEGER" property="isSupplement" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, doctor_id, is_first_aid, create_user_id, create_date, update_user_id, update_date, 
+    case_characteristics, proposed_consultation, medical_plan, record_id, hospital_manage_id, 
+    is_sign, is_supplement
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from his_first_course_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_first_course_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisFirstCourseRecord" useGeneratedKeys="true" keyProperty="id" >
+    insert into his_first_course_record (id, doctor_id, is_first_aid, 
+      create_user_id, create_date, update_user_id, 
+      update_date, case_characteristics, proposed_consultation, 
+      medical_plan, record_id, hospital_manage_id, 
+      is_sign, is_supplement)
+    values (#{id,jdbcType=BIGINT}, #{doctorId,jdbcType=BIGINT}, #{isFirstAid,jdbcType=INTEGER},
+      #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{caseCharacteristics,jdbcType=VARCHAR}, #{proposedConsultation,jdbcType=VARCHAR}, 
+      #{medicalPlan,jdbcType=VARCHAR}, #{recordId,jdbcType=BIGINT}, #{hospitalManageId,jdbcType=BIGINT}, 
+      #{isSign,jdbcType=INTEGER}, #{isSupplement,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisFirstCourseRecord">
+    insert into his_first_course_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="doctorId != null">
+        doctor_id,
+      </if>
+      <if test="isFirstAid != null">
+        is_first_aid,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateUserId != null">
+        update_user_id,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="caseCharacteristics != null">
+        case_characteristics,
+      </if>
+      <if test="proposedConsultation != null">
+        proposed_consultation,
+      </if>
+      <if test="medicalPlan != null">
+        medical_plan,
+      </if>
+      <if test="recordId != null">
+        record_id,
+      </if>
+      <if test="hospitalManageId != null">
+        hospital_manage_id,
+      </if>
+      <if test="isSign != null">
+        is_sign,
+      </if>
+      <if test="isSupplement != null">
+        is_supplement,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="doctorId != null">
+        #{doctorId,jdbcType=BIGINT},
+      </if>
+      <if test="isFirstAid != null">
+        #{isFirstAid,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="caseCharacteristics != null">
+        #{caseCharacteristics,jdbcType=VARCHAR},
+      </if>
+      <if test="proposedConsultation != null">
+        #{proposedConsultation,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalPlan != null">
+        #{medicalPlan,jdbcType=VARCHAR},
+      </if>
+      <if test="recordId != null">
+        #{recordId,jdbcType=BIGINT},
+      </if>
+      <if test="hospitalManageId != null">
+        #{hospitalManageId,jdbcType=BIGINT},
+      </if>
+      <if test="isSign != null">
+        #{isSign,jdbcType=INTEGER},
+      </if>
+      <if test="isSupplement != null">
+        #{isSupplement,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisFirstCourseRecord">
+    update his_first_course_record
+    <set>
+      <if test="doctorId != null">
+        doctor_id = #{doctorId,jdbcType=BIGINT},
+      </if>
+      <if test="isFirstAid != null">
+        is_first_aid = #{isFirstAid,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="caseCharacteristics != null">
+        case_characteristics = #{caseCharacteristics,jdbcType=VARCHAR},
+      </if>
+      <if test="proposedConsultation != null">
+        proposed_consultation = #{proposedConsultation,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalPlan != null">
+        medical_plan = #{medicalPlan,jdbcType=VARCHAR},
+      </if>
+      <if test="recordId != null">
+        record_id = #{recordId,jdbcType=BIGINT},
+      </if>
+      <if test="hospitalManageId != null">
+        hospital_manage_id = #{hospitalManageId,jdbcType=BIGINT},
+      </if>
+      <if test="isSign != null">
+        is_sign = #{isSign,jdbcType=INTEGER},
+      </if>
+      <if test="isSupplement != null">
+        is_supplement = #{isSupplement,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisFirstCourseRecord">
+    update his_first_course_record
+    set doctor_id = #{doctorId,jdbcType=BIGINT},
+      is_first_aid = #{isFirstAid,jdbcType=INTEGER},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      case_characteristics = #{caseCharacteristics,jdbcType=VARCHAR},
+      proposed_consultation = #{proposedConsultation,jdbcType=VARCHAR},
+      medical_plan = #{medicalPlan,jdbcType=VARCHAR},
+      record_id = #{recordId,jdbcType=BIGINT},
+      hospital_manage_id = #{hospitalManageId,jdbcType=BIGINT},
+      is_sign = #{isSign,jdbcType=INTEGER},
+      is_supplement = #{isSupplement,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!--自定义sql-->
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select a.*,b.user_name as recorderName
+from his_first_course_record as a
+left join `his-userinfo`.user_info as b on a.doctor_id = b.id
+where a.id = #{id,jdbcType=BIGINT}
+  </select>
+</mapper>

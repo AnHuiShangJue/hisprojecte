@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="description"
+          content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google. ">
+    <meta name="keywords"
+          content="materialize, admin template, dashboard template, flat admin template, responsive admin template,">
+    <title th:text="${title}"></title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Favicons-->
+    <link rel="icon" th:href="@{/accounts/assets/global/images/favicon/favicon-32x32.png}" sizes="32x32">
+    <!-- Favicons-->
+    <link rel="apple-touch-icon-precomposed" th:href="@{/accounts/assets/global/images/favicon/apple-touch-icon-152x152.png}">
+    <!-- For iPhone -->
+    <meta name="msapplication-TileColor" content="#00bcd4">
+    <meta name="msapplication-TileImage" content="/accounts/assets/global/images/favicon/mstile-144x144.png">
+
+    <!--<link rel="stylesheet" type="text/css" media="all" th:href="@{/accounts/assets/global/css/materialize.min.css}"/>-->
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/accounts/assets/global/css/materialize.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/accounts/assets/global/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/accounts/assets/global/css/page-center.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/accounts/assets/global/css/prism.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/accounts/assets/global/css/font-awesome.css}"/>
+    <link rel="stylesheet" type="text/css" media="all"
+          th:href="@{/accounts/assets/global/js/plugins/perfect-scrollbar/perfect-scrollbar.css}"/>
+    <!--Let browser know website is optimized for mobile-->
+    <!-- jQuery Library -->
+    <script type="text/javascript" th:src="@{/accounts/assets/global/js/jquery-1.11.2.min.js}"></script>
+    <script type="text/javascript" th:src="@{/accounts/assets/global/js/jquery.cookie.min.js}"></script>
+
+    <!--materialize js-->
+    <script type="text/javascript" th:src="@{/accounts/assets/global/js/materialize.js}"></script>
+    <!--define Formcheck-->
+    <script type="text/javascript" th:src="@{/accounts/assets/global/js/anhuishangjue.ajax.js}"></script>
+    <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
+
+
+</head>
+
+<body class="cyan">
+
+
+<!-- Start Page Loading -->
+<div id="loader-wrapper">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+</div>
+<!-- End Page Loading -->
+
+
+<div id="login-page" class="row">
+    <div class="col s12 z-depth-4 card-panel">
+        <form id="loginform" class="login-form">
+            <div class="row">
+                <div class="input-field col s12 center">
+                    <img th:src="@{/accounts/assets/global/images/login-logo.png}" alt=""
+                         class="circle responsive-img valign profile-image-login">
+                    <p class="center login-form-text" th:text="${title}"></p>
+                </div>
+            </div>
+            <div class="row margin">
+                <div class="input-field col s12">
+                    <i class="material-icons  prefix">account_circle</i>
+                    <input id="username" type="text">
+                    <label for="username" class="center-align">账 号</label>
+                </div>
+            </div>
+            <div class="row margin">
+                <div class="input-field col s12">
+                    <i class="material-icons  prefix">lock_outline</i>
+                    <input id="password" type="password">
+                    <label for="password">密 码</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <button type="button" id="btn_login" class="btn waves-effect waves-light col s12">登 录</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript">
+
+        function formcheck() {
+            var username = $('#username').val();
+            var password = $('#password').val();
+
+            if (username == "") {
+                Materialize.toast("请输入用户名!", 3000);
+
+                // Toast("请输入用户名!");
+                document.getElementById("username").focus();
+                return false;
+            }
+            if (password == "") {
+                Materialize.toast("请输入密码!", 3000);
+                // Toast("请输入密码!");
+                document.getElementById("password").focus();
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            initBtn();
+            // initListener();
+        });
+
+        function initBtn() {
+            //验证登录
+            $('#btn_login').click(function () {
+                if (formcheck()) {
+                    var username = $('#username').val();
+                    var password = $('#password').val();
+                    // if($('#remember-me').attr('checked')){
+                    //     remeberMe = true
+                    // }
+                    var user = {"username":username,"password":password,"grant_type":"password","scope":"select","client_id":"bd1c0a783ccdd1c9b9e4","client_secret":"1a9030fbca47a5b2c28e92f19050bb77824b5ad1"};
+                    console.log(user.username);
+                    console.log(user.password);
+                    $.ajax({
+                        type: "post",
+                        data: user,
+                        url: "/uaa/oauth/token",
+                        dataType: "json",
+                        success: function (msg) {
+                            if (msg.access_token != null) {
+                                console.log(msg);
+                                Materialize.toast("登录成功", 3000);
+                                $.cookie("Authorization",msg.access_token,{ expires: 7 });
+                                window.location.href = "/accounts/his/back/index/index.ahsj?token="+msg.access_token
+                                // window.location.href = "/accounts/his/back/index/index.ahsj"
+                            }
+                        },
+                        error: function (data) {
+                            if(data.responseJSON !=null){
+                                console.log(data);
+                                Materialize.toast("登陆失败!"+data.responseJSON.error_description);
+                            }else{
+                                Materialize.toast("网络异常");
+                            }
+                        }
+                    });
+                }
+            });
+
+        }
+    </script>
+</div>
+
+
+<!-- ================================================
+  Scripts
+  ================================================ -->
+
+
+<!--prism-->
+<script type="text/javascript" th:src="@{/accounts/assets/global/js/prism.js}"></script>
+<!--scrollbar-->
+<script type="text/javascript"
+        th:src="@{/accounts/assets/global/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js}"></script>
+<!--plugins.js - Some Specific JS codes for Plugin Settings-->
+<script type="text/javascript" th:src="@{/accounts/assets/global/js/plugins.js}"></script>
+
+
+</body>
+
+</html>

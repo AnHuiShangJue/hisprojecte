@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+<head>
+    <style>
+        .fontsize01 {
+            font-size: 14px;
+        }
+
+        .fontsize02 {
+            font-size: 12px;
+        }
+
+    </style>
+</head>
+<div th:replace="public/base_print :: html"></div>
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<div class="row">
+
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4">
+            <label class="black-text fontsize01">就诊编号</label></br>
+            <label class="black-text fontsize02">លេខទស្សនា</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text" th:text="${medicalNumber}"></label>
+        </div>
+        <input type="hidden" id="medicalNumber" th:value="${medicalNumber}">
+
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4">
+            <label class="black-text fontsize01">姓名</label></br>
+            <label class="black-text fontsize02">name</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text"><span id="patientName"></span></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4">
+            <label class="black-text fontsize01">身份证</label></br>
+            <label class="black-text fontsize02">id card</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text"><span id="idcard"></span></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4">
+            <label class="black-text fontsize01">手机号</label></br>
+            <label class="black-text fontsize02">Phone Number</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text"><span id="phonenumber"></span></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12">
+            <h6 class="black-text">用药明细</h6>
+            <label class="black-text fontsize02">ព័ត៌មានលម្អិតអំពីថ្នាំ</label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12">
+            <table id="table_id" style="font-size: 14px"></table>
+        </div>
+    </div>
+</div>
+
+<!-- ================================================
+Scripts
+================================================ -->
+<div th:replace="public/base_print_script :: html"></div>
+<script th:inline="javascript">
+    $(document).ready(function () {
+        printShow();
+        getDrug();
+    });
+    var medicalNumber = $("#medicalNumber").val();
+
+    function getDrug() {
+        $.ahsjajax(
+            CTX + "/api/returnDrug/userDrugDetails.ahsj",
+            {"medicalNumber": medicalNumber},
+            function (data) {
+                if (!isNullOrEmpty(data.id)) {
+                    $("#patientName").html(data.name);
+                    $("#phonenumber").html(data.phonenumber);
+                    $("#idcard").html(data.idcard);
+                    M.updateTextFields();
+                    return true;
+                } else {
+                    resetNumber();
+                    dialog.warn(medicalNumber + "不存在用药明细,请重新输入！")
+                    return false;
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }
+        );
+    };
+    function printShow() {
+        $.ahsjajax(
+            CTX + "/api/medicationDetails/PrintUseDrug.ahsj",
+            {"medicalNumber": medicalNumber},
+            function (data) {
+                if (!isNullOrEmpty(data)) {//有
+                    var trs = "<tr><td><h6 class='black-text'>名称(name)</h6></td><td><h6 class='black-text'>数目(number)</h6></td><td><h6 class='black-text'>单价(price)</h6></td><td><h6 class='black-text'>单项总价(តំលៃទំនិញតែមួយមុខ)</h6></td></tr>";
+                    $.each(data, function (index, item) {
+                        trs += "<tr><td><p class='black-text fontsize03'>" + item.drugsName + "(" + item.tdrugsName + ")" + "</p></td><td ><p class='black-text fontsize03'>" + item.count + "</p></td><td ><p class='black-text fontsize03'>" + item.salePrice + "</p></td><td ><p class='black-text fontsize03'>" + item.price + "</p></td></tr >";
+                    });
+                    $("#table_id").append(trs);
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }
+        );
+    }
+
+    function doOk() {
+        $('body  div div.row.valign-wrapper').printThis({
+            importCSS: true,
+            debug: true,
+            afterPrint: function () {
+                dialog.confirm('确定打印?', function (index, layero) {
+                });
+            }
+        });
+    }
+
+    $("input").change(function () {
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</body>
+
+</html>

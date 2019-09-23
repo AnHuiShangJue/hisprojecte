@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahsj.hiscore.dao.HisEnterConsumablesDetailsMapper">
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisEnterConsumablesDetails">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="consumables_id" jdbcType="BIGINT" property="consumablesId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="spec" jdbcType="VARCHAR" property="spec" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="enter_count" jdbcType="INTEGER" property="enterCount" />
+    <result column="surplus" jdbcType="INTEGER" property="surplus" />
+    <result column="validity_period" jdbcType="TIMESTAMP" property="validityPeriod" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_user_id" jdbcType="BIGINT" property="updateUserId" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, consumables_id, name, type, spec, price, enter_count, surplus,validity_period, create_user_id,
+    create_date, update_user_id, update_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from his_enter_consumables_details
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_enter_consumables_details
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisEnterConsumablesDetails">
+    insert into his_enter_consumables_details (id, consumables_id, name, 
+      type, spec, price, enter_count,surplus,
+      validity_period, create_user_id, create_date, 
+      update_user_id, update_date)
+    values (#{id,jdbcType=BIGINT}, #{consumablesId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{spec,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, #{enterCount,jdbcType=INTEGER},#{surplus,jdbcType=INTEGER},
+      #{validityPeriod,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisEnterConsumablesDetails">
+    insert into his_enter_consumables_details
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="consumablesId != null">
+        consumables_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="spec != null">
+        spec,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="enterCount != null">
+        enter_count,
+      </if>
+      <if test="surplus != null">
+        surplus,
+      </if>
+      <if test="validityPeriod != null">
+        validity_period,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateUserId != null">
+        update_user_id,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="consumablesId != null">
+        #{consumablesId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="spec != null">
+        #{spec,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="enterCount != null">
+        #{enterCount,jdbcType=INTEGER},
+      </if>
+      <if test="surplus != null">
+        #{surplus,jdbcType=INTEGER},
+      </if>
+      <if test="validityPeriod != null">
+        #{validityPeriod,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisEnterConsumablesDetails">
+    update his_enter_consumables_details
+    <set>
+      <if test="consumablesId != null">
+        consumables_id = #{consumablesId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="spec != null">
+        spec = #{spec,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="enterCount != null">
+        enter_count = #{enterCount,jdbcType=INTEGER},
+      </if>
+      <if test="surplus != null">
+        surplus = #{surplus,jdbcType=INTEGER},
+      </if>
+      <if test="validityPeriod != null">
+        validity_period = #{validityPeriod,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisEnterConsumablesDetails">
+    update his_enter_consumables_details
+    set consumables_id = #{consumablesId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      spec = #{spec,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      enter_count = #{enterCount,jdbcType=INTEGER},
+      surplus = #{surplus,jdbcType=INTEGER},
+      validity_period = #{validityPeriod,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--自定义sql-->
+
+  <select id="selectValidityPeriodById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select his_enter_consumables_details.validity_period
+    from his_enter_consumables_details
+    where his_enter_consumables_details.validity_period = #{validityPeriod,jdbcType=TIMESTAMP}
+  </select>
+
+
+  <select id="selectByConsumablesId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select his_enter_consumables_details.*
+    from his_enter_consumables_details
+    where his_enter_consumables_details.consumables_id = #{consumablesId,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectByConsumablesIdOrder" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select his_enter_consumables_details.*
+    from his_enter_consumables_details
+    where his_enter_consumables_details.consumables_id = #{consumablesId,jdbcType=BIGINT}
+    order by his_enter_consumables_details.validity_period asc
+  </select>
+
+  <select id="selectByConsumablesAndValidityPeriod" parameterType="com.ahsj.hiscore.entity.HisEnterConsumablesDetails" resultMap="BaseResultMap">
+    select his_enter_consumables_details.*
+    from his_enter_consumables_details
+    where his_enter_consumables_details.consumables_id = #{consumablesId,jdbcType=BIGINT}
+    and his_enter_consumables_details.validity_period = #{validityPeriod,jdbcType=TIMESTAMP}
+  </select>
+
+  <!--list查询-->
+  <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    SELECT
+    his_enter_consumables_details.*
+    FROM
+    his_enter_consumables_details
+    where
+    1= 1 and his_enter_consumables_details.validity_period &gt; CURRENT_DATE AND his_enter_consumables_details.surplus>0
+    <if test="parameter.name != null and parameter.name != ''">
+      and name like concat('%' #{parameter.name,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+
+  <select id="onelist" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    SELECT
+    his_enter_consumables_details.*
+    FROM
+    his_enter_consumables_details
+    where
+    his_enter_consumables_details.consumables_id= #{consumablesId,jdbcType=BIGINT} AND his_enter_consumables_details.surplus>0
+  </select>
+
+  <!--批量插入list-->
+  <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">
+    <selectKey resultType="long" keyProperty="id" order="AFTER">
+      SELECT
+      LAST_INSERT_ID()
+    </selectKey>
+    insert into his_enter_consumables_details (id, consumables_id, name,
+    type, spec, price, enter_count,surplus,
+    validity_period, create_user_id, create_date,
+    update_user_id, update_date)
+    values
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.id,jdbcType=BIGINT}, #{item.consumablesId,jdbcType=BIGINT}, #{item.name,jdbcType=VARCHAR},
+      #{item.type,jdbcType=INTEGER}, #{item.spec,jdbcType=VARCHAR}, #{item.price,jdbcType=DOUBLE}, #{item.enterCount,jdbcType=INTEGER},#{item.surplus,jdbcType=INTEGER},
+      #{item.validityPeriod,jdbcType=TIMESTAMP}, #{item.createUserId,jdbcType=BIGINT}, #{item.createDate,jdbcType=TIMESTAMP},
+      #{item.updateUserId,jdbcType=BIGINT}, #{item.updateDate,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+
+</mapper>

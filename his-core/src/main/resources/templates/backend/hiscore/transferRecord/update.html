@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<!-- Form with validation -->
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title">转入记录新增</h4>
+                <label style="color:black">Transfer record added</label>
+                <form class="col s12" id="sendForm" action="#">
+                    <input type="hidden" id="id" name="id" th:value="${hisTransferRecord.Id}"/>
+                    <input type="hidden" id="hosptalManageId" name="hosptalManageId" th:value="${hosptalManageId}"/>
+                    <input type="hidden" id="doctorId" name="doctorId" th:value="${doctorId}"/>
+                    <input type="hidden" id="departmentId" name="departmentId" th:value="${departmentId}"/>
+                    <div class="row">
+                        <div class="input-field col s2 l2 xl2">
+                            <input id="createTime" name="createTime" type="text" class="validate" th:value="${#dates.format(hospitalManage.createDate,'yyyy/MM/dd')}" readonly/>
+                            <label for="createTime">入院日期<span style="font-size: 12px">(Admission date)</span></label>
+                        </div>
+                        <div class="input-field col s2">
+                            <input type="text" id="transferDate" class="datepicker" name="transferDate"
+                                   th:placeholder="${#dates.format(hisTransferRecord.transferDate, 'yyyy/MM/dd')}" th:value="${#dates.format(hisTransferRecord.transferDate, 'yyyy/MM/dd')}"/>
+                            <label for="transferDate">转 入 日 期<span style="font-size: 12px">(Transfer date)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6 l6 xl6">
+                            <input id="admissionDiagnosis" name="admissionDiagnosis" type="text" th:value="${hospitalManage.inpatientDiagnosis}"/>
+                            <label for="admissionDiagnosis">入院诊断<span style="font-size: 12px">(Hospitalization diagnosis)</span></label>
+                        </div>
+                        <div class="input-field col s6 l6 xl6">
+                            <input id="transferDiagnosis" name="transferDiagnosis" type="text" th:value="${hisTransferRecord.transferDiagnosis}"/>
+                            <label for="transferDiagnosis">入科诊断<span style="font-size: 12px">(Admission diagnosis)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="admissionSituation" name="admissionSituation" type="text" th:value="${hisTransferRecord.admissionSituation}"/>
+                            <label for="admissionSituation">入院情况<span style="font-size: 12px">(Admission situation)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="medicalTreatment" name="medicalTreatment" type="text" th:value="${hisTransferRecord.medicalTreatment}"/>
+                            <label for="medicalTreatment">诊疗经过<span style="font-size: 12px">(Medical treatment)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="currentSituation" name="currentSituation" type="text" th:value="${hisTransferRecord.currentSituation}"/>
+                            <label for="currentSituation">目前情况<span style="font-size: 12px">(Current situation)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="treatmentPlan" name="treatmentPlan" type="text" th:value="${hisTransferRecord.treatmentPlan}"/>
+                            <label for="treatmentPlan">转入诊疗计划<span style="font-size: 12px">(Transfer to a treatment plan)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button id="send_btn" class="btn cyan waves-effect waves-light right" type="submit"
+                                    name="action">提 交
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+    $(function () {
+        formCheck();
+    });
+
+    function formCheck() {
+        $("#sendForm").validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 2
+                },
+                number: {
+                    required: true,
+                    minlength: 3
+                },
+                idCard: {
+                    required: true,
+                    minlength: 11
+                },
+            },
+            messages: {
+                name: {
+                    required: "请输入名称",
+                    minlength: "最少包含2个字符"
+                },
+                number: {
+                    required: "请输入工号",
+                    minlength: "最少输入3个字符"
+                },
+                idCard: {
+                    required: "请输入身份证号码",
+                    minlength: "最少输入11个字符"
+                }
+
+            },
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+                dialog.confirm('确定提交吗?', function (index, layero){
+                    var queryString = $('#sendForm').serialize();
+                    $.ahsjajax(
+                        CTX + "/api/transferRecord/InSaveOrUpdate.ahsj?token=" + TOKEN,
+                        queryString,
+                        function (msg) {
+                            if (msg.success) {
+                                M.toast({html: msg.message});
+                                parent.grid.search();
+                                dialog.parentclose();
+                                return false;
+                            } else {
+                                M.toast({html: msg.message});
+                                return false;
+                            }
+                        },
+                        function () {
+                            M.toast({html: "网络异常"});
+                            return false;
+                        }
+                    );});
+            }
+
+        });
+    }
+
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title">输血记录</h4><label style="color:black">Blood transfusion record
+
+            </label>
+                <form class="col s12" id="sendForm" action="#">
+                    <input type="hidden" id="id" name="id" th:value="${hisBloodTransfusionRecord.id}">
+                    <input type="hidden" id="recordId" name="recordId" th:value="${hisBloodTransfusionRecord.recordId}">
+                    <input type="hidden" id="doctorId" name="doctorId" th:value="${hisBloodTransfusionRecord.doctorId}">
+                    <input type="hidden" id="approveId" name="approveId"
+                           th:value="${hisBloodTransfusionRecord.approveId}">
+                    <input type="hidden" id="hospitalManageId" name="hospitalManageId"
+                           th:value="${hisBloodTransfusionRecord.hospitalManageId}">
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <select ahsj:select name="isAgree" id="isAgree" type="code" typeKey="is_agree"
+                                    th:value="${hisBloodTransfusionRecord.isAgree}" disabled="disabled">
+                            </select>
+                            <label for="isAgree">家属是否签署治疗知情同意书<span style="font-size: 12px">(Whether the family signed the informed consent form
+)</span></label>
+                        </div>
+                        <!--<div class="input-field col s4 l4 xl4">
+                            <select ahsj:select name="prescription" id="prescription" type="code" typeKey="prescription"
+                                    th:value="${hisBloodTransfusionRecord.prescription}" disabled="disabled">
+                            </select>
+                            <label for="prescription">批准人<span style="font-size: 12px">(ឱសថមានេវជ្ជប
+)</span></label>
+                        </div>-->
+                        <div class="input-field col s4 l4 xl4">
+                            <select ahsj:select name="isApprove" id="isApprove" type="code" typeKey="is_approve"
+                                    th:value="${hisBloodTransfusionRecord.isApprove}">
+                            </select>
+                            <label for="isApprove">负责人是否批准<span style="font-size: 12px">(Whether the person in charge approves)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4 ">
+                            <input id="purpose" name="purpose" type="text"
+                                   th:value="${hisBloodTransfusionRecord.purpose}"/>
+                            <label for="purpose">输血目的<span style="font-size: 12px">(Blood transfusion purpose
+)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="input-field col s4 l4 xl4">
+                            <select ahsj:select name="bloodVariety" id="bloodVariety" type="code"
+                                    typeKey="blood_variety"
+                                    th:value="${hisBloodTransfusionRecord.bloodVariety}">
+                            </select>
+                            <label for="bloodVariety">血液品种<span style="font-size: 12px">(Blood variety)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <select ahsj:select name="bloodType" id="bloodType" type="code" typeKey="blood_type"
+                                    th:value="${hisBloodTransfusionRecord.bloodType}">
+                            </select>
+                            <label for="isApprove">血液类型<span style="font-size: 12px">(Blood type)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="num" name="num" type="number"
+                                   th:value="${hisBloodTransfusionRecord.num}">
+                            <label for="num">血液数量/输血数量<span style="font-size: 12px">(Blood volume
+)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="indicationAssessment" name="indicationAssessment" type="text"
+                                   th:value="${hisBloodTransfusionRecord.indicationAssessment}"/>
+                            <label for="indicationAssessment">适应证评估<span
+                                    style="font-size: 12px">(Indication assessment)</span></label>
+                        </div>
+
+                        <div class="input-field col s4 l4 xl4">
+                            <select ahsj:select name="isBad" id="isBad" type="code" typeKey="is_bad"
+                                    th:value="${hisBloodTransfusionRecord.isBad}">
+                            </select>
+                            <label for="isBad">输血过程有无不良反应<span style="font-size: 12px">(Whether there is any adverse reaction in the blood transfusion process)</span></label>
+                        </div>
+                        <!--  <div class="input-field col s4 l4 xl4">
+                              <select ahsj:select name="isSign" id="isSign" type="code" typeKey="is_sign"
+                                      th:value="${hisBloodTransfusionRecord.isSign}">
+                              </select>
+                              <label for="isSign">经治医生是否签名<span style="font-size: 12px">(Whether the doctor  the signature)</span></label>
+                          </div>-->
+                        <div class="input-field col s12 x12 m12 l12 xl12">
+                                    <textarea type="text" id="adverseReactions" class="materialize-textarea"
+                                              name="adverseReactions"
+                                              th:text="${hisBloodTransfusionRecord.adverseReactions}"
+                                              data-length="255">
+                                    </textarea>
+                            <label for="adverseReactions">不良反应记录<span style="font-size: 12px">(Adverse reaction record
+
+)</span></label>
+                        </div>
+                        <div class="input-field col s12 x12 m12 l12 xl12">
+                                    <textarea type="text" id="evaluation" class="materialize-textarea"
+                                              name="evaluation"
+                                              th:text="${hisBloodTransfusionRecord.evaluation}"
+                                              data-length="255">
+                                    </textarea>
+                            <label for="evaluation">输血后疗效评价情况<span style="font-size: 12px">(Evaluation of efficacy after transfusion
+
+)</span></label>
+                        </div>
+                    </div>
+                    <div class="row" th:if="${flag}">
+                        <div class="input-field col s12">
+                            <button id="send_btn" class="btn cyan waves-effect waves-light right" type="submit"
+                                    name="action">提 交(submit
+                                )
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ================================================
+Scripts
+================================================ -->
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+    $(function () {
+        formCheck();
+
+    });
+
+    function formCheck() {
+        $("#sendForm").validate({
+            rules: {},
+            messages: {},
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+                dialog.confirm('确定提交吗?', function (index, layero) {
+                    var queryString = $('#sendForm').serialize();
+                    console.log("queryString is" + queryString);
+
+                    $.ahsjajax(
+                        CTX + "/api/bloodTransfusionRecord/saveOrUpdate.ahsj?token=" + TOKEN,
+                        queryString,
+                        function (msg) {
+                            if (msg.success) {
+                                M.toast({html: msg.message});
+                                parent.grid.search();
+                                dialog.parentclose();
+                                return false;
+                            } else {
+                                M.toast({html: msg.message});
+                                return false;
+                            }
+                        },
+                        function () {
+                            M.toast({html: "网络异常"});
+                            return false;
+                        }
+                    );
+                });
+            }
+        });
+    }
+
+    $("input").change(function () {
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</body>
+
+</html>

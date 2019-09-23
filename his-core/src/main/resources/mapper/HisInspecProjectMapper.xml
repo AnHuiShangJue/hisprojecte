@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisInspecProjectMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisInspecProject">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="create_user_id" property="createUserId" jdbcType="BIGINT"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="BIGINT"/>
+        <result column="order_num" property="orderNum" jdbcType="INTEGER"/>
+        <result column="project_id" property="projectId" jdbcType="BIGINT"/>
+        <result column="inspection_id" property="inspectionId" jdbcType="BIGINT"/>
+        <result column="num" property="num" jdbcType="INTEGER"/>
+        <result column="price_num" property="priceNum"/>
+        <result column="is_enable" property="isEnable"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, create_date, update_date, create_user_id, update_user_id, order_num, project_id,
+    inspection_id, num
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from his_inspec_project
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_inspec_project
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+    <delete id="deleteByInspectionId" parameterType="java.lang.Long">
+    delete from his_inspec_project
+    where inspection_id = #{inspectionId,jdbcType=BIGINT}
+  </delete>
+
+
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisInspecProject" useGeneratedKeys="true"
+            keyProperty="id">
+    insert into his_inspec_project (id, create_date, update_date, 
+      create_user_id, update_user_id, order_num,
+      project_id, inspection_id, num
+      )
+    values (#{id,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{createUserId,jdbcType=BIGINT}, #{updateUserId,jdbcType=BIGINT}, #{orderNum,jdbcType=INTEGER},
+      #{projectId,jdbcType=BIGINT}, #{inspectionId,jdbcType=BIGINT}, #{num,jdbcType=INTEGER}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisInspecProject">
+        insert into his_inspec_project
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="order != null">
+                order_num,
+            </if>
+            <if test="projectId != null">
+                project_id,
+            </if>
+            <if test="inspectionId != null">
+                inspection_id,
+            </if>
+            <if test="num != null">
+                num,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="order != null">
+                #{orderNum,jdbcType=INTEGER},
+            </if>
+            <if test="projectId != null">
+                #{projectId,jdbcType=BIGINT},
+            </if>
+            <if test="inspectionId != null">
+                #{inspectionId,jdbcType=BIGINT},
+            </if>
+            <if test="num != null">
+                #{num,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisInspecProject">
+        update his_inspec_project
+        <set>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="order != null">
+                order_num = #{orderNum,jdbcType=INTEGER},
+            </if>
+            <if test="projectId != null">
+                project_id = #{projectId,jdbcType=BIGINT},
+            </if>
+            <if test="inspectionId != null">
+                inspection_id = #{inspectionId,jdbcType=BIGINT},
+            </if>
+            <if test="num != null">
+                num = #{num,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisInspecProject">
+    update his_inspec_project
+    set create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      order_num = #{orderNum,jdbcType=INTEGER},
+      project_id = #{projectId,jdbcType=BIGINT},
+      inspection_id = #{inspectionId,jdbcType=BIGINT},
+      num = #{num,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <!--自定义SQL -->
+
+    <select id="selectInspecProjectByCombinationId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from his_inspec_project
+        where inspection_id = #{inspection_id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByInspectionIds" parameterType="com.ahsj.hiscore.entity.HisInspecProject">
+    delete from his_inspec_project
+    where project_id = #{projectId,jdbcType=BIGINT} and  inspection_id = #{inspectionId,jdbcType=BIGINT}
+  </delete>
+
+    <select id="queryCombinationByProjectAndInspectionId" resultMap="BaseResultMap"
+            parameterType="com.ahsj.hiscore.entity.HisInspecProject">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from his_inspec_project hip WHERE hip.project_id = #{ projectId,jdbcType=BIGINT} and hip.inspection_id =
+        #{inspectionId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByHisInspecProjectInspectionId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+						  SELECT  hip.num , hp.price as price_num  from  his_inspec_project hip left join his_project hp  on  hip.project_id = hp.id
+						   WHERE   hip.inspection_id = #{inspectionId,jdbcType=BIGINT}
+  </select>
+
+    <select id="queryByProjectId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select hip.* , p.is_enable as is_enable  from his_inspec_project hip LEFT join  his_project p on p.id = hip.project_id  where hip.project_id = #{projectId,jdbcType=BIGINT}
+    </select>
+
+
+    <select id="queryByInspectionId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select hip.* , p.is_enable as is_enable  from his_inspec_project hip LEFT join  his_project p on p.id = hip.project_id  where  hip.inspection_id = #{inspectionId,jdbcType=BIGINT}
+    </select>
+
+</mapper>

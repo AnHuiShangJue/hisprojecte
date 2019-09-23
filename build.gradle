@@ -1,0 +1,89 @@
+buildscript {
+    ext.kotlin_version = '1.3.21'
+    ext {
+        springBootVersion = '2.0.4.RELEASE'
+        springCloudVersion = 'Finchley.SR1'
+    }
+    repositories {
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'se.transmode.gradle:gradle-docker:1.2'
+    }
+}
+apply plugin: 'kotlin'
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'docker'
+    apply plugin: 'org.jetbrains.kotlin.jvm'
+    group = 'com.anhuishangjue'
+    version = 'latest'
+    sourceCompatibility = 1.8
+
+  
+    repositories {
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        mavenCentral()
+    }
+
+    dependencies {
+        compile files("../libs/springcloud-core.jar")
+        testCompile('org.springframework.boot:spring-boot-starter-test')
+        //所有项目都引入lomobok
+        compileOnly ('org.projectlombok:lombok:1.18.2')
+        //kotlin所需要的文件
+        compile("org.jetbrains.kotlin:kotlin-reflect")
+        compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+        compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.5"
+        implementation 'se.transmode.gradle:gradle-docker:1.2'
+      // https://mvnrepository.com/artifact/com.bmuschko/gradle-docker-plugin
+        compile group: 'com.bmuschko', name: 'gradle-docker-plugin', version: '3.6.1'
+        //mybatis数据库逆向工程
+      // implementation "org.mybatis.generator:mybatis-generator-core:1.3.2"
+        
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+    // tag::task[]
+    task buildDocker(type: Docker, dependsOn: build) {
+        push = true
+        applicationName = jar.baseName
+        dockerfile = file('src/main/docker/Dockerfile')
+        doFirst {
+            copy {
+                from jar
+                into stageDir
+            }
+        }
+    }
+// end::task[]
+}
+repositories {
+    mavenCentral()
+}
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+}
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+

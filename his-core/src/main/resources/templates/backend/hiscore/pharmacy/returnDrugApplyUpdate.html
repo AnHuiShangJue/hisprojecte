@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title"></h4>
+                <form class="col s12" id="sendForm" action="#">
+                    <input type="hidden" id="id" name="id" th:value="${hisApplicationForDrugReturn.id}">
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="voucher" name="voucher" type="text"
+                                   th:value="${hisApplicationForDrugReturn.voucher}"
+                                   th:readonly="true">
+                            <label for="voucher">申请凭证<span style="font-size: 12px">(Application certificate
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="recordNumber" name="recordNumber" type="text"
+                                   th:value="${hisApplicationForDrugReturn.recordNumber}"
+                                   th:readonly="true"/>
+                            <label for="recordNumber">对应处方编号</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="patientName" name="patientName" type="text"
+                                   th:value="${hisApplicationForDrugReturn.patientName}"
+                                   data-error=".errorTxt1"/>
+                            <div class="errorTxt1"></div>
+                            <label for="patientName">申请退药人姓名</label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="phonenumber" name="phonenumber" type="text"
+                                   th:value="${hisApplicationForDrugReturn.phonenumber}"/>
+                            <label for="phonenumber">退药人手机号<span style="font-size: 12px">(Drug withdrawal mobile phone number
+)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="idcard" name="idcard" type="text"
+                                   th:value="${hisApplicationForDrugReturn.idcard}"
+                                   data-error=".errorTxt2"/>
+                            <div class="errorTxt2"></div>
+                            <label for="idcard">退药人身份证</label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="createDate"  class="datepicker" name="createDate" type="text"
+                                   th:placeholder="${#dates.format(hisApplicationForDrugReturn.createDate, 'yyyy/MM/dd')}" th:value="${#dates.format(hisApplicationForDrugReturn.createDate, 'yyyy/MM/dd')}"
+                                 />
+                            <label for="createDate">申请日期</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field cols12 x12 l12 xl12">
+                            <input id="reason" name="reason" type="text"
+                                   th:value="${hisApplicationForDrugReturn.reason}"/>
+                            <label for="reason">退药原因<span style="font-size: 12px">(reasonនៃការដកប្រាក់
+)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 x12 l12 xl12">
+                            <input id="remarks" name="remarks" type="text"
+                                   th:value="${hisApplicationForDrugReturn.remarks}"/>
+                            <label for="remarks">备注<span style="font-size: 12px">(remark)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button id="send_btn" class="btn cyan waves-effect waves-light right" type="submit"
+                                    name="action">提 交(submit
+                                )
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ================================================
+Scripts
+================================================ -->
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+    $(function () {
+        formCheck();
+
+    });
+
+    function formCheck() {
+        $("#sendForm").validate({
+            rules: {
+                patientName: {
+                    required: true,
+                    minlength: 1
+                },
+                idcard: {
+                    required: true,
+                    minlength: 1
+
+                },
+            },
+            messages: {
+                patientName: {
+                    required: "请输入申请退药人姓名",
+                    minlength: "最少输入1个字符"
+                },
+                idcard: {
+                    required: "请输入退药人身份证",
+                    minlength: "请至少输入1个字符"
+                },
+            },
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+                dialog.confirm('确定提交吗?', function (index, layero){
+                var queryString = $('#sendForm').serialize();
+                console.log("queryString is" + queryString);
+
+                $.ahsjajax(
+                    CTX + "/api/returnDrug/update.ahsj?token=" + TOKEN,
+                    queryString,
+                    function (msg) {
+                        if (msg.success) {
+                            M.toast({html: msg.message});
+                            parent.grid.search();
+                            dialog.parentclose();
+                            return false;
+                        } else {
+                            M.toast({html: msg.message});
+                            return false;
+                        }
+                    },
+                    function () {
+                        M.toast({html: "网络异常"});
+                        return false;
+                    }
+                );});
+            }
+        });
+    }
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+<div th:replace="public/base_list :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<div class="row">
+    <div class="breadcrumbs-inline pt-3 pb-1" id="breadcrumbs-wrapper">
+        <!-- Search for small screen-->
+        <div class="container">
+            <div class="row">
+                <div class="col s10 m6 l6 breadcrumbs-left">
+                    <h5 class="breadcrumbs-title mt-0 mb-0 display-inline hide-on-small-and-down">DataTable</h5>
+                    <ol class="breadcrumbs mb-0">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#">Table</a>
+                        </li>
+                        <li class="breadcrumb-item active">DataTable
+                        </li>
+                    </ol>
+                </div>
+                <div class="col s2 m6 l6"><a
+                        class="btn btn-floating dropdown-settings waves-effect waves-light breadcrumbs-btn right"
+                        href="#!" data-target="dropdown1"><i class="material-icons">expand_more </i><i
+                        class="material-icons right">arrow_drop_down</i></a>
+                    <ul class="dropdown-content" id="dropdown1" tabindex="0">
+                        <li tabindex="0"><a class="grey-text text-darken-2"
+                                            href="user-profile-page.html">Profile<span
+                                class="new badge red">2</span></a></li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="app-contacts.html">Contacts</a>
+                        </li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="page-faq.html">FAQ</a></li>
+                        <li class="divider" tabindex="-1"></li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="user-login.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 xl12 m12 l12 ">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 x12 l12 xl12">
+                    <div class="card">
+                        <div class="card-content">
+                            <h4 class="card-title">操作台
+                            </h4><label style="color:black">Console</label>
+                            <div class="row" th:if="${isDischarged} eq 1">
+                                <div class="input-field col s4 l4 xl4 m4">
+                                    <select ahsj:select name="medicalOrderType" id="medicalOrderType" type="code" typeKey="medical_order_detail_type">
+                                    </select>
+                                    <label for="medicalOrderType">选择医嘱类型<span style="font-size: 12px">(Select medical order type)</span></label>
+                                </div>
+                                <div class="col s2 m2 l2 xl2 ">
+                                    <!--<a id="printBtn" class="btn waves-effect waves-light red"><i
+                                            class="material-icons  white-text tooltipped " data-position="bottom"
+                                            data-delay="50" data-tooltip="打印（Add medical advice）">print</i></a>-->
+                                    <a id="createBtn" class="btn waves-effect waves-light red"><i
+                                            class="material-icons  white-text tooltipped " data-position="bottom"
+                                            data-delay="50" data-tooltip="新增医嘱（Add medical advice）">add</i></a>
+                                    <a id="deleteManyBtn"
+                                       class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
+                                            class="material-icons white-text tooltipped" data-position="bottom"
+                                            data-delay="50" data-tooltip="批量删除（batch deletion）">delete</i></a>
+                                </div>
+                                <div class="input-field col s4 l4 xl4">
+                                    <select id="chooseTemplate" name="chooseTemplate">
+                                        <option th:value="0">请选择模板（Please select a template）</option>
+                                    </select>
+                                    <label for="chooseTemplate">选择模板（Select template）</label>
+                                </div>
+                                <div class="col s2 m2 l2 xl2 ">
+                                    <a id="visitTemplateBtn" class="btn waves-effect waves-light "><i
+                                            class="material-icons  white-text tooltipped " data-position="bottom"
+                                            data-delay="50" data-tooltip="查看模板明细（View template details）">visibility</i></a>
+                                    <a id="selectTemplateBtn"
+                                       class="btn waves-effect waves-light  offset-s1 offset-l1 offset-xl1 offset-m1"><i
+                                            class="material-icons white-text tooltipped" data-position="bottom"
+                                            data-delay="50" data-tooltip="选择模板（Select template）">local_hospital</i></a>
+                                    <!--<a id="addMedicine"
+                                       class="btn waves-effect waves-light  offset-s1 offset-l1 offset-xl1 offset-m1"><i
+                                            class="material-icons white-text tooltipped" data-position="bottom"
+                                            data-delay="50" data-tooltip="添加药品医嘱(Add a drug order)">local_hospital</i></a>
+                                    <a id="addProject"
+                                       class="btn waves-effect waves-light  offset-s1 offset-l1 offset-xl1 offset-m1"><i
+                                            class="material-icons white-text tooltipped" data-position="bottom"
+                                            data-delay="50" data-tooltip="添加项目医嘱(Add project order)">local_hospital</i></a>-->
+                                </div>
+                            </div>
+                            <!--Form Advance-->
+                            <div class="row">
+                                <div id="refreshtable" class="col l12 m12 l12 xl12">
+                                    <table id="data-table-simple" class="display">
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--医嘱编号-->
+<div>
+    <input id="number" type="hidden" th:value="${number}"/>
+    <input id="hosptalregistNumber" type="hidden" th:value="${hosptalregistNumber}"/>
+</div>
+<div th:replace="public/base_list_script :: html"></div>
+
+
+<script type="text/javascript">
+    var grid = new Datatable();
+    $(document).ready(function () {
+        //医嘱
+        var medicalOrderSelect  = $("#chooseTemplate");
+        $.getJSON(CTX+"/api/medicalOrderTemplate/getTemplate.ahsj?&token="+TOKEN, function (result){
+            $(result).each(function (i) {
+                medicalOrderSelect.append("<option value='" + this.templateNumber + "'>" + this.templateName + "</option>")
+            });
+            medicalOrderSelect.formSelect();
+        });
+        initBtn();
+        initTable();
+    });
+
+    function initTable() {
+        grid.init({
+            src: $("#data-table-simple"),
+            onSuccess: function (grid) {
+            },
+            onError: function (grid) {
+            },
+            onDataLoad: function (grid) {
+
+            },
+            loadingMessage: 'Loading...',
+            dataTable: {
+                "ajax": {
+                    "url": CTX+"/api/medicalOrderDetail/listDetailByNumber.ahsj?token="+TOKEN + "&number=" + $("#number").val(), // ajax source
+                },
+                "columns": [
+                    {
+                        "title": "<label><input type=\"checkbox\"  id=\"checkAll\" class=\"select-all\" > <span></span></label> ",
+                        "render": function (data, type, row, meta) {
+                            return " <label> <input type=\"checkbox\" value=\"" + row.id + "\"> <span></span> </label>";
+                        },
+                        "width": "18px",
+                        "className": "centered"
+                    },
+                    /* {
+                          "title": "医嘱编号",
+                          "data": "number",
+                          "name": "number"
+                      },*/ {
+                        "title": "医嘱名称/医嘱内容",
+                        "data": "name",
+                        "name": "name"
+                    },
+                    {
+                        "title": "操作序号",
+                        "data": "orderNum",
+                        "name": "order_num"
+                    },
+                  {
+                        "title": "是否皮试",
+                        "data": "isSkinTestName",
+                        "name": "is_skin_test"
+                    },
+                    {
+                        "title": "医嘱开始时间",
+                        "data": "startTime",
+                        "name": "start_time"
+                    },
+                    /* {
+                         "title": "单位",
+                         "data": "unit",
+                         "name": "unit"
+                     },*/
+                    {
+                        "title": "用法",
+                        "data": "usages",
+                        "name": "usages"
+                    },
+                    /*{
+                        "title": "用量",
+                        "data": "dosage",
+                        "name": "dosage"
+                    },*/
+                    {
+                        "title": "间隔",
+                        "data": "intervalsName",
+                        "name": "intervals"
+                    },
+                    {
+                        "title": "总量",
+                        "data": "totalAmount",
+                        "name": "total_amount"
+                    },
+
+                    {
+                        "title": "校对护士姓名",
+                        "data": "pnName",
+                        "name": ""
+                    },
+
+                    {
+                        "title": "核准护士姓名",
+                        "data": "anName",
+                        "name": ""
+                    },
+                    {
+                        "title": "操作",
+                        "width": "240px",
+                        "className": "centered",
+                        "orderable": false,
+                        "render": function (data, type, row) {
+                            var rtnBtn = "";
+                            //如果获取字符串，必须在参数外反转"
+                            if([[${isDischarged}]] ==1) {
+                                rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='edit(" + row.id + ",\"" + row.number + "\");'> <i class='material-icons'>edit</i></a>" +
+                                    // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"校对\" onclick=\"proofreading(" + row.id + ",'" + row.number + "');\"> <i class='material-icons'>playlist_add_check</i></a>" +
+                                    // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"核准\" onclick=\"isApproved(" + row.id + ",'" + row.number + "');\"> <i class='material-icons'>done</i></a>" +
+                                    "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick='deleteInit(" + row.id + ");'> <i class='material-icons'>delete</i></a>";
+                                    // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"停嘱（Stop）\" onclick='stop(" + row.id + ");'> <i class='material-icons'>do_not_disturb</i></a>";
+
+                                // 返回自定义内容
+                            }
+                            return rtnBtn;
+                        }
+                    }
+                ],
+                "order": [
+                    [2, 'asc']
+                ],
+            }
+        });
+
+    }
+
+
+
+    function edit(id,number) {
+        var url = CTX+ "/api/medicalOrderDetail/updateTemporary/index.ahsj?token="+TOKEN+"&id="+id + "&number=" + number;
+        dialog.show(url, "医嘱信息管理");
+    }
+
+
+
+
+    function deleteInit(id) {
+        dialog.confirm('确定删除?', function (index, layero) {
+            $.ahsjajax(CTX + "/api/medicalOrderDetail/delete.ahsj",
+                {"ids": id},
+                function (msg) {
+                    if (msg.success) {
+                        swal.close();
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                        grid.search();
+                    } else {
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                    }
+                },
+                function (data) {
+                    M.toast({
+                        html: "网络异常", completeCallback: function () {
+                        }
+                    });
+                }
+            );
+        });
+    }
+
+
+
+    //医嘱开药   用药医嘱
+    function addMedicine(id,medicalOrderNumber) {
+        $.ahsjajax(CTX + "/api/medicalOrderDetail/addMedicine.ahsj",
+            {"ids": id,"medicalOrderNumber":medicalOrderNumber},
+            function (msg) {
+
+                if (msg.success) {
+                    M.toast({
+                        html: msg.message, completeCallback: function () {
+                        }
+                    });
+                    grid.search();
+                } else {
+                    M.toast({
+                        html: msg.message, completeCallback: function () {
+                        }
+                    });
+                }
+            },
+            function (data) {
+                M.toast({
+                    html: "网络异常", completeCallback: function () {
+                    }
+                });
+            }
+        );
+    }
+
+    //医嘱开项目  项目医嘱 id:项目表ID，number:项目表编号 medicalOrderNumber：医嘱编号
+    function addProject(id,medicalOrderNumber) {
+        $.ahsjajax(CTX + "/api/medicalOrderDetail/addProject.ahsj",
+            {"ids": id,"medicalOrderNumber":medicalOrderNumber},
+            function (msg) {
+
+                if (msg.success) {
+                    M.toast({
+                        html: msg.message, completeCallback: function () {
+                        }
+                    });
+                    grid.search();
+                } else {
+                    M.toast({
+                        html: msg.message, completeCallback: function () {
+                        }
+                    });
+                }
+            },
+            function (data) {
+                M.toast({
+                    html: "网络异常", completeCallback: function () {
+                    }
+                });
+            }
+        );
+    }
+
+
+
+    function initBtn() {
+        //新增药品医嘱
+        $("#addMedicine").click(function () {
+            var url = CTX + "/api/pharmacy/listForMedication/index.ahsj?token=" + TOKEN+"&medicalOrderNumber="+$("#number").val();
+            dialog.show(url, "添加医嘱用药（Add medical order medication）")
+        });
+
+        //新增项目医嘱
+        $("#addProject").click(function () {
+            var url = CTX + "/api/treatmentplan/project/index.ahsj?token=" + TOKEN+"&medicalOrderNumber="+$("#number").val();
+            dialog.show(url, "通过医嘱添加项目（Add items by doctor's advice）")
+        });
+
+        // 查看模板明细
+        $("#visitTemplateBtn").click(function () {
+            var templateNumber = $("#chooseTemplate").val();
+            if(templateNumber == 0)
+                dialog.warn("请先选择一条模板");
+            else {
+                var url = CTX + "/api/medicalOrderTemplateDetail/list/index.ahsj?token=" + TOKEN + "&templateNumber=" + templateNumber;
+                dialog.show(url, "医嘱模板明细查看");
+            }
+        });
+        // 选择模板
+        $("#selectTemplateBtn").click(function () {
+            var templateNumber = $("#chooseTemplate").val();
+            var number =$("#number").val();
+            if(templateNumber == 0)
+                dialog.warn("请先选择一条模板");
+            else {
+                dialog.confirm('确定添加该模板?', function (index, layero) {
+
+                    $.ahsjajax(CTX + "/api/medicalOrderDetail/addTemplate.ahsj?=" + TOKEN,
+                        {
+                            "templateNumber": templateNumber,
+                            "number": number
+                            // "name":name
+                        },
+                        function (msg) {
+                            if (msg.success) {
+                                M.toast({
+                                    html: msg.message, completeCallback: function () {
+                                    }
+                                });
+                                grid.search();
+                            } else {
+                                M.toast({
+                                    html: msg.message, completeCallback: function () {
+                                    }
+                                });
+                            }
+                        },
+                        function (data) {
+                            M.toast({
+                                html: "网络异常", completeCallback: function () {
+                                }
+                            });
+                        });
+                });
+            }
+        });
+        //新增按钮
+        $("#createBtn").click(function () {
+            var url = CTX +"/api/medicalOrderDetail/update/index.ahsj?token="+TOKEN + "&number=" +$("#number").val()+"&medicalOrderType="+$("#medicalOrderType").val();
+            dialog.show(url, "添加新医嘱（Add a new order）")
+        });
+        $("#deleteManyBtn").click(function () {
+            var ids = grid.getSelectedRows();
+            if (ids.length == 0) {
+                dialog.warn("请至少选择一条数据");
+                return;
+            }
+            deleteInit(ids.join(','));
+            grid.search();
+        });
+        //搜索按钮
+        $('#searchBtn').click(function () {
+            grid.search();
+        });
+        $('#resetBtn').click(function () {
+            grid.reset();
+        });
+    }
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+
+</script>
+</body>
+</html>
+

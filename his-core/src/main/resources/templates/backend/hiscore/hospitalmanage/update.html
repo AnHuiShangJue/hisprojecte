@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+<!-- Form with validation -->
+<div class="row">
+    <div class="col s12 m12 l12 xl12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title">住院信息审核</h4>
+                <form class="col s12" id="sendForm" action="#">
+                    <input type="hidden" id="id" name="id" th:value="${hisHospitalManage.id}"/>
+                    <input type="hidden" id="id1" name="patientId" th:value="${hisPatientInfo.id}"/>
+                    <input type="hidden" id="id3" name="hosptalRegistId" th:value="${hisHospitalManage.ids}"/>
+                    <input type="hidden" id="id4" name="medicalNumber" th:value="${hisHosptalregist.medicalNumber}"/>
+                        <div class="input-field col s3 l3 xl3">
+                            <input id="name" name="patientName" type="text" th:value="${hisPatientInfo.name}"
+                                   th:readonly="true"/>
+                            <label for="name">姓 名</label>
+                        </div>
+                        <div class="input-field col s3 l3 xl3">
+                            <input id="age" name="age" type="number" th:value="${hisPatientInfo.age}"
+                                   th:readonly="true"/>
+                            <label for="age">年 龄</label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input  name="sexName" id="sex" type="text" typeKey="sex"
+                                    th:value="${hisPatientInfo.sexName}"
+                                    th:readonly="true"/>
+                            <label for="sex">性别</label>
+                        </div>
+                        <div class="input-field col s5 l5 xl5">
+                            <input id="idcard" name="idcard" type="text" th:value="${hisPatientInfo.idcard}"
+                                   th:readonly="true"/>
+                            <label for="idcard">身份证号</label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="phoneNumber" name="phoneNumber" type="text" th:value="${hisPatientInfo.phonenumber}"
+                                   th:readonly="true"/>
+                            <label for="phoneNumber">手机号</label>
+                        </div>
+                         <div class="input-field col s4 l4 xl4">
+                            <input id="number" name="number" type="text" th:value="${hisHosptalregist.number}"
+                               th:readonly="true"/>
+                            <label for="number">住院编号</label>
+                         </div>
+                         <div class="col input-field s3 m3 l3">
+                             <select ahsj:select name="departmentId" id="departmentId" type="depart" typeKey="2"
+                                     departKbn="1" th:value="${hisHosptalregist.departmentId}">
+                             </select> <!--departKbn="1"  1是医疗 2是非医疗 -->   <!--typeKey="2"   1是部门 2是科室-->
+                        <label for="departmentId">科 室</label>
+                         </div>
+                        <div class="col input-field s3 m3 l3">
+                            <select id="doctorId" name="doctorId" class="js-data-example-ajax" th:value="${hisHosptalregist.doctorId}">
+                            </select>
+                            <label>医 生</label>
+                        </div>
+                    <div class="col input-field s3 m3 l3">
+                        <select ahsj:select name="careLevel" id="careLevel" type="code" typeKey="care_level" th:value="${hisHosptalregist.careLevel}">
+                        </select>
+                        <label for="careLevel">护理级别</label>
+                    </div>
+                     <div class="input-field col s4 l4 xl4">
+                        <select   name="nurseId" id="nurseId">
+                            <option th:value="0">选择护士</option>
+                        </select>
+                            <label for="nurseId">护士</label>
+                     </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <select   name="wardId" id="wardId">
+                                <option th:value="0">选择病房</option>
+                            </select>
+                            <label for="wardId">病房编号</label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <select   name="bedId" id="bedId"
+                                      data-error=".errorTxt4">
+                                <div class="errorTxt4"></div>
+                                <option th:value="0"> 选择病床 </option>
+                            </select>
+                            <label for="bedId">病床编号</label>
+                        </div>
+                    <div class="input-field col s4 l4 xl4">
+                        <input id="diseaseRegion" name="diseaseRegion" type="text" th:value="${hisHospitalManage.diseaseRegion}"/>
+                        <label for="diseaseRegion">病区<span style="font-size: 12px">(disease Region
+
+)</span></label>
+                    </div>
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="outpatientDiagnosis" name="outpatientDiagnosis" type="text" th:value="${hisHosptalregist.outpatientDiagnosis}"/>
+                            <label for="outpatientDiagnosis">门诊诊断</label>
+                        </div>
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="inpatientDiagnosis" name="inpatientDiagnosis" type="text" th:value="${hisHosptalregist.inpatientDiagnosis}"/>
+                            <label for="inpatientDiagnosis">住院诊断</label>
+                        </div>
+                        <div class="input-field col s12 l12 xl12">
+                        <input id="remarks" name="remarks" type="text" th:value="${hisHosptalregist.remark}"/>
+                        <label for="remarks">备 注</label>
+                        </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <a id="failBtn"
+                               class="waves-effect waves dark btn btn-primary next-step">审 核 不 通 过
+                                <i class="material-icons white-text tooltipped" data-position="bottom"
+                                   data-delay="50"
+                                   data-tooltip="">clear</i>
+                            </a>
+                            <button id="send_btn" class="btn cyan waves-effect waves-light right" type="submit"
+                                    name="action">审 核 通 过
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ================================================
+Scripts
+================================================ -->
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+
+    $(document).ready(function () {
+        initBtn();
+    });
+
+    $("select[name='departmentId']").change(function () {
+        getDoctor()
+    })
+
+    $(document).ready(function() {
+        getDoctor()
+        //病房
+        var nurIdSelect  = $("#nurseId");
+        $.getJSON(CTX+"/api/nurse/getNurse.ahsj?&token="+TOKEN, function (result){
+            $(result).each(function (i) {
+                nurIdSelect.append("<option value='" + this.userId + "'>" + this.name + "</option>")
+            })
+            nurIdSelect.formSelect();
+        })
+    })
+    $(document).ready(function () {
+        getDoctor()
+        //病房
+        var wardIdSelect = $("#wardId");
+        $.getJSON(CTX + "/api/hosptalregist/getHisWard.ahsj?&token=" + TOKEN, function (result) {
+            $(result).each(function (i) {
+                wardIdSelect.append("<option value='" + this.id + "'>" + this.number + "</option>")
+            })
+            wardIdSelect.formSelect();
+        })
+    })
+    var docSelect = $("#doctorId");
+
+    function getDoctor() {
+        departmentId = $("select[name='departmentId']").val();
+        $.getJSON(CTX + "/api/doctor/getDoctor.ahsj?departmentId=" + departmentId + "&token=" + TOKEN, function (result) {
+            docSelect.empty();
+            $(result).each(function (i) {
+                docSelect.append(
+                    "<option value='" + this.id + "'>" + this.name + "</option>")
+            })
+            docSelect.formSelect();
+        })
+    }
+
+    var doctorId = docSelect.val();
+    var wardSel = $("#wardId");
+    var bedIdSelect = $("#bedId");
+    wardSel.change(function () {
+        if (wardSel.val() == 0) {
+            bedIdSelect.empty();
+            bedIdSelect.append(" <option value='0'>选择病床</option>");
+            bedIdSelect.formSelect();
+        }
+        //病床
+        else {
+            getBed();
+        }
+    });
+    function getBed() {
+        var wardNumber = $("#wardId").find("option:selected").text();
+        $.getJSON(CTX + "/api/hisbeds/getBed.ahsj?wardNumber=" + wardNumber + "&token=" + TOKEN, function (result) {
+            bedIdSelect.empty();
+            $(result).each(function (i) {
+                bedIdSelect.append(
+                    "<option value='" + this.id + "'>" + this.number + "</option>")
+            });
+            bedIdSelect.formSelect();
+        })
+    }
+
+
+
+    $(function () {
+        formCheck();
+    });
+
+    function formCheck() {
+        $("#sendForm").validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 2
+                },
+                phonenumber: {
+                    required: true,
+                    minlength: 1
+                },
+                idcard: {
+                    required: true,
+                    minlength: 1
+                },
+                bedId: {
+                    required: true,
+                    minlength: 1
+                }
+
+
+            },
+            messages: {
+                name: {
+                    required: "请输入名称",
+                    minlength: "最少包含2个字符"
+                },
+                phonenumber: {
+                    required: "请输入手机号",
+                    minlength: "最少输入1个字符"
+                },
+                idcard: {
+                    required: "请输入身份证号码",
+                    minlength: "最少输入1个字符"
+                },
+                bedId: {
+                    required: "请选择病房",
+                    minlength: "最少选择一个病床"
+                }
+
+            },
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+                var bedIds = $("#bedId").val();
+                console.log("值是"+bedIds);
+                dialog.confirm('确定提交吗?', function (index, layero) {
+                    if (bedIds != null ){
+                    var queryString = $('#sendForm').serialize();
+                    console.log("queryString is" + queryString);
+
+                    $.ahsjajax(
+                        CTX + "/api/hishospitalmanage/saveOrUpdate.ahsj?token=" + TOKEN,
+                        queryString,
+                        function (msg) {
+                            if (msg.success) {
+                                M.toast({html: msg.message});
+                                parent.grid.reset();
+                                dialog.parentclose();
+                                return false;
+                            } else {
+                                M.toast({html: msg.message});
+                                return false;
+                            }
+                        },
+                        function () {
+                            M.toast({html: "网络异常"});
+                            return false;
+                        }
+                    );
+                }else {
+                        dialog.warn("该病房无剩余病床，审核失败！！");
+                    }
+                });
+
+            }
+
+        });
+    }
+
+    function initBtn() {
+        $("#failBtn").click(function () {
+            [[${hisHospitalManage.ids}]]
+            dialog.confirm('确定审核不通过?', function (index, layero){
+                $.ahsjajax(CTX + "/api/hishospitalmanage/fail.ahsj",
+                    {"id":[[${hisHospitalManage.ids}]]},
+                    function (msg) {
+                        if (msg.success) {
+                            if (msg.success) {
+                                M.toast({html: msg.message});
+                                parent.grid.reset();
+                                dialog.parentclose();
+                                return false;
+                            } else {
+                                M.toast({html: msg.message});
+                                return false;
+                            }
+                        }
+                    },
+                    function () {
+                        M.toast({html: "网络异常"});
+                    }
+                );
+            });
+            });
+    }
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</body>
+
+</html>

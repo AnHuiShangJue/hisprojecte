@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://mybatis.org/schema/mybatis-mapper" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div th:replace="public/base_update :: html"></div>
+<body>
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title">报损信息详情</h4><label style="color:black">Report loss details
+            </label>
+                <form class="col s12" id="send_Form" action="#">
+                    <input  type="hidden" id="id" name="id" th:value="${hisConsumablesDestory.id}">
+                    <input  type="hidden" id="destoryId" name="destoryId" th:value="${hisConsumablesDestory.destoryId}">
+                    <input  type="hidden" id="consumablesId" name="consumablesId" th:value="${hisConsumablesDestory.consumablesId}">
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="name" name="name" type="text" th:value="${hisConsumablesDestory.name}" th:readonly="true"/>
+                            <label for="name">耗 材 名 称<span style="font-size: 12px">(Supplies name
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <select ahsj:select name="type" id="type" type="code" typeKey="consumable_type" cssClass="" disabled="disabled"
+                                    th:value="${hisConsumablesDestory.type}">
+                            </select>
+                            <label for="type">类 型<span style="font-size: 12px">(type
+
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="spec" name="spec" type="text"  th:value="${hisConsumablesDestory.spec}" th:readonly="true"/>
+                            <label for="spec">规 格<span style="font-size: 12px">(specification
+
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="price" name="price" type="number" th:value="${hisConsumablesDestory.price}" th:readonly="true"/>
+                            <label for="price">价 格<span style="font-size: 12px">(price
+)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="validityPeriod" name="validityPeriod" type="text" th:placeholder="${#dates.format(hisConsumablesDestory.validityPeriod, 'yyyy/MM/dd')}" th:value="${#dates.format(hisConsumablesDestory.validityPeriod, 'yyyy/MM/dd')}" th:readonly="true"/>
+                            <label for="validityPeriod">有效期<span style="font-size: 12px">(Validity period
+
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="destoryNumber" name="destoryNumber" type="number" th:value="${hisConsumablesDestory.destoryNumber}" th:readonly="true"/>
+                            <label for="destoryNumber">报损数目<span style="font-size: 12px">(Number of reported losses
+
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <select ahsj:select id="destoryType" name="destoryType" type="code" typeKey="loss_type" th:value="${hisConsumablesDestory.destoryType}" disabled="disabled"/>
+                            <label for="destoryType">报损类型<span style="font-size: 12px">(Report loss type
+
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="destoryPeriod" name="destoryPeriod" type="text" th:placeholder="${#dates.format(hisConsumablesDestory.destoryPeriod, 'yyyy/MM/dd')}" th:value="${#dates.format(hisConsumablesDestory.destoryPeriod, 'yyyy/MM/dd')}" th:readonly="true"/>
+                            <label for="destoryPeriod">报损日期<span style="font-size: 12px">(Report loss date
+
+)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <select ahsj:select id="isReview" name="isReview" type="code" typeKey="is_review" th:value="${hisConsumablesDestory.isReview}" th:readonly="true"/>
+                            <label for="isReview">审核状态<span style="font-size: 12px">(Approval Status
+
+)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div>
+                            <label for="reason">原因：<span style="font-size: 12px">(reason
+
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="reason" name="reason" th:value="${hisConsumablesDestory.reason}" th:readonly="true"/>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================================================
+Scripts
+================================================ -->
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+
+
+   $(function () {
+       formCheck();
+   });
+
+
+   $("input").change(function(){
+       $(this).val($(this).val().trim());
+   });
+</script>
+
+</body>
+
+</html>

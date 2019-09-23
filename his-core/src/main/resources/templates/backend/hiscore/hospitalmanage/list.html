@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://mybatis.org/schema/mybatis-mapper"
+>
+
+<div th:replace="public/base_list :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<div class="row">
+    <div class="breadcrumbs-inline pt-3 pb-1" id="breadcrumbs-wrapper">
+        <!-- Search for small screen-->
+        <div class="container">
+            <div class="row">
+                <div class="col s10 m6 l6 breadcrumbs-left">
+                    <h5 class="breadcrumbs-title mt-0 mb-0 display-inline hide-on-small-and-down">DataTable</h5>
+                    <ol class="breadcrumbs mb-0">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#">Table</a>
+                        </li>
+                        <li class="breadcrumb-item active">DataTable
+                        </li>
+                    </ol>
+                </div>
+                <div class="col s2 m6 l6"><a
+                        class="btn btn-floating dropdown-settings waves-effect waves-light breadcrumbs-btn right"
+                        href="#!" data-target="dropdown1"><i class="material-icons">expand_more </i><i
+                        class="material-icons right">arrow_drop_down</i></a>
+                    <ul class="dropdown-content" id="dropdown1" tabindex="0">
+                        <li tabindex="0"><a class="grey-text text-darken-2"
+                                            href="user-profile-page.html">Profile<span
+                                class="new badge red">2</span></a></li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="app-contacts.html">Contacts</a>
+                        </li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="page-faq.html">FAQ</a></li>
+                        <li class="divider" tabindex="-1"></li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="user-login.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 xl12 m12 l12 ">
+        <div class="container">
+            <div class="section section-data-tables">
+                <div class="card">
+                    <div class="card-content">
+                        <form id="searchForm" class="row" action="">
+                            <!--默认只能看今天的-->
+                            <input id="isToday" name="isToday" type="hidden" value="1"/>
+                            <div class="row">
+                                <div class="col input-field s3 m3 l3">
+                                    <input id="names" name="names" type="text"/>
+                                    <label for="names">姓名查询<span style="font-size: 12px">(Name inquiry)</span></label>
+                                </div>
+                                <div class="col input-field s3 m3 l3">
+                                    <input id="idcards" name="idcards" type="text"/>
+                                    <label for="idcards">身份证号查询<span style="font-size: 12px">(id card inquiry)</span>
+
+
+                                    </label>
+                                </div>
+                                <div class="col input-field s3 m3 l3">
+                                    <input id="number" name="number" type="text"/>
+                                    <label for="number">住院编号查询<span style="font-size: 12px">(Hospital number query
+)</span></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col  s1 m1 l1 xl1">
+                                    <div ahsj:radio name="isRe" id="isRe" type="code" typeKey="is_re"
+                                         title="查询条件" cssdefault="radiotdefault" haveDefault="true" value="0"></div>
+                                </div>
+                                <div class="col  s1 m1 l1 xl1">
+                                    <div ahsj:radio name="isHos" id="isHos" type="code" typeKey="is_hos"
+                                         title="查询条件" cssdefault="radiotdefault" haveDefault="true" value="0"></div>
+                                </div>
+                                <div class="col  s1 m1 l1 xl1">
+                                    <div ahsj:radio name="isDischarged" id="isDischarged" type="code" typeKey="is_discharged"
+                                         title="查询条件" cssdefault="radiotdefault" haveDefault="true" value="0"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col  s1 m1 l1 xl1">
+                                        <select ahsj:select name="departmentId" id="departmentId" type="depart" typeKey="2" departKbn="1">
+                                        </select>
+                                        <label for="departmentId">科 室</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <div class="col s2 m2 l2 xl2 offset-l1">
+                            <a class="waves-effect waves-light btn" id="searchBtn"><i
+                                    class="material-icons  white-text tooltipped " data-position="bottom"
+                                    data-delay="50" data-tooltip="搜索">search</i></a>
+                            <a id="resetBtn" class="waves-effect waves-light btn"><i
+                                    class="material-icons  white-text tooltipped " data-position="bottom"
+                                    data-delay="50" data-tooltip="重置">youtube_searched_for</i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col s12 x12 l12 xl12">
+            <div class="card">
+                <div class="card-content">
+                    <h4 class="card-title">住   院
+                    </h4><label style="color:black">Hospitalization
+                </label>
+                    <div class="row">
+                    </div>
+                    <!--Form Advance-->
+                    <div class="row">
+                        <div id="refreshtable" class="col l12 m12 l12 xl12">
+                            <table id="data-table-simple" class="display">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="public/base_list_script :: html"></div>
+<div th:replace="public/base_update_script :: html"></div>
+
+
+<script th:inline="javascript">
+    var grid = new Datatable();
+    $(document).ready(function () {
+        initBtn();
+        initTable();
+    });
+
+
+
+    function initTable() {
+        grid.init({
+            src: $("#data-table-simple"),
+            onSuccess: function (grid) {
+            },
+            onError: function (grid) {
+            },
+            onDataLoad: function (grid) {
+            },
+            loadingMessage: 'Loading...',
+            dataTable: {
+                "ajax": {
+                    "url": CTX+"/api/hishospitalmanage/list.ahsj?", // ajax source
+                },
+                "columns": [
+                    {
+                        "title":"住院编号",
+                        "data":"number",
+                        "name":"number"
+                    },{
+                        "title":"就诊编号",
+                        "data":"medicalNumber",
+                        "name":"medical_number"
+                    },{
+                        "title":"姓名",
+                        "data":"names",
+                        "name":"names"
+                    },{
+                        "title":"年龄",
+                        "data":"ages",
+                        "name":"ages"
+                    },{
+                        "title":"性别",
+                        "data":"sexsName",
+                        "name":"sexs"
+                    },{
+                        "title":"身份证号",
+                        "data":"idcards",
+                        "name":"idcards"
+                    },
+                    {
+                        "title": "科别",
+                        "data": "departmentIdName",
+                        "name": "department_id"
+                    },
+                    {
+                        "title":"来源",
+                        "data":"isReName",
+                        "name":"is_re"
+                    },{
+                        "title":"住院状态",
+                        "data":"isHosName",
+                        "name":"is_hos"
+                    },{
+                        "title":"出院状态",
+                        "data":"isDischargedName",
+                        "name":"is_discharged"
+                    },{
+                        "title":"登记时间",
+                        "data":"joinDate",
+                        "name":"join_date"
+                    },{
+                        "title": "操作",
+                        "width": "120px",
+                        "className": "centered",
+                        "orderable": false,
+                        "render": function (data, type, row) {
+                            var rtnBtn = "";
+                            //如果获取字符串，必须在参数外反转"
+                            rtnBtn = rtnBtn +
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"审核\" onclick='detail(" + row.patientId + "," + row.ids + "," + row.doctorId + "," + row.isHos + ");'><i class='material-icons'>input</i></a>"+
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"出院\" href='javascript:;' onclick='discharged(" + row.id + "," + row.isDischarged + ");'><i class='material-icons'>camera_front</i></a>"+
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看\" href='javascript:;' onclick='view(" + row.patientId + "," + row.ids + "," + row.doctorId + "," + row.wardId + "," + row.bedId + "," + row.nurseId + "," + row.isHos + "," + row.id + ");'><i class='material-icons'>visibility</i></a>"+
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" onclick='update(" + row.id + "," + row.isHos + ");'><i class='material-icons'>edit</i></a>";
+                            // 返回自定义内容
+                            return rtnBtn;
+                            // 返回自定义内容
+
+                        }
+                    }
+                ],
+                "order": [
+                    [9, 'desc']
+                ],
+            }
+        });
+
+    }
+
+    function detail(patientId,ids,doctorId,isHos) {
+        if (isHos==2||isHos==3){
+            dialog.warn("已审核或审核未通过，请勿重复操作！")
+        }else {
+        var url = CTX+ "/api/hishospitalmanage/update/index.ahsj?token="+TOKEN+"&patientId="+patientId+"&ids="+ids+"&doctorId="+doctorId;
+        dialog.show(url, "信息审核");
+    }
+    }
+
+    function view(patientId,ids,doctorId,wardId,bedId,nurseId,isHos,id) {
+        if (isHos==1 || isHos==2) {
+            dialog.warn("未审核或审核未通过，无病人住院信息！")
+        }else {
+            var url = CTX + "/api/hishospitalmanage/view/index.ahsj?token=" + TOKEN + "&patientId=" + patientId + "&ids=" + ids + "&doctorId=" + doctorId + "&wardId=" + wardId + "&bedId=" + bedId + "&nurseId=" + nurseId +"&id=" + id;
+            dialog.show(url, "审核信息查看");
+    }
+    }
+
+    function update(id,isHos) {
+        if (isHos==1 || isHos==2) {
+            dialog.warn("未审核或审核未通过，无病人住院信息！")
+        }else {
+            var url = CTX + "/api/hishospitalmanage/inpatientUpdate/index.ahsj?token=" + TOKEN + "&id=" + id;
+            dialog.show(url, "住院信息修改");
+    }
+    }
+
+    function discharged(id,isDischarged) {
+        if (isDischarged == 1) {
+            dialog.confirm('确定该病人出院?', function (index, layero) {
+                $.ahsjajax(CTX + "/api/hishospitalmanage/hosEnter.ahsj",
+                    {"id": id},
+                    function (msg) {
+                        if (msg.success) {
+                            swal.close();
+                            M.toast({
+                                html: msg.message, completeCallback: function () {
+                                }
+                            });
+                            grid.search();
+                        } else {
+                            M.toast({
+                                html: msg.message, completeCallback: function () {
+                                }
+                            });
+                        }
+                    },
+                    function (data) {
+                        M.toast({
+                            html: "网络异常", completeCallback: function () {
+                            }
+                        });
+                    }
+                );
+            });
+        }else if(isDischarged==2) {
+            dialog.warn('该病人已出院，请勿重复操作！')
+        }
+
+    }
+
+
+
+    function initBtn() {
+        //搜索按钮
+        $('#searchBtn').click(function () {
+            grid.search();
+        });
+        $('#resetBtn').click(function () {
+            grid.reset();
+        });
+    }
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+</body>
+</html>
+

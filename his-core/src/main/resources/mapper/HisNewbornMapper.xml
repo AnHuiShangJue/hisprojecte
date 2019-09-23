@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisNewbornMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisNewborn" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="activity" property="activity" jdbcType="INTEGER" />
+    <result column="pulse" property="pulse" jdbcType="INTEGER" />
+    <result column="respiration" property="respiration" jdbcType="INTEGER" />
+    <result column="born_name" property="bornName" jdbcType="VARCHAR" />
+    <result column="bed_number" property="bedNumber" jdbcType="INTEGER" />
+    <result column="parent_address" property="parentAddress" jdbcType="VARCHAR" />
+    <result column="born_address" property="bornAddress" jdbcType="VARCHAR" />
+    <result column="apprarance" property="apprarance" jdbcType="INTEGER" />
+    <result column="national" property="national" jdbcType="VARCHAR" />
+    <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+    <result column="p_name" property="pName" jdbcType="VARCHAR" />
+    <result column="head_circumference" property="headCircumference" jdbcType="DECIMAL" />
+    <result column="health_standards" property="healthStandards" jdbcType="VARCHAR" />
+    <result column="born_sex" property="bornSex" jdbcType="INTEGER" />
+    <result column="weight" property="weight" jdbcType="DECIMAL" />
+    <result column="height" property="height" jdbcType="DECIMAL" />
+    <result column="grimace_response" property="grimaceResponse" jdbcType="INTEGER" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="is_enable" property="isEnable" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, create_user_id, create_date, update_user_id, activity, pulse, respiration, born_name, 
+    bed_number, parent_address, born_address, apprarance, national, id_card, p_name, 
+    head_circumference, health_standards, born_sex, weight, height, grimace_response, 
+    update_date, is_enable, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from his_newborn
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from his_newborn
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisNewborn" >
+    insert into his_newborn (id, create_user_id, create_date, 
+      update_user_id, activity, pulse, 
+      respiration, born_name, bed_number, 
+      parent_address, born_address, apprarance, 
+      national, id_card, p_name, 
+      head_circumference, health_standards, born_sex, 
+      weight, height, grimace_response, 
+      update_date, is_enable, remark
+      )
+    values (#{id,jdbcType=BIGINT}, #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateUserId,jdbcType=BIGINT}, #{activity,jdbcType=INTEGER}, #{pulse,jdbcType=INTEGER}, 
+      #{respiration,jdbcType=INTEGER}, #{bornName,jdbcType=VARCHAR}, #{bedNumber,jdbcType=INTEGER}, 
+      #{parentAddress,jdbcType=VARCHAR}, #{bornAddress,jdbcType=VARCHAR}, #{apprarance,jdbcType=INTEGER}, 
+      #{national,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, #{pName,jdbcType=VARCHAR}, 
+      #{headCircumference,jdbcType=DECIMAL}, #{healthStandards,jdbcType=VARCHAR}, #{bornSex,jdbcType=INTEGER},
+      #{weight,jdbcType=DECIMAL}, #{height,jdbcType=DECIMAL}, #{grimaceResponse,jdbcType=INTEGER}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{isEnable,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisNewborn" >
+    insert into his_newborn
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="activity != null" >
+        activity,
+      </if>
+      <if test="pulse != null" >
+        pulse,
+      </if>
+      <if test="respiration != null" >
+        respiration,
+      </if>
+      <if test="bornName != null" >
+        born_name,
+      </if>
+      <if test="bedNumber != null" >
+        bed_number,
+      </if>
+      <if test="parentAddress != null" >
+        parent_address,
+      </if>
+      <if test="bornAddress != null" >
+        born_address,
+      </if>
+      <if test="apprarance != null" >
+        apprarance,
+      </if>
+      <if test="national != null" >
+        national,
+      </if>
+      <if test="idCard != null" >
+        id_card,
+      </if>
+      <if test="pName != null" >
+        p_name,
+      </if>
+      <if test="headCircumference != null" >
+        head_circumference,
+      </if>
+      <if test="healthStandards != null" >
+        health_standards,
+      </if>
+      <if test="bornSex != null" >
+        born_sex,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="height != null" >
+        height,
+      </if>
+      <if test="grimaceResponse != null" >
+        grimace_response,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="isEnable != null" >
+        is_enable,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="activity != null" >
+        #{activity,jdbcType=INTEGER},
+      </if>
+      <if test="pulse != null" >
+        #{pulse,jdbcType=INTEGER},
+      </if>
+      <if test="respiration != null" >
+        #{respiration,jdbcType=INTEGER},
+      </if>
+      <if test="bornName != null" >
+        #{bornName,jdbcType=VARCHAR},
+      </if>
+      <if test="bedNumber != null" >
+        #{bedNumber,jdbcType=INTEGER},
+      </if>
+      <if test="parentAddress != null" >
+        #{parentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="bornAddress != null" >
+        #{bornAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="apprarance != null" >
+        #{apprarance,jdbcType=INTEGER},
+      </if>
+      <if test="national != null" >
+        #{national,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="pName != null" >
+        #{pName,jdbcType=VARCHAR},
+      </if>
+      <if test="headCircumference != null" >
+        #{headCircumference,jdbcType=DECIMAL},
+      </if>
+      <if test="healthStandards != null" >
+        #{healthStandards,jdbcType=VARCHAR},
+      </if>
+      <if test="bornSex != null" >
+        #{bornSex,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="height != null" >
+        #{height,jdbcType=DECIMAL},
+      </if>
+      <if test="grimaceResponse != null" >
+        #{grimaceResponse,jdbcType=INTEGER},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisNewborn" >
+    update his_newborn
+    <set >
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="activity != null" >
+        activity = #{activity,jdbcType=INTEGER},
+      </if>
+      <if test="pulse != null" >
+        pulse = #{pulse,jdbcType=INTEGER},
+      </if>
+      <if test="respiration != null" >
+        respiration = #{respiration,jdbcType=INTEGER},
+      </if>
+      <if test="bornName != null" >
+        born_name = #{bornName,jdbcType=VARCHAR},
+      </if>
+      <if test="bedNumber != null" >
+        bed_number = #{bedNumber,jdbcType=INTEGER},
+      </if>
+      <if test="parentAddress != null" >
+        parent_address = #{parentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="bornAddress != null" >
+        born_address = #{bornAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="apprarance != null" >
+        apprarance = #{apprarance,jdbcType=INTEGER},
+      </if>
+      <if test="national != null" >
+        national = #{national,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="pName != null" >
+        p_name = #{pName,jdbcType=VARCHAR},
+      </if>
+      <if test="headCircumference != null" >
+        head_circumference = #{headCircumference,jdbcType=DECIMAL},
+      </if>
+      <if test="healthStandards != null" >
+        health_standards = #{healthStandards,jdbcType=VARCHAR},
+      </if>
+      <if test="bornSex != null" >
+        born_sex = #{bornSex,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="height != null" >
+        height = #{height,jdbcType=DECIMAL},
+      </if>
+      <if test="grimaceResponse != null" >
+        grimace_response = #{grimaceResponse,jdbcType=INTEGER},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isEnable != null" >
+        is_enable = #{isEnable,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisNewborn" >
+    update his_newborn
+    set create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      activity = #{activity,jdbcType=INTEGER},
+      pulse = #{pulse,jdbcType=INTEGER},
+      respiration = #{respiration,jdbcType=INTEGER},
+      born_name = #{bornName,jdbcType=VARCHAR},
+      bed_number = #{bedNumber,jdbcType=INTEGER},
+      parent_address = #{parentAddress,jdbcType=VARCHAR},
+      born_address = #{bornAddress,jdbcType=VARCHAR},
+      apprarance = #{apprarance,jdbcType=INTEGER},
+      national = #{national,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      p_name = #{pName,jdbcType=VARCHAR},
+      head_circumference = #{headCircumference,jdbcType=DECIMAL},
+      health_standards = #{healthStandards,jdbcType=VARCHAR},
+      born_sex = #{bornSex,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=DECIMAL},
+      height = #{height,jdbcType=DECIMAL},
+      grimace_response = #{grimaceResponse,jdbcType=INTEGER},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      is_enable = #{isEnable,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--自定义SQL-->
+
+  <select id="queryList" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    select  <include refid="Base_Column_List"/> from  his_newborn where  1=1
+
+    <if test="parameter.bornName != null and parameter.bornName != ''">
+     and  born_name = #{parameter.bornName,jdbcType=VARCHAR}
+    </if>
+    <if test="parameter.healthStandards != null and parameter.healthStandards != ''">
+     and  health_standards = #{parameter.healthStandards,jdbcType=VARCHAR}
+    </if>
+    <if test="parameter.idCard != null and parameter.idCard != ''">
+     and id_card = #{parameter.idCard,jdbcType=VARCHAR}
+    </if>
+    <if test="parameter.lowCreateDate != null">
+     and  date(create_date) &gt;= #{parameter.lowCreateDate}
+    </if>
+    <if test="parameter.highCreateDate != null">
+     and  date(create_date) &lt;=  #{parameter.highCreateDate}
+    </if>
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+
+
+  <select id="selectHisNewborn"  parameterType="com.ahsj.hiscore.entity.HisNewborn"  resultMap="BaseResultMap">
+    select  <include refid="Base_Column_List"/> from  his_newborn where   bed_number = #{bedNumber,jdbcType=INTEGER} and  is_enable = 1
+  </select>
+
+
+  <update id="updateIsEnable" parameterType="list">
+    update his_newborn
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="is_enable=case" suffix="end,">
+        <foreach collection="list" item="item" index="index">
+          <if test="item.isEnable!=null">
+            when id=#{item.id} then #{item.isEnable}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where
+    <foreach collection="list" separator="or" item="item" index="index">
+      id=#{item.id}
+    </foreach>
+  </update>
+</mapper>

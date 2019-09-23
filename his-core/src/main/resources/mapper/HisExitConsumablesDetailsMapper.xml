@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahsj.hiscore.dao.HisExitConsumablesDetailsMapper">
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisExitConsumablesDetails">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="consumables_id" jdbcType="BIGINT" property="consumablesId" />
+    <result column="his_hospital_manager_id" jdbcType="VARCHAR" property="hisHospitalManagerId" />
+    <result column="exit_number" jdbcType="VARCHAR" property="exitNumber" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="spec" jdbcType="VARCHAR" property="spec" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="exit_count" jdbcType="INTEGER" property="exitCount" />
+    <result column="validity_period" jdbcType="TIMESTAMP" property="validityPeriod" />
+    <result column="is_back" jdbcType="INTEGER" property="isBack" />
+    <result column="is_del" jdbcType="INTEGER" property="isDel" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_user_id" jdbcType="BIGINT" property="updateUserId" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="person_in_charge" property="personInCharge" jdbcType="VARCHAR" />
+    <result column="expected_time" property="expectedTime" jdbcType="TIMESTAMP" />
+    <!--添加 耗材盘点-->
+    <result column="types" jdbcType="INTEGER" property="types" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="stock" jdbcType="INTEGER" property="stock" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id,his_hospital_manager_id,exit_number, consumables_id, name, type, spec, price, exit_count, validity_period, is_back,
+    is_del, create_user_id, create_date, update_user_id, update_date,person_in_charge,
+    expected_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from his_exit_consumables_details
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from his_exit_consumables_details
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisExitConsumablesDetails">
+    insert into his_exit_consumables_details (id,exit_number,his_hospital_manager_id, consumables_id, name,
+      type, spec, price, exit_count, 
+      validity_period, is_back, is_del, 
+      create_user_id, create_date, update_user_id, 
+      update_date,person_in_charge,
+    expected_time)
+    values (#{id,jdbcType=BIGINT},#{exitNumber,jdbcType=VARCHAR},#{hisHospitalManagerId,jdbcType=VARCHAR}, #{consumablesId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR},
+      #{type,jdbcType=INTEGER}, #{spec,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, #{exitCount,jdbcType=INTEGER}, 
+      #{validityPeriod,jdbcType=TIMESTAMP}, #{isBack,jdbcType=INTEGER}, #{isDel,jdbcType=INTEGER}, 
+      #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, 
+      #{updateDate,jdbcType=TIMESTAMP},#{personInCharge,jdbcType=VARCHAR}, #{expectedTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisExitConsumablesDetails">
+    insert into his_exit_consumables_details
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="exitNumber != null">
+        exit_number,
+      </if>
+      <if test="hisHospitalManagerId != null">
+        his_hospital_manager_id,
+      </if>
+      <if test="consumablesId != null">
+        consumables_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="spec != null">
+        spec,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="exitCount != null">
+        exit_count,
+      </if>
+      <if test="validityPeriod != null">
+        validity_period,
+      </if>
+      <if test="isBack != null">
+        is_back,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateUserId != null">
+        update_user_id,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="personInCharge != null" >
+        person_in_charge,
+      </if>
+      <if test="expectedTime != null" >
+        expected_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="exitNumber != null">
+        #{exitNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="hisHospitalManagerId != null">
+        #{hisHospitalManagerId,jdbcType=VARCHAR},
+      </if>
+      <if test="consumablesId != null">
+        #{consumablesId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="spec != null">
+        #{spec,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="exitCount != null">
+        #{exitCount,jdbcType=INTEGER},
+      </if>
+      <if test="validityPeriod != null">
+        #{validityPeriod,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isBack != null">
+        #{isBack,jdbcType=INTEGER},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="personInCharge != null" >
+        #{personInCharge,jdbcType=VARCHAR},
+      </if>
+      <if test="expectedTime != null" >
+        #{expectedTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisExitConsumablesDetails">
+    update his_exit_consumables_details
+    <set>
+      <if test="exitNumber != null">
+        exit_number = #{exitNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="hisHospitalManagerId != null">
+        his_hospital_manager_id = #{hisHospitalManagerId,jdbcType=VARCHAR},
+      </if>
+      <if test="consumablesId != null">
+        consumables_id = #{consumablesId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="spec != null">
+        spec = #{spec,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="exitCount != null">
+        exit_count = #{exitCount,jdbcType=INTEGER},
+      </if>
+      <if test="validityPeriod != null">
+        validity_period = #{validityPeriod,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isBack != null">
+        is_back = #{isBack,jdbcType=INTEGER},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="personInCharge != null" >
+        person_in_charge = #{personInCharge,jdbcType=VARCHAR},
+      </if>
+      <if test="expectedTime != null" >
+        expected_time = #{expectedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisExitConsumablesDetails">
+    update his_exit_consumables_details
+    set consumables_id = #{consumablesId,jdbcType=BIGINT},
+      exit_number = #{exitNumber,jdbcType=VARCHAR},
+      his_hospital_manager_id = #{hisHospitalManagerId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      spec = #{spec,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      exit_count = #{exitCount,jdbcType=INTEGER},
+      validity_period = #{validityPeriod,jdbcType=TIMESTAMP},
+      is_back = #{isBack,jdbcType=INTEGER},
+      is_del = #{isDel,jdbcType=INTEGER},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      person_in_charge = #{personInCharge,jdbcType=VARCHAR},
+      expected_time = #{expectedTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <!--自定义sql-->
+  <!--list查询-->
+  <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    SELECT distinct
+      his_exit_consumables_details.exit_number,
+      his_exit_consumables_details.his_hospital_manager_id,
+      his_exit_consumables_details.person_in_charge,
+      his_exit_consumables_details.create_date
+    FROM
+    his_exit_consumables_details
+    where
+    1 = 1
+    <if test="parameter.name != null and parameter.name != ''">
+      and name like concat('%' #{parameter.name,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.exitNumber != null and parameter.exitNumber != ''">
+      and exit_number like concat('%' #{parameter.exitNumber,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.personInCharge != null and parameter.personInCharge != ''">
+      and person_in_charge like concat('%' #{parameter.personInCharge,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.lowexitDate != null">
+      and create_date &gt;= #{parameter.lowexitDate,jdbcType=TIMESTAMP}
+    </if>
+    <if test="parameter.highexitDate != null">
+      and date_sub(create_date,interval 1 day) &lt;= #{parameter.highexitDate,jdbcType=TIMESTAMP}
+    </if>
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+
+  <!--根据编号查询-->
+  <select id="listByNumber" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    SELECT
+    a.*,
+    c.name as patientName
+    FROM
+    his_exit_consumables_details as a
+    LEFT JOIN his_medical_record as b on a.his_hospital_manager_id = b.medical_record_id
+    LEFT JOIN his_patient_info as c on b.patient_id = c.id
+    where
+    a.exit_number = #{parameter.exitNumber,jdbcType=VARCHAR}
+    <if test="parameter.name != null and parameter.name != ''">
+      and a.name like concat('%' #{parameter.name,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.lowPrice != null and parameter.lowPrice != '' ">
+      and a.price &gt;= #{parameter.lowPrice,jdbcType=DOUBLE}
+    </if>
+    <if test="parameter.highPrice != null and parameter.highPrice != ''">
+      and a.price &lt;= #{parameter.highPrice,jdbcType=DOUBLE}
+    </if>
+    <if test="parameter.lowexitDate != null">
+      and a.create_date &gt;= #{parameter.lowexitDate,jdbcType=TIMESTAMP}
+    </if>
+    <if test="parameter.highexitDate != null">
+      and a.date_sub(create_date,interval 1 day) &lt;= #{parameter.highexitDate,jdbcType=TIMESTAMP}
+    </if>
+    <if test="parameter.personInCharge != null and parameter.personInCharge != ''">
+      and a.person_in_charge like concat('%' #{parameter.personInCharge,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+<select id="consumableInventory" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+  select * FROM(
+  (select i.user_name ,d.create_date,c.name,c.type,a.stock,(d.price*d.exit_count) as price,'出库' as types
+  from  his_exit_consumables_details as d
+  left JOIN his_consumables as c on c.id = d.consumables_id
+  LEFT JOIN `his-userinfo`.user_info as i on i.id = d.create_user_id
+  LEFT JOIN his_consumables_details as a on a.consumables_id = c.id)
+  union (
+  select  i.user_name ,d.create_date,c.name,c.type,a.stock,(d.price*d.destory_number) as price,'报损' as types
+  from his_consumables_destory as d
+  left JOIN his_consumables as c on c.id = d.consumables_id
+  LEFT JOIN `his-userinfo`.user_info as i on i.id = d.create_user_id
+  LEFT JOIN his_consumables_details as a on a.consumables_id = c.id
+  where d.is_review =1))as m
+  where 1=1
+  <if test="parameter.lowTime != null">
+    and date(m.create_date) &gt;= #{parameter.lowTime ,jdbcType=TIMESTAMP}
+  </if>
+  <if test="parameter.upTime != null">
+    and date(m.create_date) &lt;= #{parameter.upTime ,jdbcType=TIMESTAMP}
+  </if>
+  <if test="parameter.months != null and parameter.months != ''">
+    and month(m.create_date)=#{parameter.months}
+  </if>
+  <if test="parameter.years != null and parameter.years != ''">
+    and YEAR(m.create_date) = #{parameter.years}
+  </if>
+  <if test="parameter.name != null and parameter.name != ''">
+    and m.name like concat('%' #{parameter.name},'%')
+  </if>
+  <if test="parameter.userName != null and parameter.userName != ''">
+    and i.user_name like concat('%' #{parameter.userName},'%')
+  </if>
+  <if test="parameter.orders != null and parameter.orders != ''">
+    order by ${parameter.orders}
+  </if>
+
+</select>
+
+
+</mapper>

@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisRescueMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisRescue" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="patient_id" property="patientId" jdbcType="BIGINT" />
+    <result column="command_doctor_id" property="commandDoctorId" jdbcType="BIGINT" />
+    <result column="participants" property="participants" jdbcType="VARCHAR" />
+    <result column="participantsName" property="participantsname" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="time_of_illness" property="timeOfIllness" jdbcType="TIMESTAMP" />
+    <result column="main_sign" property="mainSign" jdbcType="VARCHAR" />
+    <result column="brief_symptom_sign" property="briefSymptomSign" jdbcType="VARCHAR" />
+    <result column="physical_examination_result" property="physicalExaminationResult" jdbcType="VARCHAR" />
+    <result column="emergency_test_result" property="emergencyTestResult" jdbcType="VARCHAR" />
+    <result column="special_inspection_result" property="specialInspectionResult" jdbcType="VARCHAR" />
+    <result column="vital_signs_changes" property="vitalSignsChanges" jdbcType="VARCHAR" />
+    <result column="rescue_measures" property="rescueMeasures" jdbcType="VARCHAR" />
+    <result column="consultation_opinion" property="consultationOpinion" jdbcType="VARCHAR" />
+    <result column="rescue_result" property="rescueResult" jdbcType="VARCHAR" />
+    <result column="terminating_reasons" property="terminatingReasons" jdbcType="VARCHAR" />
+    <result column="next_step" property="nextStep" jdbcType="VARCHAR" />
+    <result column="medical_care" property="medicalCare" jdbcType="VARCHAR" />
+    <result column="time_of_death" property="timeOfDeath" jdbcType="TIMESTAMP" />
+    <result column="death_basis" property="deathBasis" jdbcType="VARCHAR" />
+    <result column="family_opinion" property="familyOpinion" jdbcType="VARCHAR" />
+    <result column="special_requirements" property="specialRequirements" jdbcType="VARCHAR" />
+    <result column="family_name" property="familyName" jdbcType="VARCHAR" />
+    <result column="relationship" property="relationship" jdbcType="VARCHAR" />
+    <result column="family_is_sign" property="familyIsSign" jdbcType="INTEGER" />
+    <result column="supplementary_time" property="supplementaryTime" jdbcType="TIMESTAMP" />
+    <result column="people_is_sign" property="peopleIsSign" jdbcType="INTEGER" />
+    <result column="record_number" property="recordNumber" jdbcType="VARCHAR" />
+    <result column="already_sign_id" property="alreadySignId" jdbcType="VARCHAR" />
+    <result column="patient_name" property="patientName" jdbcType="VARCHAR" />
+    <result column="hospital_manage_id" property="hospitalManageId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, create_user_id, create_date, update_user_id, update_date, patient_id, command_doctor_id, 
+    participants, participantsName, start_time, end_time, time_of_illness, main_sign, 
+    brief_symptom_sign, physical_examination_result, emergency_test_result, special_inspection_result, 
+    vital_signs_changes, rescue_measures, consultation_opinion, rescue_result, terminating_reasons, 
+    next_step, medical_care, time_of_death, death_basis, family_opinion, special_requirements, 
+    family_name, relationship, family_is_sign, supplementary_time, people_is_sign, record_number, 
+    already_sign_id, hospital_manage_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from his_rescue
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from his_rescue
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisRescue" keyProperty="id" useGeneratedKeys="true" >
+    insert into his_rescue (id, create_user_id, create_date, 
+      update_user_id, update_date, patient_id, 
+      command_doctor_id, participants, participantsName, 
+      start_time, end_time, time_of_illness, 
+      main_sign, brief_symptom_sign, physical_examination_result, 
+      emergency_test_result, special_inspection_result, 
+      vital_signs_changes, rescue_measures, consultation_opinion, 
+      rescue_result, terminating_reasons, next_step, 
+      medical_care, time_of_death, death_basis, 
+      family_opinion, special_requirements, family_name, 
+      relationship, family_is_sign, supplementary_time, 
+      people_is_sign, record_number, already_sign_id, 
+      hospital_manage_id)
+    values (#{id,jdbcType=BIGINT}, #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, #{patientId,jdbcType=BIGINT}, 
+      #{commandDoctorId,jdbcType=BIGINT}, #{participants,jdbcType=VARCHAR}, #{participantsname,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{timeOfIllness,jdbcType=TIMESTAMP}, 
+      #{mainSign,jdbcType=VARCHAR}, #{briefSymptomSign,jdbcType=VARCHAR}, #{physicalExaminationResult,jdbcType=VARCHAR}, 
+      #{emergencyTestResult,jdbcType=VARCHAR}, #{specialInspectionResult,jdbcType=VARCHAR}, 
+      #{vitalSignsChanges,jdbcType=VARCHAR}, #{rescueMeasures,jdbcType=VARCHAR}, #{consultationOpinion,jdbcType=VARCHAR}, 
+      #{rescueResult,jdbcType=VARCHAR}, #{terminatingReasons,jdbcType=VARCHAR}, #{nextStep,jdbcType=VARCHAR}, 
+      #{medicalCare,jdbcType=VARCHAR}, #{timeOfDeath,jdbcType=TIMESTAMP}, #{deathBasis,jdbcType=VARCHAR}, 
+      #{familyOpinion,jdbcType=VARCHAR}, #{specialRequirements,jdbcType=VARCHAR}, #{familyName,jdbcType=VARCHAR}, 
+      #{relationship,jdbcType=VARCHAR}, #{familyIsSign,jdbcType=INTEGER}, #{supplementaryTime,jdbcType=TIMESTAMP}, 
+      #{peopleIsSign,jdbcType=INTEGER}, #{recordNumber,jdbcType=VARCHAR}, #{alreadySignId,jdbcType=VARCHAR},
+      #{hospitalManageId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisRescue" >
+    insert into his_rescue
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="commandDoctorId != null" >
+        command_doctor_id,
+      </if>
+      <if test="participants != null" >
+        participants,
+      </if>
+      <if test="participantsname != null" >
+        participantsName,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="timeOfIllness != null" >
+        time_of_illness,
+      </if>
+      <if test="mainSign != null" >
+        main_sign,
+      </if>
+      <if test="briefSymptomSign != null" >
+        brief_symptom_sign,
+      </if>
+      <if test="physicalExaminationResult != null" >
+        physical_examination_result,
+      </if>
+      <if test="emergencyTestResult != null" >
+        emergency_test_result,
+      </if>
+      <if test="specialInspectionResult != null" >
+        special_inspection_result,
+      </if>
+      <if test="vitalSignsChanges != null" >
+        vital_signs_changes,
+      </if>
+      <if test="rescueMeasures != null" >
+        rescue_measures,
+      </if>
+      <if test="consultationOpinion != null" >
+        consultation_opinion,
+      </if>
+      <if test="rescueResult != null" >
+        rescue_result,
+      </if>
+      <if test="terminatingReasons != null" >
+        terminating_reasons,
+      </if>
+      <if test="nextStep != null" >
+        next_step,
+      </if>
+      <if test="medicalCare != null" >
+        medical_care,
+      </if>
+      <if test="timeOfDeath != null" >
+        time_of_death,
+      </if>
+      <if test="deathBasis != null" >
+        death_basis,
+      </if>
+      <if test="familyOpinion != null" >
+        family_opinion,
+      </if>
+      <if test="specialRequirements != null" >
+        special_requirements,
+      </if>
+      <if test="familyName != null" >
+        family_name,
+      </if>
+      <if test="relationship != null" >
+        relationship,
+      </if>
+      <if test="familyIsSign != null" >
+        family_is_sign,
+      </if>
+      <if test="supplementaryTime != null" >
+        supplementary_time,
+      </if>
+      <if test="peopleIsSign != null" >
+        people_is_sign,
+      </if>
+      <if test="recordNumber != null" >
+        record_number,
+      </if>
+      <if test="alreadySignId != null" >
+        already_sign_id,
+      </if>
+      <if test="hospitalManageId != null" >
+        hospital_manage_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientId != null" >
+        #{patientId,jdbcType=BIGINT},
+      </if>
+      <if test="commandDoctorId != null" >
+        #{commandDoctorId,jdbcType=BIGINT},
+      </if>
+      <if test="participants != null" >
+        #{participants,jdbcType=VARCHAR},
+      </if>
+      <if test="participantsname != null" >
+        #{participantsname,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeOfIllness != null" >
+        #{timeOfIllness,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mainSign != null" >
+        #{mainSign,jdbcType=VARCHAR},
+      </if>
+      <if test="briefSymptomSign != null" >
+        #{briefSymptomSign,jdbcType=VARCHAR},
+      </if>
+      <if test="physicalExaminationResult != null" >
+        #{physicalExaminationResult,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyTestResult != null" >
+        #{emergencyTestResult,jdbcType=VARCHAR},
+      </if>
+      <if test="specialInspectionResult != null" >
+        #{specialInspectionResult,jdbcType=VARCHAR},
+      </if>
+      <if test="vitalSignsChanges != null" >
+        #{vitalSignsChanges,jdbcType=VARCHAR},
+      </if>
+      <if test="rescueMeasures != null" >
+        #{rescueMeasures,jdbcType=VARCHAR},
+      </if>
+      <if test="consultationOpinion != null" >
+        #{consultationOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="rescueResult != null" >
+        #{rescueResult,jdbcType=VARCHAR},
+      </if>
+      <if test="terminatingReasons != null" >
+        #{terminatingReasons,jdbcType=VARCHAR},
+      </if>
+      <if test="nextStep != null" >
+        #{nextStep,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalCare != null" >
+        #{medicalCare,jdbcType=VARCHAR},
+      </if>
+      <if test="timeOfDeath != null" >
+        #{timeOfDeath,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deathBasis != null" >
+        #{deathBasis,jdbcType=VARCHAR},
+      </if>
+      <if test="familyOpinion != null" >
+        #{familyOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="specialRequirements != null" >
+        #{specialRequirements,jdbcType=VARCHAR},
+      </if>
+      <if test="familyName != null" >
+        #{familyName,jdbcType=VARCHAR},
+      </if>
+      <if test="relationship != null" >
+        #{relationship,jdbcType=VARCHAR},
+      </if>
+      <if test="familyIsSign != null" >
+        #{familyIsSign,jdbcType=INTEGER},
+      </if>
+      <if test="supplementaryTime != null" >
+        #{supplementaryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="peopleIsSign != null" >
+        #{peopleIsSign,jdbcType=INTEGER},
+      </if>
+      <if test="recordNumber != null" >
+        #{recordNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="alreadySignId != null" >
+        #{alreadySignId,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalManageId != null" >
+        #{hospitalManageId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisRescue" >
+    update his_rescue
+    <set >
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientId != null" >
+        patient_id = #{patientId,jdbcType=BIGINT},
+      </if>
+      <if test="commandDoctorId != null" >
+        command_doctor_id = #{commandDoctorId,jdbcType=BIGINT},
+      </if>
+      <if test="participants != null" >
+        participants = #{participants,jdbcType=VARCHAR},
+      </if>
+      <if test="participantsname != null" >
+        participantsName = #{participantsname,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeOfIllness != null" >
+        time_of_illness = #{timeOfIllness,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mainSign != null" >
+        main_sign = #{mainSign,jdbcType=VARCHAR},
+      </if>
+      <if test="briefSymptomSign != null" >
+        brief_symptom_sign = #{briefSymptomSign,jdbcType=VARCHAR},
+      </if>
+      <if test="physicalExaminationResult != null" >
+        physical_examination_result = #{physicalExaminationResult,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyTestResult != null" >
+        emergency_test_result = #{emergencyTestResult,jdbcType=VARCHAR},
+      </if>
+      <if test="specialInspectionResult != null" >
+        special_inspection_result = #{specialInspectionResult,jdbcType=VARCHAR},
+      </if>
+      <if test="vitalSignsChanges != null" >
+        vital_signs_changes = #{vitalSignsChanges,jdbcType=VARCHAR},
+      </if>
+      <if test="rescueMeasures != null" >
+        rescue_measures = #{rescueMeasures,jdbcType=VARCHAR},
+      </if>
+      <if test="consultationOpinion != null" >
+        consultation_opinion = #{consultationOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="rescueResult != null" >
+        rescue_result = #{rescueResult,jdbcType=VARCHAR},
+      </if>
+      <if test="terminatingReasons != null" >
+        terminating_reasons = #{terminatingReasons,jdbcType=VARCHAR},
+      </if>
+      <if test="nextStep != null" >
+        next_step = #{nextStep,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalCare != null" >
+        medical_care = #{medicalCare,jdbcType=VARCHAR},
+      </if>
+      <if test="timeOfDeath != null" >
+        time_of_death = #{timeOfDeath,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deathBasis != null" >
+        death_basis = #{deathBasis,jdbcType=VARCHAR},
+      </if>
+      <if test="familyOpinion != null" >
+        family_opinion = #{familyOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="specialRequirements != null" >
+        special_requirements = #{specialRequirements,jdbcType=VARCHAR},
+      </if>
+      <if test="familyName != null" >
+        family_name = #{familyName,jdbcType=VARCHAR},
+      </if>
+      <if test="relationship != null" >
+        relationship = #{relationship,jdbcType=VARCHAR},
+      </if>
+      <if test="familyIsSign != null" >
+        family_is_sign = #{familyIsSign,jdbcType=INTEGER},
+      </if>
+      <if test="supplementaryTime != null" >
+        supplementary_time = #{supplementaryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="peopleIsSign != null" >
+        people_is_sign = #{peopleIsSign,jdbcType=INTEGER},
+      </if>
+      <if test="recordNumber != null" >
+        record_number = #{recordNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="alreadySignId != null" >
+        already_sign_id = #{alreadySignId,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalManageId != null" >
+        hospital_manage_id = #{hospitalManageId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisRescue" >
+    update his_rescue
+    set create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      patient_id = #{patientId,jdbcType=BIGINT},
+      command_doctor_id = #{commandDoctorId,jdbcType=BIGINT},
+      participants = #{participants,jdbcType=VARCHAR},
+      participantsName = #{participantsname,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      time_of_illness = #{timeOfIllness,jdbcType=TIMESTAMP},
+      main_sign = #{mainSign,jdbcType=VARCHAR},
+      brief_symptom_sign = #{briefSymptomSign,jdbcType=VARCHAR},
+      physical_examination_result = #{physicalExaminationResult,jdbcType=VARCHAR},
+      emergency_test_result = #{emergencyTestResult,jdbcType=VARCHAR},
+      special_inspection_result = #{specialInspectionResult,jdbcType=VARCHAR},
+      vital_signs_changes = #{vitalSignsChanges,jdbcType=VARCHAR},
+      rescue_measures = #{rescueMeasures,jdbcType=VARCHAR},
+      consultation_opinion = #{consultationOpinion,jdbcType=VARCHAR},
+      rescue_result = #{rescueResult,jdbcType=VARCHAR},
+      terminating_reasons = #{terminatingReasons,jdbcType=VARCHAR},
+      next_step = #{nextStep,jdbcType=VARCHAR},
+      medical_care = #{medicalCare,jdbcType=VARCHAR},
+      time_of_death = #{timeOfDeath,jdbcType=TIMESTAMP},
+      death_basis = #{deathBasis,jdbcType=VARCHAR},
+      family_opinion = #{familyOpinion,jdbcType=VARCHAR},
+      special_requirements = #{specialRequirements,jdbcType=VARCHAR},
+      family_name = #{familyName,jdbcType=VARCHAR},
+      relationship = #{relationship,jdbcType=VARCHAR},
+      family_is_sign = #{familyIsSign,jdbcType=INTEGER},
+      supplementary_time = #{supplementaryTime,jdbcType=TIMESTAMP},
+      people_is_sign = #{peopleIsSign,jdbcType=INTEGER},
+      record_number = #{recordNumber,jdbcType=VARCHAR},
+      already_sign_id = #{alreadySignId,jdbcType=VARCHAR},
+      hospital_manage_id = #{hospitalManageId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+  <!--自定义SQL-->
+
+  <select id="queryList" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
+    SELECT hr.* , hp.name as patient_name from  his_rescue hr left join  his_patient_info hp on hr.patient_id = hp.id  where  hr.patient_id =  #{parameter.patientId,jdbcType=BIGINT}
+
+    <if test="parameter.recordNumber != null and parameter.recordNumber != ''">
+     and  hr.record_number = #{parameter.recordNumber,jdbcType=VARCHAR}
+    </if>
+    <if test="parameter.familyName != null and parameter.familyName != ''">
+     and  hr.family_name = #{parameter.familyName,jdbcType=VARCHAR}
+    </if>
+    <if test="parameter.lowCreateDate != null">
+      and  date(start_time) &gt;= #{parameter.lowCreateDate}
+    </if>
+    <if test="parameter.highCreateDate != null">
+      and  date(start_time) &lt;=  #{parameter.highCreateDate}
+    </if>
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+
+  <select id="queryHisRescue" parameterType="com.ahsj.hiscore.entity.HisRescue" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/> from  his_rescue his  where 1=1
+    <if test="recordNumber != null and recordNumber != ''">
+      and his.record_number = #{recordNumber,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>

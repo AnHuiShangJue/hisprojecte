@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisNurseMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisNurse" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="join_date" property="joinDate" jdbcType="TIMESTAMP" />
+    <result column="leave_date" property="leaveDate" jdbcType="TIMESTAMP" />
+    <result column="stay_time" property="stayTime" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="localtion" property="localtion" jdbcType="VARCHAR" />
+    <result column="graduation_date" property="graduationDate" jdbcType="TIMESTAMP" />
+    <result column="graduation_major" property="graduationMajor" jdbcType="VARCHAR" />
+    <result column="graduated_school" property="graduatedSchool" jdbcType="VARCHAR" />
+    <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
+    <result column="image_id" property="imageId" jdbcType="BIGINT" />
+    <result column="department_id" property="departmentId" jdbcType="BIGINT" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="depart_name" property="departName" jdbcType="VARCHAR" />
+    <result column="salary_id" property="salaryId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, sex, age, phone, join_date, leave_date, stay_time, description, id_card, 
+    number, create_user_id, create_date, update_date, update_user_id, localtion, graduation_date, 
+    graduation_major, graduated_school, image_url, image_id, department_id, address, 
+    salary_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from his_nurse
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from his_nurse
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.ahsj.hiscore.entity.HisNurse" >
+    insert into his_nurse (id, name, sex, 
+      age, phone, join_date, 
+      leave_date, stay_time, description, 
+      id_card, number, create_user_id, 
+      create_date, update_date, update_user_id, 
+      localtion, graduation_date, graduation_major, 
+      graduated_school, image_url, image_id, 
+      department_id, address, salary_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
+      #{age,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{joinDate,jdbcType=TIMESTAMP}, 
+      #{leaveDate,jdbcType=TIMESTAMP}, #{stayTime,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{idCard,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, #{createUserId,jdbcType=BIGINT}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, 
+      #{localtion,jdbcType=VARCHAR}, #{graduationDate,jdbcType=TIMESTAMP}, #{graduationMajor,jdbcType=VARCHAR}, 
+      #{graduatedSchool,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}, #{imageId,jdbcType=BIGINT}, 
+      #{departmentId,jdbcType=BIGINT}, #{address,jdbcType=VARCHAR}, #{salaryId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.ahsj.hiscore.entity.HisNurse" >
+    insert into his_nurse
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="joinDate != null" >
+        join_date,
+      </if>
+      <if test="leaveDate != null" >
+        leave_date,
+      </if>
+      <if test="stayTime != null" >
+        stay_time,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="idCard != null" >
+        id_card,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="localtion != null" >
+        localtion,
+      </if>
+      <if test="graduationDate != null" >
+        graduation_date,
+      </if>
+      <if test="graduationMajor != null" >
+        graduation_major,
+      </if>
+      <if test="graduatedSchool != null" >
+        graduated_school,
+      </if>
+      <if test="imageUrl != null" >
+        image_url,
+      </if>
+      <if test="imageId != null" >
+        image_id,
+      </if>
+      <if test="departmentId != null" >
+        department_id,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="salaryId != null" >
+        salary_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="joinDate != null" >
+        #{joinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaveDate != null" >
+        #{leaveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stayTime != null" >
+        #{stayTime,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="localtion != null" >
+        #{localtion,jdbcType=VARCHAR},
+      </if>
+      <if test="graduationDate != null" >
+        #{graduationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="graduationMajor != null" >
+        #{graduationMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="graduatedSchool != null" >
+        #{graduatedSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imageId != null" >
+        #{imageId,jdbcType=BIGINT},
+      </if>
+      <if test="departmentId != null" >
+        #{departmentId,jdbcType=BIGINT},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="salaryId != null" >
+        #{salaryId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisNurse" >
+    update his_nurse
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="joinDate != null" >
+        join_date = #{joinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaveDate != null" >
+        leave_date = #{leaveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stayTime != null" >
+        stay_time = #{stayTime,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="localtion != null" >
+        localtion = #{localtion,jdbcType=VARCHAR},
+      </if>
+      <if test="graduationDate != null" >
+        graduation_date = #{graduationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="graduationMajor != null" >
+        graduation_major = #{graduationMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="graduatedSchool != null" >
+        graduated_school = #{graduatedSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        image_url = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imageId != null" >
+        image_id = #{imageId,jdbcType=BIGINT},
+      </if>
+      <if test="departmentId != null" >
+        department_id = #{departmentId,jdbcType=BIGINT},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="salaryId != null" >
+        salary_id = #{salaryId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisNurse" >
+    update his_nurse
+    set name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      age = #{age,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      join_date = #{joinDate,jdbcType=TIMESTAMP},
+      leave_date = #{leaveDate,jdbcType=TIMESTAMP},
+      stay_time = #{stayTime,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      number = #{number,jdbcType=VARCHAR},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      localtion = #{localtion,jdbcType=VARCHAR},
+      graduation_date = #{graduationDate,jdbcType=TIMESTAMP},
+      graduation_major = #{graduationMajor,jdbcType=VARCHAR},
+      graduated_school = #{graduatedSchool,jdbcType=VARCHAR},
+      image_url = #{imageUrl,jdbcType=VARCHAR},
+      image_id = #{imageId,jdbcType=BIGINT},
+      department_id = #{departmentId,jdbcType=BIGINT},
+      address = #{address,jdbcType=VARCHAR},
+      salary_id = #{salaryId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!--自定义sql-->
+  <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    SELECT
+    a.* ,
+    e.name  as depart_name
+    FROM
+    `his-rpac`.his_nurse as a
+    LEFT JOIN `his-rpac`.his_user_nurse as b ON a.id = b.nurse_id
+    LEFT JOIN `his-userinfo`.user_info as c ON c.id = b.user_id
+    LEFT JOIN `his-userinfo`.user_org_rel as d ON d.user_id = c.id
+    LEFT JOIN `his-userinfo`.organization as e ON e.tree_id = d.dept_id
+    where
+       1= 1
+    <if test="parameter.name != null and parameter.name != ''">
+      and a.name like concat('%' #{parameter.name,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.idCard != null and parameter.idCard != ''">
+      and a.id_card like concat('%' #{parameter.idCard,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.number != null and parameter.number != ''">
+      and a.number like concat('%' #{parameter.number,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.number != null and parameter.number != ''">
+      and a.number like concat('%' #{parameter.number,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.joinDate != null ">
+      and a.join_date &gt;= #{parameter.joinDate,jdbcType=TIMESTAMP}
+    </if>
+    <if test="parameter.leaveDate != null ">
+      and a.leave_date &gt;= #{parameter.leaveDate,jdbcType=TIMESTAMP}
+    </if>
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+  <select id="selectForInsert" resultMap="BaseResultMap" parameterType="com.ahsj.hiscore.entity.HisNurse">
+    select his_nurse.*
+    from his_nurse
+    where
+      id_card = #{idCard,jdbcType=VARCHAR}
+      or number = #{number,jdbcType=VARCHAR}
+  </select>
+
+  <select id="getHisNurseByDepartmentId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select
+        <include refid="Base_Column_List"/>
+    from his_nurse
+    where   department_id = #{departmentId,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectNurse"  resultMap="BaseResultMap" >
+SELECT
+  a.id,
+b.user_id,
+c.user_name AS name
+FROM `his-rpac`.his_nurse AS a
+LEFT JOIN `his-rpac`.his_user_nurse AS b ON a.id = b.nurse_id
+LEFT JOIN `his-userinfo`.user_info AS c ON c.id = b.user_id
+where a.leave_date IS NULL
+  </select>
+
+  <select id="selectNumberCount" resultType="int">
+    select count(*)
+from his_nurse
+  </select>
+
+  <select id="selectByNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select his_nurse.*
+from his_nurse
+where number = #{number,jdbcType=VARCHAR}
+  </select>
+</mapper>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title">药方药品基本信息</h4>
+                <form class="col s12" id="sendForm" action="#">
+                    <input type="hidden" id="id" name="id" th:value="${medicineInfo.id}">
+                    <input type="hidden" name="parentId" th:value="${medicineInfo.parentId}">
+
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="drugsName" name="drugsName" type="text" th:value="${medicineInfo.drugsName}"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label for="drugsName">药 品 名 称</label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="drugsNumb" name="drugsNumb" type="text" th:value="${medicineInfo.drugsNumb}"
+                                   data-error=".errorTxt2">
+                            <div class="errorTxt2"></div>
+                            <label for="drugsNumb">药品编号</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="drugsSpec" name="drugsSpec" type="text" th:value="${medicineInfo.drugsSpec}"/>
+                            <label for="drugsSpec">药 品 规 格</label>
+                        </div>
+                       <!-- <div class="input-field col s4 l4 xl4">
+                            <input id="placeorigin" name="placeorigin" type="text"
+                                   th:value="${medicineInfo.placeorigin}"/>
+                            <label for="placeorigin">源产地</label>
+                        </div>-->
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="prescription" name="prescription" type="text"
+                                   th:value="${medicineInfo.prescription}"/>
+                            <label for="prescription">是否为处方药</label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="mentalMedicine" name="mentalMedicine" type="text"
+                                   th:value="${medicineInfo.mentalMedicine}"/>
+                            <label for="mentalMedicine">是否为精神药品</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="largeUnit" name="largeUnit" type="text" th:value="${medicineInfo.largeUnit}"/>
+                            <label for="largeUnit">大单位</label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="smallUnit" name="smallUnit" type="text" th:value="${medicineInfo.smallUnit}"/>
+                            <label for="smallUnit">小单位</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="conversionRate" name="conversionRate" type="number"
+                                   th:value="${medicineInfo.conversionRate}"/>
+                            <label for="conversionRate">转换率</label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="disable" name="disable" type="text" th:value="${medicineInfo.disable}"/>
+                            <label for="disable">是否停用</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="level" name="level" type="text" th:value="${medicineInfo.level}"/>
+                            <label for="level">药品级别</label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="medicalInsuranceSign" name="medicalInsuranceSign" type="text"
+                                   th:value="${medicineInfo.medicalInsuranceSign}"/>
+                            <label for="medicalInsuranceSign">药品类型</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="baseMedicine" name="baseMedicine" type="text"
+                                   th:value="${medicineInfo.baseMedicine}"/>
+                            <label for="baseMedicine">是否基药</label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="narcoticDrugs" name="narcoticDrugs" type="text"
+                                   th:value="${medicineInfo.narcoticDrugs}"/>
+                            <label for="narcoticDrugs">是否麻醉药品</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="remarks" name="remarks" type="text" th:value="${medicineInfo.remarks}"/>
+                            <label for="remarks">备注</label>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button id="send_btn" class="btn cyan waves-effect waves-light right" type="submit"
+                                    name="action">提交
+                                <i class="mdi-content-send right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+
+<!-- ================================================
+Scripts
+================================================ -->
+<div th:replace="public/base_update_script :: html"></div>
+
+<script th:inline="javascript">
+    $(function () {
+        formCheck();
+
+    });
+
+    function formCheck() {
+        $("#sendForm").validate({
+            rules: {
+                drugsName: {
+                    required: true,
+                    minlength: 1
+                },
+                drugsNumb: {
+                    required: true,
+                    minlength: 1,
+                }
+
+            },
+            messages: {
+                drugsName: {
+                    required: "请输入药品名称",
+                    minlength: "最少包含1个字符"
+                },
+                drugsNumb: {
+                    required: "请输入药品编号",
+                    minlength: "请输入1个字符",
+                },
+
+            },
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+                dialog.confirm('确定提交吗?', function (index, layero){
+                var queryString = $('#sendForm').serialize();
+                $.ahsjajax(
+                    CTX + "/api/prescription/medicine/saveOrUpdate.ahsj",
+                    queryString,
+                    function (msg) {
+                        if (msg.success) {
+                            M.toast({html: msg.message});
+                            parent.grid.search();
+                            dialog.parentclose();
+                            return false;
+                        } else {
+                            M.toast({html: msg.message});
+                            return false;
+                        }
+                    },
+                    function () {
+                        M.toast({html: "网络异常"});
+                        return false;
+                    }
+                );});
+            }
+
+        });
+    }
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisConsultationNoteMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisConsultationNote" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="his_hospital_manage_id" property="hisHospitalManageId" jdbcType="BIGINT" />
+    <result column="applicant_department_id" property="applicantDepartmentId" jdbcType="BIGINT" />
+    <result column="invitee_department_id" property="inviteeDepartmentId" jdbcType="BIGINT" />
+    <result column="applicant_date" property="applicantDate" jdbcType="TIMESTAMP" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="meeting_format" property="meetingFormat" jdbcType="INTEGER" />
+    <result column="medical_history" property="medicalHistory" jdbcType="VARCHAR" />
+    <result column="consultation_purposes" property="consultationPurposes" jdbcType="VARCHAR" />
+    <result column="admitting_diagnosis" property="admittingDiagnosis" jdbcType="VARCHAR" />
+    <result column="applicant_doctor_id" property="applicantDoctorId" jdbcType="BIGINT" />
+    <result column="consultation_opinion" property="consultationOpinion" jdbcType="VARCHAR" />
+    <result column="invitee_doctor_id" property="inviteeDoctorId" jdbcType="BIGINT" />
+    <result column="consultation_date" property="consultationDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, update_date, create_date, his_hospital_manage_id, applicant_department_id, invitee_department_id, 
+    applicant_date, update_user_id, create_user_id, meeting_format, medical_history, 
+    consultation_purposes, admitting_diagnosis, applicant_doctor_id, consultation_opinion, 
+    invitee_doctor_id, consultation_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from his_consultation_note
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from his_consultation_note
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisConsultationNote"  useGeneratedKeys="true" keyProperty="id">
+    insert into his_consultation_note (id, update_date, create_date, 
+      his_hospital_manage_id, applicant_department_id, 
+      invitee_department_id, applicant_date, update_user_id, 
+      create_user_id, meeting_format, medical_history, 
+      consultation_purposes, admitting_diagnosis, 
+      applicant_doctor_id, consultation_opinion, 
+      invitee_doctor_id, consultation_date)
+    values (#{id,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{hisHospitalManageId,jdbcType=BIGINT}, #{applicantDepartmentId,jdbcType=BIGINT}, 
+      #{inviteeDepartmentId,jdbcType=BIGINT}, #{applicantDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, 
+      #{createUserId,jdbcType=BIGINT}, #{meetingFormat,jdbcType=INTEGER}, #{medicalHistory,jdbcType=VARCHAR}, 
+      #{consultationPurposes,jdbcType=VARCHAR}, #{admittingDiagnosis,jdbcType=VARCHAR}, 
+      #{applicantDoctorId,jdbcType=BIGINT}, #{consultationOpinion,jdbcType=VARCHAR}, 
+      #{inviteeDoctorId,jdbcType=BIGINT}, #{consultationDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisConsultationNote" >
+    insert into his_consultation_note
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="hisHospitalManageId != null" >
+        his_hospital_manage_id,
+      </if>
+      <if test="applicantDepartmentId != null" >
+        applicant_department_id,
+      </if>
+      <if test="inviteeDepartmentId != null" >
+        invitee_department_id,
+      </if>
+      <if test="applicantDate != null" >
+        applicant_date,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="meetingFormat != null" >
+        meeting_format,
+      </if>
+      <if test="medicalHistory != null" >
+        medical_history,
+      </if>
+      <if test="consultationPurposes != null" >
+        consultation_purposes,
+      </if>
+      <if test="admittingDiagnosis != null" >
+        admitting_diagnosis,
+      </if>
+      <if test="applicantDoctorId != null" >
+        applicant_doctor_id,
+      </if>
+      <if test="consultationOpinion != null" >
+        consultation_opinion,
+      </if>
+      <if test="inviteeDoctorId != null" >
+        invitee_doctor_id,
+      </if>
+      <if test="consultationDate != null" >
+        consultation_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hisHospitalManageId != null" >
+        #{hisHospitalManageId,jdbcType=BIGINT},
+      </if>
+      <if test="applicantDepartmentId != null" >
+        #{applicantDepartmentId,jdbcType=BIGINT},
+      </if>
+      <if test="inviteeDepartmentId != null" >
+        #{inviteeDepartmentId,jdbcType=BIGINT},
+      </if>
+      <if test="applicantDate != null" >
+        #{applicantDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="meetingFormat != null" >
+        #{meetingFormat,jdbcType=INTEGER},
+      </if>
+      <if test="medicalHistory != null" >
+        #{medicalHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="consultationPurposes != null" >
+        #{consultationPurposes,jdbcType=VARCHAR},
+      </if>
+      <if test="admittingDiagnosis != null" >
+        #{admittingDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="applicantDoctorId != null" >
+        #{applicantDoctorId,jdbcType=BIGINT},
+      </if>
+      <if test="consultationOpinion != null" >
+        #{consultationOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="inviteeDoctorId != null" >
+        #{inviteeDoctorId,jdbcType=BIGINT},
+      </if>
+      <if test="consultationDate != null" >
+        #{consultationDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisConsultationNote" >
+    update his_consultation_note
+    <set >
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hisHospitalManageId != null" >
+        his_hospital_manage_id = #{hisHospitalManageId,jdbcType=BIGINT},
+      </if>
+      <if test="applicantDepartmentId != null" >
+        applicant_department_id = #{applicantDepartmentId,jdbcType=BIGINT},
+      </if>
+      <if test="inviteeDepartmentId != null" >
+        invitee_department_id = #{inviteeDepartmentId,jdbcType=BIGINT},
+      </if>
+      <if test="applicantDate != null" >
+        applicant_date = #{applicantDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="meetingFormat != null" >
+        meeting_format = #{meetingFormat,jdbcType=INTEGER},
+      </if>
+      <if test="medicalHistory != null" >
+        medical_history = #{medicalHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="consultationPurposes != null" >
+        consultation_purposes = #{consultationPurposes,jdbcType=VARCHAR},
+      </if>
+      <if test="admittingDiagnosis != null" >
+        admitting_diagnosis = #{admittingDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="applicantDoctorId != null" >
+        applicant_doctor_id = #{applicantDoctorId,jdbcType=BIGINT},
+      </if>
+      <if test="consultationOpinion != null" >
+        consultation_opinion = #{consultationOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="inviteeDoctorId != null" >
+        invitee_doctor_id = #{inviteeDoctorId,jdbcType=BIGINT},
+      </if>
+      <if test="consultationDate != null" >
+        consultation_date = #{consultationDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisConsultationNote" >
+    update his_consultation_note
+    set update_date = #{updateDate,jdbcType=TIMESTAMP},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      his_hospital_manage_id = #{hisHospitalManageId,jdbcType=BIGINT},
+      applicant_department_id = #{applicantDepartmentId,jdbcType=BIGINT},
+      invitee_department_id = #{inviteeDepartmentId,jdbcType=BIGINT},
+      applicant_date = #{applicantDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      meeting_format = #{meetingFormat,jdbcType=INTEGER},
+      medical_history = #{medicalHistory,jdbcType=VARCHAR},
+      consultation_purposes = #{consultationPurposes,jdbcType=VARCHAR},
+      admitting_diagnosis = #{admittingDiagnosis,jdbcType=VARCHAR},
+      applicant_doctor_id = #{applicantDoctorId,jdbcType=BIGINT},
+      consultation_opinion = #{consultationOpinion,jdbcType=VARCHAR},
+      invitee_doctor_id = #{inviteeDoctorId,jdbcType=BIGINT},
+      consultation_date = #{consultationDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.userinfor.dao.RoleOrganizationMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.userinfor.entity.RoleOrganization" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="role_id" property="roleId" jdbcType="BIGINT" />
+    <result column="tree_id" property="treeId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, role_id, tree_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from role_org_rel
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from role_org_rel
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.userinfor.entity.RoleOrganization" >
+    insert into role_org_rel (id, role_id, tree_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{treeId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.userinfor.entity.RoleOrganization" >
+    insert into role_org_rel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="treeId != null" >
+        tree_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="treeId != null" >
+        #{treeId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.userinfor.entity.RoleOrganization" >
+    update role_org_rel
+    <set >
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="treeId != null" >
+        tree_id = #{treeId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.userinfor.entity.RoleOrganization" >
+    update role_org_rel
+    set role_id = #{roleId,jdbcType=BIGINT},
+      tree_id = #{treeId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="TreeResultMap" type="com.ahsj.userinfor.entity.TreeEntity" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="pId" property="pId" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="isParent" property="isParent" jdbcType="BOOLEAN" />
+    <result column="open" property="open" jdbcType="BOOLEAN" />
+    <result column="checked" property="checked" jdbcType="BOOLEAN" />
+
+  </resultMap>
+  <!--自定义-->
+  <!--查询所有菜单树-->
+  <select id="listOrgnizationMenuTree" parameterType="com.ahsj.userinfor.entity.Role" resultMap="TreeResultMap">
+    select
+    id,
+    pId,
+    name,
+    isParent,
+    open,
+    checked
+    from
+    (
+    select
+    organization.tree_id as id,
+    parent_id as pId,
+    name as name,
+    case when parent_id = 0 then true else false end as isParent,
+    false as open,
+    case when role_org_rel.id is null then false else true end as checked,
+    organization.order_no order_num
+    from organization
+    left join role_org_rel on role_org_rel.tree_id = organization.tree_id
+    and role_org_rel.role_id = 1
+    union all
+    select
+    tree_id as id,
+    parent_id as pId,
+    menu_name as name,
+    case when has_sub = 0 then true else false end as isParent,
+    false as open,
+    case when role_permission.id is null then false else true end as checked,
+    menu.order_num
+    from menu
+    left join role_permission on menu.tree_id = role_permission.menu_tree_id
+    and role_permission.role_id = #{id,jdbcType=BIGINT}
+    <if test="companyId != 1">
+      ,
+      user_role,role,role_permission role_p
+      where user_role.role_id = role.id
+      and role_p.role_id = role.id
+      and user_role.user_id = #{userId,jdbcType=BIGINT}
+      and role_p.menu_tree_id = menu.tree_id
+    </if>
+    union all
+    select
+    menu_operate.permission as id,
+    menu.tree_id as pId,
+    operate.name as name,
+    false as isParent,
+    false as open,
+    case when role_permission.id is null then false else true end as checked,
+    operate.order_num
+    from menu_operate left join  role_permission on menu_operate.permission = role_permission.menu_tree_id
+    and role_permission.role_id = #{id,jdbcType=BIGINT},
+    operate,
+    menu
+    <if test="companyId != 1">
+      ,
+      user_role,role,role_permission role_p
+    </if>
+    where menu_operate.menu_id = menu.id
+    and menu_operate.operate_id = operate.id
+    <if test="companyId != 1">
+      and user_role.role_id = role.id
+      and role_p.role_id = role.id
+      and user_role.user_id = #{userId,jdbcType=BIGINT}
+      and role_p.menu_tree_id = menu_operate.permission
+    </if>
+    ) a
+    order by a.pId, a.order_num asc
+  </select>
+</mapper>

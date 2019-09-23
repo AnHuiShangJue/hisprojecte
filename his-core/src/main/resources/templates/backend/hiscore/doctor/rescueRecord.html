@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+
+<div th:replace="public/base_print :: html"></div>
+<body>
+<div class="container">
+    <div class="row valign-wrapper">
+        <div class="col s6 m6 l6 center">
+            <h5><span id="currentDate" name="currentDate" ></span></h5>
+        </div>
+        <div class="col s6 m6 l6 center">
+
+            <h5>抢救记录</h5>
+        </div>
+    </div>
+
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12">
+            <table>
+                <tr>
+                    <td>抢救过程记录：</td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div  class="row valign-wrapper">
+        <div class="col s12 m12 l12 right">
+            <p>医师签名：</p>
+        </div>
+
+    </div>
+</div>
+
+<div th:replace="public/base_list_script :: html"></div>
+<div th:replace="public/base_print_script :: html"></div>
+<script th:inline="javascript">
+
+</script>
+</body>
+</html>

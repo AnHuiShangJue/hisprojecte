@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.hiscore.dao.HisDailyCourseMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisDailyCourse" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="his_hospital_manage_id" property="hisHospitalManageId" jdbcType="BIGINT" />
+    <result column="symptom" property="symptom" jdbcType="VARCHAR" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="emotion" property="emotion" jdbcType="VARCHAR" />
+    <result column="psychology" property="psychology" jdbcType="VARCHAR" />
+    <result column="diet" property="diet" jdbcType="VARCHAR" />
+    <result column="sleep" property="sleep" jdbcType="VARCHAR" />
+    <result column="relieve_oneself" property="relieveOneself" jdbcType="VARCHAR" />
+    <result column="lesion_change" property="lesionChange" jdbcType="VARCHAR" />
+    <result column="symptom_change" property="symptomChange" jdbcType="VARCHAR" />
+    <result column="sign_change" property="signChange" jdbcType="VARCHAR" />
+    <result column="diagnose" property="diagnose" jdbcType="VARCHAR" />
+    <result column="examine" property="examine" jdbcType="VARCHAR" />
+    <result column="clinic_important" property="clinicImportant" jdbcType="VARCHAR" />
+    <result column="clinic" property="clinic" jdbcType="VARCHAR" />
+    <result column="measure" property="measure" jdbcType="VARCHAR" />
+    <result column="measure_result" property="measureResult" jdbcType="VARCHAR" />
+    <result column="evolve" property="evolve" jdbcType="VARCHAR" />
+    <result column="detail" property="detail" jdbcType="VARCHAR" />
+    <result column="indication" property="indication" jdbcType="VARCHAR" />
+    <result column="kind" property="kind" jdbcType="VARCHAR" />
+    <result column="dosage" property="dosage" jdbcType="VARCHAR" />
+    <result column="prescription_update" property="prescriptionUpdate" jdbcType="VARCHAR" />
+    <result column="prescription_update_id" property="prescriptionUpdateId" jdbcType="BIGINT" />
+    <result column="update_reason" property="updateReason" jdbcType="VARCHAR" />
+    <result column="circulation" property="circulation" jdbcType="VARCHAR" />
+    <result column="circulation_indication" property="circulationIndication" jdbcType="VARCHAR" />
+    <result column="circulation_kind" property="circulationKind" jdbcType="VARCHAR" />
+    <result column="circulation_amount" property="circulationAmount" jdbcType="VARCHAR" />
+    <result column="blood_transfusion_reflect" property="bloodTransfusionReflect" jdbcType="VARCHAR" />
+    <result column="ward_round" property="wardRound" jdbcType="VARCHAR" />
+    <result column="consultation" property="consultation" jdbcType="VARCHAR" />
+    <result column="executive_condition" property="executiveCondition" jdbcType="VARCHAR" />
+    <result column="important_thing" property="importantThing" jdbcType="VARCHAR" />
+    <result column="record_date" property="recordDate" jdbcType="TIMESTAMP" />
+    <result column="doctor_id" property="doctorId" jdbcType="BIGINT" />
+    <result column="sign" property="sign" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, his_hospital_manage_id, symptom, create_user_id, create_date, update_date, update_user_id, 
+    emotion, psychology, diet, sleep, relieve_oneself, lesion_change, symptom_change, 
+    sign_change, diagnose, examine, clinic_important, clinic, measure, measure_result, 
+    evolve, detail, indication, kind, dosage, prescription_update, prescription_update_id, 
+    update_reason, circulation, circulation_indication, circulation_kind, circulation_amount, 
+    blood_transfusion_reflect, ward_round, consultation, executive_condition, important_thing, 
+    record_date, doctor_id, sign
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from his_daily_course
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from his_daily_course
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisDailyCourse"  useGeneratedKeys="true" keyProperty="id">
+    insert into his_daily_course (id, his_hospital_manage_id, symptom, 
+      create_user_id, create_date, update_date, 
+      update_user_id, emotion, psychology, 
+      diet, sleep, relieve_oneself, 
+      lesion_change, symptom_change, sign_change, 
+      diagnose, examine, clinic_important, 
+      clinic, measure, measure_result, 
+      evolve, detail, indication, 
+      kind, dosage, prescription_update, 
+      prescription_update_id, update_reason, circulation, 
+      circulation_indication, circulation_kind, 
+      circulation_amount, blood_transfusion_reflect, 
+      ward_round, consultation, executive_condition, 
+      important_thing, record_date, doctor_id, 
+      sign)
+    values (#{id,jdbcType=BIGINT}, #{hisHospitalManageId,jdbcType=BIGINT}, #{symptom,jdbcType=VARCHAR}, 
+      #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{updateUserId,jdbcType=BIGINT}, #{emotion,jdbcType=VARCHAR}, #{psychology,jdbcType=VARCHAR}, 
+      #{diet,jdbcType=VARCHAR}, #{sleep,jdbcType=VARCHAR}, #{relieveOneself,jdbcType=VARCHAR}, 
+      #{lesionChange,jdbcType=VARCHAR}, #{symptomChange,jdbcType=VARCHAR}, #{signChange,jdbcType=VARCHAR}, 
+      #{diagnose,jdbcType=VARCHAR}, #{examine,jdbcType=VARCHAR}, #{clinicImportant,jdbcType=VARCHAR}, 
+      #{clinic,jdbcType=VARCHAR}, #{measure,jdbcType=VARCHAR}, #{measureResult,jdbcType=VARCHAR}, 
+      #{evolve,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR}, #{indication,jdbcType=VARCHAR}, 
+      #{kind,jdbcType=VARCHAR}, #{dosage,jdbcType=VARCHAR}, #{prescriptionUpdate,jdbcType=VARCHAR}, 
+      #{prescriptionUpdateId,jdbcType=BIGINT}, #{updateReason,jdbcType=VARCHAR}, #{circulation,jdbcType=VARCHAR}, 
+      #{circulationIndication,jdbcType=VARCHAR}, #{circulationKind,jdbcType=VARCHAR}, 
+      #{circulationAmount,jdbcType=VARCHAR}, #{bloodTransfusionReflect,jdbcType=VARCHAR}, 
+      #{wardRound,jdbcType=VARCHAR}, #{consultation,jdbcType=VARCHAR}, #{executiveCondition,jdbcType=VARCHAR}, 
+      #{importantThing,jdbcType=VARCHAR}, #{recordDate,jdbcType=TIMESTAMP}, #{doctorId,jdbcType=BIGINT}, 
+      #{sign,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisDailyCourse" >
+    insert into his_daily_course
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="hisHospitalManageId != null" >
+        his_hospital_manage_id,
+      </if>
+      <if test="symptom != null" >
+        symptom,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="emotion != null" >
+        emotion,
+      </if>
+      <if test="psychology != null" >
+        psychology,
+      </if>
+      <if test="diet != null" >
+        diet,
+      </if>
+      <if test="sleep != null" >
+        sleep,
+      </if>
+      <if test="relieveOneself != null" >
+        relieve_oneself,
+      </if>
+      <if test="lesionChange != null" >
+        lesion_change,
+      </if>
+      <if test="symptomChange != null" >
+        symptom_change,
+      </if>
+      <if test="signChange != null" >
+        sign_change,
+      </if>
+      <if test="diagnose != null" >
+        diagnose,
+      </if>
+      <if test="examine != null" >
+        examine,
+      </if>
+      <if test="clinicImportant != null" >
+        clinic_important,
+      </if>
+      <if test="clinic != null" >
+        clinic,
+      </if>
+      <if test="measure != null" >
+        measure,
+      </if>
+      <if test="measureResult != null" >
+        measure_result,
+      </if>
+      <if test="evolve != null" >
+        evolve,
+      </if>
+      <if test="detail != null" >
+        detail,
+      </if>
+      <if test="indication != null" >
+        indication,
+      </if>
+      <if test="kind != null" >
+        kind,
+      </if>
+      <if test="dosage != null" >
+        dosage,
+      </if>
+      <if test="prescriptionUpdate != null" >
+        prescription_update,
+      </if>
+      <if test="prescriptionUpdateId != null" >
+        prescription_update_id,
+      </if>
+      <if test="updateReason != null" >
+        update_reason,
+      </if>
+      <if test="circulation != null" >
+        circulation,
+      </if>
+      <if test="circulationIndication != null" >
+        circulation_indication,
+      </if>
+      <if test="circulationKind != null" >
+        circulation_kind,
+      </if>
+      <if test="circulationAmount != null" >
+        circulation_amount,
+      </if>
+      <if test="bloodTransfusionReflect != null" >
+        blood_transfusion_reflect,
+      </if>
+      <if test="wardRound != null" >
+        ward_round,
+      </if>
+      <if test="consultation != null" >
+        consultation,
+      </if>
+      <if test="executiveCondition != null" >
+        executive_condition,
+      </if>
+      <if test="importantThing != null" >
+        important_thing,
+      </if>
+      <if test="recordDate != null" >
+        record_date,
+      </if>
+      <if test="doctorId != null" >
+        doctor_id,
+      </if>
+      <if test="sign != null" >
+        sign,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="hisHospitalManageId != null" >
+        #{hisHospitalManageId,jdbcType=BIGINT},
+      </if>
+      <if test="symptom != null" >
+        #{symptom,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="emotion != null" >
+        #{emotion,jdbcType=VARCHAR},
+      </if>
+      <if test="psychology != null" >
+        #{psychology,jdbcType=VARCHAR},
+      </if>
+      <if test="diet != null" >
+        #{diet,jdbcType=VARCHAR},
+      </if>
+      <if test="sleep != null" >
+        #{sleep,jdbcType=VARCHAR},
+      </if>
+      <if test="relieveOneself != null" >
+        #{relieveOneself,jdbcType=VARCHAR},
+      </if>
+      <if test="lesionChange != null" >
+        #{lesionChange,jdbcType=VARCHAR},
+      </if>
+      <if test="symptomChange != null" >
+        #{symptomChange,jdbcType=VARCHAR},
+      </if>
+      <if test="signChange != null" >
+        #{signChange,jdbcType=VARCHAR},
+      </if>
+      <if test="diagnose != null" >
+        #{diagnose,jdbcType=VARCHAR},
+      </if>
+      <if test="examine != null" >
+        #{examine,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicImportant != null" >
+        #{clinicImportant,jdbcType=VARCHAR},
+      </if>
+      <if test="clinic != null" >
+        #{clinic,jdbcType=VARCHAR},
+      </if>
+      <if test="measure != null" >
+        #{measure,jdbcType=VARCHAR},
+      </if>
+      <if test="measureResult != null" >
+        #{measureResult,jdbcType=VARCHAR},
+      </if>
+      <if test="evolve != null" >
+        #{evolve,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null" >
+        #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="indication != null" >
+        #{indication,jdbcType=VARCHAR},
+      </if>
+      <if test="kind != null" >
+        #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="dosage != null" >
+        #{dosage,jdbcType=VARCHAR},
+      </if>
+      <if test="prescriptionUpdate != null" >
+        #{prescriptionUpdate,jdbcType=VARCHAR},
+      </if>
+      <if test="prescriptionUpdateId != null" >
+        #{prescriptionUpdateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateReason != null" >
+        #{updateReason,jdbcType=VARCHAR},
+      </if>
+      <if test="circulation != null" >
+        #{circulation,jdbcType=VARCHAR},
+      </if>
+      <if test="circulationIndication != null" >
+        #{circulationIndication,jdbcType=VARCHAR},
+      </if>
+      <if test="circulationKind != null" >
+        #{circulationKind,jdbcType=VARCHAR},
+      </if>
+      <if test="circulationAmount != null" >
+        #{circulationAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodTransfusionReflect != null" >
+        #{bloodTransfusionReflect,jdbcType=VARCHAR},
+      </if>
+      <if test="wardRound != null" >
+        #{wardRound,jdbcType=VARCHAR},
+      </if>
+      <if test="consultation != null" >
+        #{consultation,jdbcType=VARCHAR},
+      </if>
+      <if test="executiveCondition != null" >
+        #{executiveCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="importantThing != null" >
+        #{importantThing,jdbcType=VARCHAR},
+      </if>
+      <if test="recordDate != null" >
+        #{recordDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="doctorId != null" >
+        #{doctorId,jdbcType=BIGINT},
+      </if>
+      <if test="sign != null" >
+        #{sign,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisDailyCourse" >
+    update his_daily_course
+    <set >
+      <if test="hisHospitalManageId != null" >
+        his_hospital_manage_id = #{hisHospitalManageId,jdbcType=BIGINT},
+      </if>
+      <if test="symptom != null" >
+        symptom = #{symptom,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="emotion != null" >
+        emotion = #{emotion,jdbcType=VARCHAR},
+      </if>
+      <if test="psychology != null" >
+        psychology = #{psychology,jdbcType=VARCHAR},
+      </if>
+      <if test="diet != null" >
+        diet = #{diet,jdbcType=VARCHAR},
+      </if>
+      <if test="sleep != null" >
+        sleep = #{sleep,jdbcType=VARCHAR},
+      </if>
+      <if test="relieveOneself != null" >
+        relieve_oneself = #{relieveOneself,jdbcType=VARCHAR},
+      </if>
+      <if test="lesionChange != null" >
+        lesion_change = #{lesionChange,jdbcType=VARCHAR},
+      </if>
+      <if test="symptomChange != null" >
+        symptom_change = #{symptomChange,jdbcType=VARCHAR},
+      </if>
+      <if test="signChange != null" >
+        sign_change = #{signChange,jdbcType=VARCHAR},
+      </if>
+      <if test="diagnose != null" >
+        diagnose = #{diagnose,jdbcType=VARCHAR},
+      </if>
+      <if test="examine != null" >
+        examine = #{examine,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicImportant != null" >
+        clinic_important = #{clinicImportant,jdbcType=VARCHAR},
+      </if>
+      <if test="clinic != null" >
+        clinic = #{clinic,jdbcType=VARCHAR},
+      </if>
+      <if test="measure != null" >
+        measure = #{measure,jdbcType=VARCHAR},
+      </if>
+      <if test="measureResult != null" >
+        measure_result = #{measureResult,jdbcType=VARCHAR},
+      </if>
+      <if test="evolve != null" >
+        evolve = #{evolve,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null" >
+        detail = #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="indication != null" >
+        indication = #{indication,jdbcType=VARCHAR},
+      </if>
+      <if test="kind != null" >
+        kind = #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="dosage != null" >
+        dosage = #{dosage,jdbcType=VARCHAR},
+      </if>
+      <if test="prescriptionUpdate != null" >
+        prescription_update = #{prescriptionUpdate,jdbcType=VARCHAR},
+      </if>
+      <if test="prescriptionUpdateId != null" >
+        prescription_update_id = #{prescriptionUpdateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateReason != null" >
+        update_reason = #{updateReason,jdbcType=VARCHAR},
+      </if>
+      <if test="circulation != null" >
+        circulation = #{circulation,jdbcType=VARCHAR},
+      </if>
+      <if test="circulationIndication != null" >
+        circulation_indication = #{circulationIndication,jdbcType=VARCHAR},
+      </if>
+      <if test="circulationKind != null" >
+        circulation_kind = #{circulationKind,jdbcType=VARCHAR},
+      </if>
+      <if test="circulationAmount != null" >
+        circulation_amount = #{circulationAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodTransfusionReflect != null" >
+        blood_transfusion_reflect = #{bloodTransfusionReflect,jdbcType=VARCHAR},
+      </if>
+      <if test="wardRound != null" >
+        ward_round = #{wardRound,jdbcType=VARCHAR},
+      </if>
+      <if test="consultation != null" >
+        consultation = #{consultation,jdbcType=VARCHAR},
+      </if>
+      <if test="executiveCondition != null" >
+        executive_condition = #{executiveCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="importantThing != null" >
+        important_thing = #{importantThing,jdbcType=VARCHAR},
+      </if>
+      <if test="recordDate != null" >
+        record_date = #{recordDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="doctorId != null" >
+        doctor_id = #{doctorId,jdbcType=BIGINT},
+      </if>
+      <if test="sign != null" >
+        sign = #{sign,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisDailyCourse" >
+    update his_daily_course
+    set his_hospital_manage_id = #{hisHospitalManageId,jdbcType=BIGINT},
+      symptom = #{symptom,jdbcType=VARCHAR},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      emotion = #{emotion,jdbcType=VARCHAR},
+      psychology = #{psychology,jdbcType=VARCHAR},
+      diet = #{diet,jdbcType=VARCHAR},
+      sleep = #{sleep,jdbcType=VARCHAR},
+      relieve_oneself = #{relieveOneself,jdbcType=VARCHAR},
+      lesion_change = #{lesionChange,jdbcType=VARCHAR},
+      symptom_change = #{symptomChange,jdbcType=VARCHAR},
+      sign_change = #{signChange,jdbcType=VARCHAR},
+      diagnose = #{diagnose,jdbcType=VARCHAR},
+      examine = #{examine,jdbcType=VARCHAR},
+      clinic_important = #{clinicImportant,jdbcType=VARCHAR},
+      clinic = #{clinic,jdbcType=VARCHAR},
+      measure = #{measure,jdbcType=VARCHAR},
+      measure_result = #{measureResult,jdbcType=VARCHAR},
+      evolve = #{evolve,jdbcType=VARCHAR},
+      detail = #{detail,jdbcType=VARCHAR},
+      indication = #{indication,jdbcType=VARCHAR},
+      kind = #{kind,jdbcType=VARCHAR},
+      dosage = #{dosage,jdbcType=VARCHAR},
+      prescription_update = #{prescriptionUpdate,jdbcType=VARCHAR},
+      prescription_update_id = #{prescriptionUpdateId,jdbcType=BIGINT},
+      update_reason = #{updateReason,jdbcType=VARCHAR},
+      circulation = #{circulation,jdbcType=VARCHAR},
+      circulation_indication = #{circulationIndication,jdbcType=VARCHAR},
+      circulation_kind = #{circulationKind,jdbcType=VARCHAR},
+      circulation_amount = #{circulationAmount,jdbcType=VARCHAR},
+      blood_transfusion_reflect = #{bloodTransfusionReflect,jdbcType=VARCHAR},
+      ward_round = #{wardRound,jdbcType=VARCHAR},
+      consultation = #{consultation,jdbcType=VARCHAR},
+      executive_condition = #{executiveCondition,jdbcType=VARCHAR},
+      important_thing = #{importantThing,jdbcType=VARCHAR},
+      record_date = #{recordDate,jdbcType=TIMESTAMP},
+      doctor_id = #{doctorId,jdbcType=BIGINT},
+      sign = #{sign,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

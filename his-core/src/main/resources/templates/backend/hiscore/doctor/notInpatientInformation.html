@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+<!--Form Advance-->
+<div class="row">
+    <div class="row">
+        <div class="col s12 m12 l12">
+            <div id="validation" class="card card card-default scrollspy">
+                <div class="card-content">
+                    <h4 class="card-title">就诊记录查看</h4><label style="color:black">Visit record
+                </label>
+                    <form class="col s12" id="sendForm" action="#">
+                        <input type="hidden" id="id" name="id" th:value="${hisMedicalRecord.id}">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="medicalRecordId" name="medicalRecordId" type="text" th:value="${hisMedicalRecord.medicalRecordId}"
+                                   th:readonly="true"/>
+                            <label for="medicalRecordId">就诊记录编号<span style="font-size: 12px">(Visit record number
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="name" name="name" type="text" th:value="${hisPatientInfo.name}"
+                                   th:readonly="true"/>
+                            <label for="name">姓 名<span style="font-size: 12px">(name
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input name="sex" id="sex" type="text" typeKey="sex"
+                                   th:value="${hisPatientInfo.sexName}"
+                                   th:readonly="true"/>
+                            <label for="sex">性 别<span style="font-size: 12px">(sex
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="age" name="age" type="number" th:value="${hisPatientInfo.age}"
+                                   th:readonly="true"/>
+                            <label for="age">年 龄<span style="font-size: 12px">(age)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="idcard" name="idcard" type="text"  th:value="${hisPatientInfo.idcard}"
+                                   th:readonly="true"/>
+                            <label for="idcard">身份证号码<span style="font-size: 12px">(id card)</span></label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 x12 l12 xl12">
+
+            <iframe id="topframe" name="rightframeName" class="framecontent" frameborder="0" height="1000px" width="100%" scrolling="auto" ></iframe>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+    function initIframe() {
+        if ([[${isOpreate}]] != null){
+            $("#topframe").attr("src",CTX + "/api/treatmentplan/record/index.ahsj?token=" + TOKEN + "&id=" + [[${hisMedicalRecord.id}]]+"&isOpreate="+[[${isOpreate}]]);
+
+        } else {
+            $("#topframe").attr("src",CTX + "/api/treatmentplan/plan/index.ahsj?token=" + TOKEN + "&id=" + [[${hisMedicalRecord.id}]]+"&doctorId="+[[${hisMedicalRecord.doctorId }]]);
+
+        }
+    }
+
+    $(function () {
+        initIframe();
+
+    });
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a  id="tmp" >查看</a>
+<script th:inline="javascript">
+ var tmp = document.getElementById("tmp");
+ tmp.href = "WebOffice://|Officectrl|http://192.168.0.174:8003/hiscore/api/wordplugin/edit/index.ahsj?token="+[[${token}]]+"&id=1&hospitalNumber=3109310&type=1"
+</script>
+</body>
+</html>

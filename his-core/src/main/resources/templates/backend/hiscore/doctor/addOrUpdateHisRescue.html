@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<!-- Form with validation -->
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title">抢救记录信息</h4>
+                <label style="color:black">Newborn information</label>
+                <form class="col s12" id="sendForm" action="#">
+                    <input type="hidden" id="id" name="id" th:value="${hisRescue.id}">
+                    <input type="hidden" id="patientId" name="patientId" th:value="${hisRescue.patientId}">
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="recordNumber" name="recordNumber" type="text" class="validate" th:value="${hisRescue.recordNumber}" readonly="readonly"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label for="recordNumber">就诊记录编号<span style="font-size: 12px">(Medical record number)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="patientName" name="patientName" type="text" class="validate"  readonly="readonly" th:value="${hisRescue.patientName}"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label for="patientName">病 人 姓 名<span style="font-size: 12px">(Disease name)</span></label>
+                        </div>
+
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="familyName" name="familyName" type="text"  th:value="${hisRescue.familyName}"
+                                   data-error=".errorTxt2"/>
+                            <div class="errorTxt2"></div>
+                            <label for="familyName">家属姓名<span style="font-size: 12px">(Family name)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="relationship" name="relationship" type="text"  th:value="${hisRescue.relationship}"
+                                   data-error=".errorTxt2"/>
+                            <div class="errorTxt2"></div>
+                            <label for="relationship">与患者的关系<span style="font-size: 12px">(relationship with the patient)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="mainSign" name="mainSign"  type="text"  th:value="${hisRescue.mainSign}"
+                                   data-error=".errorTxt2"/>
+                            <div class="errorTxt2"></div>
+                            <label for="mainSign">主要征象<span style="font-size: 12px">(main signs)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="briefSymptomSign" name="briefSymptomSign" type="text"  th:value="${hisRescue.briefSymptomSign}"/>
+                            <label for="briefSymptomSign">简要症状体征<span
+                                    style="font-size: 12px">(Brief symptoms and signs)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="physicalExaminationResult" name="physicalExaminationResult" type="text"  th:value="${hisRescue.physicalExaminationResult}"/>
+                            <label for="physicalExaminationResult">重点体检结果<span style="font-size: 12px">(Key physical examination results)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="emergencyTestResult" name="emergencyTestResult" type="text"  th:value="${hisRescue.emergencyTestResult}"/>
+                            <label for="emergencyTestResult">急诊检验结果<span style="font-size: 12px">(Emergency examination results)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="specialInspectionResult" name="specialInspectionResult" type="text"  th:value="${hisRescue.specialInspectionResult}"/>
+                            <label for="specialInspectionResult">特殊检查结果<span
+                                    style="font-size: 12px">(Special examination result)</span></label>
+                        </div>
+
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="vitalSignsChanges" name="vitalSignsChanges" type="text"  th:value="${hisRescue.vitalSignsChanges}"/>
+                            <label for="vitalSignsChanges">抢救时生命体征变化<span style="font-size: 12px">(Changes in vital signs during rescue)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="rescueMeasures" name="rescueMeasures" type="text" class="validate" th:value="${hisRescue.rescueMeasures}"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label for="rescueMeasures">抢救措施<span style="font-size: 12px">(The rescue measures)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="consultationOpinion" name="consultationOpinion" type="text"  th:value="${hisRescue.consultationOpinion}"/>
+                            <label for="consultationOpinion">会诊意见<span style="font-size: 12px">(Consultation opinion)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="rescueResult" name="rescueResult" type="text"  th:value="${hisRescue.rescueResult}"/>
+                            <label for="rescueResult">抢救结果<span
+                                    style="font-size: 12px">(Save the result)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="terminatingReasons" name="terminatingReasons" type="text" th:value="${hisRescue.terminatingReasons}"
+                                   data-error=".errorTxt2"/>
+                            <div class="errorTxt2"></div>
+                            <label for="terminatingReasons">终止抢救的理由<span style="font-size: 12px">(Reasons for the termination of rescue)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="nextStep" name="nextStep" type="text"  th:value="${hisRescue.nextStep}"/>
+                            <label for="nextStep">抢救成功后下一步进行的措施<span style="font-size: 12px">(The next step after successful rescue)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="medicalCare" name="medicalCare" type="text"  th:value="${hisRescue.medicalCare}"/>
+                            <label for="medicalCare">医疗护理应注意的问题<span style="font-size: 12px">(Problems that should be paid attention to in medical care)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="deathBasis" name="deathBasis" type="text"  th:value="${hisRescue.deathBasis}"/>
+                            <label for="deathBasis">患者死亡依据<span style="font-size: 12px">(Death criteria)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="familyOpinion" name="familyOpinion" type="text"  th:value="${hisRescue.familyOpinion}"/>
+                            <label for="familyOpinion">家属对抢救的意见<span style="font-size: 12px">(Family members' opinions on rescue)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="specialRequirements" name="specialRequirements" type="text"  th:value="${hisRescue.specialRequirements}"/>
+                            <label for="specialRequirements">特殊尸体护理要求<span style="font-size: 12px">(Special corpse care requirements)</span></label>
+                        </div>
+
+                        <div class="input-field col s4 l4 xl4 jeinpbox">
+                           <!-- <input id="endTime" name="endTime" type="text"  th:value="${hisRescue.endTime}"/>-->
+                            <input type="text" id="startTime" class="jeinput" name="startTime"
+                                   readonly="readonly" autocomplete="off"
+                                   th:placeholder="${#dates.format(hisRescue.startTime, 'yyyy-MM-dd HH:mm:ss')}"
+                                   th:value="${#dates.format(hisRescue.startTime, 'yyyy-MM-dd HH:mm:ss')}">
+                            <label for="startTime">抢救开始时间<span style="font-size: 12px">(Rescue time)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4 jeinpbox">
+                           <!-- <input id="endTime" name="endTime" type="text"  th:value="${hisRescue.endTime}"/>-->
+                            <input type="text" id="endTime" class="jeinput" name="endTime"
+                                   readonly="readonly" autocomplete="off"
+                                   th:placeholder="${#dates.format(hisRescue.endTime, 'yyyy-MM-dd HH:mm:ss')}"
+                                   th:value="${#dates.format(hisRescue.endTime, 'yyyy-MM-dd HH:mm:ss')}">
+                            <label for="endTime">抢救结束时间<span style="font-size: 12px">(End of rescue time)</span></label>
+                        </div>
+
+
+
+
+
+
+                        <div class="input-field col s4 l4 xl4">
+                            <select ahsj:select name="familyIsSign" id="familyIsSign" type="code" typeKey="yes_or_no"  th:value="${hisRescue.familyIsSign}" >
+                            </select>
+                            <label for="familyIsSign">家属是否签字<span style="font-size: 12px">(Family member's signature)</span></label>
+                        </div>
+
+                        <!--<div>
+                            <input id="bid" type="hidden" name="patientId" th:value="${bid}">
+                        </div>-->
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12" th:if="${one != 1 }">
+                            <button id="send_btn" class="btn cyan waves-effect waves-light right" type="submit"
+                                    name="action">提 交
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+
+    var wardIdSelect = $("#bedNumber");
+    $(function () {
+        var enLang = {
+            name: "en",
+            month: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
+            weeks: ["SUN", "MON", "TUR", "WED", "THU", "FRI", "SAT"],
+            times: ["Hour", "Minute", "Second"],
+            timetxt: ["Time", "Start Time", "End Time"],
+            backtxt: "Back",
+            clear: "Clear",
+            today: "Now",
+            yes: "Confirm",
+            close: "Close"
+        }
+        jeDate("#endTime", {
+            theme: {bgcolor: "#00A1CB", pnColor: "#00CCFF"},
+            minDate: "1900-01-01",              //最小日期
+            maxDate: "2099-12-31",              //最大日期
+            method: {
+                choose: function (params) {
+
+                }
+            },
+            format: "YYYY-MM-DD hh:mm:ss"
+        });
+        jeDate("#startTime", {
+            theme: {bgcolor: "#00A1CB", pnColor: "#00CCFF"},
+            minDate: "1900-01-01",              //最小日期
+            maxDate: "2099-12-31",              //最大日期
+            method: {
+                choose: function (params) {
+
+                }
+            },
+            format: "YYYY-MM-DD hh:mm:ss"
+        });
+        formCheck();
+        getSelectHome();
+    });
+
+    function formCheck() {
+        $("#sendForm").validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 2
+                },
+                number: {
+                    required: true,
+                    minlength: 3
+                },
+                idCard: {
+                    required: true,
+                    minlength: 11
+                },
+            },
+            messages: {
+                name: {
+                    required: "请输入名称",
+                    minlength: "最少包含2个字符"
+                },
+                number: {
+                    required: "请输入工号",
+                    minlength: "最少输入3个字符"
+                },
+                idCard: {
+                    required: "请输入身份证号码",
+                    minlength: "最少输入11个字符"
+                }
+
+            },
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+                dialog.confirm('确定提交吗?', function (index, layero) {
+                    var queryString = $('#sendForm').serialize();
+                    $.ahsjajax(
+                        CTX + "/api/hisrescue/addOrUpdateHisRescue.ahsj?token=" + TOKEN,
+                        queryString,
+                        function (msg) {
+                            if (msg.success) {
+                                M.toast({html: msg.message});
+                                parent.grid.search();
+                                dialog.parentclose();
+                                return false;
+                            } else {
+                                M.toast({html: msg.message});
+                                return false;
+                            }
+                        },
+                        function () {
+                            M.toast({html: "网络异常"});
+                            return false;
+                        }
+                    );
+                });
+            }
+
+        });
+    }
+
+    function getSelectHome() {
+        $.ahsjajax(
+            CTX + "/api/hisNewborn/add/getHisHospitalManageBed.ahsj",
+            null,
+            function (msg) {
+                data = msg;
+                console.log(data);
+                $(data).each(function (i) {
+                    wardIdSelect.append(
+                        "<option value='" + this.bedsNumber + "'>" + this.bedsNumber + "</option>")
+                });
+                wardIdSelect.formSelect();
+                if (msg.success) {
+                    M.toast({html: msg.message});
+                    return false;
+                } else {
+                    //M.toast({html: msg.message});
+                    return false;
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            })
+    }
+
+
+    $("input").change(function () {
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+
+</body>
+
+</html>

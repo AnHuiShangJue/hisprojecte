@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://mybatis.org/schema/mybatis-mapper" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div th:replace="public/base_update :: html"></div>
+<body>
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title">生活自理能力（ADL）评估单</h4><label style="color:black">
+            </label>
+                <form class="col s12" id="send_Form" action="#">
+                    <div class="row">
+                        <!--<div class="input-field col s4 l4 xl4">-->
+                            <!--<input id="manageNumber" name="manageNumber" type="text" th:value="${manageNumber}" th:readonly="true"/>-->
+                            <!--<label for="manageNumber">住院编号<span style="font-size: 12px">(Hospital number)</span></label>-->
+                        <!--</div>-->
+                        <div class="col s1">
+                            <h6>日常活动项目</h6><label style="color:black">（eating）</label>
+                        </div>
+                        <div class="col s1">
+                            <h6>进餐</h6><label style="color:black">（eating）</label>
+                        </div>
+                        <div class="col s1">
+                            <h6>部分独立或需要部分帮助</h6><label style="color:black">（eating）</label>
+                        </div>
+                        <div class="col s1">
+                            <h6>需要大帮助</h6><label style="color:black">（eating）</label>
+                        </div>
+                        <div class="col s1">
+                            <h6>完全依赖</h6><label style="color:black">（eating）</label>
+                        </div>
+                        <div class="col s1">
+                            <h6>评估日期</h6><label style="color:black">（eating）</label>
+                        </div>
+                        <div class="col s1">
+                            <h6>不选择</h6><label style="color:black">（eating）</label>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col s1">
+                            <h6>进餐</h6><label style="color:black">（eating）</label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="eat1" name="eat" type="radio" value="10" />
+                                <span>10分(score 10)</span>
+                            </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="eat2" name="eat" type="radio" value="5"/>
+                                <span>5分（score 5）</span>
+                            </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="eat3" name="eat" type="radio" value="0"/>
+                                <span>0分（score 0）</span>
+                            </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+
+                        </div>
+                        <div class="input-field col s1 jeinput" style="padding-top:6px">
+                                <input id="dateseat"  class="jeinput " style="width:115px" name="dateseat" type="text" autocomplete="off"/>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="eat4" name="eat" type="radio" value="404" checked/>
+                                <span>不选择（Don't choose）</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s1">
+                            <h6>洗澡</h6><label style="color:black">（Take a shower）</label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="shower1" name="shower" type="radio" value="5"/>
+                                <span>5分（score 5）</span>
+                            </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="shower2" name="shower" type="radio" value="0"/>
+                                <span>0分（score 0）</span>
+                            </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+
+                        </div>
+                        <div class="input-field col s1 jeinput" style="padding-top:6px">
+                            <input id="datesshower"  class="jeinput " style="width:115px" name="datesshower" type="text" autocomplete="off"/>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="shower3" name="shower" type="radio" value="404" checked/>
+                                <span>不选择（Don't choose）</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s1">
+                            <h6>修饰</h6><label style="color:black">（modification）</label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="modification1" name="modification" type="radio" value="5"/>
+                                <span>5分（score 5）</span>
+                            </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="modification2" name="modification" type="radio" value="0"/>
+                                <span>0分（score 0）</span>
+                            </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+
+                        </div>
+                        <div class="input-field col s1 jeinput" style="padding-top:6px">
+                            <input id="datesmodification"  class="jeinput " style="width:115px" name="datesmodification" type="text" autocomplete="off"/>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="modification3" name="modification" type="radio" value="404" checked/>
+                                <span>不选择（Don't choose）</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s1">
+                            <h6>穿衣</h6><label style="color:black">（wear）</label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="wear1" name="wear" type="radio" value="10"/>
+                                <span>10分（score 10）</span>
+                            </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="wear2" name="wear" type="radio" value="5"/>
+                                <span>5分（score 5）</span>
+                            </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="wear3" name="wear" type="radio" value="0"/>
+                                <span>0分（score 0）</span>
+                            </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+
+                        </div>
+                        <div class="input-field col s1 jeinput" style="padding-top:6px">
+                            <input id="dateswear"  class="jeinput " style="width:115px" name="dateswear" type="text" autocomplete="off"/>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="wear4" name="wear" type="radio" value="404" checked/>
+                                <span>不选择（Don't choose）</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s1">
+                            <h6>可控制大便</h6><label style="color:black">（Controllable bowel movement）</label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="shit1" name="shit" type="radio" value="10"/>
+                                <span>10分（score 10）</span>
+                            </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="shit2" name="shit" type="radio" value="5"/>
+                                <span>5分-每周小于一次失控（score 5 - Lose control less than once a week）</span>
+                            </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="shit3" name="shit" type="radio" value="0"/>
+                                <span>0分（score 0-Out of control）</span>
+                            </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+
+                        </div>
+                        <div class="input-field col s1 jeinput" style="padding-top:6px">
+                            <input id="datesshit"  class="jeinput " style="width:115px" name="datesshit" type="text" autocomplete="off"/>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="shit4" name="shit" type="radio" value="404" checked/>
+                                <span>不选择（Don't choose）</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s1">
+                            <h6>可控制小便</h6><label style="color:black">（Controlled urination）</label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="pee1" name="pee" type="radio" value="10"/>
+                                <span>10分（score 10）</span>
+                            </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="pee2" name="pee" type="radio" value="5"/>
+                                <span>5分-每24h小于一次失控（score 5 - Lose control less than once every 24 hours）</span>
+                            </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <input id="pee3" name="pee" type="radio" value="0"/>
+                            <span>0分-失控（score 0-Out of control）</span>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+
+                        </div>
+                        <div class="input-field col s1 jeinput" style="padding-top:6px">
+                            <input id="datespee"  class="jeinput " style="width:115px" name="datespee" type="text" autocomplete="off"/>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="pee4" name="pee" type="radio" value="404" checked/>
+                                <span>不选择（Don't choose）</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s1">
+                            <h6>用厕（包括擦净、整理衣裤、冲水）</h6><label style="color:black">Use the toilet(Including wiping, arranging clothes, flushing)</label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="toilet1" name="toilet" type="radio" value="10"/>
+                                <span>10分（score 10）</span>
+                            </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="toilet2" name="toilet" type="radio" value="5"/>
+                                <span>5分（score 5）</span>
+                            </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <input id="toilet3" name="toilet" type="radio" value="0"/>
+                            <span>0分（score 0）</span>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+
+                        </div>
+                        <div class="input-field col s1 jeinput" style="padding-top:6px">
+                            <input id="datestoilet"  class="jeinput " style="width:115px" name="datestoilet" type="text" autocomplete="off"/>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="toilet4" name="toilet" type="radio" value="404" checked/>
+                                <span>不选择（Don't choose）</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s1">
+                            <h6>床旁椅转移</h6><label style="color:black">Bedside chair transfer
+                        </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="bedsidechair1" name="bedsidechair" type="radio" value="15" />
+                                <span>15（score 15）</span>
+                            </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="bedsidechair2" name="bedsidechair" type="radio" value="10"/>
+                                <span>10分（score 10）</span>
+                            </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="bedsidechair3" name="bedsidechair" type="radio" value="5"/>
+                                <span>5分（score 5）</span>
+                            </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="bedsidechair4" name="bedsidechair" type="radio" value="0"/>
+                                <span>0分（score 0）</span>
+                            </label>
+                        </div>
+                        <div class="input-field col s1 jeinput" style="padding-top:6px">
+                            <input id="datesbedsidechair"  class="jeinput " style="width:115px" name="datesbedsidechair" type="text" autocomplete="off"/>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="bedsidechair5" name="bedsidechair" type="radio" value="404" checked/>
+                                <span>不选择（Don't choose）</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s1">
+                            <h6>平地行走45m</h6><label style="color:black">45m flat ground walk
+                        </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="walk1" name="walk" type="radio" value="15" />
+                                <span>15（score 15）</span>
+                            </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="walk2" name="walk" type="radio" value="10"/>
+                                <span>10分（score10）</span>
+                            </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="walk3" name="walk" type="radio" value="5"/>
+                                <span>5分（score 5）</span>
+                            </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="walk4" name="walk" type="radio" value="0"/>
+                                <span>0分（score 0）</span>
+                            </label>
+                        </div>
+                        <div class="input-field col s1 jeinput" style="padding-top:6px">
+                            <input id="dateswalk"  class="jeinput " style="width:115px" name="dateswalk" type="text" autocomplete="off"/>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="walk5" name="walk" type="radio" value="404" checked/>
+                                <span>不选择（Don't choose）</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s1">
+                            <h6>上下楼梯</h6><label style="color:black">Up and down the stairs
+                        </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="stairs1" name="stairs" type="radio" value="10"/>
+                                <span>10分（score 10）</span>
+                            </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="stairs2" name="stairs" type="radio" value="5"/>
+                                <span>5分（score 5）</span>
+                            </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="stairs3" name="stairs" type="radio" value="0"/>
+                                <span>0分（score 0）</span>
+                            </label>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+
+                        </div>
+                        <div class="input-field col s1 jeinput" style="padding-top:6px">
+                            <input id="datesstairs"  class="jeinput " style="width:115px" name="datesstairs" type="text" autocomplete="off"/>
+                        </div>
+                        <div class="col s1" style="padding-top:6px">
+                            <label>
+                                <input id="stairs4" name="stairs" type="radio" value="404" checked/>
+                                <span>不选择（Don't choose）</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <h6>总分：(Score:)</h6><label style="color:black">
+                            <input id="score"  type="text" th:value="${score}" readonly ="true"/>
+                        </label>
+                        </div>
+                        <div class="input-field col s12">
+                            <button id="send_btn" class="btn cyan waves-effect waves-light right" type="submit" name="action">提交（commit）
+                                <i class="mdi-content-send right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <input type="hidden" id="hospitalnumber" name="hospitalnumber" th:value="${hr}">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<input  type="hidden" id="id" name="id" th:value="${nursingRecord.id}"/>-->
+<!--<input  type="hidden" id="last_manageNumber" name="last_manageNumber" th:value="${last_manageNumber}"/>-->
+
+<!-- ================================================
+Scripts
+================================================ -->
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+    var enLang = {
+        name  : "en",
+        month : ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
+        weeks : [ "SUN","MON","TUR","WED","THU","FRI","SAT" ],
+        times : ["Hour","Minute","Second"],
+        timetxt: ["Time","Start Time","End Time"],
+        backtxt:"Back",
+        clear : "Clear",
+        today : "Now",
+        yes   : "Confirm",
+        close : "Close"
+    };
+    jeDate("#dateswalk",{
+        theme:{bgcolor:"#00A1CB",pnColor:"#00CCFF"},
+        // festival:true,
+        minDate:"1900-01-01",              //最小日期
+        maxDate:"2099-12-31",              //最大日期
+        format: "YYYY-MM-DD hh:mm:ss"
+    });
+    jeDate("#dateseat",{
+        theme:{bgcolor:"#00A1CB",pnColor:"#00CCFF"},
+        // festival:true,
+        minDate:"1900-01-01",              //最小日期
+        maxDate:"2099-12-31",              //最大日期
+        format: "YYYY-MM-DD hh:mm:ss"
+    });
+    jeDate("#datesshower",{
+        theme:{bgcolor:"#00A1CB",pnColor:"#00CCFF"},
+        // festival:true,
+        minDate:"1900-01-01",              //最小日期
+        maxDate:"2099-12-31",              //最大日期
+        format: "YYYY-MM-DD hh:mm:ss"
+    });
+    jeDate("#datestoilet",{
+        theme:{bgcolor:"#00A1CB",pnColor:"#00CCFF"},
+        // festival:true,
+        minDate:"1900-01-01",              //最小日期
+        maxDate:"2099-12-31",              //最大日期
+        format: "YYYY-MM-DD hh:mm:ss"
+    });
+    jeDate("#datesstairs",{
+        theme:{bgcolor:"#00A1CB",pnColor:"#00CCFF"},
+        // festival:true,
+        minDate:"1900-01-01",              //最小日期
+        maxDate:"2099-12-31",              //最大日期
+        format: "YYYY-MM-DD hh:mm:ss"
+    });
+    jeDate("#datesbedsidechair",{
+        theme:{bgcolor:"#00A1CB",pnColor:"#00CCFF"},
+        // festival:true,
+        minDate:"1900-01-01",              //最小日期
+        maxDate:"2099-12-31",              //最大日期
+        format: "YYYY-MM-DD hh:mm:ss"
+    });
+    jeDate("#datespee",{
+        theme:{bgcolor:"#00A1CB",pnColor:"#00CCFF"},
+        // festival:true,
+        minDate:"1900-01-01",              //最小日期
+        maxDate:"2099-12-31",              //最大日期
+        format: "YYYY-MM-DD hh:mm:ss"
+    });
+    jeDate("#datesshit",{
+        theme:{bgcolor:"#00A1CB",pnColor:"#00CCFF"},
+        // festival:true,
+        minDate:"1900-01-01",              //最小日期
+        maxDate:"2099-12-31",              //最大日期
+        format: "YYYY-MM-DD hh:mm:ss"
+    });
+    jeDate("#dateswear",{
+        theme:{bgcolor:"#00A1CB",pnColor:"#00CCFF"},
+        // festival:true,
+        minDate:"1900-01-01",              //最小日期
+        maxDate:"2099-12-31",              //最大日期
+        format: "YYYY-MM-DD hh:mm:ss"
+    });
+    jeDate("#datesmodification",{
+        theme:{bgcolor:"#00A1CB",pnColor:"#00CCFF"},
+        // festival:true,
+        minDate:"1900-01-01",              //最小日期
+        maxDate:"2099-12-31",              //最大日期
+        format: "YYYY-MM-DD hh:mm:ss"
+    });
+
+    //给radiobutton赋值
+    var stairs = [[${hisAdlBarthel.stairs}]]
+    if (stairs == 10){
+        $("input[name='stairs'][value='10']").attr("checked",true)
+    }else if (stairs == 5) {
+        $("input[name='stairs'][value='5']").attr("checked",true)
+    }else if (stairs == 0) {
+        $("input[name='stairs'][value='0']").attr("checked",true)
+    }else {
+        $("input[name='stairs'][value='404']").attr("checked",true)
+    }
+
+    var eat = [[${hisAdlBarthel.eat}]]
+    if (eat == 10){
+        $("input[name='eat'][value='10']").attr("checked",true)
+    }else if (eat == 5) {
+        $("input[name='eat'][value='5']").attr("checked",true)
+    }else if (eat == 0) {
+        $("input[name='eat'][value='0']").attr("checked",true)
+    }else {
+        $("input[name='eat'][value='404']").attr("checked",true)
+    }
+
+    var shower = [[${hisAdlBarthel.shower}]]
+    if (shower == 5) {
+        $("input[name='shower'][value='5']").attr("checked",true)
+    }else if (shower == 0) {
+        $("input[name='shower'][value='0']").attr("checked",true)
+    }else {
+        $("input[name='shower'][value='404']").attr("checked",true)
+    }
+
+    var modification = [[${hisAdlBarthel.modification}]]
+    if (modification == 5) {
+        $("input[name='modification'][value='5']").attr("checked",true)
+    }else if (modification == 0) {
+        $("input[name='modification'][value='0']").attr("checked",true)
+    }else {
+        $("input[name='modification'][value='404']").attr("checked",true)
+    }
+
+    var shit = [[${hisAdlBarthel.shit}]]
+    if (shit == 10){
+        $("input[name='shit'][value='10']").attr("checked",true)
+    }else if (shit == 5) {
+        $("input[name='shit'][value='5']").attr("checked",true)
+    }else if (shit == 0) {
+        $("input[name='shit'][value='0']").attr("checked",true)
+    }else {
+        $("input[name='shit'][value='404']").attr("checked",true)
+    }
+
+    var pee = [[${hisAdlBarthel.pee}]]
+    if (pee == 10){
+        $("input[name='pee'][value='10']").attr("checked",true)
+    }else if (pee == 5) {
+        $("input[name='pee'][value='5']").attr("checked",true)
+    }else if (pee == 0) {
+        $("input[name='pee'][value='0']").attr("checked",true)
+    }else {
+        $("input[name='pee'][value='404']").attr("checked",true)
+    }
+
+    var toilet = [[${hisAdlBarthel.toilet}]]
+    if (toilet == 10){
+        $("input[name='toilet'][value='10']").attr("checked",true)
+    }else if (toilet == 5) {
+        $("input[name='toilet'][value='5']").attr("checked",true)
+    }else if (toilet == 0) {
+        $("input[name='toilet'][value='0']").attr("checked",true)
+    }else {
+        $("input[name='toilet'][value='404']").attr("checked",true)
+    }
+
+    var bedsidechair = [[${hisAdlBarthel.bedsidechair}]]
+    if (bedsidechair == 15){
+        $("input[name='bedsidechair'][value='15']").attr("checked",true)
+    }else if (bedsidechair == 10){
+        $("input[name='bedsidechair'][value='10']").attr("checked",true)
+    }else if (bedsidechair == 5) {
+        $("input[name='bedsidechair'][value='5']").attr("checked",true)
+    }else if (bedsidechair == 0) {
+        $("input[name='bedsidechair'][value='0']").attr("checked",true)
+    }else {
+        $("input[name='bedsidechair'][value='404']").attr("checked",true)
+    }
+
+    var walk = [[${hisAdlBarthel.walk}]]
+    if (walk == 15){
+        $("input[name='walk'][value='15']").attr("checked",true)
+    }else if (bedsidechair == 10){
+        $("input[name='walk'][value='10']").attr("checked",true)
+    }else if (bedsidechair == 5) {
+        $("input[name='walk'][value='5']").attr("checked",true)
+    }else if (bedsidechair == 0) {
+        $("input[name='walk'][value='0']").attr("checked",true)
+    }else {
+        $("input[name='walk'][value='404']").attr("checked",true)
+    }
+
+
+
+
+
+
+
+    $(function () {
+        formCheck();
+    });
+
+    function formCheck() {
+        $("#send_Form").validate({
+            rules: {
+            },
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+                dialog.confirm('确定提交吗?', function (index, layero){
+                    var queryString = $('#send_Form').serialize();
+                    console.log("queryString is" + queryString);
+                    $.ahsjajax(
+                        CTX + "/api/hisAdlBarthel/saveOrUpdate.ahsj?token=" + TOKEN,
+                        queryString,
+                        function (msg) {
+                            if (msg.success) {
+                                M.toast({html: msg.message});
+                                parent.grid.search();
+                                dialog.parentclose();
+                                return false;
+                            } else {
+                                M.toast({html: msg.message});
+                                return false;
+                            }
+                        },
+                        function () {
+                            M.toast({html: "网络异常"});
+                            return false;
+                        }
+                    );});
+            }
+        });
+    }
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</body>
+
+</html>

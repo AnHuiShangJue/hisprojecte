@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:replace="public/base_list :: html"></div>
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+<!-- Start Page Loading -->
+<div class="row">
+    <div class="breadcrumbs-inline pt-3 pb-1" id="breadcrumbs-wrapper">
+        <!-- Search for small screen-->
+        <div class="container">
+            <div class="row">
+                <div class="col s10 m6 l6 breadcrumbs-left">
+                    <h5 class="breadcrumbs-title mt-0 mb-0 display-inline hide-on-small-and-down">DataTable</h5>
+                    <ol class="breadcrumbs mb-0">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#">Table</a>
+                        </li>
+                        <li class="breadcrumb-item active">DataTable
+                        </li>
+                    </ol>
+                </div>
+                <div class="col s2 m6 l6"><a
+                        class="btn btn-floating dropdown-settings waves-effect waves-light breadcrumbs-btn right"
+                        href="#!" data-target="dropdown1"><i class="material-icons">expand_more </i><i
+                        class="material-icons right">arrow_drop_down</i></a>
+                    <ul class="dropdown-content" id="dropdown1" tabindex="0">
+                        <li tabindex="0"><a class="grey-text text-darken-2"
+                                            href="user-profile-page.html">Profile<span
+                                class="new badge red">2</span></a></li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="app-contacts.html">Contacts</a>
+                        </li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="page-faq.html">FAQ</a></li>
+                        <li class="divider" tabindex="-1"></li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="user-login.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 x12 l12 xl12">
+        <div class="container">
+            <div class="section section-data-tables">
+                <div class="card">
+                    <div class="card-content">
+                        <form id="searchForm" class="row" action="">
+                            <div class="row">
+                                <div>
+                                    <input id="planDetail" type="hidden" th:value="${buyplanId}">
+                                </div>
+                                <div class="col input-field s3 m3 l3 xl3">
+                                    <input id="name" name="name" type="text"/>
+                                    <label for="name">耗材名称<span style="font-size: 12px">(Supplies name)</span></label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <div class="col s2 m2 l2 xl2 offset-l1">
+                            <a  class="waves-effect waves-light btn" id="searchBtn"><i
+                                    class="material-icons  white-text tooltipped " data-position="bottom"
+                                    data-delay="50" data-tooltip="搜索">search</i></a>
+                            <a id="resetBtn" class="waves-effect waves-light btn"><i
+                                    class="material-icons  white-text tooltipped " data-position="bottom"
+                                    data-delay="50" data-tooltip="重置">youtube_searched_for</i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12 x12 l12 xl12">
+                    <div class="card">
+                        <div class="card-content">
+                            <h4 class="card-title">操作台
+                            </h4><label style="color:black">Console</label>
+                            <div class="row">
+                                <div class="col s2 m2 l2 xl2 offset-xl10">
+                                    <a  id="btnEdit" class="btn waves-effect waves-light red">
+                                        <i class="material-icons  white-text tooltipped " data-position="bottom" data-delay="50" data-tooltip="编辑">edit</i>
+                                    </a>
+                                    <a id="btnDeleteMany" class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1">
+                                        <i class="material-icons white-text tooltipped" data-position="bottom" data-delay="50" data-tooltip="批量删除">delete</i>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--Form Advance-->
+                            <div class="row">
+                                <div id="refreshtable" class="col l12 m12 l12 xl12">
+                                    <table id="data-table-simple" class="display">
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div th:replace="public/base_list_script :: html"></div>
+<script type="text/javascript" th:src="@{/hiscore/assets/global/js/ahsj.selfdatatable.js}"></script>
+<script type="text/javascript">
+    var grid = new Datatable();
+    $(document).ready(function () {
+        initBtn();
+        initTable();
+    });
+
+    function initTable() {
+        grid.init({
+            src: $("#data-table-simple"),
+            onSuccess: function (grid) {
+            },
+            onError: function (grid) {
+            },
+            onDataLoad: function (grid) {
+            },
+            loadingMessage: 'Loading...',
+            dataTable: {
+                "ajax": {
+                    "url": CTX+"/api/hisconsumablesbuyplandetails/details.ahsj?token=" +TOKEN + "&buyplanId="+ $('#planDetail').val(), // ajax source
+                },
+                "columns": [
+                    {
+                        "title": "<label><input type=\"checkbox\"  id=\"checkAll\" class=\"select-all\" > <span></span></label> ",
+                        "render": function (data, type, row, meta) {
+                            return " <label> <input type=\"checkbox\" value=\"" + row.id + "\"> <span></span> </label>";
+                        },
+                        "width": "18px",
+                        "orderable": false,//取消排序功能
+                        "className": "center-align"/*center-align代表中心对齐*/
+                    },
+                    {
+                        "title":"计划编号",
+                        "data":"buyplanId",
+                        "name":"buyplan_id",
+                        "orderable": false//取消排序功能
+                    },
+                    {
+                        "title": "耗材名称",
+                        "data": "name",
+                        "name": "name",
+                        "orderable": false//取消排序功能
+                    },
+                    {
+                        "title": "耗材规格",
+                        "data": "spec",
+                        "name": "spec",
+                        "orderable": false
+                    },{
+                        "title":"单价",
+                        "data":"price",
+                        "name":"price"
+                    },{
+                        "title":"预计购入数量",
+                        "data":"enterCountPlan",
+                        "name":"enter_count_plan"
+                    },{
+                        "title": "操作",
+                        "width": "60px",
+                        "className": "centered",
+                        "orderable": false,
+                        "render": function (data, type, row) {
+                            var rtnBtn = "";
+                            //如果获取字符串，必须在参数外反转"
+                            rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick='deleteInit(" + row.id + ");'> <i class='material-icons'>delete</i></a>";
+                            // 返回自定义内容
+                            return rtnBtn;
+                        }
+                    }
+                ],
+                "order" : [ [ 2, "asc" ] ],
+            },
+        });
+
+    }
+
+    // function edit(id) {
+    //     var url = CTX+"/api/hisconsumables/update/index.ahsj?token="+TOKEN+"&id="+id;
+    //     dialog.show(url, "修改用户信息");
+    // }
+
+    function deleteInit(id) {
+        dialog.confirm('确定删除?', function (index, layero) {
+            $.ahsjajax(CTX + "/api/hisconsumablesbuyplandetails/delete.ahsj",
+                {"ids": id},
+                function (msg) {
+                    if (msg.success) {
+                        swal.close();
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                        grid.search();
+                    } else {
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                    }
+                },
+                function (data) {
+                    M.toast({
+                        html: "网络异常", completeCallback: function () {
+                        }
+                    });
+                }
+            );
+        });
+    }
+
+
+    function initBtn() {
+        //搜索按钮
+        $('#searchBtn').click(function () {
+            grid.search();
+        });
+        $("#btnEdit").click(function () {
+            //编辑单条计划内容---->
+            var url = CTX + "/api/hisconsumablesbuyplandetails/edit/index.ahsj?token=" + TOKEN +"&buyplanId="+ $('#planDetail').val();
+            dialog.show(url, "药品采购计划详细信息编辑")
+        });
+
+        $("#btnDeleteMany").click(function () {
+            var ids = grid.getSelectedRows();
+            if (ids.length == 0) {
+                dialog.warn("请至少选择一条数据");
+                return;
+            }
+            deleteInit(ids.join(','));
+        });
+        $('#resetBtn').click(function () {
+            grid.reset();
+        });
+    }
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+</body>
+</html>
+

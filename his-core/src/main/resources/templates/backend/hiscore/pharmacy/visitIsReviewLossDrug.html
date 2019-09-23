@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy">
+            <div class="card-content">
+                <h4 class="card-title">已审核药品详细信息查看</h4>
+                <form class="col s12" id="sendForm" action="#">
+                    <input type="hidden" id="id" name="id" th:value="${hisDrugLossReporting.id}">
+                    <input type="hidden" id="pharmacyId" name="pharmacyId"
+                           th:value="${hisDrugLossReporting.pharmacyId}">
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="drugs_numb" name="drugsNumb" type="text"
+                                   th:value="${hisDrugLossReporting.drugsNumb}"
+                                   th:readonly="true"/>
+                            <label for="drugs_numb">药品编号</label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="drugs_name" name="drugsName" type="text"
+                                   th:value="${hisDrugLossReporting.drugsName}"
+                                   th:readonly="true"/>
+                            <label for="drugs_name">药品名称</label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="drugs_spec" name="drugsSpec" type="text"
+                                   th:value="${hisDrugLossReporting.drugsSpec}"
+                                   th:readonly="true"/>
+                            <label for="drugs_spec">药品规格</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="salePrice" name="salePrice" type="number"
+                                   th:value="${hisDrugLossReporting.salePrice}"
+                                   th:readonly="true"/>
+                            <label for="salePrice">售 价</label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="enterPrice" name="enterPrice" type="number"
+                                   th:value="${hisDrugLossReporting.enterPrice}"
+                                   th:readonly="true"/>
+                            <label for="enterPrice">进 价</label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="validity_period" name="validityPeriod" type="text"
+                                   th:placeholder="${#dates.format(hisDrugLossReporting.validityPeriod, 'yyyy/MM/dd')}"
+                                   th:value="${#dates.format(hisDrugLossReporting.validityPeriod, 'yyyy/MM/dd')}"
+                                   th:readonly="true"/>
+                            <label for="validity_period">有效期 </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                     <!--   <div class="input-field col s4 l4 xl4">
+                            <input name="manufacturersName" id="manufacturers" type="text" typeKey="placeOrigin"
+                                   th:value="${hisDrugLossReporting.manufacturersName}"
+                                   th:readonly="true"/>
+                            <label for="manufacturers">生产商家（原产地）</label>
+                        </div>-->
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="largeUnit" name="largeUnit" type="text"
+                                   th:value="${hisDrugLossReporting.largeUnit}" th:readonly="true"/>
+                            <label for="largeUnit">药品大单位</label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="smallUnit" name="smallUnit" type="text"
+                                   th:value="${hisDrugLossReporting.smallUnit}" th:readonly="true"/>
+                            <label for="smallUnit">药品小单位</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input name="typeName" id="type" type="text" typeKey="loss_type"
+                                   th:value="${hisDrugLossReporting.typeName}" th:readonly="true"/>
+                            <label for="type">报损类型</label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input name="number" id="number" type="number"
+                                   th:value="${hisDrugLossReporting.number}"
+                                   th:readonly="true"/>
+                            <label for="number">报损数量</label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="createDate" name="createDate" type="text"
+                                   th:placeholder="${#dates.format(hisDrugLossReporting.createDate, 'yyyy/MM/dd')}"
+                                   th:value="${#dates.format(hisDrugLossReporting.createDate, 'yyyy/MM/dd')}"
+                                   th:readonly="true"/>
+                            <label for="createDate">报损日期 </label>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="input-field col s12 x12 l12 xl12">
+                            <input name="treatmentMeasures" id="treatmentMeasures" type="text"
+                                   th:value="${hisDrugLossReporting.treatmentMeasures}"th:readonly="true"/>
+                            <label for="treatmentMeasures">处理措施 </label>
+                        </div>
+                        <div class="input-field col s12 x12 l12 xl12">
+                            <input name="remarks" id="remarks" type="text"
+                                   th:value="${hisDrugLossReporting.remarks}"th:readonly="true"/>
+                            <label for="remarks">备注 </label>
+                        </div>
+                        <div class="input-field col s12 x12 l12 xl12">
+                            <input id="reason" name="reason" type="text"
+                                   th:value="${hisDrugLossReporting.reason}"th:readonly="true"/>
+                            <label for="reason">报损原因</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ================================================
+Scripts
+================================================ -->
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+    $(function () {
+    });
+
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</body>
+
+</html>

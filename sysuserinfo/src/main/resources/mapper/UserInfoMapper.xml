@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.sysuserinfo.dao.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.sysuserinfo.entity.UserInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="tel_phone" property="telPhone" jdbcType="VARCHAR" />
+    <result column="specialty" property="specialty" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="CHAR" />
+    <result column="dept_id" property="deptId" jdbcType="VARCHAR" />
+    <result column="qq" property="qq" jdbcType="VARCHAR" />
+    <result column="card_no" property="cardNo" jdbcType="VARCHAR" />
+    <result column="agency_years" property="agencyYears" jdbcType="DECIMAL" />
+    <result column="is_certificate" property="isCertificate" jdbcType="VARCHAR" />
+    <result column="mail" property="mail" jdbcType="VARCHAR" />
+    <result column="order_no" property="orderNo" jdbcType="INTEGER" />
+    <result column="qrcode" property="qrcode" jdbcType="VARCHAR" />
+    <result column="original_file_name" property="originalFileName" jdbcType="VARCHAR" />
+    <result column="is_init_data" property="isInitData" jdbcType="VARCHAR" />
+    <result column="company_id" property="companyId" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="VARCHAR" />
+    <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+
+    <result column="roleIdStr" property="roleIdStr" jdbcType="VARCHAR" />
+    <result column="roleNameStr" property="roleNameStr" jdbcType="VARCHAR" />
+    <result column="is_leader" property="isLeader" jdbcType="VARCHAR" />
+    <result column="userDeptId" property="userDeptId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, type, user_id, user_name, sex, tel_phone, specialty, password, dept_id, qq, card_no, 
+    agency_years, is_certificate, mail, order_no, qrcode, original_file_name, is_init_data, 
+    company_id, del_flag, create_user_id, create_date, update_user_id, update_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" parameterType="com.ahsj.sysuserinfo.entity.UserInfo" >
+    insert into user_info (id, type, user_id, 
+      user_name, sex, tel_phone, 
+      specialty, password, dept_id, 
+      qq, card_no, agency_years, 
+      is_certificate, mail, order_no, 
+      qrcode, original_file_name, is_init_data, 
+      company_id, del_flag, create_user_id, 
+      create_date, update_user_id, update_date
+      )
+    values (#{id,jdbcType=BIGINT}, #{type,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{telPhone,jdbcType=VARCHAR}, 
+      #{specialty,jdbcType=VARCHAR}, #{password,jdbcType=CHAR}, #{deptId,jdbcType=VARCHAR}, 
+      #{qq,jdbcType=VARCHAR}, #{cardNo,jdbcType=VARCHAR}, #{agencyYears,jdbcType=DECIMAL}, 
+      #{isCertificate,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}, #{orderNo,jdbcType=INTEGER}, 
+      #{qrcode,jdbcType=VARCHAR}, #{originalFileName,jdbcType=VARCHAR}, #{isInitData,jdbcType=VARCHAR}, 
+      #{companyId,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" parameterType="com.ahsj.sysuserinfo.entity.UserInfo" >
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="telPhone != null" >
+        tel_phone,
+      </if>
+      <if test="specialty != null" >
+        specialty,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="deptId != null" >
+        dept_id,
+      </if>
+      <if test="qq != null" >
+        qq,
+      </if>
+      <if test="cardNo != null" >
+        card_no,
+      </if>
+      <if test="agencyYears != null" >
+        agency_years,
+      </if>
+      <if test="isCertificate != null" >
+        is_certificate,
+      </if>
+      <if test="mail != null" >
+        mail,
+      </if>
+      <if test="orderNo != null" >
+        order_no,
+      </if>
+      <if test="qrcode != null" >
+        qrcode,
+      </if>
+      <if test="originalFileName != null" >
+        original_file_name,
+      </if>
+      <if test="isInitData != null" >
+        is_init_data,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="telPhone != null" >
+        #{telPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="specialty != null" >
+        #{specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=CHAR},
+      </if>
+      <if test="deptId != null" >
+        #{deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNo != null" >
+        #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyYears != null" >
+        #{agencyYears,jdbcType=DECIMAL},
+      </if>
+      <if test="isCertificate != null" >
+        #{isCertificate,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=INTEGER},
+      </if>
+      <if test="qrcode != null" >
+        #{qrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="originalFileName != null" >
+        #{originalFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="isInitData != null" >
+        #{isInitData,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.sysuserinfo.entity.UserInfo" >
+    update user_info
+    <set >
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="telPhone != null" >
+        tel_phone = #{telPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="specialty != null" >
+        specialty = #{specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=CHAR},
+      </if>
+      <if test="deptId != null" >
+        dept_id = #{deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNo != null" >
+        card_no = #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="agencyYears != null" >
+        agency_years = #{agencyYears,jdbcType=DECIMAL},
+      </if>
+      <if test="isCertificate != null" >
+        is_certificate = #{isCertificate,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        mail = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        order_no = #{orderNo,jdbcType=INTEGER},
+      </if>
+      <if test="qrcode != null" >
+        qrcode = #{qrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="originalFileName != null" >
+        original_file_name = #{originalFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="isInitData != null" >
+        is_init_data = #{isInitData,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.sysuserinfo.entity.UserInfo" >
+    update user_info
+    set type = #{type,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      tel_phone = #{telPhone,jdbcType=VARCHAR},
+      specialty = #{specialty,jdbcType=VARCHAR},
+      password = #{password,jdbcType=CHAR},
+      dept_id = #{deptId,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      card_no = #{cardNo,jdbcType=VARCHAR},
+      agency_years = #{agencyYears,jdbcType=DECIMAL},
+      is_certificate = #{isCertificate,jdbcType=VARCHAR},
+      mail = #{mail,jdbcType=VARCHAR},
+      order_no = #{orderNo,jdbcType=INTEGER},
+      qrcode = #{qrcode,jdbcType=VARCHAR},
+      original_file_name = #{originalFileName,jdbcType=VARCHAR},
+      is_init_data = #{isInitData,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!--自定义sql-->
+  <select id="selectByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    user_org_rel.is_leader,
+    user_info.*,
+    organization.name as dept_name
+    from user_info left join user_org_rel on user_info.id = user_org_rel.user_id
+    left join organization on user_org_rel.dept_id = organization.tree_id
+    where user_info.user_id = #{parameter.userId,jdbcType=VARCHAR}
+  </select>
+  <!--通过组织ID查询-->
+  <select id="listUserByOrgId" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    select  user_info.*,
+    user_org_rel.id as userDeptId,
+    user_org_rel.is_leader
+    from user_info ,
+    user_org_rel
+    where user_info.id =  user_org_rel.user_id
+    <if test="parameter.deptId != null and parameter.deptId != '' and parameter.deptId != '1' ">
+      and user_org_rel.dept_id = ${parameter.deptId}
+    </if>
+    <if test="parameter.companyPrivi != null and parameter.companyPrivi != ''">
+      and ${parameter.companyPrivi}
+    </if>
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+  <select id="listNotSelectUserByOrgId" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    select  user_info.*  from user_info where user_info.id not in (select user_id from user_org_rel)
+    <if test="parameter.companyPrivi != null and parameter.companyPrivi != ''">
+      and ${parameter.companyPrivi}
+    </if>
+    <if test="parameter.userId != null and parameter.userId != '' " >
+      and user_id like concat('%' #{parameter.userId,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+
+  </select>
+  <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+      select
+         user_info.*
+      from user_info
+      left join user_org_rel on user_org_rel.user_id = user_info.id
+      left join organization on user_org_rel.dept_id = organization.id
+      where
+       1=1
+    <if test="parameter.userId != null and parameter.userId != '' " >
+      and user_id like concat('%' #{parameter.userId,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+  <!-- 自定义 -->
+  <resultMap id="selectResultMap" type="com.ahsj.sysuserinfo.entity.SelectEntity" >
+    <result column="value" property="value" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="index" property="index" jdbcType="INTEGER" />
+    <result column="nested" property="nested" jdbcType="VARCHAR" />
+    <result column="selected" property="selected" jdbcType="BOOLEAN" />
+  </resultMap>
+  <!-- 查询角色下面的用户 -->
+  <select id="listUserInfo" parameterType="com.ahsj.sysuserinfo.entity.UserInfo" resultMap="selectResultMap">
+    select
+     distinct
+      user_info.id as value,
+      concat(user_info.user_id ,"(",user_info.user_name,")") as name,
+      case when user_role.id is null then false else true end as selected
+    from user_info left join user_role on user_info.id = user_role.user_id
+    and user_role.role_id = #{roleIdStr,jdbcType=BIGINT},
+    role
+    where
+    role.id = #{roleIdStr,jdbcType=BIGINT}
+  </select>
+
+
+  <select id="selectByDeptId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/> from user_info WHERE dept_id = #{deptId}
+  </select>
+
+  <select id="getUserLoginId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT  <include refid="Base_Column_List"/> from   user_info  where  user_id = #{userId}
+  </select>
+
+  <select id="getUserId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    SELECT  <include refid="Base_Column_List"/> from   user_info  where  id = #{id}
+  </select>
+
+</mapper>

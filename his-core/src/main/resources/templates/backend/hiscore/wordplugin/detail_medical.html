@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://mybatis.org/schema/mybatis-mapper">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <title>temp</title>
+</head>
+<body onload="javascript:WebOpen();">
+文件名称(File Name)：<input type="text" id="fileName" style="width:200px;" th:value="${fileName}">&nbsp;&nbsp;
+<input type="hidden" id="hospitalNumber"  th:value="${hospitalNumber}">
+<br/>
+<br/>
+</div>
+<!-- ================================================
+Scripts
+================================================ -->
+<script th:inline="javascript">
+    var filePath = [[${filePath}]];
+    var type = [[${type}]];
+    var isOpen=false;
+    if (!!window.ActiveXObject || "ActiveXObject" in window) {
+        document.write('<object classid="clsid:FF09E4FA-BFAA-486E-ACB4-86EB0AE875D5" codebase="WebOffice.ocx#Version=2019,1,7,3" id="WebOffice" width="900" height="700" >');
+        document.write('</object>');
+    } else {
+        document.write('<object id="WebOffice" CLSID="{FF09E4FA-BFAA-486E-ACB4-86EB0AE875D5}" TYPE="application/x-itst-activex"  width=100% height=900></object>');
+    }
+    var WebOffice;
+
+    function startInit() {
+        WebOffice.Caption = '欢迎使用';
+        WebOffice.Menubar = 'true';
+    }
+
+    function WebOpen()
+    {
+        WebOffice = document.getElementById("WebOffice");
+        startInit();
+        //通过对象WebOffice的Open方法打开个一个服务器文档
+        //此处服务器文档地址为：http://www.officectrl.com/officecs/temp/file1.doc
+        var url= encodeURI("http://192.168.0.99:8003/zuul/hiscore/api/wordplugin/download/index.ahsj?fileName="+filePath+"&token=" + [[${token}]]);
+        // var url= encodeURI("http://192.168.0.174:8003/zuul/hiscore/api/wordplugin/download/index.ahsj?fileName="+filePath+"&token=" + [[${token}]]);
+        WebOffice.Open(url, false, "Word.Document");
+        isOpen=true;
+    }
+
+</script>
+
+</body>
+
+</html>
