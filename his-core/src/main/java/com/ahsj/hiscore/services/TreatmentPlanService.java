@@ -24,6 +24,7 @@ public interface TreatmentPlanService {
      *@Date 2019-07-11
      *@Time 17:17
     **/
+
     Message saveOrUpdate(HisMedical hisMedical, List<HisMedicationDetails> detailsList, List<HisRecordProject> projects, Long recordId) throws Exception;
 
 
