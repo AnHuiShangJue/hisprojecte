@@ -250,6 +250,7 @@ public class RegisteredController extends BaseOAController {
             Translate clo1 = iTranslateService.queryTranslateClo(translate);
 
             hisRegistered.setDepartmentName(clo1.getTranslateKhmer());
+            hisRegistered.setDepartmentNameEnlish(clo1.getTranslateChina());
 
 
             detail.setCode(hisRegistered.getRegisteredCategory().toString());
@@ -261,6 +262,7 @@ public class RegisteredController extends BaseOAController {
             translate1.setTranslateColumn("value");
             Translate clo = iTranslateService.queryTranslateClo(translate1);
             hisRegistered.setCategoryName(clo.getTranslateKhmer());
+            hisRegistered.setCategoryNameEnlish(clo.getTranslateChina());
 
 
             modelAndView.addObject("hisregistered", hisRegistered);

@@ -75,7 +75,18 @@
     <input id="type" th:value="${hisMedicalOrder.type}" type="hidden">
     <div class="row valign-wrapper">
         <div class="col s12 m12 l12">
-            <table id="table_id" style="font: 15px 'Roboto Condensed',Sans-serif"></table>
+            <table class="bordered centered "  style="font: 15px 'Roboto Condensed',Sans-serif" >
+                <tr>
+                    <th>序号(Serial number)</th>
+                    <th>开始时间(Starting time)</th>
+                    <th>医嘱内容(Medical content)</th>
+                </tr>
+                <tr th:each="c:${hisMedicalOrderDetailList}" >
+                    <td th:text="${c.orderNum}"></td>
+                    <td th:text="${c.startTime}"></td>
+                    <td th:text="${c.name}"></td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>

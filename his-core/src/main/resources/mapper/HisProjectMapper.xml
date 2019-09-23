@@ -32,9 +32,9 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-    id, create_date, create_user_id, update_date, update_user_id, name, description, 
-    type, price, number, pinyin_code, unit, department_id, is_enable,num
-  </sql>
+        id, create_date, create_user_id, update_date, update_user_id, name, description,
+        type, price, number, pinyin_code, unit, department_id, is_enable,num
+    </sql>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
 
@@ -44,22 +44,22 @@
         where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from his_project
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+        delete from his_project
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.ahsj.hiscore.entity.HisProject">
 
-    insert into his_project (id, create_date, create_user_id, 
-      update_date, update_user_id, name, 
-      description, type, price, 
-      number, pinyin_code, unit, 
-      department_id, is_enable,num)
-    values (#{id,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, 
-      #{updateDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
-      #{description,jdbcType=VARCHAR}, #{type,jdbcType=SMALLINT}, #{price,jdbcType=DECIMAL}, 
-      #{number,jdbcType=VARCHAR}, #{pinyinCode,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR},
-      #{departmentId,jdbcType=BIGINT}, #{isEnable,jdbcType=INTEGER}, #{num,jdbcType=INTEGER})
-  </insert>
+        insert into his_project (id, create_date, create_user_id,
+                                 update_date, update_user_id, name,
+                                 description, type, price,
+                                 number, pinyin_code, unit,
+                                 department_id, is_enable,num)
+        values (#{id,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT},
+                #{updateDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR},
+                #{description,jdbcType=VARCHAR}, #{type,jdbcType=SMALLINT}, #{price,jdbcType=DECIMAL},
+                #{number,jdbcType=VARCHAR}, #{pinyinCode,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR},
+                #{departmentId,jdbcType=BIGINT}, #{isEnable,jdbcType=INTEGER}, #{num,jdbcType=INTEGER})
+    </insert>
 
     <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisProject" useGeneratedKeys="true"
             keyProperty="id">
@@ -209,23 +209,23 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisProject">
-    update his_project
-    set create_date = #{createDate,jdbcType=TIMESTAMP},
-      create_user_id = #{createUserId,jdbcType=BIGINT},
-      update_date = #{updateDate,jdbcType=TIMESTAMP},
-      update_user_id = #{updateUserId,jdbcType=BIGINT},
-      name = #{name,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
-      type = #{type,jdbcType=SMALLINT},
-      price = #{price,jdbcType=DECIMAL},
-      number = #{number,jdbcType=VARCHAR},
-      pinyin_code = #{pinyinCode,jdbcType=VARCHAR},
-      unit = #{unit,jdbcType=VARCHAR},
-      department_id = #{departmentId,jdbcType=BIGINT},
-      is_enable = #{isEnable,jdbcType=INTEGER},
-      num = #{num,jdbcType=INTEGER},
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        update his_project
+        set create_date = #{createDate,jdbcType=TIMESTAMP},
+            create_user_id = #{createUserId,jdbcType=BIGINT},
+            update_date = #{updateDate,jdbcType=TIMESTAMP},
+            update_user_id = #{updateUserId,jdbcType=BIGINT},
+            name = #{name,jdbcType=VARCHAR},
+            description = #{description,jdbcType=VARCHAR},
+            type = #{type,jdbcType=SMALLINT},
+            price = #{price,jdbcType=DECIMAL},
+            number = #{number,jdbcType=VARCHAR},
+            pinyin_code = #{pinyinCode,jdbcType=VARCHAR},
+            unit = #{unit,jdbcType=VARCHAR},
+            department_id = #{departmentId,jdbcType=BIGINT},
+            is_enable = #{isEnable,jdbcType=INTEGER},
+            num = #{num,jdbcType=INTEGER},
+            where id = #{id,jdbcType=BIGINT}
+    </update>
 
 
     <!--自定义SQL-->
@@ -242,7 +242,7 @@
             and p.number = #{parameter.number,jdbcType=VARCHAR}
         </if>
         <if test="parameter.pinyinCode != null and parameter.pinyinCode != ''">
-            and pinyin_code like concat('%', #{parameter.pinyinCode,jdbcType=INTEGER},'%')
+            and p.pinyin_code like concat('%', #{parameter.pinyinCode,jdbcType=INTEGER},'%')
         </if>
         <if test="parameter.type != null and parameter.type != ''">
             and p.type = #{parameter.type,jdbcType=INTEGER}
@@ -272,18 +272,18 @@
     </select>
 
     <select id="queryProject" resultMap="BaseResultMap">
-    select
-        h.*
+        select
+            h.*
         from  his_project  h  order by create_date desc limit = 1
-  </select>
+    </select>
 
 
     <select id="queryCombinationId" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select his.id as combination_id, hip.id as inspection_id,
-        his.name as combination_name ,his.number as combination_number ,hip.num as his_project_num ,hip.order_num as
-        his_project_order_num , hp.*
+               his.name as combination_name ,his.number as combination_number ,hip.num as his_project_num ,hip.order_num as
+                   his_project_order_num , hp.*
         from his_inspection_combination his left join his_inspec_project hip on his.id = hip.inspection_id
-        left join his_project hp on hip.project_id = hp.id WHERE his.id = #{combinationId}
+                                            left join his_project hp on hip.project_id = hp.id WHERE his.id = #{combinationId}
 
     </select>
 
@@ -368,7 +368,7 @@
             and p.number like concat('%', #{parameter.number,jdbcType=VARCHAR},'%')
         </if>
         <if test="parameter.pinyinCode != null and parameter.pinyinCode != ''">
-            and pinyin_code like concat('%', #{parameter.pinyinCode,jdbcType=INTEGER},'%')
+            and p.pinyin_code like concat('%', #{parameter.pinyinCode,jdbcType=INTEGER},'%')
         </if>
         <if test="parameter.type != null and parameter.type != ''">
             and p.type = #{parameter.type,jdbcType=INTEGER}
@@ -493,7 +493,7 @@
             and p.name like concat('%', #{name,jdbcType=INTEGER},'%')
         </if>
         <if test="pinyinCode != null and pinyinCode != ''">
-            and pinyin_code like concat('%', #{pinyinCode,jdbcType=INTEGER},'%')
+            and p.pinyin_code like concat('%', #{pinyinCode,jdbcType=INTEGER},'%')
         </if>
         <if test="isEnable != null and isEnable != ''">
             and p.is_enable = #{isEnable,jdbcType=INTEGER}

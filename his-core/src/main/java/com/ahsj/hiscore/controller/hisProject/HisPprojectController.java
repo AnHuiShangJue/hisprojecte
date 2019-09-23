@@ -122,6 +122,7 @@ public class HisPprojectController extends BaseController {
         modelAndView.addObject("token", token);
         modelAndView.addObject("title", "收费信息修改");
         modelAndView.addObject("hisProject", hisProject);
+        System.out.println("-------------------->"+hisProject.getNumber());
         return modelAndView;
     }
 
@@ -203,7 +204,8 @@ public class HisPprojectController extends BaseController {
     @PostMapping("/updateHisProject.ahsj")
     public Message updateHisProject(HisProject hisProject) throws Exception {
         hisProject.setUpdateUserId(getUserId());
-        return hisProjectService.updateByPrimaryKeySelective(hisProject);
+        Message message = hisProjectService.updateByPrimaryKeySelective(hisProject);
+        return message;
     }
 
 
@@ -376,12 +378,12 @@ public class HisPprojectController extends BaseController {
             if (StringUtils.isEmpty(hisProject.getName())){
             }
             String firstChar = PinyinUtils.ToFirstChar(hisProject.getName());
-                hisProject.setPinyinCode(firstChar);
+            hisProject.setPinyinCode(firstChar);
         }
 
         //处理收费类型和字典空值
         for (HisProject hisProject : projectList) {
-            if (hisProject.getName().indexOf("治疗") == -1) {
+            if (hisProject.getName().indexOf("治疗") != -1) {
                 hisProject.setAssitTypeName("治疗");
             } else if (hisProject.getName().indexOf("术") != -1) {
                 hisProject.setAssitTypeName("手术");
@@ -479,7 +481,7 @@ public class HisPprojectController extends BaseController {
         if (!CollectionUtils.isEmpty(list)) {
             list = list.stream().filter(e -> !StringUtils.equals(e.getNumber(), Constants.HIS_NAME)).collect(Collectors.toList());
 
-           hisProjectService.importExcel(list);
+            hisProjectService.importExcel(list);
         }
         //将错误日志存库
         File file = new File(Constants.HIS_SYS_EXCEL_PROJECT_ERROR_FILE_URL);
@@ -531,9 +533,9 @@ public class HisPprojectController extends BaseController {
      * @Time 11:30
      **/
     public Boolean checkHisProject(HisProject hisProject) {
-       if (EmptyUtil.Companion.isNullOrEmpty(hisProject.getPrice()) || EmptyUtil.Companion.isNullOrEmpty(hisProject.getName()) || EmptyUtil.Companion.isNullOrEmpty(hisProject.getNumber())
+        if (EmptyUtil.Companion.isNullOrEmpty(hisProject.getPrice()) || EmptyUtil.Companion.isNullOrEmpty(hisProject.getName()) || EmptyUtil.Companion.isNullOrEmpty(hisProject.getNumber())
         ) {
-           System.out.println("-------"+hisProject.getNumber()+"----"+hisProject.getName()+"-----------"+hisProject.getId()+"------");
+//           System.out.println("-------"+hisProject.getNumber()+"----"+hisProject.getName()+"-----------"+hisProject.getId()+"------");
             return true;
         }
         return false;

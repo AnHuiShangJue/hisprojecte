@@ -542,7 +542,7 @@ public class HisProjectServiceImpl implements HisProjectService {
         for (HisProject hisProject : excelData) {
             boolean updateflag = false;
             for (HisProject project : tempList) {
-                if (project.getName().equals(hisProject.getName())) {
+                if (project.getNumber().equals(hisProject.getNumber())) {
                     updateflag = true;
                     break;
                 }
@@ -561,7 +561,6 @@ public class HisProjectServiceImpl implements HisProjectService {
                 detail.setValue(assitTypeName);
                 detail.setSysCodeType(Constants.HIS_SYS_ASSIT_PROJECT_TYPE);
                 String code = iCodeService.getSysCodeName(detail).getCode();
-                System.out.println("-------" + code);
                 int a = Integer.parseInt(code);
                 short type = (short) a;
                 projectInsertList.get(i).setType(type);
@@ -626,7 +625,7 @@ public class HisProjectServiceImpl implements HisProjectService {
 
         if (projectUpdateList != null && projectUpdateList.size() > 0) {
             for (HisProject project : projectUpdateList) {
-                Long hid = hisProjectMapper.queryHisProjectByName(project.getName()).getId();
+                Long hid = hisProjectMapper.queryHisProjectByNumber(project.getNumber()).getId();
                 String assitTypeName = project.getAssitTypeName();
                 SysCodeDetail detail = new SysCodeDetail();
                 detail.setValue(assitTypeName);

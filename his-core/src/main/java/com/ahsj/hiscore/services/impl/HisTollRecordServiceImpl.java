@@ -859,7 +859,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
     @Override
     @Transactional(readOnly = true)
     public PageBean<HisTollRecord> pharmacyInventory(PageBean<HisTollRecord> pageBean) throws Exception {
-      //  pageBean.setData(CodeHelper.getInstance().setCodeValue(hisTollRecordMapper.pharmacyInventory(pageBean)));
+        //  pageBean.setData(CodeHelper.getInstance().setCodeValue(hisTollRecordMapper.pharmacyInventory(pageBean)));
         return pageBean;
     }
 

@@ -18,12 +18,12 @@
                     <input type="hidden" id="id" name="id" th:value="${hisNewborn.id}">
                     <div class="row">
                         <div class="input-field col s4 l4 xl4">
-                        <input id="bornName" name="bornName" type="text" class="validate" th:value="${hisNewborn.bornName}"
-                               data-error=".errorTxt1"><div class="errorTxt1"></div>
-                        <label for="bornName">姓 名<span style="font-size: 12px">(name)</span></label>
-                    </div>
-           <!--         </div>
-                    <div class="row">-->
+                            <input id="bornName" name="bornName" type="text" class="validate" th:value="${hisNewborn.bornName}"
+                                   data-error=".errorTxt1"><div class="errorTxt1"></div>
+                            <label for="bornName">姓 名<span style="font-size: 12px">(name)</span></label>
+                        </div>
+                        <!--         </div>
+                                 <div class="row">-->
                         <div class="input-field col s4 l4 xl4"  th:if="${one == 0}">
                             <select ahsj:select name="bornSex" id="bornSex" type="code" typeKey="sex" >
                             </select>
@@ -36,15 +36,15 @@
                             <!-- <input id="sex" name="sex" type="text" th:value="${hisNurse.sex}"/>-->
                             <label for="bornSex1">性 别<span style="font-size: 12px">(sex)</span></label>
                         </div>
-              <!--      </div>
-                    <div class="row">-->
+                        <!--      </div>
+                              <div class="row">-->
                         <div class="input-field col s4 l4 xl4"  th:if="${one == 0}">
                             <select  name="bedNumber" id="bedNumber">
                                 <option>选择病床编号</option>
                             </select>
                         </div>
                         <div class="input-field col s4 l4 xl4"  th:if="${one == 1}">
-                          <input id="bedNumber1" name="bedNumber" readonly="readonly" type="number" th:value="${hisNewborn.bedNumber}"
+                            <input id="bedNumber1" name="bedNumber" readonly="readonly" type="number" th:value="${hisNewborn.bedNumber}"
                                    data-error=".errorTxt2"/>
                             <div class="errorTxt2"></div>
                             <label for="bedNumber1">床位号<span style="font-size: 12px">(Bed number)</span></label>
@@ -53,9 +53,9 @@
                             <input id="bornAddress" name="bornAddress" type="text" th:value="${hisNewborn.bornAddress}"/>
                             <label for="bornAddress">新生儿户口地址<span style="font-size: 12px">(Newborn account address)</span></label>
                         </div>
-                  <!--  </div>
+                        <!--  </div>
 
-                    <div class="row">-->
+                          <div class="row">-->
                         <div class="input-field col s4 l4 xl4">
                             <input id="height" name="height" type="number" th:value="${hisNewborn.height}"/>
                             <label for="height">身高（单位：厘米）<span style="font-size: 12px">(height(unit:cm))</span></label>
@@ -73,8 +73,8 @@
                             <input id="national" name="national" type="text" th:value="${hisNewborn.national}"/>
                             <label for="national">民族<span style="font-size: 12px">(Nationality)</span></label>
                         </div>
-                <!--    </div>
-                    <div class="row">-->
+                        <!--    </div>
+                            <div class="row">-->
                         <div class="input-field col s4 l4 xl4">
                             <input id="pName" name="pName" type="text" class="validate" th:value="${hisNewborn.pName}"
                                    data-error=".errorTxt1">
@@ -185,8 +185,8 @@
                     0——无呼吸<br>
                     1——哭声微弱，像是呜咽的声音；呼吸缓慢，而且不规则<br>
                     2——哭声良好响亮；呼吸的频率和力度均匀、正常<br>
-<!--                    简介-->
-<!--                    新生儿评分又称Apgar评分法、阿氏评分，是孩子出生后立即检查他身体状况的标准评估方法。在孩子出生后，根据皮肤颜色、心搏速率、呼吸、肌张力及运动、反射五项体征进行评分。满10分者为正常新生儿，评分7分以下的新生儿考虑患有轻度窒息，评分在4分以下考虑患有重度窒息。大部分新生儿的评分多在7- 10分之间。-->
+                    <!--                    简介-->
+                    <!--                    新生儿评分又称Apgar评分法、阿氏评分，是孩子出生后立即检查他身体状况的标准评估方法。在孩子出生后，根据皮肤颜色、心搏速率、呼吸、肌张力及运动、反射五项体征进行评分。满10分者为正常新生儿，评分7分以下的新生儿考虑患有轻度窒息，评分在4分以下考虑患有重度窒息。大部分新生儿的评分多在7- 10分之间。-->
                     评分具体标准是：<br>
                     1．皮肤颜色：评估新生儿肺部血氧交换的情况。全身皮肤呈粉红色为2分，手脚末梢呈青紫色为1分，全身呈青紫色为0分。<br>
                     2．心搏速率：评估新生儿心脏跳动的强度和节律性。心搏有力大于100次/分钟为2分，心搏微弱小于100次/分钟为1分，听不到心音为0分。<br>
@@ -225,7 +225,7 @@
                 },
                 idCard: {
                     required: true,
-                    minlength: 11
+                    minlength: 0
                 },
             },
             messages: {
@@ -239,7 +239,7 @@
                 },
                 idCard: {
                     required: "请输入身份证号码",
-                    minlength: "最少输入11个字符"
+                    minlength: ""
                 }
 
             },

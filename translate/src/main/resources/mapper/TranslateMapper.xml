@@ -17,11 +17,11 @@
     <result column="translate_column" property="translateColumn" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, translate_id, translate_type, translate_china, translate_Khmer, create_user_id, 
+    id, translate_id, translate_type, translate_china, translate_Khmer, create_user_id,
     create_date, update_user_id, update_date, translate_join, translate_join2,translate_join3,translate_column
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from translate
     where id = #{id,jdbcType=BIGINT}
@@ -31,14 +31,14 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.ahsj.translate.entity.Translate" >
-    insert into translate (id, translate_id, translate_type, 
-      translate_china, translate_Khmer, create_user_id, 
-      create_date, update_user_id, update_date, 
-      translate_join, translate_join2,translate_join3,translate_column)
-    values (#{id,jdbcType=BIGINT}, #{translateId,jdbcType=BIGINT}, #{translateType,jdbcType=VARCHAR}, 
-      #{translateChina,jdbcType=VARCHAR}, #{translateKhmer,jdbcType=VARCHAR}, #{createUserId,jdbcType=BIGINT}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, 
-      #{translateJoin,jdbcType=VARCHAR},#{translateJoin2,jdbcType=VARCHAR},#{translateJoin3,jdbcType=VARCHAR}, #{translateColumn,jdbcType=VARCHAR})
+    insert into translate (id, translate_id, translate_type,
+                           translate_china, translate_Khmer, create_user_id,
+                           create_date, update_user_id, update_date,
+                           translate_join, translate_join2,translate_join3,translate_column)
+    values (#{id,jdbcType=BIGINT}, #{translateId,jdbcType=BIGINT}, #{translateType,jdbcType=VARCHAR},
+            #{translateChina,jdbcType=VARCHAR}, #{translateKhmer,jdbcType=VARCHAR}, #{createUserId,jdbcType=BIGINT},
+            #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP},
+            #{translateJoin,jdbcType=VARCHAR},#{translateJoin2,jdbcType=VARCHAR},#{translateJoin3,jdbcType=VARCHAR}, #{translateColumn,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ahsj.translate.entity.Translate" >
     insert into translate
@@ -170,17 +170,17 @@
   <update id="updateByPrimaryKey" parameterType="com.ahsj.translate.entity.Translate" >
     update translate
     set translate_id = #{translateId,jdbcType=BIGINT},
-      translate_type = #{translateType,jdbcType=VARCHAR},
-      translate_china = #{translateChina,jdbcType=VARCHAR},
-      translate_Khmer = #{translateKhmer,jdbcType=VARCHAR},
-      create_user_id = #{createUserId,jdbcType=BIGINT},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
-      update_user_id = #{updateUserId,jdbcType=BIGINT},
-      update_date = #{updateDate,jdbcType=TIMESTAMP},
-      translate_join = #{translateJoin,jdbcType=VARCHAR},
-      translate_join2 = #{translateJoin2,jdbcType=VARCHAR},
-      translate_join3 = #{translateJoin3,jdbcType=VARCHAR},
-      translate_column = #{translateColumn,jdbcType=VARCHAR}
+        translate_type = #{translateType,jdbcType=VARCHAR},
+        translate_china = #{translateChina,jdbcType=VARCHAR},
+        translate_Khmer = #{translateKhmer,jdbcType=VARCHAR},
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+        translate_join = #{translateJoin,jdbcType=VARCHAR},
+        translate_join2 = #{translateJoin2,jdbcType=VARCHAR},
+        translate_join3 = #{translateJoin3,jdbcType=VARCHAR},
+        translate_column = #{translateColumn,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 
@@ -239,7 +239,51 @@
 
   <delete id="deleteByTranslate" parameterType="com.ahsj.translate.entity.Translate">
     delete  from translate where   translate_id = #{translateId,jdbcType=BIGINT} and
-    translate_type = #{translateType,jdbcType=VARCHAR}
+      translate_type = #{translateType,jdbcType=VARCHAR}
   </delete>
+
+
+  <select id="selectByTranslateCount" parameterType="com.ahsj.translate.entity.Translate">
+    select <include refid="Base_Column_List"/> from translate where   translate_id = #{translateId,jdbcType=BIGINT} and
+    translate_type = #{translateType,jdbcType=VARCHAR}
+  </select>
+
+  <update id="updateByTranslates" parameterType="com.ahsj.translate.entity.Translate">
+    update translate
+    <set >
+      <if test="translateChina != null" >
+        translate_china = #{translateChina,jdbcType=VARCHAR},
+      </if>
+      <if test="translateKhmer != null" >
+        translate_Khmer = #{translateKhmer,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="translateJoin != null" >
+        translate_join = #{translateJoin,jdbcType=VARCHAR},
+      </if>
+      <if test="translateJoin2 != null" >
+        translate_join2 = #{translateJoin2,jdbcType=VARCHAR},
+      </if>
+      <if test="translateJoin3 != null" >
+        translate_join3 = #{translateJoin3,jdbcType=VARCHAR},
+      </if>
+      <if test="translateColumn != null" >
+        translate_column = #{translateColumn,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where   translate_id = #{translateId,jdbcType=BIGINT} and
+    translate_type = #{translateType,jdbcType=VARCHAR}
+  </update>
 </mapper>
 

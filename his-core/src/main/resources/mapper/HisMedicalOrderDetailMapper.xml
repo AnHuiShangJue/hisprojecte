@@ -36,11 +36,11 @@
   </resultMap>
   <sql id="Base_Column_List" >
     id, number, name, is_skin_test, specification, unit, usages, dosage, intervals, proofreading_nurse_id,
-    approved_nurse_id, stop_date, stop_user_id, stop_prfing_nurse_id, stop_apd_nurse_id, 
+    approved_nurse_id, stop_date, stop_user_id, stop_prfing_nurse_id, stop_apd_nurse_id,
     total_amount, create_user_id, create_date, update_user_id, update_date,order_num,is_stop,is_proofreading,is_approved,medical_order_type,content,start_time,target_id,is_first_edit,is_stop_proofreading,isstopapproved
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from his_medical_order_detail
     where id = #{id,jdbcType=BIGINT}
@@ -50,21 +50,21 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisMedicalOrderDetail" >
-    insert into his_medical_order_detail (id, number, name, 
-      is_skin_test, specification, unit,
-      usages, dosage, intervals,
-      proofreading_nurse_id, approved_nurse_id, stop_date,
-      stop_user_id, stop_prfing_nurse_id, stop_apd_nurse_id,
-      total_amount, create_user_id, create_date,
-      update_user_id, update_date,order_num,is_stop,is_proofreading,is_approved,medical_order_type,content,start_time,target_id,is_first_edit,is_stop_proofreading,isstopapproved)
+    insert into his_medical_order_detail (id, number, name,
+                                          is_skin_test, specification, unit,
+                                          usages, dosage, intervals,
+                                          proofreading_nurse_id, approved_nurse_id, stop_date,
+                                          stop_user_id, stop_prfing_nurse_id, stop_apd_nurse_id,
+                                          total_amount, create_user_id, create_date,
+                                          update_user_id, update_date,order_num,is_stop,is_proofreading,is_approved,medical_order_type,content,start_time,target_id,is_first_edit,is_stop_proofreading,isstopapproved)
     values (#{id,jdbcType=BIGINT}, #{number,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
-      #{isSkinTest,jdbcType=INTEGER}, #{specification,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, 
-      #{usages,jdbcType=VARCHAR}, #{dosage,jdbcType=VARCHAR}, #{intervals,jdbcType=INTEGER}, 
-      #{proofreadingNurseId,jdbcType=BIGINT}, #{approvedNurseId,jdbcType=BIGINT}, #{stopDate,jdbcType=TIMESTAMP}, 
-      #{stopUserId,jdbcType=BIGINT}, #{stopPrfingNurseId,jdbcType=BIGINT}, #{stopApdNurseId,jdbcType=BIGINT}, 
-      #{totalAmount,jdbcType=DECIMAL}, #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, #{orderNum,jdbcType=INTEGER},#{isStop,jdbcType=INTEGER},#{isProofreading,jdbcType=INTEGER},#{isApproved,jdbcType=INTEGER},#{medicalOrderType,jdbcType=INTEGER}
-      ,#{content,jdbcType=VARCHAR},#{startTime,jdbcType=TIMESTAMP},#{targetId,jdbcType=BIGINT},#{isFirstEdit,jdbcType=INTEGER},#{isStopProofreading,jdbcType=INTEGER},#{isstopapproved,jdbcType=INTEGER})
+            #{isSkinTest,jdbcType=INTEGER}, #{specification,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR},
+            #{usages,jdbcType=VARCHAR}, #{dosage,jdbcType=VARCHAR}, #{intervals,jdbcType=INTEGER},
+            #{proofreadingNurseId,jdbcType=BIGINT}, #{approvedNurseId,jdbcType=BIGINT}, #{stopDate,jdbcType=TIMESTAMP},
+            #{stopUserId,jdbcType=BIGINT}, #{stopPrfingNurseId,jdbcType=BIGINT}, #{stopApdNurseId,jdbcType=BIGINT},
+            #{totalAmount,jdbcType=DECIMAL}, #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP},
+            #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, #{orderNum,jdbcType=INTEGER},#{isStop,jdbcType=INTEGER},#{isProofreading,jdbcType=INTEGER},#{isApproved,jdbcType=INTEGER},#{medicalOrderType,jdbcType=INTEGER}
+             ,#{content,jdbcType=VARCHAR},#{startTime,jdbcType=TIMESTAMP},#{targetId,jdbcType=BIGINT},#{isFirstEdit,jdbcType=INTEGER},#{isStopProofreading,jdbcType=INTEGER},#{isstopapproved,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisMedicalOrderDetail" >
     insert into his_medical_order_detail
@@ -148,8 +148,8 @@
         content,
       </if>
       <if test="startTime != null" >
-      start_time,
-    </if>
+        start_time,
+      </if>
       <if test="targetId != null" >
         target_id,
       </if>
@@ -358,24 +358,24 @@
   <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisMedicalOrderDetail" >
     update his_medical_order_detail
     set number = #{number,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      is_skin_test = #{isSkinTest,jdbcType=INTEGER},
-      specification = #{specification,jdbcType=VARCHAR},
-      unit = #{unit,jdbcType=VARCHAR},
-      usages = #{usages,jdbcType=VARCHAR},
-      dosage = #{dosage,jdbcType=VARCHAR},
-      intervals = #{intervals,jdbcType=INTEGER},
-      proofreading_nurse_id = #{proofreadingNurseId,jdbcType=BIGINT},
-      approved_nurse_id = #{approvedNurseId,jdbcType=BIGINT},
-      stop_date = #{stopDate,jdbcType=TIMESTAMP},
-      stop_user_id = #{stopUserId,jdbcType=BIGINT},
-      stop_prfing_nurse_id = #{stopPrfingNurseId,jdbcType=BIGINT},
-      stop_apd_nurse_id = #{stopApdNurseId,jdbcType=BIGINT},
-      total_amount = #{totalAmount,jdbcType=DECIMAL},
-      create_user_id = #{createUserId,jdbcType=BIGINT},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
-      update_user_id = #{updateUserId,jdbcType=BIGINT},
-      update_date = #{updateDate,jdbcType=TIMESTAMP},
+        name = #{name,jdbcType=VARCHAR},
+        is_skin_test = #{isSkinTest,jdbcType=INTEGER},
+        specification = #{specification,jdbcType=VARCHAR},
+        unit = #{unit,jdbcType=VARCHAR},
+        usages = #{usages,jdbcType=VARCHAR},
+        dosage = #{dosage,jdbcType=VARCHAR},
+        intervals = #{intervals,jdbcType=INTEGER},
+        proofreading_nurse_id = #{proofreadingNurseId,jdbcType=BIGINT},
+        approved_nurse_id = #{approvedNurseId,jdbcType=BIGINT},
+        stop_date = #{stopDate,jdbcType=TIMESTAMP},
+        stop_user_id = #{stopUserId,jdbcType=BIGINT},
+        stop_prfing_nurse_id = #{stopPrfingNurseId,jdbcType=BIGINT},
+        stop_apd_nurse_id = #{stopApdNurseId,jdbcType=BIGINT},
+        total_amount = #{totalAmount,jdbcType=DECIMAL},
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
         is_stop = #{isStop,jdbcType=INTEGER},
         order_num = #{orderNum,jdbcType=INTEGER},
         is_proofreading = #{isProofreading,jdbcType=INTEGER},
@@ -414,9 +414,9 @@
 
   <select id="selectByNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
     select his_medical_order_detail.*
-from his_medical_order_detail
-where number = #{parameter.number,jdbcType = VARCHAR}
-order by order_num desc
+    from his_medical_order_detail
+    where number = #{parameter.number,jdbcType = VARCHAR}
+    order by order_num desc
   </select>
 
 
@@ -440,7 +440,7 @@ order by order_num desc
   </select>
 
 
-<!--根据医嘱编号删除所有-->
+  <!--根据医嘱编号删除所有-->
   <delete id="deleteByNumber" parameterType="java.lang.String" >
     delete
     from his_medical_order_detail
@@ -474,7 +474,7 @@ order by order_num desc
       #{item.totalAmount,jdbcType=DECIMAL}, #{item.createUserId,jdbcType=BIGINT}, #{item.createDate,jdbcType=TIMESTAMP},
       #{item.updateUserId,jdbcType=BIGINT}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.orderNum,jdbcType=INTEGER},#{item.isStop,jdbcType=INTEGER},#{item.isProofreading,jdbcType=INTEGER},#{item.isApproved,jdbcType=INTEGER}
       ,#{item.medicalOrderType,jdbcType=INTEGER},#{item.content,jdbcType=VARCHAR},#{item.startTime,jdbcType=TIMESTAMP},#{item.targetId,jdbcType=BIGINT},#{item.isFirstEdit,jdbcType=INTEGER},#{item.isStopProofreading,jdbcType=INTEGER}
-      ,#{isstopapproved,jdbcType=INTEGER})
+      ,#{item.isstopapproved,jdbcType=INTEGER})
     </foreach>
   </insert>
 </mapper>

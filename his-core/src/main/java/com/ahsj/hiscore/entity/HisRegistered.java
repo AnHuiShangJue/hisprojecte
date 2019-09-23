@@ -35,6 +35,8 @@ public class HisRegistered extends BaseEntity {
     private Integer registeredCategory;
     String categoryName;
 
+    String categoryNameEnlish;
+
     private BigDecimal money;
 
     private BigDecimal amountReceivable;
@@ -54,6 +56,8 @@ public class HisRegistered extends BaseEntity {
     private Long departmentId;
 
     private String departmentName;
+
+    private String departmentNameEnlish;
 
 
     @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_print", typeName = "printName")
@@ -305,6 +309,22 @@ public class HisRegistered extends BaseEntity {
 
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
+    }
+
+    public String getCategoryNameEnlish() {
+        return categoryNameEnlish;
+    }
+
+    public void setCategoryNameEnlish(String categoryNameEnlish) {
+        this.categoryNameEnlish = categoryNameEnlish;
+    }
+
+    public String getDepartmentNameEnlish() {
+        return departmentNameEnlish;
+    }
+
+    public void setDepartmentNameEnlish(String departmentNameEnlish) {
+        this.departmentNameEnlish = departmentNameEnlish;
     }
 
     @Override

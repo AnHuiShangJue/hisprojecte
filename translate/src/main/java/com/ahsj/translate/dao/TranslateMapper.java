@@ -29,4 +29,8 @@ public interface TranslateMapper {
     Translate queryTranslate(Translate translate);
 
     int deleteByTranslate(Translate translate);
+
+    void updateByTranslates(Translate translate);
+
+    List<Translate> selectByTranslateCount(Translate translate);
 }

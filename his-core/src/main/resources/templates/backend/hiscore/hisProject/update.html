@@ -19,7 +19,7 @@
                     <div class="row">
 
                         <div class="input-field col s4 l4 xl4" >
-                            <input id="number" name="number" type="number" th:value="${hisProject.number}" readonly="readonly"
+                            <input id="number" name="number" type="text" th:value="${hisProject.number}" readonly="readonly"
                                    data-error=".errorTxt2">
                             <div class="errorTxt2"></div>
                             <label for="number">项目编号<span style="font-size: 12px">(project number)</span></label>
@@ -34,12 +34,12 @@
                         </div>
 
 
-                    <!--    <div class="input-field col s4 l4 xl4">
-                            <input id="pinyinCode" name="pinyinCode" type="text"
-                                   data-error=".errorTxt1" th:value="${hisProject.pinyinCode}">
-                            <div class="errorTxt1"></div>
-                            <label for="pinyinCode">项目的拼音码<span style="font-size: 12px">(Project phonetic code)</span></label>
-                        </div>-->
+                        <!--    <div class="input-field col s4 l4 xl4">
+                                <input id="pinyinCode" name="pinyinCode" type="text"
+                                       data-error=".errorTxt1" th:value="${hisProject.pinyinCode}">
+                                <div class="errorTxt1"></div>
+                                <label for="pinyinCode">项目的拼音码<span style="font-size: 12px">(Project phonetic code)</span></label>
+                            </div>-->
 
 
                         <div class="input-field col s4 l4 xl4">
@@ -109,8 +109,8 @@
     }
 
     $(function () {
-       formCheck();
-       initSelect();
+        formCheck();
+        initSelect();
         var select1=$(".select2-container");
         if(select1){
             select1.css('display', 'none');
@@ -131,28 +131,28 @@
             },
             submitHandler: function (form) {
                 dialog.confirm('确定提交吗?', function (index, layero){
-                var queryString = $('#sendForm').serialize();
-                console.log("queryString is" + queryString);
+                    var queryString = $('#sendForm').serialize();
+                    console.log("queryString is" + queryString);
 
-                $.ahsjajax(
-                    CTX + "/api/hisProject/updateHisProject.ahsj",
-                    queryString,
-                    function (msg) {
-                        if (msg.success) {
-                            M.toast({html: msg.message});
-                            parent.grid.search();
-                            dialog.parentclose();
-                            return false;
-                        } else {
-                            M.toast({html: msg.message});
+                    $.ahsjajax(
+                        CTX + "/api/hisProject/updateHisProject.ahsj",
+                        queryString,
+                        function (msg) {
+                            if (msg.success) {
+                                M.toast({html: msg.message});
+                                parent.grid.search();
+                                dialog.parentclose();
+                                return false;
+                            } else {
+                                M.toast({html: msg.message});
+                                return false;
+                            }
+                        },
+                        function () {
+                            M.toast({html: "网络异常"});
                             return false;
                         }
-                    },
-                    function () {
-                        M.toast({html: "网络异常"});
-                        return false;
-                    }
-                );});
+                    );});
             }
 
         });

@@ -48,9 +48,9 @@
         <result column="deposit_warning" property="depositWarning" jdbcType="DECIMAL"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, hosptal_regist_id,department_id, patient_id, doctor_id, nurse_id,care_level, bed_id, ward_id, create_date,disease_region,
-    update_date, remarks, create_user_id,outpatient_diagnosis,inpatient_diagnosis,sex,idcard,number,patient_name,age,is_discharged,hospitalization_day,pay_hospitalization_day,toll_details_id,rest_deposit,medical_number,deposit_warning
-  </sql>
+        id, hosptal_regist_id,department_id, patient_id, doctor_id, nurse_id,care_level, bed_id, ward_id, create_date,disease_region,
+        update_date, remarks, create_user_id,outpatient_diagnosis,inpatient_diagnosis,sex,idcard,number,patient_name,age,is_discharged,hospitalization_day,pay_hospitalization_day,toll_details_id,rest_deposit,medical_number,deposit_warning
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
@@ -58,23 +58,23 @@
         where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from his_hospital_manage
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+        delete from his_hospital_manage
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
     <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisHospitalManage">
-    insert into his_hospital_manage (id, hosptal_regist_id, patient_id, 
-      doctor_id, nurse_id, bed_id, 
-      ward_id, create_date, update_date, 
-      remarks, create_user_id,outpatient_diagnosis,disease_region,
-      inpatient_diagnosis,sex,idcard,
-      number,patient_name,age,is_discharged,nurse_name,phone_number,department_id,care_level,medical_number,hospitalization_day,pay_hospitalization_day,toll_details_id,rest_deposit,deposit_warning)
-    values (#{id,jdbcType=BIGINT}, #{hosptalRegistId,jdbcType=BIGINT}, #{patientId,jdbcType=BIGINT}, 
-      #{doctorId,jdbcType=BIGINT}, #{nurseId,jdbcType=BIGINT}, #{bedId,jdbcType=BIGINT}, 
-      #{wardId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
-      #{remarks,jdbcType=VARCHAR}, #{createUserId,jdbcType=BIGINT}, #{outpatientDiagnosis,jdbcType=VARCHAR}, #{diseaseRegion,jdbcType=VARCHAR}, #{inpatientDiagnosis,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{idcard,jdbcType=VARCHAR},
-      #{number,jdbcType=VARCHAR}, #{patientName,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER},#{isDischarged,jdbcType=INTEGER}, #{nurseName,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR},
-      #{departmentId,jdbcType=BIGINT}, #{careLevel,jdbcType=INTEGER},#{medicalNumber,jdbcType=VARCHAR},#{hospitalizationDay,jdbcType=VARCHAR},#{payHospitalizationDay,jdbcType=VARCHAR},#{tollDetailsId,jdbcType=VARCHAR},#{restDeposit,jdbcType=DECIMAL},#{depositWarning,jdbcType=DECIMAL})
-  </insert>
+        insert into his_hospital_manage (id, hosptal_regist_id, patient_id,
+                                         doctor_id, nurse_id, bed_id,
+                                         ward_id, create_date, update_date,
+                                         remarks, create_user_id,outpatient_diagnosis,disease_region,
+                                         inpatient_diagnosis,sex,idcard,
+                                         number,patient_name,age,is_discharged,nurse_name,phone_number,department_id,care_level,medical_number,hospitalization_day,pay_hospitalization_day,toll_details_id,rest_deposit,deposit_warning)
+        values (#{id,jdbcType=BIGINT}, #{hosptalRegistId,jdbcType=BIGINT}, #{patientId,jdbcType=BIGINT},
+                #{doctorId,jdbcType=BIGINT}, #{nurseId,jdbcType=BIGINT}, #{bedId,jdbcType=BIGINT},
+                #{wardId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP},
+                #{remarks,jdbcType=VARCHAR}, #{createUserId,jdbcType=BIGINT}, #{outpatientDiagnosis,jdbcType=VARCHAR}, #{diseaseRegion,jdbcType=VARCHAR}, #{inpatientDiagnosis,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{idcard,jdbcType=VARCHAR},
+                #{number,jdbcType=VARCHAR}, #{patientName,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER},#{isDischarged,jdbcType=INTEGER}, #{nurseName,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR},
+                #{departmentId,jdbcType=BIGINT}, #{careLevel,jdbcType=INTEGER},#{medicalNumber,jdbcType=VARCHAR},#{hospitalizationDay,jdbcType=VARCHAR},#{payHospitalizationDay,jdbcType=VARCHAR},#{tollDetailsId,jdbcType=VARCHAR},#{restDeposit,jdbcType=DECIMAL},#{depositWarning,jdbcType=DECIMAL})
+    </insert>
     <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisHospitalManage">
         insert into his_hospital_manage
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -227,35 +227,35 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisHospitalManage">
-    update his_hospital_manage
-    set hosptal_regist_id = #{hosptalRegistId,jdbcType=BIGINT},
-      patient_id = #{patientId,jdbcType=BIGINT},
-      department_id = #{departmentId,jdbcType=BIGINT},
-      doctor_id = #{doctorId,jdbcType=BIGINT},
-      care_level = #{careLevel,jdbcType=INTEGER},
-      nurse_id = #{nurseId,jdbcType=BIGINT},
-      bed_id = #{bedId,jdbcType=BIGINT},
-      ward_id = #{wardId,jdbcType=BIGINT},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
-      update_date = #{updateDate,jdbcType=TIMESTAMP},
-      remarks = #{remarks,jdbcType=VARCHAR},
-      create_user_id = #{createUserId,jdbcType=BIGINT},
-      outpatient_diagnosis= #{outpatientDiagnosis,jdbcType=VARCHAR},
-      disease_region= #{diseaseRegion,jdbcType=VARCHAR},
-      inpatient_diagnosis = #{inpatientDiagnosis,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=INTEGER},
-      idcard = #{idcard,jdbcType=VARCHAR},
-      number = #{number,jdbcType=VARCHAR},
-      patient_name = #{patientName,jdbcType=VARCHAR},
-      age = #{age,jdbcType=INTEGER},
-      is_discharged = #{isDischarged,jdbcType=INTEGER},
-          hospitalization_day = #{hospitalizationDay,jdbcType=VARCHAR},
-      pay_hospitalization_day = #{payHospitalizationDay,jdbcType=VARCHAR},
-      toll_details_id = #{tollDetailsId,jdbcType=VARCHAR},
-      rest_deposit = #{restDeposit,jdbcType=DECIMAL},
-      deposit_warning = #{depositWarning,jdbcType=DECIMAL}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        update his_hospital_manage
+        set hosptal_regist_id = #{hosptalRegistId,jdbcType=BIGINT},
+            patient_id = #{patientId,jdbcType=BIGINT},
+            department_id = #{departmentId,jdbcType=BIGINT},
+            doctor_id = #{doctorId,jdbcType=BIGINT},
+            care_level = #{careLevel,jdbcType=INTEGER},
+            nurse_id = #{nurseId,jdbcType=BIGINT},
+            bed_id = #{bedId,jdbcType=BIGINT},
+            ward_id = #{wardId,jdbcType=BIGINT},
+            create_date = #{createDate,jdbcType=TIMESTAMP},
+            update_date = #{updateDate,jdbcType=TIMESTAMP},
+            remarks = #{remarks,jdbcType=VARCHAR},
+            create_user_id = #{createUserId,jdbcType=BIGINT},
+            outpatient_diagnosis= #{outpatientDiagnosis,jdbcType=VARCHAR},
+            disease_region= #{diseaseRegion,jdbcType=VARCHAR},
+            inpatient_diagnosis = #{inpatientDiagnosis,jdbcType=VARCHAR},
+            sex = #{sex,jdbcType=INTEGER},
+            idcard = #{idcard,jdbcType=VARCHAR},
+            number = #{number,jdbcType=VARCHAR},
+            patient_name = #{patientName,jdbcType=VARCHAR},
+            age = #{age,jdbcType=INTEGER},
+            is_discharged = #{isDischarged,jdbcType=INTEGER},
+            hospitalization_day = #{hospitalizationDay,jdbcType=VARCHAR},
+            pay_hospitalization_day = #{payHospitalizationDay,jdbcType=VARCHAR},
+            toll_details_id = #{tollDetailsId,jdbcType=VARCHAR},
+            rest_deposit = #{restDeposit,jdbcType=DECIMAL},
+            deposit_warning = #{depositWarning,jdbcType=DECIMAL}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
     <!--  自定义sql-->
 
     <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
@@ -311,22 +311,22 @@
         </if>
     </select>
     <select id="selectByPatientId" resultMap="BaseResultMap" parameterType="com.ahsj.hiscore.entity.HisHospitalManage">
-    select his_hospital_manage.*
-    from his_hospital_manage
-    where
-      patient_id = #{patientId,jdbcType=BIGINT}
-  </select>
+        select his_hospital_manage.*
+        from his_hospital_manage
+        where
+            patient_id = #{patientId,jdbcType=BIGINT}
+    </select>
     <select id="selectByHosptalRegistId" parameterType="java.lang.Long" resultMap="BaseResultMap">
-          select his_hospital_manage .*
+        select his_hospital_manage .*
         from his_hospital_manage
         where hosptal_regist_id = #{id,jdbcType=BIGINT}
-  </select>
+    </select>
     <select id="selectByHosOrder" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select his_hospital_manage.*
-    from his_hospital_manage
-    where his_hospital_manage.patient_id = #{patientId,jdbcType=BIGINT}
-    order by his_hospital_manage.create_date desc
-  </select>
+        select his_hospital_manage.*
+        from his_hospital_manage
+        where his_hospital_manage.patient_id = #{patientId,jdbcType=BIGINT}
+        order by his_hospital_manage.create_date desc
+    </select>
 
     <!--查看正在医院住院的病人信息-->
     <select id="listForDetails" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
@@ -341,7 +341,10 @@
         left join his_ward as d on a.ward_id = d.id
         left join his_bed as e on a.bed_id = e.id
         where
-        1= 1 and a.is_discharged = 1
+        1= 1
+        <if test="parameter.isDischarged != null and parameter.isDischarged != ''">
+            and a.is_discharged =#{parameter.isDischarged,jdbcType=VARCHAR}
+        </if>
         <if test="parameter.medicalNumber != null and parameter.medicalNumber != ''">
             and a.medical_number like concat('%' #{parameter.medicalNumber,jdbcType=VARCHAR},'%')
         </if>
@@ -375,23 +378,23 @@
     </select>
 
     <select id="selectByNumber" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
-    SELECT
-    a.*, b.name as doctorName,b.numb as doctorNumber, c.name as nurseNames,c.number as nurseNumber,d.number as wardsNumber,e.number as bedsNumber
-    FROM
-    his_hospital_manage as a
-    left join his_doctor_info as b on a.doctor_id = b.id
-    left join his_nurse as c on a.nurse_id = c.id
-    left join his_ward as d on a.ward_id = d.id
-    left join his_bed as e on a.bed_id = e.id
-    where
-    a.medical_number = #{parameter.medicalRecordId,jdbcType = VARCHAR}
-  </select>
+        SELECT
+            a.*, b.name as doctorName,b.numb as doctorNumber, c.name as nurseNames,c.number as nurseNumber,d.number as wardsNumber,e.number as bedsNumber
+        FROM
+            his_hospital_manage as a
+                left join his_doctor_info as b on a.doctor_id = b.id
+                left join his_nurse as c on a.nurse_id = c.id
+                left join his_ward as d on a.ward_id = d.id
+                left join his_bed as e on a.bed_id = e.id
+        where
+            a.medical_number = #{parameter.medicalRecordId,jdbcType = VARCHAR}
+    </select>
     <select id="selectManageCount" resultType="int" parameterType="java.lang.String">
         select
             count(1)
         from his_hospital_manage
         where his_hospital_manage.number LIKE CONCAT(#{his_hospital_manage}, '%')
-  </select>
+    </select>
     <select id="selectByDate" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -401,17 +404,17 @@
     </select>
     <!--根据住院编号查询-->
     <select id="selectByHospNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select
-    b.name as departmentName,
-    a.*,
-    c.number as bedsNumber,
-    d.number as wardsNumber
-    from his_hospital_manage as a
-      LEFT JOIN `his-userinfo`.organization as b on a.department_id = b.id
-      LEFT JOIN his_bed as c on c.id = a.bed_id
-      LEFT JOIN his_ward as d on d.id = a.ward_id
-    where a.number = #{number,jdbcType=VARCHAR}
-  </select>
+        select
+            b.name as departmentName,
+            a.*,
+            c.number as bedsNumber,
+            d.number as wardsNumber
+        from his_hospital_manage as a
+                 LEFT JOIN `his-userinfo`.organization as b on a.department_id = b.id
+                 LEFT JOIN his_bed as c on c.id = a.bed_id
+                 LEFT JOIN his_ward as d on d.id = a.ward_id
+        where a.number = #{number,jdbcType=VARCHAR}
+    </select>
     <!--    批量更新-->
     <update id="updateBatchForDaily" parameterType="list">
         update his_hospital_manage
@@ -432,25 +435,25 @@
 
     <select id="selectHospitalManageDataCount" resultMap="BaseResultMap"
             parameterType="com.ahsj.hiscore.entity.HisHospitalManage">
-	SELECT
-	COUNT(*) as count
-	FROM his_hospital_manage as a
-	WHERE
-        is_discharged = 1
-    order by a.create_date asc
+        SELECT
+            COUNT(*) as count
+        FROM his_hospital_manage as a
+        WHERE
+            is_discharged = 1
+        order by a.create_date asc
     </select>
     <select id="selectForCalculateDate" parameterType="java.util.Date" resultMap="BaseResultMap">
-    select his_hospital_manage.*
-    from his_hospital_manage
-    where
-    create_date &gt;=  #{createDate,jdbcType=TIMESTAMP}
-    and
-    create_date &lt; #{endDate,jdbcType=TIMESTAMP}
-    order by create_date asc
-  </select>
+        select his_hospital_manage.*
+        from his_hospital_manage
+        where
+            create_date &gt;=  #{createDate,jdbcType=TIMESTAMP}
+          and
+            create_date &lt; #{endDate,jdbcType=TIMESTAMP}
+        order by create_date asc
+    </select>
     <select id="countUseBed" resultType="java.lang.Integer">
-select count(id) as userNum from his_hospital_manage where is_discharged=1
-  </select>
+        select count(id) as userNum from his_hospital_manage where is_discharged=1
+    </select>
     <select id="getHisHospitalManageAll" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
         select o.name as patient_name ,o.phonenumber as phone_number,o.sex as sex,
         o.idcard as idcard ,o.age as age,m.care_level,
@@ -472,34 +475,34 @@ select count(id) as userNum from his_hospital_manage where is_discharged=1
 
     </select>
     <select id="getHisHospitalManageByNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
-select o.name as patient_name ,o.phonenumber as phone_number,o.sex as sex,
-o.idcard as idcard ,o.age as age,m.care_level ,
-i.user_name as doctor_name, b.number as number,
-b.price as price,e.user_name as nurse_name,m.create_date as create_date
-from his_hospital_manage as m
-LEFT JOIN `his-userinfo`.user_info  as i on i.id = m.doctor_id
-LEFT JOIN his_patient_info as o on o.id = m.patient_id
-LEFT JOIN `his-userinfo`.user_info  as e  on e.id = m.nurse_id
-left JOIN his_bed as b on b.id = m.bed_id
-where m.is_discharged=1 AND  B.number =#{number,jdbcType=VARCHAR}
+        select o.name as patient_name ,o.phonenumber as phone_number,o.sex as sex,
+               o.idcard as idcard ,o.age as age,m.care_level ,
+               i.user_name as doctor_name, b.number as number,
+               b.price as price,e.user_name as nurse_name,m.create_date as create_date
+        from his_hospital_manage as m
+                 LEFT JOIN `his-userinfo`.user_info  as i on i.id = m.doctor_id
+                 LEFT JOIN his_patient_info as o on o.id = m.patient_id
+                 LEFT JOIN `his-userinfo`.user_info  as e  on e.id = m.nurse_id
+                 left JOIN his_bed as b on b.id = m.bed_id
+        where m.is_discharged=1 AND  B.number =#{number,jdbcType=VARCHAR}
     </select>
 
     <select id="getHisHospitalManageBed" resultMap="BaseResultMap">
-    select hm.* , b.number as bed_number from his_hospital_manage hm left join his_bed b on hm.bed_id = b.id where
-    hm.is_discharged = 1 </select>
+        select hm.* , b.number as bed_number from his_hospital_manage hm left join his_bed b on hm.bed_id = b.id where
+            hm.is_discharged = 1 </select>
 
     <select id="selectByPatientIdAndInpatient" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select his_hospital_manage.*
-from his_hospital_manage
-where patient_id = #{patientId,jdbcType=BIGINT} and is_discharged = 1
-order by create_date desc
-limit 0,1
+        from his_hospital_manage
+        where patient_id = #{patientId,jdbcType=BIGINT} and is_discharged = 1
+        order by create_date desc
+                 limit 0,1
     </select>
     <select id="selectNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
         select m.*,b.number as bed_number,w.number as ward_number
-from his_hospital_manage as m
-LEFT JOIN his_bed as b on b.id = m.bed_id
-LEFT JOIN his_ward as  w on w.id = m.ward_id
-where m.number =  #{number,jdbcType=VARCHAR}</select>
+        from his_hospital_manage as m
+                 LEFT JOIN his_bed as b on b.id = m.bed_id
+                 LEFT JOIN his_ward as  w on w.id = m.ward_id
+        where m.number =  #{number,jdbcType=VARCHAR}</select>
 
 </mapper>

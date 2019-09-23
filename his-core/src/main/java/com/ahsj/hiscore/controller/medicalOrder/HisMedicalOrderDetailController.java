@@ -1,5 +1,6 @@
 package com.ahsj.hiscore.controller.medicalOrder;
 
+import com.ahsj.hiscore.core.CodeHelper;
 import com.ahsj.hiscore.entity.*;
 import com.ahsj.hiscore.services.*;
 import core.controller.BaseController;
@@ -26,7 +27,7 @@ import java.util.Map;
 public class HisMedicalOrderDetailController extends BaseController {
     @Autowired
     HisMedicalOrderDetailService hisMedicalOrderDetailService;
-    
+
     @Autowired
     HisMedicalOrderTemplateDetailService hisMedicalOrderTemplateDetailService;
 
@@ -45,7 +46,7 @@ public class HisMedicalOrderDetailController extends BaseController {
      *@Author zhushixiang
      *@Date 2019-07-17
      *@Time 15:13
-    **/
+     **/
     @RequestMapping("listDetailByNumber/index.ahsj")
     ModelAndView listDetailByNumber( String token,@RequestParam(value ="number",required = true)String number,
                                      @RequestParam(value = "isDischarged",required = false)Integer isDischarged,String hosptalregistNumber,Integer type) throws Exception {
@@ -73,10 +74,10 @@ public class HisMedicalOrderDetailController extends BaseController {
      *@Author jin
      *@Date 2019/9/21
      *@Time 22:38
-    */
+     */
     @RequestMapping("listDetailByNumberNurse/index.ahsj")
     ModelAndView listDetailByNumberNurse( String token,@RequestParam(value ="number",required = true)String number,
-                                     @RequestParam(value = "isDischarged",required = false)Integer isDischarged,String hosptalregistNumber,Integer type) throws Exception {
+                                          @RequestParam(value = "isDischarged",required = false)Integer isDischarged,String hosptalregistNumber,Integer type) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         if(type == 1){
             modelAndView.setViewName("backend/hiscore/nursestation/listDetailByNumber");
@@ -101,7 +102,7 @@ public class HisMedicalOrderDetailController extends BaseController {
      *@Author zhushixiang
      *@Date 2019-07-17
      *@Time 15:20
-    **/
+     **/
     @RequestMapping("/listDetailByNumber.ahsj")
     @ResponseBody
     public PageBean<HisMedicalOrderDetail> listDetailByNumber (Map<String, Object> model, HttpServletRequest request, HisMedicalOrderDetail hisMedicalOrderDetail) throws Exception{
@@ -118,7 +119,7 @@ public class HisMedicalOrderDetailController extends BaseController {
      *@Author zhushixiang
      *@Date 2019-07-17
      *@Time 17:29
-    **/
+     **/
     @RequestMapping(value = "delete.ahsj", method = {RequestMethod.POST})
     @ResponseBody
     public Message delete (Map<String, Object> model, HttpServletRequest request
@@ -136,7 +137,7 @@ public class HisMedicalOrderDetailController extends BaseController {
      *@Author zhushixiang
      *@Date 2019-07-17
      *@Time 17:32
-    **/
+     **/
     @RequestMapping("/update/index.ahsj")
     ModelAndView UpdateIndex(HisMedicalOrderDetail hisMedicalOrderDetail, String token)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
@@ -181,7 +182,7 @@ public class HisMedicalOrderDetailController extends BaseController {
      *@Author zhushixiang
      *@Date 2019-09-21
      *@Time 21:48
-    **/
+     **/
     @RequestMapping("updateTemporary/index.ahsj")
     ModelAndView updateTemporary(HisMedicalOrderDetail hisMedicalOrderDetail, String token)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
@@ -226,7 +227,7 @@ public class HisMedicalOrderDetailController extends BaseController {
      *@Author zhushixiang
      *@Date 2019-07-17
      *@Time 20:51
-    **/
+     **/
     @RequestMapping(value = "saveOrUpdate.ahsj", method = {RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
     public Message saveOrUpdate (Map<String, Object> model, HttpServletRequest request, HisMedicalOrderDetail hisMedicalOrderDetail) throws Exception {
@@ -312,8 +313,8 @@ public class HisMedicalOrderDetailController extends BaseController {
     @RequestMapping(value = "addProject.ahsj", method = {RequestMethod.POST, RequestMethod.GET})
     @ResponseBody
     public Message addProject(Map<String, Object> model, HttpServletRequest request,
-                               @RequestParam(value = "ids", required = true)Long[] ids,
-                               @RequestParam(value = "medicalOrderNumber", required = true) String medicalOrderNumber
+                              @RequestParam(value = "ids", required = true)Long[] ids,
+                              @RequestParam(value = "medicalOrderNumber", required = true) String medicalOrderNumber
     ) throws Exception {
         return hisMedicalOrderDetailService.addProject(ids,medicalOrderNumber);
     }
@@ -325,7 +326,7 @@ public class HisMedicalOrderDetailController extends BaseController {
      *@Author zhushixiang
      *@Date 2019-09-18
      *@Time 13:55
-    **/
+     **/
     @RequestMapping(value = "stopOrder.ahsj", method = {RequestMethod.POST})
     @ResponseBody
     public Message stopOrder (Map<String, Object> model, HttpServletRequest request
@@ -343,7 +344,7 @@ public class HisMedicalOrderDetailController extends BaseController {
      *@Author zhushixiang
      *@Date 2019-09-21
      *@Time 18:10
-    **/
+     **/
     @RequestMapping("printDoctorAdvice/index.ahsj")
     ModelAndView printDoctorAdvice(String number, String token,String hosptalregistNumber) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/medicalorder/doctorAdvice");
@@ -360,6 +361,28 @@ public class HisMedicalOrderDetailController extends BaseController {
         if(!EmptyUtil.Companion.isNullOrEmpty(hisBed))
             hisHospitalManage.setBedsNumber(hisBed.getNumber());
         modelAndView.addObject("hisHospitalManage", hisHospitalManage);
+        //根据医嘱编号查看明细
+        List<HisMedicalOrderDetail> hisMedicalOrderDetailList = CodeHelper.getInstance().setCodeValue(hisMedicalOrderDetailService.selectByNumberAscAndNotStop(number));
+        if(EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetailList)||hisMedicalOrderDetailList.size()!=0) {
+            for (HisMedicalOrderDetail hisMedicalOrderDetail : hisMedicalOrderDetailList) {
+                if (EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getAnName())) {
+                    hisMedicalOrderDetail.setAnName("");
+                }
+                if (EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getPnName())) {
+                    hisMedicalOrderDetail.setPnName("");
+                }
+                if (EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getSanName())) {
+                    hisMedicalOrderDetail.setSanName("");
+                }
+                if (EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getSpnName())) {
+                    hisMedicalOrderDetail.setSpnName("");
+                }
+                if (EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getStopUserName())) {
+                    hisMedicalOrderDetail.setStopUserName("");
+                }
+            }
+        }
+        modelAndView.addObject("hisMedicalOrderDetailList",hisMedicalOrderDetailList);
         return modelAndView;
     }
 
