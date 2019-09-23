@@ -273,7 +273,16 @@
             parent.grid.search();
             dialog.parentclose();
         });
+        $('#searchBtn').click(function () {
+            grid.search();
+        });
+        $('#resetBtn').click(function () {
+            grid.reset();
+        });
     }
+    $("#searchForm .row .col input[type='radio']").click(function () {
+        grid.search();
+    });
 
     $("input").change(function(){
         $(this).val($(this).val().trim());
