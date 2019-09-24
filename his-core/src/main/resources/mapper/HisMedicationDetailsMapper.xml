@@ -54,7 +54,7 @@
     delete from his_medication_details
     where id = #{id,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisMedicationDetails">
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisMedicationDetails" useGeneratedKeys="true" keyProperty="id">
     insert into his_medication_details (id, medication_id, description, 
       remarks, is_pay, is_back, 
       is_del, count, drugs_numb, 

@@ -26,6 +26,8 @@ public class HisMedicationDetailsTranslate implements Serializable {
 
     private String drugsAlias;
 
+    private String description;
+
     public HisMedicationDetailsTranslate() {
     }
 
@@ -59,5 +61,13 @@ public class HisMedicationDetailsTranslate implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
