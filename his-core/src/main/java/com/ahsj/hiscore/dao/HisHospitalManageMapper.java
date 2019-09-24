@@ -114,6 +114,7 @@ public interface HisHospitalManageMapper extends BaseMapper<HisHospitalManage> {
      **/
     List<HisHospitalManage> selectByDate();
 
+
     /**
      * @Description
      * @Author muxu
@@ -133,6 +134,17 @@ public interface HisHospitalManageMapper extends BaseMapper<HisHospitalManage> {
      * @Params [hisHospitalManageList]
      **/
     void updateBatchForDaily(List<HisHospitalManage> hisHospitalManageList);
+    
+    
+    /**
+     * @Description 批量跟新押金
+     * @Author  muxu
+     * @Date  2019/9/24
+     * @Time 20:25
+     * @Return void
+     * @Params [hisHospitalManageList]
+    **/
+    void updateBatchForDaily1(List<HisHospitalManage> hisHospitalManageList);
 
 
     /**

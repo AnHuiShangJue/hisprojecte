@@ -105,7 +105,25 @@ public interface HisHospitalManageService {
     HisHospitalManage selectByNumber(String number) throws Exception;
 
 
+    /**
+     * @Description 住院天数定时任务
+     * @Author  muxu
+     * @Date  2019/9/24
+     * @Time 18:24
+     * @Return void
+     * @Params []
+    **/
     void startAddDate();
+
+    /**
+     * @Description
+     * @Author  muxu
+     * @Date  2019/9/24
+     * @Time 18:24
+     * @Return void
+     * @Params []
+    **/
+    void startAddcareLevel();
 
     /**
      * @Description 时间段内住院人数统计

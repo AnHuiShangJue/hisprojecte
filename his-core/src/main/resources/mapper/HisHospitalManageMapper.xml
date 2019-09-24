@@ -402,6 +402,7 @@
         where
         is_discharged = 1
     </select>
+
     <!--根据住院编号查询-->
     <select id="selectByHospNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -423,6 +424,23 @@
                 <foreach collection="list" item="item" index="index">
                     <if test="item.hospitalizationDay!=null">
                         when id=#{item.id} then #{item.hospitalizationDay}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where
+        <foreach collection="list" separator="or" item="item" index="index">
+            id=#{item.id}
+        </foreach>
+    </update>
+
+    <update id="updateBatchForDaily1" parameterType="list">
+        update his_hospital_manage
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="rest_deposit=case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.restDeposit!=null">
+                        when id=#{item.id} then #{item.restDeposit}
                     </if>
                 </foreach>
             </trim>

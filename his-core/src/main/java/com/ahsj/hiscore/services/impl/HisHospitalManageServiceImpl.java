@@ -8,6 +8,7 @@ import com.ahsj.hiscore.services.*;
 import core.entity.PageBean;
 import core.message.Message;
 import core.message.MessageUtil;
+import jdk.nashorn.internal.objects.annotations.Where;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +72,9 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
 
     @Autowired
     HisBedService hisBedService;
+
+    @Autowired
+    HisProjectMapper hisProjectMapper;
 
     /**
      * @Description 新增
@@ -340,6 +344,15 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
         return CodeHelper.getInstance().setCodeValue(hisHospitalManageMapper.selectByNumber(medicalNumber));
     }
 
+
+    /**
+     * @Description 住院天数定时任务
+     * @Author  muxu
+     * @Date  2019/9/24
+     * @Time 18:24
+     * @Return void
+     * @Params []
+    **/
     @Override
     @Transactional(readOnly = false)
     public void startAddDate() {
@@ -378,6 +391,66 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
         return null;
     }
 
+
+    /**
+     * @Description 护理费用定时任务
+     * @Author  muxu
+     * @Date  2019/9/24
+     * @Time 18:28
+     * @Return
+     * @Params
+    **/
+    @Override
+    @Transactional(readOnly = false)
+    public void startAddcareLevel() {
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String createdate = sdf.format(date);
+        logger.info(createdate);
+
+        List<HisHospitalManage> hisHospitalManageList = hisHospitalManageMapper.selectByDate();
+        if (hisHospitalManageList.size()==0){
+            logger.info("-------------------无护理消费人员-----------------------");
+        }else {
+            logger.info("-------------------扫描到" + hisHospitalManageList.size() + "病人进行护理消费日结-----------------------");
+            if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManageList) && !EmptyUtil.Companion.isNullOrEmpty(hisHospitalManageList.size())) {
+                Long[] ids = new Long[hisHospitalManageList.size()];
+                List<HisHospitalManage> hisHospitalManageList1 = new ArrayList<>();
+                int i = 0;
+                for (HisHospitalManage h : hisHospitalManageList
+                ) {
+                    ids[i] = h.getId();
+                    HisHospitalManage hisHospitalManage1 = hisHospitalManageMapper.selectByPrimaryKey(ids[i]);
+                    hisHospitalManage1.setId(ids[i]);
+                    if (hisHospitalManage1.getCareLevel()==1){
+                        String number = "120100003（ACAC001）";
+                        HisProject hisProject =hisProjectMapper.queryHisProjectByNumber(number);
+                        hisHospitalManage1.setRestDeposit(h.getRestDeposit().subtract(hisProject.getPrice()));
+                    }else if (hisHospitalManage1.getCareLevel()==2){
+                        String number = "120100004（ACAB001）";
+                        HisProject hisProject =hisProjectMapper.queryHisProjectByNumber(number);
+                        hisHospitalManage1.setRestDeposit(h.getRestDeposit().subtract(hisProject.getPrice()));
+                    }else if (hisHospitalManage1.getCareLevel()==3){
+                        String number = "120100005（ACAA001）";
+                        HisProject hisProject =hisProjectMapper.queryHisProjectByNumber(number);
+                        hisHospitalManage1.setRestDeposit(h.getRestDeposit().subtract(hisProject.getPrice()));
+                    }else if (hisHospitalManage1.getCareLevel()==5){
+                        String number = "120100002（ACAD001）";
+                        HisProject hisProject =hisProjectMapper.queryHisProjectByNumber(number);
+                        hisHospitalManage1.setRestDeposit(h.getRestDeposit().subtract(hisProject.getPrice()));
+                    }
+                    hisHospitalManageList1.add(hisHospitalManage1);
+                    i++;
+                }
+                logger.info("-------------------开始护理费用日结-----------------------");
+                hisHospitalManageMapper.updateBatchForDaily1(hisHospitalManageList1);
+                logger.info("-----------------护理费用日结人数为：" + hisHospitalManageList.size() + "-----------------------");
+                logger.info("-------------------结束护理费用日结-----------------------");
+        }else {
+                logger.info("-------------------护理费用日结结束，今天无可结算费用-----------------------");
+            }
+        }
+    }
 
     /**
      * @Description 时间段内住院人数统计

@@ -76,6 +76,21 @@ public class QuartzJob {
         logger.info("-------------------扫描结束-----------------------");
     }
 
+    /**
+     * @Description 护理级别定时任务
+     * @Author  muxu
+     * @Date  2019/9/24
+     * @Time 18:29
+     * @Return
+     * @Params
+    **/
+    @Scheduled(cron = "0 59 23 * * ?")
+    public void careLeveladdjob()throws Exception {
+        logger.info("-------------------开始日结-----------------------");
+        hisHospitalManageService.startAddcareLevel();
+        logger.info("-------------------结束日结-----------------------");
+    }
+
 
     /**
      *@功能说明  翻译
