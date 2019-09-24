@@ -57,19 +57,23 @@
                                 </div>
                                 <div class="col input-field s2 m2 l2 xl2">
                                     <input id="years" name="years" type="text"/>
-                                    <label class="active" for="years">年份选择<span style="font-size: 12px">(Year selection)</span></label>
+                                    <label class="active" for="years">年份选择<span
+                                            style="font-size: 12px">(Year selection)</span></label>
                                 </div>
                                 <div class="col input-field s2 m2 l2 xl2">
                                     <input id="number" name="number" type="text"/>
-                                    <label for="number">交易流水号<span style="font-size: 12px">(Transaction flow number)</span></label>
-                                </div><br><br><br><br>
+                                    <label for="number">交易流水号<span
+                                            style="font-size: 12px">(Transaction flow number)</span></label>
+                                </div>
+                                <br><br><br><br>
                                 <div class="col  s1 m1 l1 xl1">
                                     <h6>收费日期</h6>
                                     <label style="color:black">Date of charge</label>
                                 </div>
                                 <div class="col  input-field s2 m2 l2 xl2">
                                     <input id="lowTime" name="lowTime" type="text" class="datepicker"/>
-                                    <label for="lowTime">下区间<span style="font-size: 12px">(Lower interval)</span></label>
+                                    <label for="lowTime">下区间<span
+                                            style="font-size: 12px">(Lower interval)</span></label>
                                 </div>
                                 <div class="col input-field s2 m2 l2 xl2">
                                     <input id="upTime" name="upTime" type="text"
@@ -77,8 +81,10 @@
                                     <label for="upTime">上区间<span style="font-size: 12px">(upper interval)</span></label>
                                 </div>
                                 <div class="col s3 m3 l3 xl3 ">
-                                    <div ahsj:radio name="attenchType" id="attenchType" type="code" typeKey="attenchType"
-                                         title="收费来源 (Source of charge)" cssdefault="radiotdefault" haveDefault="true" value="0">
+                                    <div ahsj:radio name="attenchType" id="attenchType" type="code"
+                                         typeKey="attenchType"
+                                         title="收费来源 (Source of charge)" cssdefault="radiotdefault" haveDefault="true"
+                                         value="0">
                                     </div>
                                 </div>
 
@@ -104,13 +110,17 @@
                 <div class="card">
                     <div class="card-content">
                         <h4 class="card-title">
-                            统计的时间区间为<span style="font-size: 12px"> (The time interval of the statistics is)</span>：<span id="minTime"></span>——— <span id="maxTime"></span>
+                            统计的时间区间为<span style="font-size: 12px"> (The time interval of the statistics is)</span>：<span
+                                id="minTime"></span>——— <span id="maxTime"></span>
                         </h4>
                         <h4 class="card-title">
-                            区间内药品收入纯利润<span style="font-size: 12px">(The total amount of income in the interval is)</span>：<span id="salePrice"></span>
+                            区间内药品收入纯利润<span
+                                style="font-size: 12px">(The total amount of income in the interval is)</span>：<span
+                                id="salePrice"></span>
                         </h4>
                         <h4 class="card-title">
-                            区间内的药品成本为<span style="font-size: 12px">(The drug cost within the interval is)</span>：<span id="costPrice"></span>
+                            区间内的药品成本为<span style="font-size: 12px">(The drug cost within the interval is)</span>：<span
+                                id="costPrice"></span>
                         </h4>
 
                     </div>
@@ -237,15 +247,15 @@
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn +
-                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看明细\" onclick='visitDetail(\"" + row.number + "\");'> <i class='material-icons'>visibility</i></a>"+
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"打印\" href='javascript:;' onclick='print(\"" + row.number + "\");'> <i class='material-icons'>print</i></a>";
+                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看明细\" onclick='visitDetail(\"" + row.number + "\");'> <i class='material-icons'>visibility</i></a>" +
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"打印\" href='javascript:;' onclick=\"print('" + row.number + "'," + row.attenchType + ");\"> <i class='material-icons'>print</i></a>";
                             // 返回自定义内容
                             return rtnBtn;
                         }
                     }
                 ],
                 "order": [
-                    [ 1, 'asc' ]
+                    [1, 'asc']
                 ]
             }
         });
@@ -285,7 +295,7 @@
                 salePrice.html("");
                 costPrice.html("");
                 if (!isNullOrEmpty(data)) {
-                    salePrice.html(data.salePrice-data.costPrice);
+                    salePrice.html(data.salePrice - data.costPrice);
                     costPrice.html(data.costPrice);
                     $("#minTime").html(data.minTime);
                     $("#maxTime").html(data.maxTime);
@@ -321,15 +331,27 @@
         $(this).val($(this).val().trim());
     });
 
-    function print(number){
+    function print(number, attenchType) {
+        if (attenchType == 4) {
+                dialog.confirm('确定打印吗?', function (index, layero) {
+                    if (number != "" && number != null && number != undefined) {
+                        var url = CTX + "/api/hisTollRecord/printDrug/index.ahsj?number=" + number + "&token=" + TOKEN;
+                        dialog.showDialog(url, "打印凭证预览", "700px", "700px");
+                    } else {
+                        dialog.warn("没有需要打印的内容！")
+                    }
+                });
+        }
+        else {
         dialog.confirm('确定打印吗?', function (index, layero) {
             if (number != "" && number != null && number != undefined) {
-                var url = CTX + "/api/hisTollDetails/printHospital/index.ahsj?number="+ number+"&token="+TOKEN;
+                var url = CTX + "/api/hisTollDetails/printHospital/index.ahsj?number=" + number + "&token=" + TOKEN;
                 dialog.showDialog(url, "打印凭证预览", "700px", "700px");
             } else {
                 dialog.warn("没有需要打印的内容！")
-            }});
-    }
+            }
+        });
+    }}
 </script>
 </body>
 </html>
