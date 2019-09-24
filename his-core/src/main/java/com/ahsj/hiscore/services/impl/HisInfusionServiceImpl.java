@@ -115,9 +115,12 @@ public class HisInfusionServiceImpl implements HisInfusionService {
                 hisInfusionList.get(i).setPrice(hisMedicationDetails.getPrice());
 
                 //更新药品信息中的remarks
-                int a = Integer.valueOf(hisMedicationDetails.getRemarks());
+                int a = 0;
+                if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicationDetails.getRemarks())){
+                    a = hisMedicationDetails.getAlreadyout();
+                }
                 int single = Integer.valueOf(hisInfusionList.get(i).getSingleDose());
-                hisMedicationDetails.setRemarks(String.valueOf(a+ single));
+                hisMedicationDetails.setAlreadyout(a+ single);
                 hisMedicationDetailsMapper.updateRemarks(hisMedicationDetails);
 
             }

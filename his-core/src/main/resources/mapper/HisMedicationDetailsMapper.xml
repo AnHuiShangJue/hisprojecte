@@ -32,6 +32,7 @@
         <result column="total_price" property="totalPrice" jdbcType="DECIMAL"/>
         <result column="medical_record_id" property="medicalRecordId" jdbcType="BIGINT"/>
         <result column="is_out" property="isOut" jdbcType="INTEGER"/>
+        <result column="alreadyout" property="alreadyout" jdbcType="INTEGER"/>
         <result column="exit_id" property="exitId" jdbcType="BIGINT"/>
         <result column="sale_price" property="salePrice" jdbcType="DECIMAL"/>
         <result column="price" property="price" jdbcType="DECIMAL"/>
@@ -40,7 +41,7 @@
     <sql id="Base_Column_List">
     id, medication_id, description, remarks, is_pay, is_back, is_del, count, drugs_numb, 
     drugs_name, drugs_alias, drugs_spec, prescription, mental_medicine, large_unit, small_unit, 
-    conversion_rate, disable, level, medical_insurance_sign, placeOrigin, base_medicine, 
+    conversion_rate, disable, level, medical_insurance_sign, placeOrigin, base_medicine, alreadyout,
     narcotic_drugs, create_user_id, create_date, update_user_id, update_date, total_price,medical_record_id,is_out,exit_id
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
@@ -62,7 +63,7 @@
       small_unit, conversion_rate, disable, 
       level, medical_insurance_sign, placeOrigin, 
       base_medicine, narcotic_drugs, create_user_id, 
-      create_date, update_user_id, update_date, 
+      create_date, update_user_id, update_date, alreadyout,
       total_price,medical_record_id,is_out,exit_id)
     values (#{id,jdbcType=BIGINT}, #{medicationId,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, 
       #{remarks,jdbcType=VARCHAR}, #{isPay,jdbcType=INTEGER}, #{isBack,jdbcType=INTEGER}, 
@@ -73,7 +74,7 @@
       #{level,jdbcType=INTEGER}, #{medicalInsuranceSign,jdbcType=INTEGER}, #{placeorigin,jdbcType=VARCHAR}, 
       #{baseMedicine,jdbcType=INTEGER}, #{narcoticDrugs,jdbcType=INTEGER}, #{createUserId,jdbcType=BIGINT}, 
       #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, 
-      #{totalPrice,jdbcType=DECIMAL}, #{medicalRecordId,jdbcType=BIGINT},#{isOut,jdbcType=INTEGER},#{exitId,jdbcType=BIGINT})
+      #{totalPrice,jdbcType=DECIMAL}, #{medicalRecordId,jdbcType=BIGINT},#{isOut,jdbcType=INTEGER},#{alreadyout,jdbcType=INTEGER},#{exitId,jdbcType=BIGINT})
   </insert>
     <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisMedicationDetails">
         insert into his_medication_details
@@ -167,6 +168,9 @@
             </if>
             <if test="isOut != null">
                 is_out,
+            </if>
+            <if test="alreadyout != null">
+                alreadyout,
             </if>
             <if test="exitId != null">
                 exit_id,
@@ -263,6 +267,9 @@
             <if test="isOut != null">
                 #{isOut,jdbcType=INTEGER},
             </if>
+            <if test="alreadyout != null">
+                #{alreadyout,jdbcType=INTEGER},
+            </if>
             <if test="exitId != null">
                 #{exitId,jdbcType=BIGINT},
             </if>
@@ -358,6 +365,9 @@
             <if test="isOut != null">
                 is_out = #{isOut,jdbcType=INTEGER},
             </if>
+            <if test="alreadyout != null">
+                alreadyout = #{alreadyout,jdbcType=INTEGER},
+            </if>
             <if test="exitId != null">
                 exit_id = #{exitId,jdbcType=BIGINT},
             </if>
@@ -395,6 +405,7 @@
       total_price = #{totalPrice,jdbcType=DECIMAL},
       medical_record_id = #{medicalRecordId,jdbcType=BIGINT},
       is_out = #{isOut,jdbcType=INTEGER},
+      alreadyout = #{alreadyout,jdbcType=INTEGER},
       exit_id = #{exitId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>

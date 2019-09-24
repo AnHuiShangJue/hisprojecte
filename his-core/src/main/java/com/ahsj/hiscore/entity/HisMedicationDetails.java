@@ -227,6 +227,8 @@ public class HisMedicationDetails extends BaseEntity {
 
     private String tollNumber;//交易流水号
 
+    private Integer alreadyout;
+
 
     private String exitCreateUserName;//药品出库操作人姓名
 
@@ -597,5 +599,13 @@ public class HisMedicationDetails extends BaseEntity {
 
     public void setMedicineTotalPrice(BigDecimal medicineTotalPrice) {
         this.medicineTotalPrice = medicineTotalPrice;
+    }
+
+    public Integer getAlreadyout() {
+        return alreadyout;
+    }
+
+    public void setAlreadyout(Integer alreadyout) {
+        this.alreadyout = alreadyout;
     }
 }
