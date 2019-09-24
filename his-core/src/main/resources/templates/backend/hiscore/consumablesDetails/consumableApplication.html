@@ -273,19 +273,6 @@
                         return rtnBtn;
                     }
                 },
-                /*{
-                    "title": "单价",
-                    "width": "120px",
-                    "className": "centered",
-                    "render": function (row) {
-                        var rtnBtn = "";
-                        //如果获取字符串，必须在参数外反转"
-                        rtnBtn = rtnBtn +
-                            " <input id='unitPrice' name='unitPrice' type='number' value=\"" +row.price + "\"/>"
-                        // 返回自定义内容
-                        return rtnBtn;
-                    }
-                },*/
                 {
                     "title": "操作",
                     "width": "120px",
@@ -416,34 +403,12 @@
 
                 var medicalRecordId = $("#BtnMediEnter").attr("medicalRecordId");
 
-                // var personInCharge=$(" input[ name='personInCharge' ] ").val();
-                // var expectedTime=$(" input[ name='expectedTime' ] ").val();
                 $.ahsjajax(CTX + "/api/hisconsumablesdetails/save/hisConsumablesDetails/byIds/nums.ahsj",
                     {
                         "ids": ids.join(','),//耗材编号
                         "medicalRecordId":medicalRecordId,
                         "nums": numbers.join(',')//采购数量
-                       /* "prices":prices.join(','), //价格
-                        "personInCharge":personInCharge,
-                        "expectedTime":expectedTime*/
                     },
-                    /*function (msg) {
-                        if (msg.success) {
-                            M.toast({
-                                html: msg.message, completeCallback: function () {
-
-                                }
-                            });
-                            parent.grid.search();
-                            dialog.parentclose();
-
-                        } else {
-                            M.toast({
-                                html: msg.message, completeCallback: function () {
-                                }
-                            });
-                        }
-                    },*/
                     function (msg) {
                         if (msg.success) {
                             M.toast({html: msg.message});

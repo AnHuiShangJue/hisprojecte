@@ -11,7 +11,7 @@
     <div class="col s12 m12 l12">
         <div id="validation" class="card card card-default scrollspy">
             <div class="card-content">
-                <h4 class="card-title">药方药品基本信息</h4>
+                <h4 class="card-title">药方药品基本信息</h4><label>Basic information of prescription drugs</label>
                 <form class="col s12" id="sendForm" action="#">
                     <input type="hidden" id="id" name="id" th:value="${medicineInfo.id}">
                     <input type="hidden" name="parentId" th:value="${medicineInfo.parentId}">
@@ -21,86 +21,81 @@
                             <input id="drugsName" name="drugsName" type="text" th:value="${medicineInfo.drugsName}"
                                    data-error=".errorTxt1">
                             <div class="errorTxt1"></div>
-                            <label for="drugsName">药 品 名 称</label>
+                            <label for="drugsName">药 品 名 称<span style="font-size: 12px">(Name of drug)</span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4">
                             <input id="drugsNumb" name="drugsNumb" type="text" th:value="${medicineInfo.drugsNumb}"
                                    data-error=".errorTxt2">
                             <div class="errorTxt2"></div>
-                            <label for="drugsNumb">药品编号</label>
+                            <label for="drugsNumb">药品编号<span style="font-size: 12px">(Drug number)</span></label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s4 l4 xl4">
                             <input id="drugsSpec" name="drugsSpec" type="text" th:value="${medicineInfo.drugsSpec}"/>
-                            <label for="drugsSpec">药 品 规 格</label>
+                            <label for="drugsSpec">药 品 规 格<span style="font-size: 12px">(Drug Specification)</span></label>
                         </div>
-                       <!-- <div class="input-field col s4 l4 xl4">
-                            <input id="placeorigin" name="placeorigin" type="text"
-                                   th:value="${medicineInfo.placeorigin}"/>
-                            <label for="placeorigin">源产地</label>
-                        </div>-->
                     </div>
                     <div class="row">
                         <div class="input-field col s4 l4 xl4">
                             <input id="prescription" name="prescription" type="text"
                                    th:value="${medicineInfo.prescription}"/>
-                            <label for="prescription">是否为处方药</label>
+                            <label for="prescription">是否为处方药<span style="font-size: 12px">(Is it a prescription drug)</span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4">
                             <input id="mentalMedicine" name="mentalMedicine" type="text"
                                    th:value="${medicineInfo.mentalMedicine}"/>
-                            <label for="mentalMedicine">是否为精神药品</label>
+                            <label for="mentalMedicine">是否为精神药品<span style="font-size: 12px">(Is it a psychotropic drug)</span></label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s4 l4 xl4">
                             <input id="largeUnit" name="largeUnit" type="text" th:value="${medicineInfo.largeUnit}"/>
-                            <label for="largeUnit">大单位</label>
+                            <label for="largeUnit">大单位<span style="font-size: 12px">(Large unit)</span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4">
                             <input id="smallUnit" name="smallUnit" type="text" th:value="${medicineInfo.smallUnit}"/>
-                            <label for="smallUnit">小单位</label>
+                            <label for="smallUnit">小单位<span style="font-size: 12px">(Small unit)</span></label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s4 l4 xl4">
                             <input id="conversionRate" name="conversionRate" type="number"
                                    th:value="${medicineInfo.conversionRate}"/>
-                            <label for="conversionRate">转换率</label>
+                            <label for="conversionRate">转换率<span style="font-size: 12px">(Conversion rate)</span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4">
                             <input id="disable" name="disable" type="text" th:value="${medicineInfo.disable}"/>
-                            <label for="disable">是否停用</label>
+                            <label for="disable">是否停用<span style="font-size: 12px">(Is it discontinued)</span></label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s4 l4 xl4">
                             <input id="level" name="level" type="text" th:value="${medicineInfo.level}"/>
-                            <label for="level">药品级别</label>
+                            <label for="level">药品级别<span style="font-size: 12px">(Drug grade)</span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4">
                             <input id="medicalInsuranceSign" name="medicalInsuranceSign" type="text"
                                    th:value="${medicineInfo.medicalInsuranceSign}"/>
-                            <label for="medicalInsuranceSign">药品类型</label>
+                            <label for="medicalInsuranceSign">药品类型<span style="font-size: 12px">(Types of drugs)</span></label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s4 l4 xl4">
                             <input id="baseMedicine" name="baseMedicine" type="text"
                                    th:value="${medicineInfo.baseMedicine}"/>
-                            <label for="baseMedicine">是否基药</label>
+                            <label for="baseMedicine">是否基药<span style="font-size: 12px">(Is it the basic medicine)</span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4">
                             <input id="narcoticDrugs" name="narcoticDrugs" type="text"
                                    th:value="${medicineInfo.narcoticDrugs}"/>
-                            <label for="narcoticDrugs">是否麻醉药品</label>
+                            <label for="narcoticDrugs">是否麻醉药品<span style="font-size: 12px">(Is it narcotic)</span></label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s4 l4 xl4">
                             <input id="remarks" name="remarks" type="text" th:value="${medicineInfo.remarks}"/>
-                            <label for="remarks">备注</label>
+                            <label for="remarks">备注<span style="font-size: 12px">(Remarks)</span></label>
                         </div>
                     </div>
 

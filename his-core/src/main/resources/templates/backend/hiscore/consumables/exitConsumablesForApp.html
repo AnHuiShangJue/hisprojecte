@@ -258,42 +258,6 @@
             }
             exitConsumables(ids.join(','));
         });
-
-
-
-      /*  //批量智能出库
-        function exitConsumables(id) {
-            var ids = [];
-            ids.push(id);
-            dialog.confirm('确定要出库?', function (index, layero) {
-                $.ahsjajax(CTX +  "/api/hisPproject/combination/delete/HisCombination.ahsj",
-                    {ids: ids},
-                    function (msg) {
-                        if (msg.success) {
-                            swal.close();
-                            M.toast({
-                                html: msg.message, completeCallback: function () {
-                                }
-                            });
-                            grid.search();
-                            dialog.parentclose();
-
-                        } else {
-                            M.toast({
-                                html: msg.message, completeCallback: function () {
-                                }
-                            });
-                        }
-                    },
-                    function (data) {
-                        M.toast({
-                            html: "网络异常", completeCallback: function () {
-                            }
-                        });
-                    }
-                );
-            });
-        }*/
     }
 
 </script>

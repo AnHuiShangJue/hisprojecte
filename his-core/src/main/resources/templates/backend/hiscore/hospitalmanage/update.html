@@ -11,7 +11,7 @@
     <div class="col s12 m12 l12 xl12">
         <div id="validation" class="card card card-default scrollspy">
             <div class="card-content">
-                <h4 class="card-title">住院信息审核</h4>
+                <h4 class="card-title">住院信息审核</h4><label>Audit of hospitalization information</label>
                 <form class="col s12" id="sendForm" action="#">
                     <input type="hidden" id="id" name="id" th:value="${hisHospitalManage.id}"/>
                     <input type="hidden" id="id1" name="patientId" th:value="${hisPatientInfo.id}"/>
@@ -20,61 +20,61 @@
                         <div class="input-field col s3 l3 xl3">
                             <input id="name" name="patientName" type="text" th:value="${hisPatientInfo.name}"
                                    th:readonly="true"/>
-                            <label for="name">姓 名</label>
+                            <label for="name">姓 名<span style="font-size: 12px">(name)</span></label>
                         </div>
                         <div class="input-field col s3 l3 xl3">
                             <input id="age" name="age" type="number" th:value="${hisPatientInfo.age}"
                                    th:readonly="true"/>
-                            <label for="age">年 龄</label>
+                            <label for="age">年 龄<span style="font-size: 12px">(age)</span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4">
                             <input  name="sexName" id="sex" type="text" typeKey="sex"
                                     th:value="${hisPatientInfo.sexName}"
                                     th:readonly="true"/>
-                            <label for="sex">性别</label>
+                            <label for="sex">性别<span style="font-size: 12px">(sex)</span></label>
                         </div>
                         <div class="input-field col s5 l5 xl5">
                             <input id="idcard" name="idcard" type="text" th:value="${hisPatientInfo.idcard}"
                                    th:readonly="true"/>
-                            <label for="idcard">身份证号</label>
+                            <label for="idcard">身份证号<span style="font-size: 12px">(id card)</span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4">
                             <input id="phoneNumber" name="phoneNumber" type="text" th:value="${hisPatientInfo.phonenumber}"
                                    th:readonly="true"/>
-                            <label for="phoneNumber">手机号</label>
+                            <label for="phoneNumber">手机号<span style="font-size: 12px">(Phonenumber)</span></label>
                         </div>
                          <div class="input-field col s4 l4 xl4">
                             <input id="number" name="number" type="text" th:value="${hisHosptalregist.number}"
                                th:readonly="true"/>
-                            <label for="number">住院编号</label>
+                            <label for="number">住院编号<span style="font-size: 12px">(Hospitalization Number)</span></label>
                          </div>
                          <div class="col input-field s3 m3 l3">
                              <select ahsj:select name="departmentId" id="departmentId" type="depart" typeKey="2"
                                      departKbn="1" th:value="${hisHosptalregist.departmentId}">
                              </select> <!--departKbn="1"  1是医疗 2是非医疗 -->   <!--typeKey="2"   1是部门 2是科室-->
-                        <label for="departmentId">科 室</label>
+                        <label for="departmentId">科 室<span style="font-size: 12px">(Department)</span></label>
                          </div>
                         <div class="col input-field s3 m3 l3">
                             <select id="doctorId" name="doctorId" class="js-data-example-ajax" th:value="${hisHosptalregist.doctorId}">
                             </select>
-                            <label>医 生</label>
+                            <label>医 生<span style="font-size: 12px">(Doctor)</span></label>
                         </div>
                     <div class="col input-field s3 m3 l3">
                         <select ahsj:select name="careLevel" id="careLevel" type="code" typeKey="care_level" th:value="${hisHosptalregist.careLevel}">
                         </select>
-                        <label for="careLevel">护理级别</label>
+                        <label for="careLevel">护理级别<span style="font-size: 12px">(Nursing level)</span></label>
                     </div>
                      <div class="input-field col s4 l4 xl4">
                         <select   name="nurseId" id="nurseId">
                             <option th:value="0">选择护士</option>
                         </select>
-                            <label for="nurseId">护士</label>
+                            <label for="nurseId">护士<span style="font-size: 12px">(Nurse)</span></label>
                      </div>
                         <div class="input-field col s4 l4 xl4">
                             <select   name="wardId" id="wardId">
                                 <option th:value="0">选择病房</option>
                             </select>
-                            <label for="wardId">病房编号</label>
+                            <label for="wardId">病房编号<span style="font-size: 12px">(Ward number)</span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4">
                             <select   name="bedId" id="bedId"
@@ -82,25 +82,23 @@
                                 <div class="errorTxt4"></div>
                                 <option th:value="0"> 选择病床 </option>
                             </select>
-                            <label for="bedId">病床编号</label>
+                            <label for="bedId">病床编号<span style="font-size: 12px">(Bed number)</span></label>
                         </div>
                     <div class="input-field col s4 l4 xl4">
                         <input id="diseaseRegion" name="diseaseRegion" type="text" th:value="${hisHospitalManage.diseaseRegion}"/>
-                        <label for="diseaseRegion">病区<span style="font-size: 12px">(disease Region
-
-)</span></label>
+                        <label for="diseaseRegion">病区<span style="font-size: 12px">(Inpatient Area)</span></label>
                     </div>
                         <div class="input-field col s12 l12 xl12">
                             <input id="outpatientDiagnosis" name="outpatientDiagnosis" type="text" th:value="${hisHosptalregist.outpatientDiagnosis}"/>
-                            <label for="outpatientDiagnosis">门诊诊断</label>
+                            <label for="outpatientDiagnosis">门诊诊断<span style="font-size: 12px">(Outpatient diagnosis)</span></label>
                         </div>
                         <div class="input-field col s12 l12 xl12">
                             <input id="inpatientDiagnosis" name="inpatientDiagnosis" type="text" th:value="${hisHosptalregist.inpatientDiagnosis}"/>
-                            <label for="inpatientDiagnosis">住院诊断</label>
+                            <label for="inpatientDiagnosis">住院诊断<span style="font-size: 12px">(Hospitalization diagnosis)</span></label>
                         </div>
                         <div class="input-field col s12 l12 xl12">
                         <input id="remarks" name="remarks" type="text" th:value="${hisHosptalregist.remark}"/>
-                        <label for="remarks">备 注</label>
+                        <label for="remarks">备 注<span style="font-size: 12px">(Remarks)</span></label>
                         </div>
                     <div class="row">
                         <div class="input-field col s12">

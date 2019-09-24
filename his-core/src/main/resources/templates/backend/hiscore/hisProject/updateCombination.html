@@ -11,7 +11,8 @@
     <div class="col s12 m12 l12">
         <div id="validation" class="card card card-default scrollspy">
             <div class="card-content">
-                <h4 class="card-title">收费信息修改</h4>
+                <h4 class="card-title">收费信息修改</h4><label style="color:black">Fee information modification
+            </label>
                 <form class="col s12" id="sendForm" action="#">
                     <input type="hidden" id="inspectionId" name="inspectionId" th:value="${hisProject.inspectionId}" >
                     <div class="row">
@@ -19,31 +20,20 @@
                             <input id="combinationName" name="combinationName" type="text" th:value="${hisProject.combinationName}"  readonly="readonly"
                                    data-error=".errorTxt1">
                             <div class="errorTxt1"></div>
-                            <label for="combinationName">项目组合名称</label>
+                            <label for="combinationName">项目组合名称<span style="font-size: 12px">(Portfolio name)</span></label>
                         </div>
-
-
-                       <!-- <div class="input-field col s4 l4 xl4" >
-                             <input id="number" name="number" type="text"
-                                    data-error=".errorTxt2" >
-                             <div class="errorTxt2"></div>
-                             <label for="number">项目编号</label>
-                         </div>
--->
-
-
                         <div class="input-field col s4 l4 xl4">
                             <input id="name" name="name" type="text" th:value="${hisProject.name}"  readonly="readonly"
                                    data-error=".errorTxt1">
                             <div class="errorTxt1"></div>
-                            <label for="name">项目名称</label>
+                            <label for="name">项目名称<span style="font-size: 12px">(entry name)</span></label>
                         </div>
 
                         <div class="input-field col s4 l4 xl4">
                             <input id="hisProjectNum" name="hisProjectNum" type="number" th:value="${hisProject.hisProjectNum}"
                                    data-error=".errorTxt1">
                             <div class="errorTxt1"></div>
-                            <label for="hisProjectNum">数量</label>
+                            <label for="hisProjectNum">数量<span style="font-size: 12px">(Number)</span></label>
                         </div>
 
 
@@ -51,7 +41,7 @@
                             <input id="pinyinCode" name="pinyinCode" type="text" th:value="${hisProject.pinyinCode}"  readonly="readonly"
                                    data-error=".errorTxt1" >
                             <div class="errorTxt1"></div>
-                            <label for="pinyinCode">项目的拼音码</label>
+                            <label for="pinyinCode">项目的拼音码<span style="font-size: 12px">(Pinyin code for the project)</span></label>
                         </div>
 
 
@@ -59,7 +49,7 @@
                             <input id="price" name="price" type="number" th:value="${hisProject.price}"  readonly="readonly"
                                    data-error=".errorTxt1" >
                             <div class="errorTxt1"></div>
-                            <label for="price">项目的收费标准</label>
+                            <label for="price">项目的收费标准<span style="font-size: 12px">(Fee Standard for Projects)</span></label>
                         </div>
 
 
@@ -67,27 +57,9 @@
                             <input id="unit" name="unit" type="text" th:value="${hisProject.unit}"  readonly="readonly"
                                    data-error=".errorTxt1">
                             <div class="errorTxt1"></div>
-                            <label for="unit">项目的使用单位</label>
+                            <label for="unit">项目的使用单位<span style="font-size: 12px">(Users of the project)</span></label>
                         </div>
-
-                     <!--   <div class="col input-field s4 m4 l4">
-                            <select ahsj:select name="type" id="type" type="code"    typeKey="assit_project_type">
-                            </select>
-                            <label for="type">类别</label>
-                        </div>-->
-
-                        <!--<div class="col input-field s4 m4 l4">
-                            <select ahsj:select name="departmentId" id="departmentId" type="depart" typeKey="2" departKbn="1" >
-                            </select>
-                            <label for="departmentId">科 室</label>
-                        </div>-->
-
                     </div>
-
-
-
-
-
                     <div class="row">
                         <div class="input-field col s12">
                             <button id="send_btn" class="btn cyan waves-effect waves-light right" type="submit"

@@ -211,31 +211,6 @@
         // dialog.show(url, "修改用户信息");
     }
 
-    // function deleteInit(ids) {
-    //     layer.confirm('确定删除?', {
-    //         btn: ['确定', '取消'] //可以无限个按钮
-    //     }, function (index, layero) {
-    //         $.ahsjajax( CTX+"/api/hisconsumables/delete.ahsj",
-    //             {"ids": ids},
-    //             function (msg) {
-    //                 if (msg.success) {
-    //                     layer.close(index);
-    //                     Materialize.toast(msg.message, 500,"",function () {
-    //                         grid.search();
-    //                         dialog.parentclose();
-    //                     });
-    //                 } else {
-    //                     layer.close(index);
-    //                     Materialize.toast(msg.message, 3000);
-    //                 }
-    //             },
-    //             function (data) {
-    //                 layer.close(index);
-    //                 Materialize.toast("网络异常");
-    //             }
-    //         );
-    //     });
-    // }
 
     function initBtn() {
         //新增按钮(添加数据到列表)
@@ -246,27 +221,7 @@
                 dialog.warn("请至少选择一条数据");
                 return;
             }
-            //把ids传到Exitcontroller
-            // $.ahsjajax(
-            //     CTX+"/api/hisconsumables/backenterconsumables.ahsj?token="+TOKEN,
-            //     {"ids": ids.join(",")},
-            //     function (msg) {
-            //         if (msg.success) {
-            //             layer.close(index);
-            //             Materialize.toast(msg.message, 500,"",function () {
-            //                 grid.search();
-            //                 dialog.parentclose();
-            //             });
-            //         } else {
-            //             layer.close(index);
-            //             Materialize.toast(msg.message, 3000);
-            //         }
-            //     },
-            //     function (data) {
-            //         layer.close(index);
-            //         Materialize.toast("网络异常");
-            //     }
-            // );
+
 
             var url = CTX+"/api/hisconsumables/backenterconsumables/index.ahsj?token="+TOKEN+"&ids="+ids.join(",");
             dialog.show(url, "修改用户信息");

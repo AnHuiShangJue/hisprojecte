@@ -11,7 +11,8 @@
     <div class="col s12 m12 l12">
         <div id="validation" class="card card card-default scrollspy">
             <div class="card-content">
-                <h4 class="card-title" >收费项目组信息修改</h4>
+                <h4 class="card-title" >收费项目组信息修改</h4><label style="color:black">Information modification of charging project group
+            </label>
                 <form class="col s12" id="sendForm" action="#">
                     <input type="hidden" id="id" name="id"  th:value="${hisInspectionCombination.id}">
                     <div class="row">
@@ -20,7 +21,7 @@
                              <input id="ordernum" name="ordernum" type="text"  readonly="readonly"
                                     data-error=".errorTxt2" th:value="${hisInspectionCombination.ordernum}">
                              <div class="errorTxt2"></div>
-                             <label for="ordernum">项目组序号</label>
+                             <label for="ordernum">项目组序号<span style="font-size: 12px">(Project Group Number)</span></label>
                          </div>
 
 
@@ -28,7 +29,7 @@
                             <input id="name" name="name" type="text"
                                    data-error=".errorTxt1" th:value="${hisInspectionCombination.name}">
                             <div class="errorTxt1"></div>
-                            <label for="name">项目组名称</label>
+                            <label for="name">项目组名称<span style="font-size: 12px">(Project group name)</span></label>
                         </div>
 
 
@@ -36,7 +37,7 @@
                             <input id="number" name="number" type="text"
                                    data-error=".errorTxt1" th:value="${hisInspectionCombination.number}">
                             <div class="errorTxt1"></div>
-                            <label for="number">项目组简码</label>
+                            <label for="number">项目组简码<span style="font-size: 12px">(Project Group Simplified Code)</span></label>
                         </div>
 
 
@@ -44,7 +45,7 @@
                             <input id="money" name="money" type="number"   readonly="readonly"
                                    data-error=".errorTxt1" th:value="${hisInspectionCombination.money}">
                             <div class="errorTxt1"></div>
-                            <label for="money">项目总价</label>
+                            <label for="money">项目总价<span style="font-size: 12px">(Total project price)</span></label>
                         </div>
 
 

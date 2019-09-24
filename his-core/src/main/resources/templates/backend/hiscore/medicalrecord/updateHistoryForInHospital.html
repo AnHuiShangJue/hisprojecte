@@ -12,7 +12,7 @@
     <div class="col s12 m12 l12">
         <div id="validation" class="card card card-default scrollspy">
             <div class="card-content">
-                <h4 class="card-title">住院病历修改</h4><label style="color:black">
+                <h4 class="card-title">住院病历修改</h4><label style="color:black">Revision of inpatient medical records
             </label>
                 <form class="col s12" id="sendForm" action="#">
                     <input type="hidden" id="id" name="id" th:value="${hisMedical.id}" >
@@ -42,34 +42,35 @@
                             <input id="noSetDate" name="noSetDate" class="datepicker"
                                    th:placeholder="${#dates.format(hisMedical.noSetDate, 'yyyy/MM/dd')}"
                                    th:value="${#dates.format(hisMedical.noSetDate, 'yyyy/MM/dd')}" />
-                            <label for="noSetDate">发病时间<span style="font-size: 12px">()</span></label>
+                            <label for="noSetDate">发病时间<span style="font-size: 12px">(Onset time)</span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4">
                             <input id="bloodPressure" name="bloodPressure" type="text" th:value="${hisMedical.bloodPressure}" />
-                            <label for="bloodPressure">血压<span style="font-size: 12px">(
+                            <label for="bloodPressure">血压<span style="font-size: 12px">(blood pressure
 )</span></label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s4 l4 xl4">
                             <input id="nowCondition" name="nowCondition" type="text" th:value="${hisMedical.nowCondition}" />
-                            <label for="nowCondition">现病史<span style="font-size: 12px">()</span></label>
+                            <label for="nowCondition">现病史<span style="font-size: 12px">(History of Present Illness)</span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4">
                             <input id="hiscondition" name="hiscondition" type="text" th:value="${hisMedical.hiscondition}" />
                             <label for="hiscondition">既往史<span style="font-size: 12px">(
+Past history
 )</span></label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s4 l4 xl4">
                             <input id="chiefcomplaint" name="chiefcomplaint" type="text" th:value="${hisMedical.chiefcomplaint}" />
-                            <label for="chiefcomplaint">主诉<span style="font-size: 12px">(
+                            <label for="chiefcomplaint">主诉<span style="font-size: 12px">(Chief complaint
 )</span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4">
                             <input id="remarks" name="remarks" type="text" th:value="${hisMedical.remarks}" />
-                            <label for="remarks">备注<span style="font-size: 12px">(
+                            <label for="remarks">备注<span style="font-size: 12px">(Remarks
 )</span></label>
                         </div>
 

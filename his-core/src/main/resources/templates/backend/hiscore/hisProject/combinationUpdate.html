@@ -12,6 +12,7 @@
         <div id="validation" class="card card card-default scrollspy">
             <div class="card-content">
                 <h4 class="card-title">收费组合项目信息修改</h4>
+                <label>Information Modification of Charge Portfolio Project</label>
                 <form class="col s12" id="sendForm" action="#">
                     <input type="hidden" id="id" name="id" th:value="${hisMedicinePurchasingPlanRecord.id}">
                     <div class="row">
@@ -19,14 +20,14 @@
                             <input id="planNumber" name="planNumber" type="text"
                                    th:value="${hisMedicinePurchasingPlanRecord.planNumber}"
                                    th:readonly="true">
-                            <label for="planNumber">组合编号</label>
+                            <label for="planNumber">组合编号<span style="font-size: 12px">(Combination number)</span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4">
                             <input id="person_in_charge" name="personInCharge" type="text"
                                    th:value="${hisMedicinePurchasingPlanRecord.personInCharge}"
                                    data-error=".errorTxt1">
                             <div class="errorTxt1"></div>
-                            <label for="person_in_charge">组合名称</label>
+                            <label for="person_in_charge">组合名称<span style="font-size: 12px">(Combination name)</span></label>
                         </div>
                     </div>
                     <div class="row">
@@ -35,13 +36,13 @@
                                    th:placeholder="${#dates.format(hisMedicinePurchasingPlanRecord.expectedTime, 'yyyy/MM/dd')}" th:value="${#dates.format(hisMedicinePurchasingPlanRecord.expectedTime, 'yyyy/MM/dd')}"
                                    data-error=".errorTxt2"/>
                             <div class="errorTxt2"></div>
-                            <label for="expected_time">组合简码</label>
+                            <label for="expected_time">组合简码<span style="font-size: 12px">(Combinatorial code)</span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4">
                             <input id="budget" name="budget" type="number"
                                    th:value="${hisMedicinePurchasingPlanRecord.budget}"
                                    th:readonly="true"/>
-                            <label for="budget">总价</label>
+                            <label for="budget">总价<span style="font-size: 12px">(Total price)</span></label>
                         </div>
                     </div>
 
