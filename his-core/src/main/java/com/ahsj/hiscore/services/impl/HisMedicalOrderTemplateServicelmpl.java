@@ -4,6 +4,7 @@ import com.ahsj.hiscore.core.CodeHelper;
 import com.ahsj.hiscore.dao.HisMedicalOrderTemplateDetailMapper;
 import com.ahsj.hiscore.dao.HisMedicalOrderTemplateMapper;
 import com.ahsj.hiscore.entity.HisMedicalOrderTemplate;
+import com.ahsj.hiscore.entity.HisMedicalTemplate;
 import com.ahsj.hiscore.services.HisMedicalOrderTemplateService;
 import core.entity.PageBean;
 import core.message.Message;
@@ -35,6 +36,7 @@ public class HisMedicalOrderTemplateServicelmpl implements HisMedicalOrderTempla
     @Override
     @Transactional(readOnly = true)
     public PageBean<HisMedicalOrderTemplate> list(PageBean<HisMedicalOrderTemplate> pageBean) throws Exception {
+
        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisMedicalOrderTemplateMapper.list(pageBean)));
        return pageBean;
     }

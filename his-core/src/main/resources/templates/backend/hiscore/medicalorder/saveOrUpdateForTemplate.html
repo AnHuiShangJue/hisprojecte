@@ -6,7 +6,7 @@
     <div class="col s12 m12 l12">
         <div id="validation" class="card card card-default scrollspy">
             <div class="card-content">
-                <h4 class="card-title">医嘱模板管理</h4><label style="color:black">គ្រប់គ្រងគំរូពេទ្យ
+                <h4 class="card-title">医嘱模板管理</h4><label style="color:black">Medical template management
 
             </label>
                 <form class="col s12" id="send_Form" action="#">
@@ -14,16 +14,35 @@
                     <div class="row">
                         <div class="input-field col s4 l4 xl4" th:if="${hisMedicalOrderTemplate.id} ne null">
                             <input id="templateNumber" name="templateNumber" type="text" th:value="${hisMedicalOrderTemplate.templateNumber}" th:readonly="true" />
-                            <label for="templateNumber">模板编号<span style="font-size: 12px">(លេខគំរូ
+                            <label for="templateNumber">模板编号<span style="font-size: 12px">(Template number
 )</span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4">
                             <input id="templateName" name="templateName" type="text" th:value="${hisMedicalOrderTemplate.templateName}" data-error=".errorTxt1"/>
                             <div class="errorTxt1"></div>
-                            <label for="templateName">模板名<span style="font-size: 12px">(Template nameពុម្ព
+                            <label for="templateName">模板名<span style="font-size: 12px">(Template name
 
 )</span></label>
+
+
+
                         </div>
+
+                        <!--<div class="input-field col s4 l4 xl4">-->
+                            <div class="col s1" style="padding-top:6px">
+                                <label>
+                                    <input id="remarks1" name="remarks" type="radio" value="0" />
+                                    <span>公共模板（public）</span>
+                                </label>
+                            </div>
+                            <div class="col s1" style="padding-top:6px">
+                                <label>
+                                    <input id="remarks2" name="remarks" type="radio" value="1" checked/>
+                                    <span>仅自己使用（private）</span>
+                                </label>
+                            </div>
+                        <!--</div>-->
+
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
