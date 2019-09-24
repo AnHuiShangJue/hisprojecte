@@ -57,9 +57,9 @@
                                     <input id="years" name="years" type="text"/>
                                     <label class="active"  for="years">年份选择<span style="font-size: 12px">(Year selection)</span></label>
                                 </div>
-                            <div class="col input-field s2 m2 l2 xl2">
+                                <div class="col input-field s2 m2 l2 xl2">
                                     <input id="number" name="number" type="text"/>
-                                <label for="number">挂号编号<span style="font-size: 12px">(Registered number)</span></label>
+                                    <label for="number">挂号编号<span style="font-size: 12px">(Registered number)</span></label>
 
                                 </div> <br><br><br><br>
                                 <div class="col  s1 m1 l1 xl1">
@@ -101,7 +101,7 @@
                             <h4 class="card-title">
                                 区间内的总收入金额为<span style="font-size: 12px">(The total amount of income in the interval is)</span>：<span id="price"></span>
                             </h4>
-                    </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -204,7 +204,8 @@
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn +
-                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看明细\" onclick='visitDetail(\"" + row.number + "\");'> <i class='material-icons'>visibility</i></a>";
+                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看明细\" onclick='visitDetail(\"" + row.number + "\");'> <i class='material-icons'>visibility</i></a>"+
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"打印\" href='javascript:;' onclick='print(" + row.id + ");'> <i class='material-icons'>print</i></a>" ;
                             // 返回自定义内容
                             return rtnBtn;
                         }
@@ -273,7 +274,15 @@
         $(this).val($(this).val().trim());
     });
 
-
+    function print(id){
+        dialog.confirm('确定打印吗?', function (index, layero) {
+            if (id != "" && id != null && id != undefined) {
+                var url = CTX + "/api/registered/print/index.ahsj?token=" + TOKEN+"&id="+id;
+                dialog.showDialog(url, "打印凭证预览","700px","700px");
+            } else {
+                dialog.warn("没有需要打印的内容！")
+            }});
+    }
 </script>
 </body>
 </html>

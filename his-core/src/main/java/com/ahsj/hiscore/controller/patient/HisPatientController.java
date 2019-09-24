@@ -444,6 +444,7 @@ public class HisPatientController extends BaseController {
         HisMedicalRecord hisMedicalRecord = hisMedicalRecordService.selectByRegisterId(hisRegistered.getId());
         //根据就诊记录ID查询出就诊判断HisMedical这张表
         HisMedical hisMedical = hisMedicalService.selectByMedicalRecordId(hisMedicalRecord.getId());
+        if(!EmptyUtil.Companion.isNullOrEmpty(hisMedical)){
         Translate check = new Translate();
         check.setTranslateType(Constants.TRANSLATE_HIS_HHISMEDICAL);
         check.setTranslateId(hisMedical.getId());
@@ -473,7 +474,7 @@ public class HisPatientController extends BaseController {
                 if (translateList.size() > 0)
                     flag = false;
             }
-        }
+        }}
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/medicalrecord/print");
         modelAndView.addObject("title", "打印治疗诊疗单");
         modelAndView.addObject("token", token);

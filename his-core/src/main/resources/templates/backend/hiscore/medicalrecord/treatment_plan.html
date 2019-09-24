@@ -293,6 +293,11 @@
                                                 type="submit" th:if="${isSameUser}">提交
                                         </button>
                                     </div>
+                                    <div class="col m6 s12 mb-1" style="width: auto;margin-bottom: 5% !important;">
+                                        <button class="waves-effect waves-dark btn btn-primary" id="printShow"
+                                                type="button" >打印
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -701,7 +706,7 @@
             $("#saveBtn").click(function () {
                 layer.confirm('<input id="templateName" name="templateName">', {icon: 1, title:'请输入模板名称（Please enter a template name）'}, function(index){
                     //do something
-                //判断血压的正则表达式，血压范围为1-255  格式为90/140   数字（1-255）/数字（1-255）
+                    //判断血压的正则表达式，血压范围为1-255  格式为90/140   数字（1-255）/数字（1-255）
                     var reg = new RegExp(/^(\b25[0-5]\b|\b2[0-4]\d\b|\b1\d\d\b|\b[1-9]\d\b|\b[1-9]\b)[/](\b25[0-5]\b|\b2[0-4]\d\b|\b1\d\d\b|\b[1-9]\d\b|\b[1-9]\b)$/);
                     var bloodPressure = $("#bloodPressure").val();
                     if (!isNullOrEmpty(bloodPressure)) {
@@ -1000,7 +1005,7 @@
 
     //添加病历模板
     function addMedical(json,prescriptionIsusable,combineIsusable,prescriptionId,combineId) {
-       //添加病历信息
+        //添加病历信息
         if(!isNullOrEmpty(json.id)) {
             changeInputValue("chiefcomplaint", json.chiefcomplaint);
             changeInputValue("personalHistory", json.personalHistory);
@@ -1138,6 +1143,9 @@
     $("input").change(function () {
         $(this).val($(this).val().trim());
     });
+    $("#printShow").click(function () {
+        printShow();
+    })
 
 </script>
 </body>

@@ -233,7 +233,8 @@
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn +
-                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看明细\" onclick='visitDetail(\"" + row.number + "\");'> <i class='material-icons'>visibility</i></a>";
+                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看明细\" onclick='visitDetail(\"" + row.number + "\");'> <i class='material-icons'>visibility</i></a>"+
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"打印\" href='javascript:;' onclick='print(\"" + row.number + "\");'> <i class='material-icons'>print</i></a>";
                             // 返回自定义内容
                             return rtnBtn;
                         }
@@ -310,6 +311,15 @@
     $("input").change(function () {
         $(this).val($(this).val().trim());
     });
+    function print(number){
+        dialog.confirm('确定打印吗?', function (index, layero) {
+            if (number != "" && number != null && number != undefined) {
+                var url = CTX + "/api/hisTollDetails/printHospital/index.ahsj?number="+ number+"&token="+TOKEN;
+                dialog.showDialog(url, "打印凭证预览", "700px", "700px");
+            } else {
+                dialog.warn("没有需要打印的内容！")
+            }});
+    }
 </script>
 </body>
 </html>

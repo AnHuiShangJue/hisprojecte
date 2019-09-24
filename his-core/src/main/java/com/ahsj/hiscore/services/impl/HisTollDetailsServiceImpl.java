@@ -164,24 +164,26 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
             if (h.getType() == 1 || h.getType() == 4) {//药品
                 translate.setTranslateId(h.getId().longValue());
                 translate.setTranslateType(Constants.TRANSLATE_HIS_MEDICINEINFO);
-                translate.setTranslateChina(h.getName());
                 List<Translate> translates = iTranslateService.queryTranslate(translate);
                 if (!EmptyUtil.Companion.isNullOrEmpty(translates)) {
-                    translates.stream().forEach(t -> h.setTranName(t.getTranslateKhmer()));
+                    for (Translate translate1 : translates) {
+                        if (StringUtils.equals(h.getName(),translate1.getTranslateChina())){
+                            h.setTranName(translate1.getTranslateKhmer());
+                        }
+                    }
                 }
             }
             if (h.getType() == 2) {//项目
                 translate.setTranslateId(h.getId().longValue());
                 translate.setTranslateType(Constants.TRANSLATE_HIS_PROJECT);
-                translate.setTranslateChina(h.getName());
                 List<Translate> translates = iTranslateService.queryTranslate(translate);
                 if (!EmptyUtil.Companion.isNullOrEmpty(translates)) {
-                    translates.stream().forEach(t -> h.setTranName(t.getTranslateKhmer()));
+                    translates.stream().filter(e-> StringUtils.equals(h.getName(),e.getTranslateChina())).forEach(t -> h.setTranName(t.getTranslateKhmer()));
                 }
             }
             if (h.getType() == 3) {//住院费用
                 if (!EmptyUtil.Companion.isNullOrEmpty(h.getName())) {
-                    h.setTranName("មន្ទីរពេទ្យ។" + h.getName() + "ថ្លៃគ្រែ។");
+                    h.setTranName("Hospital bed number" + h.getName());
                     h.setName("住院" + h.getName() + "号病床费用");
                 }
             }
@@ -196,7 +198,7 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
      *@Author zhushixiang
      *@Date 2019-09-11
      *@Time 11:28
-    **/
+     **/
     @Override
     @Transactional(readOnly = false)
     public void insertBatch(List<HisTollDetails> hisTollDetailsList) throws Exception {
@@ -212,7 +214,7 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
      *@Author zhushixiang
      *@Date 2019-09-12
      *@Time 16:58
-    **/
+     **/
     @Override
     @Transactional(readOnly = true)
     public HisTollDetails selectByTollNumberForBedAmount(String tollRecordNumber) throws Exception {
@@ -228,7 +230,7 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
      *@Author zhushixiang
      *@Date 2019-09-13
      *@Time 16:34
-    **/
+     **/
     @Override
     @Transactional(readOnly = true)
     public PageBean<HisTollDetails> listForcommonSwipeByCommonNumber(PageBean<HisTollDetails> hisTollDetailsPageBean) throws Exception {
