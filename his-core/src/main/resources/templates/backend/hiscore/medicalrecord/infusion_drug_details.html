@@ -71,6 +71,7 @@
     </div>
 </div>
 <input type="hidden" id="recordId" th:value="${recordId}">
+<input type="hidden" id="medicalRecordId" th:value="${medicalRecordId}">
 <input type="hidden" id="number" th:value="${number}">
 
 <div th:replace="public/base_list_script :: html"></div>
@@ -146,7 +147,7 @@
         $("#btnPrint").click(function () {
 
             //输液单
-            var url = CTX + "/api/hisInfusion/outpatientprintf/index.ahsj?token=" + TOKEN +"&recordId="+$("#recordId").val();
+            var url = CTX + "/api/hisInfusion/outpatientprintf/index.ahsj?token=" + TOKEN +"&recordId="+$("#recordId").val()+"&medicalRecordId="+$("#medicalRecordId").val();
             dialog.showDialog(url, "打印输液单","800px","800px");
 
         });
