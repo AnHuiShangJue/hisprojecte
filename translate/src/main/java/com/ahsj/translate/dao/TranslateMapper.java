@@ -32,5 +32,5 @@ public interface TranslateMapper {
 
     void updateByTranslates(Translate translate);
 
-    List<Translate> selectByTranslateCount(Translate translate);
+    List<Translate> queryByTranslate(Translate translate);
 }

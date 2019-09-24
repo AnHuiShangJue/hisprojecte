@@ -1,5 +1,7 @@
 package com.ahsj.translate.entity.TranslateModel;
 
+import com.ahsj.translate.entity.HisMedicationDetails;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -56,6 +58,16 @@ public class TranslateModels implements Serializable {
     List<HisPrescriptionTranslate> hisPrescriptionTranslates;
 
     List<HisConsumablesTranslate> hisConsumablesTranslates;
+
+    List<HisMedicationDetailsTranslate> hisMedicationDetails;
+
+    public List<HisMedicationDetailsTranslate> getHisMedicationDetails() {
+        return hisMedicationDetails;
+    }
+
+    public void setHisMedicationDetails(List<HisMedicationDetailsTranslate> hisMedicationDetails) {
+        this.hisMedicationDetails = hisMedicationDetails;
+    }
 
     public List<HisConsumablesTranslate> getHisConsumablesTranslates() {
         return hisConsumablesTranslates;
