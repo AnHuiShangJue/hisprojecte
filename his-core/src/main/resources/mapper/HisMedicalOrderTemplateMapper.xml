@@ -129,9 +129,12 @@
   <!--自定义sql-->
   <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
         select a.*,b.user_name as createUserName
-from his_medical_order_template as a
-left join `his-userinfo`.user_info as b on a.create_user_id = b.id
-where 1=1
+        from his_medical_order_template as a
+        left join `his-userinfo`.user_info as b on a.create_user_id = b.id
+        where 1=1
+    <if test="parameter.remarks != null and parameter.remarks != ''">
+      and remarks = #{parameter.remarks,jdbcType=VARCHAR}
+    </if>
     <if test="parameter.orders != null and parameter.orders != ''">
       order by ${parameter.orders}
     </if>

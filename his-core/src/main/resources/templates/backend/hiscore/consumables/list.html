@@ -296,17 +296,7 @@
                 var param = "ch";
                 var url =   CTX + "/api/hisconsumables/exportExcel.ahsj?token="+ TOKEN+"&name="+name+"&lowPrice="+lowPrice+"&highPrice="+highPrice+"&isEnable="+isEnable+"&param="+ param+"&idsData="+idsData;
                 window.location=url;
-                /*   $.ahsjajaxGet(CTX + "/api/hisProject/exportExcel.ahsj",
-                       {
-                           "token":TOKEN ,
-                           "pinyinCode":pinyinCode ,
-                           "idsData": idsData,
-                           "isEnable": isEnable,
-                           "param":param
-                       },
-                       function (msg) {
-                       }
-                   )*/
+
             }, function(){
                 var ids = grid.getSelectedRows();
                 var idsData = ids.join(',');
@@ -317,20 +307,9 @@
                 var highPrice =hisConsumables.highPrice;
                 var isEnable =hisConsumables.isEnable;
                 var param = "km";
-                // var url =   CTX + "/api/hisconsumables/exportExcel.ahsj?token="+ TOKEN+"&name="+name+"&type="+type+"&spec="+spec+"&price="+price+"&enable="+enable;
                 var url =   CTX + "/api/hisconsumables/exportExcel.ahsj?token="+ TOKEN+"&name="+name+"&lowPrice="+lowPrice+"&highPrice="+highPrice+"&isEnable="+isEnable+"&param="+ param+"&idsData="+idsData;
                 window.location=url;
-                /*   $.ahsjajaxGet(CTX + "/api/hisProject/exportExcel.ahsj",
-                       {
-                           "token":TOKEN ,
-                           "pinyinCode":pinyinCode ,
-                           "idsData": idsData,
-                           "isEnable": isEnable,
-                           "param":param
-                       },
-                       function (msg) {
-                       }
-                   )*/
+
             });
         });
 

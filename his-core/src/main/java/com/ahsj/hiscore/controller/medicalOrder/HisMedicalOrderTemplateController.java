@@ -38,6 +38,7 @@ public class HisMedicalOrderTemplateController extends BaseController {
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/medicalorder/template");
         modelAndView.addObject("title","医嘱模板基本信息");
         modelAndView.addObject("token",token);
+        modelAndView.addObject("userId",getId());
         return modelAndView;
     }
 
@@ -68,6 +69,10 @@ public class HisMedicalOrderTemplateController extends BaseController {
     @RequestMapping(value = "saveOrUpdate.ahsj")
     @ResponseBody
     public Message saveOrUpdate (Map<String, Object> model, HisMedicalOrderTemplate hisMedicalOrderTemplate) throws Exception {
+
+        if (hisMedicalOrderTemplate.getRemarks() == "1"){
+            hisMedicalOrderTemplate.setRemarks(String.valueOf(getId()));
+        }
         return  hisMedicalOrderTemplateService.saveOrUpdate(hisMedicalOrderTemplate);
     }
 

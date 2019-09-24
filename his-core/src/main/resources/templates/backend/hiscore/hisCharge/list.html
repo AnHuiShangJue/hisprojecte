@@ -49,25 +49,25 @@
                                 <input id="medicalRecordId" name="medicalRecordId" type="text"
                                        data-error=".errorTxt1">
                                 <div class="errorTxt1"></div>
-                                <label for="medicalRecordId">请输入就诊编号</label>
+                                <label for="medicalRecordId">请输入就诊编号</label>(Please enter the doctor's number)
                             </div>
                             <div class="input-field col s4 l4 xl4">
                                 <input id="number" name="number" type="text"
                                        data-error=".errorTxt1">
                                 <div class="errorTxt1"></div>
-                                <label for="number">请输入交易流水号</label>
+                                <label for="number">请输入交易流水号</label>(Please enter the trade flow number)
                             </div>
                             <div class="input-field col s4 l4 xl4">
                                 <input id="createDate1" name="createDate" type="text"  class="datepicker"
                                        data-error=".errorTxt1">
                                 <div class="errorTxt1"></div>
-                                <label for="createDate1">请输入交易时间上区间</label>
+                                <label for="createDate1">请输入交易时间上区间</label>(Please enter the upper trading time interval)
                             </div>
                             <div class="input-field col s4 l4 xl4">
                                 <input id="createDate2" name="createDate" type="text"  class="datepicker"
                                        data-error=".errorTxt1">
                                 <div class="errorTxt1"></div>
-                                <label for="createDate2">请输入交易时间下区间</label>
+                                <label for="createDate2">请输入交易时间下区间</label>(Please enter the trading time interval)
                             </div>
                         </form>
                         <div class="row">
@@ -85,23 +85,23 @@
                         <div class="input-field col s4 l4 xl4">
                             <input readonly id="loginName" type="text"
                                    th:value="${loginName}">
-                            <label for="loginName">操作人</label>
+                            <label for="loginName">操作人</label>(Operator)
                         </div>
                         <div class="input-field col s4 l4 xl4">
                             <input readonly type="text" id="patientName"/>
-                            <label class="active" for="patientName">病人姓名:</label>
+                            <label class="active" for="patientName">病人姓名:</label>(Name of patient)
                         </div>
                         <div class="input-field col s4 l4 xl4">
                             <input readonly type="text" id="sex"/>
-                            <label class="active" for="sex">性 别:</label>
+                            <label class="active" for="sex">性 别:</label>(sex)
                         </div>
                         <div class="input-field col s4 l4 xl4">
                             <input readonly type="text" id="department_id"/>
-                            <label class="active"   for="department_id">就诊科室:</label>
+                            <label class="active"   for="department_id">就诊科室:</label>(Visiting Department)
                         </div>
                         <div class="input-field col s4 l4 xl4">
                             <input type="text" readonly  id="doctorName">
-                            <label class="active" for="doctorName">接诊医生:</label>
+                            <label class="active" for="doctorName">接诊医生:</label>(Attending doctor)
                         </div>
                     </div>
                 </div>
@@ -110,7 +110,7 @@
                     <div class="col s12 x12 l12 xl12">
                         <div class="card">
                             <div class="card-content">
-                                <h4 class="card-title">门诊收费
+                                <h4 class="card-title">门诊收费<label>(Outpatient charges)</label>
                                 </h4>
                                 <!--Form Advance-->
                                 <div class="row">
@@ -129,25 +129,25 @@
                                             <div class="card-content">
                                                 <div class="input-field col s4 l4 xl4">
                                                     <input readonly type="number" id="amountPrice">
-                                                    <label class="active" for="amountPrice">总应收金额:</label>
+                                                    <label class="active" for="amountPrice">总应收金额:</label>(Total amount receivable)
                                                 </div>
                                                 <form class="col s12" id="sendForm" action="#">
                                                     <div class="input-field col s4 l4 xl4">
                                                         <input type="number" name="actualCharge" id="actualCharge"
                                                                data-error=".errorTxt2">
                                                         <div class="errorTxt2"></div>
-                                                        <label for="actualCharge">实际收款金额</label>
+                                                        <label for="actualCharge">实际收款金额</label>(Actual amount of receipt)
                                                     </div>
                                                     <div class="input-field col s4 l4 xl4">
                                                         <input type="number" readonly  id="change">
-                                                        <label class="active" for="change">实际找零金额 :</label>
+                                                        <label class="active" for="change">实际找零金额 :</label>(Actual change amount)
                                                         <input hidden name="money" id="money">
                                                         <input hidden name="recoverTheFee" id="recoverTheFee">
                                                     </div>
                                                     <div>
                                                         <textarea id="remark" name="remark"
                                                                   class="materialize-textarea">  </textarea>
-                                                        <label for="remark">备注</label>
+                                                        <label for="remark">备注</label>(Remarks)
                                                     </div>
                                                     <div class="row">
                                                         <div class="input-field col s12">

@@ -25,6 +25,8 @@ public class HisMedicalOrderTemplate extends BaseEntity {
 
     private String createUserName;//创建人姓名
 
+    private String isPublic;
+
     public Long getId() {
         return id;
     }
@@ -79,5 +81,13 @@ public class HisMedicalOrderTemplate extends BaseEntity {
 
     public void setCreateUserName(String createUserName) {
         this.createUserName = createUserName;
+    }
+
+    public String getIsPublic() {
+        return isPublic;
+    }
+
+    public void setIsPublic(String isPublic) {
+        this.isPublic = isPublic;
     }
 }

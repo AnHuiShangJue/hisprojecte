@@ -27,8 +27,8 @@
 <div class="row">
     <div class="row valign-wrapper">
         <div class="col s12 m12 l12 center">
-            <h5 class="black-text">中柬第一医院长期医嘱单</h5>
-            <label class="black-text fontsize02">The first china-cambodia hospital Long term medical advice sheet</label>
+            <h5 class="black-text">中柬第一医院临时医嘱单</h5>
+            <label class="black-text fontsize02">The first china-cambodia hospital temporary medical order sheet</label>
         </div>
     </div>
 
@@ -38,38 +38,38 @@
 
     <div class="row valign-wrapper">
         <div class="col s12 m12 l12">
-        <table border="0" cellspacing="0" cellpadding="0">
+            <table border="0" cellspacing="0" cellpadding="0">
 
-        <tr>
-            <td>
-                <label>姓名(name)</label>
-                <label th:text="${hisHospitalManage.patientName}"></label>
-            </td>
-            <td>
-                <label>性别(sex)</label>
-                <label th:text="${hisHospitalManage.sexName}"></label>
-            </td>
-            <td>
-                <label>年龄(age)</label>
-                <label th:text="${hisHospitalManage.age}"></label>
-            </td>
+                <tr>
+                    <td>
+                        <label>姓名(name)</label>
+                        <label th:text="${hisHospitalManage.patientName}"></label>
+                    </td>
+                    <td>
+                        <label>性别(sex)</label>
+                        <label th:text="${hisHospitalManage.sexName}"></label>
+                    </td>
+                    <td>
+                        <label>年龄(age)</label>
+                        <label th:text="${hisHospitalManage.age}"></label>
+                    </td>
 
-        </tr>
-            <tr>
-                <td>
-                    <label>科室(Department)</label>
-                    <label th:text="${hisHospitalManage.departmentName}"></label>
-                </td>
-                <td>
-                    <label>床号(Bed No)</label>
-                    <label th:text="${hisHospitalManage.bedsNumber}"></label>
-                </td>
-                <td>
-                    <label>住院编号(Hospital number)</label>
-                    <label th:text="${hisHospitalManage.number}"></label>
-                </td>
-            </tr>
-        </table>
+                </tr>
+                <tr>
+                    <td>
+                        <label>科室(Department)</label>
+                        <label th:text="${hisHospitalManage.departmentName}"></label>
+                    </td>
+                    <td>
+                        <label>床号(Bed No)</label>
+                        <label th:text="${hisHospitalManage.bedsNumber}"></label>
+                    </td>
+                    <td>
+                        <label>住院编号(Hospital number)</label>
+                        <label th:text="${hisHospitalManage.number}"></label>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 
@@ -79,23 +79,18 @@
 
 
                 <tr>
-                    <th style="border:1px solid black;width: 80px;">开始时间(The start time)</th>
-                    <th style="border:1px solid black;width: 200px;">医嘱内容(Medical content)</th>
-                    <th style="border:1px solid black;">医师签名(Physician signature)</th>
-                    <th style="border:1px solid black;width: 80px;">时间(Time)</th>
-                    <th style="border:1px solid black;">执行人签名(Signature of executor)</th>
-                    <th style="border:1px solid black;">核对人签名(Check signature)</th>
-                    <th style="border:1px solid black;width: 80px;">停止时间(Stop time)</th>
-                    <th style="border:1px solid black;">停止医师签名(Stop physician signature)</th>
+                    <th style="border:1px solid black;width: 70px;">开始时间(The start time)</th>
+                    <th style="border:1px solid black;width: 240px;">医嘱内容(Medical content)</th>
+                    <th style="border:1px solid black;width: 70px;">医师签名(Physician signature)</th>
+                    <th style="border:1px solid black;width: 70px;">时间(Time)</th>
+                    <th style="border:1px solid black;width: 70px;">执行人签名(Signature of executor)</th>
+                    <th style="border:1px solid black;width: 70px;">核对人签名(Check signature)</th>
 
                 </tr>
 
                 <tr th:each="c:${hisMedicalOrderDetailList}" >
                     <td th:text="${c.startTime}" style="border:1px solid black;"></td>
                     <td th:text="${c.name}" style="border:1px solid black;"></td>
-                    <td style="border:1px solid black;"></td>
-                    <td style="border:1px solid black;"></td>
-<!--                    <td th:text="${c.orderNum}"></td>-->
                     <td style="border:1px solid black;"></td>
                     <td style="border:1px solid black;"></td>
                     <td style="border:1px solid black;"></td>
@@ -126,7 +121,7 @@ Scripts
                 var jsons = data[0];
                 // if (!isNullOrEmpty(jsons)) {//有
                 //     var type = $("#type").val();
-                //     var trs;
+                //     var trs
                 //     if (type == 1) {
                 //         trs = "<tr><td><h6 class='black-text'>序号(Serial number)</h6></td><td><h6 class='black-text'>开始时间(Starting time)</h6></td><td><h6 class='black-text'>医嘱内容(Medical content)</h6></td><td><h6 class='black-text'>用法(usage)</h6></td><td><h6 class='black-text'>间隔(interval)</h6></td><td><h6 class='black-text'>总量(Total amount</h6></td><td><h6 class='black-text'>校对护士(Proofreading nurse )</h6></td>" +
                 //             "<td><h6 class='black-text'>执行护士(Executive nurse )</h6></td><td><h6 class='black-text'>停嘱医生(Stop doctor )</h6></td><td><h6 class='black-text'>停嘱时间(Stop time)</h6></td><td><h6 class='black-text'>停嘱校对护士(Stop signing proofreading nurse)</h6></td></tr>";

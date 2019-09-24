@@ -60,6 +60,7 @@ public class TranslateServiceImpl implements TranslateService {
         }
         translateMapper.insert(translate);
         return MessageUtil.createMessage(true, "添加成功");
+
     }
 
     /**
@@ -92,135 +93,14 @@ public class TranslateServiceImpl implements TranslateService {
         } else {
             GoogleApi googleApi = new GoogleApi();
             List<Translate> translateList = translateModel.getTranslateList();
-            List<Translate> insertList = new ArrayList<>();
-            List<Translate> updateList = new ArrayList<>();
             for (Translate translate : translateList) {
-                List<Translate> select = translateMapper.selectByTranslateCount(translate);
-                if (select.size()>0){
-                    System.out.println("-->修改");
-                    Translate translateOne = new Translate();
-                    String china = translate.getTranslateChina();
-                    if (StringUtils.isEmpty(china)){
-                        continue;
-                    }
-                    String km = googleApi.translate(china, Constants.TRANSLATE_KHMER_EN);
-                    translateOne.setTranslateChina(translate.getTranslateChina());
-                    if (km.length() > 0 && km.length() <= 255) {
-                        translateOne.setTranslateKhmer(km);
-                        translateOne.setTranslateId(translate.getTranslateId());
-                        translateOne.setTranslateType(translate.getTranslateType());
-                        translateOne.setCreateDate(new Date());
-                        System.out.println(translate.getTranslateColumn());
-                        translateOne.setTranslateColumn(translate.getTranslateColumn());
-                        translateOne.setCreateUserId(translateModel.getUserId());
-                        updateList.add(translateOne);
-                    } else if(km.length() >255 && km.length() <=510){
-                        String substringOne = StringUtils.substring(km, 0, 255);
-                        String substringTwo = StringUtils.substring(km, 255, km.length());
-                        translateOne.setTranslateKhmer(substringOne);
-                        translateOne.setTranslateJoin(substringTwo);
-                        translateOne.setTranslateId(translate.getTranslateId());
-                        translateOne.setTranslateType(translate.getTranslateType());
-                        translateOne.setTranslateColumn(translate.getTranslateColumn());
-                        translateOne.setCreateDate(new Date());
-                        translateOne.setCreateUserId(translateModel.getUserId());
-                        updateList.add(translateOne);
-                    }else if(km.length() > 510 && km.length() <= 765){
-                        String substringOne = StringUtils.substring(km, 0, 255);
-                        String substringTwo = StringUtils.substring(km, 255, 510);
-                        String substringThree = StringUtils.substring(km, 510, km.length());
-                        translateOne.setTranslateKhmer(substringOne);
-                        translateOne.setTranslateJoin(substringTwo);
-                        translateOne.setTranslateJoin2(substringThree);
-                        translateOne.setTranslateId(translate.getTranslateId());
-                        translateOne.setTranslateType(translate.getTranslateType());
-                        translateOne.setTranslateColumn(translate.getTranslateColumn());
-                        translateOne.setCreateDate(new Date());
-                        translateOne.setCreateUserId(translateModel.getUserId());
-                        updateList.add(translateOne);
-                    }else if(km.length() > 765 && km.length() <=1020){
-                        String substringOne = StringUtils.substring(km, 0, 255);
-                        String substringTwo = StringUtils.substring(km, 255, 510);
-                        String substringThree = StringUtils.substring(km, 510, 765);
-                        String substringFour = StringUtils.substring(km, 765, km.length());
-                        translateOne.setTranslateKhmer(substringOne);
-                        translateOne.setTranslateJoin(substringTwo);
-                        translateOne.setTranslateJoin2(substringThree);
-                        translateOne.setTranslateJoin3(substringFour);
-                        translateOne.setTranslateId(translate.getTranslateId());
-                        translateOne.setTranslateType(translate.getTranslateType());
-                        translateOne.setTranslateColumn(translate.getTranslateColumn());
-                        translateOne.setCreateDate(new Date());
-                        translateOne.setCreateUserId(translateModel.getUserId());
-                        updateList.add(translateOne);
-                    }
-
-//                    translateMapper.updateByTranslates(translate);
-                }else {
-                    Translate translateOne = new Translate();
-                    String china = translate.getTranslateChina();
-                    if (StringUtils.isEmpty(china)){
-                        continue;
-                    }
-                    String km = googleApi.translate(china, Constants.TRANSLATE_KHMER_EN);
-                    translateOne.setTranslateChina(translate.getTranslateChina());
-                    if (km.length() > 0 && km.length() <= 255) {
-                        translateOne.setTranslateKhmer(km);
-                        translateOne.setTranslateId(translate.getTranslateId());
-                        translateOne.setTranslateType(translate.getTranslateType());
-                        translateOne.setCreateDate(new Date());
-                        System.out.println(translate.getTranslateColumn());
-                        translateOne.setTranslateColumn(translate.getTranslateColumn());
-                        translateOne.setCreateUserId(translateModel.getUserId());
-                        insertList.add(translateOne);
-                    } else if(km.length() >255 && km.length() <=510){
-                        String substringOne = StringUtils.substring(km, 0, 255);
-                        String substringTwo = StringUtils.substring(km, 255, km.length());
-                        translateOne.setTranslateKhmer(substringOne);
-                        translateOne.setTranslateJoin(substringTwo);
-                        translateOne.setTranslateId(translate.getTranslateId());
-                        translateOne.setTranslateType(translate.getTranslateType());
-                        translateOne.setTranslateColumn(translate.getTranslateColumn());
-                        translateOne.setCreateDate(new Date());
-                        translateOne.setCreateUserId(translateModel.getUserId());
-                        insertList.add(translateOne);
-                    }else if(km.length() > 510 && km.length() <= 765){
-                        String substringOne = StringUtils.substring(km, 0, 255);
-                        String substringTwo = StringUtils.substring(km, 255, 510);
-                        String substringThree = StringUtils.substring(km, 510, km.length());
-                        translateOne.setTranslateKhmer(substringOne);
-                        translateOne.setTranslateJoin(substringTwo);
-                        translateOne.setTranslateJoin2(substringThree);
-                        translateOne.setTranslateId(translate.getTranslateId());
-                        translateOne.setTranslateType(translate.getTranslateType());
-                        translateOne.setTranslateColumn(translate.getTranslateColumn());
-                        translateOne.setCreateDate(new Date());
-                        translateOne.setCreateUserId(translateModel.getUserId());
-                        insertList.add(translateOne);
-                    }else if(km.length() > 765 && km.length() <=1020){
-                        String substringOne = StringUtils.substring(km, 0, 255);
-                        String substringTwo = StringUtils.substring(km, 255, 510);
-                        String substringThree = StringUtils.substring(km, 510, 765);
-                        String substringFour = StringUtils.substring(km, 765, km.length());
-                        translateOne.setTranslateKhmer(substringOne);
-                        translateOne.setTranslateJoin(substringTwo);
-                        translateOne.setTranslateJoin2(substringThree);
-                        translateOne.setTranslateJoin3(substringFour);
-                        translateOne.setTranslateId(translate.getTranslateId());
-                        translateOne.setTranslateType(translate.getTranslateType());
-                        translateOne.setTranslateColumn(translate.getTranslateColumn());
-                        translateOne.setCreateDate(new Date());
-                        translateOne.setCreateUserId(translateModel.getUserId());
-                        insertList.add(translateOne);
-                    }
+                //先删除后新增操作
+                if (!EmptyUtil.Companion.isNullOrEmpty(translate.getTranslateId()) && !EmptyUtil.Companion.isNullOrEmpty(translate.getTranslateType())) {
+                    translateMapper.deleteByTranslate(translate);
                 }
-//                //先删除后新增操作
-//                if (!EmptyUtil.Companion.isNullOrEmpty(translate.getTranslateId()) && !EmptyUtil.Companion.isNullOrEmpty(translate.getTranslateType())) {
-//                    translateMapper.deleteByTranslate(translate);
-//                }
             }
-
-          /*  for (Translate translate : translateList) {
+            List<Translate> list = new ArrayList<>();
+            for (Translate translate : translateList) {
                 Translate translateOne = new Translate();
                 String china = translate.getTranslateChina();
                 if (StringUtils.isEmpty(china)){
@@ -277,15 +157,8 @@ public class TranslateServiceImpl implements TranslateService {
                     translateOne.setCreateUserId(translateModel.getUserId());
                     list.add(translateOne);
                 }
-            }*/
-            if (!EmptyUtil.Companion.isNullOrEmpty(insertList) || !EmptyUtil.Companion.isNullOrEmpty(insertList.size())){
-                translateMapper.addTranslateList(insertList);
             }
-            if (!EmptyUtil.Companion.isNullOrEmpty(updateList) || !EmptyUtil.Companion.isNullOrEmpty(updateList.size())){
-                for (Translate translate : updateList) {
-                    translateMapper.updateByTranslates(translate);
-                }
-            }
+            translateMapper.addTranslateList(list);
             amqpTemplat.convertAndSend("com.ahsj.addTranslate", AHSJ_TRANSLATE);
             return MessageUtil.createMessage(true, "操作成功 ");
         }

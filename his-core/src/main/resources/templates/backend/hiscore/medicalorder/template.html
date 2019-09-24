@@ -43,6 +43,47 @@
         <div class="container">
             <div class="row">
                 <div class="col s12 x12 l12 xl12">
+
+                    <div class="container">
+                        <div class="section section-data-tables">
+                            <div class="card">
+                                <div class="card-content">
+                                    <form id="searchForm" class="row" action="">
+                                        <div class="row">
+                                                <div class="col s1 input-field" style="padding-top:6px">
+                                                    <label>
+                                                        <input id="remarks1" name="remarks" type="radio" value="0" />
+                                                        <span>公共模板(public)</span>
+                                                    </label>
+                                                </div>
+                                                <div class="col s1 input-field" style="padding-top:6px">
+                                                    <label>
+                                                        <input id="remarks2" name="remarks" type="radio" th:value="${userId}"/>
+                                                        <span>仅自己的(private)</span>
+                                                    </label>
+                                                </div>
+                                                <div class="col s1 input-field" style="padding-top:6px">
+                                                    <label>
+                                                        <input id="remarks3" name="remarks" type="radio" value="" checked/>
+                                                        <span>全部(all)</span>
+                                                    </label>
+                                                </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="row" style="    margin-top: 40px;margin-bottom: 10px;">
+                                    <div class="col s2 m2 l2 xl2 offset-l1">
+                                        <a class="waves-effect waves-light btn" id="searchBtn"><i
+                                                class="material-icons  white-text tooltipped " data-position="bottom"
+                                                data-delay="50" data-tooltip="搜索">search</i></a>
+                                        <a id="resetBtn" class="waves-effect waves-light btn"><i
+                                                class="material-icons  white-text tooltipped " data-position="bottom"
+                                                data-delay="50" data-tooltip="重置">youtube_searched_for</i></a>
+                                    </div>
+                                </div>
+                            </div>
+
+
                     <div class="card">
                         <div class="card-content">
                             <h4 class="card-title">操作台
@@ -95,7 +136,7 @@
             loadingMessage: 'Loading...',
             dataTable: {
                 "ajax": {
-                    "url": CTX + "/api/medicalOrderTemplate/list.ahsj?token=" + TOKEN, // ajax source
+                    "url": CTX + "/api/medicalOrderTemplate/list.ahsj?token=" + TOKEN+"&remarks1="+$("#remarks1").val()+"&remarks2="+$("#remarks2").val()+"&remarks3="+$("#remarks3").val(), // ajax source
                 },
                 "columns": [
                     {
@@ -125,6 +166,11 @@
                         "title": "创建时间",
                         "data": "createDate",
                         "name": "create_date"
+                    },
+                    {
+                        "title": "是否公用",
+                        "data": "isPublic",
+                        "name": ""
                     },
                     {
                         "title": "操作",

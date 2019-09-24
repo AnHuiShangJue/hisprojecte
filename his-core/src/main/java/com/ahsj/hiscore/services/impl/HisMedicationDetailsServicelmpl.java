@@ -8,8 +8,10 @@ import com.ahsj.hiscore.core.CodeHelper;
 import com.ahsj.hiscore.dao.HisMedicationDetailsMapper;
 import com.ahsj.hiscore.entity.HisMedicationDetails;
 import com.ahsj.hiscore.entity.HisPharmacyDetail;
+import com.ahsj.hiscore.entity.HisProject;
 import com.ahsj.hiscore.entity.Translate;
 import com.ahsj.hiscore.entity.TranslateModel.HisMedicationDetailsTranslate;
+import com.ahsj.hiscore.entity.TranslateModel.HisProjectTranslate;
 import com.ahsj.hiscore.entity.TranslateModel.TranslateDelete;
 import com.ahsj.hiscore.entity.TranslateModel.TranslateModels;
 import com.ahsj.hiscore.feign.ITranslateService;
@@ -106,7 +108,7 @@ public class HisMedicationDetailsServicelmpl implements HisMedicationDetailsServ
         hisMedicationDetailsMapper.deleteByMedicalRecordIdNotIsOutOrIspay(hisMedicationDetailsList.get(0).getMedicalRecordId());
         //新增一批用药明细
         hisMedicationDetailsMapper.insertBatch(hisMedicationDetailsList);
-        for (HisMedicationDetails hisMedicationDetails : hisMedicationDetailsList) {
+       /* for (HisMedicationDetails hisMedicationDetails : hisMedicationDetailsList) {
             log.info("--------------------药品明细新增翻译发送开始--------------------------");
             BaseLoginUser loginUser = new BaseLoginUser();
             TranslateModels translateModels = new TranslateModels();
@@ -118,7 +120,23 @@ public class HisMedicationDetailsServicelmpl implements HisMedicationDetailsServ
             log.info(JsonUtils.serialize(translateModels));
             log.info("--------------------药品明细新增翻译发送结束--------------------------");
 
+        }*/
+
+
+        TranslateModels translateModels = new TranslateModels();
+        BaseLoginUser loginUser = new BaseLoginUser();
+        List<HisMedicationDetailsTranslate> infoTranslates = new ArrayList<>();
+        for (HisMedicationDetails hisMedicationDetails  : hisMedicationDetailsList) {
+            log.info("--------------------药品明细新增翻译发送开始---------------------------");
+            HisMedicationDetailsTranslate translate = new HisMedicationDetailsTranslate();
+            BeanUtils.copyProperties(hisMedicationDetails, translate);
+            infoTranslates.add(translate);
+            log.info("--------------------药品明细新增翻译发送结束---------------------------");
         }
+        translateModels.setUserId(loginUser.getId());
+        translateModels.setHisMedicationDetails(infoTranslates);
+        amqpTemplat.convertAndSend("com.ahsj.addHisMedicationDetailsList", JsonUtils.serialize(translateModels));
+        log.info(JsonUtils.serialize(translateModels));
 
         return MessageUtil.createMessage(true, "新增成功");
     }

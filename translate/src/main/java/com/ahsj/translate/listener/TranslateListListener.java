@@ -2,11 +2,9 @@ package com.ahsj.translate.listener;
 
 import com.ahsj.translate.common.Constants;
 import com.ahsj.translate.common.utils.JsonUtils;
+import com.ahsj.translate.entity.HisMedicationDetails;
 import com.ahsj.translate.entity.Translate;
-import com.ahsj.translate.entity.TranslateModel.HisConsumablesTranslate;
-import com.ahsj.translate.entity.TranslateModel.HisMedicineInfoTranslate;
-import com.ahsj.translate.entity.TranslateModel.HisProjectTranslate;
-import com.ahsj.translate.entity.TranslateModel.TranslateModels;
+import com.ahsj.translate.entity.TranslateModel.*;
 import com.ahsj.translate.entity.model.TranslateModel;
 import com.ahsj.translate.service.TranslateService;
 import org.slf4j.Logger;
@@ -110,7 +108,7 @@ public class TranslateListListener {
     @RabbitListener(bindings = @QueueBinding(
             value = @Queue(name = "com.mq.verify.queue.HisConsumablesListListEnlish"),
             exchange = @Exchange(name = "com.ahsj.exchange", type = ExchangeTypes.TOPIC),
-            key = {"com.ahsj.addHisConsumablesList", "com.ahsj.updateHisConsumablesList"}
+            key = {"com.ahsj.addHisConsumablesList","com.ahsj.updateHisConsumablesList"}
     ))
     public void HisConsumablesListListEnlish(String model) {
         if (EmptyUtil.Companion.isNullOrEmpty(model)) {
@@ -123,6 +121,26 @@ public class TranslateListListener {
                 toTranslate(hisConsumablesTranslate, HisConsumablesTranslate.class, hisConsumablesTranslate.getId(), Constants.TRANSLATE_HIS_HISCONSUMABLES, m.getUserId());
             }
             log.info("--------------------耗材模块翻译接受信息结束--------------------------");
+        }
+    }
+
+
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(name = "com.mq.verify.queue.HisMedicationDetailsListEnlish"),
+            exchange = @Exchange(name = "com.ahsj.exchange", type = ExchangeTypes.TOPIC),
+            key = {"com.ahsj.addHisMedicationDetailsList"}
+    ))
+    public void addHisMedicationDetailsList(String model) {
+        if (EmptyUtil.Companion.isNullOrEmpty(model)) {
+            return;
+        } else {
+            log.info("--------------------药品明细模块翻译接受信息开始--------------------------");
+            TranslateModels m = JsonUtils.parse(model, TranslateModels.class);
+            List<HisMedicationDetailsTranslate> hisMedicationDetails = m.getHisMedicationDetails();
+            for (HisMedicationDetailsTranslate medicationDetails : hisMedicationDetails) {
+                toTranslate(medicationDetails, HisMedicationDetailsTranslate.class, medicationDetails.getId(), Constants.TRANSLATE_HIS_MEDICATIONDETAILS, m.getUserId());
+            }
+            log.info("--------------------药品明细模块翻译接受信息结束--------------------------");
         }
     }
 

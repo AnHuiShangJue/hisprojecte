@@ -118,10 +118,6 @@
                                     <a   id="createBtn" class="btn waves-effect waves-light red"><i
                                             class="material-icons  white-text tooltipped " data-position="bottom"
                                             data-delay="50" data-tooltip="增加新的采购计划">add</i></a>
-                                    <!--<a  id="deleteManyBtn"-->
-                                        <!--class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i-->
-                                            <!--class="material-icons white-text tooltipped" data-position="bottom"-->
-                                            <!--data-delay="50" data-tooltip="批量删除">delete</i></a>-->
                                 </div>
                             </div>
                             <!--Form Advance-->
@@ -291,14 +287,7 @@
             var url = CTX + "/api/hisconsumablesbuyplan/add/index.ahsj?token=" + TOKEN;
             dialog.show(url, "耗材采购计划添加")
         });
-        // $("#deleteManyBtn").click(function () {
-        //     var ids = grid.getSelectedRows();
-        //     if (ids.length == 0) {
-        //         dialog.warn("请至少选择一条数据");
-        //         return;
-        //     }
-        //     deleteInit(ids.join(','));
-        // });
+
         //搜索按钮
         $('#searchBtn').click(function () {
             grid.search();

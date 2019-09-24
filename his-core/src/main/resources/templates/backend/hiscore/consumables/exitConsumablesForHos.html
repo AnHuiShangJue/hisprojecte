@@ -95,14 +95,6 @@
                             </h4><label style="color:black">Console</label>
                             <div class="row">
                                 <div class="col s2 m2 l2 xl2 offset-xl10">
-                                  <!--  <a id="exitConsumables"
-                                       class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
-                                            class="material-icons white-text tooltipped" data-position="bottom"
-                                            data-delay="50" data-tooltip="智能出库">pan_tool</i></a>-->
-                                  <!--  <a id="exitForHos"
-                                       class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
-                                            class="material-icons white-text tooltipped" data-position="bottom"
-                                            data-delay="50" data-tooltip="耗材出库申请列表">art_track</i></a>-->
                                 </div>
                             </div>
                             <!--Form Advance-->
@@ -258,42 +250,6 @@
             }
             exitConsumables(ids.join(','));
         });
-
-
-
-      /*  //批量智能出库
-        function exitConsumables(id) {
-            var ids = [];
-            ids.push(id);
-            dialog.confirm('确定要出库?', function (index, layero) {
-                $.ahsjajax(CTX +  "/api/hisPproject/combination/delete/HisCombination.ahsj",
-                    {ids: ids},
-                    function (msg) {
-                        if (msg.success) {
-                            swal.close();
-                            M.toast({
-                                html: msg.message, completeCallback: function () {
-                                }
-                            });
-                            grid.search();
-                            dialog.parentclose();
-
-                        } else {
-                            M.toast({
-                                html: msg.message, completeCallback: function () {
-                                }
-                            });
-                        }
-                    },
-                    function (data) {
-                        M.toast({
-                            html: "网络异常", completeCallback: function () {
-                            }
-                        });
-                    }
-                );
-            });
-        }*/
     }
 
 </script>
