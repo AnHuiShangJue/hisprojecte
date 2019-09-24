@@ -515,7 +515,8 @@ where p.record_id=(
 
 select m.id from his_medical_record as m where m.registered_id=(
 
-select  r.id from his_registered as r where r.number = #{number,jdbcType=VARCHAR}))
+select  r.id from his_registered as r where r.number = #{number,jdbcType=VARCHAR})) and
+p.is_payed='2'
 
     </select>
 

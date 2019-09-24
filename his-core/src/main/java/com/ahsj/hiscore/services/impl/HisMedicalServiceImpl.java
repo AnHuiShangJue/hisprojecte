@@ -115,6 +115,7 @@ public class HisMedicalServiceImpl implements HisMedicalService {
     @Transactional(readOnly = true)
     public HisMedical selectPrint(String number) throws Exception {
         HisMedical hisMedical = hisMedicalMapper.selectPrint(number);
+        if(!EmptyUtil.Companion.isNullOrEmpty(hisMedical)){
         Translate translate = new Translate();//翻译
         translate.setTranslateId(hisMedical.getId());
         translate.setTranslateType(Constants.TRANSLATE_HIS_HHISMEDICAL);
@@ -168,7 +169,10 @@ public class HisMedicalServiceImpl implements HisMedicalService {
                 }
             }
 
-
+        }
+        }
+        else{
+            hisMedical = new HisMedical();
         }
         return hisMedical;
     }

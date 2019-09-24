@@ -191,6 +191,7 @@ public interface HisTollRecordMapper extends BaseMapper<HisTollRecord> {
      * @Date 2019/9/19
      * @Time 10:18
      **/
+    List<HisTollRecord> pharmacyInventory(PageBean<HisTollRecord> pageBean) throws Exception;
 
 
     /**

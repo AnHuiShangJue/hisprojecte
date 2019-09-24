@@ -615,7 +615,7 @@
         <include refid="Base_Column_List"/>
         from his_medication_details
     </select>
-   <select id="selectByMedicalNumber" resultMap="BaseResultMap" parameterType="java.lang.String">
+    <select id="selectByMedicalNumber" resultMap="BaseResultMap" parameterType="java.lang.String">
          select
         h.id, h.medication_id, h.description, h.remarks, h.is_pay, h.is_back, h.is_del, h.count, h.drugs_numb,
         h.drugs_name, h.drugs_alias, h.drugs_spec, h.prescription, h.mental_medicine, h.large_unit, h.small_unit,
@@ -640,10 +640,10 @@
         from his_medication_details as a
         left join his_medical_record as b on b.id = a.medical_record_id
         LEFT JOIN his_pharmacy_detail as c on c.id = a.medication_id
-            where
-            a.is_pay = 1 and
-            a.is_back = 2 and
-            a.medical_record_id  = #{parameter.medicalRecordId,jdbcType=BIGINT}
+        where
+        a.is_pay = 1 and
+        a.is_back = 2 and
+        a.medical_record_id  = #{parameter.medicalRecordId,jdbcType=BIGINT}
         <if test="parameter.orders != null and parameter.orders != ''">
             order by ${parameter.orders}
         </if>
@@ -661,7 +661,7 @@ where d.medical_record_id =(
 select m.id from his_medical_record as m where m.registered_id=(
 
 select  r.id from his_registered as r where r.number =#{number,jdbcType=VARCHAR}))
-
+and d.is_pay ='2'
 
     </select>
 
