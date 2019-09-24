@@ -97,14 +97,14 @@ Scripts
             function (data) {
                 var jsons = data[0];
                 if (!isNullOrEmpty(jsons)) {//有
-                    if (isNullOrEmpty(item.name)) {
-                        item.name = ""
-                    }
-                    if (isNullOrEmpty(item.tranName)) {
-                        item.tranName = ""
-                    }
                     var trs = "<tr><td><h6 class='black-text'>名称(name)</h6></td><td><h6 class='black-text'>数目(number)</h6></td><td><h6 class='black-text'>单价(price)</h6></td><td><h6 class='black-text'>单项总价(Single item total price)</h6></td></tr>";
                     $.each(data, function (index, item) {
+                        if (isNullOrEmpty(item.name)) {
+                            item.name = ""
+                        }
+                        if (isNullOrEmpty(item.tranName)) {
+                            item.tranName = ""
+                        }
                         trs += "<tr><td><p class='black-text fontsize03'>" + item.name + "(" + item.tranName + ")" + "</p></td><td ><p class='black-text fontsize03'>" + item.num + "</p></td><td ><p class='black-text fontsize03'>" + item.price + "</p></td><td ><p class='black-text fontsize03'>" + (item.num * item.price) + "</p></td></tr >";
                     });
                     var jsons = data[0];
