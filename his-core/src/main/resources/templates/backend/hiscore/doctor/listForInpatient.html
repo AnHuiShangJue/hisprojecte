@@ -252,8 +252,7 @@
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn +
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看病人病历信息(View patient medical record information)\" onclick='detailsWord(\"" + row.medicalNumber + "\");'\"><i class='material-icons'>visibility</i></a>"+
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"病人出院(Patient discharged)\" onclick='discharged(\""+ row.number +"\");'><i class='material-icons'>assignment</i></a>";
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看病人病历信息(View patient medical record information)\" onclick='detailsWord(\"" + row.medicalNumber + "\");'\"><i class='material-icons'>visibility</i></a>";
                             rtnBtn = rtnBtn +
                                 "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看病人医嘱(View patient orders)\" onclick='visitOrder(\"" + row.medicalNumber + "\","+row.id+",\""+row.patientName+"\");'><i class='material-icons'>assignment</i></a>"
                             // 返回自定义内容

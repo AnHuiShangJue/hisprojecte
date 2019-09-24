@@ -3,7 +3,7 @@ server:
 
 eureka:
   instance:
-    ipAddress:  192.168.1.1
+    ipAddress: 192.168.0.174
     prefer-ip-address: true
     ## 心跳间隔，5秒
     lease-renewal-interval-in-seconds: 5

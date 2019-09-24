@@ -1,19 +1,15 @@
 package com.ahsj.hiscore.services.impl;
 
-import com.ahsj.hiscore.core.CodeHelper;
 import com.ahsj.hiscore.dao.MedicalRecordWordMapper;
 import com.ahsj.hiscore.entity.MedicalRecordWord;
 import com.ahsj.hiscore.services.MedicalRecordWordService;
 import core.entity.PageBean;
 import core.message.Message;
 import core.message.MessageUtil;
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utils.EmptyUtil;
-
-import java.util.List;
 
 /**
  * @program: hisprojecte
@@ -29,14 +25,15 @@ public class MedicalRecordWordServiceImpl implements MedicalRecordWordService {
 
     @Override
     @Transactional(readOnly = false)
-    public Message saveOrUpdate(MedicalRecordWord medicalRecordWord) {
-        if(EmptyUtil.Companion.isNullOrEmpty(medicalRecordWord.getId())){
-            medicalRecordWordMapper.insert(medicalRecordWord);
+    public Message saveOrUpdate(MedicalRecordWord medicalRecordWord, Long type) {
+            //1说明是从模版过来，那么一定是保存
+            if(type.intValue() == 1){
+                medicalRecordWordMapper.insert(medicalRecordWord);
+            }else if(type.intValue() == 2){
+                medicalRecordWordMapper.updateByPrimaryKey(medicalRecordWord);
+            }
             return MessageUtil.createMessage(true,"保存成功！");
-        }else{
-            medicalRecordWordMapper.updateByPrimaryKey(medicalRecordWord);
-            return MessageUtil.createMessage(true,"保存成功！");
-        }
+
     }
 
     @Override

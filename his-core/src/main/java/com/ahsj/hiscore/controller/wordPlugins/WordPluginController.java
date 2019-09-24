@@ -197,7 +197,8 @@ public class WordPluginController extends BaseOAController {
     private Message saveWordMedical(@RequestParam("file") MultipartFile file,
                                     @RequestParam("fileName") String fileName,
                                     @RequestParam("hospitalNumber") String hospitalNumber,
-                                    @RequestParam(value = "id",required = false) Long id) {
+                                    @RequestParam(value = "id",required = false) Long id,
+                                    @RequestParam(value="type",required = true) Long type) {
 
         if (file.isEmpty()) {
             return MessageUtil.createMessage(false, "文件是空的");
@@ -226,8 +227,8 @@ public class WordPluginController extends BaseOAController {
             if(!EmptyUtil.Companion.isNullOrEmpty(id)){
                 medicalRecordWord.setId(id);
             }
-            medicalRecordWordService.saveOrUpdate(medicalRecordWord);
-            return MessageUtil.createMessage(true, "病历保存成功");
+            medicalRecordWordService.saveOrUpdate(medicalRecordWord,type);
+            return MessageUtil.createMessage(true, fileName+"病历保存成功");
         } catch (Exception e) {
             e.printStackTrace();
             return MessageUtil.createMessage(false, "服务器异常");
@@ -312,7 +313,7 @@ public class WordPluginController extends BaseOAController {
             Path path = Paths.get(SavePath);
             Files.write(path, bytes);
             templateMedialReocSerivce.saveOrUpdate(templateMedicalRecord);
-            return MessageUtil.createMessage(true, "模版保存成功");
+            return MessageUtil.createMessage(true, fileName+"模版保存成功");
         } catch (Exception e) {
             e.printStackTrace();
             return MessageUtil.createMessage(false, "服务器异常");
@@ -466,7 +467,7 @@ public class WordPluginController extends BaseOAController {
                 medicalRecordWord.setId(id);
             }
             nursingRecordWordService.saveOrUpdate(medicalRecordWord);
-            return MessageUtil.createMessage(true, "病历保存成功");
+            return MessageUtil.createMessage(true, fileName+"护理记录保存成功");
         } catch (Exception e) {
             e.printStackTrace();
             return MessageUtil.createMessage(false, "服务器异常");
@@ -523,7 +524,7 @@ public class WordPluginController extends BaseOAController {
             Path path = Paths.get(SavePath);
             Files.write(path, bytes);
             nursingRecordTemplateService.saveOrUpdate(templateMedicalRecord);
-            return MessageUtil.createMessage(true, "模版保存成功");
+            return MessageUtil.createMessage(true, fileName+"模版保存成功");
         } catch (Exception e) {
             e.printStackTrace();
             return MessageUtil.createMessage(false, "服务器异常");

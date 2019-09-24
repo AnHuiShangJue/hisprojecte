@@ -53,7 +53,7 @@ Scripts
     function saveWord() {
         var hospitalNumber = document.getElementById("hospitalNumber").value;
         var fileName = document.getElementById("fileName").value;
-        strSaveUrl = encodeURI("http://192.168.0.99:8003/hiscore/api/wordplugin/saveWordMedical/index.ahsj?token="+[[${token}]]+"&hospitalNumber="+hospitalNumber+"&fileName="+fileName);
+        strSaveUrl = encodeURI("http://192.168.0.99:8003/hiscore/api/wordplugin/saveWordMedical/index.ahsj?token="+[[${token}]]+"&hospitalNumber="+hospitalNumber+"&fileName="+fileName+"&type="+[[${type}]]);
         // strSaveUrl = encodeURI("http://192.168.0.174:8003/hiscore/api/wordplugin/saveWordMedical/index.ahsj?token="+[[${token}]]+"&hospitalNumber="+hospitalNumber+"&fileName="+fileName);
         Save(fileName);
     }
@@ -83,11 +83,14 @@ Scripts
             WebOffice.HttpAddPostCurrFile("file", "");
             //strResults用于获得网页提交后的返回数据，可用以调试服务器端代码。
             var strResults = WebOffice.HttpPost(strSaveUrl);
-            if(strResults.success){
-                alert(strResults.message);
+            var msg = JSON.parse(strResults,function (key,value) {
+                return value;
+            });
+            if(msg.success){
+                alert(msg.message);
                 WebOffice.Close();
             }else{
-                alert(strResults.message);
+                alert(msg.message);
             }
         } catch (e) {
             alert('发生错误！请联系管理员！');

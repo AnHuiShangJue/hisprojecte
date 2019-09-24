@@ -205,11 +205,17 @@
                         "orderable": false,
                         "render": function (data, type, row) {
                             var rtnBtn = "";
-                            //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn +
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看当前病历记录（View current medical record）\" onclick='detail(" + row.id + ");'><i class='material-icons'>visibility</i></a>";
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看当前病历记录（View current medical record）\" onclick='detail(" + row.id + ","+2+ ");'><i class='material-icons'>visibility</i></a>";
                             // 返回自定义内容
+                            if([[${loginUserId}]] == row.createUserId){
+                                rtnBtn = rtnBtn +
+                                    "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"编辑当前病历记录（View current medical record）\" onclick='edit(" + row.id +","+2+ ");'><i class='material-icons'>edit</i></a>";
+                                // 返回自定义内容
+                                return rtnBtn;
+                            }
                             return rtnBtn;
+
                         }
                     }
                 ],
@@ -223,10 +229,15 @@
 
 
     //查看当前病历记录
-    function detail(id) {
+    function detail(id,type) {
         // var url =  "WebOffice://|Officectrl|http://192.168.0.174:8003/hiscore/api/wordplugin/detailMedical/index.ahsj?token="+[[${token}]]+"&id="+id+"&hospitalNumber="+hospitalNumber+"&type=2";
-        var url = "WebOffice://|Officectrl|http://192.168.0.99:8003/hiscore/api/wordplugin/detailMedical/index.ahsj?token=" + [[${token}]] + "&id=" + id + "&hospitalNumber=" + hospitalNumber + "&type=2";
+        var url = "WebOffice://|Officectrl|http://192.168.0.99:8003/hiscore/api/wordplugin/detailMedical/index.ahsj?token=" + [[${token}]] + "&id=" + id + "&hospitalNumber=" + hospitalNumber + "&type="+type;
         dialog.show(url, "病历记录查看(View Medical record )");
+    }
+
+    function edit(id,type){
+        var url = "WebOffice://|Officectrl|http://192.168.0.99:8003/hiscore/api/wordplugin/edit/index.ahsj?token=" + [[${token}]] + "&id=" + id + "&hospitalNumber=" + hospitalNumber + "&type="+type;
+        dialog.show(url, "病历记录修改(Edit Medical record )");
     }
 
 

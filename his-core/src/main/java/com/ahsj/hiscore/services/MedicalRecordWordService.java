@@ -4,8 +4,6 @@ import com.ahsj.hiscore.entity.MedicalRecordWord;
 import core.entity.PageBean;
 import core.message.Message;
 
-import java.util.List;
-
 /**
  * @program: hisprojecte
  * @description:
@@ -14,7 +12,7 @@ import java.util.List;
  **/
 public interface MedicalRecordWordService {
 
-    Message saveOrUpdate(MedicalRecordWord medicalRecordWord);
+    Message saveOrUpdate(MedicalRecordWord medicalRecordWord, Long type);
 
     MedicalRecordWord selectById(Long id);
 
