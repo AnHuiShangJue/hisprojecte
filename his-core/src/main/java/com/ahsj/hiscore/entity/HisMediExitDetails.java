@@ -57,6 +57,15 @@ public class HisMediExitDetails extends BaseEntity {
 
     private Long mediEnterId;
 
+    private String tdescription;
+
+    public String getTdescription() {
+        return tdescription;
+    }
+
+    public void setTdescription(String tdescription) {
+        this.tdescription = tdescription;
+    }
 
     public String getTdrugsName() {
         return tdrugsName;

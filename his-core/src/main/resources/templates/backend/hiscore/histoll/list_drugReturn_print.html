@@ -7,7 +7,8 @@
         }
 
         .fontsize02 {
-            font-size: 12px;}
+            font-size: 12px;
+        }
 
     </style>
 </head>
@@ -34,7 +35,7 @@
             <label class="black-text fontsize02">toll gatherer123444445889</label>
         </div>
         <div class="col s8 m8 l8" style="height: 75px;">
-            <label  class="black-text" ><span id="createName"></span></label>
+            <label class="black-text"><span id="createName"></span></label>
         </div>
     </div>
 
@@ -44,7 +45,7 @@
             <label class="black-text fontsize02">Refund amount</label>
         </div>
         <div class="col s8 m8 l8" style="height: 100px;">
-            <label class="black-text" ><span id="totalPrices"></span></label>
+            <label class="black-text"><span id="totalPrices"></span></label>
         </div>
 
     </div>
@@ -68,7 +69,7 @@
     </div>
 
     <div class="row valign-wrapper">
-        <div class="col s12 m12 l12" >
+        <div class="col s12 m12 l12">
             <table id="table_id" style="font-size: 14px"></table>
         </div>
     </div>
@@ -83,31 +84,40 @@ Scripts
         printShow();
     });
     var number = $("#number").val();
+
     function printShow() {
         $.ahsjajax(
             CTX + "/api/hisTollDetails/printShow/index.ahsj",
             {"number": number},
             function (data) {
-                var  jsons =  data[0];
-                if(!isNullOrEmpty(jsons)){//有
+                var jsons = data[0];
+                if (!isNullOrEmpty(jsons)) {//有
+                    if (isNullOrEmpty(item.name)) {
+                        item.name = ""
+                    }
+                    if (isNullOrEmpty(item.tranName)) {
+                        item.tranName = ""
+                    }
                     var trs = "<tr><td><h6 class='black-text'>名称(name)</h6></td><td><h6 class='black-text'>数目(number)</h6></td><td><h6 class='black-text'>单价(price)</h6></td><td><h6 class='black-text'>单项总价(Single item total price)</h6></td></tr>";
                     $.each(data, function (index, item) {
-                        trs += "<tr><td><p class='black-text fontsize03'>"+ item.name +  "(" +item.tranName +")"+   "</p></td><td ><p class='black-text fontsize03'>"+item.num+"</p></td><td ><p class='black-text fontsize03'>"+item.price+"</p></td><td ><p class='black-text fontsize03'>"+(item.num*item.price)+"</p></td></tr >";
+                        trs += "<tr><td><p class='black-text fontsize03'>" + item.name + "(" + item.tranName + ")" + "</p></td><td ><p class='black-text fontsize03'>" + item.num + "</p></td><td ><p class='black-text fontsize03'>" + item.price + "</p></td><td ><p class='black-text fontsize03'>" + (item.num * item.price) + "</p></td></tr >";
                     });
-                    var  jsons =  data[0];
+                    var jsons = data[0];
                     //  console.log(data[0]);
                     $("#createName").html(jsons.createName);
                     $("#totalPrices").html(jsons.totalPrices);
                     $("#createDate").html(jsons.createDate);
                     //  console.log(trs);
                     $("#table_id").append(trs);
-                }},
+                }
+            },
             function () {
                 M.toast({html: "网络异常"});
                 return false;
             }
         );
     }
+
     function doOk() {
         $('body  div div.row.valign-wrapper').printThis({
             importCSS: true,
@@ -121,7 +131,7 @@ Scripts
         });
     }
 
-    $("input").change(function(){
+    $("input").change(function () {
         $(this).val($(this).val().trim());
     });
 </script>
