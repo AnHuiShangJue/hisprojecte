@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import utils.EmptyUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -126,6 +127,22 @@ public class HisMedicationDetailsController extends BaseController {
     @RequestMapping("selectPrint.ahsj")
     public List<HisMedicationDetails> selectPrint(String number) throws Exception {
         return hisMedicationDetailsService.selectPrint(number);
+    }
+
+    /**
+     * @Description 查看历史用药
+     * @Params: [token, numbers]
+     * @Author: dingli
+     * @Return: org.springframework.web.servlet.ModelAndView
+     * @Date 2019/9/24
+     * @Time 11:21
+     **/
+    @RequestMapping("showDrugs/index.ahsj")
+    public ModelAndView showDrugs(String token, String medicalRecordId) {
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/medicalrecord/useDrug");
+        modelAndView.addObject("medicalRecordId", medicalRecordId);
+        modelAndView.addObject("token", token);
+        return modelAndView;
     }
 
 
