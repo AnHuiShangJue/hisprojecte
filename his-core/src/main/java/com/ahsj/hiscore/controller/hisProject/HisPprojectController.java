@@ -12,6 +12,7 @@ package com.ahsj.hiscore.controller.hisProject;
 
 import com.ahsj.hiscore.common.Constants;
 import com.ahsj.hiscore.common.utils.*;
+import com.ahsj.hiscore.entity.HisBed;
 import com.ahsj.hiscore.entity.HisImportInfo;
 import com.ahsj.hiscore.entity.HisProject;
 import com.ahsj.hiscore.entity.HisRecordProject;
@@ -122,7 +123,7 @@ public class HisPprojectController extends BaseController {
         modelAndView.addObject("token", token);
         modelAndView.addObject("title", "收费信息修改");
         modelAndView.addObject("hisProject", hisProject);
-        System.out.println("-------------------->"+hisProject.getNumber());
+        System.out.println("-------------------->" + hisProject.getNumber());
         return modelAndView;
     }
 
@@ -144,7 +145,7 @@ public class HisPprojectController extends BaseController {
             pageBean.setParameter(hisProject);
             PageBean<HisProject> hisProjectPageBean = hisProjectService.queryList(pageBean);
             return hisProjectPageBean;
-        } else if (hisProject.getType() == (short) 1 ) {
+        } else if (hisProject.getType() == (short) 1) {
             hisProject.setType(null);
             PageBean<HisProject> pageBean = new PageBean<>();
             pageBean.setParameter(hisProject);
@@ -359,7 +360,7 @@ public class HisPprojectController extends BaseController {
         for (int i = 0; i < projectList.size(); i++) {
             if (EmptyUtil.Companion.isNullOrEmpty(projectList.get(i).getName())) {
                 HisImportInfo hisImportInfo = new HisImportInfo();
-                String errors = dateOne + " : 第" + (i + 1) + "条记录的项目名存在空值     "+projectList.get(i).getNumber();
+                String errors = dateOne + " : 第" + (i + 1) + "条记录的项目名存在空值     " + projectList.get(i).getNumber();
                 projectList.get(i).setName(Constants.HIS_NAME);
                 errorFilelist.add(errors);
                 hisImportInfo.setUploadErrorInfo(errors);
@@ -375,7 +376,7 @@ public class HisPprojectController extends BaseController {
             if (EmptyUtil.Companion.isNullOrEmpty(hisProject.getDeptName())) {
                 hisProject.setDeptName("其他");
             }
-            if (StringUtils.isEmpty(hisProject.getName())){
+            if (StringUtils.isEmpty(hisProject.getName())) {
             }
             String firstChar = PinyinUtils.ToFirstChar(hisProject.getName());
             hisProject.setPinyinCode(firstChar);
@@ -553,5 +554,45 @@ public class HisPprojectController extends BaseController {
     @ResponseBody
     public List<HisRecordProject> selectPrint(String number) throws Exception {
         return hisRecordProjectService.selectPrint(number);
+    }
+
+    /**
+     * @Description 根据就诊编号查看历史项目
+     * @Params: [token]  medicalRecordId
+     * @Author: dingli
+     * @Return: org.springframework.web.servlet.ModelAndView
+     * @Date 2019/9/24
+     * @Time 13:57
+     **/
+    @RequestMapping("showProjects/index.ahsj")
+    public ModelAndView showProjects(String token, String medicalRecordId) {
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/medicalrecord/useProject");
+        modelAndView.addObject("title", "历史项目");
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("medicalRecordId", medicalRecordId);
+        return modelAndView;
+    }
+
+    /**
+     * @Description 根据就诊编号查看历史项目
+     * @Params: [hisRecordProject]
+     * @Author: dingli
+     * @Return: core.entity.PageBean<com.ahsj.hiscore.entity.HisRecordProject>
+     * @Date 2019/9/24
+     * @Time 14:33
+     **/
+    @RequestMapping("/getProjects/index.ahsj")
+    @ResponseBody
+    public PageBean<HisRecordProject> getProjects(String medicalNumber) throws Exception {
+        PageBean<HisRecordProject> pageBean = new PageBean<HisRecordProject>();
+        if (!EmptyUtil.Companion.isNullOrEmpty(medicalNumber)) {//查找
+            HisRecordProject hisRecordProject = new HisRecordProject();
+            hisRecordProject.setMedicalNumber(medicalNumber);
+            pageBean.setParameter(hisRecordProject);
+            pageBean = hisRecordProjectService.selectByMedicalNumber(pageBean);
+        } else {
+            pageBean.setData(new ArrayList<HisRecordProject>());
+        }
+        return pageBean;
     }
 }

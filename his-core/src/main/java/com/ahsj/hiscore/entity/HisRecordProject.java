@@ -108,6 +108,16 @@ public class HisRecordProject extends BaseEntity {
 
     private String tranName ;
 
+    private String medicalNumber ;
+
+    public String getMedicalNumber() {
+        return medicalNumber;
+    }
+
+    public void setMedicalNumber(String medicalNumber) {
+        this.medicalNumber = medicalNumber;
+    }
+
     public BigDecimal getTotalPrice() {
         return totalPrice;
     }

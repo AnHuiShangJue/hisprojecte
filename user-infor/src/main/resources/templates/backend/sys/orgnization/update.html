@@ -12,7 +12,7 @@
     <div class="col s12 m12 l12">
         <div id="validation" class="card card card-default scrollspy">
             <div class="card-content">
-                <h4 class="card-title">组织机构基本信息</h4><label style="color:black">ព័ត៌មានមូលដ្ឋាននៃការរៀបចំ
+                <h4 class="card-title">组织机构基本信息</h4><label style="color:black">Organizational basic information
 
             </label>
                 <form class="col s12" id="sendForm" action="#">
@@ -32,7 +32,7 @@
                             <select ahsj:select name="departKbn" id="departKbn" type="code"
                                  typeKey="depart_kbn" th:value="${sysOrganizationInfo.departKbn}">
                             </select>
-                            <label for="departKbn">单 位 部 门 区 分<span style="font-size: 12px">(Unit departmentអង្គភាព
+                            <label for="departKbn">单 位 部 门 区 分<span style="font-size: 12px">(Unit division
 
 )</span></label>
                         </div>
@@ -49,13 +49,13 @@
                             <input id="address" name="address" type="text" th:value="${sysOrganizationInfo.address}"
                                    data-error=".errorTxt4">
                             <div class="errorTxt4"></div>
-                            <label for="address">地 址<span style="font-size: 12px">(អាសយដ្ឋាន
+                            <label for="address">地 址<span style="font-size: 12px">(address
 
 )</span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4">
                             <input id="zip_code" name="zipCode" type="text" th:value="${sysOrganizationInfo.zipCode}"/>
-                            <label for="zip_code">邮 编<span style="font-size: 12px">(កូដប្រៃសណីយ៍
+                            <label for="zip_code">邮 编<span style="font-size: 12px">(E-mail
 
 )</span></label>
                         </div>
@@ -64,14 +64,14 @@
                         <div class="input-field col s4 l4 xl4">
                             <input id="responsible" name="responsible" type="text"
                                    th:value="${sysOrganizationInfo.responsible}"/>
-                            <label for="responsible">联 系 人<span style="font-size: 12px">(ទំនាក់ទំនង
+                            <label for="responsible">联 系 人<span style="font-size: 12px">(Contact
 
 )</span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4">
                             <input id="tel_phone" name="telPhone" type="text"
                                    th:value="${sysOrganizationInfo.telPhone}"/>
-                            <label for="tel_phone">联 系 电 话<span style="font-size: 12px">(ទំនាក់ទំនងទូរស័ព្ទ
+                            <label for="tel_phone">联 系 电 话<span style="font-size: 12px">(phone number
 
 )</span></label>
                         </div>

@@ -212,32 +212,42 @@ public interface HisRecordProjectService {
     List<HisRecordProject> selectPrint(String number) throws Exception;
 
     /**
-     *@Description 查询出当前就诊编号未付费的项目列表
-     *@Params [id]
-     *@return java.util.List<com.ahsj.hiscore.entity.HisRecordProject>
-     *@Author zhushixiang
-     *@Date 2019-09-10
-     *@Time 17:28
-    **/
-    List<HisRecordProject> selectByMedicalRecordIdNotIspayed(Long medicalRecordId)throws Exception;
+     * @return java.util.List<com.ahsj.hiscore.entity.HisRecordProject>
+     * @Description 查询出当前就诊编号未付费的项目列表
+     * @Params [id]
+     * @Author zhushixiang
+     * @Date 2019-09-10
+     * @Time 17:28
+     **/
+    List<HisRecordProject> selectByMedicalRecordIdNotIspayed(Long medicalRecordId) throws Exception;
 
     /**
-     *@Description 批量更新
-     *@Params [hisRecordProjectList]
-     *@return void
-     *@Author zhushixiang
-     *@Date 2019-09-11
-     *@Time 10:08
-    **/
+     * @return void
+     * @Description 批量更新
+     * @Params [hisRecordProjectList]
+     * @Author zhushixiang
+     * @Date 2019-09-11
+     * @Time 10:08
+     **/
     void updateBatchForIsPay(List<HisRecordProject> hisRecordProjectList);
 
     /**
-     *@Description 新增
-     *@Params [hisRecordProject]
-     *@return core.message.Message
-     *@Author zhushixiang
-     *@Date 2019-09-18
-     *@Time 9:40
-    **/
-    Message insert(HisRecordProject hisRecordProject)throws Exception;
+     * @return core.message.Message
+     * @Description 新增
+     * @Params [hisRecordProject]
+     * @Author zhushixiang
+     * @Date 2019-09-18
+     * @Time 9:40
+     **/
+    Message insert(HisRecordProject hisRecordProject) throws Exception;
+
+    /**
+     * @Description 根据就诊编号查询历史项目
+     * @Params: [pageBean]
+     * @Author: dingli
+     * @Return: core.entity.PageBean<com.ahsj.hiscore.entity.HisRecordProject>
+     * @Date 2019/9/24
+     * @Time 14:26
+     **/
+    PageBean<HisRecordProject> selectByMedicalNumber(PageBean<HisRecordProject> pageBean) throws Exception;
 }

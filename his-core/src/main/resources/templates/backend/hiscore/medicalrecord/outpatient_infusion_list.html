@@ -123,7 +123,7 @@
                         "render": function (data, type, row) {
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
-                            rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看\" href='javascript:;' onclick=\"edit(" + row.recordId + ",'" + row.number + "');\"> <i class='material-icons'>visibility</i></a>"+
+                            rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看\" href='javascript:;' onclick=\"edit(" + row.recordId + ",'" + row.number + "','"+row.medicalRecordId+"');\"> <i class='material-icons'>visibility</i></a>"+
                                 "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" href='javascript:;' onclick=\"deleteInit('" + row.number + "');\"> <i class='material-icons'>delete</i></a>";
                             // 返回自定义内容
                             return rtnBtn;
@@ -139,8 +139,8 @@
     }
 
 
-    function edit(recordId,number) {
-        var url = CTX + "/api/hisInfusion/infusionDrugDetailsList/index.ahsj?token=" + TOKEN + "&recordId=" + recordId+ "&number=" + number;
+    function edit(recordId,number,medicalRecordId) {
+        var url = CTX + "/api/hisInfusion/infusionDrugDetailsList/index.ahsj?token=" + TOKEN + "&recordId=" + recordId+ "&number=" + number+"&medicalRecordId="+medicalRecordId;
         dialog.show(url, "输液单信息查看");
     }
     function deleteInit(nubmer) {

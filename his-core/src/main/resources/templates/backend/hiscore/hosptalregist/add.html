@@ -31,6 +31,7 @@
                         <a id="resetBtn" class="waves-effect waves-light btn"><i
                                 class="material-icons  white-text tooltipped " data-position="bottom"
                                 data-delay="50" data-tooltip="重置">youtube_searched_for</i></a>
+
                     </div>
                 </div>
                 <form class="col s12" id="sendForm" action="#">
@@ -116,7 +117,7 @@
 )</span></label>
                         </div>
                         <div class="input-field col s12 l12 xl12">
-                            <input id="inpatientDiagnosis" name="inpatientDiagnosis" type="text">
+                            <input id="inpatientDiagnosis" name="inpatientDiagnosis" type="text" >
                             <label for="inpatientDiagnosis">住院诊断<span style="font-size: 12px">(Inpatient diagnosis
 )</span></label>
                         </div>
@@ -150,13 +151,9 @@ Scripts
         formCheck();
         getDoctor();
     });
-    $('#searchBtn').click(function () {
-        getPatient();
 
-    });
 
-    $('#resetBtn').click(function reset() {
-
+    function resetNumber(){
         $('#searchForm')[0].reset();
         $("#name").attr("value","");
         $("#age").attr("value","");
@@ -170,12 +167,26 @@ Scripts
         $("#chiefcomplaint").attr("value","");
         $("#inpatientDiagnosis").attr("value","");
         $("#remark").attr("value","");
+        $("#medicalNumber").attr("value","");
         changeSelectValue("sex",1);
         changeSelectValue("is_married",1);
+
+
         M.updateTextFields();//重新初始化页面上的内容
+    }
 
-    });
-
+    function resetchange(){
+        $("#name").val("");
+        $("#age").val("");
+        $("#idcard").val("");
+        $("#phonenumber").val("");
+        $("#height").val("");
+        $("#weight").val("");
+        $("#location").val("");
+        $("#chiefcomplaint").val("");
+        $("#inpatientDiagnosis").val("");
+        $("#remark").val("");
+    }
 
 
     $("select[name='departmentId']").change(function () {
@@ -233,7 +244,10 @@ Scripts
     }
 
     function fun() {//提交成功跳转
-        dialog.success("新增成功！")
+        dialog.success("新增成功！");
+        resetchange();
+        resetNumber();
+
     }
 
     function formCheck() {
@@ -329,23 +343,6 @@ Scripts
                             if (msg.success) {
                                 M.toast({html: msg.message});
                                 fun();
-                                $('#searchForm')[0].reset();
-                                // $('#sendForm')[0].reset();
-                                $("#name").attr("value","");
-                                $("#age").attr("value","");
-                                $("#idcard").attr("value","");
-                                $("#phonenumber").attr("value","");
-                                $("#height").attr("value","");
-                                $("#weight").attr("value","");
-                                $("#location").attr("value","");
-                                $("#is_married").attr("value","");
-                                $("#sex").attr("value","");
-                                $("#departmentId").attr("value","");
-                                $("#doctorId").attr("value","");
-                                $("#chiefcomplaint").attr("value","");
-                                $("#inpatientDiagnosis").attr("value","");
-                                $("#remark").attr("value","");
-                                M.updateTextFields();//重新初始化页面上的内容
                                 return true;
                             } else {
                                 M.toast({html: msg.message});
@@ -382,6 +379,16 @@ Scripts
             }else {
                 dialog.warn("请输入就诊编号！")
             }
+        });
+
+
+        //重置按钮
+        $('#resetBtn').click(function reset() {
+            resetNumber();
+            resetchange();
+            // var nnn=$("#name").val();
+            // console.log(nnn);
+
         });
     }
     $("input").change(function(){

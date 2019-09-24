@@ -326,14 +326,14 @@
     </select>
 
 
-    <delete id="deleteByRecordId" parameterType="java.lang.Long" >
+    <delete id="deleteByRecordId" parameterType="java.lang.Long">
     delete
     from his_record_project
     where record_id =#{id,jdbcType=BIGINT}
   </delete>
 
 
-    <delete id="deleteByRecordIdNotIsCheckdOrIsPayed" parameterType="java.lang.Long" >
+    <delete id="deleteByRecordIdNotIsCheckdOrIsPayed" parameterType="java.lang.Long">
         delete
         from his_record_project
         where record_id =#{id,jdbcType=BIGINT} and his_record_project.is_payed = 2 and his_record_project.is_checked = 2;
@@ -357,17 +357,17 @@
     </update>
 
 
-
-
     <select id="queryList" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
-        select hrp.* ,hmr.medical_record_id ,t.number as his_toll_record_number from his_record_project hrp left join  his_medical_record hmr on hrp.record_id = hmr.id left join his_toll_record t on t.medical_record_id = hmr.medical_record_id
+        select hrp.* ,hmr.medical_record_id ,t.number as his_toll_record_number from his_record_project hrp left join
+        his_medical_record hmr on hrp.record_id = hmr.id left join his_toll_record t on t.medical_record_id =
+        hmr.medical_record_id
         where hrp.is_checked = 2 and hrp.is_back = 2 and hrp.is_payed = 1
 
         <if test="parameter.medicalRecordId != null and parameter.medicalRecordId != ''">
-          and  hmr.medical_record_id =#{parameter.medicalRecordId,jdbcType=VARCHAR}
+            and hmr.medical_record_id =#{parameter.medicalRecordId,jdbcType=VARCHAR}
         </if>
         <if test="parameter.tollRecordNumber != null and parameter.tollRecordNumber != ''">
-          and  t.number  =#{parameter.tollRecordNumber,jdbcType=VARCHAR}
+            and t.number =#{parameter.tollRecordNumber,jdbcType=VARCHAR}
         </if>
         <if test="parameter.orders != null and parameter.orders != ''">
             order by ${parameter.orders}
@@ -375,21 +375,24 @@
     </select>
 
     <select id="queryLists" parameterType="com.ahsj.hiscore.entity.HisRecordProject" resultMap="BaseResultMap">
-        select hrp.* ,hmr.medical_record_id ,t.number as his_toll_record_number from his_record_project hrp left join  his_medical_record hmr on hrp.record_id = hmr.id left join his_toll_record t on t.medical_record_id = hmr.medical_record_id
+        select hrp.* ,hmr.medical_record_id ,t.number as his_toll_record_number from his_record_project hrp left join
+        his_medical_record hmr on hrp.record_id = hmr.id left join his_toll_record t on t.medical_record_id =
+        hmr.medical_record_id
         where hrp.is_checked = 2 and hrp.is_back = 2 and hrp.is_payed = 1
 
         <if test="medicalRecordId != null and medicalRecordId != ''">
-          and  hmr.medical_record_id =#{medicalRecordId,jdbcType=VARCHAR}
+            and hmr.medical_record_id =#{medicalRecordId,jdbcType=VARCHAR}
         </if>
         <if test="tollRecordNumber != null and tollRecordNumber != ''">
-          and  t.number  =#{tollRecordNumber,jdbcType=VARCHAR}
+            and t.number =#{tollRecordNumber,jdbcType=VARCHAR}
         </if>
     </select>
 
 
     <select id="projectInfo" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
-        select hrp.* ,p.refund_num as refund_num , hrp.price * p.refund_num as project_sum_price from his_record_project hrp left join  his_refund_project p on hrp.id = p.record_project_id
-        where  p.voucher = #{parameter.voucher,jdbcType=VARCHAR}
+        select hrp.* ,p.refund_num as refund_num , hrp.price * p.refund_num as project_sum_price from his_record_project
+        hrp left join his_refund_project p on hrp.id = p.record_project_id
+        where p.voucher = #{parameter.voucher,jdbcType=VARCHAR}
         <if test="parameter.name != null and parameter.name != ''">
             and hrp.name = #{parameter.name,jdbcType=INTEGER}
         </if>
@@ -405,7 +408,6 @@
         select hrp.* ,p.refund_num as refund_num , hrp.price * p.refund_num as project_sum_price from his_record_project hrp left join  his_refund_project p on hrp.id = p.record_project_id
         where  p.voucher = #{voucher,jdbcType=VARCHAR}
     </select>
-
 
 
     <select id="ItemPatientList" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
@@ -445,9 +447,12 @@
 
 
     <select id="pageBeanList" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
-        SELECT  hrp.* ,p.refund_num as refund_num,p.toll_record_number as his_toll_record_number  ,hrp.price * p.refund_num as project_sum_price, p.patient_name as patient_names,p.remarks as remarks ,p.voucher as vouchers from his_refund_project p
-        LEFT JOIN  his_record_project hrp  on hrp.id = p.record_project_id
-        where  p.is_review = 1 and p.is_back = 2  and p.toll_record_number = #{parameter.tollRecordNumber,jdbcType=VARCHAR}
+        SELECT hrp.* ,p.refund_num as refund_num,p.toll_record_number as his_toll_record_number ,hrp.price *
+        p.refund_num as project_sum_price, p.patient_name as patient_names,p.remarks as remarks ,p.voucher as vouchers
+        from his_refund_project p
+        LEFT JOIN his_record_project hrp on hrp.id = p.record_project_id
+        where p.is_review = 1 and p.is_back = 2 and p.toll_record_number =
+        #{parameter.tollRecordNumber,jdbcType=VARCHAR}
         <if test="parameter.name != null and parameter.name != ''">
             and hrp.name = #{parameter.name,jdbcType=INTEGER}
         </if>
@@ -460,14 +465,16 @@
         </if>
     </select>
 
-    <select id="pricelistsBytollRecordNumber" parameterType="com.ahsj.hiscore.entity.HisRecordProject" resultMap="BaseResultMap">
+    <select id="pricelistsBytollRecordNumber" parameterType="com.ahsj.hiscore.entity.HisRecordProject"
+            resultMap="BaseResultMap">
         SELECT  hrp.* ,p.refund_num as refund_num,p.toll_record_number as his_toll_record_number  ,hrp.price * p.refund_num as project_sum_price, p.patient_name as patient_names,p.remarks as remarks ,p.voucher as vouchers from his_refund_project p
         LEFT JOIN  his_record_project hrp  on hrp.id = p.record_project_id
         where  p.is_review = 1 and p.is_back = 2  and p.toll_record_number = #{tollRecordNumber,jdbcType=VARCHAR}
 
     </select>
 
-    <select id="HisRecordProjectLists" parameterType="com.ahsj.hiscore.entity.HisRecordProject" resultMap="BaseResultMap">
+    <select id="HisRecordProjectLists" parameterType="com.ahsj.hiscore.entity.HisRecordProject"
+            resultMap="BaseResultMap">
         SELECT  hrp.* ,p.refund_num as refund_num,t.number as his_toll_record_number  ,hrp.price * p.refund_num as project_sum_price, p.patient_name as patient_names,p.remarks as remarks ,p.voucher as vouchers from his_toll_record t
         LEFT JOIN his_refund_project p on t.medical_record_id = p.record_number LEFT JOIN  his_record_project hrp  on hrp.id = p.record_project_id
         where  p.is_review = 1 and p.is_back = 1  and p.toll_record_number = #{tollRecordNumber,jdbcType=VARCHAR}
@@ -523,6 +530,16 @@ p.is_payed='2'
     <select id="selectByMedicalRecordIdNotIspayed" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select his_record_project.*
 from his_record_project
-where record_id =#{medicalRecordId,jdbcType=BIGINT} and is_payed = 2
+where record_id #={medicalRecordId,jdbcType=BIGINT} and is_payed = 2
+    </select>
+
+    <select id="selectByMedicalNumber" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_record_project
+        where record_id =(select id from his_medical_record where medical_record_id  =#{parameter.medicalNumber})
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
     </select>
 </mapper>

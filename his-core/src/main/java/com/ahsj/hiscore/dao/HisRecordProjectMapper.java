@@ -52,13 +52,13 @@ public interface HisRecordProjectMapper {
     void deleteByRecordId(Long recordId);
 
     /**
-     *@Description 批量修改付费状态
-     *@Params [hisRecordProjects]
-     *@return void
-     *@Author zhushixiang
-     *@Date 2019-09-11
-     *@Time 10:10
-    **/
+     * @return void
+     * @Description 批量修改付费状态
+     * @Params [hisRecordProjects]
+     * @Author zhushixiang
+     * @Date 2019-09-11
+     * @Time 10:10
+     **/
     void setPayBatch(List<HisRecordProject> hisRecordProjects);
 
 
@@ -206,12 +206,22 @@ public interface HisRecordProjectMapper {
     List<HisRecordProject> selectPrint(String number);
 
     /**
-     *@Description 查询出当前就诊编号未付费的项目列表
-     *@Params [medicalRecordId]
-     *@return java.util.List<com.ahsj.hiscore.entity.HisRecordProject>
-     *@Author zhushixiang
-     *@Date 2019-09-10
-     *@Time 17:30
-    **/
+     * @return java.util.List<com.ahsj.hiscore.entity.HisRecordProject>
+     * @Description 查询出当前就诊编号未付费的项目列表
+     * @Params [medicalRecordId]
+     * @Author zhushixiang
+     * @Date 2019-09-10
+     * @Time 17:30
+     **/
     List<HisRecordProject> selectByMedicalRecordIdNotIspayed(Long medicalRecordId);
+
+    /**
+     * @Description 根据就诊编号查询历史项目
+     * @Params: [medicalNumber]
+     * @Author: dingli
+     * @Return: java.util.List<com.ahsj.hiscore.entity.HisRecordProject>
+     * @Date 2019/9/24
+     * @Time 14:05
+     **/
+    List<HisRecordProject> selectByMedicalNumber(PageBean<HisRecordProject> pageBean);
 }

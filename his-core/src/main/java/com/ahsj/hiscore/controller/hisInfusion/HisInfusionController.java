@@ -137,11 +137,12 @@ public class HisInfusionController extends BaseController {
      * @Params [token, recordId]
     **/
     @RequestMapping("infusionDrugDetailsList/index.ahsj")
-    ModelAndView infusionDrugDetailsListIndex(String token,Long recordId,String number) throws Exception{
+    ModelAndView infusionDrugDetailsListIndex(String token,String recordId,String number,String medicalRecordId) throws Exception{
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/medicalrecord/infusion_drug_details");
         modelAndView.addObject("title", "医疗信息系统");
         modelAndView.addObject("token", token);
         modelAndView.addObject("recordId", recordId);
+        modelAndView.addObject("medicalRecordId", medicalRecordId);//HM
         modelAndView.addObject("number", number);
         return modelAndView;
     }
@@ -412,14 +413,14 @@ public class HisInfusionController extends BaseController {
      * @Params [token, hospitalManageId, medicalRecordId]
     **/
     @RequestMapping(value = "outpatientprintf/index.ahsj")
-    public ModelAndView outpatientprintf(String token,String recordId) throws Exception {
+    public ModelAndView outpatientprintf(String token,String recordId,String medicalRecordId) throws Exception {
         //HM开头的编号
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/medicalrecord/outpatient_infusion_print");
         modelAndView.addObject("token", token);
         //更新和打印
         modelAndView.addObject("title", "打印输液单");
             List<HisInfusion> hisInfusionList = hisInfusionService.listByRecordForPrint(recordId);
-            HisPatientInfo hisPatientInfo = hisPatientService.selectByRecordId(recordId);
+            HisPatientInfo hisPatientInfo = hisPatientService.selectByMedicalRecordId(medicalRecordId);
             if (EmptyUtil.Companion.isNullOrEmpty(hisPatientInfo.getSex())){
                 modelAndView.addObject("sex", null);
             }else {

@@ -87,14 +87,15 @@
                                 </div>
                             </div>
                             <div class="row">
-                                    <div class="col  s2 m2 l2 xl2">
-                                        <select ahsj:select name="departmentId" id="departmentId" type="depart" typeKey="2" departKbn="1">
-                                        </select>
-                                        <label for="departmentId">科 室<span style="font-size: 12px">(Department
+                                <div class="col  s2 m2 l2 xl2">
+                                    <select ahsj:select name="departmentId" id="departmentId" type="depart" typeKey="2"
+                                            departKbn="1">
+                                    </select>
+                                    <label for="departmentId">科 室<span style="font-size: 12px">(Department
 
 )</span></label>
-                                    </div>
                                 </div>
+                            </div>
                         </form>
                     </div>
                     <div class="row">
@@ -156,25 +157,25 @@
             loadingMessage: 'Loading...',
             dataTable: {
                 "ajax": {
-                    "url": CTX+"/api/hismedicalrecord/medicalrecordlist.ahsj?token="+TOKEN, // ajax source
+                    "url": CTX + "/api/hismedicalrecord/medicalrecordlist.ahsj?token=" + TOKEN, // ajax source
                 },
                 "columns": [
                     {
-                        "title":"就诊记录编号",
-                        "data":"medicalRecordId",
-                        "name":"medical_record_id"
-                    },{
-                        "title":"挂号编号",
-                        "data":"numbers",
-                        "name":"numbers"
-                    },{
-                        "title":"姓名",
-                        "data":"patientName",
-                        "name":"patient_name"
-                    },{
-                        "title":"年龄",
-                        "data":"patientAge",
-                        "name":"patient_age"
+                        "title": "就诊记录编号",
+                        "data": "medicalRecordId",
+                        "name": "medical_record_id"
+                    }, {
+                        "title": "挂号编号",
+                        "data": "numbers",
+                        "name": "numbers"
+                    }, {
+                        "title": "姓名",
+                        "data": "patientName",
+                        "name": "patient_name"
+                    }, {
+                        "title": "年龄",
+                        "data": "patientAge",
+                        "name": "patient_age"
                     },
                     {
                         "title": "科别",
@@ -182,17 +183,17 @@
                         "name": "department_id"
                     },
                     {
-                        "title":"状态",
-                        "data":"isRelName",
-                        "name":"is_rel"
-                    },                    {
-                        "title":"门诊医师",
-                        "data":"name",
-                        "name":"name"
-                    },                    {
-                        "title":"接诊时间",
-                        "data":"createDate",
-                        "name":"create_date"
+                        "title": "状态",
+                        "data": "isRelName",
+                        "name": "is_rel"
+                    }, {
+                        "title": "门诊医师",
+                        "data": "name",
+                        "name": "name"
+                    }, {
+                        "title": "接诊时间",
+                        "data": "createDate",
+                        "name": "create_date"
                     },
                     {
                         "title": "操作",
@@ -202,8 +203,10 @@
                         "render": function (data, type, row) {
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
-                            rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='edit(" + row.id + "," + row.patientId + "," + row.registeredId + "," + row.doctorId + ");'> <i class='material-icons'>search</i></a>"+
-                            "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"输液单\" href='javascript:;' onclick='infusion(" + row.id + "," + row.patientId + ");'> <i class='material-icons'>healing</i></a>";
+                            rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='edit(" + row.id + "," + row.patientId + "," + row.registeredId + "," + row.doctorId + ");'> <i class='material-icons'>search</i></a>" +
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"输液单\" href='javascript:;' onclick='infusion(" + row.id + "," + row.patientId + ");'> <i class='material-icons'>healing</i></a>" +
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"历史用药\" href='javascript:;' onclick='showDrugs(\"" + row.medicalRecordId + "\");'> <i class='material-icons'>mail_outline</i></a>" +
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"历史项目\" href='javascript:;' onclick='showProjects(\"" + row.medicalRecordId + "\");'> <i class='material-icons'>markunread</i></a>";
                             // 返回自定义内容
                             return rtnBtn;
                         }
@@ -219,16 +222,15 @@
     }
 
 
+    function edit(id, patientId, registeredId) {
 
-    function edit(id,patientId,registeredId) {
-
-            var url = CTX + "/api/hismedicalrecord/medicalrecordotherupdate/index.ahsj?token=" + TOKEN + "&id=" + id + "&patientId=" + patientId + "&registeredId=" + registeredId;
-            dialog.show(url, "就诊记录信息");
+        var url = CTX + "/api/hismedicalrecord/medicalrecordotherupdate/index.ahsj?token=" + TOKEN + "&id=" + id + "&patientId=" + patientId + "&registeredId=" + registeredId;
+        dialog.show(url, "就诊记录信息");
     }
 
-    function infusion(id,patientId) {
+    function infusion(id, patientId) {
 
-        var url = CTX + "/api/hisInfusion/selectByRecordIdListIndex/index.ahsj?token=" + TOKEN + "&id=" + id + "&patientId="+ patientId+"&isNurseOpreate=1";
+        var url = CTX + "/api/hisInfusion/selectByRecordIdListIndex/index.ahsj?token=" + TOKEN + "&id=" + id + "&patientId=" + patientId + "&isNurseOpreate=1";
         dialog.show(url, "输液单");
     }
 
@@ -242,10 +244,19 @@
         });
     }
 
-    $("input").change(function(){
+    $("input").change(function () {
         $(this).val($(this).val().trim());
     });
 
+    function showDrugs(medicalRecordId) {
+        var url = CTX + "/api/medicationDetails/showDrugs/index.ahsj?token=" + TOKEN + "&medicalRecordId=" + medicalRecordId ;
+        dialog.show(url, "历史用药");
+    }
+
+    function showProjects(medicalRecordId) {
+        var url = CTX + "/api/hisProject/showProjects/index.ahsj?token=" + TOKEN + "&medicalRecordId=" + medicalRecordId ;
+        dialog.show(url, "历史项目");
+    }
 </script>
 </body>
 </html>

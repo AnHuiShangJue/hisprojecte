@@ -340,7 +340,7 @@ order by his_medi_exit_details.create_date desc
   </select>
 
     <select id="listByIds" resultMap="BaseResultMap">
-        select m.id ,e.toll_number,b.description,
+        select m.id ,e.toll_number,b.description,b.id as  pharmacy_id,
         e.drugs_name,e.drugs_spec,e.exit_count,e.create_date,i.user_name,e.record_number,o.`name` as
         patient_Name,e.validity_period
         from his_medi_exit_details as e

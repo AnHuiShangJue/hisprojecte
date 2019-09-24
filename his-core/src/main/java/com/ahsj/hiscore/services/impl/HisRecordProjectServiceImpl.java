@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utils.EmptyUtil;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -394,13 +395,13 @@ public class HisRecordProjectServiceImpl implements HisRecordProjectService {
     }
 
     /**
-     *@Description 查询出当前就诊编号未付费的项目列表
-     *@Params [medicalRecordId]
-     *@return java.util.List<com.ahsj.hiscore.entity.HisRecordProject>
-     *@Author zhushixiang
-     *@Date 2019-09-10
-     *@Time 17:29
-    **/
+     * @return java.util.List<com.ahsj.hiscore.entity.HisRecordProject>
+     * @Description 查询出当前就诊编号未付费的项目列表
+     * @Params [medicalRecordId]
+     * @Author zhushixiang
+     * @Date 2019-09-10
+     * @Time 17:29
+     **/
     @Override
     @Transactional(readOnly = true)
     public List<HisRecordProject> selectByMedicalRecordIdNotIspayed(Long medicalRecordId) throws Exception {
@@ -408,34 +409,51 @@ public class HisRecordProjectServiceImpl implements HisRecordProjectService {
     }
 
     /**
-     *@Description 批量更新
-     *@Params [hisRecordProjectList]
-     *@return int
-     *@Author zhushixiang
-     *@Date 2019-09-11
-     *@Time 10:09
-    **/
+     * @return int
+     * @Description 批量更新
+     * @Params [hisRecordProjectList]
+     * @Author zhushixiang
+     * @Date 2019-09-11
+     * @Time 10:09
+     **/
     @Override
     @Transactional(readOnly = false)
     public void updateBatchForIsPay(List<HisRecordProject> hisRecordProjectList) {
-        if(!EmptyUtil.Companion.isNullOrEmpty(hisRecordProjectList) && hisRecordProjectList.size()!=0 ){
+        if (!EmptyUtil.Companion.isNullOrEmpty(hisRecordProjectList) && hisRecordProjectList.size() != 0) {
             hisRecordProjectMapper.setPayBatch(hisRecordProjectList);
         }
     }
 
     /**
-     *@Description 新增
-     *@Params [hisRecordProject]
-     *@return core.message.Message
-     *@Author zhushixiang
-     *@Date 2019-09-18
-     *@Time 9:40
-    **/
+     * @return core.message.Message
+     * @Description 新增
+     * @Params [hisRecordProject]
+     * @Author zhushixiang
+     * @Date 2019-09-18
+     * @Time 9:40
+     **/
     @Override
     @Transactional(readOnly = true)
     public Message insert(HisRecordProject hisRecordProject) throws Exception {
-         hisRecordProjectMapper.insert(hisRecordProject);
-         return MessageUtil.createMessage(true,"新增医嘱项目成功（New medical order success）");
+        hisRecordProjectMapper.insert(hisRecordProject);
+        return MessageUtil.createMessage(true, "新增医嘱项目成功（New medical order success）");
+    }
+
+    /**
+     * @Description 根据就诊编号查询用药明细
+     * @Params: [pageBean]
+     * @Author: dingli
+     * @Return: core.entity.PageBean<com.ahsj.hiscore.entity.HisRecordProject>
+     * @Date 2019/9/24   bignum1.multiply(bignum2)
+     * @Time 14:27
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public PageBean<HisRecordProject> selectByMedicalNumber(PageBean<HisRecordProject> pageBean) throws Exception {
+        List<HisRecordProject> hisRecordProjects = hisRecordProjectMapper.selectByMedicalNumber(pageBean);
+        hisRecordProjects.stream().forEach(e -> e.setTotalPrice(e.getPrice().multiply(new BigDecimal(e.getNum()))));
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisRecordProjects));
+        return pageBean;
     }
 }
 
