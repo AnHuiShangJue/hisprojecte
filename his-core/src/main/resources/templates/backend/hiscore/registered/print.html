@@ -3,6 +3,11 @@
 
 <head>
 </head>
+<style>
+    table tr td{
+        padding: 0;
+    }
+</style>
 <div th:replace="public/base_print :: html"></div>
 
 <body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
@@ -15,79 +20,79 @@
             <label class="black-text fontsize02">The first china-cambodia hospital</label>
         </div>
     </div>
-
     <div class="row valign-wrapper">
-        <div class="col s6 m6 l6" style="height: 80px;">
-            <label class="black-text">挂号编号</label></br>
-            <label class="black-text">Registered number</label>
+        <div class="col s12 m12 l12">
+        <table>
+            <tr>
+                <td style="padding: 0px 15px;">
+                    <label class="black-text">挂号编号</label>
+                    <label class="black-text">Registered number</label>
+                </td>
+                <td style="padding: 0px 15px;"><label class="black-text" th:text="${hisregistered.number}"></label></td>
+            </tr>
+            <tr>
+                <td style="padding: 0px 15px;">
+                    <label class="black-text">挂号科室</label>
+                    <label class="black-text">Registered department</label>
+                </td>
+                <td style="padding: 0px 15px;">
+                    <label class="black-text" th:text="${hisregistered.departmentNameEnlish}"></label>
+                    <label class="black-text" th:text="${hisregistered.departmentName}"></label>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="padding: 0px 15px;">
+                    <label class="black-text">挂号费用</label>
+                    <label class="black-text">Registration fee</label>
+                </td>
+                <td style="padding: 0px 15px;">
+                    <label class="black-text" th:text="${hisregistered.money}"></label>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 0px 15px;">
+                    <label class="black-text">挂号费用类型</label>
+                    <label class="black-text">Registration fee type</label>
+                </td>
+                <td style="padding: 0px 15px;">
+                    <label class="black-text" th:text="${hisregistered.categoryNameEnlish}"></label>
+                    <label class="black-text" th:text="${hisregistered.categoryName}"></label>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="padding: 0px 15px;">
+                    <label class="black-text">挂号人姓名</label>
+                    <label class="black-text"> Registered person name</label>
+                </td>
+                <td style="padding: 0px 15px;">
+                    <label class="black-text" th:text="${hisregistered.patientName}"></label>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="padding: 0px 15px;">
+                    <label class="black-text">挂号创建时间</label>
+                    <label class="black-text">Registration creation time</label>
+                </td>
+                <td style="padding: 0px 15px;">
+                    <label class="black-text" th:text="${#dates.format(hisregistered.createDate, 'yyyy-MM-dd hh:mm:ss')}"></label>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 0px 15px;">
+                    <h5 class="black-text">挂号序号</h5>
+                    <label class="black-text">Registered serial number</label>
+                </td>
+                <td style="padding: 0px 15px;">
+                    <h6 class="black-text " th:text="${hisregistered.serial}"></h6>
+                </td>
+            </tr>
+        </table>
         </div>
-        <div class="col s6 m6 l6" style="height: 80px;">
-            <label class="black-text" th:text="${hisregistered.number}"></label>
         </div>
 
-    </div>
-
-    <div class="row valign-wrapper">
-        <div class="col s6 m6 l6" style="height: 80px;">
-            <label class="black-text">挂号科室</label></br>
-            <label class="black-text">Registered department</label>
-        </div>
-        <div class="col s6 m6 l6" style="height: 80px;">
-            <label class="black-text" th:text="${hisregistered.departmentNameEnlish}"></label></br>
-            <label class="black-text" th:text="${hisregistered.departmentName}"></label>
-        </div>
-    </div>
-
-    <div class="row valign-wrapper">
-        <div class="col s6 m6 l6" style="height: 80px;">
-            <label class="black-text">挂号费用</label></br>
-            <label class="black-text">Registration fee</label>
-        </div>
-        <div class="col s6 m6 l6" style="height: 80px;">
-            <label class="black-text" th:text="${hisregistered.money}"></label>
-        </div>
-
-    </div>
-
-    <div class="row valign-wrapper">
-        <div class="col s6 m6 l6" style="height: 80px;">
-            <label class="black-text">挂号费用类型</label></br>
-            <label class="black-text">Registration fee type</label>
-        </div>
-        <div class="col s6 m6 l6" style="height: 80px;">
-            <label class="black-text" th:text="${hisregistered.categoryNameEnlish}"></label></br>
-            <label class="black-text" th:text="${hisregistered.categoryName}"></label>
-        </div>
-    </div>
-
-    <div class="row valign-wrapper">
-        <div class="col s6 m6 l6" style="height: 80px;">
-            <label class="black-text">挂号人姓名</label></br>
-            <label class="black-text"> Registered person name</label>
-        </div>
-        <div class="col s6 m6 l6" style="height: 80px;">
-            <label class="black-text" th:text="${hisregistered.patientName}"></label>
-        </div>
-
-    </div>
-    <div class="row valign-wrapper">
-        <div class="col s6 m6 l6" style="height: 80px;">
-            <label class="black-text">挂号创建时间</label></br>
-            <label class="black-text">Registration creation time</label>
-        </div>
-        <div class="col s6 m6 l6" style="height: 80px;">
-            <label class="black-text" th:text="${#dates.format(hisregistered.createDate, 'yyyy-MM-dd hh:mm:ss')}"></label>
-        </div>
-    </div>
-    <div class="row valign-wrapper">
-        <div class="col s6 m6 l6">
-            <h5 class="black-text">挂号序号</h5>
-            <label class="black-text">Registered serial number</label>
-        </div>
-        <div class="col s6 m6 l6" style="height: 100px;">
-            <h6 class="black-text " th:text="${hisregistered.serial}"></h6>
-        </div>
-    </div>
 </div>
 
 <!-- ================================================
