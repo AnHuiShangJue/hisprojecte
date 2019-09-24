@@ -126,4 +126,19 @@
       update_date = #{updateDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <!--自定义sql-->
+  <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    select
+    his_dunning_list.*
+    from his_dunning_list
+    where
+    hospi_manager_number = #{parameter.hospiManagerNumber,jdbcType=VARCHAR}
+    <if test="parameter.createDate != null and parameter.createDate != ''">
+      and create_date = #{parameter.createDate,jdbcType=TIMESTAMP}
+    </if>
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
 </mapper>

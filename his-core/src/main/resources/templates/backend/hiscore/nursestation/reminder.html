@@ -87,12 +87,8 @@
 
 
                     var MedicalRecordId = [[${MedicalRecordId}]];
-                    var money = [[${money}]];
+                    var money = [[${shouldPay}]];
                     var number = [[${number}]];
-                    // var restDeposit = [[${restDeposit}]];
-                    // var patientName = [[${patientName}]];
-                    // var date = [[${date}]];
-                    // var operator = [[${operator}]];
 
                     $.ahsjajax(
                         CTX + "/api/hisdunninglist/save.ahsj",
@@ -103,7 +99,6 @@
                         }
                         ,
                         function (msg) {
-                            console.log(msg);
                             if (msg.success) {
                                 M.toast({html: msg.message});
                                 return false;
@@ -118,27 +113,6 @@
                         }
                     );
 
-
-
-                    // $.ahsjajax(
-                    //     CTX + "/api/nursestation/reminder/index.ahsj",
-                    //     {"MedicalRecordId":MedicalRecordId}
-                    //     ,
-                    //     function (msg) {
-                    //         console.log(msg);
-                    //         if (msg.success) {
-                    //             M.toast({html: msg.message});
-                    //             return false;
-                    //         } else {
-                    //             M.toast({html: msg.message});
-                    //             return false;
-                    //         }
-                    //     },
-                    //     function () {
-                    //         M.toast({html: "网络异常"});
-                    //         return false;
-                    //     }
-                    // );
                 })
 
                 }

@@ -114,7 +114,7 @@ public class HisInfusionServiceImpl implements HisInfusionService {
                 hisInfusionList.get(i).setDosage(hisMedicationDetails.getCount().toString());
                 hisInfusionList.get(i).setPrice(hisMedicationDetails.getPrice());
 
-                //更新药品信息中的remarks
+                //更新药品信息中的alreadyout
                 int a = 0;
                 if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicationDetails.getRemarks())){
                     a = hisMedicationDetails.getAlreadyout();

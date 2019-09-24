@@ -1,8 +1,11 @@
 package com.ahsj.hiscore.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import core.entity.BaseEntity;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class HisDunningList extends BaseEntity {
     private Long id;
@@ -13,6 +16,9 @@ public class HisDunningList extends BaseEntity {
 
     private String hospiManagerNumber;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private Date createDate;
 
 
     public Long getId() {
@@ -48,4 +54,13 @@ public class HisDunningList extends BaseEntity {
     }
 
 
+    @Override
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    @Override
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
 }

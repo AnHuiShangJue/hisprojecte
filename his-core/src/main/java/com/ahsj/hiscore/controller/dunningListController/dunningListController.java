@@ -1,7 +1,9 @@
 package com.ahsj.hiscore.controller.dunningListController;
 
+import com.ahsj.hiscore.entity.HisDunningList;
 import com.ahsj.hiscore.services.HisDunningListService;
 import core.controller.BaseController;
+import core.entity.PageBean;
 import core.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,6 +44,23 @@ public class dunningListController extends BaseController {
         Message aa = hisDunningListService.save(MedicalRecordId,money,number);
         return aa;
 
+    }
+
+    /**
+     *@Description list查询
+     *@Params
+     *@return
+     *@Author jin
+     *@Date 2019/9/24
+     *@Time 19:03
+    */
+    @RequestMapping(value = "list.ahsj", method = {RequestMethod.POST})
+    @ResponseBody
+    public PageBean<HisDunningList> list (Map<String, Object> model, HttpServletRequest request, HisDunningList hisDunningList) throws Exception{
+        PageBean<HisDunningList> pageBean = new PageBean<HisDunningList>();
+        pageBean.setParameter(hisDunningList);
+        pageBean = hisDunningListService.list(pageBean);
+        return pageBean;
     }
 
 }

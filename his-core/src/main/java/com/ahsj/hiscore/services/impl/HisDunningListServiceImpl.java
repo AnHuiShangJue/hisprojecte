@@ -1,8 +1,10 @@
 package com.ahsj.hiscore.services.impl;
 
+import com.ahsj.hiscore.core.CodeHelper;
 import com.ahsj.hiscore.dao.HisDunningListMapper;
 import com.ahsj.hiscore.entity.HisDunningList;
 import com.ahsj.hiscore.services.HisDunningListService;
+import core.entity.PageBean;
 import core.message.Message;
 import core.message.MessageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +40,12 @@ public class HisDunningListServiceImpl implements HisDunningListService {
 
 
 
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public PageBean<HisDunningList> list(PageBean<HisDunningList> pageBean) throws Exception {
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisDunningListMapper.list(pageBean)));
+        return pageBean;
     }
 }
