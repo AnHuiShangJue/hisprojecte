@@ -205,8 +205,8 @@
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='edit(" + row.id + "," + row.patientId + "," + row.registeredId + "," + row.doctorId + ");'> <i class='material-icons'>search</i></a>" +
                                 "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"输液单\" href='javascript:;' onclick='infusion(" + row.id + "," + row.patientId + ");'> <i class='material-icons'>healing</i></a>" +
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"历史用药\" href='javascript:;' onclick='showDrugs(\"" + row.medicalRecordId + "\");'> <i class='material-icons'>healing</i></a>" +
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"历史项目\" href='javascript:;' onclick='showProjects(\"" + row.medicalRecordId + "\");'> <i class='material-icons'>healing</i></a>";
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"历史用药\" href='javascript:;' onclick='showDrugs(\"" + row.medicalRecordId + "\");'> <i class='material-icons'>mail_outline</i></a>" +
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"历史项目\" href='javascript:;' onclick='showProjects(\"" + row.medicalRecordId + "\");'> <i class='material-icons'>markunread</i></a>";
                             // 返回自定义内容
                             return rtnBtn;
                         }
