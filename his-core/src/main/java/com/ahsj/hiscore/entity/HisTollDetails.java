@@ -90,6 +90,26 @@ public class HisTollDetails extends BaseEntity {
 
     private String registerNumber;//挂号编号
 
+    private String tdrugsSpec;
+
+    private String drugsSpec;
+
+    public String getDrugsSpec() {
+        return drugsSpec;
+    }
+
+    public void setDrugsSpec(String drugsSpec) {
+        this.drugsSpec = drugsSpec;
+    }
+
+    public String getTdrugsSpec() {
+        return tdrugsSpec;
+    }
+
+    public void setTdrugsSpec(String tdrugsSpec) {
+        this.tdrugsSpec = tdrugsSpec;
+    }
+
     public Integer getNum() {
         return num;
     }

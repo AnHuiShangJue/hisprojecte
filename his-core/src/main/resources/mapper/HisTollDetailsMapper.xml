@@ -353,14 +353,17 @@
             LAST_INSERT_ID()
         </selectKey>
 
-        insert into his_toll_details (id, create_user_id, create_date, update_user_id, update_date, toll_record_id, name,
+        insert into his_toll_details (id, create_user_id, create_date, update_user_id, update_date, toll_record_id,
+        name,
         records, target_id, type, money, description, is_settlement)
         values
-        <foreach collection="list" item="item" index="index" separator="," >
+        <foreach collection="list" item="item" index="index" separator=",">
             (#{item.id,jdbcType=BIGINT}, #{item.createUserId,jdbcType=BIGINT}, #{item.createDate,jdbcType=TIMESTAMP},
-            #{item.updateUserId,jdbcType=BIGINT}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.tollRecordId,jdbcType=BIGINT},
+            #{item.updateUserId,jdbcType=BIGINT}, #{item.updateDate,jdbcType=TIMESTAMP},
+            #{item.tollRecordId,jdbcType=BIGINT},
             #{item.name,jdbcType=VARCHAR}, #{item.records,jdbcType=VARCHAR}, #{item.targetId,jdbcType=BIGINT},
-            #{item.type,jdbcType=INTEGER}, #{item.money,jdbcType=DECIMAL}, #{item.description,jdbcType=VARCHAR},#{item.isSettlement,jdbcType=INTEGER}
+            #{item.type,jdbcType=INTEGER}, #{item.money,jdbcType=DECIMAL},
+            #{item.description,jdbcType=VARCHAR},#{item.isSettlement,jdbcType=INTEGER}
             )
         </foreach>
     </insert>
@@ -629,7 +632,7 @@
         </if>
     </select>
     <select id="listByNumber" resultMap="BaseResultMap" parameterType="java.lang.String">
-        SELECT
+ SELECT
             h.recover_the_fee,
             i.user_name,d.type,
             abs(h.actual_charge-
@@ -650,6 +653,14 @@
                     d.type=2
                     then
                     (select p.project_id from  his_record_project  as p  where   p.id = d.target_id )
+
+										when
+                    d.type=5
+                    then
+                    (
+										select p.project_id from  his_record_project  as p  where   p.id = (
+										select p.record_project_id from  his_refund_project  as p  where   p.id = d.target_id ))
+
                 end as id
                 ,
             case when
@@ -669,6 +680,11 @@
                      d.type=4
                      then
                      (select g.return_count from his_application_for_drug_return_details as g where g.id = d.target_id)
+
+										 when d.type = 5
+										 then(
+										 select p.refund_num from his_refund_project as p  where  p.id = d.target_id
+										 )
                 end  as num ,
             case when
                      d.type=1
@@ -691,6 +707,12 @@
                      d.type =4
                      then
                      (select g.price from his_application_for_drug_return_details as g where g.id = d.target_id)
+										 when  d.type =5
+										 then(
+										 	select p.price from  his_record_project  as p  where   p.id = (
+										select p.record_project_id from  his_refund_project  as p  where   p.id = d.target_id )
+										 )
+
                 end  as price ,
             d.name,
             d.money

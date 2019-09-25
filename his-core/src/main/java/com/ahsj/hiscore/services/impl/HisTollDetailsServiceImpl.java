@@ -3,9 +3,11 @@ package com.ahsj.hiscore.services.impl;
 import com.ahsj.hiscore.common.Constants;
 import com.ahsj.hiscore.core.CodeHelper;
 import com.ahsj.hiscore.dao.HisTollDetailsMapper;
+import com.ahsj.hiscore.entity.HisMedicineInfo;
 import com.ahsj.hiscore.entity.HisTollDetails;
 import com.ahsj.hiscore.entity.Translate;
 import com.ahsj.hiscore.feign.ITranslateService;
+import com.ahsj.hiscore.services.HisMedicineInfoService;
 import com.ahsj.hiscore.services.HisTollDetailsService;
 import core.entity.PageBean;
 import core.message.Message;
@@ -32,6 +34,9 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
 
     @Autowired
     ITranslateService iTranslateService;
+
+    @Autowired
+    HisMedicineInfoService hisMedicineInfoService;
 
     @Override
     public int insertSelective(HisTollDetails record) throws Exception {
@@ -69,8 +74,8 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
 
     @Override
     public Message saveForHospi(List<HisTollDetails> hisTollDetails) {
-        if(EmptyUtil.Companion.isNullOrEmpty(hisTollDetails) || hisTollDetails.size() ==0)
-            return MessageUtil.createMessage(false,"无可付费信息");
+        if (EmptyUtil.Companion.isNullOrEmpty(hisTollDetails) || hisTollDetails.size() == 0)
+            return MessageUtil.createMessage(false, "无可付费信息");
         hisTollDetailsMapper.saveForHospi(hisTollDetails);
         return MessageUtil.createMessage(true, "保存成功！");
     }
@@ -162,23 +167,28 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
         for (HisTollDetails h : hisTollDetails) {
             Translate translate = new Translate();//翻译
             if (h.getType() == 1 || h.getType() == 4) {//药品
+                HisMedicineInfo hisMedicineInfo = hisMedicineInfoService.selectById(h.getId().longValue());
+                h.setDrugsSpec(hisMedicineInfo.getDrugsSpec());
                 translate.setTranslateId(h.getId().longValue());
                 translate.setTranslateType(Constants.TRANSLATE_HIS_MEDICINEINFO);
                 List<Translate> translates = iTranslateService.queryTranslate(translate);
                 if (!EmptyUtil.Companion.isNullOrEmpty(translates)) {
                     for (Translate translate1 : translates) {
-                        if (StringUtils.equals(h.getName(),translate1.getTranslateChina())){
+                        if (StringUtils.equals(h.getName(), translate1.getTranslateChina())) {
                             h.setTranName(translate1.getTranslateKhmer());
+                        }
+                        if (StringUtils.equals(h.getDrugsSpec(), translate1.getTranslateChina())) {
+                            h.setTdrugsSpec(translate1.getTranslateKhmer());
                         }
                     }
                 }
             }
-            if (h.getType() == 2) {//项目
+            if (h.getType() == 2 || h.getType() == 5) {//项目
                 translate.setTranslateId(h.getId().longValue());
                 translate.setTranslateType(Constants.TRANSLATE_HIS_PROJECT);
                 List<Translate> translates = iTranslateService.queryTranslate(translate);
                 if (!EmptyUtil.Companion.isNullOrEmpty(translates)) {
-                    translates.stream().filter(e-> StringUtils.equals(h.getName(),e.getTranslateChina())).forEach(t -> h.setTranName(t.getTranslateKhmer()));
+                    translates.stream().filter(e -> StringUtils.equals(h.getName(), e.getTranslateChina())).forEach(t -> h.setTranName(t.getTranslateKhmer()));
                 }
             }
             if (h.getType() == 3) {//住院费用
@@ -192,44 +202,44 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
     }
 
     /**
-     *@Description 批量插入
-     *@Params [hisTollDetailsList]
-     *@return void
-     *@Author zhushixiang
-     *@Date 2019-09-11
-     *@Time 11:28
+     * @return void
+     * @Description 批量插入
+     * @Params [hisTollDetailsList]
+     * @Author zhushixiang
+     * @Date 2019-09-11
+     * @Time 11:28
      **/
     @Override
     @Transactional(readOnly = false)
     public void insertBatch(List<HisTollDetails> hisTollDetailsList) throws Exception {
-        if(!EmptyUtil.Companion.isNullOrEmpty(hisTollDetailsList) || hisTollDetailsList.size() != 0){
+        if (!EmptyUtil.Companion.isNullOrEmpty(hisTollDetailsList) || hisTollDetailsList.size() != 0) {
             hisTollDetailsMapper.saveForHospi(hisTollDetailsList);
         }
     }
 
     /**
-     *@Description 根据交易流水号查询当次所付住院费用的明细
-     *@Params [tollRecordNumber]
-     *@return com.ahsj.hiscore.entity.HisTollDetails
-     *@Author zhushixiang
-     *@Date 2019-09-12
-     *@Time 16:58
+     * @return com.ahsj.hiscore.entity.HisTollDetails
+     * @Description 根据交易流水号查询当次所付住院费用的明细
+     * @Params [tollRecordNumber]
+     * @Author zhushixiang
+     * @Date 2019-09-12
+     * @Time 16:58
      **/
     @Override
     @Transactional(readOnly = true)
     public HisTollDetails selectByTollNumberForBedAmount(String tollRecordNumber) throws Exception {
-        if(!StringUtils.isEmpty(tollRecordNumber))
+        if (!StringUtils.isEmpty(tollRecordNumber))
             return hisTollDetailsMapper.selectByTollNumberForBedAmount(tollRecordNumber);
         return new HisTollDetails();
     }
 
     /**
-     *@Description 根据公共编号 搜索出对应的消费明细
-     *@Params [hisTollDetailsPageBean]
-     *@return core.entity.PageBean<com.ahsj.hiscore.entity.HisTollDetails>
-     *@Author zhushixiang
-     *@Date 2019-09-13
-     *@Time 16:34
+     * @return core.entity.PageBean<com.ahsj.hiscore.entity.HisTollDetails>
+     * @Description 根据公共编号 搜索出对应的消费明细
+     * @Params [hisTollDetailsPageBean]
+     * @Author zhushixiang
+     * @Date 2019-09-13
+     * @Time 16:34
      **/
     @Override
     @Transactional(readOnly = true)

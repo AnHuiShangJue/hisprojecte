@@ -8,6 +8,7 @@ import core.entity.PageBean;
 import core.message.BoolMessage;
 import core.message.Message;
 import core.message.MessageUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,6 +67,15 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
 
     @Autowired
     HisMedicalRecordService hisMedicalRecordService;
+
+    @Autowired
+    HisRefundProjectInfoMapper hisRefundProjectInfoMapper;
+
+    @Autowired
+    HisRecordProjectService hisRecordProjectService;
+
+    @Autowired
+    HisRefundProjectMapper hisRefundProjectMapper;
 
     @Override
     @Transactional(readOnly = false)
@@ -326,11 +336,11 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         PageBean<HisTollDetails> pageBean = new PageBean<HisTollDetails>();
         HisTollDetails hd = new HisTollDetails();
         HisMedicalRecord hisMedicalRecord = new HisMedicalRecord();
-        if("R".equals(hisTollRecord.getRegisterNumber().substring(0,1))){
+        if ("R".equals(hisTollRecord.getRegisterNumber().substring(0, 1))) {
             hd.setRegisterNumber(hisTollRecord.getRegisterNumber());
             HisRegistered hisRegistered = hisRegisteredService.selectByNumber(hisTollRecord.getRegisterNumber());
             hisMedicalRecord = hisMedicalRecordService.selectByRegisterId(hisRegistered.getId());
-        }else if("HM".equals(hisTollRecord.getRegisterNumber().substring(0,2))){
+        } else if ("HM".equals(hisTollRecord.getRegisterNumber().substring(0, 2))) {
             hd.setMedicalReocordNumber(hisTollRecord.getRegisterNumber());
         }
         pageBean.setParameter(hd);
@@ -352,9 +362,9 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         //编号
         String number = createdate + String.format("%05d", count);
         number = "HTR" + number;
-        if("R".equals(hisTollRecord.getRegisterNumber().substring(0,1))){
+        if ("R".equals(hisTollRecord.getRegisterNumber().substring(0, 1))) {
             hisTollRecord.setMedicalRecordId(hisMedicalRecord.getMedicalRecordId());
-        }else if("HM".equals(hisTollRecord.getRegisterNumber().substring(0,2))){
+        } else if ("HM".equals(hisTollRecord.getRegisterNumber().substring(0, 2))) {
             hisTollRecord.setMedicalRecordId(hd.getMedicalReocordNumber());
         }
         hisTollRecord.setNumber(number);
@@ -868,7 +878,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
     @Override
     @Transactional(readOnly = true)
     public PageBean<HisTollRecord> pharmacyInventory(PageBean<HisTollRecord> pageBean) throws Exception {
-          pageBean.setData(CodeHelper.getInstance().setCodeValue(hisTollRecordMapper.pharmacyInventory(pageBean)));
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisTollRecordMapper.pharmacyInventory(pageBean)));
         return pageBean;
     }
 
@@ -885,5 +895,71 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
     public HisTollRecord getPharmacyinventoryPrice(HisTollRecord hisTollRecord) throws Exception {
         return hisTollRecordMapper.getPharmacyinventoryPrice(hisTollRecord);
     }
-}
 
+    /**
+     * @Description 项目退费
+     * @Params: [hisTollHospiModel]
+     * @Author: dingli
+     * @Return: core.message.Message
+     * @Date 2019/9/25
+     * @Time 10:21
+     **/
+    @Override
+    @Transactional(readOnly = false)
+    public Message hisProjectSave(HisRefundProjectInfo hisRefundProjectInfo) throws Exception {
+        if (EmptyUtil.Companion.isNullOrEmpty(hisRefundProjectInfo.getRefundSumProce()) || EmptyUtil.Companion.isNullOrEmpty(hisRefundProjectInfo.getVoucher()) ||
+                EmptyUtil.Companion.isNullOrEmpty(hisRefundProjectInfo.getTollRecordNumber())) {
+            return MessageUtil.createMessage(false, "退款失败!");
+        } else {
+            HisRefundProjectInfo projectInfo = hisRefundProjectInfoMapper.queryHisRefundProjectInfo(hisRefundProjectInfo);
+            if (!EmptyUtil.Companion.isNullOrEmpty(projectInfo)) {
+                return MessageUtil.createMessage(false, "退款失败! 该项目已经退款成功 ");
+            }
+            HisRecordProject hisRecordProject = new HisRecordProject();
+            hisRecordProject.setTollRecordNumber(hisRefundProjectInfo.getTollRecordNumber());
+            List<HisRecordProject> hisRecordProjectList = hisRecordProjectMapper.pricelistsBytollRecordNumber(hisRecordProject);
+            BigDecimal sumPrice = new BigDecimal("0");
+            for (int i = 0; i < hisRecordProjectList.size(); i++) {
+                sumPrice = sumPrice.add(hisRecordProjectList.get(i).getProjectSumPrice());
+            }
+            if (sumPrice.compareTo(hisRefundProjectInfo.getRefundSumProce()) != 0) {
+                return MessageUtil.createMessage(false, "退款金额不一致");
+            }
+            String createdate = new SimpleDateFormat("yyyyMMdd").format(new Date());
+            int count = hisTollRecordMapper.selectNumbCount(createdate) + 1;
+            //编号
+            HisTollRecord hisTollRecord1 = hisTollRecordMapper.selectByNumber(hisRefundProjectInfo.getTollRecordNumber());//
+            String number = createdate + String.format("%05d", count);
+            number = "HTR" + number;
+            HisTollRecord hisTollRecord = new HisTollRecord();
+            hisTollRecord.setMoney(new BigDecimal(0));
+            hisTollRecord.setActualCharge(new BigDecimal(0));
+            hisTollRecord.setRecoverTheFee(hisRefundProjectInfo.getRefundSumProce());
+            hisTollRecord.setAttenchType(8);//退项目
+            hisTollRecord.setMedicalRecordId(hisTollRecord1.getMedicalRecordId());
+            hisTollRecord.setIsSettlement(2);//未结算
+            hisTollRecord.setNumber(number);//交易流水号
+            hisTollRecord.setType(2);
+            hisTollRecordMapper.insert(hisTollRecord);
+            //明细
+            // List<HisRecordProject> pricelistsBytollRecordNumber = hisRecordProjectService.pricelistsBytollRecordNumber(hisRecordProject);
+            HisRefundProject hisRefundProject = new HisRefundProject();
+            hisRefundProject.setTollRecordNumber(hisRefundProjectInfo.getTollRecordNumber());
+            List<HisRefundProject> refundProjectList = hisRefundProjectMapper.queryHisRefundProject(hisRefundProject);
+            for (HisRefundProject h : refundProjectList) {
+                HisRecordProject hisRecordProject1 = hisRecordProjectService.selectByPrimaryKey(h.getRecordProjectId());
+                HisTollDetails hisTollDetails = new HisTollDetails();
+                hisTollDetails.setIsSettlement(2);
+                hisTollDetails.setName(hisRecordProject1.getName());
+                hisTollDetails.setTargetId(h.getId());
+                hisTollDetails.setMoney(hisRecordProject1.getPrice());
+                hisTollDetails.setType(5);//项目退费
+                hisTollDetails.setTollRecordId(hisTollRecord.getId());
+                hisTollDetailsService.insert(hisTollDetails);
+                h.setIsBack(1);  //将退项目设置为已退
+                hisRefundProjectMapper.updateByHisRefundProjectListBack(refundProjectList);
+            }
+            return MessageUtil.createMessage(true, "退费成功！" + number);
+        }
+    }
+}

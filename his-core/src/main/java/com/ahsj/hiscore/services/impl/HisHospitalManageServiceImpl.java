@@ -437,14 +437,19 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
                     HisTollDetails hisTollDetails = new HisTollDetails();
                     HisTollRecord hisTollRecord = new HisTollRecord();
                     hisRecordProject.setRecordId(hisMedicalRecord.getId());
+                    //一级护理
                     if (hisHospitalManage1.getCareLevel()==1){
                         number = "120100003（ACAC001）";
-                    }else if (hisHospitalManage1.getCareLevel()==2){
+                    }else if (hisHospitalManage1.getCareLevel()==2){   //二级护理
                         number = "120100004（ACAB001）";
-                    }else if (hisHospitalManage1.getCareLevel()==3){
+                    }else if (hisHospitalManage1.getCareLevel()==3){   //三级护理
                         number = "120100005（ACAA001）";
-                    }else if (hisHospitalManage1.getCareLevel()==5){
+                    }else if (hisHospitalManage1.getCareLevel()==4){  //四级护理
+                        number = "120100014（ACNZ001）";
+                    }else if (hisHospitalManage1.getCareLevel()==5){  //特级监护
                         number = "120100002（ACAD001）";
+                    }else if (hisHospitalManage1.getCareLevel()==6){  //重症监护
+                        number = "120100015（ACNZ002）";
                     }
                     HisProject hisProject =hisProjectMapper.queryHisProjectByNumber(number);
                     hisHospitalManage1.setRestDeposit(h.getRestDeposit().subtract(hisProject.getPrice()));
