@@ -203,15 +203,22 @@ public class NurseStationController extends BaseMedicineController {
      * @Time 13:28
      */
     @RequestMapping(value = "reminder/index.ahsj")
-    public ModelAndView reminder(String token, String MedicalRecordId, BigDecimal money, BigDecimal restDeposit, String patientName) throws Exception {
+    public ModelAndView reminder(String token, String MedicalRecordId, BigDecimal money, BigDecimal restDeposit, String patientName ,BigDecimal depositWarning) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/nursestation/reminder");
         modelAndView.addObject("title", "打印催款单");
         modelAndView.addObject("token", token);
         modelAndView.addObject("MedicalRecordId", MedicalRecordId);//住院编号
         modelAndView.addObject("money", money);//费用
-        modelAndView.addObject("restDeposit", restDeposit);//余额
+        modelAndView.addObject("restDeposit", restDeposit.abs());//余额
         modelAndView.addObject("patientName", patientName);//名字
-        modelAndView.addObject("shouldPay", money.subtract(restDeposit).doubleValue());//应缴费用
+        modelAndView.addObject("depositWarning", depositWarning);//最高欠款额度
+
+        //余额减收费的钱
+        BigDecimal a = restDeposit.subtract(money);
+        //考虑到欠款额度--------应该缴费的钱
+        BigDecimal b = a.add(depositWarning);
+
+        modelAndView.addObject("shouldPay", b.abs());//应缴费用
         modelAndView.addObject("operator", getUserName());//操作员
 
         String createdate = new SimpleDateFormat("yyyyMMddhhmmsszzz").format(new Date());//当前时间年月日

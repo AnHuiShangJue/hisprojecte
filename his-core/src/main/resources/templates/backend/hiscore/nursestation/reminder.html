@@ -45,10 +45,10 @@
 
     <div class="row valign-wrapper">
         <div class="col s10 m10 l10 offset-l1 offset-m1 offset-s1">
-            <p>剩余押金为<span th:text="${restDeposit}"></span>元，最低缴纳押金为<span th:text="${money}"></span>元</p>
-            <p>押金不足，请你速续交住院押金，请缴纳不少于 <span th:text="${shouldPay}"></span>元。</p>
-            <p>The remaining deposit is<span th:text="${restDeposit}"></span>Yuan ， Minimum deposit is<span th:text="${money}"></span>Yuan</p>
-            <p>The deposit is insufficient. Please continue to pay the hospital deposit. Please pay no less than <span th:text="${shouldPay}"></span>Yuan</p>
+            <p>当前欠款额度为<span th:text="${restDeposit}"></span>美元，最高欠款额度为<span th:text="${depositWarning}"></span>美元。</p>项目收费<span th:text="${money}"></span>美元。
+            <p>请您前往收费台交付费用，请缴纳至少 <span th:text="${shouldPay}"></span>美元。</p>
+            <p>The remaining deposit is $<span th:text="${restDeposit}"></span>， The maximum debt limit is $ <span th:text="${money}"></span></p>Project charge $<span th:text="${money}"></span>.
+            <p>TPlease go to the toll desk to pay. Please pay at least $ <span th:text="${shouldPay}"></span></p>
 <!--            <p>大写人民币：<span id="rmb"></span></p>-->
 <!--            <p>រេមីនមីន<span id="translationRmb"></span></p>-->
         </div>
