@@ -94,6 +94,10 @@ public class HisMedicalOrderDetail extends BaseEntity {
 
     private Long correspondId;
 
+    private Integer isInfusionList;
+
+    private String infusionNumber;
+
 
 
     //以下字段是查询出来为显示要求所声明的，在数据库本表中并非实际存在
@@ -484,5 +488,21 @@ public class HisMedicalOrderDetail extends BaseEntity {
 
     public void setCorrespondId(Long correspondId) {
         this.correspondId = correspondId;
+    }
+
+    public Integer getIsInfusionList() {
+        return isInfusionList;
+    }
+
+    public void setIsInfusionList(Integer isInfusionList) {
+        this.isInfusionList = isInfusionList;
+    }
+
+    public String getInfusionNumber() {
+        return infusionNumber;
+    }
+
+    public void setInfusionNumber(String infusionNumber) {
+        this.infusionNumber = infusionNumber;
     }
 }
