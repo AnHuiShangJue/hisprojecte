@@ -230,7 +230,7 @@
                                 "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"编辑(edit)\" onclick='edit(" + row.id + ");'><i class='material-icons'>edit</i></a>"+
                                 "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看病人病历信息(View patient medical record information)\" onclick='details(\"" + row.number + "\");'><i class='material-icons'>visibility</i></a>"+
                                 "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"护理记录(Nursing record)\" onclick='nuserrecord(\"" + row.number + "\");'><i class='material-icons'>assignment</i></a>"+
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"输液单(Infusion list)\" onclick=\"infusion('"+ row.number +"',"+row.patientId+");\"> <i class='material-icons'>healing</i></a>"+
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"输液单(Infusion list)\" onclick=\"infusion('"+ row.medicalNumber +"',"+row.patientId+");\"> <i class='material-icons'>healing</i></a>"+
                                 "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看病人收费信息(View patient billing information)\" onclick=\"hosDetail('" + row.number + "'," + row.depositWarning + ");\"><i class='material-icons'>attach_money</i></a>";
                             // 返回自定义内容
                             return rtnBtn;
