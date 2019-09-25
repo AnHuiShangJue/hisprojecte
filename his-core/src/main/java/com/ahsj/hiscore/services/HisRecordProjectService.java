@@ -250,4 +250,14 @@ public interface HisRecordProjectService {
      * @Time 14:26
      **/
     PageBean<HisRecordProject> selectByMedicalNumber(PageBean<HisRecordProject> pageBean) throws Exception;
+
+    /**
+     *@Description
+     *@Params [hisRecordProject]
+     *@return void
+     *@Author zhushixiang
+     *@Date 2019-09-25
+     *@Time 10:55
+    **/
+    void update(HisRecordProject hisRecordProject);
 }

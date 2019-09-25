@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import utils.EmptyUtil;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -147,12 +148,14 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
 
             //更新医嘱（）
         } else {
-            //设置为2即不可编辑了
             if (hisMedicalOrderDetail.getMedicalOrderType() == 2) {
                 HisPharmacyDetail hisPharmacyDetail = hisPharmacyDetailService.selectById(hisMedicalOrderDetail.getTargetId());
                 //保存开药明细
                 HisMedicalOrder hisMedicalOrder = hisMedicalOrderService.selectByNumber(hisMedicalOrderDetail.getNumber());
                 HisMedicationDetails hisMedicationDetails = new HisMedicationDetails();
+                if(!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getCorrespondId())){
+                    hisMedicationDetails = hisMedicationDetailsService.selectById(hisMedicalOrderDetail.getCorrespondId());
+                }
                 hisMedicationDetails.setMedicationId(hisMedicalOrderDetail.getTargetId());
                 if(EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getTotalAmount())) {
                     hisMedicationDetails.setCount(1);
@@ -172,12 +175,20 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
                 hisMedicationDetails.setIsBack(2);
                 hisMedicationDetails.setIsDel(2);
                 hisMedicationDetails.setDescription(hisMedicalOrderDetail.getUsages());
-                hisMedicationDetailsService.insert(hisMedicationDetails);
+                if(EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getCorrespondId())) {
+                    hisMedicationDetailsService.insert(hisMedicationDetails);
+                    hisMedicalOrderDetail.setCorrespondId(hisMedicationDetails.getId());
+                }else {
+                    hisMedicationDetailsService.update(hisMedicationDetails);
+                }
             }else if(hisMedicalOrderDetail.getMedicalOrderType() == 3){
                 HisProject hisProject = hisProjectService.selectByPrimaryKey(hisMedicalOrderDetail.getTargetId());
-                //保存开药明细
+                //保存开项目明细
                 HisMedicalOrder hisMedicalOrder = hisMedicalOrderService.selectByNumber(hisMedicalOrderDetail.getNumber());
                 HisRecordProject hisRecordProject = new HisRecordProject();
+                if(!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getCorrespondId())){
+                    hisRecordProject = hisRecordProjectService.selectByPrimaryKey(hisMedicalOrderDetail.getCorrespondId());
+                }
                 if(EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getTotalAmount())) {
                     hisMedicalOrderDetail.setTotalAmount(new BigDecimal("1"));
                     hisRecordProject.setNum(1);
@@ -197,13 +208,18 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
                 hisRecordProject.setIsChecked((short)2);
                 hisRecordProject.setIsPayed((short)2);
                 hisRecordProject.setIsBack(2);
-                hisRecordProjectService.insert(hisRecordProject);
+                if(EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getCorrespondId())) {
+                    hisRecordProjectService.insert(hisRecordProject);
+                    hisMedicalOrderDetail.setCorrespondId(hisRecordProject.getId());
+                }else {
+                    hisRecordProjectService.update(hisRecordProject);
+                }
             }
-            hisMedicalOrderDetail.setIsFirstEdit(2);
+//            hisMedicalOrderDetail.setIsFirstEdit(2);
             if(EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getTotalAmount()))
                 hisMedicalOrderDetail.setTotalAmount(new BigDecimal("1"));
             hisMedicalOrderDetailMapper.updateByPrimaryKeySelective(hisMedicalOrderDetail);
-            return MessageUtil.createMessage(true, "更新成功");
+            return MessageUtil.createMessage(true, "更新成功(update completed)");
 
         }
     }
@@ -367,8 +383,10 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
         hisMedicalOrderDetail.setIsStop(1);
         hisMedicalOrderDetail.setStopDate(new Date());
         //已经停嘱设置不可编辑
-        hisMedicalOrderDetail.setIsFirstEdit(2);
+//        hisMedicalOrderDetail.setIsFirstEdit(2);
         hisMedicalOrderDetail.setStopUserId(loginUser);
+        //停嘱时若药品未付钱直接删除此项明细
+
         hisMedicalOrderDetailMapper.updateByPrimaryKeySelective(hisMedicalOrderDetail);
         return MessageUtil.createMessage(true,"停嘱成功(Stop success)");
     }
@@ -385,5 +403,28 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
     @Transactional(readOnly = true)
     public List<HisMedicalOrderDetail> selectByNumberAscAndNotStop(String number) throws Exception {
         return hisMedicalOrderDetailMapper.selectByNumberAscAndNotStop(number);
+    }
+
+    /**
+     *@Description 医嘱添加药品组合
+     *@Params [ids]
+     *@return core.message.Message
+     *@Author zhushixiang
+     *@Date 2019-09-24
+     *@Time 18:20
+    **/
+    @Override
+    @Transactional(readOnly = false)
+    public Message addCombinationMedicine(Long[] ids) throws Exception {
+        //查询已选医嘱明细
+        List<HisMedicalOrderDetail> alreadySelect = hisMedicalOrderDetailMapper.selectByIds(ids);
+        //设置不能组合非用药医嘱
+    /*    for (HisMedicalOrderDetail hisMedicalOrderDetail : alreadySelect) {
+            if(hisMedicalOrderDetail.getMedicalOrderType()!=2)
+                return MessageUtil.createMessage(false,"不能组合非用药医嘱（Cannot combine non-medical doctors）");
+        }*/
+        //接受排序好后的医嘱明细
+        List<HisMedicalOrderDetail> hisMedicalOrderDetailList = new ArrayList<>();
+        return null;
     }
 }

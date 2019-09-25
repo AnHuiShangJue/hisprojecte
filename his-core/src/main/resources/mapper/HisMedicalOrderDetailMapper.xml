@@ -33,11 +33,12 @@
     <result column="is_first_edit" property="isFirstEdit" jdbcType="INTEGER" />
     <result column="is_stop_proofreading" property="isStopProofreading" jdbcType="INTEGER" />
     <result column="isstopapproved" property="isstopapproved" jdbcType="INTEGER" />
+    <result column="correspond_id" property="correspondId" jdbcType="BIGINT" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, number, name, is_skin_test, specification, unit, usages, dosage, intervals, proofreading_nurse_id,
     approved_nurse_id, stop_date, stop_user_id, stop_prfing_nurse_id, stop_apd_nurse_id,
-    total_amount, create_user_id, create_date, update_user_id, update_date,order_num,is_stop,is_proofreading,is_approved,medical_order_type,content,start_time,target_id,is_first_edit,is_stop_proofreading,isstopapproved
+    total_amount, create_user_id, create_date, update_user_id, update_date,order_num,is_stop,is_proofreading,is_approved,medical_order_type,content,start_time,target_id,is_first_edit,is_stop_proofreading,isstopapproved,correspond_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
@@ -56,7 +57,8 @@
                                           proofreading_nurse_id, approved_nurse_id, stop_date,
                                           stop_user_id, stop_prfing_nurse_id, stop_apd_nurse_id,
                                           total_amount, create_user_id, create_date,
-                                          update_user_id, update_date,order_num,is_stop,is_proofreading,is_approved,medical_order_type,content,start_time,target_id,is_first_edit,is_stop_proofreading,isstopapproved)
+                                          update_user_id, update_date,order_num,is_stop,is_proofreading,is_approved,medical_order_type,content,start_time,target_id,is_first_edit,is_stop_proofreading,isstopapproved
+                                          ,correspond_id)
     values (#{id,jdbcType=BIGINT}, #{number,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
             #{isSkinTest,jdbcType=INTEGER}, #{specification,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR},
             #{usages,jdbcType=VARCHAR}, #{dosage,jdbcType=VARCHAR}, #{intervals,jdbcType=INTEGER},
@@ -64,7 +66,7 @@
             #{stopUserId,jdbcType=BIGINT}, #{stopPrfingNurseId,jdbcType=BIGINT}, #{stopApdNurseId,jdbcType=BIGINT},
             #{totalAmount,jdbcType=DECIMAL}, #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP},
             #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, #{orderNum,jdbcType=INTEGER},#{isStop,jdbcType=INTEGER},#{isProofreading,jdbcType=INTEGER},#{isApproved,jdbcType=INTEGER},#{medicalOrderType,jdbcType=INTEGER}
-             ,#{content,jdbcType=VARCHAR},#{startTime,jdbcType=TIMESTAMP},#{targetId,jdbcType=BIGINT},#{isFirstEdit,jdbcType=INTEGER},#{isStopProofreading,jdbcType=INTEGER},#{isstopapproved,jdbcType=INTEGER})
+             ,#{content,jdbcType=VARCHAR},#{startTime,jdbcType=TIMESTAMP},#{targetId,jdbcType=BIGINT},#{isFirstEdit,jdbcType=INTEGER},#{isStopProofreading,jdbcType=INTEGER},#{isstopapproved,jdbcType=INTEGER},#{correspondId,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisMedicalOrderDetail" >
     insert into his_medical_order_detail
@@ -162,6 +164,9 @@
       <if test="isstopapproved != null" >
         isstopapproved,
       </if>
+      <if test="correspondId != null" >
+        correspond_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -256,6 +261,9 @@
       </if>
       <if test="isstopapproved != null" >
         #{isstopapproved,jdbcType=INTEGER},
+      </if>
+      <if test="correspondId != null" >
+        #{correspondId,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -352,6 +360,9 @@
       <if test="isstopapproved != null" >
         isstopapproved = #{isstopapproved,jdbcType=INTEGER},
       </if>
+      <if test="correspondId != null" >
+        correspond_id = #{correspondId,jdbcType=BIGINT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -386,7 +397,8 @@
         target_id = #{targetId,jdbcType=BIGINT},
         is_first_edit = #{isFirstEdit,jdbcType=INTEGER},
         is_stop_proofreading = #{isStopProofreading,jdbcType=INTEGER},
-        isstopapproved = #{isstopapproved,jdbcType=INTEGER}
+        isstopapproved = #{isstopapproved,jdbcType=INTEGER},
+        correspond_id = #{correspondId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 
@@ -463,7 +475,7 @@
 
     insert into his_medical_order_detail(id, number, name, is_skin_test, specification, unit, usages, dosage, intervals, proofreading_nurse_id,
     approved_nurse_id, stop_date, stop_user_id, stop_prfing_nurse_id, stop_apd_nurse_id,
-    total_amount, create_user_id, create_date, update_user_id, update_date,order_num,is_stop,is_proofreading,is_approved, medical_order_type,content,start_time,target_id,is_first_edit,is_stop_proofreading, isstopapproved  )
+    total_amount, create_user_id, create_date, update_user_id, update_date,order_num,is_stop,is_proofreading,is_approved, medical_order_type,content,start_time,target_id,is_first_edit,is_stop_proofreading, isstopapproved,correspond_id})
     values
     <foreach collection="list" item="item" index="index" separator="," >
       (#{item.id,jdbcType=BIGINT}, #{item.number,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR},
@@ -474,7 +486,17 @@
       #{item.totalAmount,jdbcType=DECIMAL}, #{item.createUserId,jdbcType=BIGINT}, #{item.createDate,jdbcType=TIMESTAMP},
       #{item.updateUserId,jdbcType=BIGINT}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.orderNum,jdbcType=INTEGER},#{item.isStop,jdbcType=INTEGER},#{item.isProofreading,jdbcType=INTEGER},#{item.isApproved,jdbcType=INTEGER}
       ,#{item.medicalOrderType,jdbcType=INTEGER},#{item.content,jdbcType=VARCHAR},#{item.startTime,jdbcType=TIMESTAMP},#{item.targetId,jdbcType=BIGINT},#{item.isFirstEdit,jdbcType=INTEGER},#{item.isStopProofreading,jdbcType=INTEGER}
-      ,#{item.isstopapproved,jdbcType=INTEGER})
+      ,#{item.isstopapproved,jdbcType=INTEGER},#{item.correspondId,jdbcType=BIGINT)
     </foreach>
   </insert>
+
+  <select id="selectByIds" resultMap="BaseResultMap">
+    select his_medical_order_detail.*
+      from his_medical_order_detail
+        where id in
+    <foreach collection="ids" item="id" separator="," open="(" close=")">
+      #{id}
+    </foreach>
+  </select>
+
 </mapper>

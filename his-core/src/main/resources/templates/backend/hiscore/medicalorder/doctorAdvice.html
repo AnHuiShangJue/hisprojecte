@@ -82,7 +82,7 @@
                     <th style="border:1px solid black;width: 80px;">开始时间(The start time)</th>
                     <th style="border:1px solid black;width: 200px;">医嘱内容(Medical content)</th>
                     <th style="border:1px solid black;">医师签名(Physician signature)</th>
-                    <th style="border:1px solid black;width: 80px;">时间(Time)</th>
+                    <th style="border:1px solid black;width: 80px;">执行时间(execution time)</th>
                     <th style="border:1px solid black;">执行人签名(Signature of executor)</th>
                     <th style="border:1px solid black;">核对人签名(Check signature)</th>
                     <th style="border:1px solid black;width: 80px;">停止时间(Stop time)</th>
@@ -91,9 +91,10 @@
                 </tr>
 
                 <tr th:each="c:${hisMedicalOrderDetailList}" >
-                    <td th:text="${c.startTime}" style="border:1px solid black;"></td>
+                    <td th:text="${#dates.format(c.startTime, 'yyyy-MM-dd HH:mm:ss')}" style="border:1px solid black;" th:if="${c.startTime} ne null"></td>
+                    <td th:text="${#dates.format(new java.util.Date().getTime(), 'yyyy-MM-dd HH:mm:ss')}" style="border:1px solid black;" th:if="${c.startTime} eq null"></td>
                     <td th:text="${c.name}" style="border:1px solid black;"></td>
-                    <td style="border:1px solid black;"></td>
+                    <td style="border:1px solid black;" ></td>
                     <td style="border:1px solid black;"></td>
 <!--                    <td th:text="${c.orderNum}"></td>-->
                     <td style="border:1px solid black;"></td>

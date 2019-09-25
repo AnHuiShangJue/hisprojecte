@@ -1,6 +1,7 @@
 package com.ahsj.hiscore.services;
 
 import com.ahsj.hiscore.common.utils.ZipUtils;
+import com.ahsj.hiscore.entity.HisMedicalOrderDetail;
 import com.ahsj.hiscore.entity.HisMedicationDetails;
 import core.entity.PageBean;
 import core.message.Message;
@@ -171,4 +172,24 @@ public interface HisMedicationDetailsService {
      *@Time 19:01
     **/
     Message insert(HisMedicationDetails hisMedicationDetails)throws Exception;
+
+    /**
+     *@Description
+     *@Params [correspondId]
+     *@return com.ahsj.hiscore.entity.HisMedicationDetails
+     *@Author zhushixiang
+     *@Date 2019-09-25
+     *@Time 10:50
+    **/
+    HisMedicationDetails selectById(Long correspondId);
+
+    /**
+     *@Description
+     *@Params [hisMedicalOrderDetail]
+     *@return void
+     *@Author zhushixiang
+     *@Date 2019-09-25
+     *@Time 10:52
+    **/
+    void update(HisMedicationDetails hisMedicationDetails );
 }

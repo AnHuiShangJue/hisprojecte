@@ -455,6 +455,12 @@ public class HisRecordProjectServiceImpl implements HisRecordProjectService {
         pageBean.setData(CodeHelper.getInstance().setCodeValue(hisRecordProjects));
         return pageBean;
     }
+
+    @Override
+    @Transactional(readOnly = false)
+    public void update(HisRecordProject hisRecordProject) {
+        hisRecordProjectMapper.updateByPrimaryKeySelective(hisRecordProject);
+    }
 }
 
     

@@ -6,10 +6,7 @@ import com.ahsj.hiscore.common.utils.ZipUtils;
 import com.ahsj.hiscore.controller.BaseLoginUser;
 import com.ahsj.hiscore.core.CodeHelper;
 import com.ahsj.hiscore.dao.HisMedicationDetailsMapper;
-import com.ahsj.hiscore.entity.HisMedicationDetails;
-import com.ahsj.hiscore.entity.HisPharmacyDetail;
-import com.ahsj.hiscore.entity.HisProject;
-import com.ahsj.hiscore.entity.Translate;
+import com.ahsj.hiscore.entity.*;
 import com.ahsj.hiscore.entity.TranslateModel.HisMedicationDetailsTranslate;
 import com.ahsj.hiscore.entity.TranslateModel.HisProjectTranslate;
 import com.ahsj.hiscore.entity.TranslateModel.TranslateDelete;
@@ -443,5 +440,25 @@ public class HisMedicationDetailsServicelmpl implements HisMedicationDetailsServ
     public Message insert(HisMedicationDetails hisMedicationDetails) throws Exception {
          hisMedicationDetailsMapper.insert(hisMedicationDetails);
          return MessageUtil.createMessage(true,"新增用药明细成功");
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public HisMedicationDetails selectById(Long correspondId) {
+        return hisMedicationDetailsMapper.selectByPrimaryKey(correspondId);
+    }
+
+    /**
+     *@Description
+     *@Params [hisMedicalOrderDetail]
+     *@return void
+     *@Author zhushixiang
+     *@Date 2019-09-25
+     *@Time 10:52
+    **/
+    @Override
+    @Transactional(readOnly = false)
+    public void update(HisMedicationDetails hisMedicationDetails) {
+        hisMedicationDetailsMapper.updateByPrimaryKeySelective(hisMedicationDetails);
     }
 }

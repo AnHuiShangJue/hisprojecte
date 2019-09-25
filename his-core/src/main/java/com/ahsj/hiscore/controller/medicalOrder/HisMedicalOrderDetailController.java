@@ -338,7 +338,7 @@ public class HisMedicalOrderDetailController extends BaseController {
     }
 
     /**
-     *@Description
+     *@Description 跳转打印医嘱页面
      *@Params [number, token]
      *@return org.springframework.web.servlet.ModelAndView
      *@Author zhushixiang
@@ -347,10 +347,14 @@ public class HisMedicalOrderDetailController extends BaseController {
      **/
     @RequestMapping("printDoctorAdvice/index.ahsj")
     ModelAndView printDoctorAdvice(String number, String token,String hosptalregistNumber) throws Exception {
-        ModelAndView modelAndView = new ModelAndView("backend/hiscore/medicalorder/doctorAdvice");
+        ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("title", "打印凭证预览");
         modelAndView.addObject("token", token);
         HisMedicalOrder hisMedicalOrder = hisMedicalOrderService.selectByNumber(number);
+        if(hisMedicalOrder.getType() == 1)
+            modelAndView.setViewName("backend/hiscore/medicalorder/doctorAdvice");
+        else if(hisMedicalOrder.getType() == 2)
+            modelAndView.setViewName("backend/hiscore/medicalorder/temporaryOrders");
         HisHospitalManage hisHospitalManage = hisHospitalManageService.selectByHospNumber(hosptalregistNumber);
         if(hisHospitalManage.getSex()==1)
             hisHospitalManage.setSexName("男");
@@ -365,6 +369,8 @@ public class HisMedicalOrderDetailController extends BaseController {
         List<HisMedicalOrderDetail> hisMedicalOrderDetailList = CodeHelper.getInstance().setCodeValue(hisMedicalOrderDetailService.selectByNumberAscAndNotStop(number));
         if(EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetailList)||hisMedicalOrderDetailList.size()!=0) {
             for (HisMedicalOrderDetail hisMedicalOrderDetail : hisMedicalOrderDetailList) {
+                //记录拼接医嘱内容
+                StringBuffer stringBuffer = new StringBuffer(hisMedicalOrderDetail.getName());
                 if (EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getAnName())) {
                     hisMedicalOrderDetail.setAnName("");
                 }
@@ -380,11 +386,42 @@ public class HisMedicalOrderDetailController extends BaseController {
                 if (EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getStopUserName())) {
                     hisMedicalOrderDetail.setStopUserName("");
                 }
+                if (EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getStopUserName())) {
+                    hisMedicalOrderDetail.setStopUserName("");
+                }
+                if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getUsages())) {
+                    stringBuffer.append("  "+hisMedicalOrderDetail.getUsages());
+                }
+                if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getIntervalsName())) {
+                    stringBuffer.append("  "+hisMedicalOrderDetail.getIntervalsName());
+                }
+                if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getTotalAmount())) {
+                    stringBuffer.append("  "+hisMedicalOrderDetail.getTotalAmount());
+                }
+                hisMedicalOrderDetail.setName(stringBuffer.toString());
             }
         }
         modelAndView.addObject("hisMedicalOrderDetailList",hisMedicalOrderDetailList);
         return modelAndView;
     }
 
+    /**
+     *@Description 医嘱添加药品组合
+     *@Params [model, request, id]
+     *@return core.message.Message
+     *@Author zhushixiang
+     *@Date 2019-09-24
+     *@Time 18:18
+    **/
+    @RequestMapping(value = "addCombinationMedicine.ahsj", method = {RequestMethod.POST})
+    @ResponseBody
+    //传来的ID为医嘱明细ID
+    public Message addCombinationMedicine (Map<String, Object> model, HttpServletRequest request
+            , @RequestParam(value="ids", required=true) Long[] ids
+    ) throws Exception {
+        if(null != request.getParameter("id")){
+            return  hisMedicalOrderDetailService.addCombinationMedicine(ids);
+        }else  return MessageUtil.createMessage(false,"参数异常(Abnormal parameter)");
+    }
 
 }

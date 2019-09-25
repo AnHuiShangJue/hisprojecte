@@ -109,4 +109,14 @@ public interface HisMedicalOrderDetailService {
      *@Time 17:54
     **/
     List<HisMedicalOrderDetail> selectByNumberAscAndNotStop(String number)throws Exception;
+
+    /**
+     *@Description 医嘱添加药品组合
+     *@Params [ids]
+     *@return core.message.Message
+     *@Author zhushixiang
+     *@Date 2019-09-25
+     *@Time 9:22
+    **/
+    Message addCombinationMedicine(Long[] ids)throws Exception;
 }

@@ -92,6 +92,8 @@ public class HisMedicalOrderDetail extends BaseEntity {
 
     private Integer isstopapproved;
 
+    private Long correspondId;
+
 
 
     //以下字段是查询出来为显示要求所声明的，在数据库本表中并非实际存在
@@ -474,5 +476,13 @@ public class HisMedicalOrderDetail extends BaseEntity {
 
     public void setIsstopapproved(Integer isstopapproved) {
         this.isstopapproved = isstopapproved;
+    }
+
+    public Long getCorrespondId() {
+        return correspondId;
+    }
+
+    public void setCorrespondId(Long correspondId) {
+        this.correspondId = correspondId;
     }
 }

@@ -80,15 +80,13 @@
                                        class="btn waves-effect waves-light  offset-s1 offset-l1 offset-xl1 offset-m1"><i
                                             class="material-icons white-text tooltipped" data-position="bottom"
                                             data-delay="50" data-tooltip="选择模板（Select template）">local_hospital</i></a>
-                                    <!--<a id="addMedicine"
-                                       class="btn waves-effect waves-light  offset-s1 offset-l1 offset-xl1 offset-m1"><i
-                                            class="material-icons white-text tooltipped" data-position="bottom"
-                                            data-delay="50" data-tooltip="添加药品医嘱(Add a drug order)">local_hospital</i></a>
-                                    <a id="addProject"
-                                       class="btn waves-effect waves-light  offset-s1 offset-l1 offset-xl1 offset-m1"><i
-                                            class="material-icons white-text tooltipped" data-position="bottom"
-                                            data-delay="50" data-tooltip="添加项目医嘱(Add project order)">local_hospital</i></a>-->
                                 </div>
+                            </div>
+                            <!--设置医嘱中用药医嘱为一组（病人未出院才可设置）-->
+                            <div class="row" th:if="${isDischarged} eq 1">
+                                <a id="combinationMedicine" class="btn waves-effect waves-light "><i
+                                        class="material-icons  white-text tooltipped " data-position="bottom"
+                                        data-delay="50" data-tooltip="组合药品（Combination medicine）">settings_ethernet</i></a>
                             </div>
                             <!--Form Advance-->
                             <div class="row">
@@ -250,11 +248,12 @@
                                 rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='edit(" + row.id + ",\"" + row.number + "\");'> <i class='material-icons'>edit</i></a>" +
                                     // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"校对\" onclick=\"proofreading(" + row.id + ",'" + row.number + "');\"> <i class='material-icons'>playlist_add_check</i></a>" +
                                     // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"核准\" onclick=\"isApproved(" + row.id + ",'" + row.number + "');\"> <i class='material-icons'>done</i></a>" +
-                                    "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick='deleteInit(" + row.id + ");'> <i class='material-icons'>delete</i></a>"+
-                                    "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"停嘱（Stop）\" onclick='stop(" + row.id + ");'> <i class='material-icons'>do_not_disturb</i></a>";
+                                    "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick='deleteInit(" + row.id + ");'> <i class='material-icons'>delete</i></a>";
+
 
                                 // 返回自定义内容
                             }
+                            rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"停嘱（Stop）\" onclick='stop(" + row.id + ");'> <i class='material-icons'>do_not_disturb</i></a>";
                             return rtnBtn;
                         }
                     }
@@ -536,6 +535,47 @@
             deleteInit(ids.join(','));
             grid.search();
         });
+
+        //组合用药医嘱
+        $("#combinationMedicine").click(function () {
+            var ids = grid.getSelectedRows();
+            if (ids.length == 0 ||ids.length==1) {
+                dialog.warn("请至少选择两条数据(Please select at least two data)");
+                return;
+            }else {
+                dialog.confirm('确定添加该药品组合?(Make sure to add the drug combination?)', function (index, layero) {
+
+                    $.ahsjajax(CTX + "/api/medicalOrderDetail/addCombinationMedicine.ahsj?=" + TOKEN,
+                        {
+                            "ids": ids.join(',')
+                            // "name":name
+                        },
+                        function (msg) {
+                            if (msg.success) {
+                                M.toast({
+                                    html: msg.message, completeCallback: function () {
+                                    }
+                                });
+                                grid.search();
+                            } else {
+                                M.toast({
+                                    html: msg.message, completeCallback: function () {
+                                    }
+                                });
+                            }
+                        },
+                        function (data) {
+                            M.toast({
+                                html: "网络异常", completeCallback: function () {
+                                }
+                            });
+                        });
+                });
+
+            }
+        });
+
+
         //搜索按钮
         $('#searchBtn').click(function () {
             grid.search();

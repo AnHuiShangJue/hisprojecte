@@ -525,7 +525,7 @@
     <!--根据就诊编号查看用药明细-->
     <select id="listForMedicationDetailsByNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
     select distinct a.drugs_numb,a.drugs_name,a.drugs_spec,a.count,a.total_price,a.is_pay,a.is_out,a.id,z.surplus as surplus,
-           z.validity_period as validityPeriod,z.id as mediEnterId,z.medical_record_id as recordNumber,d.number as tollNumber
+           z.validity_period as validityPeriod,z.id as mediEnterId,z.medical_record_id as recordNumber,d.number as tollNumber,a.description as description
     FROM his_medication_details as a
            left join his_medical_record as b on a.medical_record_id = b.id
            left join(

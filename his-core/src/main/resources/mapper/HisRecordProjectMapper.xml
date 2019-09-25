@@ -52,7 +52,7 @@
     delete from his_record_project
     where id = #{id,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisRecordProject">
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisRecordProject" useGeneratedKeys="true" keyProperty="id">
     insert into his_record_project (id, record_id, create_date, 
       create_user_id, update_date, update_user_id, 
       name, description, type, 

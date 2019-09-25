@@ -70,4 +70,14 @@ public interface HisMedicalOrderDetailMapper extends BaseMapper<HisMedicalOrderD
      *@Time 18:02
     **/
     List<HisMedicalOrderDetail> selectByNumberAscAndNotStop(String number);
+
+    /**
+     *@Description 根据ids批量查找
+     *@Params [ids]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisMedicalOrderDetail>
+     *@Author zhushixiang
+     *@Date 2019-09-24
+     *@Time 18:32
+    **/
+    List<HisMedicalOrderDetail> selectByIds(Long[] ids);
 }
