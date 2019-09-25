@@ -429,21 +429,23 @@ public class HisMedicalOrderDetailController extends BaseController {
                 //设置医嘱单符号
                     //从是医嘱单的开始   记录编号若编号不一致重新开始一次
                     //标记输液单起始符号 「代表开始  \代表其中包含药品 」代表结束
-                if(hisMedicalOrderDetail.getIsInfusionList() == 1){
-                    if(EmptyUtil.Companion.isNullOrEmpty(infusionNumber))
-                        infusionNumber = hisMedicalOrderDetail.getInfusionNumber();
-                    List<HisInfusion> hisInfusionList = hisInfusionService.selectByNumber(infusionNumber);
-                    if(infusionNumber.equals(hisMedicalOrderDetail.getInfusionNumber())){
-                        if(flag == 0){
-                            stringBuffer.append("  「");
-                            flag++;
-                        }else {
-                            if(flag+1 == hisInfusionList.size()){
-                                stringBuffer.append("  」");
-                                flag=0;
-                            }else {
-                                stringBuffer.append("  |");
+                if(!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getIsInfusionList())) {
+                    if (hisMedicalOrderDetail.getIsInfusionList() == 1) {
+                        if (EmptyUtil.Companion.isNullOrEmpty(infusionNumber))
+                            infusionNumber = hisMedicalOrderDetail.getInfusionNumber();
+                        List<HisInfusion> hisInfusionList = hisInfusionService.selectByNumber(infusionNumber);
+                        if (infusionNumber.equals(hisMedicalOrderDetail.getInfusionNumber())) {
+                            if (flag == 0) {
+                                stringBuffer.append("  「");
                                 flag++;
+                            } else {
+                                if (flag + 1 == hisInfusionList.size()) {
+                                    stringBuffer.append("  」");
+                                    flag = 0;
+                                } else {
+                                    stringBuffer.append("  |");
+                                    flag++;
+                                }
                             }
                         }
                     }
