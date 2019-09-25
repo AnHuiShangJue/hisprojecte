@@ -35,9 +35,8 @@
             </div>
         </div>
         <div id="validation" class="card card card-default scrollspy">
-            <div class="card-content">
-                <h4 class="card-title">挂号信息新增</h4><label style="color:black">Registered information added
-            </label>
+            <div class="card-content" style="height: 600px;">
+                <h4 class="card-title">挂号信息新增</h4><label style="color:black">Registered information added</label>
                 <form class="col s12" id="sendForm" action="#">
                     <div class="row">
                         <div class="row">
@@ -51,8 +50,7 @@
                                 <div class="errorTxt2"></div>
                                 <label for="idcard">身 份 证 号 码<span style="font-size: 12px">(id card)</span></label>
                             </div>
-                        </div>
-                        <div class="row">
+
                             <div class="input-field col s4 l4 xl4">
                                 <select ahsj:select name="registeredCategory" id="registeredCategory" type="code"
                                         typeKey="registered_category"
@@ -61,6 +59,9 @@
                                 <label for="payType">挂 号 类 别<span style="font-size: 12px">(Registered category
 )</span></label>
                             </div>
+                        </div>
+                        <div class="row">
+
                             <div class="input-field col s4 l4 xl4">
                                 <select ahsj:select name="payType" id="payType" type="code" typeKey="pay_type"
                                         value="1">
@@ -68,10 +69,8 @@
                                 <label for="payType">支 付 方 式<span style="font-size: 12px">(payment method
 )</span></label>
                             </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col input-field s3 m3 l3">
+                            <div class="col input-field s4 m4 l4">
                                 <select ahsj:select name="orgId" id="orgId" type="depart" typeKey="2" departKbn="1">
                                 </select>
                                 <label for="orgId">科 室<span style="font-size: 12px">(Department
@@ -87,7 +86,7 @@
                             <div class="input-field col s4 l4 xl4">
                                 <input id="paidAmount" name="paidAmount" type="number" data-error=".errorTxt3">
                                 <div class="errorTxt3"></div>
-                                <label for="paidAmount">实 际 收 款 金 额<span style="font-size: 12px">(Actual collection amount
+                                <label for="paidAmount">实 际 收 款 金 额<span style="font-size: 12px;">(Actual collection amount
 )</span></label>
                             </div>
                             <div class="input-field col s4 l4 xl4">
@@ -97,7 +96,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="input-field col s4 l4 xl4">
+                            <div class="input-field col s12 l12 xl12">
                                 <input id="remark" name="remark" type="text"/>
                                 <label for="remark">备 注<span style="font-size: 12px">(remark)</span></label>
                             </div>
@@ -244,7 +243,7 @@
                 idcard: {
                     required: true,
                     minlength: 6
-                   // maxlength: 18
+                    // maxlength: 18
                 },
                 paidAmount: {
                     required: true,
@@ -280,28 +279,28 @@
             submitHandler: function (form) {
                 dialog.confirm('确定提交吗?', function (index, layero){
                     checkMoney();
-                var queryString = $('#sendForm').serialize();
-                console.log("queryString is" + queryString);
+                    var queryString = $('#sendForm').serialize();
+                    console.log("queryString is" + queryString);
 
-                $.ahsjajax(
-                    CTX + "/api/registered/registered.ahsj",
-                    queryString,
-                    function (msg) {
-                        if (msg.success) {
-                            M.toast({html: msg.message});
-                            parent.grid.search();
-                            dialog.parentclose();
-                            return false;
-                        } else {
-                            M.toast({html: msg.message});
+                    $.ahsjajax(
+                        CTX + "/api/registered/registered.ahsj",
+                        queryString,
+                        function (msg) {
+                            if (msg.success) {
+                                M.toast({html: msg.message});
+                                parent.grid.search();
+                                dialog.parentclose();
+                                return false;
+                            } else {
+                                M.toast({html: msg.message});
+                                return false;
+                            }
+                        },
+                        function () {
+                            M.toast({html: "网络异常"});
                             return false;
                         }
-                    },
-                    function () {
-                        M.toast({html: "网络异常"});
-                        return false;
-                    }
-                );});
+                    );});
             }
 
         });
