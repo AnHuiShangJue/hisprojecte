@@ -315,6 +315,7 @@ public class HisInfusionController extends BaseController {
         modelAndView.addObject("title", "输液单列表");
         modelAndView.addObject("token", token);
         modelAndView.addObject("hospitalManage",hospitalManage);
+        modelAndView.addObject("type",1);
 
         modelAndView.addObject("patientId",patientId);
         return modelAndView;
