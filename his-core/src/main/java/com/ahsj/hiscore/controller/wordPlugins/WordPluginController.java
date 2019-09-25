@@ -203,7 +203,7 @@ public class WordPluginController extends BaseOAController {
         if (file.isEmpty()) {
             return MessageUtil.createMessage(false, "文件是空的");
         }
-        fileName  = fileName.substring(0,fileName.indexOf(",")-1);
+        fileName  = fileName.substring(0,fileName.indexOf(","));
         try {
             byte[] bytes = file.getBytes();
             File tmp = new File(FILE_DIR +hospitalNumber);
@@ -442,7 +442,7 @@ public class WordPluginController extends BaseOAController {
         if (file.isEmpty()) {
             return MessageUtil.createMessage(false, "文件是空的");
         }
-        fileName  = fileName.substring(0,fileName.indexOf(",")-1);
+        fileName  = fileName.substring(0,fileName.indexOf(","));
         try {
             byte[] bytes = file.getBytes();
             File tmp = new File(NUR_FILE_DIR +hospitalNumber);
