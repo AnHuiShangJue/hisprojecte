@@ -19,7 +19,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -79,7 +78,6 @@ public class HisPatientController extends BaseController {
 //    @ApiOperation(value = "新增更新")
     @RequestMapping(value = "saveOrUpdate.ahsj", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    @PostAuthorize("hasAnyAuthority('hiscore.patient.add','hiscore.patient.update')")
     public Message saveOrUpdate(Map<String, Object> model, HisPatientInfo hisPatientInfo) throws Exception {
         HisPatientInfo patientEntity = hisPatientInfo.toPatientEntity();
         return hisPatientService.saveOrUpdate(patientEntity);
@@ -114,7 +112,6 @@ public class HisPatientController extends BaseController {
     // @ApiOperation(value = "删除")
     @ResponseBody
     @RequestMapping(value = "delete.ahsj", method = {RequestMethod.POST})
-    @PostAuthorize("hasAuthority('hiscore.patient.delete')")
     public Message delete(Map<String, Object> model, HttpServletRequest request
             , @RequestParam(value = "ids", required = true) Long[] ids
     ) throws Exception {
@@ -132,7 +129,6 @@ public class HisPatientController extends BaseController {
      * @Time 20:33
      **/
     @RequestMapping("list/index.ahsj")
-    @PostAuthorize("hasAuthority('hiscore.patient')")
     ModelAndView listIndex(String token) {
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/patient/list");
         modelAndView.addObject("title", "病人信息模块");
@@ -149,7 +145,6 @@ public class HisPatientController extends BaseController {
      * @Time 13:27
      **/
     @RequestMapping("update/index.ahsj")
-    @PostAuthorize("hasAuthority('hiscore.patient.update')")
     ModelAndView UpdateIndex(HisPatientInfo hisPatientInfo, String token, Integer isOpreate) {
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/patient/update");
         if (!EmptyUtil.Companion.isNullOrEmpty(hisPatientInfo.getId())) {

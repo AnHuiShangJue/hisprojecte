@@ -132,15 +132,15 @@
                                        class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
                                             class="material-icons white-text tooltipped" data-position="bottom"
                                             data-delay="50" data-tooltip="批量删除">delete</i></a>
-                                    <a sec:authorize="hasAuthority('hiscore.patient.update')" id="setDisableManyBtn"
+                                    <a  id="setDisableManyBtn"
                                        class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
                                             class="material-icons white-text tooltipped" data-position="bottom"
                                             data-delay="50" data-tooltip="批量设置收费停用状态">info</i></a>
-                                    <a sec:authorize="hasAuthority('hiscore.patient.update')" id="setDownloadManyBtn"
+                                    <a  id="setDownloadManyBtn"
                                        class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
                                             class="material-icons white-text tooltipped" data-position="bottom"
                                             data-delay="50" data-tooltip="导出">file_download</i></a>
-                                    <a sec:authorize="hasAuthority('hiscore.patient.update')" id="setUploadManyBtn"
+                                    <a  id="setUploadManyBtn"
                                        class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
                                             class="material-icons white-text tooltipped" data-position="bottom"
                                             data-delay="50" data-tooltip="导入">file_upload</i></a>
@@ -242,7 +242,7 @@
 
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn + "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='edit(" + row.id + ");'> <i class='material-icons'>edit</i></a>" +
-                                "<a sec:authorize=\"hasAuthority('hiscore.patient.update')\" class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"设置停用状态\" onclick='setDisable(" + row.id + ");'><i class='material-icons'>info</i></a>  ";
+                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"设置停用状态\" onclick='setDisable(" + row.id + ");'><i class='material-icons'>info</i></a>  ";
 
                             // 返回自定义内容
                             return rtnBtn;

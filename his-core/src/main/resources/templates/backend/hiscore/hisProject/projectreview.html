@@ -141,8 +141,8 @@
                         "render": function (data, type, row) {
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
-                            rtnBtn = rtnBtn + "<a sec:authorize=\"hasAuthority('hiscore.patient.update')\" class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"审核\" href='javascript:;' onclick='review(" + row.id + "," + row.isBack + "," + row.isPayed + ");'> <i class='material-icons'>edit</i></a>"+
-                                "<a sec:authorize=\"hasAuthority('hiscore.patient.update')\" class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"打印\" href='javascript:;' onclick='print(" + row.id + "," + row.isChecked + ");'> <i class='material-icons'>print</i></a>";
+                            rtnBtn = rtnBtn + "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"审核\" href='javascript:;' onclick='review(" + row.id + "," + row.isBack + "," + row.isPayed + ");'> <i class='material-icons'>edit</i></a>"+
+                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"打印\" href='javascript:;' onclick='print(" + row.id + "," + row.isChecked + ");'> <i class='material-icons'>print</i></a>";
                             // 返回自定义内容
                             return rtnBtn;
                         }

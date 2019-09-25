@@ -167,8 +167,8 @@ public class HisProjectServiceImpl implements HisProjectService {
                     if (projectList.size() == 0) {
                         hisProject.setNumber(1L);*/
                 if(EmptyUtil.Companion.isNullOrEmpty(hisProject.getPinyinCode())){
-                    String toFirstChar = PinyinUtils.ToFirstChar(hisProject.getName());
-                    hisProject.setPinyinCode(toFirstChar);
+                    /*String toFirstChar = PinyinUtils.ToFirstChar(hisProject.getName());
+                    hisProject.setPinyinCode(toFirstChar);*/
                 }
                 hisProjectMapper.insert(hisProject);
                 log.info("--------------------收费项目新增翻译发送开始---------------------------");
@@ -253,7 +253,7 @@ public class HisProjectServiceImpl implements HisProjectService {
                 return MessageUtil.createMessage(false, "修改失败。");
             }
             if (!EmptyUtil.Companion.isNullOrEmpty(project.getNumber())) {
-               /* String toFirstChar = PinyinUtils.ToFirstChar(hisProject.getName());
+                /*String toFirstChar = PinyinUtils.ToFirstChar(hisProject.getName());
                 hisProject.setPinyinCode(toFirstChar);*/
                 hisProjectMapper.updateByPrimaryKeySelective(hisProject);
                 log.info("--------------------收费项目修改翻译发送开始---------------------------");

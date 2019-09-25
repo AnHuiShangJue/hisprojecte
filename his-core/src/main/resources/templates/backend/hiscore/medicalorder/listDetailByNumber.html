@@ -560,6 +560,7 @@
                         },
                         function (msg) {
                             if (msg.success) {
+                                grid.search();
                                 M.toast({
                                     html: msg.message, completeCallback: function () {
                                     }

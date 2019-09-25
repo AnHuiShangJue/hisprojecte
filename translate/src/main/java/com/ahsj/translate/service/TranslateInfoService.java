@@ -54,7 +54,7 @@ public interface TranslateInfoService {
 
     /**
      * @return core.message.Message
-     * @功能说明 批量添加 消息队列  定时任务
+     * @功能说明 批量添加 消息队列 定时任务
      * @Params [TranslateInfoModel]
      * @Author XJP
      * @Date 2019/8/9

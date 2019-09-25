@@ -78,14 +78,14 @@
                             </h4><label style="color:black">Console</label>
                             <div class="row">
                                 <div class="col s3 m3 l3 xl3 offset-xl10">
-                                    <a  sec:authorize="hasAuthority('hiscore.patient.add')" id="createBtn" class="btn waves-effect waves-light red"><i
+                                    <a   id="createBtn" class="btn waves-effect waves-light red"><i
                                             class="material-icons  white-text tooltipped " data-position="bottom"
                                             data-delay="50" data-tooltip="新增">add</i></a>
-                                    <a  sec:authorize="hasAuthority('hiscore.patient.delete')"id="deleteManyBtn"
+                                    <a  id="deleteManyBtn"
                                         class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
                                             class="material-icons white-text tooltipped" data-position="bottom"
                                             data-delay="50" data-tooltip="批量删除">delete</i></a>
-                                    <a  sec:authorize="hasAuthority('hiscore.patient.delete')"id="show"
+                                    <a  id="show"
                                         class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
                                             class="material-icons white-text tooltipped" data-position="bottom"
                                             data-delay="50" data-tooltip="体温单">visibility</i></a>
@@ -244,8 +244,8 @@
                         "render": function (data, type, row) {
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
-                            rtnBtn = rtnBtn + "<a sec:authorize=\"hasAuthority('hiscore.patient.update')\" class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='edit(" + row.id + ");'> <i class='material-icons'>edit</i></a>" +
-                                "<a  sec:authorize=\"hasAuthority('hiscore.patient.delete')\"class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick='deleteInit(" + row.id + ");'> <i class='material-icons'>delete</i></a>";
+                            rtnBtn = rtnBtn + "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='edit(" + row.id + ");'> <i class='material-icons'>edit</i></a>" +
+                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick='deleteInit(" + row.id + ");'> <i class='material-icons'>delete</i></a>";
                             // 返回自定义内容
                             return rtnBtn;
                         }

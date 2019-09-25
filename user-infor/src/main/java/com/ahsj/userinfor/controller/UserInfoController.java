@@ -36,7 +36,6 @@ public class UserInfoController extends BaseOAController{
 
     @RequestMapping(value = "/saveOrUpdateUserInfo.ahsj")
     @ResponseBody
-    @PostAuthorize("hasAnyAuthority('sys.user.add','sys.user.update')")
     public Message saveOrUpdateUserInfo(UserInfo user)  {
         return userInfoService.saveOrUpdateUserInfo(user);
     }
@@ -50,7 +49,6 @@ public class UserInfoController extends BaseOAController{
 
     @RequestMapping("/delete.ahsj")
     @ResponseBody
-    @PostAuthorize("hasAuthority('sys.user.delete')")
     public Message delete(Long[] id) throws Exception {
         return userInfoService.delete(id);
     }
@@ -79,7 +77,6 @@ public class UserInfoController extends BaseOAController{
 
     @RequestMapping("/selectById.ahsj")
     @ResponseBody
-    @PostAuthorize("hasAuthority('sys.operate')")
     public UserInfo selectById(Long id)  {
         return userInfoService.selectById(id);
     }
@@ -92,7 +89,6 @@ public class UserInfoController extends BaseOAController{
     }
 
     @RequestMapping("/update/index.ahsj")
-    @PostAuthorize("hasAuthority('sys.user.update')")
     ModelAndView UpdateIndex(UserInfo userInfo){
         ModelAndView modelAndView = new ModelAndView("backend/sys/user/update");
         if(!EmptyUtil.Companion.isNullOrEmpty(userInfo.getId())){
@@ -106,7 +102,6 @@ public class UserInfoController extends BaseOAController{
     }
 
     @RequestMapping("/index/index.ahsj")
-    @PostAuthorize("hasAuthority('sys.user')")
     ModelAndView UserIndex(String token){
         ModelAndView modelAndView = new ModelAndView("backend/sys/user/list");
         modelAndView.addObject("userName",getUserName());
