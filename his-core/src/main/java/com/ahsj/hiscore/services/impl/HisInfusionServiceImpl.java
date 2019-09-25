@@ -168,4 +168,19 @@ public class HisInfusionServiceImpl implements HisInfusionService {
     public List<HisInfusion> listByRecordForPrint(String recordId) throws Exception {
         return CodeHelper.getInstance().setCodeValue(hisInfusionMapper.listByRecordForPrint(recordId));
     }
+
+    /**
+     *@Description 根据输液单编号查找
+     *@Params [infusionNumber]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisInfusion>
+     *@Author zhushixiang
+     *@Date 2019-09-25
+     *@Time 16:28
+    **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<HisInfusion> selectByNumber(String infusionNumber) throws Exception {
+        List<HisInfusion> hisInfusionList = hisInfusionMapper.selectByNumber(infusionNumber);
+        return hisInfusionMapper.selectByNumber(infusionNumber);
+    }
 }

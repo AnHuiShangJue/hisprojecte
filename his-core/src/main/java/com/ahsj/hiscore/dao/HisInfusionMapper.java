@@ -40,4 +40,13 @@ public interface HisInfusionMapper extends BaseMapper<HisInfusion>{
 
     List<? extends HisInfusion> infusionDrugDetailsList(PageBean<HisInfusion> pageBean);
 
+    /**
+     *@Description 根据输液单编号查找
+     *@Params [infusionNumber]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisInfusion>
+     *@Author zhushixiang
+     *@Date 2019-09-25
+     *@Time 16:29
+    **/
+    List<HisInfusion> selectByNumber(String infusionNumber);
 }

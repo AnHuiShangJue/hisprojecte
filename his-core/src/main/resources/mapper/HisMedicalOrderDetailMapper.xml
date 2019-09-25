@@ -511,7 +511,7 @@
       #{item.totalAmount,jdbcType=DECIMAL}, #{item.createUserId,jdbcType=BIGINT}, #{item.createDate,jdbcType=TIMESTAMP},
       #{item.updateUserId,jdbcType=BIGINT}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.orderNum,jdbcType=INTEGER},#{item.isStop,jdbcType=INTEGER},#{item.isProofreading,jdbcType=INTEGER},#{item.isApproved,jdbcType=INTEGER}
       ,#{item.medicalOrderType,jdbcType=INTEGER},#{item.content,jdbcType=VARCHAR},#{item.startTime,jdbcType=TIMESTAMP},#{item.targetId,jdbcType=BIGINT},#{item.isFirstEdit,jdbcType=INTEGER},#{item.isStopProofreading,jdbcType=INTEGER}
-      ,#{item.isstopapproved,jdbcType=INTEGER},#{item.correspondId,jdbcType=BIGINT},#{item.isInfusionList,jdbcType=INTEGER}, #{item.infusionNumber,jdbcType=VARCHAR} )
+      ,#{item.isstopapproved,jdbcType=INTEGER},#{item.correspondId,jdbcType=BIGINT},#{item.isInfusionList,jdbcType=INTEGER}, #{item.infusionNumber,jdbcType=VARCHAR})
     </foreach>
   </insert>
 

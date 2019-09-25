@@ -114,4 +114,13 @@ public interface HisInfusionService {
     **/
     List<HisInfusion> listByRecordForPrint(String recordId)throws Exception;
 
+    /**
+     *@Description 根据输液单编号查找
+     *@Params [infusionNumber]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisInfusion>
+     *@Author zhushixiang
+     *@Date 2019-09-25
+     *@Time 16:35
+    **/
+    List<HisInfusion> selectByNumber(String infusionNumber)throws Exception;
 }

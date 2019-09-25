@@ -72,10 +72,11 @@
 <div th:replace="public/base_update_script :: html"></div>
 <script th:inline="javascript">
     function initIframe() {
+        var number = $("#number").val();
         if (isNullOrEmpty([[${isOpreate}]])) {
-        $("#topframe").attr("src",CTX + "/api/treatmentplan/plan/index.ahsj?token=" + TOKEN + "&id=" + [[${hisMedicalRecord.id}]]+"&doctorId="+[[${hisMedicalRecord.doctorId }]]);
+        $("#topframe").attr("src",CTX + "/api/treatmentplan/plan/index.ahsj?token=" + TOKEN + "&id=" + [[${hisMedicalRecord.id}]]+"&doctorId="+[[${hisMedicalRecord.doctorId }]]+"&number="+number);
     }else{
-            $("#topframe").attr("src",CTX + "/api/treatmentplan/plan/index.ahsj?token=" + TOKEN + "&id=" + [[${hisMedicalRecord.id}]]+"&doctorId="+[[${hisMedicalRecord.doctorId }]]+"&isOpreate="+[[${isOpreate}]]);
+            $("#topframe").attr("src",CTX + "/api/treatmentplan/plan/index.ahsj?token=" + TOKEN + "&id=" + [[${hisMedicalRecord.id}]]+"&doctorId="+[[${hisMedicalRecord.doctorId }]]+"&isOpreate="+[[${isOpreate}]]+"&number="+number);
         }
     }
 

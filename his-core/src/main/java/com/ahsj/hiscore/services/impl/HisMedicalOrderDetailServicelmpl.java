@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import utils.EmptyUtil;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
@@ -44,6 +45,9 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
 
     @Autowired
     HisRecordProjectService hisRecordProjectService;
+
+    @Autowired
+    HisInfusionService hisInfusionService;
 
 
 
@@ -215,7 +219,7 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
                     hisRecordProjectService.update(hisRecordProject);
                 }
             }
-//            hisMedicalOrderDetail.setIsFirstEdit(2);
+            hisMedicalOrderDetail.setIsFirstEdit(2);
             if(EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getTotalAmount()))
                 hisMedicalOrderDetail.setTotalAmount(new BigDecimal("1"));
             hisMedicalOrderDetailMapper.updateByPrimaryKeySelective(hisMedicalOrderDetail);
@@ -441,13 +445,67 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
         //查询已选医嘱明细
         List<HisMedicalOrderDetail> alreadySelect = hisMedicalOrderDetailMapper.selectByIds(ids);
         //设置不能组合非用药医嘱
-    /*    for (HisMedicalOrderDetail hisMedicalOrderDetail : alreadySelect) {
+        Integer size = 0;
+        Integer integer;//记录序号  判定是否正确
+        integer = alreadySelect.get(0).getOrderNum();
+        for (HisMedicalOrderDetail hisMedicalOrderDetail : alreadySelect) {
+
+            //getIsFirstEdit = 1 说明用药医嘱开过后没有设置医嘱的用法用量以及开始时间
             if(hisMedicalOrderDetail.getMedicalOrderType()!=2)
                 return MessageUtil.createMessage(false,"不能组合非用药医嘱（Cannot combine non-medical doctors）");
-        }*/
-        //接受排序好后的医嘱明细
-        List<HisMedicalOrderDetail> hisMedicalOrderDetailList = new ArrayList<>();
-        return null;
+            if(hisMedicalOrderDetail.getIsStop() == 1  ||EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getCorrespondId())){
+                return MessageUtil.createMessage(false,"不能把已停嘱药品/未设置用法用量的药品作为输液单药品(Cannot use drugs that have been stopped or have no usage and dosage as infusion drugs)");
+            }
+            if(hisMedicalOrderDetail.getOrderNum() == integer){
+                integer++;
+            }else {
+                return MessageUtil.createMessage(false,"所选输液单药品不连续（Selected infusion single medicine is not continuous）");
+            }
+            if(!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getIsInfusionList())) {
+                if (hisMedicalOrderDetail.getIsInfusionList() == 1)
+                    size++;
+            }
+        }
+        if(size == alreadySelect.size())
+            return MessageUtil.createMessage(false,"已经添加为输液单，请勿重复添加（Already added as an infusion order, do not add it repeatedly）");
+        //确认所选无误后  将其添加为输液单
+        String name="SYD";
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
+        String createdate = sdf.format(date);
+        for (HisMedicalOrderDetail hisMedicalOrderDetail : alreadySelect) {
+            //设置其类型为输液单
+            hisMedicalOrderDetail.setIsInfusionList(1);
+            //根据医嘱编号查询出对应医嘱
+            HisMedicalOrder hisMedicalOrder = hisMedicalOrderService.selectByNumber(hisMedicalOrderDetail.getNumber());
+            //根据用药医嘱绑定的药库ID targetId 查询对应药品信息
+            HisPharmacyDetail hisPharmacyDetail = hisPharmacyDetailService.selectById(hisMedicalOrderDetail.getTargetId());
+            //查询出目标药品
+            HisInfusion hisInfusion = new HisInfusion();
+            //设置输液单表数据
+
+            //此步设置的是就诊记录编号 "HM" 命名不规范注意
+            hisInfusion.setHosptalregistNumber(hisMedicalOrder.getRecordId());
+            //输液单起始日期 是医嘱的开始时间还是当前时间
+            hisInfusion.setStartTime(hisMedicalOrderDetail.getStartTime());
+            hisInfusion.setPatientId(hisMedicalOrder.getPatientId());
+            hisInfusion.setUsages(hisMedicalOrderDetail.getUsages());
+            hisInfusion.setIntervals(hisMedicalOrderDetail.getIntervals());
+            hisInfusion.setDrugsNumb(hisPharmacyDetail.getDrugsNumb());
+            hisInfusion.setDrugname(hisPharmacyDetail.getDrugsName());
+            hisInfusion.setDosage(hisMedicalOrderDetail.getTotalAmount().toString());
+//            hisInfusion.setPrice(hisMedicalOrderDetail.getTotalAmount().multiply(hisPharmacyDetail.getSalePrice()));
+            hisInfusion.setNumber(name + createdate);
+            //设置医嘱单编号
+            //type=2 表示住院
+            hisInfusion.setType(2);
+            hisInfusionService.saveOrUpdate(hisInfusion);
+            hisMedicalOrderDetail.setInfusionNumber(hisInfusion.getNumber());
+            hisMedicalOrderDetailMapper.updateByPrimaryKeySelective(hisMedicalOrderDetail);
+
+
+        }
+        return MessageUtil.createMessage(true,"添加输液单成功（Adding an infusion order successfully）");
     }
 
     /**

@@ -462,4 +462,10 @@
     delete from his_infusion
     where number = #{number,jdbcType=VARCHAR}
   </delete>
+
+  <select id="selectByNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select his_infusion.*
+from his_infusion
+where his_infusion.number =#{infusionNumber,jdbcType=VARCHAR}
+  </select>
 </mapper>

@@ -98,6 +98,8 @@ public class HisMedicalOrderDetail extends BaseEntity {
 
     private String infusionNumber;
 
+    private String remarkSign;//标记输液单起始符号 「代表开始  \代表其中包含药品 」代表结束
+
 
 
     //以下字段是查询出来为显示要求所声明的，在数据库本表中并非实际存在
@@ -504,5 +506,13 @@ public class HisMedicalOrderDetail extends BaseEntity {
 
     public void setInfusionNumber(String infusionNumber) {
         this.infusionNumber = infusionNumber;
+    }
+
+    public String getRemarkSign() {
+        return remarkSign;
+    }
+
+    public void setRemarkSign(String remarkSign) {
+        this.remarkSign = remarkSign;
     }
 }

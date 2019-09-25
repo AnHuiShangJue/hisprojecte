@@ -92,7 +92,7 @@
                 </tr>
 
                 <tr th:each="c:${hisMedicalOrderDetailList}" >
-                    <td th:text="${#dates.format(c.startTime, 'yyyy-MM-dd HH:mm:ss')}" style="border:1px solid black;" th:if="${c.startTime} ne null"></td>
+                    <td th:text="${#dates.format(c.startTime, 'yyyy-MM-dd HH:mm:ss')}" style="border:1px solid black;" th:if="${c.startTime} ne null" ></td>
                     <td th:text="${#dates.format(new java.util.Date().getTime(), 'yyyy-MM-dd HH:mm:ss')}" style="border:1px solid black;" th:if="${c.startTime} eq null"></td>
                     <td th:text="${c.name}" style="border:1px solid black;"></td>
                     <td style="border:1px solid black;" ></td>
