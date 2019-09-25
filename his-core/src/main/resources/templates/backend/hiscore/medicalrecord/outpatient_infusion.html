@@ -261,7 +261,7 @@
                         "render": function (data, type, row) {
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
-                            if (row.remarks < row.count){
+                            if (row.alreadyout < row.count){
                                 rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"添加至待采购列表\" href='javascript:;' onclick=add("+row.id+","+row.medicationId+",'" + row.drugsName + "','"+row.drugsSpec+"','"+row.smallUnit+"',"+row.count+","+row.price+");>" +
                                     " <i class='material-icons'>add</i></a>";
                             }
@@ -478,9 +478,8 @@
             dialog.confirm('确定提交吗?', function (index, layero){
                 medicationIds = gridEnterList.getIds();
                 singledoses = gridEnterList.getSingledose();
-
-
-
+                counts = gridEnterList.getCount();
+                alreadyouts = grid.getAlreadyout();
 
                 var startTime=$("#startTime").val();
                 var isSkinTest=$("#isSkinTest").val();
@@ -490,38 +489,51 @@
                 var intervals=$("#intervals").val();
                 var recordId = $("#medicalRecordId").val();
                 var patientId = $("#patientId").val();
-                $.ahsjajax(CTX + "/api/hisInfusion/save.ahsj",
-                    {
-                        "medicationIds": medicationIds.join(','),//采购药品id
-                        "singledoses":singledoses.join(','), //单次剂量
-                        "startTime":startTime,//预期时间
-                        "isSkinTest":isSkinTest,//是否皮试
-                        "duration":duration,//持续时间
-                        // "units":units,//单位
-                        "usages":usages,//用法
-                        "dosages":dosages,//用量
-                        "intervals":intervals,//间隔
-                        "recordId":recordId,
-                        "patientId":patientId
-                    },
-                    function (msg) {
-                        if (msg.success) {
-                            M.toast({html: msg.message});
-                            parent.grid.search();
-                            dialog.parentclose();
-                            return false;
-                        } else {
-                            M.toast({html: msg.message});
-                            return false;
-                        }
-                    },
-                    function (data) {
-                        M.toast({
-                            html: "网络异常", completeCallback: function () {
-                            }
-                        });
+
+                var flags = [i];
+                for (i = 0;i<singledoses.length;++i){
+                    if (singledoses[i] > (counts[i]-alreadyouts[i])){    //单次剂量 大于 剩余可用药品时
+                        flags.push(i);
                     }
-                );
+                }
+                if (flags.size>0){
+                    M.toast({html: "第"+flags+"条数据超出(The"+flags+"datas exceeded )"});
+                }else {
+                    $.ahsjajax(CTX + "/api/hisInfusion/save.ahsj",
+                        {
+                            "medicationIds": medicationIds.join(','),//采购药品id
+                            "singledoses":singledoses.join(','), //单次剂量
+                            "startTime":startTime,//预期时间
+                            "isSkinTest":isSkinTest,//是否皮试
+                            "duration":duration,//持续时间
+                            // "units":units,//单位
+                            "usages":usages,//用法
+                            "dosages":dosages,//用量
+                            "intervals":intervals,//间隔
+                            "recordId":recordId,
+                            "patientId":patientId
+                        },
+                        function (msg) {
+                            if (msg.success) {
+                                M.toast({html: msg.message});
+                                parent.grid.search();
+                                dialog.parentclose();
+                                return false;
+                            } else {
+                                M.toast({html: msg.message});
+                                return false;
+                            }
+                        },
+                        function (data) {
+                            M.toast({
+                                html: "网络异常", completeCallback: function () {
+                                }
+                            });
+                        }
+                    );
+                }
+
+
             });
         }
     });

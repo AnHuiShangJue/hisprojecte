@@ -193,6 +193,8 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
 
         //处理住院交易明细
         HandleHisTollDetails(hisTollDetails, hisTollRecord.getId());
+//        if(hisTollDetails.get)
+
         BoolMessage message = (BoolMessage) hisTollDetailsService.saveForHospi(hisTollDetails);
         if (!message.isSuccess()) return MessageUtil.createMessage(false, "保存失败！请联系管理人员");
 
