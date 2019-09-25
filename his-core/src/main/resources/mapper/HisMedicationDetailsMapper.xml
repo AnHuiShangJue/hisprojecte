@@ -599,7 +599,7 @@
         h.drugs_name, h.drugs_alias, h.drugs_spec, h.prescription, h.mental_medicine, h.large_unit, h.small_unit,
         h.conversion_rate, h.disable, h.level, h.medical_insurance_sign, h.placeOrigin, h.base_medicine,
         h.narcotic_drugs, h.create_user_id, h.create_date, h.update_user_id, h.update_date,
-        h.total_price,h.medical_record_id,h.is_out,h.exit_id
+        h.total_price,h.medical_record_id,h.is_out,h.exit_id,h.alreadyout
         ,p.sale_price,(h.count*p.sale_price) as price
         from his_medication_details as h
         LEFT JOIN his_pharmacy_detail as p
@@ -684,9 +684,9 @@ left join his_pharmacy_detail as b on a.drugs_numb = b.drugs_numb
 where a.medical_record_id  = #{medicalRecordId,jdbcType=BIGINT} and is_pay = 2
     </select>
 
-    <update id="updateRemarks" parameterType="com.ahsj.hiscore.entity.HisMedicationDetails">
+    <update id="updateAlreadyout" parameterType="com.ahsj.hiscore.entity.HisMedicationDetails">
         update his_medication_details
-        set remarks = #{remarks,jdbcType=VARCHAR}
+        set alreadyout = #{alreadyout,jdbcType=INTEGER}
         where id = #{id,jdbcType=BIGINT}
     </update>
 

@@ -72,6 +72,7 @@
 </div>
 <input type="hidden" id="hospitalManage" th:value="${hospitalManage}">
 <input type="hidden" id="patientId" th:value="${patientId}">
+<input type="hidden" id="isOpreate" th:value="${isOpreate}">
 
 
 
@@ -143,7 +144,7 @@
                         "render": function (data, type, row) {
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
-                            rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看\" onclick=\"details('" + row.hosptalregistNumber + "','"+row.number+"',"+row.patientId+","+row.nurseId+",'"+row.startTime+"');\"> <i class='material-icons'>visibility</i></a>"+
+                            rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看\" onclick=\"details('" + row.hosptalregistNumber + "','"+row.number+"',"+row.patientId+",'"+row.startTime+"');\"> <i class='material-icons'>visibility</i></a>"+
                             "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick=\"deleteInit('" + row.number + "');\"> <i class='material-icons'>delete</i></a>";
                             // 返回自定义内容
                             return rtnBtn;
@@ -157,8 +158,8 @@
     }
 
     //详情和打印
-    function details(hosptalregistNumber,number,patientId,nurseId,startTime) {
-        var url = CTX + "/api/hisInfusion/details/index.ahsj?token=" + TOKEN +"&hospitalManageId="+hosptalregistNumber+"&number="+number+"&patientId="+patientId+"&nurseId="+nurseId+"&startTime="+startTime;
+    function details(hosptalregistNumber,number,patientId,startTime) {
+        var url = CTX + "/api/hisInfusion/details/index.ahsj?token=" + TOKEN +"&hospitalManageId="+hosptalregistNumber+"&number="+number+"&patientId="+patientId+"&startTime="+startTime;
         dialog.show(url, "详情和打印");
     }
 
@@ -196,7 +197,7 @@
         $("#btnAdd").click(function () {
 
             //输液单
-                var url = CTX + "/api/hisInfusion/save/index.ahsj?token=" + TOKEN +"&hospitalManageId="+$("#hospitalManage").val()+"&patientId="+$("#patientId").val();
+                var url = CTX + "/api/hisInfusion/save/index.ahsj?token=" + TOKEN +"&hospitalManageId="+$("#hospitalManage").val()+"&patientId="+$("#patientId").val()+"&isOpreate="+isOpreate;
                 dialog.show(url, "输液单添加");
         });
 

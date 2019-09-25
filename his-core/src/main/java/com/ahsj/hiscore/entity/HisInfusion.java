@@ -32,7 +32,7 @@ public class HisInfusion extends BaseEntity {
 
     private String drugname;
 
-    private String singleDose;
+    private Integer singleDose;
 
     private String singleUnit;
 
@@ -172,13 +172,7 @@ public class HisInfusion extends BaseEntity {
         this.drugname = drugname == null ? null : drugname.trim();
     }
 
-    public String getSingleDose() {
-        return singleDose;
-    }
 
-    public void setSingleDose(String singleDose) {
-        this.singleDose = singleDose == null ? null : singleDose.trim();
-    }
 
     public String getSingleUnit() {
         return singleUnit;
@@ -350,5 +344,13 @@ public class HisInfusion extends BaseEntity {
 
     public void setSalePrice(BigDecimal salePrice) {
         this.salePrice = salePrice;
+    }
+
+    public Integer getSingleDose() {
+        return singleDose;
+    }
+
+    public void setSingleDose(Integer singleDose) {
+        this.singleDose = singleDose;
     }
 }

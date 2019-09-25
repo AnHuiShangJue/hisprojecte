@@ -160,7 +160,8 @@ public class HisInfusionController extends BaseController {
     public Message save(Map<String, Object> model,HttpServletRequest request
             , @RequestParam(value="ids", required=false) Long[] ids    //id
             , @RequestParam(value="medicationIds", required=true) String[] medicationIds  //药品id
-            , @RequestParam(value="singledoses", required=false) String[] singledoses   //单次用量
+            , @RequestParam(value="singledoses", required=false) Integer[] singledoses   //单次用量
+            , @RequestParam(value="singleunits", required=false) String[] singleunits   //单次用量
             , @RequestParam(value="units", required=false) String[] units   //单位
             , @RequestParam(value="usages", required=false) String usages  //用法
             , @RequestParam(value="duration", required=false) String duration  //持续时间
@@ -189,6 +190,10 @@ public class HisInfusionController extends BaseController {
                 }
                 if(null != request.getParameter("singledoses")){
                     hisInfusion.setSingleDose(singledoses[i]);
+
+                }
+                if(null != request.getParameter("singleunits")){
+                    hisInfusion.setSingleUnit(singleunits[i]);
 
                 }
                 if(null != request.getParameter("units")){
@@ -236,6 +241,7 @@ public class HisInfusionController extends BaseController {
                     String createdate = sdf.format(date);
                     hisInfusion.setNumber(name + createdate);
                 }
+                hisInfusion.setType(1);
                 hisInfusionList.add(hisInfusion);
 
             }
@@ -272,7 +278,7 @@ public class HisInfusionController extends BaseController {
     }
 
     /**
-     *@Description listAllByHM
+     *@Description listAllByNumber
      *@Params
      *@return
      *@Author jin
@@ -280,17 +286,17 @@ public class HisInfusionController extends BaseController {
      *@Time 11:10
     */
     @ResponseBody
-    @RequestMapping(value = "listAllByHM.ahsj", method = {RequestMethod.POST})
-    public PageBean<HisInfusion> listAllByHM(Map<String, Object> model, HttpServletRequest request
-            , @RequestParam(value="hospitalManageId", required=false) String hospitalManageId //就诊记录编号
+    @RequestMapping(value = "listAllByNumber.ahsj", method = {RequestMethod.POST})
+    public PageBean<HisInfusion> listAllByNumber(Map<String, Object> model, HttpServletRequest request
+            , @RequestParam(value="hospitalManageId", required=false) String hospitalManageId //输液单
     ) throws Exception {
         PageBean<HisInfusion> pageBean = new PageBean<HisInfusion>();
         HisInfusion hisInfusion = new HisInfusion();
         if(null != request.getParameter("hospitalManageId")){
-            hisInfusion.setHosptalregistNumber(hospitalManageId);
+            hisInfusion.setNumber(hospitalManageId);
         }
         pageBean.setParameter(hisInfusion);
-        return hisInfusionService.listAllByHM(pageBean);
+        return hisInfusionService.listAllByNumber(pageBean);
     }
 
 
@@ -351,8 +357,8 @@ public class HisInfusionController extends BaseController {
      *@Time 17:31
     */
     @RequestMapping(value = "details/index.ahsj")
-    public ModelAndView edit(String token, String hospitalManageId,String number,Long patientId,Long nurseId,String startTime) throws Exception {
-        //HM开头的编号
+    public ModelAndView edit(String token, String hospitalManageId,String number,Long patientId,String startTime) throws Exception {
+//        HM开头的编号
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/infusion/infusionDetails");
         modelAndView.addObject("token", token);
 
@@ -362,7 +368,7 @@ public class HisInfusionController extends BaseController {
         modelAndView.addObject("hospitalManage",hospitalManageId);
         modelAndView.addObject("number",number);
         modelAndView.addObject("patientId",patientId);
-        modelAndView.addObject("nurseId",nurseId);
+//        modelAndView.addObject("nurseId",nurseId);
         modelAndView.addObject("startTime",startTime);
         return modelAndView;
     }
@@ -377,14 +383,15 @@ public class HisInfusionController extends BaseController {
      *@Time 14:06
     */
     @RequestMapping(value = "printf/index.ahsj")
-    public ModelAndView printf(String token, String hospitalManageId) throws Exception {
+    public ModelAndView printf(String token, String hospitalManageId,String number) throws Exception {
         //HM开头的编号
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/infusion/newInfusion");
         modelAndView.addObject("token", token);
         //更新和打印
         modelAndView.addObject("hospitalManage",hospitalManageId);
+        modelAndView.addObject("number",number);
         modelAndView.addObject("title", "打印输液单");
-        List<HisInfusion> hisInfusionList = hisInfusionService.listByHMForPrint(hospitalManageId);
+        List<HisInfusion> hisInfusionList = hisInfusionService.listByHMForPrint(number);
 
         HisPatientInfo hisPatientInfo = hisPatientService.selectByMedicalRecordId(hospitalManageId);
         if (hisPatientInfo.getSex() == 1){

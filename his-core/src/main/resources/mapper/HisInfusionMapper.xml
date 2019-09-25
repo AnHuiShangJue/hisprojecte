@@ -13,7 +13,7 @@
     <result column="duration" jdbcType="VARCHAR" property="duration" />
     <result column="drugs_numb" jdbcType="VARCHAR" property="drugsNumb" />
     <result column="drugname" jdbcType="VARCHAR" property="drugname" />
-    <result column="single_dose" jdbcType="VARCHAR" property="singleDose" />
+    <result column="single_dose" jdbcType="INTEGER" property="singleDose" />
     <result column="single_unit" jdbcType="VARCHAR" property="singleUnit" />
     <result column="is_skin_test" jdbcType="INTEGER" property="isSkinTest" />
     <result column="dosage" jdbcType="VARCHAR" property="dosage" />
@@ -58,7 +58,7 @@
     values (#{id,jdbcType=BIGINT}, #{recordId,jdbcType=VARCHAR}, #{hosptalregistNumber,jdbcType=VARCHAR}, 
       #{startTime,jdbcType=TIMESTAMP}, #{patientId,jdbcType=BIGINT}, #{usages,jdbcType=VARCHAR}, 
       #{intervals,jdbcType=INTEGER}, #{speed,jdbcType=VARCHAR}, #{duration,jdbcType=VARCHAR}, 
-      #{drugsNumb,jdbcType=VARCHAR}, #{drugname,jdbcType=VARCHAR}, #{singleDose,jdbcType=VARCHAR}, 
+      #{drugsNumb,jdbcType=VARCHAR}, #{drugname,jdbcType=VARCHAR}, #{singleDose,jdbcType=INTEGER},
       #{singleUnit,jdbcType=VARCHAR}, #{isSkinTest,jdbcType=INTEGER}, #{dosage,jdbcType=VARCHAR}, 
       #{unit,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{createUserId,jdbcType=BIGINT}, 
       #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP},
@@ -182,7 +182,7 @@
         #{drugname,jdbcType=VARCHAR},
       </if>
       <if test="singleDose != null">
-        #{singleDose,jdbcType=VARCHAR},
+        #{singleDose,jdbcType=INTEGER},
       </if>
       <if test="singleUnit != null">
         #{singleUnit,jdbcType=VARCHAR},
@@ -262,7 +262,7 @@
         drugname = #{drugname,jdbcType=VARCHAR},
       </if>
       <if test="singleDose != null">
-        single_dose = #{singleDose,jdbcType=VARCHAR},
+        single_dose = #{singleDose,jdbcType=INTEGER},
       </if>
       <if test="singleUnit != null">
         single_unit = #{singleUnit,jdbcType=VARCHAR},
@@ -321,7 +321,7 @@
       duration = #{duration,jdbcType=VARCHAR},
       drugs_numb = #{drugsNumb,jdbcType=VARCHAR},
       drugname = #{drugname,jdbcType=VARCHAR},
-      single_dose = #{singleDose,jdbcType=VARCHAR},
+      single_dose = #{singleDose,jdbcType=INTEGER},
       single_unit = #{singleUnit,jdbcType=VARCHAR},
       is_skin_test = #{isSkinTest,jdbcType=INTEGER},
       dosage = #{dosage,jdbcType=VARCHAR},
@@ -354,7 +354,7 @@
       (#{item.id,jdbcType=BIGINT}, #{item.recordId,jdbcType=VARCHAR}, #{item.hosptalregistNumber,jdbcType=VARCHAR},
       #{item.startTime,jdbcType=TIMESTAMP}, #{item.patientId,jdbcType=BIGINT}, #{item.usages,jdbcType=VARCHAR},
       #{item.intervals,jdbcType=INTEGER}, #{item.speed,jdbcType=VARCHAR}, #{item.duration,jdbcType=VARCHAR},
-      #{item.drugsNumb,jdbcType=VARCHAR}, #{item.drugname,jdbcType=VARCHAR}, #{item.singleDose,jdbcType=VARCHAR},
+      #{item.drugsNumb,jdbcType=VARCHAR}, #{item.drugname,jdbcType=VARCHAR}, #{item.singleDose,jdbcType=INTEGER},
       #{item.singleUnit,jdbcType=VARCHAR}, #{item.isSkinTest,jdbcType=INTEGER}, #{item.dosage,jdbcType=VARCHAR},
       #{item.unit,jdbcType=VARCHAR}, #{item.price,jdbcType=DECIMAL}, #{item.createUserId,jdbcType=BIGINT},
       #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=BIGINT}, #{item.updateDate,jdbcType=TIMESTAMP},
@@ -378,13 +378,13 @@
     LEFT JOIN his_user_nurse as b on b.user_id = a.nurse_id
     LEFT JOIN his_nurse as c on b.nurse_id = c.id
     LEFT JOIN his_medication_details as d on a.drugs_numb = d.id
-    where a.hosptalregist_number = #{parameter.hosptalregistNumber,jdbcType = VARCHAR}
+    where a.hosptalregist_number = #{parameter.hosptalregistNumber,jdbcType = VARCHAR} and a.type = 1
     <if test="parameter.orders != null and parameter.orders != ''">
       order by ${parameter.orders}
     </if>
   </select>
   <!--根据HM开头编号查找输液单记录(不合并-->
-  <select id="listAllByHM" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
+  <select id="listAllByNumber" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
     select
     a.*
     ,c.name as nurseName
@@ -393,12 +393,12 @@
     LEFT JOIN his_user_nurse as b on b.user_id = a.nurse_id
     LEFT JOIN his_nurse as c on b.nurse_id = c.id
     LEFT JOIN his_medication_details as d on a.drugs_numb = d.id
-    where a.hosptalregist_number = #{parameter.hosptalregistNumber,jdbcType = VARCHAR}
+    where a.number = #{parameter.number,jdbcType = VARCHAR}
     <if test="parameter.orders != null and parameter.orders != ''">
       order by ${parameter.orders}
     </if>
   </select>
-    <!--返回list-->
+    <!--返回list(改为使用输液单编号)-->
     <select id="listByHMForPrint" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
         a.*
@@ -411,7 +411,7 @@
         LEFT JOIN his_nurse as c on b.nurse_id = c.id
         LEFT JOIN his_medication_details as d on a.drugs_numb = d.id
         LEFT JOIN his_patient_info as e on a.patient_id = e.id
-        where a.hosptalregist_number = #{hosptalregistNumber,jdbcType = VARCHAR}
+        where a.number = #{number,jdbcType = VARCHAR}
     </select>
 
   <select id="listByRecordForPrint" resultMap="BaseResultMap" parameterType="java.lang.String">

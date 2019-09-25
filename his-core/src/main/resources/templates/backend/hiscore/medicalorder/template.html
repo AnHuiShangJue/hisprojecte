@@ -136,7 +136,8 @@
             loadingMessage: 'Loading...',
             dataTable: {
                 "ajax": {
-                    "url": CTX + "/api/medicalOrderTemplate/list.ahsj?token=" + TOKEN+"&remarks1="+$("#remarks1").val()+"&remarks2="+$("#remarks2").val()+"&remarks3="+$("#remarks3").val(), // ajax source
+                    // "url": CTX + "/api/medicalOrderTemplate/list.ahsj?token=" + TOKEN+"&remarks1="+$("#remarks1").val()+"&remarks2="+$("#remarks2").val()+"&remarks3="+$("#remarks3").val(), // ajax source
+                    "url": CTX + "/api/medicalOrderTemplate/list.ahsj?token=" + TOKEN+"&remarks="+$("#remarks").val(), // ajax source
                 },
                 "columns": [
                     {

@@ -195,6 +195,15 @@ var AHSJDT = function () {
                 i++;
             });
             return alreadyouts;
+        },
+        getSingleunit:function (){
+            singleunits = [];
+            var i = 0;
+            $('tbody > tr > td  > input[name="singleunit"]', table).each(function () {
+                singleunits[i] = $(this).val();
+                i++;
+            });
+            return singleunits;
         }
     };
 

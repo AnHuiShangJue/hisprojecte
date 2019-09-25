@@ -133,5 +133,5 @@ public interface HisMedicationDetailsMapper extends BaseMapper<HisMedicationDeta
      *@Date 2019/9/16
      *@Time 9:50
     */
-    void updateRemarks(HisMedicationDetails hisMedicationDetails);
+    void updateAlreadyout(HisMedicationDetails hisMedicationDetails);
 }

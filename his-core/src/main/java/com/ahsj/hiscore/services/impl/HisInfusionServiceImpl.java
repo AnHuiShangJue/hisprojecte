@@ -115,13 +115,13 @@ public class HisInfusionServiceImpl implements HisInfusionService {
                 hisInfusionList.get(i).setPrice(hisMedicationDetails.getPrice());
 
                 //更新药品信息中的alreadyout
-                int a = 0;
-                if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicationDetails.getRemarks())){
-                    a = hisMedicationDetails.getAlreadyout();
-                }
-                int single = Integer.valueOf(hisInfusionList.get(i).getSingleDose());
-                hisMedicationDetails.setAlreadyout(a+ single);
-                hisMedicationDetailsMapper.updateRemarks(hisMedicationDetails);
+//                int a = 0;
+////                if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicationDetails.getAlreadyout())){
+////                    a = hisMedicationDetails.getAlreadyout();
+////                }
+////                int single = Integer.valueOf(hisInfusionList.get(i).getSingleDose());
+////                hisMedicationDetails.setAlreadyout(a+ single);
+////                hisMedicationDetailsMapper.updateAlreadyout(hisMedicationDetails);
 
             }
             hisInfusionMapper.insertBatch(hisInfusionList);
@@ -145,8 +145,8 @@ public class HisInfusionServiceImpl implements HisInfusionService {
 
     @Override
     @Transactional(readOnly = true)
-    public PageBean<HisInfusion> listAllByHM(PageBean<HisInfusion> pageBean) throws Exception {
-        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisInfusionMapper.listAllByHM(pageBean)));
+    public PageBean<HisInfusion> listAllByNumber(PageBean<HisInfusion> pageBean) throws Exception {
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisInfusionMapper.listAllByNumber(pageBean)));
         return pageBean;
     }
 

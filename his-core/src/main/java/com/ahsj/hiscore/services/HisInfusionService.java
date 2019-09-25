@@ -92,7 +92,7 @@ public interface HisInfusionService {
      *@Date 2019/8/30
      *@Time 16:15
     */
-    PageBean<HisInfusion> listAllByHM(PageBean<HisInfusion> pageBean)throws Exception;
+    PageBean<HisInfusion> listAllByNumber(PageBean<HisInfusion> pageBean)throws Exception;
 
     /**
      *@Description

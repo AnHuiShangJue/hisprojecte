@@ -67,11 +67,11 @@
                                 <label for="usages">用法<span style="font-size: 12px">(usage
 )</span></label>
                             </div>
-                            <div class="input-field col s4 l4 xl4">
-                                <input id="dosage" name="dosage" type="text" data-error=".errorTxt6"/>
-                                <div class="errorTxt6"></div>
-                                <label for="dosage">用量<span style="font-size: 12px">(dosage)</span></label>
-                            </div>
+                            <!--<div class="input-field col s4 l4 xl4">-->
+                                <!--<input id="dosage" name="dosage" type="text" data-error=".errorTxt6"/>-->
+                                <!--<div class="errorTxt6"></div>-->
+                                <!--<label for="dosage">用量<span style="font-size: 12px">(dosage)</span></label>-->
+                            <!--</div>-->
                             <div class="input-field col s4 l4 xl4">
                                 <select ahsj:select name="intervals" id="intervals" type="code" typeKey="intervals" cssClass="">
                                 </select>
@@ -126,11 +126,11 @@
                             <!--Form Advance-->
                             <form class="col s12" id="send_Form2" action="#">
                                 <div class="row">
-                                    <div class="col input-field s4 m6 l6 xl6">
+                                    <div class="col input-field s4 m6 l6 xl6" th:if="${isOpreate}">
                                         <select id="nurseId" name="nurseId" type="text"/>
                                     </div>
                                     <div class="col input-field s4 m6 l6 xl6 jeinput">
-                                        <input id="startTime" name="startTime" type="text" class="jeinput" th:value="${startTime}"/>
+                                        <input id="startTime" name="startTime" type="text" class="jeinput" th:value="${startTime}" autocomplete="off"/>
                                     </div>
                                 </div>
 
@@ -293,11 +293,11 @@
                         "data": "isPayName",
                         "name": "is_pay"
                     },
-                    {
-                        "title": "已添加数目",
-                        "data": "alreadyout",
-                        "name": "alreadyout"
-                    },
+                    // {
+                    //     "title": "已添加数目",
+                    //     "data": "alreadyout",
+                    //     "name": "alreadyout"
+                    // },
                     {
                         "title": "操作",
                         "width": "60px",
@@ -306,19 +306,19 @@
                         "render": function (data, type, row) {
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
-
-                            if (row.remarks < row.count){
-                                rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"添加至待采购列表\" href='javascript:;' onclick=add("+row.id+","+row.medicationId+",'" + row.drugsName + "','" +row.drugsSpec+"','"+row.smallUnit+"',"+row.count+","+row.price+");>" +
-                                    " <i class='material-icons'>add</i></a>";
+                            if(row.isPay == 1){
+                                // if (row.alreadyout < row.count){
+                                    rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"添加至待采购列表\" href='javascript:;' onclick=add("+row.id+","+row.medicationId+",'" + row.drugsName + "','" +row.drugsSpec+"','"+row.smallUnit+"',"+row.count+","+row.price+","+row.alreadyout+");>" +
+                                        " <i class='material-icons'>add</i></a>";
+                                // }
                             }
-
                             // 返回自定义内容
                             return rtnBtn;
                         }
                     }
                 ],
                 "order": [
-                    [2, 'asc']
+                    [6, 'asc']
                 ]
             }
         });
@@ -341,6 +341,19 @@
                         //如果获取字符串，必须在参数外反转"
                         rtnBtn = rtnBtn +
                             " <input id='singledose' name='singledose' type='number'/>";
+                        // 返回自定义内容
+                        return rtnBtn;
+                    }
+                },
+                {
+                    "title": "单位",
+                    "width": "120px",
+                    "className": "centered",
+                    "render": function (row) {
+                        var rtnBtn = "";
+                        //如果获取字符串，必须在参数外反转"
+                        rtnBtn = rtnBtn +
+                            " <input id='singleunit' name='singleunit' type='text'/>";
                         // 返回自定义内容
                         return rtnBtn;
                     }
@@ -372,8 +385,8 @@
                     "render": function (row) {
                         var rtnBtn = "";
                         //如果获取字符串，必须在参数外反转"
-                        rtnBtn = rtnBtn +
-                            "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"移除\" onclick='remove(" + row.id + ");'> <i class='material-icons'>delete</i></a>";
+                            rtnBtn = rtnBtn +
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"移除\" onclick='remove(" + row.id + ");'> <i class='material-icons'>delete</i></a>";
                         // 返回自定义内容
                         return rtnBtn;
                     }
@@ -385,7 +398,7 @@
     }
 
     //添加到list里
-    function add(id,medicationId,drugsName,drugsSpec,smallUnit,count,price) {
+    function add(id,medicationId,drugsName,drugsSpec,smallUnit,count,price,alreadyout) {
         var selectRowsIds = gridEnterList.getIds();
         if (selectRowsIds.length !== 0) {
             for (var k = 0; k < selectRowsIds.length; k++) {
@@ -395,7 +408,7 @@
             }
         }
         if (null !== id) {
-            gridEnterList.addRow({"id":id,"medicationId":medicationId, "drugsName": drugsName,"drugsSpec":drugsSpec,"smallUnit":smallUnit,"count":count,"price":price});
+            gridEnterList.addRow({"id":id,"medicationId":medicationId, "drugsName": drugsName,"drugsSpec":drugsSpec,"smallUnit":smallUnit,"count":count,"price":price,"alreadyout":alreadyout});
         }
     }
 
@@ -434,7 +447,8 @@
                             "drugsSpec": json.data[j].drugsSpec,
                             "smallUnit": json.data[j].smallUnit,
                             "count": json.data[j].count,
-                            "price": json.data[j].price
+                            "price": json.data[j].price,
+                            "alreadyout": json.data[j].alreadyout
                         }
                     }
                 }
@@ -481,10 +495,10 @@
                 required: true,
                 minlength: 1
             },
-            dosage: {//2
-                required: true,
-                minlength: 1
-            },
+            // dosage: {//2
+            //     required: true,
+            //     minlength: 1
+            // },
             intervals: {//2
                 required: true,
                 minlength: 1
@@ -515,10 +529,10 @@
                 required: "请选择用法",
                 minlength: "最少包含1个字符"
             },
-            dosage:{
-                required: "请选择用量",
-                minlength: "最少包含1个字符"
-            },
+            // dosage:{
+            //     required: "请选择用量",
+            //     minlength: "最少包含1个字符"
+            // },
             intervals:{
                 required: "请选择间隔",
                 minlength: "最少包含1个字符"
@@ -541,9 +555,9 @@
                 // var buyplanId = (new Date()).getTime();
                 medicationIds = gridEnterList.getIds();
                 singledoses = gridEnterList.getSingledose();
-                // counts = gridEnterList.
-
-
+                singleunits = gridEnterList.getSingleunit();
+                counts = gridEnterList.getCount();
+                alreadyouts = gridEnterList.getAlreadyout();
 
                 // var flag = true;
 
@@ -558,43 +572,51 @@
                 var hospitalManageId = $("#hospitalManage").val();
                 var patientId = $("#patientId").val();
 
-                // for (i = 0 ; i<singledoses.length ;++i){
-                //     if (singledoses[i] > )
-                // }
 
-                $.ahsjajax(CTX + "/api/hisInfusion/save.ahsj",
-                    {
-                        "medicationIds": medicationIds.join(','),//采购药品id
-                        "singledoses":singledoses.join(','), //单次剂量
-                        "nurseId":nurseId,//负责人
-                        "startTime":startTime,//预期时间
-                        "isSkinTest":isSkinTest,//是否皮试
-                        "duration":duration,//持续时间
-                        // "units":units,//单位
-                        "usages":usages,//用法
-                        "dosages":dosages,//用量
-                        "intervals":intervals,//间隔
-                        "hospitalManageId":hospitalManageId,//就诊记录编号
-                        "patientId":patientId//病人id
-                    },
-                    function (msg) {
-                        if (msg.success) {
-                            M.toast({html: msg.message});
-                            parent.grid.search();
-                            dialog.parentclose();
-                            return false;
-                        } else {
-                            M.toast({html: msg.message});
-                            return false;
-                        }
-                    },
-                    function (data) {
-                        M.toast({
-                            html: "网络异常", completeCallback: function () {
+                // var flags = [];
+                // for (i = 0;i<singledoses.length;++i){
+                //     if (singledoses[i] > (counts[i]-alreadyouts[i])){    //单次剂量 大于 剩余可用药品时
+                //         flags.push(i);
+                //     }
+                // }
+                // if (flags.size>0){
+                //     M.toast({html: "第"+flags+"条数据超出(The"+flags+"datas exceeded )"});
+                // }else {
+                    $.ahsjajax(CTX + "/api/hisInfusion/save.ahsj",
+                        {
+                            "medicationIds": medicationIds.join(','),//采购药品id
+                            "singledoses":singledoses.join(','), //单次剂量
+                            "singleunits":singleunits.join(','), //单位
+                            "nurseId":nurseId,//负责人
+                            "startTime":startTime,//预期时间
+                            "isSkinTest":isSkinTest,//是否皮试
+                            "duration":duration,//持续时间
+                            // "units":units,//单位
+                            "usages":usages,//用法
+                            "dosages":dosages,//用量
+                            "intervals":intervals,//间隔
+                            "hospitalManageId":hospitalManageId,//就诊记录编号
+                            "patientId":patientId//病人id
+                        },
+                        function (msg) {
+                            if (msg.success) {
+                                M.toast({html: msg.message});
+                                parent.grid.search();
+                                dialog.parentclose();
+                                return false;
+                            } else {
+                                M.toast({html: msg.message});
+                                return false;
                             }
-                        });
-                    }
-                );
+                        },
+                        function (data) {
+                            M.toast({
+                                html: "网络异常", completeCallback: function () {
+                                }
+                            });
+                        }
+                    );
+                // }
             });
 
 

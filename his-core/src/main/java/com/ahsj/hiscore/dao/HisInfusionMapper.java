@@ -27,7 +27,7 @@ public interface HisInfusionMapper extends BaseMapper<HisInfusion>{
 
     List<? extends HisInfusion> listByHM(PageBean<HisInfusion> pageBean);
 
-    List<? extends HisInfusion> listAllByHM(PageBean<HisInfusion> pageBean);
+    List<? extends HisInfusion> listAllByNumber(PageBean<HisInfusion> pageBean);
 
     List<HisInfusion> listByHMForPrint(String Hm);
 
