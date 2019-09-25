@@ -106,6 +106,7 @@
 <div>
     <input id="number" type="hidden" th:value="${number}"/>
     <input id="hosptalregistNumber" type="hidden" th:value="${hosptalregistNumber}"/>
+    <input id="UserId" type="hidden" th:value="${UserId}"/>
 </div>
 <div th:replace="public/base_list_script :: html"></div>
 
@@ -115,7 +116,9 @@
     $(document).ready(function () {
         //医嘱
         var medicalOrderSelect  = $("#chooseTemplate");
-        $.getJSON(CTX+"/api/medicalOrderTemplate/getTemplate.ahsj?&token="+TOKEN, function (result){
+        $.getJSON(CTX+"/api/medicalOrderTemplate/getTemplate.ahsj?token="+TOKEN + "&createUserId=" + $("#UserId").val(),
+
+            function (result){
             $(result).each(function (i) {
                 medicalOrderSelect.append("<option value='" + this.templateNumber + "'>" + this.templateName + "</option>")
             });

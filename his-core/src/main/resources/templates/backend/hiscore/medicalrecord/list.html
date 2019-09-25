@@ -203,7 +203,7 @@ function initTable() {
 
     }
     function Visiting(id,patientId,isRel,departmentId,numbers) {
-        if (departmentId == [[${userDepartId}]] && isRel == 1) {
+        if (isRel == 1) {
             dialog.confirm('确定接诊?', function (index, layero) {
                 $.ahsjajax(CTX + "/api/hismedicalrecord/recEnter.ahsj",
                     {"id": id},
@@ -232,15 +232,16 @@ function initTable() {
                     }
                 );
             });
-        }else if(departmentId == [[${userDepartId}]] && isRel==2) {
+        }else if(isRel==2) {
+            grid.search();
+            $("#right_frame").attr("src", url = CTX + "/api/hismedicalrecord/update/index.ahsj?token=" + TOKEN + "&patientId=" + patientId + "&id=" + id + "&numbers=" + numbers);
+            /*        }else if (/!*departmentId != [[${userDepartId}]] &&*!/ isRel==2){
             grid.search();
             $("#right_frame").attr("src", url = CTX + "/api/hismedicalrecord/update/index.ahsj?token=" + TOKEN + "&patientId=" + patientId+"&id="+id+"&numbers="+numbers);
-        }else if (departmentId != [[${userDepartId}]] && isRel==2){
-            grid.search();
-            $("#right_frame").attr("src", url = CTX + "/api/hismedicalrecord/update/index.ahsj?token=" + TOKEN + "&patientId=" + patientId+"&id="+id+"&numbers="+numbers);
-        }else if (departmentId != [[${userDepartId}]] && isRel==1){
+        }else if (/!*departmentId != [[${userDepartId}]] && *!/isRel==1){
             grid.search();
             dialog.warn("接诊失败，不能接诊其他科室病人！！")
+        }*/
         }
 
     }

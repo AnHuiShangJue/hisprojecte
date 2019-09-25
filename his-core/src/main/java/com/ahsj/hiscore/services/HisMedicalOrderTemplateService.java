@@ -55,7 +55,7 @@ public interface HisMedicalOrderTemplateService {
      *@Date 2019-07-29
      *@Time 9:02
     **/
-    List<HisMedicalOrderTemplate> selectTemplate()throws Exception;
+    List<HisMedicalOrderTemplate> selectTemplate(Long createUserId)throws Exception;
 
     /**
      *@Description

@@ -20,15 +20,13 @@
                     <div class="row">
                         <div class="input-field col s3 l3 xl3">
                             <input id="name" name="name" type="text" th:value="${hisPatientInfo.name}"
-                                   th:readonly="${hisMedicalRecord.doctorId  != userId}"
                                    data-error=".errorTxt1">
                             <div class="errorTxt1"></div>
                             <label for="name">姓 名<span style="font-size: 12px">(name
 )</span></label>
                         </div>
                         <div class="input-field col s9 l9 xl9">
-                            <input id="location" name="location" type="text"  th:value="${hisPatientInfo.location}"
-                                   th:readonly="${hisMedicalRecord.doctorId  != userId}"/>
+                            <input id="location" name="location" type="text"  th:value="${hisPatientInfo.location}"/>
                             <label for="location">地 址<span style="font-size: 12px">(address
 )</span></label>
                         </div>
@@ -37,7 +35,6 @@
                         <div class="input-field col s7 l7 xl7">
                             <input id="phonenumber" name="phonenumber" type="text"
                                    th:value="${hisPatientInfo.phonenumber}"
-                                   th:readonly="${hisMedicalRecord.doctorId  != userId}"
                                    data-error=".errorTxt2">
                             <div class="errorTxt2"></div>
                             <label for="phonenumber">手机号<span style="font-size: 12px">(手机号
@@ -46,35 +43,31 @@
                         <div class="input-field col s4 l4 xl4">
                             <input id="age" name="age" type="number"
                                    th:value="${hisPatientInfo.age}"
-                                   th:readonly="${hisMedicalRecord.doctorId  != userId}"
                                    data-error=".errorTxt4">
                             <div class="errorTxt4"></div>
                             <label for="age">年 龄<span style="font-size: 12px">(age
 )</span></label>
                         </div>
                         <div class="input-field col s8 l8 xl8">
-                            <input id="id_card" name="idcard" type="text" th:value="${hisPatientInfo.idcard}"
-                                   th:readonly="true"/>
+                            <input id="id_card" name="idcard" type="text" th:value="${hisPatientInfo.idcard}"/>
                             <label for="id_card">身份证号<span style="font-size: 12px">(id card
 )</span></label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s4 l4 xl4">
-                            <input id="height" name="height" type="number"  th:value="${hisPatientInfo.height}"
-                                   th:readonly="${hisMedicalRecord.doctorId  != userId}"/>
+                            <input id="height" name="height" type="number"  th:value="${hisPatientInfo.height}"/>
                             <label for="height">身 高<span style="font-size: 12px">(height
 )</span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4">
-                            <input id="weight" name="weight" type="number"  th:value="${hisPatientInfo.weight}"
-                                   th:readonly="${hisMedicalRecord.doctorId  != userId}"/>
+                            <input id="weight" name="weight" type="number"  th:value="${hisPatientInfo.weight}"/>
                             <label for="weight">体 重<span style="font-size: 12px">(weight
 
 )</span></label>
                         </div>
 
-                        <div th:if="${hisMedicalRecord.doctorId != userId}">
+<!--                        <div th:if="${hisMedicalRecord.doctorId != userId}">
                         <div class="input-field col s4 l4 xl4">
                             <input  name="isMarried" id="is_married1" type="text" typeKey="is_married"
                                     th:value="${hisPatientInfo.married}"
@@ -90,9 +83,9 @@
                             <label for="sex">性别<span style="font-size: 12px">(sex
 )</span></label>
                         </div>
-                        </div>
+                        </div>-->
 
-                        <div class="row" th:if="${hisMedicalRecord.doctorId == userId}">
+                        <div class="row" >
                             <div class="input-field col s4 l4 xl4">
 
                             <select ahsj:select name="isMarried" id="is_married" type="code" typeKey="is_married"
@@ -115,32 +108,32 @@
 
                  <div class="row">
                     <div class="col m4 s12 mb-3">
-                       <div th:if="${hisMedicalRecord.doctorId  == userId}">
+<!--                       <div th:if="${hisMedicalRecord.doctorId  == userId}">-->
                             <button class="waves-effect waves dark btn btn-primary next-step"
                                     type="submit">保存
                                 <i class="material-icons right">send</i>
                             </button>
-                        </div>
+<!--                        </div>-->
                     </div>
-                <div class="col m4 s12 mb-3">
-                    <div th:if="${hisMedicalRecord.doctorId  != userId}">
-                        <a id="ViewBtn"
-                           class="waves-effect waves dark btn btn-primary next-step">查 看
-                            <i class="material-icons white-text tooltipped" data-position="bottom"
-                               data-delay="50"
-                               data-tooltip=""></i>
-                        </a>
-                    </div>
-                    </div>
-                    <div class="col m4 s12 mb-3">
-                     <div th:if="${hisMedicalRecord.doctorId  == userId}">
+<!--                <div class="col m4 s12 mb-3">-->
+<!--                    <div th:if="${hisMedicalRecord.doctorId  != userId}">-->
+<!--                        <a id="ViewBtn"-->
+<!--                           class="waves-effect waves dark btn btn-primary next-step">查 看-->
+<!--                            <i class="material-icons white-text tooltipped" data-position="bottom"-->
+<!--                               data-delay="50"-->
+<!--                               data-tooltip=""></i>-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                    </div>-->
+                    <div class="col m4 s12 mb-3 right">
+<!--                     <div th:if="${hisMedicalRecord.doctorId  == userId}">-->
                      <a id="NextBtn"
                            class="waves-effect waves dark btn btn-primary next-step">下一步
                             <i class="material-icons white-text tooltipped" data-position="bottom"
                                data-delay="50"
                                data-tooltip="">arrow_forward</i>
                         </a>
-                     </div>
+<!--                     </div>-->
                     </div>
                  </div>
                 </form>
@@ -247,10 +240,10 @@ Scripts
                 + "&id=" + [[${hisMedicalRecord.id}]]+"&doctorId="+[[${hisMedicalRecord.doctorId }]];
             parent.dialog.show(url, "")
         });
-        $("#ViewBtn").click(function () {
+/*        $("#ViewBtn").click(function () {
             var url = CTX + "/api/treatmentplan/plan/index.ahsj?token=" + TOKEN+ "&id=" + [[${hisMedicalRecord.id}]]+"&doctorId="+[[${hisMedicalRecord.doctorId }]];
             parent.dialog.show(url, "")
-        });
+        });*/
     }
 
     $("input").change(function(){

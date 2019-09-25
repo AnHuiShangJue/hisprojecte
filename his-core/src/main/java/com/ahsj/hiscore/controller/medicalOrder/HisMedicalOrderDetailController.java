@@ -68,6 +68,7 @@ public class HisMedicalOrderDetailController extends BaseController {
         modelAndView.addObject("number",number);
         modelAndView.addObject("isDischarged",isDischarged);
         modelAndView.addObject("hosptalregistNumber",hosptalregistNumber);
+        modelAndView.addObject("UserId",getId());
         return modelAndView;
     }
 

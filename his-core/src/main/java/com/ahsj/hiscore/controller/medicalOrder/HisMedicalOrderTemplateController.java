@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import utils.EmptyUtil;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -126,8 +127,8 @@ public class HisMedicalOrderTemplateController extends BaseController {
 
     @RequestMapping(value = "getTemplate.ahsj", method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String  getTemplate() throws Exception{
-        String medicalOrderTemplate = JSON.toJSONString(hisMedicalOrderTemplateService.selectTemplate());
-        return  medicalOrderTemplate;
+    public List<HisMedicalOrderTemplate>  getTemplate(String token,Long createUserId) throws Exception{
+        List<HisMedicalOrderTemplate> hisMedicalOrderTemplates = hisMedicalOrderTemplateService.selectTemplate(createUserId);
+        return  hisMedicalOrderTemplates;
     }
 }

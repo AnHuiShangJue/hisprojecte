@@ -56,7 +56,7 @@ public interface HisMedicalOrderTemplateMapper extends BaseMapper<HisMedicalOrde
      *@Date 2019-09-10
      *@Time 9:33
     **/
-    List<HisMedicalOrderTemplate> selectTemplate();
+    List<HisMedicalOrderTemplate> selectTemplate(Long createUserId);
 
     /**
      *@Description 根据模板编号查找

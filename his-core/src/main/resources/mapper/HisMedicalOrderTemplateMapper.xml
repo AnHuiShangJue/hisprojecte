@@ -155,11 +155,14 @@ from his_medical_order_template
 where template_name =#{templateName,jdbcType=VARCHAR}
   </select>
 
-  <select id="selectTemplate" resultMap="BaseResultMap">
+  <select id="selectTemplate" resultMap="BaseResultMap" parameterType="java.lang.Long">
     select distinct
       his_medical_order_template.template_number,
       his_medical_order_template.template_name
     from his_medical_order_template
+		where
+		his_medical_order_template.remarks = '0' or
+		his_medical_order_template.create_user_id = #{createUserId ,jdbcType=BIGINT}
   </select>
 
   <select id="selectByTemplateNumber" parameterType="java.lang.String" resultMap="BaseResultMap">

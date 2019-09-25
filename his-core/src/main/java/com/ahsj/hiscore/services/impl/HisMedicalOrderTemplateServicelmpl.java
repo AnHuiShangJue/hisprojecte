@@ -119,8 +119,8 @@ public class HisMedicalOrderTemplateServicelmpl implements HisMedicalOrderTempla
     **/
     @Override
     @Transactional(readOnly = true)
-    public List<HisMedicalOrderTemplate> selectTemplate() throws Exception {
-        return CodeHelper.getInstance().setCodeValue(hisMedicalOrderTemplateMapper.selectTemplate());
+    public List<HisMedicalOrderTemplate> selectTemplate(Long createUserId) throws Exception {
+        return CodeHelper.getInstance().setCodeValue(hisMedicalOrderTemplateMapper.selectTemplate(createUserId));
     }
 
     /**
