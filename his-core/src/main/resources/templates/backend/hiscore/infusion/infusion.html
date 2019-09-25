@@ -53,12 +53,12 @@
                                 <label for="isSkinTest">是否皮试<span style="font-size: 12px">(Whether skin test
 )</span></label>
                             </div>
-                            <div class="input-field col s4 l4 xl4">
-                            <input id="duration" name="duration" type="number" data-error=".errorTxt3"/>
-                            <div class="errorTxt3"></div>
-                            <label for="duration">持续时间<span style="font-size: 12px">(duration
-                            )</span></label>
-                            </div>
+                            <!--<div class="input-field col s4 l4 xl4">-->
+                            <!--<input id="duration" name="duration" type="number" data-error=".errorTxt3"/>-->
+                            <!--<div class="errorTxt3"></div>-->
+                            <!--<label for="duration">持续时间<span style="font-size: 12px">(duration-->
+                            <!--)</span></label>-->
+                            <!--</div>-->
 
 
                             <div class="input-field col s4 l4 xl4">
@@ -483,10 +483,10 @@
                 required: true,
                 minlength: 1
             },
-            duration: {//2
-                required: true,
-                minlength: 1
-            },
+            // duration: {//2
+            //     required: true,
+            //     minlength: 1
+            // },
             // unit: {//2
             //     required: true,
             //     minlength: 1
@@ -517,10 +517,10 @@
                 required: "请选择是否皮试",
                 minlength: "最少包含1个字符"
             },
-            duration:{
-                required: "请填写持续时间",
-                minlength: "最少包含1个字符"
-            },
+            // duration:{
+            //     required: "请填写持续时间",
+            //     minlength: "最少包含1个字符"
+            // },
             // unit:{
             //     required: "请选择单位",
             //     minlength: "最少包含1个字符"
@@ -564,7 +564,7 @@
                 var nurseId=$("#nurseId").val();
                 var startTime=$("#startTime").val();
                 var isSkinTest=$("#isSkinTest").val();
-                var duration=$("#duration").val();
+                // var duration=$("#duration").val();
                 // var units=$("#unit").val();
                 var usages=$("#usages").val();
                 var dosages=$("#dosage").val();
@@ -590,7 +590,7 @@
                             "nurseId":nurseId,//负责人
                             "startTime":startTime,//预期时间
                             "isSkinTest":isSkinTest,//是否皮试
-                            "duration":duration,//持续时间
+                            // "duration":duration,//持续时间
                             // "units":units,//单位
                             "usages":usages,//用法
                             "dosages":dosages,//用量
