@@ -327,7 +327,6 @@ public class HisRefundProjectServiceImpl implements HisRefundProjectService {
             List<HisRefundProjectDetail> list = new ArrayList<>();
             for (HisRecordProject recordProject : pricelistsBytollRecordNumber) {
                 HisRefundProjectDetail refundProjectDetail = new HisRefundProjectDetail();
-
                 BeanUtils.copyProperties(recordProject, refundProjectDetail);
                 refundProjectDetail.setId(null);
                 refundProjectDetail.setVouchers(fmt);
@@ -357,7 +356,6 @@ public class HisRefundProjectServiceImpl implements HisRefundProjectService {
                 recordProject.setIsBack(1);
             }
             hisRecordProjectService.updateByHisRefundProjectListBack(hisRecordProjects);
-
             return MessageUtil.createMessage(true, "退款成功!");
         }
     }

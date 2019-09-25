@@ -232,4 +232,14 @@ public interface HisTollRecordService {
      * @Time 11:35
      **/
     HisTollRecord getPharmacyinventoryPrice(HisTollRecord hisTollRecord) throws Exception;
+
+    /**
+     * @Description 项目退费
+     * @Params: [hisTollHospiModel]
+     * @Author: dingli
+     * @Return: core.message.Message
+     * @Date 2019/9/25
+     * @Time 10:20
+     **/
+    Message hisProjectSave(HisRefundProjectInfo hisRefundProjectInfo) throws Exception;
 }

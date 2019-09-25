@@ -313,7 +313,7 @@
         $(this).val($(this).val().trim());
     });
     function print(number, attenchType) {
-        if (attenchType == 4) {
+        if (attenchType == 4 || attenchType == 8) {
                 dialog.confirm('确定打印吗?', function (index, layero) {
                     if (number != "" && number != null && number != undefined) {
                         var url = CTX + "/api/hisTollRecord/printDrug/index.ahsj?number=" + number + "&token=" + TOKEN;

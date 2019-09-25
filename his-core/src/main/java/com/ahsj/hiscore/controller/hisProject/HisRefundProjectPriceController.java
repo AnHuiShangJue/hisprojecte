@@ -48,6 +48,9 @@ public class HisRefundProjectPriceController extends BaseController {
     @Autowired
     HisRefundProjectDetailService hisRefundProjectDetailService;
 
+    @Autowired
+    HisTollRecordService hisTollRecordService;
+
     /**
      * @return org.springframework.web.servlet.ModelAndView
      * @功能说明 进入退项目退费页面
@@ -128,7 +131,9 @@ public class HisRefundProjectPriceController extends BaseController {
      **/
     @PostMapping("/save.ahsj")
     public Message saveHisRefundProjectInfo(HisRefundProjectInfo hisRefundProjectInfo) throws Exception {
-        return hisRefundProjectService.saveHisRefundProjectInfo(hisRefundProjectInfo);
+      //  return hisRefundProjectService.saveHisRefundProjectInfo(hisRefundProjectInfo);
+        hisRefundProjectInfo.toString();
+        return hisTollRecordService.hisProjectSave(hisRefundProjectInfo);  //dingli
     }
 
 }

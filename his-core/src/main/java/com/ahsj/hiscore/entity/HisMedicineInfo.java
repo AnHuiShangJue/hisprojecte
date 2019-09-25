@@ -10,92 +10,92 @@ import core.entity.BaseEntity;
 import java.util.Date;
 
 public class HisMedicineInfo extends BaseEntity {
-    @ExcelColumn( value = "序号", col = 1)
+    @ExcelColumn(value = "序号", col = 1)
     @ColumnCheckAnnotation(index = 0, length = 64, isRepeat = false, nullable = false)
     private Long id;
 
-    @ExcelColumn( value = "药品编号", col = 2)
+    @ExcelColumn(value = "药品编号", col = 2)
     @ColumnCheckAnnotation(index = 1, length = 64, isRepeat = true, nullable = false)
     private String drugsNumb;
 
-    @ExcelColumn( value = "药品名称", col = 3)
+    @ExcelColumn(value = "药品名称", col = 3)
     @ColumnCheckAnnotation(index = 2, length = 64, isRepeat = true, nullable = false)
     private String drugsName;
 
-    @ExcelColumn( value = "药品别名", col = 4)
+    @ExcelColumn(value = "药品别名", col = 4)
     @ColumnCheckAnnotation(index = 3, length = 64, isRepeat = true, nullable = false)
     private String drugsAlias;
 
-    @ExcelColumn( value = "药品规格", col = 5)
+    @ExcelColumn(value = "药品规格", col = 5)
     @ColumnCheckAnnotation(index = 4, length = 64, isRepeat = true, nullable = false)
     private String drugsSpec;
 
 
     @ColumnCheckAnnotation(index = 5, length = 1, isRepeat = true, nullable = false, dataType = DataType.Code, codeKey = "prescription")
-    @CodeValueColumn(type = Constants.TYPE_CODE,typeKey = "prescription",typeName = "precriptionName")
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "prescription", typeName = "precriptionName")
     private Integer prescription;
-    @ExcelColumn( value = "是否为处方药", col = 6)
+    @ExcelColumn(value = "是否为处方药", col = 6)
     private String precriptionName;
 
 
     @ColumnCheckAnnotation(index = 6, length = 1, isRepeat = true, nullable = false, dataType = DataType.Code, codeKey = "mental_medicine")
-    @CodeValueColumn(type = Constants.TYPE_CODE,typeKey = "mental_medicine",typeName = "mentalmedicine")
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "mental_medicine", typeName = "mentalmedicine")
     private Integer mentalMedicine;
-    @ExcelColumn( value = "是否为精神药品", col = 7)
+    @ExcelColumn(value = "是否为精神药品", col = 7)
     private String mentalmedicine;
 
-    @ExcelColumn( value = "大单位", col = 8)
+    @ExcelColumn(value = "大单位", col = 8)
     @ColumnCheckAnnotation(index = 7, length = 64, isRepeat = true, nullable = false)
     private String largeUnit;
 
-    @ExcelColumn( value = "小单位", col = 9)
+    @ExcelColumn(value = "小单位", col = 9)
     @ColumnCheckAnnotation(index = 8, length = 64, isRepeat = true, nullable = false)
     private String smallUnit;
 
-    @ExcelColumn( value = "转换率", col = 10)
+    @ExcelColumn(value = "转换率", col = 10)
     @ColumnCheckAnnotation(index = 9, length = 64, isRepeat = true, nullable = false)
     private Short conversionRate;
 
-    @CodeValueColumn(type = Constants.TYPE_CODE,typeKey = "disable",typeName = "disabled")
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "disable", typeName = "disabled")
     private Integer disable;
     private String disabled;
 
 
     @ColumnCheckAnnotation(index = 10, length = 1, isRepeat = true, nullable = false, dataType = DataType.Code, codeKey = "level")
-    @CodeValueColumn(type = Constants.TYPE_CODE,typeKey = "level",typeName = "leveld")
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "level", typeName = "leveld")
     private Integer level;
-    @ExcelColumn( value = "药品级别", col = 11)
+    @ExcelColumn(value = "药品级别", col = 11)
     private String leveld;
 
 
     @ColumnCheckAnnotation(index = 11, length = 1, isRepeat = true, nullable = false, dataType = DataType.Code, codeKey = "medical_insurance_sign")
-    @CodeValueColumn(type = Constants.TYPE_CODE,typeKey = "medical_insurance_sign",typeName = "medicalinsurancesign")
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "medical_insurance_sign", typeName = "medicalinsurancesign")
     private Integer medicalInsuranceSign;
-    @ExcelColumn( value = "药品类型", col = 12)
+    @ExcelColumn(value = "药品类型", col = 12)
     private String medicalinsurancesign;
 
 
-    @ColumnCheckAnnotation(index =12, length = 1, isRepeat = true, nullable = false, dataType = DataType.Code, codeKey = "placeOrigin")
-    @CodeValueColumn(type = Constants.TYPE_CODE,typeKey = "placeOrigin",typeName = "placeoriginName")
+    @ColumnCheckAnnotation(index = 12, length = 1, isRepeat = true, nullable = false, dataType = DataType.Code, codeKey = "placeOrigin")
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "placeOrigin", typeName = "placeoriginName")
     private Integer placeorigin;
-    @ExcelColumn( value = "原产地", col = 13)
+    @ExcelColumn(value = "原产地", col = 13)
     private String placeoriginName;
 
 
     @ColumnCheckAnnotation(index = 13, length = 1, isRepeat = true, nullable = false, dataType = DataType.Code, codeKey = "base_medicine")
-    @CodeValueColumn(type = Constants.TYPE_CODE,typeKey = "base_medicine",typeName = "basemedicine")
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "base_medicine", typeName = "basemedicine")
     private Integer baseMedicine;
-    @ExcelColumn( value = "是否为基础药品", col = 14)
+    @ExcelColumn(value = "是否为基础药品", col = 14)
     private String basemedicine;
 
 
     @ColumnCheckAnnotation(index = 14, length = 1, isRepeat = true, nullable = false, dataType = DataType.Code, codeKey = "narcotic_drugs")
-    @CodeValueColumn(type = Constants.TYPE_CODE,typeKey = "narcotic_drugs",typeName = "narcoticdrugs")
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "narcotic_drugs", typeName = "narcoticdrugs")
     private Integer narcoticDrugs;
-    @ExcelColumn( value = "是否为麻醉药品", col = 15)
+    @ExcelColumn(value = "是否为麻醉药品", col = 15)
     private String narcoticdrugs;
 
-    @ExcelColumn( value = "备注", col = 16)
+    @ExcelColumn(value = "备注", col = 16)
     @ColumnCheckAnnotation(index = 15, length = 64, isRepeat = true, nullable = false)
     private String remarks;
 
@@ -107,7 +107,7 @@ public class HisMedicineInfo extends BaseEntity {
 
     private Date updateDate;
 
-    @ExcelColumn( value = "药品进价", col = 17)
+    @ExcelColumn(value = "药品进价", col = 17)
     @ColumnCheckAnnotation(index = 16, length = 64, isRepeat = true, nullable = false)
     private Double enterPrice;
 
@@ -119,6 +119,16 @@ public class HisMedicineInfo extends BaseEntity {
     private Long placeoriginId;
     private Long baseMedicineId;
     private Long narcoticDrugsId;
+
+    private String tdrugsSpec;
+
+    public String getTdrugsSpec() {
+        return tdrugsSpec;
+    }
+
+    public void setTdrugsSpec(String tdrugsSpec) {
+        this.tdrugsSpec = tdrugsSpec;
+    }
 
     public Double getEnterPrice() {
         return enterPrice;
