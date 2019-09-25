@@ -26,7 +26,7 @@ public class PinyinUtils {
         HanyuPinyinOutputFormat defaultFormat = new HanyuPinyinOutputFormat();
         defaultFormat.setCaseType(HanyuPinyinCaseType.LOWERCASE);
         defaultFormat.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
-        for (int i = 0; i < newChar.length; i++) {  
+        for (int i = 0; i < newChar.length; i++) {
             if (newChar[i] > 255) {
                 try {  
                     pinyinStr += PinyinHelper.toHanyuPinyinStringArray(newChar[i], defaultFormat)[0].charAt(0);

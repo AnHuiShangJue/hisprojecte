@@ -27,8 +27,8 @@ spring:
     name: his-core
   datasource:
     url: jdbc:log4jdbc:mysql://192.168.0.105:3306/his-rpac?useUnicode=true&characterEncoding=utf8&useSSL=true&allowMultiQueries=true
-    username: root
-    password: 123456
+    username: ahsj
+    password: shangjue0603
     #    password: ahsj
     driver-class-name: net.sf.log4jdbc.DriverSpy
     type: com.zaxxer.hikari.HikariDataSource
