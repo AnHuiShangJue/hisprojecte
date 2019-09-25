@@ -1,9 +1,7 @@
 package com.ahsj.hiscore.quartz;
 
-import com.ahsj.hiscore.services.HisDailyRecordService;
-import com.ahsj.hiscore.services.HisDrugLossReportingService;
-import com.ahsj.hiscore.services.HisHospitalManageService;
-import com.ahsj.hiscore.services.TranslateInfoService;
+import com.ahsj.hiscore.entity.HisMedicalOrderDetail;
+import com.ahsj.hiscore.services.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +34,9 @@ public class QuartzJob {
 
     @Autowired
     HisDrugLossReportingService hisDrugLossReportingService;
+
+    @Autowired
+    HisMedicalOrderDetailService hisMedicalOrderDetailService;
 
     /**
      * @return void
@@ -105,6 +106,22 @@ public class QuartzJob {
         logger.info("-------------------翻译信息开始-----------------------");
         translateInfoService.TranslateInfojob();
         logger.info("-------------------翻译信息结束-----------------------");
+    }
+
+    /**
+     *@Description 根据医嘱当时生成输液单(定时任务)
+     *@Params []
+     *@return void
+     *@Author zhushixiang
+     *@Date 2019-09-25
+     *@Time 21:33
+    **/
+    @Scheduled(cron = "0 0 0 * * ?")
+//    @Scheduled(cron = "0/30 * * * * ?")
+    public void createInfusionByMedicalOrder()throws Exception {
+        logger.info("-------------------扫描医嘱详细信息，生成输液单-----------------------");
+        hisMedicalOrderDetailService.createInfusionByMedicalOrder();
+        logger.info("-------------------扫描结束-----------------------");
     }
 }
 

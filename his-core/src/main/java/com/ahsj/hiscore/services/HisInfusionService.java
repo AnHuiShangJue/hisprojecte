@@ -123,4 +123,14 @@ public interface HisInfusionService {
      *@Time 16:35
     **/
     List<HisInfusion> selectByNumber(String infusionNumber)throws Exception;
+
+    /**
+     *@Description 根据输液单编号查找（为住院输液单服务）
+     *@Params [number]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisInfusion>
+     *@Author zhushixiang
+     *@Date 2019-09-25
+     *@Time 23:40
+    **/
+    List<HisInfusion> listByHMForHospitalPrint(String number);
 }

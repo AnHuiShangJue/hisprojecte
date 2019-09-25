@@ -2,9 +2,8 @@ package com.ahsj.hiscore.controller.hisInfusion;
 
 import com.ahsj.hiscore.entity.HisInfusion;
 import com.ahsj.hiscore.entity.HisPatientInfo;
-import com.ahsj.hiscore.services.HisInfusionService;
-import com.ahsj.hiscore.services.HisMedicalRecordService;
-import com.ahsj.hiscore.services.HisPatientService;
+import com.ahsj.hiscore.entity.HisPharmacyDetail;
+import com.ahsj.hiscore.services.*;
 import core.controller.BaseController;
 import core.entity.PageBean;
 import core.message.Message;
@@ -37,6 +36,11 @@ public class HisInfusionController extends BaseController {
     @Autowired
     HisMedicalRecordService hisMedicalRecordService;
 
+    @Autowired
+    HisPharmacyDetailService hisPharmacyDetailService;
+
+    @Autowired
+    HisHospitalManageService hisHospitalManageService;
     /**
      * @Description 新增更新
      * @Author  muxu
@@ -309,14 +313,14 @@ public class HisInfusionController extends BaseController {
      *@Time 11:07
      */
     @RequestMapping(value = "infusionlist/index.ahsj")
-    public ModelAndView infusion(String token, String hospitalManage,String patientId) throws Exception {
+    public ModelAndView infusion(String token, String hospitalManage,String patientId,Integer flag) throws Exception {
         //HM开头的编号
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/infusion/list");
         modelAndView.addObject("title", "输液单列表");
         modelAndView.addObject("token", token);
         modelAndView.addObject("hospitalManage",hospitalManage);
-        modelAndView.addObject("type",1);
-
+        if(!EmptyUtil.Companion.isNullOrEmpty(flag))
+            modelAndView.addObject("flag",flag);
         modelAndView.addObject("patientId",patientId);
         return modelAndView;
     }
@@ -358,7 +362,7 @@ public class HisInfusionController extends BaseController {
      *@Time 17:31
     */
     @RequestMapping(value = "details/index.ahsj")
-    public ModelAndView edit(String token, String hospitalManageId,String number,Long patientId,String startTime) throws Exception {
+    public ModelAndView edit(String token, String hospitalManageId,String number,Long patientId,String startTime,Integer flag) throws Exception {
 //        HM开头的编号
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/infusion/infusionDetails");
         modelAndView.addObject("token", token);
@@ -369,7 +373,8 @@ public class HisInfusionController extends BaseController {
         modelAndView.addObject("hospitalManage",hospitalManageId);
         modelAndView.addObject("number",number);
         modelAndView.addObject("patientId",patientId);
-//        modelAndView.addObject("nurseId",nurseId);
+        if(!EmptyUtil.Companion.isNullOrEmpty(flag))
+            modelAndView.addObject("flag",flag);
         modelAndView.addObject("startTime",startTime);
         return modelAndView;
     }
@@ -408,6 +413,43 @@ public class HisInfusionController extends BaseController {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String time =formatter.format(hisInfusionList.get(0).getUpdateDate());
             modelAndView.addObject("time",time);
+        return modelAndView;
+    }
+
+
+    /**
+     *@Description 住院输液单打印
+     *@Params [token, hospitalManageId, number]
+     *@return org.springframework.web.servlet.ModelAndView
+     *@Author zhushixiang
+     *@Date 2019-09-25
+     *@Time 23:13
+    **/
+    @RequestMapping(value = "inHospitalInfusion/index.ahsj")
+    public ModelAndView inHospitalInfusion(String token, String hospitalManageId,String number) throws Exception {
+        //HM开头的编号
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/infusion/inHospitalInfusion");
+        modelAndView.addObject("token", token);
+        //更新和打印
+        modelAndView.addObject("hospitalManage",hospitalManageId);
+        modelAndView.addObject("number",number);
+        modelAndView.addObject("title", "打印输液单");
+        List<HisInfusion> hisInfusionList = hisInfusionService.listByHMForHospitalPrint(number);
+
+        HisPatientInfo hisPatientInfo = hisPatientService.selectByMedicalRecordIdForInhospital(hospitalManageId);
+        if (hisPatientInfo.getSex() == 1){
+            modelAndView.addObject("sex", "男");
+        }else {
+            modelAndView.addObject("sex", "女");
+
+        }
+
+        modelAndView.addObject("hisPatientInfo",hisPatientInfo);
+        modelAndView.addObject("hisInfusionList",hisInfusionList);
+
+      /*  SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String time =formatter.format(hisInfusionList.get(0).getUpdateDate());
+        modelAndView.addObject("time",time);*/
         return modelAndView;
     }
 
@@ -462,6 +504,23 @@ public class HisInfusionController extends BaseController {
     ) throws Exception {
 
         return hisInfusionService.listByHMForPrint(hospitalManageId);
+    }
+
+    /**
+     *@Description
+     *@Params [model, request, hospitalManageId]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisInfusion>
+     *@Author zhushixiang
+     *@Date 2019-09-26
+     *@Time 0:15
+    **/
+    @ResponseBody
+    @RequestMapping(value = "listByHMForHospitalPrint.ahsj", method = {RequestMethod.POST})
+    public List<HisInfusion> listByHMForHospitalPrint(Map<String, Object> model, HttpServletRequest request
+            , @RequestParam(value="hospitalManageId", required=false) String hospitalManageId //就诊记录编号
+    ) throws Exception {
+
+        return hisInfusionService.listByHMForHospitalPrint(hospitalManageId);
     }
 
 

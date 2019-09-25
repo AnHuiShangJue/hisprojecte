@@ -129,4 +129,14 @@ public interface HisMedicalOrderDetailService {
      *@Time 11:26
     **/
     Message cancleOrder(Long id,Long loginUser)throws Exception;
+
+    /**
+     *@Description 根据医嘱当时生成输液单(定时任务)
+     *@Params []
+     *@return void
+     *@Author zhushixiang
+     *@Date 2019-09-25
+     *@Time 22:02
+    **/
+    void createInfusionByMedicalOrder()throws Exception;
 }

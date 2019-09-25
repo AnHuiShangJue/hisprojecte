@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utils.EmptyUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -182,5 +183,21 @@ public class HisInfusionServiceImpl implements HisInfusionService {
     public List<HisInfusion> selectByNumber(String infusionNumber) throws Exception {
         List<HisInfusion> hisInfusionList = hisInfusionMapper.selectByNumber(infusionNumber);
         return hisInfusionMapper.selectByNumber(infusionNumber);
+    }
+
+    /**
+     *@Description 根据输液单编号查找（为住院输液单服务）
+     *@Params [number]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisInfusion>
+     *@Author zhushixiang
+     *@Date 2019-09-25
+     *@Time 23:39
+    **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<HisInfusion> listByHMForHospitalPrint(String number) {
+        if(EmptyUtil.Companion.isNullOrEmpty(hisInfusionMapper.listByHMForHospitalPrint(number)))
+            return new ArrayList<>();
+        return CodeHelper.getInstance().setCodeValue(hisInfusionMapper.listByHMForHospitalPrint(number));
     }
 }

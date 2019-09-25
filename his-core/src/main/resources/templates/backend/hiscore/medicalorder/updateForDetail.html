@@ -63,7 +63,7 @@
 )</span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4">
-                            <input id="totalAmount" name="totalAmount" type="number"
+                            <input id="totalAmount" name="totalAmount" type="number" step="1" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
                                    th:value="${hisMedicalOrderDetail.totalAmount}"
                                    data-error=".errorTxt1">
                             <div class="errorTxt1"></div>

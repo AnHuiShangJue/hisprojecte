@@ -313,4 +313,18 @@ public class PatientServiceImpl implements HisPatientService {
     public HisPatientInfo selectByPrimaryKey(Long id) throws Exception {
         return hisPatientInfoMapper.selectByPrimaryKey(id);
     }
+
+    /**
+     *@Description  根据就诊记录编号  查询相关信息（为HHM编号服务）
+     *@Params [hospitalManageId]
+     *@return com.ahsj.hiscore.entity.HisPatientInfo
+     *@Author zhushixiang
+     *@Date 2019-09-26
+     *@Time 0:57
+    **/
+    @Override
+    @Transactional(readOnly = true)
+    public HisPatientInfo selectByMedicalRecordIdForInhospital(String hospitalManageId) {
+        return hisPatientInfoMapper.selectByMedicalRecordIdForInhospital(hospitalManageId);
+    }
 }

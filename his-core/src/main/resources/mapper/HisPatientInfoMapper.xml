@@ -262,17 +262,31 @@
         </if>
     </select>
     <select id="selectByMedicalRecordId" resultMap="BaseResultMap" parameterType="java.lang.String">
-  select
-   p.id, p.name, p.birthday, p.location, p.age, p.phonenumber, p.idcard, p.remarks,
-   p.height, p.weight, p.sex,p.is_married,p.update_date,
-   a.chiefcomplaint as chiefcomplaint,c.name as departmentName
-   from his_patient_info as p
-   LEFT JOIN his_medical_record as r on r.patient_id=p.id
-   left join his_medical as a on a.record_id=r.id
-   left join his_registered as b on p.id=b.patient_id
-   left join `his-userinfo`.organization as c on c.id = b.department_id
-  where r.medical_record_id= #{medicalRecordId,jdbcType=VARCHAR}
+        select
+            p.id, p.name, p.birthday, p.location, p.age, p.phonenumber, p.idcard, p.remarks,
+            p.height, p.weight, p.sex,p.is_married,p.update_date,
+            a.chiefcomplaint as chiefcomplaint,c.name as departmentName
+        from his_patient_info as p
+                 LEFT JOIN his_medical_record as r on r.patient_id=p.id
+                 left join his_medical as a on a.record_id=r.id
+                 left join ( select a.* from his_registered as a left join his_medical_record as b on b.registered_id = a.id where b.medical_record_id =#{medicalRecordId,jdbcType=VARCHAR}  ) as b on p.id=b.patient_id
+                 left join `his-userinfo`.organization as c on c.id = b.department_id
+        where r.medical_record_id= #{medicalRecordId,jdbcType=VARCHAR}
   </select>
+
+
+    <select id="selectByMedicalRecordIdForInhospital" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+            p.id, p.name, p.birthday, p.location, p.age, p.phonenumber, p.idcard, p.remarks,
+            p.height, p.weight, p.sex,p.is_married,p.update_date,
+            a.chiefcomplaint as chiefcomplaint,c.name as departmentName
+        from his_patient_info as p
+                 LEFT JOIN his_medical_record as r on r.patient_id=p.id
+                 left join his_medical as a on a.record_id=r.id
+                 left join ( select * from his_hospital_manage where his_hospital_manage.medical_number =#{medicalRecordId,jdbcType=VARCHAR}  ) as b on p.id=b.patient_id
+                 left join `his-userinfo`.organization as c on c.id = b.department_id
+        where r.medical_record_id= #{medicalRecordId,jdbcType=VARCHAR}
+    </select>
     <select id="selectByRecordId" resultMap="BaseResultMap" parameterType="java.lang.String">
   select
    p.id, p.name, p.birthday, p.location, p.age, p.phonenumber, p.idcard, p.remarks,

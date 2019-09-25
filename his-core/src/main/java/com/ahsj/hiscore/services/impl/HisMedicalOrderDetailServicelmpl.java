@@ -15,10 +15,7 @@ import utils.EmptyUtil;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailService {
@@ -385,36 +382,61 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
         if(hisMedicalOrderDetail.getIsStop()==1){
             return MessageUtil.createMessage(true,"此医嘱已停嘱，请勿多次停嘱(This medical plan has been suspended. Please do not stop it several times.)");
         }
-        hisMedicalOrderDetail.setIsStop(1);
-        hisMedicalOrderDetail.setStopDate(new Date());
-        //已经停嘱设置不可编辑
+        if(hisMedicalOrderDetail.getIsInfusionList() == 1){
+            List<HisMedicalOrderDetail> hisMedicalOrderDetailList = hisMedicalOrderDetailMapper.selectByInfusionNumber(hisMedicalOrderDetail.getInfusionNumber());
+            for (HisMedicalOrderDetail medicalOrderDetail : hisMedicalOrderDetailList) {
+                medicalOrderDetail.setIsStop(1);
+                medicalOrderDetail.setStopDate(new Date());
+                //已经停嘱设置不可编辑
 //        hisMedicalOrderDetail.setIsFirstEdit(2);
-        hisMedicalOrderDetail.setStopUserId(loginUser);
-        if(hisMedicalOrderDetail.getMedicalOrderType() == 2) {
-            //停嘱时若药品未付钱直接删除此项明细,若已付请出库后再退回
-            //搜索出对应的用药明细
-            HisMedicationDetails hisMedicationDetails = hisMedicationDetailsService.selectById(hisMedicalOrderDetail.getCorrespondId());
-            if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicationDetails)) {
-                //2代表未付钱
-                if (hisMedicationDetails.getIsPay() == 2) {
-                    hisMedicationDetailsService.deleteById(hisMedicationDetails.getId());
-                } else if (hisMedicationDetails.getIsPay() == 1) {
-                    returnMessage.append("药品已付费，请走出库-退药流程(The existence of drugs has been paid, please go out of the library - withdrawal process)");
+                medicalOrderDetail.setStopUserId(loginUser);
+                HisMedicationDetails hisMedicationDetails = hisMedicationDetailsService.selectById(medicalOrderDetail.getCorrespondId());
+                if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicationDetails)) {
+                    //2代表未付钱
+                    if (hisMedicationDetails.getIsPay() == 2) {
+                        hisMedicationDetailsService.deleteById(hisMedicationDetails.getId());
+                    } else if (hisMedicationDetails.getIsPay() == 1) {
+                        returnMessage.append(hisMedicationDetails.getDrugsNumb()+",");
+                    }
+                }
+                hisMedicalOrderDetailMapper.updateByPrimaryKeySelective(medicalOrderDetail);
+            }
+            if(!EmptyUtil.Companion.isNullOrEmpty(returnMessage)){
+                returnMessage.append("药品已付费，请走出库-退药流程(The existence of drugs has been paid, please go out of the library - withdrawal process)");
+            }
+            return MessageUtil.createMessage(true, "停嘱成功(Stop success)    " + returnMessage.toString());
+        }else {
+            hisMedicalOrderDetail.setIsStop(1);
+            hisMedicalOrderDetail.setStopDate(new Date());
+            //已经停嘱设置不可编辑
+//        hisMedicalOrderDetail.setIsFirstEdit(2);
+            hisMedicalOrderDetail.setStopUserId(loginUser);
+            if (hisMedicalOrderDetail.getMedicalOrderType() == 2) {
+                //停嘱时若药品未付钱直接删除此项明细,若已付请出库后再退回
+                //搜索出对应的用药明细
+                HisMedicationDetails hisMedicationDetails = hisMedicationDetailsService.selectById(hisMedicalOrderDetail.getCorrespondId());
+                if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicationDetails)) {
+                    //2代表未付钱
+                    if (hisMedicationDetails.getIsPay() == 2) {
+                        hisMedicationDetailsService.deleteById(hisMedicationDetails.getId());
+                    } else if (hisMedicationDetails.getIsPay() == 1) {
+                        returnMessage.append("药品已付费，请走出库-退药流程(The existence of drugs has been paid, please go out of the library - withdrawal process)");
+                    }
+                }
+            } else if (hisMedicalOrderDetail.getMedicalOrderType() == 3) {
+                HisRecordProject hisRecordProject = hisRecordProjectService.selectByPrimaryKey(hisMedicalOrderDetail.getCorrespondId());
+                if (!EmptyUtil.Companion.isNullOrEmpty(hisRecordProject)) {
+                    if (hisRecordProject.getIsPayed() == 2) {
+                        hisRecordProjectService.deleteById(hisRecordProject.getId());
+                    } else if (hisRecordProject.getIsPayed() == 1) {
+                        returnMessage.append("项目已付费，请走退项目流程（The project has been paid, please go back to the project process）");
+                    }
                 }
             }
-        }else if(hisMedicalOrderDetail.getMedicalOrderType() == 3){
-            HisRecordProject hisRecordProject = hisRecordProjectService.selectByPrimaryKey(hisMedicalOrderDetail.getCorrespondId());
-            if(!EmptyUtil.Companion.isNullOrEmpty(hisRecordProject)){
-                if(hisRecordProject.getIsPayed() == 2){
-                    hisRecordProjectService.deleteById(hisRecordProject.getId());
-                }else if(hisRecordProject.getIsPayed() == 1){
-                    returnMessage.append("项目已付费，请走退项目流程（The project has been paid, please go back to the project process）");
-                }
-            }
-        }
 
-        hisMedicalOrderDetailMapper.updateByPrimaryKeySelective(hisMedicalOrderDetail);
-        return MessageUtil.createMessage(true,"停嘱成功(Stop success)    "+returnMessage.toString());
+            hisMedicalOrderDetailMapper.updateByPrimaryKeySelective(hisMedicalOrderDetail);
+            return MessageUtil.createMessage(true, "停嘱成功(Stop success)    " + returnMessage.toString());
+        }
     }
 
     /**
@@ -493,7 +515,7 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
             hisInfusion.setIntervals(hisMedicalOrderDetail.getIntervals());
             hisInfusion.setDrugsNumb(hisPharmacyDetail.getDrugsNumb());
             hisInfusion.setDrugname(hisPharmacyDetail.getDrugsName());
-            hisInfusion.setDosage(hisMedicalOrderDetail.getTotalAmount().toString());
+//            hisInfusion.setDosage(hisMedicalOrderDetail.getTotalAmount().toString());
 //            hisInfusion.setPrice(hisMedicalOrderDetail.getTotalAmount().multiply(hisPharmacyDetail.getSalePrice()));
             hisInfusion.setNumber(name + createdate);
             //设置医嘱单编号
@@ -524,35 +546,126 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
         if(hisMedicalOrderDetail.getIsStop()==1){
             return MessageUtil.createMessage(true,"此临时医嘱已取消，请勿多次取消(This temporary medical order has been cancelled, please do not cancel multiple times)");
         }
-        hisMedicalOrderDetail.setIsStop(1);
-        hisMedicalOrderDetail.setStopDate(new Date());
-        //已经停嘱设置不可编辑
+        if(hisMedicalOrderDetail.getIsInfusionList() == 1) {
+            List<HisMedicalOrderDetail> hisMedicalOrderDetailList = hisMedicalOrderDetailMapper.selectByInfusionNumber(hisMedicalOrderDetail.getInfusionNumber());
+            for (HisMedicalOrderDetail medicalOrderDetail : hisMedicalOrderDetailList) {
+                medicalOrderDetail.setIsStop(1);
+                medicalOrderDetail.setStopDate(new Date());
+                //已经停嘱设置不可编辑
 //        hisMedicalOrderDetail.setIsFirstEdit(2);
-        hisMedicalOrderDetail.setStopUserId(loginUser);
-        if(hisMedicalOrderDetail.getMedicalOrderType() == 2) {
-            //取消临时医嘱时若药品未付钱直接删除此项明细,若已付请出库后再退回
-            //搜索出对应的用药明细
-            HisMedicationDetails hisMedicationDetails = hisMedicationDetailsService.selectById(hisMedicalOrderDetail.getCorrespondId());
-            if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicationDetails)) {
-                //2代表未付钱
-                if (hisMedicationDetails.getIsPay() == 2) {
-                    hisMedicationDetailsService.deleteById(hisMedicationDetails.getId());
-                } else if (hisMedicationDetails.getIsPay() == 1 && hisMedicationDetails.getIsOut() == 2) {
-                    returnMessage.append("药品已付费且未出库，请走出库-退药流程(The existence of drugs has been paid and not out, please go out of the library - withdrawal process)");
+                medicalOrderDetail.setStopUserId(loginUser);
+                HisMedicationDetails hisMedicationDetails = hisMedicationDetailsService.selectById(medicalOrderDetail.getCorrespondId());
+                if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicationDetails)) {
+                    //2代表未付钱
+                    if (hisMedicationDetails.getIsPay() == 2) {
+                        hisMedicationDetailsService.deleteById(hisMedicationDetails.getId());
+                    } else if (hisMedicationDetails.getIsPay() == 1) {
+                        returnMessage.append(hisMedicationDetails.getDrugsNumb() + ",");
+                    }
                 }
+                hisMedicalOrderDetailMapper.updateByPrimaryKeySelective(medicalOrderDetail);
             }
-        }else if(hisMedicalOrderDetail.getMedicalOrderType() == 3){
-            HisRecordProject hisRecordProject = hisRecordProjectService.selectByPrimaryKey(hisMedicalOrderDetail.getCorrespondId());
-            if(!EmptyUtil.Companion.isNullOrEmpty(hisRecordProject)){
-                if(hisRecordProject.getIsPayed() == 2){
-                    hisRecordProjectService.deleteById(hisRecordProject.getId());
-                }else if(hisRecordProject.getIsPayed() == 1 && hisRecordProject.getIsChecked() == 2){
-                    returnMessage.append("项目已付费且未检查，请走退项目流程（The project has been paid not check, please go back to the project process）");
-                }
+            if (!EmptyUtil.Companion.isNullOrEmpty(returnMessage)) {
+                returnMessage.append("药品已付费，请走出库-退药流程(The existence of drugs has been paid, please go out of the library - withdrawal process)");
             }
+            return MessageUtil.createMessage(true, "取消成功(Cancle success)    " + returnMessage.toString());
         }
+        else {
+            hisMedicalOrderDetail.setIsStop(1);
+            hisMedicalOrderDetail.setStopDate(new Date());
+            //已经停嘱设置不可编辑
+//        hisMedicalOrderDetail.setIsFirstEdit(2);
+//        hisMedicalOrderDetail.setStopUserId(loginUser);
+            if (hisMedicalOrderDetail.getMedicalOrderType() == 2) {
+                //取消临时医嘱时若药品未付钱直接删除此项明细,若已付请出库后再退回
+                //搜索出对应的用药明细
+                HisMedicationDetails hisMedicationDetails = hisMedicationDetailsService.selectById(hisMedicalOrderDetail.getCorrespondId());
+                if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicationDetails)) {
+                    //2代表未付钱
+                    if (hisMedicationDetails.getIsPay() == 2) {
+                        hisMedicationDetailsService.deleteById(hisMedicationDetails.getId());
+                    } else if (hisMedicationDetails.getIsPay() == 1 && hisMedicationDetails.getIsOut() == 2) {
+                        returnMessage.append("药品已付费且未出库，请走出库-退药流程(The existence of drugs has been paid and not out, please go out of the library - withdrawal process)");
+                    }
+                }
+            } else if (hisMedicalOrderDetail.getMedicalOrderType() == 3) {
+                HisRecordProject hisRecordProject = hisRecordProjectService.selectByPrimaryKey(hisMedicalOrderDetail.getCorrespondId());
+                if (!EmptyUtil.Companion.isNullOrEmpty(hisRecordProject)) {
+                    if (hisRecordProject.getIsPayed() == 2) {
+                        hisRecordProjectService.deleteById(hisRecordProject.getId());
+                    } else if (hisRecordProject.getIsPayed() == 1 && hisRecordProject.getIsChecked() == 2) {
+                        returnMessage.append("项目已付费且未检查，请走退项目流程（The project has been paid not check, please go back to the project process）");
+                    }
+                }
+            }
+            hisMedicalOrderDetailMapper.updateByPrimaryKeySelective(hisMedicalOrderDetail);
+            return MessageUtil.createMessage(true, "取消成功(Cancle success)    " + returnMessage.toString());
+        }
+    }
 
-        hisMedicalOrderDetailMapper.updateByPrimaryKeySelective(hisMedicalOrderDetail);
-        return MessageUtil.createMessage(true,"取消成功(Cancle success)    "+returnMessage.toString());
+    /**
+     *@Description
+     *@Params []
+     *@return void
+     *@Author zhushixiang
+     *@Date 2019-09-25
+     *@Time 21:37
+    **/
+    @Override
+    @Transactional(readOnly = false)
+    public void createInfusionByMedicalOrder() throws Exception{
+        //扫描所有输液单医嘱  并按照输液单编号分组
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
+        String name = "SYD";
+        String createdate = "";
+        List<String> infusionNumberList = hisMedicalOrderDetailMapper.groupByinfusionNumber();
+        if(!EmptyUtil.Companion.isNullOrEmpty(infusionNumberList)&& infusionNumberList.size() !=0){
+            for (String s : infusionNumberList) {
+                List<HisInfusion> hisInfusionList = new ArrayList<>();
+                boolean flag = true;
+                while (flag) {
+                    Date date = new Date();
+                    createdate = sdf.format(date);
+                    hisInfusionList =hisInfusionService.selectByNumber(name+createdate);
+                    if(EmptyUtil.Companion.isNullOrEmpty(hisInfusionList)||hisInfusionList.size() == 0){
+                        flag = false;
+                    }
+                }
+                List<HisMedicalOrderDetail> hisMedicalOrderDetailList = hisMedicalOrderDetailMapper.selectByInfusionNumber(s);
+                for (HisMedicalOrderDetail hisMedicalOrderDetail : hisMedicalOrderDetailList) {
+                    //根据医嘱编号查询出对应医嘱
+                    HisMedicalOrder hisMedicalOrder = hisMedicalOrderService.selectByNumber(hisMedicalOrderDetail.getNumber());
+                    //根据用药医嘱绑定的药库ID targetId 查询对应药品信息
+                    HisPharmacyDetail hisPharmacyDetail = hisPharmacyDetailService.selectById(hisMedicalOrderDetail.getTargetId());
+                    //查询出目标药品
+                    HisInfusion hisInfusion = new HisInfusion();
+                    //设置输液单表数据
+
+                    //此步设置的是就诊记录编号 "HM" 命名不规范注意
+                    hisInfusion.setHosptalregistNumber(hisMedicalOrder.getRecordId());
+                    //输液单起始日期 是医嘱的开始时间还是当前时间
+                    hisInfusion.setStartTime(new Date());
+                    hisInfusion.setPatientId(hisMedicalOrder.getPatientId());
+                    hisInfusion.setUsages(hisMedicalOrderDetail.getUsages());
+                    hisInfusion.setIntervals(hisMedicalOrderDetail.getIntervals());
+                    hisInfusion.setDrugsNumb(hisPharmacyDetail.getDrugsNumb());
+                    hisInfusion.setDrugname(hisPharmacyDetail.getDrugsName());
+                    hisInfusion.setCreateDate(Calendar.getInstance().getTime());
+                    hisInfusion.setUpdateDate(Calendar.getInstance().getTime());
+                    if(!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getCreateUserId()))
+                        hisInfusion.setCreateUserId(hisMedicalOrderDetail.getCreateUserId());
+                    if(!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getUpdateUserId()))
+                        hisInfusion.setUpdateUserId(hisMedicalOrderDetail.getUpdateUserId());
+//            hisInfusion.setDosage(hisMedicalOrderDetail.getTotalAmount().toString());
+//            hisInfusion.setPrice(hisMedicalOrderDetail.getTotalAmount().multiply(hisPharmacyDetail.getSalePrice()));
+                    hisInfusion.setNumber(name + createdate);
+                    //设置医嘱单编号
+                    //type=2 表示住院
+                    hisInfusion.setType(2);
+                    hisInfusionService.saveOrUpdate(hisInfusion);
+                }
+            }
+
+        }
     }
 }

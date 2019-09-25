@@ -499,7 +499,7 @@
 
     insert into his_medical_order_detail(id, number, name, is_skin_test, specification, unit, usages, dosage, intervals, proofreading_nurse_id,
     approved_nurse_id, stop_date, stop_user_id, stop_prfing_nurse_id, stop_apd_nurse_id,
-    total_amount, create_user_id, create_date, update_user_id, update_date,order_num,is_stop,is_proofreading,is_approved, medical_order_type,content,start_time,target_id,is_first_edit,is_stop_proofreading, isstopapproved,correspond_id}
+    total_amount, create_user_id, create_date, update_user_id, update_date,order_num,is_stop,is_proofreading,is_approved, medical_order_type,content,start_time,target_id,is_first_edit,is_stop_proofreading, isstopapproved,correspond_id
     ,is_infusion_list,infusion_number )
     values
     <foreach collection="list" item="item" index="index" separator="," >
@@ -523,6 +523,19 @@
       #{id}
     </foreach>
 order by order_num
+  </select>
+
+  <select id="selectByInfusionNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select his_medical_order_detail.*
+    from his_medical_order_detail
+where infusion_number =#{infusionNumber,jdbcType=VARCHAR}
+  </select>
+
+  <select id="groupByinfusionNumber" resultType="java.lang.String">
+    select his_medical_order_detail.infusion_number
+    from his_medical_order_detail
+    where is_infusion_list = 1 and is_stop = 2
+    GROUP BY infusion_number
   </select>
 
 </mapper>

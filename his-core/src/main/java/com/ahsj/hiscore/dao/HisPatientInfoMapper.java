@@ -110,4 +110,13 @@ public interface HisPatientInfoMapper  extends BaseMapper<HisPatientInfo>{
     **/
     int importHisPatientInfo(List<HisPatientInfo> hisWardList);
 
+    /**
+     *@Description 根据就诊记录编号  查询相关信息（为HHM编号服务）
+     *@Params [hospitalManageId]
+     *@return com.ahsj.hiscore.entity.HisPatientInfo
+     *@Author zhushixiang
+     *@Date 2019-09-26
+     *@Time 0:58
+    **/
+    HisPatientInfo selectByMedicalRecordIdForInhospital(String hospitalManageId);
 }

@@ -378,7 +378,14 @@
     LEFT JOIN his_user_nurse as b on b.user_id = a.nurse_id
     LEFT JOIN his_nurse as c on b.nurse_id = c.id
     LEFT JOIN his_medication_details as d on a.drugs_numb = d.id
-    where a.hosptalregist_number = #{parameter.hosptalregistNumber,jdbcType = VARCHAR} and a.type = 1
+    where a.hosptalregist_number = #{parameter.hosptalregistNumber,jdbcType = VARCHAR}
+    <if test="parameter.type != null and parameter.type == 1">
+      and a.type = 1
+    </if>
+    <if test="parameter.type != null and parameter.type == 2">
+      and a.type = 2
+    </if>
+      GROUP BY number
     <if test="parameter.orders != null and parameter.orders != ''">
       order by ${parameter.orders}
     </if>
@@ -413,6 +420,22 @@
         LEFT JOIN his_patient_info as e on a.patient_id = e.id
         where a.number = #{number,jdbcType = VARCHAR}
     </select>
+
+
+  <select id="listByHMForHospitalPrint" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+      a.*
+            ,c.name as nurseName
+            ,d.drugs_spec as drugsSpec
+            ,d.small_unit as smallUnit
+            ,e.name as patientName
+    from his_infusion as a
+           LEFT JOIN his_user_nurse as b on b.user_id = a.nurse_id
+           LEFT JOIN his_nurse as c on b.nurse_id = c.id
+           LEFT JOIN his_pharmacy_detail as d on a.drugs_numb = d.drugs_numb
+           LEFT JOIN his_patient_info as e on a.patient_id = e.id
+    where a.number = #{number,jdbcType = VARCHAR}
+  </select>
 
   <select id="listByRecordForPrint" resultMap="BaseResultMap" parameterType="java.lang.String">
         select

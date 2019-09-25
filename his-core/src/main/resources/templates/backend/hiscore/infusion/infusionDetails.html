@@ -54,7 +54,7 @@
                             <a id="btnPrint" class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1">
                                 <i class="material-icons white-text tooltipped" data-position="bottom" data-delay="50" data-tooltip="打印">print</i>
                             </a>
-                            <a id="btnDeleteMany" class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1">
+                            <a id="btnDeleteMany" class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1" th:if="${flag} eq null">
                                 <i class="material-icons white-text tooltipped" data-position="bottom" data-delay="50" data-tooltip="批量删除">delete</i>
                             </a>
                         </div>
@@ -162,8 +162,10 @@
                         "render": function (data, type, row) {
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
-                            rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" onclick=\"details('" + row.hosptalregistNumber + "');\"> <i class='material-icons'>detail</i></a>"+
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick='deleteInit(" + row.id + ");'> <i class='material-icons'>delete</i></a>";
+                            rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" onclick=\"details('" + row.hosptalregistNumber + "');\"> <i class='material-icons'>detail</i></a>";
+                            if(isNullOrEmpty([[${flag}]])) {
+                                rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick='deleteInit(" + row.id + ");'> <i class='material-icons'>delete</i></a>";
+                            }
                             // 返回自定义内容
                             return rtnBtn;
                         }
@@ -209,9 +211,13 @@
 
     function initBtn() {
         $("#btnPrint").click(function () {
-
-            //输液单
-            var url = CTX + "/api/hisInfusion/printf/index.ahsj?token=" + TOKEN +"&hospitalManageId="+$("#hospitalManage").val()+"&number="+$("#number").val();
+            if(isNullOrEmpty([[${flag}]])) {
+                //输液单
+                var url = CTX + "/api/hisInfusion/printf/index.ahsj?token=" + TOKEN + "&hospitalManageId=" + $("#hospitalManage").val() + "&number=" + $("#number").val();
+            }else {
+                //输液单
+                var url = CTX + "/api/hisInfusion/inHospitalInfusion/index.ahsj?token=" + TOKEN + "&hospitalManageId=" + $("#hospitalManage").val() + "&number=" + $("#number").val()+"&flag=1";
+            }
             // dialog.show(url, "输液单打印");
             dialog.showDialog(url, "打印输液单","800px","800px");
 

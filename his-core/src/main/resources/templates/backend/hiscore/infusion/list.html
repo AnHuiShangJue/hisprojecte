@@ -47,11 +47,11 @@
                             <h4 class="card-title">操作台
                             </h4><label style="color:black">Console</label>
                             <div class="row">
-                                <div class="col s2 m2 l2 xl2 offset-xl10">
-                                    <a id="btnAdd" class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1">
+                                <div class="col s2 m2 l2 xl2 offset-xl10" th:if="${flag} eq null">
+                                    <a id="btnAdd" class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1" >
                                         <i class="material-icons white-text tooltipped" data-position="bottom" data-delay="50" data-tooltip="添加">add</i>
                                     </a>
-                                    <a id="btnDeleteMany" class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1">
+                                    <a id="btnDeleteMany" class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1" >
                                         <i class="material-icons white-text tooltipped" data-position="bottom" data-delay="50" data-tooltip="批量删除">delete</i>
                                     </a>
                                 </div>
@@ -144,14 +144,16 @@
                         "render": function (data, type, row) {
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
-                            rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看\" onclick=\"details('" + row.hosptalregistNumber + "','"+row.number+"',"+row.patientId+",'"+row.startTime+"');\"> <i class='material-icons'>visibility</i></a>"+
-                            "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick=\"deleteInit('" + row.number + "');\"> <i class='material-icons'>delete</i></a>";
+                            rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看\" onclick=\"details('" + row.hosptalregistNumber + "','"+row.number+"',"+row.patientId+",'"+row.startTime+"');\"> <i class='material-icons'>visibility</i></a>";
+                            if(isNullOrEmpty([[${flag}]])) {
+                                rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick=\"deleteInit('" + row.number + "');\"> <i class='material-icons'>delete</i></a>";
+                            }
                             // 返回自定义内容
                             return rtnBtn;
                         }
                     }
                 ],
-                "order" : [ [ 2, "desc" ] ],
+                "order" : [ [ 3, "desc" ] ],
             }
         });
 
@@ -159,7 +161,11 @@
 
     //详情和打印
     function details(hosptalregistNumber,number,patientId,startTime) {
-        var url = CTX + "/api/hisInfusion/details/index.ahsj?token=" + TOKEN +"&hospitalManageId="+hosptalregistNumber+"&number="+number+"&patientId="+patientId+"&startTime="+startTime;
+        if(isNullOrEmpty([[${flag}]])) {
+            var url = CTX + "/api/hisInfusion/details/index.ahsj?token=" + TOKEN + "&hospitalManageId=" + hosptalregistNumber + "&number=" + number + "&patientId=" + patientId + "&startTime=" + startTime;
+        }else {
+            var url = CTX + "/api/hisInfusion/details/index.ahsj?token=" + TOKEN + "&hospitalManageId=" + hosptalregistNumber + "&number=" + number + "&patientId=" + patientId + "&startTime=" + startTime+"&flag=1";
+        }
         dialog.show(url, "详情和打印");
     }
 

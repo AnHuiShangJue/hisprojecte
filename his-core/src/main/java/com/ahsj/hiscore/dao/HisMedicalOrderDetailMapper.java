@@ -80,4 +80,24 @@ public interface HisMedicalOrderDetailMapper extends BaseMapper<HisMedicalOrderD
      *@Time 18:32
     **/
     List<HisMedicalOrderDetail> selectByIds(Long[] ids);
+
+    /**
+     *@Description 根据输液单编号查找
+     *@Params [infusionNumber]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisMedicalOrderDetail>
+     *@Author zhushixiang
+     *@Date 2019-09-25
+     *@Time 20:23
+    **/
+    List<HisMedicalOrderDetail> selectByInfusionNumber(String infusionNumber);
+
+    /**
+     *@Description
+     *@Params []
+     *@return java.util.List<java.lang.String>
+     *@Author zhushixiang
+     *@Date 2019-09-25
+     *@Time 21:49
+    **/
+    List<String> groupByinfusionNumber();
 }

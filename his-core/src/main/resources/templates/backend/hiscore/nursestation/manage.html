@@ -273,7 +273,7 @@
 
     //输液单
     function infusion(medicalRecordId,patientId) {
-        var url = CTX + "/api/hisInfusion/infusionlist/index.ahsj?token=" + TOKEN +"&hospitalManage="+medicalRecordId+"&patientId="+patientId;
+        var url = CTX + "/api/hisInfusion/infusionlist/index.ahsj?token=" + TOKEN +"&hospitalManage="+medicalRecordId+"&patientId="+patientId+"&flag=3";
         dialog.show(url, "输液单列表");
     }
      //word版

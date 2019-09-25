@@ -66,6 +66,9 @@ public class HisInfusion extends BaseEntity {
 
     private BigDecimal salePrice;
 
+    private String drugsSpec;
+
+
 
     //别名
     private String nurseName;
@@ -366,4 +369,13 @@ public class HisInfusion extends BaseEntity {
     public void setIntervalsName(String intervalsName) {
         this.intervalsName = intervalsName;
     }
+
+    public String getDrugsSpec() {
+        return drugsSpec;
+    }
+
+    public void setDrugsSpec(String drugsSpec) {
+        this.drugsSpec = drugsSpec;
+    }
+
 }

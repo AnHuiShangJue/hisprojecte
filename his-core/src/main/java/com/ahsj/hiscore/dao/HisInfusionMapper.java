@@ -49,4 +49,14 @@ public interface HisInfusionMapper extends BaseMapper<HisInfusion>{
      *@Time 16:29
     **/
     List<HisInfusion> selectByNumber(String infusionNumber);
+
+    /**
+     *@Description 根据输液单编号查找(仅为住院输液单服务)
+     *@Params [number]
+     *@return java.util.List<? extends com.ahsj.hiscore.entity.HisInfusion>
+     *@Author zhushixiang
+     *@Date 2019-09-26
+     *@Time 0:08
+    **/
+    List< HisInfusion> listByHMForHospitalPrint(String number);
 }

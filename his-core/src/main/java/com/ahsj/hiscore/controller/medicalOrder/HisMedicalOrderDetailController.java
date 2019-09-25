@@ -431,23 +431,24 @@ public class HisMedicalOrderDetailController extends BaseController {
                     //标记输液单起始符号 「代表开始  \代表其中包含药品 」代表结束
                 if(!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getIsInfusionList())) {
                     if (hisMedicalOrderDetail.getIsInfusionList() == 1) {
-                        if (EmptyUtil.Companion.isNullOrEmpty(infusionNumber))
+                        if (EmptyUtil.Companion.isNullOrEmpty(infusionNumber)|| flag == -1) {
                             infusionNumber = hisMedicalOrderDetail.getInfusionNumber();
+                            flag = 0;
+                        }
                         List<HisInfusion> hisInfusionList = hisInfusionService.selectByNumber(infusionNumber);
-                        if (infusionNumber.equals(hisMedicalOrderDetail.getInfusionNumber())) {
                             if (flag == 0) {
                                 stringBuffer.append("  「");
                                 flag++;
                             } else {
                                 if (flag + 1 == hisInfusionList.size()) {
                                     stringBuffer.append("  」");
-                                    flag = 0;
+                                    flag = -1;
                                 } else {
                                     stringBuffer.append("  |");
                                     flag++;
                                 }
                             }
-                        }
+
                     }
                 }
                 hisMedicalOrderDetail.setName(stringBuffer.toString());
