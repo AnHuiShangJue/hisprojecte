@@ -459,6 +459,20 @@ public class HisMedicationDetailsServicelmpl implements HisMedicationDetailsServ
     @Override
     @Transactional(readOnly = false)
     public void update(HisMedicationDetails hisMedicationDetails) {
-        hisMedicationDetailsMapper.updateByPrimaryKeySelective(hisMedicationDetails);
+        hisMedicationDetailsMapper.updateByPrimaryKey(hisMedicationDetails);
+    }
+
+    /**
+     *@Description 单条删除
+     *@Params [id]
+     *@return void
+     *@Author zhushixiang
+     *@Date 2019-09-25
+     *@Time 11:18
+    **/
+    @Override
+    @Transactional(readOnly = false)
+    public void deleteById(Long id) throws Exception {
+        hisMedicationDetailsMapper.deleteByPrimaryKey(id);
     }
 }

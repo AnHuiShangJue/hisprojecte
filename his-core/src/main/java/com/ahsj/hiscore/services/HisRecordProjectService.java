@@ -1,5 +1,6 @@
 package com.ahsj.hiscore.services;
 
+import com.ahsj.hiscore.common.utils.ZipUtils;
 import com.ahsj.hiscore.entity.HisRecordProject;
 import com.ahsj.hiscore.entity.HisRefundProject;
 import core.entity.PageBean;
@@ -260,4 +261,14 @@ public interface HisRecordProjectService {
      *@Time 10:55
     **/
     void update(HisRecordProject hisRecordProject);
+
+    /**
+     *@Description 
+     *@Params [id]
+     *@return void
+     *@Author zhushixiang
+     *@Date 2019-09-25
+     *@Time 11:25
+    **/
+    void deleteById(Long id);
 }

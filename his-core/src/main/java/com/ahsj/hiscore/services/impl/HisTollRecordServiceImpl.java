@@ -149,6 +149,9 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
 
         //处理住院交易
         HisTollRecord hisTollRecord = hisTollHospiModel.getHisTollRecord();
+        if(EmptyUtil.Companion.isNullOrEmpty(hisTollRecord.getActualCharge())) {
+            hisTollRecord.setActualCharge(new BigDecimal("0"));
+        }
 
         PageBean<HisTollDetails> pageBean = new PageBean<HisTollDetails>();
         HisTollDetails hd = new HisTollDetails();

@@ -192,4 +192,14 @@ public interface HisMedicationDetailsService {
      *@Time 10:52
     **/
     void update(HisMedicationDetails hisMedicationDetails );
+
+    /**
+     *@Description 单条删除
+     *@Params [id]
+     *@return void
+     *@Author zhushixiang
+     *@Date 2019-09-25
+     *@Time 11:18
+    **/
+    void deleteById(Long id)throws Exception;
 }

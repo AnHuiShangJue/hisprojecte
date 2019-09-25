@@ -461,6 +461,20 @@ public class HisRecordProjectServiceImpl implements HisRecordProjectService {
     public void update(HisRecordProject hisRecordProject) {
         hisRecordProjectMapper.updateByPrimaryKeySelective(hisRecordProject);
     }
+
+    /**
+     *@Description 单条删除
+     *@Params [id]
+     *@return void
+     *@Author zhushixiang
+     *@Date 2019-09-25
+     *@Time 11:17
+    **/
+    @Override
+    @Transactional(readOnly = false)
+    public void deleteById(Long id) {
+        hisRecordProjectMapper.deleteByPrimaryKey(id);
+    }
 }
 
     

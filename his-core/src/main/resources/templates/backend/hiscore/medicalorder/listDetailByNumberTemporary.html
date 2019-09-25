@@ -61,10 +61,10 @@
                                     <a id="createBtn" class="btn waves-effect waves-light red"><i
                                             class="material-icons  white-text tooltipped " data-position="bottom"
                                             data-delay="50" data-tooltip="新增医嘱（Add medical advice）">add</i></a>
-                                    <a id="deleteManyBtn"
+                                 <!--   <a id="deleteManyBtn"
                                        class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
                                             class="material-icons white-text tooltipped" data-position="bottom"
-                                            data-delay="50" data-tooltip="批量删除（batch deletion）">delete</i></a>
+                                            data-delay="50" data-tooltip="批量删除（batch deletion）">delete</i></a>-->
                                 </div>
                                 <div class="input-field col s4 l4 xl4">
                                     <select id="chooseTemplate" name="chooseTemplate">
@@ -221,14 +221,15 @@
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
                             if([[${isDischarged}]] ==1) {
-                                rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='edit(" + row.id + ",\"" + row.number + "\");'> <i class='material-icons'>edit</i></a>" +
+                                rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='edit(" + row.id + ",\"" + row.number + "\");'> <i class='material-icons'>edit</i></a>";
                                     // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"校对\" onclick=\"proofreading(" + row.id + ",'" + row.number + "');\"> <i class='material-icons'>playlist_add_check</i></a>" +
                                     // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"核准\" onclick=\"isApproved(" + row.id + ",'" + row.number + "');\"> <i class='material-icons'>done</i></a>" +
-                                    "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick='deleteInit(" + row.id + ");'> <i class='material-icons'>delete</i></a>";
+                                    // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick='deleteInit(" + row.id + ");'> <i class='material-icons'>delete</i></a>";
                                     // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"停嘱（Stop）\" onclick='stop(" + row.id + ");'> <i class='material-icons'>do_not_disturb</i></a>";
 
                                 // 返回自定义内容
                             }
+                            rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"取消（Cancle）\" onclick='cancle(" + row.id + ");'> <i class='material-icons'>do_not_disturb</i></a>";
                             return rtnBtn;
                         }
                     }
@@ -248,16 +249,13 @@
         dialog.show(url, "医嘱信息管理");
     }
 
-
-
-
-    function deleteInit(id) {
-        dialog.confirm('确定删除?', function (index, layero) {
-            $.ahsjajax(CTX + "/api/medicalOrderDetail/delete.ahsj",
-                {"ids": id},
+    //取消短期医嘱
+    function cancle(id) {
+        dialog.confirm('确定取消（Sure Cancle）?', function (index, layero) {
+            $.ahsjajax(CTX + "/api/medicalOrderDetail/cancleOrder.ahsj",
+                {"id": id},
                 function (msg) {
                     if (msg.success) {
-                        swal.close();
                         M.toast({
                             html: msg.message, completeCallback: function () {
                             }
@@ -281,152 +279,181 @@
     }
 
 
-
-    //医嘱开药   用药医嘱
-    function addMedicine(id,medicalOrderNumber) {
-        $.ahsjajax(CTX + "/api/medicalOrderDetail/addMedicine.ahsj",
-            {"ids": id,"medicalOrderNumber":medicalOrderNumber},
-            function (msg) {
-
-                if (msg.success) {
-                    M.toast({
-                        html: msg.message, completeCallback: function () {
-                        }
-                    });
-                    grid.search();
-                } else {
-                    M.toast({
-                        html: msg.message, completeCallback: function () {
-                        }
-                    });
-                }
-            },
-            function (data) {
-                M.toast({
-                    html: "网络异常", completeCallback: function () {
-                    }
-                });
-            }
-        );
-    }
-
-    //医嘱开项目  项目医嘱 id:项目表ID，number:项目表编号 medicalOrderNumber：医嘱编号
-    function addProject(id,medicalOrderNumber) {
-        $.ahsjajax(CTX + "/api/medicalOrderDetail/addProject.ahsj",
-            {"ids": id,"medicalOrderNumber":medicalOrderNumber},
-            function (msg) {
-
-                if (msg.success) {
-                    M.toast({
-                        html: msg.message, completeCallback: function () {
-                        }
-                    });
-                    grid.search();
-                } else {
-                    M.toast({
-                        html: msg.message, completeCallback: function () {
-                        }
-                    });
-                }
-            },
-            function (data) {
-                M.toast({
-                    html: "网络异常", completeCallback: function () {
-                    }
-                });
-            }
-        );
-    }
-
-
-
-    function initBtn() {
-        //新增药品医嘱
-        $("#addMedicine").click(function () {
-            var url = CTX + "/api/pharmacy/listForMedication/index.ahsj?token=" + TOKEN+"&medicalOrderNumber="+$("#number").val();
-            dialog.show(url, "添加医嘱用药（Add medical order medication）")
-        });
-
-        //新增项目医嘱
-        $("#addProject").click(function () {
-            var url = CTX + "/api/treatmentplan/project/index.ahsj?token=" + TOKEN+"&medicalOrderNumber="+$("#number").val();
-            dialog.show(url, "通过医嘱添加项目（Add items by doctor's advice）")
-        });
-
-        // 查看模板明细
-        $("#visitTemplateBtn").click(function () {
-            var templateNumber = $("#chooseTemplate").val();
-            if(templateNumber == 0)
-                dialog.warn("请先选择一条模板");
-            else {
-                var url = CTX + "/api/medicalOrderTemplateDetail/list/index.ahsj?token=" + TOKEN + "&templateNumber=" + templateNumber;
-                dialog.show(url, "医嘱模板明细查看");
-            }
-        });
-        // 选择模板
-        $("#selectTemplateBtn").click(function () {
-            var templateNumber = $("#chooseTemplate").val();
-            var number =$("#number").val();
-            if(templateNumber == 0)
-                dialog.warn("请先选择一条模板");
-            else {
-                dialog.confirm('确定添加该模板?', function (index, layero) {
-
-                    $.ahsjajax(CTX + "/api/medicalOrderDetail/addTemplate.ahsj?=" + TOKEN,
-                        {
-                            "templateNumber": templateNumber,
-                            "number": number
-                            // "name":name
-                        },
-                        function (msg) {
-                            if (msg.success) {
-                                M.toast({
-                                    html: msg.message, completeCallback: function () {
-                                    }
-                                });
-                                grid.search();
-                            } else {
-                                M.toast({
-                                    html: msg.message, completeCallback: function () {
-                                    }
-                                });
-                            }
-                        },
-                        function (data) {
+        function deleteInit(id) {
+            dialog.confirm('确定删除?', function (index, layero) {
+                $.ahsjajax(CTX + "/api/medicalOrderDetail/delete.ahsj",
+                    {"ids": id},
+                    function (msg) {
+                        if (msg.success) {
+                            swal.close();
                             M.toast({
-                                html: "网络异常", completeCallback: function () {
+                                html: msg.message, completeCallback: function () {
                                 }
                             });
+                            grid.search();
+                        } else {
+                            M.toast({
+                                html: msg.message, completeCallback: function () {
+                                }
+                            });
+                        }
+                    },
+                    function (data) {
+                        M.toast({
+                            html: "网络异常", completeCallback: function () {
+                            }
                         });
-                });
-            }
-        });
-        //新增按钮
-        $("#createBtn").click(function () {
-            var url = CTX +"/api/medicalOrderDetail/update/index.ahsj?token="+TOKEN + "&number=" +$("#number").val()+"&medicalOrderType="+$("#medicalOrderType").val();
-            dialog.show(url, "添加新医嘱（Add a new order）")
-        });
-        $("#deleteManyBtn").click(function () {
-            var ids = grid.getSelectedRows();
-            if (ids.length == 0) {
-                dialog.warn("请至少选择一条数据");
-                return;
-            }
-            deleteInit(ids.join(','));
-            grid.search();
-        });
-        //搜索按钮
-        $('#searchBtn').click(function () {
-            grid.search();
-        });
-        $('#resetBtn').click(function () {
-            grid.reset();
-        });
-    }
+                    }
+                );
+            });
+        }
 
-    $("input").change(function(){
-        $(this).val($(this).val().trim());
-    });
+
+        //医嘱开药   用药医嘱
+        function addMedicine(id, medicalOrderNumber) {
+            $.ahsjajax(CTX + "/api/medicalOrderDetail/addMedicine.ahsj",
+                {"ids": id, "medicalOrderNumber": medicalOrderNumber},
+                function (msg) {
+
+                    if (msg.success) {
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                        grid.search();
+                    } else {
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                    }
+                },
+                function (data) {
+                    M.toast({
+                        html: "网络异常", completeCallback: function () {
+                        }
+                    });
+                }
+            );
+        }
+
+        //医嘱开项目  项目医嘱 id:项目表ID，number:项目表编号 medicalOrderNumber：医嘱编号
+        function addProject(id, medicalOrderNumber) {
+            $.ahsjajax(CTX + "/api/medicalOrderDetail/addProject.ahsj",
+                {"ids": id, "medicalOrderNumber": medicalOrderNumber},
+                function (msg) {
+
+                    if (msg.success) {
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                        grid.search();
+                    } else {
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                    }
+                },
+                function (data) {
+                    M.toast({
+                        html: "网络异常", completeCallback: function () {
+                        }
+                    });
+                }
+            );
+        }
+
+
+        function initBtn() {
+            //新增药品医嘱
+            $("#addMedicine").click(function () {
+                var url = CTX + "/api/pharmacy/listForMedication/index.ahsj?token=" + TOKEN + "&medicalOrderNumber=" + $("#number").val();
+                dialog.show(url, "添加医嘱用药（Add medical order medication）")
+            });
+
+            //新增项目医嘱
+            $("#addProject").click(function () {
+                var url = CTX + "/api/treatmentplan/project/index.ahsj?token=" + TOKEN + "&medicalOrderNumber=" + $("#number").val();
+                dialog.show(url, "通过医嘱添加项目（Add items by doctor's advice）")
+            });
+
+            // 查看模板明细
+            $("#visitTemplateBtn").click(function () {
+                var templateNumber = $("#chooseTemplate").val();
+                if (templateNumber == 0)
+                    dialog.warn("请先选择一条模板");
+                else {
+                    var url = CTX + "/api/medicalOrderTemplateDetail/list/index.ahsj?token=" + TOKEN + "&templateNumber=" + templateNumber;
+                    dialog.show(url, "医嘱模板明细查看");
+                }
+            });
+            // 选择模板
+            $("#selectTemplateBtn").click(function () {
+                var templateNumber = $("#chooseTemplate").val();
+                var number = $("#number").val();
+                if (templateNumber == 0)
+                    dialog.warn("请先选择一条模板");
+                else {
+                    dialog.confirm('确定添加该模板?', function (index, layero) {
+
+                        $.ahsjajax(CTX + "/api/medicalOrderDetail/addTemplate.ahsj?=" + TOKEN,
+                            {
+                                "templateNumber": templateNumber,
+                                "number": number
+                                // "name":name
+                            },
+                            function (msg) {
+                                if (msg.success) {
+                                    M.toast({
+                                        html: msg.message, completeCallback: function () {
+                                        }
+                                    });
+                                    grid.search();
+                                } else {
+                                    M.toast({
+                                        html: msg.message, completeCallback: function () {
+                                        }
+                                    });
+                                }
+                            },
+                            function (data) {
+                                M.toast({
+                                    html: "网络异常", completeCallback: function () {
+                                    }
+                                });
+                            });
+                    });
+                }
+            });
+            //新增按钮
+            $("#createBtn").click(function () {
+                var url = CTX + "/api/medicalOrderDetail/update/index.ahsj?token=" + TOKEN + "&number=" + $("#number").val() + "&medicalOrderType=" + $("#medicalOrderType").val();
+                dialog.show(url, "添加新医嘱（Add a new order）")
+            });
+            $("#deleteManyBtn").click(function () {
+                var ids = grid.getSelectedRows();
+                if (ids.length == 0) {
+                    dialog.warn("请至少选择一条数据");
+                    return;
+                }
+                deleteInit(ids.join(','));
+                grid.search();
+            });
+            //搜索按钮
+            $('#searchBtn').click(function () {
+                grid.search();
+            });
+            $('#resetBtn').click(function () {
+                grid.reset();
+            });
+        }
+
+        $("input").change(function () {
+            $(this).val($(this).val().trim());
+        });
+
 
 </script>
 </body>

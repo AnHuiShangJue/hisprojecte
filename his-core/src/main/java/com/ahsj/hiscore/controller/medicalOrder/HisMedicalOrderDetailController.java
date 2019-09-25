@@ -1,5 +1,6 @@
 package com.ahsj.hiscore.controller.medicalOrder;
 
+import com.ahsj.hiscore.common.utils.ZipUtils;
 import com.ahsj.hiscore.core.CodeHelper;
 import com.ahsj.hiscore.entity.*;
 import com.ahsj.hiscore.services.*;
@@ -334,6 +335,24 @@ public class HisMedicalOrderDetailController extends BaseController {
     ) throws Exception {
         if(null != request.getParameter("id")){
             return  hisMedicalOrderDetailService.stopOrder(id,getId());
+        }else  return MessageUtil.createMessage(false,"参数异常");
+    }
+
+    /**
+     *@Description 取消临时医嘱
+     *@Params [model, request, id]
+     *@return core.message.Message
+     *@Author zhushixiang
+     *@Date 2019-09-25
+     *@Time 11:09
+    **/
+    @RequestMapping(value = "cancleOrder.ahsj", method = {RequestMethod.POST})
+    @ResponseBody
+    public Message cancleOrder (Map<String, Object> model, HttpServletRequest request
+            , @RequestParam(value="id", required=true) Long id
+    ) throws Exception {
+        if(null != request.getParameter("id")){
+            return  hisMedicalOrderDetailService.cancleOrder(id,getId());
         }else  return MessageUtil.createMessage(false,"参数异常");
     }
 

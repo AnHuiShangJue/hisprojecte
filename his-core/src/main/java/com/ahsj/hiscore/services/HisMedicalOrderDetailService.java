@@ -119,4 +119,14 @@ public interface HisMedicalOrderDetailService {
      *@Time 9:22
     **/
     Message addCombinationMedicine(Long[] ids)throws Exception;
+
+    /**
+     *@Description 取消临时医嘱
+     *@Params [id]
+     *@return core.message.Message
+     *@Author zhushixiang
+     *@Date 2019-09-25
+     *@Time 11:26
+    **/
+    Message cancleOrder(Long id,Long loginUser)throws Exception;
 }
