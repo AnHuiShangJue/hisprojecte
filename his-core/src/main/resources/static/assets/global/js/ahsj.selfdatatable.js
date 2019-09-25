@@ -177,6 +177,24 @@ var AHSJDT = function () {
                 i++;
             });
             return singledoses;
+        },
+        getCount:function () {
+            counts = [];
+            var i = 0;
+            $('tbody > tr > td  > input[name="singledose"]', table).each(function () {
+                counts[i] = $(this).val();
+                i++;
+            });
+            return counts;
+        },
+        getAlreadyout:function () {
+            alreadyouts = [];
+            var i = 0;
+            $('tbody > tr > td  > input[name="singledose"]', table).each(function () {
+                alreadyouts[i] = $(this).val();
+                i++;
+            });
+            return alreadyouts;
         }
     };
 
