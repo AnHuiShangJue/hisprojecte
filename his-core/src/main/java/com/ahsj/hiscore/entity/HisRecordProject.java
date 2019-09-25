@@ -54,7 +54,7 @@ public class HisRecordProject extends BaseEntity {
 
     private BigDecimal totalPrice;
 
-    private Long number;
+    private String number;
 
     private String pinyinCode;
 
@@ -254,11 +254,11 @@ public class HisRecordProject extends BaseEntity {
         this.price = price;
     }
 
-    public Long getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(Long number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 

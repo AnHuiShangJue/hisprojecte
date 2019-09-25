@@ -434,9 +434,22 @@ public class HisRecordProjectServiceImpl implements HisRecordProjectService {
      **/
     @Override
     @Transactional(readOnly = true)
-    public Message insert(HisRecordProject hisRecordProject) throws Exception {
+    public Message insert(HisRecordProject hisRecordProject){
         hisRecordProjectMapper.insert(hisRecordProject);
         return MessageUtil.createMessage(true, "新增医嘱项目成功（New medical order success）");
+    }
+
+    /**
+     * @Description
+     * @Author  muxu
+     * @Date  2019/9/25
+     * @Time 12:36
+     * @Return
+     * @Params
+    **/
+    @Override
+    public void saveAboutCareLevel(HisRecordProject hisRecordProject) {
+        hisRecordProjectMapper.insert(hisRecordProject);
     }
 
     /**

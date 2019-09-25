@@ -199,7 +199,7 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
                 hisRecordProject.setDescription(hisProject.getDescription());
                 hisRecordProject.setType(hisProject.getType());
                 hisRecordProject.setPrice(hisProject.getPrice());
-                hisRecordProject.setNumber(Long.parseLong(hisProject.getNumber()));
+                hisRecordProject.setNumber(hisProject.getNumber());
                 hisRecordProject.setPinyinCode(hisProject.getPinyinCode());
                 hisRecordProject.setUnit(hisProject.getUnit());
                 hisRecordProject.setProjectId(hisProject.getId());

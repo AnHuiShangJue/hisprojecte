@@ -446,11 +446,15 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         if (sumPrice.compareTo(hisTollRecord1.getRecoverTheFee()) != 0) {
             return MessageUtil.createMessage(false, "退款金额不一致");
         }
+
+
         String createdate = new SimpleDateFormat("yyyyMMdd").format(new Date());
         int count = hisTollRecordMapper.selectNumbCount(createdate) + 1;
         //编号
         String number = createdate + String.format("%05d", count);
         number = "HTR" + number;
+
+
         HisTollRecord hisTollRecord = new HisTollRecord();
         hisTollRecord.setMoney(new BigDecimal(0));
         hisTollRecord.setActualCharge(new BigDecimal(0));

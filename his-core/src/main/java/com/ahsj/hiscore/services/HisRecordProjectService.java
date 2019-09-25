@@ -240,7 +240,17 @@ public interface HisRecordProjectService {
      * @Date 2019-09-18
      * @Time 9:40
      **/
-    Message insert(HisRecordProject hisRecordProject) throws Exception;
+    Message insert(HisRecordProject hisRecordProject);
+
+    /**
+     * @Description 保存
+     * @Author  muxu
+     * @Date  2019/9/25
+     * @Time 12:35
+     * @Return void
+     * @Params [hisRecordProject]
+    **/
+    void saveAboutCareLevel(HisRecordProject hisRecordProject);
 
     /**
      * @Description 根据就诊编号查询历史项目

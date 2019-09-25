@@ -12,7 +12,7 @@
         <result column="description" property="description" jdbcType="VARCHAR"/>
         <result column="type" property="type" jdbcType="SMALLINT"/>
         <result column="price" property="price" jdbcType="DECIMAL"/>
-        <result column="number" property="number" jdbcType="BIGINT"/>
+        <result column="number" property="number" jdbcType="VARCHAR"/>
         <result column="pinyin_code" property="pinyinCode" jdbcType="VARCHAR"/>
         <result column="unit" property="unit" jdbcType="VARCHAR"/>
         <result column="department_id" property="departmentId" jdbcType="BIGINT"/>
@@ -63,7 +63,7 @@
     values (#{id,jdbcType=BIGINT}, #{recordId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
       #{createUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, 
       #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{type,jdbcType=SMALLINT}, 
-      #{price,jdbcType=DECIMAL}, #{number,jdbcType=BIGINT}, #{pinyinCode,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DECIMAL}, #{number,jdbcType=VARCHAR}, #{pinyinCode,jdbcType=VARCHAR},
       #{unit,jdbcType=VARCHAR}, #{departmentId,jdbcType=BIGINT}, #{checkDescription,jdbcType=VARCHAR}, 
       #{checkNumber,jdbcType=BIGINT}, #{isChecked,jdbcType=SMALLINT}, #{isPayed,jdbcType=SMALLINT}, 
       #{projectId,jdbcType=BIGINT},
@@ -166,7 +166,7 @@
                 #{price,jdbcType=DECIMAL},
             </if>
             <if test="number != null">
-                #{number,jdbcType=BIGINT},
+                #{number,jdbcType=VARCHAR},
             </if>
             <if test="pinyinCode != null">
                 #{pinyinCode,jdbcType=VARCHAR},
@@ -228,7 +228,7 @@
                 price = #{price,jdbcType=DECIMAL},
             </if>
             <if test="number != null">
-                number = #{number,jdbcType=BIGINT},
+                number = #{number,jdbcType=VARCHAR},
             </if>
             <if test="pinyinCode != null">
                 pinyin_code = #{pinyinCode,jdbcType=VARCHAR},
@@ -274,7 +274,7 @@
       description = #{description,jdbcType=VARCHAR},
       type = #{type,jdbcType=SMALLINT},
       price = #{price,jdbcType=DECIMAL},
-      number = #{number,jdbcType=BIGINT},
+      number = #{number,jdbcType=VARCHAR},
       pinyin_code = #{pinyinCode,jdbcType=VARCHAR},
       unit = #{unit,jdbcType=VARCHAR},
       department_id = #{departmentId,jdbcType=BIGINT},
@@ -303,7 +303,7 @@
             #{item.createUserId,jdbcType=BIGINT}, #{item.updateDate,jdbcType=TIMESTAMP},
             #{item.updateUserId,jdbcType=BIGINT},
             #{item.name,jdbcType=VARCHAR}, #{item.description,jdbcType=VARCHAR}, #{item.type,jdbcType=SMALLINT},
-            #{item.price,jdbcType=DECIMAL}, #{item.number,jdbcType=BIGINT}, #{item.pinyinCode,jdbcType=VARCHAR},
+            #{item.price,jdbcType=DECIMAL}, #{item.number,jdbcType=VARCHAR}, #{item.pinyinCode,jdbcType=VARCHAR},
             #{item.unit,jdbcType=VARCHAR}, #{item.departmentId,jdbcType=BIGINT},
             #{item.checkDescription,jdbcType=VARCHAR},
             #{item.checkNumber,jdbcType=BIGINT}, #{item.isChecked,jdbcType=SMALLINT}, #{item.isPayed,jdbcType=SMALLINT},
@@ -397,7 +397,7 @@
             and hrp.name = #{parameter.name,jdbcType=INTEGER}
         </if>
         <if test="parameter.number != null and parameter.number != ''">
-            and hrp.number = #{parameter.number,jdbcType=INTEGER}
+            and hrp.number = #{parameter.number,jdbcType=VARCHAR}
         </if>
         <if test="parameter.orders != null and parameter.orders != ''">
             order by ${parameter.orders}
@@ -457,7 +457,7 @@
             and hrp.name = #{parameter.name,jdbcType=INTEGER}
         </if>
         <if test="parameter.number != null and parameter.number != ''">
-            and hrp.number = #{parameter.number,jdbcType=INTEGER}
+            and hrp.number = #{parameter.number,jdbcType=VARCHAR}
         </if>
 
         <if test="parameter.orders != null and parameter.orders != ''">

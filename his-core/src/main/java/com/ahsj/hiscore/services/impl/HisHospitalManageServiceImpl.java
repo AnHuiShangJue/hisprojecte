@@ -76,6 +76,15 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
     @Autowired
     HisProjectMapper hisProjectMapper;
 
+    @Autowired
+    HisRecordProjectService hisRecordProjectService;
+
+    @Autowired
+    HisTollRecordMapper hisTollRecordMapper;
+
+    @Autowired
+    HisTollDetailsMapper hisTollDetailsMapper;
+
     /**
      * @Description 新增
      * @Author muxu
@@ -417,28 +426,67 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
                 Long[] ids = new Long[hisHospitalManageList.size()];
                 List<HisHospitalManage> hisHospitalManageList1 = new ArrayList<>();
                 int i = 0;
+                String number ="0";
                 for (HisHospitalManage h : hisHospitalManageList
                 ) {
                     ids[i] = h.getId();
                     HisHospitalManage hisHospitalManage1 = hisHospitalManageMapper.selectByPrimaryKey(ids[i]);
                     hisHospitalManage1.setId(ids[i]);
+                    HisMedicalRecord hisMedicalRecord = hisMedicalRecordMapper.selectByMedicalRecordId(hisHospitalManage1.getMedicalNumber());
+                    HisRecordProject hisRecordProject = new HisRecordProject();
+                    HisTollDetails hisTollDetails = new HisTollDetails();
+                    HisTollRecord hisTollRecord = new HisTollRecord();
+                    hisRecordProject.setRecordId(hisMedicalRecord.getId());
                     if (hisHospitalManage1.getCareLevel()==1){
-                        String number = "120100003（ACAC001）";
-                        HisProject hisProject =hisProjectMapper.queryHisProjectByNumber(number);
-                        hisHospitalManage1.setRestDeposit(h.getRestDeposit().subtract(hisProject.getPrice()));
+                        number = "120100003（ACAC001）";
                     }else if (hisHospitalManage1.getCareLevel()==2){
-                        String number = "120100004（ACAB001）";
-                        HisProject hisProject =hisProjectMapper.queryHisProjectByNumber(number);
-                        hisHospitalManage1.setRestDeposit(h.getRestDeposit().subtract(hisProject.getPrice()));
+                        number = "120100004（ACAB001）";
                     }else if (hisHospitalManage1.getCareLevel()==3){
-                        String number = "120100005（ACAA001）";
-                        HisProject hisProject =hisProjectMapper.queryHisProjectByNumber(number);
-                        hisHospitalManage1.setRestDeposit(h.getRestDeposit().subtract(hisProject.getPrice()));
+                        number = "120100005（ACAA001）";
                     }else if (hisHospitalManage1.getCareLevel()==5){
-                        String number = "120100002（ACAD001）";
-                        HisProject hisProject =hisProjectMapper.queryHisProjectByNumber(number);
-                        hisHospitalManage1.setRestDeposit(h.getRestDeposit().subtract(hisProject.getPrice()));
+                        number = "120100002（ACAD001）";
                     }
+                    HisProject hisProject =hisProjectMapper.queryHisProjectByNumber(number);
+                    hisHospitalManage1.setRestDeposit(h.getRestDeposit().subtract(hisProject.getPrice()));
+                    hisRecordProject.setName(hisProject.getName());
+                    hisRecordProject.setType(hisProject.getType());
+                    hisRecordProject.setPrice(hisProject.getPrice());
+                    hisRecordProject.setNumber(hisProject.getNumber());
+                    hisRecordProject.setPinyinCode(hisProject.getPinyinCode());
+                    hisRecordProject.setUnit(hisProject.getUnit());
+                    hisRecordProject.setIsChecked(new Short("2"));
+                    hisRecordProject.setIsPayed(new Short("1"));
+                    hisRecordProject.setIsBack(2);
+                    hisRecordProject.setProjectId(hisProject.getId());
+                    hisRecordProject.setNum(1);
+                    hisRecordProject.setCreateDate(date);
+                    hisRecordProject.setUpdateDate(date);
+                    hisRecordProjectService.insert(hisRecordProject);
+                    hisTollDetails.setName(hisProject.getName());
+                    hisTollDetails.setTargetId(hisRecordProject.getId());
+                    hisTollDetails.setType(2);
+                    hisTollDetails.setMoney(hisProject.getPrice());
+                    hisTollDetails.setCreateDate(date);
+                    hisTollDetails.setUpdateDate(date);
+                    hisTollRecord.setMoney(hisProject.getPrice());
+                    hisTollRecord.setActualCharge(hisProject.getPrice());
+                    hisTollRecord.setRecoverTheFee(new BigDecimal("0.00"));
+                    hisTollRecord.setType(2);
+                    hisTollRecord.setAttenchType(2);
+                    hisTollRecord.setCreateDate(date);
+                    hisTollRecord.setUpdateDate(date);
+                    hisTollRecord.setDeposit(h.getRestDeposit().subtract(hisProject.getPrice()));
+                    String createdate1 = new SimpleDateFormat("yyyyMMdd").format(new Date());
+                    int count = hisTollRecordMapper.selectNumbCount(createdate1) + 1;
+                    //编号
+                    String number1 = createdate1 + String.format("%05d", count);
+                    number1 = "HTR" + number1;
+                    hisTollRecord.setNumber(number1);
+                    hisTollRecord.setMedicalRecordId(hisMedicalRecord.getMedicalRecordId());
+                    hisTollRecord.setIsSettlement(2);
+                    hisTollRecordMapper.insert(hisTollRecord);
+                    hisTollDetails.setTollRecordId(hisTollRecord.getId());
+                    hisTollDetailsMapper.insert(hisTollDetails);
                     hisHospitalManageList1.add(hisHospitalManage1);
                     i++;
                 }

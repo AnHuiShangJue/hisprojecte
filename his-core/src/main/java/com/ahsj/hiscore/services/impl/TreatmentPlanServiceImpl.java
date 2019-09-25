@@ -274,7 +274,7 @@ public class TreatmentPlanServiceImpl implements TreatmentPlanService {
                 if (h.getId().equals(hisRecordProject.getId())) {
                     hisRecordProject.setName(h.getName());
                     hisRecordProject.setDescription(h.getDescription());
-                    hisRecordProject.setNumber(Long.parseLong(h.getNumber()));
+                    hisRecordProject.setNumber(h.getNumber());
                     hisRecordProject.setPinyinCode(h.getPinyinCode());
                     hisRecordProject.setType(h.getType());
                     hisRecordProject.setRecordId(recordId);
