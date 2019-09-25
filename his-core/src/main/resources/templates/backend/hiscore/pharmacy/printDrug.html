@@ -95,17 +95,23 @@ Scripts
                 if (!isNullOrEmpty(jsons)) {//有
                     var trs = "<tr><td><h6 class='black-text'>名称(name)</h6></td><td><h6 class='black-text'>数目(number)</h6></td><td><h6 class='black-text'>规格(specification)</h6></td><td><h6 class='black-text'>用法用量(usage and dosage)</h6></td><td><h6 class='black-text'>有效期(Validity period)</h6></td></tr>";
                     $.each(data, function (index, item) {
+                        if (isNullOrEmpty(item.drugsName)) {
+                            item.drugsName = ""
+                        }
                         if (isNullOrEmpty(item.tdrugsName)) {
                             item.tdrugsName = ""
                         }
                         if (isNullOrEmpty(item.tdescription)) {
                             item.tdescription = ""
                         }
+                        if (isNullOrEmpty(item.description)) {
+                            item.description = ""
+                        }
                         if (isNullOrEmpty(item.tdrugsSpec)) {
                             item.tdrugsSpec = ""
                         }
-                        if (isNullOrEmpty(item.drugsName)) {
-                            item.drugsName = ""
+                        if (isNullOrEmpty(item.drugsSpec)) {
+                            item.drugsSpec = ""
                         }
                         trs += "<tr><td><p class='black-text fontsize03'> " + item.drugsName + "(" + item.tdrugsName + ")" + "</p></td><td ><p class='black-text fontsize03'> " + item.exitCount + "</p></td><td ><p class='black-text fontsize03'> " + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</p></td><td ><p class='black-text fontsize03'> " + item.description + "(" + item.tdescription + ")" + "</p></td><td ><p class='black-text fontsize03'> " + item.validityPeriod + "</p></td></tr >";
                     });

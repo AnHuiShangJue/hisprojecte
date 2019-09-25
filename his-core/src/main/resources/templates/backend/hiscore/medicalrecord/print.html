@@ -179,7 +179,6 @@
         printShow3();
     });
     var number = $("#number").val();
-    console.log(number)
 
     function printShow2() {
         $.ahsjajax(
@@ -205,7 +204,7 @@
             function (data) {
                 var jsons = data[0];
                 if (!isNullOrEmpty(jsons)) {//有
-                    var trs = "<tr><td><h6 class='black-text'>名称(name)</h6></td><td><h6 class='black-text'>数目(number)</h6></td><td><h6 class='black-text'>单价(price)</h6></td><td><h6 class='black-text'>单项总价(Single item total price)</h6></td></tr>";
+                    var trs = "<tr><td><h6 class='black-text'>名称(name)</h6></td><td><h6 class='black-text'>规格(drugsSpec)</h6><td><h6 class='black-text'>数目(number)</h6></td><td><h6 class='black-text'>单价(price)</h6></td><td><h6 class='black-text'>单项总价(Single item total price)</h6></td></tr>";
                     $.each(data, function (index, item) {
                         if (isNullOrEmpty(item.name)) {
                             item.name = ""
@@ -213,12 +212,17 @@
                         if (isNullOrEmpty(item.tranName)) {
                             item.tranName = ""
                         }
-                        trs += "<tr><td><p class='black-text fontsize03'> " + item.drugsName + "(" + item.tdrugsName + ")" + "</p></td><td ><p class='black-text fontsize03'> " + item.count + "</p></td><td ><p class='black-text fontsize03'>" + item.price + "</p></td><td ><p class='black-text fontsize03'> " + item.totalPrice + "</p></td></tr >";
+                        if (isNullOrEmpty(item.drugsSpec)) {
+                            item.drugsSpec = ""
+                        }
+                        if (isNullOrEmpty(item.tdrugsSpec)) {
+                            item.tdrugsSpec = ""
+                        }
+                        trs += "<tr><td><p class='black-text fontsize03'> " + item.drugsName + "(" + item.tdrugsName + ")" + "</p></td><td ><p class='black-text fontsize03'>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</p></td><td ><p class='black-text fontsize03'> " + item.count + "</p></td><td ><p class='black-text fontsize03'>" + item.price + "</p></td><td ><p class='black-text fontsize03'> " + item.totalPrice + "</p></td></tr >";
                     });
                     $("#drug").append(trs);
-                }
-                else{
-                    $("#tabledrug").attr("style","display:none;");
+                } else {
+                    $("#tabledrug").attr("style", "display:none;");
                 }
             },
             function () {
@@ -247,9 +251,8 @@
                         trs += "<tr><td><p class='black-text fontsize03'> " + item.name + "(" + item.tname + ")" + "</p></td><td ><p class='black-text fontsize03'> " + item.num + "</p></td><td ><p class='black-text fontsize03'>" + item.price + "</p></td><td ><p class='black-text fontsize03'> " + item.totalPrice + "</p></td></tr >";
                     });
                     $("#project").append(trs);
-                }
-                else{
-                    $("#tableP").attr("style","display:none;");
+                } else {
+                    $("#tableP").attr("style", "display:none;");
                 }
             },
             function () {
