@@ -385,7 +385,7 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
         //已经停嘱设置不可编辑
 //        hisMedicalOrderDetail.setIsFirstEdit(2);
         hisMedicalOrderDetail.setStopUserId(loginUser);
-        //停嘱时若药品未付钱直接删除此项明细
+        //停嘱时若药品未付钱直接删除此项明细,若已付请出库后再退回
 
         hisMedicalOrderDetailMapper.updateByPrimaryKeySelective(hisMedicalOrderDetail);
         return MessageUtil.createMessage(true,"停嘱成功(Stop success)");
