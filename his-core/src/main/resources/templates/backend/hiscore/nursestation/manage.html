@@ -80,6 +80,25 @@
                                     <label for="phoneNumber">手机号<span style="font-size: 12px">(phone number)</span></label>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col  s6 m6 l6 xl6">
+                                    <h6>是否出院（Is it discharged?）</h6>
+
+                                    <label>
+                                        <input id="noWarning" name="isDischarged" type="radio" value="1"/>
+                                        <span>未出院（Not discharged）</span>
+                                    </label>
+                                    <label>
+                                        <input id="isWarning" name="isDischarged" type="radio" value="2"/>
+                                        <span>已出院（Discharged）</span>
+                                    </label>
+                                    <label>
+                                        <input id="noSelectWarning" class="radiotdefault" name="isDischarged" type="radio"
+                                               value="0" checked/>
+                                        <span>不选择(Do not choose)</span>
+                                    </label>
+                                </div>
+                            </div>
                         </form>
                     </div>
                     <div class="row">
@@ -181,12 +200,12 @@
                     {
                         "title":"所属病房",
                         "data":"wardsNumber",
-                        "name":""
+                        "name":"wardsNumber"
                     },
                     {
                         "title":"所属病床",
                         "data":"bedsNumber",
-                        "name":""
+                        "name":"bedsNumber"
                     },
                     {
                         "title":"主治医生",

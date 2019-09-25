@@ -1,6 +1,8 @@
 package com.ahsj.hiscore.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import core.code.CodeValueColumn;
+import core.code.Constants;
 import core.entity.BaseEntity;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -22,7 +24,9 @@ public class HisInfusion extends BaseEntity {
 
     private String usages;
 
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "intervals", typeName = "intervalsName")
     private Integer intervals;
+    private String intervalsName;
 
     private String speed;
 
@@ -352,5 +356,14 @@ public class HisInfusion extends BaseEntity {
 
     public void setSingleDose(Integer singleDose) {
         this.singleDose = singleDose;
+    }
+
+
+    public String getIntervalsName() {
+        return intervalsName;
+    }
+
+    public void setIntervalsName(String intervalsName) {
+        this.intervalsName = intervalsName;
     }
 }
