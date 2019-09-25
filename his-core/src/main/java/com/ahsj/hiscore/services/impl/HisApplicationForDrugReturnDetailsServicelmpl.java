@@ -289,6 +289,7 @@ public class HisApplicationForDrugReturnDetailsServicelmpl implements HisApplica
             List<Translate> translates = iTranslateService.queryTranslate(translate);
             if (!EmptyUtil.Companion.isNullOrEmpty(translates)) {
                 translates.stream().filter(f -> f.getTranslateChina().equals(h.getDrugsName())).forEach(e -> h.setTdrugsName(e.getTranslateKhmer()));//赋翻译字段
+                translates.stream().filter(f -> f.getTranslateChina().equals(h.getDrugsSpec())).forEach(e -> h.setTdrugsSpec(e.getTranslateKhmer()));//赋翻译字段
             }
         }
         return list;

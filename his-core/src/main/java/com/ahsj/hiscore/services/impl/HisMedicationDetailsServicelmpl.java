@@ -17,6 +17,7 @@ import com.ahsj.hiscore.services.HisPharmacyDetailService;
 import core.entity.PageBean;
 import core.message.Message;
 import core.message.MessageUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -181,10 +182,10 @@ public class HisMedicationDetailsServicelmpl implements HisMedicationDetailsServ
         for (HisMedicationDetails h : hisMedicationDetails) {
             Translate translate = new Translate();
             translate.setTranslateId(h.getmId());//药品基本表ID
-            translate.setTranslateChina(h.getDrugsName());
             translate.setTranslateType(Constants.TRANSLATE_HIS_MEDICINEINFO);
             List<Translate> translates = iTranslateService.queryTranslate(translate);
-            translates.stream().forEach(f -> h.setTdrugsName(f.getTranslateKhmer()));//赋翻译字段
+            translates.stream().filter(f-> StringUtils.equals(h.getDrugsName(),f.getTranslateChina())).forEach(f -> h.setTdrugsName(f.getTranslateKhmer()));//赋翻译字段
+            translates.stream().filter(f-> StringUtils.equals(h.getDrugsSpec(),f.getTranslateChina())).forEach(f -> h.setTdrugsSpec(f.getTranslateKhmer()));//赋翻译字段
         }
         return hisMedicationDetails;
     }
@@ -408,6 +409,7 @@ public class HisMedicationDetailsServicelmpl implements HisMedicationDetailsServ
             List<Translate> translates = iTranslateService.queryTranslate(translate);
             if (!EmptyUtil.Companion.isNullOrEmpty(translates)) {
                 translates.stream().filter(f -> f.getTranslateChina().equals(hisMedicalRecord.getDrugsName())).forEach(f -> hisMedicalRecord.setTdrugsName(f.getTranslateKhmer()));
+                translates.stream().filter(f -> f.getTranslateChina().equals(hisMedicalRecord.getDrugsSpec())).forEach(f -> hisMedicalRecord.setTdrugsSpec(f.getTranslateKhmer()));
             }
         }
         return hisMedicalRecords;

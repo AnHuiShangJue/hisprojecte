@@ -49,6 +49,8 @@ public class HisMedicationDetails extends BaseEntity {
 
     private String drugsSpec;
 
+    private String tdrugsSpec;
+
     @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "prescription", typeName = "prescriptions")
     private Integer prescription;
 
@@ -407,6 +409,14 @@ public class HisMedicationDetails extends BaseEntity {
 
     public void setMedicalInsuranceSign(Integer medicalInsuranceSign) {
         this.medicalInsuranceSign = medicalInsuranceSign;
+    }
+
+    public String getTdrugsSpec() {
+        return tdrugsSpec;
+    }
+
+    public void setTdrugsSpec(String tdrugsSpec) {
+        this.tdrugsSpec = tdrugsSpec;
     }
 
     public String getPlaceorigin() {

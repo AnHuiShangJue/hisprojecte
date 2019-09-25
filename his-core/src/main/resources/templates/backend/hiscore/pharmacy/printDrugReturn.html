@@ -93,9 +93,21 @@ Scripts
             {"recordNumber": recordNumber},
             function (data) {
                 if (!isNullOrEmpty(data)) {//有
-                    var trs = "<tr><td><h6 class='black-text'>名称(name)</h6></td><td><h6 class='black-text'>数目(number)</h6></td><td><h6 class='black-text'>单价(unit price)</h6></td><td><h6 class='black-text'>单项总价(Single item total price)</h6></td></tr>";
+                    var trs = "<tr><td><h6 class='black-text'>名称(name)</h6></td><td><h6 class='black-text'>规格(specification)</h6></td><td><h6 class='black-text'>数目(number)</h6></td><td><h6 class='black-text'>单价(unit price)</h6></td><td><h6 class='black-text'>单项总价(Single item total price)</h6></td></tr>";
                     $.each(data, function (index, item) {
-                        trs += "<tr><td><p class='black-text fontsize03'>" + item.drugsName + "(" + item.tdrugsName + ")" + "</p></td><td ><p class='black-text fontsize03'>" + item.returnCount + "</p></td><td ><p class='black-text fontsize03'>" + item.price + "</p></td><td ><p class='black-text fontsize03'>" + item.totalPrice + "</p></td></tr >";
+                        if (isNullOrEmpty(item.drugsName)) {
+                            item.drugsName = ""
+                        }
+                        if (isNullOrEmpty(item.tdrugsName)) {
+                            item.tdrugsName = ""
+                        }
+                        if (isNullOrEmpty(item.drugsSpec)) {
+                            item.drugsSpec = ""
+                        }
+                        if (isNullOrEmpty(item.tdrugsSpec)) {
+                            item.tdrugsSpec = ""
+                        }
+                        trs += "<tr><td><p class='black-text fontsize03'>" + item.drugsName + "(" + item.tdrugsName + ")" + "</p></td><td ><p class='black-text fontsize03'>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</p></td><td ><p class='black-text fontsize03'>" + item.returnCount + "</p></td><td ><p class='black-text fontsize03'>" + item.price + "</p></td><td ><p class='black-text fontsize03'>" + item.totalPrice + "</p></td></tr >";
                     });
                 }
                 $("#table_id").append(trs);

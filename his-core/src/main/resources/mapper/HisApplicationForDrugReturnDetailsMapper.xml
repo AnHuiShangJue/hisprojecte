@@ -365,7 +365,7 @@ where a.voucher=#{voucher,jdbcType=VARCHAR}
     </if>
   </select>
 <select id="selectByRecordNumber" resultMap="BaseResultMap"  parameterType="java.lang.String" >
-select d.drugs_name,d.drugs_numb,d.price,d.total_price,d.return_count,o.id AS mId,i.`name` as patientName,d.create_date
+select d.drugs_name,d.drugs_numb,d.price,d.total_price,d.return_count,o.id AS mId,i.`name` as patientName,d.create_date,d.drugs_spec
 from his_application_for_drug_return_details as d
 LEFT JOIN his_medicine_info as o on o.drugs_numb = d.drugs_numb
 LEFT JOIN his_patient_info as i  on i.id =
