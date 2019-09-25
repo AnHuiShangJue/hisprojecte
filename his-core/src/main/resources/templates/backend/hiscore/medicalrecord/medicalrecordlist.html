@@ -232,7 +232,7 @@
     function infusion(medicalRecordId, patientId) {
 
         // var url = CTX + "/api/hisInfusion/selectByRecordIdListIndex/index.ahsj?token=" + TOKEN + "&medicalRecordId=" + medicalRecordId + "&patientId=" + patientId + "&isNurseOpreate=1";
-        var url = CTX + "/api/hisInfusion/infusionlist/index.ahsj?token=" + TOKEN +"&hospitalManage="+medicalRecordId+"&patientId="+patientId+"&isOpreate=1";
+        var url = CTX + "/api/hisInfusion/infusionlist/index.ahsj?token=" + TOKEN +"&hospitalManage="+medicalRecordId+"&patientId="+patientId+"&isOpreate=1"+"&flag=1";
         dialog.show(url, "输液单");
     }
 
