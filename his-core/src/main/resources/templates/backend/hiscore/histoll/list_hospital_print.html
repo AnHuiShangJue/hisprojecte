@@ -22,15 +22,20 @@
 
 <div class="row">
     <div class="row valign-wrapper">
+        <div class="col s12 m12 l12">
+            <label class="black-text">财务联(Financial group)</label>
+
+        </div>
+    </div>
+    <div class="row valign-wrapper">
         <div class="col s12 m12 l12 center">
-            <h5 class="black-text">中柬第一医院</h5>
-            <label class="black-text fontsize02">The first china-cambodia hospital</label>
+            <h5 class="black-text">中柬第一医院门诊住院收费统计</h5>
+            <label class="black-text fontsize02">The first china-cambodia hospital Outpatient and inpatient charge statistics</label>
         </div>
     </div>
     <div class="row valign-wrapper">
         <div class="col s4 m4 l4">
-            <label class="black-text fontsize01">交易流水号</label></br>
-            <label class="black-text fontsize02">Transaction flow number</label>
+            <label class="black-text fontsize01">交易流水号(Transaction flow number)</label>
         </div>
         <div class="col s8 m8 l8">
             <label class="black-text" th:text="${number}"></label>
@@ -40,18 +45,15 @@
     </div>
     <div class="row valign-wrapper">
         <div class="col s4 m4 l4">
-            <label class="black-text fontsize01">收费人</label></br>
-            <label class="black-text fontsize02">Toll collector</label>
+            <label class="black-text fontsize01">收费人(Toll collector)</label>
         </div>
         <div class="col s8 m8 l8">
             <label class="black-text"><span id="createName"></span></label>
         </div>
     </div>
-
     <div class="row valign-wrapper">
         <div class="col s4 m4 l4 ">
-            <label class="black-text fontsize01">收费金额</label></br>
-            <label class="black-text fontsize02">charge amount </label>
+            <label class="black-text fontsize01">收费金额(charge amount)</label>
         </div>
         <div class="col s8 m8 l8">
             <label class="black-text"><span id="totalPrices"></span></label>
@@ -59,8 +61,7 @@
     </div>
     <div class="row valign-wrapper">
         <div class="col s4 m4 l4 ">
-            <label class="black-text fontsize01">找回金额</label></br>
-            <label class="black-text fontsize02">Retrieve the amount </label>
+            <label class="black-text fontsize01">找回金额(Retrieve the amount)</label>
         </div>
         <div class="col s8 m8 l8">
             <label class="black-text"><span id="recoverTheFee"></span></label>
@@ -68,8 +69,7 @@
     </div>
     <div class="row valign-wrapper">
         <div class="col s4 m4 l4 ">
-            <label class="black-text fontsize01">收费时间</label></br>
-            <label class="black-text fontsize02">chargeable time</label>
+            <label class="black-text fontsize01">收费时间(Chargeable time)</label>
         </div>
         <div class="col s8 m8 l8">
             <label class="black-text"><span id="createDate"></span></label>
@@ -77,17 +77,177 @@
     </div>
     <div class="row valign-wrapper">
         <div class="col s12 m12 l12">
-            <h6 class="black-text">收费明细</h6>
-            <label class="black-text fontsize02">Charge details</label>
+            <label class="black-text fontsize01">收费明细(Charge details)</label>
+    </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 ">
+            <table id="table_id"></table>
+        </div>
+    </div>
+
+    <div class="row valign-wrapper" style="height: 100px">
+        <div class="col s5 m5 l5">
+            <ul>
+                <li style="border-top: 1px dashed #000;"></li>
+            </ul>
+        </div>
+        <div class="col s2 m2 l2 center">
+            <i class="material-icons">content_cut</i>
+        </div>
+        <div class="col s5 m5 l5">
+            <ul>
+                <li style="border-top: 1px dashed #000;"></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12">
+            <label class="black-text">科室联(Department al)</label>
+
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 center">
+            <h5 class="black-text">中柬第一医院门诊住院收费统计</h5>
+            <label class="black-text fontsize02">The first china-cambodia hospital Outpatient and inpatient charge statistics</label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4">
+            <label class="black-text fontsize01">交易流水号(Transaction flow number)</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text" th:text="${number}"></label>
+        </div>
+        <input type="hidden" id="number" th:value="${number}">
+
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4">
+            <label class="black-text fontsize01">收费人(Toll collector)</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text"><span id="createName"></span></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4 ">
+            <label class="black-text fontsize01">收费金额(charge amount)</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text"><span id="totalPrices"></span></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4 ">
+            <label class="black-text fontsize01">找回金额(Retrieve the amount)</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text"><span id="recoverTheFee"></span></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4 ">
+            <label class="black-text fontsize01">收费时间(Chargeable time)</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text"><span id="createDate"></span></label>
         </div>
     </div>
     <div class="row valign-wrapper">
         <div class="col s12 m12 l12">
-            <table id="table_id" style="font: 15px 'Roboto Condensed',Sans-serif"></table>
+            <label class="black-text fontsize01">收费明细(Charge details)</label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 ">
+            <table id="table_id1"></table>
+        </div>
+    </div>
+
+    <div class="row valign-wrapper" style="height: 100px">
+        <div class="col s5 m5 l5">
+            <ul>
+                <li style="border-top: 1px dashed #000;"></li>
+            </ul>
+        </div>
+        <div class="col s2 m2 l2 center">
+            <i class="material-icons">content_cut</i>
+        </div>
+        <div class="col s5 m5 l5">
+            <ul>
+               <li style="border-top: 1px dashed #000;"></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12">
+            <label class="black-text">自由联(Free coupon)</label>
+
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 center">
+            <h5 class="black-text">中柬第一医院门诊住院收费统计</h5>
+            <label class="black-text fontsize02">The first china-cambodia hospital Outpatient and inpatient charge statistics</label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4">
+            <label class="black-text fontsize01">交易流水号(Transaction flow number)</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text" th:text="${number}"></label>
+        </div>
+        <input type="hidden" id="number" th:value="${number}">
+
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4">
+            <label class="black-text fontsize01">收费人(Toll collector)</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text"><span id="createName"></span></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4 ">
+            <label class="black-text fontsize01">收费金额(charge amount)</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text"><span id="totalPrices"></span></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4 ">
+            <label class="black-text fontsize01">找回金额(Retrieve the amount)</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text"><span id="recoverTheFee"></span></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4 ">
+            <label class="black-text fontsize01">收费时间(Chargeable time)</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <label class="black-text"><span id="createDate"></span></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12">
+            <label class="black-text fontsize01">收费明细(Charge details)</label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 ">
+            <table id="table_id2"></table>
         </div>
     </div>
 </div>
-
 
 <!-- ================================================
 Scripts
@@ -106,7 +266,7 @@ Scripts
             function (data) {
                 var jsons = data[0];
                 if (!isNullOrEmpty(jsons)) {//有
-                    var trs = "<tr><td><h6 class='black-text'>名称(name)</h6></td><td><h6 class='black-text'>规格(drugsSpec)</h6></td><td><h6 class='black-text'>数目(number)</h6></td><td><h6 class='black-text'>单价(price)</h6></td><td><h6 class='black-text'>单项总价(Single item price)</h6></td></tr>";
+                    var trs = "<tr><td><label class='black-text'>名称(name)</label></td><td><label class='black-text'>规格(drugsSpec)</label></td><td><label class='black-text'>数目(number)</label></td><td><label class='black-text'>单价(price)</label></td><td><label class='black-text'>单项总价(Single item price)</label></td></tr>";
                     $.each(data, function (index, item) {
                         if (isNullOrEmpty(item.name)) {
                             item.name = ""
@@ -120,7 +280,7 @@ Scripts
                         if (isNullOrEmpty(item.tdrugsSpec)) {
                             item.tdrugsSpec = ""
                         }
-                        trs += "<tr><td><p class='black-text fontsize03'> " + item.name + "(" + item.tranName + ")" + "</p></td><td ><p class='black-text fontsize03'>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</p></td><td ><p class='black-text fontsize03'> " + item.num + "</p></td><td ><p class='black-text fontsize03'>" + item.price + "</p></td><td ><p class='black-text fontsize03'> " + (item.num * item.price) + "</p></td></tr >";
+                        trs += "<tr><td><label class='black-text fontsize02'> " + item.name + "(" + item.tranName + ")" + "</label></td><td ><label class='black-text fontsize02'>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</label></td><td ><label class='black-text fontsize02'> " + item.num + "</label></td><td ><label class='black-text fontsize02'>" + item.price + "</label></td><td ><label class='black-text fontsize02'> " + (item.num * item.price) + "</label></td></tr >";
                     });
                     var jsons = data[0];
                     $("#createName").html(jsons.createName);
@@ -128,6 +288,8 @@ Scripts
                     $("#createDate").html(jsons.createDate);
                     $("#recoverTheFee").html(jsons.recoverTheFee);
                     $("#table_id").append(trs);
+                    $("#table_id1").append(trs);
+                    $("#table_id2").append(trs);
                 }
             },
             function () {
