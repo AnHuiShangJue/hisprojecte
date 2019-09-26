@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import utils.EmptyUtil;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -274,7 +275,8 @@ public class HisTollDetailsController extends BaseController {
             hisTollDetails.setCreateDate(ht.getCreateDate());
             hisTollDetails.setCreateName(ht.getUserName());
             hisTollDetails.setTotalPrices(ht.getMoney());
-            hisTollDetails.setRecoverTheFee(ht.getRecoverTheFee());
+            hisTollDetails.setRecoverTheFee(new BigDecimal("0"));
+            hisTollDetails.setMoney(new BigDecimal("0"));
             list.add(hisTollDetails);
         } else {
             list = hisTollDetailsService.listByNumber(number);

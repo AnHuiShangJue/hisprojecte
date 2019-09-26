@@ -149,73 +149,73 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
 
             //更新医嘱（）
         } else {
-            if (hisMedicalOrderDetail.getMedicalOrderType() == 2) {
-                HisPharmacyDetail hisPharmacyDetail = hisPharmacyDetailService.selectById(hisMedicalOrderDetail.getTargetId());
-                //保存开药明细
-                HisMedicalOrder hisMedicalOrder = hisMedicalOrderService.selectByNumber(hisMedicalOrderDetail.getNumber());
-                HisMedicationDetails hisMedicationDetails = new HisMedicationDetails();
-                if(!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getCorrespondId())){
-                    hisMedicationDetails = hisMedicationDetailsService.selectById(hisMedicalOrderDetail.getCorrespondId());
+            if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getMedicalOrderType())){
+                if (hisMedicalOrderDetail.getMedicalOrderType() == 2) {
+                    HisPharmacyDetail hisPharmacyDetail = hisPharmacyDetailService.selectById(hisMedicalOrderDetail.getTargetId());
+                    //保存开药明细
+                    HisMedicalOrder hisMedicalOrder = hisMedicalOrderService.selectByNumber(hisMedicalOrderDetail.getNumber());
+                    HisMedicationDetails hisMedicationDetails = new HisMedicationDetails();
+                    if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getCorrespondId())) {
+                        hisMedicationDetails = hisMedicationDetailsService.selectById(hisMedicalOrderDetail.getCorrespondId());
+                    }
+                    hisMedicationDetails.setMedicationId(hisMedicalOrderDetail.getTargetId());
+                    if (EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getTotalAmount())) {
+                        hisMedicationDetails.setCount(1);
+                        hisMedicalOrderDetail.setTotalAmount(new BigDecimal("1"));
+                    } else
+                        hisMedicationDetails.setCount(hisMedicalOrderDetail.getTotalAmount().intValue());
+                    hisMedicationDetails.setDrugsNumb(hisPharmacyDetail.getDrugsNumb());
+                    hisMedicationDetails.setDrugsName(hisPharmacyDetail.getDrugsName());
+                    hisMedicationDetails.setDrugsAlias(hisPharmacyDetail.getDrugsAlias());
+                    hisMedicationDetails.setDrugsSpec(hisPharmacyDetail.getDrugsSpec());
+                    hisMedicationDetails.setTotalPrice(hisPharmacyDetail.getSalePrice().multiply(BigDecimal.valueOf(hisMedicationDetails.getCount())));
+                    HisMedicalRecord hisMedicalRecord = hisMedicalRecordService.selectByMedicalRecordId(hisMedicalOrder.getRecordId());
+                    hisMedicationDetails.setMedicalRecordId(hisMedicalRecord.getId());
+                    hisMedicationDetails.setIsOut(2);
+                    hisMedicationDetails.setIsPay(2);
+                    hisMedicationDetails.setIsBack(2);
+                    hisMedicationDetails.setIsDel(2);
+                    hisMedicationDetails.setDescription(hisMedicalOrderDetail.getUsages());
+                    if (EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getCorrespondId())) {
+                        hisMedicationDetailsService.insert(hisMedicationDetails);
+                        hisMedicalOrderDetail.setCorrespondId(hisMedicationDetails.getId());
+                    } else {
+                        hisMedicationDetailsService.update(hisMedicationDetails);
+                    }
+                } else if (hisMedicalOrderDetail.getMedicalOrderType() == 3) {
+                    HisProject hisProject = hisProjectService.selectByPrimaryKey(hisMedicalOrderDetail.getTargetId());
+                    //保存开项目明细
+                    HisMedicalOrder hisMedicalOrder = hisMedicalOrderService.selectByNumber(hisMedicalOrderDetail.getNumber());
+                    HisRecordProject hisRecordProject = new HisRecordProject();
+                    if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getCorrespondId())) {
+                        hisRecordProject = hisRecordProjectService.selectByPrimaryKey(hisMedicalOrderDetail.getCorrespondId());
+                    }
+                    if (EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getTotalAmount())) {
+                        hisMedicalOrderDetail.setTotalAmount(new BigDecimal("1"));
+                        hisRecordProject.setNum(1);
+                    } else
+                        hisRecordProject.setNum(hisMedicalOrderDetail.getTotalAmount().intValue());
+                    hisRecordProject.setName(hisProject.getName());
+                    hisRecordProject.setDescription(hisProject.getDescription());
+                    hisRecordProject.setType(hisProject.getType());
+                    hisRecordProject.setPrice(hisProject.getPrice());
+                    hisRecordProject.setNumber(hisProject.getNumber());
+                    hisRecordProject.setPinyinCode(hisProject.getPinyinCode());
+                    hisRecordProject.setUnit(hisProject.getUnit());
+                    hisRecordProject.setProjectId(hisProject.getId());
+                    HisMedicalRecord hisMedicalRecord = hisMedicalRecordService.selectByMedicalRecordId(hisMedicalOrder.getRecordId());
+                    hisRecordProject.setRecordId(hisMedicalRecord.getId());
+                    hisRecordProject.setIsChecked((short) 2);
+                    hisRecordProject.setIsPayed((short) 2);
+                    hisRecordProject.setIsBack(2);
+                    if (EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getCorrespondId())) {
+                        hisRecordProjectService.insert(hisRecordProject);
+                        hisMedicalOrderDetail.setCorrespondId(hisRecordProject.getId());
+                    } else {
+                        hisRecordProjectService.update(hisRecordProject);
+                    }
                 }
-                hisMedicationDetails.setMedicationId(hisMedicalOrderDetail.getTargetId());
-                if(EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getTotalAmount())) {
-                    hisMedicationDetails.setCount(1);
-                    hisMedicalOrderDetail.setTotalAmount(new BigDecimal("1"));
-                }
-                else
-                    hisMedicationDetails.setCount(hisMedicalOrderDetail.getTotalAmount().intValue());
-                hisMedicationDetails.setDrugsNumb(hisPharmacyDetail.getDrugsNumb());
-                hisMedicationDetails.setDrugsName(hisPharmacyDetail.getDrugsName());
-                hisMedicationDetails.setDrugsAlias(hisPharmacyDetail.getDrugsAlias());
-                hisMedicationDetails.setDrugsSpec(hisPharmacyDetail.getDrugsSpec());
-                hisMedicationDetails.setTotalPrice(hisPharmacyDetail.getSalePrice().multiply(BigDecimal.valueOf(hisMedicationDetails.getCount())));
-                HisMedicalRecord hisMedicalRecord =hisMedicalRecordService.selectByMedicalRecordId(hisMedicalOrder.getRecordId());
-                hisMedicationDetails.setMedicalRecordId(hisMedicalRecord.getId());
-                hisMedicationDetails.setIsOut(2);
-                hisMedicationDetails.setIsPay(2);
-                hisMedicationDetails.setIsBack(2);
-                hisMedicationDetails.setIsDel(2);
-                hisMedicationDetails.setDescription(hisMedicalOrderDetail.getUsages());
-                if(EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getCorrespondId())) {
-                    hisMedicationDetailsService.insert(hisMedicationDetails);
-                    hisMedicalOrderDetail.setCorrespondId(hisMedicationDetails.getId());
-                }else {
-                    hisMedicationDetailsService.update(hisMedicationDetails);
-                }
-            }else if(hisMedicalOrderDetail.getMedicalOrderType() == 3){
-                HisProject hisProject = hisProjectService.selectByPrimaryKey(hisMedicalOrderDetail.getTargetId());
-                //保存开项目明细
-                HisMedicalOrder hisMedicalOrder = hisMedicalOrderService.selectByNumber(hisMedicalOrderDetail.getNumber());
-                HisRecordProject hisRecordProject = new HisRecordProject();
-                if(!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getCorrespondId())){
-                    hisRecordProject = hisRecordProjectService.selectByPrimaryKey(hisMedicalOrderDetail.getCorrespondId());
-                }
-                if(EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getTotalAmount())) {
-                    hisMedicalOrderDetail.setTotalAmount(new BigDecimal("1"));
-                    hisRecordProject.setNum(1);
-                }
-                else
-                    hisRecordProject.setNum(hisMedicalOrderDetail.getTotalAmount().intValue());
-                hisRecordProject.setName(hisProject.getName());
-                hisRecordProject.setDescription(hisProject.getDescription());
-                hisRecordProject.setType(hisProject.getType());
-                hisRecordProject.setPrice(hisProject.getPrice());
-                hisRecordProject.setNumber(hisProject.getNumber());
-                hisRecordProject.setPinyinCode(hisProject.getPinyinCode());
-                hisRecordProject.setUnit(hisProject.getUnit());
-                hisRecordProject.setProjectId(hisProject.getId());
-                HisMedicalRecord hisMedicalRecord =hisMedicalRecordService.selectByMedicalRecordId(hisMedicalOrder.getRecordId());
-                hisRecordProject.setRecordId(hisMedicalRecord.getId());
-                hisRecordProject.setIsChecked((short)2);
-                hisRecordProject.setIsPayed((short)2);
-                hisRecordProject.setIsBack(2);
-                if(EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getCorrespondId())) {
-                    hisRecordProjectService.insert(hisRecordProject);
-                    hisMedicalOrderDetail.setCorrespondId(hisRecordProject.getId());
-                }else {
-                    hisRecordProjectService.update(hisRecordProject);
-                }
-            }
+        }
             hisMedicalOrderDetail.setIsFirstEdit(2);
             if(EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getTotalAmount()))
                 hisMedicalOrderDetail.setTotalAmount(new BigDecimal("1"));
@@ -482,6 +482,8 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
         for (HisMedicalOrderDetail hisMedicalOrderDetail : alreadySelect) {
 
             //getIsFirstEdit = 1 说明用药医嘱开过后没有设置医嘱的用法用量以及开始时间
+            if(EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getMedicalOrderType()))
+                return MessageUtil.createMessage(false,"不能组合非用药医嘱（Cannot combine non-medical doctors）");
             if(hisMedicalOrderDetail.getMedicalOrderType()!=2)
                 return MessageUtil.createMessage(false,"不能组合非用药医嘱（Cannot combine non-medical doctors）");
             if(hisMedicalOrderDetail.getIsStop() == 1  ||EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getCorrespondId())){

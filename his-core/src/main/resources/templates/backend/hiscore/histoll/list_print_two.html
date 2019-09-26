@@ -57,6 +57,8 @@
                 </tr>
 
                 <tr>
+                    <td><label class="black-text fontsize01">总应收金额(Total receivable amount)</label></td>
+                    <td><label class="black-text"><span id="money"></span></label></td>
                     <td><label class="black-text fontsize01">收费时间(Chargeable time)</label></td>
                     <td><label class="black-text"><span id="createDate"></span></label></td>
                 </tr>
@@ -91,10 +93,12 @@ Scripts
             function (data) {
                 var jsons = data[0];
                 if (!isNullOrEmpty(jsons)) {//有
+                    var flag = true;
                     var trs = "<tr><td><label class='black-text'>名称(name)</label></td><td><label class='black-text'>规格(drugsSpec)</label></td><td><label class='black-text'>数目(number)</label></td><td><label class='black-text'>单价(price)</label></td><td><label class='black-text'>单项总价(Single item price)</label></td></tr>";
                     $.each(data, function (index, item) {
                         if (isNullOrEmpty(item.name)) {
                             item.name = ""
+                            flag = false;
                         }
                         if (isNullOrEmpty(item.tranName)) {
                             item.tranName = ""
@@ -112,7 +116,10 @@ Scripts
                     $("#totalPrices").html(jsons.totalPrices);
                     $("#createDate").html(jsons.createDate);
                     $("#recoverTheFee").html(jsons.recoverTheFee);
-                    $("#table_id").append(trs);
+                    $("#money").html(jsons.money);
+                    if(flag) {
+                        $("#table_id").append(trs);
+                    }
                 }
             },
             function () {
