@@ -527,7 +527,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             hisTollRecord.setNumber(number);
             hisTollRecord.setType(2);
             hisTollRecord.setIsSettlement(2);
-            hisTollRecord.setAttenchType(2);
+            hisTollRecord.setAttenchType(9);
             hisTollRecordMapper.insert(hisTollRecord);
             HisHospitalManage hisHospitalManage = hisHospitalManageMapper.selectByNumber(hisTollRecord.getMedicalRecordId());
             hisHospitalManage.setRestDeposit(new BigDecimal(0.00));
@@ -544,7 +544,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         hisTollRecord.setNumber(number);
         hisTollRecord.setType(2);
         hisTollRecord.setIsSettlement(2);
-        hisTollRecord.setAttenchType(2);
+        hisTollRecord.setAttenchType(9);
         hisTollRecordMapper.insert(hisTollRecord);
 
         //修改住院押金
