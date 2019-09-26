@@ -279,6 +279,20 @@ public class HisTollDetailsController extends BaseController {
         return list;
     }
 
+    /**
+     * @Description
+     * @Params: [number, token, hisTollDetails]
+     * @Author: dingli
+     * @Return: java.util.List<com.ahsj.hiscore.entity.HisTollDetails>
+     * @Date 2019/9/26
+     * @Time 20:25
+     **/
+    @RequestMapping("printShowFor/index.ahsj")
+    @ResponseBody
+    HisTollDetails printShowFor(String number) throws Exception {//没有明细
+        return hisTollDetailsService.listByNumberFor(number);
+
+    }
 
     /**
      * @Description 退卡退费

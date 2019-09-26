@@ -949,4 +949,16 @@
 ))
         )
     </select>
+
+
+    <select id="listByNumberFor" resultMap="BaseResultMap" parameterType="java.lang.String">
+
+  select
+r.money,r.recover_the_fee,r.create_date,i.user_name
+        from his_toll_record  as r
+
+				   LEFT JOIN  `his-userinfo`.user_info as i  on   i.id = r.create_user_id
+        where r.number = #{number}
+
+    </select>
 </mapper>

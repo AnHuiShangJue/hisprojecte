@@ -531,6 +531,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             hisTollRecordMapper.insert(hisTollRecord);
             HisHospitalManage hisHospitalManage = hisHospitalManageMapper.selectByNumber(hisTollRecord.getMedicalRecordId());
             hisHospitalManage.setRestDeposit(new BigDecimal(0.00));
+            hisHospitalManageMapper.updateByPrimaryKey(hisHospitalManage);
             return MessageUtil.createMessage(true, number + "收费结算成功！");
         }
         for (int i = 0; i < hisTollDetails.size(); i++) {

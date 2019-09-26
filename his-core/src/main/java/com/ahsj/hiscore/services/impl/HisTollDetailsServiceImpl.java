@@ -249,13 +249,13 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
     }
 
     /**
-         * @Description  出院打印
-         * @Params: [number]
-         * @Author: dingli
-         * @Return: java.util.List<com.ahsj.hiscore.entity.HisTollDetails>
-         *@Date 2019/9/26
-         *@Time 18:50
-        **/
+     * @Description 出院打印
+     * @Params: [number]
+     * @Author: dingli
+     * @Return: java.util.List<com.ahsj.hiscore.entity.HisTollDetails>
+     * @Date 2019/9/26
+     * @Time 18:50
+     **/
     @Override
     @Transactional(readOnly = true)
     public List<HisTollDetails> listByNumberLeave(String number) throws Exception {
@@ -295,5 +295,19 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
             }
         }
         return hisTollDetails;
+    }
+
+    /**
+     * @Description
+     * @Params: [number]
+     * @Author: dingli
+     * @Return: java.util.List<com.ahsj.hiscore.entity.HisTollDetails>
+     * @Date 2019/9/26
+     * @Time 20:24
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public HisTollDetails listByNumberFor(String number) throws Exception {
+        return hisTollDetailsMapper.listByNumberFor(number);
     }
 }

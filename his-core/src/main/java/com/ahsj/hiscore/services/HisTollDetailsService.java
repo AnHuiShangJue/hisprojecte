@@ -123,7 +123,7 @@ public interface HisTollDetailsService {
     PageBean<HisTollDetails> listForcommonSwipeByCommonNumber(PageBean<HisTollDetails> hisTollDetailsPageBean) throws Exception;
 
     /**
-     * @Description  出院结算
+     * @Description 出院结算
      * @Params: [number]
      * @Author: dingli
      * @Return: java.util.List<com.ahsj.hiscore.entity.HisTollDetails>
@@ -131,4 +131,14 @@ public interface HisTollDetailsService {
      * @Time 18:49
      **/
     List<HisTollDetails> listByNumberLeave(String number) throws Exception;
+
+    /**
+     * @Description
+     * @Params: [number]
+     * @Author: dingli
+     * @Return: java.util.List<com.ahsj.hiscore.entity.HisTollDetails>
+     * @Date 2019/9/26
+     * @Time 20:21
+     **/
+   HisTollDetails listByNumberFor(String number) throws Exception;
 }

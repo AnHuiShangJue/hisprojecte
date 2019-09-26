@@ -78,4 +78,14 @@ public interface HisTollDetailsMapper extends BaseMapper<HisTollDetails> {
      * @Time 18:51
      **/
     List<HisTollDetails> listByNumberLeave(String number);
+
+/**
+     * @Description
+     * @Params: [number]
+     * @Author: dingli
+     * @Return: java.util.List<com.ahsj.hiscore.entity.HisTollDetails>
+     *@Date 2019/9/26
+     *@Time 20:22
+    **/
+  HisTollDetails listByNumberFor(String number);
 }
