@@ -2,6 +2,8 @@ package com.ahsj.hiscore;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -19,14 +21,6 @@ public class demo {
  */
 @Test
 public void init(){
-    ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
-    System.out.println("开始");
-    scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
-        @Override
-        public void run() {
-            System.out.println("-----------测试------------------");
-        }
-    },0,10000, TimeUnit.MILLISECONDS);
 
 }
 
