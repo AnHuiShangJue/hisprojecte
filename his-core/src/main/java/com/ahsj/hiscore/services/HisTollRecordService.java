@@ -242,4 +242,14 @@ public interface HisTollRecordService {
      * @Time 10:20
      **/
     Message hisProjectSave(HisRefundProjectInfo hisRefundProjectInfo) throws Exception;
+
+    /**
+     * @Description 查看药库盘点明细
+     * @Params: [pageBean]
+     * @Author: dingli
+     * @Return: core.entity.PageBean<com.ahsj.hiscore.entity.HisTollRecord>
+     * @Date 2019/9/26
+     * @Time 11:06
+     **/
+    PageBean<HisTollRecord> pharmacyInventoryDetail(PageBean<HisTollRecord> pageBean) throws Exception;
 }

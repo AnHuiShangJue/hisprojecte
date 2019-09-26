@@ -273,6 +273,18 @@ public class HisTollRecord extends BaseEntity {
     @DateTimeFormat(pattern = "yyyy/MM/dd ")
     private Date minTime;//上去间
 
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd ")
+    private Date createDateFor;
+
+    public Date getCreateDateFor() {
+        return createDateFor;
+    }
+
+    public void setCreateDateFor(Date createDateFor) {
+        this.createDateFor = createDateFor;
+    }
+
     public Date getMaxTime() {
         return maxTime;
     }

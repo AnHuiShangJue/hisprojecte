@@ -45,77 +45,24 @@
             <div class="section section-data-tables">
                 <div class="card">
                     <div class="card-content">
-                        <form id="searchForm" class="row" action="">
-                            <div class="row">
-                                <div class="col  s1 m1 l1 xl1">
-                                    <h6>模糊搜索</h6>
-                                    <label style="color:black">Fuzzy search</label>
-                                </div>
-                                <div class="col input-field s2 m2 l2 xl2">
-                                    <input id="months" name="months" type="text"/>
-                                    <label for="months" class="active">月份选择<span style="font-size: 12px">(Month selection)</span></label>
-                                </div>
-                                <div class="col input-field s2 m2 l2 xl2">
-                                    <input id="years" name="years" type="text"/>
-                                    <label class="active" for="years">年份选择<span
-                                            style="font-size: 12px">(Year selection)</span></label>
-                                </div>
-                                <div class="col input-field s2 m2 l2 xl2">
-                                    <input id="detailsName" name="detailsName" type="text"/>
-                                    <label for="detailsName">药品名称<span
-                                            style="font-size: 12px">(drug names)</span></label>
-                                </div>
-                                <br><br><br><br>
-                                <div class="col  s1 m1 l1 xl1">
-                                    <h6>出 库日期</h6>
-                                    <label style="color:black">Date of charge</label>
-                                </div>
-                                <div class="col  input-field s2 m2 l2 xl2">
-                                    <input id="lowTime" name="lowTime" type="text" class="datepicker"/>
-                                    <label for="lowTime">下区间<span
-                                            style="font-size: 12px">(Lower interval)</span></label>
-                                </div>
-                                <div class="col input-field s2 m2 l2 xl2">
-                                    <input id="upTime" name="upTime" type="text"
-                                           class="datepicker"/>
-                                    <label for="upTime">上区间<span style="font-size: 12px">(upper interval)</span></label>
-                                </div>
-
+                        <h4 class="card-title">药品盘点详细信息</h4><label style="color:black">Drug inventory details</label>
+                        <div class="row">
+                            <div class="input-field col s4 l4 xl4">
+                                <input id="drugName"  readonly="true"  type="text" th:value="${drugName}">
+                                <label >药品名称<span style="font-size: 12px">(Drug name )</span></label>
                             </div>
-                        </form>
-                    </div>
-                    <div class="row">
-                        <div class="col s2 m2 l2 xl2 offset-l1">
-                            <a class="waves-effect waves-light btn" id="searchBtn"><i
-                                    class="material-icons  white-text tooltipped " data-position="bottom"
-                                    data-delay="50" data-tooltip="搜索">search</i></a>
-                            <a id="resetBtn" class="waves-effect waves-light btn"><i
-                                    class="material-icons  white-text tooltipped " data-position="bottom"
-                                    data-delay="50" data-tooltip="重置">youtube_searched_for</i></a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s12 x12 l12 xl12">
-                <div class="card">
-                    <div class="card-content">
-                        <h4 class="card-title">
-                            统计的时间区间为<span style="font-size: 12px"> (The time interval of the statistics is)</span>：<span
-                                id="minTime"></span>——— <span id="maxTime"></span>
-                        </h4>
-                        <h4 class="card-title">
-                            区间内药品收入纯利润<span
-                                style="font-size: 12px">(The total amount of income in the interval is)</span>：<span
-                                id="salePrice"></span>
-                        </h4>
-                        <h4 class="card-title">
-                            区间内的药品成本为<span style="font-size: 12px">(The drug cost within the interval is)</span>：<span
-                                id="costPrice"></span>
-                        </h4>
-
+                            <div class="input-field col s4 l4 xl4">
+                                <input id="createDate" readonly="true"  type="text"   th:value="${createDate}">
+                                <label >查看日期<span style="font-size: 12px">(Check the date)</span></label>
+                            </div>
+                            <div class="input-field col s4 l4 xl4">
+                                <input id="stock"  readonly="true"  type="text" th:value="${stock}">
+                                <label >库存<span style="font-size: 12px">(repertory)</span></label>
+                            </div>
+                            <div class="input-field col s4 l4 xl4">
+                                <input id="saleCounts" readonly="true"  type="text"   th:value="${saleCounts}">
+                                <label >销售数目<span style="font-size: 12px">(Number of sales)</span></label>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -145,6 +92,8 @@
 <div th:replace="public/base_list_script :: html"></div>
 <script type="text/javascript">
     var grid = new Datatable();
+    var createDate = $("#createDate").val();
+    var drugName = $("#drugName").val();
     $(document).ready(function () {
         initBtn();
         initTable();
@@ -164,7 +113,7 @@
             loadingMessage: 'Loading...',
             dataTable: {
                 "ajax": {
-                    "url": CTX + "/api/hisTollRecord/pharmacyInventory.ahsj?token=" + TOKEN, // ajax source
+                    "url": CTX + "/api/hisTollRecord/pharmacyInventoryDetail.ahsj?token=" + TOKEN + "&drugName=" + drugName + "&createDate=" + createDate, // ajax source
                 },
                 "columns": [
                     {
@@ -173,40 +122,44 @@
                         "name": "details_name"
                     },
                     {
-                        "title": "销售数目",
-                        "data": "saleCounts",
-                        "name": "sale_counts"
-                    },
-                    {
                         "title": "出库数目",
                         "data": "exitCount",
                         "name": "exit_count"
                     },
-
+                    {
+                        "title": "药品售价",
+                        "data": "salePrice",
+                        "name": "sale_price"
+                    },
+                    {
+                        "title": "药品进价",
+                        "data": "costPrice",
+                        "name": "cost_price"
+                    },
                     {
                         "title": "出库时间",
-                        "data": "createDateFor",
-                        "name": "createDateFor"
+                        "data": "createDate",
+                        "name": "create_date"
                     },
                     {
-                        "title": "库存",
-                        "data": "stock",
-                        "name": "stock"
+                        "title": "出库人",
+                        "data": "userName",
+                        "name": "user_name"
                     },
-                    {
-                        "title": "操作",
-                        "width": "120px",
-                        "className": "centered",
-                        "orderable": false,
-                        "render": function (data, type, row) {
-                            var rtnBtn = "";
-                            //如果获取字符串，必须在参数外反转"
-                            rtnBtn = rtnBtn +
-                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看明细\" onclick=\"visitDetail('" + row.createDateFor + "','" + row.detailsName + "','"+row.saleCounts+"','"+row.stock+"');\"> <i class='material-icons'>visibility</i></a>";
-                            // 返回自定义内容
-                            return rtnBtn;
-                        }
-                    }
+                    /* {
+                         "title": "操作",
+                         "width": "120px",
+                         "className": "centered",
+                         "orderable": false,
+                         "render": function (data, type, row) {
+                             var rtnBtn = "";
+                             //如果获取字符串，必须在参数外反转"
+                             rtnBtn = rtnBtn +
+                                 "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看明细\" onclick='visitDetail(\"" + row.number + "\");'> <i class='material-icons'>visibility</i></a>";
+                             // 返回自定义内容
+                             return rtnBtn;
+                         }
+                     }*/
                 ],
                 "order": [
                     [1, 'asc']
@@ -233,11 +186,6 @@
         $("#searchForm .row .col input[type='radio']").click(function () {
             grid.search();
         });
-    }
-
-    function visitDetail(createDateFor, detailsName,saleCounts,stock) {
-        var url = CTX + "/api/hisTollRecord/getDrugDetails/index.ahsj?token=" + TOKEN + "&createDate=" + createDateFor + "&drugName=" + detailsName+"&saleCounts="+saleCounts+"&stock="+stock;
-        dialog.show(url, "药库盘点详细");
     }
 
     function getPrice() {

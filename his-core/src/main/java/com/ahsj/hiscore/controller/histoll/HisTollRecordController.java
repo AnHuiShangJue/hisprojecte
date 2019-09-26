@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import utils.EmptyUtil;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Controller
 @RequestMapping("/api/hisTollRecord/")
 public class HisTollRecordController extends BaseController {
@@ -488,5 +491,47 @@ public class HisTollRecordController extends BaseController {
         modelAndView.addObject("title", "耗材盘点");
         modelAndView.addObject("token", token);
         return modelAndView;
+    }
+
+    /**
+     * @Description 药库盘点详细信息
+     * @Params: [token, createDate, drugName]
+     * @Author: dingli
+     * @Return: org.springframework.web.servlet.ModelAndView
+     * @Date 2019/9/26
+     * @Time 10:56
+     **/
+    @RequestMapping("getDrugDetails/index.ahsj")
+    ModelAndView getDrugDetails(String token, String createDate, String drugName,String saleCounts,String stock) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/hisFinance/pharmacyDetail");
+        modelAndView.addObject("title", "药库盘点详细信息");
+        modelAndView.addObject("createDate", createDate);
+        modelAndView.addObject("drugName", drugName);
+        modelAndView.addObject("saleCounts", saleCounts);
+        modelAndView.addObject("stock", stock);
+        modelAndView.addObject("token", token);
+        return modelAndView;
+    }
+
+    /**
+     * @Description 药库盘点详细信息
+     * @Params: [hisTollRecord]
+     * @Author: dingli
+     * @Return: core.entity.PageBean<com.ahsj.hiscore.entity.HisTollRecord>
+     * @Date 2019/9/26
+     * @Time 11:10
+     **/
+    @RequestMapping("/pharmacyInventoryDetail.ahsj")
+    @ResponseBody
+    public PageBean<HisTollRecord> pharmacyInventoryDetail(String createDate, String drugName) throws Exception {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = sdf.parse(createDate);
+        HisTollRecord hisTollRecord = new HisTollRecord();
+        hisTollRecord.setCreateDate(date);
+        hisTollRecord.setDetailsName(drugName);
+        PageBean<HisTollRecord> pageBean = new PageBean<HisTollRecord>();
+        pageBean.setParameter(hisTollRecord);
+        pageBean = hisTollRecordService.pharmacyInventoryDetail(pageBean);
+        return pageBean;
     }
 }

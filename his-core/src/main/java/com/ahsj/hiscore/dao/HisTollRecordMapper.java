@@ -204,4 +204,14 @@ public interface HisTollRecordMapper extends BaseMapper<HisTollRecord> {
      **/
     HisTollRecord getPharmacyinventoryPrice(HisTollRecord hisTollRecord) throws Exception;
 
+    /**
+     * @Description 药库盘点详细信息
+     * @Params: [pageBean]
+     * @Author: dingli
+     * @Return: java.util.List<com.ahsj.hiscore.entity.HisTollRecord>
+     * @Date 2019/9/26
+     * @Time 11:02
+     **/
+    List<HisTollRecord> pharmacyInventoryDetail(PageBean<HisTollRecord> pageBean) throws Exception;
+
 }

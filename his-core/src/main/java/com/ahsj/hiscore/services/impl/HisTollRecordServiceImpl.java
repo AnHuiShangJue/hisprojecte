@@ -159,7 +159,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
 
         //处理住院交易
         HisTollRecord hisTollRecord = hisTollHospiModel.getHisTollRecord();
-        if(EmptyUtil.Companion.isNullOrEmpty(hisTollRecord.getActualCharge())) {
+        if (EmptyUtil.Companion.isNullOrEmpty(hisTollRecord.getActualCharge())) {
             hisTollRecord.setActualCharge(new BigDecimal("0"));
         }
 
@@ -961,5 +961,20 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             }
             return MessageUtil.createMessage(true, "退费成功！" + number);
         }
+    }
+
+    /**
+     * @Description  查看药库盘点明细
+     * @Params: [pageBean]
+     * @Author: dingli
+     * @Return: core.entity.PageBean<com.ahsj.hiscore.entity.HisTollRecord>
+     * @Date 2019/9/26
+     * @Time 11:07
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public PageBean<HisTollRecord> pharmacyInventoryDetail(PageBean<HisTollRecord> pageBean) throws Exception {
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisTollRecordMapper.pharmacyInventoryDetail(pageBean)));
+        return pageBean;
     }
 }

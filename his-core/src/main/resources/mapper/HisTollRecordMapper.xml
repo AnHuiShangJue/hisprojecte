@@ -20,6 +20,7 @@
         <result column="stock" property="stock"/>
         <result column="exit_count" property="exitCount"/>
         <result column="sale_counts" property="saleCounts"/>
+        <result column="createDateFor" property="createDateFor"/>
         <!--添加-->
         <result column="patient_name" property="patientName" jdbcType="VARCHAR"/>
         <result column="nurse_name" property="nurseName" jdbcType="VARCHAR"/>
@@ -937,39 +938,30 @@ from  his_toll_record as t
     </select>
 
     <select id="pharmacyInventory" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
-        select d.id ,d.stock ,m.exit_count,d.drugs_name as details_name,d.sale_counts,(a.price*m.exit_count) as
-        cost_price, (r.price*m.exit_count) as sale_price
-        ,i.user_name as user_name,m.create_date
-        from his_medi_exit_details as m
-        LEFT JOIN his_pharmacy_detail as d on d.id = m.pharmacy_id
-        LEFT JOIN `his-userinfo`.user_info as i on i.id = m.create_user_id
-        left JOIN his_related_medicationandexit as r on r.exit_id = m.id
-        LEFT JOIN his_medi_enter_details as a on a.id = m.medi_enter_id
+        select  sum(d.exit_count) as exit_count,date(d.create_date) as createDateFor,d.drugs_name as details_name ,p.stock,p.sale_counts
+        from  his_medi_exit_details  as d
+        LEFT JOIN  his_pharmacy_detail as p  on p.id  = d.pharmacy_id
         where 1=1
         <if test="parameter.lowTime != null">
-            and date(m.create_date) &gt;= #{parameter.lowTime ,jdbcType=TIMESTAMP}
+            and date(d.create_date) &gt;= #{parameter.lowTime ,jdbcType=TIMESTAMP}
         </if>
         <if test="parameter.upTime != null">
-            and date(m.create_date) &lt;= #{parameter.upTime ,jdbcType=TIMESTAMP}
+            and date(d.create_date) &lt;= #{parameter.upTime ,jdbcType=TIMESTAMP}
         </if>
         <if test="parameter.months != null and parameter.months != ''">
-            and month(m.create_date)=#{parameter.months}
+            and month(d.create_date)=#{parameter.months}
         </if>
         <if test="parameter.years != null and parameter.years != ''">
-            and YEAR(m.create_date) = #{parameter.years}
+            and YEAR(d.create_date) = #{parameter.years}
         </if>
         <if test="parameter.detailsName != null and parameter.detailsName != ''">
             and d.drugs_name like concat('%' #{parameter.detailsName},'%')
         </if>
-        <if test="parameter.userName != null and parameter.userName != ''">
-            and i.user_name like concat('%' #{parameter.userName},'%')
-        </if>
+        GROUP BY   d.drugs_name,date(d.create_date)
         <if test="parameter.orders != null and parameter.orders != ''">
             order by ${parameter.orders}
         </if>
-
     </select>
-
     <select id="getPharmacyinventoryPrice" resultMap="BaseResultMap" parameterType="com.ahsj.hiscore.entity.HisTollRecord">
         select sum(a.price*m.exit_count) as cost_price,sum(r.price*m.exit_count) as sale_price,
         min(m.create_date) as minTime ,max(m.create_date) as maxTime
@@ -998,7 +990,27 @@ from  his_toll_record as t
             and i.user_name like concat('%' #{userName},'%')
         </if>
     </select>
+    <select id="pharmacyInventoryDetail" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
+        select d.id ,d.stock ,m.exit_count,d.drugs_name as details_name,d.sale_counts,(a.price*m.exit_count) as
+        cost_price, (r.price*m.exit_count) as sale_price
+        ,i.user_name as user_name,m.create_date
+        from his_medi_exit_details as m
+        LEFT JOIN his_pharmacy_detail as d on d.id = m.pharmacy_id
+        LEFT JOIN `his-userinfo`.user_info as i on i.id = m.create_user_id
+        left JOIN his_related_medicationandexit as r on r.exit_id = m.id
+        LEFT JOIN his_medi_enter_details as a on a.id = m.medi_enter_id
+        where 1=1
+        <if test="parameter.createDate != null ">
+            and date(m.create_date) = #{parameter.createDate}
+        </if>
+        <if test="parameter.detailsName != null and parameter.detailsName != ''">
+            and d.drugs_name like concat('%' #{parameter.detailsName},'%')
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
 
+    </select>
 
 </mapper>
 
