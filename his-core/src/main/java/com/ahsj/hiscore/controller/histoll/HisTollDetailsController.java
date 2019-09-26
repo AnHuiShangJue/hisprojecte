@@ -42,7 +42,6 @@ public class HisTollDetailsController extends BaseController {
     HisRegisteredService hisRegisteredService;
 
 
-
     /**
      * @return org.springframework.web.servlet.ModelAndView
      * @Description 门诊收费结算
@@ -167,7 +166,7 @@ public class HisTollDetailsController extends BaseController {
     public PageBean<HisTollDetails> outpatientListIndex(HisTollDetails hisTollDetails) throws Exception {
         PageBean<HisTollDetails> hisTollDetailsPageBean = new PageBean<HisTollDetails>();
         hisTollDetailsPageBean.setParameter(hisTollDetails);
-        if(hisTollDetails.getRegisterNumber().contains("HM")){
+        if (hisTollDetails.getRegisterNumber().contains("HM")) {
             HisMedicalRecord hisMedicalRecord = hisMedicalRecordService.selectByMedicalRecordId(hisTollDetails.getRegisterNumber());
             HisRegistered hisRegistered = hisRegisteredService.selectById(hisMedicalRecord.getRegisteredId());
             hisTollDetails.setRegisterNumber(hisRegistered.getNumber());
@@ -227,14 +226,33 @@ public class HisTollDetailsController extends BaseController {
      * @Date 2019/8/3
      * @Time 11:30
      **/
-    @RequestMapping("printHospital/index.ahsj")
-    ModelAndView printHospital(String token, String number) throws Exception {
-        ModelAndView modelAndView = new ModelAndView("backend/hiscore/histoll/list_hospital_print");
+    @RequestMapping("printHospitalOne/index.ahsj")
+    ModelAndView printHospitalOne(String token, String number) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/histoll/list_print_one");
         modelAndView.addObject("title", "打印凭证预览");
         modelAndView.addObject("token", token);
         modelAndView.addObject("number", number);
         return modelAndView;
     }
+
+    @RequestMapping("printHospitalTwo/index.ahsj")
+    ModelAndView printHospitalTwo(String token, String number) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/histoll/list_print_two");
+        modelAndView.addObject("title", "打印凭证预览");
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("number", number);
+        return modelAndView;
+    }
+
+    @RequestMapping("printHospitalThree/index.ahsj")
+    ModelAndView printHospitalThree(String token, String number) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/histoll/list_print_three");
+        modelAndView.addObject("title", "打印凭证预览");
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("number", number);
+        return modelAndView;
+    }
+
 
     /**
      * @Description 查找收费明细
@@ -299,13 +317,13 @@ public class HisTollDetailsController extends BaseController {
     }
 
     /**
-     *@Description 通用刷卡模块显示消费明细
-     *@Params
-     *@return
-     *@Author zhushixiang
-     *@Date 2019-09-13
-     *@Time 16:26
-    **/
+     * @return
+     * @Description 通用刷卡模块显示消费明细
+     * @Params
+     * @Author zhushixiang
+     * @Date 2019-09-13
+     * @Time 16:26
+     **/
     @RequestMapping("commonSwipe/list.ahsj")
     @ResponseBody
     public PageBean<HisTollDetails> commonSwipeList(HisTollDetails hisTollDetails) throws Exception {

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+<head>
+    <style>
+        .fontsize01 {
+            font-size: 14px;
+        }
+
+        .fontsize02 {
+            font-size: 10px;
+        }
+table tr td{
+    padding: 0;
+}
+    </style>
+</head>
+<div th:replace="public/base_print :: html"></div>
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<div class="row">
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12">
+            <label class="black-text">财务联(Financial group)</label>
+
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 center">
+            <h5 class="black-text">中柬第一医院门诊住院收费统计</h5>
+            <label class="black-text fontsize02">The first china-cambodia hospital Outpatient and inpatient charge statistics</label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 ">
+        <table style="border: none">
+            <tr>
+                <td><label class="black-text fontsize01" style="padding: 0;font-size: 8px">交易流水号(Transaction flow number)</label></td>
+                <td><label class="black-text" th:text="${number}" style="padding: 0;"></label></td>
+            </tr>
+            <input type="hidden" id="number" th:value="${number}">
+            <tr>
+                <td><label class="black-text fontsize01">收费人(Toll collector)</label></td>
+                <td><label class="black-text"><span id="createName"></span></label></td>
+            </tr>
+            <tr>
+                <td><label class="black-text fontsize01">收费金额(charge amount)</label></td>
+                <td><label class="black-text"><span id="totalPrices"></span></label></td>
+            </tr>
+            <tr>
+                <td> <label class="black-text fontsize01">找回金额(Retrieve the amount)</label></td>
+                <td><label class="black-text"><span id="recoverTheFee"></span></label></td>
+            </tr>
+            <tr>
+                <td><label class="black-text fontsize01">收费时间(Chargeable time)</label></td>
+                <td><label class="black-text"><span id="createDate"></span></label></td>
+            </tr>
+            <tr>
+                <td colspan="2"><label class="black-text fontsize01">收费明细(Charge details)</label></td>
+            </tr>
+        </table>
+        </div>
+        </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 ">
+            <table id="table_id"></table>
+        </div>
+    </div>
+
+    <div class="row valign-wrapper" style="height: 100px">
+        <div class="col s5 m5 l5">
+            <ul>
+                <li style="border-top: 1px dashed #000;"></li>
+            </ul>
+        </div>
+        <div class="col s2 m2 l2 center">
+            <i class="material-icons">content_cut</i>
+        </div>
+        <div class="col s5 m5 l5">
+            <ul>
+                <li style="border-top: 1px dashed #000;"></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12">
+            <label class="black-text">科室联(Department al)</label>
+
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 center">
+            <h5 class="black-text">中柬第一医院门诊住院收费统计</h5>
+            <label class="black-text fontsize02">The first china-cambodia hospital Outpatient and inpatient charge statistics</label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 ">
+        <table>
+            <tr>
+                <td><label class="black-text fontsize01">交易流水号(Transaction flow number)</label></td>
+                <td><label class="black-text" th:text="${number}"></label></td>
+            </tr>
+
+            <tr>
+                <td><label class="black-text fontsize01">收费人(Toll collector)</label></td>
+                <td><label class="black-text"><span id="createName"></span></label></td>
+            </tr>
+            <tr>
+                <td><label class="black-text fontsize01">收费金额(charge amount)</label></td>
+                <td><label class="black-text"><span id="totalPrices"></span></label></td>
+            </tr>
+            <tr>
+                <td> <label class="black-text fontsize01">找回金额(Retrieve the amount)</label></td>
+                <td><label class="black-text"><span id="recoverTheFee"></span></label></td>
+            </tr>
+            <tr>
+                <td><label class="black-text fontsize01">收费时间(Chargeable time)</label></td>
+                <td><label class="black-text"><span id="createDate"></span></label></td>
+            </tr>
+            <tr>
+                <td colspan="2"><label class="black-text fontsize01">收费明细(Charge details)</label></td>
+            </tr>
+        </table>
+        </div>
+        </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 ">
+            <table id="table_id1"></table>
+        </div>
+    </div>
+
+    <div class="row valign-wrapper" style="height: 100px">
+        <div class="col s5 m5 l5">
+            <ul>
+                <li style="border-top: 1px dashed #000;"></li>
+            </ul>
+        </div>
+        <div class="col s2 m2 l2 center">
+            <i class="material-icons">content_cut</i>
+        </div>
+        <div class="col s5 m5 l5">
+            <ul>
+               <li style="border-top: 1px dashed #000;"></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12">
+            <label class="black-text">自由联(Free coupon)</label>
+
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 center">
+            <h5 class="black-text">中柬第一医院门诊住院收费统计</h5>
+            <label class="black-text fontsize02">The first china-cambodia hospital Outpatient and inpatient charge statistics</label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 ">
+        <table>
+            <tr>
+                <td><label class="black-text fontsize01">交易流水号(Transaction flow number)</label></td>
+                <td><label class="black-text" th:text="${number}"></label></td>
+            </tr>
+
+            <tr>
+                <td><label class="black-text fontsize01">收费人(Toll collector)</label></td>
+                <td><label class="black-text"><span id="createName"></span></label></td>
+            </tr>
+            <tr>
+                <td><label class="black-text fontsize01">收费金额(charge amount)</label></td>
+                <td><label class="black-text"><span id="totalPrices"></span></label></td>
+            </tr>
+            <tr>
+                <td> <label class="black-text fontsize01">找回金额(Retrieve the amount)</label></td>
+                <td><label class="black-text"><span id="recoverTheFee"></span></label></td>
+            </tr>
+            <tr>
+                <td><label class="black-text fontsize01">收费时间(Chargeable time)</label></td>
+                <td><label class="black-text"><span id="createDate"></span></label></td>
+            </tr>
+            <tr>
+                <td colspan="2"><label class="black-text fontsize01">收费明细(Charge details)</label></td>
+            </tr>
+        </table>
+        </div>
+        </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 ">
+            <table id="table_id2"></table>
+        </div>
+    </div>
+</div>
+
+<!-- ================================================
+Scripts
+================================================ -->
+<div th:replace="public/base_print_script :: html"></div>
+<script th:inline="javascript">
+    $(document).ready(function () {
+        printShow();
+    });
+    var number = $("#number").val();
+
+    function printShow() {
+        $.ahsjajax(
+            CTX + "/api/hisTollDetails/printShow/index.ahsj",
+            {"number": number},
+            function (data) {
+                var jsons = data[0];
+                if (!isNullOrEmpty(jsons)) {//有
+                    var trs = "<tr><td><label class='black-text'>名称(name)</label></td><td><label class='black-text'>规格(drugsSpec)</label></td><td><label class='black-text'>数目(number)</label></td><td><label class='black-text'>单价(price)</label></td><td><label class='black-text'>单项总价(Single item price)</label></td></tr>";
+                    $.each(data, function (index, item) {
+                        if (isNullOrEmpty(item.name)) {
+                            item.name = ""
+                        }
+                        if (isNullOrEmpty(item.tranName)) {
+                            item.tranName = ""
+                        }
+                        if (isNullOrEmpty(item.drugsSpec)) {
+                            item.drugsSpec = ""
+                        }
+                        if (isNullOrEmpty(item.tdrugsSpec)) {
+                            item.tdrugsSpec = ""
+                        }
+                        trs += "<tr><td><label class='black-text fontsize02'> " + item.name + "(" + item.tranName + ")" + "</label></td><td ><label class='black-text fontsize02'>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</label></td><td ><label class='black-text fontsize02'> " + item.num + "</label></td><td ><label class='black-text fontsize02'>" + item.price + "</label></td><td ><label class='black-text fontsize02'> " + (item.num * item.price) + "</label></td></tr >";
+                    });
+                    var jsons = data[0];
+                    $("#createName").html(jsons.createName);
+                    $("#totalPrices").html(jsons.totalPrices);
+                    $("#createDate").html(jsons.createDate);
+                    $("#recoverTheFee").html(jsons.recoverTheFee);
+                    $("#table_id").append(trs);
+                    $("#table_id1").append(trs);
+                    $("#table_id2").append(trs);
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }
+        );
+    }
+
+    function doOk() {
+        $('body  div div.row.valign-wrapper').printThis({
+            importCSS: true,
+            debug: true,
+            afterPrint: function () {
+                dialog.confirm('确定打印?', function (index, layero) {
+
+                    /*       $.ahsjajax(CTX + "/api/hisTollRecord/printDrug/index.ahsj",
+                               {"number": [[number]]},
+                               function (msg) {
+                                   if (msg.success) {
+                                       M.toast({
+                                           html: msg.message, completeCallback: function () {
+                                           }
+                                       });
+                                       grid.search();
+                                       dialog.parentclose();
+                                   } else {
+                                       M.toast({
+                                           html: msg.message, completeCallback: function () {
+                                           }
+                                       });
+                                   }
+                               },
+                               function (data) {
+                                   M.toast({
+                                       html: "网络异常", completeCallback: function () {
+                                       }
+                                   });
+                               }
+                           );*/
+                });
+            }
+        });
+    }
+
+    $("input").change(function () {
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</body>
+
+</html>

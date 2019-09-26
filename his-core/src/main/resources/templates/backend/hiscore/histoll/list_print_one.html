@@ -9,7 +9,9 @@
         .fontsize02 {
             font-size: 10px;
         }
-
+table tr td{
+    padding: 0;
+}
     </style>
 </head>
 <div th:replace="public/base_print :: html"></div>
@@ -33,8 +35,8 @@
         <div class="col s12 m12 l12 ">
         <table style="border: none">
             <tr>
-                <td><label class="black-text fontsize01">交易流水号(Transaction flow number)</label></td>
-                <td><label class="black-text" th:text="${number}"></label></td>
+                <td><label class="black-text fontsize01" style="padding: 0;font-size: 8px">交易流水号(Transaction flow number)</label></td>
+                <td><label class="black-text" th:text="${number}" style="padding: 0;"></label></td>
             </tr>
             <input type="hidden" id="number" th:value="${number}">
             <tr>
@@ -82,13 +84,25 @@
     </div>
 
     <div class="row valign-wrapper">
+        <div class="col s12 m12 l12">
+            <label class="black-text">科室联(Department al)</label>
+
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 center">
+            <h5 class="black-text">中柬第一医院门诊住院收费统计</h5>
+            <label class="black-text fontsize02">The first china-cambodia hospital Outpatient and inpatient charge statistics</label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
         <div class="col s12 m12 l12 ">
         <table>
             <tr>
                 <td><label class="black-text fontsize01">交易流水号(Transaction flow number)</label></td>
                 <td><label class="black-text" th:text="${number}"></label></td>
             </tr>
-            <input type="hidden" id="number" th:value="${number}">
+
             <tr>
                 <td><label class="black-text fontsize01">收费人(Toll collector)</label></td>
                 <td><label class="black-text"><span id="createName"></span></label></td>
@@ -134,13 +148,25 @@
     </div>
 
     <div class="row valign-wrapper">
+        <div class="col s12 m12 l12">
+            <label class="black-text">自由联(Free coupon)</label>
+
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 center">
+            <h5 class="black-text">中柬第一医院门诊住院收费统计</h5>
+            <label class="black-text fontsize02">The first china-cambodia hospital Outpatient and inpatient charge statistics</label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
         <div class="col s12 m12 l12 ">
         <table>
             <tr>
                 <td><label class="black-text fontsize01">交易流水号(Transaction flow number)</label></td>
                 <td><label class="black-text" th:text="${number}"></label></td>
             </tr>
-            <input type="hidden" id="number" th:value="${number}">
+
             <tr>
                 <td><label class="black-text fontsize01">收费人(Toll collector)</label></td>
                 <td><label class="black-text"><span id="createName"></span></label></td>

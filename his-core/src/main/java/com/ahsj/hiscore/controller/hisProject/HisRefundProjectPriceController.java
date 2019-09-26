@@ -132,7 +132,6 @@ public class HisRefundProjectPriceController extends BaseController {
     @PostMapping("/save.ahsj")
     public Message saveHisRefundProjectInfo(HisRefundProjectInfo hisRefundProjectInfo) throws Exception {
       //  return hisRefundProjectService.saveHisRefundProjectInfo(hisRefundProjectInfo);
-        hisRefundProjectInfo.toString();
         return hisTollRecordService.hisProjectSave(hisRefundProjectInfo);  //dingli
     }
 

@@ -248,16 +248,34 @@ public class HisTollRecordController extends BaseController {
     }
 
     /**
-     * @Description 退药打印, 根据交易流水号
+     * @Description 退项目打印, 根据交易流水号
      * @Param number
      * @Author: dingli
      * @return: org.springframework.web.servlet.ModelAndView
      * @Date 2019/7/29
      * @Time 14:24
      **/
-    @RequestMapping("printDrug/index.ahsj")
-    ModelAndView printDrug(String number, String patientName, String token) throws Exception {
-        ModelAndView modelAndView = new ModelAndView("backend/hiscore/histoll/list_drugReturn_print");
+
+    @RequestMapping("printDrugFive/index.ahsj")
+    ModelAndView printDrugFive(String number, String patientName, String token) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/histoll/list_print_five");
+        modelAndView.addObject("title", "打印凭证预览");
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("number", number);
+        return modelAndView;
+    }
+
+    /**
+     * @Description 退药打印, 根据交易流水号
+     * @Params: [number, patientName, token]
+     * @Author: dingli
+     * @Return: org.springframework.web.servlet.ModelAndView
+     * @Date 2019/9/26
+     * @Time 16:55
+     **/
+    @RequestMapping("printDrugFour/index.ahsj")
+    ModelAndView printDrugFour(String number, String patientName, String token) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/histoll/list_print_four");
         modelAndView.addObject("title", "打印凭证预览");
         modelAndView.addObject("token", token);
         modelAndView.addObject("number", number);
@@ -502,7 +520,7 @@ public class HisTollRecordController extends BaseController {
      * @Time 10:56
      **/
     @RequestMapping("getDrugDetails/index.ahsj")
-    ModelAndView getDrugDetails(String token, String createDate, String drugName,String saleCounts,String stock) throws Exception {
+    ModelAndView getDrugDetails(String token, String createDate, String drugName, String saleCounts, String stock) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/hisFinance/pharmacyDetail");
         modelAndView.addObject("title", "药库盘点详细信息");
         modelAndView.addObject("createDate", createDate);

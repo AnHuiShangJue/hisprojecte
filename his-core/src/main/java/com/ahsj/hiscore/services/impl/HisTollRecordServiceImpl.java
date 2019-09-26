@@ -142,7 +142,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         if (EmptyUtil.Companion.isNullOrEmpty(hisTollRecordMapper.hospitalDetails(medicalRecordId)))
             return new HisTollRecordDetails();
         HisTollRecordDetails hisTollRecordDetails = CodeHelper.getInstance().setCodeValue(hisTollRecordMapper.hospitalDetails(medicalRecordId));
-        if (hisTollRecordDetails.getRestDeposit().compareTo(new BigDecimal(0)) == -1) {//如果押金小于0
+        if (hisTollRecordDetails.getRestDeposit().compareTo(new BigDecimal(0)) == -1) {//
             hisTollRecordDetails.setMoney(hisTollRecordDetails.getMoney().add(hisTollRecordDetails.getRestDeposit().abs()));
         }
         return hisTollRecordDetails;
