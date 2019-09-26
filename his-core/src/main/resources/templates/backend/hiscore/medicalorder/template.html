@@ -58,11 +58,12 @@
                                                 </div>
                                                 <div class="col s1 input-field" style="padding-top:6px">
                                                     <label>
-                                                        <input id="remarks2" name="remarks" type="radio" th:value="${userId}"/>
+                                                        <input id="remarks2" name="remarks" type="radio" value="1"/>
                                                         <span>仅自己的(private)</span>
                                                     </label>
                                                 </div>
-                                                <div class="col s1 input-field" style="padding-top:6px">
+                                            <input id="userId"  type="hidden" th:value="${userId}"/>
+                                            <div class="col s1 input-field" style="padding-top:6px">
                                                     <label>
                                                         <input id="remarks3" name="remarks" type="radio" value="" checked/>
                                                         <span>全部(all)</span>
@@ -136,8 +137,7 @@
             loadingMessage: 'Loading...',
             dataTable: {
                 "ajax": {
-                    // "url": CTX + "/api/medicalOrderTemplate/list.ahsj?token=" + TOKEN+"&remarks1="+$("#remarks1").val()+"&remarks2="+$("#remarks2").val()+"&remarks3="+$("#remarks3").val(), // ajax source
-                    "url": CTX + "/api/medicalOrderTemplate/list.ahsj?token=" + TOKEN+"&remarks="+$("#remarks").val(), // ajax source
+                    "url": CTX + "/api/medicalOrderTemplate/list.ahsj?token=" + TOKEN+"&createUserId="+$("#userId").val(), // ajax source
                 },
                 "columns": [
                     {
