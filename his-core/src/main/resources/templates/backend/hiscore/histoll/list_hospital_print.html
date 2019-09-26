@@ -18,7 +18,7 @@ table tr td{
 <body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
       data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
 
-<div class="row">
+<div class="row" style="padding: 0;margin:0">
     <div class="row valign-wrapper">
         <div class="col s12 m12 l12">
             <label class="black-text">财务联(Financial group)</label>
@@ -33,7 +33,7 @@ table tr td{
     </div>
     <div class="row valign-wrapper">
         <div class="col s12 m12 l12 ">
-        <table style="border: none">
+        <table style="border: none;font-size: 8px">
             <tr>
                 <td><label class="black-text fontsize01">交易流水号(Transaction flow number)</label></td>
                 <td><label class="black-text" th:text="${number}" style="padding: 0;"></label></td>
@@ -61,7 +61,7 @@ table tr td{
         </div>
     <div class="row valign-wrapper">
         <div class="col s12 m12 l12 ">
-            <table id="table_id"></table>
+            <table id="table_id" style="border: none;font-size: 8px"></table>
         </div>
     </div>
 
