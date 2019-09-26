@@ -93,32 +93,42 @@ public interface HisTollDetailsService {
     List<HisTollDetails> listByNumber(String number) throws Exception;
 
     /**
-     *@Description 批量插入
-     *@Params []
-     *@return void
-     *@Author zhushixiang
-     *@Date 2019-09-11
-     *@Time 11:27
-    **/
-    void insertBatch(List<HisTollDetails> hisTollDetailsList)throws Exception;
+     * @return void
+     * @Description 批量插入
+     * @Params []
+     * @Author zhushixiang
+     * @Date 2019-09-11
+     * @Time 11:27
+     **/
+    void insertBatch(List<HisTollDetails> hisTollDetailsList) throws Exception;
 
     /**
-     *@Description 根据交易流水号查询当次所付住院费用的明细
-     *@Params [tollRecordNumber]
-     *@return com.ahsj.hiscore.entity.HisTollDetails
-     *@Author zhushixiang
-     *@Date 2019-09-12
-     *@Time 16:58
-    **/
-    HisTollDetails selectByTollNumberForBedAmount(String tollRecordNumber)throws Exception;
+     * @return com.ahsj.hiscore.entity.HisTollDetails
+     * @Description 根据交易流水号查询当次所付住院费用的明细
+     * @Params [tollRecordNumber]
+     * @Author zhushixiang
+     * @Date 2019-09-12
+     * @Time 16:58
+     **/
+    HisTollDetails selectByTollNumberForBedAmount(String tollRecordNumber) throws Exception;
 
     /**
-     *@Description 根据公共编号 搜索出对应的消费明细
-     *@Params [hisTollDetailsPageBean]
-     *@return core.entity.PageBean<com.ahsj.hiscore.entity.HisTollDetails>
-     *@Author zhushixiang
-     *@Date 2019-09-13
-     *@Time 16:33
-    **/
-    PageBean<HisTollDetails> listForcommonSwipeByCommonNumber(PageBean<HisTollDetails> hisTollDetailsPageBean)throws Exception;
+     * @return core.entity.PageBean<com.ahsj.hiscore.entity.HisTollDetails>
+     * @Description 根据公共编号 搜索出对应的消费明细
+     * @Params [hisTollDetailsPageBean]
+     * @Author zhushixiang
+     * @Date 2019-09-13
+     * @Time 16:33
+     **/
+    PageBean<HisTollDetails> listForcommonSwipeByCommonNumber(PageBean<HisTollDetails> hisTollDetailsPageBean) throws Exception;
+
+    /**
+     * @Description  出院结算
+     * @Params: [number]
+     * @Author: dingli
+     * @Return: java.util.List<com.ahsj.hiscore.entity.HisTollDetails>
+     * @Date 2019/9/26
+     * @Time 18:49
+     **/
+    List<HisTollDetails> listByNumberLeave(String number) throws Exception;
 }

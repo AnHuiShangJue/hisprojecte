@@ -3,81 +3,70 @@
 <head>
     <style>
         .fontsize01 {
-            font-size: 14px;
+            font-size: 8px;
         }
 
         .fontsize02 {
-            font-size: 12px;
+            font-size: 8px;
         }
 
+        table tr td {
+            padding: 0;
+        }
     </style>
 </head>
 <div th:replace="public/base_print :: html"></div>
 <body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
       data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
 
-<div class="row">
-    <div class="row valign-wrapper">
-        <div class="col s12 m12 l12 center">
-            <h5 class="black-text">中柬第一医院</h5>
-            <label class="black-text fontsize02">The first china-cambodia hospital</label>
-        </div>
-    </div>
-    <div class="row valign-wrapper">
-        <div class="col s4 m4 l4" style="height: 110px;">
-            <label class="black-text fontsize01">交易流水号</label></br>
-            <label class="black-text fontsize02">Transaction flow number</label>
-        </div>
-        <div class="col s8 m8 l8" style="height: 110px;">
-            <label class="black-text" th:text="${number}"></label>
-        </div>
-        <input type="hidden" id="number" th:value="${number}">
-
-    </div>
-    <div class="row valign-wrapper">
-        <div class="col s4 m4 l4" style="height: 75px;">
-            <label class="black-text fontsize01">收费人</label></br>
-            <label class="black-text fontsize02">Toll collector</label>
-        </div>
-        <div class="col s8 m8 l8" style="height: 75px;">
-            <label class="black-text"><span id="createName"></span></label>
-        </div>
-    </div>
-
-    <div class="row valign-wrapper">
-        <div class="col s4 m4 l4" style="height: 100px;">
-            <label class="black-text fontsize01">退费金额</label></br>
-            <label class="black-text fontsize02">Refund amount</label>
-        </div>
-        <div class="col s8 m8 l8" style="height: 100px;">
-            <label class="black-text"><span id="totalPrices"></span></label>
-        </div>
-
-    </div>
-    <div class="row valign-wrapper">
-        <div class="col s4 m4 l4" style="height: 75px;">
-            <label class="black-text fontsize01">收费时间</label></br>
-            <label class="black-text fontsize02">Charging time</label>
-        </div>
-        <div class="col s8 m8 l8" style="height: 75px;">
-            <label class="black-text"><span id="createDate"></span></label>
-        </div>
-    </div>
-    <div class="row valign-wrapper">
-        <div class="col s4 m4 l4">
-            <h6 class="black-text">收费明细</h6>
-            <label class="black-text fontsize02">Charge details</label>
-        </div>
-        <div class="col s8 m8 l8">
-            <h6 class="black-text"></h6>
-        </div>
-    </div>
-
+<div class="row" style="padding: 0;margin:0">
     <div class="row valign-wrapper">
         <div class="col s12 m12 l12">
-            <table id="table_id" style="font-size: 14px"></table>
+            <label class="black-text">财务联(Financial group)</label>
+
         </div>
     </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 center">
+            <h4 class="black-text" style="text-align: center">中柬第一医院门诊出院收费统计</h4>
+            <p class="black-text fontsize02" style="text-align: center">The first china-cambodia hospital Outpatient and
+                inpatient charge statistics</p>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 ">
+            <table style="border: none;font-size: 8px">
+                <tr>
+                    <!-- <td><label class="black-text fontsize01">交易流水号(Transaction flow number)</label></td>
+                     <td><label class="black-text" th:text="${number}" style="padding: 0;"></label></td>-->
+                    <td><label class="black-text fontsize01">收费人(Toll collector)</label></td>
+                    <td><label class="black-text"><span id="createName"></span></label></td>
+                </tr>
+                <input type="hidden" id="number" th:value="${number}">
+
+                <tr>
+                    <td><label class="black-text fontsize01">收费金额(charge amount)</label></td>
+                    <td><label class="black-text"><span id="totalPrices"></span></label></td>
+                    <td><label class="black-text fontsize01">找回金额(Retrieve the amount)</label></td>
+                    <td><label class="black-text"><span id="recoverTheFee"></span></label></td>
+                </tr>
+
+                <tr>
+                    <td><label class="black-text fontsize01">收费时间(Chargeable time)</label></td>
+                    <td><label class="black-text"><span id="createDate"></span></label></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><label class="black-text fontsize01">收费明细(Charge details)</label></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 ">
+            <table id="table_id" style="border: none;font-size: 8px"></table>
+        </div>
+    </div>
+
 </div>
 
 <!-- ================================================
@@ -87,17 +76,18 @@ Scripts
 <script th:inline="javascript">
     $(document).ready(function () {
         printShow();
+        printShow1();
     });
     var number = $("#number").val();
 
     function printShow() {
         $.ahsjajax(
-            CTX + "/api/hisTollDetails/printShow/index.ahsj",
+            CTX + "/api/hisTollDetails/printShowLeave/index.ahsj",
             {"number": number},
             function (data) {
                 var jsons = data[0];
                 if (!isNullOrEmpty(jsons)) {//有
-                    var trs = "<tr><td><h6 class='black-text'>名称(name)</h6></td><td><h6 class='black-text'>规格(drugsSpec)</h6></td><td><h6 class='black-text'>数目(number)</h6></td><td><h6 class='black-text'>单价(price)</h6></td><td><h6 class='black-text'>单项总价(Single item total price)</h6></td></tr>";
+                    var trs = "<tr><td><label class='black-text'>名称(name)</label></td><td><label class='black-text'>规格(drugsSpec)</label></td><td><label class='black-text'>数目(number)</label></td><td><label class='black-text'>单价(price)</label></td><td><label class='black-text'>单项总价(Single item price)</label></td></tr>";
                     $.each(data, function (index, item) {
                         if (isNullOrEmpty(item.name)) {
                             item.name = ""
@@ -111,16 +101,35 @@ Scripts
                         if (isNullOrEmpty(item.tdrugsSpec)) {
                             item.tdrugsSpec = ""
                         }
-                        trs += "<tr><td><p class='black-text fontsize03'>" + item.name + "(" + item.tranName + ")" + "</p></td><td ><p class='black-text fontsize03'>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</p></td><td ><p class='black-text fontsize03'>" + item.num + "</p></td><td ><p class='black-text fontsize03'>" + item.price + "</p></td><td ><p class='black-text fontsize03'>" + (item.num * item.price) + "</p></td></tr >";
+                        trs += "<tr><td><label class='black-text fontsize02'> " + item.name + "(" + item.tranName + ")" + "</label></td><td ><label class='black-text fontsize02'>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</label></td><td ><label class='black-text fontsize02'> " + item.num + "</label></td><td ><label class='black-text fontsize02'>" + item.price + "</label></td><td ><label class='black-text fontsize02'> " + (item.num * item.price) + "</label></td></tr >";
                     });
                     var jsons = data[0];
-                    //  console.log(data[0]);
                     $("#createName").html(jsons.createName);
                     $("#totalPrices").html(jsons.totalPrices);
                     $("#createDate").html(jsons.createDate);
-                    //  console.log(trs);
+                    $("#recoverTheFee").html(jsons.recoverTheFee);
                     $("#table_id").append(trs);
+                    $("#table_id1").append(trs);
+                    $("#table_id2").append(trs);
                 }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }
+        );
+    }
+
+    function printShow1() {
+        $.ahsjajax(
+            CTX + "/api/hisTollDetails/printShow/index.ahsj",
+            {"number": number},
+            function (data) {
+                var jsons = data[0];
+                $("#createName").html(jsons.createName);
+                $("#totalPrices").html(jsons.totalPrices);
+                $("#createDate").html(jsons.createDate);
+                $("#recoverTheFee").html(jsons.recoverTheFee);
             },
             function () {
                 M.toast({html: "网络异常"});
@@ -131,12 +140,35 @@ Scripts
 
     function doOk() {
         $('body  div div.row.valign-wrapper').printThis({
-            importCSS: true,
+            importCSS: false,
             debug: true,
             afterPrint: function () {
                 dialog.confirm('确定打印?', function (index, layero) {
 
-
+                    /*       $.ahsjajax(CTX + "/api/hisTollRecord/printDrug/index.ahsj",
+                               {"number": [[number]]},
+                               function (msg) {
+                                   if (msg.success) {
+                                       M.toast({
+                                           html: msg.message, completeCallback: function () {
+                                           }
+                                       });
+                                       grid.search();
+                                       dialog.parentclose();
+                                   } else {
+                                       M.toast({
+                                           html: msg.message, completeCallback: function () {
+                                           }
+                                       });
+                                   }
+                               },
+                               function (data) {
+                                   M.toast({
+                                       html: "网络异常", completeCallback: function () {
+                                       }
+                                   });
+                               }
+                           );*/
                 });
             }
         });

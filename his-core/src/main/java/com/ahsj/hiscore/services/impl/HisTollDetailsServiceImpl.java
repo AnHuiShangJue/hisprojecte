@@ -247,4 +247,53 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
         hisTollDetailsPageBean.setData(CodeHelper.getInstance().setCodeValue(hisTollDetailsMapper.listForcommonSwipeByCommonNumber(hisTollDetailsPageBean)));
         return hisTollDetailsPageBean;
     }
+
+    /**
+         * @Description  出院打印
+         * @Params: [number]
+         * @Author: dingli
+         * @Return: java.util.List<com.ahsj.hiscore.entity.HisTollDetails>
+         *@Date 2019/9/26
+         *@Time 18:50
+        **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<HisTollDetails> listByNumberLeave(String number) throws Exception {
+        List<HisTollDetails> hisTollDetails = hisTollDetailsMapper.listByNumberLeave(number);//所有收费明细
+        for (HisTollDetails h : hisTollDetails) {
+            Translate translate = new Translate();//翻译
+            if (h.getType() == 1 || h.getType() == 4) {//药品
+                HisMedicineInfo hisMedicineInfo = hisMedicineInfoService.selectById(h.getId().longValue());
+                h.setDrugsSpec(hisMedicineInfo.getDrugsSpec());
+                translate.setTranslateId(h.getId().longValue());
+                translate.setTranslateType(Constants.TRANSLATE_HIS_MEDICINEINFO);
+                List<Translate> translates = iTranslateService.queryTranslate(translate);
+                if (!EmptyUtil.Companion.isNullOrEmpty(translates)) {
+                    for (Translate translate1 : translates) {
+                        if (StringUtils.equals(h.getName(), translate1.getTranslateChina())) {
+                            h.setTranName(translate1.getTranslateKhmer());
+                        }
+                        if (StringUtils.equals(h.getDrugsSpec(), translate1.getTranslateChina())) {
+                            h.setTdrugsSpec(translate1.getTranslateKhmer());
+                        }
+                    }
+                }
+            }
+            if (h.getType() == 2 || h.getType() == 5) {//项目
+                translate.setTranslateId(h.getId().longValue());
+                translate.setTranslateType(Constants.TRANSLATE_HIS_PROJECT);
+                List<Translate> translates = iTranslateService.queryTranslate(translate);
+                if (!EmptyUtil.Companion.isNullOrEmpty(translates)) {
+                    translates.stream().filter(e -> StringUtils.equals(h.getName(), e.getTranslateChina())).forEach(t -> h.setTranName(t.getTranslateKhmer()));
+                }
+            }
+            if (h.getType() == 3) {//住院费用
+                if (!EmptyUtil.Companion.isNullOrEmpty(h.getName())) {
+                    h.setTranName("Hospital bed number" + h.getName());
+                    h.setName("住院" + h.getName() + "号病床费用");
+                }
+            }
+        }
+        return hisTollDetails;
+    }
 }

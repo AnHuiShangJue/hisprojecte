@@ -851,4 +851,102 @@
         where a.num != 0
         order by a.isPay desc
     </select>
+
+    <select id="listByNumberLeave" resultMap="BaseResultMap" parameterType="java.lang.String">
+ SELECT
+            h.recover_the_fee,
+            i.user_name,d.type,
+            abs(h.actual_charge-
+                h.recover_the_fee)as total_prices ,
+            d.create_date,d.target_id ,
+            case
+                when
+                    d.type =4
+                    then
+                    (select m.id from  his_medicine_info as m  where  m.drugs_numb = (
+                        select r.drugs_numb from  his_application_for_drug_return_details as r  where id = d.target_id))
+                WHEN
+                    d.type=1
+                    then (select m.id from  his_medicine_info as m  where  m.drugs_numb = (
+                    select d.drugs_numb from  his_medication_details as d  where d.id = d.target_id)
+                )
+                when
+                    d.type=2
+                    then
+                    (select p.project_id from  his_record_project  as p  where   p.id = d.target_id )
+
+										when
+                    d.type=5
+                    then
+                    (
+										select p.project_id from  his_record_project  as p  where   p.id = (
+										select p.record_project_id from  his_refund_project  as p  where   p.id = d.target_id ))
+
+                end as id
+                ,
+            case when
+                     d.type=1
+                     then
+                     (select m.count from his_medication_details as m where m.id  =
+                                                                            d.target_id)
+                 when
+                     d.type=2
+                     then
+                         (select h.num from  his_record_project as h where h.id = d.target_id)
+                 when
+                     d.type=3
+                     then
+                     (select m.hospitalization_day from his_hospital_manage as m where m.id = d.target_id)
+                 when
+                     d.type=4
+                     then
+                     (select g.return_count from his_application_for_drug_return_details as g where g.id = d.target_id)
+
+										 when d.type = 5
+										 then(
+										 select p.refund_num from his_refund_project as p  where  p.id = d.target_id
+										 )
+                end  as num ,
+            case when
+                     d.type=1
+                     then
+                     (select s.sale_price  from his_pharmacy_detail as s where s.id =
+                                                                               (select m.medication_id from his_medication_details as m where m.id  =
+                                                                                                                                              d.target_id)
+                     )
+                 when
+                     d.type=2
+                     then
+                     (
+                         select h.price from  his_record_project as h where h.id = d.target_id
+                     )
+                 when
+                     d.type=3
+                     then
+                         (SELECT e.price from  his_bed as e  where e.number = d.name)
+                 when
+                     d.type =4
+                     then
+                     (select g.price from his_application_for_drug_return_details as g where g.id = d.target_id)
+										 when  d.type =5
+										 then(
+										 	select p.price from  his_record_project  as p  where   p.id = (
+										select p.record_project_id from  his_refund_project  as p  where   p.id = d.target_id )
+										 )
+
+                end  as price ,
+            d.name,
+            d.money
+        FROM `his_toll_details` as d
+                 LEFT JOIN  `his-userinfo`.user_info as i  on   i.id = d.create_user_id
+                 LEFT JOIN
+                 his_toll_record as h on h.id = d.toll_record_id
+        where  d.toll_record_id  in(
+            SELECT h.id
+            from his_toll_record as h where h.number in(
+						select  o.number from  his_toll_record as o where o.medical_record_id =(
+						select  r.medical_record_id from his_toll_record as r where r.number = #{number}
+))
+        )
+    </select>
 </mapper>

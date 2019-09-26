@@ -337,4 +337,30 @@ public class HisTollDetailsController extends BaseController {
             return hisTollDetailsPageBean;
         }
     }
+
+
+    /**
+     * @Description 出院打印
+     * @Params: [number, token, hisTollDetails]
+     * @Author: dingli
+     * @Return: java.util.List<com.ahsj.hiscore.entity.HisTollDetails>
+     * @Date 2019/9/26
+     * @Time 18:28
+     **/
+    @RequestMapping("printShowLeave/index.ahsj")
+    @ResponseBody
+    List<HisTollDetails> printShowLeave(String number, String token, HisTollDetails hisTollDetails) throws Exception {//没有明细
+        List<HisTollDetails> list = new ArrayList<HisTollDetails>();
+        if (EmptyUtil.Companion.isNullOrEmpty(hisTollDetailsService.listByNumberLeave(number))) {
+            HisTollRecord ht = hisTollRecordService.selectByNumbers(number);
+            hisTollDetails.setCreateDate(ht.getCreateDate());
+            hisTollDetails.setCreateName(ht.getUserName());
+            hisTollDetails.setTotalPrices(ht.getMoney());
+            hisTollDetails.setRecoverTheFee(ht.getRecoverTheFee());
+            list.add(hisTollDetails);
+        } else {
+            list = hisTollDetailsService.listByNumberLeave(number);
+        }
+        return list;
+    }
 }
