@@ -53,6 +53,9 @@
                 <label>年龄(age)</label>
                 <label th:text="${hisHospitalManage.age}"></label>
             </td>
+            <td>
+                <label id="now"></label>
+            </td>
 
         </tr>
             <tr>
@@ -64,7 +67,7 @@
                     <label>床号(Bed No)</label>
                     <label th:text="${hisHospitalManage.bedsNumber}"></label>
                 </td>
-                <td>
+                <td colspan="2">
                     <label>住院编号(Hospital number)</label>
                     <label th:text="${hisHospitalManage.number}"></label>
                 </td>
@@ -115,7 +118,20 @@ Scripts
 <div th:replace="public/base_print_script :: html"></div>
 <script th:inline="javascript">
     $(document).ready(function () {
+        var myDate = new Date();
+        var year = myDate.getFullYear();
+        var month = myDate.getMonth() + 1;
+        var date = myDate.getDate();
+        var h = myDate.getHours();
+        var m = myDate.getMinutes();
+        var s = myDate.getSeconds();
+        var now = year + "-" + month + "-" + date + " " + h + ":" + m + ":" + s;
+        console.log(now);
+        document.getElementById("now").innerHTML=now;
+
         printShow();
+
+
     });
     var hosptalregistNumber = $("#hosptalregistNumber").val();
     var number = $("#medicalOrderNumber").val();
