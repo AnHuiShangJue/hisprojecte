@@ -382,6 +382,15 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
         if(hisMedicalOrderDetail.getIsStop()==1){
             return MessageUtil.createMessage(true,"此医嘱已停嘱，请勿多次停嘱(This medical plan has been suspended. Please do not stop it several times.)");
         }
+        if(EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getIsInfusionList())){
+            hisMedicalOrderDetail.setIsStop(1);
+            hisMedicalOrderDetail.setStopDate(new Date());
+            //已经停嘱设置不可编辑
+//        hisMedicalOrderDetail.setIsFirstEdit(2);
+            hisMedicalOrderDetail.setStopUserId(loginUser);
+            hisMedicalOrderDetailMapper.updateByPrimaryKeySelective(hisMedicalOrderDetail);
+            return MessageUtil.createMessage(true, "停嘱成功(Stop success)    " + returnMessage.toString());
+        }
         if(hisMedicalOrderDetail.getIsInfusionList() == 1){
             List<HisMedicalOrderDetail> hisMedicalOrderDetailList = hisMedicalOrderDetailMapper.selectByInfusionNumber(hisMedicalOrderDetail.getInfusionNumber());
             for (HisMedicalOrderDetail medicalOrderDetail : hisMedicalOrderDetailList) {
@@ -545,6 +554,15 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
         HisMedicalOrderDetail hisMedicalOrderDetail = hisMedicalOrderDetailMapper.selectByPrimaryKey(id);
         if(hisMedicalOrderDetail.getIsStop()==1){
             return MessageUtil.createMessage(true,"此临时医嘱已取消，请勿多次取消(This temporary medical order has been cancelled, please do not cancel multiple times)");
+        }
+        if(EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getIsInfusionList())){
+            hisMedicalOrderDetail.setIsStop(1);
+            hisMedicalOrderDetail.setStopDate(new Date());
+            //已经停嘱设置不可编辑
+//        hisMedicalOrderDetail.setIsFirstEdit(2);
+            hisMedicalOrderDetail.setStopUserId(loginUser);
+            hisMedicalOrderDetailMapper.updateByPrimaryKeySelective(hisMedicalOrderDetail);
+            return MessageUtil.createMessage(true, "取消成功(Cancle success)    " + returnMessage.toString());
         }
         if(hisMedicalOrderDetail.getIsInfusionList() == 1) {
             List<HisMedicalOrderDetail> hisMedicalOrderDetailList = hisMedicalOrderDetailMapper.selectByInfusionNumber(hisMedicalOrderDetail.getInfusionNumber());
