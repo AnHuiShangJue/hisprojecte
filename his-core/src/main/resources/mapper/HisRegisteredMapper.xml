@@ -300,7 +300,7 @@
             and a.number like concat('%' #{parameter.number,jdbcType=VARCHAR},'%')
         </if>
         <if test="parameter.serial != null and parameter.serial != ''">
-            and a.serial like concat('%' #{parameter.serial,jdbcType=BIGINT},'%')
+            and a.serial =#{parameter.serial,jdbcType=BIGINT}
         </if>
         <if test="parameter.registeredCategory != null and parameter.registeredCategory != ''">
             and a.registered_category =#{parameter.registeredCategory,jdbcType=INTEGER}

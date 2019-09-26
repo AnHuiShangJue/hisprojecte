@@ -31,25 +31,22 @@
         <div class="col s12 m12 l12">
             <table border="1" cellspacing="0" class="table" id="table_id">
                 <tr>
-                    <td>NO：</td>
+                    <td>编号(number)：</td>
                     <td th:text="${hisInfusionList[0].number}" colspan="3"></td>
-                    <td>科别：</td>
+                    <td>科别(Branch)：</td>
                     <td th:text="${hisPatientInfo.departmentName}" colspan="2"></td>
                 </tr>
                 <tr>
                     <td style="border: 1px solid grey;">
-                        <p>姓名：</p>
-                        <label>name</label>
+                        <p>姓名(name)：</p>
                     </td>
                     <td style="border: 1px solid grey;" th:text="${hisPatientInfo.name}"></td>
                     <td style="border: 1px solid grey;">
-                        <p>性别：</p>
-                        <label>sex</label>
+                        <p>性别(sex)：</p>
                     </td>
                     <td style="border: 1px solid grey;" th:text="${sex}"></td>
                     <td style="border: 1px solid grey;">
-                        <p>年龄：</p>
-                        <label>age</label>
+                        <p>年龄(age)：</p>
                     </td>
                     <td style="border: 1px solid grey;" th:text="${hisPatientInfo.age}"></td>
                     <td style="border: 1px solid grey;" th:text="${time}"></td>

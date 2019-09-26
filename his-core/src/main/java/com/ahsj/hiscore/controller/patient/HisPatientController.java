@@ -460,15 +460,15 @@ public class HisPatientController extends BaseController {
             column = "nowCondition";
         if(!StringUtils.isEmpty(column)) {
             check.setTranslateColumn(column);
-            boolean flag = true;//标记变量 标记循环结束
-            List<Translate> translateList = new ArrayList<>();
-            while (flag) {
-                translateList = iTranslateService.queryTranslate(check);
-                if( EmptyUtil.Companion.isNullOrEmpty(translateList)|| translateList.size() ==0 )
-                    continue;
-                if (translateList.size() > 0)
-                    flag = false;
-            }
+//            boolean flag = true;//标记变量 标记循环结束
+//            List<Translate> translateList = new ArrayList<>();
+//            while (flag) {
+//            translateList = iTranslateService.queryTranslate(check);
+//                if( EmptyUtil.Companion.isNullOrEmpty(translateList)|| translateList.size() ==0 )
+//                    continue;
+//                if (translateList.size() > 0)
+//                    flag = false;
+//            }
         }}
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/medicalrecord/print");
         modelAndView.addObject("title", "打印治疗诊疗单");
