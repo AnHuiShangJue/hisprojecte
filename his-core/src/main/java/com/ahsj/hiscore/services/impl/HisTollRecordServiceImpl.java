@@ -910,24 +910,20 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
     @Override
     @Transactional(readOnly = false)
     public Message hisProjectSave(HisRefundProjectInfo hisRefundProjectInfo) throws Exception {
-        if (EmptyUtil.Companion.isNullOrEmpty(hisRefundProjectInfo.getRefundSumProce()) || EmptyUtil.Companion.isNullOrEmpty(hisRefundProjectInfo.getVoucher()) ||
-                EmptyUtil.Companion.isNullOrEmpty(hisRefundProjectInfo.getTollRecordNumber())) {
-            return MessageUtil.createMessage(false, "退款失败!");
-        } else {
             HisRefundProjectInfo projectInfo = hisRefundProjectInfoMapper.queryHisRefundProjectInfo(hisRefundProjectInfo);
             if (!EmptyUtil.Companion.isNullOrEmpty(projectInfo)) {
                 return MessageUtil.createMessage(false, "退款失败! 该项目已经退款成功 ");
             }
             HisRecordProject hisRecordProject = new HisRecordProject();
             hisRecordProject.setTollRecordNumber(hisRefundProjectInfo.getTollRecordNumber());
-            List<HisRecordProject> hisRecordProjectList = hisRecordProjectMapper.pricelistsBytollRecordNumber(hisRecordProject);
+      /*      List<HisRecordProject> hisRecordProjectList = hisRecordProjectMapper.pricelistsBytollRecordNumber(hisRecordProject);
             BigDecimal sumPrice = new BigDecimal("0");
             for (int i = 0; i < hisRecordProjectList.size(); i++) {
                 sumPrice = sumPrice.add(hisRecordProjectList.get(i).getProjectSumPrice());
             }
             if (sumPrice.compareTo(hisRefundProjectInfo.getRefundSumProce()) != 0) {
                 return MessageUtil.createMessage(false, "退款金额不一致");
-            }
+            }*/
             String createdate = new SimpleDateFormat("yyyyMMdd").format(new Date());
             int count = hisTollRecordMapper.selectNumbCount(createdate) + 1;
             //编号
@@ -963,7 +959,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
                 hisRefundProjectMapper.updateByHisRefundProjectListBack(refundProjectList);
             }
             return MessageUtil.createMessage(true, "退费成功！" + number);
-        }
+
     }
 
     /**

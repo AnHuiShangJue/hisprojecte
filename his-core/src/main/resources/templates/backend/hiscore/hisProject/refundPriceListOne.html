@@ -229,8 +229,9 @@
                     for (var i = 0; i < data.length; i++) {
                         var projectSumPrice = data[i].projectSumPrice;
                         sum = sum + projectSumPrice;
+
                     }
-                    changeInputValue("recoverTheFee", sum);
+                    changeInputValue("recoverTheFee", sum.toFixed(2));
                 }
             },
             function () {
@@ -259,8 +260,8 @@
                             $("#print_btn").attr("disabled", false);
                             return true;
                         } else {
-                            M.toast({html: msg.message});
-                            dialog.warn("退款失败,该项目已经退费！");
+                            data = msg.message.substring(0, 5);//截取成功信息
+                            dialog.warn(data);
                             return false;
                         }
                     }
