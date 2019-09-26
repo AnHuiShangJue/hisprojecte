@@ -46,10 +46,10 @@
                     <div class="card-content">
                         <form id="searchForm" class="row" action="">
                             <div class="input-field col s4 l4 xl4">
-                                <input id="registerNumber" name="registerNumber" type="text"
+                                <input id="MedicalRecordId" name="MedicalRecordId" type="text"
                                        data-error=".errorTxt1">
                                 <div class="errorTxt1"></div>
-                                <label for="registerNumber">请输入挂号编号或就诊编号<span style="font-size: 12px">(Please enter the registration number
+                                <label for="MedicalRecordId">请输入住院编号<span style="font-size: 12px">(Please enter the hospitalization number
 
 
 )</span></label>
@@ -72,32 +72,43 @@
                                        th:value="${loginName}">
                                 <label for="loginName">操作人<span style="font-size: 12px">(Operator
 
+
 )</span></label>
                             </div>
-                            <div class="input-field col s4 l4 xl4">
-                                <input readonly type="text" id="patientName"/>
-                                <label class="active" for="patientName">病人姓名<span style="font-size: 12px">(Patient name
+                                <div class="input-field col s4 l4 xl4">
+                                    <input readonly type="text" id="patientName"/>
+                                    <label class="active" for="patientName">病人姓名<span style="font-size: 12px">(Patient name
+
 
 )</span>:</label>
-                            </div>
-                            <div class="input-field col s4 l4 xl4">
-                                <input readonly type="text" id="sex"/>
-                                <label class="active" for="sex">性 别<span style="font-size: 12px">(sex
+                                </div>
+                                <div class="input-field col s4 l4 xl4">
+                                    <input readonly type="text" id="sex"/>
+                                    <label class="active" for="sex">性 别<span style="font-size: 12px">(sex
+
 
 )</span>:</label>
-                            </div>
-                            <div class="input-field col s4 l4 xl4">
-                                <input readonly type="text" id="department_id"/>
-                                <label class="active" for="department_id">就诊科室<span style="font-size: 12px">(Visiting department
+                                </div>
+                                <div class="input-field col s4 l4 xl4">
+                                    <input readonly type="text" id="department_id"/>
+                                    <label class="active" for="department_id">就诊科室<span style="font-size: 12px">(Visiting departmentទេសចរណ៍
+
 
 )</span>:</label>
-                            </div>
-                            <div class="input-field col s4 l4 xl4">
-                                <input type="text" readonly id="doctorName">
-                                <label class="active" for="doctorName">接诊医生<span style="font-size: 12px">(Receiving doctor
+                                </div>
+                                <div class="input-field col s4 l4 xl4">
+                                    <input type="text" readonly id="doctorName">
+                                    <label class="active" for="doctorName">接诊医生<span style="font-size: 12px">(Receiving doctor
 
 )</span>:</label>
-                            </div>
+                                </div>
+                                <div class="input-field col s4 l4 xl4">
+                                    <input type="number" readonly id="restDeposit" name="restDeposit">
+                                    <label class="active" for="restDeposit">剩余押金<span style="font-size: 12px">(Remaining deposit
+
+
+)</span></label>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -105,7 +116,7 @@
                     <div class="col s12 x12 l12 xl12">
                         <div class="card">
                             <div class="card-content">
-                                <h4 class="card-title">门诊收费
+                                <h4 class="card-title">住院收费
                                 </h4><label style="color:black">Hospitalization charge
                             </label>
                                 <!--Form Advance-->
@@ -130,7 +141,7 @@
 
 )</span>:</label>
                                     </div>
-                                    <input type="hidden" id="register_number" name="registerNumber" />
+                                    <input type="hidden" id="medical_record_id" name="medicalRecordId" />
                                     <div class="input-field col s4 l4 xl4">
                                         <input type="number" name="actualCharge" id="actualCharge"
                                                data-error=".errorTxt2">
@@ -145,34 +156,37 @@
 
 )</span></label>
                                     </div>
-                                </form>
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <button id="print_btn"
-                                                class="btn cyan waves-effect waves-light right"
-                                                type="button"
-                                                name="action"
-                                                hidden="true">打 印（print）
-                                            <i class="mdi-content-send right"></i>
-                                        </button>
-                                        <button id="send_btn"
-                                                class="btn cyan waves-effect waves-light right"
-                                                type="button"
-                                                name="action"
-                                                hidden="true">门诊费用结算（Outpatient fee settlement
-                                            ）
-                                            <i class="mdi-content-send right"></i>
-                                        </button>
-                                        <button id="swipe_btn"
-                                                class="btn cyan waves-effect waves-light right"
-                                                type="button"
-                                                name="action"
-                                                hidden="true">刷卡结算（Card settlement
-                                            ）
-                                            <i class="mdi-content-send right"></i>
-                                        </button>
+                                    <div class="input-field col s4 l4 xl4">
+                                        <input type="number" name="deposit" id="deposit" readonly
+                                               data-error=".errorTxt3">
+
+                                        <label class="active" for="deposit">住 院 押 金<span style="font-size: 12px">(Hospitalization deposit
+                                        )</span></label>
+                                        <div class="errorTxt3"></div>
+
+
                                     </div>
-                                </div>
+                                </form>
+                                    <div class="row">
+                                        <input type="hidden" name="">
+                                        <div class="input-field col s12">
+                                            <button id="print_btn"
+                                                    class="btn cyan waves-effect waves-light right"
+                                                    type="button"
+                                                    name="action"
+                                                    hidden="true">打 印（print）
+                                                <i class="mdi-content-send right"></i>
+                                            </button>
+                                            <button id="send_btn"
+                                                    class="btn cyan waves-effect waves-light right"
+                                                    type="button"
+                                                    name="action"
+                                                    hidden="true">住 院 费 用 结 算（Hospitalization fee settlement
+                                                ）
+                                                <i class="mdi-content-send right"></i>
+                                            </button>
+                                        </div>
+                                    </div>
 
                             </div>
                         </div>
@@ -183,67 +197,77 @@
     </div>
 </div>
 </div>
-
 <div th:replace="public/base_list_script :: html"></div>
 <script type="text/javascript">
     var grid = new Datatable();
     $(document).ready(function () {
         initBtn();
         initTable();
-        $("#print_btn").attr("disabled",true);
+        $("#print_btn").attr("disabled", true);
     });
     $(function () {
         formCheck();
     });
+    $('#resetBtn').click(function reset() {
+        grid.reset();
+        resetNumber();
+        $("#print_btn").attr("disabled", true);
+    });
+    function resetNumber(){
+        changeInputValue("deposit","");
+        changeInputValue("recoverTheFee","");
+        changeInputValue("patientName","");
+        changeInputValue("sex","");
+        changeInputValue("department_id","");
+        changeInputValue("doctorName","");
+        changeInputValue("restDeposit","");
+        changeInputValue("money","");
+        $("#medical_record_id").attr("value","");
+    }
 
     function initBtn() {
         //搜索按钮
         $('#searchBtn').click(function () {
-            var reg1 = new RegExp(/^R\d{13}$/);
-            var reg2 = new RegExp(/^HM\d{13}$/);
-            var registerNumber = $("#registerNumber").val();
-            if(reg1.test(registerNumber)||reg2.test(registerNumber)){
+            var reg1 = new RegExp(/^HR\d{13}$/);
+            var MedicalRecordId = $("#MedicalRecordId").val();
+            if(reg1.test(MedicalRecordId)){
                 grid.search();
                 getCharge();
             }else{
-                dialog.warn("所输入的数据不符合格式要求！请输入R开头的编号")
+                dialog.warn("所输入的数据不符合格式要求！请输入HR开头的编号")
             }
-        });
-        //重置按钮
-        $('#resetBtn').click(function () {
-           grid.reset();
-            $("#patientName").attr("value","");
-            $("#sex").attr("value","");
-            $("#department_id").attr("value","");
-            $("#doctorName").attr("value","");
-            $("#actualCharge").attr("value","");
-            $("#money").attr("value","");
-            $("#recoverTheFee").attr("value","");
-            $("#remark").attr("value","");
-            $("#print_btn").attr("disabled",true);
-        });
+        });}
         $("#actualCharge").change(function () {
             //实际收款金额
             var actualCharge = $("#actualCharge").val();
-            //总应收金额
+            //总收款金额
             var money = $("#money").val();
-            //实际找零金额
-            var recoverTheFee = $("#recoverTheFee").val();
+            //剩余押金
+            var restDeposit = $("#restDeposit").val();
+            //本次提交的押金
+            var deposit = $("#deposit").val();
+
             if (money.length > 0) {
                 if (!isNullOrEmpty(actualCharge)) {
                     var ac = numeral(actualCharge);
                     var m = numeral(money);
-                    var rt = numeral(recoverTheFee);
-                    if(ac.value() < m.value()){
+                    var rd = numeral(restDeposit);
+                    var totalMoney = ac.value()+rd.value();
+                    if(totalMoney < m.value()){
                         dialog.warn("总金额小于应收金额，请重新输入!!!")
                     }else{
                         //如果实际收款大于应收款
-                            changeInputValue("recoverTheFee",numeral(ac.value()).subtract(m.value()).format('0.00'));
+                        if(ac.value() >= m.value()){
+                            changeInputValue("deposit",numeral(ac.value()).subtract(m.value()).format('0.00'));
+                            changeInputValue("recoverTheFee",0);
+                        }else{
+                            changeInputValue("deposit",numeral(ac.value()).subtract(m.value()).format('0.00'));
+                            changeInputValue("recoverTheFee",0);
+                        }
                     }
                 }
             }
         });
-    }
     function validform(sendForm){
         return $(sendForm).validate({
             rules : {
@@ -259,93 +283,56 @@
             errorElement: 'div',
         });
     }
-    var number;
-    $("#send_btn").click(function () {
-        if(validform("#sendForm").form()) {
-        dialog.confirm('确定提交吗?', function (index, layero) {
-            checkMoney();
-            var hisTollRecord = $("#sendForm").serialize();
-            var json = grid.getDataTable().ajax.json().data;
-            var hisTollHospiModel = {
-                "hisTollRecord": strToObj(hisTollRecord),
-                "hisTollDetailsList": json
-            };
-            var jsonData = JSON.stringify(hisTollHospiModel);
-            if(json!=null&&json!=""&&json!=undefined){
-            $.ahsjajax(
-                CTX + "/api/hisTollRecord/outpatient/save.ahsj",
-                jsonData,
-                function (msg) {
-                    if (msg.success) {
-                        data = msg.message.substring(16);//截取成功信息
-                        number = msg.message.substring(0,16); //截取交易流水号
-                        M.toast({html: data});
-                        grid.search();
-                        $("#print_btn").attr("disabled", false);
-                        dialog.success(data);
-                        return true;
-                    } else {
-                        M.toast({html: msg.message});
-                        return false;
-                    }
-                },
-                null, null, null, function () {
-                    M.toast({html: "网络异常"});
-                    return false;
-                }, "application/json; charset=UTF-8"
-            );}
-            else{
-                dialog.warn("找不到门诊费用结算信息！")
-            }
-        })}});
-
-    //刷卡支付  预留等待补充
-    $('#swipe_btn').click(function () {
-        //就诊卡编号 预留等待补充
-        var visitCardNumber = '002';
-        dialog.confirm('确定刷卡结算吗?', function (index, layero) {
-            if(!isNullOrEmpty(visitCardNumber)) {
-                $.ahsjajax(CTX + "/api/visitCard/swipe.ahsj",
-                    {"visitCardNumber": visitCardNumber},
+        var number ; //交易流水号
+        $("#send_btn").click(function () {
+            if(validform("#sendForm").form()) {
+            dialog.confirm('确定结算吗?', function (index, layero) {
+                checkMoney();
+                var hisTollRecord = $("#sendForm").serialize();
+                var json = grid.getDataTable().ajax.json().data;
+                var hisTollHospiModel = {
+                    "hisTollRecord": strToObj(hisTollRecord),
+                    "hisTollDetailsList": json
+                };
+                var jsonData = JSON.stringify(hisTollHospiModel);
+                if(json!=null&&json!=""&&json!=undefined){
+                $.ahsjajax(
+                    CTX + "/api/hisTollRecord/hospital/save.ahsj",
+                    jsonData,
                     function (msg) {
                         if (msg.success) {
                             data = msg.message.substring(16);//截取成功信息
                             number = msg.message.substring(0,16); //截取交易流水号
-                            M.toast({
-                                html: msg.message, completeCallback: function () {
-                                }
-                            });
+                            M.toast({html: data});
                             grid.search();
                             $("#print_btn").attr("disabled", false);
+                            dialog.success(data);
+                            return true;
                         } else {
-                            M.toast({
-                                html: msg.message, completeCallback: function () {
-                                }
-                            });
+                            M.toast({html: msg.message});
+                            return false;
                         }
                     },
-                    function (data) {
-                        M.toast({
-                            html: "网络异常", completeCallback: function () {
-                            }
-                        });
-                    }
-                );
-            }else {
-                dialog.warn("无对应就诊卡信息");
-            }
-        });
-    });
+                    null, null, null, function () {
+                        M.toast({html: "网络异常"});
+                        return false;
+                    }, "application/json; charset=UTF-8"
+                );}
+                else{
+                    dialog.warn("找不到住院结算信息！")
+                }
+            });}
+            });
+        $("#print_btn").click(function () {
+            dialog.confirm('确定打印吗?', function (index, layero) {
+                if (number != "" && number != null && number != undefined) {
+                    var url = CTX + "/api/hisTollDetails/printHospital/index.ahsj?number="+ number+"&token="+TOKEN;
+                    dialog.showDialog(url, "打印凭证预览", "700px", "700px");
+                } else {
+                    dialog.warn("没有需要打印的内容！")
+                }});
+        })
 
-    $("#print_btn").click(function () {
-        dialog.confirm('确定打印吗?', function (index, layero) {
-            if (number != "" && number != null && number != undefined) {
-                var url = CTX + "/api/hisTollDetails/printHospitalOne/index.ahsj?number="+ number+"&token="+TOKEN;
-                dialog.showDialog(url, "打印凭证预览", "700px", "700px");
-            } else {
-                dialog.warn("没有需要打印的内容！")
-            }});
-    });
     function initTable() {
         grid.init({
             src: $("#data-table-simple"),
@@ -358,7 +345,7 @@
             loadingMessage: 'Loading...',
             dataTable: {
                 "ajax": {
-                    "url": CTX + "/api/hisTollDetails/outpatient/list.ahsj",
+                    "url": CTX + "/api/hisTollDetails/hospital/list.ahsj",
                 },
                 "pageLength": 200,
                 "columns": [
@@ -386,35 +373,35 @@
                     }, {
                         "title": "是否付费",
                         "data": "payName",
-                        "name": "isPay"
+                        "name": "is_pay"
                     }
                 ],
-                "order" : [ [ 1, 'asc' ] ]
+                // "order" : [ [ 0, 'asc' ] ]
             }
         });
     }
-    function formCheck() {
-    }
-    function getCharge() {
 
-        var registerNumber = $("#registerNumber").val();
-        if (!isNullOrEmpty(registerNumber)) {
+
+    function getCharge() {
+        var MedicalRecordId = $("#MedicalRecordId").val();
+        if (!isNullOrEmpty(MedicalRecordId)) {
             //获取基本信息
             $.ahsjajax(
-                CTX + "/api/hisTollRecord/outpatient/details.ahsj",
-                {"registerNumber": registerNumber},
+                CTX + "/api/hisTollRecord/hospital/details.ahsj",
+                {"medicalRecordId": MedicalRecordId},
                 function (data) {
-                    console.log(data)
                     if (!isNullOrEmpty(data.id)) {
                         changeInputValue("patientName",data.patientName);
                         changeInputValue("sex",data.sexName);
                         changeInputValue("department_id",data.departmentName);
                         changeInputValue("doctorName",data.doctorName);
+                        changeInputValue("restDeposit",data.restDeposit);
                         changeInputValue("money",data.money);
-                        $("#register_number").attr("value",$("#registerNumber").val());
+                        $("#medical_record_id").attr("value",$("#MedicalRecordId").val());
                         return true;
                     } else {
-                        dialog.warn(registerNumber + "号不存在！")
+                        dialog.warn(MedicalRecordId + "号不存在！")
+                        resetNumber();
                         return false;
                     }
                 },
@@ -425,30 +412,37 @@
             );
         }
     }
-
-    //核对输入金额是否正确
+//核对输入金额是否正确
     function checkMoney() {
         //实际收款金额
         var actualCharge = $("#actualCharge").val();
-        //总应收金额
+        //总收款金额
         var money = $("#money").val();
-        //实际找零金额
-        var recoverTheFee = $("#recoverTheFee").val();
+        //剩余押金
+        var restDeposit = $("#restDeposit").val();
+        //本次提交的押金
+        var deposit = $("#deposit").val();
         if (money.length > 0) {
             if (!isNullOrEmpty(actualCharge)) {
                 var ac = numeral(actualCharge);
                 var m = numeral(money);
-                var rt = numeral(recoverTheFee);
-                if(ac.value() < m.value()){
+                var rd = numeral(restDeposit);
+                var totalMoney = ac.value()+rd.value();
+                if(totalMoney < m.value()){
                     dialog.warn("总金额小于应收金额，请重新输入!!!")
                 }else{
                     //如果实际收款大于应收款
-                    changeInputValue("recoverTheFee",numeral(ac.value()).subtract(m.value()).format('0.00'));
+                    if(ac.value() >= m.value()){
+                        changeInputValue("deposit",numeral(ac.value()).subtract(m.value()).format('0.00'));
+                        changeInputValue("recoverTheFee",0);
+                    }else{
+                        changeInputValue("deposit",numeral(ac.value()).subtract(m.value()).format('0.00'));
+                        changeInputValue("recoverTheFee",0);
+                    }
                 }
             }
         }
     }
-
     $("input").change(function(){
         $(this).val($(this).val().trim());
     });

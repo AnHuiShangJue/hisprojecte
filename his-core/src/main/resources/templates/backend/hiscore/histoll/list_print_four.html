@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+<head>
+    <style>
+        .fontsize01 {
+            font-size: 14px;
+        }
+
+        .fontsize02 {
+            font-size: 12px;
+        }
+
+    </style>
+</head>
+<div th:replace="public/base_print :: html"></div>
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<div class="row">
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12 center">
+            <h5 class="black-text">中柬第一医院</h5>
+            <label class="black-text fontsize02">The first china-cambodia hospital</label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4" style="height: 110px;">
+            <label class="black-text fontsize01">交易流水号</label></br>
+            <label class="black-text fontsize02">Transaction flow number</label>
+        </div>
+        <div class="col s8 m8 l8" style="height: 110px;">
+            <label class="black-text" th:text="${number}"></label>
+        </div>
+        <input type="hidden" id="number" th:value="${number}">
+
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4" style="height: 75px;">
+            <label class="black-text fontsize01">收费人</label></br>
+            <label class="black-text fontsize02">Toll collector</label>
+        </div>
+        <div class="col s8 m8 l8" style="height: 75px;">
+            <label class="black-text"><span id="createName"></span></label>
+        </div>
+    </div>
+
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4" style="height: 100px;">
+            <label class="black-text fontsize01">退费金额</label></br>
+            <label class="black-text fontsize02">Refund amount</label>
+        </div>
+        <div class="col s8 m8 l8" style="height: 100px;">
+            <label class="black-text"><span id="totalPrices"></span></label>
+        </div>
+
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4" style="height: 75px;">
+            <label class="black-text fontsize01">收费时间</label></br>
+            <label class="black-text fontsize02">Charging time</label>
+        </div>
+        <div class="col s8 m8 l8" style="height: 75px;">
+            <label class="black-text"><span id="createDate"></span></label>
+        </div>
+    </div>
+    <div class="row valign-wrapper">
+        <div class="col s4 m4 l4">
+            <h6 class="black-text">收费明细</h6>
+            <label class="black-text fontsize02">Charge details</label>
+        </div>
+        <div class="col s8 m8 l8">
+            <h6 class="black-text"></h6>
+        </div>
+    </div>
+
+    <div class="row valign-wrapper">
+        <div class="col s12 m12 l12">
+            <table id="table_id" style="font-size: 14px"></table>
+        </div>
+    </div>
+</div>
+
+<!-- ================================================
+Scripts
+================================================ -->
+<div th:replace="public/base_print_script :: html"></div>
+<script th:inline="javascript">
+    $(document).ready(function () {
+        printShow();
+    });
+    var number = $("#number").val();
+
+    function printShow() {
+        $.ahsjajax(
+            CTX + "/api/hisTollDetails/printShow/index.ahsj",
+            {"number": number},
+            function (data) {
+                var jsons = data[0];
+                if (!isNullOrEmpty(jsons)) {//有
+                    var trs = "<tr><td><h6 class='black-text'>名称(name)</h6></td><td><h6 class='black-text'>规格(drugsSpec)</h6></td><td><h6 class='black-text'>数目(number)</h6></td><td><h6 class='black-text'>单价(price)</h6></td><td><h6 class='black-text'>单项总价(Single item total price)</h6></td></tr>";
+                    $.each(data, function (index, item) {
+                        if (isNullOrEmpty(item.name)) {
+                            item.name = ""
+                        }
+                        if (isNullOrEmpty(item.tranName)) {
+                            item.tranName = ""
+                        }
+                        if (isNullOrEmpty(item.drugsSpec)) {
+                            item.drugsSpec = ""
+                        }
+                        if (isNullOrEmpty(item.tdrugsSpec)) {
+                            item.tdrugsSpec = ""
+                        }
+                        trs += "<tr><td><p class='black-text fontsize03'>" + item.name + "(" + item.tranName + ")" + "</p></td><td ><p class='black-text fontsize03'>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</p></td><td ><p class='black-text fontsize03'>" + item.num + "</p></td><td ><p class='black-text fontsize03'>" + item.price + "</p></td><td ><p class='black-text fontsize03'>" + (item.num * item.price) + "</p></td></tr >";
+                    });
+                    var jsons = data[0];
+                    //  console.log(data[0]);
+                    $("#createName").html(jsons.createName);
+                    $("#totalPrices").html(jsons.totalPrices);
+                    $("#createDate").html(jsons.createDate);
+                    //  console.log(trs);
+                    $("#table_id").append(trs);
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }
+        );
+    }
+
+    function doOk() {
+        $('body  div div.row.valign-wrapper').printThis({
+            importCSS: true,
+            debug: true,
+            afterPrint: function () {
+                dialog.confirm('确定打印?', function (index, layero) {
+
+
+                });
+            }
+        });
+    }
+
+    $("input").change(function () {
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</body>
+
+</html>
