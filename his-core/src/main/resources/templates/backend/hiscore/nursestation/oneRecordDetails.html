@@ -187,81 +187,7 @@
             }
         });
 
-        // gridForMedicalOrder.init({
-        //     src: $("#data-table-simple-medicalOrder"),
-        //     onSuccess: function (gridForMedicalOrder) {
-        //     },
-        //     onError: function (gridForMedicalOrder) {
-        //     },
-        //     onDataLoad: function (gridForMedicalOrder) {
-        //
-        //     },
-        //     loadingMessage: 'Loading...',
-        //     dataTable: {
-        //         "ajax": {
-        //             "url": CTX + "/api/hisMedicalOrder/listByRecordId.ahsj?token=" + TOKEN + "&recordId="+ $("#medicalRecordId").val(), // ajax source
-        //         },
-        //         "columns": [
-        //             {
-        //                 "title": "<label><input type=\"checkbox\"  id=\"checkAll\" class=\"select-all\" > <span></span></label> ",
-        //                 "render": function (data, type, row, meta) {
-        //                     return " <label> <input type=\"checkbox\" value=\"" + row.id + "\"> <span></span> </label>";
-        //                 },
-        //                 "width": "18px",
-        //                 "className": "centered"
-        //             },
-        //             {
-        //                 "title": "就诊记录编号",
-        //                 "data": "recordId", //实体字段
-        //                 "name": "record_id"   //库中字段
-        //             },
-        //             {
-        //                 "title": "医嘱编号",
-        //                 "data": "number",
-        //                 "name": "number"
-        //             }, {
-        //                 "title": "医嘱类型",
-        //                 "data": "typeName",
-        //                 "name": "type"
-        //             },
-        //             {
-        //                 "title": "医嘱创建时间",
-        //                 "data": "createDate",
-        //                 "name": "create_date"
-        //             }, {
-        //                 "title": "医嘱创建人",
-        //                 "data": "userName",
-        //                 "name": ""
-        //             },
-        //             {
-        //                 "title": "操作序号",
-        //                 "data": "orderNum",
-        //                 "name": "order_num"
-        //             },
-        //             {
-        //                 "title": "操作",
-        //                 "width": "120px",
-        //                 "className": "centered",
-        //                 "orderable": false,
-        //                 "render": function (data, type, row) {
-        //                     var rtnBtn = "";
-        //                     //如果获取字符串，必须在参数外反转"
-        //                     rtnBtn = rtnBtn +
-        //                         "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看医嘱详细信息\" onclick='medicalOrderDetail(\"" + row.number + "\");'><i class='material-icons'>visibility</i></a>";
-        //                         // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='editMedicalOrder(" + row.id + ");'> <i class='material-icons'>edit</i></a>" +
-        //                         // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick='deleteInitForMedicalOrder(" + row.id + ");'> <i class='material-icons'>delete</i></a>";
-        //                     // 返回自定义内容
-        //                     return rtnBtn;
-        //                     // 返回自定义内容
-        //
-        //                 }
-        //             }
-        //         ],
-        //         "order": [
-        //             [6, 'asc']
-        //         ],
-        //     }
-        // });
+
         gridForMedicalOrder.init({
             src: $("#data-table-simple-medicalOrder"),
             onSuccess: function (gridForMedicalOrder) {
@@ -333,10 +259,13 @@
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn +
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看医嘱详细信息\" onclick=\"medicalOrderDetail('" + row.number + "',"+row.type+");\"><i class='material-icons'>visibility</i></a>";
+                                // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看医嘱详细信息\" onclick=\"medicalOrderDetail('" + row.number + "',"+row.type+");\"><i class='material-icons'>visibility</i></a>";
                             // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='editMedicalOrder(" + row.id + ");'> <i class='material-icons'>edit</i></a>" +
                             // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick='deleteInitForMedicalOrder(" + row.id + ");'> <i class='material-icons'>delete</i></a>";
-
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看医嘱详细信息\" onclick='medicalOrderDetail(\"" + row.number + "\","+row.type+");'><i class='material-icons'>visibility</i></a>"+
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"打印（Print）\" onclick='print(\"" + row.number + "\");'> <i class='material-icons'>print</i></a>"+
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='editMedicalOrder(" + row.id + ");'> <i class='material-icons'>edit</i></a>";
+                                // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick='deleteInitForMedicalOrder(" + row.id + ");'> <i class='material-icons'>delete</i></a>";
                             return rtnBtn;
                             // 返回自定义内容
 
@@ -419,11 +348,29 @@
     }
 
 
+
     //查看医嘱明细
     function medicalOrderDetail(number,type) {
-        var url = CTX+ "/api/medicalOrderDetail/listDetailByNumberNurse/index.ahsj?token="+TOKEN+"&number="+number+"&isDischarged=1"+"&type="+type;
-        // var url = CTX+ "/api/medicalOrderDetail/listDetailByNumber/index.ahsj?token="+TOKEN+"&number="+number+"&isDischarged="+[[${hisHospitalManage.isDischarged}]];
+        var hosptalregistNumber = $("#hosNumber").val()           //hr
+        var url = CTX+ "/api/medicalOrderDetail/listDetailByNumber/index.ahsj?token="+TOKEN+"&number="+number+"&isDischarged="+[[${hisHospitalManage.isDischarged}]]+"&hosptalregistNumber="+hosptalregistNumber+"&type="+type;
         dialog.show(url, "查看医嘱详细信息");
+    }
+
+    function print(number) {
+        var hosptalregistNumber = $("#hosNumber").val();
+        dialog.confirm('确定打印吗?', function (index, layero) {
+            if (number != "" && number != null && number != undefined) {
+                var url = CTX + "/api/medicalOrderDetail/printDoctorAdvice/index.ahsj?number=" + number + "&token=" + TOKEN+"&hosptalregistNumber="+hosptalregistNumber;
+                dialog.showDialog(url, "打印凭证预览", "800px", "700px");
+            } else {
+                dialog.warn("没有需要打印的内容！")
+            }
+        });
+    }
+
+    function editMedicalOrder(id) {
+        var url = CTX+ "/api/hisMedicalOrder/update/index.ahsj?token="+TOKEN+"&id="+id ;
+        dialog.show(url, "医嘱信息管理");
     }
 
 

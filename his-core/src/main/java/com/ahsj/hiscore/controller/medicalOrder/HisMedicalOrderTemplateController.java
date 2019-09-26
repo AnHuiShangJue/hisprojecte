@@ -71,9 +71,9 @@ public class HisMedicalOrderTemplateController extends BaseController {
     @ResponseBody
     public Message saveOrUpdate (Map<String, Object> model, HisMedicalOrderTemplate hisMedicalOrderTemplate) throws Exception {
 
-        if (hisMedicalOrderTemplate.getRemarks() == "1"){
-            hisMedicalOrderTemplate.setRemarks(String.valueOf(getId()));
-        }
+//        if (hisMedicalOrderTemplate.getRemarks().equals("1")){
+//            hisMedicalOrderTemplate.setRemarks(String.valueOf(getId()));
+//        }
         return  hisMedicalOrderTemplateService.saveOrUpdate(hisMedicalOrderTemplate);
     }
 

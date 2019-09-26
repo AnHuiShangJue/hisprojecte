@@ -211,9 +211,9 @@
                             //如果获取字符串，必须在参数外反转"
                             if(row.hospitalManageId != null){
                                 rtnBtn = rtnBtn +
-                                    "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"当次住院病历查看\" onclick=\"visitDetails("+ row.hospitalManageId +",'" + row.hosNumber + "','"+row.medicalRecordId+"',"+row.fnurseId+");\"> <i class='material-icons'>visibility</i></a>"+
-                                    "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"输液单\" onclick=\"infusion('"+ row.medicalRecordId +"',"+row.patientId+");\"> <i class='material-icons'>healing</i></a>"+
-                                    "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"当次对应护理记录\" onclick=\"visitAnkleRecord("+ row.hospitalManageId +",'" + row.hosNumber + "','"+row.medicalRecordId+"',"+row.fnurseId+");\"> <i class='material-icons'>assignment</i></a>";
+                                    "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"当次住院病历查看\" onclick=\"visitDetails("+ row.hospitalManageId +",'" + row.hosNumber + "','"+row.medicalRecordId+"',"+row.fnurseId+");\"> <i class='material-icons'>visibility</i></a>";
+                                    // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"输液单\" onclick=\"infusion('"+ row.medicalRecordId +"',"+row.patientId+");\"> <i class='material-icons'>healing</i></a>"+
+                                    // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"当次对应护理记录\" onclick=\"visitAnkleRecord("+ row.hospitalManageId +",'" + row.hosNumber + "','"+row.medicalRecordId+"',"+row.fnurseId+");\"> <i class='material-icons'>assignment</i></a>";
                                 if (row.isDischarge == 1){
                                     rtnBtn = rtnBtn +
                                         "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"耗材申请\" onclick=\"consumables('"+ row.medicalRecordId +"',"+row.id+");\"> <i class='material-icons'>all_out</i></a>";
@@ -221,8 +221,8 @@
                                 }
                             }
                             // else {
-                                rtnBtn = rtnBtn +
-                                    "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"对应信息查看\" onclick='visitInformationForNotInHospital(\""+ row.medicalRecordId +"\",\""+row.pName+"\");'> <i class='material-icons'>event_note</i></a>";
+                            //     rtnBtn = rtnBtn +
+                            //         "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"对应信息查看\" onclick='visitInformationForNotInHospital(\""+ row.medicalRecordId +"\",\""+row.pName+"\");'> <i class='material-icons'>event_note</i></a>";
                             // }
                             return rtnBtn;
                             // 返回自定义内容

@@ -305,7 +305,7 @@
                         changeInputValue("restDeposit",data.restDeposit);
                         changeInputValue("money",data.money);
                             $("#medical_record_id").attr("value",$("#MedicalRecordId").val());
-                        if (data.restDeposit <= data.depositWarning){//设置打印按钮是否隐藏
+                        if (data.restDeposit <= (0-data.depositWarning)){//设置打印按钮是否隐藏
                             $("#print_btn2").attr("style","display:block;");
                         }
                         return true;
