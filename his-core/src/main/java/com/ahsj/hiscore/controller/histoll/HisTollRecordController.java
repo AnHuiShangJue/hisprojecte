@@ -554,4 +554,19 @@ public class HisTollRecordController extends BaseController {
         pageBean = hisTollRecordService.pharmacyInventoryDetail(pageBean);
         return pageBean;
     }
+
+
+    /**
+     *@Description 根据交易流水号核对是否为住院
+     *@Params [token, hisTollRecord]
+     *@return com.ahsj.hiscore.entity.HisTollRecord
+     *@Author zhushixiang
+     *@Date 2019-09-26
+     *@Time 22:02
+    **/
+    @RequestMapping("checkIsInpatient.ahsj")
+    @ResponseBody
+    HisHospitalManage checkIsInpatient(String token, String tollNumber) throws Exception {
+        return hisTollRecordService.checkIsInpatient(tollNumber);
+    }
 }

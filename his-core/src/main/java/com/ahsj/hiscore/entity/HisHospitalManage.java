@@ -138,6 +138,8 @@ public class HisHospitalManage extends BaseEntity {
 
     private BigDecimal depositWarning;
 
+    private BigDecimal retrunPrice;//退药总价
+
     public String getNurseNames() {
         return nurseNames;
     }
@@ -618,5 +620,13 @@ public class HisHospitalManage extends BaseEntity {
 
     public void setDiseaseRegion(String diseaseRegion) {
         this.diseaseRegion = diseaseRegion;
+    }
+
+    public BigDecimal getRetrunPrice() {
+        return retrunPrice;
+    }
+
+    public void setRetrunPrice(BigDecimal retrunPrice) {
+        this.retrunPrice = retrunPrice;
     }
 }

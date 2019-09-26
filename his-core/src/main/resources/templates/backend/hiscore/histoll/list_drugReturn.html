@@ -244,39 +244,96 @@
     var number; //交易流水号
     $('#send_btn').click(function () {
         dialog.confirm('确定退费吗?', function (index, layero) {
-            var json = grid.getDataTable().ajax.json().data;
-            var hisTollRecord = $("#sendForm").serialize();
-            var hisTollHospiModel = {
-                "hisTollRecord": strToObj(hisTollRecord),
-                "hisApplicationForDrugReturnDetailsList": json
-            };
-            var jsonData = JSON.stringify(hisTollHospiModel);
-            if (json != "" && json != null && json != undefined) {
-                $.ahsjajax(
-                   CTX + "/api/hisTollRecord/returnDrug/save.ahsj",
-                    jsonData,
-                    function (msg) {
-                        if (msg.success) {
-                            data = msg.message.substring(0, 5);//截取成功信息
-                            M.toast({html: data});
-                            dialog.success("退款成功！");
-                            grid.reset();
-                            number = msg.message.substring(5); //截取交易流水号
-                            $("#print_btn").attr("disabled", false);
-                            return true;
-                        } else {
-                            M.toast({html: msg.message});
-                            dialog.warn("退款失败,该药品已经退费！")
-                            return false;
+            //获取交易流水号
+            var tollNumber = $("#number").val();
+            $.ahsjajax(
+                CTX + "/api/hisTollRecord/checkIsInpatient.ahsj",
+                {"tollNumber": tollNumber},
+                function (data) {
+                    if (!isNullOrEmpty(data.id)) {
+                        if(data.isDischarged == 1) {
+                            dialog.warn(tollNumber + "未出院，请把要退费的金额冲入对应押金！要退费的金额为：" + $("#recoverTheFee").val() + "相关联住院编号为:" + data.number);
+                        }else {
+                            var json = grid.getDataTable().ajax.json().data;
+                            var hisTollRecord = $("#sendForm").serialize();
+                            var hisTollHospiModel = {
+                                "hisTollRecord": strToObj(hisTollRecord),
+                                "hisApplicationForDrugReturnDetailsList": json
+                            };
+                            var jsonData = JSON.stringify(hisTollHospiModel);
+                            if (json != "" && json != null && json != undefined) {
+                                $.ahsjajax(
+                                    CTX + "/api/hisTollRecord/returnDrug/save.ahsj",
+                                    jsonData,
+                                    function (msg) {
+                                        if (msg.success) {
+                                            data = msg.message.substring(0, 5);//截取成功信息
+                                            M.toast({html: data});
+                                            dialog.success("退款成功！");
+                                            grid.reset();
+                                            number = msg.message.substring(5); //截取交易流水号
+                                            $("#print_btn").attr("disabled", false);
+                                            return true;
+                                        } else {
+                                            M.toast({html: msg.message});
+                                            dialog.warn("退款失败,该药品已经退费！");
+                                            return false;
+                                        }
+                                    },    null, null, null, function () {
+                                        M.toast({html: "网络异常"});
+                                        return false;
+                                    }, "application/json; charset=UTF-8"
+                                );}
+                            else {
+                                dialog.warn("没有退费信息！")
+                            }
                         }
-                    },    null, null, null, function () {
-                        M.toast({html: "网络异常"});
-                        return false;
-                    }, "application/json; charset=UTF-8"
-                );}
-             else {
-                dialog.warn("没有退费信息！")
-            }
+                        return true;
+                    }else {
+                        var json = grid.getDataTable().ajax.json().data;
+                        var hisTollRecord = $("#sendForm").serialize();
+                        var hisTollHospiModel = {
+                            "hisTollRecord": strToObj(hisTollRecord),
+                            "hisApplicationForDrugReturnDetailsList": json
+                        };
+                        var jsonData = JSON.stringify(hisTollHospiModel);
+                        if (json != "" && json != null && json != undefined) {
+                            $.ahsjajax(
+                                CTX + "/api/hisTollRecord/returnDrug/save.ahsj",
+                                jsonData,
+                                function (msg) {
+                                    if (msg.success) {
+                                        data = msg.message.substring(0, 5);//截取成功信息
+                                        M.toast({html: data});
+                                        dialog.success("退款成功！");
+                                        grid.reset();
+                                        number = msg.message.substring(5); //截取交易流水号
+                                        $("#print_btn").attr("disabled", false);
+                                        return true;
+                                    } else {
+                                        M.toast({html: msg.message});
+                                        dialog.warn("退款失败,该药品已经退费！")
+                                        return false;
+                                    }
+                                },    null, null, null, function () {
+                                    M.toast({html: "网络异常"});
+                                    return false;
+                                }, "application/json; charset=UTF-8"
+                            );}
+                        else {
+                            dialog.warn("没有退费信息！")
+                        }
+                    }
+                },
+                function () {
+                    M.toast({html: "网络异常"});
+                    return false;
+                }
+            );
+
+
+
+
         });
     });
     $("#print_btn").click(function () {

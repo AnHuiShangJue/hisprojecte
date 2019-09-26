@@ -77,6 +77,9 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
     @Autowired
     HisRefundProjectMapper hisRefundProjectMapper;
 
+    @Autowired
+    HisHospitalManageService hisHospitalManageService;
+
     @Override
     @Transactional(readOnly = false)
     public Message addHisTollRecord(List<HisCharge> record, HisTollRecord hisTollRecord) throws Exception {
@@ -459,8 +462,6 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         if (sumPrice.compareTo(hisTollRecord1.getRecoverTheFee()) != 0) {
             return MessageUtil.createMessage(false, "退款金额不一致");
         }
-
-
         String createdate = new SimpleDateFormat("yyyyMMdd").format(new Date());
         int count = hisTollRecordMapper.selectNumbCount(createdate) + 1;
         //编号
@@ -987,5 +988,37 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
     public PageBean<HisTollRecord> pharmacyInventoryDetail(PageBean<HisTollRecord> pageBean) throws Exception {
         pageBean.setData(CodeHelper.getInstance().setCodeValue(hisTollRecordMapper.pharmacyInventoryDetail(pageBean)));
         return pageBean;
+    }
+
+    /**
+     *@Description 根据交易流水号核对是否为住院
+     *@Params [tollNumber]
+     *@return com.ahsj.hiscore.entity.HisHospitalManage
+     *@Author zhushixiang
+     *@Date 2019-09-26
+     *@Time 22:04
+    **/
+    @Override
+    @Transactional(readOnly = true)
+    public HisHospitalManage checkIsInpatient(String tollNumber) throws Exception {
+        //根据交易流水号查询该病人对应的住院信息，主要返回剩余押金，是否已住院（已住院退现金，未出院提醒冲入押金）
+        if("HM".equals(tollNumber.substring(0,2))){
+
+        }else if("HTR".equals(tollNumber.substring(0,3))){
+            HisTollRecord hisTollRecord = hisTollRecordMapper.selectByNumber(tollNumber);
+            tollNumber = hisTollRecord.getMedicalRecordId();
+        }
+        HisHospitalManage hisHospitalManage = hisHospitalManageService.checkIsInpatient(tollNumber);
+        if(EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage))
+            return new HisHospitalManage();
+        /*List<HisApplicationForDrugReturnDetails> hisApplicationForDrugReturnDetailsList = hisApplicationForDrugReturnDetailsMapper.selectByRecordNumber(hisHospitalManage.getMedicalNumber());
+        BigDecimal sumPrice = new BigDecimal("0");
+        if(!EmptyUtil.Companion.isNullOrEmpty(hisApplicationForDrugReturnDetailsList)&& hisApplicationForDrugReturnDetailsList.size()!=0) {
+            for (HisApplicationForDrugReturnDetails hisApplicationForDrugReturnDetails : hisApplicationForDrugReturnDetailsList) {
+                sumPrice.add(hisApplicationForDrugReturnDetails.getTotalPrice());
+            }
+        }
+        hisHospitalManage.setRetrunPrice(sumPrice);*/
+        return hisHospitalManage;
     }
 }

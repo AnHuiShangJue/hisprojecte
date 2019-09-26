@@ -252,4 +252,14 @@ public interface HisTollRecordService {
      * @Time 11:06
      **/
     PageBean<HisTollRecord> pharmacyInventoryDetail(PageBean<HisTollRecord> pageBean) throws Exception;
+
+    /**
+     *@Description 根据交易流水号核对是否为住院
+     *@Params [tollNumber]
+     *@return com.ahsj.hiscore.entity.HisHospitalManage
+     *@Author zhushixiang
+     *@Date 2019-09-26
+     *@Time 22:03
+    **/
+    HisHospitalManage checkIsInpatient(String tollNumber)throws Exception;
 }

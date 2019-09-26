@@ -247,4 +247,14 @@ public interface HisHospitalManageMapper extends BaseMapper<HisHospitalManage> {
      * @Time 15:29
      **/
     HisHospitalManage selectNumber(String number);
+
+    /**
+     *@Description 根据交易流水号核对是否为住院
+     *@Params [tollNumber]
+     *@return com.ahsj.hiscore.entity.HisHospitalManage
+     *@Author zhushixiang
+     *@Date 2019-09-26
+     *@Time 22:09
+    **/
+    HisHospitalManage checkIsInpatient(String tollNumber);
 }

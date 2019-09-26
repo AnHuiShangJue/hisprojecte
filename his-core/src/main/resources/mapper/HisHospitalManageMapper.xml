@@ -520,5 +520,11 @@
                  LEFT JOIN his_bed as b on b.id = m.bed_id
                  LEFT JOIN his_ward as  w on w.id = m.ward_id
         where m.number =  #{number,jdbcType=VARCHAR}</select>
+    <select id="checkIsInpatient" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select distinct a.*
+        from his_hospital_manage as a
+                 left join his_toll_record as b on a.medical_number = b.medical_record_id
+        where b.medical_record_id = #{tollNumber,jdbcType=VARCHAR}
+    </select>
 
 </mapper>

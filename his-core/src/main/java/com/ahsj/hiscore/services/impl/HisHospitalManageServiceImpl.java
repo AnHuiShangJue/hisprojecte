@@ -737,6 +737,20 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
     public HisHospitalManage selectNumber(String number) {
         return CodeHelper.getInstance().setCodeValue(hisHospitalManageMapper.selectNumber(number));
     }
+
+    /**
+     *@Description 根据交易流水号/就诊编号核对是否为住院
+     *@Params [tollNumber]
+     *@return com.ahsj.hiscore.entity.HisHospitalManage
+     *@Author zhushixiang
+     *@Date 2019-09-26
+     *@Time 22:08
+    **/
+    @Override
+    @Transactional(readOnly = true)
+    public HisHospitalManage checkIsInpatient(String tollNumber) throws Exception {
+        return hisHospitalManageMapper.checkIsInpatient(tollNumber);
+    }
 }
 
 
