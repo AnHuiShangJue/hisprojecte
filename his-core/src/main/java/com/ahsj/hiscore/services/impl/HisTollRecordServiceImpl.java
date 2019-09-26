@@ -199,7 +199,10 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
 
         //修改住院押金
         HisHospitalManage hisHospitalManage = hisHospitalManageMapper.selectByNumber(hisTollRecord.getMedicalRecordId());
-        hisHospitalManage.setRestDeposit(hisHospitalManage.getRestDeposit().add(hisTollRecord.getDeposit()));
+        if(hisHospitalManage.getRestDeposit().compareTo(new BigDecimal("0"))>=1) {
+            hisHospitalManage.setRestDeposit(hisHospitalManage.getRestDeposit().add(hisTollRecord.getDeposit()));
+        }else
+            hisHospitalManage.setRestDeposit(hisTollRecord.getDeposit());
         //无收费记录，则为交押金
         if (hisTollDetails.size() == 0 && !hisTollRecord.getDeposit().equals(0)) {
             hisHospitalManageMapper.updateByPrimaryKey(hisHospitalManage);
