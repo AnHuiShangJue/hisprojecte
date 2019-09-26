@@ -76,7 +76,6 @@ Scripts
 <script th:inline="javascript">
     $(document).ready(function () {
         printShow();
-        printShow1();
     });
     var number = $("#number").val();
 
@@ -112,24 +111,6 @@ Scripts
                     $("#table_id1").append(trs);
                     $("#table_id2").append(trs);
                 }
-            },
-            function () {
-                M.toast({html: "网络异常"});
-                return false;
-            }
-        );
-    }
-
-    function printShow1() {
-        $.ahsjajax(
-            CTX + "/api/hisTollDetails/printShow/index.ahsj",
-            {"number": number},
-            function (data) {
-                var jsons = data[0];
-                $("#createName").html(jsons.createName);
-                $("#totalPrices").html(jsons.totalPrices);
-                $("#createDate").html(jsons.createDate);
-                $("#recoverTheFee").html(jsons.recoverTheFee);
             },
             function () {
                 M.toast({html: "网络异常"});
