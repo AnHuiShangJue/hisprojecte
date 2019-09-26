@@ -295,7 +295,7 @@
                     ,yes: function(index, layero){
                         //按钮【按钮一】的回调
                         if (number != "" && number != null && number != undefined) {
-                            var url = CTX + "/api/hisTollDetails/printDrugFour/index.ahsj?number="+ number+"&token="+TOKEN+"&type=1";
+                            var url = CTX + "/api/hisTollRecord/printDrugFour/index.ahsj?number="+ number+"&token="+TOKEN+"&type=1";
                             dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                         } else {
                             dialog.warn("没有需要打印的内容！")
@@ -304,7 +304,7 @@
                     ,btn2: function(index, layero){
                         //按钮【按钮二】的回调
                         if (number != "" && number != null && number != undefined) {
-                            var url = CTX + "/api/hisTollDetails/printDrugFour/index.ahsj?number="+ number+"&token="+TOKEN+"&type=2";
+                            var url = CTX + "/api/hisTollRecord/printDrugFour/index.ahsj?number="+ number+"&token="+TOKEN+"&type=2";
                             dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                         } else {
                             dialog.warn("没有需要打印的内容！")
@@ -315,7 +315,7 @@
                     ,btn3: function(index, layero){
                         //按钮【按钮三】的回调
                         if (number != "" && number != null && number != undefined) {
-                            var url = CTX + "/api/hisTollDetails/printDrugFour/index.ahsj?number="+ number+"&token="+TOKEN+"&type=3";
+                            var url = CTX + "/api/hisTollRecord/printDrugFour/index.ahsj?number="+ number+"&token="+TOKEN+"&type=3";
                             dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                         } else {
                             dialog.warn("没有需要打印的内容！")

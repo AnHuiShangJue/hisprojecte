@@ -247,11 +247,12 @@ public class HisTollDetailsController extends BaseController {
     }
 
     @RequestMapping("printHospitalThree/index.ahsj")
-    ModelAndView printHospitalThree(String token, String number) throws Exception {
+    ModelAndView printHospitalThree(String token, String number,Integer type) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/histoll/list_print_three");
         modelAndView.addObject("title", "打印凭证预览");
         modelAndView.addObject("token", token);
         modelAndView.addObject("number", number);
+        modelAndView.addObject("type", type);
         return modelAndView;
     }
 

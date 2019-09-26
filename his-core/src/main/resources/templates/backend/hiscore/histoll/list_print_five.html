@@ -20,8 +20,15 @@
 
 <div class="row" style="padding: 0;margin:0">
     <div class="row valign-wrapper">
-        <div class="col s12 m12 l12">
-            <label class="black-text">财务联(Financial group)</label>
+        <div class="col s12 m12 l12" th:if="${type} eq 1">
+            <label class="black-text">财务联(Financial union)</label>
+
+        </div>
+        <div class="col s12 m12 l12" th:if="${type} eq 2">
+            <label class="black-text">科室联(Department)</label>
+        </div>
+        <div class="col s12 m12 l12" th:if="${type} eq 3">
+            <label class="black-text">自由联(Free association)</label>
 
         </div>
     </div>
