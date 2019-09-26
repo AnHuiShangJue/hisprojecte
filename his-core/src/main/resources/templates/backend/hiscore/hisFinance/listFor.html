@@ -329,28 +329,43 @@
     });
 
     function print(number, attenchType) {
-        dialog.confirm('确定打印吗?', function (index, layero) {
             if (number != "" && number != null && number != undefined) {
                 if (attenchType == 1) {//门诊打印
                     var url = CTX + "/api/hisTollDetails/printHospitalOne/index.ahsj?number=" + number + "&token=" + TOKEN;
                 }
-                if (attenchType == 2) {//住院收费
-                    var url = CTX + "/api/hisTollDetails/printHospitalTwo/index.ahsj?number=" + number + "&token=" + TOKEN;
+                else if (attenchType == 2) {//住院收费
+                    layer.open({
+                        title:'打印小票（Print a small ticket）',
+                        content:'确定打印么（Determine what to print?）？',
+                        btn:['财务联（Financial union）', '科室联（Department）', '自由联（Free association）'],
+                        yes:function(index,layro){
+                            var url = CTX + "/api/hisTollDetails/printHospitalTwo/index.ahsj?number="+ number+"&token="+TOKEN+"&type=1";
+
+                        },
+                        btn2:function(){
+                            var url = CTX + "/api/hisTollDetails/printHospitalTwo/index.ahsj?number="+ number+"&token="+TOKEN+"&type=2";
+
+                        },
+                        btn3:function () {
+                            var url = CTX + "/api/hisTollDetails/printHospitalTwo/index.ahsj?number="+ number+"&token="+TOKEN+"&type=3";
+
+                        },
+                    });
                 }
                 if (attenchType == 9) {//出院打印
                     var url = CTX + "/api/hisTollDetails/printHospitalThree/index.ahsj?number=" + number + "&token=" + TOKEN;
                 }
-                if (attenchType == 4) {//药品退费
+                else if (attenchType == 4) {//药品退费
                     var url = CTX + "/api/hisTollRecord/printDrugFour/index.ahsj?number=" + number + "&token=" + TOKEN;
                 }
-                if (attenchType == 8) {//项目退费
+                else if (attenchType == 8) {//项目退费
                     var url = CTX + "/api/hisTollRecord/printDrugFive/index.ahsj?number=" + number + "&token=" + TOKEN;
                 }
                 dialog.showDialog(url, "打印凭证预览", "700px", "700px");
             } else {
                 dialog.warn("没有需要打印的内容！")
             }
-        });
+
     }
 </script>
 </body>
