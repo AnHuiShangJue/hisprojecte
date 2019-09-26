@@ -387,7 +387,7 @@
         $("#print_btn").click(function () {
             dialog.confirm('确定打印吗?', function (index, layero) {
                 if (number != "" && number != null && number != undefined) {
-                    var url = CTX + "/api/hisTollDetails/printHospital/index.ahsj?number="+ number+"&token="+TOKEN;
+                    var url = CTX + "/api/hisTollDetails/printHospitalTwo/index.ahsj?number="+ number+"&token="+TOKEN;
                     dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                 } else {
                     dialog.warn("没有需要打印的内容！")
