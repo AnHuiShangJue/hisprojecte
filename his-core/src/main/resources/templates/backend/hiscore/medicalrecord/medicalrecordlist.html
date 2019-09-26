@@ -134,6 +134,9 @@
         </div>
     </div>
 </div>
+
+<input type="hidden" id="flag" th:value="${theflag}">
+
 <div th:replace="public/base_list_script :: html"></div>
 
 
@@ -232,7 +235,7 @@
     function infusion(medicalRecordId, patientId) {
 
         // var url = CTX + "/api/hisInfusion/selectByRecordIdListIndex/index.ahsj?token=" + TOKEN + "&medicalRecordId=" + medicalRecordId + "&patientId=" + patientId + "&isNurseOpreate=1";
-        var url = CTX + "/api/hisInfusion/infusionlist/index.ahsj?token=" + TOKEN +"&hospitalManage="+medicalRecordId+"&patientId="+patientId+"&isOpreate=1";
+        var url = CTX + "/api/hisInfusion/infusionlist/index.ahsj?token=" + TOKEN +"&hospitalManage="+medicalRecordId+"&patientId="+patientId+"&flag="+$("#flag").val();
         dialog.show(url, "输液单");
     }
 
