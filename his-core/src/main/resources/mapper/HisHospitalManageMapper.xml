@@ -527,4 +527,6 @@
         where b.medical_record_id = #{tollNumber,jdbcType=VARCHAR}
     </select>
 
+
+
 </mapper>

@@ -107,22 +107,22 @@ public interface HisHospitalManageService {
 
     /**
      * @Description 住院天数定时任务
-     * @Author  muxu
-     * @Date  2019/9/24
+     * @Author muxu
+     * @Date 2019/9/24
      * @Time 18:24
      * @Return void
      * @Params []
-    **/
+     **/
     void startAddDate();
 
     /**
      * @Description
-     * @Author  muxu
-     * @Date  2019/9/24
+     * @Author muxu
+     * @Date 2019/9/24
      * @Time 18:24
      * @Return void
      * @Params []
-    **/
+     **/
     void startAddcareLevel();
 
     /**
@@ -217,12 +217,13 @@ public interface HisHospitalManageService {
     HisHospitalManage selectNumber(String number);
 
     /**
-     *@Description 根据交易流水号核对是否为住院
-     *@Params [tollNumber]
-     *@return com.ahsj.hiscore.entity.HisHospitalManage
-     *@Author zhushixiang
-     *@Date 2019-09-26
-     *@Time 22:07
-    **/
-    HisHospitalManage checkIsInpatient(String tollNumber)throws Exception;
+     * @return com.ahsj.hiscore.entity.HisHospitalManage
+     * @Description 根据交易流水号核对是否为住院
+     * @Params [tollNumber]
+     * @Author zhushixiang
+     * @Date 2019-09-26
+     * @Time 22:07
+     **/
+    HisHospitalManage checkIsInpatient(String tollNumber) throws Exception;
+
 }

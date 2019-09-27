@@ -308,6 +308,10 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
     @Override
     @Transactional(readOnly = true)
     public HisTollDetails listByNumberFor(String number) throws Exception {
-        return hisTollDetailsMapper.listByNumberFor(number);
-    }
+        if(EmptyUtil.Companion.isNullOrEmpty(hisTollDetailsMapper.selectNumber(number))){//未住院
+            return CodeHelper.getInstance().setCodeValue(hisTollDetailsMapper.listByNumberFors(number));
+        }
+        else{
+        return CodeHelper.getInstance().setCodeValue(hisTollDetailsMapper.listByNumberFor(number)); //住院
+    }}
 }
