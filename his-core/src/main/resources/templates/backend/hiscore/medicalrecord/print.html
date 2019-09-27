@@ -268,28 +268,28 @@
             {"number": number},
             function (data) {
                 console.log(data)
-                if (data.hiscondition != null && data.thiscondition != null) {
+                if (data.hiscondition != null) {
                     $("#hiscondition").html(data.hiscondition + "(" + data.thiscondition + ")");
                 }
-                if (data.nowCondition != null && data.tnowCondition != null) {
+                if (data.nowCondition != null) {
                     $("#nowCondition").html(data.nowCondition + "(" + data.tnowCondition + ")");
                 }
-                if (data.chiefcomplaint != null && data.tchiefcomplaint != null) {
+                if (data.chiefcomplaint != null) {
                     $("#chiefcomplaint").html(data.chiefcomplaint + "(" + data.tchiefcomplaint + ")");
                 }
-                if (data.personalHistory != null && data.tpersonalHistory != null) {
+                if (data.personalHistory != null) {
                     $("#personalHistory").html(data.personalHistory + "(" + data.tpersonalHistory + ")");
                 }
-                if (data.allergies != null && data.tallergies != null) {
+                if (data.allergies != null) {
                     $("#allergies").html(data.allergies + "(" + data.tallergies + ")");
                 }
-                if (data.familyHistory != null && data.tfamilyHistory != null) {
+                if (data.familyHistory != null) {
                     $("#familyHistory").html(data.familyHistory + "(" + data.tfamilyHistory + ")");
                 }
-                if (data.other != null && data.tother != null) {
+                if (data.other != null) {
                     $("#other").html(data.other + "(" + data.tother + ")");
                 }
-                if (data.bloodPressure != null && data.bloodPressure != "") {
+                if (data.bloodPressure != null) {
                     $("#bloodPressure").html(data.bloodPressure + " mmhg");
                 }
                 if (data.bodyTemperature != null) {
