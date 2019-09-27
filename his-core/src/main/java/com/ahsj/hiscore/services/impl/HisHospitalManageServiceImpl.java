@@ -751,8 +751,9 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
         if (EmptyUtil.Companion.isNullOrEmpty(hisHospitalManageBed)) {
             return new ArrayList<>();
         } else {
-            List<HisHospitalManage> collect = hisHospitalManageBed.stream().filter(e -> e.getBedsNumber() != null).collect(Collectors.toList());
-            return collect;
+           // List<HisHospitalManage> collect = hisHospitalManageBed.stream().filter(e -> e.getBedsNumber() != null).collect(Collectors.toList());
+         //   System.out.println("-------collect-----------"+collect.size());
+            return hisHospitalManageBed;
         }
     }
 

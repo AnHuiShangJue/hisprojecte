@@ -17,6 +17,7 @@
         <result column="age" property="age" jdbcType="INTEGER"/>
         <result column="ages" property="ages" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="bed_number" property="bedsNumber" jdbcType="VARCHAR"/>
         <result column="patient_name" property="patientName" jdbcType="VARCHAR"/>
         <result column="names" property="names" jdbcType="VARCHAR"/>
         <result column="number" property="number" jdbcType="VARCHAR"/>
