@@ -46,7 +46,7 @@
         <result column="deposit_warning" property="depositWarning" jdbcType="DECIMAL"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, hosptal_regist_id,department_id, patient_id, doctor_id, nurse_id,care_level, bed_id, ward_id, create_date,disease_region,
+        id, hosptal_regist_id,department_id, patient_id, doctor_id, nurse_id,care_level, bed_id, ward_id, create_date,disease_region,phone_number,
         update_date, remarks, create_user_id,outpatient_diagnosis,inpatient_diagnosis,sex,idcard,number,patient_name,age,is_discharged,hospitalization_day,pay_hospitalization_day,toll_details_id,rest_deposit,medical_number,deposit_warning
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
@@ -238,6 +238,7 @@
             update_date = #{updateDate,jdbcType=TIMESTAMP},
             remarks = #{remarks,jdbcType=VARCHAR},
             create_user_id = #{createUserId,jdbcType=BIGINT},
+            phone_number = #{phoneNumber,jdbcType=BIGINT},
             outpatient_diagnosis= #{outpatientDiagnosis,jdbcType=VARCHAR},
             disease_region= #{diseaseRegion,jdbcType=VARCHAR},
             inpatient_diagnosis = #{inpatientDiagnosis,jdbcType=VARCHAR},

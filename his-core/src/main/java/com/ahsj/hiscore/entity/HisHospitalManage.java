@@ -121,7 +121,7 @@ public class HisHospitalManage extends BaseEntity {
 
     private String doctorNumber;
 
-    private String phoneNumber;
+    private Long phoneNumber;
 
     private String nurseIdcard;
 
@@ -139,6 +139,15 @@ public class HisHospitalManage extends BaseEntity {
     private BigDecimal depositWarning;
 
     private BigDecimal retrunPrice;//退药总价
+
+
+    private String location;
+
+    private Integer height;
+
+    private Double Weight;
+
+    private Integer isMarried;
 
     public String getNurseNames() {
         return nurseNames;
@@ -501,11 +510,11 @@ public class HisHospitalManage extends BaseEntity {
         this.careLevels = careLevels;
     }
 
-    public String getPhoneNumber() {
+    public Long getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(Long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -629,4 +638,37 @@ public class HisHospitalManage extends BaseEntity {
     public void setRetrunPrice(BigDecimal retrunPrice) {
         this.retrunPrice = retrunPrice;
     }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
+    }
+
+    public Double getWeight() {
+        return Weight;
+    }
+
+    public void setWeight(Double weight) {
+        Weight = weight;
+    }
+
+    public Integer getIsMarried() {
+        return isMarried;
+    }
+
+    public void setIsMarried(Integer isMarried) {
+        this.isMarried = isMarried;
+    }
+
 }
