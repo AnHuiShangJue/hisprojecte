@@ -1,5 +1,9 @@
 package com.ahsj.hiscore.controller.hosptalregist;
+import com.ahsj.hiscore.dao.HisUserDoctorMapper;
 import com.ahsj.hiscore.entity.HisHosptalregist;
+import com.ahsj.hiscore.entity.HisUserDoctor;
+import com.ahsj.hiscore.entity.sys.Organization;
+import com.ahsj.hiscore.feign.IOrganizationService;
 import com.ahsj.hiscore.services.*;
 import com.alibaba.fastjson.JSON;
 import core.controller.BaseController;
@@ -22,6 +26,12 @@ public class hosptalregistController  extends BaseController {
     @Autowired
     HisMedicalService hisMedicalService;
 
+    @Autowired
+    HisUserDoctorMapper hisUserDoctorMapper;
+
+    @Autowired
+    IOrganizationService iOrganizationService;
+
     @RequestMapping("add/index.ahsj")
     /**  
          *@Description 
@@ -37,6 +47,9 @@ public class hosptalregistController  extends BaseController {
         modelAndView.addObject("title","医疗信息系统");
         modelAndView.addObject("token",token);
         modelAndView.addObject("loginName",getUserName());
+        modelAndView.addObject("userId",getId());
+        modelAndView.addObject("departmentId",getDeptId());
+        modelAndView.addObject("departmentName",iOrganizationService.getOrganizationById(Long.valueOf(getDeptId())).getName());
         return modelAndView;
     }
 

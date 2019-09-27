@@ -43,9 +43,7 @@
                             <label class="active" for="name">姓名<span style="font-size: 12px">(name)</span></label>
                         </div>
                         <div class="input-field col s3 l3 xl3">
-                            <input id="age" name="age" type="number"
-                                   data-error=".errorTxt2">
-                            <div class="errorTxt2"></div>
+                            <input id="age" name="age" type="number"/>
                             <label class="active" for="age">年龄<span style="font-size: 12px">(age)</span></label>
                         </div>
                         <div class="input-field col s3 l3 xl3">
@@ -64,22 +62,16 @@
 )</span></label>
                         </div>
                         <div class="input-field col s3 l3 xl3">
-                            <input id="height" name="height" type="number"
-                                   data-error=".errorTxt5" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')">
-                            <div class="errorTxt5"></div>
+                            <input id="height" name="height" type="number" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/>
                             <label class="active" for="height">身 高 cm<span style="font-size: 12px">(height cm)</span></label>
                         </div>
                         <div class="input-field col s3 l3 xl3">
-                            <input id="weight" name="weight" type="number"
-                                   data-error=".errorTxt6">
-                            <div class="errorTxt6"></div>
-                            <label class="active" for="weight">体 重<span style="font-size: 12px">(weight
+                            <input id="weight" name="weight" type="number"/>
+                            <label class="active" for="weight">体 重 kg<span style="font-size: 12px">(weight
 )</span></label>
                         </div>
                         <div class="input-field col s3 l3 xl3">
-                            <input id="location" name="location" type="text"
-                                   data-error=".errorTxt7">
-                            <div class="errorTxt7"></div>
+                            <input id="location" name="location" type="text"/>
                             <label class="active" for="location">地 址<span
                                     style="font-size: 12px">(address)</span></label>
                         </div>
@@ -96,23 +88,33 @@
                             <label >性 别<span style="font-size: 12px">(sex
 )</span></label>
                         </div>
-                        <div class="col input-field s3 m3 l3">
+<!--                        <div class="col input-field s3 m3 l3">
                             <select ahsj:select name="departmentId" id="departmentId" type="depart" typeKey="2"
-                                    departKbn="1">
-                            </select> <!--departKbn="1"  1是医疗 2是非医疗 -->   <!--typeKey="2"   1是部门 2是科室-->
+                                    departKbn="1"  th:value="${departmentId}">
+                            </select> &lt;!&ndash;departKbn="1"  1是医疗 2是非医疗 &ndash;&gt;   &lt;!&ndash;typeKey="2"   1是部门 2是科室&ndash;&gt;
                             <label for="departmentId">科 室<span style="font-size: 12px">(Department
 )</span></label>
-                        </div>
+                        </div>-->
+                        <input id="departmentId" name="departmentId" type="hidden" th:value="${departmentId}">
                         <div class="col input-field s3 m3 l3">
-                            <select id="doctorId" name="doctorId" class="js-data-example-ajax">
-                            </select>
-                            <label>医 生<span style="font-size: 12px">(Doctor
+                            <input id="departmentName" name="departmentName" type="text" th:value="${departmentName}" readonly/>
+                            <label for="departmentName">科 室<span style="font-size: 12px">(Department
 )</span></label>
                         </div>
+<!--                        <div class="col input-field s3 m3 l3">-->
+<!--                            <select id="doctorId" name="doctorId" class="js-data-example-ajax">-->
+<!--                            </select>-->
+<!--                            <label>医 生<span style="font-size: 12px">(Doctor-->
+<!--)</span></label>-->
+                            <input id="doctorId" name="doctorId" type="hidden" th:value="${userId}">
+                            <div class="col input-field s3 m3 l3">
+                                <input id="doctorName" name="doctorName" type="text" th:value="${loginName}" readonly/>
+                                <label for="doctorName">医 生<span style="font-size: 12px">(Doctor
+)</span></label>
+                            </div>
+<!--                        </div>-->
                         <div class="input-field col s12 l12 xl12">
-                            <input id="chiefcomplaint" name="outpatientDiagnosis" type="text"
-                                   data-error=".errorTxt8">
-                            <div class="errorTxt8"></div>
+                            <input id="chiefcomplaint" name="outpatientDiagnosis" type="text" />
                             <label for="chiefcomplaint">门诊诊断<span style="font-size: 12px">(Outpatient diagnosis
 )</span></label>
                         </div>
@@ -189,7 +191,7 @@ Scripts
     }
 
 
-    $("select[name='departmentId']").change(function () {
+/*    $("select[name='departmentId']").change(function () {
         getDoctor()
     })
     var docSelect = $("#doctorId");
@@ -204,7 +206,7 @@ Scripts
             })
             docSelect.formSelect();
         })
-    }
+    }*/
 
     function getPatient() {
         var medicalRecordId = $("#medicalRecordId").val();
@@ -257,11 +259,6 @@ Scripts
                     required: true,
                     minlength: 2
                 },
-                age: {
-                    required: true,
-                    number: true,
-                    minlength: 1
-                },
                 idcard: {
                     required: true,
                     minlength: 1
@@ -269,24 +266,6 @@ Scripts
                 phonenumber: {
                     required: true,
                     number: true,
-                    minlength: 1
-                },
-                height: {
-                    required: true,
-                    number: true,
-                    minlength: 1
-                },
-                weight: {
-                    required: true,
-                    number: true,
-                    minlength: 1
-                },
-                outpatientDiagnosis: {
-                    required: true,
-                    minlength: 1
-                },
-                location: {
-                    required: true,
                     minlength: 1
                 }
             },
@@ -295,10 +274,6 @@ Scripts
                     required: "请输入名称",
                     minlength: "最少包含2个字符"
                 },
-                age: {
-                    required: "请输入年龄",
-                    minlength: "最少包含1个数字"
-                },
                 idcard: {
                     required: "请输入身份证号",
                     minlength: "最少包含1个字符"
@@ -306,22 +281,6 @@ Scripts
                 phonenumber: {
                     required: "请输入手机号",
                     minlength: "最少包含1位数字"
-                },
-                height: {
-                    required: "请输入身高",
-                    minlength: "最少包含1个数字"
-                },
-                weight: {
-                    required: "请输入体重",
-                    minlength: "最少包含1个数字"
-                },
-                outpatientDiagnosis: {
-                    required: "请输入门诊诊断",
-                    minlength: "最少包含1个字符"
-                },
-                location: {
-                    required: "请输入地址",
-                    minlength: "最少包含1个字符"
                 }
             },
             errorElement: 'div',
@@ -359,7 +318,6 @@ Scripts
 
         });
     }
-
 
     function initBtn() {
         //搜索按钮

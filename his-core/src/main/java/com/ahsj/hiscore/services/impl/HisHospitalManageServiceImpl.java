@@ -95,6 +95,16 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
     @Override
     @Transactional(readOnly = false)
     public Message saveOrUpdate(HisHospitalManage hisHospitalManage) throws Exception {
+        HisPatientInfo hisPatientInfo1 = new HisPatientInfo(); //病人信息
+        hisPatientInfo1.setName(hisHospitalManage.getPatientName());
+        hisPatientInfo1.setIdcard(hisHospitalManage.getIdcard());
+        hisPatientInfo1.setPhonenumber(hisHospitalManage.getPhoneNumber());
+        hisPatientInfo1.setLocation(hisHospitalManage.getLocation());
+        hisPatientInfo1.setHeight(hisHospitalManage.getHeight());
+        hisPatientInfo1.setWeight(hisHospitalManage.getWeight());
+        hisPatientInfo1.setIsMarried(hisHospitalManage.getIsMarried());
+        hisPatientInfo1.setSex(hisHospitalManage.getSex());
+        hisPatientInfo1.setAge(hisHospitalManage.getAge());
         List<HisHospitalManage> check = hisHospitalManageMapper.selectByHosOrder(hisHospitalManage.getPatientId());
         HisPatientInfo hisPatientInfo = hisPatientInfoMapper.selectByPrimaryKey(hisHospitalManage.getPatientId());
         HisHosptalregist hisHosptalregist = hisHosptalregistMapper.selectByPrimaryKey(hisHospitalManage.getHosptalRegistId());
@@ -118,28 +128,63 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
                     if (EmptyUtil.Companion.isNullOrEmpty(hisHosptalregist.getMedicalNumber())) {
 
                         hisMedicalRecord.setPatientId(hisHospitalManage.getPatientId());
+                        hisPatientInfo1.setId(hisHospitalManage.getPatientId());
                         hisMedicalRecordService.recEnter(null, String.valueOf(hisHospitalManage.getDoctorId()), 2, hisHospitalManage.getPatientId());
                         List<HisMedicalRecord> hisMedicalRecord1 = hisMedicalRecordMapper.selectByMedicalRecordOrder(hisHospitalManage.getPatientId());
                         hisHospitalManage.setMedicalNumber(hisMedicalRecord1.get(0).getMedicalRecordId());
                         hisHospitalManage.setHospitalizationDay("1");
                         hisHospitalManage.setDepositWarning(new BigDecimal(300));
                         hisHospitalManage.setPayHospitalizationDay("");
-                        hisHospitalManage.setSex(hisPatientInfo.getSex());
+                        hisHospitalManage.setSex(hisPatientInfo1.getSex());
                         hisHospitalManage.setRestDeposit(new BigDecimal(0));
-                        hisHospitalManageMapper.insert(hisHospitalManage);
-                        hisHosptalregistMapper.updateByPrimaryKey(hisHosptalregist);
-                        return MessageUtil.createMessage(true, "审核通过，住院成功！");
-
+                        HisPatientInfo checkIfExit = hisPatientInfoMapper.selectByPrimaryKey(hisPatientInfo1.getId());
+                        if (EmptyUtil.Companion.isNullOrEmpty(checkIfExit)) {
+                            return MessageUtil.createMessage(false, "审核失败!所变更的病人信息不存在!");
+                        }
+                        HisPatientInfo checkIdcard = hisPatientInfoMapper.selectByIdcard(hisPatientInfo1.getIdcard());
+                        if (EmptyUtil.Companion.isNullOrEmpty(checkIdcard)) {
+                            hisPatientInfoMapper.updateByPrimaryKeySelective(hisPatientInfo1);
+                            hisHospitalManageMapper.insert(hisHospitalManage);
+                            hisHosptalregistMapper.updateByPrimaryKey(hisHosptalregist);
+                            return MessageUtil.createMessage(true, "审核通过，住院成功！");
+                        } else {
+                            if (hisPatientInfo1.getId().equals(checkIdcard.getId())) {
+                                hisPatientInfoMapper.updateByPrimaryKeySelective(hisPatientInfo1);
+                                hisHospitalManageMapper.insert(hisHospitalManage);
+                                hisHosptalregistMapper.updateByPrimaryKey(hisHosptalregist);
+                                return MessageUtil.createMessage(true, "审核通过，住院成功！");
+                            } else {
+                                return MessageUtil.createMessage(false, "审核失败!所变更的身份证号已存在");
+                            }
+                        }
                     } else {
                         //有待修改
+                        hisPatientInfo1.setId(hisHospitalManage.getPatientId());
                         hisHospitalManage.setHospitalizationDay("1");
                         hisHospitalManage.setDepositWarning(new BigDecimal(300));
                         hisHospitalManage.setPayHospitalizationDay("");
-                        hisHospitalManage.setSex(hisPatientInfo.getSex());
+                        hisHospitalManage.setSex(hisPatientInfo1.getSex());
                         hisHospitalManage.setRestDeposit(new BigDecimal(0));
-                        hisHospitalManageMapper.insert(hisHospitalManage);
-                        hisHosptalregistMapper.updateByPrimaryKey(hisHosptalregist);
-                        return MessageUtil.createMessage(true, "审核通过，住院成功！");
+                        HisPatientInfo checkIfExit = hisPatientInfoMapper.selectByPrimaryKey(hisPatientInfo1.getId());
+                        if (EmptyUtil.Companion.isNullOrEmpty(checkIfExit)) {
+                            return MessageUtil.createMessage(false, "审核失败!所变更的病人信息不存在!");
+                        }
+                        HisPatientInfo checkIdcard = hisPatientInfoMapper.selectByIdcard(hisPatientInfo1.getIdcard());
+                        if (EmptyUtil.Companion.isNullOrEmpty(checkIdcard)) {
+                            hisPatientInfoMapper.updateByPrimaryKeySelective(hisPatientInfo1);
+                            hisHospitalManageMapper.insert(hisHospitalManage);
+                            hisHosptalregistMapper.updateByPrimaryKey(hisHosptalregist);
+                            return MessageUtil.createMessage(true, "审核通过，住院成功！");
+                        } else {
+                            if (hisPatientInfo1.getId().equals(checkIdcard.getId())) {
+                                hisPatientInfoMapper.updateByPrimaryKeySelective(hisPatientInfo1);
+                                hisHospitalManageMapper.insert(hisHospitalManage);
+                                hisHosptalregistMapper.updateByPrimaryKey(hisHosptalregist);
+                                return MessageUtil.createMessage(true, "审核通过，住院成功！");
+                            } else {
+                                return MessageUtil.createMessage(false, "审核失败!所变更的身份证号已存在");
+                            }
+                        }
                     }
                 }
             } else {
@@ -148,7 +193,8 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
         } else {
             HisHospitalManage check1 = hisHospitalManageMapper.selectByPrimaryKey(hisHospitalManage.getId());
             if (!EmptyUtil.Companion.isNullOrEmpty(check1)) {
-                hisHospitalManage.setSex(check1.getSex());
+                hisPatientInfo1.setId(hisHospitalManage.getPatientId());
+                hisHospitalManage.setSex(hisHospitalManage.getSex());
                 hisHospitalManage.setDepartmentId(check1.getDepartmentId());
                 hisHospitalManage.setDoctorId(check1.getDoctorId());
                 hisHospitalManage.setHospitalizationDay(check1.getHospitalizationDay());
@@ -156,8 +202,24 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
                 hisHospitalManage.setTollDetailsId(check1.getTollDetailsId());
                 hisHospitalManage.setRestDeposit(check1.getRestDeposit());
                 hisHospitalManage.setIsDischarged(check1.getIsDischarged());
-                hisHospitalManageMapper.updateByPrimaryKey(hisHospitalManage);
-                return MessageUtil.createMessage(true, "更新成功！");
+                HisPatientInfo checkIfExit = hisPatientInfoMapper.selectByPrimaryKey(hisPatientInfo1.getId());
+                if (EmptyUtil.Companion.isNullOrEmpty(checkIfExit)) {
+                    return MessageUtil.createMessage(false, "更新失败!所变更的病人信息不存在!");
+                }
+                HisPatientInfo checkIdcard = hisPatientInfoMapper.selectByIdcard(hisPatientInfo1.getIdcard());
+                if (EmptyUtil.Companion.isNullOrEmpty(checkIdcard)) {
+                    hisPatientInfoMapper.updateByPrimaryKeySelective(hisPatientInfo1);
+                    hisHospitalManageMapper.updateByPrimaryKey(hisHospitalManage);
+                    return MessageUtil.createMessage(true, "更新成功！");
+                } else {
+                    if (hisPatientInfo1.getId().equals(checkIdcard.getId())) {
+                        hisPatientInfoMapper.updateByPrimaryKeySelective(hisPatientInfo1);
+                        hisHospitalManageMapper.updateByPrimaryKey(hisHospitalManage);
+                        return MessageUtil.createMessage(true, "更新成功！");
+                    } else {
+                        return MessageUtil.createMessage(false, "更新失败!所变更的身份证号已存在");
+                    }
+                }
             } else {
                 return MessageUtil.createMessage(false, "数据异常请联系管理员！");
             }
