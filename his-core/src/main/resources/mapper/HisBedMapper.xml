@@ -179,12 +179,14 @@
     <select id="countBedByWardId" parameterType="java.lang.Long" resultType="java.lang.Integer">
    SELECT count(1) FROM `his_bed` where ward_id =#{wardId,jdbcType=BIGINT};
   </select>
+
     <select id="getBed" parameterType="com.ahsj.hiscore.entity.HisBed" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from `his_bed`
-        where number = #{number,jdbcType=INTEGER}
+        where number = #{number,jdbcType=INTEGER}  and  ward_id =#{wardId,jdbcType=BIGINT};
     </select>
+
     <delete id="deleteByWardId" parameterType="java.lang.Long">
     delete from his_bed
    where ward_id =#{wardId,jdbcType=BIGINT}

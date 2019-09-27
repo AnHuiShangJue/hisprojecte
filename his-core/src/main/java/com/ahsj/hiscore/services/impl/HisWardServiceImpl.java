@@ -80,8 +80,8 @@ public class HisWardServiceImpl implements HisWradService {
     @Transactional(readOnly = false)
     @Override
     public Message saveOrUpdate(HisWard hisWard) throws Exception {
-        // HisWard hisWard1 = hisWardMapper.gethisWardByNumber(hisWard.getNumber());
-        HisWard hisWard1 = hisWardMapper.selectByPrimaryKey(hisWard.getId());
+         HisWard hisWard1 = hisWardMapper.gethisWardByNumber(hisWard.getNumber());
+        //HisWard hisWard1 = hisWardMapper.selectByPrimaryKey(hisWard.getId());
         if (EmptyUtil.Companion.isNullOrEmpty(hisWard.getId())) {
             // 如果主健为空 则为新增
             if (EmptyUtil.Companion.isNullOrEmpty(hisWard1)) {
