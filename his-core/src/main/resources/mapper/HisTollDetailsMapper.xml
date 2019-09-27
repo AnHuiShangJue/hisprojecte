@@ -959,9 +959,9 @@
 
 
     <select id="listByNumberFor" resultMap="BaseResultMap" parameterType="java.lang.String">
-select a.create_date ,a.recover_the_fee,a.user_name,b.patient_name,b.sex,b.age,b.department_id,b.doctor_name
+select  a.actual_charge as price,a.create_date ,a.recover_the_fee,a.user_name,b.patient_name,b.sex,b.age,b.department_id,b.doctor_name
 				from  (select
-r.recover_the_fee,r.create_date,i.user_name
+r.recover_the_fee,r.create_date,i.user_name,r.actual_charge
         from his_toll_record  as r
 				   LEFT JOIN  `his-userinfo`.user_info as i  on   i.id = r.create_user_id
         where r.number =#{number}) as a

@@ -43,7 +43,7 @@ public class HisBedServiceImpl implements HisBedService {
         HisBed bed = hisBedMapper.getBed(hisBed);
         if (EmptyUtil.Companion.isNullOrEmpty(hisBed.getId())) {
             // 如果主健为空 则为新增
-         /*   if (EmptyUtil.Companion.isNullOrEmpty(bed)) {*///当前病床下是否有该病床号
+            if (EmptyUtil.Companion.isNullOrEmpty(bed)) {//当前病床下是否有该病床号
                 int i = hisBedMapper.countBedByWardId(hisBed.getWardId());//当前病床总数
                 HisWard hisWard = hisWardMapper.selectByPrimaryKey(hisBed.getWardId());//总病床数
                 int count = hisWard.getCount();
@@ -55,9 +55,9 @@ public class HisBedServiceImpl implements HisBedService {
                 } else {
                     return MessageUtil.createMessage(false, "新增失败,病床已满！");
                 }
-           /* } else {
+           } else {
                 return MessageUtil.createMessage(false, "新增失败," + hisBed.getNumber() + "号病床已经存在！");
-            }*/
+            }
         }
         else {//主键不为空  修改
             if (!EmptyUtil.Companion.isNullOrEmpty(bed) && bed.getId() != hisBed.getId()) {//当前病床下是否有该病床号
