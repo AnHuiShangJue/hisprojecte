@@ -960,15 +960,13 @@
     <select id="listByNumberFor" resultMap="BaseResultMap" parameterType="java.lang.String">
 select a.create_date ,a.recover_the_fee,a.user_name,b.patient_name,b.sex,b.age,b.department_id,b.doctor_name
 				from  (select
-r.money,r.recover_the_fee,r.create_date,i.user_name
+r.recover_the_fee,r.create_date,i.user_name
         from his_toll_record  as r
-
 				   LEFT JOIN  `his-userinfo`.user_info as i  on   i.id = r.create_user_id
         where r.number =#{number}) as a
 					CROSS JOIN
 			(
-			select m.patient_name,m.sex,m.age,m.department_id ,i.user_name as  doctor_name    from  his_hospital_manage
-			as  m
+			select m.patient_name,m.sex,m.age,m.department_id ,i.user_name as  doctor_name    from  his_hospital_manage as  m
 			  LEFT JOIN  `his-userinfo`.user_info as i  on   i.id = m.doctor_id
 			where m.medical_number =(
 				SELECT r.medical_record_id from his_toll_record   as r   where r.number =#{number})) as b
@@ -979,7 +977,6 @@ r.money,r.recover_the_fee,r.create_date,i.user_name
 				from  (select
 r.money,r.recover_the_fee,r.create_date,i.user_name
         from his_toll_record  as r
-
 				   LEFT JOIN  `his-userinfo`.user_info as i  on   i.id = r.create_user_id
         where r.number =#{number}) as a
 					CROSS JOIN

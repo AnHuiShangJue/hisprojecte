@@ -311,7 +311,7 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
         if(EmptyUtil.Companion.isNullOrEmpty(hisTollDetailsMapper.selectNumber(number))){//未住院
             return CodeHelper.getInstance().setCodeValue(hisTollDetailsMapper.listByNumberFors(number));
         }
-        else{
+        System.out.println(number+"---------------------------");
         return CodeHelper.getInstance().setCodeValue(hisTollDetailsMapper.listByNumberFor(number)); //住院
-    }}
+    }
 }
