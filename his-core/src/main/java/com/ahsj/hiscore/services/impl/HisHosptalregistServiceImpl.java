@@ -94,13 +94,25 @@ public class HisHosptalregistServiceImpl implements HisHosptalregistService {
                 } else {//修改入院登记
                     if (!EmptyUtil.Companion.isNullOrEmpty(check)) {
                         hisPatientInfo.setId(check.getId());
+                        //身份证号存在,把主键给新传入的病人对象
+                        if (check.getName().equals(hisPatientInfo.getName())) {//身份证号与名字相同
+                            hisPatientService.saveOrUpdate(hisPatientInfo);//更新病人信息
+                            hisHosptalregist.setNumber("HR" + createdate + String.format("%05d", hisHosptalregistMapper.selectNumCount(createdate) + 1));//设置编号
+                            hisHosptalregist.setPatientId(hisPatientInfoMapper.selectByIdcard(hisPatientInfo.getIdcard()).getId());
+                            hisHosptalregist.setMedicalNumber(null);
+                            hisHosptalregistMapper.insert(hisHosptalregist);//入院登记
+                            return MessageUtil.createMessage(true, "新增成功");
+                        } else {
+                            return MessageUtil.createMessage(false, "新增失败,身份证号与姓名不符！");
+                        }
+                    } else { //身份证号不存在
+                        hisPatientService.saveOrUpdate(hisPatientInfo);//更新病人信息
+                        hisHosptalregist.setNumber("HR" + createdate + String.format("%05d", hisHosptalregistMapper.selectNumCount(createdate) + 1));//设置编号
+                        hisHosptalregist.setPatientId(hisPatientInfoMapper.selectByIdcard(hisPatientInfo.getIdcard()).getId());
+                        hisHosptalregist.setMedicalNumber(null);
+                        hisHosptalregistMapper.insert(hisHosptalregist);//入院登记
+                        return MessageUtil.createMessage(true, "新增成功");
                     }
-                    hisPatientService.saveOrUpdate(hisPatientInfo);//更新病人信息
-                    hisHosptalregist.setNumber("HR" + createdate + String.format("%05d", hisHosptalregistMapper.selectNumCount(createdate) + 1));//设置编号
-                    hisHosptalregist.setPatientId(hisPatientInfoMapper.selectByIdcard(hisPatientInfo.getIdcard()).getId());
-                    hisHosptalregist.setMedicalNumber(null);
-                    hisHosptalregistMapper.insert(hisHosptalregist);//入院登记
-                    return MessageUtil.createMessage(true, "新增成功");
                 }
             } else {
                 return MessageUtil.createMessage(false, "数据错误，请联系管理员！");

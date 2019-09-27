@@ -9,9 +9,9 @@
         .fontsize02 {
             font-size: 8px;
         }
-table tr td{
-    padding: 0;
-}
+        table tr td{
+            padding: 0;
+        }
     </style>
 </head>
 <div th:replace="public/base_print :: html"></div>
@@ -34,52 +34,54 @@ table tr td{
     </div>
     <div class="row valign-wrapper">
         <div class="col s12 m12 l12 center">
-            <h4 class="black-text" style="text-align: center">中柬第一医院门诊收费</h4>
-            <p class="black-text fontsize02" style="text-align: center">The first china-cambodia hospital Outpatient service charge</p>
+            <h4 class="black-text" style="text-align: center">中柬第一医院门诊住院收费统计</h4>
+            <p class="black-text fontsize02" style="text-align: center">The first china-cambodia hospital Outpatient and inpatient charge statistics</p>
         </div>
     </div>
     <div class="row valign-wrapper">
         <div class="col s12 m12 l12 ">
-        <table style="border: none;font-size: 8px">
-            <tr>
-                <td><label class="black-text fontsize01">姓名(name)</label></td>
-                <td><label class="black-text"  style="padding: 0;" id="name"></label></td>
-                <td><label class="black-text fontsize01">科室(department)</label></td>
-                <td><label class="black-text" id="department"></label></td>
-            </tr>
-            <tr>
-                <td><label class="black-text fontsize01">年龄(age)</label></td>
-                <td><label class="black-text"  style="padding: 0;" id="age"></label></td>
-                <td><label class="black-text fontsize01">性别(sex)</label></td>
-                <td><label class="black-text" id="sex"></label></td>
-            </tr>
-            <tr>
-                <td><label class="black-text fontsize01">医生(doctor)</label></td>
-                <td><label class="black-text"  style="padding: 0;" id="doctor"></label></td>
-                <td><label class="black-text fontsize01">收费时间(Chargeable time)</label></td>
-                <td><label class="black-text"><span id="createDate"></span></label></td>
-            </tr>
-            <tr>
-                <td><label class="black-text fontsize01">交易流水号(Transaction flow number)</label></td>
-                <td><label class="black-text" th:text="${number}" style="padding: 0;"></label></td>
-                <td><label class="black-text fontsize01">收费人(Toll collector)</label></td>
-                <td><label class="black-text"><span id="createName"></span></label></td>
-            </tr>
-            <input type="hidden" id="number" th:value="${number}">
+            <table style="border: none;font-size: 8px">
+                <tr>
+                    <td><label class="black-text fontsize01">姓名(name)</label></td>
+                    <td><label class="black-text"  style="padding: 0;" id="name"></label></td>
+                    <td><label class="black-text fontsize01">科室(department)</label></td>
+                    <td><label class="black-text" id="department"></label></td>
+                </tr>
+                <tr>
+                    <td><label class="black-text fontsize01">年龄(age)</label></td>
+                    <td><label class="black-text"  style="padding: 0;" id="age"></label></td>
+                    <td><label class="black-text fontsize01">性别(sex)</label></td>
+                    <td><label class="black-text" id="sex"></label></td>
+                </tr>
+                <tr>
+                    <td><label class="black-text fontsize01">医生(doctor)</label></td>
+                    <td><label class="black-text"  style="padding: 0;" id="doctor"></label></td>
+                </tr>
+                <tr>
+                    <td><label class="black-text fontsize01">交易流水号(Transaction flow number)</label></td>
+                    <td><label class="black-text" th:text="${number}" style="padding: 0;"></label></td>
+                    <td><label class="black-text fontsize01">收费人(Toll collector)</label></td>
+                    <td><label class="black-text"><span id="createName"></span></label></td>
+                </tr>
+                <input type="hidden" id="number" th:value="${number}">
 
-            <tr>
-                <td><label class="black-text fontsize01">收费金额(charge amount)</label></td>
-                <td><label class="black-text"><span id="totalPrices"></span></label></td>
-                <td><label class="black-text fontsize01">找回金额(Retrieve the amount)</label></td>
-                <td><label class="black-text"><span id="recoverTheFee"></span></label></td>
-            </tr>
+                <tr>
+                    <td><label class="black-text fontsize01">收费金额(charge amount)</label></td>
+                    <td><label class="black-text"><span id="totalPrices"></span></label></td>
+                    <td><label class="black-text fontsize01">找回金额(Retrieve the amount)</label></td>
+                    <td><label class="black-text"><span id="recoverTheFee"></span></label></td>
+                </tr>
 
-            <tr>
-                <td colspan="2"><label class="black-text fontsize01">收费明细(Charge details)</label></td>
-            </tr>
-        </table>
+                <tr>
+                    <td><label class="black-text fontsize01">收费时间(Chargeable time)</label></td>
+                    <td><label class="black-text"><span id="createDate"></span></label></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><label class="black-text fontsize01">收费明细(Charge details)</label></td>
+                </tr>
+            </table>
         </div>
-        </div>
+    </div>
     <div class="row valign-wrapper">
         <div class="col s12 m12 l12 ">
             <table id="table_id" style="border: none;font-size: 8px"></table>
@@ -120,10 +122,18 @@ Scripts
                         if (isNullOrEmpty(item.tdrugsSpec)) {
                             item.tdrugsSpec = ""
                         }
-                        trs += "<tr><td><label class='black-text fontsize02'> " + item.name + "(" + item.tranName + ")" + "</label></td><td ><label class='black-text fontsize02'>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</label></td><td ><label class='black-text fontsize02'> " + item.num + "</label></td><td ><label class='black-text fontsize02'>" + item.price.toFixed(2) + "</label></td><td ><label class='black-text fontsize02'> " + (item.num * item.price).toFixed(2) + "</label></td></tr >";
+                        trs += "<tr><td><label class='black-text fontsize02'> " + item.name + "(" + item.tranName + ")" + "</label></td><td ><label class='black-text fontsize02'>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</label></td><td ><label class='black-text fontsize02'> " + item.num + "</label></td><td ><label class='black-text fontsize02'>" + item.price + "</label></td><td ><label class='black-text fontsize02'> " + (item.num * item.price) + "</label></td></tr >";
                     });
+                    // var jsons = data[0];
+                    // $("#createName").html(jsons.createName);
+                    // $("#totalPrices").html(jsons.totalPrices);
+                    // $("#createDate").html(jsons.createDate);
+                    // $("#recoverTheFee").html(jsons.recoverTheFee);
 
-
+                    $("#createName").html(jsons.createName);
+                    $("#totalPrices").html(jsons.totalPrices);
+                    $("#createDate").html(jsons.createDate);
+                    $("#recoverTheFee").html(jsons.recoverTheFee);
                     $("#table_id").append(trs);
                     $("#table_id1").append(trs);
                     $("#table_id2").append(trs);
@@ -141,9 +151,9 @@ Scripts
             {"number": number},
             function (data) {
                 $("#createName").html(data.createName);
-                $("#totalPrices").html(data.money.toFixed(2));
+                $("#totalPrices").html(data.money);
                 $("#createDate").html(data.createDate);
-                $("#recoverTheFee").html(data.recoverTheFee.toFixed(2));
+                $("#recoverTheFee").html(data.recoverTheFee);
 
                 $("#name").html(data.patientName);
                 $("#sex").html(data.sexName);
@@ -201,3 +211,4 @@ Scripts
 </body>
 
 </html>
+
