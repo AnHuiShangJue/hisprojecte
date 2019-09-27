@@ -45,13 +45,11 @@
 
                         <div class="row">
                             <div class="col input-field s3 m3 l3">
-                                <select ahsj:select name="orgId" id="orgId" type="depart" typeKey="2" departKbn="1">
+                                <select ahsj:select name="orgId" id="orgId" type="depart" typeKey="2" departKbn="1" th:value="${hisRegistered.departmentId}">
                                 </select>
                                 <label for="orgId">科 室<span style="font-size: 12px">(Department
 )</span></label>
-                                <input id="money" name="money" type="number" th:value="${hisRegistered.departmentId}" readonly/>
-                                <label for="money">应 收 金 额<span style="font-size: 12px">(Amount receivable
-)</span></label>
+
                             </div>
                             <div class="input-field col s4 l4 xl4">
                                 <input id="money" name="money" type="number" th:value="${hisRegistered.money}" readonly/>
