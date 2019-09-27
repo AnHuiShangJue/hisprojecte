@@ -46,11 +46,28 @@
         <div class="col s12 m12 l12 ">
             <table style="border: none;font-size: 8px">
                 <tr>
-                    <!-- <td><label class="black-text fontsize01">交易流水号(Transaction flow number)</label></td>
-                     <td><label class="black-text" th:text="${number}" style="padding: 0;"></label></td>-->
+                    <td><label class="black-text fontsize01">姓名(name)</label></td>
+                    <td><label class="black-text"  style="padding: 0;" id="name"></label></td>
+                    <td><label class="black-text fontsize01">科室(department)</label></td>
+                    <td><label class="black-text" id="department"></label></td>
+                </tr>
+                <tr>
+                    <td><label class="black-text fontsize01">年龄(age)</label></td>
+                    <td><label class="black-text"  style="padding: 0;" id="age"></label></td>
+                    <td><label class="black-text fontsize01">性别(sex)</label></td>
+                    <td><label class="black-text" id="sex"></label></td>
+                </tr>
+                <tr>
+                    <td><label class="black-text fontsize01">医生(doctor)</label></td>
+                    <td><label class="black-text"  style="padding: 0;" id="doctor"></label></td>
                     <td><label class="black-text fontsize01">收费人(Toll collector)</label></td>
                     <td><label class="black-text"><span id="createName"></span></label></td>
                 </tr>
+                <!--<tr>
+                     <td><label class="black-text fontsize01">交易流水号(Transaction flow number)</label></td>
+                     <td><label class="black-text" th:text="${number}" style="padding: 0;"></label></td>
+
+                </tr>-->
                 <input type="hidden" id="number" th:value="${number}">
 
                 <tr>
@@ -132,6 +149,12 @@ Scripts
                     $("#totalPrices").html(data.money);
                     $("#createDate").html(data.createDate);
                     $("#recoverTheFee").html(data.recoverTheFee);
+
+                    $("#name").html(data.patientName);
+                    $("#sex").html(data.sexName);
+                    $("#age").html(data.age);
+                    $("#department").html(data.departmentIdName);
+                    $("#doctor").html(data.doctorName);
             },
             function () {
                 M.toast({html: "网络异常"});

@@ -43,15 +43,19 @@
             <table style="border: none;font-size: 8px">
                 <tr>
                     <td><label class="black-text fontsize01">姓名(name)</label></td>
-                    <td><label class="black-text"  style="padding: 0;"></label></td>
+                    <td><label class="black-text"  style="padding: 0;" id="name"></label></td>
                     <td><label class="black-text fontsize01">科室(department)</label></td>
-                    <td><label class="black-text"></label></td>
+                    <td><label class="black-text" id="department"></label></td>
                 </tr>
                 <tr>
                     <td><label class="black-text fontsize01">年龄(age)</label></td>
-                    <td><label class="black-text"  style="padding: 0;"></label></td>
+                    <td><label class="black-text"  style="padding: 0;" id="age"></label></td>
                     <td><label class="black-text fontsize01">性别(sex)</label></td>
-                    <td><label class="black-text"></label></td>
+                    <td><label class="black-text" id="sex"></label></td>
+                </tr>
+                <tr>
+                    <td><label class="black-text fontsize01">医生(doctor)</label></td>
+                    <td><label class="black-text"  style="padding: 0;" id="doctor"></label></td>
                 </tr>
                 <tr>
                     <td><label class="black-text fontsize01">交易流水号(Transaction flow number)</label></td>
@@ -95,6 +99,7 @@ Scripts
 <script th:inline="javascript">
     $(document).ready(function () {
         printShow();
+        printShow1();
     });
     var number = $("#number").val();
 
@@ -123,12 +128,12 @@ Scripts
                         }
                         trs += "<tr><td><label class='black-text fontsize02'> " + item.name + "(" + item.tranName + ")" + "</label></td><td ><label class='black-text fontsize02'>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</label></td><td ><label class='black-text fontsize02'> " + item.num + "</label></td><td ><label class='black-text fontsize02'>" + item.price + "</label></td><td ><label class='black-text fontsize02'> " + (item.num * item.price) + "</label></td></tr >";
                     });
-                    var jsons = data[0];
-                    $("#createName").html(jsons.createName);
-                    $("#totalPrices").html(jsons.totalPrices);
-                    $("#createDate").html(jsons.createDate);
-                    $("#recoverTheFee").html(jsons.recoverTheFee);
-                    $("#money").html(jsons.money);
+                    // var jsons = data[0];
+                    // $("#createName").html(jsons.createName);
+                    // $("#totalPrices").html(jsons.totalPrices);
+                    // $("#createDate").html(jsons.createDate);
+                    // $("#recoverTheFee").html(jsons.recoverTheFee);
+                    // $("#money").html(jsons.money);
                     if(flag) {
                         $("#table_id").append(trs);
                     }
@@ -140,7 +145,28 @@ Scripts
             }
         );
     }
+    function printShow1() {
+        $.ahsjajax(
+            CTX + "/api/hisTollDetails/printShowFor/index.ahsj",
+            {"number": number},
+            function (data) {
+                $("#createName").html(data.createName);
+                $("#totalPrices").html(data.money);
+                $("#createDate").html(data.createDate);
+                $("#recoverTheFee").html(data.recoverTheFee);
 
+                $("#name").html(data.patientName);
+                $("#sex").html(data.sexName);
+                $("#age").html(data.age);
+                $("#department").html(data.departmentIdName);
+                $("#doctor").html(data.doctorName);
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }
+        );
+    }
     function doOk() {
         $('body  div div.row.valign-wrapper').printThis({
             importCSS: false,
