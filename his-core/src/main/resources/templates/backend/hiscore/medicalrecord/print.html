@@ -268,25 +268,51 @@
             {"number": number},
             function (data) {
                 console.log(data)
+                if (data.thiscondition == null) {
+                    data.thiscondition=""
+                }
                 if (data.hiscondition != null) {
                     $("#hiscondition").html(data.hiscondition + "(" + data.thiscondition + ")");
                 }
+                if (data.tnowCondition == null) {
+                    data.tnowCondition=""
+                }
                 if (data.nowCondition != null) {
+
                     $("#nowCondition").html(data.nowCondition + "(" + data.tnowCondition + ")");
+                }
+                if (data.tchiefcomplaint ==null) {
+                    data.tchiefcomplaint=""
                 }
                 if (data.chiefcomplaint != null) {
                     $("#chiefcomplaint").html(data.chiefcomplaint + "(" + data.tchiefcomplaint + ")");
                 }
+                if (data.tpersonalHistory == null) {
+                    data.tpersonalHistory=""
+                }
                 if (data.personalHistory != null) {
+
                     $("#personalHistory").html(data.personalHistory + "(" + data.tpersonalHistory + ")");
                 }
+                if (data.tallergies == null) {
+                    data.tallergies=""
+                }
                 if (data.allergies != null) {
+
                     $("#allergies").html(data.allergies + "(" + data.tallergies + ")");
                 }
+                if (data.tfamilyHistory ==null) {
+                    data.tfamilyHistory=""
+                }
                 if (data.familyHistory != null) {
+
                     $("#familyHistory").html(data.familyHistory + "(" + data.tfamilyHistory + ")");
                 }
+                if (data.tother ==null) {
+                    data.tother=""
+                }
                 if (data.other != null) {
+
                     $("#other").html(data.other + "(" + data.tother + ")");
                 }
                 if (data.bloodPressure != null) {
