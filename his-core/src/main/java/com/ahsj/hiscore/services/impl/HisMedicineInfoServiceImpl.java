@@ -112,11 +112,11 @@ public class HisMedicineInfoServiceImpl implements HisMedicineInfoService {
             if (!EmptyUtil.Companion.isNullOrEmpty(checkId)) {
                 //修改药品编号时需要确保此药品编号不与药库中其他药品的药品编号相等
                 if (!EmptyUtil.Companion.isNullOrEmpty(checkForDrugsNumb)) {
-                    if (checkForDrugsNumb.getId() != hisMedicineInfo.getId())
+                    if (!checkForDrugsNumb.getId().equals(hisMedicineInfo.getId()))
                         return MessageUtil.createMessage(false, "更新失败!此药品编号在药品中已经存在");
                 }
                 if (!EmptyUtil.Companion.isNullOrEmpty(checkForDrugsNameAndSpec)) {
-                    if (checkForDrugsNameAndSpec.getId() != hisMedicineInfo.getId())
+                    if (!checkForDrugsNameAndSpec.getId().equals(hisMedicineInfo.getId()))
                         return MessageUtil.createMessage(false, "更新失败!此药品名称与规格在药品中已经存在");
                 }
                 HisPharmacyDetail hisPharmacyDetail = hisPharmacyDetailMapper.selectByDrugsNumb(hisMedicineInfoMapper.selectByPrimaryKey(hisMedicineInfo.getId()).getDrugsNumb());
