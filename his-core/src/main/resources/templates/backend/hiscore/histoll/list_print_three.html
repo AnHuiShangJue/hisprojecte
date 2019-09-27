@@ -37,9 +37,8 @@
     </div>
     <div class="row valign-wrapper">
         <div class="col s12 m12 l12 center">
-            <h4 class="black-text" style="text-align: center">中柬第一医院门诊出院收费统计</h4>
-            <p class="black-text fontsize02" style="text-align: center">The first china-cambodia hospital Outpatient and
-                inpatient charge statistics</p>
+            <h4 class="black-text" style="text-align: center">中柬第一医院出院收费</h4>
+            <p class="black-text fontsize02" style="text-align: center">The first china-cambodia hospital The hospital charges</p>
         </div>
     </div>
     <div class="row valign-wrapper">
@@ -144,16 +143,16 @@ Scripts
             CTX + "/api/hisTollDetails/printShowFor/index.ahsj",
             {"number": number},
             function (data) {
-                    $("#createName").html(data.createName);
-                    $("#totalPrices").html(data.money);
-                    $("#createDate").html(data.createDate);
-                    $("#recoverTheFee").html(data.recoverTheFee);
+                $("#createName").html(data.createName);
+                $("#totalPrices").html(data.money);
+                $("#createDate").html(data.createDate);
+                $("#recoverTheFee").html(data.recoverTheFee);
 
-                    $("#name").html(data.patientName);
-                    $("#sex").html(data.sexName);
-                    $("#age").html(data.age);
-                    $("#department").html(data.departmentIdName);
-                    $("#doctor").html(data.doctorName);
+                $("#name").html(data.patientName);
+                $("#sex").html(data.sexName);
+                $("#age").html(data.age);
+                $("#department").html(data.departmentIdName);
+                $("#doctor").html(data.doctorName);
             },
             function () {
                 M.toast({html: "网络异常"});
