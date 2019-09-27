@@ -94,7 +94,7 @@ Scripts
 <script th:inline="javascript">
     $(document).ready(function () {
         printShow();
-        printShow1()
+        printShow1();
     });
     var number = $("#number").val();
 
@@ -103,12 +103,17 @@ Scripts
             CTX + "/api/hisTollDetails/printShow/index.ahsj",
             {"number": number},
             function (data) {
+                var totalPrices;
+                var recoverTheFee;
+                var money;
                 var jsons = data[0];
                 if (!isNullOrEmpty(jsons)) {//有
-                    var trs = "<tr><td><h6 class='black-text'>名称(name)</h6></td><td><h6 class='black-text'>规格(drugsSpec)</h6></td><td><h6 class='black-text'>数目(number)</h6></td><td><h6 class='black-text'>单价(price)</h6></td><td><h6 class='black-text'>单项总价(Single item total price)</h6></td></tr>";
+                    var flag = true;
+                    var trs = "<tr><td><label class='black-text'>名称(name)</label></td><td><label class='black-text'>规格(drugsSpec)</label></td><td><label class='black-text'>数目(number)</label></td><td><label class='black-text'>单价(price)</label></td><td><label class='black-text'>单项总价(Single item price)</label></td></tr>";
                     $.each(data, function (index, item) {
                         if (isNullOrEmpty(item.name)) {
                             item.name = ""
+                            flag = false;
                         }
                         if (isNullOrEmpty(item.tranName)) {
                             item.tranName = ""
@@ -119,9 +124,19 @@ Scripts
                         if (isNullOrEmpty(item.tdrugsSpec)) {
                             item.tdrugsSpec = ""
                         }
-                        trs += "<tr><td><p class='black-text fontsize03'>" + item.name + "(" + item.tranName + ")" + "</p></td><td ><p class='black-text fontsize03'>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</p></td><td ><p class='black-text fontsize03'>" + item.num + "</p></td><td ><p class='black-text fontsize03'>" + item.price.toFixed(2) + "</p></td><td ><p class='black-text fontsize03'>" + (item.num * item.price).toFixed(2) + "</p></td></tr >";
+                        trs += "<tr><td><label class='black-text fontsize02'> " + item.name + "(" + item.tranName + ")" + "</label></td><td ><label class='black-text fontsize02'>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</label></td><td ><label class='black-text fontsize02'> " + item.num + "</label></td><td ><label class='black-text fontsize02'>" + item.price.toFixed(2) + "</label></td><td ><label class='black-text fontsize02'> " + (item.num * item.price).toFixed(2) + "</label></td></tr >";
                     });
-                    $("#table_id").append(trs);
+
+
+                    $("#createName").html(jsons.createName);
+                    $("#totalPrices").html(jsons.totalPrices.toFixed(2));
+                    $("#createDate").html(jsons.createDate);
+                    $("#recoverTheFee").html(jsons.recoverTheFee.toFixed(2));
+                    $("#money").html(jsons.money);
+                    $("#depositRecharge").html((jsons.totalPrices - jsons.money).toFixed(2));
+                    if(flag) {
+                        $("#table_id").append(trs);
+                    }
                 }
             },
             function () {
@@ -136,10 +151,9 @@ Scripts
             {"number": number},
             function (data) {
                 $("#createName").html(data.createName);
-                $("#totalPrices").html(data.money.toFixed(2));
+                // $("#totalPrices").html(data.money);
                 $("#createDate").html(data.createDate);
-                $("#recoverTheFee").html(data.recoverTheFee.toFixed(2));
-
+                // $("#recoverTheFee").html(data.recoverTheFee);
                 $("#name").html(data.patientName);
                 $("#sex").html(data.sexName);
                 $("#age").html(data.age);
