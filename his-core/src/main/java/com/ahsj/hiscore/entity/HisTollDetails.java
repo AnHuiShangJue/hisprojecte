@@ -31,6 +31,16 @@ public class HisTollDetails extends BaseEntity {
 
     private String description;
 
+    private String number;
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
     private String MedicalReocordNumber;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createDate;

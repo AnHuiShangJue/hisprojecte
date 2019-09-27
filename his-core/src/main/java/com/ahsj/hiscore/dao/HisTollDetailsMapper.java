@@ -4,6 +4,7 @@ import com.ahsj.hiscore.entity.HisHospitalManage;
 import com.ahsj.hiscore.entity.HisTollDetails;
 import org.apache.ibatis.annotations.Mapper;
 import core.entity.PageBean;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -88,9 +89,9 @@ public interface HisTollDetailsMapper extends BaseMapper<HisTollDetails> {
      * @Date 2019/9/26
      * @Time 20:22
      **/
-    HisTollDetails listByNumberFor(String number);
+    HisTollDetails listByNumberFor(@Param("number") String number);
 
-    HisTollDetails listByNumberFors(String number);
+    HisTollDetails listByNumberFors(@Param("number") String number);
 
     /**
      * @Description
@@ -100,5 +101,5 @@ public interface HisTollDetailsMapper extends BaseMapper<HisTollDetails> {
      * @Date 2019/9/27
      * @Time 13:55
      **/
-    HisHospitalManage selectNumber(String number);
+    HisTollDetails selectNumber(String number);
 }
