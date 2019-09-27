@@ -34,8 +34,8 @@ table tr td{
     </div>
     <div class="row valign-wrapper">
         <div class="col s12 m12 l12 center">
-            <h4 class="black-text" style="text-align: center">中柬第一医院门诊住院收费统计</h4>
-            <p class="black-text fontsize02" style="text-align: center">The first china-cambodia hospital Outpatient and inpatient charge statistics</p>
+            <h4 class="black-text" style="text-align: center">中柬第一医院门诊收费</h4>
+            <p class="black-text fontsize02" style="text-align: center">The first china-cambodia hospital Outpatient service charge</p>
         </div>
     </div>
     <div class="row valign-wrapper">
@@ -56,6 +56,8 @@ table tr td{
             <tr>
                 <td><label class="black-text fontsize01">医生(doctor)</label></td>
                 <td><label class="black-text"  style="padding: 0;" id="doctor"></label></td>
+                <td><label class="black-text fontsize01">收费时间(Chargeable time)</label></td>
+                <td><label class="black-text"><span id="createDate"></span></label></td>
             </tr>
             <tr>
                 <td><label class="black-text fontsize01">交易流水号(Transaction flow number)</label></td>
@@ -72,10 +74,6 @@ table tr td{
                 <td><label class="black-text"><span id="recoverTheFee"></span></label></td>
             </tr>
 
-            <tr>
-                <td><label class="black-text fontsize01">收费时间(Chargeable time)</label></td>
-                <td><label class="black-text"><span id="createDate"></span></label></td>
-            </tr>
             <tr>
                 <td colspan="2"><label class="black-text fontsize01">收费明细(Charge details)</label></td>
             </tr>
@@ -125,10 +123,7 @@ Scripts
                         trs += "<tr><td><label class='black-text fontsize02'> " + item.name + "(" + item.tranName + ")" + "</label></td><td ><label class='black-text fontsize02'>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</label></td><td ><label class='black-text fontsize02'> " + item.num + "</label></td><td ><label class='black-text fontsize02'>" + item.price + "</label></td><td ><label class='black-text fontsize02'> " + (item.num * item.price) + "</label></td></tr >";
                     });
 
-                    $("#createName").html(jsons.createName);
-                     $("#totalPrices").html(jsons.totalPrices);
-                     $("#createDate").html(jsons.createDate);
-                     $("#recoverTheFee").html(jsons.recoverTheFee);
+
                     $("#table_id").append(trs);
                     $("#table_id1").append(trs);
                     $("#table_id2").append(trs);
@@ -145,6 +140,11 @@ Scripts
             CTX + "/api/hisTollDetails/printShowFor/index.ahsj",
             {"number": number},
             function (data) {
+                $("#createName").html(data.createName);
+                $("#totalPrices").html(data.money);
+                $("#createDate").html(data.createDate);
+                $("#recoverTheFee").html(data.recoverTheFee);
+
                 $("#name").html(data.patientName);
                 $("#sex").html(data.sexName);
                 $("#age").html(data.age);
