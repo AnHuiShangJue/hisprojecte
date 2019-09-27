@@ -84,12 +84,12 @@ public class HisWardServiceImpl implements HisWradService {
         HisWard hisWard1 = hisWardMapper.selectByPrimaryKey(hisWard.getId());
         if (EmptyUtil.Companion.isNullOrEmpty(hisWard.getId())) {
             // 如果主健为空 则为新增
-            if (EmptyUtil.Companion.isNullOrEmpty(hisWard1)) {
+           /* if (EmptyUtil.Companion.isNullOrEmpty(hisWard1)) {*/
                 hisWardMapper.insert(hisWard);//增加对象
                 return MessageUtil.createMessage(true, "添加病房成功!");
-            } else {
+           /* } else {
                 return MessageUtil.createMessage(false, "新增失败," + hisWard.getNumber() + "号病房已经存在！");
-            }
+            }*/
         } else {//主键不为空  修改
             if (!EmptyUtil.Companion.isNullOrEmpty(hisWard1) && hisWard1.getId() != hisWard.getId()) {//该病房号存在并id不一致
                 //主键不存在
