@@ -125,7 +125,7 @@ Scripts
                         if (isNullOrEmpty(item.tdrugsSpec)) {
                             item.tdrugsSpec = ""
                         }
-                        trs += "<tr><td><label class='black-text fontsize02'> " + item.name + "(" + item.tranName + ")" + "</label></td><td ><label class='black-text fontsize02'>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</label></td><td ><label class='black-text fontsize02'> " + item.num + "</label></td><td ><label class='black-text fontsize02'>" + item.price + "</label></td><td ><label class='black-text fontsize02'> " + (item.num * item.price) + "</label></td></tr >";
+                        trs += "<tr><td><label class='black-text fontsize02'> " + item.name + "(" + item.tranName + ")" + "</label></td><td ><label class='black-text fontsize02'>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</label></td><td ><label class='black-text fontsize02'> " + item.num + "</label></td><td ><label class='black-text fontsize02'>" + item.price.toFixed(2) + "</label></td><td ><label class='black-text fontsize02'> " + (item.num * item.price).toFixed(2) + "</label></td></tr >";
                     });
                     $("#table_id").append(trs);
                     $("#table_id1").append(trs);
@@ -144,9 +144,9 @@ Scripts
             {"number": number},
             function (data) {
                 $("#createName").html(data.createName);
-                $("#totalPrices").html(data.money);
+                $("#totalPrices").html(data.money.toFixed(2));
                 $("#createDate").html(data.createDate);
-                $("#recoverTheFee").html(data.recoverTheFee);
+                $("#recoverTheFee").html(data.recoverTheFee.toFixed(2));
 
                 $("#name").html(data.patientName);
                 $("#sex").html(data.sexName);
