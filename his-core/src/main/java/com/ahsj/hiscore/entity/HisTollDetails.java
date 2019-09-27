@@ -41,9 +41,11 @@ public class HisTollDetails extends BaseEntity {
 
     private Integer age;
 
+    @CodeValueColumn(type = Constants.GLOBAL_DATA_ORANGIATION, typeKey = "sex", typeName = "sexName")
     private Integer sex;
+    private String sexName;
 
-    @CodeValueColumn(type = Constants.GLOBAL_DATA_ORANGIATION, typeKey = "", typeName = "departmentIdName")
+    @CodeValueColumn(type = Constants.GLOBAL_DATA_ORANGIATION, typeKey = "department_id", typeName = "departmentIdName")
     private Long departmentId;
     private String departmentIdName;
 
@@ -91,7 +93,16 @@ public class HisTollDetails extends BaseEntity {
         return departmentIdName;
     }
 
+    public String getSexName() {
+        return sexName;
+    }
+
+    public void setSexName(String sexName) {
+        this.sexName = sexName;
+    }
+
     public void setDepartmentIdName(String departmentIdName) {
+
         this.departmentIdName = departmentIdName;
     }
 

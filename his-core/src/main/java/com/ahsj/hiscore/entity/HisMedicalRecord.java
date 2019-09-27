@@ -198,7 +198,7 @@ public class HisMedicalRecord extends BaseEntity {
     private Integer isRel;
     private String isRelName;
 
-    @CodeValueColumn(type = Constants.GLOBAL_DATA_ORANGIATION, typeKey = "", typeName = "departmentIdName")
+    @CodeValueColumn(type = Constants.GLOBAL_DATA_ORANGIATION, typeKey = "department_id", typeName = "departmentIdName")
     private Long departmentId;
     private String departmentIdName;
 
