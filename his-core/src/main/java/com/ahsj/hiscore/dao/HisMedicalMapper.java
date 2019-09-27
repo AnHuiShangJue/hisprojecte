@@ -1,7 +1,9 @@
 package com.ahsj.hiscore.dao;
 
 import com.ahsj.hiscore.entity.HisMedical;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface HisMedicalMapper extends BaseMapper<HisMedical>{
     int deleteByPrimaryKey(Long id);
 
