@@ -260,6 +260,7 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
     @Transactional(readOnly = true)
     public List<HisTollDetails> listByNumberLeave(String number) throws Exception {
         List<HisTollDetails> hisTollDetails = hisTollDetailsMapper.listByNumberLeave(number);//所有收费明细
+        if(!EmptyUtil.Companion.isNullOrEmpty(hisTollDetails)){
         for (HisTollDetails h : hisTollDetails) {
             Translate translate = new Translate();//翻译
             if (h.getType() == 1 || h.getType() == 4) {//药品
@@ -293,7 +294,7 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
                     h.setName("住院" + h.getName() + "号病床费用");
                 }
             }
-        }
+        }}
         return hisTollDetails;
     }
 
