@@ -20,7 +20,13 @@
         <result column="is_settlement" property="isSettlement" jdbcType="INTEGER"/>
         <!--添加字段-->
         <result column="user_name" property="createName"/>
-        <result column="totalPrices" property="total_prices"/>
+        <result column="patient_name" property="patientName"/>
+        <result column="sex" property="sex"/>
+        <result column="age" property="age"/>
+        <result column="department_id" property="departmentId"/>
+        <result column="doctor_name" property="doctorName"/>
+
+        <result column="total_prices" property="totalPrices"/>
         <result column="recover_the_fee" property="recoverTheFee"/>
     </resultMap>
     <sql id="Base_Column_List">
@@ -952,13 +958,21 @@
 
 
     <select id="listByNumberFor" resultMap="BaseResultMap" parameterType="java.lang.String">
-
-  select
+select a.create_date ,a.recover_the_fee,a.user_name,b.patient_name,b.sex,b.age,b.department_id,b.doctor_name
+				from  (select
 r.money,r.recover_the_fee,r.create_date,i.user_name
         from his_toll_record  as r
 
 				   LEFT JOIN  `his-userinfo`.user_info as i  on   i.id = r.create_user_id
-        where r.number = #{number}
+        where r.number =#{number}) as a
+					CROSS JOIN
+			(
+			select m.patient_name,m.sex,m.age,m.department_id ,i.user_name as  doctor_name    from  his_hospital_manage
+			as  m
+			  LEFT JOIN  `his-userinfo`.user_info as i  on   i.id = m.doctor_id
+
+			where m.     medical_number =(
+				SELECT r.medical_record_id from his_toll_record   as r   where r.number =#{number})) as b
 
     </select>
 </mapper>
