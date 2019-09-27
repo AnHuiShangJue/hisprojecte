@@ -1,5 +1,6 @@
 package com.ahsj.hiscore.dao;
 
+import com.ahsj.hiscore.entity.HisHospitalManage;
 import com.ahsj.hiscore.entity.HisTollDetails;
 import org.apache.ibatis.annotations.Mapper;
 import core.entity.PageBean;
@@ -79,13 +80,25 @@ public interface HisTollDetailsMapper extends BaseMapper<HisTollDetails> {
      **/
     List<HisTollDetails> listByNumberLeave(String number);
 
-/**
+    /**
      * @Description
      * @Params: [number]
      * @Author: dingli
      * @Return: java.util.List<com.ahsj.hiscore.entity.HisTollDetails>
-     *@Date 2019/9/26
-     *@Time 20:22
-    **/
-  HisTollDetails listByNumberFor(String number);
+     * @Date 2019/9/26
+     * @Time 20:22
+     **/
+    HisTollDetails listByNumberFor(String number);
+
+    HisTollDetails listByNumberFors(String number);
+
+    /**
+     * @Description
+     * @Params: [number]  根据交易号判断是否住院
+     * @Author: dingli
+     * @Return: com.ahsj.hiscore.entity.HisHospitalManage
+     * @Date 2019/9/27
+     * @Time 13:55
+     **/
+    HisHospitalManage selectNumber(String number);
 }

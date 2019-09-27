@@ -41,11 +41,11 @@ public class HisTollDetails extends BaseEntity {
 
     private Integer age;
 
-    @CodeValueColumn(type = Constants.GLOBAL_DATA_ORANGIATION, typeKey = "sex", typeName = "sexName")
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "sex", typeName = "sexName")
     private Integer sex;
     private String sexName;
 
-    @CodeValueColumn(type = Constants.GLOBAL_DATA_ORANGIATION, typeKey = "department_id", typeName = "departmentIdName")
+    @CodeValueColumn(type = Constants.GLOBAL_DATA_ORANGIATION, typeKey = "", typeName = "departmentIdName")
     private Long departmentId;
     private String departmentIdName;
 
