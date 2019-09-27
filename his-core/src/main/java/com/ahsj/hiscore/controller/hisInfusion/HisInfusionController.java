@@ -428,7 +428,7 @@ public class HisInfusionController extends BaseController {
     @RequestMapping(value = "inHospitalInfusion/index.ahsj")
     public ModelAndView inHospitalInfusion(String token, String hospitalManageId,String number) throws Exception {
         //HM开头的编号
-        ModelAndView modelAndView = new ModelAndView("backend/hiscore/infusion/inHospitalInfusion");
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/infusion/newInfusion");
         modelAndView.addObject("token", token);
         //更新和打印
         modelAndView.addObject("hospitalManage",hospitalManageId);
@@ -437,12 +437,17 @@ public class HisInfusionController extends BaseController {
         List<HisInfusion> hisInfusionList = hisInfusionService.listByHMForHospitalPrint(number);
 
         HisPatientInfo hisPatientInfo = hisPatientService.selectByMedicalRecordIdForInhospital(hospitalManageId);
-        if (hisPatientInfo.getSex() == 1){
-            modelAndView.addObject("sex", "男");
+        if (EmptyUtil.Companion.isNullOrEmpty(hisPatientInfo.getSex())){
+            modelAndView.addObject("sex", "");
         }else {
-            modelAndView.addObject("sex", "女");
+            if (hisPatientInfo.getSex() == 1){
+                modelAndView.addObject("sex", "男");
+            }else {
+                modelAndView.addObject("sex", "女");
 
+            }
         }
+
 
         modelAndView.addObject("hisPatientInfo",hisPatientInfo);
         modelAndView.addObject("hisInfusionList",hisInfusionList);
