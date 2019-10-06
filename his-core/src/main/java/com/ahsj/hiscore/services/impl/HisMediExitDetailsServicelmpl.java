@@ -461,6 +461,7 @@ public class HisMediExitDetailsServicelmpl implements HisMediExitDetailsService 
         return CodeHelper.getInstance().setCodeValue(hisMediExitDetails);
 
     }
+
     /**
      * @param ids
      * @Description 查询历史出药明细
@@ -471,7 +472,7 @@ public class HisMediExitDetailsServicelmpl implements HisMediExitDetailsService 
      **/
     @Override
     @Transactional(readOnly = true)
-    public List<HisMediExitDetails> listByIdsHistory(Long[] ids)throws Exception {
+    public List<HisMediExitDetails> listByIdsHistory(Long[] ids) throws Exception {
         List<HisMediExitDetails> hisMediExitDetails = hisMediExitDetailsMapper.listByIdsHistory(ids);
         for (HisMediExitDetails h : hisMediExitDetails) {
             Translate translate = new Translate();
@@ -485,5 +486,60 @@ public class HisMediExitDetailsServicelmpl implements HisMediExitDetailsService 
         }
         return CodeHelper.getInstance().setCodeValue(hisMediExitDetails);
     }
-}
+
+    /**
+     * @Description 分页查询药品出库记录
+     * @Params: [pageBean]
+     * @Author: dingli
+     * @Return: core.entity.PageBean<com.ahsj.hiscore.entity.HisMediExitDetails>
+     * @Date 2019/10/6
+     * @Time 16:31
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public PageBean<HisMediExitDetails> getAllMediExit(PageBean<HisMediExitDetails> pageBean) throws Exception {
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisMediExitDetailsMapper.getAll(pageBean)));
+        return pageBean;
+    }
+
+    /**
+     * @Description 分页查询药品出库记录明细
+     * @Params:
+     * @Author: dingli
+     * @Return: core.entity.PageBean<com.ahsj.hiscore.entity.HisMediExitDetails>
+     * @Date 2019/10/6
+     * @Time 16:31
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public PageBean<HisMediExitDetails> getAllMediExitDetail(PageBean<HisMediExitDetails> pageBean) throws Exception {
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisMediExitDetailsMapper.getAllMediExitDetail(pageBean)));
+        return pageBean;
+    }
+
+    /**
+     * @Description 根据交易流水号打印出库药品
+     * @Params: [tollNumber]
+     * @Author: dingli
+     * @Return: java.util.List<com.ahsj.hiscore.entity.HisMediExitDetails>
+     * @Date 2019/10/6
+     * @Time 17:47
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<HisMediExitDetails> getRemovalBytollNumber(String tollNumber)throws Exception{
+        List<HisMediExitDetails> hisMediExitDetails = hisMediExitDetailsMapper.getRemovalBytollNumber(tollNumber);
+        for (HisMediExitDetails h : hisMediExitDetails) {
+            Translate translate = new Translate();
+            translate.setTranslateId(h.getId());
+            translate.setTranslateType(Constants.TRANSLATE_HIS_MEDICINEINFO);
+            List<Translate> translates = iTranslateService.queryTranslate(translate);
+            if (!EmptyUtil.Companion.isNullOrEmpty(translates)) {
+                translates.stream().filter(f -> f.getTranslateChina().equals(h.getDrugsName())).forEach(e -> h.setTdrugsName(e.getTranslateKhmer()));
+                translates.stream().filter(f -> f.getTranslateChina().equals(h.getDrugsSpec())).forEach(e -> h.setTdrugsSpec(e.getTranslateKhmer()));
+            }
+        }
+        hisMediExitDetails.toString();
+        return CodeHelper.getInstance().setCodeValue(hisMediExitDetails);
+}}
 

@@ -383,16 +383,50 @@ order by his_medi_exit_details.create_date desc
 
     <select id="getAll" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
         select
-        <include refid="Base_Column_List"/>
-        from his_medi_exit_details
+        d.create_date,i.user_name,sum(d.exit_count) as exit_count,d.toll_number,d.record_number
+        from his_medi_exit_details as d
+        LEFT JOIN `his-userinfo`.user_info as i on i.id = d.create_user_id
+        where 1=1
         <if test="parameter.recordNumber != null  and parameter.recordNumber != '' ">
-            and record_number = #{parameter.recordNumber}
+            and d.record_number like concat('%' #{parameter.recordNumber},'%')
         </if>
         <if test="parameter.tollNumber != null  and parameter.tollNumber != ''">
-            and toll_number = #{parameter.tollNumber}
+            and d.toll_number like concat('%' #{parameter.tollNumber},'%')
+        </if>
+        <if test="parameter.userName != null  and parameter.userName != ''">
+            and i.user_name like concat('%' #{parameter.userName},'%')
+        </if>
+        GROUP BY  d.toll_number
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+    <select id="getAllMediExitDetail" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
+        select
+        d.*,i.user_name
+        from his_medi_exit_details as d
+        LEFT JOIN `his-userinfo`.user_info as i on i.id = d.create_user_id
+        where 1=1
+        <if test="parameter.tollNumber != null  and parameter.tollNumber != ''">
+            and d.toll_number like concat('%' #{parameter.tollNumber},'%')
         </if>
         <if test="parameter.orders != null and parameter.orders != ''">
             order by ${parameter.orders}
         </if>
+    </select>
+
+    <select id="getRemovalBytollNumber" resultMap="BaseResultMap" parameterType="java.lang.String">
+   select m.id ,e.toll_number,b.description,b.id as pharmacy_id,
+        e.drugs_name,e.drugs_spec,e.exit_count,e.create_date,i.user_name,e.record_number,o.`name` as
+        patient_Name,e.validity_period
+        from his_medi_exit_details as e
+        LEFT JOIN his_medicine_info as m on m.drugs_numb = e.drugs_numb
+        LEFT JOIN `his-userinfo`.user_info as i on i.id = e.create_user_id
+        LEFT JOIN his_medical_record as r on r.medical_record_id = e.record_number
+        LEFT JOIN his_patient_info as o on o.id =r.patient_id
+        left join his_related_medicationandexit as a on a.exit_id = e.id
+        left join his_medication_details as b on a.medication_detail_id = b.id
+        where e.toll_number = #{tollNumber,jdbcType=VARCHAR}
     </select>
 </mapper>

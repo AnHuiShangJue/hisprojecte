@@ -1,5 +1,6 @@
 package com.ahsj.hiscore.controller.pharmacy;
 
+import com.ahsj.hiscore.entity.HisBed;
 import com.ahsj.hiscore.entity.HisMediExitDetails;
 import com.ahsj.hiscore.entity.HisMedicationDetails;
 import com.ahsj.hiscore.entity.model.HisMedicalModel;
@@ -7,6 +8,7 @@ import com.ahsj.hiscore.services.HisMediEnterDetailsService;
 import com.ahsj.hiscore.services.HisMediExitDetailsService;
 import com.ahsj.hiscore.services.HisMedicineInfoService;
 import core.controller.BaseController;
+import core.entity.PageBean;
 import core.message.Message;
 import core.message.MessageUtil;
 import org.apache.http.HttpRequest;
@@ -169,11 +171,89 @@ public class HisMediExitDetailsController extends BaseController {
         return new ArrayList<HisMediExitDetails>();
     }
 
+    /**
+     * @Description 分页查询出库记录
+     * @Params: [hisMediExitDetails]
+     * @Author: dingli
+     * @Return: core.entity.PageBean<com.ahsj.hiscore.entity.HisMediExitDetails>
+     * @Date 2019/10/6
+     * @Time 15:53
+     **/
     @RequestMapping("stockRemoval/index.ahsj")
-    ModelAndView stockRemoval(String token) {
-        ModelAndView modelAndView = new ModelAndView("backend/hiscore/pharmacy/stockRemoval");
-        modelAndView.addObject("title", "药品出库信息");
+    @ResponseBody
+    public PageBean<HisMediExitDetails> list(HisMediExitDetails hisMediExitDetails) throws Exception {
+        PageBean<HisMediExitDetails> pageBean = new PageBean<HisMediExitDetails>();
+        pageBean.setParameter(hisMediExitDetails);
+        hisMediExitDetailsService.getAllMediExit(pageBean);
+        return pageBean;
+    }
+
+    /**
+     * @Description 药品出库详细信息查看
+     * @Params: [id, token]
+     * @Author: dingli
+     * @Return: org.springframework.web.servlet.ModelAndView
+     * @Date 2019/10/6
+     * @Time 16:08
+     **/
+    @RequestMapping("stockRemovalDetail.ahsj")
+    ModelAndView stockRemovalDetail(String createDate, String token, String recordNumber, String userName, String tollNumber) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/pharmacy/stockRemovalDetail");
+        modelAndView.addObject("title", "药品出库详细信息查看");
         modelAndView.addObject("token", token);
+        modelAndView.addObject("createDate", createDate);
+        modelAndView.addObject("recordNumber", recordNumber);
+        modelAndView.addObject("userName", userName);
+        modelAndView.addObject("tollNumber", tollNumber);
         return modelAndView;
     }
+
+    /**
+     * @Description
+     * @Params: [hisMediExitDetails]
+     * @Author: dingli
+     * @Return: core.entity.PageBean<com.ahsj.hiscore.entity.HisMediExitDetails>
+     * @Date 2019/10/6
+     * @Time 16:30
+     **/
+    @RequestMapping("stockRemovalDetail/index.ahsj")
+    @ResponseBody
+    public PageBean<HisMediExitDetails> listDetail(HisMediExitDetails hisMediExitDetails) throws Exception {
+        PageBean<HisMediExitDetails> pageBean = new PageBean<HisMediExitDetails>();
+        pageBean.setParameter(hisMediExitDetails);
+        hisMediExitDetailsService.getAllMediExitDetail(pageBean);
+        return pageBean;
+    }
+
+    /**
+     * @Description 药品出库详细信息打印
+     * @Params: [tollNumber, token]
+     * @Author: dingli
+     * @Return: org.springframework.web.servlet.ModelAndView
+     * @Date 2019/10/6
+     * @Time 17:32
+     **/
+    @RequestMapping("printStockRemoval.ahsj")
+    ModelAndView stockRemovalDetail(String tollNumber, String token) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/pharmacy/printStockRemoval");
+        modelAndView.addObject("title", "");
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("tollNumber", tollNumber);
+        return modelAndView;
+    }
+
+    /**
+     * @Description
+     * @Params: [tollNumber]
+     * @Author: dingli
+     * @Return: java.util.List<com.ahsj.hiscore.entity.HisMediExitDetails>
+     * @Date 2019/10/6
+     * @Time 18:07
+     **/
+    @RequestMapping("removal/index.ahsj")
+    @ResponseBody
+    public List<HisMediExitDetails> removal(String tollNumber,String token) throws Exception {
+        return hisMediExitDetailsService.getRemovalBytollNumber(tollNumber);
+    }
+
 }

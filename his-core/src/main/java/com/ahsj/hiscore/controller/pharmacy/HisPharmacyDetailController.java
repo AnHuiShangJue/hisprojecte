@@ -566,4 +566,12 @@ public class HisPharmacyDetailController extends BaseMedicineController {
     }
 
 
+    @RequestMapping("/stockRemoval/index.ahsj")
+    ModelAndView stockRemoval(String token) {
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/pharmacy/stockRemoval");
+        modelAndView.addObject("title", "药品出库信息");
+        modelAndView.addObject("token", token);
+        return modelAndView;
+    }
+
 }

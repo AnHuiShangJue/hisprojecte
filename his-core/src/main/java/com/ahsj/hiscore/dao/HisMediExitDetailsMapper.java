@@ -2,6 +2,7 @@ package com.ahsj.hiscore.dao;
 
 import com.ahsj.hiscore.entity.HisMediEnterDetails;
 import com.ahsj.hiscore.entity.HisMediExitDetails;
+import com.ahsj.hiscore.entity.HisWard;
 import core.entity.PageBean;
 import org.apache.ibatis.annotations.Mapper;
 import org.jetbrains.annotations.NotNull;
@@ -70,5 +71,20 @@ public interface HisMediExitDetailsMapper extends BaseMapper<HisMediExitDetails>
      * @Date 2019/10/6
      * @Time 15:15
      **/
-    List<HisMediExitDetails> getAll(PageBean<HisMediExitDetails> pageBean);
+    List<HisMediExitDetails> getAll(PageBean<HisMediExitDetails> pageBean) throws Exception;
+
+    /**
+     * @Description 药品出库记录明细
+     * @Params: [pageBean]
+     * @Author: dingli
+     * @Return: java.util.List<com.ahsj.hiscore.entity.HisMediExitDetails>
+     * @Date 2019/10/6
+     * @Time 16:32
+     **/
+    List<HisMediExitDetails> getAllMediExitDetail(PageBean<HisMediExitDetails> pageBean) throws Exception;
+
+
+    List<HisMediExitDetails> getRemovalBytollNumber(String tollNumber);
+
+
 }
