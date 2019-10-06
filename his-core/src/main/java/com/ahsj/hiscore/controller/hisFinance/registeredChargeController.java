@@ -57,6 +57,10 @@ public class registeredChargeController {
      **/
     @RequestMapping(value = "list.ahsj", method = {RequestMethod.POST})
     public PageBean<HisRegisteredpay> list(HisRegisteredpay hisRegisteredpay) throws Exception {
+        if (hisRegisteredpay.getLowTime() != null || hisRegisteredpay.getUpTime() != null) {
+            hisRegisteredpay.setYears(null);
+            hisRegisteredpay.setMonths(null);
+        }
         PageBean<HisRegisteredpay> pageBean = new PageBean<HisRegisteredpay>();
         pageBean.setParameter(hisRegisteredpay);
         pageBean = hisFinanceService.getAllHisFinance(pageBean);

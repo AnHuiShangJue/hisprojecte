@@ -407,6 +407,7 @@ public class HisMedicationDetailsServicelmpl implements HisMedicationDetailsServ
             translate.setTranslateId(hisMedicalRecord.getId());
             translate.setTranslateType(Constants.TRANSLATE_HIS_MEDICINEINFO);
             List<Translate> translates = iTranslateService.queryTranslate(translate);
+            translates.toString();
             if (!EmptyUtil.Companion.isNullOrEmpty(translates)) {
                 translates.stream().filter(f -> f.getTranslateChina().equals(hisMedicalRecord.getDrugsName())).forEach(f -> hisMedicalRecord.setTdrugsName(f.getTranslateKhmer()));
                 translates.stream().filter(f -> f.getTranslateChina().equals(hisMedicalRecord.getDrugsSpec())).forEach(f -> hisMedicalRecord.setTdrugsSpec(f.getTranslateKhmer()));

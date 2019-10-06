@@ -23,6 +23,8 @@ public interface HisInfusionMapper extends BaseMapper<HisInfusion>{
 
     int updateByPrimaryKey(HisInfusion record);
 
+    int updateRemarks(HisInfusion hisInfusion);
+
     List<? extends HisInfusion> list(PageBean<HisInfusion> pageBean);
 
     List<? extends HisInfusion> listByHM(PageBean<HisInfusion> pageBean);
@@ -30,6 +32,8 @@ public interface HisInfusionMapper extends BaseMapper<HisInfusion>{
     List<? extends HisInfusion> listAllByNumber(PageBean<HisInfusion> pageBean);
 
     List<HisInfusion> listByHMForPrint(String Hm);
+    List<HisInfusion> listByRemarkForPrint(String remark);
+
 
 
     List<HisInfusion> listByRecordForPrint(String recordId);
@@ -59,4 +63,15 @@ public interface HisInfusionMapper extends BaseMapper<HisInfusion>{
      *@Time 0:08
     **/
     List< HisInfusion> listByHMForHospitalPrint(String number);
+
+    /**
+     *@Description 根据分组编号查询  listByRemark
+     *@Params
+     *@return
+     *@Author jin
+     *@Date 2019/10/6
+     *@Time 16:59
+    */
+    List<? extends HisInfusion> listByRemark(PageBean<HisInfusion> pageBean);
+
 }

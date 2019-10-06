@@ -117,4 +117,26 @@ public interface HisMediExitDetailsService {
      * @Time 9:49
      **/
     List<HisMediExitDetails> listByIdsHistory(Long[] ids) throws Exception;
+
+    /**
+     * @Description 分页查询药品出库记录
+     * @Params: [pageBean]
+     * @Author: dingli
+     * @Return: core.entity.PageBean<com.ahsj.hiscore.entity.HisMediExitDetails>
+     * @Date 2019/10/6
+     * @Time 15:48
+     **/
+    PageBean<HisMediExitDetails> getAllMediExit(PageBean<HisMediExitDetails> pageBean) throws Exception;
+
+    /**
+     * @Description 分页查询药品出库记录明细
+     * @Params: [pageBean]
+     * @Author: dingli
+     * @Return: core.entity.PageBean<com.ahsj.hiscore.entity.HisMediExitDetails>
+     * @Date 2019/10/6
+     * @Time 16:31
+     **/
+    PageBean<HisMediExitDetails> getAllMediExitDetail(PageBean<HisMediExitDetails> pageBean) throws Exception;
+
+    List<HisMediExitDetails> getRemovalBytollNumber(String tollNumber)  throws Exception;
 }

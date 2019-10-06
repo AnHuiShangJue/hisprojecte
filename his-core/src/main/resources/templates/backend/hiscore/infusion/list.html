@@ -55,6 +55,9 @@
                                         <i class="material-icons white-text tooltipped" data-position="bottom" data-delay="50" data-tooltip="批量删除">delete</i>
                                     </a>
                                 </div>
+                                <a id="combinationBtn" class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1" >
+                                    <i class="material-icons white-text tooltipped" data-position="bottom" data-delay="50" data-tooltip="组合">call_merge</i>
+                                </a>
                             </div>
                             <!--Form Advance-->
                             <div class="row">
@@ -127,12 +130,7 @@
                         "data": "startTime",
                         "name": "start_time",
                     },
-                    {
-                        "title": "执行护士",
-                        "data": "nurseName",
-                        "name": "nurseName",
-                        "orderable": false
-                    },{
+                   {
                         "title":"创建时间",
                         "data":"createDate",
                         "name":"create_date"
@@ -218,6 +216,21 @@
         $('#resetBtn').click(function () {
             grid.reset();
         });
+
+        $("#combinationBtn").click(function () {
+            var number = grid.getSelectedRows();
+            if (number.length == 0) {
+                dialog.warn("请至少选择一条数据");
+                return;
+            }
+            // var url = CTX+"/api/hisconsumables/backenterconsumables/index.ahsj?token="+TOKEN+"&ids="+ids.join(",")+"&hospitalManageId="+$("#hospitalManage").val()+"&patientId="+$("#patientId").val()+"&isOpreate="+isOpreate;
+            if(isNullOrEmpty([[${flag}]])) {
+                var url = CTX + "/api/hisInfusion/details/index.ahsj?token=" + TOKEN + "&hospitalManageId=" + $("#hospitalManage").val() + "&number=" + number.join(",") + "&patientId=" + $("#patientId").val();
+            }else {
+                var url = CTX + "/api/hisInfusion/details/index.ahsj?token=" + TOKEN + "&hospitalManageId=" + $("#hospitalManage").val() + "&number=" + number.join(",") + "&patientId=" + $("#patientId").val() +"&flag=1";
+            }
+            dialog.show(url, "输液单组合");
+        })
     }
 
     $("input").change(function(){

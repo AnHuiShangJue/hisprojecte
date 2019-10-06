@@ -257,7 +257,7 @@ public class HisTollRecordController extends BaseController {
      **/
 
     @RequestMapping("printDrugFive/index.ahsj")
-    ModelAndView printDrugFive(String number, String patientName, String token,Integer type) throws Exception {
+    ModelAndView printDrugFive(String number, String patientName, String token, Integer type) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/histoll/list_print_five");
         modelAndView.addObject("title", "打印凭证预览");
         modelAndView.addObject("token", token);
@@ -275,7 +275,7 @@ public class HisTollRecordController extends BaseController {
      * @Time 16:55
      **/
     @RequestMapping("printDrugFour/index.ahsj")
-    ModelAndView printDrugFour(String number, String patientName, String token,Integer type) throws Exception {
+    ModelAndView printDrugFour(String number, String patientName, String token, Integer type) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/histoll/list_print_four");
         modelAndView.addObject("title", "打印凭证预览");
         modelAndView.addObject("token", token);
@@ -485,6 +485,10 @@ public class HisTollRecordController extends BaseController {
     @RequestMapping("/pharmacyInventory.ahsj")
     @ResponseBody
     public PageBean<HisTollRecord> pharmacyInventory(HisTollRecord hisTollRecord) throws Exception {
+        if (hisTollRecord.getLowsTime() != null || hisTollRecord.getUpTime() != null) {
+            hisTollRecord.setYears(null);
+            hisTollRecord.setMoney(null);
+        }
         PageBean<HisTollRecord> pageBean = new PageBean<HisTollRecord>();
         pageBean.setParameter(hisTollRecord);
         pageBean = hisTollRecordService.pharmacyInventory(pageBean);
@@ -502,6 +506,10 @@ public class HisTollRecordController extends BaseController {
     @RequestMapping("getPharmacyinventoryPrice")
     @ResponseBody
     HisTollRecord getPharmacyinventoryPrice(String token, HisTollRecord hisTollRecord) throws Exception {
+        if (hisTollRecord.getLowsTime() != null || hisTollRecord.getUpTime() != null) {
+            hisTollRecord.setYears(null);
+            hisTollRecord.setMoney(null);
+        }
         return hisTollRecordService.getPharmacyinventoryPrice(hisTollRecord);
     }
 
@@ -522,13 +530,12 @@ public class HisTollRecordController extends BaseController {
      * @Time 10:56
      **/
     @RequestMapping("getDrugDetails/index.ahsj")
-    ModelAndView getDrugDetails(String token, String createDate, String drugName, String saleCounts, String stock) throws Exception {
+    ModelAndView getDrugDetails(String token, String drugsNumb,String stock,String drugsName) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/hisFinance/pharmacyDetail");
         modelAndView.addObject("title", "药库盘点详细信息");
-        modelAndView.addObject("createDate", createDate);
-        modelAndView.addObject("drugName", drugName);
-        modelAndView.addObject("saleCounts", saleCounts);
+        modelAndView.addObject("drugsNumb", drugsNumb);
         modelAndView.addObject("stock", stock);
+        modelAndView.addObject("drugsName", drugsName);
         modelAndView.addObject("token", token);
         return modelAndView;
     }
@@ -543,12 +550,9 @@ public class HisTollRecordController extends BaseController {
      **/
     @RequestMapping("/pharmacyInventoryDetail.ahsj")
     @ResponseBody
-    public PageBean<HisTollRecord> pharmacyInventoryDetail(String createDate, String drugName) throws Exception {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = sdf.parse(createDate);
+    public PageBean<HisTollRecord> pharmacyInventoryDetail(String drugsNumb) throws Exception {
         HisTollRecord hisTollRecord = new HisTollRecord();
-        hisTollRecord.setCreateDate(date);
-        hisTollRecord.setDetailsName(drugName);
+        hisTollRecord.setDrugsNumb(drugsNumb);
         PageBean<HisTollRecord> pageBean = new PageBean<HisTollRecord>();
         pageBean.setParameter(hisTollRecord);
         pageBean = hisTollRecordService.pharmacyInventoryDetail(pageBean);
@@ -557,13 +561,13 @@ public class HisTollRecordController extends BaseController {
 
 
     /**
-     *@Description 根据交易流水号核对是否为住院
-     *@Params [token, hisTollRecord]
-     *@return com.ahsj.hiscore.entity.HisTollRecord
-     *@Author zhushixiang
-     *@Date 2019-09-26
-     *@Time 22:02
-    **/
+     * @return com.ahsj.hiscore.entity.HisTollRecord
+     * @Description 根据交易流水号核对是否为住院
+     * @Params [token, hisTollRecord]
+     * @Author zhushixiang
+     * @Date 2019-09-26
+     * @Time 22:02
+     **/
     @RequestMapping("checkIsInpatient.ahsj")
     @ResponseBody
     HisHospitalManage checkIsInpatient(String token, String tollNumber) throws Exception {

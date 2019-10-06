@@ -4,6 +4,8 @@ import com.ahsj.hiscore.entity.HisInfusion;
 import com.ahsj.hiscore.entity.HisPatientInfo;
 import com.ahsj.hiscore.entity.HisPharmacyDetail;
 import com.ahsj.hiscore.services.*;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import core.controller.BaseController;
 import core.entity.PageBean;
 import core.message.Message;
@@ -303,6 +305,47 @@ public class HisInfusionController extends BaseController {
         return hisInfusionService.listAllByNumber(pageBean);
     }
 
+    /**
+     *@Description 根据id查询  --infusion表
+     *@Params
+     *@return
+     *@Author jin
+     *@Date 2019/10/6
+     *@Time 10:28
+    */
+    @ResponseBody
+    @RequestMapping(value = "listByNumbers.ahsj", method = {RequestMethod.POST})
+    public List<HisInfusion> listById(Map<String, Object> model, HttpServletRequest request
+            , @RequestParam(value="numbers", required=false) String[] numbers //输液单
+    ) throws Exception {
+        if(null != request.getParameter("ids")){
+            return hisInfusionService.listByNumbers(numbers);
+        }else {
+            List<HisInfusion> hisInfusionList = new ArrayList<>();
+            return hisInfusionList;
+        }
+    }
+    /**
+     *@Description 根据分组编号查询
+     *@Params
+     *@return
+     *@Author jin
+     *@Date 2019/10/6
+     *@Time 16:56
+    */
+    @ResponseBody
+    @RequestMapping(value = "listByRemark.ahsj", method = {RequestMethod.POST})
+    public PageBean<HisInfusion> listByRemark(Map<String, Object> model, HttpServletRequest request
+            , @RequestParam(value="remark", required=true) String remark //输液单
+    ) throws Exception {
+        PageBean<HisInfusion> pageBean = new PageBean<HisInfusion>();
+        HisInfusion hisInfusion = new HisInfusion();
+        if(null != request.getParameter("remark")){
+            hisInfusion.setRemarks(remark);
+        }
+        pageBean.setParameter(hisInfusion);
+        return hisInfusionService.listByRemark(pageBean);
+    }
 
     /**
      *@Description 跳转输液单页面infusion
@@ -362,20 +405,34 @@ public class HisInfusionController extends BaseController {
      *@Time 17:31
     */
     @RequestMapping(value = "details/index.ahsj")
-    public ModelAndView edit(String token, String hospitalManageId,String number,Long patientId,String startTime,Integer flag) throws Exception {
+    public ModelAndView edit(String token, String hospitalManageId,String[] number,Long patientId,String startTime,Integer flag) throws Exception {
 //        HM开头的编号
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/infusion/infusionDetails");
         modelAndView.addObject("token", token);
 
         //更新和打印
         modelAndView.addObject("title", "更新输液单");
-
         modelAndView.addObject("hospitalManage",hospitalManageId);
-        modelAndView.addObject("number",number);
         modelAndView.addObject("patientId",patientId);
         if(!EmptyUtil.Companion.isNullOrEmpty(flag))
             modelAndView.addObject("flag",flag);
         modelAndView.addObject("startTime",startTime);
+
+        //输液单分组
+        HisInfusion hisInfusion = new HisInfusion();
+        String name="Group";
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
+        String createdate = sdf.format(date);
+        for (int i = 0; i < number.length; i++) {
+            hisInfusion.setRemarks(name+createdate);
+            hisInfusion.setNumber(number[i]);
+            hisInfusionService.updateRemarks(hisInfusion);
+        }
+
+        modelAndView.addObject("remark",name+createdate);
+        modelAndView.addObject("number",number[0]);
+
         return modelAndView;
     }
 
@@ -389,13 +446,14 @@ public class HisInfusionController extends BaseController {
      *@Time 14:06
     */
     @RequestMapping(value = "printf/index.ahsj")
-    public ModelAndView printf(String token, String hospitalManageId,String number) throws Exception {
+    public ModelAndView printf(String token, String hospitalManageId,String number,String remark) throws Exception {
         //HM开头的编号
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/infusion/newInfusion");
         modelAndView.addObject("token", token);
         //更新和打印
         modelAndView.addObject("hospitalManage",hospitalManageId);
         modelAndView.addObject("number",number);
+        modelAndView.addObject("remark",remark);
         modelAndView.addObject("title", "打印输液单");
         List<HisInfusion> hisInfusionList = hisInfusionService.listByHMForPrint(number);
 
@@ -426,13 +484,13 @@ public class HisInfusionController extends BaseController {
      *@Time 23:13
     **/
     @RequestMapping(value = "inHospitalInfusion/index.ahsj")
-    public ModelAndView inHospitalInfusion(String token, String hospitalManageId,String number) throws Exception {
+    public ModelAndView inHospitalInfusion(String token, String hospitalManageId,String remark,String number) throws Exception {
         //HM开头的编号
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/infusion/newInfusion");
         modelAndView.addObject("token", token);
         //更新和打印
         modelAndView.addObject("hospitalManage",hospitalManageId);
-        modelAndView.addObject("number",number);
+        modelAndView.addObject("remark",remark);
         modelAndView.addObject("title", "打印输液单");
         List<HisInfusion> hisInfusionList = hisInfusionService.listByHMForHospitalPrint(number);
 
@@ -503,12 +561,11 @@ public class HisInfusionController extends BaseController {
      *@Time 15:57
     */
     @ResponseBody
-    @RequestMapping(value = "listByHMForPrint.ahsj", method = {RequestMethod.POST})
+    @RequestMapping(value = "listByRemarkForPrint.ahsj", method = {RequestMethod.POST})
     public List<HisInfusion> listByHMForPrint(Map<String, Object> model, HttpServletRequest request
-            , @RequestParam(value="hospitalManageId", required=false) String hospitalManageId //就诊记录编号
+            , @RequestParam(value="remark", required=true) String remark //就诊记录编号
     ) throws Exception {
-
-        return hisInfusionService.listByHMForPrint(hospitalManageId);
+        return hisInfusionService.listByRemarkForPrint(remark);
     }
 
     /**

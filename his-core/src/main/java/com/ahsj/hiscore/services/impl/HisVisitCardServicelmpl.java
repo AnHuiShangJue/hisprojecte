@@ -104,7 +104,7 @@ public class HisVisitCardServicelmpl implements HisVisitCardService {
     @Override
     @Transactional(readOnly = true)
     public HisVisitCard selectByNumbers(String number) throws Exception {
-        return CodeHelper.getInstance().setCodeValue(hisVisitCardMapper.selectByNumbers(number));
+        return hisVisitCardMapper.selectByNumbers(number)==null? new HisVisitCard():CodeHelper.getInstance().setCodeValue(hisVisitCardMapper.selectByNumbers(number));
     }
 
     /**

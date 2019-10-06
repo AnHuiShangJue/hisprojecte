@@ -282,8 +282,8 @@
     }
 
     function getPrice() {
-        /*  var lowTime =$("#lowTime").val();
-          var upTime =$("#upTime").val();*/
+          var lowTime =$("#lowTime").val();
+          var upTime =$("#upTime").val();
         var searchForm = $("#searchForm").serialize();
         var price = $("#price")
         //获取基本信息
@@ -294,8 +294,14 @@
                 price.html("");
                 if (!isNullOrEmpty(data)) {
                     price.html(data.money)
-                    $("#minTime").html(data.minTime)
-                    $("#maxTime").html(data.maxTime)
+                    if(isNullOrEmpty(lowTime)){ $("#minTime").html(data.minTime);}
+                    else{
+                        $("#minTime").html(lowTime)
+                    }
+                    if(isNullOrEmpty(upTime)){  $("#maxTime").html(data.maxTime);}
+                    else{
+                        $("#maxTime").html(upTime)
+                    }
                     return true;
                 } else {
                     price.html("0")

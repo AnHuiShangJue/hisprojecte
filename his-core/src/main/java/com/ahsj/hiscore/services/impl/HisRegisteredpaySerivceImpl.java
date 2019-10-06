@@ -32,7 +32,7 @@ public class HisRegisteredpaySerivceImpl implements HisRegisteredpayService {
                 return MessageUtil.createMessage(false, "付费失败，并未绑定指定的挂号！");
             } else {
                 HisRegisteredpay tmp = hisRegisteredpayMapper.selectByRegisteredId(hisRegisteredpay.getRegisteredId());
-                if (!EmptyUtil.Companion.isNullOrEmpty(tmp) ) {
+                if (!EmptyUtil.Companion.isNullOrEmpty(tmp)) {
                     return MessageUtil.createMessage(false, "付费失败，该挂号单已经付清完毕！");
                 }
                 hisRegisteredpayMapper.insert(hisRegisteredpay);
@@ -41,7 +41,7 @@ public class HisRegisteredpaySerivceImpl implements HisRegisteredpayService {
             }
         } else {
             HisRegisteredpay tmp = hisRegisteredpayMapper.selectByPrimaryKey(hisRegisteredpay.getId());
-            if (!EmptyUtil.Companion.isNullOrEmpty(tmp) )
+            if (!EmptyUtil.Companion.isNullOrEmpty(tmp))
                 return MessageUtil.createMessage(false, "付费失败，该挂号单不存在！");
             hisRegisteredpayMapper.updateByPrimaryKey(hisRegisteredpay);
             return MessageUtil.createMessage(true, "付费修改成功！");
@@ -50,6 +50,10 @@ public class HisRegisteredpaySerivceImpl implements HisRegisteredpayService {
 
     @Override
     public HisRegisteredpay getPrice(HisRegisteredpay hisRegisteredpay) throws Exception {
+        if (hisRegisteredpay.getLowTime() != null || hisRegisteredpay.getUpTime() != null) {
+            hisRegisteredpay.setYears(null);
+            hisRegisteredpay.setMonths(null);
+        }
         return hisRegisteredpayMapper.getPrice(hisRegisteredpay);
     }
 }

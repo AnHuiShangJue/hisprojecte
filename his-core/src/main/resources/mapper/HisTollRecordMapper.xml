@@ -42,6 +42,9 @@
         <result column="sale_price" property="salePrice"/>
         <result column="medicine_name" property="medicineName" jdbcType="DECIMAL"/>
         <result column="medicine_date" property="medicineDate"/>
+        <result column="enter_count" property="enterCount"/>
+        <result column="drugs_spec" property="drugsSpec" jdbcType="VARCHAR"/>
+        <result column="drugs_numb" property="drugsNumb" jdbcType="VARCHAR"/>
 
 
     </resultMap>
@@ -742,7 +745,7 @@ from  his_toll_record as t
         select distinct (r.number), o.user_name AS
         user_name ,r.medical_record_id, i.name as patient_name,r.is_settlement
         ,d.create_date,r.attench_type,d.type,s.create_date as medicine_date,u.user_name as medicine_name,k.momey as
-        sale_price,l.cost_price
+        sale_price,l.cost_price,r.recover_the_fee
         from his_toll_details as d
         LEFT JOIN his_toll_record as r on r.id = d.toll_record_id
         LEFT JOIN `his-userinfo`.user_info as o on o.id = d.create_user_id
@@ -938,39 +941,49 @@ from  his_toll_record as t
     </select>
 
     <select id="pharmacyInventory" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
-        select  sum(d.exit_count) as exit_count,date(d.create_date) as createDateFor,d.drugs_name as details_name ,p.stock,p.sale_counts
-        from  his_medi_exit_details  as d
-        LEFT JOIN  his_pharmacy_detail as p  on p.id  = d.pharmacy_id
+        select d.drugs_name as details_name, m.create_date
+        ,m.enter_count,e.exit_count,r.number,d.stock,d.drugs_spec,d.drugs_numb
+        from his_pharmacy_detail as d
+        LEFT JOIN
+        (select max(s.create_date)as create_date,s.drugs_numb,s.enter_count from his_medi_enter_details as s GROUP BY
+        s.pharmacy_id )as m
+        on m.drugs_numb = d.drugs_numb
+        LEFT JOIN
+        (select sum(s.exit_count) as exit_count, s.drugs_numb from his_medi_exit_details as s
         where 1=1
         <if test="parameter.lowTime != null">
-            and date(d.create_date) &gt;= #{parameter.lowTime ,jdbcType=TIMESTAMP}
+            and date(s.create_date) &gt;= #{parameter.lowTime ,jdbcType=TIMESTAMP}
         </if>
         <if test="parameter.upTime != null">
-            and date(d.create_date) &lt;= #{parameter.upTime ,jdbcType=TIMESTAMP}
+            and date(s.create_date) &lt;= #{parameter.upTime ,jdbcType=TIMESTAMP}
         </if>
         <if test="parameter.months != null and parameter.months != ''">
-            and month(d.create_date)=#{parameter.months}
+            and month(s.create_date)=#{parameter.months}
         </if>
         <if test="parameter.years != null and parameter.years != ''">
-            and YEAR(d.create_date) = #{parameter.years}
+            and YEAR(s.create_date) = #{parameter.years}
         </if>
+        GROUP BY s.pharmacy_id ) as e
+        on e.drugs_numb = d.drugs_numb
+        LEFT JOIN
+        (select sum(r.number) as number ,r.drugs_numb from his_drug_loss_reporting as r GROUP BY r.pharmacy_id ) as r on
+        r.drugs_numb = d.drugs_numb
+        where 1=1
         <if test="parameter.detailsName != null and parameter.detailsName != ''">
             and d.drugs_name like concat('%' #{parameter.detailsName},'%')
         </if>
-        GROUP BY   d.drugs_name,date(d.create_date)
         <if test="parameter.orders != null and parameter.orders != ''">
             order by ${parameter.orders}
         </if>
     </select>
-    <select id="getPharmacyinventoryPrice" resultMap="BaseResultMap" parameterType="com.ahsj.hiscore.entity.HisTollRecord">
-        select sum(a.price*m.exit_count) as cost_price,sum(r.price*m.exit_count) as sale_price,
-        min(m.create_date) as minTime ,max(m.create_date) as maxTime
-        from his_medi_exit_details as m
-        LEFT JOIN his_pharmacy_detail as d on d.id = m.pharmacy_id
-        LEFT JOIN `his-userinfo`.user_info as i on i.id = m.create_user_id
-        left JOIN his_related_medicationandexit as r on r.exit_id = m.id
-        LEFT JOIN his_medi_enter_details as a on a.id = m.medi_enter_id
-        where 1=1
+    <select id="getPharmacyinventoryPrice" resultMap="BaseResultMap"
+            parameterType="com.ahsj.hiscore.entity.HisTollRecord">
+        select coalesce(sum(a.price*m.exit_count),0) as cost_price,coalesce(sum(r.price*m.exit_count),0) as sale_price,
+        min(m.create_date)
+        as minTime ,max(m.create_date) as maxTime from his_medi_exit_details as m LEFT JOIN his_pharmacy_detail
+        as d on d.drugs_name = m.drugs_name LEFT JOIN `his-userinfo`.user_info as i on i.id = m.create_user_id
+        left JOIN his_related_medicationandexit as r on r.exit_id = m.id LEFT JOIN his_medi_enter_details
+        as a on a.id = m.medi_enter_id where 1=1
         <if test="lowTime != null">
             and date(m.create_date) &gt;= #{lowTime ,jdbcType=TIMESTAMP}
         </if>
@@ -991,25 +1004,15 @@ from  his_toll_record as t
         </if>
     </select>
     <select id="pharmacyInventoryDetail" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
-        select d.id ,d.stock ,m.exit_count,d.drugs_name as details_name,d.sale_counts,(a.price*m.exit_count) as
+         select d.id ,d.stock ,m.exit_count,d.drugs_name as details_name,d.sale_counts,(a.price*m.exit_count) as
         cost_price, (r.price*m.exit_count) as sale_price
         ,i.user_name as user_name,m.create_date
         from his_medi_exit_details as m
-        LEFT JOIN his_pharmacy_detail as d on d.id = m.pharmacy_id
+        LEFT JOIN his_pharmacy_detail as d on d.drugs_numb = m.drugs_numb
         LEFT JOIN `his-userinfo`.user_info as i on i.id = m.create_user_id
         left JOIN his_related_medicationandexit as r on r.exit_id = m.id
         LEFT JOIN his_medi_enter_details as a on a.id = m.medi_enter_id
-        where 1=1
-        <if test="parameter.createDate != null ">
-            and date(m.create_date) = #{parameter.createDate}
-        </if>
-        <if test="parameter.detailsName != null and parameter.detailsName != ''">
-            and d.drugs_name like concat('%' #{parameter.detailsName},'%')
-        </if>
-        <if test="parameter.orders != null and parameter.orders != ''">
-            order by ${parameter.orders}
-        </if>
-
+where  m.drugs_numb =  #{parameter.drugsNumb}
     </select>
 
 </mapper>

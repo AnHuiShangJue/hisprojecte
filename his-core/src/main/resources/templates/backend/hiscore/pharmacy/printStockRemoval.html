@@ -31,7 +31,7 @@
         <div class="col s8 m8 l8">
             <label class="black-text"><span id="recordNumber"></span></label>
         </div>
-        <input type="hidden" id="ids" th:value="${ids}">
+
 
     </div>
     <div class="row valign-wrapper">
@@ -43,7 +43,7 @@
             <label class="black-text"><span id="tollNumber"></span></label>
         </div>
     </div>
-
+    <input type="hidden" id="number" th:value="${tollNumber}">
     <div class="row valign-wrapper">
         <div class="col s4 m4 l4 ">
             <label class="black-text fontsize01">出药人</label></br>
@@ -86,10 +86,10 @@ Scripts
     });
 
     function printShow() {
-        var ids = $("#ids").val();
+        var tollNumber = $("#number").val();
         $.ahsjajax(
-            CTX + "/api/mediexit/getDrug.ahsj?token=" + TOKEN,
-            {"ids": ids},
+            CTX + "/api/mediexit/removal/index.ahsj?token=" + TOKEN,
+            {"tollNumber": tollNumber},
             function (data) {
                 var jsons = data[0];
                 if (!isNullOrEmpty(jsons)) {//有
@@ -134,7 +134,7 @@ Scripts
     function doOk() {
         $('body  div div.row.valign-wrapper').printThis({
             importCSS: true,
-            debug: false,
+            debug: true,
             afterPrint: function () {
                 dialog.confirm('确定打印?', function (index, layero) {
 

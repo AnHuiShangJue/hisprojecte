@@ -408,7 +408,7 @@
             }
         }
         if (null !== id) {
-            gridEnterList.addRow({"id":id,"medicationId":medicationId, "drugsName": drugsName,"drugsSpec":drugsSpec,"smallUnit":smallUnit,"count":count,"price":price,"alreadyout":alreadyout});
+            gridEnterList.addRow({"id":id,"medicationId":medicationId, "drugsName": drugsName,"drugsSpec":drugsSpec,"smallUnit":smallUnit,"count":count,"price":price});
         }
     }
 
@@ -439,7 +439,7 @@
             }
             for (var i = 0; i < ids.length; ++i) {
                 for (var j = 0; j < json.data.length; j++) {
-                    if (undefined !== ids[i] && '' !== ids[i] && null != ids[i] && json.data[j].id == ids[i]) {
+                    if (undefined !== ids[i] && '' !== ids[i] && null != ids[i] && json.data[j].medicationId == ids[i]) {
                         tmps[i] = {
                             "medicationId": json.data[j].medicationId,
                             "id": json.data[j].id,
@@ -447,8 +447,8 @@
                             "drugsSpec": json.data[j].drugsSpec,
                             "smallUnit": json.data[j].smallUnit,
                             "count": json.data[j].count,
-                            "price": json.data[j].price,
-                            "alreadyout": json.data[j].alreadyout
+                            "price": json.data[j].price
+                            // "alreadyout": json.data[j].alreadyout
                         }
                     }
                 }
