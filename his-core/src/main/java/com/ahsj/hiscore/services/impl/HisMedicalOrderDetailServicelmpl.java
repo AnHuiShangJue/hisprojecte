@@ -54,6 +54,9 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
     HisInfusionService hisInfusionService;
 
     @Autowired
+    HisHospitalManageService hisHospitalManageService;
+
+    @Autowired
     ITranslateService iTranslateService;
 
 
@@ -386,7 +389,7 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
     **/
     @Override
     @Transactional(readOnly = false)
-    public Message stopOrder(Long id,Long loginUser) throws Exception {
+    public Message stopOrder(Long id,Long loginUser,Date stopDate) throws Exception {
         StringBuffer returnMessage = new StringBuffer();//记录返回信息
         HisMedicalOrderDetail hisMedicalOrderDetail = hisMedicalOrderDetailMapper.selectByPrimaryKey(id);
         if(hisMedicalOrderDetail.getIsStop()==1){
@@ -394,7 +397,7 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
         }
         if(EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getIsInfusionList())){
             hisMedicalOrderDetail.setIsStop(1);
-            hisMedicalOrderDetail.setStopDate(new Date());
+            hisMedicalOrderDetail.setStopDate(stopDate);
             //已经停嘱设置不可编辑
 //        hisMedicalOrderDetail.setIsFirstEdit(2);
             hisMedicalOrderDetail.setStopUserId(loginUser);
@@ -405,7 +408,7 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
             List<HisMedicalOrderDetail> hisMedicalOrderDetailList = hisMedicalOrderDetailMapper.selectByInfusionNumber(hisMedicalOrderDetail.getInfusionNumber());
             for (HisMedicalOrderDetail medicalOrderDetail : hisMedicalOrderDetailList) {
                 medicalOrderDetail.setIsStop(1);
-                medicalOrderDetail.setStopDate(new Date());
+                medicalOrderDetail.setStopDate(stopDate);
                 //已经停嘱设置不可编辑
 //        hisMedicalOrderDetail.setIsFirstEdit(2);
                 medicalOrderDetail.setStopUserId(loginUser);
@@ -426,7 +429,7 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
             return MessageUtil.createMessage(true, "停嘱成功(Stop success)    " + returnMessage.toString());
         }else {
             hisMedicalOrderDetail.setIsStop(1);
-            hisMedicalOrderDetail.setStopDate(new Date());
+            hisMedicalOrderDetail.setStopDate(stopDate);
             //已经停嘱设置不可编辑
 //        hisMedicalOrderDetail.setIsFirstEdit(2);
             hisMedicalOrderDetail.setStopUserId(loginUser);
@@ -733,5 +736,88 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
             }
 
         }
+    }
+
+    /**
+     *@Description 为所有正在住院的病人根据他们的长期医嘱每天定时生成对应的药品与项目收费明细（长期医嘱医生只需开一天的量即可）
+     *@Params []
+     *@return void
+     *@Author zhushixiang
+     *@Date 2019-10-04
+     *@Time 23:45
+    **/
+    @Override
+    @Transactional(readOnly = false)
+    public void createChargeDetailsForMedicalOrder() throws Exception {
+        //查询所有在住院病人且具有长期医嘱且未停嘱的用药与项目医嘱相关信息
+        List<HisHospitalManage> hisHospitalManageList = hisHospitalManageService.selectInpatientAndHaveLongTermMedicalAdvice();
+        //根据查询出来的生成对应的明细,非空才能执行
+        if(!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManageList) && hisHospitalManageList.size() != 0) {
+            for (HisHospitalManage hisHospitalManage : hisHospitalManageList) {
+                //生成新的消费明细时 医嘱明细表中的 correspond_id需要修改 他代表的是当前医嘱明细对应的用药明细与用项目明细表的ID
+
+                //生成对应的用药明细
+                if(hisHospitalManage.getMedicalOrderType() == 2) {
+                    HisMedicationDetails hisMedicationDetails = new HisMedicationDetails();
+                    hisMedicationDetails.setMedicationId(hisHospitalManage.getTargetId());
+                    hisMedicationDetails.setCount(hisHospitalManage.getTotalAmount().intValue());
+                    HisPharmacyDetail hisPharmacyDetail = hisPharmacyDetailService.selectById(hisHospitalManage.getTargetId());
+                    hisMedicationDetails.setDrugsNumb(hisPharmacyDetail.getDrugsNumb());
+                    hisMedicationDetails.setDrugsName(hisPharmacyDetail.getDrugsName());
+                    hisMedicationDetails.setDrugsAlias(hisPharmacyDetail.getDrugsAlias());
+                    hisMedicationDetails.setDrugsSpec(hisPharmacyDetail.getDrugsSpec());
+                    hisMedicationDetails.setTotalPrice(hisPharmacyDetail.getSalePrice().multiply(BigDecimal.valueOf(hisMedicationDetails.getCount())));
+                    HisMedicalRecord hisMedicalRecord = hisMedicalRecordService.selectByMedicalRecordId(hisHospitalManage.getMedicalNumber());
+                    hisMedicationDetails.setMedicalRecordId(hisMedicalRecord.getId());
+                    hisMedicationDetails.setIsOut(2);
+                    hisMedicationDetails.setIsPay(2);
+                    hisMedicationDetails.setIsBack(2);
+                    hisMedicationDetails.setIsDel(2);
+                    HisMedicalOrderDetail hisMedicalOrderDetail = hisMedicalOrderDetailMapper.selectByPrimaryKey(hisHospitalManage.getMedicalOrderDetailId());
+                    hisMedicationDetails.setCreateDate(Calendar.getInstance().getTime());
+                    hisMedicationDetails.setUpdateDate(Calendar.getInstance().getTime());
+                    hisMedicationDetails.setCreateUserId(hisMedicalOrderDetail.getCreateUserId());
+                    hisMedicationDetails.setUpdateUserId(hisMedicalOrderDetail.getUpdateUserId());
+                    hisMedicationDetails.setDescription(hisHospitalManage.getUsages());
+                    hisMedicationDetailsService.insert(hisMedicationDetails);
+                    //修改医嘱明细对应的 correspond_id
+
+                    hisMedicalOrderDetail.setCorrespondId(hisMedicationDetails.getId());
+                    hisMedicalOrderDetailMapper.updateByPrimaryKeySelective(hisMedicalOrderDetail);
+                }
+                //生成对应的项目明细
+                else if(hisHospitalManage.getMedicalOrderType() == 3){
+                    HisProject hisProject = hisProjectService.selectByPrimaryKey(hisHospitalManage.getTargetId());
+                    //保存开项目明细
+                    HisRecordProject hisRecordProject = new HisRecordProject();
+                    hisRecordProject.setNum(hisHospitalManage.getTotalAmount().intValue());
+                    hisRecordProject.setName(hisProject.getName());
+                    hisRecordProject.setDescription(hisProject.getDescription());
+                    hisRecordProject.setType(hisProject.getType());
+                    hisRecordProject.setPrice(hisProject.getPrice());
+                    hisRecordProject.setNumber(hisProject.getNumber());
+                    hisRecordProject.setPinyinCode(hisProject.getPinyinCode());
+                    hisRecordProject.setUnit(hisProject.getUnit());
+                    hisRecordProject.setProjectId(hisProject.getId());
+                    HisMedicalRecord hisMedicalRecord = hisMedicalRecordService.selectByMedicalRecordId(hisHospitalManage.getMedicalNumber());
+                    hisRecordProject.setRecordId(hisMedicalRecord.getId());
+                    hisRecordProject.setIsChecked((short) 2);
+                    hisRecordProject.setIsPayed((short) 2);
+                    hisRecordProject.setIsBack(2);
+                    HisMedicalOrderDetail hisMedicalOrderDetail = hisMedicalOrderDetailMapper.selectByPrimaryKey(hisHospitalManage.getMedicalOrderDetailId());
+                    hisRecordProject.setCreateDate(Calendar.getInstance().getTime());
+                    hisRecordProject.setUpdateDate(Calendar.getInstance().getTime());
+                    hisRecordProject.setCreateUserId(hisMedicalOrderDetail.getCreateUserId());
+                    hisRecordProject.setUpdateUserId(hisMedicalOrderDetail.getUpdateUserId());
+                    hisRecordProjectService.insert(hisRecordProject);
+                    //修改医嘱明细对应的 correspond_id
+
+                    hisMedicalOrderDetail.setCorrespondId(hisRecordProject.getId());
+                    hisMedicalOrderDetailMapper.updateByPrimaryKeySelective(hisMedicalOrderDetail);
+                }
+            }
+        }
+
+
     }
 }

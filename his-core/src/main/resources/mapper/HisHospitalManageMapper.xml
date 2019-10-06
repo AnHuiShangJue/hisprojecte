@@ -529,6 +529,14 @@
         where b.medical_record_id = #{tollNumber,jdbcType=VARCHAR}
     </select>
 
+    <select id="selectInpatientAndHaveLongTermMedicalAdvice" resultMap="BaseResultMap">
+        select a.*,c.medical_order_type as medicalOrderType, c.target_id as targetId,c.total_amount as totalAmount,c.usages as usages,c.id as medicalOrderDetailId
+        from his_hospital_manage as a
+left join his_medical_order as b on a.number = b.hosptalregist_number
+        left join his_medical_order_detail as c on b.number = c.number
+where a.is_discharged = 1 and b.type = 1 and c.is_stop = 2 and c.medical_order_type != 1
+    </select>
+
 
 
 </mapper>

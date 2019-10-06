@@ -149,6 +149,16 @@ public class HisHospitalManage extends BaseEntity {
 
     private Integer isMarried;
 
+    private Integer medicalOrderType;//医嘱明细类型 1.普通医嘱 2.用药医嘱 3.项目医嘱   对应medical_order_detail_type
+
+    private Long targetId;//用药医嘱或项目医嘱 对应的药库表ID 或向项目表ID
+
+    private BigDecimal totalAmount;//医嘱用药或项目总量
+
+    private String usages;//医嘱用法
+
+    private Long medicalOrderDetailId;//对应的医嘱明细表ID
+
     public String getNurseNames() {
         return nurseNames;
     }
@@ -671,4 +681,43 @@ public class HisHospitalManage extends BaseEntity {
         this.isMarried = isMarried;
     }
 
+    public Integer getMedicalOrderType() {
+        return medicalOrderType;
+    }
+
+    public void setMedicalOrderType(Integer medicalOrderType) {
+        this.medicalOrderType = medicalOrderType;
+    }
+
+    public Long getTargetId() {
+        return targetId;
+    }
+
+    public void setTargetId(Long targetId) {
+        this.targetId = targetId;
+    }
+
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public String getUsages() {
+        return usages;
+    }
+
+    public void setUsages(String usages) {
+        this.usages = usages;
+    }
+
+    public Long getMedicalOrderDetailId() {
+        return medicalOrderDetailId;
+    }
+
+    public void setMedicalOrderDetailId(Long medicalOrderDetailId) {
+        this.medicalOrderDetailId = medicalOrderDetailId;
+    }
 }

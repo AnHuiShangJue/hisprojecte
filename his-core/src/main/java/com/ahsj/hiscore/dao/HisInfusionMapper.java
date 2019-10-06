@@ -64,6 +64,27 @@ public interface HisInfusionMapper extends BaseMapper<HisInfusion>{
     **/
     List< HisInfusion> listByHMForHospitalPrint(String number);
 
+
+    /**
+     *@Description 根据就诊编号查询对应未付款的输液单
+     *@Params [medicalRecordId]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisInfusion>
+     *@Author zhushixiang
+     *@Date 2019-10-06
+     *@Time 12:56
+    **/
+    List<HisInfusion> selectByRecordNumberAndNotPay(String medicalRecordId);
+
+    /**
+     *@Description 根据就诊记录编号删除未付费的输液单
+     *@Params [recordId]
+     *@return void
+     *@Author zhushixiang
+     *@Date 2019-10-06
+     *@Time 14:52
+    **/
+    void deleteByRecordIdAndNotPay(String medicalRecordId);
+
     /**
      *@Description 根据分组编号查询  listByRemark
      *@Params

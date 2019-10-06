@@ -68,6 +68,8 @@ public class HisInfusion extends BaseEntity {
 
     private String drugsSpec;
 
+    private String startTimeVarchar;
+
 
 
     //别名
@@ -81,6 +83,8 @@ public class HisInfusion extends BaseEntity {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date updateDate;
 
+    private Long medicationId;
+
 
     private String smallUnit;
     private Integer countNumber;
@@ -90,6 +94,7 @@ public class HisInfusion extends BaseEntity {
     //翻译字段
     private String tdrugsName;
     private String tunit;
+
 
     public Long getId() {
         return id;
@@ -376,6 +381,22 @@ public class HisInfusion extends BaseEntity {
 
     public void setDrugsSpec(String drugsSpec) {
         this.drugsSpec = drugsSpec;
+    }
+
+    public Long getMedicationId() {
+        return medicationId;
+    }
+
+    public void setMedicationId(Long medicationId) {
+        this.medicationId = medicationId;
+    }
+
+    public String getStartTimeVarchar() {
+        return startTimeVarchar;
+    }
+
+    public void setStartTimeVarchar(String startTimeVarchar) {
+        this.startTimeVarchar = startTimeVarchar;
     }
 //    @Override
 //    public String toString() {

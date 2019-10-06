@@ -813,6 +813,20 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
     public HisHospitalManage checkIsInpatient(String tollNumber) throws Exception {
         return hisHospitalManageMapper.checkIsInpatient(tollNumber);
     }
+
+    /**
+     *@Description 查询所有在住院病人且具有长期医嘱且未停嘱的用药与项目医嘱相关信息
+     *@Params []
+     *@return java.util.List<com.ahsj.hiscore.entity.HisHospitalManage>
+     *@Author zhushixiang
+     *@Date 2019-10-04
+     *@Time 23:53
+    **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<HisHospitalManage> selectInpatientAndHaveLongTermMedicalAdvice() throws Exception {
+        return hisHospitalManageMapper.selectInpatientAndHaveLongTermMedicalAdvice();
+    }
 }
 
 

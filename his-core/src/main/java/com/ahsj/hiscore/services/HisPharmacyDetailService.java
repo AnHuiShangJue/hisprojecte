@@ -211,4 +211,24 @@ public interface HisPharmacyDetailService {
      *@Time 18:16
     **/
     PageBean<HisPharmacyDetail> listForIsDisableAndObtained(PageBean<HisPharmacyDetail> pharmacyDetailPageBean)throws Exception;
+
+    /**
+     *@Description 根据IDs查询药库药品信息
+     *@Params [ids]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisPharmacyDetail>
+     *@Author zhushixiang
+     *@Date 2019-10-05
+     *@Time 14:57
+    **/
+    List<HisPharmacyDetail> selectForListForMedicationByIds(Long[] ids)throws Exception;
+
+    /**
+     *@Description 为门诊用药增加输液单
+     *@Params [ids]
+     *@return core.message.Message
+     *@Author zhushixiang
+     *@Date 2019-10-05
+     *@Time 23:47
+    **/
+    Message addCombinationMedicine(Long[] ids)throws Exception;
 }

@@ -198,4 +198,27 @@ function handleTextArea(){
         })
     }
 }
+//缓存ID值 checkBox代表的就是复选框的选中状态  为true代表选中了  为false代表未选中
+//缓存ID
+ function cacheId(checkBox,id,cacheIds) {
+    //若被选中数组中要保存此值
+    var check = $(checkBox).is(":checked");
+    if(check){
+        var index = cacheIds.indexOf(id);
+        //-1代表数组中无此值 ，只有无此值时才能添加
+        if(index == -1){
+            cacheIds.push(id);
+        }
+    }
+    //若未被选中 要判断数组中是否有ID 若有需要移除
+    else {
+        var index = cacheIds.indexOf(id);
+        //不等于-1 说明id在数组中存在
+        if(index != -1){
+            //splice方法可以向数组中删除，插入，替换任意数量的项
+            //删除: 接受两个参数，第一个参数表示要从哪里开始删除，第二个项表示删除的个数 color.splice(0, 2);//从第0个开始删除两个
+            cacheIds.splice(index,1);
+        }
+    }
+}
 

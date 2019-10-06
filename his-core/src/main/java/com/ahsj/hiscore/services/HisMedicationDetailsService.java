@@ -202,4 +202,24 @@ public interface HisMedicationDetailsService {
      *@Time 11:18
     **/
     void deleteById(Long id)throws Exception;
+
+    /**
+     *@Description 根据就诊记录ID查询未付的药品
+     *@Params [pageBean]
+     *@return core.entity.PageBean<com.ahsj.hiscore.entity.HisMedicationDetails>
+     *@Author zhushixiang
+     *@Date 2019-10-06
+     *@Time 18:00
+    **/
+    PageBean<HisMedicationDetails> listByRecordIdAndNotPay(PageBean<HisMedicationDetails> pageBean)throws Exception;
+
+    /**
+     *@Description 根据ids 批量查找
+     *@Params [ids]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisMedicationDetails>
+     *@Author zhushixiang
+     *@Date 2019-10-06
+     *@Time 19:24
+    **/
+    List<HisMedicationDetails> selectByIds(Long[] ids)throws Exception;
 }

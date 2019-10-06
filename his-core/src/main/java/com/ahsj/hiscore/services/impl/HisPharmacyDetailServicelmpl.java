@@ -950,4 +950,34 @@ public class HisPharmacyDetailServicelmpl implements HisPharmacyDetailService {
         pharmacyDetailPageBean.setData(CodeHelper.getInstance().setCodeValue(hisPharmacyDetailMapper.listForIsDisableAndObtained(pharmacyDetailPageBean)));
         return pharmacyDetailPageBean;
     }
+
+    /**
+     *@Description 根据IDs查询药库药品信息
+     *@Params [ids]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisPharmacyDetail>
+     *@Author zhushixiang
+     *@Date 2019-10-05
+     *@Time 14:58
+    **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<HisPharmacyDetail> selectForListForMedicationByIds(Long[] ids) throws Exception {
+        List<HisPharmacyDetail> hisPharmacyDetailList =hisPharmacyDetailMapper.selectForListForMedicationByIds(ids);
+        return hisPharmacyDetailMapper.selectForListForMedicationByIds(ids);
+    }
+
+    /**
+     *@Description 为门诊用药增加输液单
+     *@Params [ids]
+     *@return core.message.Message
+     *@Author zhushixiang
+     *@Date 2019-10-05
+     *@Time 16:32
+    **/
+    @Override
+    @Transactional(readOnly = false)
+    public Message addCombinationMedicine(Long[] ids) throws Exception {
+
+        return null;
+    }
 }

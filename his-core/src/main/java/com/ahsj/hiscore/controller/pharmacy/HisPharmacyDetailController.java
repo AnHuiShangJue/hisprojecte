@@ -122,12 +122,18 @@ public class HisPharmacyDetailController extends BaseMedicineController {
      * @Time 21:05
      **/
     @RequestMapping("/listForMedication/index.ahsj")
-    ModelAndView listForMedicationIndex(String token, @RequestParam(value = "medicalOrderNumber", required = false) String medicalOrderNumber) {
+    ModelAndView listForMedicationIndex(String token, @RequestParam(value = "medicalOrderNumber", required = false) String medicalOrderNumber,@RequestParam(value = "infusion",required = false)Integer infusion) {
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/pharmacy/listForMedication");
         modelAndView.addObject("title", "医生开药");
         modelAndView.addObject("token", token);
-        if (!EmptyUtil.Companion.isNullOrEmpty(medicalOrderNumber))
+        Integer type =0;//listForMedication页面可以开普通用药，医嘱用药以及门诊输液单用药   定义type变量来标识属于哪种用药 0代表门诊普通开药 1代表医嘱用药 2代表门诊输液单用药
+        if (!EmptyUtil.Companion.isNullOrEmpty(medicalOrderNumber)) {
             modelAndView.addObject("medicalOrderNumber", medicalOrderNumber);
+            type = 1;
+        }else if(!EmptyUtil.Companion.isNullOrEmpty(infusion)){
+            type = 2;
+        }
+        modelAndView.addObject("type", type);
         return modelAndView;
     }
 
@@ -572,6 +578,41 @@ public class HisPharmacyDetailController extends BaseMedicineController {
         modelAndView.addObject("title", "药品出库信息");
         modelAndView.addObject("token", token);
         return modelAndView;
+    }
+
+
+
+    /**
+     *@Description 根据IDs查询药库药品信息
+     *@Params [ids]
+     *@return core.entity.PageBean<com.ahsj.hiscore.entity.HisPharmacyDetail>
+     *@Author zhushixiang
+     *@Date 2019-10-05
+     *@Time 14:56
+    **/
+    @ResponseBody
+    @RequestMapping(value = "selectForListForMedicationByIds.ahsj")
+    public List<HisPharmacyDetail> selectForListForMedicationByIds(Long[] ids) throws Exception {
+        return hisPharmacyDetailService.selectForListForMedicationByIds(ids);
+    }
+
+    /**
+     *@Description 为门诊用药增加输液单
+     *@Params [model, request, ids]
+     *@return core.message.Message
+     *@Author zhushixiang
+     *@Date 2019-10-05
+     *@Time 16:29
+    **/
+    @RequestMapping(value = "addCombinationMedicine.ahsj", method = {RequestMethod.POST})
+    @ResponseBody
+    //传来的ID为药库药品ID
+    public Message addCombinationMedicine (Map<String, Object> model, HttpServletRequest request
+            , @RequestParam(value="ids", required=true) Long[] ids
+    ) throws Exception {
+        if(null != request.getParameter("ids")){
+            return hisPharmacyDetailService.addCombinationMedicine(ids);
+        }else  return MessageUtil.createMessage(false,"参数异常(Abnormal parameter)");
     }
 
 }

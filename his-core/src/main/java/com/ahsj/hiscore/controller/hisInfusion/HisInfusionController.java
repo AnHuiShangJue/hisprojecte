@@ -1,6 +1,7 @@
 package com.ahsj.hiscore.controller.hisInfusion;
 
 import com.ahsj.hiscore.entity.HisInfusion;
+import com.ahsj.hiscore.entity.HisMedicalRecord;
 import com.ahsj.hiscore.entity.HisPatientInfo;
 import com.ahsj.hiscore.entity.HisPharmacyDetail;
 import com.ahsj.hiscore.services.*;
@@ -619,4 +620,24 @@ public class HisInfusionController extends BaseController {
         }
         else  return MessageUtil.createMessage(false,"参数异常");
     }
+
+    /**
+     *@Description 跳转添加输液单界面
+     *@Params [token]
+     *@return org.springframework.web.servlet.ModelAndView
+     *@Author zhushixiang
+     *@Date 2019-10-06
+     *@Time 7:43
+    **/
+    @RequestMapping(value = "addInfusionMedicine/index.ahsj")
+    //recordId代表的是就诊记录表的ID
+    public ModelAndView addInfusionMedicine(String token,Long recordId) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/infusion/addInfusionMedicine");
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("recordId", recordId);
+        return modelAndView;
+    }
+
+
+    
 }

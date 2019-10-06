@@ -478,4 +478,33 @@ public class HisMedicationDetailsServicelmpl implements HisMedicationDetailsServ
     public void deleteById(Long id) throws Exception {
         hisMedicationDetailsMapper.deleteByPrimaryKey(id);
     }
+
+    /**
+     *@Description 根据就诊记录ID查询未付的药品
+     *@Params [pageBean]
+     *@return core.entity.PageBean<com.ahsj.hiscore.entity.HisMedicationDetails>
+     *@Author zhushixiang
+     *@Date 2019-10-06
+     *@Time 17:57
+    **/
+    @Override
+    @Transactional(readOnly = true)
+    public PageBean<HisMedicationDetails> listByRecordIdAndNotPay(PageBean<HisMedicationDetails> pageBean) throws Exception {
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisMedicationDetailsMapper.listByRecordIdAndNotPay(pageBean)));
+        return pageBean;
+    }
+
+    /**
+     *@Description 根据ids 批量查找
+     *@Params [ids]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisMedicationDetails>
+     *@Author zhushixiang
+     *@Date 2019-10-06
+     *@Time 19:24
+    **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<HisMedicationDetails> selectByIds(Long[] ids) throws Exception {
+        return hisMedicationDetailsMapper.selectByIds(ids);
+    }
 }
