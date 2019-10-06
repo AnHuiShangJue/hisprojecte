@@ -377,5 +377,44 @@ public class HisInfusion extends BaseEntity {
     public void setDrugsSpec(String drugsSpec) {
         this.drugsSpec = drugsSpec;
     }
-
+//    @Override
+//    public String toString() {
+//        return "{" +
+//                "id=" + id +
+//                ", recordId='" + recordId + '\'' +
+//                ", hosptalregistNumber='" + hosptalregistNumber + '\'' +
+//                ", startTime=" + startTime +
+//                ", patientId=" + patientId +
+//                ", usages='" + usages + '\'' +
+//                ", intervals=" + intervals +
+//                ", intervalsName='" + intervalsName + '\'' +
+//                ", speed='" + speed + '\'' +
+//                ", duration='" + duration + '\'' +
+//                ", drugsNumb='" + drugsNumb + '\'' +
+//                ", drugname='" + drugname + '\'' +
+//                ", singleDose=" + singleDose +
+//                ", singleUnit='" + singleUnit + '\'' +
+//                ", isSkinTest=" + isSkinTest +
+//                ", dosage='" + dosage + '\'' +
+//                ", unit='" + unit + '\'' +
+//                ", price=" + price +
+//                ", medicalRecordNumber='" + medicalRecordNumber + '\'' +
+//                ", remarks='" + remarks + '\'' +
+//                ", number='" + number + '\'' +
+//                ", type=" + type +
+//                ", projectId=" + projectId +
+//                ", nurseId=" + nurseId +
+//                ", medicalRecordId='" + medicalRecordId + '\'' +
+//                ", salePrice=" + salePrice +
+//                ", drugsSpec='" + drugsSpec + '\'' +
+//                ", nurseName='" + nurseName + '\'' +
+//                ", createDate=" + createDate +
+//                ", updateDate=" + updateDate +
+//                ", smallUnit='" + smallUnit + '\'' +
+//                ", countNumber=" + countNumber +
+//                ", patientName='" + patientName + '\'' +
+//                ", tdrugsName='" + tdrugsName + '\'' +
+//                ", tunit='" + tunit + '\'' +
+//                '}';
+//    }
 }

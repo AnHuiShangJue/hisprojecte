@@ -153,8 +153,24 @@ public class HisInfusionServiceImpl implements HisInfusionService {
 
     @Override
     @Transactional(readOnly = true)
+    public List<HisInfusion> listByNumbers(String[] ids) throws Exception {
+        List<HisInfusion> hisInfusionList = new ArrayList<HisInfusion>();
+        for (int i = 0; i < ids.length; i++) {
+            hisInfusionList.addAll(hisInfusionMapper.selectByNumber(ids[i]));
+        }
+        return CodeHelper.getInstance().setCodeValue(hisInfusionList);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public List<HisInfusion> listByHMForPrint(String Hm) throws Exception {
         return CodeHelper.getInstance().setCodeValue(hisInfusionMapper.listByHMForPrint(Hm));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<HisInfusion> listByRemarkForPrint(String remark) throws Exception {
+        return CodeHelper.getInstance().setCodeValue(hisInfusionMapper.listByRemarkForPrint(remark));
     }
 
     /**
@@ -199,5 +215,20 @@ public class HisInfusionServiceImpl implements HisInfusionService {
         if(EmptyUtil.Companion.isNullOrEmpty(hisInfusionMapper.listByHMForHospitalPrint(number)))
             return new ArrayList<>();
         return CodeHelper.getInstance().setCodeValue(hisInfusionMapper.listByHMForHospitalPrint(number));
+    }
+
+    @Override
+    @Transactional(readOnly = false)
+    public void updateRemarks(HisInfusion hisInfusion) throws Exception {
+        if (!EmptyUtil.Companion.isNullOrEmpty(hisInfusion)){
+            hisInfusionMapper.updateRemarks(hisInfusion);
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public PageBean<HisInfusion> listByRemark(PageBean<HisInfusion> pageBean) throws Exception {
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisInfusionMapper.listByRemark(pageBean)));
+        return pageBean;
     }
 }

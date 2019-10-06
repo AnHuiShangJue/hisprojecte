@@ -64,7 +64,7 @@
 </div>
 
 <input type="hidden" id="hospitalManage" th:value="${hospitalManage}">
-<input type="hidden" id="number" th:value="${number}">
+<input type="hidden" id="remark" th:value="${remark}">
 
 
 <div th:replace="public/base_list_script :: html"></div>
@@ -74,10 +74,10 @@
 
     $(document).ready(function () {
 
-        var hospitalManage = $("#number").val();
+        var remark = $("#remark").val();
         $.ahsjajax(
-            CTX + "/api/hisInfusion/listByHMForPrint.ahsj?token=" + TOKEN,
-            {"hospitalManageId": hospitalManage},
+            CTX + "/api/hisInfusion/listByRemarkForPrint.ahsj?token=" + TOKEN,
+            {"remark": remark},
             function (data) {
                 var jsons = data[0];
                 if (!isNullOrEmpty(jsons)) {//有
@@ -102,7 +102,7 @@
     function doOk() {
         $('body  div .row.valign-wrapper').printThis({
             importCSS: true,
-            debug: true,
+            debug: false,
             afterPrint: function () {
                 dialog.confirm('确定打印?', function (index, layero) {
 

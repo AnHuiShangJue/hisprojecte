@@ -421,6 +421,21 @@
         where a.number = #{number,jdbcType = VARCHAR}
     </select>
 
+  <select id="listByRemarkForPrint" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        a.*
+        ,c.name as nurseName
+        ,d.count as countNumber
+        ,d.small_unit as smallUnit
+        ,e.name as patientName
+        from his_infusion as a
+        LEFT JOIN his_user_nurse as b on b.user_id = a.nurse_id
+        LEFT JOIN his_nurse as c on b.nurse_id = c.id
+        LEFT JOIN his_medication_details as d on a.drugs_numb = d.id
+        LEFT JOIN his_patient_info as e on a.patient_id = e.id
+        where a.remarks = #{remarks,jdbcType = VARCHAR}
+    </select>
+
 
   <select id="listByHMForHospitalPrint" resultMap="BaseResultMap" parameterType="java.lang.String">
     select
@@ -486,9 +501,28 @@
     where number = #{number,jdbcType=VARCHAR}
   </delete>
 
+  <!--根据编号查询-->
   <select id="selectByNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
     select his_infusion.*
 from his_infusion
 where his_infusion.number =#{infusionNumber,jdbcType=VARCHAR}
   </select>
+
+  <!--根据分组编号remark-->
+  <select id="listByRemark" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
+    select his_infusion.*
+    from his_infusion
+    where his_infusion.remarks =#{parameter.remarks,jdbcType=VARCHAR}
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+
+  <!--更新remark-->
+  <update id="updateRemarks" parameterType="com.ahsj.hiscore.entity.HisInfusion">
+    update his_infusion
+    set remarks = #{remarks,jdbcType=VARCHAR}
+    where number = #{number,jdbcType=BIGINT}
+  </update>
+
 </mapper>

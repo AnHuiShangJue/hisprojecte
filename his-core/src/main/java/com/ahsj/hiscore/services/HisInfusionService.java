@@ -95,6 +95,17 @@ public interface HisInfusionService {
     PageBean<HisInfusion> listAllByNumber(PageBean<HisInfusion> pageBean)throws Exception;
 
     /**
+     *@Description 根据id查询
+     *@Params
+     *@return
+     *@Author jin
+     *@Date 2019/10/6
+     *@Time 10:34
+    */
+    List<HisInfusion> listByNumbers(String[] numbers)throws Exception;
+
+
+    /**
      *@Description
      *@Params
      *@return
@@ -103,6 +114,7 @@ public interface HisInfusionService {
      *@Time 14:10
     */
     List<HisInfusion> listByHMForPrint(String Hm)throws Exception;
+    List<HisInfusion> listByRemarkForPrint(String remark)throws Exception;
 
     /**
      * @Description
@@ -133,4 +145,25 @@ public interface HisInfusionService {
      *@Time 23:40
     **/
     List<HisInfusion> listByHMForHospitalPrint(String number);
+
+    /**
+     *@Description 更新remark
+     *@Params
+     *@return
+     *@Author jin
+     *@Date 2019/10/6
+     *@Time 16:48
+    */
+    void updateRemarks(HisInfusion hisInfusion)throws Exception;
+
+    /**
+     *@Description 根据分组编号remark查询
+     *@Params
+     *@return
+     *@Author jin
+     *@Date 2019/10/6
+     *@Time 16:58
+    */
+    PageBean<HisInfusion> listByRemark(PageBean<HisInfusion> pageBean)throws Exception;
+
 }
