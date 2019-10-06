@@ -212,10 +212,10 @@
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn +
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"审核\" onclick='detail(" + row.patientId + "," + row.ids + "," + row.doctorId + "," + row.isHos + ");'><i class='material-icons'>input</i></a>"+
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"出院\" href='javascript:;' onclick='discharged(" + row.id + "," + row.isDischarged + ");'><i class='material-icons'>camera_front</i></a>"+
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看\" href='javascript:;' onclick='view(" + row.patientId + "," + row.ids + "," + row.doctorId + "," + row.wardId + "," + row.bedId + "," + row.nurseId + "," + row.isHos + "," + row.id + ");'><i class='material-icons'>visibility</i></a>"+
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" onclick='update(" + row.id + "," + row.isHos + ");'><i class='material-icons'>edit</i></a>";
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"办理（Handle）\" onclick='detail(" + row.patientId + "," + row.ids + "," + row.doctorId + "," + row.isHos + ");'><i class='material-icons'>input</i></a>"+
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"出院(Discharged)\" href='javascript:;' onclick='discharged(" + row.id + "," + row.isDischarged + ");'><i class='material-icons'>camera_front</i></a>"+
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看(View)\" href='javascript:;' onclick='view(" + row.patientId + "," + row.ids + "," + row.doctorId + "," + row.wardId + "," + row.bedId + "," + row.nurseId + "," + row.isHos + "," + row.id + ");'><i class='material-icons'>visibility</i></a>"+
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改(Edit)\" onclick='update(" + row.id + "," + row.isHos + ");'><i class='material-icons'>edit</i></a>";
                             // 返回自定义内容
                             return rtnBtn;
                             // 返回自定义内容

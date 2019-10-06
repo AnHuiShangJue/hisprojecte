@@ -372,6 +372,9 @@
     <if test="parameter.userId != null and parameter.userId != '' " >
       and user_id like concat('%' #{parameter.userId,jdbcType=VARCHAR},'%')
     </if>
+    <if test="parameter.userName != null and parameter.userName != '' " >
+      and user_name like concat('%' #{parameter.userName,jdbcType=VARCHAR},'%')
+    </if>
     <if test="parameter.orders != null and parameter.orders != ''">
       order by ${parameter.orders}
     </if>

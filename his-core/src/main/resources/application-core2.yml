@@ -108,7 +108,7 @@ feign:
     config:
       default:
         connectTimeout: 120000
-        readTimeout: 30000
+        readTimeout: 120000
         loggerLevel: full
         decode404: true
   hystrix:
