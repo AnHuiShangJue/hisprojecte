@@ -102,54 +102,38 @@
             rules: {
                 userId: {
                     required: true,
-                    minlength: 8
+                    minlength: 1
                 },
                 userName: {
                     required: true,
-                    minlength: 3
+                    minlength: 1
                 },
                 password: {
                     required: true,
-                    minlength: 6
-                },
-                mail: {
-                    required: true,
-                    email: true
-                },
-                telPhone: {
-                    required: true,
-                    minlength: 11
+                    minlength: 1
                 },
                 cardNo: {
                     required: true,
-                    minlength: 18
+                    minlength: 1
                 },
 
             },
             messages: {
                 userId: {
                     required: "请输入账号",
-                    minlength: "最少包含10个字符"
+                    minlength: "最少包含1个字符"
                 },
                 password: {
                     required: "请输入密码",
-                    minlength: "最少输入6个字符"
+                    minlength: "最少输入1个字符"
                 },
                 userName: {
                     required: "请输入用户名",
-                    minlength: "最少输入3个字符"
-                },
-                mail: {
-                    required: "请输入邮箱",
-                    email: "请输入xxx@xx.com/cn格式的邮箱"
-                },
-                telPhone: {
-                    required: "请输入手机号码",
-                    minlength: "最少输入11个字符"
+                    minlength: "最少输入1个字符"
                 },
                 cardNo: {
                     required: "请输入身份证号码",
-                    minlength: "最少输入18个字符"
+                    minlength: "最少输入1个字符"
                 },
 
             },
