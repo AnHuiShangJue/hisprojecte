@@ -3,14 +3,17 @@
 <head>
     <style>
         .fontsize01 {
-            font-size: 8px;
+            font-size: 1px;
         }
-
         .fontsize02 {
-            font-size: 8px;
+            font-size: 1px;
         }
         table tr td{
             padding: 0;
+        }
+        label{
+            padding: 0;
+            margin: 0;
         }
     </style>
 </head>
@@ -19,49 +22,49 @@
       data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
 
 <div class="row" style="padding: 0;margin:0">
-    <div class="row valign-wrapper">
+    <div class="row valign-wrapper" style="width: 500px;margin: 0 auto">
         <div class="col s12 m12 l12" th:if="${type} eq 1">
-            <label class="black-text">财务联(Financial union)</label>
+            <label style="font-size: 1px">财务联(Financial union)</label>
 
         </div>
         <div class="col s12 m12 l12" th:if="${type} eq 2">
-            <label class="black-text">科室联(Department)</label>
+            <label style="font-size: 1px">科室联(Department)</label>
         </div>
         <div class="col s12 m12 l12" th:if="${type} eq 3">
-            <label class="black-text">自由联(Free association)</label>
+            <label style="font-size: 1px">自由联(Free association)</label>
 
         </div>
     </div>
     <div class="row valign-wrapper">
-        <div class="col s12 m12 l12 center">
-            <h4 class="black-text" style="text-align: center;padding: 0 auto;margin: 0 auto">中柬第一医院住院收费</h4>
-            <p class="black-text fontsize02" style="text-align: center;padding: 0 auto;margin: 0 auto">The first china-cambodia hospital Hospitalization fee</p>
+        <div class="col s12 m12 l12 center" style="width: 500px;margin: 0 auto">
+            <h4 style="text-align: center;padding: 0;margin: 0;font-size: 1px">中柬第一医院住院收费</h4>
+            <p style="text-align: center;padding: 0;margin: 0;font-size: 1px">The first china-cambodia hospital Hospitalization fee</p>
         </div>
     </div>
     <div class="row valign-wrapper">
-        <div class="col s12 m12 l12 ">
-            <table style="border: none;font-size: 8px">
+        <div class="col s12 m12 l12 " >
+            <table style="border: none;font-size: 1px;width: 500px;margin: 0 auto">
                 <tr>
                     <td><label class="black-text fontsize01">姓名(name)</label></td>
-                    <td><label class="black-text"  style="padding: 0;" id="name"></label></td>
+                    <td><label id="name" class="black-text fontsize01"></label></td>
                     <td><label class="black-text fontsize01">科室(department)</label></td>
-                    <td><label class="black-text" id="department"></label></td>
+                    <td><label id="department" class="black-text fontsize01"></label></td>
                 </tr>
                 <tr>
                     <td><label class="black-text fontsize01">年龄(age)</label></td>
-                    <td><label class="black-text"  style="padding: 0;" id="age"></label></td>
+                    <td><label class="black-text fontsize01"  style="padding: 0;" id="age"></label></td>
                     <td><label class="black-text fontsize01">性别(sex)</label></td>
-                    <td><label class="black-text" id="sex"></label></td>
+                    <td><label class="black-text fontsize01" id="sex"></label></td>
                 </tr>
                 <tr>
                     <td><label class="black-text fontsize01">医生(doctor)</label></td>
-                    <td><label class="black-text"  style="padding: 0;" id="doctor"></label></td>
+                    <td><label class="black-text fontsize01" id="doctor"></label></td>
                 </tr>
                 <tr>
                     <td><label class="black-text fontsize01">交易流水号(Transaction flow number)</label></td>
-                    <td><label class="black-text" th:text="${number}" style="padding: 0;"></label></td>
+                    <td><label class="black-text fontsize01" th:text="${number}" style="padding: 0;"></label></td>
                     <td><label class="black-text fontsize01">收费人(Toll collector)</label></td>
-                    <td><label class="black-text"><span id="createName"></span></label></td>
+                    <td><label class="black-text fontsize01"><span id="createName"></span></label></td>
                 </tr>
                 <input type="hidden" id="number" th:value="${number}">
 
@@ -74,13 +77,13 @@
 
                 <tr>
                     <td><label class="black-text fontsize01">总应收金额(Total receivable amount)</label></td>
-                    <td><label class="black-text"><span id="money"></span></label></td>
+                    <td><label class="black-text fontsize01"><span id="money"></span></label></td>
                     <td><label class="black-text fontsize01">收费时间(Chargeable time)</label></td>
-                    <td><label class="black-text"><span id="createDate"></span></label></td>
+                    <td><label class="black-text fontsize01"><span id="createDate"></span></label></td>
                 </tr>
                 <tr>
                     <td><label class="black-text fontsize01">押金充值(Deposit recharge)</label></td>
-                    <td><label class="black-text"><span id="depositRecharge"></span></label></td>
+                    <td><label class="black-text fontsize01"><span id="depositRecharge"></span></label></td>
                 </tr>
                 <tr>
                     <td colspan="2"><label class="black-text fontsize01">收费明细(Charge details)</label></td>
@@ -89,8 +92,8 @@
         </div>
     </div>
     <div class="row valign-wrapper">
-        <div class="col s12 m12 l12 ">
-            <table id="table_id" style="border: none;font-size: 8px"></table>
+        <div class="col s12 m12 l12">
+            <table id="table_id" style="border: none;font-size: 1px;width: 500px;margin: 0 auto"></table>
         </div>
     </div>
 
@@ -178,34 +181,10 @@ Scripts
     function doOk() {
         $('body  div div.row.valign-wrapper').printThis({
             importCSS: false,
-            debug: true,
+            debug: false,
             afterPrint: function () {
                 dialog.confirm('确定打印?', function (index, layero) {
 
-                    /*       $.ahsjajax(CTX + "/api/hisTollRecord/printDrug/index.ahsj",
-                               {"number": [[number]]},
-                               function (msg) {
-                                   if (msg.success) {
-                                       M.toast({
-                                           html: msg.message, completeCallback: function () {
-                                           }
-                                       });
-                                       grid.search();
-                                       dialog.parentclose();
-                                   } else {
-                                       M.toast({
-                                           html: msg.message, completeCallback: function () {
-                                           }
-                                       });
-                                   }
-                               },
-                               function (data) {
-                                   M.toast({
-                                       html: "网络异常", completeCallback: function () {
-                                       }
-                                   });
-                               }
-                           );*/
                 });
             }
         });

@@ -2,6 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
 
 <head>
+    <style>
+        table tr td {
+            padding: 0;
+        }
+    </style>
 </head>
 <div th:replace="public/base_print :: html"></div>
 
@@ -204,7 +209,7 @@
             function (data) {
                 var jsons = data[0];
                 if (!isNullOrEmpty(jsons)) {//有
-                    var trs = "<tr><td><h6 class='black-text'>名称(name)</h6></td><td><h6 class='black-text'>规格(drugsSpec)</h6><td><h6 class='black-text'>数目(number)</h6></td><td><h6 class='black-text'>单价(price)</h6></td><td><h6 class='black-text'>单项总价(Single item total price)</h6></td></tr>";
+                    var trs = "<tr><td>名称(name)</td><td>规格(drugsSpec)<td>数目(number)</td><td>单价(price)</td><td>单项总价(Single item total price)</td></tr>";
                     $.each(data, function (index, item) {
                         if (isNullOrEmpty(item.name)) {
                             item.name = ""
@@ -239,7 +244,7 @@
             function (data) {
                 var jsons = data[0];
                 if (!isNullOrEmpty(jsons)) {//有
-                    var trs = "<tr><td><h6 class='black-text'>名称(name)</h6></td><td><h6 class='black-text'>数目(number)</h6></td><td><h6 class='black-text'>单价(price)</h6></td><td><h6 class='black-text'>单项总价(Single item total price)</h6></td></tr>";
+                    var trs = "<tr><td>名称(name)</td><td>数目(number)</td><td>单价(price)</td><td>单项总价(Single item total price)</td></tr>";
                     $.each(data, function (index, item) {
                         if (isNullOrEmpty(item.name)) {
                             item.name = ""
