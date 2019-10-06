@@ -123,7 +123,6 @@ public class HisPprojectController extends BaseController {
         modelAndView.addObject("token", token);
         modelAndView.addObject("title", "收费信息修改");
         modelAndView.addObject("hisProject", hisProject);
-        System.out.println("-------------------->" + hisProject.getNumber());
         return modelAndView;
     }
 

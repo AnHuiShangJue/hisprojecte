@@ -35,6 +35,9 @@ public interface HisMedicineInfoMapper extends BaseMapper<HisMedicineInfo> {
      **/
     List<HisMedicineInfo> list(PageBean<HisMedicineInfo> pageBean);
 
+
+    List<HisMedicineInfo> listandenglish();
+
     /**
      * @return com.ahsj.hiscore.entity.HisMedicineInfo
      * @Description 根据药品编号查找

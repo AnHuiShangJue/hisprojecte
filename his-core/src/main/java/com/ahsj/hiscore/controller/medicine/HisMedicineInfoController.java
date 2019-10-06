@@ -449,7 +449,7 @@ public class HisMedicineInfoController extends BaseController {
      *@功能说明  下载导入错误信息
      *@Params [request, param, idsData, hisProject, response, session, token, pinyinCode, isEnable]
      *@return void
-     *@Author XJP
+     *@Author XJPapi/hismedicineinfo
      *@Date 2019/9/3
      *@Time 15:19
      **/

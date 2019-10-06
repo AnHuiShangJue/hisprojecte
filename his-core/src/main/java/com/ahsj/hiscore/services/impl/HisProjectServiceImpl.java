@@ -287,7 +287,11 @@ public class HisProjectServiceImpl implements HisProjectService {
     @Override
     @Transactional(readOnly = true)
     public PageBean<HisProject> queryList(PageBean<HisProject> pageBean) throws Exception {
-        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisProjectMapper.queryList(pageBean)));
+        List<HisProject> hisProjectList = hisProjectMapper.queryList(pageBean);
+        for (HisProject hisProject : hisProjectList) {
+            hisProject.setName(hisProject.getName()+"("+hisProject.getTranslateKhmer()+")");
+        }
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisProjectList));
         return pageBean;
     }
 

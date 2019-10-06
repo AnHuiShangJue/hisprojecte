@@ -1,7 +1,9 @@
 package com.ahsj.hiscore.controller;
 
 import com.ahsj.hiscore.common.utils.JsonUtils;
+import com.ahsj.hiscore.dao.HisMedicineInfoMapper;
 import com.ahsj.hiscore.dao.HisProjectMapper;
+import com.ahsj.hiscore.entity.HisMedicineInfo;
 import com.ahsj.hiscore.entity.HisProject;
 import com.ahsj.hiscore.entity.Translate;
 import com.ahsj.hiscore.entity.TranslateModel.*;
@@ -46,6 +48,7 @@ public class TranslateController {
     @Autowired
     ITranslateService iTranslateService;
 
+    @Autowired
     HisProjectService  hisProjectService;
 
     @Autowired
@@ -56,6 +59,9 @@ public class TranslateController {
 
     @Autowired
     HisProjectMapper hisProjectMapper;
+
+    @Autowired
+    HisMedicineInfoMapper hisMedicineInfoMapper;
 
 
     @PostMapping("/code.ahsj")
@@ -120,7 +126,8 @@ public class TranslateController {
         );
         List<Long> list = arrayList.stream().map(Translate::getTranslateId).collect(Collectors.toList());
         List<Long> plist = getLongList(collect, list);
-        List<HisProject> subtractList  =  new ArrayList<>();
+
+       List<HisProject> subtractList  =  new ArrayList<>();
         for (Long aLong : plist) {
             HisProject hisProject = hisProjectMapper.selectByPrimaryKey(aLong);
             subtractList.add(hisProject);
@@ -140,6 +147,42 @@ public class TranslateController {
     }
 
 
+    @PostMapping("/medicineInfo.ahsj")
+    public String  HisMedicineInfo() throws Exception {
+        List<HisMedicineInfo> hisMedicineInfos = hisMedicineInfoMapper.queryAll();
+        //  List<HisProject> hisProjectList = hisProjectService.queryAll();
+        System.out.println("------->"+hisMedicineInfos.size());
+        List<Long> collect = hisMedicineInfos.stream().map(HisMedicineInfo::getId)
+                .collect(Collectors.toList());
+        Translate translate = new Translate();
+        translate.setTranslateType("10008");
+        List<Translate> translates = iTranslateService.queryTranslate(translate);
+        //根据TranslateId去重
+        List<Translate> arrayList = translates.stream().collect(
+                Collectors.collectingAndThen(Collectors.toCollection(
+                        () -> new TreeSet<>(Comparator.comparing(e -> e.getTranslateId()))), ArrayList::new)
+        );
+        List<Long> list = arrayList.stream().map(Translate::getTranslateId).collect(Collectors.toList());
+        List<Long> plist = getLongList(collect, list);
+
+        List<HisMedicineInfo> subtractList  =  new ArrayList<>();
+        for (Long aLong : plist) {
+            HisMedicineInfo hisMedicineInfo = hisMedicineInfoMapper.selectByPrimaryKey(aLong);
+            subtractList.add(hisMedicineInfo);
+        }
+        BaseLoginUser loginUser = new BaseLoginUser();
+        TranslateModels translateModels = new TranslateModels();
+        List<HisMedicineInfoTranslate> translateList = new ArrayList<>();
+        for (HisMedicineInfo hisMedicineInfo : subtractList) {
+            HisMedicineInfoTranslate hisMedicineInfoTranslate = new HisMedicineInfoTranslate();
+            BeanUtils.copyProperties(hisMedicineInfo, hisMedicineInfoTranslate);
+            translateList.add(hisMedicineInfoTranslate);
+        }
+        translateModels.setUserId(loginUser.getId());
+        translateModels.setHisMedicineInfoTranslates(translateList);
+        amqpTemplat.convertAndSend("com.ahsj.addHisMedicineInfoList", JsonUtils.serialize(translateModels));
+        return null;
+    }
 
 
     /**

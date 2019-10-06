@@ -88,6 +88,8 @@ public class HisProject extends BaseEntity implements Serializable {
     private Integer hisProjectOrderNum;
 
 
+
+
     @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_enable", typeName = "isEnableType")//is_enable  disable
     private Integer isEnable;
     private String isEnableType;
@@ -96,7 +98,25 @@ public class HisProject extends BaseEntity implements Serializable {
 
     private Integer projectNum;
 
+    private String translateKhmer;
 
+    private String chineseEnglishName;
+
+    public String getChineseEnglishName() {
+        return chineseEnglishName;
+    }
+
+    public void setChineseEnglishName(String chineseEnglishName) {
+        this.chineseEnglishName = chineseEnglishName;
+    }
+
+    public String getTranslateKhmer() {
+        return translateKhmer;
+    }
+
+    public void setTranslateKhmer(String translateKhmer) {
+        this.translateKhmer = translateKhmer;
+    }
 
     public Integer getProjectNum() {
         return projectNum;

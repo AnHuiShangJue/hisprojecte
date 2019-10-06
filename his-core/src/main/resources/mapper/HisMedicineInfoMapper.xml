@@ -23,6 +23,8 @@
         <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR"/>
         <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
         <result column="enter_price" property="enterPrice" jdbcType="DOUBLE"/>
+        <result column="translate_Khmer" property="translateKhmer"/>
+        <result column="chinese_english_name" property="chineseEnglishName"/>
     </resultMap>
     <sql id="Base_Column_List">
         id
@@ -341,10 +343,11 @@
     </update>
     <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
         select
-        his_medicine_info.*
-        from his_medicine_info
-        where
-        1 =1
+        m.* , t.translate_Khmer as translate_Khmer ,CONCAT(m.drugs_name,'(',t.translate_Khmer,')') as
+        chinese_english_name
+        from his_medicine_info m left join `his-translate`.translate t
+        on m.id = t.translate_id WHERE t.translate_type = '10008' and t.translate_column = 'drugsName'
+
         <if test="parameter.drugsNumb != null and parameter.drugsNumb != ''">
             and drugs_numb like concat('%' #{parameter.drugsNumb,jdbcType=VARCHAR},'%')
         </if>
@@ -383,6 +386,13 @@
         </if>
     </select>
 
+    <select id="listandenglish" resultMap="BaseResultMap">
+select
+   m.*,t.translate_Khmer as translate_Khmer
+        from his_medicine_info m  left join `his-translate`.translate t
+        on m.id =  t.translate_id   WHERE t.translate_type = '10008' and t.translate_column = 'drugsSpec' ORDER BY t.translate_id
+    </select>
+
     <!--根据药品编号查找-->
     <select id="selectByDrugsNumb" parameterType="java.lang.String" resultMap="BaseResultMap">
         SELECT
@@ -406,16 +416,18 @@
     </select>
 
 
-
-
     <select id="queryTranslateInfoByDate" resultMap="BaseResultMap">
-        select  <include refid="Base_Column_List"/> from his_medicine_info as his
+        select
+        <include refid="Base_Column_List"/>
+        from his_medicine_info as his
         where    <![CDATA[ (DATE_FORMAT(his.update_date, '%Y-%m-%d') =  DATE_FORMAT( #{updateDate}, '%Y-%m-%d'))]]>
     </select>
 
-    <select id="queryAll" resultMap="BaseResultMap" >
-        select <include refid="Base_Column_List"/> from  his_medicine_info
-     </select>
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_medicine_info
+    </select>
 
     <select id="selectAll" resultMap="BaseResultMap">
         select his_medicine_info.*
@@ -423,7 +435,7 @@ from his_medicine_info
     </select>
 
 
-    <select id="queryListExportAll"  resultMap="BaseResultMap">
+    <select id="queryListExportAll" resultMap="BaseResultMap">
         select
             a.*,b.id as prescriptionId,b.value as precriptionName,c.id as mentalMedicineId,c.value as mentalmedicine,d.id as levelId,d.value as leveld,
                e.id as medicalInsuranceSignId,e.value as medicalinsurancesign,f.id as placeoriginId,f.value as placeoriginName,g.id as baseMedicineId,g.value as basemedicine,h.id as narcoticDrugsId,h.value as narcoticdrugs
@@ -437,25 +449,34 @@ from his_medicine_info
             left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'narcotic_drugs' ) as h on a.narcotic_drugs = h.code
     </select>
 
-    <select id="queryListExportAndByIdsAll"  resultMap="BaseResultMap" parameterType="java.util.List">
+    <select id="queryListExportAndByIdsAll" resultMap="BaseResultMap" parameterType="java.util.List">
         select
-        a.*,b.id as prescriptionId,b.value as precriptionName,c.id as mentalMedicineId,c.value as mentalmedicine,d.id as levelId,d.value as leveld,
-        e.id as medicalInsuranceSignId,e.value as medicalinsurancesign,f.id as placeoriginId,f.value as placeoriginName,g.id as baseMedicineId,g.value as basemedicine,h.id as narcoticDrugsId,h.value as narcoticdrugs
+        a.*,b.id as prescriptionId,b.value as precriptionName,c.id as mentalMedicineId,c.value as mentalmedicine,d.id as
+        levelId,d.value as leveld,
+        e.id as medicalInsuranceSignId,e.value as medicalinsurancesign,f.id as placeoriginId,f.value as
+        placeoriginName,g.id as baseMedicineId,g.value as basemedicine,h.id as narcoticDrugsId,h.value as narcoticdrugs
         from his_medicine_info as a
-        left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'prescription' ) as b on a.prescription = b.code
-        left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'mental_medicine' ) as c on a.mental_medicine = c.code
-        left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'level' ) as d on a.level = d.code
-        left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'medical_insurance_sign' ) as e on a.medical_insurance_sign = e.code
-        left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'placeOrigin' ) as f on a.placeorigin = f.code
-        left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'base_medicine' ) as g on a.base_medicine = g.code
-        left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'narcotic_drugs' ) as h on a.narcotic_drugs = h.code
+        left join (SELECT d.code,d.value,d.id from `his-userinfo`.sys_code c left JOIN `his-userinfo`.sys_code_detail d
+        on c.id = d.type_id WHERE c.type = 'prescription' ) as b on a.prescription = b.code
+        left join (SELECT d.code,d.value,d.id from `his-userinfo`.sys_code c left JOIN `his-userinfo`.sys_code_detail d
+        on c.id = d.type_id WHERE c.type = 'mental_medicine' ) as c on a.mental_medicine = c.code
+        left join (SELECT d.code,d.value,d.id from `his-userinfo`.sys_code c left JOIN `his-userinfo`.sys_code_detail d
+        on c.id = d.type_id WHERE c.type = 'level' ) as d on a.level = d.code
+        left join (SELECT d.code,d.value,d.id from `his-userinfo`.sys_code c left JOIN `his-userinfo`.sys_code_detail d
+        on c.id = d.type_id WHERE c.type = 'medical_insurance_sign' ) as e on a.medical_insurance_sign = e.code
+        left join (SELECT d.code,d.value,d.id from `his-userinfo`.sys_code c left JOIN `his-userinfo`.sys_code_detail d
+        on c.id = d.type_id WHERE c.type = 'placeOrigin' ) as f on a.placeorigin = f.code
+        left join (SELECT d.code,d.value,d.id from `his-userinfo`.sys_code c left JOIN `his-userinfo`.sys_code_detail d
+        on c.id = d.type_id WHERE c.type = 'base_medicine' ) as g on a.base_medicine = g.code
+        left join (SELECT d.code,d.value,d.id from `his-userinfo`.sys_code c left JOIN `his-userinfo`.sys_code_detail d
+        on c.id = d.type_id WHERE c.type = 'narcotic_drugs' ) as h on a.narcotic_drugs = h.code
         where
         <foreach collection="list" separator="or" item="item" index="index">
             a.id=#{item.id}
         </foreach>
     </select>
 
-    <select id="queryForCode"  resultMap="BaseResultMap" parameterType="java.lang.String">
+    <select id="queryForCode" resultMap="BaseResultMap" parameterType="java.lang.String">
         select DISTINCT
             b.id as prescriptionId,c.id as mentalMedicineId,d.id as levelId,
             e.id as medicalInsuranceSignId,f.id as placeoriginId,g.id as baseMedicineId,h.id as narcoticDrugsId
@@ -538,8 +559,9 @@ from his_medicine_info
     </update>
 
 
-    <insert id="importHisMedicineInfo"  useGeneratedKeys="true" keyProperty="id" parameterType="com.ahsj.hiscore.entity.HisMedicineInfo">
-        insert into his_medicine_info (  id ,
+    <insert id="importHisMedicineInfo" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.ahsj.hiscore.entity.HisMedicineInfo">
+        insert into his_medicine_info ( id ,
         drugs_numb,
         drugs_name,
         drugs_alias,
@@ -564,13 +586,17 @@ from his_medicine_info
         values
         <foreach collection="list" item="item" index="index" separator=",">
             (#{item.id,jdbcType=BIGINT}, #{item.drugsNumb,jdbcType=VARCHAR}, #{item.drugsName,jdbcType=VARCHAR},
-            #{item.drugsAlias,jdbcType=VARCHAR}, #{item.drugsSpec,jdbcType=VARCHAR}, #{item.prescription,jdbcType=INTEGER},
-            #{item.mentalMedicine,jdbcType=INTEGER}, #{item.largeUnit,jdbcType=VARCHAR}, #{item.smallUnit,jdbcType=VARCHAR},
+            #{item.drugsAlias,jdbcType=VARCHAR}, #{item.drugsSpec,jdbcType=VARCHAR},
+            #{item.prescription,jdbcType=INTEGER},
+            #{item.mentalMedicine,jdbcType=INTEGER}, #{item.largeUnit,jdbcType=VARCHAR},
+            #{item.smallUnit,jdbcType=VARCHAR},
             #{item.conversionRate,jdbcType=DECIMAL}, #{item.disable,jdbcType=INTEGER}, #{item.level,jdbcType=INTEGER},
             #{item.medicalInsuranceSign,jdbcType=INTEGER}, #{item.placeorigin,jdbcType=INTEGER},
             #{item.baseMedicine,jdbcType=INTEGER},
-            #{item.narcoticDrugs,jdbcType=INTEGER}, #{item.remarks,jdbcType=VARCHAR}, #{item.createUserId,jdbcType=VARCHAR},
-            #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP},#{item.enterPrice,jdbcType=DOUBLE})
+            #{item.narcoticDrugs,jdbcType=INTEGER}, #{item.remarks,jdbcType=VARCHAR},
+            #{item.createUserId,jdbcType=VARCHAR},
+            #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=VARCHAR},
+            #{item.updateDate,jdbcType=TIMESTAMP},#{item.enterPrice,jdbcType=DOUBLE})
         </foreach>
     </insert>
 

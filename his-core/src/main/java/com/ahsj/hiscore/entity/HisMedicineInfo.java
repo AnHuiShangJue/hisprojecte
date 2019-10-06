@@ -122,6 +122,26 @@ public class HisMedicineInfo extends BaseEntity {
 
     private String tdrugsSpec;
 
+    private String translateKhmer;
+
+    private String chineseEnglishName;
+
+    public String getTranslateKhmer() {
+        return translateKhmer;
+    }
+
+    public void setTranslateKhmer(String translateKhmer) {
+        this.translateKhmer = translateKhmer;
+    }
+
+    public String getChineseEnglishName() {
+        return chineseEnglishName;
+    }
+
+    public void setChineseEnglishName(String chineseEnglishName) {
+        this.chineseEnglishName = chineseEnglishName;
+    }
+
     public String getTdrugsSpec() {
         return tdrugsSpec;
     }

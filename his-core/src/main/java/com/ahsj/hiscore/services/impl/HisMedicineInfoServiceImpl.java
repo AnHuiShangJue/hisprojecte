@@ -9,6 +9,7 @@ import com.ahsj.hiscore.dao.HisMedicineInfoMapper;
 import com.ahsj.hiscore.dao.HisPharmacyDetailMapper;
 import com.ahsj.hiscore.entity.HisMedicineInfo;
 import com.ahsj.hiscore.entity.HisPharmacyDetail;
+import com.ahsj.hiscore.entity.HisProject;
 import com.ahsj.hiscore.entity.Translate;
 import com.ahsj.hiscore.entity.TranslateModel.HisMedicineInfoTranslate;
 import com.ahsj.hiscore.entity.TranslateModel.TranslateDelete;
@@ -200,8 +201,23 @@ public class HisMedicineInfoServiceImpl implements HisMedicineInfoService {
     **/
     @Override
     @Transactional(readOnly = true)
-    public PageBean<HisMedicineInfo> list(PageBean<HisMedicineInfo> pageBean) {
-        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisMedicineInfoMapper.list(pageBean)));
+    public PageBean<HisMedicineInfo> list(PageBean<HisMedicineInfo> pageBean) throws Exception {
+        List<HisMedicineInfo> list = hisMedicineInfoMapper.list(pageBean);
+        List<HisMedicineInfo> listandenglish = hisMedicineInfoMapper.listandenglish();
+        for (HisMedicineInfo hisMedicineInfo : list) {
+            hisMedicineInfo.setDrugsName(hisMedicineInfo.getDrugsName()+"("+hisMedicineInfo.getTranslateKhmer()+")");
+            for (HisMedicineInfo medicineInfo : listandenglish) {
+                if (StringUtils.equals(medicineInfo.getDrugsSpec(),hisMedicineInfo.getDrugsSpec())){
+                    if (medicineInfo.getDrugsSpec().indexOf("支") != -1){
+                        hisMedicineInfo.setDrugsSpec(medicineInfo.getDrugsSpec()+"("+medicineInfo.getTranslateKhmer()+"bottle)");
+                    }else {
+                        hisMedicineInfo.setDrugsSpec(medicineInfo.getDrugsSpec()+"("+medicineInfo.getTranslateKhmer()+")");
+                    }
+                }
+            }
+        }
+
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(list));
       /*  for (int i = 0; i <pageBean.getData().size() ; i++) {
             Translate translate = new Translate();
             translate.setTranslateId(474L);
