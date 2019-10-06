@@ -173,23 +173,32 @@
                         "name": "details_name"
                     },
                     {
-                        "title": "销售数目",
-                        "data": "saleCounts",
-                        "name": "sale_counts"
+                        "title": "药品规格",
+                        "data": "drugsSpec",
+                        "name": "drugs_spec"
+                    },
+                    {
+                        "title": "最近一次入库时间",
+                        "data": "createDate",
+                        "name": "create_date"
+                    },
+                    {
+                        "title": "最近一次入库数目 ",
+                        "data": "enterCount",
+                        "name": "enter_count"
+                    },
+                    {
+                        "title": "报损数目",
+                        "data": "number",
+                        "name": "number"
                     },
                     {
                         "title": "出库数目",
                         "data": "exitCount",
                         "name": "exit_count"
                     },
-
                     {
-                        "title": "出库时间",
-                        "data": "createDateFor",
-                        "name": "createDateFor"
-                    },
-                    {
-                        "title": "库存",
+                        "title": "剩余库存",
                         "data": "stock",
                         "name": "stock"
                     },
@@ -202,7 +211,7 @@
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn +
-                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看明细\" onclick=\"visitDetail('" + row.createDateFor + "','" + row.detailsName + "','"+row.saleCounts+"','"+row.stock+"');\"> <i class='material-icons'>visibility</i></a>";
+                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看明细\" onclick=\"visitDetail('" + row.drugsNumb + "','" + row.detailsName + "','" + row.stock + "');\"> <i class='material-icons'>visibility</i></a>";
                             // 返回自定义内容
                             return rtnBtn;
                         }
@@ -215,10 +224,7 @@
         });
     }
 
-    function visitDetail(number) {
-        var url = CTX + "/api/hisTollRecord/details/index.ahsj?token=" + TOKEN + "&number=" + number;
-        dialog.show(url, "收费详细信息");
-    }
+
 
     function initBtn() {
         //搜索按钮
@@ -235,14 +241,14 @@
         });
     }
 
-    function visitDetail(createDateFor, detailsName,saleCounts,stock) {
-        var url = CTX + "/api/hisTollRecord/getDrugDetails/index.ahsj?token=" + TOKEN + "&createDate=" + createDateFor + "&drugName=" + detailsName+"&saleCounts="+saleCounts+"&stock="+stock;
+    function visitDetail(drugsNumb,detailsName,stock) {
+        var url = CTX + "/api/hisTollRecord/getDrugDetails/index.ahsj?token=" + TOKEN + "&drugsNumb="+drugsNumb+"&stock="+stock+"&drugsName="+detailsName;
         dialog.show(url, "药库盘点详细");
     }
 
     function getPrice() {
-        /*  var lowTime =$("#lowTime").val();
-          var upTime =$("#upTime").val();*/
+         var lowTime =$("#lowTime").val();
+          var upTime =$("#upTime").val();
         var searchForm = $("#searchForm").serialize();
         var salePrice = $("#salePrice")
         var costPrice = $("#costPrice")
@@ -254,13 +260,20 @@
                 salePrice.html("");
                 costPrice.html("");
                 if (!isNullOrEmpty(data)) {
-                    salePrice.html(data.salePrice - data.costPrice);
-                    costPrice.html(data.costPrice);
-                    $("#minTime").html(data.minTime);
-                    $("#maxTime").html(data.maxTime);
+                    salePrice.html((data.salePrice - data.costPrice).toFixed(2));
+                    costPrice.html((data.costPrice).toFixed(2));
+                    if(isNullOrEmpty(lowTime)){ $("#minTime").html(data.minTime);}
+                   else{
+                        $("#minTime").html(lowTime)
+                    }
+                    if(isNullOrEmpty(upTime)){  $("#maxTime").html(data.maxTime);}
+                    else{
+                        $("#maxTime").html(upTime)
+                    }
                     return true;
                 } else {
-                    price.html("0")
+                    $("#minTime").html("")
+                    $("#maxTime").html("")
                     return false;
                 }
             },

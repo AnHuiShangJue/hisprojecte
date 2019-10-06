@@ -28,6 +28,8 @@ public class HisTollRecord extends BaseEntity {
 
     private String medicineName;
 
+    private String drugsNumb;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy/MM/dd ")
     private Date medicineDate;
@@ -54,6 +56,9 @@ public class HisTollRecord extends BaseEntity {
 
     private Integer exitCount;
 
+    private Integer enterCount;
+
+    private String drugsSpec;
 
     private Integer stock;
 
@@ -73,12 +78,38 @@ public class HisTollRecord extends BaseEntity {
         this.attenchTypes = attenchTypes;
     }
 
+    public String getDrugsNumb() {
+        return drugsNumb;
+    }
+
+    public void setDrugsNumb(String drugsNumb) {
+        this.drugsNumb = drugsNumb;
+    }
+
     @Override
     public Date getCreateDate() {
         return createDate;
     }
 
+    public Integer getEnterCount() {
+        return enterCount;
+    }
+
+    public void setEnterCount(Integer enterCount) {
+        this.enterCount = enterCount;
+    }
+
+    public String getDrugsSpec() {
+        return drugsSpec;
+    }
+
+    public void setDrugsSpec(String drugsSpec) {
+        this.drugsSpec = drugsSpec;
+    }
+
     @Override
+
+
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }

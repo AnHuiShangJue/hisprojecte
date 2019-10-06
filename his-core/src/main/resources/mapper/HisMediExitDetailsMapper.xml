@@ -340,7 +340,7 @@ order by his_medi_exit_details.create_date desc
   </select>
 
     <select id="listByIds" resultMap="BaseResultMap">
-        select m.id ,e.toll_number,b.description,b.id as  pharmacy_id,
+        select m.id ,e.toll_number,b.description,b.id as pharmacy_id,
         e.drugs_name,e.drugs_spec,e.exit_count,e.create_date,i.user_name,e.record_number,o.`name` as
         patient_Name,e.validity_period
         from his_medi_exit_details as e
@@ -359,23 +359,40 @@ order by his_medi_exit_details.create_date desc
     </select>
 
     <select id="listByIdsHistory" resultMap="BaseResultMap">
-select m.id ,e.toll_number, e.drugs_name,e.drugs_spec,e.exit_count,e.create_date,i.user_name,e.record_number,o.`name`
-as patient_Name,e.validity_period from his_medi_exit_details as e LEFT JOIN his_medicine_info
-as m on m.drugs_numb = e.drugs_numb LEFT JOIN `his-userinfo`.user_info as i on i.id = e.create_user_id
-LEFT JOIN his_medical_record as r on r.medical_record_id = e.record_number LEFT JOIN his_patient_info
-as o on o.id =r.patient_id where e.id in (select r.exit_id from his_related_medicationandexit
-as r where r.medication_detail_id  in (
-select  d.id from his_medication_details as d where d.medical_record_id = (
+        select m.id ,e.toll_number,
+        e.drugs_name,e.drugs_spec,e.exit_count,e.create_date,i.user_name,e.record_number,o.`name`
+        as patient_Name,e.validity_period from his_medi_exit_details as e LEFT JOIN his_medicine_info
+        as m on m.drugs_numb = e.drugs_numb LEFT JOIN `his-userinfo`.user_info as i on i.id = e.create_user_id
+        LEFT JOIN his_medical_record as r on r.medical_record_id = e.record_number LEFT JOIN his_patient_info
+        as o on o.id =r.patient_id where e.id in (select r.exit_id from his_related_medicationandexit
+        as r where r.medication_detail_id in (
+        select d.id from his_medication_details as d where d.medical_record_id = (
 
-select distinct h.medical_record_id from his_medication_details  as h where h.id in <foreach collection="array" item="id" index="index"
-                                                                                             open="(" close=")" separator=",">
-        #{id,jdbcType=BIGINT}
-    </foreach>
+        select distinct h.medical_record_id from his_medication_details as h where h.id in
+        <foreach collection="array" item="id" index="index"
+                 open="(" close=")" separator=",">
+            #{id,jdbcType=BIGINT}
+        </foreach>
 
-)
-and  d.id not in<foreach collection="array" item="id" index="index"
-                         open="(" close=")" separator=",">
+        )
+        and d.id not in<foreach collection="array" item="id" index="index"
+                                open="(" close=")" separator=",">
         #{id,jdbcType=BIGINT}
     </foreach> ) )
+    </select>
+
+    <select id="getAll" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
+        select
+        <include refid="Base_Column_List"/>
+        from his_medi_exit_details
+        <if test="parameter.recordNumber != null  and parameter.recordNumber != '' ">
+            and record_number = #{parameter.recordNumber}
+        </if>
+        <if test="parameter.tollNumber != null  and parameter.tollNumber != ''">
+            and toll_number = #{parameter.tollNumber}
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
     </select>
 </mapper>

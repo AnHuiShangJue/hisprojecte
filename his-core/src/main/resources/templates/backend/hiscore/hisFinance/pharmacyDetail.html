@@ -47,22 +47,16 @@
                     <div class="card-content">
                         <h4 class="card-title">药品盘点详细信息</h4><label style="color:black">Drug inventory details</label>
                         <div class="row">
+                            <input hidden  id="drugsNumb" type="text" th:value="${drugsNumb}">
                             <div class="input-field col s4 l4 xl4">
-                                <input id="drugName"  readonly="true"  type="text" th:value="${drugName}">
+                                <input id="drugName"  readonly="true"  type="text" th:value="${drugsName}">
                                 <label >药品名称<span style="font-size: 12px">(Drug name )</span></label>
-                            </div>
-                            <div class="input-field col s4 l4 xl4">
-                                <input id="createDate" readonly="true"  type="text"   th:value="${createDate}">
-                                <label >查看日期<span style="font-size: 12px">(Check the date)</span></label>
                             </div>
                             <div class="input-field col s4 l4 xl4">
                                 <input id="stock"  readonly="true"  type="text" th:value="${stock}">
                                 <label >库存<span style="font-size: 12px">(repertory)</span></label>
                             </div>
-                            <div class="input-field col s4 l4 xl4">
-                                <input id="saleCounts" readonly="true"  type="text"   th:value="${saleCounts}">
-                                <label >销售数目<span style="font-size: 12px">(Number of sales)</span></label>
-                            </div>
+
                     </div>
                 </div>
             </div>
@@ -92,19 +86,15 @@
 <div th:replace="public/base_list_script :: html"></div>
 <script type="text/javascript">
     var grid = new Datatable();
-    var createDate = $("#createDate").val();
-    var drugName = $("#drugName").val();
+    var  drugsNumb = $("#drugsNumb").val();
     $(document).ready(function () {
-        initBtn();
         initTable();
-
     });
 
     function initTable() {
         grid.init({
             src: $("#data-table-simple"),
             onSuccess: function (grid) {
-                getPrice();
             },
             onError: function (grid) {
             },
@@ -113,7 +103,7 @@
             loadingMessage: 'Loading...',
             dataTable: {
                 "ajax": {
-                    "url": CTX + "/api/hisTollRecord/pharmacyInventoryDetail.ahsj?token=" + TOKEN + "&drugName=" + drugName + "&createDate=" + createDate, // ajax source
+                    "url": CTX + "/api/hisTollRecord/pharmacyInventoryDetail.ahsj?token=" + TOKEN + "&drugsNumb="+drugsNumb , // ajax source
                 },
                 "columns": [
                     {
@@ -146,20 +136,7 @@
                         "data": "userName",
                         "name": "user_name"
                     },
-                    /* {
-                         "title": "操作",
-                         "width": "120px",
-                         "className": "centered",
-                         "orderable": false,
-                         "render": function (data, type, row) {
-                             var rtnBtn = "";
-                             //如果获取字符串，必须在参数外反转"
-                             rtnBtn = rtnBtn +
-                                 "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看明细\" onclick='visitDetail(\"" + row.number + "\");'> <i class='material-icons'>visibility</i></a>";
-                             // 返回自定义内容
-                             return rtnBtn;
-                         }
-                     }*/
+
                 ],
                 "order": [
                     [1, 'asc']
@@ -167,76 +144,6 @@
             }
         });
     }
-
-    function visitDetail(number) {
-        var url = CTX + "/api/hisTollRecord/details/index.ahsj?token=" + TOKEN + "&number=" + number;
-        dialog.show(url, "收费详细信息");
-    }
-
-    function initBtn() {
-        //搜索按钮
-        $('#searchBtn').click(function () {
-            grid.search();
-            M.updateTextFields();//重新初始化页面上的内容
-
-        });
-        $('#resetBtn').click(function () {
-            grid.reset();
-        });
-        $("#searchForm .row .col input[type='radio']").click(function () {
-            grid.search();
-        });
-    }
-
-    function getPrice() {
-        /*  var lowTime =$("#lowTime").val();
-          var upTime =$("#upTime").val();*/
-        var searchForm = $("#searchForm").serialize();
-        var salePrice = $("#salePrice")
-        var costPrice = $("#costPrice")
-        //获取基本信息
-        $.ahsjajax(
-            CTX + "/api/hisTollRecord/getPharmacyinventoryPrice?token=" + TOKEN,
-            searchForm,
-            function (data) {
-                salePrice.html("");
-                costPrice.html("");
-                if (!isNullOrEmpty(data)) {
-                    salePrice.html(data.salePrice - data.costPrice);
-                    costPrice.html(data.costPrice);
-                    $("#minTime").html(data.minTime);
-                    $("#maxTime").html(data.maxTime);
-                    return true;
-                } else {
-                    price.html("0")
-                    return false;
-                }
-            },
-            function () {
-                Materialize.toast("网络异常");
-                return false;
-            }
-        );
-
-
-    }
-
-    laydate.render({
-        elem: '#years'
-        , type: 'year'
-    });
-    laydate.render({
-        elem: '#months',
-        type: 'month'
-        , format: 'MM'
-    });
-    $("input").mouseover(function () {
-        M.updateTextFields();//重新初始化页面上的内容
-    })
-
-    $("input").change(function () {
-        $(this).val($(this).val().trim());
-    });
 </script>
 </body>
 </html>

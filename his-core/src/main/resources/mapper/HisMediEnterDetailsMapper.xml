@@ -319,4 +319,7 @@ and his_medi_enter_details.validity_period = #{validityPeriod,jdbcType=TIMESTAMP
 from his_medi_enter_details
 where validity_period &lt;= CURRENT_DATE and surplus > 0
   </select>
+
+
+
 </mapper>

@@ -236,6 +236,10 @@
     function getPrice(){
         var searchForm =$("#searchForm").serialize();
         var price =$("#price")
+        var lowTime =$("#lowTime").val();
+        var upTime =$("#upTime").val();
+        var years = $("#years").val();
+        var months = $("#months").val();
         //获取基本信息
         $.ahsjajax(
             CTX + "/api/registeredCharge/getPrice?token=" + TOKEN,
@@ -244,8 +248,26 @@
                 price.html("");
                 if (!isNullOrEmpty(data)) {
                     price.html(data.amountReceivable)
-                    $("#minTime").html(data.minTime)
-                    $("#maxTime").html(data.maxTime)
+                /*    if(lowTime==null&&upTime==null&&years!=null&&months==null){
+                        $("#minTime").html(years+"年")
+                        $("#maxTime").html(years+"年")
+                    }
+                    if(lowTime==null&&upTime==null&&months!=null&&years==null){
+                        $("#minTime").html(months+"月")
+                        $("#maxTime").html(months+"月")
+                    }
+                    if(lowTime==null&&upTime==null&&months!=null&&years!=null){
+                        $("#minTime").html(years+"年"+months+"月")
+                        $("#maxTime").html(years+"年"+months+"月")
+                    }*/
+                    if(isNullOrEmpty(lowTime)){ $("#minTime").html(data.minTime);}
+                    else{
+                        $("#minTime").html(lowTime)
+                    }
+                    if(isNullOrEmpty(upTime)){  $("#maxTime").html(data.maxTime);}
+                    else{
+                        $("#maxTime").html(upTime)
+                    }
                     return true;
                 } else {
                     price.html("0")

@@ -814,9 +814,6 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
     public PageBean<HisTollRecord> getAllDrug(PageBean<HisTollRecord> pageBean) throws Exception {
         List<HisTollRecord> list = CodeHelper.getInstance().setCodeValue(hisTollRecordMapper.getAllDrug(pageBean));
         for (HisTollRecord hisTollRecord : list) {
-            if (hisTollRecord.getType() == 1) {
-                hisTollRecord.setRecoverTheFee(new BigDecimal("0"));
-            }
             if ((hisTollRecord.getType() == 4)) {
                 hisTollRecord.setRecoverTheFee(hisTollRecord.getSalePrice());
                 hisTollRecord.setSalePrice(new BigDecimal("0"));

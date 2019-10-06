@@ -274,8 +274,8 @@
     }
 
     function getPrice() {
-        /*  var lowTime =$("#lowTime").val();
-          var upTime =$("#upTime").val();*/
+          var lowTime =$("#lowTime").val();
+          var upTime =$("#upTime").val();
         var searchForm = $("#searchForm").serialize();
         var salePrice = $("#salePrice")
         var costPrice = $("#costPrice")
@@ -289,8 +289,14 @@
                 if (!isNullOrEmpty(data)) {
                     salePrice.html((data.salePrice - data.costPrice).toFixed(2));
                     costPrice.html(data.costPrice.toFixed(2));
-                    $("#minTime").html(data.minTime);
-                    $("#maxTime").html(data.maxTime);
+                    if(isNullOrEmpty(lowTime)){ $("#minTime").html(data.minTime);}
+                    else{
+                        $("#minTime").html(lowTime)
+                    }
+                    if(isNullOrEmpty(upTime)){  $("#maxTime").html(data.maxTime);}
+                    else{
+                        $("#maxTime").html(upTime)
+                    }
                     return true;
                 } else {
                     price.html("0")

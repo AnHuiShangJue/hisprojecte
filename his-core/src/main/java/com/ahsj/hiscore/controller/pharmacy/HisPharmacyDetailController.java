@@ -564,4 +564,6 @@ public class HisPharmacyDetailController extends BaseMedicineController {
         pharmacyDetailPageBean.setParameter(hisPharmacyDetail);
         return hisPharmacyDetailService.list(pharmacyDetailPageBean);
     }
+
+
 }

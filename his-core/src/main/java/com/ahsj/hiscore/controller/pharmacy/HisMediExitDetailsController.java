@@ -169,4 +169,11 @@ public class HisMediExitDetailsController extends BaseController {
         return new ArrayList<HisMediExitDetails>();
     }
 
+    @RequestMapping("stockRemoval/index.ahsj")
+    ModelAndView stockRemoval(String token) {
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/pharmacy/stockRemoval");
+        modelAndView.addObject("title", "药品出库信息");
+        modelAndView.addObject("token", token);
+        return modelAndView;
+    }
 }
