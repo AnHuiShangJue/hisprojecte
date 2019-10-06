@@ -114,6 +114,15 @@ public class HisMedicalOrderDetail extends BaseEntity {
     private String sanNumber;//核准校对护士编号
     private String sanName;//核准校对护士姓名
 
+    private String ttanslateName;
+
+    public String getTtanslateName() {
+        return ttanslateName;
+    }
+
+    public void setTtanslateName(String ttanslateName) {
+        this.ttanslateName = ttanslateName;
+    }
 
     public String getIsProofreadingName() {
         return isProofreadingName;
@@ -514,5 +523,62 @@ public class HisMedicalOrderDetail extends BaseEntity {
 
     public void setRemarkSign(String remarkSign) {
         this.remarkSign = remarkSign;
+    }
+
+    @Override
+    public String toString() {
+        return "HisMedicalOrderDetail{" +
+                "id=" + id +
+                ", number='" + number + '\'' +
+                ", name='" + name + '\'' +
+                ", isSkinTest=" + isSkinTest +
+                ", isSkinTestName='" + isSkinTestName + '\'' +
+                ", specification='" + specification + '\'' +
+                ", unit='" + unit + '\'' +
+                ", usages='" + usages + '\'' +
+                ", dosage='" + dosage + '\'' +
+                ", intervals=" + intervals +
+                ", intervalsName='" + intervalsName + '\'' +
+                ", proofreadingNurseId=" + proofreadingNurseId +
+                ", approvedNurseId=" + approvedNurseId +
+                ", stopDate=" + stopDate +
+                ", stopUserId=" + stopUserId +
+                ", stopPrfingNurseId=" + stopPrfingNurseId +
+                ", stopApdNurseId=" + stopApdNurseId +
+                ", totalAmount=" + totalAmount +
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
+                ", orderNum=" + orderNum +
+                ", isStop=" + isStop +
+                ", isStopName='" + isStopName + '\'' +
+                ", isProofreading=" + isProofreading +
+                ", isProofreadingName='" + isProofreadingName + '\'' +
+                ", isApproved=" + isApproved +
+                ", isApprovedName='" + isApprovedName + '\'' +
+                ", medicalOrderType=" + medicalOrderType +
+                ", medicalOrderTypeName='" + medicalOrderTypeName + '\'' +
+                ", content='" + content + '\'' +
+                ", startTime=" + startTime +
+                ", targetId=" + targetId +
+                ", isFirstEdit=" + isFirstEdit +
+                ", stopUserName='" + stopUserName + '\'' +
+                ", isStopProofreading=" + isStopProofreading +
+                ", isstopapproved=" + isstopapproved +
+                ", correspondId=" + correspondId +
+                ", isInfusionList=" + isInfusionList +
+                ", infusionNumber='" + infusionNumber + '\'' +
+                ", remarkSign='" + remarkSign + '\'' +
+                ", pnNumber='" + pnNumber + '\'' +
+                ", pnName='" + pnName + '\'' +
+                ", anNumber='" + anNumber + '\'' +
+                ", anName='" + anName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", userType=" + userType +
+                ", spnNumber='" + spnNumber + '\'' +
+                ", spnName='" + spnName + '\'' +
+                ", sanNumber='" + sanNumber + '\'' +
+                ", sanName='" + sanName + '\'' +
+                ", ttanslateName='" + ttanslateName + '\'' +
+                '}';
     }
 }

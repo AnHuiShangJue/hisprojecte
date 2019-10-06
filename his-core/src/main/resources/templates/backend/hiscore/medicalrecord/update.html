@@ -107,14 +107,14 @@
                     </div>
 
                  <div class="row">
-                    <div class="col m4 s12 mb-3">
-<!--                       <div th:if="${hisMedicalRecord.doctorId  == userId}">-->
+                 <!--   <div class="col m4 s12 mb-3">
+&lt;!&ndash;                       <div th:if="${hisMedicalRecord.doctorId  == userId}">&ndash;&gt;
                             <button class="waves-effect waves dark btn btn-primary next-step"
                                     type="submit">保存
                                 <i class="material-icons right">send</i>
                             </button>
-<!--                        </div>-->
-                    </div>
+&lt;!&ndash;                        </div>&ndash;&gt;
+                    </div>-->
 <!--                <div class="col m4 s12 mb-3">-->
 <!--                    <div th:if="${hisMedicalRecord.doctorId  != userId}">-->
 <!--                        <a id="ViewBtn"-->
@@ -236,10 +236,33 @@ Scripts
 
         //查看按钮
         $("#NextBtn").click(function () {
-            var url = CTX + "/api/treatmentplan/plan/index.ahsj?token=" + TOKEN +"&number="+$("#number").val()
+            var queryString = $('#sendForm').serialize();
+            console.log("queryString is" + queryString);
+            $.ahsjajax(
+                CTX + "/api/patient/saveOrUpdate.ahsj?token=" + TOKEN,
+                queryString,
+                function (msg) {
+                    if (msg.success) {
+                        var url = CTX + "/api/treatmentplan/plan/index.ahsj?token=" + TOKEN +"&number="+$("#number").val()
+                            + "&id=" + [[${hisMedicalRecord.id}]]+"&doctorId="+[[${hisMedicalRecord.doctorId }]];
+                        parent.dialog.show(url, "")
+                    } else {
+                      M.toast({html: msg.message});
+                        return false;
+                    }
+                },
+                function () {
+                    M.toast({html: "网络异常"});
+                    return false;
+                }
+            );
+
+     /*       var url = CTX + "/api/treatmentplan/plan/index.ahsj?token=" + TOKEN +"&number="+$("#number").val()
                 + "&id=" + [[${hisMedicalRecord.id}]]+"&doctorId="+[[${hisMedicalRecord.doctorId }]];
-            parent.dialog.show(url, "")
+            parent.dialog.show(url, "")*/
         });
+
+
 /*        $("#ViewBtn").click(function () {
             var url = CTX + "/api/treatmentplan/plan/index.ahsj?token=" + TOKEN+ "&id=" + [[${hisMedicalRecord.id}]]+"&doctorId="+[[${hisMedicalRecord.doctorId }]];
             parent.dialog.show(url, "")

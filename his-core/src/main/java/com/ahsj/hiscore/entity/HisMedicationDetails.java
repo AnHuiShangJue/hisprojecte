@@ -618,4 +618,69 @@ public class HisMedicationDetails extends BaseEntity {
     public void setAlreadyout(Integer alreadyout) {
         this.alreadyout = alreadyout;
     }
+
+    @Override
+    public String toString() {
+        return "HisMedicationDetails{" +
+                "id=" + id +
+                ", mId=" + mId +
+                ", medicationId=" + medicationId +
+                ", description='" + description + '\'' +
+                ", remarks='" + remarks + '\'' +
+                ", medicalNumber='" + medicalNumber + '\'' +
+                ", isPay=" + isPay +
+                ", isPayName='" + isPayName + '\'' +
+                ", isBack=" + isBack +
+                ", isBacks='" + isBacks + '\'' +
+                ", isDel=" + isDel +
+                ", isDels='" + isDels + '\'' +
+                ", count=" + count +
+                ", drugsNumb='" + drugsNumb + '\'' +
+                ", drugsName='" + drugsName + '\'' +
+                ", tdrugsName='" + tdrugsName + '\'' +
+                ", drugsAlias='" + drugsAlias + '\'' +
+                ", drugsSpec='" + drugsSpec + '\'' +
+                ", tdrugsSpec='" + tdrugsSpec + '\'' +
+                ", prescription=" + prescription +
+                ", prescriptions='" + prescriptions + '\'' +
+                ", mentalMedicine=" + mentalMedicine +
+                ", mentalMedicines='" + mentalMedicines + '\'' +
+                ", largeUnit='" + largeUnit + '\'' +
+                ", smallUnit='" + smallUnit + '\'' +
+                ", conversionRate=" + conversionRate +
+                ", disable=" + disable +
+                ", disables='" + disables + '\'' +
+                ", level=" + level +
+                ", levels='" + levels + '\'' +
+                ", medicalInsuranceSign=" + medicalInsuranceSign +
+                ", medicalInsuranceSigns='" + medicalInsuranceSigns + '\'' +
+                ", placeorigin='" + placeorigin + '\'' +
+                ", baseMedicine=" + baseMedicine +
+                ", baseMedicines='" + baseMedicines + '\'' +
+                ", narcoticDrugs=" + narcoticDrugs +
+                ", narcoticDrugss='" + narcoticDrugss + '\'' +
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
+                ", totalPrice=" + totalPrice +
+                ", medicalRecordId=" + medicalRecordId +
+                ", counts=" + counts +
+                ", highTime=" + highTime +
+                ", lowTime=" + lowTime +
+                ", salePrice=" + salePrice +
+                ", price=" + price +
+                ", medicineTotalPrice=" + medicineTotalPrice +
+                ", isOut=" + isOut +
+                ", isOutName='" + isOutName + '\'' +
+                ", exitId=" + exitId +
+                ", validityPeriod=" + validityPeriod +
+                ", mediEnterId=" + mediEnterId +
+                ", recordNumber='" + recordNumber + '\'' +
+                ", actualCount=" + actualCount +
+                ", surplus=" + surplus +
+                ", tollNumber='" + tollNumber + '\'' +
+                ", alreadyout=" + alreadyout +
+                ", exitCreateUserName='" + exitCreateUserName + '\'' +
+                ", tollRecordNumber='" + tollRecordNumber + '\'' +
+                '}';
+    }
 }

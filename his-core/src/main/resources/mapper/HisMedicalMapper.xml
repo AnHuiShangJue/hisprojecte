@@ -33,7 +33,7 @@
     no_set_date, blood_pressure, record_id, personal_history, allergies, family_history, 
     body_temperature, body_weight, heart_rate, other
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap" >
     select 
     <include refid="Base_Column_List" />
     from his_medical

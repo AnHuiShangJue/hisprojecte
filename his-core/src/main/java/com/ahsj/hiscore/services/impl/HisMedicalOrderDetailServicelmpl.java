@@ -1,13 +1,17 @@
 package com.ahsj.hiscore.services.impl;
 
+import com.ahsj.hiscore.common.Constants;
 import com.ahsj.hiscore.core.CodeHelper;
 import com.ahsj.hiscore.dao.HisMedicalOrderDetailMapper;
 import com.ahsj.hiscore.entity.*;
+import com.ahsj.hiscore.feign.ITranslateService;
 import com.ahsj.hiscore.services.*;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 import core.entity.PageBean;
 import core.message.BoolMessage;
 import core.message.Message;
 import core.message.MessageUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +42,9 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
     HisMedicalRecordService hisMedicalRecordService;
 
     @Autowired
+    HisMedicineInfoService hisMedicineInfoService;
+
+    @Autowired
     HisProjectService hisProjectService;
 
     @Autowired
@@ -45,6 +52,9 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
 
     @Autowired
     HisInfusionService hisInfusionService;
+
+    @Autowired
+    ITranslateService iTranslateService;
 
 
 
@@ -459,7 +469,43 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
     @Override
     @Transactional(readOnly = true)
     public List<HisMedicalOrderDetail> selectByNumberAscAndNotStop(String number) throws Exception {
-        return hisMedicalOrderDetailMapper.selectByNumberAscAndNotStop(number);
+        List<HisMedicalOrderDetail> hisMedicalOrderDetails = hisMedicalOrderDetailMapper.selectByNumberAscAndNotStop(number);
+        for (HisMedicalOrderDetail hisMedicalOrderDetail : hisMedicalOrderDetails) {
+            if (hisMedicalOrderDetail.getMedicalOrderType() == 2){
+                HisMedicineInfo hisMedicineInfo = hisMedicineInfoService.selectById(hisMedicalOrderDetail.getTargetId());
+                Translate translate = new Translate();
+                translate.setTranslateId(hisMedicalOrderDetail.getTargetId());
+                translate.setTranslateType(Constants.TRANSLATE_HIS_MEDICINEINFO);
+                List<Translate> translates = iTranslateService.queryTranslate(translate);
+                String kname = "";
+                for (Translate translate1 : translates) {
+                    if (StringUtils.equals(hisMedicineInfo.getDrugsName(),translate1.getTranslateChina())){
+                        kname = translate1.getTranslateKhmer();
+                    }
+                    if (StringUtils.equals(hisMedicineInfo.getDrugsSpec(),translate1.getTranslateChina())){
+                        kname = kname+"  "+translate1.getTranslateKhmer();
+                        hisMedicalOrderDetail.setTtanslateName(kname);
+                        hisMedicalOrderDetail.setName(hisMedicalOrderDetail.getName() +"("+hisMedicalOrderDetail.getTtanslateName()+")");
+                    }
+                }
+            }
+            if (hisMedicalOrderDetail.getMedicalOrderType() == 3){
+                HisProject hisProject = hisProjectService.selectByPrimaryKey(hisMedicalOrderDetail.getTargetId());
+                Translate translate = new Translate();
+                translate.setTranslateId(hisMedicalOrderDetail.getTargetId());
+                translate.setTranslateType(Constants.TRANSLATE_HIS_PROJECT);
+                List<Translate> translates = iTranslateService.queryTranslate(translate);
+                for (Translate translate1 : translates) {
+                    String kname = "";
+                    if (StringUtils.equals(hisProject.getName(),translate1.getTranslateChina())){
+                        hisMedicalOrderDetail.setTtanslateName(translate1.getTranslateKhmer());
+                        hisMedicalOrderDetail.setName(hisMedicalOrderDetail.getName() +"("+hisMedicalOrderDetail.getTtanslateName()+")");
+                    }
+                }
+            }
+        }
+
+        return hisMedicalOrderDetails;
     }
 
     /**
