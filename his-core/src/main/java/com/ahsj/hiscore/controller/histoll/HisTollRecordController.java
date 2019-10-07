@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import utils.EmptyUtil;
@@ -170,10 +171,10 @@ public class HisTollRecordController extends BaseController {
      * @Date 2019/7/22
      * @Time 12:22
      **/
-    @RequestMapping("list/details.ahsj")
+    @RequestMapping(value = "list/details.ahsj" ,method = {RequestMethod.POST})
     @ResponseBody
     public PageBean<HisTollRecord> list(HisTollRecord hisTollRecord) throws Exception {
-        if (hisTollRecord.getLowsTime() != null || hisTollRecord.getUpTime() != null) {
+        if (hisTollRecord.getLowTime()!=null || hisTollRecord.getUpTime()!=null ) {
             hisTollRecord.setYears(null);
             hisTollRecord.setMonths(null);
         }
@@ -212,7 +213,7 @@ public class HisTollRecordController extends BaseController {
     @RequestMapping("getPrice")
     @ResponseBody
     HisTollRecord getPrices(String token, HisTollRecord hisTollRecord) throws Exception {
-        if (hisTollRecord.getLowsTime() != null || hisTollRecord.getUpTime() != null) {
+        if (hisTollRecord.getLowTime() != null || hisTollRecord.getUpTime() != null) {
             hisTollRecord.setYears(null);
             hisTollRecord.setMonths(null);
         }
@@ -437,9 +438,9 @@ public class HisTollRecordController extends BaseController {
     @RequestMapping("/getAllDrug.ahsj")
     @ResponseBody
     public PageBean<HisTollRecord> getAllDrug(HisTollRecord hisTollRecord) throws Exception {
-        if (hisTollRecord.getLowsTime() != null || hisTollRecord.getUpTime() != null) {
-            hisTollRecord.setYears(null);
-            hisTollRecord.setMonths(null);
+        if (hisTollRecord.getLowTime() != null || hisTollRecord.getUpTime() != null) {
+            hisTollRecord.setYears("");
+            hisTollRecord.setMonths("");
         }
         PageBean<HisTollRecord> pageBean = new PageBean<HisTollRecord>();
         pageBean.setParameter(hisTollRecord);
@@ -458,9 +459,9 @@ public class HisTollRecordController extends BaseController {
     @RequestMapping("getDrugPrice")
     @ResponseBody
     HisTollRecord getDrugPrice(String token, HisTollRecord hisTollRecord) throws Exception {
-        if (hisTollRecord.getLowsTime() != null || hisTollRecord.getUpTime() != null) {
-            hisTollRecord.setYears(null);
-            hisTollRecord.setMonths(null);
+        if (hisTollRecord.getLowTime() != null || hisTollRecord.getUpTime() != null) {
+            hisTollRecord.setYears("");
+            hisTollRecord.setMonths("");
         }
         return hisTollRecordService.getDrugPrice(hisTollRecord);
     }
@@ -501,7 +502,7 @@ public class HisTollRecordController extends BaseController {
     @RequestMapping("/pharmacyInventory.ahsj")
     @ResponseBody
     public PageBean<HisTollRecord> pharmacyInventory(HisTollRecord hisTollRecord) throws Exception {
-        if (hisTollRecord.getLowsTime() != null || hisTollRecord.getUpTime() != null) {
+        if (hisTollRecord.getLowTime() != null || hisTollRecord.getUpTime() != null) {
             hisTollRecord.setYears(null);
             hisTollRecord.setMonths(null);
         }
@@ -522,7 +523,7 @@ public class HisTollRecordController extends BaseController {
     @RequestMapping("getPharmacyinventoryPrice")
     @ResponseBody
     HisTollRecord getPharmacyinventoryPrice(String token, HisTollRecord hisTollRecord) throws Exception {
-        if (hisTollRecord.getLowsTime() != null || hisTollRecord.getUpTime() != null) {
+        if (hisTollRecord.getLowTime() != null || hisTollRecord.getUpTime() != null) {
             hisTollRecord.setYears(null);
             hisTollRecord.setMonths(null);
         }

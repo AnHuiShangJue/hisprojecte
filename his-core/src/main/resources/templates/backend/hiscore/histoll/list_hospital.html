@@ -150,7 +150,6 @@
 
 )</span></label>
                                     </div>
-
                                     <div class="input-field col s4 l4 xl4">
                                         <input type="number" readonly id="recoverTheFee" name="recoverTheFee">
                                         <label class="active" for="recoverTheFee">实际找零金额<span style="font-size: 12px">(Actual change amount
@@ -198,17 +197,6 @@
     </div>
 </div>
 </div>
-
-
-<!--<div class="input-field col s4 l4 xl4">-->
-    <!--<input type="number" name="wwwwww" id="wwwwww"-->
-           <!--data-error=".errorTxt2">-->
-    <!--<div class="errorTxt2"></div>-->
-    <!--<label for="wwwwww">test<span style="font-size: 12px">(Actual collection amount-->
-
-<!--)</span></label>-->
-<!--</div>-->
-
 <div th:replace="public/base_list_script :: html"></div>
 <script type="text/javascript">
     var grid = new Datatable();
@@ -249,7 +237,6 @@
                 dialog.warn("所输入的数据不符合格式要求！请输入HR开头的编号")
             }
         });}
-
         $("#actualCharge").change(function () {
             //实际收款金额
             var actualCharge = $("#actualCharge").val();
@@ -261,23 +248,21 @@
             var deposit = $("#deposit").val();
             if (money.length > 0) {
                 if (!isNullOrEmpty(actualCharge)) {
-                    var ac = numeral(actualCharge);//实际
-                    var m = numeral(money);//总
-                    var rd = numeral(parseFloat(restDeposit));//剩余押金当前
-                    var totalMoney = ac.value()+rd.value();//收款后的押金余额
+                    var ac = numeral(actualCharge);
+                    var m = numeral(money);
+                    var rd = numeral(restDeposit);
+                    var totalMoney = ac.value()+rd.value();
                     if(totalMoney < m.value()){
                         dialog.warn("总金额小于应收金额，请重新输入!!!")
                     }else{
                         //如果实际收款大于应收款
                         if(ac.value() >= m.value()){
                             changeInputValue("deposit",numeral(ac.value()).subtract(m.value()).format('0.00'));
-                            // changeInputValue("deposit",numeral(totalMoney).subtract(m.value()).format('0.00'));
+                            changeInputValue("recoverTheFee",0);
+                        }else{
+                            changeInputValue("deposit",numeral(ac.value()).subtract(m.value()).format('0.00'));
                             changeInputValue("recoverTheFee",0);
                         }
-                            // else{
-                            // changeInputValue("deposit",numeral(ac.value()).subtract(m.value()).format('0.00'));
-                        //     changeInputValue("recoverTheFee",0);
-                        // }
                     }
                 }
             }
@@ -301,7 +286,7 @@
         $("#send_btn").click(function () {
             if(validform("#sendForm").form()) {
             dialog.confirm('确定结算吗?', function (index, layero) {
-                // checkMoney();
+                checkMoney();
                 var hisTollRecord = $("#sendForm").serialize();
                 var json = grid.getDataTable().ajax.json().data;
                 var hisTollHospiModel = {
@@ -318,10 +303,6 @@
                             data = msg.message.substring(16);//截取成功信息
                             number = msg.message.substring(0,16); //截取交易流水号
                             M.toast({html: data});
-
-                            //结算完成后修改余额的值
-                            changeInputValue("restDeposit",$("#deposit").val());
-
                             grid.search();
                             $("#print_btn").attr("disabled", false);
                             dialog.success(data);
@@ -538,7 +519,7 @@
             if (!isNullOrEmpty(actualCharge)) {
                 var ac = numeral(actualCharge);
                 var m = numeral(money);
-                var rd = numeral(parseFloat(restDeposit));
+                var rd = numeral(restDeposit);
                 var totalMoney = ac.value()+rd.value();
                 if(totalMoney < m.value()){
                     dialog.warn("总金额小于应收金额，请重新输入!!!")

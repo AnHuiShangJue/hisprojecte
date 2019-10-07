@@ -583,5 +583,69 @@ public class HisTollRecord extends BaseEntity {
     public void setExitCount(Integer exitCount) {
         this.exitCount = exitCount;
     }
+
+    @Override
+    public String toString() {
+        return "HisTollRecord{" +
+                "id=" + id +
+                ", money=" + money +
+                ", actualCharge=" + actualCharge +
+                ", recoverTheFee=" + recoverTheFee +
+                ", balance=" + balance +
+                ", count=" + count +
+                ", salePrice=" + salePrice +
+                ", costPrice=" + costPrice +
+                ", medicineName='" + medicineName + '\'' +
+                ", drugsNumb='" + drugsNumb + '\'' +
+                ", placeOrigin='" + placeOrigin + '\'' +
+                ", medicineDate=" + medicineDate +
+                ", highTime=" + highTime +
+                ", lowsTime=" + lowsTime +
+                ", type=" + type +
+                ", types='" + types + '\'' +
+                ", attenchId=" + attenchId +
+                ", attenchType=" + attenchType +
+                ", attenchTypes='" + attenchTypes + '\'' +
+                ", registerNumber='" + registerNumber + '\'' +
+                ", exitCount=" + exitCount +
+                ", enterCount=" + enterCount +
+                ", drugsSpec='" + drugsSpec + '\'' +
+                ", stock=" + stock +
+                ", deposit=" + deposit +
+                ", number='" + number + '\'' +
+                ", medicalRecordId='" + medicalRecordId + '\'' +
+                ", remark='" + remark + '\'' +
+                ", isSettlement=" + isSettlement +
+                ", isSettlements='" + isSettlements + '\'' +
+                ", createDate=" + createDate +
+                ", name='" + name + '\'' +
+                ", target_id=" + target_id +
+                ", isPay=" + isPay +
+                ", num=" + num +
+                ", patientName='" + patientName + '\'' +
+                ", nurseName='" + nurseName + '\'' +
+                ", doctorName='" + doctorName + '\'' +
+                ", currentCondition='" + currentCondition + '\'' +
+                ", pastCondition='" + pastCondition + '\'' +
+                ", userName='" + userName + '\'' +
+                ", detailsName='" + detailsName + '\'' +
+                ", records='" + records + '\'' +
+                ", hnumber='" + hnumber + '\'' +
+                ", depositWarning=" + depositWarning +
+                ", saleCounts=" + saleCounts +
+                ", lowTime=" + lowTime +
+                ", upTime=" + upTime +
+                ", months='" + months + '\'' +
+                ", years='" + years + '\'' +
+                ", chiefComplaint='" + chiefComplaint + '\'' +
+                ", phonenumber=" + phonenumber +
+                ", idcard='" + idcard + '\'' +
+                ", price=" + price +
+                ", maxTime=" + maxTime +
+                ", minTime=" + minTime +
+                ", createDateFor=" + createDateFor +
+                '}';
+    }
 }
+
 

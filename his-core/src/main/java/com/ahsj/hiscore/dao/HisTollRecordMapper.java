@@ -214,4 +214,5 @@ public interface HisTollRecordMapper extends BaseMapper<HisTollRecord> {
      **/
     List<HisTollRecord> pharmacyInventoryDetail(PageBean<HisTollRecord> pageBean) throws Exception;
 
+
 }

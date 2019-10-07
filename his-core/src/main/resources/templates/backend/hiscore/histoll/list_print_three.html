@@ -111,7 +111,7 @@ Scripts
             function (data) {
                 var jsons = data[0];
                 if (!isNullOrEmpty(jsons)) {//有
-                    var trs = "<tr><td><label class='black-text'>名称(name)</label></td><td><label class='black-text'>规格(drugsSpec)</label></td><td><label class='black-text'>数目(number)</label></td><td><label class='black-text'>单价(price)</label></td><td><label class='black-text'>单项总价(Single item price)</label></td></tr>";
+                    var trs = "<tr><td><label class='black-text'>名称(name)</label></td><td><label class='black-text'>规格(drugsSpec)</label></td><td><label class='black-text'>数目(number)</label></td></tr>";
                     $.each(data, function (index, item) {
                         if (isNullOrEmpty(item.name)) {
                             item.name = ""
@@ -125,7 +125,7 @@ Scripts
                         if (isNullOrEmpty(item.tdrugsSpec)) {
                             item.tdrugsSpec = ""
                         }
-                        trs += "<tr><td><label class='black-text fontsize02'> " + item.name + "(" + item.tranName + ")" + "</label></td><td ><label class='black-text fontsize02'>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</label></td><td ><label class='black-text fontsize02'> " + item.num + "</label></td><td ><label class='black-text fontsize02'>" + item.price.toFixed(2) + "</label></td><td ><label class='black-text fontsize02'> " + (item.num * item.price).toFixed(2) + "</label></td></tr >";
+                        trs += "<tr><td><label class='black-text fontsize02'> " + item.name + "(" + item.tranName + ")" + "</label></td><td ><label class='black-text fontsize02'>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</label></td><td ><label class='black-text fontsize02'> " + item.num + "</label></td></tr >";
                     });
                     $("#createName").html(jsons.createName);
                  //   $("#totalPrices").html(jsons.totalPrices.toFixed(2));
