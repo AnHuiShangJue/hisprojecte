@@ -478,7 +478,7 @@
 
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn +
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"移除\" onclick='remove(" + row.id + ");'> <i class='material-icons'>remove</i></a>";
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"移除\" onclick='remove(" + row.id + ",\""+row.drugsNumb+"\");'> <i class='material-icons'>remove</i></a>";
                         }
                         // 返回自定义内容
                         return rtnBtn;
@@ -1332,8 +1332,27 @@
         }
     }
 
-    function remove(id) {
-        medicineList.removeRow(id);
+    function remove(id,drugsNumb) {
+        if (drugsNumb != null && drugsNumb != "" && drugsNumb != undefined) {
+            var recordId = $("#recordId").val();
+            $.ahsjajax(
+                CTX + "/api/medicationDetails/selectByDrugsNumbAndRecordIdAndNotPay.ahsj?token=" + TOKEN,
+                {"recordId": recordId,"drugsNumb": drugsNumb},
+                function (data) {
+                    if(data.length > 0){
+                        dialog.warn("该药品已配为输液单 若要移除请先移除对应输液单（This medicine has been assigned as an infusion order. To remove, please remove the corresponding infusion order.）");
+
+                    }else {
+                        medicineList.removeRow(id);
+                    }
+                },
+                function () {
+                    M.toast({html: "网络异常"});
+                    return false;
+                }
+            );
+        }
+
     }
 
     function removeForProject(id) {

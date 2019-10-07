@@ -105,4 +105,14 @@ public interface HisInfusionMapper extends BaseMapper<HisInfusion>{
      *@Time 11:26
      **/
     List<HisInfusion> selectByMedicationId(Long id);
+
+    /**
+     *@Description 根据药品编号和就诊记录ID 核查该药品是否存在输液单
+     *@Params [hisInfusion]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisInfusion>
+     *@Author zhushixiang
+     *@Date 2019-10-07
+     *@Time 17:02
+    **/
+    List<HisInfusion> selectByDrugsNumbAndRecordIdAndNotPay(HisInfusion hisInfusion);
 }

@@ -572,4 +572,11 @@ from his_infusion
 where medication_id = #{id.jdbcType=BIGINT}
   </select>
 
+    <select id="selectByDrugsNumbAndRecordIdAndNotPay" parameterType="com.ahsj.hiscore.entity.HisInfusion" resultMap="BaseResultMap">
+        select a.*
+from his_infusion as a
+left join his_medication_details as b on a.medication_id = b.id
+where b.drugs_numb =#{drugsNumb,jdbcType=VARCHAR} and a.hosptalregist_number = #{hosptalregistNumber,jdbcType=VARCHAR}
+    </select>
+
 </mapper>

@@ -1,10 +1,10 @@
 package com.ahsj.hiscore.services;
 
+import com.ahsj.hiscore.common.utils.ZipUtils;
 import com.ahsj.hiscore.entity.HisInfusion;
 import core.entity.PageBean;
 import core.message.Message;
 
-import java.util.Date;
 import java.util.List;
 
 public interface HisInfusionService {
@@ -156,7 +156,7 @@ public interface HisInfusionService {
      *@Date 2019-10-06
      *@Time 8:32
     **/
-    Message addInfusionMedicine(List<HisInfusion> hisInfusionList,Long recordId)throws Exception;
+    Message addInfusionMedicine(List<HisInfusion> hisInfusionList, Long recordId, List<HisInfusion> checkInfusionList)throws Exception;
 
     /**
      *@Description 根据就诊编号查询对应未付款的输液单
@@ -197,4 +197,14 @@ public interface HisInfusionService {
      *@Time 11:25
     **/
     List<HisInfusion> selectByMedicationId(Long id)throws Exception;
+
+    /**
+     *@Description 根据药品编号和就诊记录ID 核查该药品是否存在输液单
+     *@Params [recordId, drugsNumb]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisInfusion>
+     *@Author zhushixiang
+     *@Date 2019-10-07
+     *@Time 16:59
+    **/
+    List<HisInfusion> selectByDrugsNumbAndRecordIdAndNotPay(Long recordId, String drugsNumb)throws Exception;
 }
