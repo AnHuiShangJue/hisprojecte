@@ -157,14 +157,30 @@ public class HisHospitalManageController extends BaseController {
      * @Params [token, hisRegistered]
      **/
     @RequestMapping("update/index.ahsj")
-    ModelAndView updateIndex(String token, HisHospitalManage hisHospitalManage) throws Exception {
+    ModelAndView updateIndex(String token, HisHospitalManage hisHospitalManage,Long hosptalRegistId) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/hospitalmanage/update");
         modelAndView.addObject("title", "医疗信息系统");
         modelAndView.addObject("token", token);
-        modelAndView.addObject("hisPatientInfo", hisPatientService.selectById(hisHospitalManage.getPatientId()));
-        modelAndView.addObject("hisDoctorInfo", hisDoctorInfoService.selectById(hisHospitalManage.getDoctorId()));
-        modelAndView.addObject("hisHospitalManage", hisHospitalManage);
-        modelAndView.addObject("hisHosptalregist", hisHosptalregistService.selectById(hisHospitalManage.getIds()));
+        if (EmptyUtil.Companion.isNullOrEmpty(hosptalRegistId)){
+            modelAndView.addObject("hisPatientInfo", hisPatientService.selectById(hisHospitalManage.getPatientId()));
+            modelAndView.addObject("hisDoctorInfo", hisDoctorInfoService.selectById(hisHospitalManage.getDoctorId()));
+            modelAndView.addObject("hisHospitalManage", hisHospitalManage);
+            modelAndView.addObject("hisHosptalregist", hisHosptalregistService.selectById(hisHospitalManage.getIds()));
+        }else {
+            HisHosptalregist hisHosptalregist = hisHosptalregistService.selectById(hosptalRegistId);
+            modelAndView.addObject("hisPatientInfo", hisPatientService.selectById(hisHosptalregist.getPatientId()));
+            modelAndView.addObject("hisDoctorInfo", hisDoctorInfoService.selectById(hisHosptalregist.getDoctorId()));
+            modelAndView.addObject("hisHosptalregist", hisHosptalregist);
+
+            hisHospitalManage.setPatientId(hisHosptalregist.getPatientId());
+            hisHospitalManage.setDoctorId(hisHosptalregist.getDoctorId());
+            hisHospitalManage.setIds(hosptalRegistId);
+            modelAndView.addObject("hisHospitalManage", hisHospitalManage);
+            modelAndView.addObject("flag", 1);
+
+        }
+
+
         return modelAndView;
     }
 

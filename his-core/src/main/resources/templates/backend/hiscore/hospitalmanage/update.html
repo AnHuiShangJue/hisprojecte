@@ -262,6 +262,7 @@ Scripts
             },
             submitHandler: function (form) {
                 var bedIds = $("#bedId").val();
+                var flag = [[${flag}]];
                 console.log("值是"+bedIds);
                 dialog.confirm('确定提交吗?', function (index, layero) {
                     if (bedIds != null ){
@@ -274,8 +275,15 @@ Scripts
                         function (msg) {
                             if (msg.success) {
                                 M.toast({html: msg.message});
-                                parent.grid.reset();
-                                dialog.parentclose();
+                                if (flag == 1){
+
+                                    dialog.parentclose();
+
+                                } else {
+                                    parent.grid.reset();
+                                    dialog.parentclose();
+                                }
+
                                 return false;
                             } else {
                                 M.toast({html: msg.message});

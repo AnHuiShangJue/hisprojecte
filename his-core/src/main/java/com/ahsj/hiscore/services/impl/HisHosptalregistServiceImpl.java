@@ -77,8 +77,9 @@ public class HisHosptalregistServiceImpl implements HisHosptalregistService {
                                     hisHosptalregist.setPatientId(hisPatientInfoMapper.selectByIdcard(hisPatientInfo.getIdcard()).getId());
                                     hisMedical.setChiefcomplaint(hisHosptalregist.getOutpatientDiagnosis());
                                     hisHosptalregistMapper.insert(hisHosptalregist);//入院登记
+
                                     hisMedicalService.saveOrUpdate(hisMedical);//门诊诊断甩回
-                                    return MessageUtil.createMessage(true, "新增成功");
+                                    return MessageUtil.createMessage(true, ""+hisHosptalregist.getId());
                                 } else {
                                     return MessageUtil.createMessage(false, "前有未完成操作，请先完成就诊流程！");
                                 }
@@ -111,7 +112,7 @@ public class HisHosptalregistServiceImpl implements HisHosptalregistService {
                         hisHosptalregist.setPatientId(hisPatientInfoMapper.selectByIdcard(hisPatientInfo.getIdcard()).getId());
                         hisHosptalregist.setMedicalNumber(null);
                         hisHosptalregistMapper.insert(hisHosptalregist);//入院登记
-                        return MessageUtil.createMessage(true, "新增成功");
+                        return MessageUtil.createMessage(true, ""+hisHosptalregist.getId());
                     }
                 }
             } else {
