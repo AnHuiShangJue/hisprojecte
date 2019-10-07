@@ -404,14 +404,24 @@ public class HisMedicationDetailsServicelmpl implements HisMedicationDetailsServ
         List<HisMedicationDetails> hisMedicalRecords = hisMedicationDetailsMapper.selectPrint(number);
         for (HisMedicationDetails hisMedicalRecord : hisMedicalRecords) {
             Translate translate = new Translate();//翻译
-            translate.setTranslateId(hisMedicalRecord.getId());
+            translate.setTranslateId(hisMedicalRecord.getmId());
             translate.setTranslateType(Constants.TRANSLATE_HIS_MEDICINEINFO);
             List<Translate> translates = iTranslateService.queryTranslate(translate);
-            translates.toString();
             if (!EmptyUtil.Companion.isNullOrEmpty(translates)) {
                 translates.stream().filter(f -> f.getTranslateChina().equals(hisMedicalRecord.getDrugsName())).forEach(f -> hisMedicalRecord.setTdrugsName(f.getTranslateKhmer()));
                 translates.stream().filter(f -> f.getTranslateChina().equals(hisMedicalRecord.getDrugsSpec())).forEach(f -> hisMedicalRecord.setTdrugsSpec(f.getTranslateKhmer()));
             }
+            Translate translate1 = new Translate();
+            translate1.setTranslateId(hisMedicalRecord.getId());
+            translate1.setTranslateType(Constants.TRANSLATE_HIS_MEDICATIONDETAILS);
+            List<Translate> translates2 = iTranslateService.queryTranslate(translate);
+            if (!EmptyUtil.Companion.isNullOrEmpty(translates2)) {
+                translates2.stream().filter(f -> f.getTranslateChina().equals(hisMedicalRecord.getDescription())).forEach(e -> hisMedicalRecord.setTdescription(e.getTranslateKhmer()));
+            }
+
+
+
+
         }
         return hisMedicalRecords;
     }

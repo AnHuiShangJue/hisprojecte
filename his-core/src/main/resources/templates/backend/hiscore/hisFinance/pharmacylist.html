@@ -178,6 +178,11 @@
                         "name": "drugs_spec"
                     },
                     {
+                        "title": "进货公司",
+                        "data": "placeOrigin",
+                        "name": "placeOrigin"
+                    },
+                    {
                         "title": "最近一次入库时间",
                         "data": "createDate",
                         "name": "create_date"
@@ -211,8 +216,7 @@
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn +
-                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看明细\" onclick=\"visitDetail('" + row.drugsNumb + "','" + row.detailsName + "','" + row.stock + "');\"> <i class='material-icons'>visibility</i></a>"+
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"打印\" href='javascript:;' onclick='print(\"" + row.number + "\");'> <i class='material-icons'>print</i></a>";;
+                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看明细\" onclick=\"visitDetail('" + row.drugsNumb + "','" + row.detailsName + "','" + row.stock + "');\"> <i class='material-icons'>visibility</i></a>"
                             // 返回自定义内容
                             return rtnBtn;
                         }

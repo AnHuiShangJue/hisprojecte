@@ -55,21 +55,25 @@
                                 </div>
                                 <div class="col input-field s2 m2 l2 xl2">
                                     <input id="years" name="years" type="text"/>
-                                    <label class="active"  for="years">年份选择<span style="font-size: 12px">(Year selection)</span></label>
+                                    <label class="active" for="years">年份选择<span
+                                            style="font-size: 12px">(Year selection)</span></label>
                                 </div>
                                 <div class="col input-field s2 m2 l2 xl2">
                                     <input id="number" name="number" type="text"/>
-                                    <label for="number">挂号编号<span style="font-size: 12px">(Registered number)</span></label>
+                                    <label for="number">挂号编号<span
+                                            style="font-size: 12px">(Registered number)</span></label>
 
-                                </div> <br><br><br><br>
+                                </div>
+                                <br><br><br><br>
                                 <div class="col  s1 m1 l1 xl1">
 
                                     <h6>收费日期</h6>
                                     <label style="color:black">Date of charge</label>
                                 </div>
                                 <div class="col  input-field s2 m2 l2 xl2">
-                                    <input id="lowTime" name="lowTime" type="text" class="datepicker" />
-                                    <label for="lowTime">下区间<span style="font-size: 12px">(Lower interval)</span></label>
+                                    <input id="lowTime" name="lowTime" type="text" class="datepicker"/>
+                                    <label for="lowTime">下区间<span
+                                            style="font-size: 12px">(Lower interval)</span></label>
                                 </div>
                                 <div class="col input-field s2 m2 l2 xl2">
                                     <input id="upTime" name="upTime" type="text"
@@ -96,10 +100,14 @@
                     <div class="card">
                         <div class="card-content">
                             <h4 class="card-title">
-                                统计的时间区间为<span style="font-size: 12px"> (The time interval of the statistics is)</span>:<span id="minTime"></span>——— <span id="maxTime"></span>
+                                统计的时间区间为<span
+                                    style="font-size: 12px"> (The time interval of the statistics is)</span>:<span
+                                    id="minTime"></span>——— <span id="maxTime"></span>
                             </h4>
                             <h4 class="card-title">
-                                区间内的总收入金额为<span style="font-size: 12px">(The total amount of income in the interval is)</span>：<span id="price"></span>
+                                区间内的总收入金额为<span
+                                    style="font-size: 12px">(The total amount of income in the interval is)</span>：<span
+                                    id="price"></span>
                             </h4>
                         </div>
                     </div>
@@ -134,6 +142,7 @@
         initBtn();
         initTable();
     });
+
     function initTable() {
         grid.init({
             src: $("#data-table-simple"),
@@ -151,49 +160,49 @@
                 },
                 "columns": [
                     {
-                        "title":"挂号编号",
-                        "data":"number",
-                        "name":"number"
+                        "title": "挂号编号",
+                        "data": "number",
+                        "name": "number"
                     },
                     {
-                        "title":"挂号类别",
-                        "data":"categoryName",
-                        "name":"registered_category"
+                        "title": "挂号类别",
+                        "data": "categoryName",
+                        "name": "registered_category"
                     },
                     {
-                        "title":"姓名",
-                        "data":"patientName",
-                        "name":"patient_name"
+                        "title": "姓名",
+                        "data": "patientName",
+                        "name": "patient_name"
                     },
                     {
-                        "title":"收费时间",
-                        "data":"createDate",
-                        "name":"create_date"
+                        "title": "收费时间",
+                        "data": "createDate",
+                        "name": "create_date"
                     },
                     {
-                        "title":"收费人",
-                        "data":"createName",
-                        "name":"create_Name"
+                        "title": "收费人",
+                        "data": "createName",
+                        "name": "create_Name"
                     },
                     {
-                        "title":"支付方式",
-                        "data":"pTypeName",
-                        "name":"pay_type"
+                        "title": "支付方式",
+                        "data": "pTypeName",
+                        "name": "pay_type"
                     },
                     {
-                        "title":"应收金额",
-                        "data":"amountReceivable",
-                        "name":"amount_receivable"
+                        "title": "应收金额",
+                        "data": "amountReceivable",
+                        "name": "amount_receivable"
                     },
                     {
-                        "title":"实收金额",
-                        "data":"paidAmount",
-                        "name":"paid_amount"
+                        "title": "实收金额",
+                        "data": "paidAmount",
+                        "name": "paid_amount"
                     },
                     {
-                        "title":"找回金额",
-                        "data":"retrieveAmount",
-                        "name":"retrieve_amount"
+                        "title": "找回金额",
+                        "data": "retrieveAmount",
+                        "name": "retrieve_amount"
                     },
                     {
                         "title": "操作",
@@ -204,14 +213,16 @@
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn +
-                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看明细\" onclick='visitDetail(\"" + row.number + "\");'> <i class='material-icons'>visibility</i></a>"+
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"打印\" href='javascript:;' onclick='print(" + row.id + ");'> <i class='material-icons'>print</i></a>" ;
+                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看明细\" onclick='visitDetail(\"" + row.number + "\");'> <i class='material-icons'>visibility</i></a>" +
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"打印\" href='javascript:;' onclick='print(" + row.id + ");'> <i class='material-icons'>print</i></a>";
                             // 返回自定义内容
                             return rtnBtn;
                         }
                     }
                 ],
-                "order" : [ [ 1, 'asc' ] ]
+                "order": [
+                    [1, 'asc']
+                ]
             }
         });
     }
@@ -233,14 +244,22 @@
             grid.search();
         });
     }
-    function getPrice(){
-        var searchForm =$("#searchForm").serialize();
-        var price =$("#price")
-        var lowTime =$("#lowTime").val();
-        var upTime =$("#upTime").val();
+
+    function getPrice() {
+        var searchForm = $("#searchForm").serialize();
+        var price = $("#price")
+        var lowTime = $("#lowTime").val();
+        var upTime = $("#upTime").val();
         var years = $("#years").val();
         var months = $("#months").val();
+        console.log(lowTime)
+        console.log(upTime)
+        console.log(years)
+        console.log(months)
+
+
         //获取基本信息
+
         $.ahsjajax(
             CTX + "/api/registeredCharge/getPrice?token=" + TOKEN,
             searchForm,
@@ -248,26 +267,34 @@
                 price.html("");
                 if (!isNullOrEmpty(data)) {
                     price.html(data.amountReceivable)
-                /*    if(lowTime==null&&upTime==null&&years!=null&&months==null){
-                        $("#minTime").html(years+"年")
-                        $("#maxTime").html(years+"年")
-                    }
-                    if(lowTime==null&&upTime==null&&months!=null&&years==null){
-                        $("#minTime").html(months+"月")
-                        $("#maxTime").html(months+"月")
-                    }
-                    if(lowTime==null&&upTime==null&&months!=null&&years!=null){
-                        $("#minTime").html(years+"年"+months+"月")
-                        $("#maxTime").html(years+"年"+months+"月")
-                    }*/
-                    if(isNullOrEmpty(lowTime)){ $("#minTime").html(data.minTime);}
-                    else{
+                    if (isNullOrEmpty(lowTime)) {
+                        $("#minTime").html(data.minTime);
+                    } else {
                         $("#minTime").html(lowTime)
                     }
-                    if(isNullOrEmpty(upTime)){  $("#maxTime").html(data.maxTime);}
-                    else{
+                    if (isNullOrEmpty(upTime)) {
+                        $("#maxTime").html(data.maxTime);
+                    } else {
                         $("#maxTime").html(upTime)
                     }
+                    if ((lowTime == null || lowTime == "" || lowTime == undefined) &&
+                        (upTime == null || upTime == "" || upTime == undefined) &&
+                        (months != null || months != "" || months != undefined) &&
+                        (years == null || years == "" || years == undefined)) {
+                        $("#minTime").html(months + "月")
+                        $("#maxTime").html(months + "月")
+                    }
+
+
+                 /*   if (isNullOrEmpty(lowTime) && isNullOrEmpty(upTime) && !isNullOrEmpty(years) && isNullOrEmpty(months)) {
+                        $("#minTime").html(years + "年")
+                        $("#maxTime").html(years + "年")
+                    }
+
+                    if (lowTime == null && upTime == null && months != null && years != null) {
+                        $("#minTime").html(years + "年" + months + "月")
+                        $("#maxTime").html(years + "年" + months + "月")
+                    }*/
                     return true;
                 } else {
                     price.html("0")
@@ -278,32 +305,35 @@
                 Materialize.toast("网络异常");
                 return false;
             }
-        );}
+        );
+    }
+
     laydate.render({
         elem: '#years'
-        ,type: 'year',
+        , type: 'year',
     });
     laydate.render({
         elem: '#months',
         type: 'month'
-        ,format: 'MM'
+        , format: 'MM'
     });
-    $("input").mouseover(function(){
+    $("input").mouseover(function () {
         M.updateTextFields();//重新初始化页面上的内容
     })
 
-    $("input").change(function(){
+    $("input").change(function () {
         $(this).val($(this).val().trim());
     });
 
-    function print(id){
+    function print(id) {
         dialog.confirm('确定打印吗?', function (index, layero) {
             if (id != "" && id != null && id != undefined) {
-                var url = CTX + "/api/registered/print/index.ahsj?token=" + TOKEN+"&id="+id;
-                dialog.showDialog(url, "打印凭证预览","700px","700px");
+                var url = CTX + "/api/registered/print/index.ahsj?token=" + TOKEN + "&id=" + id;
+                dialog.showDialog(url, "打印凭证预览", "700px", "700px");
             } else {
                 dialog.warn("没有需要打印的内容！")
-            }});
+            }
+        });
     }
 </script>
 </body>
