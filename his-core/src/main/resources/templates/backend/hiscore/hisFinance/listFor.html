@@ -286,6 +286,8 @@
           var upTime =$("#upTime").val();
         var searchForm = $("#searchForm").serialize();
         var price = $("#price")
+        var years = $("#years").val();
+        var months = $("#months").val();
         //获取基本信息
         $.ahsjajax(
             CTX + "/api/hisTollRecord/getPrice?token=" + TOKEN,
@@ -301,6 +303,27 @@
                     if(isNullOrEmpty(upTime)){  $("#maxTime").html(data.maxTime);}
                     else{
                         $("#maxTime").html(upTime)
+                    }
+                    if ((lowTime == null || lowTime == "" || lowTime == undefined) &&
+                        (upTime == null || upTime == "" || upTime == undefined) &&
+                        (months != null && months != "" && months != undefined) &&
+                        (years == null || years == "" || years == undefined)) {
+                        $("#minTime").html(months + "月")
+                        $("#maxTime").html(months + "月")
+                    }
+                    if ((lowTime == null || lowTime == "" || lowTime == undefined) &&
+                        (upTime == null || upTime == "" || upTime == undefined) &&
+                        (years != null && years != "" && years != undefined) &&
+                        (months == null || months == "" || months == undefined)) {
+                        $("#minTime").html(years + "年")
+                        $("#maxTime").html(years + "年")
+                    }
+                    if ((lowTime == null || lowTime == "" || lowTime == undefined) &&
+                        (upTime == null || upTime == "" || upTime == undefined) &&
+                        (years != null && years != "" && years != undefined) &&
+                        (months != null && months != "" && months != undefined)) {
+                        $("#minTime").html(years + "年"+months+"月")
+                        $("#maxTime").html(years + "年"+months+"月")
                     }
                     return true;
                 } else {

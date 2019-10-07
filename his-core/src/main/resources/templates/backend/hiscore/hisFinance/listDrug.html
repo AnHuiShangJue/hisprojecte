@@ -152,11 +152,13 @@
 <div th:replace="public/base_list_script :: html"></div>
 <script type="text/javascript">
     var grid = new Datatable();
+    var lowTime = $("#lowTime").val();
+    var upTime = $("#upTime").val();
+    var years = $("#years").val();
+    var months = $("#months").val();
     $(document).ready(function () {
         initBtn();
         initTable();
-
-
     });
 
     function initTable() {
@@ -257,7 +259,6 @@
         var url = CTX + "/api/hisTollRecord/details/index.ahsj?token=" + TOKEN + "&number=" + number;
         dialog.show(url, "收费详细信息");
     }
-
     function initBtn() {
         //搜索按钮
         $('#searchBtn').click(function () {
@@ -274,8 +275,6 @@
     }
 
     function getPrice() {
-          var lowTime =$("#lowTime").val();
-          var upTime =$("#upTime").val();
         var searchForm = $("#searchForm").serialize();
         var salePrice = $("#salePrice")
         var costPrice = $("#costPrice")
@@ -289,13 +288,36 @@
                 if (!isNullOrEmpty(data)) {
                     salePrice.html((data.salePrice - data.costPrice).toFixed(2));
                     costPrice.html(data.costPrice.toFixed(2));
-                    if(isNullOrEmpty(lowTime)){ $("#minTime").html(data.minTime);}
-                    else{
+                    if (isNullOrEmpty(lowTime)) {
+                        $("#minTime").html(data.minTime);
+                    } else {
                         $("#minTime").html(lowTime)
                     }
-                    if(isNullOrEmpty(upTime)){  $("#maxTime").html(data.maxTime);}
-                    else{
+                    if (isNullOrEmpty(upTime)) {
+                        $("#maxTime").html(data.maxTime);
+                    } else {
                         $("#maxTime").html(upTime)
+                    }
+                    if ((lowTime == null || lowTime == "" || lowTime == undefined) &&
+                        (upTime == null || upTime == "" || upTime == undefined) &&
+                        (months != null && months != "" && months != undefined) &&
+                        (years == null || years == "" || years == undefined)) {
+                        $("#minTime").html(months + "月")
+                        $("#maxTime").html(months + "月")
+                    }
+                    if ((lowTime == null || lowTime == "" || lowTime == undefined) &&
+                        (upTime == null || upTime == "" || upTime == undefined) &&
+                        (years != null && years != "" && years != undefined) &&
+                        (months == null || months == "" || months == undefined)) {
+                        $("#minTime").html(years + "年")
+                        $("#maxTime").html(years + "年")
+                    }
+                    if ((lowTime == null || lowTime == "" || lowTime == undefined) &&
+                        (upTime == null || upTime == "" || upTime == undefined) &&
+                        (years != null && years != "" && years != undefined) &&
+                        (months != null && months != "" && months != undefined)) {
+                        $("#minTime").html(years + "年" + months + "月")
+                        $("#maxTime").html(years + "年" + months + "月")
                     }
                     return true;
                 } else {
@@ -334,102 +356,100 @@
             if (attenchType == 1) {//门诊打印
                 layer.open({
                     content: '打印小票（Print a small ticket）'
-                    ,btn: ['财务联（Financial union）', '科室联（Department）', '自由联（Free association）']
-                    ,yes: function(index, layero){
+                    , btn: ['财务联（Financial union）', '科室联（Department）', '自由联（Free association）']
+                    , yes: function (index, layero) {
                         //按钮【按钮一】的回调
                         if (number != "" && number != null && number != undefined) {
-                            var url = CTX + "/api/hisTollDetails/printHospitalOne/index.ahsj?number="+ number+"&token="+TOKEN+"&type=1";
+                            var url = CTX + "/api/hisTollDetails/printHospitalOne/index.ahsj?number=" + number + "&token=" + TOKEN + "&type=1";
                             dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                         } else {
                             dialog.warn("没有需要打印的内容！")
                         }
                     }
-                    ,btn2: function(index, layero){
+                    , btn2: function (index, layero) {
                         //按钮【按钮二】的回调
                         if (number != "" && number != null && number != undefined) {
-                            var url = CTX + "/api/hisTollDetails/printHospitalOne/index.ahsj?number="+ number+"&token="+TOKEN+"&type=2";
+                            var url = CTX + "/api/hisTollDetails/printHospitalOne/index.ahsj?number=" + number + "&token=" + TOKEN + "&type=2";
                             dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                         } else {
                             dialog.warn("没有需要打印的内容！")
                         }
 
-                        return false ;
+                        return false;
                     }
-                    ,btn3: function(index, layero){
+                    , btn3: function (index, layero) {
                         //按钮【按钮三】的回调
                         if (number != "" && number != null && number != undefined) {
-                            var url = CTX + "/api/hisTollDetails/printHospitalOne/index.ahsj?number="+ number+"&token="+TOKEN+"&type=3";
+                            var url = CTX + "/api/hisTollDetails/printHospitalOne/index.ahsj?number=" + number + "&token=" + TOKEN + "&type=3";
                             dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                         } else {
                             dialog.warn("没有需要打印的内容！")
                         }
-                        return false ;
+                        return false;
                     }
-                    ,cancel: function(){
+                    , cancel: function () {
                         //右上角关闭回调
 
                         // return false ;
                     }
                 });
-            }
-            else if (attenchType == 2) {//住院收费
+            } else if (attenchType == 2) {//住院收费
                 layer.open({
                     content: '打印小票（Print a small ticket）'
-                    ,btn: ['财务联（Financial union）', '科室联（Department）', '自由联（Free association）']
-                    ,yes: function(index, layero){
+                    , btn: ['财务联（Financial union）', '科室联（Department）', '自由联（Free association）']
+                    , yes: function (index, layero) {
                         //按钮【按钮一】的回调
                         if (number != "" && number != null && number != undefined) {
-                            var url = CTX + "/api/hisTollDetails/printHospitalTwo/index.ahsj?number="+ number+"&token="+TOKEN+"&type=1";
+                            var url = CTX + "/api/hisTollDetails/printHospitalTwo/index.ahsj?number=" + number + "&token=" + TOKEN + "&type=1";
                             dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                         } else {
                             dialog.warn("没有需要打印的内容！")
                         }
                     }
-                    ,btn2: function(index, layero){
+                    , btn2: function (index, layero) {
                         //按钮【按钮二】的回调
                         if (number != "" && number != null && number != undefined) {
-                            var url = CTX + "/api/hisTollDetails/printHospitalTwo/index.ahsj?number="+ number+"&token="+TOKEN+"&type=2";
+                            var url = CTX + "/api/hisTollDetails/printHospitalTwo/index.ahsj?number=" + number + "&token=" + TOKEN + "&type=2";
                             dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                         } else {
                             dialog.warn("没有需要打印的内容！")
                         }
 
-                        return false ;
+                        return false;
                     }
-                    ,btn3: function(index, layero){
+                    , btn3: function (index, layero) {
                         //按钮【按钮三】的回调
                         if (number != "" && number != null && number != undefined) {
-                            var url = CTX + "/api/hisTollDetails/printHospitalTwo/index.ahsj?number="+ number+"&token="+TOKEN+"&type=3";
+                            var url = CTX + "/api/hisTollDetails/printHospitalTwo/index.ahsj?number=" + number + "&token=" + TOKEN + "&type=3";
                             dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                         } else {
                             dialog.warn("没有需要打印的内容！")
                         }
-                        return false ;
+                        return false;
                     }
-                    ,cancel: function(){
+                    , cancel: function () {
                         //右上角关闭回调
 
                         // return false;
                     }
                 });
-            }
-            else if (attenchType == 9) {//出院打印
+            } else if (attenchType == 9) {//出院打印
                 layer.open({
                     content: '打印小票（Print a small ticket）'
-                    ,btn: ['财务联（Financial union）', '科室联（Department）', '自由联（Free association）']
-                    ,yes: function(index, layero){
+                    , btn: ['财务联（Financial union）', '科室联（Department）', '自由联（Free association）']
+                    , yes: function (index, layero) {
                         //按钮【按钮一】的回调
                         if (number != "" && number != null && number != undefined) {
-                            var url = CTX + "/api/hisTollDetails/printHospitalThree/index.ahsj?number="+ number+"&token="+TOKEN+"&type=1";
+                            var url = CTX + "/api/hisTollDetails/printHospitalThree/index.ahsj?number=" + number + "&token=" + TOKEN + "&type=1";
                             dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                         } else {
                             dialog.warn("没有需要打印的内容！")
                         }
                     }
-                    ,btn2: function(index, layero){
+                    , btn2: function (index, layero) {
                         //按钮【按钮二】的回调
                         if (number != "" && number != null && number != undefined) {
-                            var url = CTX + "/api/hisTollDetails/printHospitalThree/index.ahsj?number="+ number+"&token="+TOKEN+"&type=2";
+                            var url = CTX + "/api/hisTollDetails/printHospitalThree/index.ahsj?number=" + number + "&token=" + TOKEN + "&type=2";
                             dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                         } else {
                             dialog.warn("没有需要打印的内容！")
@@ -437,61 +457,60 @@
 
                         //return false 开启该代码可禁止点击该按钮关闭
                     }
-                    ,btn3: function(index, layero){
+                    , btn3: function (index, layero) {
                         //按钮【按钮三】的回调
                         if (number != "" && number != null && number != undefined) {
-                            var url = CTX + "/api/hisTollDetails/printHospitalThree/index.ahsj?number="+ number+"&token="+TOKEN+"&type=3";
+                            var url = CTX + "/api/hisTollDetails/printHospitalThree/index.ahsj?number=" + number + "&token=" + TOKEN + "&type=3";
                             dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                         } else {
                             dialog.warn("没有需要打印的内容！")
                         }
-                        return false ;
+                        return false;
                     }
-                    ,cancel: function(){
+                    , cancel: function () {
                         //右上角关闭回调
 
                         //return false 开启该代码可禁止点击该按钮关闭
                     }
                 });
-            }
-            else if (attenchType == 4) {//药品退费
+            } else if (attenchType == 4) {//药品退费
 
 
                 // var url = CTX + "/api/hisTollRecord/printDrugFour/index.ahsj?number=" + number + "&token=" + TOKEN;
                 layer.open({
                     content: '打印小票（Print a small ticket）'
-                    ,btn: ['财务联（Financial union）', '科室联（Department）', '自由联（Free association）']
-                    ,yes: function(index, layero){
+                    , btn: ['财务联（Financial union）', '科室联（Department）', '自由联（Free association）']
+                    , yes: function (index, layero) {
                         //按钮【按钮一】的回调
                         if (number != "" && number != null && number != undefined) {
-                            var url = CTX + "/api/hisTollRecord/printDrugFour/index.ahsj?number="+ number+"&token="+TOKEN+"&type=1";
+                            var url = CTX + "/api/hisTollRecord/printDrugFour/index.ahsj?number=" + number + "&token=" + TOKEN + "&type=1";
                             dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                         } else {
                             dialog.warn("没有需要打印的内容！")
                         }
                     }
-                    ,btn2: function(index, layero){
+                    , btn2: function (index, layero) {
                         //按钮【按钮二】的回调
                         if (number != "" && number != null && number != undefined) {
-                            var url = CTX + "/api/hisTollRecord/printDrugFour/index.ahsj?number="+ number+"&token="+TOKEN+"&type=2";
+                            var url = CTX + "/api/hisTollRecord/printDrugFour/index.ahsj?number=" + number + "&token=" + TOKEN + "&type=2";
                             dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                         } else {
                             dialog.warn("没有需要打印的内容！")
                         }
 
-                        return false ;
+                        return false;
                     }
-                    ,btn3: function(index, layero){
+                    , btn3: function (index, layero) {
                         //按钮【按钮三】的回调
                         if (number != "" && number != null && number != undefined) {
-                            var url = CTX + "/api/hisTollRecord/printDrugFour/index.ahsj?number="+ number+"&token="+TOKEN+"&type=3";
+                            var url = CTX + "/api/hisTollRecord/printDrugFour/index.ahsj?number=" + number + "&token=" + TOKEN + "&type=3";
                             dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                         } else {
                             dialog.warn("没有需要打印的内容！")
                         }
-                        return false ;
+                        return false;
                     }
-                    ,cancel: function(){
+                    , cancel: function () {
                         //右上角关闭回调
 
                         //return false 开启该代码可禁止点击该按钮关闭
@@ -499,42 +518,41 @@
                 });
 
 
-            }
-            else if (attenchType == 8) {//项目退费
+            } else if (attenchType == 8) {//项目退费
                 layer.open({
                     content: '打印小票（Print a small ticket）'
-                    ,btn: ['财务联（Financial union）', '科室联（Department）', '自由联（Free association）']
-                    ,yes: function(index, layero){
+                    , btn: ['财务联（Financial union）', '科室联（Department）', '自由联（Free association）']
+                    , yes: function (index, layero) {
                         //按钮【按钮一】的回调
                         if (number != "" && number != null && number != undefined) {
-                            var url = CTX + "/api/hisTollRecord/printDrugFive/index.ahsj?number=" + number + "&token=" + TOKEN+"&type=1";
+                            var url = CTX + "/api/hisTollRecord/printDrugFive/index.ahsj?number=" + number + "&token=" + TOKEN + "&type=1";
                             dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                         } else {
                             dialog.warn("没有需要打印的内容！")
                         }
                     }
-                    ,btn2: function(index, layero){
+                    , btn2: function (index, layero) {
                         //按钮【按钮二】的回调
                         if (number != "" && number != null && number != undefined) {
-                            var url = CTX + "/api/hisTollRecord/printDrugFive/index.ahsj?number=" + number + "&token=" + TOKEN+"&type=2";
+                            var url = CTX + "/api/hisTollRecord/printDrugFive/index.ahsj?number=" + number + "&token=" + TOKEN + "&type=2";
                             dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                         } else {
                             dialog.warn("没有需要打印的内容！")
                         }
 
-                        return false ;
+                        return false;
                     }
-                    ,btn3: function(index, layero){
+                    , btn3: function (index, layero) {
                         //按钮【按钮三】的回调
                         if (number != "" && number != null && number != undefined) {
-                            var url = CTX + "/api/hisTollRecord/printDrugFive/index.ahsj?number=" + number + "&token=" + TOKEN+"&type=3";
+                            var url = CTX + "/api/hisTollRecord/printDrugFive/index.ahsj?number=" + number + "&token=" + TOKEN + "&type=3";
                             dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                         } else {
                             dialog.warn("没有需要打印的内容！")
                         }
-                        return false ;
+                        return false;
                     }
-                    ,cancel: function(){
+                    , cancel: function () {
                         //右上角关闭回调
 
                         // return false

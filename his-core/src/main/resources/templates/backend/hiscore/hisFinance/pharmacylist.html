@@ -257,6 +257,8 @@
         var searchForm = $("#searchForm").serialize();
         var salePrice = $("#salePrice")
         var costPrice = $("#costPrice")
+        var years = $("#years").val();
+        var months = $("#months").val();
         //获取基本信息
         $.ahsjajax(
             CTX + "/api/hisTollRecord/getPharmacyinventoryPrice?token=" + TOKEN,
@@ -276,6 +278,28 @@
                         $("#maxTime").html(upTime)
                     }
                     return true;
+
+                    if ((lowTime == null || lowTime == "" || lowTime == undefined) &&
+                        (upTime == null || upTime == "" || upTime == undefined) &&
+                        (months != null && months != "" && months != undefined) &&
+                        (years == null || years == "" || years == undefined)) {
+                        $("#minTime").html(months + "月")
+                        $("#maxTime").html(months + "月")
+                    }
+                    if ((lowTime == null || lowTime == "" || lowTime == undefined) &&
+                        (upTime == null || upTime == "" || upTime == undefined) &&
+                        (years != null && years != "" && years != undefined) &&
+                        (months == null || months == "" || months == undefined)) {
+                        $("#minTime").html(years + "年")
+                        $("#maxTime").html(years + "年")
+                    }
+                    if ((lowTime == null || lowTime == "" || lowTime == undefined) &&
+                        (upTime == null || upTime == "" || upTime == undefined) &&
+                        (years != null && years != "" && years != undefined) &&
+                        (months != null && months != "" && months != undefined)) {
+                        $("#minTime").html(years + "年"+months+"月")
+                        $("#maxTime").html(years + "年"+months+"月")
+                    }
                 } else {
                     $("#minTime").html("")
                     $("#maxTime").html("")

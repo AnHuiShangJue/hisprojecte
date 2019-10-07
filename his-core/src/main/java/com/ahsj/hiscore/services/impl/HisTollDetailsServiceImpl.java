@@ -164,6 +164,11 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
     @Transactional(readOnly = true)
     public List<HisTollDetails> listByNumber(String number) throws Exception {
         List<HisTollDetails> hisTollDetails = hisTollDetailsMapper.listByNumber(number);//所有收费明细
+        if(EmptyUtil.Companion.isNullOrEmpty(hisTollDetails)){//没有收费明细
+            HisTollDetails priceByNumber = hisTollDetailsMapper.getPriceByNumber(number);
+            hisTollDetails.add(priceByNumber);
+            return hisTollDetails;
+        }
         for (HisTollDetails h : hisTollDetails) {
             Translate translate = new Translate();//翻译
             if (h.getType() == 1 || h.getType() == 4) {//药品

@@ -2,6 +2,7 @@ package com.ahsj.hiscore.dao;
 
 import com.ahsj.hiscore.entity.HisHospitalManage;
 import com.ahsj.hiscore.entity.HisTollDetails;
+import com.ahsj.hiscore.entity.HisTollRecord;
 import org.apache.ibatis.annotations.Mapper;
 import core.entity.PageBean;
 import org.apache.ibatis.annotations.Param;
@@ -102,4 +103,14 @@ public interface HisTollDetailsMapper extends BaseMapper<HisTollDetails> {
      * @Time 13:55
      **/
     HisTollDetails selectNumber(String number);
+
+    /**
+     * @Description 根据交易流水号查询价格信息
+     * @Params: [number]
+     * @Author: dingli
+     * @Return: com.ahsj.hiscore.entity.HisTollRecord
+     * @Date 2019/10/7
+     * @Time 14:10
+     **/
+    HisTollDetails getPriceByNumber(String number) throws Exception;
 }

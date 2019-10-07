@@ -997,4 +997,7 @@ r.money,r.recover_the_fee,r.create_date,i.user_name
 				SELECT r.medical_record_id from his_toll_record   as r   where r.number =  #{number})
     </select>
 
+    <select id="getPriceByNumber" resultMap="BaseResultMap" parameterType="java.lang.String">
+	select r.recover_the_fee,r.actual_charge as total_prices,r.money ,r.deposit from  his_toll_record as r where r.number =#{number}
+    </select>
 </mapper>

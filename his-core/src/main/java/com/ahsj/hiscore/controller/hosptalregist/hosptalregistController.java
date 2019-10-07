@@ -1,4 +1,5 @@
 package com.ahsj.hiscore.controller.hosptalregist;
+
 import com.ahsj.hiscore.dao.HisUserDoctorMapper;
 import com.ahsj.hiscore.entity.HisHosptalregist;
 import com.ahsj.hiscore.entity.HisUserDoctor;
@@ -12,10 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import core.message.Message;
+
 @RestController
 @RequestMapping("/api/hosptalregist/")
-public class hosptalregistController  extends BaseController {
-   @Autowired
+public class hosptalregistController extends BaseController {
+    @Autowired
     HisWradService hisWradService;
     @Autowired
     HisHosptalregistService hisHosptalregistService;
@@ -33,52 +35,52 @@ public class hosptalregistController  extends BaseController {
     IOrganizationService iOrganizationService;
 
     @RequestMapping("add/index.ahsj")
-    /**  
-         *@Description 
-           * @param token
-         *@Author: dingli
-         *@return    
-         *@Date 2019/7/13
-         *@Time 15:50
-        **/
-    ModelAndView addIndex(String token)throws Exception{
+    /**
+     *@Description
+     * @param token
+     *@Author: dingli
+     *@return
+     *@Date 2019/7/13
+     *@Time 15:50
+     **/
+    ModelAndView addIndex(String token) throws Exception {
 
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/hosptalregist/add");
-        modelAndView.addObject("title","医疗信息系统");
-        modelAndView.addObject("token",token);
-        modelAndView.addObject("loginName",getUserName());
-        modelAndView.addObject("userId",getId());
-        modelAndView.addObject("departmentId",getDeptId());
-        modelAndView.addObject("departmentName",iOrganizationService.getOrganizationById(Long.valueOf(getDeptId())).getName());
+        modelAndView.addObject("title", "医疗信息系统");
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("loginName", getUserName());
+        modelAndView.addObject("userId", getId());
+        modelAndView.addObject("departmentId", getDeptId());
+        modelAndView.addObject("departmentName", iOrganizationService.getOrganizationById(Long.valueOf(getDeptId())).getName());
         return modelAndView;
     }
 
     @RequestMapping(value = "getHisWard.ahsj")
-    /**  
-         *@Description 
-           * @param departmentId
+    /**
+     *@Description
+     * @param departmentId
      * @param token
-         *@Author: dingli
-         *@return    
-         *@Date 2019/7/13
-         *@Time 15:51
-        **/
-    public String  getDoctor(Long departmentId,String token) throws Exception{
-        return  JSON.toJSONString(hisWradService.selectHisWard());
+     *@Author: dingli
+     *@return
+     *@Date 2019/7/13
+     *@Time 15:51
+     **/
+    public String getDoctor(Long departmentId, String token) throws Exception {
+        return JSON.toJSONString(hisWradService.selectHisWard());
     }
 
     @RequestMapping("toadd.ahsj")
-    /**  
-         *@Description 
-           * @param token
+    /**
+     *@Description
+     * @param token
      * @param hisHosptalregist
-         *@Author: dingli
-         *@return    
-         *@Date 2019/7/13
-         *@Time 16:20
-        **/
-    public Message addHosptalregist(String token, HisHosptalregist hisHosptalregist) throws Exception{
-        return  hisHosptalregistService.saveOrUpdate(hisHosptalregist);
+     *@Author: dingli
+     *@return
+     *@Date 2019/7/13
+     *@Time 16:20
+     **/
+    public Message addHosptalregist(String token, HisHosptalregist hisHosptalregist) throws Exception {
+        return hisHosptalregistService.saveOrUpdate(hisHosptalregist);
 
     }
 
