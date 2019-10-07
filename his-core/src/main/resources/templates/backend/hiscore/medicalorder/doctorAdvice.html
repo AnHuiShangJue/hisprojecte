@@ -2,22 +2,27 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
 <head>
     <style>
-        .fontsize01 {
-            font-size: 14px;
+        body{
+            font-size: 10px;
+            line-height: 15px;
+            padding: 0;
+            margin: 0;
         }
-
         .fontsize02 {
-            font-size: 12px;
+            font-size: 10px;
         }
-
-        /*table{*/
-        /*    border-right:1px solid black;*/
-        /*    border-bottom:1px solid black;*/
-        /*}*/
-        /*table td{*/
-        /*    border-left:1px solid black;*/
-        /*    border-top:1px solid black;*/
-        /*}*/
+        .fontsize02 {
+            font-size: 10px;
+        }
+        label{
+            font-size: 10px;
+            padding: 0;
+            margin: 0;
+        }
+        table tr td{
+            padding: 0;
+            margin: 0;
+        }
     </style>
 </head>
 <div th:replace="public/base_print :: html"></div>
@@ -25,10 +30,10 @@
       data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
 
 <div class="row">
-    <div class="row valign-wrapper">
+    <div class="row valign-wrapper" style="margin-top: 30px;height: 35px;">
         <div class="col s12 m12 l12 center">
-            <h5 class="black-text">中柬第一医院长期医嘱单</h5>
-            <label class="black-text fontsize02">The first china-cambodia hospital Long term medical advice sheet</label>
+            <h5 class="black-text fontsize02" style="padding: 0;margin: 0;text-align: center;">中柬第一医院长期医嘱单</h5>
+            <p class="black-text fontsize02" style="padding: 0;margin: 0;text-align: center">The first china-cambodia hospital Long term medical advice sheet</p>
         </div>
     </div>
 
@@ -36,77 +41,78 @@
     <input id="medicalOrderNumber" th:value="${hisMedicalOrder.number}" type="hidden">
     <input id="type" th:value="${hisMedicalOrder.type}" type="hidden">
 
-    <div class="row valign-wrapper">
+    <div class="row valign-wrapper" style="height: 45px;">
         <div class="col s12 m12 l12">
-        <table border="0" cellspacing="0" cellpadding="0">
+            <table border="0" cellspacing="0" cellpadding="0" style="width: 750px;margin: 0 auto;">
 
-        <tr>
-            <td>
-                <label>姓名(name)</label>
-                <label th:text="${hisHospitalManage.patientName}"></label>
-            </td>
-            <td>
-                <label>性别(sex)</label>
-                <label th:text="${hisHospitalManage.sexName}"></label>
-            </td>
-            <td>
-                <label>年龄(age)</label>
-                <label th:text="${hisHospitalManage.age}"></label>
-            </td>
-            <td>
-                <label id="now"></label>
-            </td>
+                <tr>
+                    <td>
+                        <label>姓名(name)</label>
+                        <label th:text="${hisHospitalManage.patientName}"></label>
+                    </td>
+                    <td>
+                        <label>性别(sex)</label>
+                        <label th:text="${hisHospitalManage.sexName}"></label>
+                    </td>
+                    <td>
+                        <label>年龄(age)</label>
+                        <label th:text="${hisHospitalManage.age}"></label>
+                    </td>
+                    <td>
+                        <label id="now"></label>
+                    </td>
 
-        </tr>
-            <tr>
-                <td>
-                    <label>科室(Department)</label>
-                    <label th:text="${hisHospitalManage.departmentName}"></label>
-                </td>
-                <td>
-                    <label>床号(Bed No)</label>
-                    <label th:text="${hisHospitalManage.bedsNumber}"></label>
-                </td>
-                <td colspan="2">
-                    <label>住院编号(Hospital number)</label>
-                    <label th:text="${hisHospitalManage.number}"></label>
-                </td>
-            </tr>
-        </table>
+                </tr>
+                <tr>
+                    <td>
+                        <label>科室(Department)</label>
+                        <label th:text="${hisHospitalManage.departmentName}"></label>
+                    </td>
+                    <td>
+                        <label>床号(Bed No)</label>
+                        <label th:text="${hisHospitalManage.bedsNumber}"></label>
+                    </td>
+                    <td colspan="2">
+                        <label>住院编号(Hospital number)</label>
+                        <label th:text="${hisHospitalManage.number}"></label>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 
     <div class="row valign-wrapper">
-        <div class="col s12 m12 l12">
-            <table border="0" cellspacing="0" cellpadding="0">
+        <div class="col s12 m12 l12" style="height: 1000px;">
+            <table border="0" cellspacing="0" cellpadding="0" border-collapse="collapse" style="width: 750px;margin: 0 auto;" id="table_id">
+                <!--                <tr>-->
+                <!--                    <th style="border:1px solid black;"><div style="transform: scale(0.5);height: 50px;">开始时间(The start time)</div></th>-->
+                <!--                    <th style="border:1px solid black;width:200px;"><div style="transform: scale(0.5);">医嘱内容(Medical content)</div></th>-->
+                <!--                    <th style="border:1px solid black;"><div style="transform: scale(0.5);">医师签名(Physician signature)</div></th>-->
+                <!--                    <th style="border:1px solid black;"><div style="transform: scale(0.5);">执行时间(execution time)</div></th>-->
+                <!--                    <th style="border:1px solid black;"><div style="transform: scale(0.5);">执行人签名(Signature of executor)</div></th>-->
+                <!--                    <th style="border:1px solid black;"><div style="transform: scale(0.5);">核对人签名(Check signature)</div></th>-->
+                <!--                    <th style="border:1px solid black;width:70px;"><div style="transform: scale(0.5);">停止时间(Stop time)</div></th>-->
+                <!--                    <th style="border:1px solid black;"><div style="transform: scale(0.5);">停止护士签名(Stop nurse signature)</div></th>-->
+                <!--                    <th style="border:1px solid black;"><div style="transform: scale(0.5);">停止医师签名(Stop physician signature)</div></th>-->
 
+                <!--                </tr>-->
 
-                <tr>
-                    <th style="border:1px solid black;">开始时间(The start time)</th>
-                    <th style="border:1px solid black;width:200px;">医嘱内容(Medical content)</th>
-                    <th style="border:1px solid black;">医师签名(Physician signature)</th>
-                    <th style="border:1px solid black;">执行时间(execution time)</th>
-                    <th style="border:1px solid black;">执行人签名(Signature of executor)</th>
-                    <th style="border:1px solid black;">核对人签名(Check signature)</th>
-                    <th style="border:1px solid black;">停止时间(Stop time)</th>
-                    <th style="border:1px solid black;">停止护士签名(Stop nurse signature)</th>
-                    <th style="border:1px solid black;">停止医师签名(Stop physician signature)</th>
-
-                </tr>
-
-                <tr th:each="c:${hisMedicalOrderDetailList}" >
-                    <td th:text="${#dates.format(c.startTime, 'yyyy-MM-dd HH:mm:ss')}" style="border:1px solid black;" th:if="${c.startTime} ne null" ></td>
-                    <td th:text="${#dates.format(new java.util.Date().getTime(), 'yyyy-MM-dd HH:mm:ss')}" style="border:1px solid black;" th:if="${c.startTime} eq null"></td>
-                    <td th:text="${c.name}" style="border:1px solid black;"></td>
-                    <td style="border:1px solid black;" ></td>
-                    <td style="border:1px solid black;"></td>
-                    <td style="border:1px solid black;"></td>
-                    <td style="border:1px solid black;"></td>
-                    <td style="border:1px solid black;"></td>
-                    <td style="border:1px solid black;"></td>
-                    <td style="border:1px solid black;"></td>
-                </tr>
+                <!--                <tr th:each="c:${hisMedicalOrderDetailList}" class="trCount">-->
+                <!--                    <td th:text="${#dates.format(c.startTime, 'yyyy-MM-dd HH:mm:ss')}" style="border:1px solid black;" th:if="${c.startTime} ne null" ></td>-->
+                <!--                    <td th:text="${#dates.format(new java.util.Date().getTime(), 'yyyy-MM-dd HH:mm:ss')}" style="border:1px solid black;" th:if="${c.startTime} eq null"></td>-->
+                <!--                    <td th:text="${c.name}" style="border:1px solid black;"></td>-->
+                <!--                    <td style="border:1px solid black;" ></td>-->
+                <!--                    <td style="border:1px solid black;"></td>-->
+                <!--                    <td style="border:1px solid black;"></td>-->
+                <!--                    <td style="border:1px solid black;"></td>-->
+                <!--                    <td style="border:1px solid black;"></td>-->
+                <!--                    <td style="border:1px solid black;"></td>-->
+                <!--                    <td style="border:1px solid black;"></td>-->
+                <!--                </tr>-->
             </table>
+        </div>
+        <div id="addpage">
+
         </div>
     </div>
 </div>
@@ -118,20 +124,10 @@ Scripts
 <div th:replace="public/base_print_script :: html"></div>
 <script th:inline="javascript">
     $(document).ready(function () {
-        var myDate = new Date();
-        var year = myDate.getFullYear();
-        var month = myDate.getMonth() + 1;
-        var date = myDate.getDate();
-        var h = myDate.getHours();
-        var m = myDate.getMinutes();
-        var s = myDate.getSeconds();
-        var now = year + "-" + month + "-" + date + " " + h + ":" + m + ":" + s;
-        console.log(now);
-        document.getElementById("now").innerHTML=now;
-
+        document.getElementById("now").innerHTML=getDay();
         printShow();
-
-
+        // var trCount=document.getElementsByClassName("trCount").length;
+        // console.log(trCount);
     });
     var hosptalregistNumber = $("#hosptalregistNumber").val();
     var number = $("#medicalOrderNumber").val();
@@ -141,47 +137,64 @@ Scripts
             CTX + "/api/hisMedicalOrder/printDoctorAdvice/index.ahsj",
             {"number": number},
             function (data) {
-                var jsons = data[0];
-                // if (!isNullOrEmpty(jsons)) {//有
-                //     var type = $("#type").val();
-                //     var trs;
-                //     if (type == 1) {
-                //         trs = "<tr><td><h6 class='black-text'>序号(Serial number)</h6></td><td><h6 class='black-text'>开始时间(Starting time)</h6></td><td><h6 class='black-text'>医嘱内容(Medical content)</h6></td><td><h6 class='black-text'>用法(usage)</h6></td><td><h6 class='black-text'>间隔(interval)</h6></td><td><h6 class='black-text'>总量(Total amount</h6></td><td><h6 class='black-text'>校对护士(Proofreading nurse )</h6></td>" +
-                //             "<td><h6 class='black-text'>执行护士(Executive nurse )</h6></td><td><h6 class='black-text'>停嘱医生(Stop doctor )</h6></td><td><h6 class='black-text'>停嘱时间(Stop time)</h6></td><td><h6 class='black-text'>停嘱校对护士(Stop signing proofreading nurse)</h6></td></tr>";
-                //     } else {
-                //         trs = "<tr><td><h6 class='black-text'>序号(Serial number)</h6></td><td><h6 class='black-text'>开始时间(Starting time)</h6></td><td><h6 class='black-text'>医嘱内容(Medical content)</h6></td><td><h6 class='black-text'>用法(usage)</h6></td><td><h6 class='black-text'>间隔(interval)</h6></td>  <td><h6 class='black-text'>总量(Total amount</h6></td><td><h6 class='black-text'>校对护士(Proofreading nurse )</h6></td>" +
-                //             "<td><h6 class='black-text'>执行护士(Executive nurse )</h6></td></tr>";
-                //     }
-                //
-                //
-                //     $.each(data, function (index, item) {
-                //         if (isNullOrEmpty(item.startTime)) {
-                //             item.startTime = "";
-                //         }
-                //         if (isNullOrEmpty(item.stopDate)) {
-                //             item.stopDate = "";
-                //         }
-                //         if (isNullOrEmpty(item.usages)) {
-                //             item.usages = "";
-                //         }
-                //         if (isNullOrEmpty(item.dosage)) {
-                //             item.dosage = "";
-                //         }
-                //         if (isNullOrEmpty(item.intervals)) {
-                //             item.intervals = "";
-                //         }
-                //
-                //
-                //         if (type == 1) {
-                //             trs += "<tr><td><p class='black-text fontsize03'>" + item.orderNum + "</p></td><td ><p class='black-text fontsize03'>" + item.startTime + "</p></td><td ><p class='black-text fontsize03'>" + item.name + "</p></td><td ><p class='black-text fontsize03'>" + item.usages + "</p></td><td ><p class='black-text fontsize03'>" + item.intervalsName + "</p></td><td ><p class='black-text fontsize03'>" + item.totalAmount + "</p></td><td ><p class='black-text fontsize03'>" + item.pnName + "</p></td><td ><p class='black-text fontsize03'>" + item.anName + "</p></td><td ><p class='black-text fontsize03'>" + item.stopUserName + "</p></td>" +
-                //                 "<td ><p class='black-text fontsize03'>" + item.stopDate + "</p></td><td ><p class='black-text fontsize03'>" + item.spnName + "</p></td></tr >";
-                //         } else {
-                //             trs += "<tr><td><p class='black-text fontsize03'>" + item.orderNum + "</p></td><td ><p class='black-text fontsize03'>" + item.startTime + "</p></td><td ><p class='black-text fontsize03'>" + item.name + "</p></td><td ><p class='black-text fontsize03'>" + item.usages + "</p></td><td ><p class='black-text fontsize03'>" + item.intervalsName + "</p></td><td ><p class='black-text fontsize03'>" + item.totalAmount + "</p></td><td ><p class='black-text fontsize03'>" + item.pnName + "</p></td><td ><p class='black-text fontsize03'>" + item.anName + "</p></td></tr>";
-                //         }
-                //     });
-                //     var jsons = data[0]
-                //     $("#table_id").append(trs);
-                // }
+                console.log(data);
+                if (!isNullOrEmpty(data)) {//有
+                    if(data.length<=25){
+                    var trs;
+                    trs = "<tr><td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">开始时间(The start time)</p></td>" +
+                        "<td style=\"border:1px solid black;width:190px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">医嘱内容(Medical content)</p></td>" +
+                        "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">医师签名(Physician signature)</p></td>" +
+                        "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">执行时间(execution time)</p></td>" +
+                        "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 10px\">执行人签名(Signature of executor)</p></td>" +
+                        "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">核对人签名(Check signature)</p></td>" +
+                        "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止时间(Stop time)</p></td>" +
+                        "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止护士签名(Stop nurse signature)</p></td>" +
+                        "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止医师签名(Stop physician signature)</p></td></tr>";
+
+                    // $.each(data, function (index, item) {
+                    //     if (isNullOrEmpty(item.startTime)) {
+                    //         item.startTime = getDay();
+                    //     }
+                    //     if (isNullOrEmpty(item.name)) {
+                    //         item.name = "";
+                    //     }
+                    //
+                    //     trs += "<tr class=\"trCount\"><td style=\"border:1px solid black;\">"+ item.startTime +"</td>" +
+                    //         "<td style=\"border:1px solid black;\">"+ item.name +"</td>" +
+                    //         "<td style=\"border:1px solid black;\"></td>" +
+                    //         "<td style=\"border:1px solid black;\"></td>" +
+                    //         "<td style=\"border:1px solid black;\"></td>" +
+                    //         "<td style=\"border:1px solid black;\"></td>" +
+                    //         "<td style=\"border:1px solid black;\"></td>" +
+                    //         "<td style=\"border:1px solid black;\"></td>" +
+                    //         "<td style=\"border:1px solid black;\"></td></tr>";
+                    // });
+
+                    for(var i = 0 ; i < data.length ; i++){
+                        if (isNullOrEmpty(data[i].startTime)) {
+                            data[i].startTime = getDay();
+                        }
+                        if (isNullOrEmpty(data[i].name)) {
+                            data[i].name = "";
+                        }
+
+                        trs += "<tr class=\"trCount\"><td style=\"border:1px solid black;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+ data[i].startTime +"</p></td>" +
+                            "<td style=\"border:1px solid black;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+ data[i].name +"</p></td>" +
+                            "<td style=\"border:1px solid black;\"></td>" +
+                            "<td style=\"border:1px solid black;\"></td>" +
+                            "<td style=\"border:1px solid black;\"></td>" +
+                            "<td style=\"border:1px solid black;\"></td>" +
+                            "<td style=\"border:1px solid black;\"></td>" +
+                            "<td style=\"border:1px solid black;\"></td>" +
+                            "<td style=\"border:1px solid black;\"></td></tr>";
+                    }
+                    $("#table_id").append(trs);
+                    }
+                    if(data.length>25){
+                        printShow2();
+                    }
+
+                }
             },
             function () {
                 M.toast({html: "网络异常"});
@@ -189,10 +202,82 @@ Scripts
             }
         );
     }
+    function printShow2() {
+        $.ahsjajax(
+            CTX + "/api/hisMedicalOrder/printDoctorAdvice/index.ahsj",
+            {"number": number},
+            function (data) {
+                //console.log(data);
+                if (!isNullOrEmpty(data)) {//有
+                    var trs;
+                    trs = "<tr><td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">开始时间(The start time)</p></td>" +
+                        "<td style=\"border:1px solid black;width:190px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">医嘱内容(Medical content)</p></td>" +
+                        "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">医师签名(Physician signature)</p></td>" +
+                        "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">执行时间(execution time)</p></td>" +
+                        "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 10px\">执行人签名(Signature of executor)</p></td>" +
+                        "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">核对人签名(Check signature)</p></td>" +
+                        "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止时间(Stop time)</p></td>" +
+                        "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止护士签名(Stop nurse signature)</p></td>" +
+                        "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止医师签名(Stop physician signature)</p></td></tr>";
 
+                    for(var i = 0 ; i < 25 ; i++){
+                        if (isNullOrEmpty(data[i].startTime)) {
+                            data[i].startTime = getDay();
+                        }
+                        if (isNullOrEmpty(data[i].name)) {
+                            data[i].name = "";
+                        }
+
+                        trs += "<tr class=\"trCount\"><td style=\"border:1px solid black;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+ data[i].startTime +"</p></td>" +
+                            "<td style=\"border:1px solid black;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+ data[i].name +"</p></td>" +
+                            "<td style=\"border:1px solid black;\"></td>" +
+                            "<td style=\"border:1px solid black;\"></td>" +
+                            "<td style=\"border:1px solid black;\"></td>" +
+                            "<td style=\"border:1px solid black;\"></td>" +
+                            "<td style=\"border:1px solid black;\"></td>" +
+                            "<td style=\"border:1px solid black;\"></td>" +
+                            "<td style=\"border:1px solid black;\"></td></tr>";
+                    }
+                    $("#table_id").append(trs);
+
+
+
+                    var adddiv;
+                    adddiv = "<div style=\"height: 1060px;padding-top: 50px\"><table id=\"table_id2\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" border-collapse=\"collapse\" style=\"width: 750px;margin: 0 auto;\"></table></div>";
+                    $("#addpage").append(adddiv);
+
+                    var trss;
+                    trss = "";
+
+                    for(var i = 25 ; i < data.length ; i++){
+                        if (isNullOrEmpty(data[i].startTime)) {
+                            data[i].startTime = getDay();
+                        }
+                        if (isNullOrEmpty(data[i].name)) {
+                            data[i].name = "";
+                        }
+
+                        trss += "<tr class=\"trCount\"><td style=\"border:1px solid black;width: 70px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+ data[i].startTime +"</p></td>" +
+                            "<td style=\"border:1px solid black;width: 190px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+ data[i].name +"</p></td>" +
+                            "<td style=\"border:1px solid black;width: 70px\"></td>" +
+                            "<td style=\"border:1px solid black;width: 70px\"></td>" +
+                            "<td style=\"border:1px solid black;width: 70px\"></td>" +
+                            "<td style=\"border:1px solid black;width: 70px\"></td>" +
+                            "<td style=\"border:1px solid black;width: 70px\"></td>" +
+                            "<td style=\"border:1px solid black;width: 70px\"></td>" +
+                            "<td style=\"border:1px solid black;width: 70px\"></td></tr>";
+                    }
+                    $("#table_id2").append(trss);
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            })
+    }
     function doOk() {
         $('body  div div.row.valign-wrapper').printThis({
-            importCSS: true,
+            importCSS: false,
             debug: false,
             afterPrint: function () {
                 dialog.confirm('确定打印?', function (index, layero) {
@@ -201,6 +286,18 @@ Scripts
                 });
             }
         });
+    }
+
+    function getDay(){
+        var myDate = new Date();
+        var year = myDate.getFullYear();
+        var month = myDate.getMonth() + 1;
+        var date = myDate.getDate();
+        var h = myDate.getHours();
+        var m = myDate.getMinutes();
+        var s = myDate.getSeconds();
+        var now = year + "-" + month + "-" + date + " " + h + ":" + m + ":" + s;
+        return now;
     }
 
     $("input").change(function () {
