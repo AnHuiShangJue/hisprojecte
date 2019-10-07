@@ -45,6 +45,9 @@ public class TreatmentPlanServiceImpl implements TreatmentPlanService {
     @Autowired
     HisRecordProjectService hisRecordProjectService;
 
+    @Autowired
+    HisInfusionService hisInfusionService;
+
 
     /**
      * @return core.message.Message
@@ -56,7 +59,7 @@ public class TreatmentPlanServiceImpl implements TreatmentPlanService {
      **/
     @Override
     @Transactional(readOnly = false)
-    public Message saveOrUpdate(HisMedical hisMedical, List<HisMedicationDetails> detailsList, List<HisRecordProject> projects, Long recordId) throws Exception {
+    public Message saveOrUpdate(HisMedical hisMedical, List<HisMedicationDetails> detailsList, List<HisRecordProject> projects, Long recordId,List<HisInfusion> hisInfusionList) throws Exception {
         Message message =null;
         if (!EmptyUtil.Companion.isNullOrEmpty(recordId)) {
             //处理门诊病历
@@ -145,6 +148,10 @@ public class TreatmentPlanServiceImpl implements TreatmentPlanService {
                 hisRecordProjectService.delete(deletedIds);
             }
            String mes =  ((BoolMessage)message).getMessage();
+            //保存输液单信息
+            if(!EmptyUtil.Companion.isNullOrEmpty(hisInfusionList)&&hisInfusionList.size() !=0) {
+                hisInfusionService.addInfusionMedicine(hisInfusionList, recordId);
+            }
             return MessageUtil.createMessage(true, "就诊记录"+mes);
         } else return MessageUtil.createMessage(false, "保存就诊记录失败！该就诊记录无任何关联或已被删除！请联系管理人员！");
 

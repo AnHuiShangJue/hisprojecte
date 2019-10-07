@@ -532,11 +532,17 @@ where his_infusion.number =#{infusionNumber,jdbcType=VARCHAR}
   </select>
 
   <select id="selectByRecordNumberAndNotPay" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select a.*,c.drugs_spec as drugsSpec
-    from his_infusion as a
-left join his_medication_details as b on a.medication_id = b.id
-left join his_medicine_info as c on a.drugs_numb = c.drugs_numb
-where b.is_pay = 2 and a.hosptalregist_number = #{medicalRecordId,jdbcType=VARCHAR}
+    select a.*,
+           c.drugs_spec as drugsSpec,
+           c.id as medicineId
+          from his_infusion as a
+          left join his_medication_details as b on a.medication_id = b.id
+          left join his_medicine_info as c on a.drugs_numb = c.drugs_numb
+          where
+                1=1 and
+              b.is_pay = 2
+            and a.hosptalregist_number = #{medicalRecordId,jdbcType=VARCHAR}
+    order by a.id
   </select>
 
 
@@ -559,5 +565,11 @@ where b.is_pay = 2 and a.hosptalregist_number = #{medicalRecordId,jdbcType=VARCH
     set remarks = #{remarks,jdbcType=VARCHAR}
     where number = #{number,jdbcType=BIGINT}
   </update>
+
+  <select id="selectByMedicationId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select his_infusion.*
+from his_infusion
+where medication_id = #{id.jdbcType=BIGINT}
+  </select>
 
 </mapper>

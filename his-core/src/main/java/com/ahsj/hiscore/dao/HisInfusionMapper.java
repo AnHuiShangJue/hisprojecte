@@ -3,6 +3,7 @@ package com.ahsj.hiscore.dao;
 import org.apache.ibatis.annotations.Mapper;
 import com.ahsj.hiscore.entity.HisInfusion;
 import core.entity.PageBean;
+import org.apache.ibatis.annotations.Param;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -73,7 +74,7 @@ public interface HisInfusionMapper extends BaseMapper<HisInfusion>{
      *@Date 2019-10-06
      *@Time 12:56
     **/
-    List<HisInfusion> selectByRecordNumberAndNotPay(String medicalRecordId);
+    List<HisInfusion> selectByRecordNumberAndNotPay(@Param(value = "medicalRecordId") String medicalRecordId);
 
     /**
      *@Description 根据就诊记录编号删除未付费的输液单
@@ -95,4 +96,13 @@ public interface HisInfusionMapper extends BaseMapper<HisInfusion>{
     */
     List<? extends HisInfusion> listByRemark(PageBean<HisInfusion> pageBean);
 
+    /**
+     *@Description 根据用药明细id搜索输液单
+     *@Params [id]
+     *@return com.ahsj.hiscore.entity.HisInfusion
+     *@Author zhushixiang
+     *@Date 2019-10-07
+     *@Time 11:26
+     **/
+    List<HisInfusion> selectByMedicationId(Long id);
 }

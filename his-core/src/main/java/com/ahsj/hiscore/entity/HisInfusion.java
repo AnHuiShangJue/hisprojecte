@@ -72,6 +72,8 @@ public class HisInfusion extends BaseEntity {
 
 
 
+
+
     //别名
     private String nurseName;
 
@@ -88,12 +90,15 @@ public class HisInfusion extends BaseEntity {
 
     private String smallUnit;
     private Integer countNumber;
+    private Long medicineId;//药品基本表ID
 
 
     private String patientName;
     //翻译字段
     private String tdrugsName;
     private String tunit;
+
+
 
 
     public Long getId() {
@@ -397,6 +402,14 @@ public class HisInfusion extends BaseEntity {
 
     public void setStartTimeVarchar(String startTimeVarchar) {
         this.startTimeVarchar = startTimeVarchar;
+    }
+
+    public Long getMedicineId() {
+        return medicineId;
+    }
+
+    public void setMedicineId(Long medicineId) {
+        this.medicineId = medicineId;
     }
 //    @Override
 //    public String toString() {

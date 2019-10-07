@@ -245,18 +245,33 @@ public class HisInfusionServiceImpl implements HisInfusionService {
     public Message addInfusionMedicine(List<HisInfusion> hisInfusionList,Long recordId) throws Exception {
         String name="SYD";
         Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmssSSS");
         String createdate = sdf.format(date);
         List<HisInfusion> saveList = new ArrayList<>();
         HisMedicalRecord hisMedicalRecord = hisMedicalRecordService.selectById(recordId);
+        //查询所有此就诊记录下的所有未付款的输液单
         List<HisInfusion> checkInfusionList = hisInfusionMapper.selectByRecordNumberAndNotPay(hisMedicalRecord.getMedicalRecordId());
+        //查询所有此就诊记录下的所有未付款的用药明细
+        List<HisMedicationDetails> hisMedicationDetailsList = hisMedicationDetailsMapper.selectByRecordIdNotIsPay(hisMedicalRecord.getId());
+        //删除所有此就诊记录下的所有未付款的输液单
         if(!EmptyUtil.Companion.isNullOrEmpty(checkInfusionList) && checkInfusionList.size() > 0) {
-            for (HisInfusion hisInfusion : checkInfusionList) {
-                hisInfusionMapper.deleteByPrimaryKey(hisInfusion.getId());
+            for (int i = 0; i < checkInfusionList.size(); i++) {
+                hisInfusionMapper.deleteByPrimaryKey(checkInfusionList.get(i).getId());
             }
         }
+        Long id = hisInfusionList.get(0).getId();//此id为标记相同输液单ID
         for (int i = 0; i <hisInfusionList.size() ; i++) {
-            //传来的ID若大于0为输液单表ID
+            //传来的ID相同代表为相同输液单
+            if(id == hisInfusionList.get(i).getId()){
+
+            }
+            //id不同 说明为下一组输液单了
+            else {
+                id = hisInfusionList.get(i).getId();
+                date = new Date();
+                sdf = new SimpleDateFormat("yyyyMMddhhmmssSSS");
+                createdate = sdf.format(date);
+            }
             HisPharmacyDetail hisPharmacyDetail = hisPharmacyDetailService.selectByDrugsNumb(hisInfusionList.get(i).getDrugsNumb());
             HisInfusion hisInfusion = new HisInfusion();
             hisInfusion.setRecordId(recordId.toString());
@@ -265,10 +280,16 @@ public class HisInfusionServiceImpl implements HisInfusionService {
             hisInfusion.setPatientId(hisMedicalRecord.getPatientId());
             hisInfusion.setUsages(hisInfusionList.get(i).getUsages());
             hisInfusion.setDrugsNumb(hisPharmacyDetail.getDrugsNumb());
-            hisInfusion.setDrugname(hisPharmacyDetail.getDrugsName());
+            hisInfusion.setDrugname(hisInfusionList.get(i).getDrugname());
             hisInfusion.setDosage(hisInfusionList.get(i).getDosage());
             hisInfusion.setType(1);
             hisInfusion.setNumber(name+createdate);
+            for (HisMedicationDetails hisMedicationDetails : hisMedicationDetailsList) {
+                if(hisMedicationDetails.getDrugsNumb().equals(hisInfusionList.get(i).getDrugsNumb()) ){
+                    hisInfusion.setMedicationId(hisMedicationDetails.getId());
+                    break;
+                }
+            }
             saveList.add(hisInfusion);
         }
         hisInfusionMapper.insertBatch(saveList);
@@ -302,5 +323,19 @@ public class HisInfusionServiceImpl implements HisInfusionService {
     public PageBean<HisInfusion> listByRemark(PageBean<HisInfusion> pageBean) throws Exception {
         pageBean.setData(CodeHelper.getInstance().setCodeValue(hisInfusionMapper.listByRemark(pageBean)));
         return pageBean;
+    }
+
+    /**
+     *@Description 根据用药明细id搜索输液单
+     *@Params [id]
+     *@return com.ahsj.hiscore.entity.HisInfusion
+     *@Author zhushixiang
+     *@Date 2019-10-07
+     *@Time 11:25
+    **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<HisInfusion> selectByMedicationId(Long id) throws Exception {
+        return hisInfusionMapper.selectByMedicationId(id);
     }
 }

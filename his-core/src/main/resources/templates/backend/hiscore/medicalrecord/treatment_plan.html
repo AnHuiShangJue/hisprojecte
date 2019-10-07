@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
 
 <div th:replace="public/base_update :: html"></div>
 
@@ -7,7 +7,7 @@
       data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
 
 <div class="row">
-    <div class="input-field col s2 x2 m2 l2 xl2" >
+    <div class="input-field col s2 x2 m2 l2 xl2">
         <input type="hidden" id="demo" class="datepicker" name="demo">
     </div>
 
@@ -21,13 +21,14 @@
             <form class="col s12" id="patientMediReForm" onsubmit="return false;" action="#" method="post">
                 <ul class="stepper horizontal" id="horizStepper" style="min-height:726px;">
                     <li class="step active">
-                        <div class="step-title waves-effect">门 诊 病 历</div><label>Outpatient medical record</label>
+                        <div class="step-title waves-effect">门 诊 病 历</div>
+                        <label>Outpatient medical record</label>
                         <div class="step-content">
                             <div th:if="${true}">
                                 <div class="row">
                                     <div class="col s2 m2 l2 xl2 right">
                                         <a id="addMedicalTemplate"
-                                           class="btn waves-effect waves-light red " >
+                                           class="btn waves-effect waves-light red ">
                                             <i class="material-icons white-text tooltipped" data-position="bottom"
                                                data-delay="50"
                                                data-tooltip="使用病历模板（Use medical record template）">note_add</i>
@@ -112,7 +113,8 @@
                                         体格检查<span style="font-size: 12px">(Physical examination)</span>
                                     </h6>
                                     <div class="input-field col s2 x2 m2 l2 xl2">
-                                        <input type="number" id="bodyTemperature" name="bodyTemperature" min="16.00" step="0.01" max="48.00"
+                                        <input type="number" id="bodyTemperature" name="bodyTemperature" min="16.00"
+                                               step="0.01" max="48.00"
                                                th:value="${hisMedical.bodyTemperature}" class="active">
                                         <label for="bodyTemperature">体 温（ ℃） <span style="font-size: 12px">(body temperature  ℃
 
@@ -126,7 +128,8 @@
 )</span></label>
                                     </div>
                                     <div class="input-field col s2 x2 m2 l2 xl2">
-                                        <input type="number" id="heartRate" name="heartRate" min="1" max="255" step="1" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
+                                        <input type="number" id="heartRate" name="heartRate" min="1" max="255" step="1"
+                                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
                                                th:value="${hisMedical.heartRate}">
                                         <label for="heartRate">心 率 （bpm）<span style="font-size: 12px">(Heart rate bpm
 
@@ -180,7 +183,8 @@
                         </div>
                     </li>
                     <li class="step">
-                        <div class="step-title waves-effect">检 查 治 疗</div><label>Examination and treatment</label>
+                        <div class="step-title waves-effect">检 查 治 疗</div>
+                        <label>Examination and treatment</label>
                         <div class="step-content">
                             <div th:if="${true}">
                                 <div class="row">
@@ -235,11 +239,17 @@
                         </div>
                     </li>
                     <li class="step">
-                        <div class="step-title waves-effect">药 品 处 方</div><label>Drug prescription</label>
+                        <div class="step-title waves-effect">药 品 处 方</div>
+                        <label>Drug prescription</label>
                         <div class="step-content">
                             <!--<div th:if="${isSameUser}">-->
                             <div th:if="${true}">
                                 <div class="row">
+                                    <div class="col s3 m3 l3 xl3 left">
+                                        <a id="combinationMedicine" class="btn waves-effect waves-light "><i
+                                                class="material-icons  white-text tooltipped " data-position="bottom"
+                                                data-delay="50" data-tooltip="组合药品（Combination medicine）">settings_ethernet</i></a>
+                                    </div>
                                     <div class="col s3 m3 l3 xl3 right">
                                         <a id="addBtn"
                                            class="btn waves-effect waves-light red " th:if="${isSameUser}">
@@ -272,9 +282,63 @@
                                 <div class="row">
                                     <div class="col m6 s12 mb-1" style="width: auto;margin-bottom: 5% !important;">
                                         <button class="waves-effect waves-dark btn btn-primary" id="saveBtn"
-                                                type="submit" >保存为模板（Save as template）
+                                                type="submit">保存为模板（Save as template）
                                         </button>
                                     </div>
+                                    <div class="col m4 s12 mb-3" style="width: auto">
+                                        <button class="btn btn-light previous-step">
+                                            <i class="material-icons left">arrow_back</i>上一步
+                                        </button>
+                                    </div>
+                                    <div class="col m4 s12 mb-3" style="width: auto">
+                                        <button class="waves-effect waves dark btn btn-primary next-step"
+                                                type="submit">下一步<i class="material-icons right">arrow_forward</i>
+                                        </button>
+                                    </div>
+                                    <div class="col m6 s12 mb-1" style="width: auto;margin-bottom: 5% !important;">
+                                        <button class="red btn mr-1 btn-reset" style="margin-right: -1% !important "
+                                                type="reset" th:if="${isSameUser}">
+                                            <i class="material-icons left">clear</i>
+                                            重置
+                                        </button>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="step">
+                        <div class="step-title waves-effect">输 液 处 方</div>
+                        <label>Infusion prescription</label>
+                        <div class="step-content">
+                            <!--<div th:if="${isSameUser}">-->
+                            <div th:if="${true}">
+                                <div class="row">
+                                    <div class="col s3 m3 l3 xl3 right">
+                                        <a id="addBtnForInfusion"
+                                           class="btn waves-effect waves-light red ">
+                                            <i class="material-icons white-text tooltipped" data-position="bottom"
+                                               data-delay="50"
+                                               data-tooltip="新增输液药品（New infusion medicine）">add</i>
+                                        </a>
+                                        <a id="deleteListBtnForInfusion"
+                                           class="btn waves-effect waves-light red">
+                                            <i class="material-icons white-text tooltipped" data-position="bottom"
+                                               data-delay="50"
+                                               data-tooltip="批量移除输液处方明细（Batch removal of infusion prescription details）">remove</i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div id="medicineListForInfusion" class="col l12 m12 l12 xl12">
+                                    <table id="data-table-simple-medicineForInfusion">
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="step-actions" style="position: relative;bottom: 1px">
+                                <div class="row">
                                     <div class="col m4 s12 mb-3" style="width: auto">
                                         <button class="btn btn-light previous-step">
                                             <i class="material-icons left">arrow_back</i>上一步
@@ -290,19 +354,18 @@
                                     </div>
                                     <div class="col m6 s12 mb-1" style="width: auto;margin-bottom: 5% !important;">
                                         <button class="waves-effect waves-dark btn btn-primary" id="sendBtn"
-                                                type="submit" th:if="${isSameUser}">提交
+                                                type="submit">提交
                                         </button>
                                     </div>
                                     <div class="col m6 s12 mb-1" style="width: auto;margin-bottom: 5% !important;">
                                         <button class="waves-effect waves-dark btn btn-primary" id="printShow"
-                                                type="button" >打印
+                                                type="button">打印
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </li>
-
                 </ul>
             </form>
         </div>
@@ -321,6 +384,7 @@
     var isSameUser = [[${isSameUser}]];
     var medicineList = new AHSJDT();
     var projectList = new AHSJDT();
+    var infusionList = new AHSJDT();
 
 
     function initcharacterCounter() {
@@ -521,6 +585,108 @@
         });
     }
 
+    function initInfusionList() {
+        infusionList.init({
+            src: $("#data-table-simple-medicineForInfusion"),
+            theads: [
+                {
+                    "title": "药品编号",
+                    "data": "drugsNumb",
+                    "name": "drugs_numb"
+                },
+                {
+                    "title": "药品名称",
+                    "data": "drugname",
+                    "name": "drugname"
+                },
+                {
+                    "title": "药品规格",
+                    "data": "drugsSpec",
+                    "name": "drugsSpec"
+                },
+                {
+                    "title": "输液单编号",
+                    "data": "number",
+                    "name": "number"
+                },
+                {
+                    "title": "开药量",
+                    "width": "80px",
+                    "className": "centered",
+                    "render": function (row) {
+                        var rtnBtn = "";
+                        rtnBtn = rtnBtn +
+                            " <input id='drugsNumb' name='drugsNumb' type='hidden' value='" + row.drugsNumb + "'/>";
+                        rtnBtn = rtnBtn +
+                            " <input id='drugname' name='drugname' type='hidden' value='" + row.drugname + "'/>";
+                        //如果获取字符串，必须在参数外反转"
+                        if (!isNullOrEmpty(row.dosage)) {
+                            rtnBtn = rtnBtn +
+                                " <input id='dosage' name='dosage' type='number' value='" + row.dosage + "'/>";
+
+                        } else {
+                            rtnBtn = rtnBtn +
+                                " <input id='dosage' name='dosage' type='number' value='" + "'/>";
+                        }
+                        // 返回自定义内容
+                        return rtnBtn;
+                    }
+                },
+                {
+                    "title": "用法",
+                    "width": "200px",
+                    "className": "centered",
+                    "render": function (row) {
+                        var rtnBtn = "";
+                        //如果获取字符串，必须在参数外反转"
+                        if (!isNullOrEmpty(row.usages)) {
+                            rtnBtn = rtnBtn +
+                                " <textarea id='usages' name='usages' style='min-height: 3.4rem' class='materialize-textarea' type='text' value='" + row.usages + "' >" + row.usages + "</textarea>"
+                        } else {
+                            rtnBtn = rtnBtn +
+                                " <textarea id='usages' name='usages' style='min-height: 3.4rem' class='materialize-textarea' type='text' value='" + "' >" + "</textarea>"
+
+                        }
+                        // 返回自定义内容
+                        return rtnBtn;
+                    }
+                },
+                {
+                    "title": "输液开始时间",
+                    "width": "200px",
+                    "className": "centered",
+                    "render": function (row) {
+                        var rtnBtn = "";
+                        //如果获取字符串，必须在参数外反转"
+                        if (!isNullOrEmpty(row.startTimeVarchar)) {
+                            rtnBtn = rtnBtn +
+                                " <input id='startTimeVarchar' name='startTimeVarchar' type='text'   value='" + row.startTimeVarchar + "'/>"
+                        } else {
+                            rtnBtn = rtnBtn +
+                                " <input id='startTimeVarchar' name='startTimeVarchar' type='text'  value='" + "'/>"
+                        }
+                        // 返回自定义内容
+                        return rtnBtn;
+                    }
+                },
+                {
+                    "title": "操作",
+                    "width": "120px",
+                    "className": "centered",
+                    "render": function (row) {
+                        var rtnBtn = "";
+                        //如果获取字符串，必须在参数外反转"
+                        rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"移除\" onclick='removeForInfusion(" + row.id + ");'> <i class='material-icons'>remove</i></a>";
+
+                        // 返回自定义内容
+                        return rtnBtn;
+                    },
+                }
+            ],
+            datas: [[${hisInfusionList}]]
+        });
+    }
+
     $(document).ready(function () {
         var enLang = {
             name: "en",
@@ -550,6 +716,7 @@
         initcharacterCounter();
         initMedicineList();
         initProjectList();
+        initInfusionList();
         numberCheck();
         initTextareaAutoResize();
     });
@@ -561,6 +728,14 @@
                 var url = CTX + "/api/pharmacy/listForMedication/index.ahsj?token=" + TOKEN;
                 dialog.show(url, "药品信息添加药品处方")
             });
+
+            //跳转选择输液单药品控制器
+            $("#addBtnForInfusion").click(function () {
+                var url = CTX + "/api/medicationDetails/listByRecordIdAndNotPay/index.ahsj?token=" + TOKEN + "&recordId="+$("#recordId").val();
+                dialog.show(url, "添加输液单处方（Add an infusion order prescription）")
+            });
+
+
             $("#addByPrescriptionBtn").click(function () {
                 var url = CTX + "/api/treatmentplan/prescription/index.ahsj?token=" + TOKEN;
                 dialog.show(url, "使用药方模版添加药品处方")
@@ -611,8 +786,8 @@
                         }
                     }
                     // 判断体温是否正常，这里的表示体温在16-48之间，包括浮点数,思路：把判断范围与判断格式分开来写，这样容易理解且分开易维护
-                    var regBodyTemperature =  new RegExp(/^\d+(\.\d{0,2})?$/);
-                    var bodyTemperature =$("#bodyTemperature").val();
+                    var regBodyTemperature = new RegExp(/^\d+(\.\d{0,2})?$/);
+                    var bodyTemperature = $("#bodyTemperature").val();
                     if (!isNullOrEmpty(bodyTemperature)) {
                         if (bodyTemperature < 16.00 || bodyTemperature > 48.00 || !regBodyTemperature.test(bodyTemperature)) {
                             dialog.warn("所输入的人体温度不符合格式/超出正常范围！本系统范围：16.00-48.00，数据格式为：整数或1-2位小数（37/37.1/37.11）");
@@ -621,7 +796,7 @@
                     }
 
                     var regHeartRate = new RegExp(/^(\b25[0-5]\b|\b2[0-4]\d\b|\b1\d\d\b|\b[1-9]\d\b|\b[1-9]\b)$/);
-                    var heartRate =$("#heartRate").val();
+                    var heartRate = $("#heartRate").val();
                     if (!isNullOrEmpty(heartRate)) {
                         if (!regHeartRate.test(heartRate)) {
                             dialog.warn("所输入的心率超出正常范围！本系统范围：1-255");
@@ -649,6 +824,7 @@
                     var mediDetail = [];
                     var mediList = medicineList.getTableDatas();
                     var projectDetail = [];
+                    var infusionDetail = [];
                     $("#data-table-simple-medicine > tbody > tr").each(function () {
                         var tmp = {
                             "id": $("input[name='id']", this).val(),
@@ -675,12 +851,30 @@
 
 
                     });
+
+                    $("#data-table-simple-medicineForInfusion > tbody > tr").each(function () {
+                        var tmp = {
+                            "id": $("input[name='id']", this).val(),
+                            "drugsNumb": $("input[name='drugsNumb']", this).val(),
+                            "drugname": $("input[name='drugname']", this).val(),
+                            "dosage": $("input[name='dosage']", this).val(),
+                            "usages": $("textarea[name='usages']", this).val(),
+                            "startTimeVarchar": $("input[name='startTimeVarchar']", this).val(),
+                        };
+                        if (!isNullOrEmpty(tmp.id) && !isNullOrEmpty(tmp.dosage)) {
+                            infusionDetail.push(tmp);
+                        }
+
+
+                    });
                     var hisMedicalModel = {
                         "recordId": $("#recordId").val(),
                         "mediCard": mediCard,
                         "mediDetail": mediDetail,
-                        "projects": projectDetail
+                        "projects": projectDetail,
+                        "infusionDetail": infusionDetail
                     };
+
                     var jsonData = JSON.stringify(hisMedicalModel);
                     $.ahsjajax(
                         CTX + "/api/treatmentplan/saveOrUpdate.ahsj",
@@ -704,7 +898,10 @@
             });
 
             $("#saveBtn").click(function () {
-                layer.confirm('<input id="templateName" name="templateName">', {icon: 1, title:'请输入模板名称（Please enter a template name）'}, function(index){
+                layer.confirm('<input id="templateName" name="templateName">', {
+                    icon: 1,
+                    title: '请输入模板名称（Please enter a template name）'
+                }, function (index) {
                     //do something
                     //判断血压的正则表达式，血压范围为1-255  格式为90/140   数字（1-255）/数字（1-255）
                     var reg = new RegExp(/^(\b25[0-5]\b|\b2[0-4]\d\b|\b1\d\d\b|\b[1-9]\d\b|\b[1-9]\b)[/](\b25[0-5]\b|\b2[0-4]\d\b|\b1\d\d\b|\b[1-9]\d\b|\b[1-9]\b)$/);
@@ -717,8 +914,8 @@
                         }
                     }
                     // 判断体温是否正常，这里的表示体温在16-48之间，包括浮点数,思路：把判断范围与判断格式分开来写，这样容易理解且分开易维护
-                    var regBodyTemperature =  new RegExp(/^\d+(\.\d{0,2})?$/);
-                    var bodyTemperature =$("#bodyTemperature").val();
+                    var regBodyTemperature = new RegExp(/^\d+(\.\d{0,2})?$/);
+                    var bodyTemperature = $("#bodyTemperature").val();
                     if (!isNullOrEmpty(bodyTemperature)) {
                         if (bodyTemperature < 16.00 || bodyTemperature > 48.00 || !regBodyTemperature.test(bodyTemperature)) {
                             dialog.warn("所输入的人体温度不符合格式/超出正常范围！本系统范围：16.00-48.00，数据格式为：整数或1-2位小数（37/37.1/37.11）");
@@ -727,7 +924,7 @@
                     }
 
                     var regHeartRate = new RegExp(/^(\b25[0-5]\b|\b2[0-4]\d\b|\b1\d\d\b|\b[1-9]\d\b|\b[1-9]\b)$/);
-                    var heartRate =$("#heartRate").val();
+                    var heartRate = $("#heartRate").val();
                     if (!isNullOrEmpty(heartRate)) {
                         if (!regHeartRate.test(heartRate)) {
                             dialog.warn("所输入的心率超出正常范围！本系统范围：1-255");
@@ -751,7 +948,7 @@
                         "heartRate": $("#heartRate").val(),
                         "other": $("#other").val(),
                         "remarks": $("#remarks").val(),
-                        "templateName":$("#templateName").val()
+                        "templateName": $("#templateName").val()
                     };
                     var mediDetail = [];
                     var mediList = medicineList.getTableDatas();
@@ -782,6 +979,8 @@
 
 
                     });
+
+
                     var hisMedicalModel = {
                         "recordId": $("#recordId").val(),
                         "mediCard": mediCard,
@@ -929,6 +1128,54 @@
         }
     }
 
+
+
+    function addRowsForInfusionList(ids, json) {
+
+        var selectRowsIds = infusionList.getIds();
+        var tmps = [];
+        var id ;//把同一组输液单ID置为相同方便移除
+        var sign = 0;//标记输液单符号
+        //获取当前输液单列表数目
+        if(selectRowsIds.length !=0){
+            id = selectRowsIds[selectRowsIds.length-1]+1;
+        }else {
+            id = 1;
+        }
+
+        for (var i = 0; i < ids.length; ++i) {
+            for (var j = 0; j < json.length; j++) {
+                if (undefined !== ids[i] && '' !== ids[i] && null != ids[i] && json[j].id == ids[i]) {
+                    if(sign == 0) {
+                        tmps[i] = {
+                            "id": id,
+                            "drugsNumb": json[j].drugsNumb,
+                            "drugname": json[j].drugsName + "  「",
+                            "drugsSpec": json[j].drugsSpec
+                        };
+                    }else if(sign == ids.length - 1){
+                        tmps[i] = {
+                            "id": id,
+                            "drugsNumb": json[j].drugsNumb,
+                            "drugname": json[j].drugsName + "  」",
+                            "drugsSpec": json[j].drugsSpec
+                        };
+                    }else {
+                        tmps[i] = {
+                            "id": id,
+                            "drugsNumb": json[j].drugsNumb,
+                            "drugname": json[j].drugsName + "  |",
+                            "drugsSpec": json[j].drugsSpec
+                        };
+                    }
+                    sign++;
+                    break;
+                }
+            }
+        }
+        infusionList.addRows(tmps);
+    }
+
     function addRowForProjectList(id, number, name, pinyinCode, description, assitTypeName, price, num, unit, remarks) {
         var selectRowsIds = projectList.getIds();
         if (selectRowsIds.length !== 0) {
@@ -1004,9 +1251,9 @@
     }
 
     //添加病历模板
-    function addMedical(json,prescriptionIsusable,combineIsusable,prescriptionId,combineId) {
+    function addMedical(json, prescriptionIsusable, combineIsusable, prescriptionId, combineId) {
         //添加病历信息
-        if(!isNullOrEmpty(json.id)) {
+        if (!isNullOrEmpty(json.id)) {
             changeInputValue("chiefcomplaint", json.chiefcomplaint);
             changeInputValue("personalHistory", json.personalHistory);
             changeInputValue("allergies", json.allergies);
@@ -1016,35 +1263,35 @@
             changeInputValue("hiscondition", json.hiscondition);
 
             //添加药方信息
-            if(prescriptionIsusable != '不可正常使用'&&prescriptionId!=0) {
+            if (prescriptionIsusable != '不可正常使用' && prescriptionId != 0) {
                 if (!isNullOrEmpty(json.prescriptionId)) {
                     addPrescription(json.prescriptionId);
                 }
                 ;
             }
-            if(combineIsusable != '不可正常使用'&&combineId!=0) {
+            if (combineIsusable != '不可正常使用' && combineId != 0) {
                 if (!isNullOrEmpty(json.combineId)) {
                     addCombineProject(json.combineId);
                 }
             }
-            if(prescriptionId!=0 &&combineId!=0) {
+            if (prescriptionId != 0 && combineId != 0) {
                 if (prescriptionIsusable == '不可正常使用' && combineIsusable == '不可正常使用') {
                     dialog.warn("药方与组合项目均不可正常使用，请自行添加");
-                }else if(prescriptionIsusable == '不可正常使用' && combineIsusable != '不可正常使用') {
+                } else if (prescriptionIsusable == '不可正常使用' && combineIsusable != '不可正常使用') {
                     dialog.warn("药方不可正常使用，请自行添加");
-                }else if(prescriptionIsusable != '不可正常使用' && combineIsusable == '不可正常使用') {
+                } else if (prescriptionIsusable != '不可正常使用' && combineIsusable == '不可正常使用') {
                     dialog.warn("组合项目不可正常使用，需要请自行添加");
                 }
-            }else if(prescriptionId!=0 &&combineId ==0) {
+            } else if (prescriptionId != 0 && combineId == 0) {
                 if (prescriptionIsusable == '不可正常使用' && combineIsusable != '不可正常使用') {
                     dialog.warn("药方不可正常使用，请自行添加");
                 }
-            }else if(prescriptionId==0 &&combineId!=0) {
+            } else if (prescriptionId == 0 && combineId != 0) {
                 if (prescriptionIsusable != '不可正常使用' && combineIsusable == '不可正常使用') {
                     dialog.warn("组合项目不可正常使用，需要请自行添加");
                 }
             }
-        }else {
+        } else {
             dialog.warn("无可添加的病历信息");
         }
     }
@@ -1073,15 +1320,16 @@
         if (id != null && id != "" && id != undefined) {
             $.ahsjajax(
                 CTX + "/api/treatmentplan/project/details.ahsj?token=" + TOKEN,
-                {"combinationId":id},
+                {"combinationId": id},
                 function (data) {
-                    addRowsForProjectList(null,data);
+                    addRowsForProjectList(null, data);
                 },
                 function () {
                     M.toast({html: "网络异常"});
                     return false;
                 }
-            );}
+            );
+        }
     }
 
     function remove(id) {
@@ -1090,6 +1338,14 @@
 
     function removeForProject(id) {
         projectList.removeRow(id);
+    }
+
+
+    function removeForInfusion(id) {
+        dialog.confirm('确定移除输液单么，移除时会移除此组输液单所有药品（Determine to remove the infusion list, remove all drugs from this group of infusions when removed）?', function (index, layero) {
+            infusionList.removeRow(id);
+        });
+
     }
 
     function ahsjSerialize(formId) {
@@ -1130,14 +1386,15 @@
 
 
     function printShow() {
-        var number =$("#number").val()
+        var number = $("#number").val()
         dialog.confirm('确定打印吗?', function (index, layero) {
             if (number != "" && number != null && number != undefined) {
-                var url = CTX + "/api/patient/print/index.ahsj?number="+ number+"&token="+TOKEN;
+                var url = CTX + "/api/patient/print/index.ahsj?number=" + number + "&token=" + TOKEN;
                 dialog.showDialog(url, "打印凭证预览", "700px", "700px");
             } else {
                 dialog.warn("没有需要打印的内容！")
-            }});
+            }
+        });
     };
 
     $("input").change(function () {

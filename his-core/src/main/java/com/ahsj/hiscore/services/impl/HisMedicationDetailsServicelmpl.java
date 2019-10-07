@@ -12,8 +12,7 @@ import com.ahsj.hiscore.entity.TranslateModel.HisProjectTranslate;
 import com.ahsj.hiscore.entity.TranslateModel.TranslateDelete;
 import com.ahsj.hiscore.entity.TranslateModel.TranslateModels;
 import com.ahsj.hiscore.feign.ITranslateService;
-import com.ahsj.hiscore.services.HisMedicationDetailsService;
-import com.ahsj.hiscore.services.HisPharmacyDetailService;
+import com.ahsj.hiscore.services.*;
 import core.entity.PageBean;
 import core.message.Message;
 import core.message.MessageUtil;
@@ -27,6 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utils.EmptyUtil;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -50,6 +50,18 @@ public class HisMedicationDetailsServicelmpl implements HisMedicationDetailsServ
 
     @Autowired
     HisPharmacyDetailService hisPharmacyDetailService;
+
+    @Autowired
+    HisInfusionService hisInfusionService;
+
+    @Autowired
+    HisMedicalRecordService hisMedicalRecordService;
+
+    @Autowired
+    HisRegisteredService hisRegisteredService;
+
+    @Autowired
+    HisMedicineInfoService hisMedicineInfoService;
 
 
     /**
@@ -401,27 +413,92 @@ public class HisMedicationDetailsServicelmpl implements HisMedicationDetailsServ
     @Override
     @Transactional(readOnly = true)
     public List<HisMedicationDetails> selectPrint(String number) throws Exception {
-        List<HisMedicationDetails> hisMedicalRecords = hisMedicationDetailsMapper.selectPrint(number);
-        for (HisMedicationDetails hisMedicalRecord : hisMedicalRecords) {
+        HisRegistered hisRegistered =hisRegisteredService.selectByNumber(number);
+        HisMedicalRecord hisMedicalRecord = hisMedicalRecordService.selectByRegisterId(hisRegistered.getId());
+        //搜索出所有未付款的用药明细
+        List<HisMedicationDetails> hisMedicationDetailsList = hisMedicationDetailsMapper.selectPrint(number);
+        //搜索出所有未付款的输液单
+        List<HisInfusion> hisInfusionList = hisInfusionService.selectByRecordNumberAndNotPay(hisMedicalRecord.getMedicalRecordId());
+
+        List<HisMedicationDetails> medicationDetailsList = new ArrayList<>();
+        //遍历用药明细
+   /*     if(!EmptyUtil.Companion.isNullOrEmpty(hisMedicationDetailsList) && hisMedicationDetailsList.size() != 0) {
+            for (HisMedicationDetails hisMedicationDetails : hisMedicationDetailsList) {
+                List<HisInfusion> hisInfusions = hisInfusionService.selectByMedicationId(hisMedicationDetails.getId());
+                if(!EmptyUtil.Companion.isNullOrEmpty(hisInfusions) && hisInfusions.size() != 0){
+                    Integer count = hisMedicationDetails.getCount();
+                    for (HisInfusion hisInfusion : hisInfusions) {
+                        HisMedicationDetails save = new HisMedicationDetails();
+                        save.setDrugsName(hisMedicationDetails.getDrugsName());
+                        save.setCount(Integer.valueOf(hisInfusion.getDosage()));
+                        save.setmId(hisMedicationDetails.getmId());
+                        save.setDrugsSpec(hisMedicationDetails.getDrugsSpec());
+                        save.setPrice(hisMedicationDetails.getPrice());
+                        save.setTotalPrice(hisMedicationDetails.getTotalPrice());
+                        save.setDescription(hisInfusion.getUsages());
+                        count -= Integer.valueOf(hisInfusion.getDosage());
+                        medicationDetailsList.add(save);
+                    }
+                    if(count > 0){
+                        hisMedicationDetails.setCount(count);
+                        medicationDetailsList.add(hisMedicationDetails);
+                    }
+                }else {
+                    medicationDetailsList.add(hisMedicationDetails);
+                }
+            }
+        }*/
+
+   //遍历输液单表 为打印页面添加输液单
+        if(!EmptyUtil.Companion.isNullOrEmpty(hisInfusionList) && hisInfusionList.size() != 0){
+            for (HisInfusion hisInfusion : hisInfusionList) {
+                if(!EmptyUtil.Companion.isNullOrEmpty(hisMedicationDetailsList) && hisMedicationDetailsList.size() != 0){
+                    for (HisMedicationDetails hisMedicationDetails : hisMedicationDetailsList) {
+                        if(hisInfusion.getMedicationId().equals(hisMedicationDetails.getId()) ){
+                            hisMedicationDetails.setCount(hisMedicationDetails.getCount() - Integer.valueOf(hisInfusion.getDosage()));
+                            HisMedicationDetails save = new HisMedicationDetails();
+                            save.setDrugsName(hisInfusion.getDrugname());
+                            save.setCount(Integer.valueOf(hisInfusion.getDosage()));
+                            save.setmId(hisMedicationDetails.getmId());
+                            save.setDrugsSpec(hisMedicationDetails.getDrugsSpec());
+                            save.setPrice(hisMedicationDetails.getPrice());
+                            save.setTotalPrice(hisMedicationDetails.getPrice().multiply(BigDecimal.valueOf(save.getCount())));
+                            save.setDescription(hisInfusion.getUsages());
+                            medicationDetailsList.add(save);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        //编辑添加过输液单后的用药明细列表
+        for (HisMedicationDetails hisMedicationDetails : hisMedicationDetailsList) {
+            if(hisMedicationDetails.getCount() > 0){
+                medicationDetailsList.add(hisMedicationDetails);
+            }
+        }
+        for (HisMedicationDetails hisMedicationDetails : medicationDetailsList) {
             Translate translate = new Translate();//翻译
-            translate.setTranslateId(hisMedicalRecord.getmId());
+            translate.setTranslateId(hisMedicationDetails.getmId());
             translate.setTranslateType(Constants.TRANSLATE_HIS_MEDICINEINFO);
             List<Translate> translates = iTranslateService.queryTranslate(translate);
             if (!EmptyUtil.Companion.isNullOrEmpty(translates)) {
-                translates.stream().filter(f -> f.getTranslateChina().equals(hisMedicalRecord.getDrugsName())).forEach(f -> hisMedicalRecord.setTdrugsName(f.getTranslateKhmer()));
-                translates.stream().filter(f -> f.getTranslateChina().equals(hisMedicalRecord.getDrugsSpec())).forEach(f -> hisMedicalRecord.setTdrugsSpec(f.getTranslateKhmer()));
+                HisMedicineInfo hisMedicineInfo = hisMedicineInfoService.selectById(hisMedicationDetails.getmId());
+                translates.stream().filter(f -> f.getTranslateChina().equals(hisMedicineInfo.getDrugsName())).forEach(f -> hisMedicationDetails.setTdrugsName(f.getTranslateKhmer()));
+                translates.stream().filter(f -> f.getTranslateChina().equals(hisMedicationDetails.getDrugsSpec())).forEach(f -> hisMedicationDetails.setTdrugsSpec(f.getTranslateKhmer()));
             }
             Translate translate1 = new Translate();
-            translate1.setTranslateId(hisMedicalRecord.getId());
+            translate1.setTranslateId(hisMedicationDetails.getId());
             translate1.setTranslateType(Constants.TRANSLATE_HIS_MEDICATIONDETAILS);
             List<Translate> translates2 = iTranslateService.queryTranslate(translate1);
             if (!EmptyUtil.Companion.isNullOrEmpty(translates2)) {
-                translates2.stream().filter(f -> f.getTranslateChina().equals(hisMedicalRecord.getDescription())).forEach(e -> hisMedicalRecord.setTdescription(e.getTranslateKhmer()));
+                translates2.stream().filter(f -> f.getTranslateChina().equals(hisMedicationDetails.getDescription())).forEach(e -> hisMedicationDetails.setTdescription(e.getTranslateKhmer()));
             }
 
 
         }
-        return hisMedicalRecords;
+        return medicationDetailsList;
     }
 
     /**
