@@ -20,6 +20,7 @@ import utils.EmptyUtil;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -335,10 +336,10 @@ public class HisMedicalOrderDetailController extends BaseController {
     @RequestMapping(value = "stopOrder.ahsj", method = {RequestMethod.POST})
     @ResponseBody
     public Message stopOrder (Map<String, Object> model, HttpServletRequest request
-            , @RequestParam(value="id", required=true) Long id
+            , @RequestParam(value="id", required=true) Long id,@RequestParam(value = "stopDate",required = true) Date stopDate
     ) throws Exception {
         if(null != request.getParameter("id")){
-            return  hisMedicalOrderDetailService.stopOrder(id,getId());
+            return  hisMedicalOrderDetailService.stopOrder(id,getId(),stopDate);
         }else  return MessageUtil.createMessage(false,"参数异常");
     }
 

@@ -123,6 +123,22 @@ public class QuartzJob {
         hisMedicalOrderDetailService.createInfusionByMedicalOrder();
         logger.info("-------------------扫描结束-----------------------");
     }
+
+    /**
+     *@Description 为所有正在住院的病人根据他们的长期医嘱每天定时生成对应的药品与项目收费明细（长期医嘱医生只需开一天的量即可）
+     *@Params 
+     *@return 
+     *@Author zhushixiang
+     *@Date 2019-10-04
+     *@Time 23:42
+    **/
+    @Scheduled(cron = "0 0 0 * * ?")
+//    @Scheduled(cron = "0/30 * * * * ?")
+    public void createChargeDetailsForMedicalOrder()throws Exception {
+        logger.info("-------------------扫描在住院病人长期医嘱详细药品与项目信息，生成收费明细-----------------------");
+        hisMedicalOrderDetailService.createChargeDetailsForMedicalOrder();
+        logger.info("-------------------扫描结束-----------------------");
+    }
 }
 
     

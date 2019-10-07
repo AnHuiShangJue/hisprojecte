@@ -902,4 +902,14 @@ where disable = 2 and is_obtained = 2
             and drugs_name like concat('%' #{parameter.drugsName,jdbcType=VARCHAR},'%')
         </if>
     </select>
+
+    <select id="selectForListForMedicationByIds"  resultMap="BaseResultMap">
+select his_pharmacy_detail.*
+  from his_pharmacy_detail
+    where id in
+        <foreach item="item" index="index" collection="array"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

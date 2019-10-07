@@ -134,4 +134,24 @@ public interface HisMedicationDetailsMapper extends BaseMapper<HisMedicationDeta
      *@Time 9:50
     */
     void updateAlreadyout(HisMedicationDetails hisMedicationDetails);
+
+    /**
+     *@Description 根据就诊记录ID查询未付的药品
+     *@Params [pageBean]
+     *@return java.util.List<? extends com.ahsj.hiscore.entity.HisMedicationDetails>
+     *@Author zhushixiang
+     *@Date 2019-10-06
+     *@Time 17:59
+    **/
+    List<? extends HisMedicationDetails> listByRecordIdAndNotPay(PageBean<HisMedicationDetails> pageBean);
+
+    /**
+     *@Description 根据ids 批量查找
+     *@Params [ids]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisMedicationDetails>
+     *@Author zhushixiang
+     *@Date 2019-10-06
+     *@Time 19:25
+    **/
+    List<HisMedicationDetails> selectByIds(Long[] ids);
 }

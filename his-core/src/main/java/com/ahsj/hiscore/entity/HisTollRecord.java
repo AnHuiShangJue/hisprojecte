@@ -30,6 +30,8 @@ public class HisTollRecord extends BaseEntity {
 
     private String drugsNumb;
 
+    private String placeOrigin;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy/MM/dd ")
     private Date medicineDate;
@@ -249,6 +251,14 @@ public class HisTollRecord extends BaseEntity {
     private String number;
 
     private String medicalRecordId;
+
+    public String getPlaceOrigin() {
+        return placeOrigin;
+    }
+
+    public void setPlaceOrigin(String placeOrigin) {
+        this.placeOrigin = placeOrigin;
+    }
 
     private String remark;//实体类没有，暂时接收
     @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_settlement", typeName = "isSettlements")

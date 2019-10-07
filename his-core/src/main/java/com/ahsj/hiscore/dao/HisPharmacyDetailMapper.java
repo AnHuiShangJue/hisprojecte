@@ -184,4 +184,14 @@ public interface HisPharmacyDetailMapper extends BaseMapper<HisPharmacyDetail> {
      *@Time 18:18
     **/
     List<?extends HisPharmacyDetail> listForIsDisableAndObtained(PageBean<HisPharmacyDetail> pharmacyDetailPageBean);
+
+    /**
+     *@Description 根据IDs查询药库药品信息
+     *@Params [ids]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisPharmacyDetail>
+     *@Author zhushixiang
+     *@Date 2019-10-05
+     *@Time 14:58
+    **/
+    List<HisPharmacyDetail> selectForListForMedicationByIds(Long[] ids);
 }

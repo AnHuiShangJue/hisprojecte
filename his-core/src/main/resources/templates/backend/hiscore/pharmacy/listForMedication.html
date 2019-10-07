@@ -115,14 +115,20 @@
                             <h4 class="card-title">操作台
                             </h4><label style="color:black">Console</label>
                             <div class="row">
-                                <div class="col s4 m4 l4 xl4 right" th:if="${medicalOrderNumber} eq null">
+                                <div class="col s4 m4 l4 xl4 right" th:if="${type} eq 0 ">
                                         <a id="selectForTreamentBtn"
                                            class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
                                                 class="material-icons white-text tooltipped" data-position="bottom"
                                                 data-delay="50" data-tooltip="批量选择药品添加">playlist_add_check</i></a>
                                 </div>
-                                <div class="col s4 m4 l4 xl4 right" th:if="${medicalOrderNumber} ne null">
+                                <div class="col s4 m4 l4 xl4 right" th:if="${type} eq 1">
                                     <a id="selectForMedicineBtn"
+                                       class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
+                                            class="material-icons white-text tooltipped" data-position="bottom"
+                                            data-delay="50" data-tooltip="批量选择药品添加（Batch selection medicine addition）">playlist_add_check</i></a>
+                                </div>
+                                <div class="col s4 m4 l4 xl4 right" th:if="${type} eq 2">
+                                    <a id="selectForInfusionBtn"
                                        class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
                                             class="material-icons white-text tooltipped" data-position="bottom"
                                             data-delay="50" data-tooltip="批量选择药品添加（Batch selection medicine addition）">playlist_add_check</i></a>
@@ -149,6 +155,7 @@
 
 <script th:inline="javascript">
     var isSameDepart = [[${isSameDepart}]];
+    var cacheIds = new Array();//定义数组保存缓存的ID
     var grid = new Datatable();
     $(document).ready(function () {
         initBtn();
@@ -174,7 +181,7 @@
                     {
                         "title": "<label><input type=\"checkbox\"  id=\"checkAll\" class=\"select-all\" > <span></span></label> ",
                         "render": function (data, type, row, meta) {
-                            return " <label> <input type=\"checkbox\" value=\"" + row.id + "\"> <span></span> </label>";
+                            return " <label> <input type=\"checkbox\" value=\"" + row.id + "\"  onclick='cacheId(this,this.value,cacheIds)'> <span></span> </label>";
                         },
                         "width": "18px",
                         "orderable": false,//取消排序功能
@@ -307,6 +314,8 @@
     }
 
 
+
+
     function select(id, drugsNumb, drugsName, drugsSpec, count, description, remarks,stock) {
         parent.addRowForMedicineList(id, drugsNumb, drugsName, drugsSpec, count, description, remarks,stock);
         dialog.parentclose();
@@ -324,19 +333,31 @@
     function initBtn() {
             //批量返回药品
             $("#selectForTreamentBtn").click(function () {
-                var ids = grid.getSelectedRows();
+                // var ids = grid.getSelectedRows();
+                var ids =cacheIds;
                 if (ids.length == 0) {
                     dialog.warn("请至少选择一条数据");
                     return;
                 }
-                var json = grid.getDataTable().ajax.json();
-                parent.addRowsForMedicineList(ids,json.data);
+                $.ahsjajax(
+                    CTX + "/api/pharmacy/selectForListForMedicationByIds.ahsj?token=" + TOKEN,
+                    {"ids":ids.join(',')},
+                    function (data) {
+                        parent.addRowsForMedicineList(ids,data);
+                    },
+                    function () {
+                        M.toast({html: "网络异常"});
+                        return false;
+                    }
+                );
+                // var json = grid.getDataTable().ajax.json();
                 dialog.parentclose();
             });
 
         //医嘱  批量新增 药品
         $("#selectForMedicineBtn").click(function () {
-            var ids = grid.getSelectedRows();
+            // var ids = grid.getSelectedRows();
+            var ids =cacheIds;
             if (ids.length == 0) {
                 dialog.warn("请至少选择一条数据");
                 return;
@@ -345,6 +366,31 @@
             parent.grid.search();
             dialog.parentclose();
         });
+
+        //门诊输液单新增药品
+        $("#selectForInfusionBtn").click(function () {
+            // var ids = grid.getSelectedRows();
+            var ids =cacheIds;
+            if (ids.length == 0) {
+                dialog.warn("请至少选择一条数据");
+                return;
+            }
+            $.ahsjajax(
+                CTX + "/api/pharmacy/selectForListForMedicationByIds.ahsj?token=" + TOKEN,
+                {"ids":ids.join(',')},
+                function (data) {
+                    parent.addRowsForInfusionList(ids,data);
+                },
+                function () {
+                    M.toast({html: "网络异常"});
+                    return false;
+                }
+            );
+            // var json = grid.getDataTable().ajax.json();
+            dialog.parentclose();
+        });
+
+
         //搜索按钮
         $('#searchBtn').click(function () {
             grid.search();

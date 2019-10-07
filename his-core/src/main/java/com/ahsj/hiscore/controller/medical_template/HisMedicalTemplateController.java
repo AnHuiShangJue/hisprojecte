@@ -2,6 +2,7 @@ package com.ahsj.hiscore.controller.medical_template;
 
 import com.ahsj.hiscore.entity.*;
 import com.ahsj.hiscore.entity.model.HisMedicalModel;
+import com.ahsj.hiscore.services.HisInfusionService;
 import com.ahsj.hiscore.services.HisMedicalTemplateService;
 import com.ahsj.hiscore.services.HisPrescriptionService;
 import core.controller.BaseController;
@@ -34,6 +35,9 @@ public class HisMedicalTemplateController extends BaseController {
 
     @Autowired
     HisPrescriptionService hisPrescriptionService;
+
+    @Autowired
+    HisInfusionService hisInfusionService;
 
     /**
      * @return org.springframework.web.servlet.ModelAndView

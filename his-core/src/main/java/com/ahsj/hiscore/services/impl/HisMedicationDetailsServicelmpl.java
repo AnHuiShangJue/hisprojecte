@@ -404,14 +404,24 @@ public class HisMedicationDetailsServicelmpl implements HisMedicationDetailsServ
         List<HisMedicationDetails> hisMedicalRecords = hisMedicationDetailsMapper.selectPrint(number);
         for (HisMedicationDetails hisMedicalRecord : hisMedicalRecords) {
             Translate translate = new Translate();//翻译
-            translate.setTranslateId(hisMedicalRecord.getId());
+            translate.setTranslateId(hisMedicalRecord.getmId());
             translate.setTranslateType(Constants.TRANSLATE_HIS_MEDICINEINFO);
             List<Translate> translates = iTranslateService.queryTranslate(translate);
-            translates.toString();
             if (!EmptyUtil.Companion.isNullOrEmpty(translates)) {
                 translates.stream().filter(f -> f.getTranslateChina().equals(hisMedicalRecord.getDrugsName())).forEach(f -> hisMedicalRecord.setTdrugsName(f.getTranslateKhmer()));
                 translates.stream().filter(f -> f.getTranslateChina().equals(hisMedicalRecord.getDrugsSpec())).forEach(f -> hisMedicalRecord.setTdrugsSpec(f.getTranslateKhmer()));
             }
+            Translate translate1 = new Translate();
+            translate1.setTranslateId(hisMedicalRecord.getId());
+            translate1.setTranslateType(Constants.TRANSLATE_HIS_MEDICATIONDETAILS);
+            List<Translate> translates2 = iTranslateService.queryTranslate(translate);
+            if (!EmptyUtil.Companion.isNullOrEmpty(translates2)) {
+                translates2.stream().filter(f -> f.getTranslateChina().equals(hisMedicalRecord.getDescription())).forEach(e -> hisMedicalRecord.setTdescription(e.getTranslateKhmer()));
+            }
+
+
+
+
         }
         return hisMedicalRecords;
     }
@@ -477,5 +487,34 @@ public class HisMedicationDetailsServicelmpl implements HisMedicationDetailsServ
     @Transactional(readOnly = false)
     public void deleteById(Long id) throws Exception {
         hisMedicationDetailsMapper.deleteByPrimaryKey(id);
+    }
+
+    /**
+     *@Description 根据就诊记录ID查询未付的药品
+     *@Params [pageBean]
+     *@return core.entity.PageBean<com.ahsj.hiscore.entity.HisMedicationDetails>
+     *@Author zhushixiang
+     *@Date 2019-10-06
+     *@Time 17:57
+    **/
+    @Override
+    @Transactional(readOnly = true)
+    public PageBean<HisMedicationDetails> listByRecordIdAndNotPay(PageBean<HisMedicationDetails> pageBean) throws Exception {
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisMedicationDetailsMapper.listByRecordIdAndNotPay(pageBean)));
+        return pageBean;
+    }
+
+    /**
+     *@Description 根据ids 批量查找
+     *@Params [ids]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisMedicationDetails>
+     *@Author zhushixiang
+     *@Date 2019-10-06
+     *@Time 19:24
+    **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<HisMedicationDetails> selectByIds(Long[] ids) throws Exception {
+        return hisMedicationDetailsMapper.selectByIds(ids);
     }
 }

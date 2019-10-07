@@ -453,7 +453,7 @@ public class HisMediExitDetailsServicelmpl implements HisMediExitDetailsService 
             translate1.setTranslateId(h.getPharmacyId());
             translate1.setTranslateType(Constants.TRANSLATE_HIS_MEDICATIONDETAILS);
             List<Translate> translates2 = iTranslateService.queryTranslate(translate);
-            if (!EmptyUtil.Companion.isNullOrEmpty(translates)) {
+            if (!EmptyUtil.Companion.isNullOrEmpty(translates2)) {
                 translates2.stream().filter(f -> f.getTranslateChina().equals(h.getDescription())).forEach(e -> h.setTdescription(e.getTranslateKhmer()));
             }
 

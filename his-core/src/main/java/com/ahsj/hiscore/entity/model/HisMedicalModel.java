@@ -1,9 +1,6 @@
 package com.ahsj.hiscore.entity.model;
 
-import com.ahsj.hiscore.entity.HisMedical;
-import com.ahsj.hiscore.entity.HisMedicationDetails;
-import com.ahsj.hiscore.entity.HisProject;
-import com.ahsj.hiscore.entity.HisRecordProject;
+import com.ahsj.hiscore.entity.*;
 
 import java.util.List;
 
@@ -27,6 +24,8 @@ public class HisMedicalModel {
     List<HisMedicationDetails> mediDetail;
 
     List<HisRecordProject> projects;
+
+    List<HisInfusion> infusionDetail;
 
     public HisMedical getMediCard() {
         return mediCard;
@@ -59,6 +58,14 @@ public class HisMedicalModel {
 
     public void setProjects(List<HisRecordProject> projects) {
         this.projects = projects;
+    }
+
+    public List<HisInfusion> getInfusionDetail() {
+        return infusionDetail;
+    }
+
+    public void setInfusionDetail(List<HisInfusion> infusionDetail) {
+        this.infusionDetail = infusionDetail;
     }
 }
 

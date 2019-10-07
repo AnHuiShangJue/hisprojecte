@@ -209,7 +209,7 @@
             function (data) {
                 var jsons = data[0];
                 if (!isNullOrEmpty(jsons)) {//有
-                    var trs = "<tr><td>名称(name)</td><td>规格(drugsSpec)<td>数目(number)</td><td>单价(price)</td><td>单项总价(Single item total price)</td></tr>";
+                    var trs = "<tr><td>名称(name)</td><td>规格(drugsSpec)</td><td>用法用量(usage and dosage)</td><td>数目(number)</td><td>单价(price)</td><td>单项总价(Single item total price)</td></tr>";
                     $.each(data, function (index, item) {
                         if (isNullOrEmpty(item.name)) {
                             item.name = ""
@@ -223,7 +223,13 @@
                         if (isNullOrEmpty(item.tdrugsSpec)) {
                             item.tdrugsSpec = ""
                         }
-                        trs += "<tr><td><p class='black-text fontsize03'> " + item.drugsName + "(" + item.tdrugsName + ")" + "</p></td><td ><p class='black-text fontsize03'>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</p></td><td ><p class='black-text fontsize03'> " + item.count + "</p></td><td ><p class='black-text fontsize03'>" + item.price + "</p></td><td ><p class='black-text fontsize03'> " + item.totalPrice + "</p></td></tr >";
+                        if (isNullOrEmpty(item.tdescription)) {
+                            item.tdescription = ""
+                        }
+                        if (isNullOrEmpty(item.description)) {
+                            item.description = ""
+                        }
+                        trs += "<tr><td><p class='black-text fontsize03'> " + item.drugsName + "(" + item.tdrugsName + ")" + "</p></td><td ><p class='black-text fontsize03'>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</p></td><td ><p class='black-text fontsize03'> " + item.description + "(" + item.tdescription + ")" + "</p></td><td ><p class='black-text fontsize03'> " + item.count + "</p></td><td ><p class='black-text fontsize03'>" + item.price + "</p></td><td ><p class='black-text fontsize03'> " + item.totalPrice + "</p></td></tr >";
                     });
                     $("#drug").append(trs);
                 } else {

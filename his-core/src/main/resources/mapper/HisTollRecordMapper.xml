@@ -45,6 +45,7 @@
         <result column="enter_count" property="enterCount"/>
         <result column="drugs_spec" property="drugsSpec" jdbcType="VARCHAR"/>
         <result column="drugs_numb" property="drugsNumb" jdbcType="VARCHAR"/>
+        <result column="placeOrigin" property="placeOrigin" jdbcType="VARCHAR"/>
 
 
     </resultMap>
@@ -942,7 +943,7 @@ from  his_toll_record as t
 
     <select id="pharmacyInventory" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
         select d.drugs_name as details_name, m.create_date
-        ,m.enter_count,e.exit_count,r.number,d.stock,d.drugs_spec,d.drugs_numb
+        ,m.enter_count,e.exit_count,r.number,d.stock,d.drugs_spec,d.drugs_numb,d.placeOrigin
         from his_pharmacy_detail as d
         LEFT JOIN
         (select max(s.create_date)as create_date,s.drugs_numb,s.enter_count from his_medi_enter_details as s GROUP BY
@@ -976,8 +977,7 @@ from  his_toll_record as t
             order by ${parameter.orders}
         </if>
     </select>
-    <select id="getPharmacyinventoryPrice" resultMap="BaseResultMap"
-            parameterType="com.ahsj.hiscore.entity.HisTollRecord">
+    <select id="getPharmacyinventoryPrice" resultMap="BaseResultMap" parameterType="com.ahsj.hiscore.entity.HisTollRecord">
         select coalesce(sum(a.price*m.exit_count),0) as cost_price,coalesce(sum(r.price*m.exit_count),0) as sale_price,
         min(m.create_date)
         as minTime ,max(m.create_date) as maxTime from his_medi_exit_details as m LEFT JOIN his_pharmacy_detail

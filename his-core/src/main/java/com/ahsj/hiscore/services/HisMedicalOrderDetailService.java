@@ -5,6 +5,7 @@ import com.ahsj.hiscore.entity.HisMedicalOrderDetail;
 import core.entity.PageBean;
 import core.message.Message;
 
+import java.util.Date;
 import java.util.List;
 
 public interface HisMedicalOrderDetailService {
@@ -98,7 +99,7 @@ public interface HisMedicalOrderDetailService {
      *@Date 2019-09-18
      *@Time 14:05
     **/
-    Message stopOrder(Long id,Long loginUser)throws Exception;
+    Message stopOrder(Long id, Long loginUser, Date stopDate)throws Exception;
 
     /**
      *@Description 根据医嘱编号查看明细
@@ -139,4 +140,14 @@ public interface HisMedicalOrderDetailService {
      *@Time 22:02
     **/
     void createInfusionByMedicalOrder()throws Exception;
+
+    /**
+     *@Description 为所有正在住院的病人根据他们的长期医嘱每天定时生成对应的药品与项目收费明细（长期医嘱医生只需开一天的量即可）
+     *@Params []
+     *@return void
+     *@Author zhushixiang
+     *@Date 2019-10-04
+     *@Time 23:44
+    **/
+    void createChargeDetailsForMedicalOrder()throws Exception;
 }

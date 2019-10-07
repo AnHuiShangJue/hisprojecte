@@ -663,7 +663,7 @@
 
     <select id="selectPrint" parameterType="java.lang.String" resultMap="BaseResultMap">
 
-select d.drugs_name,d.count,i.id as id,i.drugs_spec ,a.sale_price as price ,a.sale_price*d.count as total_price
+select d.drugs_name,d.count,i.id as mid,i.drugs_spec ,a.sale_price as price ,a.sale_price*d.count as total_price,d.description,d.id
 from his_medication_details as d
 LEFT JOIN his_medicine_info as i on i.drugs_numb = d.drugs_numb
 
@@ -689,5 +689,22 @@ where a.medical_record_id  = #{medicalRecordId,jdbcType=BIGINT} and is_pay = 2
         set alreadyout = #{alreadyout,jdbcType=INTEGER}
         where id = #{id,jdbcType=BIGINT}
     </update>
+
+    <select id="listByRecordIdAndNotPay" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select his_medication_details.*
+from his_medication_details
+where is_pay = 2 and medical_record_id  = #{parameter.medicalRecordId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByIds" resultMap="BaseResultMap">
+        select his_medication_details.*
+          from his_medication_details
+            where id in
+        <foreach item="item" index="index" collection="array"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+
+    </select>
 
 </mapper>

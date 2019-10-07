@@ -131,6 +131,15 @@ var AHSJDT = function () {
             });
             return descriptions;
         },
+        getDosages: function () {
+            dosages = [];
+            var i = 0;
+            $('tbody > tr > td  > input[name="dosage"]', table).each(function () {
+                dosages[i] = $(this).val();
+                i++;
+            });
+            return dosages;
+        },
 
         getRemarks: function () {
             remark = [];

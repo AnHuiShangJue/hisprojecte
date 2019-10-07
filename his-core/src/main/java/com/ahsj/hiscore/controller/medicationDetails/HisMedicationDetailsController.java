@@ -145,5 +145,53 @@ public class HisMedicationDetailsController extends BaseController {
         return modelAndView;
     }
 
+    /**
+     *@Description 根据就诊记录ID查询未付的药品
+     *@Params [token, medicalRecordId]
+     *@return org.springframework.web.servlet.ModelAndView
+     *@Author zhushixiang
+     *@Date 2019-10-06
+     *@Time 17:48
+    **/
+    @RequestMapping("listByRecordIdAndNotPay/index.ahsj")
+    public ModelAndView listByRecordIdAndNotPay(String token, String recordId) {
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/medicalrecord/listByRecordIdAndNotPay");
+        modelAndView.addObject("recordId", recordId);
+        modelAndView.addObject("token", token);
+        return modelAndView;
+    }
+
+    /**
+     *@Description 根据就诊记录ID查询未付的药品
+     *@Params [model, request, hisMedicationDetails]
+     *@return core.entity.PageBean<com.ahsj.hiscore.entity.HisMedicationDetails>
+     *@Author zhushixiang
+     *@Date 2019-10-06
+     *@Time 17:55
+    **/
+    @RequestMapping(value = "listByRecordIdAndNotPay.ahsj", method = {RequestMethod.POST, RequestMethod.GET})
+    @ResponseBody
+    public PageBean<HisMedicationDetails> listByRecordIdAndNotPay(Map<String, Object> model, HttpServletRequest request, HisMedicationDetails hisMedicationDetails) throws Exception {
+        PageBean<HisMedicationDetails> pageBean = new PageBean<HisMedicationDetails>();
+        pageBean.setParameter(hisMedicationDetails);
+        return hisMedicationDetailsService.listByRecordIdAndNotPay(pageBean);
+    }
+
+    /**
+     *@Description 根据ids 批量查找
+     *@Params [ids]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisMedicationDetails>
+     *@Author zhushixiang
+     *@Date 2019-10-06
+     *@Time 19:23
+    **/
+    @ResponseBody
+    @RequestMapping("selectByIds.ahsj")
+    public List<HisMedicationDetails> selectByIds(Long[] ids) throws Exception {
+        return hisMedicationDetailsService.selectByIds(ids);
+    }
+
+
+
 
 }

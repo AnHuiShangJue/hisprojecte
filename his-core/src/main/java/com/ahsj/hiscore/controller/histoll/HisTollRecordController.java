@@ -173,6 +173,10 @@ public class HisTollRecordController extends BaseController {
     @RequestMapping("list/details.ahsj")
     @ResponseBody
     public PageBean<HisTollRecord> list(HisTollRecord hisTollRecord) throws Exception {
+        if (hisTollRecord.getLowsTime() != null || hisTollRecord.getUpTime() != null) {
+            hisTollRecord.setYears(null);
+            hisTollRecord.setMonths(null);
+        }
         PageBean<HisTollRecord> pageBean = new PageBean<HisTollRecord>();
         pageBean.setParameter(hisTollRecord);
         pageBean = hisTollRecordService.getAllHisTollRecord(pageBean);
@@ -208,6 +212,10 @@ public class HisTollRecordController extends BaseController {
     @RequestMapping("getPrice")
     @ResponseBody
     HisTollRecord getPrices(String token, HisTollRecord hisTollRecord) throws Exception {
+        if (hisTollRecord.getLowsTime() != null || hisTollRecord.getUpTime() != null) {
+            hisTollRecord.setYears(null);
+            hisTollRecord.setMonths(null);
+        }
         return hisTollRecordService.getPrice(hisTollRecord);
     }
 
@@ -429,6 +437,10 @@ public class HisTollRecordController extends BaseController {
     @RequestMapping("/getAllDrug.ahsj")
     @ResponseBody
     public PageBean<HisTollRecord> getAllDrug(HisTollRecord hisTollRecord) throws Exception {
+        if (hisTollRecord.getLowsTime() != null || hisTollRecord.getUpTime() != null) {
+            hisTollRecord.setYears(null);
+            hisTollRecord.setMonths(null);
+        }
         PageBean<HisTollRecord> pageBean = new PageBean<HisTollRecord>();
         pageBean.setParameter(hisTollRecord);
         pageBean = hisTollRecordService.getAllDrug(pageBean);
@@ -446,6 +458,10 @@ public class HisTollRecordController extends BaseController {
     @RequestMapping("getDrugPrice")
     @ResponseBody
     HisTollRecord getDrugPrice(String token, HisTollRecord hisTollRecord) throws Exception {
+        if (hisTollRecord.getLowsTime() != null || hisTollRecord.getUpTime() != null) {
+            hisTollRecord.setYears(null);
+            hisTollRecord.setMonths(null);
+        }
         return hisTollRecordService.getDrugPrice(hisTollRecord);
     }
 
@@ -487,7 +503,7 @@ public class HisTollRecordController extends BaseController {
     public PageBean<HisTollRecord> pharmacyInventory(HisTollRecord hisTollRecord) throws Exception {
         if (hisTollRecord.getLowsTime() != null || hisTollRecord.getUpTime() != null) {
             hisTollRecord.setYears(null);
-            hisTollRecord.setMoney(null);
+            hisTollRecord.setMonths(null);
         }
         PageBean<HisTollRecord> pageBean = new PageBean<HisTollRecord>();
         pageBean.setParameter(hisTollRecord);
@@ -508,7 +524,7 @@ public class HisTollRecordController extends BaseController {
     HisTollRecord getPharmacyinventoryPrice(String token, HisTollRecord hisTollRecord) throws Exception {
         if (hisTollRecord.getLowsTime() != null || hisTollRecord.getUpTime() != null) {
             hisTollRecord.setYears(null);
-            hisTollRecord.setMoney(null);
+            hisTollRecord.setMonths(null);
         }
         return hisTollRecordService.getPharmacyinventoryPrice(hisTollRecord);
     }

@@ -28,12 +28,14 @@
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="project_id" jdbcType="BIGINT" property="projectId" />
     <result column="nurse_id" jdbcType="BIGINT" property="nurseId" />
+    <result column="medication_id" jdbcType="BIGINT" property="medicationId" />
+    <result column="start_time_varchar" jdbcType="VARCHAR" property="startTimeVarchar" />
   </resultMap>
   <sql id="Base_Column_List">
     id, record_id, hosptalregist_number, start_time, patient_id, usages, intervals, speed, 
     duration, drugs_numb, drugname, single_dose, single_unit, is_skin_test, dosage, unit, 
     price, create_user_id, create_date, update_user_id, update_date, remarks, number,
-    type, project_id, nurse_id
+    type, project_id, nurse_id,medication_id,start_time_varchar
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -54,7 +56,7 @@
       unit, price, create_user_id, 
       create_date, update_user_id, update_date,
       remarks, number, type, 
-      project_id, nurse_id)
+      project_id, nurse_id,medication_id,start_time_varchar)
     values (#{id,jdbcType=BIGINT}, #{recordId,jdbcType=VARCHAR}, #{hosptalregistNumber,jdbcType=VARCHAR}, 
       #{startTime,jdbcType=TIMESTAMP}, #{patientId,jdbcType=BIGINT}, #{usages,jdbcType=VARCHAR}, 
       #{intervals,jdbcType=INTEGER}, #{speed,jdbcType=VARCHAR}, #{duration,jdbcType=VARCHAR}, 
@@ -63,7 +65,7 @@
       #{unit,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{createUserId,jdbcType=BIGINT}, 
       #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP},
       #{remarks,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
-      #{projectId,jdbcType=BIGINT}, #{nurseId,jdbcType=BIGINT})
+      #{projectId,jdbcType=BIGINT}, #{nurseId,jdbcType=BIGINT},#{medicationId,jdbcType=BIGINT},#{startTimeVarchar,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisInfusion">
     insert into his_infusion
@@ -146,6 +148,12 @@
       <if test="nurseId != null">
         nurse_id,
       </if>
+      <if test="medicationId != null">
+        medication_id,
+      </if>
+      <if test="startTimeVarchar != null">
+        start_time_varchar,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -226,6 +234,13 @@
       <if test="nurseId != null">
         #{nurseId,jdbcType=BIGINT},
       </if>
+      <if test="medicationId != null">
+        #{medicationId,jdbcType=BIGINT},
+      </if>
+      <if test="startTimeVarchar != null">
+        #{startTimeVarchar,jdbcType=VARCHAR},
+      </if>
+
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisInfusion">
@@ -306,6 +321,12 @@
       <if test="nurseId != null">
         nurse_id = #{nurseId,jdbcType=BIGINT},
       </if>
+      <if test="medicationId != null">
+        medication_id = #{medicationId,jdbcType=BIGINT},
+      </if>
+      <if test="startTimeVarchar != null">
+        start_time_varchar = #{startTimeVarchar,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -335,7 +356,9 @@
       number = #{number,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER},
       project_id = #{projectId,jdbcType=BIGINT},
-      nurse_id = #{nurseId,jdbcType=BIGINT}
+      nurse_id = #{nurseId,jdbcType=BIGINT},
+        medication_id = #{medicationId,jdbcType=BIGINT},
+        start_time_varchar = #{startTimeVarchar,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 
@@ -348,7 +371,7 @@
     insert into his_infusion (id, record_id, hosptalregist_number, start_time, patient_id, usages, intervals, speed,
     duration, drugs_numb, drugname, single_dose, single_unit, is_skin_test, dosage, unit,
     price, create_user_id, create_date, update_user_id, update_date, remarks, number,
-    type, project_id, nurse_id)
+    type, project_id, nurse_id, medication_id ,start_time_varchar   )
     values
     <foreach collection="list" item="item" index="index" separator=",">
       (#{item.id,jdbcType=BIGINT}, #{item.recordId,jdbcType=VARCHAR}, #{item.hosptalregistNumber,jdbcType=VARCHAR},
@@ -359,7 +382,7 @@
       #{item.unit,jdbcType=VARCHAR}, #{item.price,jdbcType=DECIMAL}, #{item.createUserId,jdbcType=BIGINT},
       #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=BIGINT}, #{item.updateDate,jdbcType=TIMESTAMP},
       #{item.remarks,jdbcType=VARCHAR}, #{item.number,jdbcType=VARCHAR}, #{item.type,jdbcType=INTEGER},
-      #{item.projectId,jdbcType=BIGINT}, #{item.nurseId,jdbcType=BIGINT})
+      #{item.projectId,jdbcType=BIGINT}, #{item.nurseId,jdbcType=BIGINT},#{item.medicationId,jdbcType=BIGINT},#{item.startTimeVarchar,jdbcType=VARCHAR})
     </foreach>
   </insert>
 
@@ -507,6 +530,18 @@
 from his_infusion
 where his_infusion.number =#{infusionNumber,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectByRecordNumberAndNotPay" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select a.*,c.drugs_spec as drugsSpec
+    from his_infusion as a
+left join his_medication_details as b on a.medication_id = b.id
+left join his_medicine_info as c on a.drugs_numb = c.drugs_numb
+where b.is_pay = 2 and a.hosptalregist_number = #{medicalRecordId,jdbcType=VARCHAR}
+  </select>
+
+
+
+
 
   <!--根据分组编号remark-->
   <select id="listByRemark" resultMap="BaseResultMap" parameterType="core.entity.PageBean">

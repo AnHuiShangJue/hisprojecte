@@ -4,28 +4,43 @@ import com.ahsj.hiscore.core.CodeHelper;
 import com.ahsj.hiscore.dao.HisInfusionMapper;
 import com.ahsj.hiscore.dao.HisMedicationDetailsMapper;
 import com.ahsj.hiscore.entity.HisInfusion;
+import com.ahsj.hiscore.entity.HisMedicalRecord;
 import com.ahsj.hiscore.entity.HisMedicationDetails;
+import com.ahsj.hiscore.entity.HisPharmacyDetail;
 import com.ahsj.hiscore.services.HisInfusionService;
+import com.ahsj.hiscore.services.HisMedicalRecordService;
+import com.ahsj.hiscore.services.HisPharmacyDetailService;
 import core.entity.PageBean;
 import core.message.Message;
 import core.message.MessageUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utils.EmptyUtil;
 
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
 @Service
 public class HisInfusionServiceImpl implements HisInfusionService {
-
+    private static Logger log = LoggerFactory.getLogger(HisInfusionService.class);
     @Autowired
     HisInfusionMapper hisInfusionMapper;
 
     @Autowired
     HisMedicationDetailsMapper hisMedicationDetailsMapper;
+
+    @Autowired
+    HisPharmacyDetailService hisPharmacyDetailService;
+
+    @Autowired
+    HisMedicalRecordService hisMedicalRecordService;
     /**
      * @Description 新增或更新
      * @Author  muxu
@@ -215,6 +230,63 @@ public class HisInfusionServiceImpl implements HisInfusionService {
         if(EmptyUtil.Companion.isNullOrEmpty(hisInfusionMapper.listByHMForHospitalPrint(number)))
             return new ArrayList<>();
         return CodeHelper.getInstance().setCodeValue(hisInfusionMapper.listByHMForHospitalPrint(number));
+    }
+
+    /**
+     *@Description 保存门诊所开的输液单
+     *@Params [ids, dosages, usages, startTime]
+     *@return core.message.Message
+     *@Author zhushixiang
+     *@Date 2019-10-06
+     *@Time 8:32
+    **/
+    @Override
+    @Transactional(readOnly = false)
+    public Message addInfusionMedicine(List<HisInfusion> hisInfusionList,Long recordId) throws Exception {
+        String name="SYD";
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
+        String createdate = sdf.format(date);
+        List<HisInfusion> saveList = new ArrayList<>();
+        HisMedicalRecord hisMedicalRecord = hisMedicalRecordService.selectById(recordId);
+        List<HisInfusion> checkInfusionList = hisInfusionMapper.selectByRecordNumberAndNotPay(hisMedicalRecord.getMedicalRecordId());
+        if(!EmptyUtil.Companion.isNullOrEmpty(checkInfusionList) && checkInfusionList.size() > 0) {
+            for (HisInfusion hisInfusion : checkInfusionList) {
+                hisInfusionMapper.deleteByPrimaryKey(hisInfusion.getId());
+            }
+        }
+        for (int i = 0; i <hisInfusionList.size() ; i++) {
+            //传来的ID若大于0为输液单表ID
+            HisPharmacyDetail hisPharmacyDetail = hisPharmacyDetailService.selectByDrugsNumb(hisInfusionList.get(i).getDrugsNumb());
+            HisInfusion hisInfusion = new HisInfusion();
+            hisInfusion.setRecordId(recordId.toString());
+            hisInfusion.setHosptalregistNumber(hisMedicalRecord.getMedicalRecordId());
+            hisInfusion.setStartTimeVarchar(hisInfusionList.get(i).getStartTimeVarchar());
+            hisInfusion.setPatientId(hisMedicalRecord.getPatientId());
+            hisInfusion.setUsages(hisInfusionList.get(i).getUsages());
+            hisInfusion.setDrugsNumb(hisPharmacyDetail.getDrugsNumb());
+            hisInfusion.setDrugname(hisPharmacyDetail.getDrugsName());
+            hisInfusion.setDosage(hisInfusionList.get(i).getDosage());
+            hisInfusion.setType(1);
+            hisInfusion.setNumber(name+createdate);
+            saveList.add(hisInfusion);
+        }
+        hisInfusionMapper.insertBatch(saveList);
+        return MessageUtil.createMessage(true,"添加输液单成功（Adding an infusion order successfully）");
+    }
+
+    /**
+     *@Description 根据就诊编号查询对应未付款的输液单
+     *@Params [medicalRecordId]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisInfusion>
+     *@Author zhushixiang
+     *@Date 2019-10-06
+     *@Time 12:53
+    **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<HisInfusion> selectByRecordNumberAndNotPay(String medicalRecordId) throws Exception {
+        return hisInfusionMapper.selectByRecordNumberAndNotPay(medicalRecordId);
     }
 
     @Override
