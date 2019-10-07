@@ -204,7 +204,7 @@ public interface HisInfusionService {
      *@return java.util.List<com.ahsj.hiscore.entity.HisInfusion>
      *@Author zhushixiang
      *@Date 2019-10-07
-     *@Time 16:59
+     *@Time 17:24
     **/
     List<HisInfusion> selectByDrugsNumbAndRecordIdAndNotPay(Long recordId, String drugsNumb)throws Exception;
 }

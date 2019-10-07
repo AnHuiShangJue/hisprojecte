@@ -15,7 +15,7 @@
     <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
     <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
     <result column="update_user_id" jdbcType="BIGINT" property="updateUserId" />
-    <result column="no_set_date" jdbcType="TIMESTAMP" property="noSetDate" />
+    <result column="no_set_date" jdbcType="VARCHAR" property="noSetDate" />
     <result column="blood_pressure" jdbcType="VARCHAR" property="bloodPressure" />
     <result column="record_id" jdbcType="BIGINT" property="recordId" />
     <result column="personal_history" jdbcType="VARCHAR" property="personalHistory" />
@@ -56,7 +56,7 @@
       #{patientSex,jdbcType=INTEGER}, #{patientAge,jdbcType=INTEGER}, #{nowCondition,jdbcType=VARCHAR}, 
       #{hiscondition,jdbcType=VARCHAR}, #{chiefcomplaint,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
       #{remarks,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, 
-      #{updateUserId,jdbcType=BIGINT}, #{noSetDate,jdbcType=TIMESTAMP}, #{bloodPressure,jdbcType=VARCHAR}, 
+      #{updateUserId,jdbcType=BIGINT}, #{noSetDate,jdbcType=VARCHAR}, #{bloodPressure,jdbcType=VARCHAR},
       #{recordId,jdbcType=BIGINT}, #{personalHistory,jdbcType=VARCHAR}, #{allergies,jdbcType=VARCHAR}, 
       #{familyHistory,jdbcType=VARCHAR}, #{bodyTemperature,jdbcType=DOUBLE}, #{bodyWeight,jdbcType=DOUBLE}, 
       #{heartRate,jdbcType=INTEGER}, #{other,jdbcType=VARCHAR})
@@ -175,7 +175,7 @@
         #{updateUserId,jdbcType=BIGINT},
       </if>
       <if test="noSetDate != null">
-        #{noSetDate,jdbcType=TIMESTAMP},
+        #{noSetDate,jdbcType=VARCHAR},
       </if>
       <if test="bloodPressure != null">
         #{bloodPressure,jdbcType=VARCHAR},
@@ -246,7 +246,7 @@
         update_user_id = #{updateUserId,jdbcType=BIGINT},
       </if>
       <if test="noSetDate != null">
-        no_set_date = #{noSetDate,jdbcType=TIMESTAMP},
+        no_set_date = #{noSetDate,jdbcType=VARCHAR},
       </if>
       <if test="bloodPressure != null">
         blood_pressure = #{bloodPressure,jdbcType=VARCHAR},
@@ -292,7 +292,7 @@
       update_date = #{updateDate,jdbcType=TIMESTAMP},
       create_user_id = #{createUserId,jdbcType=BIGINT},
       update_user_id = #{updateUserId,jdbcType=BIGINT},
-      no_set_date = #{noSetDate,jdbcType=TIMESTAMP},
+      no_set_date = #{noSetDate,jdbcType=VARCHAR},
       blood_pressure = #{bloodPressure,jdbcType=VARCHAR},
       record_id = #{recordId,jdbcType=BIGINT},
       personal_history = #{personalHistory,jdbcType=VARCHAR},
