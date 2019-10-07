@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utils.EmptyUtil;
 
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -242,15 +241,13 @@ public class HisInfusionServiceImpl implements HisInfusionService {
     **/
     @Override
     @Transactional(readOnly = false)
-    public Message addInfusionMedicine(List<HisInfusion> hisInfusionList,Long recordId) throws Exception {
+    public Message addInfusionMedicine(List<HisInfusion> hisInfusionList, Long recordId, List<HisInfusion> checkInfusionList) throws Exception {
         String name="SYD";
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmssSSS");
         String createdate = sdf.format(date);
         List<HisInfusion> saveList = new ArrayList<>();
         HisMedicalRecord hisMedicalRecord = hisMedicalRecordService.selectById(recordId);
-        //查询所有此就诊记录下的所有未付款的输液单
-        List<HisInfusion> checkInfusionList = hisInfusionMapper.selectByRecordNumberAndNotPay(hisMedicalRecord.getMedicalRecordId());
         //查询所有此就诊记录下的所有未付款的用药明细
         List<HisMedicationDetails> hisMedicationDetailsList = hisMedicationDetailsMapper.selectByRecordIdNotIsPay(hisMedicalRecord.getId());
         //删除所有此就诊记录下的所有未付款的输液单
@@ -337,5 +334,23 @@ public class HisInfusionServiceImpl implements HisInfusionService {
     @Transactional(readOnly = true)
     public List<HisInfusion> selectByMedicationId(Long id) throws Exception {
         return hisInfusionMapper.selectByMedicationId(id);
+    }
+
+    /**
+     *@Description 根据药品编号和就诊记录ID 核查该药品是否存在输液单
+     *@Params [recordId, drugsNumb]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisInfusion>
+     *@Author zhushixiang
+     *@Date 2019-10-07
+     *@Time 16:59
+    **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<HisInfusion> selectByDrugsNumbAndRecordIdAndNotPay(Long recordId, String drugsNumb) throws Exception {
+        HisMedicalRecord hisMedicalRecord = hisMedicalRecordService.selectById(recordId);
+        HisInfusion hisInfusion = new HisInfusion();
+        hisInfusion.setHosptalregistNumber(hisMedicalRecord.getMedicalRecordId());
+        hisInfusion.setDrugsNumb(drugsNumb);
+        return hisInfusionMapper.selectByDrugsNumbAndRecordIdAndNotPay(hisInfusion);
     }
 }

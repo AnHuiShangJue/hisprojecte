@@ -1,6 +1,8 @@
 package com.ahsj.hiscore.controller.medicationDetails;
 
+import com.ahsj.hiscore.entity.HisInfusion;
 import com.ahsj.hiscore.entity.HisMedicationDetails;
+import com.ahsj.hiscore.services.HisInfusionService;
 import com.ahsj.hiscore.services.HisMedicationDetailsService;
 import core.controller.BaseController;
 import core.entity.PageBean;
@@ -25,6 +27,9 @@ import java.util.Map;
 public class HisMedicationDetailsController extends BaseController {
     @Autowired
     HisMedicationDetailsService hisMedicationDetailsService;
+
+    @Autowired
+    HisInfusionService hisInfusionService;
 
     /**
      * @return
@@ -189,6 +194,20 @@ public class HisMedicationDetailsController extends BaseController {
     @RequestMapping("selectByIds.ahsj")
     public List<HisMedicationDetails> selectByIds(Long[] ids) throws Exception {
         return hisMedicationDetailsService.selectByIds(ids);
+    }
+
+    /**
+     *@Description 根据药品编号和就诊记录ID 核查该药品是否存在输液单
+     *@Params [ids]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisMedicationDetails>
+     *@Author zhushixiang
+     *@Date 2019-10-07
+     *@Time 16:57
+    **/
+    @ResponseBody
+    @RequestMapping("selectByDrugsNumbAndRecordIdAndNotPay.ahsj")
+    public List<HisInfusion> selectByDrugsNumbAndRecordIdAndNotPay(Long recordId,String drugsNumb) throws Exception {
+        return hisInfusionService.selectByDrugsNumbAndRecordIdAndNotPay(recordId,drugsNumb);
     }
 
 

@@ -1,5 +1,6 @@
 package com.ahsj.hiscore.services.impl;
 
+import com.ahsj.hiscore.dao.HisInfusionMapper;
 import com.ahsj.hiscore.dao.HisRecordProjectMapper;
 import com.ahsj.hiscore.entity.*;
 import com.ahsj.hiscore.services.*;
@@ -48,6 +49,9 @@ public class TreatmentPlanServiceImpl implements TreatmentPlanService {
     @Autowired
     HisInfusionService hisInfusionService;
 
+    @Autowired
+    HisInfusionMapper hisInfusionMapper;
+
 
     /**
      * @return core.message.Message
@@ -60,6 +64,9 @@ public class TreatmentPlanServiceImpl implements TreatmentPlanService {
     @Override
     @Transactional(readOnly = false)
     public Message saveOrUpdate(HisMedical hisMedical, List<HisMedicationDetails> detailsList, List<HisRecordProject> projects, Long recordId,List<HisInfusion> hisInfusionList) throws Exception {
+
+        //查询所有此就诊记录下的所有未付款的输液单
+        List<HisInfusion> checkInfusionList = hisInfusionMapper.selectByRecordNumberAndNotPay(hisMedicalRecordService.selectById(recordId).getMedicalRecordId());
         Message message =null;
         if (!EmptyUtil.Companion.isNullOrEmpty(recordId)) {
             //处理门诊病历
@@ -150,7 +157,7 @@ public class TreatmentPlanServiceImpl implements TreatmentPlanService {
            String mes =  ((BoolMessage)message).getMessage();
             //保存输液单信息
             if(!EmptyUtil.Companion.isNullOrEmpty(hisInfusionList)&&hisInfusionList.size() !=0) {
-                hisInfusionService.addInfusionMedicine(hisInfusionList, recordId);
+                hisInfusionService.addInfusionMedicine(hisInfusionList, recordId,checkInfusionList);
             }
             return MessageUtil.createMessage(true, "就诊记录"+mes);
         } else return MessageUtil.createMessage(false, "保存就诊记录失败！该就诊记录无任何关联或已被删除！请联系管理人员！");

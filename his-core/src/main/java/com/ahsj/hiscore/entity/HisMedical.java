@@ -47,9 +47,7 @@ public class HisMedical extends BaseEntity {
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date updateDate;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date noSetDate;
+    private String noSetDate;
 
     private String bloodPressure;
 
@@ -248,11 +246,11 @@ public class HisMedical extends BaseEntity {
     }
 
 
-    public Date getNoSetDate() {
+    public String getNoSetDate() {
         return noSetDate;
     }
 
-    public void setNoSetDate(Date noSetDate) {
+    public void setNoSetDate(String noSetDate) {
         this.noSetDate = noSetDate;
     }
 
