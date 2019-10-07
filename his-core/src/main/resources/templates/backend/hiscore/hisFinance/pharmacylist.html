@@ -277,8 +277,6 @@
                     else{
                         $("#maxTime").html(upTime)
                     }
-                    return true;
-
                     if ((lowTime == null || lowTime == "" || lowTime == undefined) &&
                         (upTime == null || upTime == "" || upTime == undefined) &&
                         (months != null && months != "" && months != undefined) &&
@@ -300,6 +298,7 @@
                         $("#minTime").html(years + "年"+months+"月")
                         $("#maxTime").html(years + "年"+months+"月")
                     }
+                    return true;
                 } else {
                     $("#minTime").html("")
                     $("#maxTime").html("")

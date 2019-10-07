@@ -526,7 +526,7 @@ public class HisMediExitDetailsServicelmpl implements HisMediExitDetailsService 
      **/
     @Override
     @Transactional(readOnly = true)
-    public List<HisMediExitDetails> getRemovalBytollNumber(String tollNumber)throws Exception{
+    public List<HisMediExitDetails> getRemovalBytollNumber(String tollNumber) throws Exception {
         List<HisMediExitDetails> hisMediExitDetails = hisMediExitDetailsMapper.getRemovalBytollNumber(tollNumber);
         for (HisMediExitDetails h : hisMediExitDetails) {
             Translate translate = new Translate();
@@ -546,5 +546,6 @@ public class HisMediExitDetailsServicelmpl implements HisMediExitDetailsService 
             }
         }
         return CodeHelper.getInstance().setCodeValue(hisMediExitDetails);
-}}
+    }
+}
 

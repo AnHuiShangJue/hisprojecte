@@ -977,7 +977,8 @@ from  his_toll_record as t
             order by ${parameter.orders}
         </if>
     </select>
-    <select id="getPharmacyinventoryPrice" resultMap="BaseResultMap" parameterType="com.ahsj.hiscore.entity.HisTollRecord">
+    <select id="getPharmacyinventoryPrice" resultMap="BaseResultMap"
+            parameterType="com.ahsj.hiscore.entity.HisTollRecord">
         select coalesce(sum(a.price*m.exit_count),0) as cost_price,coalesce(sum(r.price*m.exit_count),0) as sale_price,
         min(m.create_date)
         as minTime ,max(m.create_date) as maxTime from his_medi_exit_details as m LEFT JOIN his_pharmacy_detail
@@ -1004,7 +1005,7 @@ from  his_toll_record as t
         </if>
     </select>
     <select id="pharmacyInventoryDetail" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
-         select d.id ,d.stock ,m.exit_count,d.drugs_name as details_name,d.sale_counts,(a.price*m.exit_count) as
+        select d.id ,d.stock ,m.exit_count,d.drugs_name as details_name,d.sale_counts,(a.price*m.exit_count) as
         cost_price, (r.price*m.exit_count) as sale_price
         ,i.user_name as user_name,m.create_date
         from his_medi_exit_details as m
@@ -1012,9 +1013,14 @@ from  his_toll_record as t
         LEFT JOIN `his-userinfo`.user_info as i on i.id = m.create_user_id
         left JOIN his_related_medicationandexit as r on r.exit_id = m.id
         LEFT JOIN his_medi_enter_details as a on a.id = m.medi_enter_id
-where  m.drugs_numb =  #{parameter.drugsNumb}
+        where 1=1
+        <if test="parameter.drugsNumb != null and parameter.drugsNumb != ''">
+         and    m.drugs_numb = #{parameter.drugsNumb}
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
     </select>
-
 
 </mapper>
 

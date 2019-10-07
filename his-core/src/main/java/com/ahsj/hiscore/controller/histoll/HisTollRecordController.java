@@ -567,9 +567,8 @@ public class HisTollRecordController extends BaseController {
      **/
     @RequestMapping("/pharmacyInventoryDetail.ahsj")
     @ResponseBody
-    public PageBean<HisTollRecord> pharmacyInventoryDetail(String drugsNumb) throws Exception {
-        HisTollRecord hisTollRecord = new HisTollRecord();
-        hisTollRecord.setDrugsNumb(drugsNumb);
+    public PageBean<HisTollRecord> pharmacyInventoryDetail(HisTollRecord hisTollRecord ) throws Exception {
+
         PageBean<HisTollRecord> pageBean = new PageBean<HisTollRecord>();
         pageBean.setParameter(hisTollRecord);
         pageBean = hisTollRecordService.pharmacyInventoryDetail(pageBean);
