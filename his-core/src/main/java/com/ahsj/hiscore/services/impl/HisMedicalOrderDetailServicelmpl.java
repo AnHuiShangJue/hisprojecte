@@ -547,8 +547,7 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
                     if (StringUtils.equals(hisMedicalOrderDetail.getUsages(),translate1.getTranslateChina())){
                         kname = kname+"  "+translate1.getTranslateKhmer();
                         hisMedicalOrderDetail.setTtanslateName(kname);
-//                    System.out.println("------>"+hisMedicalOrderDetail.getName());
-                        hisMedicalOrderDetail.setName(hisMedicalOrderDetail.getName() +hisMedicalOrderDetail.getUsages()+"("+hisMedicalOrderDetail.getTtanslateName()+")");
+                        hisMedicalOrderDetail.setName(hisMedicalOrderDetail.getName()+"   " +hisMedicalOrderDetail.getUsages()+"("+hisMedicalOrderDetail.getTtanslateName()+")");
                     }
                 }
             }
