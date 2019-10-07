@@ -19,6 +19,7 @@ import utils.EmptyUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -165,8 +166,10 @@ public class HisMedicalOrderDetailController extends BaseController {
                 modelAndView.addObject("title", "添加用药医嘱（Add medication order）");
                 hisMedicalOrderDetail.setIsFirstEdit(1);
                 modelAndView.addObject("hisMedicalOrderDetail",hisMedicalOrderDetail);
+                modelAndView.addObject("type",1);
                 if(!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getNumber()))
                     modelAndView.addObject("medicalOrderNumber", hisMedicalOrderDetail.getNumber());
+
             }
             //项目医嘱
             else if(hisMedicalOrderDetail.getMedicalOrderType() == 3){
@@ -336,10 +339,10 @@ public class HisMedicalOrderDetailController extends BaseController {
     @RequestMapping(value = "stopOrder.ahsj", method = {RequestMethod.POST})
     @ResponseBody
     public Message stopOrder (Map<String, Object> model, HttpServletRequest request
-            , @RequestParam(value="id", required=true) Long id,@RequestParam(value = "stopDate",required = true) Date stopDate
+            , @RequestParam(value="id", required=true) Long id,@RequestParam(value = "stopDate",required = true) String stopDate
     ) throws Exception {
         if(null != request.getParameter("id")){
-            return  hisMedicalOrderDetailService.stopOrder(id,getId(),stopDate);
+            return  hisMedicalOrderDetailService.stopOrder(id,getId(),new Date());
         }else  return MessageUtil.createMessage(false,"参数异常");
     }
 
