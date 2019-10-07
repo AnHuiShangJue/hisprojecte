@@ -414,9 +414,9 @@ public class HisMedicalOrderDetailController extends BaseController {
                 if (EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getStopUserName())) {
                     hisMedicalOrderDetail.setStopUserName("");
                 }
-                if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getUsages())) {
+              /*  if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getUsages())) {
                     stringBuffer.append("  "+hisMedicalOrderDetail.getUsages());
-                }
+                }*/
                 if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getIntervalsName())) {
                     stringBuffer.append("  "+hisMedicalOrderDetail.getIntervalsName());
                 }

@@ -428,7 +428,34 @@ public class TranslateListener {
         } else {
             TranslateModels m = JsonUtils.parse(model, TranslateModels.class);
             HisMedicalTranslate hisMedicalTranslate = m.getHisMedicalTranslate();
+            System.out.println("------------>"+hisMedicalTranslate.getId().longValue());
             toTranslate(hisMedicalTranslate, HisMedicalTranslate.class, hisMedicalTranslate.getId().longValue(), Constants.TRANSLATE_HIS_HHISMEDICAL, m.getUserId());
+        }
+    }
+
+
+
+    /**
+     *@功能说明
+     *@Params [model]
+     *@return void
+     *@Author XJP
+     *@Date 2019/10/7
+     *@Time 10:00
+    **/
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(name = "com.mq.verify.queue.hisMedicalOrderDetailEnlish"),
+            exchange = @Exchange(name = "com.ahsj.exchange", type = ExchangeTypes.TOPIC),
+            key = {"com.ahsj.addHisMedicalOrderDetail","com.ahsj.updateHisMedicalOrderDetail"}
+    ))
+    public void HisMedicalOrderDetail(String model) {
+        System.out.println(model);
+        if (EmptyUtil.Companion.isNullOrEmpty(model)) {
+            System.out.println(model);
+        } else {
+            TranslateModels m = JsonUtils.parse(model, TranslateModels.class);
+            HisMedicalOrderDetailTranslate hisMedicalOrderDetailTranslate = m.getHisMedicalOrderDetailTranslate();
+            toTranslate(hisMedicalOrderDetailTranslate, HisMedicalOrderDetailTranslate.class, hisMedicalOrderDetailTranslate.getId().longValue(), Constants.TRANSLATE_HIS_MEDICALORDERDETAIL, m.getUserId());
         }
     }
 

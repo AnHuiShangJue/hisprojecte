@@ -1,9 +1,14 @@
 package com.ahsj.hiscore.services.impl;
 
 import com.ahsj.hiscore.common.Constants;
+import com.ahsj.hiscore.common.utils.JsonUtils;
+import com.ahsj.hiscore.controller.BaseLoginUser;
 import com.ahsj.hiscore.core.CodeHelper;
 import com.ahsj.hiscore.dao.HisMedicalOrderDetailMapper;
 import com.ahsj.hiscore.entity.*;
+import com.ahsj.hiscore.entity.TranslateModel.HisMedicalOrderDetailTranslate;
+import com.ahsj.hiscore.entity.TranslateModel.HisProjectTranslate;
+import com.ahsj.hiscore.entity.TranslateModel.TranslateModels;
 import com.ahsj.hiscore.feign.ITranslateService;
 import com.ahsj.hiscore.services.*;
 import com.sun.org.apache.bcel.internal.generic.NEW;
@@ -12,6 +17,10 @@ import core.message.BoolMessage;
 import core.message.Message;
 import core.message.MessageUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +32,9 @@ import java.util.*;
 
 @Service
 public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailService {
+
+    private Logger log = LoggerFactory.getLogger(HisMedicalOrderDetailServicelmpl.class.getSimpleName());
+
     @Autowired
     HisMedicalOrderDetailMapper hisMedicalOrderDetailMapper;
 
@@ -55,6 +67,9 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
 
     @Autowired
     ITranslateService iTranslateService;
+
+    @Autowired
+    AmqpTemplate amqpTemplat;
 
 
 
@@ -140,6 +155,21 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
                 if(EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getTotalAmount()))
                     hisMedicalOrderDetail.setTotalAmount(new BigDecimal("1"));
                 hisMedicalOrderDetailMapper.insert(hisMedicalOrderDetail);
+
+
+                log.info("--------------------医嘱新增翻译发送开始---------------------------");
+                BaseLoginUser loginUser = new BaseLoginUser();
+                TranslateModels translateModels = new TranslateModels();
+                HisMedicalOrderDetailTranslate orderDetailTranslate = new HisMedicalOrderDetailTranslate();
+                BeanUtils.copyProperties(hisMedicalOrderDetail, orderDetailTranslate);
+                translateModels.setUserId(loginUser.getId());
+                translateModels.setHisMedicalOrderDetailTranslate(orderDetailTranslate);
+                amqpTemplat.convertAndSend("com.ahsj.addHisMedicalOrderDetail", JsonUtils.serialize(translateModels));
+                log.info(JsonUtils.serialize(translateModels));
+                log.info("--------------------医嘱新增翻译发送结束---------------------------");
+
+
+
                 return MessageUtil.createMessage(true, "新增成功");
             } else {
                 if (hisMedicalOrderDetail.getOrderNum() > hisMedicalOrderDetailList.size())
@@ -230,6 +260,19 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
             if(EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getTotalAmount()))
                 hisMedicalOrderDetail.setTotalAmount(new BigDecimal("1"));
             hisMedicalOrderDetailMapper.updateByPrimaryKeySelective(hisMedicalOrderDetail);
+
+            log.info("--------------------医嘱修改翻译发送开始---------------------------");
+            BaseLoginUser loginUser = new BaseLoginUser();
+            TranslateModels translateModels = new TranslateModels();
+            HisMedicalOrderDetailTranslate orderDetailTranslate = new HisMedicalOrderDetailTranslate();
+            BeanUtils.copyProperties(hisMedicalOrderDetail, orderDetailTranslate);
+            translateModels.setUserId(loginUser.getId());
+            translateModels.setHisMedicalOrderDetailTranslate(orderDetailTranslate);
+            amqpTemplat.convertAndSend("com.ahsj.updateHisMedicalOrderDetail", JsonUtils.serialize(translateModels));
+            log.info(JsonUtils.serialize(translateModels));
+            log.info("--------------------医嘱修改翻译发送结束---------------------------");
+
+
             return MessageUtil.createMessage(true, "更新成功(update completed)");
 
         }
@@ -275,6 +318,21 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
             hisMedicalOrderDetailMapper.deleteByNumber(hisMedicalOrderDetailList.get(0).getNumber());
         if (hisMedicalOrderDetailLinkedList.size() != 0)
             hisMedicalOrderDetailMapper.insertBatch(hisMedicalOrderDetailLinkedList);
+
+        log.info("--------------------医嘱新增翻译发送开始---------------------------");
+        TranslateModels translateModels = new TranslateModels();
+        BaseLoginUser loginUser = new BaseLoginUser();
+        List<HisMedicalOrderDetailTranslate> infoTranslates = new ArrayList<>();
+        for (HisMedicalOrderDetail medicalOrderDetail : hisMedicalOrderDetailLinkedList) {
+            HisMedicalOrderDetailTranslate translate = new HisMedicalOrderDetailTranslate();
+            BeanUtils.copyProperties(medicalOrderDetail, translate);
+            infoTranslates.add(translate);
+        }
+        translateModels.setUserId(loginUser.getId());
+        translateModels.setHisMedicalOrderDetailTranslates(infoTranslates);
+        amqpTemplat.convertAndSend("com.ahsj.addHisMedicalOrderDetailList", JsonUtils.serialize(translateModels));
+        log.info(JsonUtils.serialize(translateModels));
+        log.info("--------------------医嘱新增翻译发送结束---------------------------");
     }
 
     /**
@@ -471,7 +529,27 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
     public List<HisMedicalOrderDetail> selectByNumberAscAndNotStop(String number) throws Exception {
         List<HisMedicalOrderDetail> hisMedicalOrderDetails = hisMedicalOrderDetailMapper.selectByNumberAscAndNotStop(number);
         for (HisMedicalOrderDetail hisMedicalOrderDetail : hisMedicalOrderDetails) {
-            if (hisMedicalOrderDetail.getMedicalOrderType() == 2){
+            Translate translate = new Translate();
+            translate.setTranslateId(hisMedicalOrderDetail.getId());
+            translate.setTranslateType(Constants.TRANSLATE_HIS_MEDICALORDERDETAIL);
+            List<Translate> translates = iTranslateService.queryTranslate(translate);
+            if (EmptyUtil.Companion.isNullOrEmpty(translates)){
+                continue;
+            }else {
+                String kname = "";
+                for (Translate translate1 : translates) {
+                    if (StringUtils.equals(hisMedicalOrderDetail.getName(),translate1.getTranslateChina())){
+                        kname = translate1.getTranslateKhmer();
+                    }
+                    if (StringUtils.equals(hisMedicalOrderDetail.getUsages(),translate1.getTranslateChina())){
+                        kname = kname+"  "+translate1.getTranslateKhmer();
+                        hisMedicalOrderDetail.setTtanslateName(kname);
+//                    System.out.println("------>"+hisMedicalOrderDetail.getName());
+                        hisMedicalOrderDetail.setName(hisMedicalOrderDetail.getName() +hisMedicalOrderDetail.getUsages()+"("+hisMedicalOrderDetail.getTtanslateName()+")");
+                    }
+                }
+            }
+       /*     if (hisMedicalOrderDetail.getMedicalOrderType() == 2){
                 HisMedicineInfo hisMedicineInfo = hisMedicineInfoService.selectById(hisMedicalOrderDetail.getTargetId());
                 Translate translate = new Translate();
                 translate.setTranslateId(hisMedicalOrderDetail.getTargetId());
@@ -502,7 +580,7 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
                         hisMedicalOrderDetail.setName(hisMedicalOrderDetail.getName() +"("+hisMedicalOrderDetail.getTtanslateName()+")");
                     }
                 }
-            }
+            }*/
         }
 
         return hisMedicalOrderDetails;

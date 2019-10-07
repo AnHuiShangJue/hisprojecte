@@ -401,7 +401,6 @@ public class HisProjectServiceImpl implements HisProjectService {
     @Transactional(readOnly = true)
     public PageBean<HisProject> queryCombinationIds(PageBean<HisProject> pageBean) throws Exception {
         List<HisProject> hisProjectList = hisProjectMapper.queryCombinationIds(pageBean);
-        System.out.println("---------hisProjectList---------->" + hisProjectList.size());
         pageBean.setData(CodeHelper.getInstance().setCodeValue(hisProjectMapper.queryCombinationIds(pageBean)));
         return pageBean;
     }

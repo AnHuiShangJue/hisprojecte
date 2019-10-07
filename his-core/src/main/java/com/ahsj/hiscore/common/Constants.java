@@ -25,6 +25,7 @@ public class Constants {
     public static final String TRANSLATE_HIS_HISPRESCRIPTION = "10013";// HisPrescription
     public static final String TRANSLATE_HIS_HISPRESCRIPTIONMEDICINE = "10014";// HisPrescriptionMedicine
     public static final String TRANSLATE_HIS_HHISMEDICAL= "10015";// hisMedical
+    public static final String TRANSLATE_HIS_MEDICALORDERDETAIL= "10016";// HisMedicalOrderDetail
     //测试
     public static final String TRANSLATE_HIS_HISCONSUMABLES_LIST = "10012";
 

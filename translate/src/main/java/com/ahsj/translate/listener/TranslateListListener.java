@@ -98,17 +98,17 @@ public class TranslateListListener {
 
 
     /**
-     *@功能说明  耗材导入翻译
-     *@Params [model]
-     *@return void
-     *@Author XJP
-     *@Date 2019/9/16
-     *@Time 14:41
-    **/
+     * @return void
+     * @功能说明 耗材导入翻译
+     * @Params [model]
+     * @Author XJP
+     * @Date 2019/9/16
+     * @Time 14:41
+     **/
     @RabbitListener(bindings = @QueueBinding(
             value = @Queue(name = "com.mq.verify.queue.HisConsumablesListListEnlish"),
             exchange = @Exchange(name = "com.ahsj.exchange", type = ExchangeTypes.TOPIC),
-            key = {"com.ahsj.addHisConsumablesList","com.ahsj.updateHisConsumablesList"}
+            key = {"com.ahsj.addHisConsumablesList", "com.ahsj.updateHisConsumablesList"}
     ))
     public void HisConsumablesListListEnlish(String model) {
         if (EmptyUtil.Companion.isNullOrEmpty(model)) {
@@ -124,7 +124,14 @@ public class TranslateListListener {
         }
     }
 
-
+    /**
+     * @return void
+     * @功能说明
+     * @Params [model]
+     * @Author XJP
+     * @Date 2019/10/7
+     * @Time 10:01
+     **/
     @RabbitListener(bindings = @QueueBinding(
             value = @Queue(name = "com.mq.verify.queue.HisMedicationDetailsListEnlish"),
             exchange = @Exchange(name = "com.ahsj.exchange", type = ExchangeTypes.TOPIC),
@@ -141,6 +148,34 @@ public class TranslateListListener {
                 toTranslate(medicationDetails, HisMedicationDetailsTranslate.class, medicationDetails.getId(), Constants.TRANSLATE_HIS_MEDICATIONDETAILS, m.getUserId());
             }
             log.info("--------------------药品明细模块翻译接受信息结束--------------------------");
+        }
+    }
+
+
+    /**
+     * @return void
+     * @功能说明
+     * @Params [model]
+     * @Author XJP
+     * @Date 2019/10/7
+     * @Time 10:05
+     **/
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(name = "com.mq.verify.queue.HisMedicalOrderDetailListEnglish"),
+            exchange = @Exchange(name = "com.ahsj.exchange", type = ExchangeTypes.TOPIC),
+            key = {"com.ahsj.addHisMedicalOrderDetailList"}
+    ))
+    public void HisMedicalOrderDetailList(String model) {
+        if (EmptyUtil.Companion.isNullOrEmpty(model)) {
+            return;
+        } else {
+            log.info("--------------------医嘱模块翻译接受信息开始--------------------------");
+            TranslateModels m = JsonUtils.parse(model, TranslateModels.class);
+            List<HisMedicalOrderDetailTranslate> hisMedicalOrderDetailTranslates = m.getHisMedicalOrderDetailTranslates();
+            for (HisMedicalOrderDetailTranslate medicationDetails : hisMedicalOrderDetailTranslates) {
+                toTranslate(medicationDetails, HisMedicalOrderDetailTranslate.class, medicationDetails.getId(), Constants.TRANSLATE_HIS_MEDICALORDERDETAIL, m.getUserId());
+            }
+            log.info("--------------------医嘱模块翻译接受信息结束--------------------------");
         }
     }
 

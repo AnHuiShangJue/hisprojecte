@@ -60,6 +60,26 @@ public class TranslateModels implements Serializable {
 
     List<HisMedicationDetailsTranslate> hisMedicationDetails;
 
+    HisMedicalOrderDetailTranslate hisMedicalOrderDetailTranslate;
+
+    List<HisMedicalOrderDetailTranslate> hisMedicalOrderDetailTranslates;
+
+    public List<HisMedicalOrderDetailTranslate> getHisMedicalOrderDetailTranslates() {
+        return hisMedicalOrderDetailTranslates;
+    }
+
+    public void setHisMedicalOrderDetailTranslates(List<HisMedicalOrderDetailTranslate> hisMedicalOrderDetailTranslates) {
+        this.hisMedicalOrderDetailTranslates = hisMedicalOrderDetailTranslates;
+    }
+
+    public HisMedicalOrderDetailTranslate getHisMedicalOrderDetailTranslate() {
+        return hisMedicalOrderDetailTranslate;
+    }
+
+    public void setHisMedicalOrderDetailTranslate(HisMedicalOrderDetailTranslate hisMedicalOrderDetailTranslate) {
+        this.hisMedicalOrderDetailTranslate = hisMedicalOrderDetailTranslate;
+    }
+
     public List<HisMedicationDetailsTranslate> getHisMedicationDetails() {
         return hisMedicationDetails;
     }

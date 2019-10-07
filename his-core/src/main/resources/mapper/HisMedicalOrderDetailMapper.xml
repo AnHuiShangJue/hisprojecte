@@ -53,7 +53,7 @@
     delete from his_medical_order_detail
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisMedicalOrderDetail" >
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisMedicalOrderDetail" useGeneratedKeys="true" keyProperty="id" >
     insert into his_medical_order_detail (id, number, name,
                                           is_skin_test, specification, unit,
                                           usages, dosage, intervals,
