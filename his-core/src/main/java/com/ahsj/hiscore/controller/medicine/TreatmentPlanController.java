@@ -6,6 +6,7 @@ import com.ahsj.hiscore.entity.model.HisMedicalModel;
 import com.ahsj.hiscore.services.*;
 import core.entity.PageBean;
 import core.message.Message;
+import core.message.MessageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -52,6 +53,9 @@ public class TreatmentPlanController extends BaseMedicineController {
     @Autowired
     HisHospitalManageService hisHospitalManageService;
 
+    @Autowired
+    HisInfusionService hisInfusionService;
+
     /**
      * @return org.springframework.web.servlet.ModelAndView
      * @Description 就诊计划页面
@@ -62,11 +66,13 @@ public class TreatmentPlanController extends BaseMedicineController {
      **/
     @RequestMapping("plan/index.ahsj")
     ModelAndView planIndex(String token, Long id, Long doctorId, Integer isOpreate,String number) throws Exception {
+        HisMedicalRecord hisMedicalRecord = hisMedicalRecordService.selectById(id);
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/medicalrecord/treatment_plan");
         modelAndView.addObject("title", "医疗信息系统");
         modelAndView.addObject("token", token);
         modelAndView.addObject("recordId", id);
         modelAndView.addObject("number", number);
+        modelAndView.addObject("recordNumber", hisMedicalRecord.getMedicalRecordId());
         HisMedical hisMedical = hisMedicalService.selectByRecordId(id);
         if (!EmptyUtil.Companion.isNullOrEmpty(hisMedical)) {
             modelAndView.addObject("hisMedical", hisMedical);
@@ -102,6 +108,24 @@ public class TreatmentPlanController extends BaseMedicineController {
         if (null != isOpreate && isOpreate == 1) {
             modelAndView.addObject("isSameUser", false);
         }
+
+        //查询对应未付款的输液单
+        List<HisInfusion> hisInfusionList = hisInfusionService.selectByRecordNumberAndNotPay(hisMedicalRecord.getMedicalRecordId());
+        if(!EmptyUtil.Companion.isNullOrEmpty(hisInfusionList) && hisInfusionList.size() > 0) {
+            Long setId = 1L;//保存设置ID为1  当编号发生变化时+1
+            String infusionNumber = hisInfusionList.get(0).getNumber();
+            for (HisInfusion hisInfusion : hisInfusionList) {
+                if(infusionNumber.equals(hisInfusion.getNumber())){
+
+                }else {
+                    infusionNumber = hisInfusion.getNumber();
+                    setId++;
+                }
+                hisInfusion.setId(setId);
+            }
+        }
+        modelAndView.addObject("hisInfusionList",hisInfusionList);
+
         return modelAndView;
     }
 
@@ -121,7 +145,9 @@ public class TreatmentPlanController extends BaseMedicineController {
         Long recordId = hisMedicalModel.getRecordId();
         List<HisMedicationDetails> detailsList = hisMedicalModel.getMediDetail();
         List<HisRecordProject> projects = hisMedicalModel.getProjects();
-        return treatmentPlanService.saveOrUpdate(hisMedical, detailsList, projects, recordId);
+        List<HisInfusion> hisInfusionList = hisMedicalModel.getInfusionDetail();
+
+        return treatmentPlanService.saveOrUpdate(hisMedical, detailsList, projects, recordId,hisInfusionList);
     }
 
 

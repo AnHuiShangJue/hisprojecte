@@ -1,5 +1,6 @@
 package com.ahsj.hiscore.dao;
 
+import com.ahsj.hiscore.entity.HisInfusion;
 import com.ahsj.hiscore.entity.HisMedicationDetails;
 import core.entity.PageBean;
 import org.apache.ibatis.annotations.Mapper;
@@ -154,4 +155,6 @@ public interface HisMedicationDetailsMapper extends BaseMapper<HisMedicationDeta
      *@Time 19:25
     **/
     List<HisMedicationDetails> selectByIds(Long[] ids);
+
+
 }

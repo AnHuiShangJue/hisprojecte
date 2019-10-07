@@ -663,7 +663,7 @@
 
     <select id="selectPrint" parameterType="java.lang.String" resultMap="BaseResultMap">
 
-select d.drugs_name,d.count,i.id as mid,i.drugs_spec ,a.sale_price as price ,a.sale_price*d.count as total_price,d.description,d.id
+select d.drugs_name,d.count,i.id as mid,i.drugs_spec ,a.sale_price as price ,a.sale_price*d.count as total_price,d.description,d.id,d.drugs_numb
 from his_medication_details as d
 LEFT JOIN his_medicine_info as i on i.drugs_numb = d.drugs_numb
 
@@ -674,6 +674,7 @@ select m.id from his_medical_record as m where m.registered_id=(
 
 select  r.id from his_registered as r where r.number =#{number,jdbcType=VARCHAR}))
 and d.is_pay ='2'
+        order by d.id
 
     </select>
 

@@ -188,4 +188,13 @@ public interface HisInfusionService {
     */
     PageBean<HisInfusion> listByRemark(PageBean<HisInfusion> pageBean)throws Exception;
 
+    /**
+     *@Description 根据用药明细id搜索输液单
+     *@Params [id]
+     *@return com.ahsj.hiscore.entity.HisInfusion
+     *@Author zhushixiang
+     *@Date 2019-10-07
+     *@Time 11:25
+    **/
+    List<HisInfusion> selectByMedicationId(Long id)throws Exception;
 }

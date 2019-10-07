@@ -1,9 +1,6 @@
 package com.ahsj.hiscore.services;
 
-import com.ahsj.hiscore.entity.HisMedical;
-import com.ahsj.hiscore.entity.HisMedicationDetails;
-import com.ahsj.hiscore.entity.HisProject;
-import com.ahsj.hiscore.entity.HisRecordProject;
+import com.ahsj.hiscore.entity.*;
 import core.message.Message;
 
 import java.util.List;
@@ -25,7 +22,7 @@ public interface TreatmentPlanService {
      *@Time 17:17
     **/
 
-    Message saveOrUpdate(HisMedical hisMedical, List<HisMedicationDetails> detailsList, List<HisRecordProject> projects, Long recordId) throws Exception;
+    Message saveOrUpdate(HisMedical hisMedical, List<HisMedicationDetails> detailsList, List<HisRecordProject> projects, Long recordId, List<HisInfusion> hisInfusionList) throws Exception;
 
 
 
