@@ -58,13 +58,13 @@ public class TranslateListListener {
         if (EmptyUtil.Companion.isNullOrEmpty(model)) {
             return;
         } else {
-            log.info("--------------------药品模块翻译接受信息开始--------------------------");
+            //log.info("--------------------药品模块翻译接受信息开始--------------------------");
             TranslateModels m = JsonUtils.parse(model, TranslateModels.class);
             List<HisMedicineInfoTranslate> hisMedicineInfoTranslates = m.getHisMedicineInfoTranslates();
             for (HisMedicineInfoTranslate hisMedicineInfoTranslate : hisMedicineInfoTranslates) {
                 toTranslate(hisMedicineInfoTranslate, HisMedicineInfoTranslate.class, hisMedicineInfoTranslate.getId(), Constants.TRANSLATE_HIS_MEDICINEINFO, m.getUserId());
             }
-            log.info("--------------------药品模块翻译接受信息结束--------------------------");
+            // log.info("--------------------药品模块翻译接受信息结束--------------------------");
         }
     }
 
@@ -86,13 +86,13 @@ public class TranslateListListener {
         if (EmptyUtil.Companion.isNullOrEmpty(model)) {
             return;
         } else {
-            log.info("--------------------收费模块翻译接受信息开始--------------------------");
+            // log.info("--------------------收费模块翻译接受信息开始--------------------------");
             TranslateModels m = JsonUtils.parse(model, TranslateModels.class);
             List<HisProjectTranslate> hisProjectTranslates = m.getHisProjectTranslates();
             for (HisProjectTranslate hisProjectTranslate : hisProjectTranslates) {
                 toTranslate(hisProjectTranslate, HisProjectTranslate.class, hisProjectTranslate.getId(), Constants.TRANSLATE_HIS_PROJECT, m.getUserId());
             }
-            log.info("--------------------收费模块翻译接受信息结束--------------------------");
+            // log.info("--------------------收费模块翻译接受信息结束--------------------------");
         }
     }
 
@@ -114,13 +114,13 @@ public class TranslateListListener {
         if (EmptyUtil.Companion.isNullOrEmpty(model)) {
             return;
         } else {
-            log.info("--------------------耗材模块翻译接受信息开始--------------------------");
+            // log.info("--------------------耗材模块翻译接受信息开始--------------------------");
             TranslateModels m = JsonUtils.parse(model, TranslateModels.class);
             List<HisConsumablesTranslate> hisConsumablesTranslates = m.getHisConsumablesTranslates();
             for (HisConsumablesTranslate hisConsumablesTranslate : hisConsumablesTranslates) {
                 toTranslate(hisConsumablesTranslate, HisConsumablesTranslate.class, hisConsumablesTranslate.getId(), Constants.TRANSLATE_HIS_HISCONSUMABLES, m.getUserId());
             }
-            log.info("--------------------耗材模块翻译接受信息结束--------------------------");
+            //    log.info("--------------------耗材模块翻译接受信息结束--------------------------");
         }
     }
 
@@ -141,13 +141,13 @@ public class TranslateListListener {
         if (EmptyUtil.Companion.isNullOrEmpty(model)) {
             return;
         } else {
-            log.info("--------------------药品明细模块翻译接受信息开始--------------------------");
+            //  log.info("--------------------药品明细模块翻译接受信息开始--------------------------");
             TranslateModels m = JsonUtils.parse(model, TranslateModels.class);
             List<HisMedicationDetailsTranslate> hisMedicationDetails = m.getHisMedicationDetails();
             for (HisMedicationDetailsTranslate medicationDetails : hisMedicationDetails) {
                 toTranslate(medicationDetails, HisMedicationDetailsTranslate.class, medicationDetails.getId(), Constants.TRANSLATE_HIS_MEDICATIONDETAILS, m.getUserId());
             }
-            log.info("--------------------药品明细模块翻译接受信息结束--------------------------");
+            //  log.info("--------------------药品明细模块翻译接受信息结束--------------------------");
         }
     }
 
@@ -169,13 +169,13 @@ public class TranslateListListener {
         if (EmptyUtil.Companion.isNullOrEmpty(model)) {
             return;
         } else {
-            log.info("--------------------医嘱模块翻译接受信息开始--------------------------");
+            //  log.info("--------------------医嘱模块翻译接受信息开始--------------------------");
             TranslateModels m = JsonUtils.parse(model, TranslateModels.class);
             List<HisMedicalOrderDetailTranslate> hisMedicalOrderDetailTranslates = m.getHisMedicalOrderDetailTranslates();
             for (HisMedicalOrderDetailTranslate medicationDetails : hisMedicalOrderDetailTranslates) {
                 toTranslate(medicationDetails, HisMedicalOrderDetailTranslate.class, medicationDetails.getId(), Constants.TRANSLATE_HIS_MEDICALORDERDETAIL, m.getUserId());
             }
-            log.info("--------------------医嘱模块翻译接受信息结束--------------------------");
+            //   log.info("--------------------医嘱模块翻译接受信息结束--------------------------");
         }
     }
 

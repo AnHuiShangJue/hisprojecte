@@ -79,7 +79,7 @@ public class HisPrescriptionServiceImpl implements HisPrescriptionService {
 
              hisPrescriptionMapper.insert(hisPrescription);
             searchIsAvailable();
-            log.info("--------------------药方基本新增翻译发送开始---------------------------");
+            //  log.info("--------------------药方基本新增翻译发送开始---------------------------");
             BaseLoginUser loginUser = new BaseLoginUser();
             TranslateModels translateModels = new TranslateModels();
             HisPrescriptionTranslate hisPrescriptionTranslate = new HisPrescriptionTranslate();
@@ -88,8 +88,8 @@ public class HisPrescriptionServiceImpl implements HisPrescriptionService {
             translateModels.setHisPrescriptionTranslate(hisPrescriptionTranslate);
             System.out.println(hisPrescriptionTranslate.toString()+"<--------------------");
             amqpTemplat.convertAndSend("com.ahsj.add.hisPrescription", JsonUtils.serialize(translateModels));
-            log.info(JsonUtils.serialize(translateModels));
-            log.info("--------------------药方基本新增翻译发送结束---------------------------");
+            //   log.info(JsonUtils.serialize(translateModels));
+            //   log.info("--------------------药方基本新增翻译发送结束---------------------------");
            /* if (flag == 0) {
                 return MessageUtil.createMessage(false, "保存失败。");
             }*/
@@ -102,7 +102,7 @@ public class HisPrescriptionServiceImpl implements HisPrescriptionService {
             int flag = hisPrescriptionMapper.updateByPrimaryKeySelective(hisPrescription);
             searchIsAvailable();
 
-            log.info("--------------------药方基本修改翻译发送开始---------------------------");
+            //   log.info("--------------------药方基本修改翻译发送开始---------------------------");
             BaseLoginUser loginUser = new BaseLoginUser();
             TranslateModels translateModels = new TranslateModels();
             HisPrescriptionTranslate hisPrescriptionTranslate = new HisPrescriptionTranslate();
@@ -110,8 +110,8 @@ public class HisPrescriptionServiceImpl implements HisPrescriptionService {
             translateModels.setUserId(loginUser.getId());
             translateModels.setHisPrescriptionTranslate(hisPrescriptionTranslate);
             amqpTemplat.convertAndSend("com.ahsj.update.hisPrescription", JsonUtils.serialize(translateModels));
-            log.info(JsonUtils.serialize(translateModels));
-            log.info("--------------------药方基本修改翻译发送结束---------------------------");
+            //  log.info(JsonUtils.serialize(translateModels));
+            //  log.info("--------------------药方基本修改翻译发送结束---------------------------");
             return MessageUtil.createMessage(true, "更新成功。");
 
         }
@@ -191,7 +191,7 @@ public class HisPrescriptionServiceImpl implements HisPrescriptionService {
         }
 
 
-        log.info("--------------------药方基本明细新增翻译发送开始---------------------------");
+        //  log.info("--------------------药方基本明细新增翻译发送开始---------------------------");
         List<HisPrescriptionMedicineTranslate> hisPrescriptionMedicineTranslateArrayList = new ArrayList<>();
         for (HisPrescriptionMedicine hisPrescriptionMedicine : hisPrescriptionMedicines) {
             HisPrescriptionMedicineTranslate hisPrescriptionMedicineTranslate = new HisPrescriptionMedicineTranslate();
@@ -203,8 +203,8 @@ public class HisPrescriptionServiceImpl implements HisPrescriptionService {
         translateModels.setUserId(loginUser.getId());
         translateModels.setHisPrescriptionMedicineTranslateList(hisPrescriptionMedicineTranslateArrayList);
         amqpTemplat.convertAndSend("com.ahsj.add.hisPrescriptionMedicine", JsonUtils.serialize(translateModels));
-        log.info(JsonUtils.serialize(translateModels));
-        log.info("--------------------药方基本明细新增翻译发送结束---------------------------");
+        // log.info(JsonUtils.serialize(translateModels));
+        // log.info("--------------------药方基本明细新增翻译发送结束---------------------------");
         searchIsAvailable();
         return MessageUtil.createMessage(true, "药品添加成功！");
     }

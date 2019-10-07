@@ -85,7 +85,7 @@ public class HisConsumablesBuyplanDetailsServiceImpl implements HisConsumablesBu
 
         //肖俊鹏 添加
         for (HisConsumablesBuyplanDetails hisConsumablesBuyplanDetails : hisConsumablesBuyplanDetailsList) {
-            log.info("--------------------耗材采购明细新增翻译发送开始--------------------------");
+            // log.info("--------------------耗材采购明细新增翻译发送开始--------------------------");
             BaseLoginUser loginUser = new BaseLoginUser();
             TranslateModels translateModels = new TranslateModels();
             HisConsumablesBuyplanDetailsTranslate translate = new HisConsumablesBuyplanDetailsTranslate();
@@ -93,8 +93,8 @@ public class HisConsumablesBuyplanDetailsServiceImpl implements HisConsumablesBu
             translateModels.setUserId(loginUser.getId());
             translateModels.setHisConsumablesBuyplanDetailsTranslate(translate);
             amqpTemplat.convertAndSend("com.ahsj.addHisConsumablesBuyplanDetails", JsonUtils.serialize(translateModels));
-            log.info(JsonUtils.serialize(translateModels));
-            log.info("--------------------耗材采购明细新增翻译发送结束--------------------------");
+            //  log.info(JsonUtils.serialize(translateModels));
+            // log.info("--------------------耗材采购明细新增翻译发送结束--------------------------");
         }
 
         HisConsumablesBuyplan hisConsumablesBuyplan = new HisConsumablesBuyplan();
@@ -109,7 +109,7 @@ public class HisConsumablesBuyplanDetailsServiceImpl implements HisConsumablesBu
         hisConsumablesBuyplan.setCompletion(2);
         hisConsumablesBuyplanMapper.insert(hisConsumablesBuyplan);
 
-        log.info("--------------------耗材采购新增翻译发送开始--------------------------");
+        //  log.info("--------------------耗材采购新增翻译发送开始--------------------------");
         BaseLoginUser loginUser = new BaseLoginUser();
         TranslateModels translateModels = new TranslateModels();
         HisConsumablesBuyplanTranslate translate = new HisConsumablesBuyplanTranslate();
@@ -117,8 +117,8 @@ public class HisConsumablesBuyplanDetailsServiceImpl implements HisConsumablesBu
         translateModels.setUserId(loginUser.getId());
         translateModels.setHisConsumablesBuyplanTranslate(translate);
         amqpTemplat.convertAndSend("com.ahsj.addHisConsumablesBuyplan", JsonUtils.serialize(translateModels));
-        log.info(JsonUtils.serialize(translateModels));
-        log.info("--------------------耗材采购新增翻译发送结束--------------------------");
+        // log.info(JsonUtils.serialize(translateModels));
+        //  log.info("--------------------耗材采购新增翻译发送结束--------------------------");
         return MessageUtil.createMessage(true, "耗材采购计划生成成功");
     }
 
@@ -186,7 +186,7 @@ public class HisConsumablesBuyplanDetailsServiceImpl implements HisConsumablesBu
         hisConsumablesBuyplanDetailsMapper.insertBatch(hisConsumablesBuyplanDetailsList);
         //肖俊鹏 添加
         for (HisConsumablesBuyplanDetails hisConsumablesBuyplanDetails : hisConsumablesBuyplanDetailsList) {
-            log.info("--------------------耗材采购明细新增翻译发送开始--------------------------");
+            //  log.info("--------------------耗材采购明细新增翻译发送开始--------------------------");
             BaseLoginUser loginUser = new BaseLoginUser();
             TranslateModels translateModels = new TranslateModels();
             HisConsumablesBuyplanDetailsTranslate translate = new HisConsumablesBuyplanDetailsTranslate();
@@ -194,12 +194,12 @@ public class HisConsumablesBuyplanDetailsServiceImpl implements HisConsumablesBu
             translateModels.setUserId(loginUser.getId());
             translateModels.setHisConsumablesBuyplanDetailsTranslate(translate);
             amqpTemplat.convertAndSend("com.ahsj.addHisConsumablesBuyplanDetails", JsonUtils.serialize(translateModels));
-            log.info(JsonUtils.serialize(translateModels));
-            log.info("--------------------耗材采购明细新增翻译发送结束--------------------------");
+            //   log.info(JsonUtils.serialize(translateModels));
+            //   log.info("--------------------耗材采购明细新增翻译发送结束--------------------------");
         }
         hisConsumablesBuyplan.setBudget(allBudget);
         hisConsumablesBuyplanMapper.updateByPrimaryKeySelective(hisConsumablesBuyplan);
-        log.info("--------------------耗材采购修改翻译发送开始--------------------------");
+        //   log.info("--------------------耗材采购修改翻译发送开始--------------------------");
         BaseLoginUser loginUser = new BaseLoginUser();
         TranslateModels translateModels = new TranslateModels();
         HisConsumablesBuyplanTranslate translate = new HisConsumablesBuyplanTranslate();
@@ -207,8 +207,8 @@ public class HisConsumablesBuyplanDetailsServiceImpl implements HisConsumablesBu
         translateModels.setUserId(loginUser.getId());
         translateModels.setHisConsumablesBuyplanTranslate(translate);
         amqpTemplat.convertAndSend("com.ahsj.updateHisConsumablesBuyplan", JsonUtils.serialize(translateModels));
-        log.info(JsonUtils.serialize(translateModels));
-        log.info("--------------------耗材采购修改翻译发送结束--------------------------");
+        //  log.info(JsonUtils.serialize(translateModels));
+        //  log.info("--------------------耗材采购修改翻译发送结束--------------------------");
         return MessageUtil.createMessage(true, "药品采购计划更新成功");
     }
 
@@ -247,13 +247,13 @@ public class HisConsumablesBuyplanDetailsServiceImpl implements HisConsumablesBu
             return MessageUtil.createMessage(false, "参数异常");
         } else {
             hisConsumablesBuyplanDetailsMapper.deleteByBuyplanId(buyplanId);
-            log.info("--------------------耗材采购明细删除翻译发送开始--------------------------");
+            // log.info("--------------------耗材采购明细删除翻译发送开始--------------------------");
             TranslateDelete translateDelete = new TranslateDelete();
             translateDelete.setId(buyplanId);
             translateDelete.setModel(Constants.TRANSLATE_HIS_CONSUMABLESBUYPLANDETAILS);
             amqpTemplat.convertAndSend(Constants.TRANSLATE_HIS_DELETE, JsonUtils.serialize(translateDelete));
-            log.info(JsonUtils.serialize(translateDelete));
-            log.info("--------------------耗材采购明细删除翻译发送结束--------------------------");
+            //  log.info(JsonUtils.serialize(translateDelete));
+            //  log.info("--------------------耗材采购明细删除翻译发送结束--------------------------");
             return MessageUtil.createMessage(true, "删除成功");
         }
     }

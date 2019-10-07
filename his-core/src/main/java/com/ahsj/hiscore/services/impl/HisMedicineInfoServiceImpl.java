@@ -90,7 +90,7 @@ public class HisMedicineInfoServiceImpl implements HisMedicineInfoService {
                 if (EmptyUtil.Companion.isNullOrEmpty(hisMedicineInfo.getEnterPrice()))
                     hisMedicineInfo.setEnterPrice(0.00);
                 hisMedicineInfoMapper.insert(hisMedicineInfo);
-                log.info("--------------------药品项目新增翻译发送开始---------------------------");
+                //   log.info("--------------------药品项目新增翻译发送开始---------------------------");
                 BaseLoginUser loginUser = new BaseLoginUser();
                 TranslateModels translateModels = new TranslateModels();
                 HisMedicineInfoTranslate hisMedicineInfoTranslate = new HisMedicineInfoTranslate();
@@ -98,8 +98,8 @@ public class HisMedicineInfoServiceImpl implements HisMedicineInfoService {
                 translateModels.setUserId(loginUser.getId());
                 translateModels.setHisMedicineInfoTranslate(hisMedicineInfoTranslate);
                 amqpTemplat.convertAndSend("com.ahsj.addHisMedicineInfo", JsonUtils.serialize(translateModels));
-                log.info(JsonUtils.serialize(translateModels));
-                log.info("--------------------药品项目新增翻译发送结束---------------------------");
+                //  log.info(JsonUtils.serialize(translateModels));
+                //   log.info("--------------------药品项目新增翻译发送结束---------------------------");
 
 
                 return MessageUtil.createMessage(true, "插入成功!");
@@ -147,7 +147,7 @@ public class HisMedicineInfoServiceImpl implements HisMedicineInfoService {
                     hisPharmacyDetailService.saveOrUpdate(hisPharmacyDetail);
                 }
                 hisMedicineInfoMapper.updateByPrimaryKeySelective(hisMedicineInfo);
-                log.info("--------------------药品项目修改翻译发送开始--------------------------");
+                //   log.info("--------------------药品项目修改翻译发送开始--------------------------");
                 BaseLoginUser loginUser = new BaseLoginUser();
                 TranslateModels translateModels = new TranslateModels();
                 HisMedicineInfoTranslate hisMedicineInfoTranslate = new HisMedicineInfoTranslate();
@@ -155,8 +155,8 @@ public class HisMedicineInfoServiceImpl implements HisMedicineInfoService {
                 translateModels.setUserId(loginUser.getId());
                 translateModels.setHisMedicineInfoTranslate(hisMedicineInfoTranslate);
                 amqpTemplat.convertAndSend("com.ahsj.updateHisMedicineInfo", JsonUtils.serialize(translateModels));
-                log.info(JsonUtils.serialize(translateModels));
-                log.info("--------------------药品项目修改翻译发送结束--------------------------");
+                //  log.info(JsonUtils.serialize(translateModels));
+                //  log.info("--------------------药品项目修改翻译发送结束--------------------------");
 
                 return MessageUtil.createMessage(true, "修改成功");
             } else {
@@ -179,13 +179,13 @@ public class HisMedicineInfoServiceImpl implements HisMedicineInfoService {
     public Message delete(Long[] ids) throws Exception {
         for (Long id : ids) {
             hisMedicineInfoMapper.deleteByPrimaryKey(id);
-            log.info("--------------------药品项目删除翻译发送开始--------------------------");
+            // log.info("--------------------药品项目删除翻译发送开始--------------------------");
             TranslateDelete translateDelete = new TranslateDelete();
             translateDelete.setId(id);
             translateDelete.setModel(Constants.TRANSLATE_HIS_MEDICINEINFO);
             amqpTemplat.convertAndSend(Constants.TRANSLATE_HIS_DELETE, JsonUtils.serialize(translateDelete));
-            log.info(JsonUtils.serialize(translateDelete));
-            log.info("--------------------药品项目删除翻译发送结束--------------------------");
+            //  log.info(JsonUtils.serialize(translateDelete));
+            // log.info("--------------------药品项目删除翻译发送结束--------------------------");
         }
         return MessageUtil.createMessage(true, "删除成功!");
     }
@@ -707,11 +707,11 @@ public class HisMedicineInfoServiceImpl implements HisMedicineInfoService {
             BaseLoginUser loginUser = new BaseLoginUser();
             List<HisMedicineInfoTranslate> infoTranslates = new ArrayList<>();
             for (HisMedicineInfo medicineinfo : medicineinfoInsertList) {
-                log.info("--------------------药品基本信息新增翻译发送开始---------------------------");
+                //  log.info("--------------------药品基本信息新增翻译发送开始---------------------------");
                 HisMedicineInfoTranslate HisMedicineInfoTranslate = new HisMedicineInfoTranslate();
                 BeanUtils.copyProperties(medicineinfo, HisMedicineInfoTranslate);
                 infoTranslates.add(HisMedicineInfoTranslate);
-                log.info("--------------------药品基本信息新增翻译发送结束---------------------------");
+                // log.info("--------------------药品基本信息新增翻译发送结束---------------------------");
             }
             translateModels.setUserId(loginUser.getId());
             translateModels.setHisMedicineInfoTranslates(infoTranslates);
@@ -791,11 +791,11 @@ public class HisMedicineInfoServiceImpl implements HisMedicineInfoService {
             BaseLoginUser loginUser = new BaseLoginUser();
             List<HisMedicineInfoTranslate> infoTranslates = new ArrayList<>();
             for (HisMedicineInfo medicineinfo : medicineinfoUpdateList) {
-                log.info("--------------------药品基本信息修改翻译发送开始---------------------------");
+                // log.info("--------------------药品基本信息修改翻译发送开始---------------------------");
                 HisMedicineInfoTranslate HisMedicineInfoTranslate = new HisMedicineInfoTranslate();
                 BeanUtils.copyProperties(medicineinfo, HisMedicineInfoTranslate);
                 infoTranslates.add(HisMedicineInfoTranslate);
-                log.info("--------------------药品基本信息修改翻译发送结束---------------------------");
+                // log.info("--------------------药品基本信息修改翻译发送结束---------------------------");
             }
             translateModels.setUserId(loginUser.getId());
             translateModels.setHisMedicineInfoTranslates(infoTranslates);

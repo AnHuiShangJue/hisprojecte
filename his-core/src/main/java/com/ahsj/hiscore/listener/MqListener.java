@@ -92,7 +92,7 @@ public class MqListener {
     ))
     public void listenMqMsg(String msg) throws Exception {
         if (StringUtils.equals(msg, AHSJ_TRANSLATE)) {
-            System.out.println("-------------------监听成功-----------------" + msg);
+            //  System.out.println("-------------------监听成功-----------------" + msg);
             WebContextUtil.setTranslate();
         }
     }
@@ -113,7 +113,7 @@ public class MqListener {
     ))
     public void listenMqaddTranslateInfo(String msg) throws Exception {
         if (StringUtils.equals(msg, AHSJ_TRANSLATE)) {
-            System.out.println("-------------------监听成功-----------------" + msg);
+            //System.out.println("-------------------监听成功-----------------" + msg);
             WebContextUtil.setTranslateInfo();
         }
     }

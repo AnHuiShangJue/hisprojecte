@@ -351,7 +351,6 @@ public class HisRefundProjectServiceImpl implements HisRefundProjectService {
             HisRecordProject project = new HisRecordProject();
             project.setTollRecordNumber(hisRefundProjectInfo.getTollRecordNumber());
             List<HisRecordProject> hisRecordProjects = hisRecordProjectService.HisRecordProjectLists(project);
-            System.out.println("----------------->"+hisRecordProjects.size());
             for (HisRecordProject recordProject : hisRecordProjects) {
                 recordProject.setIsBack(1);
             }

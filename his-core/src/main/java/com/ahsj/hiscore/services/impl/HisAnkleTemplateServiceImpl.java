@@ -91,7 +91,7 @@ public class HisAnkleTemplateServiceImpl implements HisAnkleTemplateService {
             }else if (hisAnkleTemplate.getOrderNum() > hisAnkleTemplateList.size()){
                 //直接插入
                 hisAnkleTemplateMapper.insert(hisAnkleTemplate);
-                log.info("--------------------护嘱新增翻译发送开始--------------------------");
+                // log.info("--------------------护嘱新增翻译发送开始--------------------------");
                 BaseLoginUser loginUser = new BaseLoginUser();
                 TranslateModels translateModels = new TranslateModels();
                 HisAnkleTemplateTranslate translate = new HisAnkleTemplateTranslate();
@@ -99,8 +99,8 @@ public class HisAnkleTemplateServiceImpl implements HisAnkleTemplateService {
                 translateModels.setUserId(loginUser.getId());
                 translateModels.setHisAnkleTemplateTranslate(translate);
                 amqpTemplat.convertAndSend("com.ahsj.addHisAnkleTemplate", JsonUtils.serialize(translateModels));
-                log.info(JsonUtils.serialize(translateModels));
-                log.info("--------------------护嘱新增翻译发送结束--------------------------");
+                // log.info(JsonUtils.serialize(translateModels));
+                // log.info("--------------------护嘱新增翻译发送结束--------------------------");
 
                 return MessageUtil.createMessage(true,"新增成功");
 
@@ -111,7 +111,7 @@ public class HisAnkleTemplateServiceImpl implements HisAnkleTemplateService {
                     }
                     hisAnkleTemplateMapper.updateBatch(hisAnkleTemplateList);
                     for (HisAnkleTemplate ankleTemplate : hisAnkleTemplateList) {
-                        log.info("--------------------护嘱修改翻译发送开始--------------------------");
+                        //  log.info("--------------------护嘱修改翻译发送开始--------------------------");
                         BaseLoginUser loginUser = new BaseLoginUser();
                         TranslateModels translateModels = new TranslateModels();
                         HisAnkleTemplateTranslate translate = new HisAnkleTemplateTranslate();
@@ -119,8 +119,8 @@ public class HisAnkleTemplateServiceImpl implements HisAnkleTemplateService {
                         translateModels.setUserId(loginUser.getId());
                         translateModels.setHisAnkleTemplateTranslate(translate);
                         amqpTemplat.convertAndSend("com.ahsj.updateHisAnkleTemplate", JsonUtils.serialize(translateModels));
-                        log.info(JsonUtils.serialize(translateModels));
-                        log.info("--------------------护嘱修改翻译发送结束--------------------------");
+                        //  log.info(JsonUtils.serialize(translateModels));
+                        //  log.info("--------------------护嘱修改翻译发送结束--------------------------");
                     }
 
                 }else {
@@ -129,7 +129,7 @@ public class HisAnkleTemplateServiceImpl implements HisAnkleTemplateService {
                     }
                     hisAnkleTemplateMapper.updateBatch(hisAnkleTemplateList);
                     for (HisAnkleTemplate ankleTemplate : hisAnkleTemplateList) {
-                        log.info("--------------------护嘱修改翻译发送开始--------------------------");
+                        // log.info("--------------------护嘱修改翻译发送开始--------------------------");
                         BaseLoginUser loginUser = new BaseLoginUser();
                         TranslateModels translateModels = new TranslateModels();
                         HisAnkleTemplateTranslate translate = new HisAnkleTemplateTranslate();
@@ -137,12 +137,12 @@ public class HisAnkleTemplateServiceImpl implements HisAnkleTemplateService {
                         translateModels.setUserId(loginUser.getId());
                         translateModels.setHisAnkleTemplateTranslate(translate);
                         amqpTemplat.convertAndSend("com.ahsj.updateHisAnkleTemplate", JsonUtils.serialize(translateModels));
-                        log.info(JsonUtils.serialize(translateModels));
-                        log.info("--------------------护嘱修改翻译发送结束--------------------------");
+                        //  log.info(JsonUtils.serialize(translateModels));
+                        //  log.info("--------------------护嘱修改翻译发送结束--------------------------");
                     }
                 }
                 hisAnkleTemplateMapper.insert(hisAnkleTemplate);
-                log.info("--------------------护嘱新增翻译发送开始--------------------------");
+                // log.info("--------------------护嘱新增翻译发送开始--------------------------");
                 BaseLoginUser loginUser = new BaseLoginUser();
                 TranslateModels translateModels = new TranslateModels();
                 HisAnkleTemplateTranslate translate = new HisAnkleTemplateTranslate();
@@ -150,8 +150,8 @@ public class HisAnkleTemplateServiceImpl implements HisAnkleTemplateService {
                 translateModels.setUserId(loginUser.getId());
                 translateModels.setHisAnkleTemplateTranslate(translate);
                 amqpTemplat.convertAndSend("com.ahsj.addHisAnkleTemplate", JsonUtils.serialize(translateModels));
-                log.info(JsonUtils.serialize(translateModels));
-                log.info("--------------------护嘱新增翻译发送结束--------------------------");
+                //   log.info(JsonUtils.serialize(translateModels));
+                //   log.info("--------------------护嘱新增翻译发送结束--------------------------");
                 return MessageUtil.createMessage(true,"插入成功");
 
             }
@@ -165,7 +165,7 @@ public class HisAnkleTemplateServiceImpl implements HisAnkleTemplateService {
             if (!EmptyUtil.Companion.isNullOrEmpty(check)){
                 //不为空---更新
                 hisAnkleTemplateMapper.updateByPrimaryKey(hisAnkleTemplate);
-                log.info("--------------------护嘱修改翻译发送开始--------------------------");
+                //   log.info("--------------------护嘱修改翻译发送开始--------------------------");
                 BaseLoginUser loginUser = new BaseLoginUser();
                 TranslateModels translateModels = new TranslateModels();
                 HisAnkleTemplateTranslate translate = new HisAnkleTemplateTranslate();
@@ -173,8 +173,8 @@ public class HisAnkleTemplateServiceImpl implements HisAnkleTemplateService {
                 translateModels.setUserId(loginUser.getId());
                 translateModels.setHisAnkleTemplateTranslate(translate);
                 amqpTemplat.convertAndSend("com.ahsj.updateHisAnkleTemplate", JsonUtils.serialize(translateModels));
-                log.info(JsonUtils.serialize(translateModels));
-                log.info("--------------------护嘱修改翻译发送结束--------------------------");
+                //    log.info(JsonUtils.serialize(translateModels));
+                //   log.info("--------------------护嘱修改翻译发送结束--------------------------");
                 return MessageUtil.createMessage(true,"更新成功!");
             }else {
                 return MessageUtil.createMessage(false,"更新失败!");

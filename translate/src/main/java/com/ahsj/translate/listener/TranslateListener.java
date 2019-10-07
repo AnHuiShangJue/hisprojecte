@@ -60,11 +60,11 @@ public class TranslateListener {
         if (EmptyUtil.Companion.isNullOrEmpty(model)) {
             return;
         } else {
-            log.info("--------------------收费模块翻译接受信息开始--------------------------");
+            //    log.info("--------------------收费模块翻译接受信息开始--------------------------");
             TranslateModels m = JsonUtils.parse(model, TranslateModels.class);
-            log.info(model);
+            // log.info(model);
             toTranslate(m.getHisProjectTranslate(), HisProjectTranslate.class, m.getHisProjectTranslate().getId(), Constants.TRANSLATE_HIS_PROJECT, m.getUserId());
-            log.info("--------------------收费模块翻译接受信息结束--------------------------");
+            //  log.info("--------------------收费模块翻译接受信息结束--------------------------");
         }
     }
 
@@ -86,10 +86,10 @@ public class TranslateListener {
         if (EmptyUtil.Companion.isNullOrEmpty(model)) {
             return;
         } else {
-           log.info("--------------------药品模块翻译接受信息开始--------------------------");
+            // log.info("--------------------药品模块翻译接受信息开始--------------------------");
             TranslateModels m = JsonUtils.parse(model, TranslateModels.class);
             toTranslate(m.getHisMedicineInfoTranslate(), HisMedicineInfoTranslate.class, m.getHisMedicineInfoTranslate().getId(), Constants.TRANSLATE_HIS_MEDICINEINFO, m.getUserId());
-            log.info("--------------------药品模块翻译接受信息结束--------------------------");
+            //   log.info("--------------------药品模块翻译接受信息结束--------------------------");
 
 
 
@@ -134,11 +134,11 @@ public class TranslateListener {
         if (EmptyUtil.Companion.isNullOrEmpty(model)) {
             return;
         } else {
-            log.info("--------------------互属模块翻译接受信息开始--------------------------");
+            //  log.info("--------------------互属模块翻译接受信息开始--------------------------");
             TranslateModels m = JsonUtils.parse(model, TranslateModels.class);
-            log.info(model);
+            //  log.info(model);
             toTranslate(m.getHisAnkleTemplateTranslate(), HisAnkleTemplateTranslate.class, m.getHisAnkleTemplateTranslate().getId(), Constants.TRANSLATE_HIS_HISANKLETEMPLATE, m.getUserId());
-            log.info("--------------------互属模块翻译接受信息结束--------------------------");
+            //  log.info("--------------------互属模块翻译接受信息结束--------------------------");
         }
     }
 
@@ -160,11 +160,11 @@ public class TranslateListener {
         if (EmptyUtil.Companion.isNullOrEmpty(model)) {
             return;
         } else {
-            log.info("--------------------采购耗材明细模块翻译接受信息开始--------------------------");
+            //  log.info("--------------------采购耗材明细模块翻译接受信息开始--------------------------");
             TranslateModels m = JsonUtils.parse(model, TranslateModels.class);
-            log.info(model);
+            //   log.info(model);
             toTranslate(m.getHisConsumablesBuyplanDetailsTranslate(), HisConsumablesBuyplanDetailsTranslate.class, m.getHisConsumablesBuyplanDetailsTranslate().getId(), Constants.TRANSLATE_HIS_CONSUMABLESBUYPLANDETAILS, m.getUserId());
-            log.info("--------------------采购耗材明细模块翻译接受信息结束--------------------------");
+            // log.info("--------------------采购耗材明细模块翻译接受信息结束--------------------------");
         }
     }
 
@@ -186,11 +186,11 @@ public class TranslateListener {
         if (EmptyUtil.Companion.isNullOrEmpty(model)) {
             return;
         } else {
-            log.info("--------------------采购耗材模块翻译接受信息开始--------------------------");
+            // log.info("--------------------采购耗材模块翻译接受信息开始--------------------------");
             TranslateModels m = JsonUtils.parse(model, TranslateModels.class);
-            log.info(model);
+            //  log.info(model);
             toTranslate(m.getHisConsumablesBuyplanTranslate(), HisConsumablesBuyplanTranslate.class, m.getHisConsumablesBuyplanTranslate().getId(), Constants.TRANSLATE_HIS_CONSUMABLESBUYPLAN, m.getUserId());
-            log.info("--------------------采购耗材模块翻译接受信息结束--------------------------");
+            //  log.info("--------------------采购耗材模块翻译接受信息结束--------------------------");
         }
     }
 
@@ -212,11 +212,11 @@ public class TranslateListener {
         if (EmptyUtil.Companion.isNullOrEmpty(model)) {
             return;
         } else {
-            log.info("--------------------耗材库存模块翻译接受信息开始--------------------------");
+            //  log.info("--------------------耗材库存模块翻译接受信息开始--------------------------");
             TranslateModels m = JsonUtils.parse(model, TranslateModels.class);
-            log.info(model);
+            //  log.info(model);
             toTranslate(m.getHisConsumablesDetailsTranslate(), HisConsumablesDetailsTranslate.class, m.getHisConsumablesDetailsTranslate().getId(), Constants.TRANSLATE_HIS_CONSUMABLESDETAILS, m.getUserId());
-            log.info("--------------------耗材库存模块翻译接受信息结束--------------------------");
+            // log.info("--------------------耗材库存模块翻译接受信息结束--------------------------");
         }
     }
 
@@ -238,11 +238,11 @@ public class TranslateListener {
         if (EmptyUtil.Companion.isNullOrEmpty(model)) {
             return;
         } else {
-            log.info("--------------------耗材模块翻译接受信息开始--------------------------");
+           // log.info("--------------------耗材模块翻译接受信息开始--------------------------");
             TranslateModels m = JsonUtils.parse(model, TranslateModels.class);
-            log.info(model);
+           // log.info(model);
             toTranslate(m.getHisConsumablesTranslate(), HisConsumablesTranslate.class, m.getHisConsumablesTranslate().getId(), Constants.TRANSLATE_HIS_HISCONSUMABLES, m.getUserId());
-            log.info("--------------------耗材模块翻译接受信息结束--------------------------");
+           // log.info("--------------------耗材模块翻译接受信息结束--------------------------");
         }
     }
 
@@ -264,11 +264,11 @@ public class TranslateListener {
         if (EmptyUtil.Companion.isNullOrEmpty(model)) {
             return;
         } else {
-            log.info("--------------------组织模块翻译接受信息开始--------------------------");
+          //  log.info("--------------------组织模块翻译接受信息开始--------------------------");
             TranslateModels m = JsonUtils.parse(model, TranslateModels.class);
-            log.info(model);
+          //  log.info(model);
             toTranslate(m.getOrganizationTranslate(), OrganizationTranslate.class, m.getOrganizationTranslate().getId(), Constants.TRANSLATE_SYS_ORGANIZATION, m.getUserId());
-            log.info("--------------------组织模块翻译接受信息结束--------------------------");
+           // log.info("--------------------组织模块翻译接受信息结束--------------------------");
         }
     }
 
@@ -290,11 +290,11 @@ public class TranslateListener {
         if (EmptyUtil.Companion.isNullOrEmpty(model)) {
             return;
         } else {
-            log.info("--------------------字典模块翻译接受信息开始--------------------------");
+          //  log.info("--------------------字典模块翻译接受信息开始--------------------------");
             TranslateModels m = JsonUtils.parse(model, TranslateModels.class);
             log.info(model);
             toTranslate(m.getSysCodeTranslate(), SysCodeTranslate.class, m.getSysCodeTranslate().getId(), Constants.TRANSLATE_SYS_CODE, m.getUserId());
-            log.info("--------------------字典模块翻译接受信息结束--------------------------");
+          //  log.info("--------------------字典模块翻译接受信息结束--------------------------");
         }
     }
 
@@ -316,11 +316,11 @@ public class TranslateListener {
         if (EmptyUtil.Companion.isNullOrEmpty(model)) {
             return;
         } else {
-            log.info("--------------------字典明细模块翻译接受信息开始--------------------------");
+           // log.info("--------------------字典明细模块翻译接受信息开始--------------------------");
             TranslateModels m = JsonUtils.parse(model, TranslateModels.class);
             log.info(model);
             toTranslate(m.getSysCodeDetailTranslate(), SysCodeDetailTranslate.class, m.getSysCodeDetailTranslate().getId().longValue(), Constants.TRANSLATE_SYS_CODE_DETAIL, m.getUserId());
-            log.info("--------------------字典明细模块翻译接受信息结束--------------------------");
+          //  log.info("--------------------字典明细模块翻译接受信息结束--------------------------");
         }
     }
 
@@ -428,7 +428,7 @@ public class TranslateListener {
         } else {
             TranslateModels m = JsonUtils.parse(model, TranslateModels.class);
             HisMedicalTranslate hisMedicalTranslate = m.getHisMedicalTranslate();
-            System.out.println("------------>"+hisMedicalTranslate.getId().longValue());
+         //   System.out.println("------------>"+hisMedicalTranslate.getId().longValue());
             toTranslate(hisMedicalTranslate, HisMedicalTranslate.class, hisMedicalTranslate.getId().longValue(), Constants.TRANSLATE_HIS_HHISMEDICAL, m.getUserId());
         }
     }

@@ -113,18 +113,18 @@ public class HisProjectServiceImpl implements HisProjectService {
             for (Long id : ids) {
                 HisProject hisProject = hisProjectMapper.selectByPrimaryKey(id);
                 if (EmptyUtil.Companion.isNullOrEmpty(hisProject)) {
-                    log.info("查询失败 ！！！  无对应数据");
+                    //log.info("查询失败 ！！！  无对应数据");
                     return MessageUtil.createMessage(false, "删除失败。");
                 }
                 if (!EmptyUtil.Companion.isNullOrEmpty(hisProject.getNumber())) {
                     hisProjectMapper.deleteByPrimaryKey(id);
-                    log.info("--------------------收费项目删除翻译开始---------------------------");
+                    //  log.info("--------------------收费项目删除翻译开始---------------------------");
                     TranslateDelete translateDelete = new TranslateDelete();
                     translateDelete.setId(id);
                     translateDelete.setModel(Constants.TRANSLATE_HIS_PROJECT);
                     amqpTemplat.convertAndSend(Constants.TRANSLATE_HIS_DELETE, JsonUtils.serialize(translateDelete));
-                    log.info(JsonUtils.serialize(translateDelete));
-                    log.info("--------------------收费项目删除翻译结束---------------------------");
+                    //   log.info(JsonUtils.serialize(translateDelete));
+                    //    log.info("--------------------收费项目删除翻译结束---------------------------");
                     continue;
                 } else {
                     return MessageUtil.createMessage(false, "删除失败。");
@@ -171,7 +171,7 @@ public class HisProjectServiceImpl implements HisProjectService {
                     hisProject.setPinyinCode(toFirstChar);*/
                 }
                 hisProjectMapper.insert(hisProject);
-                log.info("--------------------收费项目新增翻译发送开始---------------------------");
+                //   log.info("--------------------收费项目新增翻译发送开始---------------------------");
                 BaseLoginUser loginUser = new BaseLoginUser();
                 TranslateModels translateModels = new TranslateModels();
                 HisProjectTranslate hisProjectTranslate = new HisProjectTranslate();
@@ -179,8 +179,8 @@ public class HisProjectServiceImpl implements HisProjectService {
                 translateModels.setUserId(loginUser.getId());
                 translateModels.setHisProjectTranslate(hisProjectTranslate);
                 amqpTemplat.convertAndSend("com.ahsj.addProject", JsonUtils.serialize(translateModels));
-                log.info(JsonUtils.serialize(translateModels));
-                log.info("--------------------收费项目新增翻译发送结束---------------------------");
+                //  log.info(JsonUtils.serialize(translateModels));
+                //  log.info("--------------------收费项目新增翻译发送结束---------------------------");
 
                 return MessageUtil.createMessage(true, "保存成功。");
                  /*   } else {
@@ -225,7 +225,7 @@ public class HisProjectServiceImpl implements HisProjectService {
         } else {
             HisProject hisProject = hisProjectMapper.selectByPrimaryKey(id);
             if (EmptyUtil.Companion.isNullOrEmpty(hisProject)) {
-                log.info("查询失败 ！！！  无对应数据");
+                //  log.info("查询失败 ！！！  无对应数据");
                 return new HisProject();
             } else {
                 return hisProject;
@@ -249,14 +249,14 @@ public class HisProjectServiceImpl implements HisProjectService {
         if (!EmptyUtil.Companion.isNullOrEmpty(hisProject.getId())) {
             HisProject project = hisProjectMapper.selectByPrimaryKey(hisProject.getId());
             if (EmptyUtil.Companion.isNullOrEmpty(project)) {
-                log.info("查询失败 ！！！  无对应数据");
+                //  log.info("查询失败 ！！！  无对应数据");
                 return MessageUtil.createMessage(false, "修改失败。");
             }
             if (!EmptyUtil.Companion.isNullOrEmpty(project.getNumber())) {
                 /*String toFirstChar = PinyinUtils.ToFirstChar(hisProject.getName());
                 hisProject.setPinyinCode(toFirstChar);*/
                 hisProjectMapper.updateByPrimaryKeySelective(hisProject);
-                log.info("--------------------收费项目修改翻译发送开始---------------------------");
+                // log.info("--------------------收费项目修改翻译发送开始---------------------------");
                 BaseLoginUser loginUser = new BaseLoginUser();
                 TranslateModels translateModels = new TranslateModels();
                 HisProjectTranslate hisProjectTranslate = new HisProjectTranslate();
@@ -264,8 +264,8 @@ public class HisProjectServiceImpl implements HisProjectService {
                 translateModels.setUserId(loginUser.getId());
                 translateModels.setHisProjectTranslate(hisProjectTranslate);
                 amqpTemplat.convertAndSend("com.ahsj.updateProject", JsonUtils.serialize(translateModels));
-                log.info(JsonUtils.serialize(translateModels));
-                log.info("--------------------收费项目修改翻译发送结束---------------------------");
+                //  log.info(JsonUtils.serialize(translateModels));
+                //   log.info("--------------------收费项目修改翻译发送结束---------------------------");
                 return MessageUtil.createMessage(true, "修改成功。");
             } else {
                 return MessageUtil.createMessage(false, "修改失败。");
@@ -598,11 +598,11 @@ public class HisProjectServiceImpl implements HisProjectService {
             BaseLoginUser loginUser = new BaseLoginUser();
             List<HisProjectTranslate> infoTranslates = new ArrayList<>();
             for (HisProject hisProject : projectInsertList) {
-                log.info("--------------------收费项目新增翻译发送开始---------------------------");
+                //  log.info("--------------------收费项目新增翻译发送开始---------------------------");
                 HisProjectTranslate translate = new HisProjectTranslate();
                 BeanUtils.copyProperties(hisProject, translate);
                 infoTranslates.add(translate);
-                log.info("--------------------收费项目新增翻译发送结束---------------------------");
+                //  log.info("--------------------收费项目新增翻译发送结束---------------------------");
             }
             translateModels.setUserId(loginUser.getId());
             translateModels.setHisProjectTranslates(infoTranslates);
@@ -653,11 +653,11 @@ public class HisProjectServiceImpl implements HisProjectService {
             BaseLoginUser loginUser = new BaseLoginUser();
             List<HisProjectTranslate> infoTranslates = new ArrayList<>();
             for (HisProject hisProject : projectUpdateList) {
-                log.info("--------------------收费项目修改翻译发送开始---------------------------");
+                //  log.info("--------------------收费项目修改翻译发送开始---------------------------");
                 HisProjectTranslate translate = new HisProjectTranslate();
                 BeanUtils.copyProperties(hisProject, translate);
                 infoTranslates.add(translate);
-                log.info("--------------------收费项目修改翻译发送结束---------------------------");
+                //  log.info("--------------------收费项目修改翻译发送结束---------------------------");
             }
             translateModels.setUserId(loginUser.getId());
             translateModels.setHisProjectTranslates(infoTranslates);

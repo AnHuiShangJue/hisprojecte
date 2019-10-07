@@ -78,7 +78,7 @@ public class HisConsumablesImpl implements HisConsumablesService {
             if (EmptyUtil.Companion.isNullOrEmpty(check)) {
                 //是null就插入
                 hisConsumablesMapper.insert(hisConsumables);
-                log.info("--------------------耗材新增翻译发送开始--------------------------");
+                //   log.info("--------------------耗材新增翻译发送开始--------------------------");
                 BaseLoginUser loginUser = new BaseLoginUser();
                 TranslateModels translateModels = new TranslateModels();
                 HisConsumablesTranslate translate = new HisConsumablesTranslate();
@@ -86,8 +86,8 @@ public class HisConsumablesImpl implements HisConsumablesService {
                 translateModels.setUserId(loginUser.getId());
                 translateModels.setHisConsumablesTranslate(translate);
                 amqpTemplat.convertAndSend("com.ahsj.addHisConsumables", JsonUtils.serialize(translateModels));
-                log.info(JsonUtils.serialize(translateModels));
-                log.info("--------------------耗材新增翻译发送结束--------------------------");
+                //   log.info(JsonUtils.serialize(translateModels));
+                //   log.info("--------------------耗材新增翻译发送结束--------------------------");
 
                 return MessageUtil.createMessage(true, "插入成功!");
             } else {
@@ -109,7 +109,7 @@ public class HisConsumablesImpl implements HisConsumablesService {
 
 
                     hisConsumablesMapper.updateByPrimaryKeySelective(hisConsumables);
-                    log.info("--------------------耗材修改翻译发送开始--------------------------");
+                    //  log.info("--------------------耗材修改翻译发送开始--------------------------");
                     BaseLoginUser loginUser = new BaseLoginUser();
                     TranslateModels translateModels = new TranslateModels();
                     HisConsumablesTranslate translate = new HisConsumablesTranslate();
@@ -117,13 +117,13 @@ public class HisConsumablesImpl implements HisConsumablesService {
                     translateModels.setUserId(loginUser.getId());
                     translateModels.setHisConsumablesTranslate(translate);
                     amqpTemplat.convertAndSend("com.ahsj.updateHisConsumables", JsonUtils.serialize(translateModels));
-                    log.info(JsonUtils.serialize(translateModels));
-                    log.info("--------------------耗材修改翻译发送结束--------------------------");
+                    //  log.info(JsonUtils.serialize(translateModels));
+                    //  log.info("--------------------耗材修改翻译发送结束--------------------------");
                     return MessageUtil.createMessage(true, "更新成功!");
                 }
                 if (EmptyUtil.Companion.isNullOrEmpty(checkForOne)) {
                     hisConsumablesMapper.updateByPrimaryKeySelective(hisConsumables);
-                    log.info("--------------------耗材修改翻译发送开始--------------------------");
+                    // log.info("--------------------耗材修改翻译发送开始--------------------------");
                     BaseLoginUser loginUser = new BaseLoginUser();
                     TranslateModels translateModels = new TranslateModels();
                     HisConsumablesTranslate translate = new HisConsumablesTranslate();
@@ -131,13 +131,13 @@ public class HisConsumablesImpl implements HisConsumablesService {
                     translateModels.setUserId(loginUser.getId());
                     translateModels.setHisConsumablesTranslate(translate);
                     amqpTemplat.convertAndSend("com.ahsj.updateHisConsumables", JsonUtils.serialize(translateModels));
-                    log.info(JsonUtils.serialize(translateModels));
-                    log.info("--------------------耗材修改翻译发送结束--------------------------");
+                    // log.info(JsonUtils.serialize(translateModels));
+                    //  log.info("--------------------耗材修改翻译发送结束--------------------------");
                     return MessageUtil.createMessage(true, "更新成功!");
                 }
                 if (checkForOne.getId() == hisConsumables.getId()) {
                     hisConsumablesMapper.updateByPrimaryKey(hisConsumables);
-                    log.info("--------------------耗材修改翻译发送开始--------------------------");
+                    //  log.info("--------------------耗材修改翻译发送开始--------------------------");
                     BaseLoginUser loginUser = new BaseLoginUser();
                     TranslateModels translateModels = new TranslateModels();
                     HisConsumablesTranslate translate = new HisConsumablesTranslate();
@@ -145,8 +145,8 @@ public class HisConsumablesImpl implements HisConsumablesService {
                     translateModels.setUserId(loginUser.getId());
                     translateModels.setHisConsumablesTranslate(translate);
                     amqpTemplat.convertAndSend("com.ahsj.updateHisConsumables", JsonUtils.serialize(translateModels));
-                    log.info(JsonUtils.serialize(translateModels));
-                    log.info("--------------------耗材修改翻译发送结束--------------------------");
+                    //  log.info(JsonUtils.serialize(translateModels));
+                    //  log.info("--------------------耗材修改翻译发送结束--------------------------");
                     return MessageUtil.createMessage(true, "更新成功!");
                 } else if (noSameNameAndSepc(checkForOne, hisConsumables)) {
                     return MessageUtil.createMessage(true, "更新成功!");
@@ -173,13 +173,13 @@ public class HisConsumablesImpl implements HisConsumablesService {
     public Message delete(Long[] ids) throws Exception {
         for (Long id : ids) {
             hisConsumablesMapper.deleteByPrimaryKey(id);
-            log.info("--------------------耗材删除翻译发送开始--------------------------");
+            // log.info("--------------------耗材删除翻译发送开始--------------------------");
             TranslateDelete translateDelete = new TranslateDelete();
             translateDelete.setId(id);
             translateDelete.setModel(Constants.TRANSLATE_HIS_HISCONSUMABLES);
             amqpTemplat.convertAndSend(Constants.TRANSLATE_HIS_DELETE, JsonUtils.serialize(translateDelete));
-            log.info(JsonUtils.serialize(translateDelete));
-            log.info("--------------------耗材删除翻译发送结束--------------------------");
+            // log.info(JsonUtils.serialize(translateDelete));
+            // log.info("--------------------耗材删除翻译发送结束--------------------------");
         }
         return MessageUtil.createMessage(true, "删除成功!");
     }
@@ -239,7 +239,7 @@ public class HisConsumablesImpl implements HisConsumablesService {
     public List<HisConsumables> queryAll() throws Exception {
         List<HisConsumables>  hisConsumables =  hisConsumablesMapper.queryAll();
         if (EmptyUtil.Companion.isNullOrEmpty(hisConsumables)){
-            log.info("查询失败");
+            // log.info("查询失败");
             return new ArrayList<>();
         }else {
             return hisConsumables;
@@ -462,11 +462,11 @@ public class HisConsumablesImpl implements HisConsumablesService {
             BaseLoginUser loginUser = new BaseLoginUser();
             List<HisConsumablesTranslate> infoTranslates = new ArrayList<>();
             for (HisConsumables hisConsumables : hisConsumablesArrayListInsert) {
-                log.info("--------------------耗材基本信息新增翻译发送开始---------------------------");
+                //   log.info("--------------------耗材基本信息新增翻译发送开始---------------------------");
                 HisConsumablesTranslate translate = new HisConsumablesTranslate();
                 BeanUtils.copyProperties(hisConsumables, translate);
                 infoTranslates.add(translate);
-                log.info("--------------------耗材基本信息新增翻译发送结束---------------------------");
+                //   log.info("--------------------耗材基本信息新增翻译发送结束---------------------------");
             }
             translateModels.setUserId(loginUser.getId());
             translateModels.setHisConsumablesTranslates(infoTranslates);
@@ -520,11 +520,11 @@ public class HisConsumablesImpl implements HisConsumablesService {
             BaseLoginUser loginUser = new BaseLoginUser();
             List<HisConsumablesTranslate> infoTranslates = new ArrayList<>();
             for (HisConsumables hisConsumables : hisConsumablesArrayListUpdate) {
-                log.info("--------------------耗材基本信息修改翻译发送开始---------------------------");
+                // log.info("--------------------耗材基本信息修改翻译发送开始---------------------------");
                 HisConsumablesTranslate translate = new HisConsumablesTranslate();
                 BeanUtils.copyProperties(hisConsumables, translate);
                 infoTranslates.add(translate);
-                log.info("--------------------耗材基本信息修改翻译发送结束---------------------------");
+                //  log.info("--------------------耗材基本信息修改翻译发送结束---------------------------");
             }
             translateModels.setUserId(loginUser.getId());
             translateModels.setHisConsumablesTranslates(infoTranslates);

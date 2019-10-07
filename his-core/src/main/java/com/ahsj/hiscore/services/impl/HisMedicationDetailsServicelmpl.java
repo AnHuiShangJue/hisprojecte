@@ -92,13 +92,13 @@ public class HisMedicationDetailsServicelmpl implements HisMedicationDetailsServ
     public Message delete(Long[] ids) throws Exception {
         for (Long id : ids) {
             hisMedicationDetailsMapper.deleteByPrimaryKey(id);
-            log.info("--------------------药品明细删除翻译发送开始--------------------------");
+            // log.info("--------------------药品明细删除翻译发送开始--------------------------");
             TranslateDelete translateDelete = new TranslateDelete();
             translateDelete.setId(id);
             translateDelete.setModel(Constants.TRANSLATE_HIS_MEDICATIONDETAILS);
             amqpTemplat.convertAndSend(Constants.TRANSLATE_HIS_DELETE, JsonUtils.serialize(translateDelete));
-            log.info(JsonUtils.serialize(translateDelete));
-            log.info("--------------------药品明细删除翻译发送结束--------------------------");
+            // log.info(JsonUtils.serialize(translateDelete));
+            // log.info("--------------------药品明细删除翻译发送结束--------------------------");
         }
         return MessageUtil.createMessage(true, "删除成功!");
     }
@@ -137,11 +137,11 @@ public class HisMedicationDetailsServicelmpl implements HisMedicationDetailsServ
         BaseLoginUser loginUser = new BaseLoginUser();
         List<HisMedicationDetailsTranslate> infoTranslates = new ArrayList<>();
         for (HisMedicationDetails hisMedicationDetails  : hisMedicationDetailsList) {
-            log.info("--------------------药品明细新增翻译发送开始---------------------------");
+            //  log.info("--------------------药品明细新增翻译发送开始---------------------------");
             HisMedicationDetailsTranslate translate = new HisMedicationDetailsTranslate();
             BeanUtils.copyProperties(hisMedicationDetails, translate);
             infoTranslates.add(translate);
-            log.info("--------------------药品明细新增翻译发送结束---------------------------");
+            // log.info("--------------------药品明细新增翻译发送结束---------------------------");
         }
         translateModels.setUserId(loginUser.getId());
         translateModels.setHisMedicationDetails(infoTranslates);

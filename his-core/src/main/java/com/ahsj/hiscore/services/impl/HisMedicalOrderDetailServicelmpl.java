@@ -322,7 +322,7 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
         if (hisMedicalOrderDetailLinkedList.size() != 0)
             hisMedicalOrderDetailMapper.insertBatch(hisMedicalOrderDetailLinkedList);
 
-        log.info("--------------------医嘱新增翻译发送开始---------------------------");
+//        log.info("--------------------医嘱新增翻译发送开始---------------------------");
         TranslateModels translateModels = new TranslateModels();
         BaseLoginUser loginUser = new BaseLoginUser();
         List<HisMedicalOrderDetailTranslate> infoTranslates = new ArrayList<>();
@@ -334,8 +334,8 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
         translateModels.setUserId(loginUser.getId());
         translateModels.setHisMedicalOrderDetailTranslates(infoTranslates);
         amqpTemplat.convertAndSend("com.ahsj.addHisMedicalOrderDetailList", JsonUtils.serialize(translateModels));
-        log.info(JsonUtils.serialize(translateModels));
-        log.info("--------------------医嘱新增翻译发送结束---------------------------");
+//        log.info(JsonUtils.serialize(translateModels));
+//        log.info("--------------------医嘱新增翻译发送结束---------------------------");
     }
 
     /**

@@ -164,7 +164,7 @@ public class HisConsumablesDestoryImpl implements HisConsumablesDestoryService {
                     HisConsumablesDetails hisConsumablesDetails = hisConsumablesDetailsMapper.selectConsumablesId(hisEnterConsumablesDetails.getConsumablesId());
                     hisConsumablesDetails.setStock(hisConsumablesDetails.getStock()-allNumber);
                     hisConsumablesDetailsMapper.updateByPrimaryKey(hisConsumablesDetails);
-                log.info("--------------------耗材库存修改翻译发送开始--------------------------");
+                //   log.info("--------------------耗材库存修改翻译发送开始--------------------------");
                 BaseLoginUser loginUser = new BaseLoginUser();
                 TranslateModels translateModels = new TranslateModels();
                 HisConsumablesDetailsTranslate translate = new HisConsumablesDetailsTranslate();
@@ -172,8 +172,8 @@ public class HisConsumablesDestoryImpl implements HisConsumablesDestoryService {
                 translateModels.setUserId(loginUser.getId());
                 translateModels.setHisConsumablesDetailsTranslate(translate);
                 amqpTemplat.convertAndSend("com.ahsj.updateHisConsumablesDetails", JsonUtils.serialize(translateModels));
-                log.info(JsonUtils.serialize(translateModels));
-                log.info("--------------------耗材库存修改翻译发送结束--------------------------");
+                //   log.info(JsonUtils.serialize(translateModels));
+                //   log.info("--------------------耗材库存修改翻译发送结束--------------------------");
                 }
 
         }

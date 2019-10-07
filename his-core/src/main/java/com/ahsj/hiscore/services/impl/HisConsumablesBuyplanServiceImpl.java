@@ -64,7 +64,7 @@ public class HisConsumablesBuyplanServiceImpl implements HisConsumablesBuyplanSe
             checkId.setPersonInCharge(hisMedicinePurchasingPlanRecord.getPersonInCharge());
             checkId.setExpectedTime(hisMedicinePurchasingPlanRecord.getExpectedTime());
             hisConsumablesBuyplanMapper.updateByPrimaryKeySelective(checkId);
-            log.info("--------------------耗材采购修改翻译发送开始--------------------------");
+            //  log.info("--------------------耗材采购修改翻译发送开始--------------------------");
             BaseLoginUser loginUser = new BaseLoginUser();
             TranslateModels translateModels = new TranslateModels();
             HisConsumablesBuyplanTranslate translate = new HisConsumablesBuyplanTranslate();
@@ -72,8 +72,8 @@ public class HisConsumablesBuyplanServiceImpl implements HisConsumablesBuyplanSe
             translateModels.setUserId(loginUser.getId());
             translateModels.setHisConsumablesBuyplanTranslate(translate);
             amqpTemplat.convertAndSend("com.ahsj.updateHisConsumablesBuyplan", JsonUtils.serialize(translateModels));
-            log.info(JsonUtils.serialize(translateModels));
-            log.info("--------------------耗材采购修改翻译发送开始--------------------------");
+            //  log.info(JsonUtils.serialize(translateModels));
+            //  log.info("--------------------耗材采购修改翻译发送开始--------------------------");
             return MessageUtil.createMessage(true, "更新成功");
         }
     }
@@ -91,13 +91,13 @@ public class HisConsumablesBuyplanServiceImpl implements HisConsumablesBuyplanSe
     public Message delete(Long[] ids) throws Exception {
         for (Long id : ids) {
             hisConsumablesBuyplanMapper.deleteByPrimaryKey(id);
-            log.info("--------------------耗材采购删除翻译发送开始--------------------------");
+            //    log.info("--------------------耗材采购删除翻译发送开始--------------------------");
             TranslateDelete translateDelete = new TranslateDelete();
             translateDelete.setId(id);
             translateDelete.setModel(Constants.TRANSLATE_HIS_CONSUMABLESBUYPLAN);
             amqpTemplat.convertAndSend(Constants.TRANSLATE_HIS_DELETE, JsonUtils.serialize(translateDelete));
-            log.info(JsonUtils.serialize(translateDelete));
-            log.info("--------------------耗材采购删除翻译发送结束--------------------------");
+            //  log.info(JsonUtils.serialize(translateDelete));
+            //  log.info("--------------------耗材采购删除翻译发送结束--------------------------");
         }
         return MessageUtil.createMessage(true, "删除成功!");
     }

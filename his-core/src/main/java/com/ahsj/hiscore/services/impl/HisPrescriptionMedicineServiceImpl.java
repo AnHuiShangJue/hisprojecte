@@ -105,7 +105,7 @@ public class HisPrescriptionMedicineServiceImpl implements HisPrescriptionMedici
 
             int flag = hisPrescriptionMedicineMapper.insertSelective(hisPrescriptionMedicine);
             hisPrescriptionService.searchIsAvailable();
-            log.info("--------------------药方基本明细新增翻译发送开始---------------------------");
+            //  log.info("--------------------药方基本明细新增翻译发送开始---------------------------");
             BaseLoginUser loginUser = new BaseLoginUser();
             TranslateModels translateModels = new TranslateModels();
             List<HisPrescriptionMedicineTranslate> hisPrescriptionMedicineTranslateArrayList = new ArrayList<>();
@@ -115,8 +115,8 @@ public class HisPrescriptionMedicineServiceImpl implements HisPrescriptionMedici
             hisPrescriptionMedicineTranslateArrayList.add(hisPrescriptionMedicineTranslate);
             translateModels.setHisPrescriptionMedicineTranslateList(hisPrescriptionMedicineTranslateArrayList);
             amqpTemplat.convertAndSend("com.ahsj.add.hisPrescriptionMedicine", JsonUtils.serialize(translateModels));
-            log.info(JsonUtils.serialize(translateModels));
-            log.info("--------------------药方基本明细新增翻译发送结束---------------------------");
+            //log.info(JsonUtils.serialize(translateModels));
+            //log.info("--------------------药方基本明细新增翻译发送结束---------------------------");
             if (flag == 0) {
                 return MessageUtil.createMessage(false, "保存失败。");
             }
@@ -130,7 +130,7 @@ public class HisPrescriptionMedicineServiceImpl implements HisPrescriptionMedici
             if (flag == 0) {
                 return MessageUtil.createMessage(false, "更新失败。");
             }
-            log.info("--------------------药方基本明细修改翻译发送开始---------------------------");
+            //  log.info("--------------------药方基本明细修改翻译发送开始---------------------------");
             BaseLoginUser loginUser = new BaseLoginUser();
             TranslateModels translateModels = new TranslateModels();
             List<HisPrescriptionMedicineTranslate> hisPrescriptionMedicineTranslateArrayList = new ArrayList<>();
@@ -140,8 +140,8 @@ public class HisPrescriptionMedicineServiceImpl implements HisPrescriptionMedici
             hisPrescriptionMedicineTranslateArrayList.add(hisPrescriptionMedicineTranslate);
             translateModels.setHisPrescriptionMedicineTranslateList(hisPrescriptionMedicineTranslateArrayList);
             amqpTemplat.convertAndSend("com.ahsj.update.hisPrescriptionMedicine", JsonUtils.serialize(translateModels));
-            log.info(JsonUtils.serialize(translateModels));
-            log.info("--------------------药方基本明细修改翻译发送结束---------------------------");
+            //  log.info(JsonUtils.serialize(translateModels));
+            // log.info("--------------------药方基本明细修改翻译发送结束---------------------------");
             hisPrescriptionService.searchIsAvailable();
             return MessageUtil.createMessage(true, "更新成功。");
 
@@ -247,7 +247,7 @@ public class HisPrescriptionMedicineServiceImpl implements HisPrescriptionMedici
     public void saveForMultiple(List<HisPrescriptionMedicine> hisPrescriptionMedicineList) throws Exception {
         hisPrescriptionMedicineMapper.insertBatch(hisPrescriptionMedicineList);
 
-        log.info("--------------------药方基本明细新增翻译发送开始---------------------------");
+        // log.info("--------------------药方基本明细新增翻译发送开始---------------------------");
         BaseLoginUser loginUser = new BaseLoginUser();
         TranslateModels translateModels = new TranslateModels();
         List<HisPrescriptionMedicineTranslate> hisPrescriptionMedicineTranslateArrayList = new ArrayList<>();
@@ -260,8 +260,8 @@ public class HisPrescriptionMedicineServiceImpl implements HisPrescriptionMedici
         translateModels.setUserId(loginUser.getId());
         translateModels.setHisPrescriptionMedicineTranslateList(hisPrescriptionMedicineTranslateArrayList);
         amqpTemplat.convertAndSend("com.ahsj.add.hisPrescriptionMedicine", JsonUtils.serialize(translateModels));
-        log.info(JsonUtils.serialize(translateModels));
-        log.info("--------------------药方基本明细新增翻译发送结束---------------------------");
+        // log.info(JsonUtils.serialize(translateModels));
+        // log.info("--------------------药方基本明细新增翻译发送结束---------------------------");
         hisPrescriptionService.searchIsAvailable();
 
     }
@@ -331,10 +331,10 @@ public class HisPrescriptionMedicineServiceImpl implements HisPrescriptionMedici
         if (StringUtils.equals(param, Constants.HIS_CH)) {//中文导出
             psth = this.getClass().getClassLoader().getResource("templates/excel/export/PrescriptionMedicine_CH.xlsx").getPath();  //目标路径
             psth =Constants.HIS_SYS_EXCEL_PRESCRIPTION_CH_FILE_URL;
-            logger.info("------------导出药方表中文版------------");
+            //   logger.info("------------导出药方表中文版------------");
         }
         if(StringUtils.equals(param, Constants.HIS_EN)){
-            logger.info("------------导出药方表英文版------------");
+            //  logger.info("------------导出药方表英文版------------");
         }
         if (StringUtils.equals(param, Constants.HIS_KM)) {//高棉语导出
             psth = this.getClass().getClassLoader().getResource("templates/excel/export/PrescriptionMedicine_EN.xlsx").getPath();  //目标路径
@@ -403,7 +403,7 @@ public class HisPrescriptionMedicineServiceImpl implements HisPrescriptionMedici
                 List<Translate> translates9 = iTranslateService.queryTranslate(translate9);
                 translates9.stream().filter(f -> f.getTranslateChina().equals(p.getDescription())).forEach(e ->p.setDescription(e.getTranslateKhmer()));
             }
-            logger.info("------------导出药方表高棉语版------------");
+            //   logger.info("------------导出药方表高棉语版------------");
         }
         beans.put("hisPrescriptionMedicine", hisPrescriptionMedicineAll);
         if (StringUtils.equals(param, Constants.HIS_KM)) {//高棉语导出

@@ -59,7 +59,7 @@ public class HisMedicalServiceImpl implements HisMedicalService {
         if (!EmptyUtil.Companion.isNullOrEmpty(checkForExit) ) {
             hisMedicalMapper.updateByPrimaryKeySelective(hisMedical);
 
-            log.info("--------------------治疗计划更新翻译发送开始---------------------------");
+            // log.info("--------------------治疗计划更新翻译发送开始---------------------------");
             BaseLoginUser loginUser = new BaseLoginUser();
             TranslateModels translateModels = new TranslateModels();
             HisMedicalTranslate hisMedicalTranslate = new HisMedicalTranslate();
@@ -67,14 +67,14 @@ public class HisMedicalServiceImpl implements HisMedicalService {
             translateModels.setUserId(loginUser.getId());
             translateModels.setHisMedicalTranslate(hisMedicalTranslate);
             amqpTemplat.convertAndSend("com.ahsj.update.hisMedical", JsonUtils.serialize(translateModels));
-            log.info(JsonUtils.serialize(translateModels));
-            log.info("--------------------治疗计划更新翻译发送结束---------------------------");
+            // log.info(JsonUtils.serialize(translateModels));
+            // log.info("--------------------治疗计划更新翻译发送结束---------------------------");
 
             return MessageUtil.createMessage(true, "更新成功！");
         } else {
             hisMedicalMapper.insert(hisMedical);
 
-            log.info("--------------------治疗计划新增翻译发送开始---------------------------");
+            //  log.info("--------------------治疗计划新增翻译发送开始---------------------------");
             BaseLoginUser loginUser = new BaseLoginUser();
             TranslateModels translateModels = new TranslateModels();
             HisMedicalTranslate hisMedicalTranslate = new HisMedicalTranslate();
@@ -82,8 +82,8 @@ public class HisMedicalServiceImpl implements HisMedicalService {
             translateModels.setUserId(loginUser.getId());
             translateModels.setHisMedicalTranslate(hisMedicalTranslate);
             amqpTemplat.convertAndSend("com.ahsj.add.hisMedical", JsonUtils.serialize(translateModels));
-            log.info(JsonUtils.serialize(translateModels));
-            log.info("--------------------治疗计划新增翻译发送结束---------------------------");
+            //  log.info(JsonUtils.serialize(translateModels));
+            //  log.info("--------------------治疗计划新增翻译发送结束---------------------------");
 
             return MessageUtil.createMessage(true, "保存成功！");
         }
