@@ -7,11 +7,9 @@ import com.ahsj.hiscore.core.CodeHelper;
 import com.ahsj.hiscore.dao.HisMedicalOrderDetailMapper;
 import com.ahsj.hiscore.entity.*;
 import com.ahsj.hiscore.entity.TranslateModel.HisMedicalOrderDetailTranslate;
-import com.ahsj.hiscore.entity.TranslateModel.HisProjectTranslate;
 import com.ahsj.hiscore.entity.TranslateModel.TranslateModels;
 import com.ahsj.hiscore.feign.ITranslateService;
 import com.ahsj.hiscore.services.*;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import core.entity.PageBean;
 import core.message.BoolMessage;
 import core.message.Message;
@@ -447,7 +445,7 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
     **/
     @Override
     @Transactional(readOnly = false)
-    public Message stopOrder(Long id,Long loginUser,Date stopDate) throws Exception {
+    public Message stopOrder(Long id,Long loginUser,String stopDate) throws Exception {
         StringBuffer returnMessage = new StringBuffer();//记录返回信息
         HisMedicalOrderDetail hisMedicalOrderDetail = hisMedicalOrderDetailMapper.selectByPrimaryKey(id);
         if(hisMedicalOrderDetail.getIsStop()==1){
@@ -677,7 +675,7 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
     **/
     @Override
     @Transactional(readOnly = false)
-    public Message cancleOrder(Long id,Long loginUser) throws Exception {
+    public Message cancleOrder(Long id, Long loginUser, String stopDate) throws Exception {
         StringBuffer returnMessage = new StringBuffer();//记录返回信息
         HisMedicalOrderDetail hisMedicalOrderDetail = hisMedicalOrderDetailMapper.selectByPrimaryKey(id);
         if(hisMedicalOrderDetail.getIsStop()==1){
@@ -685,7 +683,7 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
         }
         if(EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getIsInfusionList())){
             hisMedicalOrderDetail.setIsStop(1);
-            hisMedicalOrderDetail.setStopDate(new Date());
+            hisMedicalOrderDetail.setStopDate(stopDate);
             //已经停嘱设置不可编辑
 //        hisMedicalOrderDetail.setIsFirstEdit(2);
             hisMedicalOrderDetail.setStopUserId(loginUser);
@@ -696,7 +694,7 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
             List<HisMedicalOrderDetail> hisMedicalOrderDetailList = hisMedicalOrderDetailMapper.selectByInfusionNumber(hisMedicalOrderDetail.getInfusionNumber());
             for (HisMedicalOrderDetail medicalOrderDetail : hisMedicalOrderDetailList) {
                 medicalOrderDetail.setIsStop(1);
-                medicalOrderDetail.setStopDate(new Date());
+                medicalOrderDetail.setStopDate(stopDate);
                 //已经停嘱设置不可编辑
 //        hisMedicalOrderDetail.setIsFirstEdit(2);
                 medicalOrderDetail.setStopUserId(loginUser);
@@ -718,7 +716,7 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
         }
         else {
             hisMedicalOrderDetail.setIsStop(1);
-            hisMedicalOrderDetail.setStopDate(new Date());
+            hisMedicalOrderDetail.setStopDate(stopDate);
             //已经停嘱设置不可编辑
 //        hisMedicalOrderDetail.setIsFirstEdit(2);
 //        hisMedicalOrderDetail.setStopUserId(loginUser);

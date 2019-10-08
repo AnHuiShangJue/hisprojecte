@@ -402,8 +402,8 @@
         //停嘱
         function stop(id) {
             dialog.confirm('确定停嘱（Sure Stop）?', function (index, layero) {
-                $.ahsjajax(CTX + "/api/medicalOrderDetail/stopOrder.ahsj",
-                    {"id": id,"stopDate":/*$("#stopDate").val()*/"0"},
+            /*    $.ahsjajax(CTX + "/api/medicalOrderDetail/stopOrder.ahsj",
+                    {"id": id,"stopDate":/!*$("#stopDate").val()*!/"0"},
                     function (msg) {
                         if (msg.success) {
                             M.toast({
@@ -425,10 +425,10 @@
                             }
                         });
                     }
-                );
-             /*   layer.open({
-                    title:'请选择停嘱时间（Please select  the parking time）',
-                    content:'<div class="input-field"><input id="stopDate" name="stopDate" class="datepicker" type="text"  /></div> ',
+                );*/
+                layer.open({
+                    title:'请输入停嘱时间（Please enter  the parking time）',
+                    content:'<div class="input-field"><input id="stopDate" name="stopDate"  type="text"  /></div> ',
                     btn:['确认（confirm）','取消（cancel）'],
                     yes:function(index,layro){
                         $.ahsjajax(CTX + "/api/medicalOrderDetail/stopOrder.ahsj",
@@ -459,7 +459,7 @@
                     btn2:function(){
                         layer.closeAll();
                     }
-                });*/
+                });
 
             });
     }

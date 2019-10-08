@@ -342,7 +342,7 @@ public class HisMedicalOrderDetailController extends BaseController {
             , @RequestParam(value="id", required=true) Long id,@RequestParam(value = "stopDate",required = true) String stopDate
     ) throws Exception {
         if(null != request.getParameter("id")){
-            return  hisMedicalOrderDetailService.stopOrder(id,getId(),new Date());
+            return  hisMedicalOrderDetailService.stopOrder(id,getId(),stopDate);
         }else  return MessageUtil.createMessage(false,"参数异常");
     }
 
@@ -358,9 +358,10 @@ public class HisMedicalOrderDetailController extends BaseController {
     @ResponseBody
     public Message cancleOrder (Map<String, Object> model, HttpServletRequest request
             , @RequestParam(value="id", required=true) Long id
+            , @RequestParam(value="stopDate", required=false) String stopDate
     ) throws Exception {
         if(null != request.getParameter("id")){
-            return  hisMedicalOrderDetailService.cancleOrder(id,getId());
+            return  hisMedicalOrderDetailService.cancleOrder(id,getId(),stopDate);
         }else  return MessageUtil.createMessage(false,"参数异常");
     }
 

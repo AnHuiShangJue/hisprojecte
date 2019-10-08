@@ -264,30 +264,42 @@
 
     //取消短期医嘱
     function cancle(id) {
-        dialog.confirm('确定取消（Sure Cancle）?', function (index, layero) {
-            $.ahsjajax(CTX + "/api/medicalOrderDetail/cancleOrder.ahsj",
-                {"id": id},
-                function (msg) {
-                    if (msg.success) {
-                        M.toast({
-                            html: msg.message, completeCallback: function () {
+        dialog.confirm('确定取消/停嘱（Sure Cancle or Stop）?', function (index, layero) {
+            layer.open({
+                title:'请输入停嘱时间（Please enter  the parking time）',
+                content:'<div class="input-field"><input id="stopDate" name="stopDate"  type="text"  /></div> ',
+                btn:['确认（confirm）','取消（cancel）'],
+                yes:function(index,layro){
+                    $.ahsjajax(CTX + "/api/medicalOrderDetail/cancleOrder.ahsj",
+                        {"id": id,"stopDate":$("#stopDate").val()},
+                        function (msg) {
+                            if (msg.success) {
+                                M.toast({
+                                    html: msg.message, completeCallback: function () {
+                                    }
+                                });
+                                layer.closeAll();
+                                grid.search();
+                            } else {
+                                M.toast({
+                                    html: msg.message, completeCallback: function () {
+                                    }
+                                });
                             }
-                        });
-                        grid.search();
-                    } else {
-                        M.toast({
-                            html: msg.message, completeCallback: function () {
-                            }
-                        });
-                    }
-                },
-                function (data) {
-                    M.toast({
-                        html: "网络异常", completeCallback: function () {
+                        },
+                        function (data) {
+                            M.toast({
+                                html: "网络异常", completeCallback: function () {
+                                }
+                            });
                         }
-                    });
+                    );
+                },
+                btn2:function(){
+                    layer.closeAll();
                 }
-            );
+            });
+
         });
     }
 

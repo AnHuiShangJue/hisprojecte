@@ -1,11 +1,9 @@
 package com.ahsj.hiscore.services;
 
-import com.ahsj.hiscore.common.utils.ZipUtils;
 import com.ahsj.hiscore.entity.HisMedicalOrderDetail;
 import core.entity.PageBean;
 import core.message.Message;
 
-import java.util.Date;
 import java.util.List;
 
 public interface HisMedicalOrderDetailService {
@@ -99,7 +97,7 @@ public interface HisMedicalOrderDetailService {
      *@Date 2019-09-18
      *@Time 14:05
     **/
-    Message stopOrder(Long id, Long loginUser, Date stopDate)throws Exception;
+    Message stopOrder(Long id, Long loginUser, String stopDate)throws Exception;
 
     /**
      *@Description 根据医嘱编号查看明细
@@ -129,7 +127,7 @@ public interface HisMedicalOrderDetailService {
      *@Date 2019-09-25
      *@Time 11:26
     **/
-    Message cancleOrder(Long id,Long loginUser)throws Exception;
+    Message cancleOrder(Long id, Long loginUser, String stopDate)throws Exception;
 
     /**
      *@Description 根据医嘱当时生成输液单(定时任务)
