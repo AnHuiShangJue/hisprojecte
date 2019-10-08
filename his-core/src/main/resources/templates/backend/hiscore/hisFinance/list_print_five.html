@@ -17,7 +17,8 @@
 <div th:replace="public/base_print :: html"></div>
 <body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
       data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
-    <div class="row valign-wrapper">
+<div class="row" style="padding: 0;margin:0">
+<div class="row valign-wrapper">
         <div class="col s12 m12 l12 center">
             <h4 class="black-text" style="text-align: center;padding: 0 auto;margin: 0 auto">中柬第一医院项目收费</h4>
             <p class="black-text fontsize02" style="text-align: center;padding: 0 auto;margin: 0 auto">The first china-cambodia hospital Charges</p>
@@ -153,7 +154,7 @@ Scripts
     }
     function doOk() {
         $('body  div div.row.valign-wrapper').printThis({
-            importCSS: true,
+            importCSS: false,
             debug: false,
             afterPrint: function () {
                 dialog.confirm('确定打印?', function (index, layero) {

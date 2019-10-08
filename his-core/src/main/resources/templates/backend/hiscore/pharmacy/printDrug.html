@@ -2,12 +2,23 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
 <head>
     <style>
-        .fontsize01 {
-            font-size: 14px;
+        body{
+            font-size: 10px;
+            line-height: 10px;
+            padding: 0;
+            margin: 0;
         }
-
-        .fontsize02 {
-            font-size: 12px;
+        table tr td {
+            padding: 0;
+            margin: 0;
+        }
+        label{
+            font-size: 10px;
+            padding: 0;
+            margin: 0;
+        }
+        p{
+            padding: 0;margin: 0;font-size: 10px;
         }
 
     </style>
@@ -17,61 +28,42 @@
       data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
 
 <div class="row">
-    <div class="row valign-wrapper">
+    <div class="row valign-wrapper" style="margin-top: 30px">
         <div class="col s12 m12 l12 center">
-            <h5 class="black-text">中柬第一医院</h5>
-            <label class="black-text fontsize02">The first china-cambodia hospital</label>
+            <h4 class="col s12 m12 l12 center" style="text-align: center;padding: 0;margin: 0;font-size: 10px">中柬第一医院</h4>
+            <p style="text-align: center;padding: 0;margin: 0;font-size: 10px">The first china-cambodia hospital</p>
         </div>
     </div>
-    <div class="row valign-wrapper">
-        <div class="col s4 m4 l4 ">
-            <label class="black-text fontsize01">就诊编号</label></br>
-            <label class="black-text fontsize02">Visit number</label>
-        </div>
-        <div class="col s8 m8 l8">
-            <label class="black-text"><span id="recordNumber"></span></label>
-        </div>
-        <input type="hidden" id="ids" th:value="${ids}">
+    <div class="row valign-wrapper" >
+        <table style="border: none;padding: 0;margin: 0;font-size: 10px">
+            <tr>
+                <td><label>就诊编号(Visit number)</label></td>
+                <td><label><span id="recordNumber"></span></label></td>
+            </tr>
+            <tr>
+                <td><label>交易流水号(Transaction flow number)</label></td>
+                <td><label><span id="tollNumber"></span></label></td>
+            </tr>
+            <tr>
+                <td><label>出药人(Drug person)</label></td>
+                <td><label><span id="userName"></span></label></td>
+            </tr>
+            <tr>
+                <td><label>出药时间(Drug delivery time)</label></td>
+                <td><label><span id="createDate"></span></label></td>
+            </tr>
+            <tr>
+                <td colspan="2"><label>出药明细(Drug detail)</label></td>
 
-    </div>
-    <div class="row valign-wrapper">
-        <div class="col s4 m4 l4 ">
-            <label class="black-text fontsize01">交易流水号</label></br>
-            <label class="black-text fontsize02">Transaction flow number</label>
-        </div>
-        <div class="col s8 m8 l8">
-            <label class="black-text"><span id="tollNumber"></span></label>
-        </div>
+            </tr>
+        </table>
     </div>
 
-    <div class="row valign-wrapper">
-        <div class="col s4 m4 l4 ">
-            <label class="black-text fontsize01">出药人</label></br>
-            <label class="black-text fontsize02">Drug person</label>
-        </div>
-        <div class="col s8 m8 l8">
-            <label class="black-text"><span id="userName"></span></label>
-        </div>
+    <input type="hidden" id="ids" th:value="${ids}">
 
-    </div>
-    <div class="row valign-wrapper">
-        <div class="col s4 m4 l4 ">
-            <label class="black-text fontsize01">出药时间</label></br>
-            <label class="black-text fontsize02">Drug delivery time</label>
-        </div>
-        <div class="col s8 m8 l8">
-            <label class="black-text"><span id="createDate"></span></label>
-        </div>
-    </div>
     <div class="row valign-wrapper">
         <div class="col s12 m12 l12">
-            <h6 class="black-text">出药明细</h6>
-            <label class="black-text fontsize02">Drug detail</label>
-        </div>
-    </div>
-    <div class="row valign-wrapper">
-        <div class="col s12 m12 l12">
-            <table id="table_id" style="font-size: 14px"></table>
+            <table id="table_id" style="border: none;margin:0;padding: 0;font-size: 10px"></table>
         </div>
     </div>
 </div>
@@ -93,7 +85,7 @@ Scripts
             function (data) {
                 var jsons = data[0];
                 if (!isNullOrEmpty(jsons)) {//有
-                    var trs = "<tr><td><h6 class='black-text'>名称(name)</h6></td><td><h6 class='black-text'>数目(number)</h6></td><td><h6 class='black-text'>规格(specification)</h6></td><td><h6 class='black-text'>用法用量(usage and dosage)</h6></td><td><h6 class='black-text'>有效期(Validity period)</h6></td></tr>";
+                    var trs = "<tr><td>名称(name)</td><td>数目(number)</td><td>规格(specification)</td><td>用法用量(usage and dosage)</td><td>有效期(Validity period)</td></tr>";
                     $.each(data, function (index, item) {
                         if (isNullOrEmpty(item.drugsName)) {
                             item.drugsName = ""
@@ -113,7 +105,7 @@ Scripts
                         if (isNullOrEmpty(item.drugsSpec)) {
                             item.drugsSpec = ""
                         }
-                        trs += "<tr><td><p class='black-text fontsize03'> " + item.drugsName + "(" + item.tdrugsName + ")" + "</p></td><td ><p class='black-text fontsize03'> " + item.exitCount + "</p></td><td ><p class='black-text fontsize03'> " + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</p></td><td ><p class='black-text fontsize03'> " + item.description + "(" + item.tdescription + ")" + "</p></td><td ><p class='black-text fontsize03'> " + item.validityPeriod + "</p></td></tr >";
+                        trs += "<tr><td><label> " + item.drugsName + "(" + item.tdrugsName + ")" + "</label></td><td ><label> " + item.exitCount + "</label></td><td ><label> " + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</label></td><td ><label> " + item.description + "(" + item.tdescription + ")" + "</label></td><td ><label> " + item.validityPeriod + "</label></td></tr >";
                     });
                     var jsons = data[0];
                     $("#recordNumber").html(jsons.recordNumber);
@@ -133,11 +125,10 @@ Scripts
 
     function doOk() {
         $('body  div div.row.valign-wrapper').printThis({
-            importCSS: true,
+            importCSS: false,
             debug: false,
             afterPrint: function () {
                 dialog.confirm('确定打印?', function (index, layero) {
-
 
                 });
             }

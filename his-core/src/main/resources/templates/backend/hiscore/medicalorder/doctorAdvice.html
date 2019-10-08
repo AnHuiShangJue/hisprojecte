@@ -82,7 +82,7 @@
     </div>
 
     <div class="row valign-wrapper">
-        <div class="col s12 m12 l12" style="height: 1000px;">
+        <div class="col s12 m12 l12" style="height: 1000px;border: 1px solid black;">
             <table border="0" cellspacing="0" cellpadding="0" border-collapse="collapse" style="width: 750px;margin: 0 auto;" id="table_id">
                 <!--                <tr>-->
                 <!--                    <th style="border:1px solid black;"><div style="transform: scale(0.5);height: 50px;">开始时间(The start time)</div></th>-->
@@ -207,7 +207,7 @@ Scripts
             CTX + "/api/hisMedicalOrder/printDoctorAdvice/index.ahsj",
             {"number": number},
             function (data) {
-                //console.log(data);
+                console.log(data);
                 if (!isNullOrEmpty(data)) {//有
                     var trs;
                     trs = "<tr><td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">开始时间(The start time)</p></td>" +

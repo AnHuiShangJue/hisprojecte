@@ -3,8 +3,21 @@
 
 <head>
     <style>
+
+        body{
+            font-size: 10px;
+            line-height: 10px;
+            padding: 0;
+            margin: 0;
+        }
         table tr td {
             padding: 0;
+            margin: 0;
+        }
+        label{
+            font-size: 10px;
+            padding: 0;
+            margin: 0;
         }
     </style>
 </head>
@@ -14,163 +27,98 @@
       data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
 
 <div class="row">
-    <div class="row valign-wrapper">
-        <div class="col s12 m12 l12 center">
-            <h5 class="black-text">中柬第一医院</h5>
-            <label class="black-text fontsize02">The first china-cambodia hospital</label>
+    <div class="row valign-wrapper" style="margin-top: 30px">
+        <div class="col s12 m12 l12 center" style="margin: 0 auto;">
+            <h4 style="text-align: center;padding: 0;margin: 0;font-size: 10px">中柬第一医院</h4>
+            <p style="text-align: center;padding: 0;margin: 0;font-size: 10px">The first china-cambodia hospital</p>
         </div>
     </div>
-    <div class="row valign-wrapper">
-        <div class="col s12 m12 l12 center">治疗诊疗单(Treatment list)</div>
+    <div class="row valign-wrapper" >
+        <table style="border: none;margin: 0 auto;font-size: 10px">
+            <tr>
+                <td colspan="2"><label>治疗诊疗单(Treatment list)</label></td>
+            </tr>
+            <tr>
+                <td><label>就诊编号(Visit number)</label></td>
+                <td><label><span id=numbers></span></label></td>
+            </tr>
+            <tr>
+                <td>就诊人(Visiting person)</td>
+                <td><label><span id="name"></span></label></td>
+            </tr>
+            <tr>
+                <td>诊疗医生(Medical doctor)</td>
+                <td><label><span id="doctorName"></span></label></td>
+            </tr>
+            <tr>
+                <td>创建时间(Creation time)</td>
+                <td><label><span id="date"></span></label></td>
+            </tr>
+            <tr>
+                <td colspan="2"><label class="fontsize01">门诊诊断(Outpatient diagnosis)</label></td>
+            </tr>
+            <tr>
+                <td>现病史(Current medical history)</td>
+                <td><label><span id="nowCondition"></span></label></td>
+            </tr>
+            <tr>
+                <td>既往史(Past history)</td>
+                <td><label><span id="hiscondition"></span></label></td>
+            </tr>
+            <tr>
+                <td>主诉(Chief complaint)</td>
+                <td><label><span id="chiefcomplaint"></span></label></td>
+            </tr>
+            <tr>
+                <td>个人史(Personal history)</td>
+                <td><label><span id="personalHistory"></span></label></td>
+            </tr>
+            <tr>
+                <td>过敏史(allergies)</td>
+                <td><label><span id="allergies"></span></label></td>
+            </tr>
+            <tr>
+                <td>家族史(Family history)</td>
+                <td><label><span id="familyHistory"></span></label></td>
+            </tr>
+            <tr>
+                <td>其他诊断(Other diagnosis)</td>
+                <td><label><span id="other"></span></label></td>
+            </tr>
+            <tr>
+                <td>血压(blood pressure)</td>
+                <td><label><span id="bloodPressure"></span></label></td>
+            </tr>
+            <tr>
+                <td>体温(body temperature)</td>
+                <td><label><span id="bodyTemperature"></span></label></td>
+            </tr>
+            <tr>
+                <td>体重(weight)</td>
+                <td><label><span id="bodyWeight"></span></label></td>
+            </tr>
+            <tr>
+                <td>心率(Heart rate)</td>
+                <td><label><span id="heartRate"></span></label></td>
+            </tr>
+            <tr>
+                <td colspan="2"><label>药物治疗方案(Drug treatment plan)</label></td>
+            </tr>
+        </table>
     </div>
-    <div class="row valign-wrapper">
 
-        <div class="col s6 m6 l6">
-            <label class="black-text">就诊编号(Visit number)</label>
-        </div>
-        <div class="col s6 m6 l6">
-            <label class="black-text"><span id=numbers></span></label>
-        </div>
-
-    </div>
-
     <div class="row valign-wrapper">
-        <div class="col s6 m6 l6">
-            <label class="black-text">就诊人(Visiting person)</label>
-        </div>
-        <div class="col s6 m6 l6">
-            <label class="black-text"><span id="name"></span></label>
-        </div>
-    </div>
-
-    <div class="row valign-wrapper">
-        <div class="col s6 m6 l6">
-            <label class="black-text">诊疗医生(Medical doctor)</label>
-        </div>
-        <div class="col s6 m6 l6">
-            <label class="black-text"><span id="doctorName"></span></label>
-        </div>
-
-    </div>
-    <div class="row valign-wrapper">
-        <div class="col s6 m6 l6">
-            <label class="black-text">创建时间(Creation time)</label>
-        </div>
-        <div class="col s6 m6 l6">
-            <label class="black-text"><span id="date"></span></label>
-        </div>
-
-    </div>
-    <div class="row valign-wrapper">
-        <div class="col s12 m12 l12 center">
-            <label class="black-text">门诊诊断(Outpatient diagnosis)</label>
-        </div>
-    </div>
-
-    <div class="row valign-wrapper">
-        <div class="col s6 m6 l6">
-            <label class="black-text">现病史(Current medical history)</label>
-        </div>
-        <div class="col s6 m6 l6">
-            <label class="black-text"><span id="nowCondition"></span></label>
-        </div>
-
-    </div>
-    <div class="row valign-wrapper">
-        <div class="col s6 m6 l6">
-            <label class="black-text">既往史(Past history)</label>
-        </div>
-        <div class="col s6 m6 l6">
-            <label class="black-text"><span id="hiscondition"></span></label>
-        </div>
-
-    </div>
-    <div class="row valign-wrapper">
-        <div class="col s6 m6 l6">
-            <label class="black-text">主诉(Chief complaint)</label>
-        </div>
-        <div class="col s6 m6 l6">
-            <label class="black-text"><span id="chiefcomplaint"></span></label>
-        </div>
-    </div>
-
-    <div class="row valign-wrapper">
-        <div class="col s6 m6 l6">
-            <label class="black-text">个人史(Personal history)</label>
-        </div>
-        <div class="col s6 m6 l6">
-            <label class="black-text"><span id="personalHistory"></span></label>
-        </div>
-    </div>
-    <div class="row valign-wrapper">
-        <div class="col s6 m6 l6">
-            <label class="black-text">过敏史(allergies)</label>
-        </div>
-        <div class="col s6 m6 l6">
-            <label class="black-text"><span id="allergies"></span></label>
-        </div>
-    </div>
-    <div class="row valign-wrapper">
-        <div class="col s6 m6 l6">
-            <label class="black-text">家族史(Family history)</label>
-        </div>
-        <div class="col s6 m6 l6">
-            <label class="black-text"><span id="familyHistory"></span></label>
-        </div>
-    </div>
-    <div class="row valign-wrapper">
-        <div class="col s6 m6 l6">
-            <label class="black-text">其他诊断(Other diagnosis)</label>
-        </div>
-        <div class="col s6 m6 l6">
-            <label class="black-text"><span id="other"></span></label>
-        </div>
-    </div>
-    <div class="row valign-wrapper">
-        <div class="col s6 m6 l6">
-            <label class="black-text">血压(blood pressure)</label>
-        </div>
-        <div class="col s6 m6 l6">
-            <label class="black-text"><span id="bloodPressure"></span></label>
-        </div>
-        <div class="col s6 m6 l6">
-            <label class="black-text">体温(body temperature)</label>
-        </div>
-        <div class="col s6 m6 l6">
-            <label class="black-text"><span id="bodyTemperature"></span></label>
-        </div>
-    </div>
-    <div class="row valign-wrapper">
-        <div class="col s6 m6 l6">
-            <label class="black-text">体重(weight)</label>
-        </div>
-        <div class="col s6 m6 l6">
-            <label class="black-text"><span id="bodyWeight"></span></label>
-        </div>
-        <div class="col s6 m6 l6">
-            <label class="black-text">心率(Heart rate)</label>
-        </div>
-        <div class="col s6 m6 l6">
-            <label class="black-text"><span id="heartRate"></span></label>
-        </div>
-    </div>
-    <div class="row valign-wrapper">
-        <div class="col s12 m12 l12 center" id="tabledrug">
-            <label class="black-text">药物治疗方案(Drug treatment plan)</label>
-        </div>
-    </div>
-    <div class="row valign-wrapper">
-        <table id="drug" style="font: 15px 'Roboto Condensed',Sans-serif"></table>
+        <table id="drug" style="border: none;margin: 0 auto;font-size: 10px"></table>
     </div>
     <input type="hidden" id="number" name="id" th:value="${number}">
     <div class="row valign-wrapper">
         <div class="col s12 m12 l12 center" id="tableP">
-            <label class="black-text">诊疗项目方案(Medical treatment plan)</label>
+            <p style="text-align: center;font-size: 10px;margin: 0;padding: 0">诊疗项目方案(Medical treatment plan)</p>
         </div>
 
     </div>
     <div class="row valign-wrapper">
-        <table id="project" style="font: 15px 'Roboto Condensed',Sans-serif"></table>
+        <table id="project" style="border: none;margin: 0 auto;font-size: 10px"></table>
     </div>
 </div>
 
@@ -209,7 +157,7 @@
             function (data) {
                 var jsons = data[0];
                 if (!isNullOrEmpty(jsons)) {//有
-                    var trs = "<tr><td>名称(name)</td><td>规格(drugsSpec)</td><td>用法用量(usage and dosage)</td><td>数目(number)</td><td>单价(price)</td><td>单项总价(Single item total price)</td></tr>";
+                    var trs = "<tr><td><label>名称(name)</label></td><td><label>规格(drugsSpec)</label></td><td><label>用法用量(usage and dosage)</label></td><td><label>数目(number)</label></td><td><label>单价(price)</label></td><td><label>单项总价(Single item total price)</label></td></tr>";
                     $.each(data, function (index, item) {
                         if (isNullOrEmpty(item.name)) {
                             item.name = ""
@@ -229,7 +177,7 @@
                         if (isNullOrEmpty(item.description)) {
                             item.description = ""
                         }
-                        trs += "<tr><td><p class='black-text fontsize03'> " + item.drugsName + "(" + item.tdrugsName + ")" + "</p></td><td ><p class='black-text fontsize03'>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</p></td><td ><p class='black-text fontsize03'> " + item.description + "(" + item.tdescription + ")" + "</p></td><td ><p class='black-text fontsize03'> " + item.count + "</p></td><td ><p class='black-text fontsize03'>" + item.price + "</p></td><td ><p class='black-text fontsize03'> " + item.totalPrice + "</p></td></tr >";
+                        trs += "<tr><td><p> " + item.drugsName + "(" + item.tdrugsName + ")" + "</p></td><td ><p>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</p></td><td ><p> " + item.description + "(" + item.tdescription + ")" + "</p></td><td ><p> " + item.count + "</p></td><td ><p>" + item.price + "</p></td><td ><p> " + item.totalPrice + "</p></td></tr >";
                     });
                     $("#drug").append(trs);
                 } else {
@@ -259,7 +207,7 @@
                             item.tname = ""
                         }
 
-                        trs += "<tr><td><p class='black-text fontsize03'> " + item.name + "(" + item.tname + ")" + "</p></td><td ><p class='black-text fontsize03'> " + item.num + "</p></td><td ><p class='black-text fontsize03'>" + item.price + "</p></td><td ><p class='black-text fontsize03'> " + item.totalPrice + "</p></td></tr >";
+                        trs += "<tr><td><p> " + item.name + "(" + item.tname + ")" + "</p></td><td ><p> " + item.num + "</p></td><td ><p>" + item.price + "</p></td><td ><p> " + item.totalPrice + "</p></td></tr >";
                     });
                     $("#project").append(trs);
                 } else {
@@ -347,7 +295,7 @@
 
     function doOk() {
         $('body  div div.row.valign-wrapper').printThis({
-            importCSS: true,
+            importCSS: false,
             debug: false,
             afterPrint: function () {
                 dialog.confirm('确定打印?', function (index, layero) {
