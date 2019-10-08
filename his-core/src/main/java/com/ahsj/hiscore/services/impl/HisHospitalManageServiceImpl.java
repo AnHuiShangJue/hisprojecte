@@ -116,6 +116,7 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
 
                 } else {
                     hisHospitalManage.setIsDischarged(1);
+
                     hisHosptalregist.setCareLevel(hisHospitalManage.getCareLevel());
                     hisHosptalregist.setDoctorId(hisHospitalManage.getDoctorId());
                     hisHosptalregist.setNurseId(hisHospitalManage.getNurseId());

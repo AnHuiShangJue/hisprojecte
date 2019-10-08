@@ -113,8 +113,21 @@
 <script type="text/javascript">
 
     var grid = new Datatable();
-
+    var cacheIds = new Array();//定义数组保存缓存的ID
     $(document).ready(function () {
+
+      /*  var year = date.getFullYear(),
+            month = date.getMonth() + 1,//月份是从0开始的
+            day = date.getDate(),
+            hour = date.getHours(),
+            min = date.getMinutes(),
+            sec = date.getSeconds();
+        var newTime = year + '-' +
+            month + '-' +
+            day + ' ' +
+            hour + ':' +
+            min + ':' +
+            sec;*/
         //医嘱
         var medicalOrderSelect  = $("#chooseTemplate");
         $.getJSON(CTX+"/api/medicalOrderTemplate/getTemplate.ahsj?token="+TOKEN + "&createUserId=" + $("#UserId").val(),
@@ -148,7 +161,7 @@
                     {
                         "title": "<label><input type=\"checkbox\"  id=\"checkAll\" class=\"select-all\" > <span></span></label> ",
                         "render": function (data, type, row, meta) {
-                            return " <label> <input type=\"checkbox\" value=\"" + row.id + "\"> <span></span> </label>";
+                            return " <label> <input type=\"checkbox\" value=\"" + row.id + "\" onclick='cacheId(this,this.value,cacheIds)'> <span></span> </label>";
                         },
                         "width": "18px",
                         "className": "centered"
@@ -389,9 +402,33 @@
         //停嘱
         function stop(id) {
             dialog.confirm('确定停嘱（Sure Stop）?', function (index, layero) {
-                layer.open({
+                $.ahsjajax(CTX + "/api/medicalOrderDetail/stopOrder.ahsj",
+                    {"id": id,"stopDate":/*$("#stopDate").val()*/"0"},
+                    function (msg) {
+                        if (msg.success) {
+                            M.toast({
+                                html: msg.message, completeCallback: function () {
+                                }
+                            });
+                            // layer.closeAll();
+                            grid.search();
+                        } else {
+                            M.toast({
+                                html: msg.message, completeCallback: function () {
+                                }
+                            });
+                        }
+                    },
+                    function (data) {
+                        M.toast({
+                            html: "网络异常", completeCallback: function () {
+                            }
+                        });
+                    }
+                );
+             /*   layer.open({
                     title:'请选择停嘱时间（Please select  the parking time）',
-                    content:'<input id="stopDate" name="stopDate" class="datepicker" type="text" /> ',
+                    content:'<div class="input-field"><input id="stopDate" name="stopDate" class="datepicker" type="text"  /></div> ',
                     btn:['确认（confirm）','取消（cancel）'],
                     yes:function(index,layro){
                         $.ahsjajax(CTX + "/api/medicalOrderDetail/stopOrder.ahsj",
@@ -422,7 +459,7 @@
                     btn2:function(){
                         layer.closeAll();
                     }
-                });
+                });*/
 
             });
     }
@@ -591,7 +628,8 @@
 
         //组合用药医嘱
         $("#combinationMedicine").click(function () {
-            var ids = grid.getSelectedRows();
+            // var ids = grid.getSelectedRows();
+            var ids = cacheIds;
             if (ids.length == 0 ||ids.length==1) {
                 dialog.warn("请至少选择两条数据(Please select at least two data)");
                 return;

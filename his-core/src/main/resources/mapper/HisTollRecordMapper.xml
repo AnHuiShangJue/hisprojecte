@@ -946,8 +946,16 @@ from  his_toll_record as t
         ,m.enter_count,e.exit_count,r.number,d.stock,d.drugs_spec,d.drugs_numb,d.placeOrigin
         from his_pharmacy_detail as d
         LEFT JOIN
-        (select max(s.create_date)as create_date,s.drugs_numb,s.enter_count from his_medi_enter_details as s GROUP BY
-        s.pharmacy_id )as m
+        (		select a.create_date,a.drugs_numb,a.enter_count from  (select s.create_date as create_date,s.drugs_numb,s.enter_count from his_medi_enter_details as s,
+
+        (select max(create_date) as create_date from his_medi_enter_details   GROUP BY pharmacy_id
+
+        ) as b
+        where s.create_date = b.create_date
+
+        GROUP BY
+        s.pharmacy_id, create_date desc )as a 	  GROUP BY a.drugs_numb
+        )as m
         on m.drugs_numb = d.drugs_numb
         LEFT JOIN
         (select sum(s.exit_count) as exit_count, s.drugs_numb from his_medi_exit_details as s

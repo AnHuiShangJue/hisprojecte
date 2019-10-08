@@ -131,7 +131,7 @@
                     <div class="row">
                         <div class="input-field col s12">
                             <button id="send_btn" class="btn cyan waves-effect waves-light right" type="sumbit"
-                                    name="action">提交（submit
+                                    name="action">提交并审核（Submit & Review
                                 ）
                                 <i class="mdi-content-send right"></i>
                             </button>
@@ -243,11 +243,15 @@ Scripts
         }
     }
 
-    function fun() {//提交成功跳转
+    function fun(id) {//提交成功跳转
         dialog.success("新增成功！");
         resetchange();
         resetNumber();
 
+        //跳转到办理审核页面
+        var url = CTX+ "/api/hishospitalmanage/update/index.ahsj?token="+TOKEN+"&hosptalRegistId="+id;
+        // var url = CTX+ "/api/hishospitalmanage/update/index.ahsj?token="+TOKEN+"&patientId="+patientId+"&ids="+ids+"&doctorId="+doctorId;
+        dialog.show(url, "信息审核");
     }
 
     function formCheck() {
@@ -293,13 +297,15 @@ Scripts
             submitHandler: function (form) {
                 dialog.confirm('确定提交吗?', function (index, layero) {
                     var send_form = $('#sendForm').serialize();
+
                     $.ahsjajax(
+
                         CTX + "/api/hosptalregist/toadd.ahsj?token=" + TOKEN,
                         send_form,
                         function (msg) {
                             if (msg.success) {
                                 M.toast({html: msg.message});
-                                fun();
+                                fun(msg.message);
                                 return true;
                             } else {
                                 M.toast({html: msg.message});
@@ -312,6 +318,9 @@ Scripts
                         }
                     );
                 });
+
+
+
             }
 
         });

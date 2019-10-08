@@ -42,7 +42,7 @@
     delete from his_hosptalregist
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisHosptalregist" >
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisHosptalregist" useGeneratedKeys="true" keyProperty="id">
     insert into his_hosptalregist (id, patient_id, number, 
       doctor_id, nurse_id, ward_id, 
       bed_id, department_id, fee_type, 

@@ -575,7 +575,6 @@ public class HisTollRecordController extends BaseController {
         return pageBean;
     }
 
-
     /**
      * @return com.ahsj.hiscore.entity.HisTollRecord
      * @Description 根据交易流水号核对是否为住院
