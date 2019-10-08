@@ -228,7 +228,7 @@ public class HisTollDetailsController extends BaseController {
      * @Time 11:30
      **/
     @RequestMapping("printHospitalOne/index.ahsj")
-    ModelAndView printHospitalOne(String token, String number,Integer type) throws Exception {
+    ModelAndView printHospitalOne(String token, String number, Integer type) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/histoll/list_print_one");
         modelAndView.addObject("title", "打印凭证预览");
         modelAndView.addObject("token", token);
@@ -238,7 +238,7 @@ public class HisTollDetailsController extends BaseController {
     }
 
     @RequestMapping("printHospitalTwo/index.ahsj")
-    ModelAndView printHospitalTwo(String token, String number,Integer type) throws Exception {
+    ModelAndView printHospitalTwo(String token, String number, Integer type) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/histoll/list_print_two");
         modelAndView.addObject("title", "打印凭证预览");
         modelAndView.addObject("token", token);
@@ -248,7 +248,7 @@ public class HisTollDetailsController extends BaseController {
     }
 
     @RequestMapping("printHospitalThree/index.ahsj")
-    ModelAndView printHospitalThree(String token, String number,Integer type) throws Exception {
+    ModelAndView printHospitalThree(String token, String number, Integer type) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/histoll/list_print_three");
         modelAndView.addObject("title", "打印凭证预览");
         modelAndView.addObject("token", token);
@@ -381,5 +381,90 @@ public class HisTollDetailsController extends BaseController {
             list = hisTollDetailsService.listByNumberLeave(number);
         }
         return list;
+    }
+
+    /**
+     * @Description 门诊收费打印
+     * @Params: [token, number]
+     * @Author: dingli
+     * @Return: org.springframework.web.servlet.ModelAndView
+     * @Date 2019/10/8
+     * @Time 11:21
+     **/
+    @RequestMapping("printHospitalOneDetail/index.ahsj")
+    ModelAndView printHospitalOneDetail(String token, String number) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/hisFinance/list_print_one");
+        modelAndView.addObject("title", "打印凭证预览");
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("number", number);
+        return modelAndView;
+    }
+
+    /**
+     * @Description
+     * @Params: [token, number]
+     * @Author: dingli
+     * @Return: org.springframework.web.servlet.ModelAndView
+     * @Date 2019/10/8
+     * @Time 11:23
+     **/
+    @RequestMapping("printHospitalTwoDetail/index.ahsj")
+    ModelAndView printHospitalTwoDetail(String token, String number) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/hisFinance/list_print_two");
+        modelAndView.addObject("title", "打印凭证预览");
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("number", number);
+        return modelAndView;
+    }
+
+    /**
+     * @Description
+     * @Params: [token, number]
+     * @Author: dingli
+     * @Return: org.springframework.web.servlet.ModelAndView
+     * @Date 2019/10/8
+     * @Time 11:32
+     **/
+    @RequestMapping("printHospitalThreeDetail/index.ahsj")
+    ModelAndView printHospitalThreeDetail(String token, String number) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/hisFinance/list_print_three");
+        modelAndView.addObject("title", "打印凭证预览");
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("number", number);
+        return modelAndView;
+    }
+
+    /**
+     * @Description
+     * @Params: [token, number]
+     * @Author: dingli
+     * @Return: org.springframework.web.servlet.ModelAndView
+     * @Date 2019/10/8
+     * @Time 11:34
+     **/
+    @RequestMapping("printDrugFourDetail/index.ahsj")
+    ModelAndView printDrugFourDetail(String token, String number) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/hisFinance/list_print_four");
+        modelAndView.addObject("title", "打印凭证预览");
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("number", number);
+        return modelAndView;
+    }
+
+    /**
+     * @Description
+     * @Params: [token, number]
+     * @Author: dingli
+     * @Return: org.springframework.web.servlet.ModelAndView
+     * @Date 2019/10/8
+     * @Time 13:22
+     **/
+    @RequestMapping("printDrugFiveDetail/index.ahsj")
+    ModelAndView printDrugFiveDetail(String token, String number) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/hisFinance/list_print_five");
+        modelAndView.addObject("title", "打印凭证预览");
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("number", number);
+        return modelAndView;
     }
 }

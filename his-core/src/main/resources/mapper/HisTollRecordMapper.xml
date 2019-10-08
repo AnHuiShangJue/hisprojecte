@@ -45,7 +45,7 @@
         <result column="enter_count" property="enterCount"/>
         <result column="drugs_spec" property="drugsSpec" jdbcType="VARCHAR"/>
         <result column="drugs_numb" property="drugsNumb" jdbcType="VARCHAR"/>
-        <result column="placeOrigin" property="placeOrigin" jdbcType="VARCHAR"/>
+        <result column="placeOrigin" property="placeOrigin" />
 
 
     </resultMap>
@@ -943,8 +943,9 @@ from  his_toll_record as t
 
     <select id="pharmacyInventory" resultMap="BaseResultMap" parameterType="core.entity.PageBean"  >
         select d.drugs_name as details_name, m.create_date
-        ,m.enter_count,e.exit_count,r.number,d.stock,d.drugs_spec,d.drugs_numb,d.placeOrigin
+        ,m.enter_count,e.exit_count,r.number,d.stock,d.drugs_spec,d.drugs_numb,i.placeOrigin
         from his_pharmacy_detail as d
+        LEFT JOIN his_medicine_info as i on i.drugs_numb = d.drugs_numb
         LEFT JOIN
         (		select a.create_date,a.drugs_numb,a.enter_count from  (select s.create_date as create_date,s.drugs_numb,s.enter_count from his_medi_enter_details as s,
 
