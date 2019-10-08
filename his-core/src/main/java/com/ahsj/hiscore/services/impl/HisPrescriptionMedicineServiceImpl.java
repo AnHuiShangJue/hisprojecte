@@ -217,8 +217,8 @@ public class HisPrescriptionMedicineServiceImpl implements HisPrescriptionMedici
                 hisPrescriptionMedicine.setDisable(hisPharmacyDetail.getDisable());
                 hisPrescriptionMedicine.setLevel(hisPharmacyDetail.getLevel());
                 hisPrescriptionMedicine.setMedicalInsuranceSign(hisPharmacyDetail.getMedicalInsuranceSign());
-               /* if (!EmptyUtil.Companion.isNullOrEmpty(hisPharmacyDetail.getPlaceorigin()))
-                    hisPrescriptionMedicine.setPlaceorigin(hisPharmacyDetail.getPlaceorigin());*/
+                if (!EmptyUtil.Companion.isNullOrEmpty(hisPharmacyDetail.getPlaceorigin()))
+                    hisPrescriptionMedicine.setPlaceorigin(hisPharmacyDetail.getPlaceorigin());
                 hisPrescriptionMedicine.setBaseMedicine(hisPharmacyDetail.getBaseMedicine());
                 hisPrescriptionMedicine.setNarcoticDrugs(hisPharmacyDetail.getNarcoticDrugs());
                 if (!EmptyUtil.Companion.isNullOrEmpty(hisPharmacyDetail.getId()))
@@ -573,8 +573,8 @@ public class HisPrescriptionMedicineServiceImpl implements HisPrescriptionMedici
                 hisPrescriptionMedicine.setDisable(hisPharmacyDetail.getDisable());
                 hisPrescriptionMedicine.setLevel(hisPharmacyDetail.getLevel());
                 hisPrescriptionMedicine.setMedicalInsuranceSign(hisPharmacyDetail.getMedicalInsuranceSign());
-                /*if (!EmptyUtil.Companion.isNullOrEmpty(hisPharmacyDetail.getPlaceorigin()))
-                    hisPrescriptionMedicine.setPlaceorigin(hisPharmacyDetail.getPlaceorigin());*/
+                if (!EmptyUtil.Companion.isNullOrEmpty(hisPharmacyDetail.getPlaceorigin()))
+                    hisPrescriptionMedicine.setPlaceorigin(hisPharmacyDetail.getPlaceorigin());
                 hisPrescriptionMedicine.setBaseMedicine(hisPharmacyDetail.getBaseMedicine());
                 hisPrescriptionMedicine.setNarcoticDrugs(hisPharmacyDetail.getNarcoticDrugs());
                 if (!EmptyUtil.Companion.isNullOrEmpty(hisPharmacyDetail.getId()))
@@ -652,8 +652,8 @@ public class HisPrescriptionMedicineServiceImpl implements HisPrescriptionMedici
                 hisPrescriptionMedicine.setDisable(hisPharmacyDetail.getDisable());
                 hisPrescriptionMedicine.setLevel(hisPharmacyDetail.getLevel());
                 hisPrescriptionMedicine.setMedicalInsuranceSign(hisPharmacyDetail.getMedicalInsuranceSign());
-               /* if (!EmptyUtil.Companion.isNullOrEmpty(hisPharmacyDetail.getPlaceorigin()))
-                    hisPrescriptionMedicine.setPlaceorigin(hisPharmacyDetail.getPlaceorigin());*/
+                if (!EmptyUtil.Companion.isNullOrEmpty(hisPharmacyDetail.getPlaceorigin()))
+                    hisPrescriptionMedicine.setPlaceorigin(hisPharmacyDetail.getPlaceorigin());
                 hisPrescriptionMedicine.setBaseMedicine(hisPharmacyDetail.getBaseMedicine());
                 hisPrescriptionMedicine.setNarcoticDrugs(hisPharmacyDetail.getNarcoticDrugs());
                 if (!EmptyUtil.Companion.isNullOrEmpty(hisPharmacyDetail.getId()))

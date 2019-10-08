@@ -83,10 +83,10 @@ public class HisMedicineInfoServiceImpl implements HisMedicineInfoService {
 
         //id是null就是新增，否则是更新
         if (EmptyUtil.Companion.isNullOrEmpty(hisMedicineInfo.getId())) {
-            HisMedicineInfo checkForDrugsNameAndSpec = hisMedicineInfoMapper.selectByDrugsNameAndSpec(hisMedicineInfo);
+//            HisMedicineInfo checkForDrugsNameAndSpec = hisMedicineInfoMapper.selectByDrugsNameAndSpec(hisMedicineInfo);
             if (!EmptyUtil.Companion.isNullOrEmpty(checkForDrugsNumb))
                 return MessageUtil.createMessage(false, "新增失败!该药品编号在库中已存在！");
-            if (EmptyUtil.Companion.isNullOrEmpty(checkForDrugsNameAndSpec)) {
+//            if (EmptyUtil.Companion.isNullOrEmpty(checkForDrugsNameAndSpec)) {
                 if (EmptyUtil.Companion.isNullOrEmpty(hisMedicineInfo.getEnterPrice()))
                     hisMedicineInfo.setEnterPrice(0.00);
                 hisMedicineInfoMapper.insert(hisMedicineInfo);
@@ -100,15 +100,14 @@ public class HisMedicineInfoServiceImpl implements HisMedicineInfoService {
                 amqpTemplat.convertAndSend("com.ahsj.addHisMedicineInfo", JsonUtils.serialize(translateModels));
                 //  log.info(JsonUtils.serialize(translateModels));
                 //   log.info("--------------------药品项目新增翻译发送结束---------------------------");
-
-
                 return MessageUtil.createMessage(true, "插入成功!");
-            } else {
+//            }
+        /*else {
                 return MessageUtil.createMessage(false, "插入失败!该药品在库中已存在！(药品名称与规格相同)");
-            }
+            }*/
         } else {
             HisMedicineInfo checkId = hisMedicineInfoMapper.selectByPrimaryKey(hisMedicineInfo.getId());
-            HisMedicineInfo checkForDrugsNameAndSpec = hisMedicineInfoMapper.selectByDrugsNameAndSpec(hisMedicineInfo);
+//            HisMedicineInfo checkForDrugsNameAndSpec = hisMedicineInfoMapper.selectByDrugsNameAndSpec(hisMedicineInfo);
             //先检测id是否存在
             if (!EmptyUtil.Companion.isNullOrEmpty(checkId)) {
                 //修改药品编号时需要确保此药品编号不与药库中其他药品的药品编号相等
@@ -116,10 +115,10 @@ public class HisMedicineInfoServiceImpl implements HisMedicineInfoService {
                     if (!checkForDrugsNumb.getId().equals(hisMedicineInfo.getId()))
                         return MessageUtil.createMessage(false, "更新失败!此药品编号在药品中已经存在");
                 }
-                if (!EmptyUtil.Companion.isNullOrEmpty(checkForDrugsNameAndSpec)) {
-                    if (!checkForDrugsNameAndSpec.getId().equals(hisMedicineInfo.getId()))
-                        return MessageUtil.createMessage(false, "更新失败!此药品名称与规格在药品中已经存在");
-                }
+//                if (!EmptyUtil.Companion.isNullOrEmpty(checkForDrugsNameAndSpec)) {
+//                    if (!checkForDrugsNameAndSpec.getId().equals(hisMedicineInfo.getId()))
+//                        return MessageUtil.createMessage(false, "更新失败!此药品名称与规格在药品中已经存在");
+//                }
                 HisPharmacyDetail hisPharmacyDetail = hisPharmacyDetailMapper.selectByDrugsNumb(hisMedicineInfoMapper.selectByPrimaryKey(hisMedicineInfo.getId()).getDrugsNumb());
                 if(!EmptyUtil.Companion.isNullOrEmpty(hisPharmacyDetail)) {
                     hisPharmacyDetail.setDrugsNumb(hisMedicineInfo.getDrugsNumb());
@@ -137,7 +136,7 @@ public class HisMedicineInfoServiceImpl implements HisMedicineInfoService {
                         hisPharmacyDetail.setConversionRate(hisMedicineInfo.getConversionRate());
                     hisPharmacyDetail.setLevel(hisMedicineInfo.getLevel());
                     hisPharmacyDetail.setMedicalInsuranceSign(hisMedicineInfo.getMedicalInsuranceSign());
-//                    hisPharmacyDetail.setPlaceorigin(hisMedicineInfo.getPlaceorigin());
+                    hisPharmacyDetail.setPlaceorigin(hisMedicineInfo.getPlaceorigin());
                     hisPharmacyDetail.setBaseMedicine(hisMedicineInfo.getBaseMedicine());
                     hisPharmacyDetail.setNarcoticDrugs(hisMedicineInfo.getNarcoticDrugs());
                     if (EmptyUtil.Companion.isNullOrEmpty(hisMedicineInfo.getEnterPrice()))
@@ -534,7 +533,7 @@ public class HisMedicineInfoServiceImpl implements HisMedicineInfoService {
                         hisMedicineInfo.setMedicalinsurancesign(translate1.getTranslateKhmer());
                     }
                 }
-                /*Translate translate5 = new Translate();
+                Translate translate5 = new Translate();
                 translate5.setTranslateId(hisMedicineInfo.getPlaceoriginId());
                 translate5.setTranslateType(Constants.TRANSLATE_SYS_CODE_DETAIL);
                 List<Translate> translates4 = iTranslateService.queryTranslate(translate5);
@@ -542,7 +541,7 @@ public class HisMedicineInfoServiceImpl implements HisMedicineInfoService {
                     if (StringUtils.equals(translate1.getTranslateChina(),hisMedicineInfo.getPlaceoriginName())){
                         hisMedicineInfo.setPlaceoriginName(translate1.getTranslateKhmer());
                     }
-                }*/
+                }
                 Translate translate6 = new Translate();
                 translate6.setTranslateId(hisMedicineInfo.getBaseMedicineId());
                 translate6.setTranslateType(Constants.TRANSLATE_SYS_CODE_DETAIL);
@@ -673,13 +672,13 @@ public class HisMedicineInfoServiceImpl implements HisMedicineInfoService {
                 Integer medicalInsuranceSign = Integer.parseInt(code4);
                 medicineinfoInsertList.get(i).setMedicalInsuranceSign(medicalInsuranceSign);
 
-                /*String placeoriginName = medicineinfoInsertList.get(i).getPlaceoriginName();
+                String placeoriginName = medicineinfoInsertList.get(i).getPlaceoriginName();
                 SysCodeDetail detail5 = new SysCodeDetail();
                 detail5.setValue(placeoriginName);
                 detail5.setSysCodeType(Constants.HIS_SYS_CODE_PLACEORIGIN);
                 String code5 = iCodeService.getSysCodeName(detail5).getCode();
                 Integer placeorigin = Integer.parseInt(code5);
-                medicineinfoInsertList.get(i).setPlaceorigin(placeorigin);*/
+                medicineinfoInsertList.get(i).setPlaceorigin(placeorigin);
 
                 String basemedicine = medicineinfoInsertList.get(i).getBasemedicine();
                 SysCodeDetail detail6 = new SysCodeDetail();
@@ -757,13 +756,13 @@ public class HisMedicineInfoServiceImpl implements HisMedicineInfoService {
                 Integer medicalInsuranceSign = Integer.parseInt(code4);
                 medicineinfoUpdateList.get(i).setMedicalInsuranceSign(medicalInsuranceSign);
 
-                /*String placeoriginName = medicineinfoUpdateList.get(i).getPlaceoriginName();
+                String placeoriginName = medicineinfoUpdateList.get(i).getPlaceoriginName();
                 SysCodeDetail detail5 = new SysCodeDetail();
                 detail5.setValue(placeoriginName);
                 detail5.setSysCodeType(Constants.HIS_SYS_CODE_PLACEORIGIN);
                 String code5 = iCodeService.getSysCodeName(detail5).getCode();
                 Integer placeorigin = Integer.parseInt(code5);
-                medicineinfoUpdateList.get(i).setPlaceorigin(placeorigin);*/
+                medicineinfoUpdateList.get(i).setPlaceorigin(placeorigin);
 
                 String basemedicine = medicineinfoUpdateList.get(i).getBasemedicine();
                 SysCodeDetail detail6 = new SysCodeDetail();

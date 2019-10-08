@@ -248,7 +248,8 @@
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn +
                                 "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看明细\" onclick='visitDetail(\"" + row.number + "\");'> <i class='material-icons'>visibility</i></a>" +
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"打印\" href='javascript:;' onclick=\"print('" + row.number + "'," + row.attenchType + ");\"> <i class='material-icons'>print</i></a>";
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"三联单打印\" href='javascript:;' onclick=\"print('" + row.number + "'," + row.attenchType + ");\"> <i class='material-icons'>print</i></a>"+
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"明细打印\" href='javascript:;' onclick=\"printDetail('" + row.number + "'," + row.attenchType + ");\"> <i class='material-icons'>print</i></a>";;
                             // 返回自定义内容
                             return rtnBtn;
                         }
@@ -575,6 +576,50 @@
             }
 
     }
+
+    function printDetail(number, attenchType) {
+            if (attenchType == 1) {//门诊打印
+                if (number != "" && number != null && number != undefined) {
+                            var url = CTX + "/api/hisTollDetails/printHospitalOneDetail/index.ahsj?number="+ number+"&token="+TOKEN;
+                            dialog.showDialog(url, "打印凭证预览", "700px", "700px");
+                        } else {
+                            dialog.warn("没有需要打印的内容！")
+                        }
+                    }
+            else if (attenchType == 2) {//住院收费
+                if (number != "" && number != null && number != undefined) {
+                    var url = CTX + "/api/hisTollDetails/printHospitalTwoDetail/index.ahsj?number=" + number + "&token=" + TOKEN ;
+                    dialog.showDialog(url, "打印凭证预览", "700px", "700px");
+                } else {
+                    dialog.warn("没有需要打印的内容！")
+                }
+            }
+            else if (attenchType == 9) {//出院打印
+
+                        if (number != "" && number != null && number != undefined) {
+                            var url = CTX + "/api/hisTollDetails/printHospitalThreeDetail/index.ahsj?number="+ number+"&token="+TOKEN;
+                            dialog.showDialog(url, "打印凭证预览", "700px", "700px");
+                        } else {
+                            dialog.warn("没有需要打印的内容！")
+                        }
+                    }
+
+            else if (attenchType == 4) {//药品退费
+                        if (number != "" && number != null && number != undefined) {
+                            var url = CTX + "/api/hisTollDetails/printDrugFourDetail/index.ahsj?number="+ number+"&token="+TOKEN;
+                            dialog.showDialog(url, "打印凭证预览", "700px", "700px");
+                        } else {
+                            dialog.warn("没有需要打印的内容！")
+                        }
+            }
+            else if (attenchType == 8) {//项目退费
+                if (number != "" && number != null && number != undefined) {
+                    var url = CTX + "/api/hisTollDetails/printDrugFiveDetail/index.ahsj?number=" + number + "&token=" + TOKEN ;
+                    dialog.showDialog(url, "打印凭证预览", "700px", "700px");
+                } else {
+                    dialog.warn("没有需要打印的内容！")
+                }
+            }}
 </script>
 </body>
 </html>

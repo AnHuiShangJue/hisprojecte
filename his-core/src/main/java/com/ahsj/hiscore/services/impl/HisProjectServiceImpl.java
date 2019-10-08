@@ -860,5 +860,17 @@ public class HisProjectServiceImpl implements HisProjectService {
         //return s;
     }
 
-
+    /**
+     *@Description 根据IDs查询项目信息
+     *@Params [ids]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisProject>
+     *@Author zhushixiang
+     *@Date 2019-10-08
+     *@Time 13:46
+    **/
+    @Override
+    @Transactional(readOnly = false)
+    public List<HisProject> selectForListForProjectByIds(Long[] ids) throws Exception {
+        return hisProjectMapper.selectForListForProjectByIds(ids);
+    }
 }

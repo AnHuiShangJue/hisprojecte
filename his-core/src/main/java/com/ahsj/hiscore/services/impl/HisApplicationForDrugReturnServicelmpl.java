@@ -109,8 +109,8 @@ public class HisApplicationForDrugReturnServicelmpl implements HisApplicationFor
             hisApplicationForDrugReturnDetails.setDrugsNumb(hisMedicationDetails.getDrugsNumb());
             hisApplicationForDrugReturnDetails.setDrugsName(hisMedicationDetails.getDrugsName());
             hisApplicationForDrugReturnDetails.setDrugsSpec(hisMedicationDetails.getDrugsSpec());
-/*            if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicationDetails.getPlaceorigin()))
-                hisApplicationForDrugReturnDetails.setPlaceorigin(hisMedicationDetails.getPlaceorigin());*/
+            if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicationDetails.getPlaceorigin()))
+                hisApplicationForDrugReturnDetails.setPlaceorigin(hisMedicationDetails.getPlaceorigin());
             hisApplicationForDrugReturnDetails.setMedicationDetailId(hisMedicationDetails.getId());
             hisApplicationForDrugReturnDetails.setValidityPeriod(hisRelatedMedicationandexit.getValidityPeriod());
             hisApplicationForDrugReturnDetails.setPrice(hisRelatedMedicationandexit.getPrice());

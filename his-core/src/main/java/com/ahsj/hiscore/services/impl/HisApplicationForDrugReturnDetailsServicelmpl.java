@@ -136,8 +136,8 @@ public class HisApplicationForDrugReturnDetailsServicelmpl implements HisApplica
             hisApplicationForDrugReturnDetails.setDrugsNumb(hisMedicationDetails.getDrugsNumb());
             hisApplicationForDrugReturnDetails.setDrugsName(hisMedicationDetails.getDrugsName());
             hisApplicationForDrugReturnDetails.setDrugsSpec(hisMedicationDetails.getDrugsSpec());
-            /*if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicationDetails.getPlaceorigin()))
-                hisApplicationForDrugReturnDetails.setPlaceorigin(hisMedicationDetails.getPlaceorigin());*/
+            if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicationDetails.getPlaceorigin()))
+                hisApplicationForDrugReturnDetails.setPlaceorigin(hisMedicationDetails.getPlaceorigin());
             hisApplicationForDrugReturnDetails.setMedicationDetailId(hisMedicationDetails.getId());
             hisApplicationForDrugReturnDetails.setPrice(hisRelatedMedicationandexit.getPrice());
             hisApplicationForDrugReturnDetails.setTotalPrice(hisRelatedMedicationandexit.getPrice().multiply(BigDecimal.valueOf(numbers[i])));

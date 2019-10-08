@@ -509,4 +509,14 @@
         from his_project
         where number =#{number,jdbcType=VARCHAR}
     </select>
+
+    <select id="selectForListForProjectByIds" resultMap="BaseResultMap">
+        select his_project.*
+from his_project
+ where id in
+        <foreach item="item" index="index" collection="array"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

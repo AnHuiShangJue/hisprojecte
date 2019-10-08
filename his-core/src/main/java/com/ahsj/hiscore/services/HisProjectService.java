@@ -199,4 +199,14 @@ public interface HisProjectService {
      * @Time 16:06
      **/
     List<Long> search(HisProjectRes hisProjectRes);
+
+    /**
+     *@Description 根据IDs查询项目信息
+     *@Params [ids]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisProject>
+     *@Author zhushixiang
+     *@Date 2019-10-08
+     *@Time 13:50
+    **/
+    List<HisProject> selectForListForProjectByIds(Long[] ids)throws Exception;
 }
