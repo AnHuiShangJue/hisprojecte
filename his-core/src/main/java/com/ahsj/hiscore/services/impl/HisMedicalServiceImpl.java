@@ -81,7 +81,9 @@ public class HisMedicalServiceImpl implements HisMedicalService {
             BeanUtils.copyProperties(hisMedical, hisMedicalTranslate);
             translateModels.setUserId(loginUser.getId());
             translateModels.setHisMedicalTranslate(hisMedicalTranslate);
-            amqpTemplat.convertAndSend("com.ahsj.add.hisMedical", JsonUtils.serialize(translateModels));
+            if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicalTranslate.getId()) || !EmptyUtil.Companion.isNullOrEmpty(hisMedicalTranslate)){
+                amqpTemplat.convertAndSend("com.ahsj.add.hisMedical", JsonUtils.serialize(translateModels));
+            }
             //  log.info(JsonUtils.serialize(translateModels));
             //  log.info("--------------------治疗计划新增翻译发送结束---------------------------");
 
