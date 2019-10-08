@@ -56,7 +56,7 @@ public class HisMedicalServiceImpl implements HisMedicalService {
     @Transactional(readOnly = false)
     public Message saveOrUpdate(HisMedical hisMedical) throws Exception {
         HisMedical checkForExit = hisMedicalMapper.selectByRecordId(hisMedical.getRecordId());
-        if (!EmptyUtil.Companion.isNullOrEmpty(checkForExit) ) {
+        if (!EmptyUtil.Companion.isNullOrEmpty(checkForExit)) {
             hisMedicalMapper.updateByPrimaryKeySelective(hisMedical);
 
             // log.info("--------------------治疗计划更新翻译发送开始---------------------------");
@@ -66,7 +66,7 @@ public class HisMedicalServiceImpl implements HisMedicalService {
             BeanUtils.copyProperties(hisMedical, hisMedicalTranslate);
             translateModels.setUserId(loginUser.getId());
             translateModels.setHisMedicalTranslate(hisMedicalTranslate);
-            amqpTemplat.convertAndSend("com.ahsj.update.hisMedical", JsonUtils.serialize(translateModels));
+           // amqpTemplat.convertAndSend("com.ahsj.update.hisMedical", JsonUtils.serialize(translateModels));
             // log.info(JsonUtils.serialize(translateModels));
             // log.info("--------------------治疗计划更新翻译发送结束---------------------------");
 
@@ -81,9 +81,7 @@ public class HisMedicalServiceImpl implements HisMedicalService {
             BeanUtils.copyProperties(hisMedical, hisMedicalTranslate);
             translateModels.setUserId(loginUser.getId());
             translateModels.setHisMedicalTranslate(hisMedicalTranslate);
-            if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicalTranslate.getId()) || !EmptyUtil.Companion.isNullOrEmpty(hisMedicalTranslate)){
-                amqpTemplat.convertAndSend("com.ahsj.add.hisMedical", JsonUtils.serialize(translateModels));
-            }
+          //  amqpTemplat.convertAndSend("com.ahsj.add.hisMedical", JsonUtils.serialize(translateModels));
             //  log.info(JsonUtils.serialize(translateModels));
             //  log.info("--------------------治疗计划新增翻译发送结束---------------------------");
 
@@ -117,7 +115,11 @@ public class HisMedicalServiceImpl implements HisMedicalService {
     @Transactional(readOnly = true)
     public HisMedical selectPrint(String number) throws Exception {
         HisMedical hisMedical = hisMedicalMapper.selectPrint(number);
-        if(!EmptyUtil.Companion.isNullOrEmpty(hisMedical)){
+        if (EmptyUtil.Companion.isNullOrEmpty(hisMedical)) {
+            hisMedical = new HisMedical();
+        }
+        return hisMedicalMapper.selectPrint(number);
+       /* if(!EmptyUtil.Companion.isNullOrEmpty(hisMedical)){
         Translate translate = new Translate();//翻译
         translate.setTranslateId(hisMedical.getId());
         translate.setTranslateType(Constants.TRANSLATE_HIS_HHISMEDICAL);
@@ -175,18 +177,17 @@ public class HisMedicalServiceImpl implements HisMedicalService {
         }
         else{
             hisMedical = new HisMedical();
-        }
-        return hisMedical;
+        }*/
     }
 
     /**
-     *@Description 根据就诊记录ID查询当次就诊判断
-     *@Params [id]
-     *@return com.ahsj.hiscore.entity.HisMedical
-     *@Author zhushixiang
-     *@Date 2019-09-09
-     *@Time 17:37
-    **/
+     * @return com.ahsj.hiscore.entity.HisMedical
+     * @Description 根据就诊记录ID查询当次就诊判断
+     * @Params [id]
+     * @Author zhushixiang
+     * @Date 2019-09-09
+     * @Time 17:37
+     **/
     @Override
     @Transactional(readOnly = true)
     public HisMedical selectByMedicalRecordId(Long medicalRecordid) throws Exception {

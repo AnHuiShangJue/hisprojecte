@@ -418,5 +418,12 @@ public class HisWardsController extends BaseController {
 
     }
 
+    @RequestMapping(value = "ceshi.ahsj", method = {RequestMethod.POST})
+    public void a() throws Exception {
+        HisWard hisWard = new HisWard();
+        hisWard.setNumber(1234456);
+        hisWardMapper.insert(hisWard);
+        hisWard.getId();
+    }
 
 }

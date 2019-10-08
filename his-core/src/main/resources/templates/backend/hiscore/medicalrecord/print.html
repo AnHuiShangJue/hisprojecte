@@ -279,52 +279,51 @@
             {"number": number},
             function (data) {
                 console.log(data)
-                if (data.thiscondition == null) {
+               /* if (data.thiscondition == null) {
                     data.thiscondition=""
-                }
+                }*/
                 if (data.hiscondition != null) {
-                    $("#hiscondition").html(data.hiscondition + "(" + data.thiscondition + ")");
+                    $("#hiscondition").html(data.hiscondition);
                 }
-                if (data.tnowCondition == null) {
+                /*if (data.tnowCondition == null) {
                     data.tnowCondition=""
-                }
+                }*/
                 if (data.nowCondition != null) {
 
-                    $("#nowCondition").html(data.nowCondition + "(" + data.tnowCondition + ")");
+                    $("#nowCondition").html(data.nowCondition);
                 }
-                if (data.tchiefcomplaint ==null) {
+               /* if (data.tchiefcomplaint ==null) {
                     data.tchiefcomplaint=""
-                }
+                }*/
                 if (data.chiefcomplaint != null) {
-                    $("#chiefcomplaint").html(data.chiefcomplaint + "(" + data.tchiefcomplaint + ")");
+                    $("#chiefcomplaint").html(data.chiefcomplaint );
                 }
-                if (data.tpersonalHistory == null) {
+               /* if (data.tpersonalHistory == null) {
                     data.tpersonalHistory=""
-                }
+                }*/
                 if (data.personalHistory != null) {
-
-                    $("#personalHistory").html(data.personalHistory + "(" + data.tpersonalHistory + ")");
+                    $("#personalHistory").html(data.personalHistory );
                 }
-                if (data.tallergies == null) {
+               /* if (data.tallergies == null) {
                     data.tallergies=""
-                }
+                }*/
                 if (data.allergies != null) {
 
-                    $("#allergies").html(data.allergies + "(" + data.tallergies + ")");
+                    $("#allergies").html(data.allergies);
                 }
-                if (data.tfamilyHistory ==null) {
+               /* if (data.tfamilyHistory ==null) {
                     data.tfamilyHistory=""
-                }
+                }*/
                 if (data.familyHistory != null) {
 
-                    $("#familyHistory").html(data.familyHistory + "(" + data.tfamilyHistory + ")");
+                    $("#familyHistory").html(data.familyHistory );
                 }
                 if (data.tother ==null) {
                     data.tother=""
                 }
                 if (data.other != null) {
 
-                    $("#other").html(data.other + "(" + data.tother + ")");
+                    $("#other").html(data.other );
                 }
                 if (data.bloodPressure != null) {
                     $("#bloodPressure").html(data.bloodPressure + " mmhg");

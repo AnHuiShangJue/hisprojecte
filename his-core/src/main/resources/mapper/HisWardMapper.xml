@@ -29,7 +29,7 @@
     delete from his_ward
     where id = #{id,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisWard">
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisWard"  useGeneratedKeys="true" keyProperty="id">
     insert into his_ward (id, number, type,
       create_user_id, create_date, update_user_id,
       update_date, count, current_count,

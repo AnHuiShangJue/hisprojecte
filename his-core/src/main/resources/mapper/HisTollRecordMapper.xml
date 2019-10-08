@@ -941,7 +941,7 @@ from  his_toll_record as t
         </if>
     </select>
 
-    <select id="pharmacyInventory" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
+    <select id="pharmacyInventory" resultMap="BaseResultMap" parameterType="core.entity.PageBean"  >
         select d.drugs_name as details_name, m.create_date
         ,m.enter_count,e.exit_count,r.number,d.stock,d.drugs_spec,d.drugs_numb,d.placeOrigin
         from his_pharmacy_detail as d
