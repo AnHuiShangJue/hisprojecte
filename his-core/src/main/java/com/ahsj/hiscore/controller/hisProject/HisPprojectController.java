@@ -12,10 +12,7 @@ package com.ahsj.hiscore.controller.hisProject;
 
 import com.ahsj.hiscore.common.Constants;
 import com.ahsj.hiscore.common.utils.*;
-import com.ahsj.hiscore.entity.HisBed;
-import com.ahsj.hiscore.entity.HisImportInfo;
-import com.ahsj.hiscore.entity.HisProject;
-import com.ahsj.hiscore.entity.HisRecordProject;
+import com.ahsj.hiscore.entity.*;
 import com.ahsj.hiscore.entity.dto.ExcelUploadFile;
 import com.ahsj.hiscore.entity.dto.HisProjectRes;
 import com.ahsj.hiscore.entity.sys.Organization;
@@ -593,5 +590,20 @@ public class HisPprojectController extends BaseController {
             pageBean.setData(new ArrayList<HisRecordProject>());
         }
         return pageBean;
+    }
+
+
+    /**
+     *@Description 根据IDs查询项目信息
+     *@Params [ids]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisPharmacyDetail>
+     *@Author zhushixiang
+     *@Date 2019-10-08
+     *@Time 13:45
+    **/
+    @ResponseBody
+    @RequestMapping(value = "selectForListForProjectByIds.ahsj")
+    public List<HisProject> selectForListForProjectByIds(Long[] ids) throws Exception {
+        return hisProjectService.selectForListForProjectByIds(ids);
     }
 }

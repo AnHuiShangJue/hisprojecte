@@ -81,7 +81,7 @@ public class HisMedicineInfoController extends BaseController {
             , @RequestParam(value="disable", required=false) Integer disable
             , @RequestParam(value="level", required=true) Integer level
             , @RequestParam(value="medicalInsuranceSign", required=true) Integer medicalInsuranceSign
-//            , @RequestParam(value="placeorigin", required=true) Integer placeorigin
+            , @RequestParam(value="placeorigin", required=true) Integer placeorigin
             , @RequestParam(value="baseMedicine", required=true) Integer baseMedicine
             , @RequestParam(value="narcoticDrugs", required=true) Integer narcoticDrugs
             , @RequestParam(value="remarks", required=false) String remarks
@@ -127,9 +127,9 @@ public class HisMedicineInfoController extends BaseController {
         if(null != request.getParameter("medicalInsuranceSign")){
             hisMedicineInfo.setMedicalInsuranceSign(medicalInsuranceSign);
         }
-        /*if(null != request.getParameter("placeorigin")){
+        if(null != request.getParameter("placeorigin")){
             hisMedicineInfo.setPlaceorigin(placeorigin);
-        }*/
+        }
         if(null != request.getParameter("baseMedicine")){
             hisMedicineInfo.setBaseMedicine(baseMedicine);
         }

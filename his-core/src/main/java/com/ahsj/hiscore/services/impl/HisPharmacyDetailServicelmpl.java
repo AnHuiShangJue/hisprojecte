@@ -450,7 +450,7 @@ public class HisPharmacyDetailServicelmpl implements HisPharmacyDetailService {
                             hisPharmacyDetail.setMedicalinsurancesign(translate1.getTranslateKhmer());
                         }
                     }
-              /*      Translate translate5 = new Translate();
+                    Translate translate5 = new Translate();
                     translate5.setTranslateId(hisPharmacyDetail.getPlaceoriginId());
                     translate5.setTranslateType(Constants.TRANSLATE_SYS_CODE_DETAIL);
                     List<Translate> translates4 = iTranslateService.queryTranslate(translate5);
@@ -458,7 +458,7 @@ public class HisPharmacyDetailServicelmpl implements HisPharmacyDetailService {
                         if (StringUtils.equals(translate1.getTranslateChina(),hisPharmacyDetail.getPlaceoriginName())){
                             hisPharmacyDetail.setPlaceoriginName(translate1.getTranslateKhmer());
                         }
-                    }*/
+                    }
                     Translate translate6 = new Translate();
                     translate6.setTranslateId(hisPharmacyDetail.getBaseMedicineId());
                     translate6.setTranslateType(Constants.TRANSLATE_SYS_CODE_DETAIL);
@@ -571,7 +571,7 @@ public class HisPharmacyDetailServicelmpl implements HisPharmacyDetailService {
                         hisPharmacyDetail.setMedicalinsurancesign(translate1.getTranslateKhmer());
                     }
                 }
-               /* Translate translate5 = new Translate();
+                Translate translate5 = new Translate();
                 translate5.setTranslateId(hisPharmacyDetail.getPlaceoriginId());
                 translate5.setTranslateType(Constants.TRANSLATE_SYS_CODE_DETAIL);
                 List<Translate> translates4 = iTranslateService.queryTranslate(translate5);
@@ -579,7 +579,7 @@ public class HisPharmacyDetailServicelmpl implements HisPharmacyDetailService {
                     if (StringUtils.equals(translate1.getTranslateChina(),hisPharmacyDetail.getPlaceoriginName())){
                         hisPharmacyDetail.setPlaceoriginName(translate1.getTranslateKhmer());
                     }
-                }*/
+                }
                 Translate translate6 = new Translate();
                 translate6.setTranslateId(hisPharmacyDetail.getBaseMedicineId());
                 translate6.setTranslateType(Constants.TRANSLATE_SYS_CODE_DETAIL);
@@ -734,7 +734,7 @@ public class HisPharmacyDetailServicelmpl implements HisPharmacyDetailService {
                 pharmacyInsertList.get(i).setSmallUnit(hisMedicineInfo.getSmallUnit());
                 pharmacyInsertList.get(i).setConversionRate(hisMedicineInfo.getConversionRate());
                 pharmacyInsertList.get(i).setMedicalInsuranceSign(hisMedicineInfo.getMedicalInsuranceSign());
-//                pharmacyInsertList.get(i).setPlaceorigin(hisMedicineInfo.getPlaceorigin());
+                pharmacyInsertList.get(i).setPlaceorigin(hisMedicineInfo.getPlaceorigin());
                 pharmacyInsertList.get(i).setBaseMedicine(hisMedicineInfo.getBaseMedicine());
                 pharmacyInsertList.get(i).setNarcoticDrugs(hisMedicineInfo.getNarcoticDrugs());
                 if(EmptyUtil.Companion.isNullOrEmpty(pharmacyInsertList.get(i).getEnterPrice()))
@@ -816,7 +816,7 @@ public class HisPharmacyDetailServicelmpl implements HisPharmacyDetailService {
                 pharmacyUpdateList.get(i).setMentalMedicine(hisPharmacyDetail.getMentalMedicine());
                 pharmacyUpdateList.get(i).setLevel(hisPharmacyDetail.getLevel());
                 pharmacyUpdateList.get(i).setMedicalInsuranceSign(hisPharmacyDetail.getMedicalInsuranceSign());
-//                pharmacyUpdateList.get(i).setPlaceorigin(hisPharmacyDetail.getPlaceorigin());
+                pharmacyUpdateList.get(i).setPlaceorigin(hisPharmacyDetail.getPlaceorigin());
                 pharmacyUpdateList.get(i).setBaseMedicine(hisPharmacyDetail.getBaseMedicine());
                 pharmacyUpdateList.get(i).setNarcoticDrugs(hisPharmacyDetail.getNarcoticDrugs());
                 pharmacyUpdateList.get(i).setLargeUnit(hisPharmacyDetail.getLargeUnit());

@@ -227,4 +227,14 @@ public interface HisProjectMapper extends BaseMapper<HisProject> {
      * @Time 11:05
      **/
     HisProject queryHisProjectByNumber(@Param("number") String number);
+
+    /**
+     *@Description 根据IDs查询项目信息
+     *@Params [ids]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisProject>
+     *@Author zhushixiang
+     *@Date 2019-10-08
+     *@Time 13:50
+    **/
+    List<HisProject> selectForListForProjectByIds(Long[] ids);
 }

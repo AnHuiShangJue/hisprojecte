@@ -78,7 +78,7 @@ public class HisMediEnterDetailsServicelmpl implements HisMediEnterDetailsServic
                 hisPharmacyDetailInsert.setLevel(checkPharmacyId.getLevel());
                 hisPharmacyDetailInsert.setIsObtained(2);
                 hisPharmacyDetailInsert.setMedicalInsuranceSign(checkPharmacyId.getMedicalInsuranceSign());
-//                hisPharmacyDetailInsert.setPlaceorigin(checkPharmacyId.getPlaceorigin());
+                hisPharmacyDetailInsert.setPlaceorigin(checkPharmacyId.getPlaceorigin());
                 hisPharmacyDetailInsert.setBaseMedicine(checkPharmacyId.getBaseMedicine());
                 hisPharmacyDetailInsert.setNarcoticDrugs(checkPharmacyId.getNarcoticDrugs());
                 hisPharmacyDetailInsert.setRemarks(checkPharmacyId.getRemarks());
@@ -150,7 +150,7 @@ public class HisMediEnterDetailsServicelmpl implements HisMediEnterDetailsServic
                 hisPharmacyDetailInsert.setIsObtained(2);
                 hisPharmacyDetailInsert.setDisable(2);
                 hisPharmacyDetailInsert.setMedicalInsuranceSign(hisMedicineInfo.getMedicalInsuranceSign());
-//                hisPharmacyDetailInsert.setPlaceorigin(hisMedicineInfo.getPlaceorigin());
+                hisPharmacyDetailInsert.setPlaceorigin(hisMedicineInfo.getPlaceorigin());
                 hisPharmacyDetailInsert.setBaseMedicine(hisMedicineInfo.getBaseMedicine());
                 hisPharmacyDetailInsert.setNarcoticDrugs(hisMedicineInfo.getNarcoticDrugs());
                 if(!EmptyUtil.Companion.isNullOrEmpty(hisMedicineInfo.getLargeUnit()))
