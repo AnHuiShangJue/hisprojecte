@@ -1,5 +1,6 @@
 package com.ahsj.hiscore.entity;
 
+import com.ahsj.hiscore.common.utils.ExcelColumn;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import core.code.CodeValueColumn;
 import core.code.Constants;
@@ -30,7 +31,9 @@ public class HisTollRecord extends BaseEntity {
 
     private String drugsNumb;
 
-    private String placeOrigin;
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "placeOrigin", typeName = "placeoriginName")
+    private Integer placeOrigin;
+    private String placeoriginName;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy/MM/dd ")
@@ -252,12 +255,21 @@ public class HisTollRecord extends BaseEntity {
 
     private String medicalRecordId;
 
-    public String getPlaceOrigin() {
+
+    public Integer getPlaceOrigin() {
         return placeOrigin;
     }
 
-    public void setPlaceOrigin(String placeOrigin) {
+    public void setPlaceOrigin(Integer placeOrigin) {
         this.placeOrigin = placeOrigin;
+    }
+
+    public String getPlaceoriginName() {
+        return placeoriginName;
+    }
+
+    public void setPlaceoriginName(String placeoriginName) {
+        this.placeoriginName = placeoriginName;
     }
 
     private String remark;//实体类没有，暂时接收
