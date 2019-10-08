@@ -393,7 +393,7 @@ public class TranslateListener {
      * @Time 15:26
      **/
     @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(name = "com.mq.verify.queue.hisPrescriptionEnlish"),
+            value = @Queue(name = "com.mq.verify.queue.hisPrescriptionEnglish"),
             exchange = @Exchange(name = "com.ahsj.exchange", type = ExchangeTypes.TOPIC),
             key = {"com.ahsj.add.hisPrescription","com.ahsj.update.hisPrescription"}
     ))
@@ -417,19 +417,21 @@ public class TranslateListener {
      *@Time 11:16
     **/
     @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(name = "com.mq.verify.queue.hisMedicalEnlish"),
+            value = @Queue(name = "com.mq.verify.queue.hisMedicalEnglish"),
             exchange = @Exchange(name = "com.ahsj.exchange", type = ExchangeTypes.TOPIC),
             key = {"com.ahsj.add.hisMedical","com.ahsj.update.hisMedical"}
     ))
     public void hisMedical(String model) {
-        System.out.println(model);
         if (EmptyUtil.Companion.isNullOrEmpty(model)) {
-            System.out.println(model);
+            return;
         } else {
             TranslateModels m = JsonUtils.parse(model, TranslateModels.class);
             HisMedicalTranslate hisMedicalTranslate = m.getHisMedicalTranslate();
-         //   System.out.println("------------>"+hisMedicalTranslate.getId().longValue());
-            toTranslate(hisMedicalTranslate, HisMedicalTranslate.class, hisMedicalTranslate.getId().longValue(), Constants.TRANSLATE_HIS_HHISMEDICAL, m.getUserId());
+            if (EmptyUtil.Companion.isNullOrEmpty(hisMedicalTranslate.getId().longValue())){
+                return;
+            }else {
+                toTranslate(hisMedicalTranslate, HisMedicalTranslate.class, hisMedicalTranslate.getId().longValue(), Constants.TRANSLATE_HIS_HHISMEDICAL, m.getUserId());
+            }
         }
     }
 
