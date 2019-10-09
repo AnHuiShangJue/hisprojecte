@@ -341,8 +341,7 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
                     hs.setExaminationFee(hs.getNursingFee().add(hisTollDetail.getPrice()));
                 }
             }
-
         }
-        return null;
+        return hs;
     }
 }
