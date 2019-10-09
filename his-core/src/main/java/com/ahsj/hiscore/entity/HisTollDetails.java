@@ -28,6 +28,8 @@ public class HisTollDetails extends BaseEntity {
 
     private BigDecimal money;
 
+    private BigDecimal moneys;
+
     private BigDecimal price;
 
     private BigDecimal recoverTheFee;
@@ -69,10 +71,29 @@ public class HisTollDetails extends BaseEntity {
 
     private BigDecimal examinationFee;//检查
 
-    private BigDecimal ObserveFee;//观察
+
+    private BigDecimal ObserveFee;//药品费
+
+    private BigDecimal drugFee;//药品费
+
+    public BigDecimal getDrugFee() {
+        return drugFee;
+    }
+
+    public void setDrugFee(BigDecimal drugFee) {
+        this.drugFee = drugFee;
+    }
 
     public BigDecimal getNursingFee() {
         return nursingFee;
+    }
+
+    public BigDecimal getMoneys() {
+        return moneys;
+    }
+
+    public void setMoneys(BigDecimal moneys) {
+        this.moneys = moneys;
     }
 
     public void setNursingFee(BigDecimal nursingFee) {

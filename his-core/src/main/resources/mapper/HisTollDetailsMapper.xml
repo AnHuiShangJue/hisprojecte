@@ -13,6 +13,7 @@
         <result column="target_id" property="targetId" jdbcType="BIGINT"/>
         <result column="type" property="type" jdbcType="INTEGER"/>
         <result column="money" property="money" jdbcType="DECIMAL"/>
+        <result column="moneys" property="moneys" jdbcType="DECIMAL"/>
         <result column="price" property="price" jdbcType="DECIMAL"/>
         <result column="description" property="description" jdbcType="VARCHAR"/>
         <result column="num" property="num" jdbcType="INTEGER"/>
@@ -725,7 +726,7 @@
 
                 end  as price ,
             d.name,
-            d.money
+            d.money as moneys
         FROM `his_toll_details` as d
                  LEFT JOIN  `his-userinfo`.user_info as i  on   i.id = d.create_user_id
                  LEFT JOIN

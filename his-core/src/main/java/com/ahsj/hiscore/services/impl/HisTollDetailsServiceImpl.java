@@ -266,10 +266,12 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
     @Transactional(readOnly = true)
     public List<HisTollDetails> listByNumberLeave(String number) throws Exception {
         List<HisTollDetails> hisTollDetails = hisTollDetailsMapper.listByNumberLeave(number);//所有收费明细
+        BigDecimal drugFee = new BigDecimal("0");//药品费用
         if (!EmptyUtil.Companion.isNullOrEmpty(hisTollDetails)) {
             for (HisTollDetails h : hisTollDetails) {
                 Translate translate = new Translate();//翻译
                 if (h.getType() == 1 || h.getType() == 4) {//药品
+                    drugFee = h.getMoneys().add(drugFee);
                     HisMedicineInfo hisMedicineInfo = hisMedicineInfoService.selectById(h.getId().longValue());
                     h.setDrugsSpec(hisMedicineInfo.getDrugsSpec());
                     translate.setTranslateId(h.getId().longValue());
@@ -302,6 +304,7 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
                 }
             }
         }
+        hisTollDetails.get(0).setDrugFee(drugFee);
         return hisTollDetails;
     }
 
@@ -326,6 +329,8 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
     public HisTollDetails printShowThere(String number) throws Exception {
         HisTollDetails hs = new HisTollDetails();
         hs.setNursingFee(new BigDecimal(0));
+        hs.setExaminationFee(new BigDecimal(0));
+        hs.setObserveFee(new BigDecimal(0));
         List<HisTollDetails> hisTollDetails = hisTollDetailsMapper.printShowThere(number);
         if (EmptyUtil.Companion.isNullOrEmpty(hisTollDetails.size())) {
             return new HisTollDetails();
