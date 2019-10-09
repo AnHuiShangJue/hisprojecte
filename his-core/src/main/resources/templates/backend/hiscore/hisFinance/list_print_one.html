@@ -84,6 +84,7 @@ Scripts
     $(document).ready(function () {
         printShow();
         printShow1();
+        printShow2();
     });
     var number = $("#number").val();
 
@@ -146,6 +147,20 @@ Scripts
                 $("#age").html(data.age);
                 $("#department").html(data.departmentIdName);
                 $("#doctor").html(data.doctorName);
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }
+        );
+    }
+
+    function printShow1() {
+        $.ahsjajax(
+            CTX + "/api/hisTollDetails/printShowThere/index.ahsj",
+            {"number": number},
+            function (data) {
+
             },
             function () {
                 M.toast({html: "网络异常"});

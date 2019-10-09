@@ -113,4 +113,6 @@ public interface HisTollDetailsMapper extends BaseMapper<HisTollDetails> {
      * @Time 14:10
      **/
     HisTollDetails getPriceByNumber(String number) throws Exception;
+
+    List<HisTollDetails> printShowThere(@Param("number") String number);
 }

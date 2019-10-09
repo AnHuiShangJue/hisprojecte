@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utils.EmptyUtil;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -164,7 +165,7 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
     @Transactional(readOnly = true)
     public List<HisTollDetails> listByNumber(String number) throws Exception {
         List<HisTollDetails> hisTollDetails = hisTollDetailsMapper.listByNumber(number);//所有收费明细
-        if(EmptyUtil.Companion.isNullOrEmpty(hisTollDetails)){//没有收费明细
+        if (EmptyUtil.Companion.isNullOrEmpty(hisTollDetails)) {//没有收费明细
             HisTollDetails priceByNumber = hisTollDetailsMapper.getPriceByNumber(number);
             hisTollDetails.add(priceByNumber);
             return hisTollDetails;
@@ -265,42 +266,42 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
     @Transactional(readOnly = true)
     public List<HisTollDetails> listByNumberLeave(String number) throws Exception {
         List<HisTollDetails> hisTollDetails = hisTollDetailsMapper.listByNumberLeave(number);//所有收费明细
-        hisTollDetails.toString();
-        if(!EmptyUtil.Companion.isNullOrEmpty(hisTollDetails)){
-        for (HisTollDetails h : hisTollDetails) {
-            Translate translate = new Translate();//翻译
-            if (h.getType() == 1 || h.getType() == 4) {//药品
-                HisMedicineInfo hisMedicineInfo = hisMedicineInfoService.selectById(h.getId().longValue());
-                h.setDrugsSpec(hisMedicineInfo.getDrugsSpec());
-                translate.setTranslateId(h.getId().longValue());
-                translate.setTranslateType(Constants.TRANSLATE_HIS_MEDICINEINFO);
-                List<Translate> translates = iTranslateService.queryTranslate(translate);
-                if (!EmptyUtil.Companion.isNullOrEmpty(translates)) {
-                    for (Translate translate1 : translates) {
-                        if (StringUtils.equals(h.getName(), translate1.getTranslateChina())) {
-                            h.setTranName(translate1.getTranslateKhmer());
-                        }
-                        if (StringUtils.equals(h.getDrugsSpec(), translate1.getTranslateChina())) {
-                            h.setTdrugsSpec(translate1.getTranslateKhmer());
+        if (!EmptyUtil.Companion.isNullOrEmpty(hisTollDetails)) {
+            for (HisTollDetails h : hisTollDetails) {
+                Translate translate = new Translate();//翻译
+                if (h.getType() == 1 || h.getType() == 4) {//药品
+                    HisMedicineInfo hisMedicineInfo = hisMedicineInfoService.selectById(h.getId().longValue());
+                    h.setDrugsSpec(hisMedicineInfo.getDrugsSpec());
+                    translate.setTranslateId(h.getId().longValue());
+                    translate.setTranslateType(Constants.TRANSLATE_HIS_MEDICINEINFO);
+                    List<Translate> translates = iTranslateService.queryTranslate(translate);
+                    if (!EmptyUtil.Companion.isNullOrEmpty(translates)) {
+                        for (Translate translate1 : translates) {
+                            if (StringUtils.equals(h.getName(), translate1.getTranslateChina())) {
+                                h.setTranName(translate1.getTranslateKhmer());
+                            }
+                            if (StringUtils.equals(h.getDrugsSpec(), translate1.getTranslateChina())) {
+                                h.setTdrugsSpec(translate1.getTranslateKhmer());
+                            }
                         }
                     }
                 }
-            }
-            if (h.getType() == 2 || h.getType() == 5) {//项目
-                translate.setTranslateId(h.getId().longValue());
-                translate.setTranslateType(Constants.TRANSLATE_HIS_PROJECT);
-                List<Translate> translates = iTranslateService.queryTranslate(translate);
-                if (!EmptyUtil.Companion.isNullOrEmpty(translates)) {
-                    translates.stream().filter(e -> StringUtils.equals(h.getName(), e.getTranslateChina())).forEach(t -> h.setTranName(t.getTranslateKhmer()));
+                if (h.getType() == 2 || h.getType() == 5) {//项目
+                    translate.setTranslateId(h.getId().longValue());
+                    translate.setTranslateType(Constants.TRANSLATE_HIS_PROJECT);
+                    List<Translate> translates = iTranslateService.queryTranslate(translate);
+                    if (!EmptyUtil.Companion.isNullOrEmpty(translates)) {
+                        translates.stream().filter(e -> StringUtils.equals(h.getName(), e.getTranslateChina())).forEach(t -> h.setTranName(t.getTranslateKhmer()));
+                    }
+                }
+                if (h.getType() == 3) {//住院费用
+                    if (!EmptyUtil.Companion.isNullOrEmpty(h.getName())) {
+                        h.setTranName("Hospital bed number" + h.getName());
+                        h.setName("住院" + h.getName() + "号病床费用");
+                    }
                 }
             }
-            if (h.getType() == 3) {//住院费用
-                if (!EmptyUtil.Companion.isNullOrEmpty(h.getName())) {
-                    h.setTranName("Hospital bed number" + h.getName());
-                    h.setName("住院" + h.getName() + "号病床费用");
-                }
-            }
-        }}
+        }
         return hisTollDetails;
     }
 
@@ -315,9 +316,33 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
     @Override
     @Transactional(readOnly = true)
     public HisTollDetails listByNumberFor(String number) throws Exception {
-        if(EmptyUtil.Companion.isNullOrEmpty(hisTollDetailsMapper.selectNumber(number))){//未住院
+        if (EmptyUtil.Companion.isNullOrEmpty(hisTollDetailsMapper.selectNumber(number))) {//未住院
             return CodeHelper.getInstance().setCodeValue(hisTollDetailsMapper.listByNumberFors(number));
         }
         return CodeHelper.getInstance().setCodeValue(hisTollDetailsMapper.listByNumberFor(number)); //住院
+    }
+
+    @Override
+    public HisTollDetails printShowThere(String number) throws Exception {
+        HisTollDetails hs = new HisTollDetails();
+        hs.setNursingFee(new BigDecimal(0));
+        List<HisTollDetails> hisTollDetails = hisTollDetailsMapper.printShowThere(number);
+        if (EmptyUtil.Companion.isNullOrEmpty(hisTollDetails.size())) {
+            return new HisTollDetails();
+        } else {
+            for (HisTollDetails hisTollDetail : hisTollDetails) {
+                if (hisTollDetail.getType() == 31) {//护理
+                    hs.setNursingFee(hs.getNursingFee().add(hisTollDetail.getPrice()));
+                }
+                if (hisTollDetail.getType() == 13) {//观察
+                    hs.setObserveFee(hs.getNursingFee().add(hisTollDetail.getPrice()));
+                }
+                if (hisTollDetail.getType() == 14) {//检查
+                    hs.setExaminationFee(hs.getNursingFee().add(hisTollDetail.getPrice()));
+                }
+            }
+
+        }
+        return null;
     }
 }

@@ -54,6 +54,9 @@ public class HisTollDetails extends BaseEntity {
 
     private Integer age;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date update_date;
+
     @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "sex", typeName = "sexName")
     private Integer sex;
     private String sexName;
@@ -61,6 +64,44 @@ public class HisTollDetails extends BaseEntity {
     @CodeValueColumn(type = Constants.GLOBAL_DATA_ORANGIATION, typeKey = "", typeName = "departmentIdName")
     private Long departmentId;
     private String departmentIdName;
+
+    private BigDecimal nursingFee;//护理
+
+    private BigDecimal examinationFee;//检查
+
+    private BigDecimal ObserveFee;//观察
+
+    public BigDecimal getNursingFee() {
+        return nursingFee;
+    }
+
+    public void setNursingFee(BigDecimal nursingFee) {
+        this.nursingFee = nursingFee;
+    }
+
+    public BigDecimal getExaminationFee() {
+        return examinationFee;
+    }
+
+    public void setExaminationFee(BigDecimal examinationFee) {
+        this.examinationFee = examinationFee;
+    }
+
+    public BigDecimal getObserveFee() {
+        return ObserveFee;
+    }
+
+    public void setObserveFee(BigDecimal observeFee) {
+        ObserveFee = observeFee;
+    }
+
+    public Date getUpdate_date() {
+        return update_date;
+    }
+
+    public void setUpdate_date(Date update_date) {
+        this.update_date = update_date;
+    }
 
     public String getDoctorName() {
         return doctorName;

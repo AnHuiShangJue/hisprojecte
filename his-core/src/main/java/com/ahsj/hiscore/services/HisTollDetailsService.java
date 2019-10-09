@@ -141,4 +141,6 @@ public interface HisTollDetailsService {
      * @Time 20:21
      **/
    HisTollDetails listByNumberFor(String number) throws Exception;
+
+    HisTollDetails printShowThere(String number) throws Exception;
 }

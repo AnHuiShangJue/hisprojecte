@@ -1009,4 +1009,31 @@ r.money,r.recover_the_fee,r.create_date,i.user_name
     <select id="getPriceByNumber" resultMap="BaseResultMap" parameterType="java.lang.String">
 	select r.recover_the_fee,r.actual_charge as total_prices,r.money ,r.deposit from  his_toll_record as r where r.number =#{number}
     </select>
+
+    <select id="printShowThere" resultMap="BaseResultMap" parameterType="java.lang.String">
+
+				SELECT
+id,type  ,price,name
+				from
+
+				his_record_project as p  where   p.id in (  select
+	case
+	   when       d.type=2
+                then
+                 (
+								 	 select p.id from  his_record_project  as p  where   p.id = d.target_id )
+									   end as id
+
+	FROM `his_toll_details` as d
+                 LEFT JOIN  `his-userinfo`.user_info as i  on   i.id = d.create_user_id
+                 LEFT JOIN
+                 his_toll_record as h on h.id = d.toll_record_id
+        where  d.toll_record_id  =(
+            SELECT h.id
+            from his_toll_record as h where h.number=#{number}
+        )
+			)
+
+
+    </select>
 </mapper>

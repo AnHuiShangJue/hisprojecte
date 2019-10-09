@@ -466,4 +466,18 @@ public class HisTollDetailsController extends BaseController {
         modelAndView.addObject("number", number);
         return modelAndView;
     }
+
+    /**
+     * @Description 获取护理费，观察费
+     * @Params: `
+     * @Author: dingli
+     * @Return: com.ahsj.hiscore.entity.HisTollDetails
+     * @Date 2019/10/9
+     * @Time 17:26
+     **/
+    @RequestMapping("printShowThere/index.ahsj")
+    @ResponseBody
+    HisTollDetails printShowThere(String number) throws Exception {//没有明细
+        return hisTollDetailsService.printShowThere(number);
+    }
 }
