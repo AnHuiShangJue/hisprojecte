@@ -2,19 +2,19 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
 <head>
     <style>
-        .fontsize01 {
-            font-size: 1px;
-        }
-        .fontsize02 {
-            font-size: 1px;
-        }
-        table tr td{
-            padding: 0;
-        }
-        label{
-            padding: 0;
+        body{
             margin: 0;
+            padding: 0;
         }
+        .baseData tr td{
+            width: 10%;
+            border: 1px solid black;
+        }
+        p{
+            margin: 0;
+            padding: 0;
+        }
+
     </style>
 </head>
 <div th:replace="public/base_print :: html"></div>
@@ -27,59 +27,140 @@
             <p style="text-align: center;padding: 0;margin: 0;font-size: 1px">The first china-cambodia hospital Hospitalization fee</p>
         </div>
     </div>
+<!--    <div class="row valign-wrapper">-->
+<!--        <div class="col s12 m12 l12 " >-->
+<!--            <table style="border: none;font-size: 1px;width: 500px;margin: 0 auto">-->
+<!--                <tr>-->
+<!--                    <td><label class="black-text fontsize01">姓名(name)</label></td>-->
+<!--                    <td><label id="name" class="black-text fontsize01"></label></td>-->
+<!--                    <td><label class="black-text fontsize01">科室(department)</label></td>-->
+<!--                    <td><label id="department" class="black-text fontsize01"></label></td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td><label class="black-text fontsize01">年龄(age)</label></td>-->
+<!--                    <td><label class="black-text fontsize01"  style="padding: 0;" id="age"></label></td>-->
+<!--                    <td><label class="black-text fontsize01">性别(sex)</label></td>-->
+<!--                    <td><label class="black-text fontsize01" id="sex"></label></td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td><label class="black-text fontsize01">医生(doctor)</label></td>-->
+<!--                    <td><label class="black-text fontsize01" id="doctor"></label></td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td><label class="black-text fontsize01">交易流水号(Transaction flow number)</label></td>-->
+<!--                    <td><label class="black-text fontsize01" th:text="${number}" style="padding: 0;"></label></td>-->
+<!--                    <td><label class="black-text fontsize01">收费人(Toll collector)</label></td>-->
+<!--                    <td><label class="black-text fontsize01"><span id="createName"></span></label></td>-->
+<!--                </tr>-->
+<!--                <input type="hidden" id="number" th:value="${number}">-->
+
+<!--                <tr>-->
+<!--                    <td><label class="black-text fontsize01">收费金额(charge amount)</label></td>-->
+<!--                    <td><label class="black-text"><span id="totalPrices"></span></label></td>-->
+<!--                    <td><label class="black-text fontsize01">找回金额(Retrieve the amount)</label></td>-->
+<!--                    <td><label class="black-text"><span id="recoverTheFee"></span></label></td>-->
+<!--                </tr>-->
+
+<!--                <tr>-->
+<!--                    <td><label class="black-text fontsize01">总应收金额(Total receivable amount)</label></td>-->
+<!--                    <td><label class="black-text fontsize01"><span id="money"></span></label></td>-->
+<!--                    <td><label class="black-text fontsize01">收费时间(Chargeable time)</label></td>-->
+<!--                    <td><label class="black-text fontsize01"><span id="createDate"></span></label></td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td><label class="black-text fontsize01">押金充值(Deposit recharge)</label></td>-->
+<!--                    <td><label class="black-text fontsize01"><span id="depositRecharge"></span></label></td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td colspan="2"><label class="black-text fontsize01">收费明细(Charge details)</label></td>-->
+<!--                </tr>-->
+<!--            </table>-->
+<!--        </div>-->
+<!--    </div>-->
+    <input type="hidden" id="number" th:value="${number}">
+
+
     <div class="row valign-wrapper">
-        <div class="col s12 m12 l12 " >
-            <table style="border: none;font-size: 1px;width: 500px;margin: 0 auto">
-                <tr>
-                    <td><label class="black-text fontsize01">姓名(name)</label></td>
-                    <td><label id="name" class="black-text fontsize01"></label></td>
-                    <td><label class="black-text fontsize01">科室(department)</label></td>
-                    <td><label id="department" class="black-text fontsize01"></label></td>
-                </tr>
-                <tr>
-                    <td><label class="black-text fontsize01">年龄(age)</label></td>
-                    <td><label class="black-text fontsize01"  style="padding: 0;" id="age"></label></td>
-                    <td><label class="black-text fontsize01">性别(sex)</label></td>
-                    <td><label class="black-text fontsize01" id="sex"></label></td>
-                </tr>
-                <tr>
-                    <td><label class="black-text fontsize01">医生(doctor)</label></td>
-                    <td><label class="black-text fontsize01" id="doctor"></label></td>
-                </tr>
-                <tr>
-                    <td><label class="black-text fontsize01">交易流水号(Transaction flow number)</label></td>
-                    <td><label class="black-text fontsize01" th:text="${number}" style="padding: 0;"></label></td>
-                    <td><label class="black-text fontsize01">收费人(Toll collector)</label></td>
-                    <td><label class="black-text fontsize01"><span id="createName"></span></label></td>
-                </tr>
-                <input type="hidden" id="number" th:value="${number}">
-
-                <tr>
-                    <td><label class="black-text fontsize01">收费金额(charge amount)</label></td>
-                    <td><label class="black-text"><span id="totalPrices"></span></label></td>
-                    <td><label class="black-text fontsize01">找回金额(Retrieve the amount)</label></td>
-                    <td><label class="black-text"><span id="recoverTheFee"></span></label></td>
-                </tr>
-
-                <tr>
-                    <td><label class="black-text fontsize01">总应收金额(Total receivable amount)</label></td>
-                    <td><label class="black-text fontsize01"><span id="money"></span></label></td>
-                    <td><label class="black-text fontsize01">收费时间(Chargeable time)</label></td>
-                    <td><label class="black-text fontsize01"><span id="createDate"></span></label></td>
-                </tr>
-                <tr>
-                    <td><label class="black-text fontsize01">押金充值(Deposit recharge)</label></td>
-                    <td><label class="black-text fontsize01"><span id="depositRecharge"></span></label></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><label class="black-text fontsize01">收费明细(Charge details)</label></td>
-                </tr>
-            </table>
+        <div class="col s12 m12 l12">
+        <table class="hospital" style="border: none;font-size: 1px;margin: 0 auto;width: 95%">
+            <tr>
+                <td><p style="margin: 0;padding: 0;">补偿机构：</p><p style="margin: 0;padding: 0;">Compensation mechanism:</p></td>
+                <td><p style="margin: 0;padding: 0;">中柬第一医院</p><p style="margin: 0;padding: 0;">The first china-cambodia hospital</p></td>
+                <td><p style="margin: 0;padding: 0;">（盖章）</p><p style="margin: 0;padding: 0;">（seal）</p></td>
+                <td style="width:18%;margin: 0;padding: 0;"></td>
+                <td><p style="margin: 0;padding: 0;">单位/元</p><p style="margin: 0;padding: 0;">Unit/yuan</p></td>
+                <td></td>
+            </tr>
+        </table>
         </div>
     </div>
     <div class="row valign-wrapper">
+        <table border="1" cellspacing="0" class="baseData" style="border: none;font-size: 1px;margin: 0 auto;width: 95%">
+            <tr>
+                <td style="width: 9%"><p style="margin: 0;padding: 0;">姓名</p><p style="margin: 0;padding: 0;">name</p></td>
+                <td style="width: 9%"></td>
+                <td style="width: 10%"><p style="margin: 0;padding: 0;">性别</p><p style="margin: 0;padding: 0;">sex</p></td>
+                <td style="width: 10%"></td>
+                <td style="width: 10%"><p style="margin: 0;padding: 0;">年龄</p><p style="margin: 0;padding: 0;">age</p></td>
+                <td style="width: 10%"></td>
+                <td style="width: 10%"><p style="margin: 0;padding: 0;">联系电话</p><p style="margin: 0;padding: 0;">phone</p></td>
+                <td style="width: 10%"></td>
+                <td style="width: 11%"><p style="margin: 0;padding: 0;">就诊机构</p><p style="margin: 0;padding: 0;">medical institutions</p></td>
+                <td style="width: 11%"><label>中柬第一医院</label></td>
+            </tr>
+            <tr>
+                <td><p style="margin: 0;padding: 0;">住院号</p><p style="margin: 0;padding: 0;">hospital number</p></td>
+                <td></td>
+                <td><p style="margin: 0;padding: 0;">身份证</p><p style="margin: 0;padding: 0;">id card</p></td>
+                <td colspan="2"></td>
+                <td colspan="2"><p style="margin: 0;padding: 0;">本次医疗费用累计</p><p style="margin: 0;padding: 0;">medical expense accumulates</p></td>
+                <td></td>
+                <td><p style="margin: 0;padding: 0;">入院/就诊日期</p><p style="margin: 0;padding: 0;">date of admission/visit</p></td>
+                <td></td>
+            </tr>
+            <tr>
+
+                <td><p style="margin: 0;padding: 0;">药品费</p><p style="margin: 0;padding: 0;">drug charge</p></td>
+                <td></td>
+                <td><p style="margin: 0;padding: 0;">护理费</p><p style="margin: 0;padding: 0;">nurse charge</p></td>
+                <td></td>
+                <td><p style="margin: 0;padding: 0;">观察费</p><p style="margin: 0;padding: 0;">observe charge</p></td>
+                <td></td>
+                <td><p style="margin: 0;padding: 0;">抢救费</p><p style="margin: 0;padding: 0;">salvage charge</p></td>
+                <td></td>
+                <td><p style="margin: 0;padding: 0;">出院日期</p><p style="margin: 0;padding: 0;">Out of the hospital date</p></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="10"><p style="margin: 0;padding: 0;">注：门诊就诊时“入院日期”即为就诊日期。</p><p style="margin: 0;padding: 0;">Note: the "date of admission" is the date of admission.</p></td>
+            </tr>
+        </table>
+    </div>
+    <div class="row valign-wrapper">
+        <table class="signature" style="border: none;font-size: 8px;margin: 0 auto;width: 95%">
+            <tr>
+                <td><p  style="margin: 0;padding: 0;">经办人（签字）：</p><p  style="margin: 0;padding: 0;">agent(signature):</p></td>
+                <td></td>
+                <td><p  style="margin: 0;padding: 0;">复核人（签字）：</p><p  style="margin: 0;padding: 0;">review(signature):</p></td>
+                <td></td>
+                <td><p  style="margin: 0;padding: 0;">结算日期：</p><p  style="margin: 0;padding: 0;">settlement date:</p></td>
+                <td id="settlementDate"></td>
+            </tr>
+            <tr>
+                <td><p  style="margin: 0;padding: 0;">审核人（签字）：</p><p  style="margin: 0;padding: 0;">reviewer(signature):</p></td>
+                <td style="width: 13%"></td>
+                <td><p  style="margin: 0;padding: 0;">负责人（签字）：</p><p  style="margin: 0;padding: 0;">take charge(signature):</p></td>
+                <td style="width: 13%"></td>
+                <td><p  style="margin: 0;padding: 0;">领款人（签字）：</p><p  style="margin: 0;padding: 0;">draw money(signature):</p></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+
+
+    <div class="row valign-wrapper">
         <div class="col s12 m12 l12">
-            <table id="table_id" style="border: none;font-size: 1px;width: 500px;margin: 0 auto"></table>
+            <table id="table_id" style="border: none;font-size: 1px;margin: 0 auto;width: 95%"></table>
         </div>
     </div>
 
@@ -91,6 +172,19 @@ Scripts
     <div th:replace="public/base_print_script :: html"></div>
 <script th:inline="javascript">
     $(document).ready(function () {
+        // var myDate = new Date();
+        // var year = myDate.getFullYear();
+        // var month = myDate.getMonth() + 1;
+        // var date = myDate.getDate();
+        // var h = myDate.getHours();
+        // var m = myDate.getMinutes();
+        // var s = myDate.getSeconds();
+        // var now = year + "-" + month + "-" + date + " " + h + ":" + m + ":" + s;
+        //
+        // document.getElementById("year").innerHTML = year;
+        // document.getElementById("settlementDate").innerHTML = now;
+
+
         printShow();
         printShow1();
     });
@@ -101,6 +195,7 @@ Scripts
             CTX + "/api/hisTollDetails/printShow/index.ahsj",
             {"number": number},
             function (data) {
+                console.log(data);
                 var totalPrices;
                 var recoverTheFee;
                 var money;

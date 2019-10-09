@@ -3,8 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .baseData{
+            width: 700px;
+            margin: 0 auto;
+        }
+        .baseData tr td{
+            width: 10%;
+            border: 1px solid black;
+        }
+        p{
+            margin: 0;
+            padding: 0;
+        }
+        .signature{
+            width: 700px;
+            margin: 0 auto;
+        }
+        .hospital{
+            width: 700px;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
+<div>
+    <h4 style="text-align: center;font-size: 1px;margin: 0;padding: 0;"><span id="year"></span>年中柬第一医院医疗结算单</h4>
+    <p style="text-align: center;font-size: 1px;margin: 0;padding: 0;">The first china-cambodia hospital Medical statement</p>
+</div>
+<div>
+    <table class="hospital">
+        <tr>
+            <td><p>补偿机构：</p><p>Compensation mechanism:</p></td>
+            <td><p>中柬第一医院</p><p>The first china-cambodia hospital</p></td>
+            <td><p>（盖章）</p><p>（seal）</p></td>
+            <td style="width:18%"></td>
+            <td><p>单位/元</p><p>Unit/yuan</p></td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+<div style="width: 100%">
+<table border="1" cellspacing="0" class="baseData">
+    <tr>
+        <td><p>姓名</p><p>name</p></td>
+        <td></td>
+        <td><p>性别</p><p>sex</p></td>
+        <td></td>
+        <td><p>年龄</p><p>age</p></td>
+        <td></td>
+        <td><p>联系电话</p><p>phone</p></td>
+        <td></td>
+        <td><p>就诊机构</p><p>medical institutions</p></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><p>住院号</p><p>hospital number</p></td>
+        <td></td>
+        <td><p>身份证</p><p>id card</p></td>
+        <td colspan="2"></td>
+        <td colspan="2">本次医疗费用累计<p></p><p>medical expense accumulates</p></td>
+        <td></td>
+        <td><p>入院/就诊日期</p><p>date of admission/visit</p></td>
+        <td></td>
+    </tr>
+    <tr>
 
+        <td><p>药品费</p><p>drug charge</p></td>
+        <td></td>
+        <td><p>护理费</p><p>nurse charge</p></td>
+        <td></td>
+        <td><p>观察费</p><p>observe charge</p></td>
+        <td></td>
+        <td><p>抢救费</p><p>salvage charge</p></td>
+        <td></td>
+        <td><p>出院日期</p><p>Out of the hospital date</p></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td colspan="10"><p>注：门诊就诊时“入院日期”即为就诊日期。</p><p>Note: the "date of admission" is the date of admission.</p></td>
+    </tr>
+</table>
+</div>
+<div>
+    <table class="signature">
+        <tr>
+            <td><p>经办人（签字）：</p><p>agent(signature):</p></td>
+            <td></td>
+            <td><p>复核人（签字）：</p><p>review(signature):</p></td>
+            <td></td>
+            <td><p>结算日期：</p><p>settlement date:</p></td>
+            <td id="settlementDate"></td>
+        </tr>
+        <tr>
+            <td><p>审核人（签字）：</p><p>reviewer(signature):</p></td>
+            <td style="width: 13%"></td>
+            <td><p>负责人（签字）：</p><p>take charge(signature):</p></td>
+            <td style="width: 13%"></td>
+            <td><p>领款人（签字）：</p><p>draw money(signature):</p></td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+<script>
+    var myDate = new Date();
+    var year = myDate.getFullYear();
+    var month = myDate.getMonth() + 1;
+    var date = myDate.getDate();
+    var h = myDate.getHours();
+    var m = myDate.getMinutes();
+    var s = myDate.getSeconds();
+    var now = year + "-" + month + "-" + date + " " + h + ":" + m + ":" + s;
+
+    document.getElementById("year").innerHTML = year;
+    document.getElementById("settlementDate").innerHTML = now;
+</script>
 </body>
 </html>
