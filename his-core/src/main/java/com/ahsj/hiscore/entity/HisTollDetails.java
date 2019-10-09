@@ -57,7 +57,7 @@ public class HisTollDetails extends BaseEntity {
     private Integer age;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date update_date;
+    private Date updateDate;
 
     @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "sex", typeName = "sexName")
     private Integer sex;
@@ -116,12 +116,14 @@ public class HisTollDetails extends BaseEntity {
         ObserveFee = observeFee;
     }
 
-    public Date getUpdate_date() {
-        return update_date;
+    @Override
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setUpdate_date(Date update_date) {
-        this.update_date = update_date;
+    @Override
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
     public String getDoctorName() {

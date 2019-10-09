@@ -326,17 +326,18 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
     }
 
     @Override
+    @Transactional(readOnly = false)
     public HisTollDetails printShowThere(String number) throws Exception {
         HisTollDetails hs = new HisTollDetails();
         hs.setNursingFee(new BigDecimal(0));
         hs.setExaminationFee(new BigDecimal(0));
         hs.setObserveFee(new BigDecimal(0));
         List<HisTollDetails> hisTollDetails = hisTollDetailsMapper.printShowThere(number);
-        if (EmptyUtil.Companion.isNullOrEmpty(hisTollDetails.size())) {
+        if (hisTollDetails.size()==0) {
             return new HisTollDetails();
         } else {
             for (HisTollDetails hisTollDetail : hisTollDetails) {
-                if (hisTollDetail.getType() == 31) {//护理
+                if (hisTollDetail.getType() == 12) {//护理
                     hs.setNursingFee(hs.getNursingFee().add(hisTollDetail.getPrice()));
                 }
                 if (hisTollDetail.getType() == 13) {//观察
