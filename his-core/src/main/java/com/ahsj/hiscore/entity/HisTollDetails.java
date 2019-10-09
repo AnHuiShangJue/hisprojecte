@@ -14,6 +14,9 @@ public class HisTollDetails extends BaseEntity {
     private Long tollRecordId;
 
     private String name;
+    private Long phonenumber;
+
+    private String idcard;
 
     private String records;
 
@@ -205,6 +208,22 @@ public class HisTollDetails extends BaseEntity {
 
     public void setMedicalRecordId(String medicalRecordId) {
         MedicalRecordId = medicalRecordId;
+    }
+
+    public Long getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(Long phonenumber) {
+        this.phonenumber = phonenumber;
+    }
+
+    public String getIdcard() {
+        return idcard;
+    }
+
+    public void setIdcard(String idcard) {
+        this.idcard = idcard;
     }
 
     public Long getId() {

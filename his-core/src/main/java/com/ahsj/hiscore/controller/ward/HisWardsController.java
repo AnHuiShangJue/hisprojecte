@@ -415,15 +415,6 @@ public class HisWardsController extends BaseController {
      //   String psth = this.getClass().getClassLoader().getResource("templates/excel/import/HisWard.xlsx").getPath();
       String  psth =Constants.HIS_SYS_EXCEL_HISWARD_IMPORT_FILE_URL;
         FileUtil.download(response, psth);
-
-    }
-
-    @RequestMapping(value = "ceshi.ahsj", method = {RequestMethod.POST})
-    public void a() throws Exception {
-        HisWard hisWard = new HisWard();
-        hisWard.setNumber(1234456);
-        hisWardMapper.insert(hisWard);
-        hisWard.getId();
     }
 
 }

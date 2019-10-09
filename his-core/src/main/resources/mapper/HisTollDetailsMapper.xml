@@ -28,6 +28,9 @@
 
         <result column="total_prices" property="totalPrices"/>
         <result column="recover_the_fee" property="recoverTheFee"/>
+        <result column="phonenumber" property="phonenumber"/>
+        <result column="idcard" property="idcard"/>
+        <result column="number" property="number"/>
     </resultMap>
     <sql id="Base_Column_List">
         id, create_user_id, create_date, update_user_id, update_date, toll_record_id, name,
@@ -959,7 +962,7 @@
 
 
     <select id="listByNumberFor" resultMap="BaseResultMap" parameterType="java.lang.String">
-select  a.actual_charge as price,a.create_date ,a.recover_the_fee,a.user_name,b.patient_name,b.sex,b.age,b.department_id,b.doctor_name
+select  a.actual_charge as price,a.create_date ,a.recover_the_fee,a.user_name,b.patient_name,b.sex,b.age,b.department_id,b.doctor_name,b.number,b.idcard,b.phone_number as phonenumber,b.create_date as update_date
 				from  (select
 r.recover_the_fee,r.create_date,i.user_name,r.actual_charge
         from his_toll_record  as r
@@ -967,14 +970,19 @@ r.recover_the_fee,r.create_date,i.user_name,r.actual_charge
         where r.number =#{number}) as a
 					CROSS JOIN
 			(
-			select m.patient_name,m.sex,m.age,m.department_id ,i.user_name as  doctor_name    from  his_hospital_manage as  m
+			select m.patient_name,m.sex,m.age,m.department_id ,i.user_name as  doctor_name ,m.number,
+
+	m.idcard,m.phone_number,m.create_date
+	from         his_hospital_manage as  m
 			  LEFT JOIN  `his-userinfo`.user_info as i  on   i.id = m.doctor_id
 			where m.medical_number =(
 				SELECT r.medical_record_id from his_toll_record   as r   where r.number =#{number})) as b
     </select>
 
     <select id="listByNumberFors" resultMap="BaseResultMap" parameterType="java.lang.String">
-				select a.create_date ,a.recover_the_fee,a.user_name,b.patient_name,b.sex,b.age,b.department_id,b.doctor_name
+				select a.create_date ,b.phonenumber,b.idcard,b.create_date as update_date,
+
+a.recover_the_fee,a.user_name,b.patient_name,b.sex,b.age,b.department_id,b.doctor_name
 				from  (select
 r.money,r.recover_the_fee,r.create_date,i.user_name
         from his_toll_record  as r
@@ -982,7 +990,8 @@ r.money,r.recover_the_fee,r.create_date,i.user_name
         where r.number =#{number}) as a
 					CROSS JOIN
 			(
-	select  i.user_name as  doctor_name , p.name as  patient_name ,p.sex,p.age,i.dept_id as department_id
+	select  i.user_name as  doctor_name , p.name as  patient_name ,p.phonenumber,p.idcard,m.create_date,
+	p.sex,p.age,i.dept_id as department_id
 			from  his_medical_record  as  m
 			  LEFT JOIN  `his-userinfo`.user_info as i  on   i.id = m.doctor_id
 				LEFT JOIN  his_patient_info  as p  on   p.id = m.patient_id

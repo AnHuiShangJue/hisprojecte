@@ -296,7 +296,6 @@ public class HisTollDetailsController extends BaseController {
     @ResponseBody
     HisTollDetails printShowFor(String number) throws Exception {//没有明细
         return hisTollDetailsService.listByNumberFor(number);
-
     }
 
     /**
