@@ -34,7 +34,7 @@
         </div>
     </div>
     <div class="row valign-wrapper" >
-        <table style="border: none;margin: 0 auto;font-size: 10px">
+        <table style="border: none;margin: 0 auto;font-size: 10px;width: 95%;">
             <tr>
                 <td colspan="2"><label>治疗诊疗单(Treatment list)</label></td>
             </tr>
@@ -157,7 +157,7 @@
             function (data) {
                 var jsons = data[0];
                 if (!isNullOrEmpty(jsons)) {//有
-                    var trs = "<tr><td><label>名称(name)</label></td><td><label>规格(drugsSpec)</label></td><td><label>用法用量(usage and dosage)</label></td><td><label>数目(number)</label></td><td><label>单价(price)</label></td><td><label>单项总价(Single item total price)</label></td></tr>";
+                    var trs = "<tr><td><label>名称(name)</label></td><td><label>规格(drugsSpec)</label></td><td><label>用法用量(usage and dosage)</label></td><td><label>数目(number)</label></td><td type=\"hidden\"><label>单价(price)</label></td><td type=\"hidden\"><label>单项总价(Single item total price)</label></td></tr>";
                     $.each(data, function (index, item) {
                         if (isNullOrEmpty(item.name)) {
                             item.name = ""
