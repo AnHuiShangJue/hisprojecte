@@ -871,6 +871,6 @@ public class HisProjectServiceImpl implements HisProjectService {
     @Override
     @Transactional(readOnly = false)
     public List<HisProject> selectForListForProjectByIds(Long[] ids) throws Exception {
-        return hisProjectMapper.selectForListForProjectByIds(ids);
+        return CodeHelper.getInstance().setCodeValue(hisProjectMapper.selectForListForProjectByIds(ids));
     }
 }
