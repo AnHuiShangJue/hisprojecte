@@ -32,6 +32,7 @@ public class HisTollDetails extends BaseEntity {
 
     private BigDecimal price;
 
+
     private BigDecimal recoverTheFee;
 
     private String description;
@@ -72,7 +73,7 @@ public class HisTollDetails extends BaseEntity {
     private BigDecimal examinationFee;//检查
 
 
-    private BigDecimal ObserveFee;//药品费
+    private BigDecimal observeFee;//药品费
 
     private BigDecimal drugFee;//药品费
 
@@ -109,11 +110,11 @@ public class HisTollDetails extends BaseEntity {
     }
 
     public BigDecimal getObserveFee() {
-        return ObserveFee;
+        return observeFee;
     }
 
     public void setObserveFee(BigDecimal observeFee) {
-        ObserveFee = observeFee;
+        this.observeFee = observeFee;
     }
 
     @Override

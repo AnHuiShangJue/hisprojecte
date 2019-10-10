@@ -337,20 +337,21 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
         hs.setObserveFee(new BigDecimal(0));
         List<HisTollDetails> hisTollDetails = hisTollDetailsMapper.printShowThere(number);
         if (hisTollDetails.size()==0) {
-            return new HisTollDetails();
+            return hs;
         } else {
             for (HisTollDetails hisTollDetail : hisTollDetails) {
                 if (hisTollDetail.getType() == 12) {//护理
                     hs.setNursingFee(hs.getNursingFee().add(hisTollDetail.getPrice()));
                 }
                 if (hisTollDetail.getType() == 13) {//观察
-                    hs.setObserveFee(hs.getNursingFee().add(hisTollDetail.getPrice()));
+                    hs.setObserveFee(hs.getObserveFee().add(hisTollDetail.getPrice()));
                 }
                 if (hisTollDetail.getType() == 14) {//检查
-                    hs.setExaminationFee(hs.getNursingFee().add(hisTollDetail.getPrice()));
+                    hs.setExaminationFee(hs.getExaminationFee().add(hisTollDetail.getPrice()));
                 }
             }
         }
+        hs.toString();
         return hs;
     }
 }
