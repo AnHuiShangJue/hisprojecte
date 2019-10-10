@@ -127,11 +127,11 @@
   </update>
   <!--自定义-->
   <!-- 批量插入 -->
-  <insert id="importBatch" useGeneratedKeys="true" parameterType="java.util.List">
-    <selectKey resultType="long" keyProperty="id" order="AFTER">
-      SELECT
-      LAST_INSERT_ID()
-    </selectKey>
+<!--  <selectKey resultType="long" keyProperty="id" order="AFTER">
+    SELECT
+    LAST_INSERT_ID()
+  </selectKey>-->
+  <insert id="importBatch" useGeneratedKeys="true" parameterType="java.util.List" keyProperty="id">
 
     insert into org_menu ( org_id, menu_id,
     permssion_perms_id, create_id, create_time,

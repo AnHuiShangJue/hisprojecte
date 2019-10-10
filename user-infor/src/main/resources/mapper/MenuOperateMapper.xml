@@ -90,11 +90,11 @@
     where menu_id = #{menuId,jdbcType=INTEGER}
   </delete>
   <!-- 批量插入 -->
-  <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">
-    <selectKey resultType="long" keyProperty="id" order="AFTER">
-      SELECT
-      LAST_INSERT_ID()
-    </selectKey>
+  <!--<selectKey resultType="long" keyProperty="id" order="AFTER">
+    SELECT
+    LAST_INSERT_ID()
+  </selectKey>-->
+  <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List" keyProperty="id">
 
     insert into menu_operate (id, menu_id, operate_id, permission)
     values

@@ -92,11 +92,11 @@
   </update>
   <!--自定义sql-->
   <!-- 批量插入 -->
-  <insert id="importBatch" useGeneratedKeys="true" parameterType="java.util.List">
-    <selectKey resultType="long" keyProperty="id" order="AFTER">
-      SELECT
-      LAST_INSERT_ID()
-    </selectKey>
+<!--  <selectKey resultType="long" keyProperty="id" order="AFTER">
+    SELECT
+    LAST_INSERT_ID()
+  </selectKey>-->
+  <insert id="importBatch" useGeneratedKeys="true" parameterType="java.util.List" keyProperty="id">
 
     insert into user_org_rel (id, user_id, dept_id, is_leader,is_init_data)
     values

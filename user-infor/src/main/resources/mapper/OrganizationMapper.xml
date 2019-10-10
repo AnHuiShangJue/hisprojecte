@@ -451,11 +451,11 @@
     </select>
 
     <!-- 批量插入 -->
-    <insert id="importBatch" useGeneratedKeys="true" parameterType="java.util.List">
-        <selectKey resultType="long" keyProperty="id" order="AFTER">
-            SELECT
-            LAST_INSERT_ID()
-        </selectKey>
+    <!--<selectKey resultType="long" keyProperty="id" order="AFTER">
+        SELECT
+        LAST_INSERT_ID()
+    </selectKey>-->
+    <insert id="importBatch" useGeneratedKeys="true" parameterType="java.util.List" keyProperty="id">
 
         insert into organization (id, tree_id, parent_id, type, depart_kbn, name,
         credit_code, responsible, address,division_id,zip_code, tel_phone, order_no,is_init_data, remark,
