@@ -23,7 +23,7 @@ public interface HisTollDetailsMapper extends BaseMapper<HisTollDetails> {
 
     int updateByPrimaryKey(HisTollDetails record);
 
-    List<HisTollDetails> listByMecordIdForHospital(PageBean<HisTollDetails> pageBean);
+    List<HisTollDetails> listByMecordIdForHospital(PageBean<HisTollDetails> pageBean);//
 
     List<? extends HisTollDetails> listForOutpatientCharges(PageBean<HisTollDetails> pageBean);
 
@@ -70,7 +70,7 @@ public interface HisTollDetailsMapper extends BaseMapper<HisTollDetails> {
      * @Date 2019-09-13
      * @Time 16:35
      **/
-    List<? extends HisTollDetails> listForcommonSwipeByCommonNumber(PageBean<HisTollDetails> hisTollDetailsPageBean);
+    List<? extends HisTollDetails> listForcommonSwipeByCommonNumber(PageBean<HisTollDetails> hisTollDetailsPageBean);//
 
     /**
      * @Description
