@@ -203,7 +203,6 @@ Scripts
         console.log(now);
         $("#settlementDate").html=now;
 
-
         printShow();
         printShow1();
         printShow2();
@@ -221,10 +220,9 @@ Scripts
                 var jsons = data[0];
                 $("#createName").html(jsons.createName);
                 $("#totalPrices").html(jsons.totalPrices.toFixed(2));
-                $("#createDate").html(jsons.createDate);
+               // $("#createDate").html(jsons.createDate);
                 $("#recoverTheFee").html(jsons.recoverTheFee.toFixed(2));
                 $("#money").html(jsons.money);
-
                 $("#drugFee").html(jsons.drugFee);
                 $("#depositRecharge").html((jsons.totalPrices - jsons.money).toFixed(2));
                 if (!isNullOrEmpty(jsons)) {//有
@@ -294,7 +292,7 @@ Scripts
             function (data) {
                 $("#nursingFee").html(data.nursingFee);
                 $("#examinationFee").html(data.examinationFee);
-                $("#ObserveFee").html(data.ObserveFee);
+                $("#ObserveFee").html(data.observeFee);
                 //$("#department").html(data.departmentIdName);
             },
             function () {

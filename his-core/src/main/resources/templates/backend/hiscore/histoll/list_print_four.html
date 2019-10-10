@@ -114,7 +114,7 @@
                 <td><label id="hospitalNumber"></label></td>
                 <td><p style="margin: 0;padding: 0;">身份证</p><p style="margin: 0;padding: 0;">id card</p></td>
                 <td colspan="2"><label id="idcard"></label></td>
-                <td colspan="2"><p style="margin: 0;padding: 0;">本次医疗费用累计</p><p style="margin: 0;padding: 0;">medical expense accumulates</p></td>
+                <td colspan="2"><p style="margin: 0;padding: 0;">本次药品退费累计</p><p style="margin: 0;padding: 0;">medical expense accumulates</p></td>
                 <td><label id="money"></label></td>
                 <td><p style="margin: 0;padding: 0;">入院/就诊日期</p><p style="margin: 0;padding: 0;">date of admission/visit</p></td>
                 <td><label id="update_date"></label></td>
@@ -164,11 +164,11 @@
             </tr>
         </table>
     </div>
-    <div class="row valign-wrapper">
+   <!-- <div class="row valign-wrapper">
         <div class="col s12 m12 l12 ">
             <table id="table_id" style="border: none;font-size: 8px"></table>
         </div>
-    </div>
+    </div>-->
 
 </div>
 <!-- ================================================
@@ -179,6 +179,7 @@ Scripts
     $(document).ready(function () {
         printShow();
         printShow1();
+        printShow2();
     });
     var number = $("#number").val();
 
@@ -211,13 +212,9 @@ Scripts
                         trs += "<tr><td><label class='black-text fontsize02'> " + item.name + "(" + item.tranName + ")" + "</label></td><td ><label class='black-text fontsize02'>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</label></td><td ><label class='black-text fontsize02'> " + item.num + "</label></td></tr >";
                     });
 
-
                     $("#createName").html(jsons.createName);
-                    $("#totalPrices").html(jsons.totalPrices.toFixed(2));
-                    $("#createDate").html(jsons.createDate);
-                    $("#recoverTheFee").html(jsons.recoverTheFee.toFixed(2));
-                    $("#money").html(jsons.money);
-                    $("#depositRecharge").html((jsons.totalPrices - jsons.money).toFixed(2));
+                    $("#money").html(jsons.recoverTheFee.toFixed(2));
+                    $("#drugFee").html(jsons.recoverTheFee.toFixed(2));
                     if(flag) {
                         $("#table_id").append(trs);
                     }
@@ -247,6 +244,22 @@ Scripts
                 $("#idcard").html(data.idcard);
                 $("#update_date").html(data.updateDate);
                 $("#phonenumber").html(data.phonenumber);
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }
+        );
+    }
+    function printShow2() {
+        $.ahsjajax(
+            CTX + "/api/hisTollDetails/printShowThere/index.ahsj",
+            {"number": number},
+            function (data) {
+                $("#nursingFee").html(data.nursingFee);
+                $("#examinationFee").html(data.examinationFee);
+                $("#ObserveFee").html(data.observeFee);
+                //$("#department").html(data.departmentIdName);
             },
             function () {
                 M.toast({html: "网络异常"});

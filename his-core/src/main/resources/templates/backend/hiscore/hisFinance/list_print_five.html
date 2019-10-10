@@ -89,9 +89,6 @@ Scripts
             CTX + "/api/hisTollDetails/printShow/index.ahsj",
             {"number": number},
             function (data) {
-                var totalPrices;
-                var recoverTheFee;
-                var money;
                 var jsons = data[0];
                 if (!isNullOrEmpty(jsons)) {//有
                     var flag = true;

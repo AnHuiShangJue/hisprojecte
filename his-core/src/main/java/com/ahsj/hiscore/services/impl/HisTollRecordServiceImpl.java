@@ -195,7 +195,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         hisTollRecord.setType(2);
         hisTollRecord.setIsSettlement(2);
         hisTollRecord.setAttenchType(2);
-        hisTollRecordMapper.insert(hisTollRecord);
+
 
         //修改住院押金
         HisHospitalManage hisHospitalManage = hisHospitalManageMapper.selectByNumber(hisTollRecord.getMedicalRecordId());
@@ -204,6 +204,8 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         }else
             hisHospitalManage.setRestDeposit(hisTollRecord.getDeposit());
         //无收费记录，则为交押金
+        hisTollRecord.setDeposit(hisHospitalManage.getRestDeposit());
+        hisTollRecordMapper.insert(hisTollRecord);
         if (hisTollDetails.size() == 0 && !hisTollRecord.getDeposit().equals(0)) {
             hisHospitalManageMapper.updateByPrimaryKey(hisHospitalManage);
             return MessageUtil.createMessage(true, number + "押金交付成功！，当前总押金为" + hisHospitalManage.getRestDeposit());

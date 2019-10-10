@@ -4,17 +4,19 @@
 <head>
     <style>
 
-        body{
+        body {
             font-size: 10px;
             line-height: 10px;
             padding: 0;
             margin: 0;
         }
+
         table tr td {
             padding: 0;
             margin: 0;
         }
-        label{
+
+        label {
             font-size: 10px;
             padding: 0;
             margin: 0;
@@ -33,7 +35,7 @@
             <p style="text-align: center;padding: 0;margin: 0;font-size: 10px">The first china-cambodia hospital</p>
         </div>
     </div>
-    <div class="row valign-wrapper" >
+    <div class="row valign-wrapper">
         <table style="border: none;margin: 0 auto;font-size: 10px;width: 95%;">
             <tr>
                 <td colspan="2"><label>治疗诊疗单(Treatment list)</label></td>
@@ -157,7 +159,7 @@
             function (data) {
                 var jsons = data[0];
                 if (!isNullOrEmpty(jsons)) {//有
-                    var trs = "<tr><td><label>名称(name)</label></td><td><label>规格(drugsSpec)</label></td><td><label>用法用量(usage and dosage)</label></td><td><label>数目(number)</label></td><td type=\"hidden\"><label>单价(price)</label></td><td type=\"hidden\"><label>单项总价(Single item total price)</label></td></tr>";
+                    var trs = "<tr><td><label>名称(name)</label></td><td><label>规格(drugsSpec)</label></td><td><label>用法用量(usage and dosage)</label></td><td><label>数目(number)</label></td><!--<td type=\"hidden\"><label>单价(price)</label></td><td type=\"hidden\"><label>单项总价(Single item total price)</label></td>--></tr>";
                     $.each(data, function (index, item) {
                         if (isNullOrEmpty(item.name)) {
                             item.name = ""
@@ -177,7 +179,7 @@
                         if (isNullOrEmpty(item.description)) {
                             item.description = ""
                         }
-                        trs += "<tr><td><p> " + item.drugsName + "(" + item.tdrugsName + ")" + "</p></td><td ><p>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</p></td><td ><p> " + item.description + "(" + item.tdescription + ")" + "</p></td><td ><p> " + item.count + "</p></td><td ><p>" + item.price + "</p></td><td ><p> " + item.totalPrice + "</p></td></tr >";
+                        trs += "<tr><td><p> " + item.drugsName + "(" + item.tdrugsName + ")" + "</p></td><td ><p>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</p></td><td ><p> " + item.description + "(" + item.tdescription + ")" + "</p></td><td ><p> " + item.count + "</p></td></tr >";
                     });
                     $("#drug").append(trs);
                 } else {
@@ -198,7 +200,7 @@
             function (data) {
                 var jsons = data[0];
                 if (!isNullOrEmpty(jsons)) {//有
-                    var trs = "<tr><td>名称(name)</td><td>数目(number)</td><td>单价(price)</td><td>单项总价(Single item total price)</td></tr>";
+                    var trs = "<tr><td>名称(name)</td><td>数目(number)</td></tr>";
                     $.each(data, function (index, item) {
                         if (isNullOrEmpty(item.name)) {
                             item.name = ""
@@ -207,7 +209,7 @@
                             item.tname = ""
                         }
 
-                        trs += "<tr><td><p> " + item.name + "(" + item.tname + ")" + "</p></td><td ><p> " + item.num + "</p></td><td ><p>" + item.price + "</p></td><td ><p> " + item.totalPrice + "</p></td></tr >";
+                        trs += "<tr><td><p> " + item.name + "(" + item.tname + ")" + "</p></td><td ><p> " + item.num + "</p></td></tr >";
                     });
                     $("#project").append(trs);
                 } else {
@@ -227,62 +229,62 @@
             {"number": number},
             function (data) {
                 console.log(data)
-               /* if (data.thiscondition == null) {
-                    data.thiscondition=""
-                }*/
-                if (data.hiscondition != null) {
+                /* if (data.thiscondition == null) {
+                     data.thiscondition=""
+                 }*/
+                if (data.hiscondition != null && data.hiscondition != "" && data.hiscondition != undefined) {
                     $("#hiscondition").html(data.hiscondition);
                 }
                 /*if (data.tnowCondition == null) {
                     data.tnowCondition=""
                 }*/
-                if (data.nowCondition != null) {
+                if (data.nowCondition != null && data.nowCondition != "" && data.nowCondition != undefined) {
 
                     $("#nowCondition").html(data.nowCondition);
                 }
-               /* if (data.tchiefcomplaint ==null) {
-                    data.tchiefcomplaint=""
-                }*/
-                if (data.chiefcomplaint != null) {
-                    $("#chiefcomplaint").html(data.chiefcomplaint );
+                /* if (data.tchiefcomplaint ==null) {
+                     data.tchiefcomplaint=""
+                 }*/
+                if (data.chiefcomplaint != null && data.chiefcomplaint != "" && data.chiefcomplaint != undefined) {
+                    $("#chiefcomplaint").html(data.chiefcomplaint);
                 }
-               /* if (data.tpersonalHistory == null) {
-                    data.tpersonalHistory=""
-                }*/
-                if (data.personalHistory != null) {
-                    $("#personalHistory").html(data.personalHistory );
+                /* if (data.tpersonalHistory == null) {
+                     data.tpersonalHistory=""
+                 }*/
+                if (data.personalHistory != null && data.personalHistory != "" && data.personalHistory != undefined) {
+                    $("#personalHistory").html(data.personalHistory);
                 }
-               /* if (data.tallergies == null) {
-                    data.tallergies=""
-                }*/
-                if (data.allergies != null) {
+                /* if (data.tallergies == null) {
+                     data.tallergies=""
+                 }*/
+                if (data.allergies != null && data.allergies != "" && data.allergies != undefined) {
 
                     $("#allergies").html(data.allergies);
                 }
-               /* if (data.tfamilyHistory ==null) {
-                    data.tfamilyHistory=""
-                }*/
-                if (data.familyHistory != null) {
+                /* if (data.tfamilyHistory ==null) {
+                     data.tfamilyHistory=""
+                 }*/
+                if (data.familyHistory != null && data.familyHistory != "" && data.familyHistory != undefined) {
 
-                    $("#familyHistory").html(data.familyHistory );
+                    $("#familyHistory").html(data.familyHistory);
                 }
-                if (data.tother ==null) {
-                    data.tother=""
-                }
-                if (data.other != null) {
+                /*   if (data.tother ==null  &&data.tother!=""&&data.tother!=undefined) {
+                       data.tother=""
+                   }*/
+                if (data.other != null && data.other != "" && data.other != undefined) {
 
-                    $("#other").html(data.other );
+                    $("#other").html(data.other);
                 }
-                if (data.bloodPressure != null) {
+                if (data.bloodPressure != null && data.bloodPressure != "" && data.bloodPressure != undefined) {
                     $("#bloodPressure").html(data.bloodPressure + " mmhg");
                 }
-                if (data.bodyTemperature != null) {
+                if (data.bodyTemperature != null && data.bodyTemperature != "" && data.bodyTemperature != undefined) {
                     $("#bodyTemperature").html(data.bodyTemperature + " ℃");
                 }
-                if (data.bodyWeight != null) {
+                if (data.bodyWeight != null && data.bodyWeight != "" && data.bodyWeight != undefined) {
                     $("#bodyWeight").html(data.bodyWeight + " KG");
                 }
-                if (data.heartRate != null) {
+                if (data.heartRate != null && data.heartRate != "" && data.heartRate != undefined) {
                     $("#heartRate").html(data.heartRate + " bmp");
                 }
             },

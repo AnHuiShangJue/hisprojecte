@@ -165,6 +165,7 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
     @Transactional(readOnly = true)
     public List<HisTollDetails> listByNumber(String number) throws Exception {
         List<HisTollDetails> hisTollDetails = hisTollDetailsMapper.listByNumber(number);//所有收费明细
+        BigDecimal drugFee = new BigDecimal("0");//药品费用
         if (EmptyUtil.Companion.isNullOrEmpty(hisTollDetails)) {//没有收费明细
             HisTollDetails priceByNumber = hisTollDetailsMapper.getPriceByNumber(number);
             hisTollDetails.add(priceByNumber);
@@ -173,6 +174,7 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
         for (HisTollDetails h : hisTollDetails) {
             Translate translate = new Translate();//翻译
             if (h.getType() == 1 || h.getType() == 4) {//药品
+                drugFee = h.getMoneys().add(drugFee);
                 HisMedicineInfo hisMedicineInfo = hisMedicineInfoService.selectById(h.getId().longValue());
                 h.setDrugsSpec(hisMedicineInfo.getDrugsSpec());
                 translate.setTranslateId(h.getId().longValue());
@@ -204,6 +206,7 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
                 }
             }
         }
+        hisTollDetails.get(0).setDrugFee(drugFee);
         return hisTollDetails;
     }
 
@@ -334,20 +337,21 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
         hs.setObserveFee(new BigDecimal(0));
         List<HisTollDetails> hisTollDetails = hisTollDetailsMapper.printShowThere(number);
         if (hisTollDetails.size()==0) {
-            return new HisTollDetails();
+            return hs;
         } else {
             for (HisTollDetails hisTollDetail : hisTollDetails) {
                 if (hisTollDetail.getType() == 12) {//护理
                     hs.setNursingFee(hs.getNursingFee().add(hisTollDetail.getPrice()));
                 }
                 if (hisTollDetail.getType() == 13) {//观察
-                    hs.setObserveFee(hs.getNursingFee().add(hisTollDetail.getPrice()));
+                    hs.setObserveFee(hs.getObserveFee().add(hisTollDetail.getPrice()));
                 }
                 if (hisTollDetail.getType() == 14) {//检查
-                    hs.setExaminationFee(hs.getNursingFee().add(hisTollDetail.getPrice()));
+                    hs.setExaminationFee(hs.getExaminationFee().add(hisTollDetail.getPrice()));
                 }
             }
         }
+        hs.toString();
         return hs;
     }
 }

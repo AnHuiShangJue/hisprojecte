@@ -215,16 +215,12 @@ Scripts
             CTX + "/api/hisTollDetails/printShow/index.ahsj",
             {"number": number},
             function (data) {
-                var totalPrices;
-                var recoverTheFee;
-                var money;
                 var jsons = data[0];
                 $("#createName").html(jsons.createName);
                 $("#totalPrices").html(jsons.totalPrices.toFixed(2));
-                $("#createDate").html(jsons.createDate);
+                //$("#createDate").html(jsons.createDate);
                 $("#recoverTheFee").html(jsons.recoverTheFee.toFixed(2));
                 $("#money").html(jsons.money);
-
                 $("#drugFee").html(jsons.drugFee);
                 $("#depositRecharge").html((jsons.totalPrices - jsons.money).toFixed(2));
                 if (!isNullOrEmpty(jsons)) {//有
@@ -277,8 +273,6 @@ Scripts
                 $("#update_date").html(data.updateDate);
                 $("#phonenumber").html(data.phonenumber);
 
-
-
             },
             function () {
                 M.toast({html: "网络异常"});
@@ -294,7 +288,7 @@ Scripts
             function (data) {
                 $("#nursingFee").html(data.nursingFee);
                 $("#examinationFee").html(data.examinationFee);
-                $("#ObserveFee").html(data.ObserveFee);
+                $("#ObserveFee").html(data.observeFee);
                 //$("#department").html(data.departmentIdName);
             },
             function () {
