@@ -363,11 +363,11 @@
   </update>
 
   <!--批量插入-->
-  <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">
-    <selectKey resultType="long" keyProperty="id" order="AFTER">
-      SELECT
-      LAST_INSERT_ID()
-    </selectKey>
+  <!--<selectKey resultType="long" keyProperty="id" order="AFTER">
+    SELECT
+    LAST_INSERT_ID()
+  </selectKey>-->
+  <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List" keyProperty="id">
     insert into his_infusion (id, record_id, hosptalregist_number, start_time, patient_id, usages, intervals, speed,
     duration, drugs_numb, drugname, single_dose, single_unit, is_skin_test, dosage, unit,
     price, create_user_id, create_date, update_user_id, update_date, remarks, number,

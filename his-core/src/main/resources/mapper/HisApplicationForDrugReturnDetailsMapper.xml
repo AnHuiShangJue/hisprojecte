@@ -294,11 +294,11 @@ where a.voucher=#{voucher,jdbcType=VARCHAR}
               BEFORE 表示 SELECT LAST_INSERT_ID() 在insert执行之前执行，这样的话就拿不到主键了，
                     这种适合那种主键不是自增的类型
         resultType 主键类型 -->
-  <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">
-    <selectKey resultType="long" keyProperty="id" order="AFTER">
-      SELECT
-      LAST_INSERT_ID()
-    </selectKey>
+ <!-- <selectKey resultType="long" keyProperty="id" order="AFTER">
+    SELECT
+    LAST_INSERT_ID()
+  </selectKey>-->
+  <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List" keyProperty="id">
 
     insert into his_application_for_drug_return_details(id, drugs_numb, drugs_name, drugs_spec, validity_period, placeOrigin, return_count,
     remarks, voucher, create_date, update_date, create_user_id, update_user_id,measures,medication_detail_id,price,total_price,related_id)

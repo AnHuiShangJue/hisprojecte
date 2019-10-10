@@ -357,11 +357,11 @@
     </select>
 
 
-    <insert id="saveForHospi" useGeneratedKeys="true" parameterType="java.util.List">
-        <selectKey resultType="long" keyProperty="id" order="AFTER">
-            SELECT
-            LAST_INSERT_ID()
-        </selectKey>
+    <!--<selectKey resultType="long" keyProperty="id" order="AFTER">
+        SELECT
+        LAST_INSERT_ID()
+    </selectKey>-->
+    <insert id="saveForHospi" useGeneratedKeys="true" parameterType="java.util.List" keyProperty="id">
 
         insert into his_toll_details (id, create_user_id, create_date, update_user_id, update_date, toll_record_id,
         name,

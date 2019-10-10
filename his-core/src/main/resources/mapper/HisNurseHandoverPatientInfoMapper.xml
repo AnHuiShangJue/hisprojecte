@@ -198,11 +198,11 @@
   </update>
 
   <!--批量插入-->
-  <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">
-    <selectKey resultType="long" keyProperty="id" order="AFTER">
-      SELECT
-      LAST_INSERT_ID()
-    </selectKey>
+<!--  <selectKey resultType="long" keyProperty="id" order="AFTER">
+    SELECT
+    LAST_INSERT_ID()
+  </selectKey>-->
+  <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List" keyProperty="id">
     insert into his_nurse_handover_patient_info (id, handover_id, type,
     patient_id, name, sex,
     bed, hospitalmanage, diagnosis,

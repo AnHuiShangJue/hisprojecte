@@ -212,11 +212,11 @@
 
 
   <!--批量插入list-->
+ <!-- <selectKey resultType="long" keyProperty="id" order="AFTER">
+    SELECT
+    LAST_INSERT_ID()
+  </selectKey>-->
   <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List" keyProperty="id" >
-    <selectKey resultType="long" keyProperty="id" order="AFTER">
-      SELECT
-      LAST_INSERT_ID()
-    </selectKey>
     insert into his_consumables_buyplan_details (id, consumables_id, enter_count_plan,
     create_user_id, create_date, update_user_id,
     update_date, name, spec,
