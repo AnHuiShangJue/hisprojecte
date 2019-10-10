@@ -162,11 +162,11 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">
-    <selectKey resultType="long" keyProperty="id" order="AFTER">
-      SELECT
-      LAST_INSERT_ID()
-    </selectKey>
+ <!-- <selectKey resultType="long" keyProperty="id" order="AFTER">
+    SELECT
+    LAST_INSERT_ID()
+  </selectKey>-->
+  <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List" keyProperty="id">
 
     insert into his_related_medicationandexit(id, medication_detail_id, exit_id, count, create_user_id, create_date, update_user_id,
     update_date, drugs_numb, validity_period,price)

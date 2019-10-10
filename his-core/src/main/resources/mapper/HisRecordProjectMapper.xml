@@ -287,11 +287,11 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
     <!-- 自定义sql-->
-    <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">
-        <selectKey resultType="long" keyProperty="id" order="AFTER">
-            SELECT
-            LAST_INSERT_ID()
-        </selectKey>
+    <!--<selectKey resultType="long" keyProperty="id" order="AFTER">
+        SELECT
+        LAST_INSERT_ID()
+    </selectKey>-->
+    <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List" keyProperty="id">
 
         insert into his_record_project( id, record_id, create_date, create_user_id, update_date, update_user_id, name,
         description,
@@ -319,7 +319,7 @@
     </select>
 
     <select id="selectByRecordIdNotIsCheckdOrIsPayed" parameterType="java.lang.Long" resultMap="BaseResultMap">
-        select *
+        select <include refid="Base_Column_List"/>
         from
             his_record_project
         where his_record_project.record_id = #{id,jdbcType=BIGINT} and his_record_project.is_payed = 2 and his_record_project.is_checked = 2;

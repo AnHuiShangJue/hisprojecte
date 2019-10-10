@@ -55,10 +55,10 @@
                                         <a id="createBtn" class="btn waves-effect waves-light red"><i
                                                 class="material-icons  white-text tooltipped " data-position="bottom"
                                                 data-delay="50" data-tooltip="新增">add</i></a>
-                                        <a id="deleteManyBtn"
+                                      <!--  <a id="deleteManyBtn"
                                            class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
                                                 class="material-icons white-text tooltipped" data-position="bottom"
-                                                data-delay="50" data-tooltip="批量删除">delete</i></a>
+                                                data-delay="50" data-tooltip="批量删除">delete</i></a>-->
                                     </div>
                                 </div>
                                 <!--Form Advance-->
@@ -262,8 +262,8 @@
                             rtnBtn = rtnBtn +
                                 "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看医嘱详细信息\" onclick='medicalOrderDetail(\"" + row.number + "\","+row.type+");'><i class='material-icons'>visibility</i></a>"+
                                 "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"打印（Print）\" onclick='print(\"" + row.number + "\");'> <i class='material-icons'>print</i></a>"+
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='editMedicalOrder(" + row.id + ");'> <i class='material-icons'>edit</i></a>" +
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick='deleteInitForMedicalOrder(" + row.id + ");'> <i class='material-icons'>delete</i></a>";
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='editMedicalOrder(" + row.id + ");'> <i class='material-icons'>edit</i></a>" ;
+                                // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick='deleteInitForMedicalOrder(" + row.id + ");'> <i class='material-icons'>delete</i></a>";
 
                             return rtnBtn;
                             // 返回自定义内容

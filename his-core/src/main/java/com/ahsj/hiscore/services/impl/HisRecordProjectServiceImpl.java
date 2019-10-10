@@ -186,6 +186,7 @@ public class HisRecordProjectServiceImpl implements HisRecordProjectService {
      * @Time 10:00
      **/
     @Override
+    @Transactional(readOnly = true)
     public List<HisRecordProject> selectByMedicalRecordIdNotIsCheckedOrIspayed(Long id) {
         return CodeHelper.getInstance().setCodeValue(hisRecordProjectMapper.selectByRecordIdNotIsCheckdOrIsPayed(id));
     }
