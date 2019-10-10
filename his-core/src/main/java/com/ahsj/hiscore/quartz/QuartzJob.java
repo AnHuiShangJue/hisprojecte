@@ -1,6 +1,7 @@
 package com.ahsj.hiscore.quartz;
 
 import com.ahsj.hiscore.entity.HisMedicalOrderDetail;
+import com.ahsj.hiscore.feign.ISecurityService;
 import com.ahsj.hiscore.services.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +38,12 @@ public class QuartzJob {
 
     @Autowired
     HisMedicalOrderDetailService hisMedicalOrderDetailService;
+
+    @Autowired
+    SystemShutdownService systemShutdownService;
+
+    @Autowired
+    ISecurityService iSecurityService;
 
     /**
      * @return void
@@ -138,6 +145,24 @@ public class QuartzJob {
         logger.info("-------------------扫描在住院病人长期医嘱详细药品与项目信息，生成收费明细-----------------------");
         hisMedicalOrderDetailService.createChargeDetailsForMedicalOrder();
         logger.info("-------------------扫描结束-----------------------");
+    }
+
+
+    /**
+     *@Description 定时关闭
+     *@Params []
+     *@return void
+     *@Author zhushixiang
+     *@Date 2019-10-10
+     *@Time 9:24
+    **/
+    //每月1号凌晨2:00自动关闭
+    @Scheduled(cron = "0 0 2 1 * *")
+//    @Scheduled(cron = "30 * * * * ?")
+    public void TimedOff()throws Exception {
+        logger.info("-------------------定时关闭启动-----------------------");
+        iSecurityService.systemShutdownService();
+        logger.info("-------------------关闭完成-----------------------");
     }
 }
 
