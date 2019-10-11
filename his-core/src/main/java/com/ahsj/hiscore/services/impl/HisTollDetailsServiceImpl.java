@@ -201,8 +201,17 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
             }
             if (h.getType() == 3) {//住院费用
                 if (!EmptyUtil.Companion.isNullOrEmpty(h.getName())) {
-                    h.setTranName("Hospital bed number" + h.getName());
-                    h.setName("住院" + h.getName() + "号病床费用");
+                    if(h.getName().contains(",")){
+                    String[] split = h.getName().trim().split(",");
+                    String wardNumber = split[0];
+                    String bedNumber = split[1];
+                    h.setTranName("Charge for ward " + wardNumber + " bed " + bedNumber);
+                    h.setName("住院" + wardNumber + "号病房" + bedNumber + "号病床费用");
+                }
+                else{
+                        h.setTranName("Hospital bed number" + h.getName());
+                        h.setName("住院" + h.getName() + "号病床费用");
+                    }
                 }
             }
         }
@@ -301,8 +310,17 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
                 }
                 if (h.getType() == 3) {//住院费用
                     if (!EmptyUtil.Companion.isNullOrEmpty(h.getName())) {
-                        h.setTranName("Hospital bed number" + h.getName());
-                        h.setName("住院" + h.getName() + "号病床费用");
+                        if(h.getName().contains(",")){
+                            String[] split = h.getName().trim().split(",");
+                            String wardNumber = split[0];
+                            String bedNumber = split[1];
+                            h.setTranName("Charge for ward " + wardNumber + " bed " + bedNumber);
+                            h.setName("住院" + wardNumber + "号病房" + bedNumber + "号病床费用");
+                        }
+                        else{
+                            h.setTranName("Hospital bed number" + h.getName());
+                            h.setName("住院" + h.getName() + "号病床费用");
+                        }
                     }
                 }
             }
@@ -336,7 +354,7 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
         hs.setExaminationFee(new BigDecimal(0));
         hs.setObserveFee(new BigDecimal(0));
         List<HisTollDetails> hisTollDetails = hisTollDetailsMapper.printShowThere(number);
-        if (hisTollDetails.size()==0) {
+        if (hisTollDetails.size() == 0) {
             return hs;
         } else {
             for (HisTollDetails hisTollDetail : hisTollDetails) {
