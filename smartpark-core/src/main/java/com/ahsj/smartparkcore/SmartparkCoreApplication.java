@@ -1,14 +1,18 @@
 package com.ahsj.smartparkcore;
 
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @SpringCloudApplication
 @EnableDiscoveryClient
@@ -20,10 +24,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableFeignClients(value = "com.ahsj.smartparkcore.feign")
 //开启任务处理
 @EnableScheduling
+@RefreshScope
 public class SmartparkCoreApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SmartparkCoreApplication.class, args);
     }
+
+
 
 }

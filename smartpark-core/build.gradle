@@ -53,8 +53,23 @@ dependencies {
     // https://mvnrepository.com/artifact/io.github.openfeign/feign-httpclient
     compile group: 'io.github.openfeign', name: 'feign-httpclient', version: '9.5.1'
 
- /*   // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-amqp
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-amqp', version: '2.0.4.RELEASE'*/
+    
+    
+    
+  // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-amqp
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-amqp', version: '2.0.4.RELEASE'
+
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-config
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-config', version: '2.0.4.RELEASE'
+
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-bus-amqp
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-bus-amqp', version: '2.1.0.RELEASE'
+
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.0.4.RELEASE'
+
+
+
 
 
 /*    // https://mvnrepository.com/artifact/cn.afterturn/easypoi-base
