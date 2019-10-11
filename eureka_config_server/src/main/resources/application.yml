@@ -28,7 +28,7 @@ spring:
       enabled: true
       server:
         git:
-          uri: https://github.com/AnHuiShangJue/config-server-git  # 配置git仓库地址
+          uri: https://github.com/AnHuiShangJue/config-server-git.git  # 配置git仓库地址
           username: AnHuiShangJue
           password: shangjue0603
           search-paths: config # 配置仓库路径
