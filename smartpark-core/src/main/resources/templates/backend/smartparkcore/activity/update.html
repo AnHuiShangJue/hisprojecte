@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+<!-- Form with validation -->
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy" style="height: 600px">
+            <div class="card-content">
+                <h4 class="card-title">病人信息详情</h4><label style="color:black">Patient information details
+            </label>
+                <form class="col s12" id="sendForm" action="#">
+                    <input type="hidden" id="id" name="id" th:value="${hisPatientInfo.id}" th:readonly="${isView}">
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="name" name="name" type="text" th:value="${hisPatientInfo.name}" th:readonly="${isView}"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label for="name">姓 名<span style="font-size: 12px">(name
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="location" name="location" type="text" th:value="${hisPatientInfo.location}" th:readonly="${isView}"/>
+                            <label for="location">地 址<span style="font-size: 12px">(address)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="age" name="age" type="number" th:value="${hisPatientInfo.age}" th:readonly="${isView}"
+                                   data-error=".errorTxt4">
+                            <div class="errorTxt4"></div>
+                            <label for="age">年龄<span style="font-size: 12px">(age)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="phonenumber" name="phonenumber" type="text" th:readonly="${isView}"
+                                   th:value="${hisPatientInfo.phonenumber}"
+                                   data-error=".errorTxt2">
+                            <div class="errorTxt2"></div>
+                            <label for="phonenumber">手机号<span style="font-size: 12px">(Phone Number
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="id_card" name="idcard" type="text" th:value="${hisPatientInfo.idcard}" th:readonly="${isView}"
+                                   data-error=".errorTxt3">
+                            <div class="errorTxt3"></div>
+                            <label for="id_card">身份证号<span style="font-size: 12px">(id card)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="height" name="height" type="number" th:value="${hisPatientInfo.height}" th:readonly="${isView}"/>
+                            <label for="height">身 高<span style="font-size: 12px">(height)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="weight" name="weight" type="number" th:value="${hisPatientInfo.weight}" th:readonly="${isView}"/>
+                            <label for="weight">体 重<span style="font-size: 12px">(weight
+)</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s4 l4 xl4">
+                            <select ahsj:select name="isMarried" id="isMarried" type="code" typeKey="is_married"
+                                    th:value="${hisPatientInfo.isMarried}">
+                            </select>
+                            <label for="isMarried">婚姻状况<span style="font-size: 12px">(marital status
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <select ahsj:select name="sex" id="sex" type="code" typeKey="sex"
+                                    th:value="${hisPatientInfo.sex}">
+                            </select>
+                            <!--<input id="sex" name="sex" type="text" th:value="${userInfo.sex}" data-error=".errorTxt6">-->
+                            <!--<div class="errorTxt6"></div>-->
+                            <label for="sex">性 别<span style="font-size: 12px">(sex
+)</span></label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button id="send_btn" class="btn cyan waves-effect waves-light right" type="submit" th:style="${isBtnView}"
+                                    name="action">提 交（submit ）
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ================================================
+Scripts
+================================================ -->
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+
+
+    $(function () {
+        formCheck();
+
+    });
+
+    function formCheck() {
+        $("#sendForm").validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 1
+                },
+                phonenumber: {
+                    required: true,
+                    minlength: 1
+                },
+                idcard: {
+                    required: true,
+                    minlength: 1
+                },
+                age: {
+                    required: true,
+                    minlength: 1
+                },
+
+
+            },
+            messages: {
+                name: {
+                    required: "请输入名称",
+                    minlength: "最少包含1个字符"
+                },
+                phonenumber: {
+                    required: "请输入手机号",
+                    minlength: "最少输入1个字符"
+                },
+                idcard: {
+                    required: "请输入身份证号码",
+                    minlength: "最少输入1个字符"
+                },
+                age: {
+                    required: "请输入病人年龄",
+                    minlength: "最少输入1个字符"
+                }
+
+            },
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+                dialog.confirm('确定提交吗?', function (index, layero){
+                    var queryString = $('#sendForm').serialize();
+                    console.log("queryString is" + queryString);
+
+                    $.ahsjajax(
+                        CTX + "/api/patient/saveOrUpdate.ahsj?token=" + TOKEN,
+                        queryString,
+                        function (msg) {
+                            if (msg.success) {
+                                M.toast({html: msg.message});
+                                parent.grid.search();
+                                dialog.parentclose();
+                                return false;
+                            } else {
+                                M.toast({html: msg.message});
+                                return false;
+                            }
+                        },
+                        function () {
+                            M.toast({html: "网络异常"});
+                            return false;
+                        }
+                    );});
+            }
+
+        });
+    }
+
+
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</body>
+
+</html>

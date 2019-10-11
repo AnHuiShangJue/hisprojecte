@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import utils.EmptyUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -107,5 +108,39 @@ public class ActivityInfoController extends BaseController {
             }
         }
         return activityInfoService.delete(ids);
+    }
+
+
+    /**
+     * @Description list M&V
+     * @Author  muxu
+     * @Date  2019/10/11
+     * @Time 10:16
+     * @Return
+     * @Params
+    **/
+    @RequestMapping("/list/index.ahsj")
+    ModelAndView listIndex(String token) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/activity/list");
+        modelAndView.addObject("title", "智慧园区系统");
+        modelAndView.addObject("token", token);
+        return modelAndView;
+    }
+
+
+    /**
+     * @Description saveOrUpdate M&V
+     * @Author  muxu
+     * @Date  2019/10/11
+     * @Time 10:19
+     * @Return org.springframework.web.servlet.ModelAndView
+     * @Params [token]
+    **/
+    @RequestMapping("/update/index.ahsj")
+    ModelAndView saveOrUpdate(String token) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/activity/update");
+        modelAndView.addObject("title", "智慧园区系统");
+        modelAndView.addObject("token", token);
+        return modelAndView;
     }
 }
