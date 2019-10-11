@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ahsj.smartparkcore.dao.EnterpriseInfoMapper" >
-  <resultMap id="BaseResultMap" type="com.ahsj.smartparkcore.entity.EnterpriseInfo" >
+  <resultMap id="BaseResultMap" type="com.ahsj.smartparkcore.entity.po.EnterpriseInfo" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="unified_social_credit_code" property="unifiedSocialCreditCode" jdbcType="VARCHAR" />
@@ -36,7 +36,7 @@
     delete from enterprise_info
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.ahsj.smartparkcore.entity.EnterpriseInfo" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insert" parameterType="com.ahsj.smartparkcore.entity.po.EnterpriseInfo" useGeneratedKeys="true" keyProperty="id">
     insert into enterprise_info (id, name, unified_social_credit_code, 
       scale, englise_name, legal_name, 
       identification_number, phone_number, description, 
@@ -52,7 +52,7 @@
       #{createUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=DATE}, #{updateUserId,jdbcType=BIGINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ahsj.smartparkcore.entity.EnterpriseInfo" >
+  <insert id="insertSelective" parameterType="com.ahsj.smartparkcore.entity.po.EnterpriseInfo" >
     insert into enterprise_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -167,7 +167,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.smartparkcore.entity.EnterpriseInfo" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.smartparkcore.entity.po.EnterpriseInfo" >
     update enterprise_info
     <set >
       <if test="name != null" >
@@ -224,7 +224,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ahsj.smartparkcore.entity.EnterpriseInfo" >
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.smartparkcore.entity.po.EnterpriseInfo" >
     update enterprise_info
     set name = #{name,jdbcType=VARCHAR},
       unified_social_credit_code = #{unifiedSocialCreditCode,jdbcType=VARCHAR},
@@ -247,7 +247,7 @@
   </update>
 
   <!--自定义SQL-->
-  <select id="queryEnterpriseInfo" parameterType="com.ahsj.smartparkcore.entity.EnterpriseInfo" resultMap="BaseResultMap">
+  <select id="queryEnterpriseInfo" parameterType="com.ahsj.smartparkcore.entity.po.EnterpriseInfo" resultMap="BaseResultMap">
     SELECT  <include refid="Base_Column_List"/> from enterprise_info where 1=1
     <if test="name != null  and name !='' " >
       and name = #{name,jdbcType=VARCHAR}
@@ -259,7 +259,7 @@
 
   <select id="queryList" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
     select <include refid="Base_Column_List"/>
-    from  from enterprise_info e where 1=1
+      from enterprise_info e where 1=1
     <if test="parameter.name != null and parameter.name != ''">
       and e.name like concat('%', #{parameter.name,jdbcType=INTEGER},'%')
     </if>

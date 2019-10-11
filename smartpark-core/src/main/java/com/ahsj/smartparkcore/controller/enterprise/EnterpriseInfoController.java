@@ -2,17 +2,24 @@ package com.ahsj.smartparkcore.controller.enterprise;
 
 import com.ahsj.smartparkcore.common.utils.FileOperateUtil;
 import com.ahsj.smartparkcore.common.utils.ZipUtils;
-import com.ahsj.smartparkcore.dao.EnterpriseInfoMapper;
-import com.ahsj.smartparkcore.entity.EnterpriseInfo;
+import com.ahsj.smartparkcore.core.ResultModel;
+import com.ahsj.smartparkcore.core.ResultStatus;
+import com.ahsj.smartparkcore.entity.dto.EnterpriseInfoDTO;
+import com.ahsj.smartparkcore.entity.po.ActivityInfo;
+import com.ahsj.smartparkcore.entity.po.EnterpriseInfo;
 import com.ahsj.smartparkcore.entity.sys.SysAttachmentInfo;
+import com.ahsj.smartparkcore.entity.vo.EnterpriseInfoVO;
 import com.ahsj.smartparkcore.feign.IOrganizationService;
 import com.ahsj.smartparkcore.services.EnterpriseInfoService;
 import com.ahsj.smartparkcore.services.SysAttachmentInfoService;
 import core.controller.BaseController;
 import core.entity.PageBean;
 import core.message.Message;
+import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -57,21 +64,44 @@ public class EnterpriseInfoController extends BaseController {
 
     /**
      * @return core.message.Message
-     * @功能说明 新增 and 修改 企业信息
+     * @功能说明 新增  企业信息
      * @Params [enterpriseInfo]
      * @Author XJP
      * @Date 2019/9/2
      * @Time 15:52
      **/
-    @PostMapping("/addOrupdateEnterpriseInfo.ahsj")
-    public Message addOrUpdateEnterpriseInfo(EnterpriseInfo enterpriseInfo,@RequestParam(value = "file") MultipartFile[] file, String relateKet, String relatePage) throws Exception {
-        return enterpriseInfoService.addOrUpdateEnterpriseInfo(enterpriseInfo,file,relateKet,relatePage);
+    @PostMapping("/addEnterpriseInfo.ahsj")
+    public ResponseEntity<Message> addEnterpriseInfo(EnterpriseInfoDTO enterpriseInfoDTO, @RequestParam(value = "file") MultipartFile[] file, String relateKet, String relatePage) throws Exception {
+        Message message = enterpriseInfoService.addEnterpriseInfo(enterpriseInfoDTO, file, relateKet, relatePage);
+        return new ResponseEntity<>((message), HttpStatus.OK);
     }
 
+    /**
+     * @return core.message.Message
+     * @功能说明 修改 企业信息
+     * @Params [enterpriseInfo]
+     * @Author XJP
+     * @Date 2019/9/2
+     * @Time 15:52
+     **/
+    @PostMapping("/updateEnterpriseInfo.ahsj")
+    public ResponseEntity<Message> updateEnterpriseInfo(EnterpriseInfoDTO enterpriseInfoDTO, @RequestParam(value = "file") MultipartFile[] file, String relateKet, String relatePage) throws Exception {
+        Message message = enterpriseInfoService.updateEnterpriseInfo(enterpriseInfoDTO, file, relateKet, relatePage);
+        return new ResponseEntity<>((message), HttpStatus.OK);
+    }
 
+    /**
+     * @return org.springframework.web.servlet.ModelAndView
+     * @功能说明
+     * @Params []
+     * @Author XJP
+     * @Date 2019/10/11
+     * @Time 17:02
+     **/
     @GetMapping("/index.ahsj")
-    public ModelAndView index() throws Exception {
-        ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/enterprise/index");
+    public ModelAndView index(String token) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/enterprise/list");
+        modelAndView.addObject("token", token);
         return modelAndView;
     }
 
@@ -84,10 +114,13 @@ public class EnterpriseInfoController extends BaseController {
      * @Time 16:44
      **/
     @PostMapping("/list.ahsj")
-    public PageBean<EnterpriseInfo> queryList(EnterpriseInfo enterpriseInfo) {
+    public ResponseEntity<PageBean<EnterpriseInfo>> queryList(EnterpriseInfoDTO enterpriseInfoDTO) {
+        DozerBeanMapper mapper = new DozerBeanMapper();
+        EnterpriseInfo map = mapper.map(enterpriseInfoDTO, EnterpriseInfo.class);
         PageBean<EnterpriseInfo> pageBean = new PageBean<>();
-        pageBean.setParameter(enterpriseInfo);
-        return enterpriseInfoService.queryList(pageBean);
+        pageBean.setParameter(map);
+        return  ResponseEntity.ok(enterpriseInfoService.queryList(pageBean));
+
     }
 
     /**
@@ -100,10 +133,19 @@ public class EnterpriseInfoController extends BaseController {
      **/
     @PostMapping("/audit.ahsj")
     public Message auditEnterpriseInfo(EnterpriseInfo enterpriseInfo, @RequestParam("audit") String audit) {
-        return enterpriseInfoService.auditEnterpriseInfo(enterpriseInfo,audit);
+        return enterpriseInfoService.auditEnterpriseInfo(enterpriseInfo, audit);
     }
+
+
+   @PostMapping("/test.ahsj")
+    public ResponseEntity<EnterpriseInfo>  queryEnterpriseInfo(@RequestParam("id") Long id ) throws Exception {
+       EnterpriseInfo enterpriseInfo = enterpriseInfoService.selectByPrimaryKey(id);
+       return  ResponseEntity.ok(enterpriseInfo);
+   }
+
+
     @PostMapping("/uploadFile.ahsj")
-    public void uploadFile(@RequestParam("file") MultipartFile[] file, @RequestParam("relateKet")String relateKet,@RequestParam("relatePage") String relatePage,@RequestParam("relateId")Long relateId) {
+    public void uploadFile(@RequestParam("file") MultipartFile[] file, @RequestParam("relateKet") String relateKet, @RequestParam("relatePage") String relatePage, @RequestParam("relateId") Long relateId) {
         LocalDate now = LocalDate.now();
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyyMMdd");
         String dateDir = now.format(df);
@@ -156,7 +198,7 @@ public class EnterpriseInfoController extends BaseController {
 
                 list.add(sysAttachmentInfo);
                 //保存数据
-           }
+            }
             //  sysAttachmentInfoService.addSaveSysAttachmentInfo(sysAttachmentInfo);
             sysAttachmentInfoService.addSaveSysAttachmentInfoList(list);//调用addSaveSysAttachmentInfoList保存到数据库的方法
             // return MessageUtil.createMessage(true, "上传成功!");

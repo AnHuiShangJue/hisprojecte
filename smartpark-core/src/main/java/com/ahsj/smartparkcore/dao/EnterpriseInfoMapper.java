@@ -1,6 +1,7 @@
 package com.ahsj.smartparkcore.dao;
 
-import com.ahsj.smartparkcore.entity.EnterpriseInfo;
+import com.ahsj.smartparkcore.entity.po.EnterpriseInfo;
+import com.ahsj.smartparkcore.entity.vo.EnterpriseInfoVO;
 import core.entity.PageBean;
 import org.apache.ibatis.annotations.Mapper;
 

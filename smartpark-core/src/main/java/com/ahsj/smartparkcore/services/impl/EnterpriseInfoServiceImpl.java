@@ -5,9 +5,14 @@ import com.ahsj.smartparkcore.common.utils.FileOperateUtil;
 import com.ahsj.smartparkcore.common.utils.ZipUtils;
 import com.ahsj.smartparkcore.controller.BaseLoginUser;
 import com.ahsj.smartparkcore.core.CodeHelper;
+import com.ahsj.smartparkcore.core.ResultModel;
+import com.ahsj.smartparkcore.core.ResultStatus;
 import com.ahsj.smartparkcore.dao.EnterpriseInfoMapper;
-import com.ahsj.smartparkcore.entity.EnterpriseInfo;
+import com.ahsj.smartparkcore.entity.dto.EnterpriseInfoDTO;
+import com.ahsj.smartparkcore.entity.po.ActivityInfo;
+import com.ahsj.smartparkcore.entity.po.EnterpriseInfo;
 import com.ahsj.smartparkcore.entity.sys.SysAttachmentInfo;
+import com.ahsj.smartparkcore.entity.vo.EnterpriseInfoVO;
 import com.ahsj.smartparkcore.feign.IOrganizationService;
 import com.ahsj.smartparkcore.services.EnterpriseInfoService;
 import com.ahsj.smartparkcore.services.SysAttachmentInfoService;
@@ -15,10 +20,13 @@ import core.entity.PageBean;
 import core.message.Message;
 import core.message.MessageUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.dozer.DozerBeanMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -73,27 +81,70 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
      **/
     @Override
     @Transactional(readOnly = false)
-    public Message addOrUpdateEnterpriseInfo(EnterpriseInfo enterpriseInfo, MultipartFile[] file, String relateKet, String relatePage) throws Exception {
-        if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo)) {
+    public Message addEnterpriseInfo(EnterpriseInfoDTO enterpriseInfoDTO, MultipartFile[] file, String relateKet, String relatePage) throws Exception {
+        DozerBeanMapper mapper = new DozerBeanMapper();
+        //DTO转化为PO 存入数据库
+        EnterpriseInfo map = mapper.map(enterpriseInfoDTO, EnterpriseInfo.class);
+
+        if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO)) {
             return MessageUtil.createMessage(false, "企业信息新增失败 ！！！");
-        } else if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getId())) {
-            EnterpriseInfo info = enterpriseInfoMapper.queryEnterpriseInfo(enterpriseInfo);
+        } else if (EmptyUtil.Companion.isNullOrEmpty(map.getId())) {
+            EnterpriseInfo info = enterpriseInfoMapper.queryEnterpriseInfo(map);
             if (!EmptyUtil.Companion.isNullOrEmpty(info)) {
                 return MessageUtil.createMessage(false, "企业信息新增失败 ！ 该企业已存在 ！！");
             }
-            enterpriseInfo.setIsVerify(Constants.THREE);
-            enterpriseInfoMapper.insert(enterpriseInfo);
+            map.setIsVerify(Constants.THREE);
+            enterpriseInfoMapper.insert(map);
             //上传附件
-            uploadFile(file,relateKet,relatePage,enterpriseInfo.getId());
+            uploadFile(file,relateKet,relatePage,map.getId());
             return MessageUtil.createMessage(true, "企业信息新增成功 ！！！");
-        } else {
-            EnterpriseInfo info = enterpriseInfoMapper.queryEnterpriseInfo(enterpriseInfo);
+        } /*else {
+            EnterpriseInfo info = enterpriseInfoMapper.queryEnterpriseInfo(map);
             if (EmptyUtil.Companion.isNullOrEmpty(info)) {
-                enterpriseInfoMapper.updateByPrimaryKey(enterpriseInfo);
+                enterpriseInfoMapper.updateByPrimaryKey(map);
                 return MessageUtil.createMessage(true, "企业信息修改成功 ！！！");
-            } else if (StringUtils.equals(info.getName(), enterpriseInfo.getName())) {
-                if (info.getId().longValue() == enterpriseInfo.getId().longValue()) {
-                    enterpriseInfoMapper.updateByPrimaryKey(enterpriseInfo);
+            } else if (StringUtils.equals(info.getName(), map.getName())) {
+                if (info.getId().longValue() == map.getId().longValue()) {
+                    enterpriseInfoMapper.updateByPrimaryKey(map);
+                    return MessageUtil.createMessage(true, "企业信息修改成功 ！！！");
+                } else {
+                    return MessageUtil.createMessage(false, "企业信息修改失败 ！ 该企业已存在  ！！");
+                }
+            }
+            return MessageUtil.createMessage(false, "企业信息修改失败 ！ 该企业已存在  ！！");
+        }*/
+        return MessageUtil.createMessage(false, "企业信息新增失败 ！ ");
+    }
+
+    @Override
+    @Transactional(readOnly = false)
+    public Message updateEnterpriseInfo(EnterpriseInfoDTO enterpriseInfoDTO, MultipartFile[] file, String relateKet, String relatePage) throws Exception {
+
+        DozerBeanMapper mapper = new DozerBeanMapper();
+        //DTO转化为PO 存入数据库
+        EnterpriseInfo map = mapper.map(enterpriseInfoDTO, EnterpriseInfo.class);
+
+
+        if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO)) {
+            return MessageUtil.createMessage(false, "企业信息新增失败 ！！！");
+        }/* else if (EmptyUtil.Companion.isNullOrEmpty(map.getId())) {
+            EnterpriseInfo info = enterpriseInfoMapper.queryEnterpriseInfo(map);
+            if (!EmptyUtil.Companion.isNullOrEmpty(info)) {
+                return MessageUtil.createMessage(false, "企业信息新增失败 ！ 该企业已存在 ！！");
+            }
+            map.setIsVerify(Constants.THREE);
+            enterpriseInfoMapper.insert(map);
+            //上传附件
+            uploadFile(file,relateKet,relatePage,map.getId());
+            return MessageUtil.createMessage(true, "企业信息新增成功 ！！！");
+        }*/ else {
+            EnterpriseInfo info = enterpriseInfoMapper.queryEnterpriseInfo(map);
+            if (EmptyUtil.Companion.isNullOrEmpty(info)) {
+                enterpriseInfoMapper.updateByPrimaryKey(map);
+                return MessageUtil.createMessage(true, "企业信息修改成功 ！！！");
+            } else if (StringUtils.equals(info.getName(), map.getName())) {
+                if (info.getId().longValue() == map.getId().longValue()) {
+                    enterpriseInfoMapper.updateByPrimaryKey(map);
                     return MessageUtil.createMessage(true, "企业信息修改成功 ！！！");
                 } else {
                     return MessageUtil.createMessage(false, "企业信息修改失败 ！ 该企业已存在  ！！");
@@ -147,6 +198,12 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
             }
             return MessageUtil.createMessage(false, "企业信息审核失败 ！！！");
         }
+    }
+
+    @Override
+    @Transactional
+    public EnterpriseInfo selectByPrimaryKey(Long id) throws Exception {
+        return enterpriseInfoMapper.selectByPrimaryKey(id);
     }
 
 

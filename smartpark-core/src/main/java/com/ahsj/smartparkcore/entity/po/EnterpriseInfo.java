@@ -1,4 +1,4 @@
-package com.ahsj.smartparkcore.entity;
+package com.ahsj.smartparkcore.entity.po;
 
 import core.entity.BaseEntity;
 
@@ -29,10 +29,6 @@ public class EnterpriseInfo extends BaseEntity {
 
     private Integer isVerify;
 
-
-
-
-
     private BigDecimal registeredCapital;
 
     private Short unitNature;
@@ -42,7 +38,6 @@ public class EnterpriseInfo extends BaseEntity {
     private Date operatingPeriodEnd;
 
     private Date createDate;
-
 
     private Date updateDate;
 
