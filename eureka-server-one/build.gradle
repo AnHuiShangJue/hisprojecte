@@ -2,6 +2,9 @@
 dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-config-server
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-config-server', version: '2.0.4.RELEASE'
 }
 
 
