@@ -37,9 +37,9 @@ public class SiteServiceslmpl implements SiteServices {
      **/
     @Override
     @Transactional(readOnly = true)
-    public ResponseEntity<ResultModel> selectSite(PageBean<SiteDTO> pageBean) throws Exception {
+    public PageBean<SiteDTO> selectSite(PageBean<SiteDTO> pageBean) throws Exception {
         pageBean.setData(CodeHelper.getInstance().setCodeValue(siteMapper.selectSite(pageBean)));
-        return new ResponseEntity<>(new ResultModel(ResultStatus.SUCCESS_SELECT, pageBean), HttpStatus.OK);
+        return pageBean;
     }
 
     /**
@@ -56,10 +56,6 @@ public class SiteServiceslmpl implements SiteServices {
         DozerBeanMapper mapper = new DozerBeanMapper(); //对象转换组件
         Site site = mapper.map(siteDTO, Site.class);
         if (EmptyUtil.Companion.isNullOrEmpty(siteMapper.selectBySiteName(site.getSiteName()))) {
-            site.setIsEnable((short) 1);
-            site.setIsLease(2);
-            site.setIsVerify(2);
-            site.toString();
             siteMapper.insert(site);
             return new ResponseEntity<>(new ResultModel(ResultStatus.SUCCESS_INSERT), HttpStatus.OK);
         } else {
@@ -135,5 +131,19 @@ public class SiteServiceslmpl implements SiteServices {
             }
         }
         return new ResponseEntity<>(new ResultModel(ResultStatus.SUCCESS_DELETE), HttpStatus.OK);
+    }
+
+    /**
+     * @Description 根据id查询场地
+     * @Params: [id]
+     * @Author: dingli
+     * @Return: com.ahsj.smartparkcore.entity.dto.SiteDTO
+     * @Date 2019/10/12
+     * @Time 10:38
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public Site selectByPrimaryKey(Long id) throws Exception {
+        return siteMapper.selectByPrimaryKey(id);
     }
 }

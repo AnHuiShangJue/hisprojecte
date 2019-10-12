@@ -3,20 +3,21 @@ package com.ahsj.smartparkcore.controller.site;
 import com.ahsj.smartparkcore.core.ResultModel;
 import com.ahsj.smartparkcore.core.ResultStatus;
 import com.ahsj.smartparkcore.entity.dto.SiteDTO;
+import com.ahsj.smartparkcore.entity.po.EnterpriseInfo;
+import com.ahsj.smartparkcore.entity.site;
 import com.ahsj.smartparkcore.services.SiteServices;
 import core.controller.BaseController;
 import core.entity.PageBean;
+import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import utils.EmptyUtil;
 
 @RestController
-@RequestMapping("/api/Site")
+@RequestMapping("/api/site")
 public class SiteController extends BaseController {
 
     @Autowired
@@ -32,9 +33,10 @@ public class SiteController extends BaseController {
      **/
     @RequestMapping("/list.index.ahsj")
     @ResponseBody
-    public ResponseEntity<ResultModel> list(SiteDTO siteDTO, PageBean<SiteDTO> pageBean) throws Exception {
+    public ResponseEntity<PageBean<SiteDTO>> list(SiteDTO siteDTO, String token) throws Exception {
+        PageBean<SiteDTO> pageBean = new PageBean<>();
         pageBean.setParameter(siteDTO);
-        return siteServices.selectSite(pageBean);
+        return ResponseEntity.ok(siteServices.selectSite(pageBean));
     }
 
     /**
@@ -107,6 +109,56 @@ public class SiteController extends BaseController {
     public ResponseEntity<ResultModel> verification(SiteDTO siteDTO) throws Exception {
         return null;
     }
+
+    /**
+     * @Description 场地信息
+     * @Params: []
+     * @Author: dingli
+     * @Return: org.springframework.web.servlet.ModelAndView
+     * @Date 2019/10/11
+     * @Time 9:54
+     **/
+    @RequestMapping(value = "/list/index.ahsj")
+    ModelAndView list(String token) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/site/list");
+        modelAndView.addObject("title", "场地信息");
+        modelAndView.addObject("token", token);
+        return modelAndView;
+    }
+
+    /**
+     * @Description 添加场地信息
+     * @Params: [token]
+     * @Author: dingli
+     * @Return: org.springframework.web.servlet.ModelAndView
+     * @Date 2019/10/11
+     * @Time 17:57
+     **/
+    @RequestMapping(value = "/add/index.ahsj")
+    ModelAndView add(String token) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/site/add");
+        modelAndView.addObject("title", "新增场地信息");
+        modelAndView.addObject("token", token);
+        return modelAndView;
+    }
+
+    /**
+     * @Description 跳转修改场地页面
+     * @Params: [token, id]
+     * @Author: dingli
+     * @Return: org.springframework.web.servlet.ModelAndView
+     * @Date 2019/10/12
+     * @Time 10:35
+     **/
+    @RequestMapping(value = "/update/index.ahsj")
+    ModelAndView update(String token, Long id) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/site/update");
+        modelAndView.addObject("title", "修改场地信息");
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("siteDTO", siteServices.selectByPrimaryKey(id));
+        return modelAndView;
+    }
+
 }
 
 
