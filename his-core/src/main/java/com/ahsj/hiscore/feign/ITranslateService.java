@@ -25,7 +25,7 @@ import java.util.List;
  * @since 1.0.0
  */
 
-@FeignClient(name = "his-translate", fallbackFactory = ITranslateServiceFallnackFactotory.class, configuration = FeignConfiguration.class)
+@FeignClient(name = "eureka-zuul-inner", fallbackFactory = ITranslateServiceFallnackFactotory.class,path="histranslate/api/translate", configuration = FeignConfiguration.class)
 public interface ITranslateService {
 
 
@@ -37,7 +37,7 @@ public interface ITranslateService {
      * @Date 2019/7/24
      * @Time 16:09
      **/
-    @PostMapping("/api/translate/add.ahsj")
+    @PostMapping("/add.ahsj")
     @LoadBalanced
     void addTranslate(@RequestBody TranslateModel translateModel) throws Exception;
 
@@ -49,7 +49,7 @@ public interface ITranslateService {
      * @Date 2019/7/24
      * @Time 16:09
      **/
-    @PostMapping("/api/translate/query/translate.ahsj")
+    @PostMapping("/query/translate.ahsj")
     @LoadBalanced
     List<Translate> queryTranslate(@RequestBody Translate translate) throws Exception;
 
@@ -61,7 +61,7 @@ public interface ITranslateService {
      * @Date 2019/7/24
      * @Time 16:09
      **/
-    @PostMapping("/api/translate/query/All/translate.ahsj")
+    @PostMapping("/query/All/translate.ahsj")
     @LoadBalanced
     List<Translate> queryTranslateAll() throws Exception;
 
@@ -73,7 +73,7 @@ public interface ITranslateService {
      * @Date 2019/8/11
      * @Time 13:55
      **/
-    @PostMapping("/api/translate/query/translatess.ahsj")
+    @PostMapping("/query/translatess.ahsj")
     @LoadBalanced
     Translate queryTranslateClo(@RequestBody Translate translate) throws Exception;
 
