@@ -73,6 +73,9 @@ public class AccessFilter extends ZuulFilter {
         }else if(GetResource()){
             return null;
         }
+        else if(GetTraslate()){
+            return null;
+        }
         else if(HaveToken()){
             if(!EmptyUtil.Companion.isNullOrEmpty(queryString)){
                 String token = getToken(queryString);
@@ -143,6 +146,16 @@ public class AccessFilter extends ZuulFilter {
     private boolean GetResource(){
         if(requestURI!= null){
             if(  requestURI.contains("/accounts/assets")|| requestURI.contains("/hiscore/assets") ){
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    private boolean GetTraslate(){
+        if(requestURI!= null){
+            if(requestURI.contains("/histranslate")|| requestURI.contains("/histranslate") ){
                 return true;
             }
             return false;
