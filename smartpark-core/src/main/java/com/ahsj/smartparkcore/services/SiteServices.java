@@ -2,6 +2,7 @@ package com.ahsj.smartparkcore.services;
 
 import com.ahsj.smartparkcore.core.ResultModel;
 import com.ahsj.smartparkcore.entity.dto.SiteDTO;
+import com.ahsj.smartparkcore.entity.po.Site;
 import core.entity.PageBean;
 import org.springframework.http.ResponseEntity;
 
@@ -22,7 +23,7 @@ public interface SiteServices {
      * @Date 2019/9/5
      * @Time 9:26
      **/
-    ResponseEntity<ResultModel> selectSite(PageBean<SiteDTO> pageBean) throws Exception;
+    PageBean<SiteDTO> selectSite(PageBean<SiteDTO> pageBean) throws Exception;
 
     /**
      * @Description 新增场地
@@ -63,5 +64,15 @@ public interface SiteServices {
      * @Time 17:12
      **/
     ResponseEntity<ResultModel> delete(Long[] ids) throws Exception;
+
+    /**
+     * @Description 根据id查询场地
+     * @Params: [id]
+     * @Author: dingli
+     * @Return: com.ahsj.smartparkcore.entity.dto.SiteDTO
+     * @Date 2019/10/12
+     * @Time 10:37
+     **/
+    Site selectByPrimaryKey(Long id) throws Exception;
 
 }

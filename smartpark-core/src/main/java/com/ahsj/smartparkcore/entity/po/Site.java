@@ -1,5 +1,7 @@
 package com.ahsj.smartparkcore.entity.po;
 
+import core.code.CodeValueColumn;
+import core.code.Constants;
 import core.entity.BaseEntity;
 
 import java.math.BigDecimal;
@@ -23,17 +25,47 @@ public class Site extends BaseEntity {
 
     private String description;
 
-    private Short isEnable;
 
     private String capacity;
 
     private String environmentalLabel;
 
-    private Integer isLease;
-
-    private Integer isVerify;
 
     private Long enterpriseId;
+
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_verify", typeName = "verifyName")
+    private Integer isVerify;
+    private String verifyName;
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_lease", typeName = "leaseName")
+    private Integer isLease;
+    private String leaseName;
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_enable", typeName = "enableName")
+    private Short isEnable;
+    private String enableName;
+
+    public String getVerifyName() {
+        return verifyName;
+    }
+
+    public void setVerifyName(String verifyName) {
+        this.verifyName = verifyName;
+    }
+
+    public String getLeaseName() {
+        return leaseName;
+    }
+
+    public void setLeaseName(String leaseName) {
+        this.leaseName = leaseName;
+    }
+
+    public String getEnableName() {
+        return enableName;
+    }
+
+    public void setEnableName(String enableName) {
+        this.enableName = enableName;
+    }
 
     public Long getId() {
         return id;
