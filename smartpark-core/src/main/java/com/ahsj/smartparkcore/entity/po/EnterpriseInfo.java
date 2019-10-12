@@ -1,5 +1,7 @@
 package com.ahsj.smartparkcore.entity.po;
 
+import core.code.CodeValueColumn;
+import core.code.Constants;
 import core.entity.BaseEntity;
 
 import java.math.BigDecimal;
@@ -27,7 +29,9 @@ public class EnterpriseInfo extends BaseEntity {
 
     private String description;
 
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_verify", typeName = "isVerifyType")
     private Integer isVerify;
+    private String isVerifyType;
 
     private BigDecimal registeredCapital;
 
@@ -41,6 +45,13 @@ public class EnterpriseInfo extends BaseEntity {
 
     private Date updateDate;
 
+    public String getIsVerifyType() {
+        return isVerifyType;
+    }
+
+    public void setIsVerifyType(String isVerifyType) {
+        this.isVerifyType = isVerifyType;
+    }
 
     public Long getId() {
         return id;

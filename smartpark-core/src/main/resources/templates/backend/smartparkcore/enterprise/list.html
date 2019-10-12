@@ -48,18 +48,18 @@
                         <form id="searchForm" class="row" action="">
                             <div class="row">
 
-                               <!-- <div class="col input-field s4 m4 l4">
+                                <div class="col input-field s4 m4 l4">
                                     <input id="name" name="name" type="text"/>
-                                    <label for="name">项目名称<span style="font-size: 12px">(Project name)</span></label>
+                                    <label for="name">名称<span style="font-size: 12px"></span></label>
                                 </div>
 
                                 <div class="col input-field s4 m4 l4">
-                                    <input id="pinyinCode" name="pinyinCode" type="text"/>
-                                    <label for="pinyinCode">项目拼音码<span style="font-size: 12px">(Project phonetic code)</span></label>
+                                    <input id="legalName" name="legalName" type="text"/>
+                                    <label for="legalName">法人名称<span style="font-size: 12px"></span></label>
                                 </div>
 
 
-                                <div class="col input-field s4 m4 l4">
+                              <!--  <div class="col input-field s4 m4 l4">
                                     <input id="number" name="number" type="number"/>
                                     <label for="number">编号<span style="font-size: 12px">(Project number)</span></label>
                                 </div>-->
@@ -81,24 +81,24 @@
                             </div>
                             <div class="row">
                                 <div class="col s1">
-                                    <h6>启用</h6>
+                                    <h6>公司规模</h6>
                                 </div>
                                 <div class="col s1" style="padding-top:6px">
                                     <label>
-                                        <input id="enable" name="isEnable" type="radio" value="1" />
-                                        <span>启用</span>
+                                        <input id="enable" name="isEnable" type="radio" value="1"  checked/>
+                                        <span>大型</span>
                                     </label>
                                 </div>
                                 <div class="col s1" style="padding-top:6px">
                                     <label>
                                         <input id="unEnable" name="isEnable" type="radio" value="2"/>
-                                        <span>不启用</span>
+                                        <span>中型</span>
                                     </label>
                                 </div>
                                 <div class="col s1" style="padding-top:6px">
                                     <label>
-                                        <input id="noSelect" name="isEnable" type="radio" value="0" checked/>
-                                        <span>不选择</span>
+                                        <input id="noSelect" name="isEnable" type="radio" value="0" />
+                                        <span>微型</span>
                                     </label>
                                 </div>
                             </div>
@@ -128,7 +128,7 @@
                                     <a id="createBtn" class="btn waves-effect waves-light red"><i
                                             class="material-icons  white-text tooltipped " data-position="bottom"
                                             data-delay="50" data-tooltip="增加新的项目信息">add</i></a>
-                                    <a id="deleteManyBtn"
+                                   <!-- <a id="deleteManyBtn"
                                        class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
                                             class="material-icons white-text tooltipped" data-position="bottom"
                                             data-delay="50" data-tooltip="批量删除">delete</i></a>
@@ -143,7 +143,7 @@
                                     <a  id="setUploadManyBtn"
                                        class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
                                             class="material-icons white-text tooltipped" data-position="bottom"
-                                            data-delay="50" data-tooltip="导入">file_upload</i></a>
+                                            data-delay="50" data-tooltip="导入">file_upload</i></a>-->
                                 </div>
                             </div>
                             <!--Form Advance-->
@@ -202,37 +202,41 @@
                         "title": "编号",
                         "data": "number", //实体字段
                         "name": "plan_number"   //库中字段
-                    },*/ {
-                        "title": "项目名称",
+                    },*/
+                    {
+                        "title": "名称",
                         "data": "name",
                         "name": "name"
-                    }, /*{
-                        "title": "拼音码",
-                        "data": "pinyinCode",
-                        "name": "pinyin_code"
+                    },
+                   {
+                        "title": "座机号码",
+                        "data": "phoneNumber",
+                        "name": "phone_number"
                     },
                     {
-                        "title": "类别",
-                        "data": "assitTypeName",
-                        "name": "type"
+                        "title": "统一社会信用代码",
+                        "data": "unifiedSocialCreditCode",
+                        "name": "unified_social_credit_code"
                     }, {
-                        "title": "收费标准",
-                        "data": "price",
-                        "name": "price"
+                        "title": "法人名称",
+                        "data": "legalName",
+                        "name": "legal_name"
                     }, {
-                        "title": "单位",
-                        "data": "unit",
-                        "name": "unit"
-                    }, {
-                        "title": "科室",
-                        "data": "deptName",
-                        "name": "dept_name"
+                        "title": "公司规模",
+                        "data": "scale",
+                        "name": "scale"
                     },
                     {
-                        "title": "是否启用",
-                        "data": "isEnableType",
-                        "name": "is_enable"
-                    },*/
+                        "title": "审核状态",
+                        "data": "isVerifyType",
+                        "name": "is_verify"
+                    },
+                    {
+                        "title": "注册资本",
+                        "data": "decimal",
+                        "name": "decimal"
+                    },
+
                     {
                         "title": "操作",
                         "width": "180px",
@@ -243,7 +247,8 @@
 
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn + "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='edit(" + row.id + ");'> <i class='material-icons'>edit</i></a>" +
-                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"设置停用状态\" onclick='setDisable(" + row.id + ");'><i class='material-icons'>info</i></a>  ";
+                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"设置启用\" onclick='setDisable(" + row.id + ");'><i class='material-icons'>info</i></a>  "+
+                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"审核\" onclick='Verify(" + row.id + ");'><i class='material-icons'>input</i></a>  ";
 
                             // 返回自定义内容
                             return rtnBtn;
@@ -251,7 +256,7 @@
                     }
                 ],
                 "order": [
-                    [2, 'asc']
+                    [1, 'asc']
                 ],
             }
         });
