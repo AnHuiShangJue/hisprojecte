@@ -1,12 +1,10 @@
 package com.ahsj.smartparkcore.services;
 
-import com.ahsj.smartparkcore.core.ResultModel;
 import com.ahsj.smartparkcore.entity.dto.EnterpriseInfoDTO;
 import com.ahsj.smartparkcore.entity.po.EnterpriseInfo;
 import com.ahsj.smartparkcore.entity.vo.EnterpriseInfoVO;
 import core.entity.PageBean;
 import core.message.Message;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -70,4 +68,14 @@ public interface EnterpriseInfoService {
      * @Time 17:57
      **/
     EnterpriseInfo selectByPrimaryKey(Long id) throws Exception;
+
+    /**
+     * @return com.ahsj.smartparkcore.entity.vo.EnterpriseInfoVO
+     * @功能说明
+     * @Params [id]
+     * @Author XJP
+     * @Date 2019/10/14
+     * @Time 14:02
+     **/
+    EnterpriseInfoVO selectById(Long id) throws Exception;
 }

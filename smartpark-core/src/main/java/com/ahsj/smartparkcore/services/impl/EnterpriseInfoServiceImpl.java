@@ -8,13 +8,16 @@ import com.ahsj.smartparkcore.core.CodeHelper;
 import com.ahsj.smartparkcore.core.ResultModel;
 import com.ahsj.smartparkcore.core.ResultStatus;
 import com.ahsj.smartparkcore.dao.EnterpriseInfoMapper;
+import com.ahsj.smartparkcore.dao.LegalPersonMapper;
 import com.ahsj.smartparkcore.entity.dto.EnterpriseInfoDTO;
 import com.ahsj.smartparkcore.entity.po.ActivityInfo;
 import com.ahsj.smartparkcore.entity.po.EnterpriseInfo;
+import com.ahsj.smartparkcore.entity.po.LegalPerson;
 import com.ahsj.smartparkcore.entity.sys.SysAttachmentInfo;
 import com.ahsj.smartparkcore.entity.vo.EnterpriseInfoVO;
 import com.ahsj.smartparkcore.feign.IOrganizationService;
 import com.ahsj.smartparkcore.services.EnterpriseInfoService;
+import com.ahsj.smartparkcore.services.LegalPersonService;
 import com.ahsj.smartparkcore.services.SysAttachmentInfoService;
 import core.entity.PageBean;
 import core.message.Message;
@@ -23,6 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.dozer.DozerBeanMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -60,6 +64,9 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
     @Autowired
     EnterpriseInfoMapper enterpriseInfoMapper;
 
+    @Autowired
+    LegalPersonService legalPersonService;
+
     private static final Long FILE_SIZE = 10485760L;
 
     @Autowired
@@ -82,75 +89,67 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
     @Override
     @Transactional(readOnly = false)
     public Message addEnterpriseInfo(EnterpriseInfoDTO enterpriseInfoDTO, MultipartFile[] file, String relateKet, String relatePage) throws Exception {
-        DozerBeanMapper mapper = new DozerBeanMapper();
-        //DTO转化为PO 存入数据库
-        EnterpriseInfo map = mapper.map(enterpriseInfoDTO, EnterpriseInfo.class);
-
-        if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO)) {
+        EnterpriseInfo enterpriseInfo = new EnterpriseInfo();
+        BeanUtils.copyProperties(enterpriseInfoDTO, enterpriseInfo);
+        if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getName()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getLegalName()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getUnifiedSocialCreditCode())) {
             return MessageUtil.createMessage(false, "企业信息新增失败 ！！！");
-        } else if (EmptyUtil.Companion.isNullOrEmpty(map.getId())) {
-            EnterpriseInfo info = enterpriseInfoMapper.queryEnterpriseInfo(map);
+        } else if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getId())) {
+            LegalPerson legalPerson = new LegalPerson();
+            BeanUtils.copyProperties(enterpriseInfoDTO, legalPerson);
+            EnterpriseInfo info = enterpriseInfoMapper.queryEnterpriseInfo(enterpriseInfo);
             if (!EmptyUtil.Companion.isNullOrEmpty(info)) {
                 return MessageUtil.createMessage(false, "企业信息新增失败 ！ 该企业已存在 ！！");
             }
-            map.setIsVerify(Constants.THREE);
-            enterpriseInfoMapper.insert(map);
+            enterpriseInfo.setIsVerify(Constants.TWO);
+            enterpriseInfoMapper.insert(enterpriseInfo);
+            legalPerson.setEnterpriseId(enterpriseInfo.getId());
+            legalPersonService.insert(legalPerson);
             //上传附件
-            uploadFile(file,relateKet,relatePage,map.getId());
+            //uploadFile(file,relateKet,relatePage,enterpriseInfo.getId());
             return MessageUtil.createMessage(true, "企业信息新增成功 ！！！");
-        } /*else {
-            EnterpriseInfo info = enterpriseInfoMapper.queryEnterpriseInfo(map);
-            if (EmptyUtil.Companion.isNullOrEmpty(info)) {
-                enterpriseInfoMapper.updateByPrimaryKey(map);
-                return MessageUtil.createMessage(true, "企业信息修改成功 ！！！");
-            } else if (StringUtils.equals(info.getName(), map.getName())) {
-                if (info.getId().longValue() == map.getId().longValue()) {
-                    enterpriseInfoMapper.updateByPrimaryKey(map);
-                    return MessageUtil.createMessage(true, "企业信息修改成功 ！！！");
-                } else {
-                    return MessageUtil.createMessage(false, "企业信息修改失败 ！ 该企业已存在  ！！");
-                }
-            }
-            return MessageUtil.createMessage(false, "企业信息修改失败 ！ 该企业已存在  ！！");
-        }*/
+        }
         return MessageUtil.createMessage(false, "企业信息新增失败 ！ ");
     }
 
+    /**
+     * @return core.message.Message
+     * @功能说明
+     * @Params [enterpriseInfoDTO, file, relateKet, relatePage]
+     * @Author XJP
+     * @Date 2019/10/14
+     * @Time 16:59
+     **/
     @Override
     @Transactional(readOnly = false)
     public Message updateEnterpriseInfo(EnterpriseInfoDTO enterpriseInfoDTO, MultipartFile[] file, String relateKet, String relatePage) throws Exception {
-
-        DozerBeanMapper mapper = new DozerBeanMapper();
-        //DTO转化为PO 存入数据库
-        EnterpriseInfo map = mapper.map(enterpriseInfoDTO, EnterpriseInfo.class);
-
-
-        if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO)) {
+        EnterpriseInfo enterpriseInfo = new EnterpriseInfo();
+        LegalPerson legalPerson = new LegalPerson();
+        BeanUtils.copyProperties(enterpriseInfoDTO, enterpriseInfo);
+        BeanUtils.copyProperties(enterpriseInfoDTO, legalPerson);
+        legalPerson.setId(null);
+        if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getName()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getLegalName()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getUnifiedSocialCreditCode())) {
             return MessageUtil.createMessage(false, "企业信息新增失败 ！！！");
-        }/* else if (EmptyUtil.Companion.isNullOrEmpty(map.getId())) {
-            EnterpriseInfo info = enterpriseInfoMapper.queryEnterpriseInfo(map);
-            if (!EmptyUtil.Companion.isNullOrEmpty(info)) {
-                return MessageUtil.createMessage(false, "企业信息新增失败 ！ 该企业已存在 ！！");
-            }
-            map.setIsVerify(Constants.THREE);
-            enterpriseInfoMapper.insert(map);
-            //上传附件
-            uploadFile(file,relateKet,relatePage,map.getId());
-            return MessageUtil.createMessage(true, "企业信息新增成功 ！！！");
-        }*/ else {
-            EnterpriseInfo info = enterpriseInfoMapper.queryEnterpriseInfo(map);
+        } else {
+            EnterpriseInfo info = enterpriseInfoMapper.queryEnterpriseInfo(enterpriseInfo);
             if (EmptyUtil.Companion.isNullOrEmpty(info)) {
-                enterpriseInfoMapper.updateByPrimaryKey(map);
+                enterpriseInfoMapper.updateByPrimaryKey(enterpriseInfo);
+                legalPerson.setEnterpriseId(enterpriseInfo.getId());
+                legalPersonService.updateByCompanyId(legalPerson);
                 return MessageUtil.createMessage(true, "企业信息修改成功 ！！！");
-            } else if (StringUtils.equals(info.getName(), map.getName())) {
-                if (info.getId().longValue() == map.getId().longValue()) {
-                    enterpriseInfoMapper.updateByPrimaryKey(map);
-                    return MessageUtil.createMessage(true, "企业信息修改成功 ！！！");
-                } else {
-                    return MessageUtil.createMessage(false, "企业信息修改失败 ！ 该企业已存在  ！！");
+            } else  {
+                if (StringUtils.equals(info.getName(), enterpriseInfo.getName())){
+                    if (info.getId().longValue() == enterpriseInfo.getId().longValue()) {
+                        enterpriseInfoMapper.updateByPrimaryKey(enterpriseInfo);
+                        legalPerson.setEnterpriseId(enterpriseInfo.getId());
+                        legalPersonService.updateByCompanyId(legalPerson);
+                        return MessageUtil.createMessage(true, "企业信息修改成功 ！！！");
+                    } else {
+                        return MessageUtil.createMessage(false, "企业信息修改失败 ！ 该企业已存在  ！！");
+                    }
+                }else {
+                    return MessageUtil.createMessage(false, "企业信息修改失败 ！ 该企业已存在   ！");
                 }
             }
-            return MessageUtil.createMessage(false, "企业信息修改失败 ！ 该企业已存在  ！！");
         }
 
     }
@@ -200,10 +199,39 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
         }
     }
 
+    /**
+     * @return com.ahsj.smartparkcore.entity.po.EnterpriseInfo
+     * @功能说明
+     * @Params [id]
+     * @Author XJP
+     * @Date 2019/10/14
+     * @Time 14:02
+     **/
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public EnterpriseInfo selectByPrimaryKey(Long id) throws Exception {
         return enterpriseInfoMapper.selectByPrimaryKey(id);
+    }
+
+    /**
+     * @return com.ahsj.smartparkcore.entity.vo.EnterpriseInfoVO
+     * @功能说明
+     * @Params [id]
+     * @Author XJP
+     * @Date 2019/10/14
+     * @Time 14:02
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public EnterpriseInfoVO selectById(Long id) throws Exception {
+        EnterpriseInfoVO enterpriseInfoVO = new EnterpriseInfoVO();
+        EnterpriseInfo enterpriseInfo = enterpriseInfoMapper.selectById(id);
+        if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo)) {
+            return new EnterpriseInfoVO();
+        } else {
+            BeanUtils.copyProperties(enterpriseInfo, enterpriseInfoVO);
+            return enterpriseInfoVO;
+        }
     }
 
 
@@ -215,7 +243,7 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
      * @Date 2019/9/3
      * @Time 10:27
      **/
-    public void uploadFile(MultipartFile[] file, String relateKet, String relatePage,Long relateId) {
+    public void uploadFile(MultipartFile[] file, String relateKet, String relatePage, Long relateId) {
         LocalDate now = LocalDate.now();
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyyMMdd");
         String dateDir = now.format(df);
@@ -271,10 +299,10 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
             }
             //  sysAttachmentInfoService.addSaveSysAttachmentInfo(sysAttachmentInfo);
             sysAttachmentInfoService.addSaveSysAttachmentInfoList(list);//调用addSaveSysAttachmentInfoList保存到数据库的方法
-           // return MessageUtil.createMessage(true, "上传成功!");
+            // return MessageUtil.createMessage(true, "上传成功!");
         } catch (Exception e) {
             e.printStackTrace();
-           // return MessageUtil.createMessage(true, "上传失败!");
+            // return MessageUtil.createMessage(true, "上传失败!");
         }
 
     }

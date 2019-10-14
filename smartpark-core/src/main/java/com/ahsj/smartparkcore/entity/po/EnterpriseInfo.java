@@ -1,8 +1,10 @@
 package com.ahsj.smartparkcore.entity.po;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import core.code.CodeValueColumn;
 import core.code.Constants;
 import core.entity.BaseEntity;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -10,14 +12,19 @@ import java.util.Date;
 /**
  * 企业信息
  */
+
+
 public class EnterpriseInfo extends BaseEntity {
+
     private Long id;
 
     private String name;
 
     private String unifiedSocialCreditCode;
 
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_company_size", typeName = "scaleName")
     private Short scale;
+    private String scaleName;
 
     private String engliseName;
 
@@ -29,7 +36,7 @@ public class EnterpriseInfo extends BaseEntity {
 
     private String description;
 
-    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_verify", typeName = "isVerifyType")
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_verification", typeName = "isVerifyType")
     private Integer isVerify;
     private String isVerifyType;
 
@@ -37,13 +44,51 @@ public class EnterpriseInfo extends BaseEntity {
 
     private Short unitNature;
 
+    @JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date operatingPeriodStart;
 
+    @JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date operatingPeriodEnd;
 
+    @JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date createDate;
 
+    @JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date updateDate;
+
+    private String phone;
+
+    private String idCard;
+
+    private String landlineNumber;
+
+    public String getLandlineNumber() {
+        return landlineNumber;
+    }
+
+    public void setLandlineNumber(String landlineNumber) {
+        this.landlineNumber = landlineNumber;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
+    }
 
     public String getIsVerifyType() {
         return isVerifyType;
@@ -182,4 +227,11 @@ public class EnterpriseInfo extends BaseEntity {
         this.updateDate = updateDate;
     }
 
+    public String getScaleName() {
+        return scaleName;
+    }
+
+    public void setScaleName(String scaleName) {
+        this.scaleName = scaleName;
+    }
 }

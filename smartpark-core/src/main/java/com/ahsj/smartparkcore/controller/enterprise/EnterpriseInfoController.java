@@ -62,33 +62,6 @@ public class EnterpriseInfoController extends BaseController {
     @Value("${file.path}")
     private String filePath;
 
-    /**
-     * @return core.message.Message
-     * @功能说明 新增  企业信息
-     * @Params [enterpriseInfo]
-     * @Author XJP
-     * @Date 2019/9/2
-     * @Time 15:52
-     **/
-    @PostMapping("/addEnterpriseInfo.ahsj")
-    public ResponseEntity<Message> addEnterpriseInfo(EnterpriseInfoDTO enterpriseInfoDTO, @RequestParam(value = "file") MultipartFile[] file, String relateKet, String relatePage) throws Exception {
-        Message message = enterpriseInfoService.addEnterpriseInfo(enterpriseInfoDTO, file, relateKet, relatePage);
-        return new ResponseEntity<>((message), HttpStatus.OK);
-    }
-
-    /**
-     * @return core.message.Message
-     * @功能说明 修改 企业信息
-     * @Params [enterpriseInfo]
-     * @Author XJP
-     * @Date 2019/9/2
-     * @Time 15:52
-     **/
-    @PostMapping("/updateEnterpriseInfo.ahsj")
-    public ResponseEntity<Message> updateEnterpriseInfo(EnterpriseInfoDTO enterpriseInfoDTO, @RequestParam(value = "file") MultipartFile[] file, String relateKet, String relatePage) throws Exception {
-        Message message = enterpriseInfoService.updateEnterpriseInfo(enterpriseInfoDTO, file, relateKet, relatePage);
-        return new ResponseEntity<>((message), HttpStatus.OK);
-    }
 
     /**
      * @return org.springframework.web.servlet.ModelAndView
@@ -104,6 +77,58 @@ public class EnterpriseInfoController extends BaseController {
         modelAndView.addObject("token", token);
         return modelAndView;
     }
+    /**
+     *@功能说明 进入企业新增页面
+     *@Params [token]
+     *@return org.springframework.web.servlet.ModelAndView
+     *@Author XJP
+     *@Date 2019/10/14
+     *@Time 11:10
+    **/
+    @GetMapping("/addEnterprise.ahsj")
+    public ModelAndView addEnterprise(String token) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/enterprise/add");
+        modelAndView.addObject("token", token);
+        return modelAndView;
+    }
+    @GetMapping("/updateEnterprise.ahsj")
+    public ModelAndView addEnterprise(String token,@RequestParam("id") Long id) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/enterprise/update");
+        EnterpriseInfoVO enterpriseInfoVO =  enterpriseInfoService.selectById(id);
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("enterpriseInfoVO", enterpriseInfoVO);
+        return modelAndView;
+    }
+
+    /**
+     * @return core.message.Message
+     * @功能说明 新增 企业信息
+     * @Params [enterpriseInfo]
+     * @Author XJP
+     * @Date 2019/9/2
+     * @Time 15:52
+     **/
+    @PostMapping("/add/enterpriseInfo.ahsj")
+    public ResponseEntity<Message> addEnterpriseInfo(EnterpriseInfoDTO enterpriseInfoDTO, @RequestParam(value = "file" , required = false) MultipartFile[] file, String relateKet, String relatePage) throws Exception {
+        Message message = enterpriseInfoService.addEnterpriseInfo(enterpriseInfoDTO, file, relateKet, relatePage);
+        return new ResponseEntity<>((message), HttpStatus.OK);
+    }
+
+    /**
+     * @return core.message.Message
+     * @功能说明 修改 企业信息
+     * @Params [enterpriseInfo]
+     * @Author XJP
+     * @Date 2019/9/2
+     * @Time 15:52
+     **/
+    @PostMapping("/update/enterpriseInfo.ahsj")
+    public ResponseEntity<Message> updateEnterpriseInfo(EnterpriseInfoDTO enterpriseInfoDTO, @RequestParam(value = "file" ,required = false) MultipartFile[] file, String relateKet, String relatePage) throws Exception {
+        Message message = enterpriseInfoService.updateEnterpriseInfo(enterpriseInfoDTO, file, relateKet, relatePage);
+        return new ResponseEntity<>((message), HttpStatus.OK);
+    }
+
+ 
 
     /**
      * @return core.entity.PageBean<com.ahsj.smartparkcore.entity.EnterpriseInfo>
@@ -142,6 +167,8 @@ public class EnterpriseInfoController extends BaseController {
        EnterpriseInfo enterpriseInfo = enterpriseInfoService.selectByPrimaryKey(id);
        return  ResponseEntity.ok(enterpriseInfo);
    }
+   
+   
 
 
     @PostMapping("/uploadFile.ahsj")

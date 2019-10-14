@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+<!--Form Advance-->
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy" style="height: 700px;">
+            <div class="card-content">
+                <h4 class="card-title">企业信息新增</h4><label style="color:black">
+            </label>
+                <form class="col s12" id="sendForm" action="#">
+                    <input type="hidden" id="id" name="id">
+                    <div class="row">
+
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="name" name="name" type="text"
+                                   data-error=".errorTxt2">
+                            <div class="errorTxt2"></div>
+                            <label for="name">公司名称</label>
+                        </div>
+
+                        <div class="col input-field s4 m4 l4">
+                            <select ahsj:select name="scale" id="scale" type="code" typeKey="is_company_size">
+                            </select>
+                            <label for="scale">公司规模</label>
+                        </div>
+
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="legalName" name="legalName" type="text">
+                            <label for="legalName">法人姓名</label>
+                        </div>
+
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="landlineNumber" name="landlineNumber" type="text" >
+                            <label for="landlineNumber">座机号码</label>
+                        </div>
+
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="idCard" name="idCard" type="text"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label for="idCard">身份证号码</label>
+                        </div>
+                       <div class="input-field col s4 l4 xl4">
+                            <input id="unifiedSocialCreditCode" name="unifiedSocialCreditCode" type="text"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label for="unifiedSocialCreditCode">组织机构代码</label>
+                        </div>
+
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="phone" name="phone" type="text"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label for="phone">手机号码</label>
+                        </div>
+
+                      <div class="col input-field s4 m4 l4">
+                            <select ahsj:select name="isVerify" id="isVerify" type="code" typeKey="is_verification">
+                            </select>
+                            <label for="isVerify">验证状态</label>
+                        </div>
+
+                         <div class="input-field col s12 x12 m12 l12 xl12">
+                                <textarea id="description" name="description" class="materialize-textarea" type="text"
+                                ></textarea>
+                                <label for="description" class="active">单位简介</label>
+                            </div>
+
+                    </div>
+
+                    <div class="input-field col s4 l4 xl4">
+                        <input id="operatingPeriodStart" name="operatingPeriodStart" type="text" class="datepicker"
+                               data-error=".errorTxt1">
+                        <div class="errorTxt1"></div>
+                        <label for="operatingPeriodStart">注册时间</label>
+                    </div>
+
+                    <div class="input-field col s4 l4 xl4">
+                        <input id="registeredCapital" name="registeredCapital" type="text"
+                               data-error=".errorTxt1">
+                        <div class="errorTxt1"></div>
+                        <label for="registeredCapital">注册资本</label>
+                    </div>
+
+                    <div class="input-field col s4 l4 xl4">
+                        <input id="unitNature" name="unitNature" type="text"
+                               data-error=".errorTxt1">
+                        <div class="errorTxt1"></div>
+                        <label for="unitNature">单位性质</label>
+                    </div>
+
+                    <div class="input-field col s4 l4 xl4">
+                        <input id="operatingPeriodEnd" name="operatingPeriodEnd" type="text" class="datepicker"
+                               data-error=".errorTxt1">
+                        <div class="errorTxt1"></div>
+                        <label for="operatingPeriodEnd">营业期限</label>
+                    </div>
+
+                    <div class="row" style="margin-bottom: 160px">
+                        <div class="input-field col s12">
+                            <button id="send_btn" class="btn cyan waves-effect waves-light right" type="submit"
+                                    name="action">提交
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+    $(function () {
+        formCheck();
+        initSelect();
+        var select1 = $(".select2-container");
+        if (select1) {
+            select1.css('display', 'none');
+        }
+    });
+
+    function initSelect() {
+        $("#type").select2({
+            minimumInputLength: 1,
+            maximumInputLength: 20
+        })
+    }
+
+    function formCheck() {
+        $("#sendForm").validate({
+
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+                dialog.confirm('确定提交吗?', function (index, layero) {
+                    var queryString = $('#sendForm').serialize();
+                    console.log("queryString is" + queryString);
+
+                    $.ahsjajax(
+                        CTX + "/api/enterprise/add/enterpriseInfo.ahsj",
+                        queryString,
+                        function (msg) {
+                            if (msg.success) {
+                                M.toast({html: msg.message});
+                                parent.grid.search();
+                                dialog.parentclose();
+                                return false;
+                            } else {
+                                M.toast({html: msg.message});
+                                return false;
+                            }
+                        },
+                        function () {
+                            M.toast({html: "网络异常"});
+                            return false;
+                        }
+                    );
+                });
+            }
+
+        });
+    }
+
+    $("input").change(function () {
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</body>
+
+</html>

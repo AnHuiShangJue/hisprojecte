@@ -85,19 +85,19 @@
                                 </div>
                                 <div class="col s1" style="padding-top:6px">
                                     <label>
-                                        <input id="enable" name="isEnable" type="radio" value="1"  checked/>
+                                        <input id="enable" name="scale" type="radio" value="1"  checked/>
                                         <span>大型</span>
                                     </label>
                                 </div>
                                 <div class="col s1" style="padding-top:6px">
                                     <label>
-                                        <input id="unEnable" name="isEnable" type="radio" value="2"/>
+                                        <input id="unEnable" name="scale" type="radio" value="2"/>
                                         <span>中型</span>
                                     </label>
                                 </div>
                                 <div class="col s1" style="padding-top:6px">
                                     <label>
-                                        <input id="noSelect" name="isEnable" type="radio" value="0" />
+                                        <input id="noSelect" name="scale" type="radio" value="3" />
                                         <span>微型</span>
                                     </label>
                                 </div>
@@ -210,8 +210,8 @@
                     },
                    {
                         "title": "座机号码",
-                        "data": "phoneNumber",
-                        "name": "phone_number"
+                        "data": "landlineNumber",
+                        "name": "landline_number"
                     },
                     {
                         "title": "统一社会信用代码",
@@ -223,7 +223,7 @@
                         "name": "legal_name"
                     }, {
                         "title": "公司规模",
-                        "data": "scale",
+                        "data": "scaleName",
                         "name": "scale"
                     },
                     {
@@ -233,8 +233,8 @@
                     },
                     {
                         "title": "注册资本",
-                        "data": "decimal",
-                        "name": "decimal"
+                        "data": "registeredCapital",
+                        "name": "registered_capital"
                     },
 
                     {
@@ -263,8 +263,8 @@
     }
 
     function edit(id) {
-        var url = CTX + "/api/hisProject/update.ahsj?token=" + TOKEN + "&id=" + id;
-        dialog.show(url, "收费信息修改页");
+        var url = CTX + "/api/enterprise/updateEnterprise.ahsj?token=" + TOKEN+ "&id=" + id;
+        dialog.show(url, "企业信息修改");
 
     }
 
@@ -329,8 +329,8 @@
         });
         //新增按钮
         $("#createBtn").click(function () {
-            var url = CTX + "/api/hisProject/add.ahsj?token=" + TOKEN;
-            dialog.show(url, "收费信息添加")
+            var url = CTX +  "/api/enterprise/addEnterprise.ahsj?token=" + TOKEN;
+            dialog.show(url, "企业信息新增")
         });
 
 

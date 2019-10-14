@@ -4,6 +4,7 @@ import com.ahsj.smartparkcore.entity.po.EnterpriseInfo;
 import com.ahsj.smartparkcore.entity.vo.EnterpriseInfoVO;
 import core.entity.PageBean;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -41,4 +42,16 @@ public interface EnterpriseInfoMapper extends BaseMapper<EnterpriseInfo> {
      * @Time 16:50
      **/
     List<EnterpriseInfo> queryList(PageBean<EnterpriseInfo> pageBean);
+
+    /**
+     * @return com.ahsj.smartparkcore.entity.vo.EnterpriseInfoVO
+     * @功能说明
+     * @Params [id]
+     * @Author XJP
+     * @Date 2019/10/14
+     * @Time 14:05
+     **/
+    EnterpriseInfo selectById(Long id);
+
+    int updateByCompanyId(EnterpriseInfo enterpriseInfo);
 }
