@@ -55,6 +55,11 @@
                                     <input id="name" name="drugsName" type="text"/>
                                     <label for="name">药品名称<span style="font-size: 12px">(Drug Name)</span></label>
                                 </div>
+                                <div class="col input-field s3 m3 l3">
+                                    <input id="drugsAlias" name="drugsAlias" type="text"/>
+                                    <label for="drugsAlias">药品拼音码<span style="font-size: 12px">(Medicine Pinyin Code
+)</span></label>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -228,6 +233,11 @@
                         "name": "drugs_name"
                     },
                     {
+                        "title": "药品拼音码",
+                        "data": "drugsAlias",
+                        "name": "drugs_alias"
+                    },
+                    {
                         "title": "药品规格",
                         "data": "drugsSpec",
                         "name": "drugs_spec"
@@ -244,10 +254,11 @@
                         "orderable": false,
                         "render": function (data, type, row) {
                             var rtnBtn = "";
+                            var drugsName = row.drugsName.replace(/ /g,",");
+                            var drugsSpec = row.drugsSpec.replace(/ /g,",");
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"添加至待入库\" href='javascript:;' onclick=add("
-                                + row.id + ",'" + row.drugsNumb + "','" + row.drugsName + "','" + row.drugsSpec + "','" + row.enterPrice + "');>" +
-                                " <i class='material-icons'>add</i></a>";
+                                + row.id + ",\"" + row.drugsNumb + "\",\"" + drugsName + "\",\"" + drugsSpec + "\"," + row.enterPrice + ")><i class='material-icons'>add</i></a>";
                             // 返回自定义内容
                             return rtnBtn;
                         }
@@ -326,6 +337,8 @@
 
     //添加到list里
     function add(id, drugsNumb, drugsName, drugsSpec, enterPrice ) {
+        drugsName = drugsName.replace(/,/g," ");
+        drugsSpec = drugsSpec.replace(/,/g," ");
         var selectRowsIds = gridEnterList.getIds();
         if (selectRowsIds.length !== 0) {
             for (var k = 0; k < selectRowsIds.length; k++) {

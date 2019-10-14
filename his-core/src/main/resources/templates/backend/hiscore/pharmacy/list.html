@@ -55,37 +55,42 @@
                                 <div class="col  s1 m1 l1 xl1">
                                     <h6>模糊搜索</h6><label style="color:black">Fuzzy search</label>
                                 </div>
-                                <div class="col input-field s2 m2 l2 xl2">
+                                <div class="col input-field s1 m1 l1 xl1">
                                     <input id="number" name="drugsNumb" type="text"/>
                                     <label for="number">药品编号<span style="font-size: 12px">(Drug number
 )</span></label>
                                 </div>
-                                <div class="col input-field s2 m2 l2 xl2">
+                                <div class="col input-field s1 m1 l1 xl1">
                                     <input id="name" name="drugsName" type="text"/>
                                     <label for="name">药品名称<span style="font-size: 12px">(Drug Name)</span></label>
+                                </div>
+                                <div class="col input-field s1 m1 l1 xl1">
+                                    <input id="drugsAlias" name="drugsAlias" type="text"/>
+                                    <label for="drugsAlias">药品拼音码<span style="font-size: 12px">(Medicine Pinyin Code
+)</span></label>
                                 </div>
                                 <div class="col  s1 m1 l1 xl1">
                                     <h6>售价区间</h6><label style="color:black">Price range
                                 </label>
                                 </div>
-                                <div class="col input-field s2 m2 l2 xl2">
+                                <div class="col input-field s1 m1 l1 xl1">
                                     <input id="lowPrice" name="lowPrice" type="number"/>
                                     <label for="lowPrice">下区间<span style="font-size: 12px">(Lower interval)</span></label>
                                 </div>
-                                <div class="col input-field s2 m2 l2 xl2">
+                                <div class="col input-field s1 m1 l1 xl1">
                                     <input id="highPrice" name="highPrice" type="number"/>
                                     <label for="highPrice">上区间<span style="font-size: 12px">(upper interval)</span></label>
-                                </div><br><br><br><br>
+                                </div>
                                 <div class="col  s1 m1 l1 xl1">
                                     <h6>已售区间</h6><label style="color:black">Sold range
 
                                 </label>
                                 </div>
-                                <div class="col  input-field s2 m2 l2 xl2">
+                                <div class="col  input-field s1 m1 l1 xl1">
                                     <input id="lowCount" name="lowCount" type="number"/>
                                     <label for="lowCount">下区间<span style="font-size: 12px">(Lower interval)</span></label>
                                 </div>
-                                <div class="col input-field s2 m2 l2 xl2">
+                                <div class="col input-field s1 m1 l1 xl1">
                                     <input id="highCount" name="highCount" type="number"/>
                                     <label for="highCount">上区间<span style="font-size: 12px">(upper interval)</span></label>
                                 </div>
@@ -265,7 +270,7 @@
                         "orderable": false//取消排序功能
                     },
                     {
-                        "title": "药品别名",
+                        "title": "药品拼音码",
                         "data": "drugsAlias",
                         "name": "drugs_alias"
                     },
