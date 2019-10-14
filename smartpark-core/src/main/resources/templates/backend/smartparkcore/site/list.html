@@ -211,7 +211,7 @@
                             rtnBtn = rtnBtn +
                                 "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改场地\" onclick='update(" + row.id + ");'> <i class='material-icons'>edit</i></a>" +
                                 "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"设置启用\" href='javascript:;' onclick='setIsEnable(" + row.id + ");'> <i class='material-icons'>info</i></a>"+
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"审核\" href='javascript:;' onclick='setIsEnable(" + row.id + ");'> <i class='material-icons'>info</i></a>";
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"审核\" href='javascript:;' onclick='isVerify(" + row.id + ");'> <i class='material-icons'>info</i></a>";
                             // 返回自定义内容
                             return rtnBtn;
                         }
@@ -233,6 +233,10 @@
     function update(id) {
         var url = CTX + "/api/site/update/index.ahsj?token=" + TOKEN+"&id="+id;
         dialog.show(url, "修改场地");
+    }
+    function isVerify(id) {
+        var url = CTX + "/api/site/isVerify/index.ahsj?token=" + TOKEN+"&id="+id;
+        dialog.show(url, "审核场地");
     }
     function setIsEnable(ids) {
         dialog.confirm('确定修改场地启用状态吗?', function (index, layero) {

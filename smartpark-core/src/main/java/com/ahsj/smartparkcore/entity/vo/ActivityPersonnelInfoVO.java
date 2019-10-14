@@ -1,7 +1,11 @@
 package com.ahsj.smartparkcore.entity.vo;
 
 import com.ahsj.smartparkcore.entity.po.ActivityPersonnelInfo;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import core.code.CodeValueColumn;
+import core.code.Constants;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -21,11 +25,20 @@ public class ActivityPersonnelInfoVO extends ActivityPersonnelInfo {
 
     private String email;
 
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_audit", typeName = "isReviewName")
     private Integer isReview;
+    private String isReviewName;
 
     private Long userId;
 
     private Long activityId;
+
+    @JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    private Date createDate;
+
+    private String remarks;
+
 
     @Override
     public Long getId() {
@@ -125,5 +138,33 @@ public class ActivityPersonnelInfoVO extends ActivityPersonnelInfo {
     @Override
     public void setActivityId(Long activityId) {
         this.activityId = activityId;
+    }
+
+    public String getIsReviewName() {
+        return isReviewName;
+    }
+
+    public void setIsReviewName(String isReviewName) {
+        this.isReviewName = isReviewName;
+    }
+
+    @Override
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    @Override
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    @Override
+    public String getRemarks() {
+        return remarks;
+    }
+
+    @Override
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 }

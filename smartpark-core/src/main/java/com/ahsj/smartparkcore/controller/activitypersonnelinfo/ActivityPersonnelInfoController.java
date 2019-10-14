@@ -6,6 +6,8 @@ import com.ahsj.smartparkcore.entity.dto.ActivityPersonnelInfoDTO;
 import com.ahsj.smartparkcore.entity.po.ActivityPersonnelInfo;
 import com.ahsj.smartparkcore.services.ActivityPersonnelInfoService;
 import core.controller.BaseController;
+import core.entity.PageBean;
+import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import utils.EmptyUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +28,24 @@ public class ActivityPersonnelInfoController extends BaseController {
     @Autowired
     ActivityPersonnelInfoService activityPersonnelInfoService;
 
+
+
+    /**
+     * @Description list
+     * @Author  muxu
+     * @Date  2019/10/14
+     * @Time 13:20
+     * @Return org.springframework.http.ResponseEntity<core.entity.PageBean<ActivityInfo>>
+     * @Params [activityInfoDTO]
+    **/
+    @RequestMapping(value = "/list.ahsj", method = {RequestMethod.POST})
+    public ResponseEntity<PageBean<ActivityPersonnelInfo>> list(ActivityPersonnelInfoDTO activityPersonnelInfoDTO) throws Exception {
+        DozerBeanMapper mapper = new DozerBeanMapper();
+        ActivityPersonnelInfo activityPersonnelInfo =mapper.map(activityPersonnelInfoDTO,ActivityPersonnelInfo.class);
+        PageBean<ActivityPersonnelInfo> pageBean = new PageBean<ActivityPersonnelInfo>();
+        pageBean.setParameter(activityPersonnelInfo);
+        return ResponseEntity.ok(activityPersonnelInfoService.list(pageBean));
+    }
     /**
      * @Description 新增
      * @Author  muxu
@@ -95,12 +116,14 @@ public class ActivityPersonnelInfoController extends BaseController {
      * @Params
     **/
     @RequestMapping(value = "/reviewSuccess.ahsj",method = {RequestMethod.POST})
-    public ResponseEntity<ResultModel>reviewSuccess(Map<String, Object> model, HttpServletRequest request, @RequestParam(value="id", required=true) Long id)throws Exception{
+    public ResponseEntity<ResultModel>reviewSuccess(Map<String, Object> model, HttpServletRequest request
+            , @RequestParam(value="id", required=true) Long id
+            , @RequestParam(value="remarks", required=true) String remarks)throws Exception{
         ActivityPersonnelInfo activityPersonnelInfo = activityPersonnelInfoService.selectById(id);
         if (EmptyUtil.Companion.isNullOrEmpty(activityPersonnelInfo)){
             return new ResponseEntity<>(new ResultModel(ResultStatus.DATA_NULL,id), HttpStatus.OK);
         }else {
-            return activityPersonnelInfoService.reviewSuccess(id);
+            return activityPersonnelInfoService.reviewSuccess(id,remarks);
         }
     }
 
@@ -113,14 +136,50 @@ public class ActivityPersonnelInfoController extends BaseController {
      * @Params
     **/
     @RequestMapping(value = "/reviewError.ahsj",method = {RequestMethod.POST})
-    public ResponseEntity<ResultModel>reviewError(Map<String, Object> model, HttpServletRequest request, @RequestParam(value="id", required=true) Long id)throws Exception{
+    public ResponseEntity<ResultModel>reviewError(Map<String, Object> model, HttpServletRequest request
+            , @RequestParam(value="id", required=true) Long id
+            , @RequestParam(value="remarks", required=true) String remarks)throws Exception{
         ActivityPersonnelInfo activityPersonnelInfo = activityPersonnelInfoService.selectById(id);
         if (EmptyUtil.Companion.isNullOrEmpty(activityPersonnelInfo)){
             return new ResponseEntity<>(new ResultModel(ResultStatus.DATA_NULL,id), HttpStatus.OK);
         }else {
-            return activityPersonnelInfoService.reviewError(id);
+            return activityPersonnelInfoService.reviewError(id,remarks);
         }
     }
 
 
+    /**
+     * @Description list M&V
+     * @Author  muxu
+     * @Date  2019/10/14
+     * @Time 13:24
+     * @Return
+     * @Params
+    **/
+    @RequestMapping("/list/index.ahsj")
+    ModelAndView listIndex(String token,Long id) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/activityPersonnelInfo/list");
+        modelAndView.addObject("title", "智慧园区系统");
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("activityId", id);
+        return modelAndView;
+    }
+
+
+    /**
+     * @Description review审核
+     * @Author  muxu
+     * @Date  2019/10/14
+     * @Time 14:17
+     * @Return org.springframework.web.servlet.ModelAndView
+     * @Params [token, id]
+    **/
+    @RequestMapping("/review/index.ahsj")
+    ModelAndView review(String token,Long id) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/activityPersonnelInfo/review");
+        modelAndView.addObject("title", "智慧园区系统");
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("activityPersonnelInfoVO", activityPersonnelInfoService.selectById(id));
+        return modelAndView;
+    }
 }

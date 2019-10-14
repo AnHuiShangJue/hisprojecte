@@ -18,10 +18,12 @@
     <result column="enterprise_id" property="enterpriseId" jdbcType="BIGINT" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="is_public" property="isPublic" jdbcType="INTEGER" />
+    <result column="is_review" property="isReview" jdbcType="INTEGER" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, name, event_location, registration_deadline, start_time, end_time, maximum_number, 
-    description, is_enable, create_date, create_user_id, update_date, update_user_id, 
+    description, is_enable, create_date, create_user_id, update_date, update_user_id, is_review, remarks,
     enterprise_id, user_id, is_public
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -39,13 +41,13 @@
       registration_deadline, start_time, end_time, 
       maximum_number, description, is_enable, 
       create_date, create_user_id, update_date, 
-      update_user_id, enterprise_id, user_id, 
+      update_user_id, enterprise_id, user_id, is_review, remarks,
       is_public)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{eventLocation,jdbcType=VARCHAR}, 
       #{registrationDeadline,jdbcType=DATE}, #{startTime,jdbcType=DATE}, #{endTime,jdbcType=DATE}, 
       #{maximumNumber,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, #{isEnable,jdbcType=INTEGER}, 
       #{createDate,jdbcType=DATE}, #{createUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=DATE}, 
-      #{updateUserId,jdbcType=BIGINT}, #{enterpriseId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      #{updateUserId,jdbcType=BIGINT}, #{enterpriseId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{isReview,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR},
       #{isPublic,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.ahsj.smartparkcore.entity.po.ActivityInfo" >
@@ -218,6 +220,8 @@
       update_user_id = #{updateUserId,jdbcType=BIGINT},
       enterprise_id = #{enterpriseId,jdbcType=BIGINT},
       user_id = #{userId,jdbcType=BIGINT},
+      is_review = #{isReview,jdbcType=INTEGER},
+      remarks = #{remarks,jdbcType=VARCHAR},
       is_public = #{isPublic,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -234,6 +238,8 @@
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="is_enable" jdbcType="INTEGER" property="isEnable" />
     <result column="is_public" jdbcType="INTEGER" property="isPublic" />
+    <result column="is_review" jdbcType="INTEGER" property="isReview" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
   </resultMap>
 
   <select id="list" resultMap="BaseResultMapVO" parameterType="core.entity.PageBean">
@@ -242,6 +248,9 @@
     from activity_info
     where
     1=1
+    <if test="parameter.name != null ">
+      and activity_info.name &gt;= #{parameter.name,jdbcType=VARCHAR}
+    </if>
     <if test="parameter.orders != null and parameter.orders != ''">
       order by ${parameter.orders}
     </if>

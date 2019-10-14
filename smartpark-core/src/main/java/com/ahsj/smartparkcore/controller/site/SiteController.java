@@ -3,12 +3,9 @@ package com.ahsj.smartparkcore.controller.site;
 import com.ahsj.smartparkcore.core.ResultModel;
 import com.ahsj.smartparkcore.core.ResultStatus;
 import com.ahsj.smartparkcore.entity.dto.SiteDTO;
-import com.ahsj.smartparkcore.entity.po.EnterpriseInfo;
-import com.ahsj.smartparkcore.entity.site;
 import com.ahsj.smartparkcore.services.SiteServices;
 import core.controller.BaseController;
 import core.entity.PageBean;
-import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -154,6 +151,23 @@ public class SiteController extends BaseController {
     ModelAndView update(String token, Long id) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/site/update");
         modelAndView.addObject("title", "修改场地信息");
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("siteDTO", siteServices.selectByPrimaryKey(id));
+        return modelAndView;
+    }
+
+    /**
+     * @Description 场地审核
+     * @Params: [token, id]
+     * @Author: dingli
+     * @Return: org.springframework.web.servlet.ModelAndView
+     * @Date 2019/10/14
+     * @Time 17:19
+     **/
+    @RequestMapping(value = "/isVerify/index.ahsj")
+    ModelAndView isVerify(String token, Long id) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/site/isVerify");
+        modelAndView.addObject("title", "场地审核");
         modelAndView.addObject("token", token);
         modelAndView.addObject("siteDTO", siteServices.selectByPrimaryKey(id));
         return modelAndView;

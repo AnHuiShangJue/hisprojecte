@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com" >
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:ahsj="http://www.anhuishangjue.com">
 <div th:replace="public/base_list :: html"></div>
 <body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
       data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
@@ -47,30 +48,26 @@
                         <form id="searchForm" class="row" action="">
                             <div class="row">
                                 <div class="col input-field s3 m3 l3">
-                                    <input id="conferenceName" name="conferenceName" type="text"/>
-                                    <label for="conferenceName">会议室名称</label>
-                                </div>
-                                <div class="col input-field s3 m3 l3">
-                                    <input id="environmentalLabel" name="environmentalLabel" type="text"/>
-                                    <label for="environmentalLabel">标志建筑</label>
-                                </div>
-                                <div class="col input-field s3 m3 l3">
-                                    <input id="location" name="location" type="text"/>
-                                    <label for="location">地点</label>
+                                    <input id="subscriberName" name="subscriberName" type="text"/>
+                                    <label for="subscriberName">预约人姓名<span style="font-size: 12px">
+</span></label>
                                 </div>
                                 <div class="col input-field s3 m3 l3">
                                     <input id="phoneNumber" name="phoneNumber" type="text"/>
-                                    <label for="phoneNumber">联系电话</label>
+                                    <label for="phoneNumber">预约人手机号<span style="font-size: 12px">
+</span></label>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col  s1 m1 l1 xl1">
-                                    <div ahsj:radio name="isEnable" id="isEnable" type="code" typeKey="is_enable"
-                                         title="是否启用" cssdefault="radiotdefault" haveDefault="true" value="0"></div>
-                                </div>
-                                <div class="col  s1 m1 l1 xl1">
-                                    <div ahsj:radio name="isLease" id="isLease" type="code" typeKey="is_lease"
-                                         title="是否已租赁" cssdefault="radiotdefault" haveDefault="true" value="0"></div>
+                                <div class="col s3 m3 l3 xl3 ">
+                                    <div ahsj:radio name="isAudit" id="is_audit" type="code"
+                                         typeKey="is_audit"
+                                         title="审核" cssdefault="isAudit" haveDefault="true"
+                                         value="0">
+                                    </div>
+                                    <div ahsj:radio name="isCancel" id="is_cancel" type="code"
+                                         typeKey="is_cancel"
+                                         title="是否取消" cssdefault="isCancel" haveDefault="true"
+                                         value="0">
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -80,10 +77,10 @@
                         <div class="col s2 m2 l2 xl2 offset-l1">
                             <a class="waves-effect waves-light btn" id="searchBtn"><i
                                     class="material-icons  white-text tooltipped " data-position="bottom"
-                                    data-delay="50" data-tooltip="搜索">search</i></a>
+                                    data-delay="50" data-tooltip="搜索">搜索</i></a>
                             <a id="resetBtn" class="waves-effect waves-light btn"><i
                                     class="material-icons  white-text tooltipped " data-position="bottom"
-                                    data-delay="50" data-tooltip="重置">youtube_searched_for</i></a>
+                                    data-delay="50" data-tooltip="重置">重置</i></a>
                         </div>
                     </div>
                 </div>
@@ -96,14 +93,14 @@
                             </h4><label style="color:black">Console</label>
                             <div class="row">
                                 <div class="col m3 l3 s3 offset-s9 offset-l9 offset-xl9 offset-m9">
-                                    <a  id="createBtn"
-                                        class="btn waves-effect waves-light red"><i
+                                    <a id="createBtn"
+                                       class="btn waves-effect waves-light red"><i
                                             class="material-icons  white-text tooltipped " data-position="bottom"
-                                            data-delay="50" data-tooltip="新增">add</i></a>
-                                    <a  id="deleteManyBtn"
-                                        class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
-                                            class="material-icons white-text tooltipped" data-position="bottom"
-                                            data-delay="50" data-tooltip="批量删除">delete</i></a>
+                                            data-delay="50" data-tooltip="新增">新增</i></a>
+                                    <!--   <a id="deleteManyBtn"
+                                          class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
+                                               class="material-icons white-text tooltipped" data-position="bottom"
+                                               data-delay="50" data-tooltip="批量删除">delete</i></a>-->
                                 </div>
                             </div>
                             <!--Form Advance-->
@@ -138,66 +135,66 @@
             onError: function (grid) {
             },
             onDataLoad: function (grid) {
-
             },
             loadingMessage: 'Loading...',
             dataTable: {
                 "ajax": {
-                    "url": CTX + "/api/conferenceRoomInfo/list.ahsj?token=" + TOKEN, // ajax source
+                    "url": CTX + "/api/book/list.index.ahsj?token=" + TOKEN, // ajax source
                 },
                 "columns": [
                     {
                         "title": "<label><input type=\"checkbox\"  id=\"checkAll\" class=\"select-all\" > <span></span></label> ",
                         "render": function (data, type, row, meta) {
-                            return " <label> <input type=\"checkbox\" value=\"" + row.id + "\"> <span></span> </label>";
+                            return " <label> <input type=\"checkbox\" value=\"" + row.id + "\" class=\"select-ids\"> <span></span> </label>";
                         },
                         "width": "18px",
                         "orderable": false,
                         "className": "center-align"
-                    }, {
-                        "title": "会议室名称",
-                        "data": "conferenceName", //实体字段
-                        "name": "conference_name"   //库中字段
-                    }, {
-                        "title": "面积",
-                        "data": "area",
-                        "name": "area"
-                    }, {
-                        "title": "容纳人数",
-                        "data": "capacity",
-                        "name": "capacity"
                     },
                     {
-                        "title": "企业描述",
-                        "data": "description",
-                        "name": "description"
+                        "title": "预约类型",
+                        "data": "bookTypeName",
+                        "name": "book_type"
                     },
                     {
-                        "title": "标志建筑",
-                        "data": "environmentalLabel",
-                        "name": "environmental_label"
+                        "title": "预约开始时间",
+                        "data": "startTime",
+                        "name": "start_time"
                     },
                     {
-                        "title": "是否启用",
-                        "data": "isEnableName",
-                        "name": "is_enable"
-                    }, {
-                        "title": "是否租赁",
-                        "data": "isLeaseName",
-                        "name": "is_lease"
-                    }, {
-                        "title": "地点",
-                        "data": "location",
-                        "name": "location"
-                    }, {
-                        "title": "联系电话",
+                        "title": "预约结束时间",
+                        "data": "endTime",
+                        "name": "end_time"
+                    },
+                    {
+                        "title": "是否审核",
+                        "data": "isAuditName",
+                        "name": "is_audit"
+                    },
+                    {
+                        "title": "是否取消",
+                        "data": "isCancelName",
+                        "name": "is_cancel"
+                    },
+                    {
+                        "title": "是否付费",
+                        "data": "isPayName",
+                        "name": "is_pay"
+                    },
+                    {
+                        "title": "付费金额",
+                        "data": "paymentAmount",
+                        "name": "paymentAmount"
+                    },
+                    {
+                        "title": "预约人姓名",
+                        "data": "subscriberName",
+                        "name": "subscriber_name"
+                    },
+                    {
+                        "title": "预约人手机",
                         "data": "phoneNumber",
                         "name": "phone_number"
-                    },
-                    {
-                        "title": "价格",
-                        "data": "price",
-                        "name": "price"
                     },
                     {
                         "title": "操作",
@@ -207,42 +204,86 @@
                         "render": function (data, type, row) {
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
-                            rtnBtn = rtnBtn + "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='edit(" + row.id + ");'> <i class='material-icons'>edit</i></a>" +
-                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick='deleteInit(" + row.id + ");'> <i class='material-icons'>delete</i></a>";
+                            rtnBtn = rtnBtn +
+                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改预约\" onclick='update(" + row.id + ");'> <i class='material-icons'>edit</i></a>" +
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"审核\" href='javascript:;' onclick='isAudit(" + row.id + ");'> <i class='material-icons'>info</i></a>";
                             // 返回自定义内容
                             return rtnBtn;
                         }
                     }
                 ],
                 "order": [
-                    [6, 'asc']
-                ],
+                    [1, 'asc']
+                ]
             }
         });
-
     }
 
+    $("#createBtn").click(
+        function addSize() {
+            var url = CTX + "/api/site/add/index.ahsj?token=" + TOKEN;
+            dialog.show(url, "新增场地");
+        })
 
-    function edit(id) {
-        var url = CTX + "/api/conferenceRoomInfo/update/index.ahsj?token=" + TOKEN + "&id=" + id;
-        dialog.show(url, "修改会议室信息");
+    function update(id) {
+        var url = CTX + "/api/book/update/index.ahsj?token=" + TOKEN + "&id=" + id;
+        dialog.show(url, "修改预约");
     }
 
-    function deleteInit(ids) {
-        dialog.confirm('确定删除?', function (index, layero) {
-            $.ahsjajax(CTX + "/api/conferenceRoomInfo/delete.ahsj",
+    function visibility(id) {
+        var url = CTX + "/api/book/show/index.ahsj?token=" + TOKEN + "&id=" + id;
+        dialog.show(url, "查看预约");
+    }
+
+    function isAudit(id) {
+        var url = CTX + "/api/book/isAudit/index.ahsj?token=" + TOKEN + "&id=" + id;
+        dialog.show(url, "审核预约");
+    }
+
+    function setIsEnable(ids) {
+        dialog.confirm('确定修改场地启用状态吗?', function (index, layero) {
+            $.ahsjajax(CTX + "/api/site/setEnable.ahsj",
                 {"ids": ids},
-                function (responseEntity) {
-                    if (responseEntity.message.substring(0,1) != "-") {
+                function (msg) {
+                    if (msg.success) {
                         swal.close();
                         M.toast({
-                            html: responseEntity.message, completeCallback: function () {
+                            html: msg.message, completeCallback: function () {
                             }
                         });
                         grid.search();
                     } else {
                         M.toast({
-                            html: responseEntity.message, completeCallback: function () {
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                    }
+                },
+                function (data) {
+                    M.toast({
+                        html: "网络异常", completeCallback: function () {
+                        }
+                    });
+                }
+            );
+        });
+    }
+
+    function deleteInit(ids) {
+        dialog.confirm('确定删除?', function (index, layero) {
+            $.ahsjajax(CTX + "/api/patient/delete.ahsj",
+                {"ids": ids},
+                function (msg) {
+                    if (msg.success) {
+                        swal.close();
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                        grid.search();
+                    } else {
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
                             }
                         });
                     }
@@ -259,10 +300,6 @@
 
     function initBtn() {
         //新增按钮
-        $("#createBtn").click(function () {
-            var url = CTX + "/api/conferenceRoomInfo/update/index.ahsj?token=" + TOKEN;
-            dialog.show(url, "会议室信息添加")
-        });
         $("#deleteManyBtn").click(function () {
             var ids = grid.getSelectedRows();
             if (ids.length == 0) {
@@ -277,9 +314,6 @@
         });
         $('#resetBtn').click(function () {
             grid.reset();
-        });
-        $("#searchForm .row .col input[type='radio']").click(function () {
-            grid.search();
         });
     }
 

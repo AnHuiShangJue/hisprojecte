@@ -1,6 +1,7 @@
 package com.ahsj.smartparkcore.dao;
 
 import com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo;
+import com.ahsj.smartparkcore.entity.vo.ConferenceRoomInfoVO;
 import core.entity.PageBean;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -20,5 +21,5 @@ public interface ConferenceRoomInfoMapper extends BaseMapper<ConferenceRoomInfo>
 
     int updateByPrimaryKey(ConferenceRoomInfo record);
 
-    List<?extends ConferenceRoomInfo> list(PageBean<ConferenceRoomInfo> pageBean);
+    List<?extends ConferenceRoomInfoVO> list(PageBean<ConferenceRoomInfo> pageBean);
 }

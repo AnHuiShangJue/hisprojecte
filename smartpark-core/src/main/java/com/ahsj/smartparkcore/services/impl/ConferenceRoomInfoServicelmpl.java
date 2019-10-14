@@ -6,6 +6,7 @@ import com.ahsj.smartparkcore.core.ResultStatus;
 import com.ahsj.smartparkcore.dao.ConferenceRoomInfoMapper;
 import com.ahsj.smartparkcore.entity.dto.ConferenceRoomInfoDTO;
 import com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo;
+import com.ahsj.smartparkcore.entity.vo.ConferenceRoomInfoVO;
 import com.ahsj.smartparkcore.services.ConferenceRoomInfoService;
 import core.entity.PageBean;
 import org.dozer.DozerBeanMapper;
@@ -67,6 +68,7 @@ public class ConferenceRoomInfoServicelmpl implements ConferenceRoomInfoService 
         }else{
             return new ResponseEntity<>(new ResultModel(ResultStatus.ERROR_UPDATE), HttpStatus.OK);
         }
+
     }
 
     /**
@@ -110,8 +112,9 @@ public class ConferenceRoomInfoServicelmpl implements ConferenceRoomInfoService 
     **/
     @Override
     @Transactional(readOnly = true)
-    public ResponseEntity<ResultModel> list(PageBean<ConferenceRoomInfo> pageBean) throws Exception {
-        pageBean.setData(CodeHelper.getInstance().setCodeValue(conferenceRoomInfoMapper.list(pageBean)));
-        return new ResponseEntity<>(new ResultModel(ResultStatus.SUCCESS_SELECT,pageBean), HttpStatus.OK);
+    public PageBean<ConferenceRoomInfoVO> list(PageBean<ConferenceRoomInfo> pageBean) throws Exception {
+        PageBean<ConferenceRoomInfoVO> pageBeanVO = new PageBean<>();
+        pageBeanVO.setData(CodeHelper.getInstance().setCodeValue(conferenceRoomInfoMapper.list(pageBean)));
+        return pageBeanVO;
     }
 }

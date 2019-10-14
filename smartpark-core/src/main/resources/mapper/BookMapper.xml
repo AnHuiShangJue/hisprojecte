@@ -1,213 +1,280 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ahsj.smartparkcore.dao.BookMapper" >
-  <resultMap id="BaseResultMap" type="com.ahsj.smartparkcore.entity.po.Book" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="target_id" property="targetId" jdbcType="BIGINT" />
-    <result column="book_type" property="bookType" jdbcType="INTEGER" />
-    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
-    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
-    <result column="subscriber_name" property="subscriberName" jdbcType="VARCHAR" />
-    <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
-    <result column="is_pay" property="isPay" jdbcType="INTEGER" />
-    <result column="is_cancel" property="isCancel" jdbcType="INTEGER" />
-    <result column="payment_amount" property="paymentAmount" jdbcType="DECIMAL" />
-    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
-    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
-    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
-    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
-    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, target_id, book_type, start_time, end_time, subscriber_name, phone_number, is_pay, 
-    is_cancel, payment_amount, create_user_id, create_date, update_date, update_user_id, 
-    remarks
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahsj.smartparkcore.dao.BookMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.smartparkcore.entity.po.Book">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="create_user_id" jdbcType="BIGINT" property="createUserId"/>
+        <result column="update_user_id" jdbcType="BIGINT" property="updateUserId"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="book_type" jdbcType="INTEGER" property="bookType"/>
+        <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="is_audit" jdbcType="INTEGER" property="isAudit"/>
+        <result column="is_cancel" jdbcType="INTEGER" property="isCancel"/>
+        <result column="is_pay" jdbcType="INTEGER" property="isPay"/>
+        <result column="payment_amount" jdbcType="DECIMAL" property="paymentAmount"/>
+        <result column="deposit" jdbcType="DECIMAL" property="deposit"/>
+        <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber"/>
+        <result column="subscriber_name" jdbcType="VARCHAR" property="subscriberName"/>
+        <result column="target_id" jdbcType="BIGINT" property="targetId"/>
+        <result column="remarks" jdbcType="VARCHAR" property="remarks"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, create_user_id, update_user_id, create_date, update_date, book_type, start_time, 
+    end_time, is_audit, is_cancel, is_pay, payment_amount, deposit, phone_number, subscriber_name, 
+    target_id, remarks, description
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from book
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from book
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from book
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.ahsj.smartparkcore.entity.po.Book" >
-    insert into book (id, target_id, book_type, 
-      start_time, end_time, subscriber_name, 
-      phone_number, is_pay, is_cancel, 
-      payment_amount, create_user_id, create_date, 
-      update_date, update_user_id, remarks
+    <insert id="insert" parameterType="com.ahsj.smartparkcore.entity.po.Book">
+    insert into book (id, create_user_id, update_user_id, 
+      create_date, update_date, book_type, 
+      start_time, end_time, is_audit, 
+      is_cancel, is_pay, payment_amount, 
+      deposit, phone_number, subscriber_name, 
+      target_id, remarks, description
       )
-    values (#{id,jdbcType=BIGINT}, #{targetId,jdbcType=BIGINT}, #{bookType,jdbcType=INTEGER}, 
-      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{subscriberName,jdbcType=VARCHAR}, 
-      #{phoneNumber,jdbcType=VARCHAR}, #{isPay,jdbcType=INTEGER}, #{isCancel,jdbcType=INTEGER}, 
-      #{paymentAmount,jdbcType=DECIMAL}, #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{updateDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{remarks,jdbcType=VARCHAR}
+    values (#{id,jdbcType=BIGINT}, #{createUserId,jdbcType=BIGINT}, #{updateUserId,jdbcType=BIGINT}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{bookType,jdbcType=INTEGER}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{isAudit,jdbcType=INTEGER}, 
+      #{isCancel,jdbcType=INTEGER}, #{isPay,jdbcType=INTEGER}, #{paymentAmount,jdbcType=DECIMAL}, 
+      #{deposit,jdbcType=DECIMAL}, #{phoneNumber,jdbcType=VARCHAR}, #{subscriberName,jdbcType=VARCHAR}, 
+      #{targetId,jdbcType=BIGINT}, #{remarks,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ahsj.smartparkcore.entity.po.Book" >
-    insert into book
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="targetId != null" >
-        target_id,
-      </if>
-      <if test="bookType != null" >
-        book_type,
-      </if>
-      <if test="startTime != null" >
-        start_time,
-      </if>
-      <if test="endTime != null" >
-        end_time,
-      </if>
-      <if test="subscriberName != null" >
-        subscriber_name,
-      </if>
-      <if test="phoneNumber != null" >
-        phone_number,
-      </if>
-      <if test="isPay != null" >
-        is_pay,
-      </if>
-      <if test="isCancel != null" >
-        is_cancel,
-      </if>
-      <if test="paymentAmount != null" >
-        payment_amount,
-      </if>
-      <if test="createUserId != null" >
-        create_user_id,
-      </if>
-      <if test="createDate != null" >
-        create_date,
-      </if>
-      <if test="updateDate != null" >
-        update_date,
-      </if>
-      <if test="updateUserId != null" >
-        update_user_id,
-      </if>
-      <if test="remarks != null" >
-        remarks,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="targetId != null" >
-        #{targetId,jdbcType=BIGINT},
-      </if>
-      <if test="bookType != null" >
-        #{bookType,jdbcType=INTEGER},
-      </if>
-      <if test="startTime != null" >
-        #{startTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="endTime != null" >
-        #{endTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="subscriberName != null" >
-        #{subscriberName,jdbcType=VARCHAR},
-      </if>
-      <if test="phoneNumber != null" >
-        #{phoneNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="isPay != null" >
-        #{isPay,jdbcType=INTEGER},
-      </if>
-      <if test="isCancel != null" >
-        #{isCancel,jdbcType=INTEGER},
-      </if>
-      <if test="paymentAmount != null" >
-        #{paymentAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="createUserId != null" >
-        #{createUserId,jdbcType=BIGINT},
-      </if>
-      <if test="createDate != null" >
-        #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateDate != null" >
-        #{updateDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateUserId != null" >
-        #{updateUserId,jdbcType=BIGINT},
-      </if>
-      <if test="remarks != null" >
-        #{remarks,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.smartparkcore.entity.po.Book" >
+    <insert id="insertSelective" parameterType="com.ahsj.smartparkcore.entity.po.Book">
+        insert into book
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="bookType != null">
+                book_type,
+            </if>
+            <if test="startTime != null">
+                start_time,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+            <if test="isAudit != null">
+                is_audit,
+            </if>
+            <if test="isCancel != null">
+                is_cancel,
+            </if>
+            <if test="isPay != null">
+                is_pay,
+            </if>
+            <if test="paymentAmount != null">
+                payment_amount,
+            </if>
+            <if test="deposit != null">
+                deposit,
+            </if>
+            <if test="phoneNumber != null">
+                phone_number,
+            </if>
+            <if test="subscriberName != null">
+                subscriber_name,
+            </if>
+            <if test="targetId != null">
+                target_id,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bookType != null">
+                #{bookType,jdbcType=INTEGER},
+            </if>
+            <if test="startTime != null">
+                #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isAudit != null">
+                #{isAudit,jdbcType=INTEGER},
+            </if>
+            <if test="isCancel != null">
+                #{isCancel,jdbcType=INTEGER},
+            </if>
+            <if test="isPay != null">
+                #{isPay,jdbcType=INTEGER},
+            </if>
+            <if test="paymentAmount != null">
+                #{paymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="deposit != null">
+                #{deposit,jdbcType=DECIMAL},
+            </if>
+            <if test="phoneNumber != null">
+                #{phoneNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="subscriberName != null">
+                #{subscriberName,jdbcType=VARCHAR},
+            </if>
+            <if test="targetId != null">
+                #{targetId,jdbcType=BIGINT},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.smartparkcore.entity.po.Book">
+        update book
+        <set>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bookType != null">
+                book_type = #{bookType,jdbcType=INTEGER},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isAudit != null">
+                is_audit = #{isAudit,jdbcType=INTEGER},
+            </if>
+            <if test="isCancel != null">
+                is_cancel = #{isCancel,jdbcType=INTEGER},
+            </if>
+            <if test="isPay != null">
+                is_pay = #{isPay,jdbcType=INTEGER},
+            </if>
+            <if test="paymentAmount != null">
+                payment_amount = #{paymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="deposit != null">
+                deposit = #{deposit,jdbcType=DECIMAL},
+            </if>
+            <if test="phoneNumber != null">
+                phone_number = #{phoneNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="subscriberName != null">
+                subscriber_name = #{subscriberName,jdbcType=VARCHAR},
+            </if>
+            <if test="targetId != null">
+                target_id = #{targetId,jdbcType=BIGINT},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.smartparkcore.entity.po.Book">
     update book
-    <set >
-      <if test="targetId != null" >
-        target_id = #{targetId,jdbcType=BIGINT},
-      </if>
-      <if test="bookType != null" >
-        book_type = #{bookType,jdbcType=INTEGER},
-      </if>
-      <if test="startTime != null" >
-        start_time = #{startTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="endTime != null" >
-        end_time = #{endTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="subscriberName != null" >
-        subscriber_name = #{subscriberName,jdbcType=VARCHAR},
-      </if>
-      <if test="phoneNumber != null" >
-        phone_number = #{phoneNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="isPay != null" >
-        is_pay = #{isPay,jdbcType=INTEGER},
-      </if>
-      <if test="isCancel != null" >
-        is_cancel = #{isCancel,jdbcType=INTEGER},
-      </if>
-      <if test="paymentAmount != null" >
-        payment_amount = #{paymentAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="createUserId != null" >
-        create_user_id = #{createUserId,jdbcType=BIGINT},
-      </if>
-      <if test="createDate != null" >
-        create_date = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateDate != null" >
-        update_date = #{updateDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateUserId != null" >
-        update_user_id = #{updateUserId,jdbcType=BIGINT},
-      </if>
-      <if test="remarks != null" >
-        remarks = #{remarks,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ahsj.smartparkcore.entity.po.Book" >
-    update book
-    set target_id = #{targetId,jdbcType=BIGINT},
+    set create_user_id = #{createUserId,jdbcType=BIGINT},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
       book_type = #{bookType,jdbcType=INTEGER},
       start_time = #{startTime,jdbcType=TIMESTAMP},
       end_time = #{endTime,jdbcType=TIMESTAMP},
-      subscriber_name = #{subscriberName,jdbcType=VARCHAR},
-      phone_number = #{phoneNumber,jdbcType=VARCHAR},
-      is_pay = #{isPay,jdbcType=INTEGER},
+      is_audit = #{isAudit,jdbcType=INTEGER},
       is_cancel = #{isCancel,jdbcType=INTEGER},
+      is_pay = #{isPay,jdbcType=INTEGER},
       payment_amount = #{paymentAmount,jdbcType=DECIMAL},
-      create_user_id = #{createUserId,jdbcType=BIGINT},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
-      update_date = #{updateDate,jdbcType=TIMESTAMP},
-      update_user_id = #{updateUserId,jdbcType=BIGINT},
-      remarks = #{remarks,jdbcType=VARCHAR}
+      deposit = #{deposit,jdbcType=DECIMAL},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      subscriber_name = #{subscriberName,jdbcType=VARCHAR},
+      target_id = #{targetId,jdbcType=BIGINT},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+    <select id="selectTime" parameterType="com.ahsj.smartparkcore.entity.dto.BookDTO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from book
+        where is_cancel =2 and is_pay = 1
+        and book_type = #{bookType,jdbcType=INTEGER}
+        and target_id = #{targetId,jdbcType=BIGINT}
+        and not ( start_time &gt;= #{endTime,jdbcType=TIMESTAMP} or end_time &lt;= #{startTime,jdbcType=TIMESTAMP});
+    </select>
+
+    <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from book
+        where 1=1
+        <if test="parameter.isAudit != null and parameter.isAudit != ''">
+            and is_audit = #{parameter.isAudit,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.isCancel != null and parameter.isCancel != ''">
+            and is_cancel = #{parameter.isCancel,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.subscriberName != null and parameter.subscriberName != ''">
+            and subscriber_name like concat('%', #{parameter.subscriberName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.phoneNumber != null and parameter.phoneNumber != ''">
+            and phone_number like concat('%', #{parameter.phoneNumber,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
 </mapper>

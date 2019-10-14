@@ -1,6 +1,10 @@
 package com.ahsj.smartparkcore.entity.dto;
 
 import com.ahsj.smartparkcore.entity.po.Book;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import core.code.CodeValueColumn;
+import core.code.Constants;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -8,25 +12,51 @@ import java.util.Date;
 public class BookDTO extends Book {
     private Long id;
 
-    private Long targetId;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd ")
+    private Date createDate;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd ")
+    private Date updateDate;
+
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "book_type", typeName = "bookTypeName")
     private Integer bookType;
+    private String bookTypeName;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date startTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date endTime;
 
-    private String subscriberName;
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_audit", typeName = "isAuditName")
+    private Integer isAudit;
+    private String isAuditName;
 
-    private String phoneNumber;
-
-    private Integer isPay;
-
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_cancel", typeName = "isCancelName")
     private Integer isCancel;
+    private String isCancelName;
+
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_pay", typeName = "isPayName")
+    private Integer isPay;
+    private String isPayName;
 
     private BigDecimal paymentAmount;
 
+    private BigDecimal deposit;
+
+    private String phoneNumber;
+
+    private String subscriberName;
+
+    private Long targetId;
+
     private String remarks;
+
+    private String description;
 
     @Override
     public Long getId() {
@@ -39,13 +69,23 @@ public class BookDTO extends Book {
     }
 
     @Override
-    public Long getTargetId() {
-        return targetId;
+    public Date getCreateDate() {
+        return createDate;
     }
 
     @Override
-    public void setTargetId(Long targetId) {
-        this.targetId = targetId;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    @Override
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    @Override
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
     @Override
@@ -79,23 +119,39 @@ public class BookDTO extends Book {
     }
 
     @Override
-    public String getSubscriberName() {
-        return subscriberName;
+    public Integer getIsAudit() {
+        return isAudit;
     }
 
     @Override
-    public void setSubscriberName(String subscriberName) {
-        this.subscriberName = subscriberName;
+    public void setIsAudit(Integer isAudit) {
+        this.isAudit = isAudit;
+    }
+
+    public String getIsAuditName() {
+        return isAuditName;
+    }
+
+    public void setIsAuditName(String isAuditName) {
+        this.isAuditName = isAuditName;
     }
 
     @Override
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public Integer getIsCancel() {
+        return isCancel;
     }
 
     @Override
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setIsCancel(Integer isCancel) {
+        this.isCancel = isCancel;
+    }
+
+    public String getIsCancelName() {
+        return isCancelName;
+    }
+
+    public void setIsCancelName(String isCancelName) {
+        this.isCancelName = isCancelName;
     }
 
     @Override
@@ -108,14 +164,12 @@ public class BookDTO extends Book {
         this.isPay = isPay;
     }
 
-    @Override
-    public Integer getIsCancel() {
-        return isCancel;
+    public String getIsPayName() {
+        return isPayName;
     }
 
-    @Override
-    public void setIsCancel(Integer isCancel) {
-        this.isCancel = isCancel;
+    public void setIsPayName(String isPayName) {
+        this.isPayName = isPayName;
     }
 
     @Override
@@ -129,6 +183,46 @@ public class BookDTO extends Book {
     }
 
     @Override
+    public BigDecimal getDeposit() {
+        return deposit;
+    }
+
+    @Override
+    public void setDeposit(BigDecimal deposit) {
+        this.deposit = deposit;
+    }
+
+    @Override
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    @Override
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public String getSubscriberName() {
+        return subscriberName;
+    }
+
+    @Override
+    public void setSubscriberName(String subscriberName) {
+        this.subscriberName = subscriberName;
+    }
+
+    @Override
+    public Long getTargetId() {
+        return targetId;
+    }
+
+    @Override
+    public void setTargetId(Long targetId) {
+        this.targetId = targetId;
+    }
+
+    @Override
     public String getRemarks() {
         return remarks;
     }
@@ -136,5 +230,23 @@ public class BookDTO extends Book {
     @Override
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getBookTypeName() {
+        return bookTypeName;
+    }
+
+    public void setBookTypeName(String bookTypeName) {
+        this.bookTypeName = bookTypeName;
     }
 }

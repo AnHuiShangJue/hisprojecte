@@ -1,12 +1,13 @@
 package com.ahsj.smartparkcore.entity.dto;
 
 import com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo;
+import core.code.CodeValueColumn;
+import core.code.Constants;
 import lombok.Data;
 
 import java.math.BigDecimal;
 
 //Data注解替代了所有的get和set方法
-@Data
 public class ConferenceRoomInfoDTO extends ConferenceRoomInfo {
     private Long id;
 
@@ -22,7 +23,9 @@ public class ConferenceRoomInfoDTO extends ConferenceRoomInfo {
 
     private String description;
 
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_enable", typeName = "isEnableName")
     private Integer isEnable;
+    private String isEnableName;
 
     private String name;
 
@@ -146,5 +149,13 @@ public class ConferenceRoomInfoDTO extends ConferenceRoomInfo {
 
     public void setConferenceName(String conferenceName) {
         this.conferenceName = conferenceName;
+    }
+
+    public String getIsEnableName() {
+        return isEnableName;
+    }
+
+    public void setIsEnableName(String isEnableName) {
+        this.isEnableName = isEnableName;
     }
 }

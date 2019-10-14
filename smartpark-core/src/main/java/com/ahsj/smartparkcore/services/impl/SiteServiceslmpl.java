@@ -144,6 +144,6 @@ public class SiteServiceslmpl implements SiteServices {
     @Override
     @Transactional(readOnly = true)
     public Site selectByPrimaryKey(Long id) throws Exception {
-        return siteMapper.selectByPrimaryKey(id);
+        return CodeHelper.getInstance().setCodeValue(siteMapper.selectByPrimaryKey(id));
     }
 }

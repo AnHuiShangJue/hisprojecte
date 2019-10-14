@@ -83,10 +83,10 @@
                                         class="btn waves-effect waves-light red"><i
                                             class="material-icons  white-text tooltipped " data-position="bottom"
                                             data-delay="50" data-tooltip="新增">add</i></a>
-                                    <a  id="deleteManyBtn"
+<!--                                    <a  id="deleteManyBtn"
                                         class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
                                             class="material-icons white-text tooltipped" data-position="bottom"
-                                            data-delay="50" data-tooltip="批量删除">delete</i></a>
+                                            data-delay="50" data-tooltip="批量删除">delete</i></a>-->
                                 </div>
                             </div>
                             <!--Form Advance-->
@@ -169,7 +169,7 @@
                     },
                     {
                         "title": "是否启用",
-                        "data": "isEnable",
+                        "data": "enableName",
                         "name": "is_enable"
                     },
                     {
@@ -178,8 +178,12 @@
                         "name": "create_date"
                     },{
                         "title": "是否公开",
-                        "data": "isPublic",
+                        "data": "isPublicName",
                         "name": "is_public"
+                    },{
+                        "title": "审核状态",
+                        "data": "isReviewName",
+                        "name": "is_review"
                     },
                     {
                         "title": "操作",
@@ -190,7 +194,9 @@
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn + "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='edit(" + row.id + ");'> <i class='material-icons'>edit</i></a>" +
-                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick='deleteInit(" + row.id + ");'> <i class='material-icons'>delete</i></a>";
+                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改启用状态\" onclick='enable(" + row.id + ");'> <i class='material-icons'>info</i></a>"+
+                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"活动人员信息\" onclick='personnel(" + row.id + ");'> <i class='material-icons'>person</i></a>"+
+                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"活动信息审核\" onclick='review(" + row.id + ");'> <i class='material-icons'>input</i></a>";
                             // 返回自定义内容
                             return rtnBtn;
                         }
@@ -206,13 +212,23 @@
 
 
     function edit(id) {
-        var url = CTX + "/api/activityInfo/update/index.ahsj?token=" + TOKEN;
+        var url = CTX + "/api/activityInfo/update/index.ahsj?token=" + TOKEN+"&id="+id;
         dialog.show(url, "修改活动信息");
     }
 
-    function deleteInit(ids) {
-        dialog.confirm('确定删除?', function (index, layero) {
-            $.ahsjajax(CTX + "/api/activityInfo/delete.ahsj",
+    function personnel(id) {
+        var url = CTX + "/api/activitypersonnelinfo/list/index.ahsj?token=" + TOKEN+"&id="+id;
+        dialog.show(url, "活动人员信息");
+    }
+
+    function review(id) {
+        var url = CTX + "/api/activityInfo/review/index.ahsj?token=" + TOKEN+"&id="+id;
+        dialog.show(url, "活动信息审核");
+    }
+
+    function enable(ids) {
+        dialog.confirm('确定修改?', function (index, layero) {
+            $.ahsjajax(CTX + "/api/activityInfo/enable.ahsj",
                 {"ids": ids},
                 function (msg) {
                     if (msg.success) {
@@ -242,7 +258,7 @@
     function initBtn() {
         //新增按钮
         $("#createBtn").click(function () {
-            var url = CTX + "/api/activityInfo/update/index.ahsj?token=" + TOKEN;
+            var url = CTX + "/api/activityInfo/save/index.ahsj?token=" + TOKEN;
             dialog.show(url, "活动信息添加")
         });
         $("#deleteManyBtn").click(function () {

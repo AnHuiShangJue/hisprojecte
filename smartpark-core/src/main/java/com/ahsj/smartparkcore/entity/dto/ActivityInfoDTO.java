@@ -36,6 +36,9 @@ public class ActivityInfoDTO extends ActivityInfo {
 
     private Integer isPublic;
 
+    private String remarks;
+
+
     @Override
     public Long getId() {
         return id;
@@ -116,15 +119,6 @@ public class ActivityInfoDTO extends ActivityInfo {
         this.description = description;
     }
 
-    @Override
-    public Integer getIsEnable() {
-        return isEnable;
-    }
-
-    @Override
-    public void setIsEnable(Integer isEnable) {
-        this.isEnable = isEnable;
-    }
 
     @Override
     public Date getCreateDate() {
@@ -174,5 +168,25 @@ public class ActivityInfoDTO extends ActivityInfo {
     @Override
     public void setIsPublic(Integer isPublic) {
         this.isPublic = isPublic;
+    }
+
+    @Override
+    public Integer getIsEnable() {
+        return isEnable;
+    }
+
+    @Override
+    public void setIsEnable(Integer isEnable) {
+        this.isEnable = isEnable;
+    }
+
+    @Override
+    public String getRemarks() {
+        return remarks;
+    }
+
+    @Override
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 }
