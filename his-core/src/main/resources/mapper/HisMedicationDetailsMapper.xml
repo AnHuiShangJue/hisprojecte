@@ -695,6 +695,15 @@ where a.medical_record_id  = #{medicalRecordId,jdbcType=BIGINT} and is_pay = 2
         select his_medication_details.*
 from his_medication_details
 where is_pay = 2 and medical_record_id  = #{parameter.medicalRecordId,jdbcType=BIGINT}
+        <if test="parameter.drugsNumb != null and parameter.drugsNumb != ''">
+            and drugs_numb like concat('%' #{parameter.drugsNumb,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.drugsName != null and parameter.drugsName != ''">
+            and drugs_name like concat('%' #{parameter.drugsName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.drugsAlias != null and parameter.drugsAlias != ''">
+            and drugs_alias like concat('%' #{parameter.drugsAlias,jdbcType=VARCHAR},'%')
+        </if>
     </select>
 
     <select id="selectByIds" resultMap="BaseResultMap">

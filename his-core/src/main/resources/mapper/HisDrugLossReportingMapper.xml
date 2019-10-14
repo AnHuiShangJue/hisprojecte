@@ -307,9 +307,10 @@
   <!--list查询-->
   <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
     SELECT
-    his_drug_loss_reporting.*
+    a.*,b.drugs_alias as drugsAlias
     FROM
-    his_drug_loss_reporting
+    his_drug_loss_reporting as a
+    left join his_medicine_info as b on a.drugs_numb = b.drugs_numb
     where
     1= 1
     <if test="parameter.drugsNumb != null and parameter.drugsNumb != ''">
@@ -317,6 +318,12 @@
     </if>
     <if test="parameter.drugsName != null and parameter.drugsName != ''">
       and drugs_name like concat('%' #{parameter.drugsName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.drugsName != null and parameter.drugsName != ''">
+      and drugs_name like concat('%' #{parameter.drugsName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.drugsAlias != null and parameter.drugsAlias != ''">
+      and drugs_alias like concat('%' #{parameter.drugsAlias,jdbcType=VARCHAR},'%')
     </if>
     <if test="parameter.orders != null and parameter.orders != ''">
       order by ${parameter.orders}

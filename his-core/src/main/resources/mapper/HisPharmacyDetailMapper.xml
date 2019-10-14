@@ -36,12 +36,40 @@
         <result column="normal_stock" jdbcType="INTEGER" property="normalStock"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, medicine_id, count, create_user_id, create_time, update_user_id, update_time,
-    enter_price, sale_price, stock, sale_counts, is_obtained, description, drugs_numb, 
-    drugs_name, drugs_alias, drugs_spec, prescription, mental_medicine, large_unit, small_unit, 
-    conversion_rate, disable, level, medical_insurance_sign, placeOrigin, base_medicine, 
-    narcotic_drugs, remarks,validity_period,stock_warn,normal_stock
-  </sql>
+        id
+        ,
+        medicine_id,
+        count,
+        create_user_id,
+        create_time,
+        update_user_id,
+        update_time,
+        enter_price,
+        sale_price,
+        stock,
+        sale_counts,
+        is_obtained,
+        description,
+        drugs_numb,
+        drugs_name,
+        drugs_alias,
+        drugs_spec,
+        prescription,
+        mental_medicine,
+        large_unit,
+        small_unit,
+        conversion_rate,
+        disable,
+        level,
+        medical_insurance_sign,
+        placeOrigin,
+        base_medicine,
+        narcotic_drugs,
+        remarks,
+        validity_period,
+        stock_warn,
+        normal_stock
+    </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -49,31 +77,34 @@
         where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from his_pharmacy_detail
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+        delete
+        from his_pharmacy_detail
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
     <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisPharmacyDetail">
-    insert into his_pharmacy_detail (id, medicine_id, count, 
-      create_user_id, create_time, update_user_id,
-      update_time, enter_price, sale_price,
-      stock, sale_counts,is_obtained,
-      description, drugs_numb, drugs_name, 
-      drugs_alias, drugs_spec, prescription, 
-      mental_medicine, large_unit, small_unit, 
-      conversion_rate, disable, level, 
-      medical_insurance_sign, placeOrigin, base_medicine, 
-      narcotic_drugs, remarks,validity_period,stock_warn,normal_stock)
-    values (#{id,jdbcType=BIGINT}, #{medicineId,jdbcType=BIGINT}, #{count,jdbcType=INTEGER}, 
-      #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, 
-      #{updateDate,jdbcType=TIMESTAMP}, #{enterPrice,jdbcType=DECIMAL}, #{salePrice,jdbcType=DECIMAL}, 
-      #{stock,jdbcType=INTEGER}, #{saleCounts,jdbcType=INTEGER}, #{isObtained,jdbcType=INTEGER}, 
-      #{description,jdbcType=VARCHAR}, #{drugsNumb,jdbcType=VARCHAR}, #{drugsName,jdbcType=VARCHAR}, 
-      #{drugsAlias,jdbcType=VARCHAR}, #{drugsSpec,jdbcType=VARCHAR}, #{prescription,jdbcType=INTEGER}, 
-      #{mentalMedicine,jdbcType=INTEGER}, #{largeUnit,jdbcType=VARCHAR}, #{smallUnit,jdbcType=VARCHAR}, 
-      #{conversionRate,jdbcType=DECIMAL}, #{disable,jdbcType=INTEGER}, #{level,jdbcType=INTEGER}, 
-      #{medicalInsuranceSign,jdbcType=INTEGER}, #{placeorigin,jdbcType=INTEGER}, #{baseMedicine,jdbcType=INTEGER},
-      #{narcoticDrugs,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}, #{validityPeriod,jdbcType=TIMESTAMP}, #{stockWarn,jdbcType=INTEGER},#{normalStock,jdbcType=INTEGER})
-  </insert>
+        insert into his_pharmacy_detail (id, medicine_id, count,
+                                         create_user_id, create_time, update_user_id,
+                                         update_time, enter_price, sale_price,
+                                         stock, sale_counts, is_obtained,
+                                         description, drugs_numb, drugs_name,
+                                         drugs_alias, drugs_spec, prescription,
+                                         mental_medicine, large_unit, small_unit,
+                                         conversion_rate, disable, level,
+                                         medical_insurance_sign, placeOrigin, base_medicine,
+                                         narcotic_drugs, remarks, validity_period, stock_warn, normal_stock)
+        values (#{id,jdbcType=BIGINT}, #{medicineId,jdbcType=BIGINT}, #{count,jdbcType=INTEGER},
+                #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT},
+                #{updateDate,jdbcType=TIMESTAMP}, #{enterPrice,jdbcType=DECIMAL}, #{salePrice,jdbcType=DECIMAL},
+                #{stock,jdbcType=INTEGER}, #{saleCounts,jdbcType=INTEGER}, #{isObtained,jdbcType=INTEGER},
+                #{description,jdbcType=VARCHAR}, #{drugsNumb,jdbcType=VARCHAR}, #{drugsName,jdbcType=VARCHAR},
+                #{drugsAlias,jdbcType=VARCHAR}, #{drugsSpec,jdbcType=VARCHAR}, #{prescription,jdbcType=INTEGER},
+                #{mentalMedicine,jdbcType=INTEGER}, #{largeUnit,jdbcType=VARCHAR}, #{smallUnit,jdbcType=VARCHAR},
+                #{conversionRate,jdbcType=DECIMAL}, #{disable,jdbcType=INTEGER}, #{level,jdbcType=INTEGER},
+                #{medicalInsuranceSign,jdbcType=INTEGER}, #{placeorigin,jdbcType=INTEGER},
+                #{baseMedicine,jdbcType=INTEGER},
+                #{narcoticDrugs,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}, #{validityPeriod,jdbcType=TIMESTAMP},
+                #{stockWarn,jdbcType=INTEGER}, #{normalStock,jdbcType=INTEGER})
+    </insert>
     <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisPharmacyDetail">
         insert into his_pharmacy_detail
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -373,100 +404,106 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisPharmacyDetail">
-    update his_pharmacy_detail
-    set medicine_id = #{medicineId,jdbcType=BIGINT},
-      count = #{count,jdbcType=INTEGER},
-      create_user_id = #{createUserId,jdbcType=BIGINT},
-      create_time = #{createDate,jdbcType=TIMESTAMP},
-      update_user_id = #{updateUserId,jdbcType=BIGINT},
-      update_time = #{updateDate,jdbcType=TIMESTAMP},
-      enter_price = #{enterPrice,jdbcType=DECIMAL},
-      sale_price = #{salePrice,jdbcType=DECIMAL},
-      stock = #{stock,jdbcType=INTEGER},
-      sale_counts = #{saleCounts,jdbcType=INTEGER},
-      is_obtained = #{isObtained,jdbcType=INTEGER},
-      description = #{description,jdbcType=VARCHAR},
-      drugs_numb = #{drugsNumb,jdbcType=VARCHAR},
-      drugs_name = #{drugsName,jdbcType=VARCHAR},
-      drugs_alias = #{drugsAlias,jdbcType=VARCHAR},
-      drugs_spec = #{drugsSpec,jdbcType=VARCHAR},
-      prescription = #{prescription,jdbcType=INTEGER},
-      mental_medicine = #{mentalMedicine,jdbcType=INTEGER},
-      large_unit = #{largeUnit,jdbcType=VARCHAR},
-      small_unit = #{smallUnit,jdbcType=VARCHAR},
-      conversion_rate = #{conversionRate,jdbcType=DECIMAL},
-      disable = #{disable,jdbcType=INTEGER},
-      level = #{level,jdbcType=INTEGER},
-      medical_insurance_sign = #{medicalInsuranceSign,jdbcType=INTEGER},
-      placeOrigin = #{placeorigin,jdbcType=INTEGER},
-      base_medicine = #{baseMedicine,jdbcType=INTEGER},
-      narcotic_drugs = #{narcoticDrugs,jdbcType=INTEGER},
-      remarks = #{remarks,jdbcType=VARCHAR},
-      validity_period = #{validityPeriod,jdbcType=TIMESTAMP}
-      stock_warn = #{stockWarn,jdbcType=INTEGER},
-      normal_stock = #{normalStock,jdbcType=INTEGER}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        update his_pharmacy_detail
+        set medicine_id            = #{medicineId,jdbcType=BIGINT},
+            count                  = #{count,jdbcType=INTEGER},
+            create_user_id         = #{createUserId,jdbcType=BIGINT},
+            create_time            = #{createDate,jdbcType=TIMESTAMP},
+            update_user_id         = #{updateUserId,jdbcType=BIGINT},
+            update_time            = #{updateDate,jdbcType=TIMESTAMP},
+            enter_price            = #{enterPrice,jdbcType=DECIMAL},
+            sale_price             = #{salePrice,jdbcType=DECIMAL},
+            stock                  = #{stock,jdbcType=INTEGER},
+            sale_counts            = #{saleCounts,jdbcType=INTEGER},
+            is_obtained            = #{isObtained,jdbcType=INTEGER},
+            description            = #{description,jdbcType=VARCHAR},
+            drugs_numb             = #{drugsNumb,jdbcType=VARCHAR},
+            drugs_name             = #{drugsName,jdbcType=VARCHAR},
+            drugs_alias            = #{drugsAlias,jdbcType=VARCHAR},
+            drugs_spec             = #{drugsSpec,jdbcType=VARCHAR},
+            prescription           = #{prescription,jdbcType=INTEGER},
+            mental_medicine        = #{mentalMedicine,jdbcType=INTEGER},
+            large_unit             = #{largeUnit,jdbcType=VARCHAR},
+            small_unit             = #{smallUnit,jdbcType=VARCHAR},
+            conversion_rate        = #{conversionRate,jdbcType=DECIMAL},
+            disable                = #{disable,jdbcType=INTEGER},
+            level                  = #{level,jdbcType=INTEGER},
+            medical_insurance_sign = #{medicalInsuranceSign,jdbcType=INTEGER},
+            placeOrigin            = #{placeorigin,jdbcType=INTEGER},
+            base_medicine          = #{baseMedicine,jdbcType=INTEGER},
+            narcotic_drugs         = #{narcoticDrugs,jdbcType=INTEGER},
+            remarks                = #{remarks,jdbcType=VARCHAR},
+            validity_period        = #{validityPeriod,jdbcType=TIMESTAMP}
+            stock_warn =
+            #{stockWarn,jdbcType=INTEGER},
+            normal_stock =
+            #{normalStock,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 
 
-  <!--自定义-->
-  <!--list查询-->
-  <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
-    SELECT
-    his_pharmacy_detail.*
-    FROM
-    his_pharmacy_detail
-    where
-    1= 1
-    <if test="parameter.drugsNumb != null and parameter.drugsNumb != ''">
-      and drugs_numb like concat('%' #{parameter.drugsNumb,jdbcType=VARCHAR},'%')
-    </if>
-    <if test="parameter.drugsName != null and parameter.drugsName != ''">
-      and drugs_name like concat('%' #{parameter.drugsName,jdbcType=VARCHAR},'%')
-    </if>
-    <if test="parameter.lowPrice != null and parameter.lowPrice != '' " >
-      and sale_price &gt;= #{parameter.lowPrice,jdbcType=DECIMAL}
-    </if>
-    <if test="parameter.highPrice != null and parameter.highPrice != ''">
-      and sale_price &lt;= #{parameter.highPrice,jdbcType=DECIMAL}
-    </if>
-    <if test="parameter.lowCount != null and parameter.lowCount != '' " >
-      and sale_counts &gt;= #{parameter.lowCount,jdbcType=INTEGER}
-    </if>
-    <if test="parameter.highCount != null and parameter.highCount != ''">
-      and sale_counts &lt;= #{parameter.highCount,jdbcType=INTEGER}
-    </if>
-    <if test="parameter.disable != null and parameter.disable != ''">
-      and disable = #{parameter.disable,jdbcType=INTEGER}
-    </if>
-    <if test="parameter.prescription != null and parameter.prescription != ''">
-      and prescription = #{parameter.prescription,jdbcType=INTEGER}
-    </if>
-    <if test="parameter.mentalMedicine != null and parameter.mentalMedicine != ''">
-      and mental_medicine = #{parameter.mentalMedicine,jdbcType=INTEGER}
-    </if>
-    <if test="parameter.level != null and parameter.level != ''">
-      and level = #{parameter.level,jdbcType=INTEGER}
-    </if>
-    <if test="parameter.medicalInsuranceSign != null and parameter.medicalInsuranceSign != ''">
-      and medical_insurance_sign = #{parameter.medicalInsuranceSign,jdbcType=INTEGER}
-    </if>
-    <if test="parameter.baseMedicine != null and parameter.baseMedicine != ''">
-      and base_medicine = #{parameter.baseMedicine,jdbcType=INTEGER}
-    </if>
-    <if test="parameter.narcoticDrugs != null and parameter.narcoticDrugs != ''">
-      and narcotic_drugs = #{parameter.narcoticDrugs,jdbcType=INTEGER}
-    </if>
-    <if test="parameter.isObtained != null and parameter.isObtained != ''">
-      and is_obtained = #{parameter.isObtained,jdbcType=INTEGER}
-    </if>
-    <if test="parameter.isWarning != null and parameter.isWarning != ''">
-      and (1 = #{parameter.isWarning,jdbcType=INTEGER} and stock_warn &gt;= stock) or(2 = #{parameter.isWarning,jdbcType=INTEGER} and stock_warn &lt; stock)
-  </if>
-    <if test="parameter.orders != null and parameter.orders != ''">
-      order by ${parameter.orders}
-    </if>
-  </select>
+    <!--自定义-->
+    <!--list查询-->
+    <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        SELECT
+        his_pharmacy_detail.*
+        FROM
+        his_pharmacy_detail
+        where
+        1= 1
+        <if test="parameter.drugsNumb != null and parameter.drugsNumb != ''">
+            and drugs_numb like concat('%' #{parameter.drugsNumb,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.drugsName != null and parameter.drugsName != ''">
+            and drugs_name like concat('%' #{parameter.drugsName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.drugsAlias != null and parameter.drugsAlias != ''">
+            and drugs_alias like concat('%' #{parameter.drugsAlias,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.lowPrice != null and parameter.lowPrice != '' ">
+            and sale_price &gt;= #{parameter.lowPrice,jdbcType=DECIMAL}
+        </if>
+        <if test="parameter.highPrice != null and parameter.highPrice != ''">
+            and sale_price &lt;= #{parameter.highPrice,jdbcType=DECIMAL}
+        </if>
+        <if test="parameter.lowCount != null and parameter.lowCount != '' ">
+            and sale_counts &gt;= #{parameter.lowCount,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.highCount != null and parameter.highCount != ''">
+            and sale_counts &lt;= #{parameter.highCount,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.disable != null and parameter.disable != ''">
+            and disable = #{parameter.disable,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.prescription != null and parameter.prescription != ''">
+            and prescription = #{parameter.prescription,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.mentalMedicine != null and parameter.mentalMedicine != ''">
+            and mental_medicine = #{parameter.mentalMedicine,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.level != null and parameter.level != ''">
+            and level = #{parameter.level,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.medicalInsuranceSign != null and parameter.medicalInsuranceSign != ''">
+            and medical_insurance_sign = #{parameter.medicalInsuranceSign,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.baseMedicine != null and parameter.baseMedicine != ''">
+            and base_medicine = #{parameter.baseMedicine,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.narcoticDrugs != null and parameter.narcoticDrugs != ''">
+            and narcotic_drugs = #{parameter.narcoticDrugs,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.isObtained != null and parameter.isObtained != ''">
+            and is_obtained = #{parameter.isObtained,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.isWarning != null and parameter.isWarning != ''">
+            and (1 = #{parameter.isWarning,jdbcType=INTEGER} and stock_warn &gt;= stock) or(2 =
+            #{parameter.isWarning,jdbcType=INTEGER} and stock_warn &lt; stock)
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
 
 
     <select id="listForMedication" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
@@ -475,12 +512,16 @@
         FROM
         his_pharmacy_detail
         where
-        1= 1 and his_pharmacy_detail.stock > 0 and his_pharmacy_detail.disable = 2 and his_pharmacy_detail.is_obtained = 2
+        1= 1 and his_pharmacy_detail.stock > 0 and his_pharmacy_detail.disable = 2 and his_pharmacy_detail.is_obtained =
+        2
         <if test="parameter.drugsNumb != null and parameter.drugsNumb != ''">
             and drugs_numb like concat('%' #{parameter.drugsNumb,jdbcType=VARCHAR},'%')
         </if>
         <if test="parameter.drugsName != null and parameter.drugsName != ''">
             and drugs_name like concat('%' #{parameter.drugsName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.drugsAlias != null and parameter.drugsAlias != ''">
+            and drugs_alias like concat('%' #{parameter.drugsAlias,jdbcType=VARCHAR},'%')
         </if>
         <if test="parameter.prescription != null and parameter.prescription != ''">
             and prescription = #{parameter.prescription,jdbcType=INTEGER}
@@ -506,120 +547,149 @@
     </select>
 
 
-  <!--根据药品编号查找-->
-  <select id="selectByDrugsNumb" parameterType="java.lang.String" resultMap="BaseResultMap">
-    SELECT
-    <include refid="Base_Column_List" />
-    FROM
-    his_pharmacy_detail
-    where
-    drugs_numb =#{drugsNumb,jdbcType=VARCHAR}
-  </select>
+    <!--根据药品编号查找-->
+    <select id="selectByDrugsNumb" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        his_pharmacy_detail
+        where
+        drugs_numb =#{drugsNumb,jdbcType=VARCHAR}
+    </select>
 
-  <!--根据药品名称和规格查找-->
-  <select id="selectByDrugsNameAndSpec" parameterType="com.ahsj.hiscore.entity.HisPharmacyDetail" resultMap="BaseResultMap">
-    SELECT
-    <include refid="Base_Column_List" />
-    FROM
-    his_pharmacy_detail
-    where
-    drugs_name =#{drugsName,jdbcType=VARCHAR}
-    and drugs_spec =#{drugsSpec,jdbcType=VARCHAR}
-  </select>
-
-
-  <!--更新库存-->
-  <update id="updateAddStockById" parameterType="com.ahsj.hiscore.entity.HisMediEnterDetails">
-    update his_pharmacy_detail
-    set his_pharmacy_detail.count = his_pharmacy_detail.count + #{enterCount,jdbcType=INTEGER}
-    where
-      medicine_id = #{pharmacyId,jdbcType=BIGINT}
-  </update>
+    <!--根据药品名称和规格查找-->
+    <select id="selectByDrugsNameAndSpec" parameterType="com.ahsj.hiscore.entity.HisPharmacyDetail"
+            resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        his_pharmacy_detail
+        where
+        drugs_name =#{drugsName,jdbcType=VARCHAR}
+        and drugs_spec =#{drugsSpec,jdbcType=VARCHAR}
+    </select>
 
 
-  <!--根据药品id查找-->
-  <select id="selectByPharmacyId" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    SELECT
-    his_pharmacy_detail.*
-    FROM
-    his_pharmacy_detail
-    where
-    medicine_id =#{pharmacyId,jdbcType=BIGINT}
-  </select>
+    <!--更新库存-->
+    <update id="updateAddStockById" parameterType="com.ahsj.hiscore.entity.HisMediEnterDetails">
+        update his_pharmacy_detail
+        set his_pharmacy_detail.count = his_pharmacy_detail.count + #{enterCount,jdbcType=INTEGER}
+        where
+            medicine_id = #{pharmacyId,jdbcType=BIGINT}
+    </update>
 
 
-  <!--根据药品id和有效期同时查找-->
-  <select id="selectByPharmacyIdAndVali" parameterType="com.ahsj.hiscore.entity.HisMediExitDetails" resultMap="BaseResultMap">
-    SELECT
-      his_pharmacy_detail.*
-    FROM
-      his_pharmacy_detail
-    where
-      medicine_id =#{pharmacyId,jdbcType=BIGINT}
-      and validity_period= #{validityPeriod,jdbcType=TIMESTAMP}
-  </select>
+    <!--根据药品id查找-->
+    <select id="selectByPharmacyId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+            his_pharmacy_detail.*
+        FROM
+            his_pharmacy_detail
+        where
+            medicine_id = #{pharmacyId,jdbcType=BIGINT}
+    </select>
 
-  <!--查询出药库中所有库存小于预警值的药品-->
-  <select id="selectForStock"  resultMap="BaseResultMap">
-    SELECT
-           his_pharmacy_detail.medicine_id as id,his_pharmacy_detail.count,his_pharmacy_detail.create_user_id,his_pharmacy_detail.create_time,
-           his_pharmacy_detail.update_user_id,his_pharmacy_detail.update_time,his_pharmacy_detail.enter_price,his_pharmacy_detail.sale_price,
-           his_pharmacy_detail.is_obtained,his_pharmacy_detail.description,his_pharmacy_detail.drugs_numb,his_pharmacy_detail.drugs_name,
-           his_pharmacy_detail.drugs_alias,his_pharmacy_detail.drugs_spec,his_pharmacy_detail.prescription,his_pharmacy_detail.mental_medicine,
-           his_pharmacy_detail.disable,his_pharmacy_detail.level,his_pharmacy_detail.medical_insurance_sign,his_pharmacy_detail.placeOrigin,
-           his_pharmacy_detail.base_medicine,his_pharmacy_detail.narcotic_drugs,his_pharmacy_detail.stock_warn,his_pharmacy_detail.normal_stock,
-           (his_pharmacy_detail.normal_stock-his_pharmacy_detail.stock) as stockNum
-    FROM
-      his_pharmacy_detail
-    where
-    1= 1
-    and stock &lt;=stock_warn
-  </select>
+
+    <!--根据药品id和有效期同时查找-->
+    <select id="selectByPharmacyIdAndVali" parameterType="com.ahsj.hiscore.entity.HisMediExitDetails"
+            resultMap="BaseResultMap">
+        SELECT
+            his_pharmacy_detail.*
+        FROM
+            his_pharmacy_detail
+        where
+            medicine_id = #{pharmacyId,jdbcType=BIGINT}
+          and validity_period = #{validityPeriod,jdbcType=TIMESTAMP}
+    </select>
+
+    <!--查询出药库中所有库存小于预警值的药品-->
+    <select id="selectForStock" resultMap="BaseResultMap">
+        SELECT
+            his_pharmacy_detail.medicine_id                                as id,
+            his_pharmacy_detail.count,
+            his_pharmacy_detail.create_user_id,
+            his_pharmacy_detail.create_time,
+            his_pharmacy_detail.update_user_id,
+            his_pharmacy_detail.update_time,
+            his_pharmacy_detail.enter_price,
+            his_pharmacy_detail.sale_price,
+            his_pharmacy_detail.is_obtained,
+            his_pharmacy_detail.description,
+            his_pharmacy_detail.drugs_numb,
+            his_pharmacy_detail.drugs_name,
+            his_pharmacy_detail.drugs_alias,
+            his_pharmacy_detail.drugs_spec,
+            his_pharmacy_detail.prescription,
+            his_pharmacy_detail.mental_medicine,
+            his_pharmacy_detail.disable,
+            his_pharmacy_detail.level,
+            his_pharmacy_detail.medical_insurance_sign,
+            his_pharmacy_detail.placeOrigin,
+            his_pharmacy_detail.base_medicine,
+            his_pharmacy_detail.narcotic_drugs,
+            his_pharmacy_detail.stock_warn,
+            his_pharmacy_detail.normal_stock,
+            (his_pharmacy_detail.normal_stock - his_pharmacy_detail.stock) as stockNum
+        FROM
+            his_pharmacy_detail
+        where
+            1 = 1
+          and stock &lt;= stock_warn
+    </select>
     <!--  -->
     <select id="selectForTreatPlan" resultMap="BaseResultMap" parameterType="java.util.List">
-    select his_pharmacy_detail.*
-    from his_pharmacy_detail
-    where
-    1=1
-    <foreach collection="array" open="or" separator="or" index="index" item="item">
-        id = #{item,jdbcType=BIGINT}
-    </foreach>
+        select his_pharmacy_detail.*
+        from his_pharmacy_detail
+        where
+        1=1
+        <foreach collection="array" open="or" separator="or" index="index" item="item">
+            id = #{item,jdbcType=BIGINT}
+        </foreach>
 
-  </select>
+    </select>
 
-  <!--批量插入-->
-  <!--useGeneratedKeys对于支持主键自增的数据库 此关键字支持在执行添加记录之后可以获取到数据库自动生成的主键ID-->
-  <!--selectKey  会将 SELECT LAST_INSERT_ID()的结果放入到传入的model的主键里面，
-        keyProperty 对应的model中的主键的属性名，这里是 his_medication_details 中的id，因为它跟数据库的主键对应
-        order AFTER 表示 SELECT LAST_INSERT_ID() 在insert执行之后执行,多用与自增主键，
-              BEFORE 表示 SELECT LAST_INSERT_ID() 在insert执行之前执行，这样的话就拿不到主键了，
-                    这种适合那种主键不是自增的类型
-        resultType 主键类型 -->
-  <!--  <selectKey resultType="long" keyProperty="id" order="AFTER">
-        SELECT
-        LAST_INSERT_ID()
-    </selectKey>-->
+    <!--批量插入-->
+    <!--useGeneratedKeys对于支持主键自增的数据库 此关键字支持在执行添加记录之后可以获取到数据库自动生成的主键ID-->
+    <!--selectKey  会将 SELECT LAST_INSERT_ID()的结果放入到传入的model的主键里面，
+          keyProperty 对应的model中的主键的属性名，这里是 his_medication_details 中的id，因为它跟数据库的主键对应
+          order AFTER 表示 SELECT LAST_INSERT_ID() 在insert执行之后执行,多用与自增主键，
+                BEFORE 表示 SELECT LAST_INSERT_ID() 在insert执行之前执行，这样的话就拿不到主键了，
+                      这种适合那种主键不是自增的类型
+          resultType 主键类型 -->
+    <!--  <selectKey resultType="long" keyProperty="id" order="AFTER">
+          SELECT
+          LAST_INSERT_ID()
+      </selectKey>-->
     <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List" keyProperty="id">
 
-    insert into his_pharmacy_detail(id, medicine_id, count, create_user_id, create_time, update_user_id, update_time,
-    enter_price, sale_price, stock, sale_counts, is_obtained, description, drugs_numb,
-    drugs_name, drugs_alias, drugs_spec, prescription, mental_medicine, large_unit, small_unit,
-    conversion_rate, disable, level, medical_insurance_sign, placeOrigin, base_medicine,
-    narcotic_drugs, remarks,validity_period,stock_warn,normal_stock)
-    values
-    <foreach collection="list" item="item" index="index" separator="," >
-      (#{item.id,jdbcType=BIGINT}, #{item.medicineId,jdbcType=BIGINT}, #{item.count,jdbcType=INTEGER},
-      #{item.createUserId,jdbcType=BIGINT}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=BIGINT},
-      #{item.updateDate,jdbcType=TIMESTAMP}, #{item.enterPrice,jdbcType=DECIMAL}, #{item.salePrice,jdbcType=DECIMAL},
-      #{item.stock,jdbcType=INTEGER}, #{item.saleCounts,jdbcType=INTEGER}, #{item.isObtained,jdbcType=INTEGER},
-      #{item.description,jdbcType=VARCHAR}, #{item.drugsNumb,jdbcType=VARCHAR}, #{item.drugsName,jdbcType=VARCHAR},
-      #{item.drugsAlias,jdbcType=VARCHAR}, #{item.drugsSpec,jdbcType=VARCHAR}, #{item.prescription,jdbcType=INTEGER},
-      #{item.mentalMedicine,jdbcType=INTEGER}, #{item.largeUnit,jdbcType=VARCHAR}, #{item.smallUnit,jdbcType=VARCHAR},
-      #{item.conversionRate,jdbcType=DECIMAL}, #{item.disable,jdbcType=INTEGER}, #{item.level,jdbcType=INTEGER},
-      #{item.medicalInsuranceSign,jdbcType=INTEGER}, #{item.placeorigin,jdbcType=INTEGER}, #{item.baseMedicine,jdbcType=INTEGER},
-      #{item.narcoticDrugs,jdbcType=INTEGER}, #{item.remarks,jdbcType=VARCHAR}, #{item.validityPeriod,jdbcType=TIMESTAMP}, #{item.stockWarn,jdbcType=INTEGER},#{item.normalStock,jdbcType=INTEGER})
-    </foreach>
-  </insert>
+        insert into his_pharmacy_detail(id, medicine_id, count, create_user_id, create_time, update_user_id,
+        update_time,
+        enter_price, sale_price, stock, sale_counts, is_obtained, description, drugs_numb,
+        drugs_name, drugs_alias, drugs_spec, prescription, mental_medicine, large_unit, small_unit,
+        conversion_rate, disable, level, medical_insurance_sign, placeOrigin, base_medicine,
+        narcotic_drugs, remarks,validity_period,stock_warn,normal_stock)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id,jdbcType=BIGINT}, #{item.medicineId,jdbcType=BIGINT}, #{item.count,jdbcType=INTEGER},
+            #{item.createUserId,jdbcType=BIGINT}, #{item.createDate,jdbcType=TIMESTAMP},
+            #{item.updateUserId,jdbcType=BIGINT},
+            #{item.updateDate,jdbcType=TIMESTAMP}, #{item.enterPrice,jdbcType=DECIMAL},
+            #{item.salePrice,jdbcType=DECIMAL},
+            #{item.stock,jdbcType=INTEGER}, #{item.saleCounts,jdbcType=INTEGER}, #{item.isObtained,jdbcType=INTEGER},
+            #{item.description,jdbcType=VARCHAR}, #{item.drugsNumb,jdbcType=VARCHAR},
+            #{item.drugsName,jdbcType=VARCHAR},
+            #{item.drugsAlias,jdbcType=VARCHAR}, #{item.drugsSpec,jdbcType=VARCHAR},
+            #{item.prescription,jdbcType=INTEGER},
+            #{item.mentalMedicine,jdbcType=INTEGER}, #{item.largeUnit,jdbcType=VARCHAR},
+            #{item.smallUnit,jdbcType=VARCHAR},
+            #{item.conversionRate,jdbcType=DECIMAL}, #{item.disable,jdbcType=INTEGER}, #{item.level,jdbcType=INTEGER},
+            #{item.medicalInsuranceSign,jdbcType=INTEGER}, #{item.placeorigin,jdbcType=INTEGER},
+            #{item.baseMedicine,jdbcType=INTEGER},
+            #{item.narcoticDrugs,jdbcType=INTEGER}, #{item.remarks,jdbcType=VARCHAR},
+            #{item.validityPeriod,jdbcType=TIMESTAMP},
+            #{item.stockWarn,jdbcType=INTEGER},#{item.normalStock,jdbcType=INTEGER})
+        </foreach>
+    </insert>
 
     <!--    批量更新-->
     <update id="updateBatch" parameterType="list">
@@ -666,39 +736,93 @@
 
 
     <!--所搜出所有信息导出excel-->
-    <select id="queryListExportAll"  resultMap="BaseResultMap">
+    <select id="queryListExportAll" resultMap="BaseResultMap">
         select
-            a.*,b.id as prescriptionId,b.value as precriptionName,c.id as mentalMedicineId,c.value as mentalmedicine,d.id as levelId,d.value as leveld,
-            e.id as medicalInsuranceSignId,e.value as medicalinsurancesign,f.id as placeoriginId,f.value as placeoriginName,g.id as baseMedicineId,g.value as basemedicine,h.id as narcoticDrugsId,h.value as narcoticdrugs,
-            i.id as disableId,i.value as disabled,j.id as isObtainedId,j.value as obtained
+            a.*,
+            b.id    as prescriptionId,
+            b.value as precriptionName,
+            c.id    as mentalMedicineId,
+            c.value as mentalmedicine,
+            d.id    as levelId,
+            d.value as leveld,
+            e.id    as medicalInsuranceSignId,
+            e.value as medicalinsurancesign,
+            f.id    as placeoriginId,
+            f.value as placeoriginName,
+            g.id    as baseMedicineId,
+            g.value as basemedicine,
+            h.id    as narcoticDrugsId,
+            h.value as narcoticdrugs,
+            i.id    as disableId,
+            i.value as disabled,
+            j.id    as isObtainedId,
+            j.value as obtained
         from his_pharmacy_detail as a
-                 left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'prescription' ) as b on a.prescription = b.code
-                 left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'mental_medicine' ) as c on a.mental_medicine = c.code
-                 left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'level' ) as d on a.level = d.code
-                 left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'medical_insurance_sign' ) as e on a.medical_insurance_sign = e.code
-                 left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'placeOrigin' ) as f on a.placeorigin = f.code
-                 left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'base_medicine' ) as g on a.base_medicine = g.code
-                 left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'narcotic_drugs' ) as h on a.narcotic_drugs = h.code
-                 left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'disable' ) as  i on a.disable = i.code
-                 left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'is_obtained' ) as j on a.is_obtained = j.code
+                 left join (SELECT d.code,d.value,d.id
+                            from `his-userinfo`.sys_code c
+                                     left JOIN `his-userinfo`.sys_code_detail d on c.id = d.type_id
+                            WHERE c.type = 'prescription') as b on a.prescription = b.code
+                 left join (SELECT d.code,d.value,d.id
+                            from `his-userinfo`.sys_code c
+                                     left JOIN `his-userinfo`.sys_code_detail d on c.id = d.type_id
+                            WHERE c.type = 'mental_medicine') as c on a.mental_medicine = c.code
+                 left join (SELECT d.code,d.value,d.id
+                            from `his-userinfo`.sys_code c
+                                     left JOIN `his-userinfo`.sys_code_detail d on c.id = d.type_id
+                            WHERE c.type = 'level') as d on a.level = d.code
+                 left join (SELECT d.code,d.value,d.id
+                            from `his-userinfo`.sys_code c
+                                     left JOIN `his-userinfo`.sys_code_detail d on c.id = d.type_id
+                            WHERE c.type = 'medical_insurance_sign') as e on a.medical_insurance_sign = e.code
+                 left join (SELECT d.code,d.value,d.id
+                            from `his-userinfo`.sys_code c
+                                     left JOIN `his-userinfo`.sys_code_detail d on c.id = d.type_id
+                            WHERE c.type = 'placeOrigin') as f on a.placeorigin = f.code
+                 left join (SELECT d.code,d.value,d.id
+                            from `his-userinfo`.sys_code c
+                                     left JOIN `his-userinfo`.sys_code_detail d on c.id = d.type_id
+                            WHERE c.type = 'base_medicine') as g on a.base_medicine = g.code
+                 left join (SELECT d.code,d.value,d.id
+                            from `his-userinfo`.sys_code c
+                                     left JOIN `his-userinfo`.sys_code_detail d on c.id = d.type_id
+                            WHERE c.type = 'narcotic_drugs') as h on a.narcotic_drugs = h.code
+                 left join (SELECT d.code,d.value,d.id
+                            from `his-userinfo`.sys_code c
+                                     left JOIN `his-userinfo`.sys_code_detail d on c.id = d.type_id
+                            WHERE c.type = 'disable') as i on a.disable = i.code
+                 left join (SELECT d.code,d.value,d.id
+                            from `his-userinfo`.sys_code c
+                                     left JOIN `his-userinfo`.sys_code_detail d on c.id = d.type_id
+                            WHERE c.type = 'is_obtained') as j on a.is_obtained = j.code
     </select>
 
     <!--根据ID数组所搜出所有信息导出excel-->
-    <select id="queryListExportAndByIdsAll"  resultMap="BaseResultMap" parameterType="java.util.List">
+    <select id="queryListExportAndByIdsAll" resultMap="BaseResultMap" parameterType="java.util.List">
         select
-        a.*,b.id as prescriptionId,b.value as precriptionName,c.id as mentalMedicineId,c.value as mentalmedicine,d.id as levelId,d.value as leveld,
-        e.id as medicalInsuranceSignId,e.value as medicalinsurancesign,f.id as placeoriginId,f.value as placeoriginName,g.id as baseMedicineId,g.value as basemedicine,h.id as narcoticDrugsId,h.value as narcoticdrugs,
+        a.*,b.id as prescriptionId,b.value as precriptionName,c.id as mentalMedicineId,c.value as mentalmedicine,d.id as
+        levelId,d.value as leveld,
+        e.id as medicalInsuranceSignId,e.value as medicalinsurancesign,f.id as placeoriginId,f.value as
+        placeoriginName,g.id as baseMedicineId,g.value as basemedicine,h.id as narcoticDrugsId,h.value as narcoticdrugs,
         i.id as disableId,i.value as disabled,j.id as isObtainedId,j.value as obtained
         from his_pharmacy_detail as a
-        left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'prescription' ) as b on a.prescription = b.code
-        left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'mental_medicine' ) as c on a.mental_medicine = c.code
-        left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'level' ) as d on a.level = d.code
-        left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'medical_insurance_sign' ) as e on a.medical_insurance_sign = e.code
-        left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'placeOrigin' ) as f on a.placeorigin = f.code
-        left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'base_medicine' ) as g on a.base_medicine = g.code
-        left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'narcotic_drugs' ) as h on a.narcotic_drugs = h.code
-        left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'disable' ) as  i on a.disable = i.code
-        left join (SELECT d.code,d.value,d.id from  `his-userinfo`.sys_code c  left JOIN  `his-userinfo`.sys_code_detail d on c.id = d.type_id  WHERE c.type = 'is_obtained' ) as j on a.is_obtained = j.code
+        left join (SELECT d.code,d.value,d.id from `his-userinfo`.sys_code c left JOIN `his-userinfo`.sys_code_detail d
+        on c.id = d.type_id WHERE c.type = 'prescription' ) as b on a.prescription = b.code
+        left join (SELECT d.code,d.value,d.id from `his-userinfo`.sys_code c left JOIN `his-userinfo`.sys_code_detail d
+        on c.id = d.type_id WHERE c.type = 'mental_medicine' ) as c on a.mental_medicine = c.code
+        left join (SELECT d.code,d.value,d.id from `his-userinfo`.sys_code c left JOIN `his-userinfo`.sys_code_detail d
+        on c.id = d.type_id WHERE c.type = 'level' ) as d on a.level = d.code
+        left join (SELECT d.code,d.value,d.id from `his-userinfo`.sys_code c left JOIN `his-userinfo`.sys_code_detail d
+        on c.id = d.type_id WHERE c.type = 'medical_insurance_sign' ) as e on a.medical_insurance_sign = e.code
+        left join (SELECT d.code,d.value,d.id from `his-userinfo`.sys_code c left JOIN `his-userinfo`.sys_code_detail d
+        on c.id = d.type_id WHERE c.type = 'placeOrigin' ) as f on a.placeorigin = f.code
+        left join (SELECT d.code,d.value,d.id from `his-userinfo`.sys_code c left JOIN `his-userinfo`.sys_code_detail d
+        on c.id = d.type_id WHERE c.type = 'base_medicine' ) as g on a.base_medicine = g.code
+        left join (SELECT d.code,d.value,d.id from `his-userinfo`.sys_code c left JOIN `his-userinfo`.sys_code_detail d
+        on c.id = d.type_id WHERE c.type = 'narcotic_drugs' ) as h on a.narcotic_drugs = h.code
+        left join (SELECT d.code,d.value,d.id from `his-userinfo`.sys_code c left JOIN `his-userinfo`.sys_code_detail d
+        on c.id = d.type_id WHERE c.type = 'disable' ) as i on a.disable = i.code
+        left join (SELECT d.code,d.value,d.id from `his-userinfo`.sys_code c left JOIN `his-userinfo`.sys_code_detail d
+        on c.id = d.type_id WHERE c.type = 'is_obtained' ) as j on a.is_obtained = j.code
         where
         <foreach collection="list" separator="or" item="item" index="index">
             a.id=#{item.id}
@@ -815,7 +939,8 @@
     </update>
 
 
-    <insert id="importHisPharmacyDetail"  useGeneratedKeys="true" keyProperty="id" parameterType="com.ahsj.hiscore.entity.HisPharmacyDetail">
+    <insert id="importHisPharmacyDetail" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.ahsj.hiscore.entity.HisPharmacyDetail">
         insert into
         his_pharmacy_detail(id, medicine_id, count, create_user_id, create_time, update_user_id, update_time,
         enter_price, sale_price, stock, sale_counts, is_obtained, description, drugs_numb,
@@ -825,19 +950,28 @@
         values
         <foreach collection="list" item="item" index="index" separator=",">
             (#{item.id,jdbcType=BIGINT}, #{item.medicineId,jdbcType=BIGINT}, #{item.count,jdbcType=INTEGER},
-            #{item.createUserId,jdbcType=BIGINT}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=BIGINT},
-            #{item.updateDate,jdbcType=TIMESTAMP}, #{item.enterPrice,jdbcType=DECIMAL}, #{item.salePrice,jdbcType=DECIMAL},
+            #{item.createUserId,jdbcType=BIGINT}, #{item.createDate,jdbcType=TIMESTAMP},
+            #{item.updateUserId,jdbcType=BIGINT},
+            #{item.updateDate,jdbcType=TIMESTAMP}, #{item.enterPrice,jdbcType=DECIMAL},
+            #{item.salePrice,jdbcType=DECIMAL},
             #{item.stock,jdbcType=INTEGER}, #{item.saleCounts,jdbcType=INTEGER}, #{item.isObtained,jdbcType=INTEGER},
-            #{item.description,jdbcType=VARCHAR}, #{item.drugsNumb,jdbcType=VARCHAR}, #{item.drugsName,jdbcType=VARCHAR},
-            #{item.drugsAlias,jdbcType=VARCHAR}, #{item.drugsSpec,jdbcType=VARCHAR}, #{item.prescription,jdbcType=INTEGER},
-            #{item.mentalMedicine,jdbcType=INTEGER}, #{item.largeUnit,jdbcType=VARCHAR}, #{item.smallUnit,jdbcType=VARCHAR},
+            #{item.description,jdbcType=VARCHAR}, #{item.drugsNumb,jdbcType=VARCHAR},
+            #{item.drugsName,jdbcType=VARCHAR},
+            #{item.drugsAlias,jdbcType=VARCHAR}, #{item.drugsSpec,jdbcType=VARCHAR},
+            #{item.prescription,jdbcType=INTEGER},
+            #{item.mentalMedicine,jdbcType=INTEGER}, #{item.largeUnit,jdbcType=VARCHAR},
+            #{item.smallUnit,jdbcType=VARCHAR},
             #{item.conversionRate,jdbcType=DECIMAL}, #{item.disable,jdbcType=INTEGER}, #{item.level,jdbcType=INTEGER},
-            #{item.medicalInsuranceSign,jdbcType=INTEGER}, #{item.placeorigin,jdbcType=INTEGER}, #{item.baseMedicine,jdbcType=INTEGER},
-            #{item.narcoticDrugs,jdbcType=INTEGER}, #{item.remarks,jdbcType=VARCHAR}, #{item.validityPeriod,jdbcType=TIMESTAMP}, #{item.stockWarn,jdbcType=INTEGER},#{item.normalStock,jdbcType=INTEGER})
+            #{item.medicalInsuranceSign,jdbcType=INTEGER}, #{item.placeorigin,jdbcType=INTEGER},
+            #{item.baseMedicine,jdbcType=INTEGER},
+            #{item.narcoticDrugs,jdbcType=INTEGER}, #{item.remarks,jdbcType=VARCHAR},
+            #{item.validityPeriod,jdbcType=TIMESTAMP},
+            #{item.stockWarn,jdbcType=INTEGER},#{item.normalStock,jdbcType=INTEGER})
         </foreach>
     </insert>
 
-    <select id="selectByExportExcel" parameterType="com.ahsj.hiscore.entity.HisPharmacyDetail" resultMap="BaseResultMap">
+    <select id="selectByExportExcel" parameterType="com.ahsj.hiscore.entity.HisPharmacyDetail"
+            resultMap="BaseResultMap">
         SELECT
         his_pharmacy_detail.*
         FROM
@@ -850,13 +984,13 @@
         <if test="drugsName != null and drugsName != ''">
             and drugs_name like concat('%' #{parameter.drugsName,jdbcType=VARCHAR},'%')
         </if>
-        <if test="lowPrice != null and lowPrice != '' " >
+        <if test="lowPrice != null and lowPrice != '' ">
             and sale_price &gt;= #{lowPrice,jdbcType=DECIMAL}
         </if>
         <if test="highPrice != null and highPrice != ''">
             and sale_price &lt;= #{highPrice,jdbcType=DECIMAL}
         </if>
-        <if test="lowCount != null and lowCount != '' " >
+        <if test="lowCount != null and lowCount != '' ">
             and sale_counts &gt;= #{lowCount,jdbcType=INTEGER}
         </if>
         <if test="highCount != null and highCount != ''">
@@ -887,14 +1021,15 @@
             and is_obtained = #{isObtained,jdbcType=INTEGER}
         </if>
         <if test="isWarning != null and isWarning != 0">
-            and (1 = #{isWarning,jdbcType=INTEGER} and stock_warn &gt;= stock) or(2 = #{isWarning,jdbcType=INTEGER} and stock_warn &lt; stock)
+            and (1 = #{isWarning,jdbcType=INTEGER} and stock_warn &gt;= stock) or(2 = #{isWarning,jdbcType=INTEGER} and
+            stock_warn &lt; stock)
         </if>
     </select>
 
     <select id="listForIsDisableAndObtained" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
         select his_pharmacy_detail.*
-from his_pharmacy_detail
-where disable = 2 and is_obtained = 2
+        from his_pharmacy_detail
+        where disable = 2 and is_obtained = 2
         <if test="parameter.drugsNumb != null and parameter.drugsNumb != ''">
             and drugs_numb like concat('%' #{parameter.drugsNumb,jdbcType=VARCHAR},'%')
         </if>
@@ -903,10 +1038,10 @@ where disable = 2 and is_obtained = 2
         </if>
     </select>
 
-    <select id="selectForListForMedicationByIds"  resultMap="BaseResultMap">
-select his_pharmacy_detail.*
-  from his_pharmacy_detail
-    where id in
+    <select id="selectForListForMedicationByIds" resultMap="BaseResultMap">
+        select his_pharmacy_detail.*
+        from his_pharmacy_detail
+        where id in
         <foreach item="item" index="index" collection="array"
                  open="(" separator="," close=")">
             #{item}

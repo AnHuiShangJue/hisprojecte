@@ -55,6 +55,11 @@
                                     <input id="name" name="drugsName" type="text"/>
                                     <label for="name">药品名称<span style="font-size: 12px">(Drug Name)</span></label>
                                 </div>
+                                <div class="col input-field s2 m2 l2 xl2">
+                                    <input id="drugsAlias" name="drugsAlias" type="text"/>
+                                    <label for="drugsAlias">药品拼音码<span style="font-size: 12px">(Medicine Pinyin Code
+)</span></label>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -134,6 +139,11 @@
                         "name": "drugs_name"
                     },
                     {
+                        "title": "药品拼音码",
+                        "data": "drugsAlias",
+                        "name": "drugs_alias"
+                    },
+                    {
                         "title": "药品规格",
                         "data": "drugsSpec",
                         "name": "drugs_spec"
@@ -207,7 +217,7 @@
                     }
                 ],
                 "order": [
-                    [2, 'asc']
+                    [1, 'asc']
                 ],
             }
         });

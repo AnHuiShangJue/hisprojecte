@@ -65,6 +65,8 @@ public class HisDrugLossReporting extends BaseEntity {
 
     private Long mediEnterId;
 
+    private String drugsAlias;
+
     @Override
     public Date getCreateDate() {
         return createDate;
@@ -259,5 +261,13 @@ public class HisDrugLossReporting extends BaseEntity {
 
     public void setManufacturersName(String manufacturersName) {
         this.manufacturersName = manufacturersName;
+    }
+
+    public String getDrugsAlias() {
+        return drugsAlias;
+    }
+
+    public void setDrugsAlias(String drugsAlias) {
+        this.drugsAlias = drugsAlias;
     }
 }

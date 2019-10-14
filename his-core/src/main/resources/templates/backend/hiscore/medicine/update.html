@@ -43,7 +43,7 @@
                         <div class="input-field col s4 l4 xl4">
                             <input id="drugs_alias" name="drugsAlias" type="text"
                                    th:value="${hisMedicineInfo.drugsAlias}">
-                            <label for="drugs_alias">药品别名<span style="font-size: 12px">(Drug alias
+                            <label for="drugs_alias">药品拼音码<span style="font-size: 12px">(Medicine Pinyin Code
 )</span></label>
                         </div>
                     </div>
@@ -183,7 +183,7 @@ Scripts
                 },
                 conversionRate: {
                     required: false,
-                    maxlength: 4
+                    maxlength: 20
                 }
             },
             messages: {
@@ -201,7 +201,7 @@ Scripts
                 },
                 conversionRate: {
                     required: "",
-                    maxlength: "最多输入4位数字"
+                    maxlength: "最多输入20位数字"
                 }
             },
             errorElement: 'div',
