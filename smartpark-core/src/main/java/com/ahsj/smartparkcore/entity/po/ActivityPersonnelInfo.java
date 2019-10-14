@@ -29,6 +29,10 @@ public class ActivityPersonnelInfo extends BaseEntity {
 
     private Long activityId;
 
+    private Date createLowDate;
+
+    private String remarks;
+
     public Long getId() {
         return id;
     }
@@ -123,5 +127,21 @@ public class ActivityPersonnelInfo extends BaseEntity {
 
     public void setActivityId(Long activityId) {
         this.activityId = activityId;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public Date getCreateLowDate() {
+        return createLowDate;
+    }
+
+    public void setCreateLowDate(Date createLowDate) {
+        this.createLowDate = createLowDate;
     }
 }

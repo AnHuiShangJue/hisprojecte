@@ -1,10 +1,13 @@
 package com.ahsj.smartparkcore.dao;
 
 import com.ahsj.smartparkcore.entity.po.ActivityPersonnelInfo;
+import core.entity.PageBean;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
-public interface ActivityPersonnelInfoMapper {
+public interface ActivityPersonnelInfoMapper extends BaseMapper<ActivityPersonnelInfo>{
     int deleteByPrimaryKey(Long id);
 
     int insert(ActivityPersonnelInfo record);
@@ -16,4 +19,7 @@ public interface ActivityPersonnelInfoMapper {
     int updateByPrimaryKeySelective(ActivityPersonnelInfo record);
 
     int updateByPrimaryKey(ActivityPersonnelInfo record);
+
+    List<? extends ActivityPersonnelInfo> list(PageBean<ActivityPersonnelInfo> activityInfoPageBean);
+
 }

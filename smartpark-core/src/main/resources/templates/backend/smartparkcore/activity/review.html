@@ -12,57 +12,26 @@
     <div class="col s12 m12 l12">
         <div id="validation" class="card card card-default scrollspy" style="height: 600px">
             <div class="card-content">
-                <h4 class="card-title">病人信息详情</h4><label style="color:black">Patient information details
+                <h4 class="card-title">活动申请审核</h4><label style="color:black">Patient information details
             </label>
                 <form class="col s12" id="sendForm" action="#">
-                    <input type="hidden" id="id" name="id" th:value="${activityInfoVO.id}"/>
+                    <input type="hidden" id="id" name="id" th:value="${activityInfo.id}"/>
                     <div class="row">
-                        <div class="input-field col s4 l4 xl4">
-                            <input id="name" name="name" type="text" th:value="${activityInfoVO.name}"/>
-                            <label for="name">活 动 名 称</label>
-                        </div>
-                        <div class="input-field col s4 l4 xl4">
-                            <input id="eventLocation" name="eventLocation" type="text" th:value="${activityInfoVO.eventLocation}"/>
-                            <label for="eventLocation">活 动 地 址</label>
-                        </div>
-                        <div class="input-field col s4 l4 xl4">
-                            <input id="registrationDeadline" name="registrationDeadline" type="text" class="datepicker" th:value="${#dates.format(activityInfoVO.registrationDeadline, 'yyyy/MM/dd')}"/>
-                            <label for="registrationDeadline">报名截止日期</label>
+                        <div class="input-field col s12 l12 xl12">
+                            <input id="remarks" name="remarks" type="text" th:value="${activityInfo.remarks}"/>
+                            <label for="remarks">活动申请审核通过/不通过意见</label>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="input-field col s4 l4 xl4">
-                            <input id="startTime" name="startTime" type="text"  class="datepicker"  th:value="${#dates.format(activityInfoVO.startTime, 'yyyy/MM/dd')}"/>
-                            <label for="startTime">活动开始时间</label>
-                        </div>
-                        <div class="input-field col s4 l4 xl4">
-                            <input id="endTime" name="endTime" type="text" class="datepicker"  th:value="${#dates.format(activityInfoVO.endTime, 'yyyy/MM/dd')}"/>
-                            <label for="endTime">活动结束时间</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s4 l4 xl4">
-                            <input id="maximumNumber" name="maximumNumber" type="number" th:value="${activityInfoVO.maximumNumber}"/>
-                            <label for="maximumNumber">人 数 上 限<span style="font-size: 12px">(height)</span></label>
-                        </div>
-                        <div class="input-field col s4 l4 xl4">
-                            <input id="description" name="description" type="text" th:value="${activityInfoVO.description}"/>
-                            <label for="description">活 动 描 述</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s4 l4 xl4">
-                            <select ahsj:select name="isPublic" id="isPublic" type="code" typeKey="is_public"
-                                    th:value="${activityInfoVO.isPublic}">
-                            </select>
-                            <label for="isPublic">是 否 公 开</label>
-                        </div>
-                    </div>
-
                     <div class="row">
                         <div class="input-field col s12">
+                            <a id="failBtn"
+                               class="waves-effect waves dark btn btn-primary next-step">审 核 不 通 过
+                                <i class="material-icons white-text tooltipped" data-position="bottom"
+                                   data-delay="50"
+                                   data-tooltip="">clear</i>
+                            </a>
                             <button id="send_btn" class="btn cyan waves-effect waves-light right" type="submit" th:style="${isBtnView}"
-                                    name="action">提 交（submit ）
+                                    name="action">审 核 通 过（submit ）
                                 <i class="material-icons right">send</i>
                             </button>
                         </div>
@@ -83,7 +52,7 @@ Scripts
 
     $(function () {
         formCheck();
-
+        initBtn();
     });
 
     function formCheck() {
@@ -142,7 +111,7 @@ Scripts
                     console.log("queryString is" + queryString);
 
                     $.ahsjajax(
-                        CTX + "/api/activityInfo/update.ahsj?token=" + TOKEN,
+                        CTX + "/api/activityInfo/reviewSuccess.ahsj?token=" + TOKEN,
                         queryString,
                         function (msg) {
                             if (msg.success) {
@@ -166,6 +135,34 @@ Scripts
     }
 
 
+    function initBtn() {
+        $("#failBtn").click(function () {
+            var id = $("#id").val();
+            var remarks = $("#remarks").val();
+            dialog.confirm('确定审核不通过?', function (index, layero){
+                $.ahsjajax(CTX + "/api/activityInfo/reviewError.ahsj",
+                    {"id":id,
+                        "remarks":remarks},
+                    function (msg) {
+                        if (msg.success) {
+                            if (msg.success) {
+                                M.toast({html: msg.message});
+                                parent.grid.search();
+                                dialog.parentclose();
+                                return false;
+                            } else {
+                                M.toast({html: msg.message});
+                                return false;
+                            }
+                        }
+                    },
+                    function () {
+                        M.toast({html: "网络异常"});
+                    }
+                );
+            });
+        });
+    }
 
     $("input").change(function(){
         $(this).val($(this).val().trim());

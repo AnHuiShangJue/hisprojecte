@@ -31,9 +31,9 @@ public class ActivityInfoServiceImpl implements ActivityInfoService {
     **/
     @Override
     @Transactional(readOnly = true)
-    public ResponseEntity<ResultModel> list(PageBean<ActivityInfo> pageBean) throws Exception {
+    public PageBean<ActivityInfo> list(PageBean<ActivityInfo> pageBean) throws Exception {
         pageBean.setData(CodeHelper.getInstance().setCodeValue(activityInfoMapper.list(pageBean)));
-        return new ResponseEntity<>(new ResultModel(ResultStatus.SUCCESS_SELECT), HttpStatus.OK);
+        return pageBean;
     }
 
     /**
@@ -52,6 +52,7 @@ public class ActivityInfoServiceImpl implements ActivityInfoService {
         ActivityInfo activityInfo = mapper.map(activityInfoDTO,ActivityInfo.class);
         // mapper.map(source, destinationClass);
         // 构造新的ActivityInfo实例对象，通过source对象中的字段内容.映射到ActivityInfoDTO.class实例对象中，并返回新的ActivityInfoDTO.class实例对象。
+        activityInfo.setIsReview(3);
         activityInfo.setIsEnable(2);
         int check = activityInfoMapper.insert(activityInfo);
         if (check !=0){
@@ -103,6 +104,32 @@ public class ActivityInfoServiceImpl implements ActivityInfoService {
         return new ResponseEntity<>(new ResultModel(ResultStatus.SUCCESS_DELETE),HttpStatus.OK);
     }
 
+
+    /**
+     * @Description 删除
+     * @Author  muxu
+     * @Date  2019/9/9
+     * @Time 14:12
+     * @Return
+     * @Params
+     **/
+
+    @Override
+    @Transactional(readOnly = false)
+    public ResponseEntity<ResultModel> enable(Long[] ids) throws Exception {
+        for (Long id : ids){
+            ActivityInfo activityInfo = activityInfoMapper.selectByPrimaryKey(id);
+            if (activityInfo.getIsEnable()==1){
+            activityInfo.setIsEnable(2);
+            }else {
+                activityInfo.setIsEnable(1);
+            }
+            activityInfoMapper.updateByPrimaryKey(activityInfo);
+        }
+        return new ResponseEntity<>(new ResultModel(ResultStatus.SUCCESS_SET),HttpStatus.OK);
+    }
+
+
     /**
      * @Description
      * @Author  muxu
@@ -116,4 +143,45 @@ public class ActivityInfoServiceImpl implements ActivityInfoService {
     public ActivityInfo selectById(Long id) throws Exception {
         return CodeHelper.getInstance().setCodeValue(activityInfoMapper.selectByPrimaryKey(id));
     }
+
+    /**
+     * @Description 活动申请审核成功
+     * @Author  muxu
+     * @Date  2019/9/11
+     * @Time 14:42
+     * @Return
+     * @Params
+     **/
+
+    @Override
+    @Transactional(readOnly = false)
+    public ResponseEntity<ResultModel> reviewSuccess(Long id,String remarks) throws Exception {
+        ActivityInfo activityInfo = activityInfoMapper.selectByPrimaryKey(id);
+        activityInfo.setIsReview(1);
+        activityInfo.setRemarks(remarks);
+        activityInfo.setIsEnable(1);
+        activityInfoMapper.updateByPrimaryKey(activityInfo);
+
+        return new ResponseEntity<>(new ResultModel(ResultStatus.SUCCESS_REVIEW), HttpStatus.OK);
+    }
+
+    /**
+     * @Description 活动审核失败
+     * @Author  muxu
+     * @Date  2019/9/11
+     * @Time 15:10
+     * @Return org.springframework.http.ResponseEntity<com.ahsj.smartparkcore.core.ResultModel>
+     * @Params [id]
+     **/
+    @Override
+    @Transactional(readOnly = false)
+    public ResponseEntity<ResultModel> reviewError(Long id,String remarks) throws Exception {
+        ActivityInfo activityInfo = activityInfoMapper.selectByPrimaryKey(id);
+        activityInfo.setIsReview(2);
+        activityInfo.setIsEnable(2);
+        activityInfo.setRemarks(remarks);
+        activityInfoMapper.updateByPrimaryKey(activityInfo);
+        return new ResponseEntity<>(new ResultModel(ResultStatus.ERROR_REVIEW), HttpStatus.OK);
+    }
+
 }

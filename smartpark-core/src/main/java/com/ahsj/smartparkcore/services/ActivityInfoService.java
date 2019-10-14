@@ -16,7 +16,7 @@ public interface ActivityInfoService {
      * @Return core.entity.PageBean<com.ahsj.smartparkcore.entity.po.ActivityInfo>
      * @Params [activityInfoPageBean]
     **/
-    ResponseEntity<ResultModel> list (PageBean<ActivityInfo> pageBean)throws Exception;
+    PageBean<ActivityInfo> list(PageBean<ActivityInfo> pageBean)throws Exception;
 
     /**
      * @Description 新增
@@ -50,7 +50,17 @@ public interface ActivityInfoService {
     **/
 
     ResponseEntity<ResultModel>delete(Long[] ids)throws Exception;
-    
+
+    /**
+     * @Description 修改启用状态
+     * @Author  muxu
+     * @Date  2019/10/14
+     * @Time 17:26
+     * @Return org.springframework.http.ResponseEntity<com.ahsj.smartparkcore.core.ResultModel>
+     * @Params [ids]
+    **/
+    ResponseEntity<ResultModel>enable(Long[] ids)throws Exception;
+
     /**
      * @Description 
      * @Author  muxu
@@ -60,5 +70,27 @@ public interface ActivityInfoService {
      * @Params 
     **/
     ActivityInfo selectById(Long id)throws Exception;
+
+
+    /**
+     * @Description 活动申请审核成功
+     * @Author  muxu
+     * @Date  2019/9/11
+     * @Time 14:42
+     * @Return
+     * @Params
+     **/
+    ResponseEntity<ResultModel> reviewSuccess(Long id,String remarks)throws Exception;
+
+
+    /**
+     * @Description 活动申请审核失败
+     * @Author  muxu
+     * @Date  2019/9/11
+     * @Time 14:42
+     * @Return
+     * @Params
+     **/
+    ResponseEntity<ResultModel> reviewError(Long id,String remarks)throws Exception;
 
 }

@@ -1,5 +1,7 @@
 package com.ahsj.smartparkcore.entity.po;
 
+import core.code.CodeValueColumn;
+import core.code.Constants;
 import core.entity.BaseEntity;
 
 import java.util.Date;
@@ -21,7 +23,14 @@ public class ActivityInfo extends BaseEntity {
 
     private String description;
 
-    private Integer isEnable;
+
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_enable", typeName = "enableName")
+    private Integer  isEnable;
+    private String enableName;
+
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_audit", typeName = "isReviewName")
+    private Integer isReview;
+    private String isReviewName;
 
     private Date createDate;
 
@@ -31,7 +40,27 @@ public class ActivityInfo extends BaseEntity {
 
     private Long userId;
 
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_public", typeName = "isPublicName")
     private Integer isPublic;
+    private String isPublicName;
+
+    private String remarks;
+
+    public Integer getIsEnable() {
+        return isEnable;
+    }
+
+    public void setIsEnable(Integer isEnable) {
+        this.isEnable = isEnable;
+    }
+
+    public String getEnableName() {
+        return enableName;
+    }
+
+    public void setEnableName(String enableName) {
+        this.enableName = enableName;
+    }
 
     public Long getId() {
         return id;
@@ -97,13 +126,6 @@ public class ActivityInfo extends BaseEntity {
         this.description = description == null ? null : description.trim();
     }
 
-    public Integer getIsEnable() {
-        return isEnable;
-    }
-
-    public void setIsEnable(Integer isEnable) {
-        this.isEnable = isEnable;
-    }
 
     public Date getCreateDate() {
         return createDate;
@@ -143,5 +165,37 @@ public class ActivityInfo extends BaseEntity {
 
     public void setIsPublic(Integer isPublic) {
         this.isPublic = isPublic;
+    }
+
+    public String getIsPublicName() {
+        return isPublicName;
+    }
+
+    public void setIsPublicName(String isPublicName) {
+        this.isPublicName = isPublicName;
+    }
+
+    public Integer getIsReview() {
+        return isReview;
+    }
+
+    public void setIsReview(Integer isReview) {
+        this.isReview = isReview;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public String getIsReviewName() {
+        return isReviewName;
+    }
+
+    public void setIsReviewName(String isReviewName) {
+        this.isReviewName = isReviewName;
     }
 }

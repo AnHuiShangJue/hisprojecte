@@ -1,7 +1,11 @@
 package com.ahsj.smartparkcore.entity.vo;
 
 import com.ahsj.smartparkcore.entity.po.ActivityInfo;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import core.code.CodeValueColumn;
+import core.code.Constants;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -14,19 +18,59 @@ public class ActivityInfoVO extends ActivityInfo {
 
     private String eventLocation;
 
+    @JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date registrationDeadline;
 
+    @JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date startTime;
 
+    @JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date endTime;
 
     private Long maximumNumber;
 
     private String description;
 
-    private Integer isEnable;
-
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_public", typeName = "isPublicName")
     private Integer isPublic;
+    private String isPublicName;
+
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_enable", typeName = "enableName")
+    private Integer  isEnable;
+    private String enableName;
+
+    private Integer isReview;
+
+    @JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    private Date createDate;
+
+    private String remarks;
+
+
+
+    @Override
+    public Integer getIsEnable() {
+        return isEnable;
+    }
+
+    @Override
+    public void setIsEnable(Integer isEnable) {
+        this.isEnable = isEnable;
+    }
+
+    @Override
+    public String getEnableName() {
+        return enableName;
+    }
+
+    @Override
+    public void setEnableName(String enableName) {
+        this.enableName = enableName;
+    }
 
     @Override
     public Long getId() {
@@ -109,16 +153,6 @@ public class ActivityInfoVO extends ActivityInfo {
     }
 
     @Override
-    public Integer getIsEnable() {
-        return isEnable;
-    }
-
-    @Override
-    public void setIsEnable(Integer isEnable) {
-        this.isEnable = isEnable;
-    }
-
-    @Override
     public Integer getIsPublic() {
         return isPublic;
     }
@@ -126,5 +160,43 @@ public class ActivityInfoVO extends ActivityInfo {
     @Override
     public void setIsPublic(Integer isPublic) {
         this.isPublic = isPublic;
+    }
+
+    public String getIsPublicName() {
+        return isPublicName;
+    }
+
+    public void setIsPublicName(String isPublicName) {
+        this.isPublicName = isPublicName;
+    }
+
+    @Override
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    @Override
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    @Override
+    public Integer getIsReview() {
+        return isReview;
+    }
+
+    @Override
+    public void setIsReview(Integer isReview) {
+        this.isReview = isReview;
+    }
+
+    @Override
+    public String getRemarks() {
+        return remarks;
+    }
+
+    @Override
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 }

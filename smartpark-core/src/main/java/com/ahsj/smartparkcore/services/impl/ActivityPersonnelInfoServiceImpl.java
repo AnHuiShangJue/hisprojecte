@@ -7,6 +7,7 @@ import com.ahsj.smartparkcore.dao.ActivityPersonnelInfoMapper;
 import com.ahsj.smartparkcore.entity.dto.ActivityPersonnelInfoDTO;
 import com.ahsj.smartparkcore.entity.po.ActivityPersonnelInfo;
 import com.ahsj.smartparkcore.services.ActivityPersonnelInfoService;
+import core.entity.PageBean;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,22 @@ import org.springframework.transaction.annotation.Transactional;
 public class ActivityPersonnelInfoServiceImpl implements ActivityPersonnelInfoService {
     @Autowired
     ActivityPersonnelInfoMapper activityPersonnelInfoMapper;
+
+
+
+    /**
+     * @Description list
+     * @Author  muxu
+     * @Date  2019/10/14
+     * @Time 13:22
+     * @Return
+     * @Params
+    **/
+    @Override
+    public PageBean<ActivityPersonnelInfo> list(PageBean<ActivityPersonnelInfo> pageBean) throws Exception {
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(activityPersonnelInfoMapper.list(pageBean)));
+        return pageBean;
+    }
 
     /**
      * @Description save
@@ -32,7 +49,7 @@ public class ActivityPersonnelInfoServiceImpl implements ActivityPersonnelInfoSe
     public ResponseEntity<ResultModel> save(ActivityPersonnelInfoDTO activityPersonnelInfoDTO) throws Exception {
         DozerBeanMapper mapper = new DozerBeanMapper();
         ActivityPersonnelInfo activityPersonnelInfo = mapper.map(activityPersonnelInfoDTO,ActivityPersonnelInfo.class);
-        activityPersonnelInfo.setIsReview(1);
+        activityPersonnelInfo.setIsReview(3);
         int check = activityPersonnelInfoMapper.insert(activityPersonnelInfo);
         if (check !=0) {
             return new ResponseEntity<>(new ResultModel(ResultStatus.SUCCESS_INSERT), HttpStatus.OK);
@@ -106,9 +123,10 @@ public class ActivityPersonnelInfoServiceImpl implements ActivityPersonnelInfoSe
 
     @Override
     @Transactional(readOnly = false)
-    public ResponseEntity<ResultModel> reviewSuccess(Long id) throws Exception {
+    public ResponseEntity<ResultModel> reviewSuccess(Long id,String remarks) throws Exception {
         ActivityPersonnelInfo activityPersonnelInfo = activityPersonnelInfoMapper.selectByPrimaryKey(id);
-        activityPersonnelInfo.setIsReview(2);
+        activityPersonnelInfo.setIsReview(1);
+        activityPersonnelInfo.setRemarks(remarks);
         activityPersonnelInfoMapper.updateByPrimaryKey(activityPersonnelInfo);
 
         return new ResponseEntity<>(new ResultModel(ResultStatus.SUCCESS_REVIEW), HttpStatus.OK);
@@ -124,9 +142,10 @@ public class ActivityPersonnelInfoServiceImpl implements ActivityPersonnelInfoSe
     **/
     @Override
     @Transactional(readOnly = false)
-    public ResponseEntity<ResultModel> reviewError(Long id) throws Exception {
+    public ResponseEntity<ResultModel> reviewError(Long id,String remarks) throws Exception {
         ActivityPersonnelInfo activityPersonnelInfo = activityPersonnelInfoMapper.selectByPrimaryKey(id);
-        activityPersonnelInfo.setIsReview(3);
+        activityPersonnelInfo.setIsReview(2);
+        activityPersonnelInfo.setRemarks(remarks);
         activityPersonnelInfoMapper.updateByPrimaryKey(activityPersonnelInfo);
         return new ResponseEntity<>(new ResultModel(ResultStatus.ERROR_REVIEW), HttpStatus.OK);
     }

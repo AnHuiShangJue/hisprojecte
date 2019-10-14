@@ -46,15 +46,18 @@
                     <div class="card-content">
                         <form id="searchForm" class="row" action="">
                             <div class="row">
-                                <div class="col input-field s3 m3 l3">
-                                    <input id="name" name="name" type="text"/>
-                                    <label for="name">活动名称<span style="font-size: 12px">(username
-)</span></label>
+                                <div class="col  s1 m1 l1 xl1">
+                                    <h6>申请参与时间段查询</h6><label style="color:black">Entry time query
+                                </label>
                                 </div>
-<!--                                <div class="col input-field s3 m3 l3">
-                                    <input id="idcard" name="idcard" type="text"/>
-                                    <label for="idcard">身份证号码<span style="font-size: 12px">(id card)</span></label>
-                                </div>-->
+                                <div class="input-field col s2">
+                                    <input type="text" id="createDate" class="datepicker" name="createDate"/>
+                                    <label for="createDate">上 区 间</label>
+                                </div>
+                                <div class="input-field col s2">
+                                    <input type="text" id="createLowDate" class="datepicker" name="createLowDate"/>
+                                    <label for="createLowDate">下 区 间</label>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -77,18 +80,18 @@
                         <div class="card-content">
                             <h4 class="card-title">操作台
                             </h4><label style="color:black">Console</label>
-                            <div class="row">
+<!--                            <div class="row">
                                 <div class="col m3 l3 s3 offset-s9 offset-l9 offset-xl9 offset-m9">
                                     <a  id="createBtn"
                                         class="btn waves-effect waves-light red"><i
                                             class="material-icons  white-text tooltipped " data-position="bottom"
                                             data-delay="50" data-tooltip="新增">add</i></a>
-<!--                                    <a  id="deleteManyBtn"
+                                    <a  id="deleteManyBtn"
                                         class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
                                             class="material-icons white-text tooltipped" data-position="bottom"
-                                            data-delay="50" data-tooltip="批量删除">delete</i></a>-->
+                                            data-delay="50" data-tooltip="批量删除">delete</i></a>
                                 </div>
-                            </div>
+                            </div>-->
                             <!--Form Advance-->
                             <div class="row">
                                 <div id="refreshtable" class="col l12 m12 l12 xl12">
@@ -102,6 +105,7 @@
             </div>
         </div>
     </div>
+    <input id="activityId" type="hidden" th:value="${activityId}">
 </div>
 
 <div th:replace="public/base_list_script :: html"></div>
@@ -109,7 +113,7 @@
 <script type="text/javascript">
     var grid = new Datatable();
     $(document).ready(function () {
-        initBtn();
+         initBtn();
         initTable();
     });
 
@@ -126,7 +130,7 @@
             loadingMessage: 'Loading...',
             dataTable: {
                 "ajax": {
-                    "url": CTX + "/api/activityInfo/list.ahsj?token=" + TOKEN, // ajax source
+                    "url": CTX + "/api/activitypersonnelinfo/list.ahsj?token=" + TOKEN+"&activityId="+$("#activityId").val() // ajax source
                 },
                 "columns": [
                     {
@@ -138,48 +142,35 @@
                         "orderable": false,
                         "className": "center-align"
                     }, {
-                        "title": "活动名称",
+                        "title": "姓名",
                         "data": "name", //实体字段
                         "name": "name"   //库中字段
                     }, {
-                        "title": "活动地点",
-                        "data": "eventLocation",
-                        "name": "event_location"
+                        "title": "年龄",
+                        "data": "age",
+                        "name": "age"
                     }, {
-                        "title": "报名截止日期",
-                        "data": "registrationDeadline",
-                        "name": "registration_deadline"
+                        "title": "性别",
+                        "data": "sex",
+                        "name": "sex"
                     },
                     {
-                        "title": "活动开始时间",
-                        "data": "startTime",
-                        "name": "start_time"
+                        "title": "email",
+                        "data": "email",
+                        "name": "email"
                     }, {
-                        "title": "活动结束时间",
-                        "data": "endTime",
-                        "name": "end_time"
+                        "title": "身份证号",
+                        "data": "idcard",
+                        "name": "idcard"
                     }, {
-                        "title": "可参加的最大人数",
-                        "data": "maximumNumber",
-                        "name": "maximum_number"
-                    }, {
-                        "title": "描述",
-                        "data": "description",
-                        "name": "description"
+                        "title": "手机号码",
+                        "data": "phoneNumber",
+                        "name": "phone_number"
                     },
                     {
-                        "title": "是否启用",
-                        "data": "enableName",
-                        "name": "is_enable"
-                    },
-                    {
-                        "title": "创建时间",
+                        "title": "申请参与时间",
                         "data": "createDate",
                         "name": "create_date"
-                    },{
-                        "title": "是否公开",
-                        "data": "isPublicName",
-                        "name": "is_public"
                     },{
                         "title": "审核状态",
                         "data": "isReviewName",
@@ -193,10 +184,7 @@
                         "render": function (data, type, row) {
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
-                            rtnBtn = rtnBtn + "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='edit(" + row.id + ");'> <i class='material-icons'>edit</i></a>" +
-                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改启用状态\" onclick='enable(" + row.id + ");'> <i class='material-icons'>info</i></a>"+
-                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"活动人员信息\" onclick='personnel(" + row.id + ");'> <i class='material-icons'>person</i></a>"+
-                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"活动信息审核\" onclick='review(" + row.id + ");'> <i class='material-icons'>input</i></a>";
+                            rtnBtn = rtnBtn + "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"审核\" onclick='review(" + row.id + ");'> <i class='material-icons'>input</i></a>";
                             // 返回自定义内容
                             return rtnBtn;
                         }
@@ -204,31 +192,26 @@
                 ],
                 "order": [
                     [2, 'asc']
-                ],
+                ]
             }
         });
 
     }
 
 
-    function edit(id) {
+/*    function edit(id) {
         var url = CTX + "/api/activityInfo/update/index.ahsj?token=" + TOKEN+"&id="+id;
         dialog.show(url, "修改活动信息");
-    }
-
-    function personnel(id) {
-        var url = CTX + "/api/activitypersonnelinfo/list/index.ahsj?token=" + TOKEN+"&id="+id;
-        dialog.show(url, "活动人员信息");
-    }
+    }*/
 
     function review(id) {
-        var url = CTX + "/api/activityInfo/review/index.ahsj?token=" + TOKEN+"&id="+id;
-        dialog.show(url, "活动信息审核");
+        var url = CTX + "/api/activitypersonnelinfo/review/index.ahsj?token=" + TOKEN+"&id="+id;
+        dialog.show(url, "审核活动信息");
     }
 
-    function enable(ids) {
-        dialog.confirm('确定修改?', function (index, layero) {
-            $.ahsjajax(CTX + "/api/activityInfo/enable.ahsj",
+/*    function deleteInit(ids) {
+        dialog.confirm('确定删除?', function (index, layero) {
+            $.ahsjajax(CTX + "/api/activityInfo/delete.ahsj",
                 {"ids": ids},
                 function (msg) {
                     if (msg.success) {
@@ -253,9 +236,9 @@
                 }
             );
         });
-    }
+    }*/
 
-    function initBtn() {
+/*    function initBtn() {
         //新增按钮
         $("#createBtn").click(function () {
             var url = CTX + "/api/activityInfo/save/index.ahsj?token=" + TOKEN;
@@ -276,7 +259,16 @@
         $('#resetBtn').click(function () {
             grid.reset();
         });
-    }
+    }*/
+        function initBtn(){
+            //搜索按钮
+            $('#searchBtn').click(function () {
+                grid.search();
+            });
+            $('#resetBtn').click(function () {
+                grid.reset();
+            });
+        }
 
     $("input").change(function () {
         $(this).val($(this).val().trim());

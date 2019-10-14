@@ -3,9 +3,20 @@ package com.ahsj.smartparkcore.services;
 import com.ahsj.smartparkcore.core.ResultModel;
 import com.ahsj.smartparkcore.entity.dto.ActivityPersonnelInfoDTO;
 import com.ahsj.smartparkcore.entity.po.ActivityPersonnelInfo;
+import core.entity.PageBean;
 import org.springframework.http.ResponseEntity;
 
 public interface ActivityPersonnelInfoService {
+
+    /**
+     * @Description list
+     * @Author  muxu
+     * @Date  2019/10/14
+     * @Time 13:21
+     * @Return
+     * @Params
+    **/
+    PageBean<ActivityPersonnelInfo> list(PageBean<ActivityPersonnelInfo> pageBean)throws Exception;
     /**
      * @Description save
      * @Author  muxu
@@ -56,7 +67,7 @@ public interface ActivityPersonnelInfoService {
      * @Params
     **/
 
-    ResponseEntity<ResultModel> reviewSuccess(Long id)throws Exception;
+    ResponseEntity<ResultModel> reviewSuccess(Long id,String remarks)throws Exception;
 
     /**
      * @Description
@@ -67,7 +78,7 @@ public interface ActivityPersonnelInfoService {
      * @Params
     **/
 
-    ResponseEntity<ResultModel> reviewError(Long id)throws Exception;
+    ResponseEntity<ResultModel> reviewError(Long id,String remarks)throws Exception;
 
 
 }
