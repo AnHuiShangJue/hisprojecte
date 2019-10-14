@@ -4,6 +4,7 @@ import com.ahsj.smartparkcore.core.ResultModel;
 import com.ahsj.smartparkcore.core.ResultStatus;
 import com.ahsj.smartparkcore.entity.dto.ConferenceRoomInfoDTO;
 import com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo;
+import com.ahsj.smartparkcore.entity.vo.ConferenceRoomInfoVO;
 import com.ahsj.smartparkcore.services.ConferenceRoomInfoService;
 import core.controller.BaseController;
 import core.entity.PageBean;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import utils.EmptyUtil;
 
@@ -39,11 +41,12 @@ public class ConferenceRoomInfoController extends BaseController {
     **/
     @RequestMapping("save.ahsj")
     @ResponseBody
+    @ResponseStatus
     public ResponseEntity<ResultModel> save(Map<String, Object> model, HttpServletRequest request, ConferenceRoomInfoDTO conferenceRoomInfoDTO)throws Exception{
-        if(EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfoDTO.getLocation())||EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfoDTO.getArea()) ||
-                EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfoDTO.getCapacity())||EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfoDTO.getName())||
+        if(/*EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfoDTO.getLocation())||*/EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfoDTO.getArea()) ||
+                EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfoDTO.getCapacity())/*||EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfoDTO.getName())||
                 EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfoDTO.getPhoneNumber())||EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfoDTO.getEnterpriseId())||
-                EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfoDTO.getConferenceName())){
+                EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfoDTO.getConferenceName())*/){
             return new ResponseEntity<>(new ResultModel(ResultStatus.ERROR_INFO_NOTCOMPELETE), HttpStatus.OK);
         }
         return conferenceRoomInfoService.save(conferenceRoomInfoDTO);
@@ -60,11 +63,12 @@ public class ConferenceRoomInfoController extends BaseController {
     **/
     @RequestMapping("update.ahsj")
     @ResponseBody
+    @ResponseStatus
     public ResponseEntity<ResultModel> update(Map<String, Object> model, HttpServletRequest request, ConferenceRoomInfoDTO conferenceRoomInfoDTO)throws Exception{
-        if(EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfoDTO.getLocation())||EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfoDTO.getArea()) ||
-                EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfoDTO.getCapacity())||EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfoDTO.getName())||
+        if(/*EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfoDTO.getLocation())||*/EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfoDTO.getArea()) ||
+                EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfoDTO.getCapacity())/*||EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfoDTO.getName())||
                 EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfoDTO.getPhoneNumber())||EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfoDTO.getEnterpriseId())||
-                EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfoDTO.getConferenceName())||EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfoDTO.getId())){
+                EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfoDTO.getConferenceName())||EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfoDTO.getId())*/){
             return new ResponseEntity<>(new ResultModel(ResultStatus.ERROR_INFO_NOTCOMPELETE), HttpStatus.OK);
         }
         return conferenceRoomInfoService.update(conferenceRoomInfoDTO);
@@ -81,6 +85,7 @@ public class ConferenceRoomInfoController extends BaseController {
     **/
     @RequestMapping("delete.ahsj")
     @ResponseBody
+    @ResponseStatus
     public ResponseEntity<ResultModel> delete(Map<String, Object> model, HttpServletRequest request, @RequestParam(value="ids", required=true) Long[] ids)throws Exception{
         for (int i = 0; i <ids.length ; i++) {
             ConferenceRoomInfo conferenceRoomInfo = conferenceRoomInfoService.selectById(ids[i]);
@@ -102,17 +107,39 @@ public class ConferenceRoomInfoController extends BaseController {
     **/
     @RequestMapping("list.ahsj")
     @ResponseBody
-    public ResponseEntity<ResultModel> list(Map<String, Object> model, HttpServletRequest request, ConferenceRoomInfoDTO conferenceRoomInfoDTO)throws Exception{
+    @ResponseStatus
+    public ResponseEntity<PageBean<ConferenceRoomInfoVO>> list(Map<String, Object> model, HttpServletRequest request, ConferenceRoomInfoDTO conferenceRoomInfoDTO)throws Exception{
         DozerBeanMapper mapper = new DozerBeanMapper();
         ConferenceRoomInfo conferenceRoomInfo =mapper.map(conferenceRoomInfoDTO,ConferenceRoomInfo.class);
         PageBean<ConferenceRoomInfo> pageBean = new PageBean<ConferenceRoomInfo>();
         pageBean.setParameter(conferenceRoomInfo);
-        return conferenceRoomInfoService.list(pageBean);
+        return ResponseEntity.ok(conferenceRoomInfoService.list(pageBean));
     }
 
     @RequestMapping("list/index.ahsj")
     ModelAndView list(String token)throws Exception{
         ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/ConferenceRoomInfo/list");
+        modelAndView.addObject("token",token);
+        modelAndView.addObject("title","会议室信息查看");
+        return modelAndView;
+    }
+
+    /**
+     *@Description
+     *@Params [token]
+     *@return org.springframework.web.servlet.ModelAndView
+     *@Author zhushixiang
+     *@Date 2019-10-11
+     *@Time 17:10
+    **/
+    @RequestMapping("update/index.ahsj")
+    ModelAndView update(ConferenceRoomInfoDTO conferenceRoomInfoDTO,String token)throws Exception{
+        ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/ConferenceRoomInfo/update");
+        if(EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfoDTO.getId())){
+            modelAndView.addObject("conferenceRoomInfoVO",new ConferenceRoomInfoVO());
+        }else {
+            modelAndView.addObject("conferenceRoomInfoVO",conferenceRoomInfoService.selectById(conferenceRoomInfoDTO.getId()));
+        }
         modelAndView.addObject("token",token);
         modelAndView.addObject("title","会议室信息管理");
         return modelAndView;

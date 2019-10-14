@@ -266,5 +266,27 @@
   <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMapVO">
     select conference_room_info.*
 from conference_room_info
+where 1=1
+    <if test="parameter.conferenceName != null and parameter.conferenceName != ''">
+      and conference_name like concat('%' #{parameter.conferenceName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.environmentalLabel != null and parameter.environmentalLabel != ''">
+      and environmental_label like concat('%' #{parameter.environmentalLabel,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.location != null and parameter.location != ''">
+      and location like concat('%' #{parameter.location,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.phoneNumber != null and parameter.phoneNumber != ''">
+      and phone_number like concat('%' #{parameter.phoneNumber,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.isEnable != null and parameter.isEnable != ''">
+      and is_enable = #{parameter.isEnable,jdbcType=INTEGER}
+    </if>
+    <if test="parameter.isLease != null and parameter.isLease != ''">
+      and is_lease = #{parameter.isLease,jdbcType=INTEGER}
+    </if>
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
   </select>
 </mapper>

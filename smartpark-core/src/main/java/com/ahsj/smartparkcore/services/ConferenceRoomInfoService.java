@@ -3,6 +3,7 @@ package com.ahsj.smartparkcore.services;
 import com.ahsj.smartparkcore.core.ResultModel;
 import com.ahsj.smartparkcore.entity.dto.ConferenceRoomInfoDTO;
 import com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo;
+import com.ahsj.smartparkcore.entity.vo.ConferenceRoomInfoVO;
 import core.entity.PageBean;
 import org.springframework.http.ResponseEntity;
 
@@ -55,5 +56,5 @@ public interface ConferenceRoomInfoService {
      *@Date 2019-09-05
      *@Time 15:50
     **/
-    ResponseEntity<ResultModel> list(PageBean<ConferenceRoomInfo> pageBean)throws Exception;
+    PageBean<ConferenceRoomInfoVO> list(PageBean<ConferenceRoomInfo> pageBean)throws Exception;
 }

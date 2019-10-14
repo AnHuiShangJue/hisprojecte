@@ -1,10 +1,11 @@
 package com.ahsj.smartparkcore.entity.vo;
 
 import com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo;
+import core.code.CodeValueColumn;
+import core.code.Constants;
 import lombok.Data;
 
 import java.math.BigDecimal;
-@Data
 public class ConferenceRoomInfoVO extends ConferenceRoomInfo {
 
     private Long id;
@@ -21,13 +22,17 @@ public class ConferenceRoomInfoVO extends ConferenceRoomInfo {
 
     private String description;
 
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_enable", typeName = "isEnableName")
     private Integer isEnable;
+    private String isEnableName;
 
     private String name;
 
     private String phoneNumber;
 
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_lease", typeName = "isLeaseName")
     private Integer isLease;
+    private String isLeaseName;
 
     private Long enterpriseId;
 
@@ -135,5 +140,23 @@ public class ConferenceRoomInfoVO extends ConferenceRoomInfo {
 
     public void setConferenceName(String conferenceName) {
         this.conferenceName = conferenceName;
+    }
+
+    @Override
+    public String getIsEnableName() {
+        return isEnableName;
+    }
+
+    @Override
+    public void setIsEnableName(String isEnableName) {
+        this.isEnableName = isEnableName;
+    }
+
+    public String getIsLeaseName() {
+        return isLeaseName;
+    }
+
+    public void setIsLeaseName(String isLeaseName) {
+        this.isLeaseName = isLeaseName;
     }
 }

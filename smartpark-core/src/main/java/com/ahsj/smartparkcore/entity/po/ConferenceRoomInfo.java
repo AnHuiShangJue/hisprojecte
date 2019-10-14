@@ -1,5 +1,7 @@
 package com.ahsj.smartparkcore.entity.po;
 
+import core.code.CodeValueColumn;
+import core.code.Constants;
 import core.entity.BaseEntity;
 
 import java.math.BigDecimal;
@@ -20,7 +22,9 @@ public class ConferenceRoomInfo  extends BaseEntity {
 
     private String description;
 
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_enable", typeName = "isEnableName")
     private Integer isEnable;
+    private String isEnableName;
 
     private String name;
 
@@ -30,7 +34,9 @@ public class ConferenceRoomInfo  extends BaseEntity {
 
     private Date updateDate;
 
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_lease", typeName = "isLeaseName")
     private Integer isLease;
+    private String isLeaseName;
 
     private Long enterpriseId;
 
@@ -165,5 +171,21 @@ public class ConferenceRoomInfo  extends BaseEntity {
 
     public void setConferenceName(String conferenceName) {
         this.conferenceName = conferenceName == null ? null : conferenceName.trim();
+    }
+
+    public String getIsEnableName() {
+        return isEnableName;
+    }
+
+    public void setIsEnableName(String isEnableName) {
+        this.isEnableName = isEnableName;
+    }
+
+    public String getIsLeaseName() {
+        return isLeaseName;
+    }
+
+    public void setIsLeaseName(String isLeaseName) {
+        this.isLeaseName = isLeaseName;
     }
 }
