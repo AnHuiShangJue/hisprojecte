@@ -110,6 +110,8 @@ public class CodeServiceImpl implements CodeService {
             if (!EmptyUtil.Companion.isNullOrEmpty(checkId) && !EmptyUtil.Companion.isNullOrEmpty(checkId.getId())) {
                 return MessageUtil.createMessage(false, "此名称已存在！");
             }
+            sysCode.setCompanyId("1");
+            sysCode.setDelFlag("0");
             sysCodeMapper.insert(sysCode);
             return MessageUtil.createMessage(true, "保存成功。");
         } else {
@@ -172,6 +174,7 @@ public class CodeServiceImpl implements CodeService {
             if (!EmptyUtil.Companion.isNullOrEmpty(check) && !EmptyUtil.Companion.isNullOrEmpty(check.getId())) {
                 return MessageUtil.createMessage(false, "此名称已存在！");
             }
+            sysCodeDetail.setDelFlag("0");
             sysCodeDetailMapper.insert(sysCodeDetail);
 
             return MessageUtil.createMessage(true, "保存成功。");

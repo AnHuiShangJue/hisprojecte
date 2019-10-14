@@ -70,11 +70,11 @@
   </update>
   <!--自定义sql-->
   <!-- 批量插入 -->
-  <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">
-    <selectKey resultType="long" keyProperty="id" order="AFTER">
-      SELECT
-      LAST_INSERT_ID()
-    </selectKey>
+  <!--<selectKey resultType="long" keyProperty="id" order="AFTER">
+    SELECT
+    LAST_INSERT_ID()
+  </selectKey>-->
+  <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List" keyProperty="id">
     insert into user_role (id, role_id, user_id)
     values
     <foreach collection="list" item="item" index="index" separator="," >
