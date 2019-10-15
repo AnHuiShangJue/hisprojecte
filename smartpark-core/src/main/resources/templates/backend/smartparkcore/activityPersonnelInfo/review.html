@@ -113,14 +113,14 @@ Scripts
                     $.ahsjajax(
                         CTX + "/api/activitypersonnelinfo/reviewSuccess.ahsj?token=" + TOKEN,
                         queryString,
-                        function (msg) {
-                            if (msg.success) {
-                                M.toast({html: msg.message});
+                        function (responseEntity) {
+                            if (responseEntity.code>0) {
+                                M.toast({html: responseEntity.message});
                                 parent.grid.search();
                                 dialog.parentclose();
                                 return false;
                             } else {
-                                M.toast({html: msg.message});
+                                M.toast({html: responseEntity.message});
                                 return false;
                             }
                         },
@@ -143,18 +143,16 @@ Scripts
                 $.ahsjajax(CTX + "/api/activitypersonnelinfo/reviewError.ahsj",
                     {"id":id,
                      "remarks":remarks},
-                    function (msg) {
-                        if (msg.success) {
-                            if (msg.success) {
-                                M.toast({html: msg.message});
+                    function (responseEntity) {
+                            if (responseEntity.code<0) {
+                                M.toast({html: responseEntity.message});
                                 parent.grid.search();
                                 dialog.parentclose();
                                 return false;
                             } else {
-                                M.toast({html: msg.message});
+                                M.toast({html: responseEntity.message});
                                 return false;
                             }
-                        }
                     },
                     function () {
                         M.toast({html: "网络异常"});

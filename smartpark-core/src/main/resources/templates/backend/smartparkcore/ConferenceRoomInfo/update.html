@@ -145,7 +145,7 @@ Scripts
                             CTX + "/api/conferenceRoomInfo/save.ahsj?token=" + TOKEN,
                             queryString,
                             function (responseEntity) {
-                                if (responseEntity.message.substring(0,1) != "-") {
+                                if (responseEntity.code > 0) {
                                     M.toast({html: responseEntity.message});
                                     parent.grid.search();
                                     dialog.parentclose();
@@ -165,7 +165,7 @@ Scripts
                             CTX + "/api/conferenceRoomInfo/update.ahsj?token=" + TOKEN,
                             queryString,
                             function (responseEntity) {
-                                if (responseEntity.message.substring(0,1) != "-") {
+                                if (responseEntity.code > 0) {
                                     M.toast({html: responseEntity.message});
                                     parent.grid.search();
                                     dialog.parentclose();

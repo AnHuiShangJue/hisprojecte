@@ -144,14 +144,14 @@ Scripts
                     $.ahsjajax(
                         CTX + "/api/activityInfo/update.ahsj?token=" + TOKEN,
                         queryString,
-                        function (msg) {
-                            if (msg.success) {
-                                M.toast({html: msg.message});
+                        function (responseEntity) {
+                            if (responseEntity.code>0) {
+                                M.toast({html: responseEntity.message});
                                 parent.grid.search();
                                 dialog.parentclose();
                                 return false;
                             } else {
-                                M.toast({html: msg.message});
+                                M.toast({html: responseEntity.message});
                                 return false;
                             }
                         },
