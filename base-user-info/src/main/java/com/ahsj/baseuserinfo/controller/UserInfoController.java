@@ -143,18 +143,19 @@ public class UserInfoController extends BaseOAController{
     @RequestMapping("/jscode2session.ahsj") // 登录
     @ResponseBody
     public String jscode2session(HttpServletRequest req
-                                 ,@RequestParam(value="code", required=true) String code) throws ClientProtocolException, IOException {
+                                  ,@RequestParam(value="js_code", required=true) String js_code
+                                  , @RequestParam(value="appId", required=true) String appId
+                                  ,@RequestParam(value="secret", required=true) String secret) throws ClientProtocolException, IOException {
 
 
-//        String url = "https://api.weixin.qq.com/sns/jscode2session?appid="+appId+"&secret="+secret+"&js_code="+js_code+"+&grant_type="+grant_type;
+        String url = "https://api.weixin.qq.com/sns/jscode2session?appid="+appId+"&secret="+secret+"&js_code="+js_code+"+&grant_type=authorization_code";
 
-//        url=url.replaceAll("JSCODE", code);
+        url=url.replaceAll("JSCODE", js_code);
 
-// 执行get请求.
-//        CloseableHttpResponse response = HttpClients.createDefault().execute(new HttpGet(url));
+ //执行get请求.
+        CloseableHttpResponse response = HttpClients.createDefault().execute(new HttpGet(url));
 // 获取响应实体
-//        String html = EntityUtils.toString(response.getEntity());
-        String html = code;
+       String html = EntityUtils.toString(response.getEntity());
 
         return html;
 
