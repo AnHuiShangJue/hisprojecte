@@ -17,7 +17,9 @@ public class ActivityPersonnelInfoVO extends ActivityPersonnelInfo {
 
     private Integer age;
 
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "sex", typeName = "sexName")
     private Integer sex;
+    private String sexName;
 
     private String phoneNumber;
 
@@ -166,5 +168,13 @@ public class ActivityPersonnelInfoVO extends ActivityPersonnelInfo {
     @Override
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+
+    public String getSexName() {
+        return sexName;
+    }
+
+    public void setSexName(String sexName) {
+        this.sexName = sexName;
     }
 }
