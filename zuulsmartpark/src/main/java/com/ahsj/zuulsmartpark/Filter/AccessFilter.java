@@ -80,6 +80,8 @@ public class AccessFilter extends ZuulFilter {
                 log.info("accessToken is"+accessToken);
             }
             return null;
+        }else if(GetPayAlipay()){
+            return null;
         }
         else{
             Object accessToken = request.getHeader("Authorization");
@@ -143,6 +145,15 @@ public class AccessFilter extends ZuulFilter {
    private boolean GetResource(){
         if(requestURI!= null){
             if(  requestURI.contains("/accounts/assets")|| requestURI.contains("/smartparkcore/assets") ){
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+   private boolean GetPayAlipay(){
+        if(requestURI!= null){
+            if(  requestURI.contains("/payalipay")|| requestURI.contains("/payalipay") ){
                 return true;
             }
             return false;
