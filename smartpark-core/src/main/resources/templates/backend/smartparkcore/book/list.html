@@ -206,7 +206,7 @@
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn +
                                 "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改预约\" onclick='update(" + row.id + ");'> <i class='material-icons'>edit</i></a>" +
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"审核\" href='javascript:;' onclick='isAudit(" + row.id + ");'> <i class='material-icons'>info</i></a>";
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"审核\" href='javascript:;' onclick='isAudit(" + row.id + ");'> <i class='material-icons'>input</i></a>";
                             // 返回自定义内容
                             return rtnBtn;
                         }
@@ -244,17 +244,17 @@
         dialog.confirm('确定修改场地启用状态吗?', function (index, layero) {
             $.ahsjajax(CTX + "/api/site/setEnable.ahsj",
                 {"ids": ids},
-                function (msg) {
-                    if (msg.success) {
+                function (responseEntity) {
+                    if (responseEntity.code>0) {
                         swal.close();
                         M.toast({
-                            html: msg.message, completeCallback: function () {
+                            html: responseEntity.message, completeCallback: function () {
                             }
                         });
                         grid.search();
                     } else {
                         M.toast({
-                            html: msg.message, completeCallback: function () {
+                            html: responseEntity.message, completeCallback: function () {
                             }
                         });
                     }

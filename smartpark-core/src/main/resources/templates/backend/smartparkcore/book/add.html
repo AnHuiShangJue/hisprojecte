@@ -143,9 +143,9 @@ Scripts
                     $.ahsjajax(
                         CTX + "/api/site/save.index.ahsj?token=" + TOKEN,
                         send_form,
-                        function (msg) {
-                            if (msg.success) {
-                                M.toast({html: msg.message});
+                        function (responseEntity) {
+                            if (responseEntity.code>0) {
+                                M.toast({html: responseEntity.message});
                                 parent.grid.search();
                                 dialog.parentclose();
                                 return true;
