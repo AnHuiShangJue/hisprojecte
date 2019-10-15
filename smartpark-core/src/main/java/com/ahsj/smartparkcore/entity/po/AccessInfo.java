@@ -1,6 +1,10 @@
 package com.ahsj.smartparkcore.entity.po;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import core.code.CodeValueColumn;
+import core.code.Constants;
 import core.entity.BaseEntity;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -19,17 +23,15 @@ public class AccessInfo extends BaseEntity {
 
     private String accessPhonenumber;
 
+    @JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date accessTime;
 
     private Long userId;
 
     private Date updateDate;
 
-    private Long updateUserId;
-
     private Date createDate;
-
-    private Long createUserId;
 
     private String remarks;
 
@@ -38,6 +40,26 @@ public class AccessInfo extends BaseEntity {
     private String openId;
 
     private String intervieweePhonenumber;
+
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_verify", typeName = "isVerifyType")
+    private Integer isVerify;
+    private String isVerifyType;
+
+    public Integer getIsVerify() {
+        return isVerify;
+    }
+
+    public void setIsVerify(Integer isVerify) {
+        this.isVerify = isVerify;
+    }
+
+    public String getIsVerifyType() {
+        return isVerifyType;
+    }
+
+    public void setIsVerifyType(String isVerifyType) {
+        this.isVerifyType = isVerifyType;
+    }
 
     public Long getId() {
         return id;
@@ -119,20 +141,12 @@ public class AccessInfo extends BaseEntity {
         this.updateDate = updateDate;
     }
 
-    public void setUpdateUserId(Long updateUserId) {
-        this.updateUserId = updateUserId;
-    }
-
     public Date getCreateDate() {
         return createDate;
     }
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
-    }
-
-    public void setCreateUserId(Long createUserId) {
-        this.createUserId = createUserId;
     }
 
     public String getRemarks() {

@@ -11,108 +11,70 @@
     <div class="col s12 m12 l12">
         <div id="validation" class="card card card-default scrollspy" style="height: 700px;">
             <div class="card-content">
-                <h4 class="card-title">企业信息新增</h4><label style="color:black">
+                <h4 class="card-title">访客申请信息新增</h4><label style="color:black">
             </label>
                 <form class="col s12" id="sendForm" action="#">
                     <input type="hidden" id="id" name="id">
                     <div class="row">
 
                         <div class="input-field col s4 l4 xl4">
-                            <input id="name" name="name" type="text"
+                            <input id="accessName" name="accessName" type="text"
                                    data-error=".errorTxt2">
                             <div class="errorTxt2"></div>
-                            <label for="name">公司名称</label>
+                            <label for="accessName">访客姓名</label>
                         </div>
 
-                        <div class="col input-field s4 m4 l4">
-                            <select ahsj:select name="scale" id="scale" type="code" typeKey="is_company_size">
-                            </select>
-                            <label for="scale">公司规模</label>
+
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="accessPhonenumber" name="accessPhonenumber" type="text">
+                            <label for="accessPhonenumber">手机号码</label>
                         </div>
 
                         <div class="input-field col s4 l4 xl4">
-                            <input id="legalName" name="legalName" type="text">
-                            <label for="legalName">法人姓名</label>
+                            <input id="accessIdcard" name="accessIdcard" type="text">
+                            <label for="accessIdcard">身份证号码</label>
                         </div>
 
-                        <div class="input-field col s4 l4 xl4">
-                            <input id="landlineNumber" name="landlineNumber" type="text" >
-                            <label for="landlineNumber">座机号码</label>
-                        </div>
 
                         <div class="input-field col s4 l4 xl4">
-                            <input id="idCard" name="idCard" type="text"
+                            <input id="intervieweeName" name="intervieweeName" type="text"
                                    data-error=".errorTxt1">
                             <div class="errorTxt1"></div>
-                            <label for="idCard">身份证号码</label>
-                        </div>
-                       <div class="input-field col s4 l4 xl4">
-                            <input id="unifiedSocialCreditCode" name="unifiedSocialCreditCode" type="text"
-                                   data-error=".errorTxt1">
-                            <div class="errorTxt1"></div>
-                            <label for="unifiedSocialCreditCode">组织机构代码</label>
-                        </div>
-
-                        <div class="input-field col s4 l4 xl4">
-                            <input id="phone" name="phone" type="text"
-                                   data-error=".errorTxt1">
-                            <div class="errorTxt1"></div>
-                            <label for="phone">手机号码</label>
+                            <label for="intervieweeName">被访问者</label>
                         </div>
                         <div class="input-field col s4 l4 xl4">
-                            <input id="address" name="address" type="text"
+                            <input id="intervieweePhonenumber" name="intervieweePhonenumber" type="text"
                                    data-error=".errorTxt1">
                             <div class="errorTxt1"></div>
-                            <label for="address">地址</label>
+                            <label for="intervieweePhonenumber">手机号码</label>
                         </div>
 
-                      <div class="col input-field s4 m4 l4">
-                            <select ahsj:select name="isVerify" id="isVerify" type="code" typeKey="is_verify">
-                            </select>
-                            <label for="isVerify">验证状态</label>
+
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="accessTime" name="accessTime" type="text" class="datepicker"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label for="accessTime">预约到访</label>
                         </div>
 
-                         <div class="input-field col s12 x12 m12 l12 xl12">
-                                <textarea id="description" name="description" class="materialize-textarea" type="text"
-                                ></textarea>
-                                <label for="description" class="active">单位简介</label>
+
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="accessReason" name="accessReason" type="text"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label for="accessReason">访问理由</label>
+                        </div>
+
+                        <div class="input-field col s4 m4 l4">
+                            <div class="">
+                                <select name="enterpriseName" id="enterpriseName">
+                                    <option>选择公司</option>
+                                </select>
                             </div>
+                        </div>
 
                     </div>
 
-                    <div class="input-field col s4 l4 xl4">
-                        <input id="operatingPeriodStart" name="operatingPeriodStart" type="text" class="datepicker"
-                               data-error=".errorTxt1">
-                        <div class="errorTxt1"></div>
-                        <label for="operatingPeriodStart">注册时间</label>
-                    </div>
-
-                    <div class="input-field col s4 l4 xl4">
-                        <input id="registeredCapital" name="registeredCapital" type="text"
-                               data-error=".errorTxt1">
-                        <div class="errorTxt1"></div>
-                        <label for="registeredCapital">注册资本</label>
-                    </div>
-
-                    <div class="col input-field s4 m4 l4">
-                        <select ahsj:select name="unitNature" id="unitNature" type="code" typeKey="company_type">
-                        </select>
-                        <label for="unitNature">单位性质</label>
-                    </div>
-
-              <!--      <div class="input-field col s4 l4 xl4">
-                        <input id="unitNature" name="unitNature" type="text"
-                               data-error=".errorTxt1">
-                        <div class="errorTxt1"></div>
-                        <label for="unitNature">单位性质</label>
-                    </div>-->
-
-                    <div class="input-field col s4 l4 xl4">
-                        <input id="operatingPeriodEnd" name="operatingPeriodEnd" type="text" class="datepicker"
-                               data-error=".errorTxt1">
-                        <div class="errorTxt1"></div>
-                        <label for="operatingPeriodEnd">营业期限</label>
-                    </div>
 
                     <div class="row" style="margin-bottom: 160px">
                         <div class="input-field col s12">
@@ -131,20 +93,87 @@
 
 <div th:replace="public/base_update_script :: html"></div>
 <script th:inline="javascript">
+    var enterpriseNameSelect = $("#enterpriseName");
     $(function () {
         formCheck();
         initSelect();
+        getSelectHome();
         var select1 = $(".select2-container");
         if (select1) {
             select1.css('display', 'none');
         }
     });
 
+    enterpriseNameSelect.change(function () {
+        var enterpriseName = enterpriseNameSelect.val();
+        localStorage.setItem("enterpriseName", enterpriseName);
+        var careLevelId = localStorage.getItem("careLevelId");
+        localStorage.removeItem("careLevel");
+
+        if (careLevelId == 0) {
+            careLevelId = null;
+        }
+        if (enterpriseName == "选择公司") {
+            enterpriseName = null;
+        }
+        var hisHospitalManage = {
+            "enterpriseName": enterpriseName
+            ,
+            "careLevel": careLevelId
+        }
+        $.ahsjajax(
+            CTX + "/api/accessinfo/enterpriseInfoAll/index.ahsj",
+            hisHospitalManage,
+            function (msg) {
+                data = msg;
+                getContent();
+                var dataLength = data.length;
+                goPage(1, 10, dataLength);
+
+                if (msg.success) {
+                    M.toast({html: msg.message});
+                    return false;
+                } else {
+                    //M.toast({html: msg.message});
+                    return false;
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }
+        );
+    })
+
     function initSelect() {
         $("#type").select2({
             minimumInputLength: 1,
             maximumInputLength: 20
         })
+    }
+
+    function getSelectHome() {
+        $.ahsjajax(
+            CTX + "/api/accessinfo/enterpriseInfoAll/index.ahsj",
+            null,
+            function (data) {
+                $(data).each(function (i) {
+                    enterpriseNameSelect.append(
+                        "<option value='" + this.name + "'>" + this.name + "</option>")
+                })
+                enterpriseNameSelect.formSelect();
+                if (msg.success) {
+                    M.toast({html: msg.message});
+                    return false;
+                } else {
+                    //M.toast({html: msg.message});
+                    return false;
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            })
     }
 
     function formCheck() {
@@ -165,7 +194,7 @@
                     console.log("queryString is" + queryString);
 
                     $.ahsjajax(
-                        CTX + "/api/enterprise/add/enterpriseInfo.ahsj",
+                        CTX + "/api/accessinfo/add/accessinfo.ahsj",
                         queryString,
                         function (msg) {
                             if (msg.success) {

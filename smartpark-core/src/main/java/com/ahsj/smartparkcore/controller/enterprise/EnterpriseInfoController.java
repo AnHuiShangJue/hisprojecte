@@ -77,24 +77,26 @@ public class EnterpriseInfoController extends BaseController {
         modelAndView.addObject("token", token);
         return modelAndView;
     }
+
     /**
-     *@功能说明 进入企业新增页面
-     *@Params [token]
-     *@return org.springframework.web.servlet.ModelAndView
-     *@Author XJP
-     *@Date 2019/10/14
-     *@Time 11:10
-    **/
+     * @return org.springframework.web.servlet.ModelAndView
+     * @功能说明 进入企业新增页面
+     * @Params [token]
+     * @Author XJP
+     * @Date 2019/10/14
+     * @Time 11:10
+     **/
     @GetMapping("/addEnterprise.ahsj")
     public ModelAndView addEnterprise(String token) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/enterprise/add");
         modelAndView.addObject("token", token);
         return modelAndView;
     }
+
     @GetMapping("/updateEnterprise.ahsj")
-    public ModelAndView addEnterprise(String token,@RequestParam("id") Long id) throws Exception {
+    public ModelAndView addEnterprise(String token, @RequestParam("id") Long id) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/enterprise/update");
-        EnterpriseInfoVO enterpriseInfoVO =  enterpriseInfoService.selectById(id);
+        EnterpriseInfoVO enterpriseInfoVO = enterpriseInfoService.selectById(id);
         modelAndView.addObject("token", token);
         modelAndView.addObject("enterpriseInfoVO", enterpriseInfoVO);
         return modelAndView;
@@ -109,7 +111,7 @@ public class EnterpriseInfoController extends BaseController {
      * @Time 15:52
      **/
     @PostMapping("/add/enterpriseInfo.ahsj")
-    public ResponseEntity<Message> addEnterpriseInfo(EnterpriseInfoDTO enterpriseInfoDTO, @RequestParam(value = "file" , required = false) MultipartFile[] file, String relateKet, String relatePage) throws Exception {
+    public ResponseEntity<Message> addEnterpriseInfo(EnterpriseInfoDTO enterpriseInfoDTO, @RequestParam(value = "file", required = false) MultipartFile[] file, String relateKet, String relatePage) throws Exception {
         Message message = enterpriseInfoService.addEnterpriseInfo(enterpriseInfoDTO, file, relateKet, relatePage);
         return new ResponseEntity<>((message), HttpStatus.OK);
     }
@@ -123,12 +125,25 @@ public class EnterpriseInfoController extends BaseController {
      * @Time 15:52
      **/
     @PostMapping("/update/enterpriseInfo.ahsj")
-    public ResponseEntity<Message> updateEnterpriseInfo(EnterpriseInfoDTO enterpriseInfoDTO, @RequestParam(value = "file" ,required = false) MultipartFile[] file, String relateKet, String relatePage) throws Exception {
+    public ResponseEntity<Message> updateEnterpriseInfo(EnterpriseInfoDTO enterpriseInfoDTO, @RequestParam(value = "file", required = false) MultipartFile[] file, String relateKet, String relatePage) throws Exception {
         Message message = enterpriseInfoService.updateEnterpriseInfo(enterpriseInfoDTO, file, relateKet, relatePage);
         return new ResponseEntity<>((message), HttpStatus.OK);
     }
 
- 
+    /**
+     * @return org.springframework.http.ResponseEntity<core.message.Message>
+     * @功能说明
+     * @Params [enterpriseInfoDTO]
+     * @Author XJP
+     * @Date 2019/10/15
+     * @Time 10:59
+     **/
+    @PostMapping("/update/enterpriseInfo/isEnable.ahsj")
+    public ResponseEntity<Message> updateIsEnable(EnterpriseInfoDTO enterpriseInfoDTO) throws Exception {
+        Message message = enterpriseInfoService.updateIsEnable(enterpriseInfoDTO);
+        return new ResponseEntity<>((message), HttpStatus.OK);
+    }
+
 
     /**
      * @return core.entity.PageBean<com.ahsj.smartparkcore.entity.EnterpriseInfo>
@@ -144,8 +159,7 @@ public class EnterpriseInfoController extends BaseController {
         EnterpriseInfo map = mapper.map(enterpriseInfoDTO, EnterpriseInfo.class);
         PageBean<EnterpriseInfo> pageBean = new PageBean<>();
         pageBean.setParameter(map);
-        return  ResponseEntity.ok(enterpriseInfoService.queryList(pageBean));
-
+        return ResponseEntity.ok(enterpriseInfoService.queryList(pageBean));
     }
 
     /**
@@ -161,14 +175,19 @@ public class EnterpriseInfoController extends BaseController {
         return enterpriseInfoService.auditEnterpriseInfo(enterpriseInfo, audit);
     }
 
-
-   @PostMapping("/test.ahsj")
-    public ResponseEntity<EnterpriseInfo>  queryEnterpriseInfo(@RequestParam("id") Long id ) throws Exception {
-       EnterpriseInfo enterpriseInfo = enterpriseInfoService.selectByPrimaryKey(id);
-       return  ResponseEntity.ok(enterpriseInfo);
-   }
-   
-   
+    /**
+     * @return org.springframework.http.ResponseEntity<com.ahsj.smartparkcore.entity.po.EnterpriseInfo>
+     * @功能说明
+     * @Params [id]
+     * @Author XJP
+     * @Date 2019/10/15
+     * @Time 13:08
+     **/
+    @PostMapping("/enterpriseInfoId.ahsj")
+    public ResponseEntity<EnterpriseInfo> queryEnterpriseInfo(@RequestParam("id") Long id) throws Exception {
+        EnterpriseInfo enterpriseInfo = enterpriseInfoService.selectByPrimaryKey(id);
+        return ResponseEntity.ok(enterpriseInfo);
+    }
 
 
     @PostMapping("/uploadFile.ahsj")
