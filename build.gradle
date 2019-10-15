@@ -47,7 +47,9 @@ allprojects {
         compile group: 'com.bmuschko', name: 'gradle-docker-plugin', version: '3.6.1'
         //mybatis数据库逆向工程
       // implementation "org.mybatis.generator:mybatis-generator-core:1.3.2"
-        
+        // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
+        compile group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.2.2'
+
     }
 
     dependencyManagement {
