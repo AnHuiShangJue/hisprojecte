@@ -4,6 +4,9 @@ import com.ahsj.baseuserinfo.entity.UserInfo;
 import com.ahsj.baseuserinfo.services.UserService;
 import core.entity.PageBean;
 import core.message.Message;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import utils.EmptyUtil;
 
+import com.alibaba.fastjson.JSONObject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -142,20 +146,29 @@ public class UserInfoController extends BaseOAController{
 
     @RequestMapping("/jscode2session.ahsj") // 登录
     @ResponseBody
-    public String jscode2session(HttpServletRequest req) throws ClientProtocolException, IOException {
+    public String jscode2session(HttpServletRequest req
+                                  ,@RequestParam(value="js_code", required=true) String js_code
+                                  , @RequestParam(value="appId", required=true) String appId
+                                  ,@RequestParam(value="secret", required=true) String secret) throws ClientProtocolException, IOException {
+        String url = "https://api.weixin.qq.com/sns/jscode2session?appid="+appId+"&secret="+secret+"&js_code="+js_code+"+&grant_type=authorization_code";
 
-        String code = req.getParameter("code");
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                    .url(url)
+                    .build();
+            try (Response response = client.newCall(request).execute()) {
+                return  response.body().string();
+        }
 
-        String url = "https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code";
-
-        url=url.replaceAll("JSCODE", code);
-
-// 执行get请求.
-        CloseableHttpResponse response = HttpClients.createDefault().execute(new HttpGet(url));
+//
+//        url=url.replaceAll("JSCODE", js_code);
+//
+// //执行get请求.
+//        CloseableHttpResponse response = HttpClients.createDefault().execute(new HttpGet(url));
 // 获取响应实体
-        String html = EntityUtils.toString(response.getEntity());
+//       String html = EntityUtils.toString(response.getEntity());
+//        return html;
 
-        return html;
 
     }
 }

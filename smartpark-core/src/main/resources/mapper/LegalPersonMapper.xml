@@ -167,4 +167,8 @@
     </set>
     where enterprise_id =  #{enterpriseId,jdbcType=BIGINT}
   </update>
+
+  <!--自定义SQL-->
+
+
 </mapper>

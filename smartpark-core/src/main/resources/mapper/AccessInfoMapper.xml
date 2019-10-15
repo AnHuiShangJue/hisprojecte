@@ -18,12 +18,13 @@
     <result column="remarks" property="remarks" jdbcType="VARCHAR" />
     <result column="interviewee_name" property="intervieweeName" jdbcType="VARCHAR" />
     <result column="open_id" property="openId" jdbcType="VARCHAR" />
+    <result column="is_verify" property="isVerify" jdbcType="INTEGER" />
     <result column="interviewee_phonenumber" property="intervieweePhonenumber" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, enterprise_id, enterprise_name, access_reason, access_name, access_idcard, access_phonenumber, 
     access_time, user_id, update_date, update_user_id, create_date, create_user_id, remarks, 
-    interviewee_name, open_id, interviewee_phonenumber
+    interviewee_name, open_id, interviewee_phonenumber,is_verify
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -41,13 +42,14 @@
       access_phonenumber, access_time, user_id, 
       update_date, update_user_id, create_date, 
       create_user_id, remarks, interviewee_name, 
-      open_id, interviewee_phonenumber)
+      open_id, interviewee_phonenumber,is_verify
+      )
     values (#{id,jdbcType=BIGINT}, #{enterpriseId,jdbcType=BIGINT}, #{enterpriseName,jdbcType=VARCHAR}, 
       #{accessReason,jdbcType=VARCHAR}, #{accessName,jdbcType=VARCHAR}, #{accessIdcard,jdbcType=VARCHAR}, 
       #{accessPhonenumber,jdbcType=VARCHAR}, #{accessTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=BIGINT}, 
       #{updateDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
       #{createUserId,jdbcType=BIGINT}, #{remarks,jdbcType=VARCHAR}, #{intervieweeName,jdbcType=VARCHAR}, 
-      #{openId,jdbcType=VARCHAR}, #{intervieweePhonenumber,jdbcType=VARCHAR})
+      #{openId,jdbcType=VARCHAR}, #{intervieweePhonenumber,jdbcType=VARCHAR}, #{isVerify,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.ahsj.smartparkcore.entity.po.AccessInfo" >
     insert into access_info
@@ -103,6 +105,9 @@
       <if test="intervieweePhonenumber != null" >
         interviewee_phonenumber,
       </if>
+      <if test="isVerify != null" >
+        is_verify,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -155,6 +160,9 @@
       </if>
       <if test="intervieweePhonenumber != null" >
         #{intervieweePhonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="isVerify != null" >
+        #{isVerify,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -209,6 +217,9 @@
       <if test="intervieweePhonenumber != null" >
         interviewee_phonenumber = #{intervieweePhonenumber,jdbcType=VARCHAR},
       </if>
+      <if test="isVerify != null" >
+        is_verify = #{isVerify,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -229,7 +240,37 @@
       remarks = #{remarks,jdbcType=VARCHAR},
       interviewee_name = #{intervieweeName,jdbcType=VARCHAR},
       open_id = #{openId,jdbcType=VARCHAR},
-      interviewee_phonenumber = #{intervieweePhonenumber,jdbcType=VARCHAR}
+      interviewee_phonenumber = #{intervieweePhonenumber,jdbcType=VARCHAR},  is_verify = #{isVerify,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+  <!--自定义SQL-->
+
+  <select id="queryList" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
+    select
+    <include refid="Base_Column_List"/>
+    from access_info a where 1=1
+
+    <if test="parameter.openId != null and parameter.openId != ''">
+      and a.open_id = #{parameter.openId,jdbcType=VARCHAR}
+    </if>
+    <if test="parameter.accessIdcard != null and parameter.accessIdcard != ''">
+      and a.access_idcard like concat('%',#{parameter.accessIdcard,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.accessName != null and parameter.accessName != ''">
+      and a.access_name like concat('%',#{parameter.accessName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.accessPhonenumber != null and parameter.accessPhonenumber != ''">
+      and a.access_phonenumber like concat('%',#{parameter.accessPhonenumber,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+
+  <select id="queryAccessInfo" resultMap="BaseResultMap" parameterType="com.ahsj.smartparkcore.entity.po.AccessInfo" >
+    select  <include refid="Base_Column_List"/> from access_info  where   access_idcard = #{accessIdcard,jdbcType=VARCHAR}
+  </select>
+
 </mapper>

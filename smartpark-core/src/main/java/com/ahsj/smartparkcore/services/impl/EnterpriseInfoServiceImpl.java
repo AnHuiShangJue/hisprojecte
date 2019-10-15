@@ -101,6 +101,7 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
                 return MessageUtil.createMessage(false, "企业信息新增失败 ！ 该企业已存在 ！！");
             }
             enterpriseInfo.setIsVerify(Constants.TWO);
+            enterpriseInfo.setIsEnable(Constants.TWO);
             enterpriseInfoMapper.insert(enterpriseInfo);
             legalPerson.setEnterpriseId(enterpriseInfo.getId());
             legalPersonService.insert(legalPerson);
@@ -128,18 +129,18 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
         BeanUtils.copyProperties(enterpriseInfoDTO, legalPerson);
         legalPerson.setId(null);
         if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getName()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getLegalName()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getUnifiedSocialCreditCode())) {
-            return MessageUtil.createMessage(false, "企业信息新增失败 ！！！");
+            return MessageUtil.createMessage(false, "企业信息修改失败 ！！！");
         } else {
             EnterpriseInfo info = enterpriseInfoMapper.queryEnterpriseInfo(enterpriseInfo);
             if (EmptyUtil.Companion.isNullOrEmpty(info)) {
-                enterpriseInfoMapper.updateByPrimaryKey(enterpriseInfo);
+                enterpriseInfoMapper.updateByPrimaryKeySelective(enterpriseInfo);
                 legalPerson.setEnterpriseId(enterpriseInfo.getId());
                 legalPersonService.updateByCompanyId(legalPerson);
                 return MessageUtil.createMessage(true, "企业信息修改成功 ！！！");
             } else  {
                 if (StringUtils.equals(info.getName(), enterpriseInfo.getName())){
                     if (info.getId().longValue() == enterpriseInfo.getId().longValue()) {
-                        enterpriseInfoMapper.updateByPrimaryKey(enterpriseInfo);
+                        enterpriseInfoMapper.updateByPrimaryKeySelective(enterpriseInfo);
                         legalPerson.setEnterpriseId(enterpriseInfo.getId());
                         legalPersonService.updateByCompanyId(legalPerson);
                         return MessageUtil.createMessage(true, "企业信息修改成功 ！！！");
@@ -232,6 +233,42 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
             BeanUtils.copyProperties(enterpriseInfo, enterpriseInfoVO);
             return enterpriseInfoVO;
         }
+    }
+
+    /**
+     *@功能说明 
+     *@Params [enterpriseInfoDTO]
+     *@return core.message.Message
+     *@Author XJP
+     *@Date 2019/10/15
+     *@Time 10:59
+    **/
+    @Override
+    @Transactional(readOnly = false)
+    public Message updateIsEnable(EnterpriseInfoDTO enterpriseInfoDTO) throws Exception {
+        if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getId())){
+            return MessageUtil.createMessage(false, "企业信息修改启用状态失败 ！！！");
+        }else {
+            EnterpriseInfo enterpriseInfo = new EnterpriseInfo();
+            BeanUtils.copyProperties(enterpriseInfoDTO, enterpriseInfo);
+             enterpriseInfo = enterpriseInfoMapper.selectByPrimaryKey(enterpriseInfo.getId());
+             if (enterpriseInfo.getIsEnable() == 1){
+                 enterpriseInfo.setIsEnable(Constants.TWO);
+                 enterpriseInfoMapper.updateByPrimaryKeySelective(enterpriseInfo);
+                 return MessageUtil.createMessage(true, "企业信息修改启用状态成功 ！！！");
+             }else {
+                 enterpriseInfo.setIsEnable(Constants.ONE);
+                 enterpriseInfoMapper.updateByPrimaryKeySelective(enterpriseInfo);
+                 return MessageUtil.createMessage(true, "企业信息修改启用状态成功 ！！！");
+             }
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<EnterpriseInfo> enterpriseInfoAll() throws Exception {
+        List<EnterpriseInfo> enterpriseInfo = enterpriseInfoMapper.enterpriseInfoAll();
+        return enterpriseInfo;
     }
 
 

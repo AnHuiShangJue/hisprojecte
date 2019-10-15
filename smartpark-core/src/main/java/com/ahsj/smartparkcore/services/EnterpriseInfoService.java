@@ -7,6 +7,8 @@ import core.entity.PageBean;
 import core.message.Message;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 /**
  * Copyright (C), 2019-2019, 安徽商角有限公司
  * FileName: EnterpriseInfoService
@@ -78,4 +80,16 @@ public interface EnterpriseInfoService {
      * @Time 14:02
      **/
     EnterpriseInfoVO selectById(Long id) throws Exception;
+
+    /**
+     * @return core.message.Message
+     * @功能说明
+     * @Params [enterpriseInfoDTO]
+     * @Author XJP
+     * @Date 2019/10/15
+     * @Time 10:51
+     **/
+    Message updateIsEnable(EnterpriseInfoDTO enterpriseInfoDTO) throws Exception;
+
+    List<EnterpriseInfo> enterpriseInfoAll() throws Exception;
 }

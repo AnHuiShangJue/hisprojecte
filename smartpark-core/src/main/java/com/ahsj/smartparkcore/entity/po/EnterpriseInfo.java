@@ -36,13 +36,15 @@ public class EnterpriseInfo extends BaseEntity {
 
     private String description;
 
-    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_verification", typeName = "isVerifyType")
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_verify", typeName = "isVerifyType")
     private Integer isVerify;
     private String isVerifyType;
 
     private BigDecimal registeredCapital;
 
-    private Short unitNature;
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "company_type", typeName = "companyTypeName")
+    private Short unitNature;  //company_type
+    private String companyTypeName;
 
     @JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
@@ -65,6 +67,44 @@ public class EnterpriseInfo extends BaseEntity {
     private String idCard;
 
     private String landlineNumber;
+
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_enable", typeName = "enableName")
+    private Integer isEnable;
+    private String enableName;
+
+    private String address;
+
+    public String getCompanyTypeName() {
+        return companyTypeName;
+    }
+
+    public void setCompanyTypeName(String companyTypeName) {
+        this.companyTypeName = companyTypeName;
+    }
+
+    public Integer getIsEnable() {
+        return isEnable;
+    }
+
+    public void setIsEnable(Integer isEnable) {
+        this.isEnable = isEnable;
+    }
+
+    public String getEnableName() {
+        return enableName;
+    }
+
+    public void setEnableName(String enableName) {
+        this.enableName = enableName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public String getLandlineNumber() {
         return landlineNumber;

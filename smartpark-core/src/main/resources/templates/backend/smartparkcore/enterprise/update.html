@@ -59,8 +59,15 @@
                             <label for="phone">手机号码</label>
                         </div>
 
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="address" name="address" type="text" th:value="${enterpriseInfoVO.address}"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label for="address">地址</label>
+                        </div>
+
                         <div class="col input-field s4 m4 l4">
-                            <select ahsj:select name="isVerify" id="isVerify" type="code" typeKey="is_verification" th:value="${enterpriseInfoVO.isVerify}">
+                            <select ahsj:select name="isVerify" id="isVerify" type="code" typeKey="is_verify" th:value="${enterpriseInfoVO.isVerify}">
                             </select>
                             <label for="isVerify">验证状态</label>
                         </div>
@@ -87,12 +94,18 @@
                         <label for="registeredCapital">注册资本</label>
                     </div>
 
-                    <div class="input-field col s4 l4 xl4">
+                    <div class="col input-field s4 m4 l4">
+                        <select ahsj:select name="unitNature" id="unitNature" type="code" typeKey="company_type" th:value="${enterpriseInfoVO.unitNature}">
+                        </select>
+                        <label for="unitNature">单位性质</label>
+                    </div>
+
+                 <!--   <div class="input-field col s4 l4 xl4">
                         <input id="unitNature" name="unitNature" type="text" th:value="${enterpriseInfoVO.unitNature}"
                                data-error=".errorTxt1">
                         <div class="errorTxt1"></div>
                         <label for="unitNature">单位性质</label>
-                    </div>
+                    </div>-->
 
                     <div class="input-field col s4 l4 xl4">
                         <input id="operatingPeriodEnd" name="operatingPeriodEnd" type="text" class="datepicker"   th:placeholder="${#dates.format(enterpriseInfoVO.operatingPeriodEnd, 'yyyy/MM/dd')}" th:value="${#dates.format(enterpriseInfoVO.operatingPeriodEnd, 'yyyy/MM/dd')}"
@@ -157,8 +170,8 @@
                         function (msg) {
                             if (msg.success) {
                                 M.toast({html: msg.message});
-                                parent.grid.search();
                                 dialog.parentclose();
+                                parent.grid.search();
                                 return false;
                             } else {
                                 M.toast({html: msg.message});

@@ -48,53 +48,21 @@
                             <div class="row">
 
                                 <div class="col input-field s4 m4 l4">
-                                    <input id="name" name="name" type="text"/>
-                                    <label for="name">名称<span style="font-size: 12px"></span></label>
+                                    <input id="accessName" name="accessName" type="text"/>
+                                    <label for="accessName">姓名<span style="font-size: 12px"></span></label>
                                 </div>
 
                                 <div class="col input-field s4 m4 l4">
-                                    <input id="legalName" name="legalName" type="text"/>
-                                    <label for="legalName">法人名称<span style="font-size: 12px"></span></label>
+                                    <input id="accessIdcard" name="accessIdcard" type="text"/>
+                                    <label for="accessIdcard">身份证号<span style="font-size: 12px"></span></label>
                                 </div>
-
+                                <div class="col input-field s4 m4 l4">
+                                    <input id="accessPhonenumber" name="accessPhonenumber" type="text"/>
+                                    <label for="accessPhonenumber">手机号<span style="font-size: 12px"></span></label>
+                                </div>
 
                             </div>
-                           <!-- <div class="row">
-                                <div class="col  s1 m1 l1 xl1">
-                                    <div ahsj:radio name="scale" id="scale" type="code" typeKey="is_company_size"
-                                         title="公司規模" cssdefault="radiotdefault" haveDefault="true" value="0"></div>
-                                </div>
-                            </div>-->
 
-                            <div class="row">
-                                <div class="col s1">
-                                    <h6>公司规模</h6>
-                                </div>
-                                <div class="col s1" style="padding-top:6px">
-                                    <label>
-                                        <input id="enable" name="scale" type="radio" value="1"  />
-                                        <span>大型</span>
-                                    </label>
-                                </div>
-                                <div class="col s1" style="padding-top:6px">
-                                    <label>
-                                        <input id="unEnable" name="scale" type="radio" value="2"/>
-                                        <span>中型</span>
-                                    </label>
-                                </div>
-                                <div class="col s1" style="padding-top:6px">
-                                    <label>
-                                        <input id="noSelect" name="scale" type="radio" value="3" />
-                                        <span>微型</span>
-                                    </label>
-                                </div>
-                                <div class="col s1" style="padding-top:6px">
-                                    <label>
-                                        <input id="nSelect" name="scale" type="radio" value="0" checked/>
-                                        <span>不选择</span>
-                                    </label>
-                                </div>
-                            </div>
                         </form>
                     </div>
                     <div class="row">
@@ -121,22 +89,7 @@
                                     <a id="createBtn" class="btn waves-effect waves-light red"><i
                                             class="material-icons  white-text tooltipped " data-position="bottom"
                                             data-delay="50" data-tooltip="增加新的项目信息">add</i></a>
-                                   <!-- <a id="deleteManyBtn"
-                                       class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
-                                            class="material-icons white-text tooltipped" data-position="bottom"
-                                            data-delay="50" data-tooltip="批量删除">delete</i></a>
-                                    <a  id="setDisableManyBtn"
-                                       class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
-                                            class="material-icons white-text tooltipped" data-position="bottom"
-                                            data-delay="50" data-tooltip="批量设置收费停用状态">info</i></a>
-                                    <a  id="setDownloadManyBtn"
-                                       class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
-                                            class="material-icons white-text tooltipped" data-position="bottom"
-                                            data-delay="50" data-tooltip="导出">file_download</i></a>
-                                    <a  id="setUploadManyBtn"
-                                       class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
-                                            class="material-icons white-text tooltipped" data-position="bottom"
-                                            data-delay="50" data-tooltip="导入">file_upload</i></a>-->
+
                                 </div>
                             </div>
                             <!--Form Advance-->
@@ -177,7 +130,7 @@
             loadingMessage: 'Loading...',
             dataTable: {
                 "ajax": {
-                    "url": CTX + "/api/enterprise/list.ahsj" // ajax source
+                    "url": CTX + "/api/accessinfo/list.ahsj" // ajax source
                 },
                 "columns": [
                     {
@@ -190,54 +143,43 @@
                         "className": "center-align"
                     },
                     {
-                        "title": "名称",
-                        "data": "name",
-                        "name": "name"
+                        "title": "访客姓名",
+                        "data": "accessName",
+                        "name": "access_name"
                     },
                     {
-                        "title": "地址",
-                        "data": "address",
-                        "name": "address"
+                        "title": "身份证号码",
+                        "data": "accessIdcard",
+                        "name": "access_idcard"
                     },
                    {
-                        "title": "座机号码",
-                        "data": "landlineNumber",
-                        "name": "landline_number"
+                        "title": "手机号码",
+                        "data": "accessPhonenumber",
+                        "name": "access_phonenumber"
                     },
                     {
-                        "title": "统一社会信用代码",
-                        "data": "unifiedSocialCreditCode",
-                        "name": "unified_social_credit_code"
+                        "title": "访问公司",
+                        "data": "enterpriseName",
+                            "name": "enterprise_name"
                     }, {
-                        "title": "法人名称",
-                        "data": "legalName",
-                        "name": "legal_name"
+                        "title": "访问时间",
+                        "data": "accessTime",
+                        "name": "access_time"
                     }, {
-                        "title": "公司规模",
-                        "data": "scaleName",
-                        "name": "scale"
+                        "title": "访问人",
+                        "data": "intervieweeName",
+                        "name": "interviewee_name"
+                    },
+                    {
+                        "title": "访问理由",
+                        "data": "accessReason",
+                        "name": "access_reason"
                     },
                     {
                         "title": "审核状态",
                         "data": "isVerifyType",
                         "name": "is_verify"
                     },
-                    {
-                        "title": "是否启用",
-                        "data": "enableName",
-                        "name": "is_enable"
-                    },
-                    {
-                        "title": "单位性质",
-                        "data": "companyTypeName",
-                        "name": "company_type"
-                    },
-                    {
-                        "title": "注册资本",
-                        "data": "registeredCapital",
-                        "name": "registered_capital"
-                    },
-
                     {
                         "title": "操作",
                         "width": "180px",
@@ -264,8 +206,8 @@
     }
 
     function edit(id) {
-        var url = CTX + "/api/enterprise/updateEnterprise.ahsj?token=" + TOKEN+ "&id=" + id;
-        dialog.show(url, "企业信息修改");
+        var url = CTX + "/api/accessinfo/updateAccessinfo.ahsj?token=" + TOKEN+"&id=" + id;
+        dialog.show(url, "访客申请信息修改");
 
     }
 
@@ -307,8 +249,8 @@
 
         //新增按钮
         $("#createBtn").click(function () {
-            var url = CTX +  "/api/enterprise/addEnterprise.ahsj?token=" + TOKEN;
-            dialog.show(url, "企业信息新增")
+            var url = CTX +  "/api/accessinfo/addAccessinfo.ahsj?token=" + TOKEN;
+            dialog.show(url, "访客申请信息新增")
         });
 
 

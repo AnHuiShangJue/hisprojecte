@@ -1,242 +1,264 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ahsj.smartparkcore.dao.EnterpriseInfoMapper" >
-  <resultMap id="BaseResultMap" type="com.ahsj.smartparkcore.entity.po.EnterpriseInfo" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="unified_social_credit_code" property="unifiedSocialCreditCode" jdbcType="VARCHAR" />
-    <result column="scale" property="scale" jdbcType="SMALLINT" />
-    <result column="englise_name" property="engliseName" jdbcType="VARCHAR" />
-    <result column="legal_name" property="legalName" jdbcType="VARCHAR" />
-    <result column="identification_number" property="identificationNumber" jdbcType="VARCHAR" />
-    <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
-    <result column="description" property="description" jdbcType="VARCHAR" />
-    <result column="is_verify" property="isVerify" jdbcType="INTEGER" />
-    <result column="registered_capital" property="registeredCapital" jdbcType="DECIMAL" />
-    <result column="unit_nature" property="unitNature" jdbcType="SMALLINT" />
-    <result column="operating_period_start" property="operatingPeriodStart" jdbcType="DATE" />
-    <result column="operating_period_end" property="operatingPeriodEnd" jdbcType="DATE" />
-    <result column="create_date" property="createDate" jdbcType="DATE" />
-    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
-    <result column="update_date" property="updateDate" jdbcType="DATE" />
-    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
-    <result column="id_card" property="idCard" jdbcType="VARCHAR" />
-    <result column="phone" property="phone" jdbcType="VARCHAR" />
-    <result column="landline_number" property="landlineNumber" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.ahsj.smartparkcore.dao.EnterpriseInfoMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.smartparkcore.entity.po.EnterpriseInfo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="unified_social_credit_code" property="unifiedSocialCreditCode" jdbcType="VARCHAR"/>
+        <result column="scale" property="scale" jdbcType="SMALLINT"/>
+        <result column="englise_name" property="engliseName" jdbcType="VARCHAR"/>
+        <result column="legal_name" property="legalName" jdbcType="VARCHAR"/>
+        <result column="identification_number" property="identificationNumber" jdbcType="VARCHAR"/>
+        <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="is_verify" property="isVerify" jdbcType="INTEGER"/>
+        <result column="is_enable" property="isEnable" jdbcType="INTEGER"/>
+        <result column="registered_capital" property="registeredCapital" jdbcType="DECIMAL"/>
+        <result column="unit_nature" property="unitNature" jdbcType="SMALLINT"/>
+        <result column="operating_period_start" property="operatingPeriodStart" jdbcType="DATE"/>
+        <result column="operating_period_end" property="operatingPeriodEnd" jdbcType="DATE"/>
+        <result column="create_date" property="createDate" jdbcType="DATE"/>
+        <result column="create_user_id" property="createUserId" jdbcType="BIGINT"/>
+        <result column="update_date" property="updateDate" jdbcType="DATE"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="BIGINT"/>
+        <result column="id_card" property="idCard" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="landline_number" property="landlineNumber" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, name, unified_social_credit_code, scale, englise_name, legal_name, identification_number, 
     phone_number, description, is_verify, registered_capital, unit_nature, operating_period_start, 
-    operating_period_end, create_date, create_user_id, update_date, update_user_id,landline_number
+    operating_period_end, create_date, create_user_id, update_date, update_user_id,landline_number,is_enable,address
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from enterprise_info
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from enterprise_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from enterprise_info
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.ahsj.smartparkcore.entity.po.EnterpriseInfo" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.ahsj.smartparkcore.entity.po.EnterpriseInfo" useGeneratedKeys="true"
+            keyProperty="id">
     insert into enterprise_info (id, name, unified_social_credit_code, 
       scale, englise_name, legal_name, 
       identification_number, phone_number, description, 
       is_verify, registered_capital, unit_nature, 
       operating_period_start, operating_period_end, create_date, 
-      create_user_id, update_date, update_user_id,landline_number
+      create_user_id, update_date, update_user_id,landline_number,is_enable,address
       )
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{unifiedSocialCreditCode,jdbcType=VARCHAR}, 
       #{scale,jdbcType=SMALLINT}, #{engliseName,jdbcType=VARCHAR}, #{legalName,jdbcType=VARCHAR}, 
       #{identificationNumber,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
       #{isVerify,jdbcType=INTEGER}, #{registeredCapital,jdbcType=DECIMAL}, #{unitNature,jdbcType=SMALLINT}, 
       #{operatingPeriodStart,jdbcType=DATE}, #{operatingPeriodEnd,jdbcType=DATE}, #{createDate,jdbcType=DATE}, 
-      #{createUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=DATE}, #{updateUserId,jdbcType=BIGINT},#{landlineNumber,jdbcType=VARCHAR}
+      #{createUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=DATE}, #{updateUserId,jdbcType=BIGINT},#{landlineNumber,jdbcType=VARCHAR},
+       #{isEnable,jdbcType=INTEGER},#{address,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ahsj.smartparkcore.entity.po.EnterpriseInfo" >
-    insert into enterprise_info
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="unifiedSocialCreditCode != null" >
-        unified_social_credit_code,
-      </if>
-      <if test="scale != null" >
-        scale,
-      </if>
-      <if test="engliseName != null" >
-        englise_name,
-      </if>
-      <if test="legalName != null" >
-        legal_name,
-      </if>
-      <if test="identificationNumber != null" >
-        identification_number,
-      </if>
-      <if test="phoneNumber != null" >
-        phone_number,
-      </if>
-      <if test="description != null" >
-        description,
-      </if>
-      <if test="isVerify != null" >
-        is_verify,
-      </if>
-      <if test="registeredCapital != null" >
-        registered_capital,
-      </if>
-      <if test="unitNature != null" >
-        unit_nature,
-      </if>
-      <if test="operatingPeriodStart != null" >
-        operating_period_start,
-      </if>
-      <if test="operatingPeriodEnd != null" >
-        operating_period_end,
-      </if>
-      <if test="createDate != null" >
-        create_date,
-      </if>
-      <if test="createUserId != null" >
-        create_user_id,
-      </if>
-      <if test="updateDate != null" >
-        update_date,
-      </if>
-      <if test="updateUserId != null" >
-        update_user_id,
-      </if>
-      <if test="landlineNumber != null" >
-        landlineNumber,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="unifiedSocialCreditCode != null" >
-        #{unifiedSocialCreditCode,jdbcType=VARCHAR},
-      </if>
-      <if test="scale != null" >
-        #{scale,jdbcType=SMALLINT},
-      </if>
-      <if test="engliseName != null" >
-        #{engliseName,jdbcType=VARCHAR},
-      </if>
-      <if test="legalName != null" >
-        #{legalName,jdbcType=VARCHAR},
-      </if>
-      <if test="identificationNumber != null" >
-        #{identificationNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="phoneNumber != null" >
-        #{phoneNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null" >
-        #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="isVerify != null" >
-        #{isVerify,jdbcType=INTEGER},
-      </if>
-      <if test="registeredCapital != null" >
-        #{registeredCapital,jdbcType=DECIMAL},
-      </if>
-      <if test="unitNature != null" >
-        #{unitNature,jdbcType=SMALLINT},
-      </if>
-      <if test="operatingPeriodStart != null" >
-        #{operatingPeriodStart,jdbcType=DATE},
-      </if>
-      <if test="operatingPeriodEnd != null" >
-        #{operatingPeriodEnd,jdbcType=DATE},
-      </if>
-      <if test="createDate != null" >
-        #{createDate,jdbcType=DATE},
-      </if>
-      <if test="createUserId != null" >
-        #{createUserId,jdbcType=BIGINT},
-      </if>
-      <if test="updateDate != null" >
-        #{updateDate,jdbcType=DATE},
-      </if>
-      <if test="updateUserId != null" >
-        #{updateUserId,jdbcType=BIGINT},
-      </if>
-      <if test="landlineNumber != null" >
-        #{landlineNumber,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.smartparkcore.entity.po.EnterpriseInfo" >
-    update enterprise_info
-    <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="unifiedSocialCreditCode != null" >
-        unified_social_credit_code = #{unifiedSocialCreditCode,jdbcType=VARCHAR},
-      </if>
-      <if test="scale != null" >
-        scale = #{scale,jdbcType=SMALLINT},
-      </if>
-      <if test="engliseName != null" >
-        englise_name = #{engliseName,jdbcType=VARCHAR},
-      </if>
-      <if test="legalName != null" >
-        legal_name = #{legalName,jdbcType=VARCHAR},
-      </if>
-      <if test="identificationNumber != null" >
-        identification_number = #{identificationNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="phoneNumber != null" >
-        phone_number = #{phoneNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null" >
-        description = #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="isVerify != null" >
-        is_verify = #{isVerify,jdbcType=INTEGER},
-      </if>
-      <if test="registeredCapital != null" >
-        registered_capital = #{registeredCapital,jdbcType=DECIMAL},
-      </if>
-      <if test="unitNature != null" >
-        unit_nature = #{unitNature,jdbcType=SMALLINT},
-      </if>
-      <if test="operatingPeriodStart != null" >
-        operating_period_start = #{operatingPeriodStart,jdbcType=DATE},
-      </if>
-      <if test="operatingPeriodEnd != null" >
-        operating_period_end = #{operatingPeriodEnd,jdbcType=DATE},
-      </if>
-      <if test="createDate != null" >
-        create_date = #{createDate,jdbcType=DATE},
-      </if>
-      <if test="createUserId != null" >
-        create_user_id = #{createUserId,jdbcType=BIGINT},
-      </if>
-      <if test="updateDate != null" >
-        update_date = #{updateDate,jdbcType=DATE},
-      </if>
-      <if test="updateUserId != null" >
-        update_user_id = #{updateUserId,jdbcType=BIGINT},
-      </if>
-      <if test="landlineNumber != null" >
-        landline_number = #{landlineNumber,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ahsj.smartparkcore.entity.po.EnterpriseInfo" >
+    <insert id="insertSelective" parameterType="com.ahsj.smartparkcore.entity.po.EnterpriseInfo">
+        insert into enterprise_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="unifiedSocialCreditCode != null">
+                unified_social_credit_code,
+            </if>
+            <if test="scale != null">
+                scale,
+            </if>
+            <if test="engliseName != null">
+                englise_name,
+            </if>
+            <if test="legalName != null">
+                legal_name,
+            </if>
+            <if test="identificationNumber != null">
+                identification_number,
+            </if>
+            <if test="phoneNumber != null">
+                phone_number,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="isVerify != null">
+                is_verify,
+            </if>
+            <if test="registeredCapital != null">
+                registered_capital,
+            </if>
+            <if test="unitNature != null">
+                unit_nature,
+            </if>
+            <if test="operatingPeriodStart != null">
+                operating_period_start,
+            </if>
+            <if test="operatingPeriodEnd != null">
+                operating_period_end,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="landlineNumber != null">
+                landlineNumber,
+            </if>
+            <if test="isEnable != null">
+                isEnable,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="unifiedSocialCreditCode != null">
+                #{unifiedSocialCreditCode,jdbcType=VARCHAR},
+            </if>
+            <if test="scale != null">
+                #{scale,jdbcType=SMALLINT},
+            </if>
+            <if test="engliseName != null">
+                #{engliseName,jdbcType=VARCHAR},
+            </if>
+            <if test="legalName != null">
+                #{legalName,jdbcType=VARCHAR},
+            </if>
+            <if test="identificationNumber != null">
+                #{identificationNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNumber != null">
+                #{phoneNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="isVerify != null">
+                #{isVerify,jdbcType=INTEGER},
+            </if>
+            <if test="registeredCapital != null">
+                #{registeredCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="unitNature != null">
+                #{unitNature,jdbcType=SMALLINT},
+            </if>
+            <if test="operatingPeriodStart != null">
+                #{operatingPeriodStart,jdbcType=DATE},
+            </if>
+            <if test="operatingPeriodEnd != null">
+                #{operatingPeriodEnd,jdbcType=DATE},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=DATE},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=DATE},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="landlineNumber != null">
+                #{landlineNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="isEnable != null">
+                #{isEnable,jdbcType=INTEGER},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.smartparkcore.entity.po.EnterpriseInfo">
+        update enterprise_info
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="unifiedSocialCreditCode != null">
+                unified_social_credit_code = #{unifiedSocialCreditCode,jdbcType=VARCHAR},
+            </if>
+            <if test="scale != null">
+                scale = #{scale,jdbcType=SMALLINT},
+            </if>
+            <if test="engliseName != null">
+                englise_name = #{engliseName,jdbcType=VARCHAR},
+            </if>
+            <if test="legalName != null">
+                legal_name = #{legalName,jdbcType=VARCHAR},
+            </if>
+            <if test="identificationNumber != null">
+                identification_number = #{identificationNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNumber != null">
+                phone_number = #{phoneNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="isVerify != null">
+                is_verify = #{isVerify,jdbcType=INTEGER},
+            </if>
+            <if test="registeredCapital != null">
+                registered_capital = #{registeredCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="unitNature != null">
+                unit_nature = #{unitNature,jdbcType=SMALLINT},
+            </if>
+            <if test="operatingPeriodStart != null">
+                operating_period_start = #{operatingPeriodStart,jdbcType=DATE},
+            </if>
+            <if test="operatingPeriodEnd != null">
+                operating_period_end = #{operatingPeriodEnd,jdbcType=DATE},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=DATE},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=DATE},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="landlineNumber != null">
+                landline_number = #{landlineNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="isEnable != null">
+                is_enable = #{isEnable,jdbcType=INTEGER},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.smartparkcore.entity.po.EnterpriseInfo">
     update enterprise_info
     set name = #{name,jdbcType=VARCHAR},
       unified_social_credit_code = #{unifiedSocialCreditCode,jdbcType=VARCHAR},
@@ -255,42 +277,52 @@
       create_user_id = #{createUserId,jdbcType=BIGINT},
       update_date = #{updateDate,jdbcType=DATE},
       update_user_id = #{updateUserId,jdbcType=BIGINT},
-        landline_number = #{landlineNumber,jdbcType=VARCHAR}
+        landline_number = #{landlineNumber,jdbcType=VARCHAR},
+         is_enable =  #{isEnable,jdbcType=INTEGER},
+          address =  #{address,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <!--自定义SQL-->
-  <select id="queryEnterpriseInfo" parameterType="com.ahsj.smartparkcore.entity.po.EnterpriseInfo" resultMap="BaseResultMap">
-    SELECT  <include refid="Base_Column_List"/> from enterprise_info where 1=1
-    <if test="name != null  and name !='' " >
-      and name = #{name,jdbcType=VARCHAR}
-    </if>
-    <if test="unifiedSocialCreditCode != null  and unifiedSocialCreditCode !='' " >
-      and unified_social_credit_code = #{unifiedSocialCreditCode,jdbcType=VARCHAR}
-    </if>
-  </select>
+    <!--自定义SQL-->
+    <select id="queryEnterpriseInfo" parameterType="com.ahsj.smartparkcore.entity.po.EnterpriseInfo"
+            resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from enterprise_info where 1=1
+        <if test="name != null  and name !='' ">
+            and name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="unifiedSocialCreditCode != null  and unifiedSocialCreditCode !='' ">
+            and unified_social_credit_code = #{unifiedSocialCreditCode,jdbcType=VARCHAR}
+        </if>
+    </select>
 
-  <select id="queryList" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
-    select <include refid="Base_Column_List"/>
-      from enterprise_info e where 1=1
-    <if test="parameter.name != null and parameter.name != ''">
-      and e.name like concat('%', #{parameter.name,jdbcType=INTEGER},'%')
-    </if>
-    <if test="parameter.legalName != null and parameter.legalName != ''">
-      and e.legal_name like concat('%', #{parameter.legalName,jdbcType=INTEGER},'%')
-    </if>
-    <if test="parameter.unifiedSocialCreditCode != null and parameter.unifiedSocialCreditCode != ''">
-      and e.unified_social_credit_code like concat('%', #{parameter.unifiedSocialCreditCode,jdbcType=INTEGER},'%')
-    </if>
-    <if test="parameter.scale != null and parameter.scale != ''">
-      and e.scale #{scale,jdbcType=SMALLINT}
-    </if>
-    <if test="parameter.orders != null and parameter.orders != ''">
-      order by ${parameter.orders}
-    </if>
-  </select>
+    <select id="queryList" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
+        select
+        <include refid="Base_Column_List"/>
+        from enterprise_info e where 1=1
+        <if test="parameter.name != null and parameter.name != ''">
+            and e.name like concat('%', #{parameter.name,jdbcType=INTEGER},'%')
+        </if>
+        <if test="parameter.legalName != null and parameter.legalName != ''">
+            and e.legal_name like concat('%', #{parameter.legalName,jdbcType=INTEGER},'%')
+        </if>
+        <if test="parameter.unifiedSocialCreditCode != null and parameter.unifiedSocialCreditCode != ''">
+            and e.unified_social_credit_code like concat('%', #{parameter.unifiedSocialCreditCode,jdbcType=INTEGER},'%')
+        </if>
+        <if test="parameter.scale != null and parameter.scale != ''">
+            and e.scale = #{parameter.scale,jdbcType=SMALLINT}
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
 
-  <select id="selectById" resultMap="BaseResultMap"  parameterType="java.lang.Long">
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long">
     select  e.* , l.id_card as id_card , l.phone as phone  from enterprise_info as e left join  legal_person as  l on e.id  = l.enterprise_id where e.id =  #{id,jdbcType=BIGINT}
   </select>
+
+    <select id="enterpriseInfoAll" resultMap="BaseResultMap">
+        select  id, name from  enterprise_info
+    </select>
 </mapper>
