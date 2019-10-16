@@ -83,6 +83,9 @@ public class AccessFilter extends ZuulFilter {
         }else if(GetPayAlipay()){
             return null;
         }
+        else if(GetWxApplet()){
+            return null;
+        }
         else{
             Object accessToken = request.getHeader("Authorization");
             if(accessToken == null) {
@@ -161,6 +164,15 @@ public class AccessFilter extends ZuulFilter {
         return false;
     }
 
+    private boolean GetWxApplet(){
+        if(requestURI!= null){
+            if(  requestURI.contains("/wxapplet")|| requestURI.contains("/wxapplet") ){
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
     private boolean HaveToken(){
             if(queryString!= null && queryString.contains("token")){
                 return true;

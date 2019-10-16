@@ -74,5 +74,13 @@ zuul:
       path: /sysuserinfo/**
       sensitiveHeaders: "*"
       serviceId: eureka-sysuserinfo
+    pay-alipay:
+      path: /payalipay/**
+      sensitiveHeaders: "*"
+      serviceId: pay-alipay
+    wx-applet:
+      path: /wxapplet/**
+      sensitiveHeaders: "*"
+      serviceId: wx-applet
   retryable: true #让Ribbon客户端自动重试失败的请求
   add-proxy-headers: true #添加代理头

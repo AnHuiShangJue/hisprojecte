@@ -23,6 +23,7 @@ public class HttpRequest {
         BufferedReader in = null;
         try {
             String urlNameString = url + "?" + param;
+            System.out.println(urlNameString);
             URL realUrl = new URL(urlNameString);
             // 打开和URL之间的连接
             URLConnection connection = realUrl.openConnection();
