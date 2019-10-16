@@ -77,6 +77,20 @@ public class PatientServiceImpl implements HisPatientService {
                 return MessageUtil.createMessage(false, "新增失败,身份证号已存在！");
             } else {
                 UserInfo userInfo = new UserInfo();
+                HisPatientInfo hisPatientInfo2 = new HisPatientInfo();
+                hisPatientInfo2.setIdcard("未提供身份证");
+                if (EmptyUtil.Companion.isNullOrEmpty(hisPatientInfo.getIdcard())){
+                    List<HisPatientInfo> hisPatientInfos =  hisPatientInfoMapper.hisPatientInfoAllOrder(hisPatientInfo2);
+                    if (EmptyUtil.Companion.isNullOrEmpty(hisPatientInfos)){
+                        hisPatientInfo.setIdcard("未提供身份证"+1);
+                    }else {
+                        HisPatientInfo hisPatientInfo1 = hisPatientInfos.get(0);
+                        String substring = StringUtils.substring(hisPatientInfo1.getIdcard(), 6);
+                        Integer idNum =Integer.valueOf(substring);
+                        idNum = idNum+1;
+                        hisPatientInfo.setIdcard("未提供身份证"+idNum);
+                    }
+                }
                 userInfo.setUserId(hisPatientInfo.getIdcard());
                 userInfo.setPassword(hisPatientInfo.getIdcard().substring(hisPatientInfo.getIdcard().length() - 6, hisPatientInfo.getIdcard().length()));
                 userInfo.setUserName(hisPatientInfo.getName());

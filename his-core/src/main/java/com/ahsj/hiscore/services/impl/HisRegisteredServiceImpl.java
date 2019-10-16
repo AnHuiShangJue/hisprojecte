@@ -15,6 +15,7 @@ import core.entity.PageBean;
 import core.message.BoolMessage;
 import core.message.Message;
 import core.message.MessageUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,6 +57,7 @@ public class HisRegisteredServiceImpl implements HisRegisteredService {
     @Override
     @Transactional(readOnly = false)
     public Message registered(HisRegistered hisRegistered, HisPatientInfo hisPatientInfo, HisRegisteredpay hisRegisteredpay) throws Exception {
+
         //设置挂号类型
         BigDecimal sumPrice = new BigDecimal(hisRegisteredpay.getPaidAmount().toString());
         if(sumPrice.compareTo(hisRegisteredpay.getAmountReceivable()) ==-1){
