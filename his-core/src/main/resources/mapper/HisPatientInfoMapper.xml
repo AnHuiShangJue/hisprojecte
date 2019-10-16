@@ -373,4 +373,13 @@
 
         </foreach>
     </insert>
+
+
+    <select id="hisPatientInfoAllOrder" resultMap="BaseResultMap" parameterType="com.ahsj.hiscore.entity.HisPatientInfo">
+        select
+        <include refid="Base_Column_List"/>
+        from his_patient_info where
+         idcard like concat('%' #{idcard,jdbcType=VARCHAR},'%')
+         order by id desc
+    </select>
 </mapper>

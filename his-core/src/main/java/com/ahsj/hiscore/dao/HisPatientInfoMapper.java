@@ -119,4 +119,7 @@ public interface HisPatientInfoMapper  extends BaseMapper<HisPatientInfo>{
      *@Time 0:58
     **/
     HisPatientInfo selectByMedicalRecordIdForInhospital(String hospitalManageId);
+
+
+    List<HisPatientInfo> hisPatientInfoAllOrder(HisPatientInfo  hisPatientInfo);
 }
