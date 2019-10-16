@@ -35,9 +35,9 @@
 )</span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4 jeinpbox" >
-                            <input id="startTime" class="jeinput" name="startTime" type="text" data-error=".errorTxt1"
+                            <input id="startTime" class="jeinput" name="startTime" type="text" data-error=".errorTxt1" autocomplete="off"
                                    th:placeholder="${#dates.format(hisMedicalOrderDetail.startTime, 'yyyy-MM-dd HH:mm:ss')}"
-                                   th:value="${#dates.format(hisMedicalOrderDetail.startTime, 'yyyy-MM-dd hh:mm:ss')}"/>
+                                   th:value="${#dates.format(hisMedicalOrderDetail.startTime, 'yyyy-MM-dd HH:mm:ss')}"/>
                             <div class="errorTxt1"></div>
                             <label for="startTime">医嘱开始时间<span style="font-size: 12px">(Recording time)</span></label>
                         </div>
@@ -124,7 +124,7 @@
 
                 }
             },
-            format: "YYYY-MM-DD hh:mm:ss"
+            format: "YYYY-MM-DD hh:mm:00"
         });
         formCheck();
     });
