@@ -23,10 +23,33 @@ spring:
   datasource:
     url: jdbc:log4jdbc:mysql://192.168.0.105:3306/smartpark?useUnicode=true&characterEncoding=utf8&useSSL=true
 #    url: jdbc:log4jdbc:mysql://127.0.0.1:3306/his-rpac?useUnicode=true&characterEncoding=utf8&useSSL=true
-    username: root
-    password: 123456
+    username: ahsj
+    password: shangjue0603
     driver-class-name: net.sf.log4jdbc.DriverSpy
     type: com.zaxxer.hikari.HikariDataSource
+
+  #xjp 添加rabbitmq 配置
+  rabbitmq:
+    host: 192.168.0.105
+    username: anhuishangjue
+    password: shangjue0603
+    virtual-host: /ahsj
+    listener:
+      simple:
+        concurrency: 20
+        max-concurrency: 20
+        prefetch: 2
+        auto-startup: true
+    template:
+      retry:
+        enabled: true
+        initial-interval: 10000ms
+        max-interval: 30000ms
+        multiplier: 5
+      exchange: com.ahsj.exchange
+    publisher-confirms: true
+    port: 5672
+
   #    secondary:
   #      url: jdbc:log4jdbc:mysql://127.0.0.1:3306/his-prac?useUnicode=true&characterEncoding=utf8&useSSL=true
   #      username: root
@@ -122,3 +145,8 @@ file:
       enabled: true
       max-file-size: 50MB
       max-request-size: 200MB
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh

@@ -1,5 +1,7 @@
 package com.ahsj.smartparkcore.common;
 
+import com.ahsj.smartparkcore.controller.BaseOAController;
+
 /**
 
  *@Author XJP
@@ -7,6 +9,8 @@ package com.ahsj.smartparkcore.common;
  *@Time 14:35
 **/
 public class Constants {
+
+    private static BaseOAController resourseUrl = new BaseOAController();
 
     //成功
     public static final String SUCCESSFUL= "SUCCESSFUL";
@@ -20,6 +24,8 @@ public class Constants {
     public static final Integer TWO= 2;
 
     public static final Integer THREE= 3;
+
+    public static final String HIS_SYS_EXCEL_PROJECT_CH_FILE_URL = resourseUrl.getJarResourcesPaths() + "/config/LocList.xml";
 
     public Constants() {
     }
