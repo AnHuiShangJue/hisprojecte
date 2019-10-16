@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahsj.payalipay.dao.ReturnAlipayMapper">
+  <resultMap id="BaseResultMap" type="com.ahsj.payalipay.entity.ReturnAlipay">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="update_user_id" jdbcType="BIGINT" property="updateUserId" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
+    <result column="payment_amount" jdbcType="DECIMAL" property="paymentAmount" />
+    <result column="return_amount" jdbcType="DECIMAL" property="returnAmount" />
+    <result column="order_name" jdbcType="VARCHAR" property="orderName" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="product_id" jdbcType="BIGINT" property="productId" />
+    <result column="payer_id" jdbcType="VARCHAR" property="payerId" />
+    <result column="alipay_number" jdbcType="VARCHAR" property="alipayNumber" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="return_number" jdbcType="VARCHAR" property="returnNumber" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, update_user_id, update_date, create_user_id, create_date, number, payment_amount, 
+    return_amount, order_name, description, product_id, payer_id, alipay_number, type, 
+    reason, return_number
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from return_alipay
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from return_alipay
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.payalipay.entity.ReturnAlipay">
+    insert into return_alipay (id, update_user_id, update_date, 
+      create_user_id, create_date, number, 
+      payment_amount, return_amount, order_name, 
+      description, product_id, payer_id, 
+      alipay_number, type, reason, 
+      return_number)
+    values (#{id,jdbcType=BIGINT}, #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{number,jdbcType=VARCHAR}, 
+      #{paymentAmount,jdbcType=DECIMAL}, #{returnAmount,jdbcType=DECIMAL}, #{orderName,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{productId,jdbcType=BIGINT}, #{payerId,jdbcType=VARCHAR}, 
+      #{alipayNumber,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{reason,jdbcType=VARCHAR}, 
+      #{returnNumber,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.payalipay.entity.ReturnAlipay">
+    insert into return_alipay
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="updateUserId != null">
+        update_user_id,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="paymentAmount != null">
+        payment_amount,
+      </if>
+      <if test="returnAmount != null">
+        return_amount,
+      </if>
+      <if test="orderName != null">
+        order_name,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="payerId != null">
+        payer_id,
+      </if>
+      <if test="alipayNumber != null">
+        alipay_number,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="returnNumber != null">
+        return_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="updateUserId != null">
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentAmount != null">
+        #{paymentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="returnAmount != null">
+        #{returnAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="orderName != null">
+        #{orderName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="payerId != null">
+        #{payerId,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayNumber != null">
+        #{alipayNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="returnNumber != null">
+        #{returnNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.payalipay.entity.ReturnAlipay">
+    update return_alipay
+    <set>
+      <if test="updateUserId != null">
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentAmount != null">
+        payment_amount = #{paymentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="returnAmount != null">
+        return_amount = #{returnAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="orderName != null">
+        order_name = #{orderName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="payerId != null">
+        payer_id = #{payerId,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayNumber != null">
+        alipay_number = #{alipayNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null">
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="returnNumber != null">
+        return_number = #{returnNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.payalipay.entity.ReturnAlipay">
+    update return_alipay
+    set update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      number = #{number,jdbcType=VARCHAR},
+      payment_amount = #{paymentAmount,jdbcType=DECIMAL},
+      return_amount = #{returnAmount,jdbcType=DECIMAL},
+      order_name = #{orderName,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      product_id = #{productId,jdbcType=BIGINT},
+      payer_id = #{payerId,jdbcType=VARCHAR},
+      alipay_number = #{alipayNumber,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      reason = #{reason,jdbcType=VARCHAR},
+      return_number = #{returnNumber,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>

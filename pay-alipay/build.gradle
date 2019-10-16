@@ -67,6 +67,19 @@ dependencies {
     compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.5"
     //google翻译
     compile 'com.google.cloud:google-cloud-translate:1.61.0'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-configuration-processor
+    compile group: 'org.springframework.boot', name: 'spring-boot-configuration-processor', version: '2.1.6.RELEASE'
+    
+    //支付宝
+    // https://mvnrepository.com/artifact/com.alipay.sdk/alipay-sdk-java
+    compile group: 'com.alipay.sdk', name: 'alipay-sdk-java', version: '3.4.49.ALL'
+
+// https://mvnrepository.com/artifact/org.opendaylight.controller/config-api
+    compile group: 'org.opendaylight.controller', name: 'config-api', version: '0.8.4'
+
+
+
+
 
 }
 sourceSets {

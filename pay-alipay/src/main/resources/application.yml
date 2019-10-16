@@ -43,7 +43,7 @@ spring:
   application:
     name: pay-alipay
   datasource:
-    url: jdbc:log4jdbc:mysql://192.168.0.105:3306/his-translate?useUnicode=true&characterEncoding=utf8&useSSL=true
+    url: jdbc:log4jdbc:mysql://192.168.0.105:3306/ahsj-alipay?useUnicode=true&characterEncoding=utf8&useSSL=true
     username: ahsj
     password: shangjue0603
     #    url: jdbc:log4jdbc:mysql://192.168.0.107:3306/his-translate?useUnicode=true&characterEncoding=utf8&useSSL=true
@@ -118,3 +118,10 @@ hystrix:
       circuitBreaker:
         sleepWindowInMilliseconds: 10000     # 短路多久以后开始尝试是否恢复，默认5s
         forceClosed: false # 是否允许熔断器忽略错误,默认false, 不开启
+      alipay:
+          appID: 2016091200494055
+          merchantPrivateKey: 商户私钥
+          alipayPublicKey: 支付宝公钥
+          gatewayUrl: https://openapi.alipaydev.com/gateway.do
+          sysServiceProviderId: 1234
+          notifyUrl: http://XXXX.com
