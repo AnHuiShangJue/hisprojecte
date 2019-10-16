@@ -7,6 +7,9 @@ import core.message.Message;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -149,27 +152,70 @@ public class UserInfoController extends BaseOAController{
     public String jscode2session(HttpServletRequest req
                                   ,@RequestParam(value="js_code", required=true) String js_code
                                   , @RequestParam(value="appId", required=true) String appId
-                                  ,@RequestParam(value="secret", required=true) String secret) throws ClientProtocolException, IOException {
-        String url = "https://api.weixin.qq.com/sns/jscode2session?appid="+appId+"&secret="+secret+"&js_code="+js_code+"+&grant_type=authorization_code";
+                                  ,@RequestParam(value="secret", required=true) String secret) throws Exception {
+/*        Map<String,Object> map = new HashMap<String,Object>();
+        if (js_code == null || js_code.length() == 0) {
+            map.put("status", 0);
+            map.put("msg", "js_code 不能为空");
+            System.out.println("map1:" + map);
+            return map;
+        }*/
+        String params = "appid="+appId+"&secret="+secret+"&js_code="+js_code+"+&grant_type=authorization_code";
+        String sr = HttpRequest.sendGet("https://api.weixin.qq.com/sns/jscode2session", params);
+        JSONObject json = JSONObject.parseObject(sr);
+        String openid = (String) json.get("openid");
+        System.out.println("openid:" + openid);
+        System.out.println("sr:" + sr);
+        return sr;
+/*        try {
+            String result = AesUtil.decrypt(encryptedData, session_key, iv, "UTF-8");
+            if (null != result && result.length() > 0) {
+                map.put("status", 1);
+                map.put("msg", "解密成功");
 
+                JSONObject userInfoJSON = JSONObject.parseObject(result);
+                Map<String,Object> userInfo = new HashMap<String,Object>();
+                userInfo.put("openId", userInfoJSON.get("openId"));
+                userInfo.put("nickName", userInfoJSON.get("nickName"));
+                userInfo.put("gender", userInfoJSON.get("gender"));
+                userInfo.put("city", userInfoJSON.get("city"));
+                userInfo.put("province", userInfoJSON.get("province"));
+                userInfo.put("country", userInfoJSON.get("country"));
+                userInfo.put("avatarUrl", userInfoJSON.get("avatarUrl"));
+                userInfo.put("unionId", userInfoJSON.get("unionId"));
+                map.put("userInfo", userInfo);
+                System.out.println("map2:" + map);
+                return map;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        map.put("status", 0);
+        map.put("msg", "解密失败");
+        System.out.println("map3:" + map);
+        return map;*/
+    }
+/*
         OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder()
-                    .url(url)
-                    .build();
-            try (Response response = client.newCall(request).execute()) {
-                return  response.body().string();
+        Request request = new Request.Builder().url(url).build();
+        try (Response response = client.newCall(request).execute()) {
+            String sr = response.body().string();
+            JSONObject json = JSONObject.parseObject(sr);
+            String session_key = json.get("session_key").toString();
+            String openid = (String) json.get("openid");
+                return  openid;
         }
 
-//
-//        url=url.replaceAll("JSCODE", js_code);
-//
-// //执行get请求.
-//        CloseableHttpResponse response = HttpClients.createDefault().execute(new HttpGet(url));
-// 获取响应实体
-//       String html = EntityUtils.toString(response.getEntity());
-//        return html;
 
 
-    }
+        url=url.replaceAll("JSCODE", js_code);
+
+ //执行get请求.
+        CloseableHttpResponse response = HttpClients.createDefault().execute(new HttpGet(url));
+ 获取响应实体
+       String html = EntityUtils.toString(response.getEntity());
+        return html;
+*/
+
 }
 
