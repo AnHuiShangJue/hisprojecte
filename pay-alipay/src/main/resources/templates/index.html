@@ -298,24 +298,23 @@
             </dl>
         </div>
     </form>
-    <form name=traderefundquery
-          action=alipay.trade.fastpay.refund.query.jsp method=post
+    <form name=traderefundquery  action="refundQuery" method=post
           target="_blank">
         <div id="body4" class="tab-content" name="divcontent">
             <dl class="content">
                 <dt>商户订单号 ：</dt>
                 <dd>
-                    <input id="WIDRQout_trade_no" name="WIDRQout_trade_no" />
+                    <input id="number" name="number" />
                 </dd>
                 <hr class="one_line">
                 <dt>支付宝交易号 ：</dt>
                 <dd>
-                    <input id="WIDRQtrade_no" name="WIDRQtrade_no" />
+                    <input id="alipayNumber" name="alipayNumber" />
                 </dd>
                 <hr class="one_line">
                 <dt>退款请求号 ：</dt>
                 <dd>
-                    <input id="WIDRQout_request_no" name="WIDRQout_request_no" />
+                    <input id="returnNumber" name="returnNumber" />
                 </dd>
                 <hr class="one_line">
                 <dt></dt>
