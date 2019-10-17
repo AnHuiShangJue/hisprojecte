@@ -47,5 +47,7 @@ public interface RegionService {
      **/
     List<Region> queryRegion(Region region) throws Exception;
 
-    Region queryRegionName(Long provinceId) throws Exception;
+    Region selectById(Long id) throws Exception;
+
+    Region queryRegionName(String substring);
 }

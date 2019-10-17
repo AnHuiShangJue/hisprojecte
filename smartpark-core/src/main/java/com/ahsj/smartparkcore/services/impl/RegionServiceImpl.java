@@ -95,11 +95,28 @@ public class RegionServiceImpl implements RegionService {
 
     @Override
     @Transactional(readOnly = true)
-    public Region queryRegionName(Long id) throws Exception {
+    public Region selectById(Long id) throws Exception {
         if (EmptyUtil.Companion.isNullOrEmpty(id)) {
             return new Region();
         } else {
             Region region = regionMapper.selectByPrimaryKey(id);
+            if (EmptyUtil.Companion.isNullOrEmpty(region)) {
+                return new Region();
+            } else {
+                return region;
+            }
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Region queryRegionName(String name) {
+        if (EmptyUtil.Companion.isNullOrEmpty(name)) {
+            return new Region();
+        } else {
+            Region region = new Region();
+            region.setName(name);
+             region = regionMapper.queryRegionName(region);
             if (EmptyUtil.Companion.isNullOrEmpty(region)) {
                 return new Region();
             } else {

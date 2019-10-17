@@ -96,9 +96,9 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
     public Message addEnterpriseInfo(EnterpriseInfoDTO enterpriseInfoDTO, MultipartFile[] file, String relateKet, String relatePage) throws Exception {
         EnterpriseInfo enterpriseInfo = new EnterpriseInfo();
         BeanUtils.copyProperties(enterpriseInfoDTO, enterpriseInfo);
-        Region region1=  regionService.queryRegionName(enterpriseInfoDTO.getProvinceId());
-        Region region2=  regionService.queryRegionName(enterpriseInfoDTO.getCityId());
-        Region region3=  regionService.queryRegionName(enterpriseInfoDTO.getAreaId());
+        Region region1=  regionService.selectById(enterpriseInfoDTO.getProvinceId());
+        Region region2=  regionService.selectById(enterpriseInfoDTO.getCityId());
+        Region region3=  regionService.selectById(enterpriseInfoDTO.getAreaId());
         enterpriseInfo.setAddress(region1.getName()+region2.getName()+region3.getName()+enterpriseInfoDTO.getAddress());
         if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getName()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getLegalName()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getUnifiedSocialCreditCode())) {
             return MessageUtil.createMessage(false, "企业信息新增失败 ！！！");
@@ -240,6 +240,18 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
             return new EnterpriseInfoVO();
         } else {
             BeanUtils.copyProperties(enterpriseInfo, enterpriseInfoVO);
+            String address = enterpriseInfo.getAddress();
+            String substring = StringUtils.substring(address, 0, 3);
+            String substring1 = StringUtils.substring(address, 3, 6);
+            String substring2 = StringUtils.substring(address, 6, 9);
+            Region region =regionService.queryRegionName(substring);
+            Region region1 = regionService.queryRegionName(substring1);
+            Region region2 = regionService.queryRegionName(substring2);
+            List<Long> longs = new ArrayList<>();
+            longs.add(region.getId());
+            longs.add(region1.getId());
+            longs.add(region2.getId());
+            enterpriseInfoVO.setListId(longs);
             enterpriseInfoVO.setProvinceName("安徽省");
             enterpriseInfoVO.setCityName("芜湖市");
             enterpriseInfoVO.setAreaName("镜湖区");

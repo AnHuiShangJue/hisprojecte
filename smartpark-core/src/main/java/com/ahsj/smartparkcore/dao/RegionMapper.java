@@ -24,4 +24,6 @@ public interface RegionMapper {
     List<Region> queryRegion(Region region);
 
     Region queryRegionName(Region region);
+
+
 }

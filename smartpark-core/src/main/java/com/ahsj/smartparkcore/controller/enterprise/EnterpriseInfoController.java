@@ -99,6 +99,10 @@ public class EnterpriseInfoController extends BaseController {
         EnterpriseInfoVO enterpriseInfoVO = enterpriseInfoService.selectById(id);
         modelAndView.addObject("token", token);
         modelAndView.addObject("enterpriseInfoVO", enterpriseInfoVO);
+        List<Long> listId = enterpriseInfoVO.getListId();
+        for (Long aLong : listId) {
+            System.out.println("----------->"+aLong);
+        }
         return modelAndView;
     }
 

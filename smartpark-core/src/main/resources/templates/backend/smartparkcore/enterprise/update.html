@@ -9,7 +9,7 @@
 <!--Form Advance-->
 <div class="row">
     <div class="col s12 m12 l12">
-        <div id="validation" class="card card card-default scrollspy" style="height: 700px;">
+        <div id="validation" class="card card card-default scrollspy" style="height: 800px;">
             <div class="card-content">
                 <h4 class="card-title">企业信息修改</h4><label style="color:black">
             </label>
@@ -109,7 +109,7 @@
                     </div>
 
                     <div class="input-field col s4 l4 xl4">
-                        <input id="registeredCapital" name="registeredCapital" type="text" th:value="${enterpriseInfoVO.registeredCapital}"
+                        <input id="registeredCapital" name="registeredCapital" type="number" th:value="${enterpriseInfoVO.registeredCapital}"
                                data-error=".errorTxt1">
                         <div class="errorTxt1"></div>
                         <label for="registeredCapital">注册资本</label>

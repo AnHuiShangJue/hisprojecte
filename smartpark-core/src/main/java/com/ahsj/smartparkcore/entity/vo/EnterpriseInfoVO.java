@@ -4,6 +4,7 @@ import com.ahsj.smartparkcore.entity.po.EnterpriseInfo;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Copyright (C), 2019-2019, 安徽商角有限公司
@@ -27,6 +28,16 @@ public class EnterpriseInfoVO  extends EnterpriseInfo {
     private String cityName;
 
     private String areaName;
+
+    private List<Long> listId;
+
+    public List<Long> getListId() {
+        return listId;
+    }
+
+    public void setListId(List<Long> listId) {
+        this.listId = listId;
+    }
 
     public String getProvinceName() {
         return provinceName;
