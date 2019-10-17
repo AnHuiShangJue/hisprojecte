@@ -111,7 +111,7 @@ public class EnterpriseInfoController extends BaseController {
      * @Time 15:52
      **/
     @PostMapping("/add/enterpriseInfo.ahsj")
-    public ResponseEntity<Message> addEnterpriseInfo(EnterpriseInfoDTO enterpriseInfoDTO, @RequestParam(value = "file", required = false) MultipartFile[] file, String relateKet, String relatePage) throws Exception {
+    public ResponseEntity<Message> addEnterpriseInfo(EnterpriseInfoDTO enterpriseInfoDTO,@RequestParam(value = "file", required = false) MultipartFile[] file, String relateKet, String relatePage) throws Exception {
         Message message = enterpriseInfoService.addEnterpriseInfo(enterpriseInfoDTO, file, relateKet, relatePage);
         return new ResponseEntity<>((message), HttpStatus.OK);
     }

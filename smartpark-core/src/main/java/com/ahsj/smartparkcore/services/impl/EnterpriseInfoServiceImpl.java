@@ -13,11 +13,13 @@ import com.ahsj.smartparkcore.entity.dto.EnterpriseInfoDTO;
 import com.ahsj.smartparkcore.entity.po.ActivityInfo;
 import com.ahsj.smartparkcore.entity.po.EnterpriseInfo;
 import com.ahsj.smartparkcore.entity.po.LegalPerson;
+import com.ahsj.smartparkcore.entity.po.Region;
 import com.ahsj.smartparkcore.entity.sys.SysAttachmentInfo;
 import com.ahsj.smartparkcore.entity.vo.EnterpriseInfoVO;
 import com.ahsj.smartparkcore.feign.IOrganizationService;
 import com.ahsj.smartparkcore.services.EnterpriseInfoService;
 import com.ahsj.smartparkcore.services.LegalPersonService;
+import com.ahsj.smartparkcore.services.RegionService;
 import com.ahsj.smartparkcore.services.SysAttachmentInfoService;
 import core.entity.PageBean;
 import core.message.Message;
@@ -62,6 +64,9 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
     Logger log = LoggerFactory.getLogger(EnterpriseInfoServiceImpl.class.getSimpleName());
 
     @Autowired
+    RegionService regionService;
+
+    @Autowired
     EnterpriseInfoMapper enterpriseInfoMapper;
 
     @Autowired
@@ -91,6 +96,10 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
     public Message addEnterpriseInfo(EnterpriseInfoDTO enterpriseInfoDTO, MultipartFile[] file, String relateKet, String relatePage) throws Exception {
         EnterpriseInfo enterpriseInfo = new EnterpriseInfo();
         BeanUtils.copyProperties(enterpriseInfoDTO, enterpriseInfo);
+        Region region1=  regionService.queryRegionName(enterpriseInfoDTO.getProvinceId());
+        Region region2=  regionService.queryRegionName(enterpriseInfoDTO.getCityId());
+        Region region3=  regionService.queryRegionName(enterpriseInfoDTO.getAreaId());
+        enterpriseInfo.setAddress(region1.getName()+region2.getName()+region3.getName()+enterpriseInfoDTO.getAddress());
         if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getName()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getLegalName()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getUnifiedSocialCreditCode())) {
             return MessageUtil.createMessage(false, "企业信息新增失败 ！！！");
         } else if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getId())) {
@@ -231,6 +240,9 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
             return new EnterpriseInfoVO();
         } else {
             BeanUtils.copyProperties(enterpriseInfo, enterpriseInfoVO);
+            enterpriseInfoVO.setProvinceName("安徽省");
+            enterpriseInfoVO.setCityName("芜湖市");
+            enterpriseInfoVO.setAreaName("镜湖区");
             return enterpriseInfoVO;
         }
     }

@@ -69,17 +69,8 @@
                             <input type="hidden" id="myEnterpriseName" th:value="${accessInfoVO.enterpriseName}">
                             <select name="enterpriseName" id="enterpriseName">
                             </select>
-                            <label for="enterpriseName">访问公司<span style="font-size: 12px">(Nurse)</span></label>
+                            <label for="enterpriseName">访问公司</label>
                         </div>
-                       <!-- <div class="input-field col s4 m4 l4">
-
-                            <div class="">
-                                <select name="enterpriseName" id="enterpriseName"   >
-                                    <option>选择公司</option>
-                                </select>
-                            </div>
-                        </div>-->
-
                     </div>
 
 
@@ -112,11 +103,9 @@
                 $(result).each(function (i) {
                     nurIdSelect.append("<option value='" + this.name + "'>" + this.name + "</option>")
                 });
-
             }else {
                 for (var j = 0;j<result.length;++j){
                     if (flag == result[j].id){
-
                         nurIdSelect.append("<option value='" + result[j].name + "'>" + result[j].name + "</option>");
                     }
                 }
@@ -137,10 +126,9 @@
         }
     });
 
- /*   function getCompany(){
-        $("#enterpriseName option[value=''] ").attr("selected",true)
-        enterpriseNameSelect.formSelect();
-    }*/
+
+
+
     enterpriseNameSelect.change(function () {
         var enterpriseName = enterpriseNameSelect.val();
         localStorage.setItem("enterpriseName", enterpriseName);

@@ -22,6 +22,36 @@ public class EnterpriseInfoDTO  extends EnterpriseInfo {
 
     private String phone;
 
+    private Long provinceId;
+
+    private Long cityId;
+
+    private Long areaId;
+
+    public Long getProvinceId() {
+        return provinceId;
+    }
+
+    public void setProvinceId(Long provinceId) {
+        this.provinceId = provinceId;
+    }
+
+    public Long getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(Long cityId) {
+        this.cityId = cityId;
+    }
+
+    public Long getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(Long areaId) {
+        this.areaId = areaId;
+    }
+
     public String getIdCard() {
         return idCard;
     }

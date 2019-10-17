@@ -59,6 +59,29 @@
                             <div class="errorTxt1"></div>
                             <label for="phone">手机号码</label>
                         </div>
+
+                        <div class="input-field col s4 m4 l4">
+                            <div class="">
+                                <select name="provinceId" id="province">
+                                    <option>选择省份</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="input-field col s4 m4 l4">
+                            <div class="">
+                                <select name="cityId" id="city">
+                                    <option>选择城市</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="input-field col s4 m4 l4">
+                            <div class="">
+                                <select name="areaId" id="area">
+                                    <option>选择区</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="input-field col s4 l4 xl4">
                             <input id="address" name="address" type="text"
                                    data-error=".errorTxt1">
@@ -66,11 +89,11 @@
                             <label for="address">地址</label>
                         </div>
 
-                      <div class="col input-field s4 m4 l4">
+                   <!--   <div class="col input-field s4 m4 l4">
                             <select ahsj:select name="isVerify" id="isVerify" type="code" typeKey="is_verify">
                             </select>
                             <label for="isVerify">验证状态</label>
-                        </div>
+                        </div>-->
 
                          <div class="input-field col s12 x12 m12 l12 xl12">
                                 <textarea id="description" name="description" class="materialize-textarea" type="text"
@@ -100,12 +123,7 @@
                         <label for="unitNature">单位性质</label>
                     </div>
 
-              <!--      <div class="input-field col s4 l4 xl4">
-                        <input id="unitNature" name="unitNature" type="text"
-                               data-error=".errorTxt1">
-                        <div class="errorTxt1"></div>
-                        <label for="unitNature">单位性质</label>
-                    </div>-->
+
 
                     <div class="input-field col s4 l4 xl4">
                         <input id="operatingPeriodEnd" name="operatingPeriodEnd" type="text" class="datepicker"
@@ -131,20 +149,105 @@
 
 <div th:replace="public/base_update_script :: html"></div>
 <script th:inline="javascript">
+    var provinceSelect = $("#province");
+    var ciytSelect = $("#city");
+    var areaSelect = $("#area");
+
+
     $(function () {
         formCheck();
         initSelect();
+        getSelectHome();
         var select1 = $(".select2-container");
         if (select1) {
             select1.css('display', 'none');
         }
+
     });
+
+    $("#province").change(function () {
+        var parentId = $(this).val();
+        ciytSelect.empty();
+        areaSelect.empty();
+        $.ahsjajax(
+            CTX + "/api/region/queryRegion.ahsj",
+            {"parentId": parentId},
+            function (data) {
+                $(data).each(function (i) {
+                    ciytSelect.append(
+                        "<option  value='" + this.id + "'>" + this.name + "</option>")
+                })
+                ciytSelect.formSelect();
+                areaSelect.formSelect();
+                if (msg.success) {
+                    M.toast({html: msg.message});
+                    return false;
+                } else {
+                    //M.toast({html: msg.message});
+                    return false;
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            })
+    })
+    $("#city").change(function () {
+        var parentId = $(this).val();
+        areaSelect.empty();
+        $.ahsjajax(
+            CTX + "/api/region/queryRegion.ahsj",
+            {"parentId": parentId},
+            function (data) {
+                $(data).each(function (i) {
+                    areaSelect.append(
+                        "<option  value='" + this.id + "'>" + this.name + "</option>")
+                })
+                areaSelect.formSelect();
+                if (msg.success) {
+                    M.toast({html: msg.message});
+                    return false;
+                } else {
+                    //M.toast({html: msg.message});
+                    return false;
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            })
+    })
 
     function initSelect() {
         $("#type").select2({
             minimumInputLength: 1,
             maximumInputLength: 20
         })
+    }
+
+    function getSelectHome() {
+        var parentId = 0;
+        $.ahsjajax(
+            CTX + "/api/region/queryRegion.ahsj",
+            {"parentId": parentId},
+            function (data) {
+                $(data).each(function (i) {
+                    provinceSelect.append(
+                        "<option  value='" + this.id + "'>" + this.name + "</option>")
+                })
+                provinceSelect.formSelect();
+                if (msg.success) {
+                   M.toast({html: msg.message});
+                    return false;
+                } else {
+                    //M.toast({html: msg.message});
+                    return false;
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            })
     }
 
     function formCheck() {
@@ -163,7 +266,6 @@
                 dialog.confirm('确定提交吗?', function (index, layero) {
                     var queryString = $('#sendForm').serialize();
                     console.log("queryString is" + queryString);
-
                     $.ahsjajax(
                         CTX + "/api/enterprise/add/enterpriseInfo.ahsj",
                         queryString,
