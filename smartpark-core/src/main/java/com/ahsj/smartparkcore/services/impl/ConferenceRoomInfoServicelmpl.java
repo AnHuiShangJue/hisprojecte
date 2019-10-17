@@ -16,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class ConferenceRoomInfoServicelmpl implements ConferenceRoomInfoService {
     @Autowired
@@ -116,5 +118,19 @@ public class ConferenceRoomInfoServicelmpl implements ConferenceRoomInfoService 
         PageBean<ConferenceRoomInfoVO> pageBeanVO = new PageBean<>();
         pageBeanVO.setData(CodeHelper.getInstance().setCodeValue(conferenceRoomInfoMapper.list(pageBean)));
         return pageBeanVO;
+    }
+
+    /**
+     *@Description  分页查询（前端对接）
+     *@Params []
+     *@return java.util.List<com.ahsj.smartparkcore.entity.vo.ConferenceRoomInfoVO>
+     *@Author zhushixiang
+     *@Date 2019-10-17
+     *@Time 13:48
+    **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<ConferenceRoomInfoVO> listForView() throws Exception {
+        return conferenceRoomInfoMapper.listForView();
     }
 }

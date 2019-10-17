@@ -289,4 +289,9 @@ where 1=1
       order by ${parameter.orders}
     </if>
   </select>
+
+  <select id="listForView" resultMap="BaseResultMapVO">
+    select conference_room_info.*
+    from conference_room_info
+  </select>
 </mapper>
