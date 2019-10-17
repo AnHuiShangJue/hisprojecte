@@ -539,13 +539,21 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
             }else {
                 String kname = "";
                 for (Translate translate1 : translates) {
-                    if (StringUtils.equals(hisMedicalOrderDetail.getName(),translate1.getTranslateChina())){
-                        kname = translate1.getTranslateKhmer();
-                    }
-                    if (StringUtils.equals(hisMedicalOrderDetail.getUsages(),translate1.getTranslateChina())){
-                        kname = kname+"  "+translate1.getTranslateKhmer();
-                        hisMedicalOrderDetail.setTtanslateName(kname);
-                        hisMedicalOrderDetail.setName(hisMedicalOrderDetail.getName()+"   " +hisMedicalOrderDetail.getUsages()+"("+hisMedicalOrderDetail.getTtanslateName()+")");
+                    if (EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getUsages())){
+                        if (StringUtils.equals(hisMedicalOrderDetail.getName(),translate1.getTranslateChina())){
+                            kname = translate1.getTranslateKhmer();
+                            hisMedicalOrderDetail.setTtanslateName(kname);
+                            hisMedicalOrderDetail.setName(hisMedicalOrderDetail.getName()+"   " +hisMedicalOrderDetail.getUsages()+"("+hisMedicalOrderDetail.getTtanslateName()+")");
+                        }
+                    }else {
+                        if (StringUtils.equals(hisMedicalOrderDetail.getName(),translate1.getTranslateChina())){
+                            kname = translate1.getTranslateKhmer();
+                        }
+                        if (StringUtils.equals(hisMedicalOrderDetail.getUsages(),translate1.getTranslateChina())){
+                            kname = kname+"  "+translate1.getTranslateKhmer();
+                            hisMedicalOrderDetail.setTtanslateName(kname);
+                            hisMedicalOrderDetail.setName(hisMedicalOrderDetail.getName()+"   " +hisMedicalOrderDetail.getUsages()+"("+hisMedicalOrderDetail.getTtanslateName()+")");
+                        }
                     }
                 }
             }
