@@ -44,7 +44,7 @@
         <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
         <!--selectByExampleQueryId="false"/>-->
 
-        <table tableName="return_alipay" domainObjectName="ReturnAlipay" enableCountByExample="false"
+        <table tableName="alipay_trade_refund" domainObjectName="AlipayTradeRefund" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"/>
 
