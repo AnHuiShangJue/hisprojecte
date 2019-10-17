@@ -2,33 +2,18 @@ package com.ahsj.baseuserinfo.controller;
 
 import com.ahsj.baseuserinfo.entity.UserInfo;
 import com.ahsj.baseuserinfo.services.UserService;
+import com.alibaba.fastjson.JSONObject;
 import core.entity.PageBean;
 import core.message.Message;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
-import java.util.HashMap;
-import java.util.Map;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import utils.EmptyUtil;
 
-import com.alibaba.fastjson.JSONObject;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.constraints.NotNull;
-import java.io.IOException;
 import java.security.Principal;
 
 @Controller
@@ -150,17 +135,20 @@ public class UserInfoController extends BaseOAController{
     @RequestMapping("/jscode2session.ahsj") // 登录
     @ResponseBody
     public String jscode2session(HttpServletRequest req
-                                  ,@RequestParam(value="js_code", required=true) String js_code
-                                  , @RequestParam(value="appId", required=true) String appId
-                                  ,@RequestParam(value="secret", required=true) String secret) throws Exception {
+                                  ,@RequestParam(value="js_code", required=false) String js_code
+                                  , @RequestParam(value="appId", required=false) String appId
+                                  ,@RequestParam(value="secret", required=false) String secret) throws Exception {
+        //String sr = "https://api.weixin.qq.com/sns/jscode2session?appid=wx9eec243b070bf766&secret=8963ca9ce2dd28783d7373b920324474&js_code=043KnI5X0iQfZV1piL4X02CJ5X0KnI59&grant_type=authorization_code";
 /*        Map<String,Object> map = new HashMap<String,Object>();
         if (js_code == null || js_code.length() == 0) {
             map.put("status", 0);
             map.put("msg", "js_code 不能为空");
             System.out.println("map1:" + map);
             return map;
-        }*/
-        String params = "appid="+appId+"&secret="+secret+"&js_code="+js_code+"+&grant_type=authorization_code";
+        }
+/*        String params = "appid="+appId+"&secret="+secret+"&js_code="+js_code+"+&grant_type=authorization_code";
+        String sr = HttpRequest.sendGet("https://api.weixin.qq.com/sns/jscode2session", params);*/
+        String params = "appid="+appId+"&secret="+secret+"&js_code="+js_code+"&grant_type=authorization_code";
         String sr = HttpRequest.sendGet("https://api.weixin.qq.com/sns/jscode2session", params);
         JSONObject json = JSONObject.parseObject(sr);
         String openid = (String) json.get("openid");
@@ -194,7 +182,7 @@ public class UserInfoController extends BaseOAController{
         map.put("msg", "解密失败");
         System.out.println("map3:" + map);
         return map;*/
-    }
+
 /*
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url(url).build();
@@ -204,18 +192,21 @@ public class UserInfoController extends BaseOAController{
             String session_key = json.get("session_key").toString();
             String openid = (String) json.get("openid");
                 return  openid;
-        }
+        }*/
 
 
-
-        url=url.replaceAll("JSCODE", js_code);
+//方法三
+/*        url=url.replaceAll("JSCODE", js_code);
 
  //执行get请求.
         CloseableHttpResponse response = HttpClients.createDefault().execute(new HttpGet(url));
- 获取响应实体
+ //获取响应实体
        String html = EntityUtils.toString(response.getEntity());
-        return html;
-*/
+        return html;*/
+
+
+
+    }
 
 }
 

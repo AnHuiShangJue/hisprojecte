@@ -7,6 +7,8 @@ import com.ahsj.smartparkcore.entity.vo.ConferenceRoomInfoVO;
 import core.entity.PageBean;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 public interface ConferenceRoomInfoService {
     /**
      *@Description 新增会议室
@@ -57,4 +59,14 @@ public interface ConferenceRoomInfoService {
      *@Time 15:50
     **/
     PageBean<ConferenceRoomInfoVO> list(PageBean<ConferenceRoomInfo> pageBean)throws Exception;
+
+    /**
+     *@Description  分页查询（前端对接）
+     *@Params []
+     *@return java.util.List<com.ahsj.smartparkcore.entity.vo.ConferenceRoomInfoVO>
+     *@Author zhushixiang
+     *@Date 2019-10-17
+     *@Time 13:47
+    **/
+    List<ConferenceRoomInfoVO> listForView()throws Exception;
 }

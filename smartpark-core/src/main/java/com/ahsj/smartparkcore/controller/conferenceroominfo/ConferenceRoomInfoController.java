@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import utils.EmptyUtil;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -52,7 +53,6 @@ public class ConferenceRoomInfoController extends BaseController {
         return conferenceRoomInfoService.save(conferenceRoomInfoDTO);
 
     }
-
     /**
      *@Description 更新会议室信息
      *@Params
@@ -114,6 +114,21 @@ public class ConferenceRoomInfoController extends BaseController {
         PageBean<ConferenceRoomInfo> pageBean = new PageBean<ConferenceRoomInfo>();
         pageBean.setParameter(conferenceRoomInfo);
         return ResponseEntity.ok(conferenceRoomInfoService.list(pageBean));
+    }
+
+    /**
+     *@Description 分页查询（前端对接）
+     *@Params [model, request, conferenceRoomInfoDTO]
+     *@return org.springframework.http.ResponseEntity<core.entity.PageBean<com.ahsj.smartparkcore.entity.vo.ConferenceRoomInfoVO>>
+     *@Author zhushixiang
+     *@Date 2019-10-17
+     *@Time 13:46
+    **/
+    @RequestMapping("listForView.ahsj")
+    @ResponseBody
+    @ResponseStatus
+    public List<ConferenceRoomInfoVO> listForView(String token)throws Exception{
+        return conferenceRoomInfoService.listForView();
     }
 
     @RequestMapping("list/index.ahsj")
