@@ -62,25 +62,26 @@
                             <label for="phone">手机号码</label>
                         </div>
 
-                        <div class="input-field col s4 l4 xl4">
-                            <input type="hidden" id="myProvinceName" th:value="${enterpriseInfoVO.provinceName}">
-                            <select name="provinceId" id="provinceName">
-                            </select>
-                            <label for="provinceName">选择省份</label>
+                        <div class="input-field col s4 m4 l4">
+                            <div class="">
+                                <select name="provinceId" id="select_1">
+                                    <option>选择省份</option>
+                                </select>
+                            </div>
                         </div>
-
-                        <div class="input-field col s4 l4 xl4">
-                            <input type="hidden" id="myCityName" th:value="${enterpriseInfoVO.cityName}">
-                            <select name="cityId" id="cityName">
-                            </select>
-                            <label for="cityName">选择城市</label>
+                        <div class="input-field col s4 m4 l4">
+                            <div class="">
+                                <select name="cityId" id="select_2">
+                                    <option>选择城市</option>
+                                </select>
+                            </div>
                         </div>
-
-                        <div class="input-field col s4 l4 xl4">
-                            <input type="hidden" id="myAreaName" th:value="${enterpriseInfoVO.areaName}">
-                            <select name="areaId" id="areaName">
-                            </select>
-                            <label for="areaName">选择区</label>
+                        <div class="input-field col s4 m4 l4">
+                            <div class="">
+                                <select name="areaId" id="select_3">
+                                    <option>选择区</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="input-field col s4 l4 xl4">
@@ -149,17 +150,32 @@
 
 <div th:replace="public/base_update_script :: html"></div>
 <script th:inline="javascript">
-    var provinceSelect = $("#provinceName");
+/*    var provinceSelect = $("#provinceName");
     var ciytSelect = $("#cityName");
-    var areaSelect = $("#areaName");
+    var areaSelect = $("#areaName");*/
     $(function () {
         formCheck();
         initSelect();
-        getProvince();
+        var  provinceId = $("#provinceId").val();
+        var  cityId = $("#cityId").val();
+        var  areaId = $("#areaId").val();
+        $("#select_1").linkselect({
+            url: {
+                "1": "/api/region/getDataByParentId.ahsj",
+                "2": "/api/region/getDataByParentId.ahsj",
+                "3": "/api/region/getDataByParentId.ahsj"
+            },//每一级从后端获取数据的地址
+            value: {"1": provinceId,"2":cityId,"3":areaId},//每一级select的默认value,此时表示第一级选中北京,具体代表的地址看数据库，北京在本数据库中为1
+            level: 3,//表示一共拥有几级联动，三级联动就写3，四级就写4，一次类推
+            now: 1,//固定值，表示当前为第几级
+            param: 0,//参数值，传向后端的参数，0表示获取所有的省份,因为所有省份的父ID为0
+            preid: "select"//所有select的id前缀都应该是一样的，后面加上_和级别数
+        });
+/*        getProvince();
         getCity();
-        getArea();
+        getArea();*/
 
-        $("#provinceName").change(function () {
+ /*       $("#provinceName").change(function () {
             var parentId = $(this).val();
             ciytSelect.empty();
             areaSelect.empty();
@@ -209,7 +225,7 @@
                 }
                 areaSelect.formSelect();
             });
-        })
+        })*/
         var select1 = $(".select2-container");
         if (select1) {
             select1.css('display', 'none');
@@ -273,7 +289,7 @@
         $(this).val($(this).val().trim());
     });
 
-    function getProvince(){
+ /*   function getProvince(){
         var parentId = 0;
         var flag = $('#myProvinceName').val();
         $.getJSON(CTX+"/api/region/queryRegions.ahsj?&token="+TOKEN+"&parentId="+parentId, function (result){
@@ -344,7 +360,7 @@
 
             areaSelect.formSelect();
         });
-    }
+    }*/
 
 
 </script>

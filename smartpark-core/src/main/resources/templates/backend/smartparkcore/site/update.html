@@ -12,6 +12,10 @@
                 <h4 class="card-title">修改场地</h4><label style="color:black"></label>
                 <form class="col s12" id="sendForm" action="#">
                     <input id="id" name="id" type="hidden" th:value="${siteDTO.id}"/>
+                    <input id="provinceId" name="" type="hidden" th:value="${siteDTO.provinceId}"/>
+                    <input id="cityId" name="" type="hidden" th:value="${siteDTO.cityId}"/>
+                    <input id="areaId" name="" type="hidden" th:value="${siteDTO.areaId}"/>
+
                     <div class="row">
                         <div class="input-field col s4 l4 xl4">
                             <input id="siteName" name="siteName" type="text" th:value="${siteDTO.siteName}"
@@ -20,74 +24,100 @@
                             <label for="siteName">场地名称<span style="font-size: 12px"></span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4">
-                            <input id="title" name="title" type="text"   th:value="${siteDTO.title}"
+                            <input id="title" name="title" type="text" th:value="${siteDTO.title}"
                                    data-error=".errorTxt1">
                             <div class="errorTxt1"></div>
                             <label for="title">标题<span style="font-size: 12px"></span></label>
                         </div>
 
+                        <div class="input-field col s4 m4 l4">
+                            <div class="">
+                                <select name="provinceId" id="select_1">
+                                    <option>选择省份</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="input-field col s4 m4 l4">
+                            <div class="">
+                                <select name="cityId" id="select_2">
+                                    <option>选择城市</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="input-field col s4 m4 l4">
+                            <div class="">
+                                <select name="areaId" id="select_3">
+                                    <option>选择区</option>
+                                </select>
+                            </div>
+                        </div>
+
+
                         <div class="input-field col s4 l4 xl4">
-                            <input id="location" name="location" type="text"   th:value="${siteDTO.location}"
+                            <input id="location" name="location" type="text" th:value="${siteDTO.location}"
                                    data-error=".errorTxt1">
                             <div class="errorTxt1"></div>
                             <label for="location">地点<span style="font-size: 12px"></span></label>
                         </div>
 
                         <div class="input-field col s4 l4 xl4">
-                            <input id="price" name="price" type="text"    th:value="${siteDTO.price}"
+                            <input id="price" name="price" type="text" th:value="${siteDTO.price}"
                                    data-error=".errorTxt1">
                             <div class="errorTxt1"></div>
                             <label for="price">价格<span style="font-size: 12px"></span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4">
-                            <input id="area" name="area" type="text"   th:value="${siteDTO.area}"
+                            <input id="area" name="area" type="text" th:value="${siteDTO.area}"
                                    data-error=".errorTxt1">
                             <div class="errorTxt1"></div>
                             <label for="area">面积<span style="font-size: 12px"></span></label>
                         </div>
 
                         <div class="input-field col s4 l4 xl4">
-                            <input id="phoneNumber" name="phoneNumber" type="text"  th:value="${siteDTO.phoneNumber}"
+                            <input id="phoneNumber" name="phoneNumber" type="text" th:value="${siteDTO.phoneNumber}"
                                    data-error=".errorTxt1">
                             <div class="errorTxt1"></div>
                             <label for="phoneNumber">联系电话<span style="font-size: 12px"></span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4">
-                            <input id="name" name="name" type="text"   th:value="${siteDTO.name}"
+                            <input id="name" name="name" type="text" th:value="${siteDTO.name}"
                                    data-error=".errorTxt1">
                             <div class="errorTxt1"></div>
                             <label for="name">姓名<span style="font-size: 12px"></span></label>
                         </div>
 
                         <div class="input-field col s4 l4 xl4">
-                            <input id="capacity" name="capacity" type="text"  th:value="${siteDTO.capacity}"
+                            <input id="capacity" name="capacity" type="text" th:value="${siteDTO.capacity}"
                                    data-error=".errorTxt1">
                             <div class="errorTxt1"></div>
                             <label for="capacity">容纳人数<span style="font-size: 12px"></span></label>
                         </div>
 
                         <div class="input-field col s4 l4 xl4">
-                            <select ahsj:select name="isLease"  type="code"  id="is_lease"  typeKey="is_lease" cssClass=""
+                            <select ahsj:select name="isLease" type="code" id="is_lease" typeKey="is_lease" cssClass=""
                                     th:value="${siteDTO.isLease}"
                             ></select>
-                            <label for="is_lease" >是否租赁<span style="font-size: 12px"></span></label>
+                            <label for="is_lease">是否租赁<span style="font-size: 12px"></span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4">
-                            <select ahsj:select name="isEnable"  type="code"  id="is_enable"  typeKey="is_enable" cssClass=""
+                            <select ahsj:select name="isEnable" type="code" id="is_enable" typeKey="is_enable"
+                                    cssClass=""
                                     th:value="${siteDTO.isEnable}"
                             ></select>
-                            <label for="is_enable" >是否启用<span style="font-size: 12px"></span></label>
+                            <label for="is_enable">是否启用<span style="font-size: 12px"></span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4">
-                            <select ahsj:select name="isVerify"  type="code"  id="is_verify"  typeKey="is_verify" cssClass=""
+                            <select ahsj:select name="isVerify" type="code" id="is_verify" typeKey="is_verify"
+                                    cssClass=""
                                     th:value="${siteDTO.isVerify}"
                             ></select>
-                            <label for="is_verify" >是否审核<span style="font-size: 12px"></span></label>
+                            <label for="is_verify">是否审核<span style="font-size: 12px"></span></label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <button id="send_btn" class="btn cyan waves-effect waves-light right" type="sumbit" name="action">提 交
+                            <button id="send_btn" class="btn cyan waves-effect waves-light right" type="sumbit"
+                                    name="action">提 交
                                 <i class="mdi-content-send right"></i>
                             </button>
                         </div>
@@ -103,9 +133,25 @@ Scripts
 ================================================ -->
 <div th:replace="public/base_update_script :: html"></div>
 <script th:inline="javascript">
-        $(function () {
-            formCheck();
+    $(function () {
+        formCheck();
+        var  provinceId = $("#provinceId").val();
+        var  cityId = $("#cityId").val();
+        var  areaId = $("#areaId").val();
+        $("#select_1").linkselect({
+            url: {
+                "1": "/api/region/getDataByParentId.ahsj",
+                "2": "/api/region/getDataByParentId.ahsj",
+                "3": "/api/region/getDataByParentId.ahsj"
+            },//每一级从后端获取数据的地址
+            value: {"1": provinceId,"2":cityId,"3":areaId},//每一级select的默认value,此时表示第一级选中北京,具体代表的地址看数据库，北京在本数据库中为1
+            level: 3,//表示一共拥有几级联动，三级联动就写3，四级就写4，一次类推
+            now: 1,//固定值，表示当前为第几级
+            param: 0,//参数值，传向后端的参数，0表示获取所有的省份,因为所有省份的父ID为0
+            preid: "select"//所有select的id前缀都应该是一样的，后面加上_和级别数
         });
+    });
+
     function formCheck() {
         $("#sendForm").validate({
             rules: {
@@ -113,7 +159,7 @@ Scripts
                     required: true,
                 },
                 price: {
-                    required:true,
+                    required: true,
                 },
             },
             messages: {
@@ -134,35 +180,36 @@ Scripts
                 }
             },
             submitHandler: function (form) {
-                dialog.confirm('确定提交吗?', function (index, layero){
-                var send_form = $('#sendForm').serialize();
-                $.ahsjajax(
-                    CTX+"/api/site/update.index.ahsj?token="+TOKEN,
-                    send_form,
-                    function (responseEntity) {
-                        if (responseEntity.code>0) {
-                            M.toast({html: responseEntity.message});
-                            parent.grid.search();
-                            dialog.parentclose();
-                            return true;
-                        } else {
-                            M.toast({html: responseEntity.message});
+                dialog.confirm('确定提交吗?', function (index, layero) {
+                    var send_form = $('#sendForm').serialize();
+                    $.ahsjajax(
+                        CTX + "/api/site/update.index.ahsj?token=" + TOKEN,
+                        send_form,
+                        function (responseEntity) {
+                            if (responseEntity.code > 0) {
+                                M.toast({html: responseEntity.message});
+                                parent.grid.search();
+                                dialog.parentclose();
+                                return true;
+                            } else {
+                                M.toast({html: responseEntity.message});
+                                return false;
+                            }
+                        },
+                        function () {
+                            Materialize.toast("网络异常");
                             return false;
                         }
-                    },
-                    function ( ) {
-                        Materialize.toast("网络异常");
-                        return false;
-                    }
-                );});
+                    );
+                });
             }
 
         });
     }
 
-        $("input").change(function(){
-            $(this).val($(this).val().trim());
-        });
-  </script>
+    $("input").change(function () {
+        $(this).val($(this).val().trim());
+    });
+</script>
 </body>
 </html>
