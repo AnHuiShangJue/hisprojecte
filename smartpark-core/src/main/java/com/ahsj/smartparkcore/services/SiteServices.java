@@ -3,6 +3,7 @@ package com.ahsj.smartparkcore.services;
 import com.ahsj.smartparkcore.core.ResultModel;
 import com.ahsj.smartparkcore.entity.dto.SiteDTO;
 import com.ahsj.smartparkcore.entity.po.Site;
+import com.ahsj.smartparkcore.entity.vo.SiteVo;
 import core.entity.PageBean;
 import org.springframework.http.ResponseEntity;
 
@@ -73,6 +74,6 @@ public interface SiteServices {
      * @Date 2019/10/12
      * @Time 10:37
      **/
-    Site selectByPrimaryKey(Long id) throws Exception;
+    SiteVo selectByPrimaryKey(Long id) throws Exception;
 
 }

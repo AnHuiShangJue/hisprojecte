@@ -46,7 +46,7 @@ class UserInfoServiceImpl(@Autowired val userInfoMapper: UserInfoMapper) : UserI
         //预留检测模块，根据具体的业务进行检索传入的值进行安全规则校验
         if (!EmptyUtil.isNullOrEmpty(userInfo.userName)) {
             if (EmptyUtil.isNullOrEmpty(userInfo.id)) {
-                val check = userInfoMapper.selectByUserName(userInfo.userName)
+                val check = userInfoMapper.selectByUserName(userInfo.userId)
                 //先判定库中是否存在该用户
                 //不存在就插入用户
                 if (EmptyUtil.isNullOrEmpty(check)) {

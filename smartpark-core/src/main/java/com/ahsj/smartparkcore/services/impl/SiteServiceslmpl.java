@@ -6,10 +6,15 @@ import com.ahsj.smartparkcore.core.ResultModel;
 import com.ahsj.smartparkcore.core.ResultStatus;
 import com.ahsj.smartparkcore.dao.SiteMapper;
 import com.ahsj.smartparkcore.entity.dto.SiteDTO;
+import com.ahsj.smartparkcore.entity.po.Region;
 import com.ahsj.smartparkcore.entity.po.Site;
+import com.ahsj.smartparkcore.entity.vo.SiteVo;
+import com.ahsj.smartparkcore.services.RegionService;
 import com.ahsj.smartparkcore.services.SiteServices;
 import core.entity.PageBean;
+import org.apache.commons.lang3.StringUtils;
 import org.dozer.DozerBeanMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +29,9 @@ public class SiteServiceslmpl implements SiteServices {
 
     @Autowired
     SiteMapper siteMapper;
+
+    @Autowired
+    RegionService regionService;
 
     private Logger logger = Logger.getLogger(SiteServiceslmpl.class.getSimpleName());
 
@@ -55,6 +63,10 @@ public class SiteServiceslmpl implements SiteServices {
     public ResponseEntity<ResultModel> save(SiteDTO siteDTO) throws Exception {
         DozerBeanMapper mapper = new DozerBeanMapper(); //对象转换组件
         Site site = mapper.map(siteDTO, Site.class);
+        Region region1 = regionService.selectById(siteDTO.getProvinceId());
+        Region region2 = regionService.selectById(siteDTO.getCityId());
+        Region region3 = regionService.selectById(siteDTO.getAreaId());
+        site.setLocation(region1.getName() + region2.getName() + region3.getName() + site.getLocation());
         if (EmptyUtil.Companion.isNullOrEmpty(siteMapper.selectBySiteName(site.getSiteName()))) {
             siteMapper.insert(site);
             return new ResponseEntity<>(new ResultModel(ResultStatus.SUCCESS_INSERT), HttpStatus.OK);
@@ -103,6 +115,11 @@ public class SiteServiceslmpl implements SiteServices {
     public ResponseEntity<ResultModel> update(SiteDTO siteDTO) throws Exception {
         DozerBeanMapper mapper = new DozerBeanMapper(); //对象转换组件
         Site site = mapper.map(siteDTO, Site.class);
+        Region region1 = regionService.selectById(siteDTO.getProvinceId());
+        Region region2 = regionService.selectById(siteDTO.getCityId());
+        Region region3 = regionService.selectById(siteDTO.getAreaId());
+        site.setLocation(region1.getName() + region2.getName() + region3.getName() + site.getLocation());
+
         Site sites = siteMapper.selectBySiteName(site.getSiteName());
         if (!EmptyUtil.Companion.isNullOrEmpty(sites) && sites.getId() != site.getId()) {//数据库存在这个名字，并且不是我要修改的对象
             return new ResponseEntity<>(new ResultModel(ResultStatus.ERROR_UPDATE, site.getSiteName() + "已存在"), HttpStatus.OK);
@@ -143,7 +160,21 @@ public class SiteServiceslmpl implements SiteServices {
      **/
     @Override
     @Transactional(readOnly = true)
-    public Site selectByPrimaryKey(Long id) throws Exception {
-        return CodeHelper.getInstance().setCodeValue(siteMapper.selectByPrimaryKey(id));
+    public SiteVo selectByPrimaryKey(Long id) throws Exception {
+        Site site = siteMapper.selectByPrimaryKey(id);
+        SiteVo siteVo = new SiteVo();
+        BeanUtils.copyProperties(site, siteVo);
+        String substring = StringUtils.substring(site.getLocation(), 0, 3);
+        String substring1 = StringUtils.substring(site.getLocation(), 3, 6);
+        String substring2 = StringUtils.substring(site.getLocation(), 6, 9);
+        String addressName = StringUtils.substring(site.getLocation(), 9,site.getLocation().length());
+        Region region = regionService.queryRegionName(substring);
+        Region region1 = regionService.queryRegionName(substring1);
+        Region region2 = regionService.queryRegionName(substring2);
+        siteVo.setProvinceId(region.getId());
+        siteVo.setCityId(region1.getId());
+        siteVo.setAreaId(region2.getId());
+        siteVo.setLocation(addressName);
+        return siteVo;
     }
 }

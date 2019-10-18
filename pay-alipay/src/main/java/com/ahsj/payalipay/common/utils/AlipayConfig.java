@@ -1,8 +1,10 @@
 package com.ahsj.payalipay.common.utils;
 
 
-
 public class AlipayConfig {
+
+    public AlipayConfig() {
+    }
 
 //↓↓↓↓↓↓↓↓↓↓请在这里配置您的基本信息↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 

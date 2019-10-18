@@ -34,7 +34,7 @@
     delete from return_alipay
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.ahsj.payalipay.entity.ReturnAlipay">
+  <insert id="insert" parameterType="com.ahsj.payalipay.entity.ReturnAlipay"  useGeneratedKeys="true" keyProperty="id">
     insert into return_alipay (id, update_user_id, update_date, 
       create_user_id, create_date, number, 
       payment_amount, return_amount, order_name, 

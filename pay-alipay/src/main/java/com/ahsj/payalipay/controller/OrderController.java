@@ -7,12 +7,16 @@ import com.ahsj.payalipay.entity.Alipay;
 import com.ahsj.payalipay.entity.AlipaymentOrder;
 import com.ahsj.payalipay.service.impl.service.AlipayService;
 import com.ahsj.payalipay.service.impl.service.AlipaymentOrderService;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradeQueryRequest;
 import com.google.api.client.util.Maps;
+import core.message.Message;
+import core.message.MessageUtil;
 import lombok.val;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,10 +61,7 @@ public class OrderController {
 
 //支付宝回调函数
     @RequestMapping("/alipay_callback.do")
-    public ModelAndView alipayCallback(HttpServletRequest request, String token) throws Exception {
-        ModelAndView modelAndView = new ModelAndView("return");
-        modelAndView.addObject("title", "支付宝支付信息");
-        modelAndView.addObject("token", token);
+    public Message alipayCallback(HttpServletRequest request, String token) throws Exception {
         Map<String, String> params = Maps.newHashMap();
         Map requestParams = request.getParameterMap();
         for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext(); ) {
@@ -78,37 +79,34 @@ public class OrderController {
         try {
             boolean alipayRSACheckedV2 = AlipaySignature.rsaCheckV2(params, AlipayConfig.getAlipay_public_key(), AlipayConfig.getCharset(), AlipayConfig.getSign_type());
             if (!alipayRSACheckedV2) {
-                modelAndView.addObject("message", "非法订单，请忽略");
-                return modelAndView;
+                return MessageUtil.createMessage(false, "非法订单，请忽略!");
             }
         } catch (AlipayApiException e) {
             log.info("支付宝回调异常", e);
         }
         //  验证各种数据,修改数据库支付状态
-        Map<String, String> map = alipayService.aliCallback(params);
-        for (String key : map.keySet()) {  //map只有一条
-            String value = map.get(key);
-            if (key.equals("true")) {
-                AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, "json", AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
-                //设置请求参数
-                AlipayTradeQueryRequest alipayRequest = new AlipayTradeQueryRequest();
-                alipayRequest.setBizContent("{\"out_trade_no\":\"" + params.get("out_trade_no") + "\"," + "\"trade_no\":\"" + params.get("trade_no") + "\"}");
-                String result = alipayClient.execute(alipayRequest).getBody();
-                boolean b = alipaymentOrderService.saveAlipaymentOrder(result);
-                if (b) {
-                    modelAndView.addObject("message", "支付成功" + value);
-                    return modelAndView;
-                } else {
-                    modelAndView.addObject("message", "支付成功,查询失败，未成功添加支付信息" + value);
-                    return modelAndView;
-                }
+        Message mes = alipayService.aliCallback(params);
+        JSONObject jsonObject = mes.buildJSON();
+        String message = (String) jsonObject.get("message");
+        boolean isSuccess = (boolean) jsonObject.get("success");
+        if (isSuccess) {//数据校对正确 ，查询订单并添加
+            AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, "json", AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
+            //设置请求参数
+            AlipayTradeQueryRequest alipayRequest = new AlipayTradeQueryRequest();
+            alipayRequest.setBizContent("{\"out_trade_no\":\"" + params.get("out_trade_no") + "\"," + "\"trade_no\":\"" + params.get("trade_no") + "\"}");
+            String result = alipayClient.execute(alipayRequest).getBody();
+            JSONObject json = JSON.parseObject(JSON.parseObject(result).get("alipay_trade_query_response").toString());
+            if (StringUtil.equals((String) json.get("msg"), "Success")) {//查询成功，添加查询记录
+                alipaymentOrderService.saveAlipaymentOrder(result);
+                log.info("------订单查询并添加成功------");
+                return MessageUtil.createMessage(true, "" + message);
+            } else {
+                log.info("------订单查询失败，未添加订单，请稍后重新查询------");
+                return MessageUtil.createMessage(true, "" + message);
             }
-            if (key.equals("false")) {
-                modelAndView.addObject("message", "支付失败" + value);
-                return modelAndView;
-            }
+        } else {
+            return MessageUtil.createMessage(false, "支付成功,数据校对不正确!" + message);
         }
-        return null;
     }
 
     /**
