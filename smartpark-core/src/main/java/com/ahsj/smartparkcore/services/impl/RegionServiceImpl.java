@@ -124,4 +124,11 @@ public class RegionServiceImpl implements RegionService {
             }
         }
     }
+
+    @Override
+    @Transactional(readOnly = false)
+    public int updateByPrimaryKeySelective(Region region) {
+        regionMapper.updateByPrimaryKeySelective(region);
+        return 0;
+    }
 }

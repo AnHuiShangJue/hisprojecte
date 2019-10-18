@@ -96,10 +96,10 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
     public Message addEnterpriseInfo(EnterpriseInfoDTO enterpriseInfoDTO, MultipartFile[] file, String relateKet, String relatePage) throws Exception {
         EnterpriseInfo enterpriseInfo = new EnterpriseInfo();
         BeanUtils.copyProperties(enterpriseInfoDTO, enterpriseInfo);
-        Region region1=  regionService.selectById(enterpriseInfoDTO.getProvinceId());
-        Region region2=  regionService.selectById(enterpriseInfoDTO.getCityId());
-        Region region3=  regionService.selectById(enterpriseInfoDTO.getAreaId());
-        enterpriseInfo.setAddress(region1.getName()+region2.getName()+region3.getName()+enterpriseInfoDTO.getAddress());
+        Region region1 = regionService.selectById(enterpriseInfoDTO.getProvinceId());
+        Region region2 = regionService.selectById(enterpriseInfoDTO.getCityId());
+        Region region3 = regionService.selectById(enterpriseInfoDTO.getAreaId());
+        enterpriseInfo.setAddress(region1.getName() + region2.getName() + region3.getName() + enterpriseInfoDTO.getAddress());
         if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getName()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getLegalName()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getUnifiedSocialCreditCode())) {
             return MessageUtil.createMessage(false, "企业信息新增失败 ！！！");
         } else if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getId())) {
@@ -136,6 +136,17 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
         LegalPerson legalPerson = new LegalPerson();
         BeanUtils.copyProperties(enterpriseInfoDTO, enterpriseInfo);
         BeanUtils.copyProperties(enterpriseInfoDTO, legalPerson);
+        System.out.println("-------->"+enterpriseInfoDTO.getProvinceId());
+        System.out.println("-------->"+enterpriseInfoDTO.getCityId());
+        System.out.println("-------->"+enterpriseInfoDTO.getAreaId());
+        Region region1 = regionService.selectById(enterpriseInfoDTO.getProvinceId());
+        Region region2 = regionService.selectById(enterpriseInfoDTO.getCityId());
+        Region region3 = regionService.selectById(enterpriseInfoDTO.getAreaId());
+        System.out.println("-------->"+region1.getName());
+        System.out.println("-------->"+region2.getName());
+        System.out.println("-------->"+region3.getName());
+        enterpriseInfo.setAddress(region1.getName() + region2.getName() + region3.getName() + enterpriseInfoDTO.getAddress());
+        System.out.println("-------->"+enterpriseInfo.getAddress());
         legalPerson.setId(null);
         if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getName()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getLegalName()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getUnifiedSocialCreditCode())) {
             return MessageUtil.createMessage(false, "企业信息修改失败 ！！！");
@@ -146,8 +157,8 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
                 legalPerson.setEnterpriseId(enterpriseInfo.getId());
                 legalPersonService.updateByCompanyId(legalPerson);
                 return MessageUtil.createMessage(true, "企业信息修改成功 ！！！");
-            } else  {
-                if (StringUtils.equals(info.getName(), enterpriseInfo.getName())){
+            } else {
+                if (StringUtils.equals(info.getName(), enterpriseInfo.getName())) {
                     if (info.getId().longValue() == enterpriseInfo.getId().longValue()) {
                         enterpriseInfoMapper.updateByPrimaryKeySelective(enterpriseInfo);
                         legalPerson.setEnterpriseId(enterpriseInfo.getId());
@@ -156,7 +167,7 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
                     } else {
                         return MessageUtil.createMessage(false, "企业信息修改失败 ！ 该企业已存在  ！！");
                     }
-                }else {
+                } else {
                     return MessageUtil.createMessage(false, "企业信息修改失败 ！ 该企业已存在   ！");
                 }
             }
@@ -244,47 +255,47 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
             String substring = StringUtils.substring(address, 0, 3);
             String substring1 = StringUtils.substring(address, 3, 6);
             String substring2 = StringUtils.substring(address, 6, 9);
-            Region region =regionService.queryRegionName(substring);
+            String addressName = StringUtils.substring(address, 9,address.length());
+            Region region = regionService.queryRegionName(substring);
             Region region1 = regionService.queryRegionName(substring1);
             Region region2 = regionService.queryRegionName(substring2);
-            List<Long> longs = new ArrayList<>();
-            longs.add(region.getId());
-            longs.add(region1.getId());
-            longs.add(region2.getId());
-            enterpriseInfoVO.setListId(longs);
-            enterpriseInfoVO.setProvinceName("安徽省");
-            enterpriseInfoVO.setCityName("芜湖市");
-            enterpriseInfoVO.setAreaName("镜湖区");
+            enterpriseInfoVO.setProvinceId(region.getParentId());
+            enterpriseInfoVO.setCityId(region1.getParentId());
+            enterpriseInfoVO.setAreaId(region2.getParentId());
+            enterpriseInfoVO.setProvinceName(substring);
+            enterpriseInfoVO.setCityName(substring1);
+            enterpriseInfoVO.setAreaName(substring2);
+            enterpriseInfoVO.setAddress(addressName);
             return enterpriseInfoVO;
         }
     }
 
     /**
-     *@功能说明 
-     *@Params [enterpriseInfoDTO]
-     *@return core.message.Message
-     *@Author XJP
-     *@Date 2019/10/15
-     *@Time 10:59
-    **/
+     * @return core.message.Message
+     * @功能说明
+     * @Params [enterpriseInfoDTO]
+     * @Author XJP
+     * @Date 2019/10/15
+     * @Time 10:59
+     **/
     @Override
     @Transactional(readOnly = false)
     public Message updateIsEnable(EnterpriseInfoDTO enterpriseInfoDTO) throws Exception {
-        if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getId())){
+        if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getId())) {
             return MessageUtil.createMessage(false, "企业信息修改启用状态失败 ！！！");
-        }else {
+        } else {
             EnterpriseInfo enterpriseInfo = new EnterpriseInfo();
             BeanUtils.copyProperties(enterpriseInfoDTO, enterpriseInfo);
-             enterpriseInfo = enterpriseInfoMapper.selectByPrimaryKey(enterpriseInfo.getId());
-             if (enterpriseInfo.getIsEnable() == 1){
-                 enterpriseInfo.setIsEnable(Constants.TWO);
-                 enterpriseInfoMapper.updateByPrimaryKeySelective(enterpriseInfo);
-                 return MessageUtil.createMessage(true, "企业信息修改启用状态成功 ！！！");
-             }else {
-                 enterpriseInfo.setIsEnable(Constants.ONE);
-                 enterpriseInfoMapper.updateByPrimaryKeySelective(enterpriseInfo);
-                 return MessageUtil.createMessage(true, "企业信息修改启用状态成功 ！！！");
-             }
+            enterpriseInfo = enterpriseInfoMapper.selectByPrimaryKey(enterpriseInfo.getId());
+            if (enterpriseInfo.getIsEnable() == 1) {
+                enterpriseInfo.setIsEnable(Constants.TWO);
+                enterpriseInfoMapper.updateByPrimaryKeySelective(enterpriseInfo);
+                return MessageUtil.createMessage(true, "企业信息修改启用状态成功 ！！！");
+            } else {
+                enterpriseInfo.setIsEnable(Constants.ONE);
+                enterpriseInfoMapper.updateByPrimaryKeySelective(enterpriseInfo);
+                return MessageUtil.createMessage(true, "企业信息修改启用状态成功 ！！！");
+            }
         }
     }
 

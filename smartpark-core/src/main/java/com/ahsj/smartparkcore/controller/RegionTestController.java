@@ -32,11 +32,21 @@ public class RegionTestController {
     @Autowired
     RegionService regionService;
 
-    @PostMapping("/hi.ahsj")
-    public List<String> update() throws Exception {
-        LocalUtil lu = LocalUtil.getInstance();
-        List<String> list = lu.getCities("中国", "北京");
-        return list;
+   @PostMapping("/h.ahsj")
+    public void update() throws Exception {
+       for (int i = 3; i <= 11; i++) {
+           if (i==9){
+               continue;
+           }
+           Region region = new Region();
+           Integer a = i ;
+           region.setParentId(a.longValue());
+           List<Region> regionList = regionService.queryRegion(region);
+           for (Region region1 : regionList) {
+               region1.setName(region1.getName()+"市");
+               regionService.updateByPrimaryKeySelective(region1);
+           }
+       }
     }
 
     @PostMapping("/hio.ahsj")
@@ -54,31 +64,32 @@ public class RegionTestController {
     }
 
 
-    @PostMapping("/hiah.ahsj")
-    public List<String> ah() throws Exception {
+    @PostMapping("/hi.ahsj")
+    public List<String> ah(String name) throws Exception {
         LocalUtil lu = LocalUtil.getInstance();
-        List<String> provinces = lu.getCities("中国","安徽");
+        List<String> provinces = lu.getCities("中国",name);
+        Region region1 = regionService.queryRegionName(name);
         List<Region> regionList = new ArrayList<>();
         for (String province : provinces) {
             Region region = new Region();
             region.setName(province);
-            region.setParentId(12L);
+            region.setParentId(region1.getId());
             regionList.add(region);
         }
         regionService.addRegionList(regionList);
         return provinces;
     }
     @PostMapping("/hiahwuhu.ahsj")
-    public List<String> ahwuhu() throws Exception {
+    public List<String> ahwuhu(String name ,Long id) throws Exception {
         LocalUtil lu = LocalUtil.getInstance();
-        List<String> provinces = lu.getcounty("中国","安徽","芜湖");
+        List<String> provinces = lu.getcounty("中国","安徽",name);
         List<Region> regionList = new ArrayList<>();
-       /* for (String province : provinces) {
+       for (String province : provinces) {
             Region region = new Region();
             region.setName(province);
-            region.setParentId(36L);
+            region.setParentId(id);
             regionList.add(region);
-        }*/
+        }
       /*  for (int i = 0; i < 3; i++) {
             Region region = new Region();
             if (i==0){

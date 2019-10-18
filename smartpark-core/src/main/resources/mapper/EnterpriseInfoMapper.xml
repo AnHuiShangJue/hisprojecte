@@ -302,13 +302,13 @@
         <include refid="Base_Column_List"/>
         from enterprise_info e where 1=1
         <if test="parameter.name != null and parameter.name != ''">
-            and e.name like concat('%', #{parameter.name,jdbcType=INTEGER},'%')
+            and e.name like concat('%', #{parameter.name,jdbcType=VARCHAR},'%')
         </if>
         <if test="parameter.legalName != null and parameter.legalName != ''">
-            and e.legal_name like concat('%', #{parameter.legalName,jdbcType=INTEGER},'%')
+            and e.legal_name like concat('%', #{parameter.legalName,jdbcType=VARCHAR},'%')
         </if>
         <if test="parameter.unifiedSocialCreditCode != null and parameter.unifiedSocialCreditCode != ''">
-            and e.unified_social_credit_code like concat('%', #{parameter.unifiedSocialCreditCode,jdbcType=INTEGER},'%')
+            and e.unified_social_credit_code like concat('%', #{parameter.unifiedSocialCreditCode,jdbcType=VARCHAR},'%')
         </if>
         <if test="parameter.scale != null and parameter.scale != ''">
             and e.scale = #{parameter.scale,jdbcType=SMALLINT}

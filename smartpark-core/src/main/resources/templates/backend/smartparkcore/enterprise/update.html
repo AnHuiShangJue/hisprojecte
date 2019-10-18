@@ -15,6 +15,9 @@
             </label>
                 <form class="col s12" id="sendForm" action="#">
                     <input type="hidden" id="id" name="id" th:value="${enterpriseInfoVO.id}">
+                    <input type="hidden" id="provinceId" name="" th:value="${enterpriseInfoVO.provinceId}">
+                    <input type="hidden" id="cityId" name="" th:value="${enterpriseInfoVO.cityId}">
+                    <input type="hidden" id="areaId" name="" th:value="${enterpriseInfoVO.areaId}">
                     <div class="row">
 
                         <div class="input-field col s4 l4 xl4">
@@ -61,21 +64,21 @@
 
                         <div class="input-field col s4 l4 xl4">
                             <input type="hidden" id="myProvinceName" th:value="${enterpriseInfoVO.provinceName}">
-                            <select name="provinceName" id="provinceName">
+                            <select name="provinceId" id="provinceName">
                             </select>
                             <label for="provinceName">选择省份</label>
                         </div>
 
                         <div class="input-field col s4 l4 xl4">
                             <input type="hidden" id="myCityName" th:value="${enterpriseInfoVO.cityName}">
-                            <select name="cityName" id="cityName">
+                            <select name="cityId" id="cityName">
                             </select>
                             <label for="cityName">选择城市</label>
                         </div>
 
                         <div class="input-field col s4 l4 xl4">
                             <input type="hidden" id="myAreaName" th:value="${enterpriseInfoVO.areaName}">
-                            <select name="areaName" id="areaName">
+                            <select name="areaId" id="areaName">
                             </select>
                             <label for="areaName">选择区</label>
                         </div>
@@ -153,6 +156,8 @@
         formCheck();
         initSelect();
         getProvince();
+        getCity();
+        getArea();
 
         $("#provinceName").change(function () {
             var parentId = $(this).val();
@@ -160,8 +165,9 @@
             areaSelect.empty();
             var flag = $('#myCityName').val();
             $.getJSON(CTX+"/api/region/queryRegions.ahsj?&token="+TOKEN+"&parentId="+parentId, function (result){
+
                 if (flag == null || flag == "" ){
-                    ciytSelect.prepend("<option value='0'>选择城市</option>");
+                    ciytSelect.prepend("<option value='-1'>选择城市</option>");
 
                     $(result).each(function (i) {
                         ciytSelect.append("<option value='" + this.id + "'>" + this.name + "</option>")
@@ -183,6 +189,7 @@
         });
         $("#cityName").change(function () {
             var parentId = $(this).val();
+            areaSelect.empty();
             var flag = $('#myAreaName').val();
             $.getJSON(CTX+"/api/region/queryRegions.ahsj?&token="+TOKEN+"&parentId="+parentId, function (result){
                 if (flag == null || flag == "" ){
@@ -200,7 +207,6 @@
                         areaSelect.append("<option value='" + this.id + "'>" + this.name + "</option>")
                     })
                 }
-
                 areaSelect.formSelect();
             });
         })
@@ -231,6 +237,10 @@
             },
             submitHandler: function (form) {
                 dialog.confirm('确定提交吗?', function (index, layero) {
+                    var provinceSelect = $("#provinceName").val();
+                    var ciytSelect = $("#cityName").val();
+                    var areaSelect = $("#areaName").val();
+
                     var queryString = $('#sendForm').serialize();
                     console.log("queryString is" + queryString);
 
@@ -268,7 +278,7 @@
         var flag = $('#myProvinceName').val();
         $.getJSON(CTX+"/api/region/queryRegions.ahsj?&token="+TOKEN+"&parentId="+parentId, function (result){
             if (flag == null || flag == "" ){
-                provinceSelect.prepend("<option value='0'>选择省份</option>");
+                provinceSelect.prepend("<option value='-1'>选择省份</option>");
 
                 $(result).each(function (i) {
                     provinceSelect.append("<option value='" + this.id + "'>" + this.name + "</option>")
@@ -285,6 +295,54 @@
             }
 
             provinceSelect.formSelect();
+        });
+    }
+    function getCity(){
+        var parentId = $("#cityId").val();
+        var flag = $('#myCityName').val();
+        $.getJSON(CTX+"/api/region/queryRegions.ahsj?&token="+TOKEN+"&parentId="+parentId, function (result){
+            if (flag == null || flag == "" ){
+                ciytSelect.prepend("<option value='0'>选择城市</option>");
+
+                $(result).each(function (i) {
+                    ciytSelect.append("<option value='" + this.id + "'>" + this.name + "</option>")
+                });
+            }else {
+                for (var j = 0;j<result.length;++j){
+                    if (flag == result[j].name){
+                        ciytSelect.append("<option value='" + result[j].id + "'>" + result[j].name + "</option>");
+                    }
+                }
+                $(result).each(function (i) {
+                    ciytSelect.append("<option value='" + this.id + "'>" + this.name + "</option>")
+                })
+            }
+
+            ciytSelect.formSelect();
+        });
+    }
+    function getArea(){
+        var parentId = $("#areaId").val();
+        var flag = $('#myAreaName').val();
+        $.getJSON(CTX+"/api/region/queryRegions.ahsj?&token="+TOKEN+"&parentId="+parentId, function (result){
+            if (flag == null || flag == "" ){
+                areaSelect.prepend("<option value='0'>选择区</option>");
+
+                $(result).each(function (i) {
+                    areaSelect.append("<option value='" + this.id + "'>" + this.name + "</option>")
+                });
+            }else {
+                for (var j = 0;j<result.length;++j){
+                    if (flag == result[j].name){
+                        areaSelect.append("<option value='" + result[j].id + "'>" + result[j].name + "</option>");
+                    }
+                }
+                $(result).each(function (i) {
+                    areaSelect.append("<option value='" + this.id + "'>" + this.name + "</option>")
+                })
+            }
+
+            areaSelect.formSelect();
         });
     }
 

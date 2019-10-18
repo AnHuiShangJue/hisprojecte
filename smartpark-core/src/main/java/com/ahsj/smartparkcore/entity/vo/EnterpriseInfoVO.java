@@ -1,6 +1,7 @@
 package com.ahsj.smartparkcore.entity.vo;
 
 import com.ahsj.smartparkcore.entity.po.EnterpriseInfo;
+import com.ahsj.smartparkcore.entity.po.Region;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -29,14 +30,34 @@ public class EnterpriseInfoVO  extends EnterpriseInfo {
 
     private String areaName;
 
-    private List<Long> listId;
+    private Long provinceId;
 
-    public List<Long> getListId() {
-        return listId;
+    private Long cityId;
+
+    private Long areaId;
+
+    public Long getProvinceId() {
+        return provinceId;
     }
 
-    public void setListId(List<Long> listId) {
-        this.listId = listId;
+    public void setProvinceId(Long provinceId) {
+        this.provinceId = provinceId;
+    }
+
+    public Long getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(Long cityId) {
+        this.cityId = cityId;
+    }
+
+    public Long getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(Long areaId) {
+        this.areaId = areaId;
     }
 
     public String getProvinceName() {

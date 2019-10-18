@@ -193,7 +193,8 @@
         select
         <include refid="Base_Column_List"/>
         from region
-        where name = #{name,jdbcType=VARCHAR}
+        where
+        name like concat('%', #{name,jdbcType=VARCHAR},'%')
     </select>
 
 </mapper>

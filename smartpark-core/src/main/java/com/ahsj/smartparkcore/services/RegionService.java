@@ -50,4 +50,6 @@ public interface RegionService {
     Region selectById(Long id) throws Exception;
 
     Region queryRegionName(String substring);
+
+    int updateByPrimaryKeySelective(Region region);
 }
