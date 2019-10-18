@@ -1,5 +1,6 @@
 package com.ahsj.payalipay.service.impl.impl;
 
+import com.ahsj.payalipay.common.utils.MockInfo;
 import com.ahsj.payalipay.service.impl.service.SmilePayService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,24 +33,21 @@ public class SmilePayServiceImpl implements SmilePayService {
      */
 
     private Map mockInfo() {
-   /*     Map merchantInfo = new HashMap();
+        Map merchantInfo = new HashMap();
         //以下信息请根据真实情况填写
         //商户 Pid
-        merchantInfo.put("merchantId", "2088201820182018");
+        merchantInfo.put("merchantId", MockInfo.merchantId);
         //ISV PID
-        merchantInfo.put("partnerId", partnerId);
+        merchantInfo.put("partnerId", MockInfo.partnerId);
         //添加刷脸付功能的appid
-        merchantInfo.put("appId", appId);
+        merchantInfo.put("appId", MockInfo.appId);
         //机具编号，便于关联商家管理的机具
-        merchantInfo.put("deviceNum", "TEST_ZOLOZ_TEST");
+        merchantInfo.put("deviceNum", MockInfo.deviceNum);
         //商户的门店编号
-        merchantInfo.put("storeCode", "TEST");
+        merchantInfo.put("storeCode", MockInfo.storeCode);
         //支付宝门店编号
-        merchantInfo.put("alipayStoreCode", "TEST");
-
-        return merchantInfo;*/
-
-        return null;
+        merchantInfo.put("alipayStoreCode", MockInfo.alipayStoreCode);
+        return merchantInfo;
     }
 
     @Override

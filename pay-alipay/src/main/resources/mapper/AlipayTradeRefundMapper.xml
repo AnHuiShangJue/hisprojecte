@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ahsj.payalipay.dao.AlipayTradeRefundMapper" >
-  <resultMap id="BaseResultMap" type="com.ahsj.payalipay.entity.AlipayTradeRefund" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
-    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
-    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
-    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
-    <result column="buyer_logon_id" property="buyerLogonId" jdbcType="VARCHAR" />
-    <result column="gmt_refund_pay" property="gmtRefundPay" jdbcType="TIMESTAMP" />
-    <result column="out_trade_no" property="outTradeNo" jdbcType="VARCHAR" />
-    <result column="refund_fee" property="refundFee" jdbcType="DECIMAL" />
-    <result column="send_back_fee" property="sendBackFee" jdbcType="DECIMAL" />
-    <result column="trade_no" property="tradeNo" jdbcType="VARCHAR" />
-    <result column="request_no" property="requestNo" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.ahsj.payalipay.dao.AlipayTradeRefundMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.payalipay.entity.AlipayTradeRefund">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="BIGINT"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="create_user_id" property="createUserId" jdbcType="BIGINT"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="buyer_logon_id" property="buyerLogonId" jdbcType="VARCHAR"/>
+        <result column="gmt_refund_pay" property="gmtRefundPay" jdbcType="TIMESTAMP"/>
+        <result column="out_trade_no" property="outTradeNo" jdbcType="VARCHAR"/>
+        <result column="refund_fee" property="refundFee" jdbcType="DECIMAL"/>
+        <result column="send_back_fee" property="sendBackFee" jdbcType="DECIMAL"/>
+        <result column="trade_no" property="tradeNo" jdbcType="VARCHAR"/>
+        <result column="request_no" property="requestNo" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, update_user_id, update_date, create_user_id, create_date, buyer_logon_id, gmt_refund_pay, 
     out_trade_no, refund_fee, send_back_fee, trade_no, request_no
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from alipay_trade_refund
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from alipay_trade_refund
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from alipay_trade_refund
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.ahsj.payalipay.entity.AlipayTradeRefund" >
+    <insert id="insert" parameterType="com.ahsj.payalipay.entity.AlipayTradeRefund">
     insert into alipay_trade_refund (id, update_user_id, update_date, 
       create_user_id, create_date, buyer_logon_id, 
       gmt_refund_pay, out_trade_no, refund_fee, 
@@ -41,125 +41,125 @@
       #{sendBackFee,jdbcType=DECIMAL}, #{tradeNo,jdbcType=VARCHAR}, #{requestNo,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ahsj.payalipay.entity.AlipayTradeRefund" >
-    insert into alipay_trade_refund
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="updateUserId != null" >
-        update_user_id,
-      </if>
-      <if test="updateDate != null" >
-        update_date,
-      </if>
-      <if test="createUserId != null" >
-        create_user_id,
-      </if>
-      <if test="createDate != null" >
-        create_date,
-      </if>
-      <if test="buyerLogonId != null" >
-        buyer_logon_id,
-      </if>
-      <if test="gmtRefundPay != null" >
-        gmt_refund_pay,
-      </if>
-      <if test="outTradeNo != null" >
-        out_trade_no,
-      </if>
-      <if test="refundFee != null" >
-        refund_fee,
-      </if>
-      <if test="sendBackFee != null" >
-        send_back_fee,
-      </if>
-      <if test="tradeNo != null" >
-        trade_no,
-      </if>
-      <if test="requestNo != null" >
-        request_no,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="updateUserId != null" >
-        #{updateUserId,jdbcType=BIGINT},
-      </if>
-      <if test="updateDate != null" >
-        #{updateDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createUserId != null" >
-        #{createUserId,jdbcType=BIGINT},
-      </if>
-      <if test="createDate != null" >
-        #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="buyerLogonId != null" >
-        #{buyerLogonId,jdbcType=VARCHAR},
-      </if>
-      <if test="gmtRefundPay != null" >
-        #{gmtRefundPay,jdbcType=TIMESTAMP},
-      </if>
-      <if test="outTradeNo != null" >
-        #{outTradeNo,jdbcType=VARCHAR},
-      </if>
-      <if test="refundFee != null" >
-        #{refundFee,jdbcType=DECIMAL},
-      </if>
-      <if test="sendBackFee != null" >
-        #{sendBackFee,jdbcType=DECIMAL},
-      </if>
-      <if test="tradeNo != null" >
-        #{tradeNo,jdbcType=VARCHAR},
-      </if>
-      <if test="requestNo != null" >
-        #{requestNo,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.payalipay.entity.AlipayTradeRefund" >
-    update alipay_trade_refund
-    <set >
-      <if test="updateUserId != null" >
-        update_user_id = #{updateUserId,jdbcType=BIGINT},
-      </if>
-      <if test="updateDate != null" >
-        update_date = #{updateDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createUserId != null" >
-        create_user_id = #{createUserId,jdbcType=BIGINT},
-      </if>
-      <if test="createDate != null" >
-        create_date = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="buyerLogonId != null" >
-        buyer_logon_id = #{buyerLogonId,jdbcType=VARCHAR},
-      </if>
-      <if test="gmtRefundPay != null" >
-        gmt_refund_pay = #{gmtRefundPay,jdbcType=TIMESTAMP},
-      </if>
-      <if test="outTradeNo != null" >
-        out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
-      </if>
-      <if test="refundFee != null" >
-        refund_fee = #{refundFee,jdbcType=DECIMAL},
-      </if>
-      <if test="sendBackFee != null" >
-        send_back_fee = #{sendBackFee,jdbcType=DECIMAL},
-      </if>
-      <if test="tradeNo != null" >
-        trade_no = #{tradeNo,jdbcType=VARCHAR},
-      </if>
-      <if test="requestNo != null" >
-        request_no = #{requestNo,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ahsj.payalipay.entity.AlipayTradeRefund" >
+    <insert id="insertSelective" parameterType="com.ahsj.payalipay.entity.AlipayTradeRefund">
+        insert into alipay_trade_refund
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="buyerLogonId != null">
+                buyer_logon_id,
+            </if>
+            <if test="gmtRefundPay != null">
+                gmt_refund_pay,
+            </if>
+            <if test="outTradeNo != null">
+                out_trade_no,
+            </if>
+            <if test="refundFee != null">
+                refund_fee,
+            </if>
+            <if test="sendBackFee != null">
+                send_back_fee,
+            </if>
+            <if test="tradeNo != null">
+                trade_no,
+            </if>
+            <if test="requestNo != null">
+                request_no,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="buyerLogonId != null">
+                #{buyerLogonId,jdbcType=VARCHAR},
+            </if>
+            <if test="gmtRefundPay != null">
+                #{gmtRefundPay,jdbcType=TIMESTAMP},
+            </if>
+            <if test="outTradeNo != null">
+                #{outTradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="refundFee != null">
+                #{refundFee,jdbcType=DECIMAL},
+            </if>
+            <if test="sendBackFee != null">
+                #{sendBackFee,jdbcType=DECIMAL},
+            </if>
+            <if test="tradeNo != null">
+                #{tradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="requestNo != null">
+                #{requestNo,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.payalipay.entity.AlipayTradeRefund">
+        update alipay_trade_refund
+        <set>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="buyerLogonId != null">
+                buyer_logon_id = #{buyerLogonId,jdbcType=VARCHAR},
+            </if>
+            <if test="gmtRefundPay != null">
+                gmt_refund_pay = #{gmtRefundPay,jdbcType=TIMESTAMP},
+            </if>
+            <if test="outTradeNo != null">
+                out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="refundFee != null">
+                refund_fee = #{refundFee,jdbcType=DECIMAL},
+            </if>
+            <if test="sendBackFee != null">
+                send_back_fee = #{sendBackFee,jdbcType=DECIMAL},
+            </if>
+            <if test="tradeNo != null">
+                trade_no = #{tradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="requestNo != null">
+                request_no = #{requestNo,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.payalipay.entity.AlipayTradeRefund">
     update alipay_trade_refund
     set update_user_id = #{updateUserId,jdbcType=BIGINT},
       update_date = #{updateDate,jdbcType=TIMESTAMP},
@@ -174,4 +174,19 @@
       request_no = #{requestNo,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+    <select id="selectAlipayTradeRefund" resultMap="BaseResultMap"  parameterType="com.ahsj.payalipay.entity.AlipayTradeRefund">
+        select
+        <include refid="Base_Column_List"/>
+        from alipay_trade_refund
+        where 1=1
+        <if test="outTradeNo != null">
+            and out_trade_no = #{outTradeNo,jdbcType=VARCHAR}
+        </if>
+        <if test="requestNo != null">
+            and request_no = #{requestNo,jdbcType=VARCHAR}
+        </if>
+        and request_no = #{requestNo,jdbcType=VARCHAR}
+    </select>
 </mapper>

@@ -14,4 +14,14 @@ public interface AlipayTradeRefundMapper {
     int updateByPrimaryKeySelective(AlipayTradeRefund record);
 
     int updateByPrimaryKey(AlipayTradeRefund record);
+
+    /**
+     * @Description 根距交易流水号或者支付宝订单号和退款申请号查询退款申请
+     * @Params: [record]
+     * @Author: dingli
+     * @Return: com.ahsj.payalipay.entity.AlipayTradeRefund
+     * @Date 2019/10/18
+     * @Time 11:36
+     **/
+    AlipayTradeRefund selectAlipayTradeRefund(AlipayTradeRefund record);
 }

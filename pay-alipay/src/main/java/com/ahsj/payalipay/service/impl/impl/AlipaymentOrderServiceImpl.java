@@ -41,7 +41,7 @@ public class AlipaymentOrderServiceImpl implements AlipaymentOrderService {
      **/
     @Override
     @Transactional(readOnly = false)
-    public int insert(AlipaymentOrder record) {
+    public int insert(AlipaymentOrder record) throws Exception {
         return alipaymentOrderMapper.insert(record);
     }
 
@@ -55,7 +55,7 @@ public class AlipaymentOrderServiceImpl implements AlipaymentOrderService {
      **/
     @Override
     @Transactional(readOnly = false)
-    public int updateByPrimaryKeySelective(AlipaymentOrder record) {
+    public int updateByPrimaryKeySelective(AlipaymentOrder record) throws Exception {
         return alipaymentOrderMapper.updateByPrimaryKeySelective(record);
     }
 
@@ -103,6 +103,20 @@ public class AlipaymentOrderServiceImpl implements AlipaymentOrderService {
         } else {
             return false;
         }
+    }
+
+    /**
+     * @Description 查询支付宝订单信息
+     * @Params: [record]
+     * @Author: dingli
+     * @Return: com.ahsj.payalipay.entity.AlipaymentOrder
+     * @Date 2019/10/18
+     * @Time 11:26
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public AlipaymentOrder selectAlipaymentOrder(AlipaymentOrder record) throws Exception {
+        return alipaymentOrderMapper.selectAlipaymentOrder(record);
     }
 
 }

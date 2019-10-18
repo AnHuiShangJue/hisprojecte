@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.wxapplet.dao.OperateMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.wxapplet.entity.Operate" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="order_num" property="orderNum" jdbcType="BIGINT" />
+    <result column="company_id" property="companyId" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="VARCHAR" />
+    <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, code, name, remark, order_num, company_id, del_flag, create_user_id, create_date, 
+    update_user_id, update_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from operate
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from operate
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.wxapplet.entity.Operate" >
+    insert into operate (id, code, name, 
+      remark, order_num, company_id, 
+      del_flag, create_user_id, create_date, 
+      update_user_id, update_date)
+    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{orderNum,jdbcType=BIGINT}, #{companyId,jdbcType=VARCHAR}, 
+      #{delFlag,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateUserId,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.wxapplet.entity.Operate" >
+    insert into operate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="orderNum != null" >
+        order_num,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null" >
+        #{orderNum,jdbcType=BIGINT},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.wxapplet.entity.Operate" >
+    update operate
+    <set >
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null" >
+        order_num = #{orderNum,jdbcType=BIGINT},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.wxapplet.entity.Operate" >
+    update operate
+    set code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      order_num = #{orderNum,jdbcType=BIGINT},
+      company_id = #{companyId,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!-- 自定义 -->
+  <select id="list" parameterType="com.ahsj.wxapplet.entity.Operate" resultMap="BaseResultMap">
+    select  <include refid="Base_Column_List" />
+    from operate
+    where 1=1
+    <if test="parameter.likeSearch != null and parameter.likeSearch !=''"  >
+      and (code like CONCAT('%',#{parameter.code},'%')
+      or name like CONCAT('%',#{parameter.likeSearch},'%'))
+    </if>
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+  <select id="selectByCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from operate
+    where code = #{code,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from operate
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+  <update id="update" parameterType="com.ahsj.wxapplet.entity.Operate" >
+    update operate
+    <set >
+      code = #{code,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="listMenuOperate" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+      operate.*,
+      case when menu_operate.id is null then false else true end as checked
+    from operate left join menu_operate on
+        operate.id = menu_operate.operate_id
+        and menu_operate.menu_id = #{menuId,jdbcType=INTEGER}
+  </select>
+</mapper>

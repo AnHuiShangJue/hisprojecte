@@ -24,4 +24,14 @@ public interface AlipayMapper {
      * @Time 13:34
      **/
     Alipay selectByNumber(String number);
+
+    /**
+     * @Description 根据交易流水号或者支付宝订单号查询
+     * @Params: [record]
+     * @Author: dingli
+     * @Return: com.ahsj.payalipay.entity.Alipay
+     * @Date 2019/10/18
+     * @Time 11:01
+     **/
+    Alipay selectAlipay(Alipay record);
 }

@@ -43,8 +43,7 @@ public class AlipayServiceImpl implements AlipayService {
 
     //支付宝的回调通知接口
     @Transactional(readOnly = false)
-    public Map<String, String> aliCallback(Map<String, String> params) throws Exception {
-        Map<String, String> map = new HashMap<>();
+    public Message aliCallback(Map<String, String> params) throws Exception {
         log.info("-------------支付宝回调-------------");
         //订单号
         String number = params.get("out_trade_no");
@@ -56,25 +55,20 @@ public class AlipayServiceImpl implements AlipayService {
         //String tradeStatus = params.get("trade_status");
         Alipay alipay = alipayMapper.selectByNumber(number);
         if (EmptyUtil.Companion.isNullOrEmpty(alipay)) {
-            map.put("false", "非法订单，回调忽略");
-            return map;
+            return MessageUtil.createMessage(false, "支付成功,数据库未查到" + number + "订单!");
         }
         if (alipay.getType() >= OrderStatusEnum.PAID.getCode()) {
-            map.put("false", "支付宝重复调用");
-            return map;
+            return MessageUtil.createMessage(false, "支付成功,支付宝重复调用!");
         }
-        if (paymentAmount.compareTo(alipay.getPaymentAmount()) == 0) {
-            log.info("-------------开始更新为支付完成状态-------------");
-            String date = params.get("gmt_payment"); //完成支付时间
-            alipay.setType(OrderStatusEnum.PAID.getCode());
-            alipay.setAlipayNumber(alipayNumber);//支付宝交易流水号
-            alipayMapper.updateByPrimaryKeySelective(alipay);
-            map.put("true", "回调成功");
-            return map;
-        } else {
-            map.put("false", "金额错误");
-            return map;
+        if (paymentAmount.compareTo(alipay.getPaymentAmount()) != 0) {
+            return MessageUtil.createMessage(false, "支付成功," + number + "订单支付金额为" + paymentAmount + "查询金额为" + alipay.getPaymentAmount() + "!");
         }
+        log.info("-------------开始更新为支付完成状态-------------");
+        String date = params.get("gmt_payment"); //完成支付时间
+        alipay.setType(OrderStatusEnum.PAID.getCode());
+        alipay.setAlipayNumber(alipayNumber);//支付宝交易流水号
+        alipayMapper.updateByPrimaryKeySelective(alipay);
+        return MessageUtil.createMessage(true, "支付成功,数据正常!");
     }
 
     /**
@@ -103,6 +97,20 @@ public class AlipayServiceImpl implements AlipayService {
     @Transactional(readOnly = false)
     public int updateByPrimaryKeySelective(Alipay record) throws Exception {
         return alipayMapper.updateByPrimaryKeySelective(record);
+    }
+
+    /**
+     * @Description 新增订单信息
+     * @Params: [record]
+     * @Author: dingli
+     * @Return: int
+     * @Date 2019/10/18
+     * @Time 10:56
+     **/
+    @Override
+    @Transactional(readOnly = false)
+    public int insert(Alipay record) {
+        return alipayMapper.insert(record);
     }
 
 
