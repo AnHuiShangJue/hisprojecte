@@ -118,3 +118,5 @@ hystrix:
       circuitBreaker:
         sleepWindowInMilliseconds: 10000     # 短路多久以后开始尝试是否恢复，默认5s
         forceClosed: false # 是否允许熔断器忽略错误,默认false, 不开启
+
+wxapplet.config.weixinpay.notifyurl: http://localhost:8080/api/WxPay/weixin/callback

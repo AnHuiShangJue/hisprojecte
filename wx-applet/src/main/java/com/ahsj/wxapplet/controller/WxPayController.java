@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 import java.util.Random;
 
@@ -52,6 +53,11 @@ public class WxPayController {
              sb.append(base.charAt(number));
              }
              return sb.toString();
+       }
+
+    @RequestMapping(value = "/weixin/callback")
+    public void wxNotify(HttpServletRequest request, HttpServletResponse response) throws Exception{
+
        }
 
 }
