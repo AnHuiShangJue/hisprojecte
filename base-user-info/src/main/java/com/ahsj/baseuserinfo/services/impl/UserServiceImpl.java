@@ -110,7 +110,7 @@ public class UserServiceImpl implements UserService {
         //预留检测模块，根据具体的业务进行检索传入的值进行安全规则校验
         if (!EmptyUtil.Companion.isNullOrEmpty(userInfo.getUserName())) {
             if (EmptyUtil.Companion.isNullOrEmpty(userInfo.getId())) {
-                UserInfo check = userInfoMapper.selectByUserName(userInfo.getUserName());
+                UserInfo check = userInfoMapper.selectByUserName(userInfo.getUserId());
                 //先判定库中是否存在该用户
                 //不存在就插入用户
                 if (EmptyUtil.Companion.isNullOrEmpty(check)) {
