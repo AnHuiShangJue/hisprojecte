@@ -146,7 +146,9 @@ public class UserInfoController extends BaseOAController{
         userInfo.setUserId(openid);
         userInfo.setPassword(openid);
         userInfo.setUserName(openid);
-        userService.saveOrUpdateUserInfo(userInfo);
+        if (!EmptyUtil.Companion.isNullOrEmpty(openid)){
+            userService.saveOrUpdateUserInfo(userInfo);
+        }
         System.out.println("openid:" + openid);
         System.out.println("sr:" + sr);
         return openid;
