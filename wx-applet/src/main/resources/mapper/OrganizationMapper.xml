@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.wxapplet.dao.OrganizationMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.wxapplet.entity.Organization">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="tree_id" property="treeId" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="depart_kbn" property="departKbn" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="credit_code" property="creditCode" jdbcType="VARCHAR"/>
+        <result column="responsible" property="responsible" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="tel_phone" property="telPhone" jdbcType="VARCHAR"/>
+        <result column="order_no" property="orderNo" jdbcType="INTEGER"/>
+        <result column="is_init_data" property="isInitData" jdbcType="VARCHAR"/>
+        <result column="zip_code" property="zipCode" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="company_id" property="companyId" jdbcType="VARCHAR"/>
+        <result column="del_flag" property="delFlag" jdbcType="VARCHAR"/>
+        <result column="create_user_id" property="createUserId" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="perms" property="perms" jdbcType="VARCHAR"/>
+        <result column="user_names" property="userNames" />
+        <result column="user_id" property="userId" />
+
+        <collection property="userInfoList" ofType="com.ahsj.wxapplet.entity.UserInfo">
+            <id column="id" property="id" jdbcType="BIGINT"/>
+            <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        </collection>
+
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+    id, tree_id, parent_id, type, depart_kbn, name, credit_code, responsible, address, 
+    tel_phone, order_no, is_init_data, zip_code, remark, company_id, del_flag, create_user_id, 
+    create_date, update_user_id, update_date, perms
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from organization
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from organization
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.ahsj.wxapplet.entity.Organization" useGeneratedKeys="true" keyProperty="id">
+    insert into organization (id, tree_id, parent_id, 
+      type, depart_kbn, name, 
+      credit_code, responsible, address, 
+      tel_phone, order_no, is_init_data, 
+      zip_code, remark, company_id, 
+      del_flag, create_user_id, create_date, 
+      update_user_id, update_date,perms)
+    values (#{id,jdbcType=BIGINT}, #{treeId,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{departKbn,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{creditCode,jdbcType=VARCHAR}, #{responsible,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{telPhone,jdbcType=VARCHAR}, #{orderNo,jdbcType=INTEGER}, #{isInitData,jdbcType=VARCHAR}, 
+      #{zipCode,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, 
+      #{delFlag,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateUserId,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{perms,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.ahsj.wxapplet.entity.Organization">
+        insert into organization
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="treeId != null">
+                tree_id,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="departKbn != null">
+                depart_kbn,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="creditCode != null">
+                credit_code,
+            </if>
+            <if test="responsible != null">
+                responsible,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="telPhone != null">
+                tel_phone,
+            </if>
+            <if test="orderNo != null">
+                order_no,
+            </if>
+            <if test="isInitData != null">
+                is_init_data,
+            </if>
+            <if test="zipCode != null">
+                zip_code,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="companyId != null">
+                company_id,
+            </if>
+            <if test="delFlag != null">
+                del_flag,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="perms != null">
+                perms,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="treeId != null">
+                #{treeId,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="departKbn != null">
+                #{departKbn,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="creditCode != null">
+                #{creditCode,jdbcType=VARCHAR},
+            </if>
+            <if test="responsible != null">
+                #{responsible,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="telPhone != null">
+                #{telPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=INTEGER},
+            </if>
+            <if test="isInitData != null">
+                #{isInitData,jdbcType=VARCHAR},
+            </if>
+            <if test="zipCode != null">
+                #{zipCode,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null">
+                #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="perms != null">
+                #{perms,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.wxapplet.entity.Organization">
+        update organization
+        <set>
+            <if test="treeId != null">
+                tree_id = #{treeId,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="departKbn != null">
+                depart_kbn = #{departKbn,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="creditCode != null">
+                credit_code = #{creditCode,jdbcType=VARCHAR},
+            </if>
+            <if test="responsible != null">
+                responsible = #{responsible,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="telPhone != null">
+                tel_phone = #{telPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNo != null">
+                order_no = #{orderNo,jdbcType=INTEGER},
+            </if>
+            <if test="isInitData != null">
+                is_init_data = #{isInitData,jdbcType=VARCHAR},
+            </if>
+            <if test="zipCode != null">
+                zip_code = #{zipCode,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null">
+                company_id = #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="perms != null">
+                perms = #{perms,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.wxapplet.entity.Organization">
+    update organization
+    set tree_id = #{treeId,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      depart_kbn = #{departKbn,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      credit_code = #{creditCode,jdbcType=VARCHAR},
+      responsible = #{responsible,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      tel_phone = #{telPhone,jdbcType=VARCHAR},
+      order_no = #{orderNo,jdbcType=INTEGER},
+      is_init_data = #{isInitData,jdbcType=VARCHAR},
+      zip_code = #{zipCode,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      perms = #{perms,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="lstAllSysOrganization" resultMap="BaseResultMap" parameterType="com.ahsj.wxapplet.entity.Organization">
+    select
+      *
+    from organization
+    where del_flag = 0
+    order by parent_id
+  </select>
+
+    <!-- 自定义 -->
+    <resultMap id="TreeResultMap" type="com.ahsj.wxapplet.entity.TreeEntity">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="pId" property="pId" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="isParent" property="isParent" jdbcType="BOOLEAN"/>
+        <result column="open" property="open" jdbcType="BOOLEAN"/>
+        <result column="chkDisabled" property="chkDisabled" jdbcType="BOOLEAN"/>
+
+    </resultMap>
+    <select id="selectTreeCode" parameterType="com.ahsj.wxapplet.entity.Organization" resultMap="TreeResultMap">
+        select
+        tree_id as id,
+        parent_id as pId,
+        name as name,
+        true as isParent,
+        false as open
+        from organization
+        where del_flag = 0 and parent_id = #{parentId,jdbcType=VARCHAR}
+        <if test="companyPrivi != null and companyPrivi != ''">
+            and ${companyPrivi}
+        </if>
+    </select>
+    <resultMap id="MenuTreeResultMap" type="com.ahsj.wxapplet.entity.MenuTreeEntity">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="pId" property="pId" jdbcType="VARCHAR"/>
+        <result column="isParent" property="isParent" jdbcType="BOOLEAN"/>
+        <result column="open" property="open" jdbcType="BOOLEAN"/>
+        <result column="chkDisabled" property="chkDisabled" jdbcType="BOOLEAN"/>
+
+    </resultMap>
+    <select id="selectMenuTreeCode" parameterType="com.ahsj.wxapplet.entity.Organization" resultMap="TreeResultMap">
+        select
+        menu_id as id,
+        org_id as pId,
+        true as isParent,
+        false as open
+        from org_menu
+        where org_id = #{orgId,jdbcType=VARCHAR}
+        <if test="companyPrivi != null and companyPrivi != ''">
+            and ${companyPrivi}
+        </if>
+    </select>
+    <select id="selectByOrgName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from organization
+        where name = #{name,jdbcType=VARCHAR}
+    </select>
+
+    <!--验证机构的唯一性-->
+    <select id="selectByOrgNameCompany" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from organization
+        where name = #{name,jdbcType=VARCHAR}
+        and tree_id like concat(#{treeId,jdbcType=VARCHAR},'%')
+    </select>
+    <delete id="deleteByTreeId" parameterType="java.lang.String">
+    delete from organization
+    where tree_id = #{treeId,jdbcType=VARCHAR}
+  </delete>
+    <select id="selectByTreeId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from organization
+        where tree_id = #{treeId,jdbcType=VARCHAR}
+    </select>
+    <!-- 取树同一层最大唯一标识 -->
+    <select id="selectMaxTreeId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+      max(tree_id) as tree_id
+    from organization
+    where parent_id = #{parentId,jdbcType=VARCHAR}
+  </select>
+    <select id="selectAllTreeCode" parameterType="com.ahsj.wxapplet.entity.Organization" resultMap="TreeResultMap">
+        select
+        tree_id as id,
+        parent_id as pId,
+        name as name,
+        true as isParent,
+        false as open
+        from organization
+        where del_flag = 0
+        <if test="companyPrivi != null and companyPrivi != ''">
+            and ${companyPrivi}
+        </if>
+    </select>
+    <select id="listOrgTree" parameterType="com.ahsj.wxapplet.entity.Organization" resultMap="TreeResultMap">
+        select
+        tree_id as id,
+        parent_id as pId,
+        name as name,
+        true as isParent,
+        true as open
+        from organization
+        <if test="type == 3">
+            where depart_kbn in (0,1)
+        </if>
+        <if test="type == 7">
+            where type = 1 and depart_kbn = 1
+        </if>
+        <if test="type != 3 and type != 7">
+            where 1=1
+            <if test="companyPrivi != null and companyPrivi != ''">
+                and ${companyPrivi}
+            </if>
+            <if test="companyId != null and companyId  != ''">
+                and tree_id like concat(#{companyId},'%')
+            </if>
+            and type = #{type}
+        </if>
+        <if test="projectCompany != null and projectCompany != '' and  projectCompany == 'true'">
+            and organization.tree_id NOT IN (SELECT tree_id from t_project_company_info)
+        </if>
+    </select>
+    <select id="listOrgUserTree" parameterType="com.ahsj.wxapplet.entity.Organization" resultMap="TreeResultMap">
+    select
+      tree_id as id,
+      parent_id as pId,
+      name as name,
+      true as isParent,
+      case when tree_id = 1 then true else false end as open,
+      true as chkDisabled
+    from organization
+    where del_flag = 0 and tree_id like concat(#{treeId},'%')
+    union all
+    select
+      user_info.id as id,
+      organization.tree_id as pId,
+      user_info.user_name as name,
+      false as isParent,
+      false as open,
+      false as chkDisabled
+    from user_info,
+         organization,
+         user_org_rel
+    where user_info.id = user_org_rel.user_id
+      and user_org_rel.dept_id = organization.tree_id
+      and organization.tree_id like concat(#{treeId},'%')
+  </select>
+
+    <select id="selectSysOrganization" resultMap="BaseResultMap" parameterType="com.ahsj.wxapplet.entity.Organization">
+        select
+        <include refid="Base_Column_List"/>
+        from organization
+        where depart_kbn = 1
+        and type = 2
+        <if test="treeId !=null and treeId !=''">
+            and tree_id = #{treeId,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <!-- 批量插入 -->
+  <!--  <selectKey resultType="long" keyProperty="id" order="AFTER">
+        SELECT
+        LAST_INSERT_ID()
+    </selectKey>-->
+    <insert id="importBatch" useGeneratedKeys="true" parameterType="java.util.List"  keyProperty="id">
+
+        insert into organization (id, tree_id, parent_id, type, depart_kbn, name,
+        credit_code, responsible, address,division_id,zip_code, tel_phone, order_no,is_init_data, remark,
+        company_id, del_flag, create_user_id, create_date, update_user_id, update_date,perms
+        )
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id,jdbcType=BIGINT}, #{item.treeId,jdbcType=VARCHAR}, #{item.parentId,jdbcType=VARCHAR},
+            #{item.type,jdbcType=VARCHAR}, #{item.departKbn,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR},
+            #{item.creditCode,jdbcType=VARCHAR}, #{item.responsible,jdbcType=VARCHAR}, #{item.address,jdbcType=VARCHAR},
+            #{item.divisionId,jdbcType=VARCHAR},#{item.zipCode,jdbcType=VARCHAR},
+            #{item.telPhone,jdbcType=VARCHAR}, #{item.orderNo,jdbcType=VARCHAR},#{item.isInitData,jdbcType=VARCHAR},
+            #{item.remark,jdbcType=VARCHAR},
+            #{item.companyId,jdbcType=VARCHAR},#{item.delFlag,jdbcType=VARCHAR},#{item.createUserId,jdbcType=VARCHAR},
+            #{item.createDate,jdbcType=TIMESTAMP},#{item.updateUserId,jdbcType=VARCHAR},#{item.updateDate,jdbcType=TIMESTAMP},#{item.perms,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+
+    <delete id="deleteInitData" parameterType="java.lang.String">
+    delete from organization
+    where is_init_data = 1
+  </delete>
+    <select id="lstAllSysOrganizationNotInit" resultMap="BaseResultMap"
+            parameterType="com.ahsj.wxapplet.entity.Organization">
+        select
+        <include refid="Base_Column_List"/>
+        from organization
+        where del_flag = 0
+        order by tree_id asc
+    </select>
+    <update id="updateBatch" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update organization
+            <set>
+                type=#{item.type},
+                credit_code=#{item.creditCode},
+                address=#{item.address},
+                division_id = #{item.divisionId},
+                zip_code = #{item.zipCode}
+            </set>
+            where tree_id = #{item.treeId}
+        </foreach>
+    </update>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from organization
+        WHERE tree_id != 1
+    </select>
+
+    <select id="selectOrganizationById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        /* select
+        u.user_name ,u.id, o.id , o.name from user_info u left join organization o on u.dept_id = o.id
+        where o.id = #{id}*/
+
+        select
+        <include refid="Base_Column_List"/>
+        from organization where id = #(id)
+    </select>
+
+    <select id="selectOrganizationByIds" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select
+    u.user_name , o.id , o.name from user_info u left join  organization o on  u.dept_id = o.id
+   where  o.id = #{id}
+  </select>
+
+
+    <select id="queryOrganization" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
+        select
+        u.user_name as  user_names , o.id , o.name ,u.user_id as user_id from organization o left join user_info u on u.dept_id = o.id
+        where o.id = #{parameter.deptId}
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+
+    <select id="queryOrganizationList" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select
+    u.user_name , o.id , o.name ,u.user_id  from  organization o left join user_info u  on  u.dept_id = o.id
+   where  o.id = #{parameter.id}
+  </select>
+
+
+    <!--根据父节点搜索-->
+    <select id="selectByParentId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+      organization.*
+    from organization
+    where parent_id = #{parentId,jdbcType=VARCHAR}
+  </select>
+
+    <!--根据父节点删除其下所有子节点-->
+    <delete id="deleteByParentId" parameterType="java.lang.String">
+    delete from organization
+    where parent_id = #{parentId,jdbcType=VARCHAR}
+  </delete>
+
+    <select id="queryTranslateInfoByDate" resultMap="BaseResultMap"
+            parameterType="com.ahsj.wxapplet.entity.Organization">
+        select
+        <include refid="Base_Column_List"/>
+        from organization as his
+        where   <![CDATA[ (DATE_FORMAT(his.update_date, '%Y-%m-%d') =  DATE_FORMAT( #{updateDate}, '%Y-%m-%d'))]]>
+    </select>
+    <select id="getOrganizationAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from organization
+    </select>
+    <select id="getOrganizationName" parameterType="com.ahsj.wxapplet.entity.Organization" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from organization o where o.name =  #{name,jdbcType=VARCHAR}
+    </select>
+</mapper>

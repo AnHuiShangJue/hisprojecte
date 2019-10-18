@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.wxapplet.dao.SysAttachmentInfoMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.wxapplet.entity.SysAttachmentInfo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="relate_id" property="relateId" jdbcType="BIGINT"/>
+        <result column="relate_page" property="relatePage" jdbcType="VARCHAR"/>
+        <result column="relate_key" property="relateKey" jdbcType="VARCHAR"/>
+        <result column="file_name" property="fileName" jdbcType="VARCHAR"/>
+        <result column="file_org_name" property="fileOrgName" jdbcType="VARCHAR"/>
+        <result column="location" property="location" jdbcType="VARCHAR"/>
+        <result column="file_size" property="fileSize" jdbcType="VARCHAR"/>
+        <result column="file_type" property="fileType" jdbcType="VARCHAR"/>
+        <result column="upload_user" property="uploadUser" jdbcType="BIGINT"/>
+        <result column="upload_date" property="uploadDate" jdbcType="TIMESTAMP"/>
+        <result column="file_type_key" property="fileTypeKey" jdbcType="VARCHAR"/>
+        <result column="file_type_value" property="fileTypeValue" jdbcType="VARCHAR"/>
+        <result column="order_no" property="orderNo" jdbcType="INTEGER"/>
+        <result column="upload_type" property="uploadType" jdbcType="VARCHAR"/>
+        <result column="company_id" property="companyId" jdbcType="VARCHAR"/>
+        <result column="del_flag" property="delFlag" jdbcType="VARCHAR"/>
+        <result column="create_user_id" property="createUserId" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="version_no" property="versionNo" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, relate_id, relate_page, relate_key, file_name, file_org_name, location, file_size, 
+    file_type, upload_user, upload_date, file_type_key, file_type_value, order_no, upload_type, 
+    company_id, del_flag, create_user_id, create_date, update_user_id, update_date, version_no
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_attachment_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_attachment_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.ahsj.wxapplet.entity.SysAttachmentInfo" useGeneratedKeys="true"
+            keyProperty="id">
+    insert into sys_attachment_info (id, relate_id, relate_page, 
+      relate_key, file_name, file_org_name, 
+      location, file_size, file_type, 
+      upload_user, upload_date, file_type_key, 
+      file_type_value, order_no, upload_type, 
+      company_id, del_flag, create_user_id, 
+      create_date, update_user_id, update_date, 
+      version_no)
+    values (#{id,jdbcType=BIGINT}, #{relateId,jdbcType=BIGINT}, #{relatePage,jdbcType=VARCHAR}, 
+      #{relateKey,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, #{fileOrgName,jdbcType=VARCHAR}, 
+      #{location,jdbcType=VARCHAR}, #{fileSize,jdbcType=VARCHAR}, #{fileType,jdbcType=VARCHAR}, 
+      #{uploadUser,jdbcType=BIGINT}, #{uploadDate,jdbcType=TIMESTAMP}, #{fileTypeKey,jdbcType=VARCHAR}, 
+      #{fileTypeValue,jdbcType=VARCHAR}, #{orderNo,jdbcType=INTEGER}, #{uploadType,jdbcType=VARCHAR}, 
+      #{companyId,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{versionNo,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.ahsj.wxapplet.entity.SysAttachmentInfo">
+        insert into sys_attachment_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="relateId != null">
+                relate_id,
+            </if>
+            <if test="relatePage != null">
+                relate_page,
+            </if>
+            <if test="relateKey != null">
+                relate_key,
+            </if>
+            <if test="fileName != null">
+                file_name,
+            </if>
+            <if test="fileOrgName != null">
+                file_org_name,
+            </if>
+            <if test="location != null">
+                location,
+            </if>
+            <if test="fileSize != null">
+                file_size,
+            </if>
+            <if test="fileType != null">
+                file_type,
+            </if>
+            <if test="uploadUser != null">
+                upload_user,
+            </if>
+            <if test="uploadDate != null">
+                upload_date,
+            </if>
+            <if test="fileTypeKey != null">
+                file_type_key,
+            </if>
+            <if test="fileTypeValue != null">
+                file_type_value,
+            </if>
+            <if test="orderNo != null">
+                order_no,
+            </if>
+            <if test="uploadType != null">
+                upload_type,
+            </if>
+            <if test="companyId != null">
+                company_id,
+            </if>
+            <if test="delFlag != null">
+                del_flag,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="versionNo != null">
+                version_no,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="relateId != null">
+                #{relateId,jdbcType=BIGINT},
+            </if>
+            <if test="relatePage != null">
+                #{relatePage,jdbcType=VARCHAR},
+            </if>
+            <if test="relateKey != null">
+                #{relateKey,jdbcType=VARCHAR},
+            </if>
+            <if test="fileName != null">
+                #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="fileOrgName != null">
+                #{fileOrgName,jdbcType=VARCHAR},
+            </if>
+            <if test="location != null">
+                #{location,jdbcType=VARCHAR},
+            </if>
+            <if test="fileSize != null">
+                #{fileSize,jdbcType=VARCHAR},
+            </if>
+            <if test="fileType != null">
+                #{fileType,jdbcType=VARCHAR},
+            </if>
+            <if test="uploadUser != null">
+                #{uploadUser,jdbcType=BIGINT},
+            </if>
+            <if test="uploadDate != null">
+                #{uploadDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fileTypeKey != null">
+                #{fileTypeKey,jdbcType=VARCHAR},
+            </if>
+            <if test="fileTypeValue != null">
+                #{fileTypeValue,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=INTEGER},
+            </if>
+            <if test="uploadType != null">
+                #{uploadType,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null">
+                #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="versionNo != null">
+                #{versionNo,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.wxapplet.entity.SysAttachmentInfo">
+        update sys_attachment_info
+        <set>
+            <if test="relateId != null">
+                relate_id = #{relateId,jdbcType=BIGINT},
+            </if>
+            <if test="relatePage != null">
+                relate_page = #{relatePage,jdbcType=VARCHAR},
+            </if>
+            <if test="relateKey != null">
+                relate_key = #{relateKey,jdbcType=VARCHAR},
+            </if>
+            <if test="fileName != null">
+                file_name = #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="fileOrgName != null">
+                file_org_name = #{fileOrgName,jdbcType=VARCHAR},
+            </if>
+            <if test="location != null">
+                location = #{location,jdbcType=VARCHAR},
+            </if>
+            <if test="fileSize != null">
+                file_size = #{fileSize,jdbcType=VARCHAR},
+            </if>
+            <if test="fileType != null">
+                file_type = #{fileType,jdbcType=VARCHAR},
+            </if>
+            <if test="uploadUser != null">
+                upload_user = #{uploadUser,jdbcType=BIGINT},
+            </if>
+            <if test="uploadDate != null">
+                upload_date = #{uploadDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fileTypeKey != null">
+                file_type_key = #{fileTypeKey,jdbcType=VARCHAR},
+            </if>
+            <if test="fileTypeValue != null">
+                file_type_value = #{fileTypeValue,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNo != null">
+                order_no = #{orderNo,jdbcType=INTEGER},
+            </if>
+            <if test="uploadType != null">
+                upload_type = #{uploadType,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null">
+                company_id = #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="versionNo != null">
+                version_no = #{versionNo,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.wxapplet.entity.SysAttachmentInfo">
+    update sys_attachment_info
+    set relate_id = #{relateId,jdbcType=BIGINT},
+      relate_page = #{relatePage,jdbcType=VARCHAR},
+      relate_key = #{relateKey,jdbcType=VARCHAR},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      file_org_name = #{fileOrgName,jdbcType=VARCHAR},
+      location = #{location,jdbcType=VARCHAR},
+      file_size = #{fileSize,jdbcType=VARCHAR},
+      file_type = #{fileType,jdbcType=VARCHAR},
+      upload_user = #{uploadUser,jdbcType=BIGINT},
+      upload_date = #{uploadDate,jdbcType=TIMESTAMP},
+      file_type_key = #{fileTypeKey,jdbcType=VARCHAR},
+      file_type_value = #{fileTypeValue,jdbcType=VARCHAR},
+      order_no = #{orderNo,jdbcType=INTEGER},
+      upload_type = #{uploadType,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      version_no = #{versionNo,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <!--批量新增-->
+    <insert id="insertList" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_attachment_info (id, relate_id, relate_page,
+        relate_key, file_name, file_org_name,
+        location, file_size, file_type,
+        upload_user, upload_date, file_type_key,
+        file_type_value, order_no, upload_type,
+        company_id, del_flag, create_user_id,
+        create_date, update_user_id, update_date,
+        version_no)
+        values
+        <foreach collection="list" separator="," item="item" index="index">
+
+            (#{item.id,jdbcType=BIGINT}, #{item.relateId,jdbcType=BIGINT}, #{item.relatePage,jdbcType=VARCHAR},
+            #{item.relateKey,jdbcType=VARCHAR}, #{item.fileName,jdbcType=VARCHAR}, #{item.fileOrgName,jdbcType=VARCHAR},
+            #{item.location,jdbcType=VARCHAR}, #{item.fileSize,jdbcType=VARCHAR}, #{item.fileType,jdbcType=VARCHAR},
+            #{item.uploadUser,jdbcType=BIGINT}, #{item.uploadDate,jdbcType=TIMESTAMP},
+            #{item.fileTypeKey,jdbcType=VARCHAR},
+            #{item.fileTypeValue,jdbcType=VARCHAR}, #{item.orderNo,jdbcType=INTEGER},
+            #{item.uploadType,jdbcType=VARCHAR},
+            #{item.companyId,jdbcType=VARCHAR}, #{item.delFlag,jdbcType=VARCHAR}, #{item.createUserId,jdbcType=VARCHAR},
+            #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=VARCHAR},
+            #{item.updateDate,jdbcType=TIMESTAMP},
+            #{item.versionNo,jdbcType=INTEGER})
+
+        </foreach>
+
+    </insert>
+
+    <select id="querySysAttachmentInfo" parameterType="com.ahsj.wxapplet.entity.SysAttachmentInfo"
+            resultMap="BaseResultMap">
+
+
+        SELECT * from (SELECT
+        a.id,
+        a.file_name,
+        a.relate_id,
+        a.file_org_name,a.location,a.file_size,a.file_type,a.relate_page,a.file_type_key,a.create_date,a.company_id,a.upload_type,a.upload_user,
+        substring_index(
+        substring_index( a.relate_key,
+        ',',
+        b.help_topic_id + 1
+        ),
+        ',' ,- 1
+        ) AS relate_key
+        FROM
+        sys_attachment_info a
+        JOIN mysql.help_topic b ON b.help_topic_id &lt; (
+        length(a.relate_key) - length(
+        REPLACE (a.relate_key, ',', '')
+        ) + 1
+        )
+        ) as sys
+        <trim prefix="where" prefixOverrides="and" suffix="" suffixOverrides="">
+            <if test="relateId != null">
+                and relate_id = #{relateId,jdbcType=BIGINT}
+            </if>
+            <if test="relatePage != null">
+                and relate_page = #{relatePage,jdbcType=VARCHAR}
+            </if>
+            <if test="relateKey != null">
+                and relate_key = #{relateKey,jdbcType=VARCHAR}
+            </if>
+            <if test="fileName != null">
+                and file_name = #{fileName,jdbcType=VARCHAR}
+            </if>
+            <if test="fileOrgName != null">
+                and file_org_name = #{fileOrgName,jdbcType=VARCHAR}
+            </if>
+            <if test="location != null">
+                and location = #{location,jdbcType=VARCHAR}
+            </if>
+            <if test="fileSize != null">
+                and file_size = #{fileSize,jdbcType=VARCHAR}
+            </if>
+            <if test="fileType != null">
+                and file_type = #{fileType,jdbcType=VARCHAR}
+            </if>
+            <if test="uploadUser != null">
+                and upload_user = #{uploadUser,jdbcType=BIGINT}
+            </if>
+            <if test="uploadDate != null">
+                and upload_date = #{uploadDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="fileTypeKey != null">
+                and file_type_key = #{fileTypeKey,jdbcType=VARCHAR}
+            </if>
+            <if test="fileTypeValue != null">
+                and file_type_value = #{fileTypeValue,jdbcType=VARCHAR}
+            </if>
+            <if test="orderNo != null">
+                and order_no = #{orderNo,jdbcType=INTEGER}
+            </if>
+            <if test="uploadType != null">
+                and upload_type = #{uploadType,jdbcType=VARCHAR}
+            </if>
+            <if test="companyId != null">
+                and company_id = #{companyId,jdbcType=VARCHAR}
+            </if>
+            <if test="delFlag != null">
+                and del_flag = #{delFlag,jdbcType=VARCHAR}
+            </if>
+            <if test="createUserId != null">
+                and create_user_id = #{createUserId,jdbcType=VARCHAR}
+            </if>
+            <if test="createDate != null">
+                and create_date = #{createDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateUserId != null">
+                and update_user_id = #{updateUserId,jdbcType=VARCHAR}
+            </if>
+            <if test="updateDate != null">
+                and update_date = #{updateDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="versionNo != null">
+                and version_no = #{versionNo,jdbcType=INTEGER}
+            </if>
+        </trim>
+    </select>
+
+</mapper>

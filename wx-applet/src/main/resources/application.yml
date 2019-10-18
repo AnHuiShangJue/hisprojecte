@@ -43,7 +43,7 @@ spring:
   application:
     name: wx-applet
   datasource:
-    url: jdbc:log4jdbc:mysql://192.168.0.105:3306/his-translate?useUnicode=true&characterEncoding=utf8&useSSL=true
+    url: jdbc:log4jdbc:mysql://192.168.0.105:3306/wx-userinfo?useUnicode=true&characterEncoding=utf8&useSSL=true
     username: ahsj
     password: shangjue0603
     #    url: jdbc:log4jdbc:mysql://192.168.0.107:3306/his-translate?useUnicode=true&characterEncoding=utf8&useSSL=true

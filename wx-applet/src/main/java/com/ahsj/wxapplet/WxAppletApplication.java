@@ -11,18 +11,17 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
 @SpringCloudApplication
 @EnableDiscoveryClient
 @MapperScan("com.ahsj.wxapplet.dao")
-@SpringBootApplication(scanBasePackages = {"com.ahsj"})
+@SpringBootApplication(scanBasePackages = {"com.ahsj.wxapplet"})
 @EnableTransactionManagement //开启事务
 @EnableCaching //开启缓存
 //开启Feign客户端配置
-@EnableFeignClients(value = "com.ahsj")
+@EnableFeignClients(value = "com.ahsj.wxapplet")
 //开启任务处理
 @EnableScheduling
 @RefreshScope
@@ -32,10 +31,4 @@ public class WxAppletApplication {
     public static void main(String[] args) {
         SpringApplication.run(WxAppletApplication.class, args);
     }
-
-    @PostMapping("/hi")
-    public String getHi(){
-        return "沐旭";
-    }
-
 }

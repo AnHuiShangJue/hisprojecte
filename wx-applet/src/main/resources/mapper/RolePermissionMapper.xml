@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.wxapplet.dao.RolePermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.wxapplet.entity.RolePermission" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="role_id" property="roleId" jdbcType="BIGINT" />
+    <result column="menu_tree_id" property="menuTreeId" jdbcType="VARCHAR" />
+    <result column="operate_id" property="operateId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, role_id, menu_tree_id, operate_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from role_permission
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from role_permission
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.wxapplet.entity.RolePermission" >
+    insert into role_permission (id, role_id, menu_tree_id, 
+      operate_id)
+    values (#{id,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{menuTreeId,jdbcType=VARCHAR}, 
+      #{operateId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.wxapplet.entity.RolePermission" >
+    insert into role_permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="menuTreeId != null" >
+        menu_tree_id,
+      </if>
+      <if test="operateId != null" >
+        operate_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="menuTreeId != null" >
+        #{menuTreeId,jdbcType=VARCHAR},
+      </if>
+      <if test="operateId != null" >
+        #{operateId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.wxapplet.entity.RolePermission" >
+    update role_permission
+    <set >
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="menuTreeId != null" >
+        menu_tree_id = #{menuTreeId,jdbcType=VARCHAR},
+      </if>
+      <if test="operateId != null" >
+        operate_id = #{operateId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.wxapplet.entity.RolePermission" >
+    update role_permission
+    set role_id = #{roleId,jdbcType=BIGINT},
+      menu_tree_id = #{menuTreeId,jdbcType=VARCHAR},
+      operate_id = #{operateId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--自定义sql-->
+  <!-- 批量插入 -->
+  <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">
+    <selectKey resultType="long" keyProperty="id" order="AFTER">
+      SELECT
+      LAST_INSERT_ID()
+    </selectKey>
+
+    insert into role_permission (id, role_id, menu_tree_id, operate_id)
+    values
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.id,jdbcType=INTEGER}, #{item.roleId,jdbcType=INTEGER}, #{item.menuTreeId,jdbcType=VARCHAR},
+      #{item.operateId,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <!--根据roleId删除权限-->
+  <delete id="deletByRoleId" parameterType="java.lang.Long" >
+    delete
+    from role_permission
+    where role_id = #{roleId,jdbcType=BIGINT}
+  </delete>
+  <select id="selectPermission" resultMap="BaseResultMap" parameterType="com.ahsj.wxapplet.entity.RolePermission" >
+    select
+      role_id, menu_tree_id, operate_id
+    from role_permission
+    where role_id = #{roleId,jdbcType=BIGINT}
+  </select>
+</mapper>
