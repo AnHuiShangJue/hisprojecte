@@ -18,7 +18,7 @@ public interface AlipaymentOrderService {
      * @Date 2019/10/17
      * @Time 11:01
      **/
-    int insert(AlipaymentOrder record);
+    int insert(AlipaymentOrder record) throws Exception;
 
     /**
      * @Description 修改支付宝信息
@@ -28,7 +28,7 @@ public interface AlipaymentOrderService {
      * @Date 2019/10/17
      * @Time 13:56
      **/
-    int updateByPrimaryKeySelective(AlipaymentOrder record);
+    int updateByPrimaryKeySelective(AlipaymentOrder record) throws Exception;
 
     /**
      * @Description 添加支付宝信息
@@ -38,5 +38,17 @@ public interface AlipaymentOrderService {
      * @Date 2019/10/17
      * @Time 14:04
      **/
-   boolean saveAlipaymentOrder(String result) throws Exception;
+    boolean saveAlipaymentOrder(String result) throws Exception;
+
+    /**
+     * @Description 查询支付宝订单
+     * @Params: [id]
+     * @Author: dingli
+     * @Return: com.ahsj.payalipay.entity.AlipaymentOrder
+     * @Date 2019/10/18
+     * @Time 11:22
+     **/
+    AlipaymentOrder selectAlipaymentOrder(AlipaymentOrder record) throws Exception;
+
+
 }

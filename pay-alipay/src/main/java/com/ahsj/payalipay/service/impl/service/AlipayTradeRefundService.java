@@ -22,6 +22,17 @@ public interface AlipayTradeRefundService {
      * @Date 2019/10/17
      * @Time 15:56
      **/
-    void addAlipayTradeRefund(String  result,String requestNo) throws Exception;
+    void addAlipayTradeRefund(String result, String requestNo) throws Exception;
+
+
+    /**
+     * @Description 根据交易流水号或者支付宝订单号和退款申请号查询退款申请
+     * @Params: [record]
+     * @Author: dingli
+     * @Return: com.ahsj.payalipay.entity.AlipayTradeRefund
+     * @Date 2019/10/18
+     * @Time 11:36
+     **/
+    AlipayTradeRefund selectAlipayTradeRefund(AlipayTradeRefund record) throws Exception;
 
 }

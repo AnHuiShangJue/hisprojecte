@@ -45,4 +45,18 @@ public class AlipayTradeRefundServiceImpl implements AlipayTradeRefundService {
         alipayTradeRefund.setRequestNo(requestNo);
         alipayTradeRefundMapper.insert(alipayTradeRefund);
     }
+
+    /**
+     * @Description 根据交易流水号或者支付宝订单号和退款申请号查询退款申请
+     * @Params: [record]
+     * @Author: dingli
+     * @Return: com.ahsj.payalipay.entity.AlipayTradeRefund
+     * @Date 2019/10/18
+     * @Time 11:36
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public AlipayTradeRefund selectAlipayTradeRefund(AlipayTradeRefund record) throws Exception {
+        return alipayTradeRefundMapper.selectAlipayTradeRefund(record);
+    }
 }

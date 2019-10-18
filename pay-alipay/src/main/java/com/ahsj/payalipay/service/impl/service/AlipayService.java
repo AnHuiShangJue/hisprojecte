@@ -22,7 +22,7 @@ public interface AlipayService {
      * @Date 2019/10/16
      * @Time 13:48
      **/
-    Map<String, String> aliCallback(Map<String, String> params) throws Exception;
+    Message aliCallback(Map<String, String> params) throws Exception;
 
     /**
      * @Description 根据订单号查询
@@ -43,4 +43,14 @@ public interface AlipayService {
      * @Time 10:12
      **/
     int updateByPrimaryKeySelective(Alipay record) throws Exception;
+
+    /**
+     * @Description 新增订单信息
+     * @Params: [record]
+     * @Author: dingli
+     * @Return: int
+     * @Date 2019/10/18
+     * @Time 10:55
+     **/
+    int insert(Alipay record);
 }
