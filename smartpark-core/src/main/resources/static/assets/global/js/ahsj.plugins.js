@@ -222,3 +222,82 @@ function handleTextArea(){
     }
 }
 
+
+//select框多级联动插件
+$.fn.linkselect = function (options) {
+    var select = this;//获取当前select对象
+    var url = options.url;//获取数据的链接
+    var value = options.value;//初始化需要选中的数据
+    var now = options.now;//当前select的级别
+    var param = options.param;//传向后台的参数
+    var level = options.level;//一共有多少级select
+    var preid = options.preid;//当前select的id的前缀
+    $.get(CTX + url[now]+"?token="+TOKEN,{param:param},function(result){
+        select.find("option").remove();
+        select.append("<option value=''>请选择</option>");
+        var list = JSON.parse(result);
+        for(key in list){
+            console.log(key+":"+list[key]);
+            if(key == value[now]){
+                select.append("<option value='"+key+"' selected>"+list[key]+"</option>");
+            }else{
+                select.append("<option value='"+key+"'>"+list[key]+"</option>");
+            }
+        }
+        select.formSelect();
+        // var list = eval("("+result+")");
+        /*  for (var i = 0; i <list.length ; i++) {
+              key =list[i].id;
+              if(key == value[now]){
+                  select.append("<option value='"+key+"' selected>"+list[i].name+"</option>");
+              }else{
+                  select.append("<option value='"+key+"'>"+list[i].name+"</option>");
+              }
+          }*/
+        //onchange事件，改变后面select的值
+        select.change(function(){
+            var thisId = select.attr("id").split("_")
+            var param = select.val();
+            var nextId = parseInt(thisId[1])+1;
+            if(nextId <= level){
+                var next = $("#"+preid+"_"+nextId);
+                next.find("option").remove();
+                $("#"+preid+"_"+nextId).linkselect({
+                    url:url,
+                    value:value,
+                    level:level,
+                    now:nextId,
+                    param:param,
+                    preid:preid
+                });
+                next.change();
+            }
+        });
+        //设置后面select的值
+        select.change();
+    });
+};
+//使用范例
+//前端
+/*$("#select_1").linkselect({
+    url:{"1":"/api/region/getDataByParentId.ahsj","2":"/api/region/getDataByParentId.ahsj","3":"/api/region/getDataByParentId.ahsj"},//每一级从后端获取数据的地址
+    value:{"1":"1"},//每一级select的默认value,此时表示第一级选中北京,具体代表的地址看数据库，北京在本数据库中为1
+    level:3,//表示一共拥有几级联动，三级联动就写3，四级就写4，一次类推
+    now:1,//固定值，表示当前为第几级
+    param:0,//参数值，传向后端的参数，0表示获取所有的省份,因为所有省份的父ID为0
+    preid:"select"//所有select的id前缀都应该是一样的，后面加上_和级别数
+})  ;*/
+//后端
+/*@RequestMapping("/getDataByParentId.ahsj")
+@ResponseBody
+public String getDataByParentId(Long param) throws Exception{
+    Region region = new Region();
+    region.setParentId(param);
+    List<Region> list = regionService.queryRegion(region);
+    Map<String, String> map = new HashMap<>();
+    list.forEach(item -> {
+        map.put(item.getId() + "", item.getName());
+});
+    return JSON.toJSONString(map);
+}*/
+
