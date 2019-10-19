@@ -9,12 +9,11 @@ import core.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Copyright (C), 2019-2019, 安徽商角有限公司
@@ -66,6 +65,20 @@ public class RegionController extends BaseController {
         List<Region> list = regionService.queryRegion(region);
         String toJSONString = JSON.toJSONString(list);
         return new ResponseEntity<>((toJSONString), HttpStatus.OK);
+    }
+
+
+    @RequestMapping("/getDataByParentId.ahsj")
+    @ResponseBody
+    public String getDataByParentId(Long param) throws Exception{
+        Region region = new Region();
+        region.setParentId(param);
+        List<Region> list = regionService.queryRegion(region);
+        Map<String, String> map = new HashMap<>();
+        list.forEach(item -> {
+            map.put(item.getId() + "", item.getName());
+        });
+        return JSON.toJSONString(map);
     }
 
 }
