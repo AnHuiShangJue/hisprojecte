@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahsj.wxapplet.dao.OrgMenuMapper">
+  <resultMap id="BaseResultMap" type="com.ahsj.wxapplet.entity.OrgMenu">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="org_id" jdbcType="BIGINT" property="orgId" />
+    <result column="menu_id" jdbcType="BIGINT" property="menuId" />
+    <result column="permssion_perms_id" jdbcType="VARCHAR" property="permssionPermsId" />
+    <result column="create_id" jdbcType="BIGINT" property="createId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_id" jdbcType="BIGINT" property="updateId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, org_id, menu_id, permssion_perms_id, create_id, create_time, update_id, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from org_menu
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from org_menu
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.wxapplet.entity.OrgMenu">
+    insert into org_menu (id, org_id, menu_id, 
+      permssion_perms_id, create_id, create_time, 
+      update_id, update_time)
+    values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{menuId,jdbcType=BIGINT}, 
+      #{permssionPermsId,jdbcType=VARCHAR}, #{createId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateId,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.wxapplet.entity.OrgMenu">
+    insert into org_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="menuId != null">
+        menu_id,
+      </if>
+      <if test="permssionPermsId != null">
+        permssion_perms_id,
+      </if>
+      <if test="createId != null">
+        create_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateId != null">
+        update_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="menuId != null">
+        #{menuId,jdbcType=BIGINT},
+      </if>
+      <if test="permssionPermsId != null">
+        #{permssionPermsId,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null">
+        #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null">
+        #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.wxapplet.entity.OrgMenu">
+    update org_menu
+    <set>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="menuId != null">
+        menu_id = #{menuId,jdbcType=BIGINT},
+      </if>
+      <if test="permssionPermsId != null">
+        permssion_perms_id = #{permssionPermsId,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null">
+        create_id = #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null">
+        update_id = #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.wxapplet.entity.OrgMenu">
+    update org_menu
+    set org_id = #{orgId,jdbcType=BIGINT},
+      menu_id = #{menuId,jdbcType=BIGINT},
+      permssion_perms_id = #{permssionPermsId,jdbcType=VARCHAR},
+      create_id = #{createId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_id = #{updateId,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!--自定义-->
+  <!-- 批量插入 -->
+  <insert id="importBatch" useGeneratedKeys="true" parameterType="java.util.List">
+    <selectKey resultType="long" keyProperty="id" order="AFTER">
+      SELECT
+      LAST_INSERT_ID()
+    </selectKey>
+
+    insert into org_menu ( org_id, menu_id,
+    permssion_perms_id, create_id, create_time,
+    update_id, update_time
+    )
+    values
+    <foreach collection="list" item="item" index="index" separator="," >
+      (org_id = #{item.orgId,jdbcType=BIGINT},
+      menu_id = #{item.menuId,jdbcType=BIGINT},
+      permssion_perms_id = #{item.permssionPermsId,jdbcType=VARCHAR}
+--       create_id = #{item.createId,jdbcType=BIGINT},
+--       create_time = #{item.createTime,jdbcType=TIMESTAMP},
+--       update_id = #{item.updateId,jdbcType=BIGINT},
+--       update_time = #{item.updateTime,jdbcType=TIMESTAMP}
+      )
+    </foreach>
+  </insert>
+
+  <delete id="deleteByMenuId" parameterType="com.ahsj.wxapplet.entity.RoleOrganization" >
+    delete from org_menu
+    where menu_id in
+    <foreach collection="ids" item="id" index="index"  open="(" close=")" separator="," >
+      ${id}
+    </foreach>
+  </delete>
+
+  <!-- 自定义 -->
+  <resultMap id="TreeResultMap" type="com.ahsj.wxapplet.entity.TreeEntity">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="pId" jdbcType="VARCHAR" property="pId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="isParent" jdbcType="BOOLEAN" property="isParent" />
+    <result column="open" jdbcType="BOOLEAN" property="open" />
+    <result column="checked" jdbcType="BOOLEAN" property="checked" />
+  </resultMap>
+
+  <select id="listMenuTree" parameterType="com.ahsj.wxapplet.entity.Role" resultMap="TreeResultMap">
+    select
+    id,
+    pId,
+    name,
+    isParent,
+    open,
+    checked
+    from
+    (
+    select DISTINCT
+    tree_id as id,
+    parent_id as pId,
+    menu_name as name,
+    case when has_sub = 0 then true else false end as isParent,
+    false as open,
+    case when org_menu.id is null then false else true end as checked,
+    menu.order_num
+    from menu
+    left join org_menu on menu.id = org_menu.menu_id
+    <if test="companyId != 1">
+      ,
+      user_role,role,role_permission role_privilege
+      where user_role.role_id = role.id
+      and role_privilege.role_id = role.id
+      and role_privilege.menu_tree_id = menu.tree_id
+    </if>
+    union all
+    select
+    operate.code as id,
+    menu.tree_id as pId,
+    operate.name as name,
+    false as isParent,
+    false as open,
+    case when menu_operate.id is null then false else true end as checked,
+    operate.order_num
+    from menu_operate LEFT JOIN operate on menu_operate.operate_id = operate.id
+    LEFT JOIN menu on menu_operate.menu_id = menu.id
+    ) a
+    order by a.pId, a.order_num asc
+  </select>
+<delete id="deleteAll" >
+  delete from org_menu
+</delete>
+</mapper>

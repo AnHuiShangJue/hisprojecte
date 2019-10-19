@@ -31,6 +31,12 @@ public class SiteDTO extends Site {
 
     private String description;
 
+    private Long provinceId;
+
+    private Long cityId;
+
+    private Long areaId;
+
 
     @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_enable", typeName = "enableName")
     private Short isEnable;
@@ -49,6 +55,30 @@ public class SiteDTO extends Site {
     private String verifyName;
 
     private Long enterpriseId;
+
+    public Long getProvinceId() {
+        return provinceId;
+    }
+
+    public void setProvinceId(Long provinceId) {
+        this.provinceId = provinceId;
+    }
+
+    public Long getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(Long cityId) {
+        this.cityId = cityId;
+    }
+
+    public Long getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(Long areaId) {
+        this.areaId = areaId;
+    }
 
     @Override
     public Long getId() {

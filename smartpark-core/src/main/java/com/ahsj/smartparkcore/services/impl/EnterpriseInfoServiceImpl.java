@@ -94,6 +94,16 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
     @Override
     @Transactional(readOnly = false)
     public Message addEnterpriseInfo(EnterpriseInfoDTO enterpriseInfoDTO, MultipartFile[] file, String relateKet, String relatePage) throws Exception {
+        if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getProvinceId()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getCityId())
+                || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getAreaId()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getAddress())){
+            return MessageUtil.createMessage(false, "企业信息新增失败 ！ 公司地址不能为空！！");
+        }
+        if(EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getIdCard())){
+            return MessageUtil.createMessage(false, "企业信息新增失败 ！ 身份证号不能为空！！");
+        }
+        if(EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getOperatingPeriodStart()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getOperatingPeriodEnd())){
+            return MessageUtil.createMessage(false, "企业信息新增失败 ！ 注册时间或者有效期时间不能为空！！");
+        }
         EnterpriseInfo enterpriseInfo = new EnterpriseInfo();
         BeanUtils.copyProperties(enterpriseInfoDTO, enterpriseInfo);
         Region region1 = regionService.selectById(enterpriseInfoDTO.getProvinceId());
@@ -132,21 +142,24 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
     @Override
     @Transactional(readOnly = false)
     public Message updateEnterpriseInfo(EnterpriseInfoDTO enterpriseInfoDTO, MultipartFile[] file, String relateKet, String relatePage) throws Exception {
+        if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getProvinceId()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getCityId())
+                || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getAreaId()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getAddress())){
+            return MessageUtil.createMessage(false, "企业信息新增失败 ！ 公司地址不能为空！！");
+        }
+        if(EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getIdCard())){
+            return MessageUtil.createMessage(false, "企业信息新增失败 ！ 身份证号不能为空！！");
+        }
+        if(EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getOperatingPeriodStart()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getOperatingPeriodEnd())){
+            return MessageUtil.createMessage(false, "企业信息新增失败 ！ 注册时间或者有效期时间不能为空！！");
+        }
         EnterpriseInfo enterpriseInfo = new EnterpriseInfo();
         LegalPerson legalPerson = new LegalPerson();
         BeanUtils.copyProperties(enterpriseInfoDTO, enterpriseInfo);
         BeanUtils.copyProperties(enterpriseInfoDTO, legalPerson);
-        System.out.println("-------->"+enterpriseInfoDTO.getProvinceId());
-        System.out.println("-------->"+enterpriseInfoDTO.getCityId());
-        System.out.println("-------->"+enterpriseInfoDTO.getAreaId());
         Region region1 = regionService.selectById(enterpriseInfoDTO.getProvinceId());
         Region region2 = regionService.selectById(enterpriseInfoDTO.getCityId());
         Region region3 = regionService.selectById(enterpriseInfoDTO.getAreaId());
-        System.out.println("-------->"+region1.getName());
-        System.out.println("-------->"+region2.getName());
-        System.out.println("-------->"+region3.getName());
         enterpriseInfo.setAddress(region1.getName() + region2.getName() + region3.getName() + enterpriseInfoDTO.getAddress());
-        System.out.println("-------->"+enterpriseInfo.getAddress());
         legalPerson.setId(null);
         if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getName()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getLegalName()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo.getUnifiedSocialCreditCode())) {
             return MessageUtil.createMessage(false, "企业信息修改失败 ！！！");
@@ -259,12 +272,9 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
             Region region = regionService.queryRegionName(substring);
             Region region1 = regionService.queryRegionName(substring1);
             Region region2 = regionService.queryRegionName(substring2);
-            enterpriseInfoVO.setProvinceId(region.getParentId());
-            enterpriseInfoVO.setCityId(region1.getParentId());
-            enterpriseInfoVO.setAreaId(region2.getParentId());
-            enterpriseInfoVO.setProvinceName(substring);
-            enterpriseInfoVO.setCityName(substring1);
-            enterpriseInfoVO.setAreaName(substring2);
+            enterpriseInfoVO.setProvinceId(region.getId());
+            enterpriseInfoVO.setCityId(region1.getId());
+            enterpriseInfoVO.setAreaId(region2.getId());
             enterpriseInfoVO.setAddress(addressName);
             return enterpriseInfoVO;
         }

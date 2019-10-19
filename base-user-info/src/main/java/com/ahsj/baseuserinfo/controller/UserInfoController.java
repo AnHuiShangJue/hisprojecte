@@ -132,81 +132,26 @@ public class UserInfoController extends BaseOAController{
         return userLoginId;
     }
 
-    @RequestMapping("/jscode2session.ahsj") // 登录
+    @RequestMapping("/info/inner/jscode2session.ahsj") // 登录
     @ResponseBody
     public String jscode2session(HttpServletRequest req
                                   ,@RequestParam(value="js_code", required=false) String js_code
                                   , @RequestParam(value="appId", required=false) String appId
                                   ,@RequestParam(value="secret", required=false) String secret) throws Exception {
-        //String sr = "https://api.weixin.qq.com/sns/jscode2session?appid=wx9eec243b070bf766&secret=8963ca9ce2dd28783d7373b920324474&js_code=043KnI5X0iQfZV1piL4X02CJ5X0KnI59&grant_type=authorization_code";
-/*        Map<String,Object> map = new HashMap<String,Object>();
-        if (js_code == null || js_code.length() == 0) {
-            map.put("status", 0);
-            map.put("msg", "js_code 不能为空");
-            System.out.println("map1:" + map);
-            return map;
-        }
-/*        String params = "appid="+appId+"&secret="+secret+"&js_code="+js_code+"+&grant_type=authorization_code";
-        String sr = HttpRequest.sendGet("https://api.weixin.qq.com/sns/jscode2session", params);*/
         String params = "appid="+appId+"&secret="+secret+"&js_code="+js_code+"&grant_type=authorization_code";
         String sr = HttpRequest.sendGet("https://api.weixin.qq.com/sns/jscode2session", params);
         JSONObject json = JSONObject.parseObject(sr);
         String openid = (String) json.get("openid");
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUserId(openid);
+        userInfo.setPassword(openid);
+        userInfo.setUserName(openid);
+        if (!EmptyUtil.Companion.isNullOrEmpty(openid)){
+            userService.saveOrUpdateUserInfo(userInfo);
+        }
         System.out.println("openid:" + openid);
         System.out.println("sr:" + sr);
-        return sr;
-/*        try {
-            String result = AesUtil.decrypt(encryptedData, session_key, iv, "UTF-8");
-            if (null != result && result.length() > 0) {
-                map.put("status", 1);
-                map.put("msg", "解密成功");
-
-                JSONObject userInfoJSON = JSONObject.parseObject(result);
-                Map<String,Object> userInfo = new HashMap<String,Object>();
-                userInfo.put("openId", userInfoJSON.get("openId"));
-                userInfo.put("nickName", userInfoJSON.get("nickName"));
-                userInfo.put("gender", userInfoJSON.get("gender"));
-                userInfo.put("city", userInfoJSON.get("city"));
-                userInfo.put("province", userInfoJSON.get("province"));
-                userInfo.put("country", userInfoJSON.get("country"));
-                userInfo.put("avatarUrl", userInfoJSON.get("avatarUrl"));
-                userInfo.put("unionId", userInfoJSON.get("unionId"));
-                map.put("userInfo", userInfo);
-                System.out.println("map2:" + map);
-                return map;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        map.put("status", 0);
-        map.put("msg", "解密失败");
-        System.out.println("map3:" + map);
-        return map;*/
-
-/*
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url(url).build();
-        try (Response response = client.newCall(request).execute()) {
-            String sr = response.body().string();
-            JSONObject json = JSONObject.parseObject(sr);
-            String session_key = json.get("session_key").toString();
-            String openid = (String) json.get("openid");
-                return  openid;
-        }*/
-
-
-//方法三
-/*        url=url.replaceAll("JSCODE", js_code);
-
- //执行get请求.
-        CloseableHttpResponse response = HttpClients.createDefault().execute(new HttpGet(url));
- //获取响应实体
-       String html = EntityUtils.toString(response.getEntity());
-        return html;*/
-
-
-
+        return openid;
     }
-
 }
 

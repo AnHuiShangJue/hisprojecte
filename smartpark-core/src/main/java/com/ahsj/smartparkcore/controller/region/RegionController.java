@@ -61,16 +61,15 @@ public class RegionController extends BaseController {
     }
 
     @GetMapping("/queryRegions.ahsj")
-    public ResponseEntity<String> enterpriseInfoAllSelect(Region region,String token) throws Exception {
+    public ResponseEntity<String> enterpriseInfoAllSelect(Region region, String token) throws Exception {
         List<Region> list = regionService.queryRegion(region);
         String toJSONString = JSON.toJSONString(list);
         return new ResponseEntity<>((toJSONString), HttpStatus.OK);
     }
 
-
     @RequestMapping("/getDataByParentId.ahsj")
     @ResponseBody
-    public String getDataByParentId(Long param) throws Exception{
+    public String getDataByParentId(Long param) throws Exception {
         Region region = new Region();
         region.setParentId(param);
         List<Region> list = regionService.queryRegion(region);

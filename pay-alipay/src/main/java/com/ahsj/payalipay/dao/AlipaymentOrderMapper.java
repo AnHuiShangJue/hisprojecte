@@ -14,4 +14,14 @@ public interface AlipaymentOrderMapper {
     int updateByPrimaryKeySelective(AlipaymentOrder record);
 
     int updateByPrimaryKey(AlipaymentOrder record);
+
+    /**
+     * @Description 查询支付宝订单
+     * @Params: [id]
+     * @Author: dingli
+     * @Return: com.ahsj.payalipay.entity.AlipaymentOrder
+     * @Date 2019/10/18
+     * @Time 11:22
+     **/
+    AlipaymentOrder selectAlipaymentOrder(AlipaymentOrder record);
 }
