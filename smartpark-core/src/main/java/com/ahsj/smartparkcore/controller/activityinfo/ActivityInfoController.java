@@ -200,7 +200,7 @@ public class ActivityInfoController extends BaseController {
         ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/activity/update");
         modelAndView.addObject("title", "智慧园区系统");
         modelAndView.addObject("token", token);
-        modelAndView.addObject("activityInfoVO",activityInfoMapper.selectByPrimaryKey(id));
+        modelAndView.addObject("activityInfoVO",activityInfoService.selectById(id));
         return modelAndView;
     }
 

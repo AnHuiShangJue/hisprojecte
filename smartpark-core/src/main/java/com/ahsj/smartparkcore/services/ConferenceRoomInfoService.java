@@ -38,7 +38,7 @@ public interface ConferenceRoomInfoService {
      *@Date 2019-09-05
      *@Time 15:24
     **/
-    ConferenceRoomInfo selectById(Long id)throws Exception;
+    ConferenceRoomInfoVO selectById(Long id)throws Exception;
 
     /**
      *@Description 删除
