@@ -86,6 +86,9 @@ public class AccessFilter extends ZuulFilter {
         else if(GetWxApplet()){
             return null;
         }
+        else if(GetBaseUser()){
+            return null;
+        }
         else{
             Object accessToken = request.getHeader("Authorization");
             if(accessToken == null) {
@@ -167,6 +170,16 @@ public class AccessFilter extends ZuulFilter {
     private boolean GetWxApplet(){
         if(requestURI!= null){
             if(  requestURI.contains("/wxapplet")|| requestURI.contains("/wxapplet") ){
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    private boolean GetBaseUser(){
+        if(requestURI!= null){
+            if(  requestURI.contains("/accounts/api/user/info/inner/jscode2session")|| requestURI.contains("/accounts/api/user/info/inner/jscode2session") ){
                 return true;
             }
             return false;

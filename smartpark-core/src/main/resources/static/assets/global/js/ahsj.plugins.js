@@ -278,7 +278,7 @@ $.fn.linkselect = function (options) {
     });
 };
 //使用范例
-//前端
+//前端  前端要求命名规范为select_1,select_2...
 /*$("#select_1").linkselect({
     url:{"1":"/api/region/getDataByParentId.ahsj","2":"/api/region/getDataByParentId.ahsj","3":"/api/region/getDataByParentId.ahsj"},//每一级从后端获取数据的地址
     value:{"1":"1"},//每一级select的默认value,此时表示第一级选中北京,具体代表的地址看数据库，北京在本数据库中为1
@@ -287,7 +287,7 @@ $.fn.linkselect = function (options) {
     param:0,//参数值，传向后端的参数，0表示获取所有的省份,因为所有省份的父ID为0
     preid:"select"//所有select的id前缀都应该是一样的，后面加上_和级别数
 })  ;*/
-//后端
+//后端 后端返回的数据要求为map类型  key为id或能唯一标识value的值 value为选择框的值
 /*@RequestMapping("/getDataByParentId.ahsj")
 @ResponseBody
 public String getDataByParentId(Long param) throws Exception{

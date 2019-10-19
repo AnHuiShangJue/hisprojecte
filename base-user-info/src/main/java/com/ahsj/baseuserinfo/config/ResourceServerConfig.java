@@ -46,6 +46,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("/api/syscode/inner/**").permitAll()  // 内部code信息访问路由全部开放
                 .antMatchers("/api/organization/info/inner/**").permitAll()  // 内部organization信息访问路由全部开放
                 .antMatchers("/assets/**").permitAll()  // 资源文件开放
+                .antMatchers("/assets/**").permitAll()  // 资源文件开放
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
