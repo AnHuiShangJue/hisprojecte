@@ -1,9 +1,14 @@
 package com.ahsj.smartparkcore.entity.po;
 
+import core.code.CodeValueColumn;
+import core.code.Constants;
+import core.entity.BaseEntity;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class StationInfo {
+public class StationInfo extends BaseEntity {
+
     private Long id;
 
     private String title;
@@ -20,21 +25,23 @@ public class StationInfo {
 
     private String description;
 
-    private Short isEnable;
-
     private String environmentalLabel;
 
     private Date createDate;
 
-    private Long createUserId;
-
     private Date updateDate;
 
-    private Long updateUserId;
-
-    private Integer isLease;
-
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_verify", typeName = "verifyName")
     private Integer isVerify;
+    private String verifyName;
+
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_lease", typeName = "leaseName")
+    private Integer isLease;
+    private String leaseName;
+
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_enable", typeName = "enableName")
+    private Short isEnable;
+    private String enableName;
 
     private Long enterpriseId;
 
@@ -47,6 +54,30 @@ public class StationInfo {
     private String remark;
 
     private Integer bookType;
+
+    public String getVerifyName() {
+        return verifyName;
+    }
+
+    public void setVerifyName(String verifyName) {
+        this.verifyName = verifyName;
+    }
+
+    public String getLeaseName() {
+        return leaseName;
+    }
+
+    public void setLeaseName(String leaseName) {
+        this.leaseName = leaseName;
+    }
+
+    public String getEnableName() {
+        return enableName;
+    }
+
+    public void setEnableName(String enableName) {
+        this.enableName = enableName;
+    }
 
     public Integer getBookType() {
         return bookType;
@@ -144,28 +175,12 @@ public class StationInfo {
         this.createDate = createDate;
     }
 
-    public Long getCreateUserId() {
-        return createUserId;
-    }
-
-    public void setCreateUserId(Long createUserId) {
-        this.createUserId = createUserId;
-    }
-
     public Date getUpdateDate() {
         return updateDate;
     }
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
-    }
-
-    public Long getUpdateUserId() {
-        return updateUserId;
-    }
-
-    public void setUpdateUserId(Long updateUserId) {
-        this.updateUserId = updateUserId;
     }
 
     public Integer getIsLease() {

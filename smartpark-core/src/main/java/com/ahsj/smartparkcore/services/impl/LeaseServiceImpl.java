@@ -1,5 +1,6 @@
 package com.ahsj.smartparkcore.services.impl;
 
+import com.ahsj.smartparkcore.common.Constants;
 import com.ahsj.smartparkcore.core.CodeHelper;
 import com.ahsj.smartparkcore.dao.LeaseMapper;
 import com.ahsj.smartparkcore.entity.vo.LeaseVO;
@@ -54,13 +55,13 @@ public class LeaseServiceImpl implements LeaseService {
         } else {
             for (LeaseVO leaseVO : list) {
                 if (leaseVO.getBookType() == 1) {
-                    leaseVO.setBookTypeName("会议室");
+                    leaseVO.setBookTypeName(Constants.ConferenceRoomInfo);
                 }
                 if (leaseVO.getBookType() == 2) {
-                    leaseVO.setBookTypeName("场地");
+                    leaseVO.setBookTypeName(Constants.site);
                 }
                 if (leaseVO.getBookType() == 3) {
-                    leaseVO.setBookTypeName("工位");
+                    leaseVO.setBookTypeName(Constants.StationInfo);
                 }
             }
             return list;
@@ -84,13 +85,13 @@ public class LeaseServiceImpl implements LeaseService {
         } else {
             for (LeaseVO leaseVO : list) {
                 if (leaseVO.getBookType() == 1) {
-                    leaseVO.setBookTypeName("会议室");
+                    leaseVO.setBookTypeName(Constants.ConferenceRoomInfo);
                 }
                 if (leaseVO.getBookType() == 2) {
-                    leaseVO.setBookTypeName("场地");
+                    leaseVO.setBookTypeName(Constants.site);
                 }
                 if (leaseVO.getBookType() == 3) {
-                    leaseVO.setBookTypeName("工位");
+                    leaseVO.setBookTypeName(Constants.StationInfo);
                 }
             }
             return list;
@@ -114,13 +115,13 @@ public class LeaseServiceImpl implements LeaseService {
         } else {
             for (LeaseVO leaseVO : list) {
                 if (leaseVO.getBookType() == 1) {
-                    leaseVO.setBookTypeName("会议室");
+                    leaseVO.setBookTypeName(Constants.ConferenceRoomInfo);
                 }
                 if (leaseVO.getBookType() == 2) {
-                    leaseVO.setBookTypeName("场地");
+                    leaseVO.setBookTypeName(Constants.site);
                 }
                 if (leaseVO.getBookType() == 3) {
-                    leaseVO.setBookTypeName("工位");
+                    leaseVO.setBookTypeName(Constants.StationInfo);
                 }
             }
             return list;

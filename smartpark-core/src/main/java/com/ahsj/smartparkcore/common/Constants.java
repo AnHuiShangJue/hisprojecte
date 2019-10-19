@@ -25,6 +25,12 @@ public class Constants {
 
     public static final Integer THREE= 3;
 
+    public static final String ConferenceRoomInfo= "会议室";
+
+    public static final String site = "场地";
+
+    public static final String StationInfo= "工位";
+
     public static final String HIS_SYS_EXCEL_PROJECT_CH_FILE_URL = resourseUrl.getJarResourcesPaths() + "/config/LocList.xml";
 
     public Constants() {
