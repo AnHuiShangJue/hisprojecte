@@ -126,7 +126,6 @@ public class ConferenceRoomInfoController extends BaseController {
     **/
     @RequestMapping("listForView.ahsj")
     @ResponseBody
-    @ResponseStatus
     public List<ConferenceRoomInfoVO> listForView()throws Exception{
         return conferenceRoomInfoService.listForView();
     }
