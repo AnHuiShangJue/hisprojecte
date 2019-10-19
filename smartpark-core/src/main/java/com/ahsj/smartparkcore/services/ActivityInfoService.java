@@ -3,6 +3,7 @@ package com.ahsj.smartparkcore.services;
 import com.ahsj.smartparkcore.core.ResultModel;
 import com.ahsj.smartparkcore.entity.dto.ActivityInfoDTO;
 import com.ahsj.smartparkcore.entity.po.ActivityInfo;
+import com.ahsj.smartparkcore.entity.vo.ActivityInfoVO;
 import core.entity.PageBean;
 import org.springframework.http.ResponseEntity;
 
@@ -69,7 +70,7 @@ public interface ActivityInfoService {
      * @Return 
      * @Params 
     **/
-    ActivityInfo selectById(Long id)throws Exception;
+    ActivityInfoVO selectById(Long id)throws Exception;
 
 
     /**

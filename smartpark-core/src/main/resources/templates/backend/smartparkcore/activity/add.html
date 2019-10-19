@@ -12,7 +12,7 @@
     <div class="col s12 m12 l12">
         <div id="validation" class="card card card-default scrollspy" style="height: 600px">
             <div class="card-content">
-                <h4 class="card-title">病人信息详情</h4><label style="color:black">Patient information details
+                <h4 class="card-title">活动信息详情</h4><label style="color:black">Patient information details
             </label>
                 <form class="col s12" id="sendForm" action="#">
                     <input type="hidden" id="id" name="id" th:value="${activityInfoVO.id}"/>
@@ -21,6 +21,28 @@
                             <input id="name" name="name" type="text" th:value="${activityInfoVO.name}"/>
                             <label for="name">活 动 名 称</label>
                         </div>
+                        <div class="input-field col s4 m4 l4">
+                            <div class="">
+                                <select name="provinceId" id="select_1">
+                                    <option>选择省份</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="input-field col s4 m4 l4">
+                            <div class="">
+                                <select name="cityId" id="select_2">
+                                    <option>选择城市</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="input-field col s4 m4 l4">
+                            <div class="">
+                                <select name="areaId" id="select_3">
+                                    <option>选择区</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="input-field col s4 l4 xl4">
                             <input id="eventLocation" name="eventLocation" type="text" th:value="${activityInfoVO.eventLocation}"/>
                             <label for="eventLocation">活 动 地 址</label>
@@ -83,6 +105,18 @@ Scripts
 
     $(function () {
         formCheck();
+        $("#select_1").linkselect({
+            url: {
+                "1": "/api/region/getDataByParentId.ahsj",
+                "2": "/api/region/getDataByParentId.ahsj",
+                "3": "/api/region/getDataByParentId.ahsj"
+            },//每一级从后端获取数据的地址
+            value: {"1":12},//每一级select的默认value,此时表示第一级选中北京,具体代表的地址看数据库，北京在本数据库中为1
+            level: 3,//表示一共拥有几级联动，三级联动就写3，四级就写4，一次类推
+            now: 1,//固定值，表示当前为第几级
+            param: 0,//参数值，传向后端的参数，0表示获取所有的省份,因为所有省份的父ID为0
+            preid: "select"//所有select的id前缀都应该是一样的，后面加上_和级别数
+        });
 
     });
 

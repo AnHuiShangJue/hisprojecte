@@ -6,9 +6,15 @@ import com.ahsj.smartparkcore.core.ResultStatus;
 import com.ahsj.smartparkcore.dao.ActivityInfoMapper;
 import com.ahsj.smartparkcore.entity.dto.ActivityInfoDTO;
 import com.ahsj.smartparkcore.entity.po.ActivityInfo;
+import com.ahsj.smartparkcore.entity.po.Region;
+import com.ahsj.smartparkcore.entity.vo.ActivityInfoVO;
+import com.ahsj.smartparkcore.entity.vo.ConferenceRoomInfoVO;
 import com.ahsj.smartparkcore.services.ActivityInfoService;
+import com.ahsj.smartparkcore.services.RegionService;
 import core.entity.PageBean;
+import org.apache.commons.lang3.StringUtils;
 import org.dozer.DozerBeanMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +26,8 @@ public class ActivityInfoServiceImpl implements ActivityInfoService {
     @Autowired
     ActivityInfoMapper activityInfoMapper;
 
-    
+    @Autowired
+    RegionService regionService;
     /**
      * @Description list
      * @Author  muxu
@@ -50,6 +57,12 @@ public class ActivityInfoServiceImpl implements ActivityInfoService {
         DozerBeanMapper mapper = new DozerBeanMapper();
         //DTO转化为PO 存入数据库
         ActivityInfo activityInfo = mapper.map(activityInfoDTO,ActivityInfo.class);
+
+        Region region1 = regionService.selectById(activityInfoDTO.getProvinceId());
+        Region region2 = regionService.selectById(activityInfoDTO.getCityId());
+        Region region3 = regionService.selectById(activityInfoDTO.getAreaId());
+        activityInfo.setEventLocation(region1.getName() + region2.getName() + region3.getName() + activityInfoDTO.getEventLocation());
+
         // mapper.map(source, destinationClass);
         // 构造新的ActivityInfo实例对象，通过source对象中的字段内容.映射到ActivityInfoDTO.class实例对象中，并返回新的ActivityInfoDTO.class实例对象。
         activityInfo.setIsReview(3);
@@ -76,6 +89,11 @@ public class ActivityInfoServiceImpl implements ActivityInfoService {
         DozerBeanMapper mapper = new DozerBeanMapper();
         //DTO转化为PO 存入数据库
         ActivityInfo activityInfo = mapper.map(activityInfoDTO,ActivityInfo.class);
+
+        Region region1 = regionService.selectById(activityInfoDTO.getProvinceId());
+        Region region2 = regionService.selectById(activityInfoDTO.getCityId());
+        Region region3 = regionService.selectById(activityInfoDTO.getAreaId());
+        activityInfo.setEventLocation(region1.getName() + region2.getName() + region3.getName() + activityInfoDTO.getEventLocation());
         // mapper.map(source, destinationClass);
         // 构造新的ActivityInfo实例对象，通过source对象中的字段内容.映射到ActivityInfoDTO.class实例对象中，并返回新的ActivityInfoDTO.class实例对象。
         int check = activityInfoMapper.updateByPrimaryKey(activityInfo);
@@ -140,8 +158,22 @@ public class ActivityInfoServiceImpl implements ActivityInfoService {
     **/
     @Override
     @Transactional(readOnly = true)
-    public ActivityInfo selectById(Long id) throws Exception {
-        return CodeHelper.getInstance().setCodeValue(activityInfoMapper.selectByPrimaryKey(id));
+    public ActivityInfoVO selectById(Long id) throws Exception {
+        ActivityInfo activityInfo = activityInfoMapper.selectByPrimaryKey(id);
+        ActivityInfoVO activityInfoVO = new ActivityInfoVO();
+        BeanUtils.copyProperties(activityInfo, activityInfoVO);
+        String substring = StringUtils.substring(activityInfo.getEventLocation(), 0, 3);
+        String substring1 = StringUtils.substring(activityInfo.getEventLocation(), 3, 6);
+        String substring2 = StringUtils.substring(activityInfo.getEventLocation(), 6, 9);
+        String addressName = StringUtils.substring(activityInfo.getEventLocation(), 9,activityInfo.getEventLocation().length());
+        Region region = regionService.queryRegionName(substring);
+        Region region1 = regionService.queryRegionName(substring1);
+        Region region2 = regionService.queryRegionName(substring2);
+        activityInfoVO.setProvinceId(region.getId());
+        activityInfoVO.setCityId(region1.getId());
+        activityInfoVO.setAreaId(region2.getId());
+        activityInfoVO.setEventLocation(addressName);
+        return activityInfoVO;
     }
 
     /**

@@ -6,10 +6,15 @@ import com.ahsj.smartparkcore.core.ResultStatus;
 import com.ahsj.smartparkcore.dao.ConferenceRoomInfoMapper;
 import com.ahsj.smartparkcore.entity.dto.ConferenceRoomInfoDTO;
 import com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo;
+import com.ahsj.smartparkcore.entity.po.Region;
 import com.ahsj.smartparkcore.entity.vo.ConferenceRoomInfoVO;
+import com.ahsj.smartparkcore.entity.vo.SiteVo;
 import com.ahsj.smartparkcore.services.ConferenceRoomInfoService;
+import com.ahsj.smartparkcore.services.RegionService;
 import core.entity.PageBean;
+import org.apache.commons.lang3.StringUtils;
 import org.dozer.DozerBeanMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +27,10 @@ import java.util.List;
 public class ConferenceRoomInfoServicelmpl implements ConferenceRoomInfoService {
     @Autowired
     ConferenceRoomInfoMapper conferenceRoomInfoMapper;
+
+
+    @Autowired
+    RegionService regionService;
 
     /**
      *@Description 新增会议室
@@ -37,7 +46,10 @@ public class ConferenceRoomInfoServicelmpl implements ConferenceRoomInfoService 
         DozerBeanMapper mapper = new DozerBeanMapper();
         //DTO转化为PO 存入数据库
         ConferenceRoomInfo conferenceRoomInfo =mapper.map(conferenceRoomInfoDTO,ConferenceRoomInfo.class);
-
+        Region region1 = regionService.selectById(conferenceRoomInfoDTO.getProvinceId());
+        Region region2 = regionService.selectById(conferenceRoomInfoDTO.getCityId());
+        Region region3 = regionService.selectById(conferenceRoomInfoDTO.getAreaId());
+        conferenceRoomInfo.setLocation(region1.getName() + region2.getName() + region3.getName() + conferenceRoomInfoDTO.getLocation());
         //补充PO中需要但是DTO不足的数据，新增会议室默认为已启用和未租赁状态
         conferenceRoomInfo.setIsEnable(1);
         conferenceRoomInfo.setIsLease(2);
@@ -63,6 +75,10 @@ public class ConferenceRoomInfoServicelmpl implements ConferenceRoomInfoService 
         DozerBeanMapper mapper = new DozerBeanMapper();
         //DTO转化为PO 存入数据库
         ConferenceRoomInfo conferenceRoomInfo =mapper.map(conferenceRoomInfoDTO,ConferenceRoomInfo.class);
+        Region region1 = regionService.selectById(conferenceRoomInfoDTO.getProvinceId());
+        Region region2 = regionService.selectById(conferenceRoomInfoDTO.getCityId());
+        Region region3 = regionService.selectById(conferenceRoomInfoDTO.getAreaId());
+        conferenceRoomInfo.setLocation(region1.getName() + region2.getName() + region3.getName() + conferenceRoomInfoDTO.getLocation());
 
         int flag = conferenceRoomInfoMapper.updateByPrimaryKeySelective(conferenceRoomInfo);
         if(flag !=0){
@@ -83,8 +99,24 @@ public class ConferenceRoomInfoServicelmpl implements ConferenceRoomInfoService 
     **/
     @Override
     @Transactional(readOnly = true)
-    public ConferenceRoomInfo selectById(Long id) throws Exception {
-        return CodeHelper.getInstance().setCodeValue(conferenceRoomInfoMapper.selectByPrimaryKey(id));
+    public ConferenceRoomInfoVO selectById(Long id) throws Exception {
+
+        ConferenceRoomInfo conferenceRoomInfo = conferenceRoomInfoMapper.selectByPrimaryKey(id);
+
+        ConferenceRoomInfoVO conferenceRoomInfoVO = new ConferenceRoomInfoVO();
+        BeanUtils.copyProperties(conferenceRoomInfo, conferenceRoomInfoVO);
+        String substring = StringUtils.substring(conferenceRoomInfo.getLocation(), 0, 3);
+        String substring1 = StringUtils.substring(conferenceRoomInfo.getLocation(), 3, 6);
+        String substring2 = StringUtils.substring(conferenceRoomInfo.getLocation(), 6, 9);
+        String addressName = StringUtils.substring(conferenceRoomInfo.getLocation(), 9,conferenceRoomInfo.getLocation().length());
+        Region region = regionService.queryRegionName(substring);
+        Region region1 = regionService.queryRegionName(substring1);
+        Region region2 = regionService.queryRegionName(substring2);
+        conferenceRoomInfoVO.setProvinceId(region.getId());
+        conferenceRoomInfoVO.setCityId(region1.getId());
+        conferenceRoomInfoVO.setAreaId(region2.getId());
+        conferenceRoomInfoVO.setLocation(addressName);
+        return conferenceRoomInfoVO;
     }
 
     /**
