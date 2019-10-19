@@ -138,7 +138,7 @@ logging:
          IUserService: DEBUG
          ICodeService: DEBUG
 file:
-  path: D:/upload/
+  path: /templates/images/
   word_name: dept.docx
   servlet:
     multipart:

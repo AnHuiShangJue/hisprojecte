@@ -3,6 +3,7 @@ package com.ahsj.smartparkcore.dao;
 import com.ahsj.smartparkcore.entity.po.StationInfo;
 
 public interface StationInfoMapper {
+
     int deleteByPrimaryKey(Long id);
 
     int insert(StationInfo record);

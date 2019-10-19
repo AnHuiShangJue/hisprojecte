@@ -18,6 +18,7 @@
     <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
     <result column="is_lease" property="isLease" jdbcType="INTEGER" />
     <result column="is_verify" property="isVerify" jdbcType="INTEGER" />
+    <result column="book_type" property="bookType" jdbcType="INTEGER" />
     <result column="enterprise_id" property="enterpriseId" jdbcType="BIGINT" />
     <result column="number" property="number" jdbcType="INTEGER" />
     <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
@@ -27,7 +28,7 @@
   <sql id="Base_Column_List" >
     id, title, location, price, area, name, phone_number, description, is_enable, environmental_label, 
     create_date, create_user_id, update_date, update_user_id, is_lease, is_verify, enterprise_id, 
-    number, start_time, end_time, remark
+    number, start_time, end_time, remark,book_type
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -46,14 +47,14 @@
       create_date, create_user_id, update_date, 
       update_user_id, is_lease, is_verify, 
       enterprise_id, number, start_time, 
-      end_time, remark)
+      end_time, remark,book_type)
     values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, 
       #{price,jdbcType=DECIMAL}, #{area,jdbcType=DOUBLE}, #{name,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, 
       #{description,jdbcType=VARCHAR}, #{isEnable,jdbcType=SMALLINT}, #{environmentalLabel,jdbcType=VARCHAR}, 
       #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, 
       #{updateUserId,jdbcType=BIGINT}, #{isLease,jdbcType=INTEGER}, #{isVerify,jdbcType=INTEGER}, 
       #{enterpriseId,jdbcType=BIGINT}, #{number,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, 
-      #{endTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+      #{endTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR},#{bookType,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.ahsj.smartparkcore.entity.po.StationInfo" >
     insert into station_info

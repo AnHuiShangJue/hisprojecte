@@ -17,6 +17,7 @@
     <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
     <result column="update_user_id" jdbcType="BIGINT" property="updateUserId" />
     <result column="is_lease" jdbcType="INTEGER" property="isLease" />
+    <result column="book_type" jdbcType="INTEGER" property="bookType" />
     <result column="enterprise_id" jdbcType="BIGINT" property="enterpriseId" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="conference_name" jdbcType="VARCHAR" property="conferenceName" />
@@ -24,7 +25,7 @@
   <sql id="Base_Column_List">
     id, location, price, area, environmental_label, capacity, description, is_enable, 
     name, phone_number, create_date, create_user_id, update_date, update_user_id, is_lease, 
-    enterprise_id, user_id, conference_name
+    enterprise_id, user_id, conference_name,book_type
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -42,14 +43,14 @@
       description, is_enable, name, 
       phone_number, create_date, create_user_id, 
       update_date, update_user_id, is_lease, 
-      enterprise_id, user_id, conference_name
+      enterprise_id, user_id, conference_name,book_type
       )
     values (#{id,jdbcType=BIGINT}, #{location,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
       #{area,jdbcType=DOUBLE}, #{environmentalLabel,jdbcType=VARCHAR}, #{capacity,jdbcType=VARCHAR}, 
       #{description,jdbcType=VARCHAR}, #{isEnable,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
       #{phoneNumber,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, 
       #{updateDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{isLease,jdbcType=INTEGER}, 
-      #{enterpriseId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{conferenceName,jdbcType=VARCHAR}
+      #{enterpriseId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{conferenceName,jdbcType=VARCHAR},#{bookType,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo">

@@ -43,6 +43,16 @@ public class Site extends BaseEntity {
     private Short isEnable;
     private String enableName;
 
+    private Integer bookType;
+
+    public Integer getBookType() {
+        return bookType;
+    }
+
+    public void setBookType(Integer bookType) {
+        this.bookType = bookType;
+    }
+
     public String getVerifyName() {
         return verifyName;
     }

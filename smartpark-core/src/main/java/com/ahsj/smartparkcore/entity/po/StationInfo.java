@@ -46,6 +46,16 @@ public class StationInfo {
 
     private String remark;
 
+    private Integer bookType;
+
+    public Integer getBookType() {
+        return bookType;
+    }
+
+    public void setBookType(Integer bookType) {
+        this.bookType = bookType;
+    }
+
     public Long getId() {
         return id;
     }

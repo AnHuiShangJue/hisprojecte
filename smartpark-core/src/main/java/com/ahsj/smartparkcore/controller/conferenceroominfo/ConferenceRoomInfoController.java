@@ -28,6 +28,7 @@ import java.util.Map;
 @RequestMapping("/api/conferenceRoomInfo/")
 public class ConferenceRoomInfoController extends BaseController {
     private String rootPath ="/api/conferenceRoomInfo";
+
     @Autowired
     ConferenceRoomInfoService conferenceRoomInfoService;
 

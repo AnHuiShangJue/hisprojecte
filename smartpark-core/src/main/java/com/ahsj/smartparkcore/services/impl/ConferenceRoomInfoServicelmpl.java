@@ -53,6 +53,7 @@ public class ConferenceRoomInfoServicelmpl implements ConferenceRoomInfoService 
         //补充PO中需要但是DTO不足的数据，新增会议室默认为已启用和未租赁状态
         conferenceRoomInfo.setIsEnable(1);
         conferenceRoomInfo.setIsLease(2);
+        conferenceRoomInfo.setBookType(1);
         int flag = conferenceRoomInfoMapper.insert(conferenceRoomInfo);
         if(flag != 0){
             return new ResponseEntity<>(new ResultModel(ResultStatus.SUCCESS_INSERT), HttpStatus.OK);

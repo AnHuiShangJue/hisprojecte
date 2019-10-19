@@ -59,7 +59,7 @@ public class EnterpriseInfoController extends BaseController {
     @Autowired
     IOrganizationService iOrganizationService;
 
-    @Value("${file.path}")
+    @Value("${file.paths}")
     private String filePath;
 
 
@@ -210,6 +210,7 @@ public class EnterpriseInfoController extends BaseController {
 
                 //文件上传的路径
                 String dirPath = filePath + dateDir + "/";
+                System.out.println("--------------------->"+filePath);
                 // 获取文件上传的全路径（防止文件名称相同）
                 String fullFilePath = dirPath + fileCode + suffix;
                 FileOperateUtil.mkDir(new File(dirPath));
