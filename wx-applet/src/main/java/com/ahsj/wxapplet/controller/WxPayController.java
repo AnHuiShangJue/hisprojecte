@@ -40,6 +40,14 @@ public class WxPayController {
     private final String url = "https://api.mch.weixin.qq.com/pay/unifiedorder";
 
 
+    /**
+     * @Description 微信小程序支付接口
+     * @Author  muxu
+     * @Date  2019/10/19
+     * @Time 16:53
+     * @Return java.util.Map
+     * @Params [request, openid, mch_id, money, title, appId]
+    **/
     @RequestMapping(value = "/weixin/payment")
     public Map payment(HttpServletRequest request
             , @RequestParam(value = "openid",required = false)String openid
@@ -47,6 +55,7 @@ public class WxPayController {
             , @RequestParam(value = "money",required = false)Integer money
             , @RequestParam(value = "title",required = false)String title
             , @RequestParam(value = "appId",required = false)String appId
+            , @RequestParam(value = "spbillCreateIp",required = false)String spbillCreateIp
     )throws Exception{
         Map map = new HashMap();
         OrderInfo orderInfo = new OrderInfo();
@@ -56,8 +65,8 @@ public class WxPayController {
         orderInfo.setBody(title);
         orderInfo.setOutTradeNo(getRandomStringByLength(32));
         orderInfo.setTotalFee(money);
-        orderInfo.setSpbillCreateIp("127.0.0.1");
-        orderInfo.setNotifyUrl(url);
+        orderInfo.setSpbillCreateIp(spbillCreateIp);
+        orderInfo.setNotifyUrl(notify_url);
         orderInfo.setTradeType(trade_type);
         orderInfo.setOpenid(openid);
         orderInfo.setSignType("MD5");
@@ -123,6 +132,15 @@ public class WxPayController {
              return sb.toString();
        }
 
+       
+       /**
+        * @Description 微信支付回调
+        * @Author  muxu
+        * @Date  2019/10/19
+        * @Time 16:53
+        * @Return void
+        * @Params [request, response]
+       **/
     @RequestMapping(value = "/weixin/callback")
     public void wxNotify(HttpServletRequest request, HttpServletResponse response) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader((ServletInputStream)request.getInputStream()));
