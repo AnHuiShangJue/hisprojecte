@@ -7,7 +7,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  * @Description 签名实体类
  * @Author  muxu
  * @Date  2019/10/19
- * @Time 15:39
+ * @Time 18:11
  * @Return 
  * @Params 
 **/

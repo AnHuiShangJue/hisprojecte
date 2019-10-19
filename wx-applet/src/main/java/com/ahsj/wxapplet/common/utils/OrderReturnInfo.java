@@ -5,7 +5,7 @@ package com.ahsj.wxapplet.common.utils;
  * @Description 订单返回消息实体类
  * @Author  muxu
  * @Date  2019/10/19
- * @Time 15:38
+ * @Time 18:11
  * @Return 
  * @Params 
 **/
