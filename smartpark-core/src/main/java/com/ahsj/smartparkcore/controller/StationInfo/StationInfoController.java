@@ -68,7 +68,6 @@ public class StationInfoController extends BaseController {
     }
 
 
-
     @GetMapping("/addStationinfo.ahsj")
     public ModelAndView addStationinfo(String token) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/stationinfo/add");
@@ -101,7 +100,7 @@ public class StationInfoController extends BaseController {
 
     /**
      * @return core.message.Message
-     * @功能说明 修改 企业信息
+     * @功能说明
      * @Params [enterpriseInfo]
      * @Author XJP
      * @Date 2019/9/2
@@ -111,5 +110,19 @@ public class StationInfoController extends BaseController {
     public ResponseEntity<Message> updateStationinfo(StationInfoDTO stationInfoDTO, @RequestParam(value = "file", required = false) MultipartFile[] file, String relateKet, String relatePage) throws Exception {
         Message message = stationInfoService.updateStationinfo(stationInfoDTO, file, relateKet, relatePage);
         return new ResponseEntity<>((message), HttpStatus.OK);
+    }
+
+    /**
+     * @return core.message.Message
+     * @功能说明
+     * @Params [ids]
+     * @Author XJP
+     * @Date 2019/10/21
+     * @Time 15:18
+     **/
+    @ResponseBody
+    @PostMapping("/setEnable.ahsj")
+    public ResponseEntity<Message> updateSetDisable(@RequestParam("ids[]") Long[] ids) throws Exception {
+        return new ResponseEntity<>((stationInfoService.updateSetDisable(ids)), HttpStatus.OK);
     }
 }

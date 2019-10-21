@@ -20,12 +20,53 @@ import org.springframework.web.multipart.MultipartFile;
  */
 
 public interface StationInfoService {
+    /**
+     * @return core.entity.PageBean<com.ahsj.smartparkcore.entity.po.StationInfo>
+     * @功能说明
+     * @Params [pageBean]
+     * @Author XJP
+     * @Date 2019/10/21
+     * @Time 15:18
+     **/
+    PageBean<StationInfo> queryList(PageBean<StationInfo> pageBean) throws Exception;
 
-    PageBean<StationInfo>  queryList(PageBean<StationInfo> pageBean) throws Exception;
-
+    /**
+     * @return com.ahsj.smartparkcore.entity.vo.StationInfoVO
+     * @功能说明
+     * @Params [id]
+     * @Author XJP
+     * @Date 2019/10/21
+     * @Time 15:18
+     **/
     StationInfoVO selectById(Long id) throws Exception;
 
-    Message addStationinfo(StationInfoDTO infoDTO, MultipartFile[] file, String relateKet, String relatePage)throws Exception;
+    /**
+     * @return core.message.Message
+     * @功能说明
+     * @Params [infoDTO, file, relateKet, relatePage]
+     * @Author XJP
+     * @Date 2019/10/21
+     * @Time 15:18
+     **/
+    Message addStationinfo(StationInfoDTO infoDTO, MultipartFile[] file, String relateKet, String relatePage) throws Exception;
 
-    Message updateStationinfo(StationInfoDTO stationInfoDTO, MultipartFile[] file, String relateKet, String relatePage)throws Exception;
+    /**
+     * @return core.message.Message
+     * @功能说明
+     * @Params [stationInfoDTO, file, relateKet, relatePage]
+     * @Author XJP
+     * @Date 2019/10/21
+     * @Time 15:18
+     **/
+    Message updateStationinfo(StationInfoDTO stationInfoDTO, MultipartFile[] file, String relateKet, String relatePage) throws Exception;
+
+    /**
+     * @return core.message.Message
+     * @功能说明
+     * @Params [ids]
+     * @Author XJP
+     * @Date 2019/10/21
+     * @Time 15:18
+     **/
+    Message updateSetDisable(Long[] ids) throws Exception;
 }

@@ -87,6 +87,10 @@
                                        class="btn waves-effect waves-light red"><i
                                             class="material-icons  white-text tooltipped " data-position="bottom"
                                             data-delay="50" data-tooltip="新增">add</i></a>
+                                    <a  id="setDisableManyBtn"
+                                        class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
+                                            class="material-icons white-text tooltipped" data-position="bottom"
+                                            data-delay="50" data-tooltip="批量设置收费停用状态">info</i></a>
                                 </div>
                             </div>
                             <!--Form Advance-->
@@ -138,6 +142,11 @@
                         "className": "center-align"
                     },
                     {
+                        "title": "工位名称",
+                        "data": "title",
+                        "name": "title"
+                    },
+                    {
                         "title": "地点",
                         "data": "location",
                         "name": "location"
@@ -158,7 +167,7 @@
                         "name": "phone_number"
                     },
                     {
-                        "title": "姓名",
+                        "title": "联系人姓名",
                         "data": "name",
                         "name": "name"
                     },
@@ -191,8 +200,8 @@
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn +
-                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改场地\" onclick='update(" + row.id + ");'> <i class='material-icons'>edit</i></a>" +
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"设置启用\" href='javascript:;' onclick='setIsEnable(" + row.id + ");'> <i class='material-icons'>info</i></a>" +
+                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改工位\" onclick='update(" + row.id + ");'> <i class='material-icons'>edit</i></a>" +
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"设置启用\" href='javascript:;' onclick='setDisable(" + row.id + ");'> <i class='material-icons'>info</i></a>" +
                                 "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"审核\" href='javascript:;' onclick='isVerify(" + row.id + ");'> <i class='material-icons'>input</i></a>";
                             // 返回自定义内容
                             return rtnBtn;
@@ -222,21 +231,35 @@
         dialog.show(url, "审核场地");
     }
 
-    function setIsEnable(ids) {
-        dialog.confirm('确定修改场地启用状态吗?', function (index, layero) {
-            $.ahsjajax(CTX + "/api/site/setEnable.ahsj",
+
+    $("#setDisableManyBtn").click(function () {
+        var ids = grid.getSelectedRows();
+
+        if (ids.length == 0) {
+            dialog.warn("请至少选择一条数据");
+            return;
+        }
+        setDisable(ids.join(','));
+    });
+
+    function setDisable(id) {
+        var ids = [];
+        ids.push(id);
+        dialog.confirm('确定修改工位启用状态吗?', function (index, layero) {
+            $.ahsjajax(CTX + "/api/stationinfo/setEnable.ahsj",
                 {"ids": ids},
-                function (responseEntity) {
-                    if (responseEntity.code > 0) {
+                function (msg) {
+                    if (msg.success) {
                         swal.close();
                         M.toast({
-                            html: responseEntity.message, completeCallback: function () {
+                            html: msg.message, completeCallback: function () {
                             }
                         });
                         grid.search();
+                        dialog.parentclose();
                     } else {
                         M.toast({
-                            html: responseEntity.message, completeCallback: function () {
+                            html: msg.message, completeCallback: function () {
                             }
                         });
                     }

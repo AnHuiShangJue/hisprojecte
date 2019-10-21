@@ -1,5 +1,6 @@
 package com.ahsj.smartparkcore.services.impl;
 
+import com.ahsj.smartparkcore.common.Constants;
 import com.ahsj.smartparkcore.core.CodeHelper;
 import com.ahsj.smartparkcore.core.ResultModel;
 import com.ahsj.smartparkcore.core.ResultStatus;
@@ -17,7 +18,10 @@ import core.entity.PageBean;
 import core.message.Message;
 import core.message.MessageUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.formula.functions.T;
 import org.dozer.DozerBeanMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,6 +46,8 @@ import utils.EmptyUtil;
 @Service
 public class StationInfoImpl implements StationInfoService {
 
+    private Logger log = LoggerFactory.getLogger(StationInfoImpl.class.getSimpleName());
+
     @Autowired
     StationInfoMapper stationInfoMapper;
 
@@ -63,6 +69,14 @@ public class StationInfoImpl implements StationInfoService {
         return pageBean;
     }
 
+    /**
+     * @return com.ahsj.smartparkcore.entity.vo.StationInfoVO
+     * @功能说明
+     * @Params [id]
+     * @Author XJP
+     * @Date 2019/10/21
+     * @Time 15:18
+     **/
     @Override
     @Transactional(readOnly = true)
     public StationInfoVO selectById(Long id) throws Exception {
@@ -83,6 +97,14 @@ public class StationInfoImpl implements StationInfoService {
         return stationInfoVO;
     }
 
+    /**
+     * @return core.message.Message
+     * @功能说明
+     * @Params [infoDTO, file, relateKet, relatePage]
+     * @Author XJP
+     * @Date 2019/10/21
+     * @Time 15:18
+     **/
     @Override
     @Transactional(readOnly = false)
     public Message addStationinfo(StationInfoDTO infoDTO, MultipartFile[] file, String relateKet, String relatePage) throws Exception {
@@ -106,9 +128,24 @@ public class StationInfoImpl implements StationInfoService {
 
     }
 
+    /**
+     * @return core.message.Message
+     * @功能说明
+     * @Params [stationInfoDTO, file, relateKet, relatePage]
+     * @Author XJP
+     * @Date 2019/10/21
+     * @Time 15:17
+     **/
     @Override
     @Transactional(readOnly = false)
     public Message updateStationinfo(StationInfoDTO stationInfoDTO, MultipartFile[] file, String relateKet, String relatePage) throws Exception {
+        if (EmptyUtil.Companion.isNullOrEmpty(stationInfoDTO.getProvinceId()) || EmptyUtil.Companion.isNullOrEmpty(stationInfoDTO.getCityId())
+                || EmptyUtil.Companion.isNullOrEmpty(stationInfoDTO.getAreaId()) || EmptyUtil.Companion.isNullOrEmpty(stationInfoDTO.getLocation())){
+            return MessageUtil.createMessage(false, "工位信息新增失败 ！ 工位地址不能为空！！");
+        }
+        if(EmptyUtil.Companion.isNullOrEmpty(stationInfoDTO.getTitle())){
+            return MessageUtil.createMessage(false, "工位信息修改失败 ！！！");
+        }
         StationInfo stationInfo = new StationInfo();
         BeanUtils.copyProperties(stationInfoDTO, stationInfo);
         Region region1 = regionService.selectById(stationInfoDTO.getProvinceId());
@@ -119,14 +156,47 @@ public class StationInfoImpl implements StationInfoService {
         if (EmptyUtil.Companion.isNullOrEmpty(stationInfo1)) {
             return MessageUtil.createMessage(false, "工位信息修改失败 ！ 该工位已存在 ！！");
         } else {
-            if (stationInfo1.getId().longValue() == stationInfo.getId().longValue()){
-             stationInfoMapper.updateByPrimaryKeySelective(stationInfo);
+            if (stationInfo1.getId().longValue() == stationInfo.getId().longValue()) {
+                stationInfoMapper.updateByPrimaryKeySelective(stationInfo);
                 return MessageUtil.createMessage(true, "工位信息修改成功 ！！！");
-            }else {
+            } else {
                 return MessageUtil.createMessage(false, "工位信息修改失败 ！ 该工位已存在 ！！");
             }
 
         }
 
+    }
+
+    /**
+     * @return core.message.Message
+     * @功能说明
+     * @Params [ids]
+     * @Author XJP
+     * @Date 2019/10/21
+     * @Time 15:17
+     **/
+    @Override
+    @Transactional(readOnly = false)
+    public Message updateSetDisable(Long[] ids) throws Exception {
+        if (EmptyUtil.Companion.isNullOrEmpty(ids)) {
+            log.info("修改工位状态失败!!! 参数不能为空 ！！");
+            return MessageUtil.createMessage(false, "修改工位状态失败。");
+        } else {
+            for (Long id : ids) {
+                StationInfo stationInfo = stationInfoMapper.selectByPrimaryKey(id);
+                if (EmptyUtil.Companion.isNullOrEmpty(stationInfo)) {
+                    log.info("查询失败 ！！！  无对应数据");
+                    return MessageUtil.createMessage(false, "修改工位状态失败。");
+                }
+                if (stationInfo.getIsEnable() == 1) {
+                    stationInfo.setIsEnable((short) 2);
+                    stationInfoMapper.updateByPrimaryKeySelective(stationInfo);
+                } else {
+                    stationInfo.setIsEnable((short) 1);
+                    stationInfoMapper.updateByPrimaryKeySelective(stationInfo);
+                }
+            }
+        }
+        return MessageUtil.createMessage(true, "修改工位状态成功。");
     }
 }

@@ -1,5 +1,6 @@
 package com.ahsj.smartparkcore.controller.enterprise;
 
+import com.ahsj.smartparkcore.common.Constants;
 import com.ahsj.smartparkcore.common.utils.FileOperateUtil;
 import com.ahsj.smartparkcore.common.utils.ZipUtils;
 import com.ahsj.smartparkcore.core.ResultModel;
@@ -15,6 +16,7 @@ import com.ahsj.smartparkcore.services.SysAttachmentInfoService;
 import core.controller.BaseController;
 import core.entity.PageBean;
 import core.message.Message;
+import org.apache.commons.lang3.StringUtils;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -59,8 +61,8 @@ public class EnterpriseInfoController extends BaseController {
     @Autowired
     IOrganizationService iOrganizationService;
 
-    @Value("${file.paths}")
-    private String filePath;
+
+    private static final  String filePath  = Constants.FILE_PATHS;
 
 
     /**
@@ -97,6 +99,16 @@ public class EnterpriseInfoController extends BaseController {
     public ModelAndView addEnterprise(String token, @RequestParam("id") Long id) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/enterprise/update");
         EnterpriseInfoVO enterpriseInfoVO = enterpriseInfoService.selectById(id);
+        SysAttachmentInfo sysAttachmentInfo = new SysAttachmentInfo();
+        sysAttachmentInfo.setRelateId(888L);
+        sysAttachmentInfo.setRelateKey("8");
+        sysAttachmentInfo.setRelatePage("8");
+        List<SysAttachmentInfo> sysAttachmentInfos = sysAttachmentInfoService.querySysAttachmentInfo(sysAttachmentInfo);
+        SysAttachmentInfo sysAttachmentInfo1 = sysAttachmentInfos.get(0);
+        String  length = Constants.FILE_PATHS_LOCAL;
+        sysAttachmentInfo1.setLocation(StringUtils.substring(sysAttachmentInfo1.getLocation(),length.length(),sysAttachmentInfo1.getLocation().length()));
+        String replace = sysAttachmentInfo1.getLocation().replace(Constants.STATIC, Constants.SMARTPARKCORE);
+        enterpriseInfoVO.setFilePath(replace);
         modelAndView.addObject("token", token);
         modelAndView.addObject("enterpriseInfoVO", enterpriseInfoVO);
         return modelAndView;

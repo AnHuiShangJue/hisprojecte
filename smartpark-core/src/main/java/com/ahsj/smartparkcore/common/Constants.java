@@ -35,7 +35,15 @@ public class Constants {
 
     public static final String NO_LEASE= "未租赁";
 
+    public static final String SMARTPARKCORE= "smartparkcore";
+
+    public static final String  STATIC= "static";
+
     public static final String HIS_SYS_EXCEL_PROJECT_CH_FILE_URL = resourseUrl.getJarResourcesPaths() + "/config/LocList.xml";
+
+    public static final String FILE_PATHS = resourseUrl.getJarResourcesPaths() + "/static/assets/upload/";
+
+    public static final String FILE_PATHS_LOCAL = resourseUrl.getJarResourcesPaths();
 
     public Constants() {
     }

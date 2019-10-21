@@ -18,6 +18,7 @@
                     <input type="hidden" id="provinceId" name="" th:value="${enterpriseInfoVO.provinceId}">
                     <input type="hidden" id="cityId" name="" th:value="${enterpriseInfoVO.cityId}">
                     <input type="hidden" id="areaId" name="" th:value="${enterpriseInfoVO.areaId}">
+                    <input type="hidden" id="files" name="" th:value="${enterpriseInfoVO.filePath}">
                     <div class="row">
 
                         <div class="input-field col s4 l4 xl4">
@@ -159,6 +160,8 @@
         var  provinceId = $("#provinceId").val();
         var  cityId = $("#cityId").val();
         var  areaId = $("#areaId").val();
+        var  files = $("#files").val();
+        $("#file_name").attr("src",files);
         $("#select_1").linkselect({
             url: {
                 "1": "/api/region/getDataByParentId.ahsj",
