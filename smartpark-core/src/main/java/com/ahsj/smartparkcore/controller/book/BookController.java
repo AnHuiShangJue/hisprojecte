@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import utils.EmptyUtil;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/book/")
 public class BookController extends BaseController {
@@ -39,7 +41,7 @@ public class BookController extends BaseController {
      * @Date 2019-09-10
      * @Time 9:46
      **/
-    public ResponseEntity<ResultModel> save(BookDTO bookDTO) throws Exception {
+    public ResponseEntity<ResultModel> save1(BookDTO bookDTO) throws Exception {
         //判断必要信息不为空
         if (EmptyUtil.Companion.isNullOrEmpty(bookDTO.getStartTime()) || EmptyUtil.Companion.isNullOrEmpty(bookDTO.getEndTime()) ||
                 EmptyUtil.Companion.isNullOrEmpty(bookDTO.getSubscriberName()) || EmptyUtil.Companion.isNullOrEmpty(bookDTO.getPhoneNumber())) {
@@ -119,14 +121,14 @@ public class BookController extends BaseController {
      * @Date 2019/10/14
      * @Time 17:52
      **/
-    @RequestMapping(value = "/isAudit/index.ahsj")
+/*    @RequestMapping(value = "/isAudit/index.ahsj")
     ModelAndView isAudit(String token, Long id) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/book/isAudit");
         modelAndView.addObject("title", "审核预定信息");
         modelAndView.addObject("token", token);
         modelAndView.addObject("bookDTO", bookService.selectByPrimaryKey(id));
         return modelAndView;
-    }
+    }*/
 
     /**
      * @Description 预约审核
@@ -158,4 +160,47 @@ public class BookController extends BaseController {
         modelAndView.addObject("bookDTO", bookService.selectByPrimaryKey(id));
         return modelAndView;
     }
+
+    /**
+     * @Description 预约新增
+     * @Params: [bookDTO]
+     * @Author: dingli
+     * @Return: org.springframework.http.ResponseEntity<com.ahsj.smartparkcore.core.ResultModel>
+     * @Date 2019/10/15
+     * @Time 10:57
+     **/
+    @RequestMapping("/save.index.ahsj")
+    public ResponseEntity<ResultModel> save(BookDTO bookDTO) throws Exception {
+        return bookService.save(bookDTO);
+    }
+
+    /**
+     * @Description 获取所有的租赁信息
+     * @Params: []
+     * @Author: dingli
+     * @Return: java.util.List<com.ahsj.smartparkcore.entity.dto.BookDTO>
+     * @Date 2019/10/21
+     * @Time 16:29
+     **/
+    @RequestMapping("/getAll")
+    public List<BookDTO> selectAllBook() throws Exception {
+        return bookService.selectAllBook();
+    }
+
+    /**
+     * @Description 获取租赁信息
+     * @Params: [pageBean]
+     * @Author: dingli
+     * @Return: core.entity.PageBean<com.ahsj.smartparkcore.entity.dto.BookDTO>
+     * @Date 2019/10/21
+     * @Time 16:48
+     **/
+    @RequestMapping("/getBook")
+    PageBean<BookDTO> listByDate(BookDTO bookDTO, String token) throws Exception {
+        PageBean<BookDTO> pageBean = new PageBean<>();
+        pageBean.setParameter(bookDTO);
+        return bookService.listByDate(pageBean);
+    }
+
 }
+

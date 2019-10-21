@@ -31,4 +31,6 @@ public interface StationInfoMapper {
     List<StationInfo> queryList(PageBean<StationInfo> pageBean);
 
     StationInfo selectByTitle(String title);
+
+    List<StationInfo> selectAll()throws Exception;
 }

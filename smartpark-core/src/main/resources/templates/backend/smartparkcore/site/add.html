@@ -20,17 +20,17 @@
                         </div>
                         <div class="input-field col s4 l4 xl4">
                             <input id="title" name="title" type="text"
-                                   data-error=".errorTxt1">
-                            <div class="errorTxt1"></div>
+                                   data-error=".errorTxt2">
+                            <div class="errorTxt2"></div>
                             <label for="title">标题<span style="font-size: 12px"></span></label>
                         </div>
-
                         <div class="input-field col s4 m4 l4">
                             <div class="">
                                 <select name="provinceId" id="select_1">
                                     <option>选择省份</option>
                                 </select>
                             </div>
+                            <label for="title">选择省份<span style="font-size: 12px"></span></label>
                         </div>
                         <div class="input-field col s4 m4 l4">
                             <div class="">
@@ -38,6 +38,7 @@
                                     <option>选择城市</option>
                                 </select>
                             </div>
+                            <label for="title">选择城市<span style="font-size: 12px"></span></label>
                         </div>
                         <div class="input-field col s4 m4 l4">
                             <div class="">
@@ -45,6 +46,7 @@
                                     <option>选择区</option>
                                 </select>
                             </div>
+                            <label for="title">选择区<span style="font-size: 12px"></span></label>
                         </div>
 
                         <div class="input-field col s4 l4 xl4">
@@ -136,7 +138,7 @@ Scripts
                 "2": "/api/region/getDataByParentId.ahsj",
                 "3": "/api/region/getDataByParentId.ahsj"
             },//每一级从后端获取数据的地址
-            value: {"1":12},//每一级select的默认value,此时表示第一级选中北京,具体代表的地址看数据库，北京在本数据库中为1
+            value: {"1": 12},//每一级select的默认value,此时表示第一级选中北京,具体代表的地址看数据库，北京在本数据库中为1
             level: 3,//表示一共拥有几级联动，三级联动就写3，四级就写4，一次类推
             now: 1,//固定值，表示当前为第几级
             param: 0,//参数值，传向后端的参数，0表示获取所有的省份,因为所有省份的父ID为0
@@ -146,22 +148,22 @@ Scripts
 
     function formCheck() {
         $("#sendForm").validate({
-          /*  rules: {
-                number: {
-                    required: true,
-                },
-                price: {
-                    required: true,
-                },
-            },
-            messages: {
-                number: {
-                    required: "请输入编号",
-                },
-                price: {
-                    required: "请输入病房费用",
-                },
-            },*/
+            /*  rules: {
+                  number: {
+                      required: true,
+                  },
+                  price: {
+                      required: true,
+                  },
+              },
+              messages: {
+                  number: {
+                      required: "请输入编号",
+                  },
+                  price: {
+                      required: "请输入病房费用",
+                  },
+              },*/
             errorElement: 'div',
             errorPlacement: function (error, element) {
                 var placement = $(element).data('error');
@@ -177,14 +179,14 @@ Scripts
                     $.ahsjajax(
                         CTX + "/api/site/save.index.ahsj?token=" + TOKEN,
                         send_form,
-                        function (msg) {
-                            if (msg.success) {
-                                M.toast({html: msg.message});
+                        function (responseEntity) {
+                            if (responseEntity.code > 0) {
+                                M.toast({html: responseEntity.message});
                                 parent.grid.search();
                                 dialog.parentclose();
                                 return true;
                             } else {
-                                M.toast({html: msg.message});
+                                M.toast({html: responseEntity.message});
                                 return false;
                             }
                         },
