@@ -55,6 +55,16 @@ public class StationInfo extends BaseEntity {
 
     private Integer bookType;
 
+    private String capacity;
+
+    public String getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(String capacity) {
+        this.capacity = capacity;
+    }
+
     public String getVerifyName() {
         return verifyName;
     }

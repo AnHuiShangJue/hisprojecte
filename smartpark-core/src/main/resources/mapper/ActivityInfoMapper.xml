@@ -36,7 +36,7 @@
     delete from activity_info
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.ahsj.smartparkcore.entity.po.ActivityInfo" >
+  <insert id="insert" parameterType="com.ahsj.smartparkcore.entity.po.ActivityInfo" useGeneratedKeys="true" keyProperty="id" >
     insert into activity_info (id, name, event_location, 
       registration_deadline, start_time, end_time, 
       maximum_number, description, is_enable, 

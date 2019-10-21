@@ -1,200 +1,306 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ahsj.smartparkcore.dao.LeaseMapper">
-    <resultMap id="BaseResultMap" type="com.ahsj.smartparkcore.entity.po.Lease">
-        <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="station_info_id" property="stationInfoId" jdbcType="BIGINT"/>
-        <result column="conference_room_info_id" property="conferenceRoomInfoId" jdbcType="BIGINT"/>
-        <result column="site_id" property="siteId" jdbcType="BIGINT"/>
-        <result column="update_user_id" property="updateUserId" jdbcType="BIGINT"/>
-        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
-        <result column="create_user_id" property="createUserId" jdbcType="BIGINT"/>
-        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+<mapper namespace="com.ahsj.smartparkcore.dao.LeaseMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.smartparkcore.entity.po.Lease" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="target_id" property="targetId" jdbcType="BIGINT" />
+    <result column="target_type" property="targetType" jdbcType="BIGINT" />
+    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="area" property="area" jdbcType="DOUBLE" />
+    <result column="capacity" property="capacity" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="contact_name" property="contactName" jdbcType="VARCHAR" />
+    <result column="contact_id" property="contactId" jdbcType="BIGINT" />
+  </resultMap>
 
-    </resultMap>
+  <!--自定义map-->
 
-    <!--自定义map-->
+  <resultMap id="ResultMap" type="com.ahsj.smartparkcore.entity.vo.LeaseVO">
+    <id column="id" property="id" jdbcType="BIGINT"/>
+    <result column="location" property="location" jdbcType="VARCHAR"/>
+    <result column="price" property="price" jdbcType="DECIMAL"/>
+    <result column="area" property="area" jdbcType="DOUBLE"/>
+    <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR"/>
+    <result column="name" property="name" jdbcType="VARCHAR"/>
+    <result column="description" property="description" jdbcType="VARCHAR"/>
+    <result column="capacity" property="capacity" jdbcType="VARCHAR"/>
+    <result column="book_type" jdbcType="INTEGER" property="bookType"/>
+    <result column="is_lease" jdbcType="INTEGER" property="isLease"/>
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+  </resultMap>
 
-    <resultMap id="ResultMap" type="com.ahsj.smartparkcore.entity.vo.LeaseVO">
-        <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="location" property="location" jdbcType="VARCHAR"/>
-        <result column="price" property="price" jdbcType="DECIMAL"/>
-        <result column="area" property="area" jdbcType="DOUBLE"/>
-        <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR"/>
-        <result column="name" property="name" jdbcType="VARCHAR"/>
-        <result column="description" property="description" jdbcType="VARCHAR"/>
-        <result column="capacity" property="capacity" jdbcType="VARCHAR"/>
-        <result column="book_type" jdbcType="INTEGER" property="bookType"/>
-        <result column="is_lease" jdbcType="INTEGER" property="isLease"/>
-        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
-    </resultMap>
-    <sql id="Base_Column_List">
-    id, station_info_id, conference_room_info_id, site_id, update_user_id, update_date, 
-    create_user_id, create_date
+  <sql id="Base_Column_List" >
+    id, target_id, target_type, update_user_id, update_date, create_user_id, create_date, 
+    area, capacity, description, location, name, phone_number, price, contact_name, contact_id
   </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-        select
-        <include refid="Base_Column_List"/>
-        from lease
-        where id = #{id,jdbcType=INTEGER}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from lease
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from lease
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="com.ahsj.smartparkcore.entity.po.Lease">
-    insert into lease (id, station_info_id, conference_room_info_id, 
-      site_id, update_user_id, update_date, 
-      create_user_id, create_date)
-    values (#{id,jdbcType=BIGINT}, #{stationInfoId,jdbcType=BIGINT}, #{conferenceRoomInfoId,jdbcType=BIGINT},
-      #{siteId,jdbcType=BIGINT}, #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, 
-      #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.ahsj.smartparkcore.entity.po.Lease" useGeneratedKeys="true" keyProperty="id" >
+    insert into lease (id, target_id, target_type, 
+      update_user_id, update_date, create_user_id, 
+      create_date, area, capacity, 
+      description, location, name, 
+      phone_number, price, contact_name, 
+      contact_id)
+    values (#{id,jdbcType=BIGINT}, #{targetId,jdbcType=BIGINT}, #{targetType,jdbcType=BIGINT}, 
+      #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{area,jdbcType=DOUBLE}, #{capacity,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{phoneNumber,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{contactName,jdbcType=VARCHAR}, 
+      #{contactId,jdbcType=BIGINT})
   </insert>
-    <insert id="insertSelective" parameterType="com.ahsj.smartparkcore.entity.po.Lease">
-        insert into lease
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="stationInfoId != null">
-                station_info_id,
-            </if>
-            <if test="conferenceRoomInfoId != null">
-                conference_room_info_id,
-            </if>
-            <if test="siteId != null">
-                site_id,
-            </if>
-            <if test="updateUserId != null">
-                update_user_id,
-            </if>
-            <if test="updateDate != null">
-                update_date,
-            </if>
-            <if test="createUserId != null">
-                create_user_id,
-            </if>
-            <if test="createDate != null">
-                create_date,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=BIGINT},
-            </if>
-            <if test="stationInfoId != null">
-                #{stationInfoId,jdbcType=BIGINT},
-            </if>
-            <if test="conferenceRoomInfoId != null">
-                #{conferenceRoomInfoId,jdbcType=BIGINT},
-            </if>
-            <if test="siteId != null">
-                #{siteId,jdbcType=BIGINT},
-            </if>
-            <if test="updateUserId != null">
-                #{updateUserId,jdbcType=BIGINT},
-            </if>
-            <if test="updateDate != null">
-                #{updateDate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="createUserId != null">
-                #{createUserId,jdbcType=BIGINT},
-            </if>
-            <if test="createDate != null">
-                #{createDate,jdbcType=TIMESTAMP},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.smartparkcore.entity.po.Lease">
-        update lease
-        <set>
-            <if test="stationInfoId != null">
-                station_info_id = #{stationInfoId,jdbcType=BIGINT},
-            </if>
-            <if test="conferenceRoomInfoId != null">
-                conference_room_info_id = #{conferenceRoomInfoId,jdbcType=BIGINT},
-            </if>
-            <if test="siteId != null">
-                site_id = #{siteId,jdbcType=BIGINT},
-            </if>
-            <if test="updateUserId != null">
-                update_user_id = #{updateUserId,jdbcType=BIGINT},
-            </if>
-            <if test="updateDate != null">
-                update_date = #{updateDate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="createUserId != null">
-                create_user_id = #{createUserId,jdbcType=BIGINT},
-            </if>
-            <if test="createDate != null">
-                create_date = #{createDate,jdbcType=TIMESTAMP},
-            </if>
-        </set>
-        where id = #{id,jdbcType=BIGINT}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.ahsj.smartparkcore.entity.po.Lease">
+  <insert id="insertSelective" parameterType="com.ahsj.smartparkcore.entity.po.Lease" >
+    insert into lease
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="targetId != null" >
+        target_id,
+      </if>
+      <if test="targetType != null" >
+        target_type,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="capacity != null" >
+        capacity,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="location != null" >
+        location,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="phoneNumber != null" >
+        phone_number,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="contactName != null" >
+        contact_name,
+      </if>
+      <if test="contactId != null" >
+        contact_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="targetId != null" >
+        #{targetId,jdbcType=BIGINT},
+      </if>
+      <if test="targetType != null" >
+        #{targetType,jdbcType=BIGINT},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=DOUBLE},
+      </if>
+      <if test="capacity != null" >
+        #{capacity,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null" >
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="contactName != null" >
+        #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactId != null" >
+        #{contactId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.smartparkcore.entity.po.Lease" >
     update lease
-    set station_info_id = #{stationInfoId,jdbcType=BIGINT},
-      conference_room_info_id = #{conferenceRoomInfoId,jdbcType=BIGINT},
-      site_id = #{siteId,jdbcType=BIGINT},
+    <set >
+      <if test="targetId != null" >
+        target_id = #{targetId,jdbcType=BIGINT},
+      </if>
+      <if test="targetType != null" >
+        target_type = #{targetType,jdbcType=BIGINT},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=DOUBLE},
+      </if>
+      <if test="capacity != null" >
+        capacity = #{capacity,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null" >
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="contactName != null" >
+        contact_name = #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactId != null" >
+        contact_id = #{contactId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.smartparkcore.entity.po.Lease" >
+    update lease
+    set target_id = #{targetId,jdbcType=BIGINT},
+      target_type = #{targetType,jdbcType=BIGINT},
       update_user_id = #{updateUserId,jdbcType=BIGINT},
       update_date = #{updateDate,jdbcType=TIMESTAMP},
       create_user_id = #{createUserId,jdbcType=BIGINT},
-      create_date = #{createDate,jdbcType=TIMESTAMP}
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      area = #{area,jdbcType=DOUBLE},
+      capacity = #{capacity,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      location = #{location,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      contact_name = #{contactName,jdbcType=VARCHAR},
+      contact_id = #{contactId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-    <!--自定义SQL-->
+  <!--自定义SQL-->
 
-    <select id="queryList" resultMap="ResultMap" parameterType="core.entity.PageBean">
-        select id , name , area, capacity, location ,phone_number ,price ,book_type , description ,
-        is_lease ,create_date from (
-        SELECT id ,site_name as name ,area, capacity, location ,phone_number ,price ,book_type , description ,
-        is_lease,create_date from site WHERE is_enable = 1
-        UNION
-        SELECT id , conference_name as name , area, capacity, location ,phone_number ,price ,book_type , description ,
-        is_lease ,create_date from conference_room_info WHERE is_enable = 1
-        ) as lease_info
-        <!-- <if test="parameter.name != null and parameter.name != ''">
-           and e.name like concat('%', #{parameter.name,jdbcType=VARCHAR},'%')
-         </if>
-         <if test="parameter.legalName != null and parameter.legalName != ''">
-           and e.legal_name like concat('%', #{parameter.legalName,jdbcType=VARCHAR},'%')
-         </if>
-         <if test="parameter.unifiedSocialCreditCode != null and parameter.unifiedSocialCreditCode != ''">
-           and e.unified_social_credit_code like concat('%', #{parameter.unifiedSocialCreditCode,jdbcType=VARCHAR},'%')
-         </if>
-         <if test="parameter.scale != null and parameter.scale != ''">
-           and e.scale = #{parameter.scale,jdbcType=SMALLINT}
-         </if>-->
-        <if test="parameter.orders != null and parameter.orders != ''">
-            order by ${parameter.orders}
-        </if>
-    </select>
+  <select id="queryList" resultMap="ResultMap" parameterType="core.entity.PageBean">
+    select id , name , area, capacity, location ,phone_number ,price ,book_type , description ,
+    is_lease ,create_date from (
+    SELECT id ,site_name as name ,area, capacity, location ,phone_number ,price ,book_type , description ,
+    is_lease,create_date from site WHERE is_enable = 1
+    UNION
+    SELECT id , conference_name as name , area, capacity, location ,phone_number ,price ,book_type , description ,
+    is_lease ,create_date from conference_room_info WHERE is_enable = 1
+    UNION
+    SELECT id , title as name , area, capacity, location ,phone_number ,price ,book_type , description ,
+    is_lease ,create_date from station_info WHERE is_enable = 1
+    ) as lease_info
+    <!-- <if test="parameter.name != null and parameter.name != ''">
+       and e.name like concat('%', #{parameter.name,jdbcType=VARCHAR},'%')
+     </if>
+     <if test="parameter.legalName != null and parameter.legalName != ''">
+       and e.legal_name like concat('%', #{parameter.legalName,jdbcType=VARCHAR},'%')
+     </if>
+     <if test="parameter.unifiedSocialCreditCode != null and parameter.unifiedSocialCreditCode != ''">
+       and e.unified_social_credit_code like concat('%', #{parameter.unifiedSocialCreditCode,jdbcType=VARCHAR},'%')
+     </if>
+     <if test="parameter.scale != null and parameter.scale != ''">
+       and e.scale = #{parameter.scale,jdbcType=SMALLINT}
+     </if>-->
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
 
-    <!--APP-->
-    <select id="List" resultMap="ResultMap">
+  <!--APP-->
+  <select id="List" resultMap="ResultMap">
      select id ,  name , area, capacity, location ,phone_number ,price ,book_type , description ,
     is_lease ,create_date  from ( SELECT id , site_name as name ,area, capacity, location ,phone_number ,price ,book_type , description  , is_lease ,create_date  from site  WHERE is_enable = 1
     UNION
     SELECT id , conference_name as name ,area, capacity, location ,phone_number ,price ,book_type , description, is_lease ,create_date from conference_room_info  WHERE is_enable = 1
+      UNION
+        SELECT id , title as name , area, capacity, location ,phone_number ,price ,book_type , description ,
+        is_lease ,create_date from station_info WHERE is_enable = 1
   ) as lease_info  order by  create_date desc
   </select>
 
-    <!--APP-->
-    <select id="isLeaseList" resultMap="ResultMap">
+  <!--APP-->
+  <select id="isLeaseList" resultMap="ResultMap">
        select id ,  name , area, capacity, location ,phone_number ,price ,book_type , description ,
     is_lease ,create_date  from ( SELECT id , site_name as name ,area, capacity, location ,phone_number ,price ,book_type , description  , is_lease ,create_date  from site  WHERE is_enable = 1 and is_lease = 1
     UNION
     SELECT id , conference_name as name ,area, capacity, location ,phone_number ,price ,book_type , description, is_lease ,create_date from conference_room_info  WHERE is_enable = 1 and is_lease = 1
+      UNION
+        SELECT id , title as name , area, capacity, location ,phone_number ,price ,book_type , description ,
+        is_lease ,create_date from station_info WHERE is_enable = 1  and is_lease = 1
   ) as lease_info  order by  create_date desc
    </select>
-    <!--APP-->
-    <select id="noLeaseList" resultMap="ResultMap">
+  <!--APP-->
+  <select id="noLeaseList" resultMap="ResultMap">
         select id ,  name , area, capacity, location ,phone_number ,price ,book_type , description ,
     is_lease ,create_date  from ( SELECT id , site_name as name ,area, capacity, location ,phone_number ,price ,book_type , description  , is_lease ,create_date  from site  WHERE is_enable = 1 and is_lease = 2
     UNION
     SELECT id , conference_name as name ,area, capacity, location ,phone_number ,price ,book_type , description, is_lease ,create_date from conference_room_info  WHERE is_enable = 1 and is_lease = 2
+    UNION
+        SELECT id , title as name , area, capacity, location ,phone_number ,price ,book_type , description ,
+        is_lease ,create_date from station_info WHERE is_enable = 1  and is_lease = 2
   ) as lease_info  order by  create_date desc
   </select>
 </mapper>

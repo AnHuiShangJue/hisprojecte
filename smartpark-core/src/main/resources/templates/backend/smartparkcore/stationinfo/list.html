@@ -208,13 +208,13 @@
 
     $("#createBtn").click(
         function addSize() {
-            var url = CTX + "/api/site/add/index.ahsj?token=" + TOKEN;
-            dialog.show(url, "新增场地");
+            var url = CTX + "/api/stationinfo/addStationinfo.ahsj?token=" + TOKEN;
+            dialog.show(url, "新增工位");
         })
 
     function update(id) {
-        var url = CTX + "/api/site/update/index.ahsj?token=" + TOKEN + "&id=" + id;
-        dialog.show(url, "修改场地");
+        var url = CTX + "/api/stationinfo/updateStationinfo.ahsj?token=" + TOKEN + "&id=" + id;
+        dialog.show(url, "修改工位");
     }
 
     function isVerify(id) {

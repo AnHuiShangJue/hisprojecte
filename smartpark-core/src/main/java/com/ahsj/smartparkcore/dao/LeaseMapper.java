@@ -1,6 +1,5 @@
 package com.ahsj.smartparkcore.dao;
 
-import com.ahsj.smartparkcore.entity.po.EnterpriseInfo;
 import com.ahsj.smartparkcore.entity.po.Lease;
 import com.ahsj.smartparkcore.entity.vo.LeaseVO;
 import core.entity.PageBean;
@@ -11,13 +10,13 @@ import java.util.List;
 @Mapper
 public interface LeaseMapper {
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(Lease lease);
 
     int insertSelective(Lease lease);
 
-    Lease selectByPrimaryKey(Integer id);
+    Lease selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(Lease lease);
 

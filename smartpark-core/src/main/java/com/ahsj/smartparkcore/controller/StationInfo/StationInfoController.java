@@ -4,16 +4,17 @@ import com.ahsj.smartparkcore.entity.dto.EnterpriseInfoDTO;
 import com.ahsj.smartparkcore.entity.dto.StationInfoDTO;
 import com.ahsj.smartparkcore.entity.po.EnterpriseInfo;
 import com.ahsj.smartparkcore.entity.po.StationInfo;
+import com.ahsj.smartparkcore.entity.vo.StationInfoVO;
 import com.ahsj.smartparkcore.services.StationInfoService;
 import core.controller.BaseController;
 import core.entity.PageBean;
+import core.message.Message;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -58,11 +59,57 @@ public class StationInfoController extends BaseController {
      * @Time 18:15
      **/
     @PostMapping("/list.ahsj")
-    public ResponseEntity<PageBean<StationInfo>> queryList(StationInfoDTO stationInfoDTO) {
+    public ResponseEntity<PageBean<StationInfo>> queryList(StationInfoDTO stationInfoDTO) throws Exception {
         DozerBeanMapper mapper = new DozerBeanMapper();
         StationInfo map = mapper.map(stationInfoDTO, StationInfo.class);
         PageBean<StationInfo> pageBean = new PageBean<>();
         pageBean.setParameter(map);
         return ResponseEntity.ok(stationInfoService.queryList(pageBean));
+    }
+
+
+
+    @GetMapping("/addStationinfo.ahsj")
+    public ModelAndView addStationinfo(String token) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/stationinfo/add");
+        modelAndView.addObject("token", token);
+        return modelAndView;
+    }
+
+    @GetMapping("/updateStationinfo.ahsj")
+    public ModelAndView addStationinfo(String token, @RequestParam("id") Long id) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/stationinfo/update");
+        StationInfoVO stationInfoVO = stationInfoService.selectById(id);
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("stationInfoVO", stationInfoVO);
+        return modelAndView;
+    }
+
+    /**
+     * @return core.message.Message
+     * @功能说明
+     * @Params [enterpriseInfo]
+     * @Author XJP
+     * @Date 2019/9/2
+     * @Time 15:52
+     **/
+    @PostMapping("/add/stationinfo.ahsj")
+    public ResponseEntity<Message> addStationinfo(StationInfoDTO infoDTO, @RequestParam(value = "file", required = false) MultipartFile[] file, String relateKet, String relatePage) throws Exception {
+        Message message = stationInfoService.addStationinfo(infoDTO, file, relateKet, relatePage);
+        return new ResponseEntity<>((message), HttpStatus.OK);
+    }
+
+    /**
+     * @return core.message.Message
+     * @功能说明 修改 企业信息
+     * @Params [enterpriseInfo]
+     * @Author XJP
+     * @Date 2019/9/2
+     * @Time 15:52
+     **/
+    @PostMapping("/update/stationinfo.ahsj")
+    public ResponseEntity<Message> updateStationinfo(StationInfoDTO stationInfoDTO, @RequestParam(value = "file", required = false) MultipartFile[] file, String relateKet, String relatePage) throws Exception {
+        Message message = stationInfoService.updateStationinfo(stationInfoDTO, file, relateKet, relatePage);
+        return new ResponseEntity<>((message), HttpStatus.OK);
     }
 }

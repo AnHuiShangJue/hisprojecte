@@ -29,4 +29,6 @@ public interface StationInfoMapper {
      *@Time 18:15
     **/
     List<StationInfo> queryList(PageBean<StationInfo> pageBean);
+
+    StationInfo selectByTitle(String title);
 }

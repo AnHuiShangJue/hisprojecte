@@ -37,7 +37,7 @@
     delete from conference_room_info
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo">
+  <insert id="insert" parameterType="com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo" useGeneratedKeys="true" keyProperty="id">
     insert into conference_room_info (id, location, price, 
       area, environmental_label, capacity, 
       description, is_enable, name, 

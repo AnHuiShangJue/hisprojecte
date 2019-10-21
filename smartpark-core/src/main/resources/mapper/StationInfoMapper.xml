@@ -286,14 +286,18 @@
     <include refid="Base_Column_List" />
     from station_info
     where 1=1
-
     <if test="parameter.location != null and parameter.location != ''">
       and location  like concat('%', #{parameter.location,jdbcType=VARCHAR},'%')
     </if>
-
     <if test="parameter.orders != null and parameter.orders != ''">
       order by ${parameter.orders}
     </if>
+  </select>
 
+  <select id="selectByTitle" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from station_info  where
+    title = #{title,jdbcType=VARCHAR}
   </select>
 </mapper>

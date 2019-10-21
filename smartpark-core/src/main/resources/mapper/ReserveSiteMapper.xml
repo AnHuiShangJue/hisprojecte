@@ -35,7 +35,7 @@
     delete from reserve_site
     where id = #{id,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="com.ahsj.smartparkcore.entity.po.ReserveSite">
+    <insert id="insert" parameterType="com.ahsj.smartparkcore.entity.po.ReserveSite" useGeneratedKeys="true" keyProperty="id">
     insert into reserve_site (id, site_id, price, 
       create_user_id, is_reserve, strat_time, 
       end_time, is_pay, is_cancel, 
