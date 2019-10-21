@@ -23,6 +23,8 @@ public class LeaseVO extends Lease {
 
     private String location;
 
+    private String name;
+
     private BigDecimal price;
 
     private Double area;
@@ -33,11 +35,29 @@ public class LeaseVO extends Lease {
 
     private String capacity;
 
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_lease", typeName = "isLeaseName")
     private Integer isLease;
+    private String isLeaseName;
 
     @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "book_type", typeName = "bookTypeName")
     private Integer bookType;
     private String bookTypeName;
+
+    public String getIsLeaseName() {
+        return isLeaseName;
+    }
+
+    public void setIsLeaseName(String isLeaseName) {
+        this.isLeaseName = isLeaseName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Integer getIsLease() {
         return isLease;

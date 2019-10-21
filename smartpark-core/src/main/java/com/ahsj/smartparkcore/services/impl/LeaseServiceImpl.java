@@ -63,6 +63,12 @@ public class LeaseServiceImpl implements LeaseService {
                 if (leaseVO.getBookType() == 3) {
                     leaseVO.setBookTypeName(Constants.StationInfo);
                 }
+                if (leaseVO.getIsLease()==1){
+                    leaseVO.setIsLeaseName(Constants.IS_LEASE);
+                }
+                if (leaseVO.getIsLease()==2){
+                    leaseVO.setIsLeaseName(Constants.NO_LEASE);
+                }
             }
             return list;
         }
@@ -93,6 +99,12 @@ public class LeaseServiceImpl implements LeaseService {
                 if (leaseVO.getBookType() == 3) {
                     leaseVO.setBookTypeName(Constants.StationInfo);
                 }
+                if (leaseVO.getIsLease()==1){
+                    leaseVO.setIsLeaseName(Constants.IS_LEASE);
+                }
+                if (leaseVO.getIsLease()==2){
+                    leaseVO.setIsLeaseName(Constants.NO_LEASE);
+                }
             }
             return list;
         }
@@ -122,6 +134,12 @@ public class LeaseServiceImpl implements LeaseService {
                 }
                 if (leaseVO.getBookType() == 3) {
                     leaseVO.setBookTypeName(Constants.StationInfo);
+                }
+                if (leaseVO.getIsLease()==1){
+                    leaseVO.setIsLeaseName(Constants.IS_LEASE);
+                }
+                if (leaseVO.getIsLease()==2){
+                    leaseVO.setIsLeaseName(Constants.NO_LEASE);
                 }
             }
             return list;

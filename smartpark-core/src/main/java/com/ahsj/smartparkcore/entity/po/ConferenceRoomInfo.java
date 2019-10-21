@@ -1,8 +1,10 @@
 package com.ahsj.smartparkcore.entity.po;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import core.code.CodeValueColumn;
 import core.code.Constants;
 import core.entity.BaseEntity;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -30,6 +32,8 @@ public class ConferenceRoomInfo  extends BaseEntity {
 
     private String phoneNumber;
 
+    @JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date createDate;
 
     private Date updateDate;

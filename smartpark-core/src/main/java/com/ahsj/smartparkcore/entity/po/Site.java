@@ -1,10 +1,13 @@
 package com.ahsj.smartparkcore.entity.po;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import core.code.CodeValueColumn;
 import core.code.Constants;
 import core.entity.BaseEntity;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class Site extends BaseEntity {
     private Long id;
@@ -25,25 +28,31 @@ public class Site extends BaseEntity {
 
     private String description;
 
-
     private String capacity;
 
     private String environmentalLabel;
-
 
     private Long enterpriseId;
 
     @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_verify", typeName = "verifyName")
     private Integer isVerify;
     private String verifyName;
+
     @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_lease", typeName = "leaseName")
     private Integer isLease;
     private String leaseName;
+
     @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_enable", typeName = "enableName")
     private Short isEnable;
     private String enableName;
 
     private Integer bookType;
+
+    @JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    private Date createDate;
+
+    private Date updateDate;
 
     public Integer getBookType() {
         return bookType;
@@ -195,5 +204,25 @@ public class Site extends BaseEntity {
 
     public void setEnterpriseId(Long enterpriseId) {
         this.enterpriseId = enterpriseId;
+    }
+
+    @Override
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    @Override
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    @Override
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    @Override
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 }
