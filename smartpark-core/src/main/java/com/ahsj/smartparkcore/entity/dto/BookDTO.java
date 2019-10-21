@@ -1,6 +1,7 @@
 package com.ahsj.smartparkcore.entity.dto;
 
 import com.ahsj.smartparkcore.entity.po.Book;
+import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import core.code.CodeValueColumn;
 import core.code.Constants;
@@ -26,10 +27,12 @@ public class BookDTO extends Book {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date startTime;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date endTime;
 
     @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_audit", typeName = "isAuditName")
@@ -57,6 +60,69 @@ public class BookDTO extends Book {
     private String remarks;
 
     private String description;
+
+    private Double area;
+
+    private String capacity;
+
+
+    private String location;
+
+    private String name;
+
+    private BigDecimal price;
+
+    private String contactName;
+
+
+
+    public Double getArea() {
+        return area;
+    }
+
+    public void setArea(Double area) {
+        this.area = area;
+    }
+
+    public String getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(String capacity) {
+        this.capacity = capacity;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public String getContactName() {
+        return contactName;
+    }
+
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
+    }
 
     @Override
     public Long getId() {

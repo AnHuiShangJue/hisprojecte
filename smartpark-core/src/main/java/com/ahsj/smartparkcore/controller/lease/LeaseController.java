@@ -1,5 +1,7 @@
 package com.ahsj.smartparkcore.controller.lease;
 
+import com.ahsj.smartparkcore.entity.dto.LeaseDTO;
+import com.ahsj.smartparkcore.entity.po.Lease;
 import com.ahsj.smartparkcore.entity.vo.LeaseVO;
 import com.ahsj.smartparkcore.services.ConferenceRoomInfoService;
 import com.ahsj.smartparkcore.services.LeaseService;
@@ -111,6 +113,19 @@ public class LeaseController extends BaseController {
     public List<LeaseVO> noLeaseList() throws Exception {
         List<LeaseVO> list = leaseService.noLeaseList();
         return list;
+    }
+
+    /**
+     * @Description targetType  targetId 查信息
+     * @Params: [lease]
+     * @Author: dingli
+     * @Return: com.ahsj.smartparkcore.entity.po.Lease
+     * @Date 2019/10/21
+     * @Time 15:23
+     **/
+    @RequestMapping("/getLease.ahsj")
+    public LeaseDTO selectLease(LeaseVO leaseVO) throws Exception {
+        return leaseService.selectLease(leaseVO);
     }
 
 }

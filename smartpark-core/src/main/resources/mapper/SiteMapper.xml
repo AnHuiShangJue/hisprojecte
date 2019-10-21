@@ -301,4 +301,9 @@
       #{id,jdbcType=BIGINT}
     </foreach>
   </select>
+  <select id="selectAll" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from site
+  </select>
 </mapper>

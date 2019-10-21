@@ -300,4 +300,10 @@
     from station_info  where
     title = #{title,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectAll" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from station_info
+  </select>
 </mapper>

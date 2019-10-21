@@ -246,14 +246,14 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-    <select id="selectTime" parameterType="com.ahsj.smartparkcore.entity.dto.BookDTO" resultMap="BaseResultMap" >
+    <select id="selectTime" parameterType="com.ahsj.smartparkcore.entity.dto.BookDTO" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from book
         where is_cancel =2 and is_pay = 1
         and book_type = #{bookType,jdbcType=INTEGER}
         and target_id = #{targetId,jdbcType=BIGINT}
-        and not ( start_time &gt;= #{endTime,jdbcType=TIMESTAMP} or end_time &lt;= #{startTime,jdbcType=TIMESTAMP});
+        and not ( start_time &gt; = #{endTime,jdbcType=TIMESTAMP} or end_time &lt;= #{startTime,jdbcType=TIMESTAMP});
     </select>
 
     <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
@@ -273,6 +273,17 @@
         <if test="parameter.phoneNumber != null and parameter.phoneNumber != ''">
             and phone_number like concat('%', #{parameter.phoneNumber,jdbcType=VARCHAR},'%')
         </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+    <select id="listByDate" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from book
+        where 1=1
+        and  start_time &lt;= now()
         <if test="parameter.orders != null and parameter.orders != ''">
             order by ${parameter.orders}
         </if>

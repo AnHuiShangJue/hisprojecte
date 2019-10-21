@@ -25,4 +25,6 @@ public interface SiteMapper {
     Site selectBySiteName(String siteName)throws Exception;
 
     int setEnable(Site record)throws Exception;
+
+    List<Site> selectAll()throws Exception;
 }

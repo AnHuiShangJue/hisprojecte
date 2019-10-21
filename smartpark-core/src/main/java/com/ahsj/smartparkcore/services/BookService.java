@@ -3,8 +3,11 @@ package com.ahsj.smartparkcore.services;
 import com.ahsj.smartparkcore.core.ResultModel;
 import com.ahsj.smartparkcore.entity.dto.BookDTO;
 import com.ahsj.smartparkcore.entity.po.Book;
+import com.ahsj.smartparkcore.entity.vo.BookVO;
 import core.entity.PageBean;
 import org.springframework.http.ResponseEntity;
+
+import java.util.List;
 
 public interface BookService {
     /**
@@ -57,4 +60,15 @@ public interface BookService {
      **/
     Book selectByPrimaryKey(Long id) throws Exception;
 
+    /**
+     * @Description 查询所有的租赁
+     * @Params: []
+     * @Author: dingli
+     * @Return: com.ahsj.smartparkcore.entity.dto.BookDTO
+     * @Date 2019/10/21
+     * @Time 15:44
+     **/
+    List<BookDTO> selectAllBook() throws Exception;
+
+    PageBean<BookDTO> listByDate(PageBean<BookDTO> pageBean) throws Exception;
 }

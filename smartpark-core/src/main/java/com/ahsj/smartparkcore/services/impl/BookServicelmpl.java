@@ -4,11 +4,14 @@ import com.ahsj.smartparkcore.core.CodeHelper;
 import com.ahsj.smartparkcore.core.ResultModel;
 import com.ahsj.smartparkcore.core.ResultStatus;
 import com.ahsj.smartparkcore.dao.BookMapper;
+import com.ahsj.smartparkcore.dao.ConferenceRoomInfoMapper;
+import com.ahsj.smartparkcore.dao.SiteMapper;
+import com.ahsj.smartparkcore.dao.StationInfoMapper;
 import com.ahsj.smartparkcore.entity.dto.BookDTO;
 import com.ahsj.smartparkcore.entity.dto.ReserveSiteDTO;
-import com.ahsj.smartparkcore.entity.po.Book;
-import com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo;
-import com.ahsj.smartparkcore.entity.po.ReserveSite;
+import com.ahsj.smartparkcore.entity.dto.SiteDTO;
+import com.ahsj.smartparkcore.entity.po.*;
+import com.ahsj.smartparkcore.entity.vo.ConferenceRoomInfoVO;
 import com.ahsj.smartparkcore.services.BookService;
 import core.entity.PageBean;
 import org.dozer.DozerBeanMapper;
@@ -19,12 +22,23 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utils.EmptyUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class BookServicelmpl implements BookService {
+
     @Autowired
     BookMapper bookMapper;
+
+    @Autowired
+    SiteMapper siteMapper;
+
+    @Autowired
+    ConferenceRoomInfoMapper conferenceRoomInfoMapper;
+
+    @Autowired
+    StationInfoMapper stationInfoMapper;
 
     /**
      * @return org.springframework.http.ResponseEntity<com.ahsj.smartparkcore.core.ResultModel>
@@ -37,6 +51,7 @@ public class BookServicelmpl implements BookService {
     @Override
     @Transactional(readOnly = false)
     public ResponseEntity<ResultModel> save(BookDTO bookDTO) throws Exception {
+
         List<Book> books = bookMapper.selectTime(bookDTO);//查询是否有时间冲突
         DozerBeanMapper mapper = new DozerBeanMapper();
         //DTO转化为PO 存入数据库
@@ -131,5 +146,77 @@ public class BookServicelmpl implements BookService {
     @Transactional(readOnly = true)
     public Book selectByPrimaryKey(Long id) throws Exception {
         return CodeHelper.getInstance().setCodeValue(bookMapper.selectByPrimaryKey(id));
+    }
+
+    /**
+     * @Description 获取所有的租赁信息
+     * @Params: []
+     * @Author: dingli
+     * @Return: com.ahsj.smartparkcore.entity.dto.BookDTO
+     * @Date 2019/10/21
+     * @Time 15:46
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<BookDTO> selectAllBook() throws Exception {
+        List<BookDTO> list = new ArrayList<>();
+        List<Site> siteDTOS = siteMapper.selectAll();
+        for (Site siteDTO : siteDTOS) {
+            BookDTO bookDTO = new BookDTO();
+            bookDTO.setBookType(2);
+            bookDTO.setTargetId(siteDTO.getId());
+            bookDTO.setArea(siteDTO.getArea());
+            bookDTO.setCapacity(siteDTO.getCapacity());
+            bookDTO.setDescription(siteDTO.getDescription());
+            bookDTO.setLocation(siteDTO.getLocation());
+            bookDTO.setName(siteDTO.getSiteName());
+            bookDTO.setPhoneNumber(siteDTO.getPhoneNumber());
+            bookDTO.setContactName(siteDTO.getName());
+            list.add(bookDTO);
+        }
+        List<ConferenceRoomInfo> conferenceRoomInfoVOS = conferenceRoomInfoMapper.selectAll();
+        for (ConferenceRoomInfo conferenceRoomInfoVO : conferenceRoomInfoVOS) {
+            BookDTO bookDTO = new BookDTO();
+            bookDTO.setBookType(1);
+            bookDTO.setTargetId(conferenceRoomInfoVO.getId());
+            bookDTO.setArea(conferenceRoomInfoVO.getArea());
+            bookDTO.setCapacity(conferenceRoomInfoVO.getCapacity());
+            bookDTO.setDescription(conferenceRoomInfoVO.getDescription());
+            bookDTO.setLocation(conferenceRoomInfoVO.getLocation());
+            bookDTO.setName(conferenceRoomInfoVO.getConferenceName());
+            bookDTO.setPhoneNumber(conferenceRoomInfoVO.getPhoneNumber());
+            bookDTO.setContactName(conferenceRoomInfoVO.getName());
+            list.add(bookDTO);
+        }
+        List<StationInfo> stationInfos = stationInfoMapper.selectAll();
+        for (StationInfo stationInfo : stationInfos) {
+            BookDTO bookDTO = new BookDTO();
+            bookDTO.setBookType(3);
+            bookDTO.setTargetId(stationInfo.getId());
+            bookDTO.setArea(stationInfo.getArea());
+            bookDTO.setCapacity(stationInfo.getCapacity());
+            bookDTO.setDescription(stationInfo.getDescription());
+            bookDTO.setLocation(stationInfo.getLocation());
+            bookDTO.setName(stationInfo.getTitle());
+            bookDTO.setPhoneNumber(stationInfo.getPhoneNumber());
+            bookDTO.setContactName(stationInfo.getName());
+            list.add(bookDTO);
+        }
+        return list;
+    }
+
+    /**
+     * @Description 查询租赁
+     * @Params: [pageBean]
+     * @Author: dingli
+     * @Return: core.entity.PageBean<com.ahsj.smartparkcore.entity.dto.BookDTO>
+     * @Date 2019/10/21
+     * @Time 16:38
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public PageBean<BookDTO> listByDate(PageBean<BookDTO> pageBean) throws Exception {
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(bookMapper.listByDate(pageBean)));
+        return pageBean;
     }
 }

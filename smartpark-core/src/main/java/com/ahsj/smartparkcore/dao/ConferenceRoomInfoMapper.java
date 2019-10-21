@@ -32,4 +32,6 @@ public interface ConferenceRoomInfoMapper extends BaseMapper<ConferenceRoomInfo>
      *@Time 13:48
     **/
     List<ConferenceRoomInfoVO> listForView();
+
+    List<ConferenceRoomInfo> selectAll();
 }

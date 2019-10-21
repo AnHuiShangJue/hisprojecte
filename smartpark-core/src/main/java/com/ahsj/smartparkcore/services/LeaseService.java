@@ -1,8 +1,11 @@
 package com.ahsj.smartparkcore.services;
 
+import com.ahsj.smartparkcore.entity.dto.LeaseDTO;
 import com.ahsj.smartparkcore.entity.po.EnterpriseInfo;
+import com.ahsj.smartparkcore.entity.po.Lease;
 import com.ahsj.smartparkcore.entity.vo.LeaseVO;
 import core.entity.PageBean;
+import sun.plugin2.message.Message;
 
 import java.util.List;
 
@@ -58,4 +61,14 @@ public interface LeaseService {
      * @Time 17:39
      **/
     List<LeaseVO> noLeaseList() throws Exception;
+
+    /**
+     * @Description 根据 targetType  targetId 查信息
+     * @Params: [lease]
+     * @Author: dingli
+     * @Return: int
+     * @Date 2019/10/21
+     * @Time 14:52
+     **/
+    LeaseDTO selectLease(LeaseVO leaseVO) throws Exception;
 }
