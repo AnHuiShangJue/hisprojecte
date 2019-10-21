@@ -43,10 +43,13 @@ spring:
   application:
     name: eureka-userinfo
   datasource:
-    #      url: jdbc:log4jdbc:mysql://127.0.0.1:3306/his-userinfo?useUnicode=true&characterEncoding=utf8&useSSL=true
+#    #      url: jdbc:log4jdbc:mysql://127.0.0.1:3306/his-userinfo?useUnicode=true&characterEncoding=utf8&useSSL=true
     url: jdbc:log4jdbc:mysql://192.168.0.105:3306/sys-user-info?useUnicode=true&characterEncoding=utf8&useSSL=true
-    username: root
-    password: 123456
+    username: ahsj
+    password: shangjue0603
+#    url: jdbc:log4jdbc:mysql://192.168.0.107:3306/sys-user-info?useUnicode=true&characterEncoding=utf8&useSSL=true
+#    username: root
+#    password: 123456
     driver-class-name: net.sf.log4jdbc.DriverSpy
     type: com.zaxxer.hikari.HikariDataSource
   #    secondary:
