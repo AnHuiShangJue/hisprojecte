@@ -1,17 +1,24 @@
 package com.ahsj.smartparkcore.dao;
 
 import com.ahsj.smartparkcore.entity.po.JoinEnterpriseReview;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface JoinEnterpriseReviewMapper {
+
     int deleteByPrimaryKey(Long id);
 
-    int insert(JoinEnterpriseReview record);
+    int insert(JoinEnterpriseReview joinEnterpriseReview);
 
-    int insertSelective(JoinEnterpriseReview record);
+    int insertSelective(JoinEnterpriseReview joinEnterpriseReview);
 
     JoinEnterpriseReview selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(JoinEnterpriseReview record);
+    int updateByPrimaryKeySelective(JoinEnterpriseReview joinEnterpriseReview);
 
-    int updateByPrimaryKey(JoinEnterpriseReview record);
+    int updateByPrimaryKey(JoinEnterpriseReview joinEnterpriseReview);
+
+    JoinEnterpriseReview queryJoinEnterpriseReview(JoinEnterpriseReview joinEnterpriseReview);
+
+    JoinEnterpriseReview queryJoinEnterpriseReviewByEmailAndPhone(JoinEnterpriseReview joinEnterpriseReview);
 }

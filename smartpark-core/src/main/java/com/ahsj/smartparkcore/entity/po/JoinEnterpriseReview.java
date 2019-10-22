@@ -1,8 +1,10 @@
 package com.ahsj.smartparkcore.entity.po;
 
+import core.entity.BaseEntity;
+
 import java.util.Date;
 
-public class JoinEnterpriseReview {
+public class JoinEnterpriseReview  extends BaseEntity {
     private Long id;
 
     private Long enterpriseId;
@@ -15,13 +17,13 @@ public class JoinEnterpriseReview {
 
     private Date updateDate;
 
-    private Long createUserId;
-
-    private Long updateUserId;
-
     private Date createDate;
 
     private String remarks;
+
+    private String phoneNumber;
+
+    private String email;
 
     public Long getId() {
         return id;
@@ -71,22 +73,6 @@ public class JoinEnterpriseReview {
         this.updateDate = updateDate;
     }
 
-    public Long getCreateUserId() {
-        return createUserId;
-    }
-
-    public void setCreateUserId(Long createUserId) {
-        this.createUserId = createUserId;
-    }
-
-    public Long getUpdateUserId() {
-        return updateUserId;
-    }
-
-    public void setUpdateUserId(Long updateUserId) {
-        this.updateUserId = updateUserId;
-    }
-
     public Date getCreateDate() {
         return createDate;
     }
@@ -101,5 +87,21 @@ public class JoinEnterpriseReview {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks == null ? null : remarks.trim();
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber == null ? null : phoneNumber.trim();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
     }
 }

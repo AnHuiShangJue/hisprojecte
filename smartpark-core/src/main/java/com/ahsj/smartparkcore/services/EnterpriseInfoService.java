@@ -91,5 +91,23 @@ public interface EnterpriseInfoService {
      **/
     Message updateIsEnable(EnterpriseInfoDTO enterpriseInfoDTO) throws Exception;
 
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.po.EnterpriseInfo>
+     * @功能说明
+     * @Params []
+     * @Author XJP
+     * @Date 2019/10/22
+     * @Time 15:33
+     **/
     List<EnterpriseInfo> enterpriseInfoAll() throws Exception;
+
+    /**
+     * @return com.ahsj.smartparkcore.entity.po.EnterpriseInfo
+     * @功能说明
+     * @Params [enterpriseInfo]
+     * @Author XJP
+     * @Date 2019/10/22
+     * @Time 15:34
+     **/
+    EnterpriseInfo queryEnterpriseInfo(EnterpriseInfo enterpriseInfo) throws Exception;
 }

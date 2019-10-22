@@ -12,10 +12,12 @@
     <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, enterprise_id, user_id, is_review, audit_opinion, update_date, create_user_id, 
-    update_user_id, create_date, remarks
+    update_user_id, create_date, remarks, phone_number, email
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -27,15 +29,17 @@
     delete from join_enterprise_review
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.ahsj.smartparkcore.entity.po.JoinEnterpriseReview" >
+  <insert id="insert" parameterType="com.ahsj.smartparkcore.entity.po.JoinEnterpriseReview" keyProperty="id" useGeneratedKeys="true">
     insert into join_enterprise_review (id, enterprise_id, user_id, 
       is_review, audit_opinion, update_date, 
       create_user_id, update_user_id, create_date, 
-      remarks)
+      remarks, phone_number, email
+      )
     values (#{id,jdbcType=BIGINT}, #{enterpriseId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
       #{isReview,jdbcType=INTEGER}, #{auditOpinion,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
       #{createUserId,jdbcType=BIGINT}, #{updateUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{remarks,jdbcType=VARCHAR})
+      #{remarks,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.ahsj.smartparkcore.entity.po.JoinEnterpriseReview" >
     insert into join_enterprise_review
@@ -70,6 +74,12 @@
       <if test="remarks != null" >
         remarks,
       </if>
+      <if test="phoneNumber != null" >
+        phone_number,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -101,6 +111,12 @@
       </if>
       <if test="remarks != null" >
         #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null" >
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -134,6 +150,12 @@
       <if test="remarks != null" >
         remarks = #{remarks,jdbcType=VARCHAR},
       </if>
+      <if test="phoneNumber != null" >
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -147,7 +169,28 @@
       create_user_id = #{createUserId,jdbcType=BIGINT},
       update_user_id = #{updateUserId,jdbcType=BIGINT},
       create_date = #{createDate,jdbcType=TIMESTAMP},
-      remarks = #{remarks,jdbcType=VARCHAR}
+      remarks = #{remarks,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <!--自定义SQL-->
+  <select id="queryJoinEnterpriseReview" resultMap="BaseResultMap"  parameterType="com.ahsj.smartparkcore.entity.po.JoinEnterpriseReview" >
+          select <include refid="Base_Column_List"/> from join_enterprise_review where
+    enterprise_id = #{enterpriseId,jdbcType=BIGINT}
+    <if test="phoneNumber != null and phoneNumber != ''">
+      and  phone_number = #{phoneNumber,jdbcType=VARCHAR}
+    </if>
+    <if test="email != null and email != ''">
+      and email = #{email,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+
+  <select id="queryJoinEnterpriseReviewByEmailAndPhone" resultMap="BaseResultMap"  parameterType="com.ahsj.smartparkcore.entity.po.JoinEnterpriseReview" >
+          select <include refid="Base_Column_List"/> from join_enterprise_review where
+    enterprise_id = #{enterpriseId,jdbcType=BIGINT}
+      and  phone_number = #{phoneNumber,jdbcType=VARCHAR}
+  </select>
 </mapper>

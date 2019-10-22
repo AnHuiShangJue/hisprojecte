@@ -316,6 +316,17 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
         return enterpriseInfo;
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public EnterpriseInfo queryEnterpriseInfo(EnterpriseInfo enterpriseInfo) throws Exception {
+        EnterpriseInfo enterpriseInfo1 = enterpriseInfoMapper.queryEnterpriseInfo(enterpriseInfo);
+        if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo1)){
+            return new EnterpriseInfo();
+        }else {
+            return enterpriseInfo1;
+        }
+    }
+
 
     /**
      * @return core.message.Message
