@@ -122,4 +122,36 @@ public class AccessInfoServiceImpl implements AccessInfoService {
         }
 
     }
+
+    @Override
+    @Transactional(readOnly = false)
+    public Message reviewSuccess(Long id) throws Exception {
+        if (EmptyUtil.Companion.isNullOrEmpty(id)) {
+            return MessageUtil.createMessage(false, "访客申请信息审核失败 ！！！");
+        }
+        AccessInfo accessInfo = accessInfoMapper.selectByPrimaryKey(id);
+        if (accessInfo.getIsVerify().equals(Constants.ONE)) {
+            return MessageUtil.createMessage(false, "该访客申请信息审核已经成功！ 无法继续审核 ！！！！！");
+        } else {
+            accessInfo.setIsVerify(Constants.ONE);
+            accessInfoMapper.updateByPrimaryKey(accessInfo);
+            return MessageUtil.createMessage(true, "访客申请信息审核成功 ！该访客申请信息验证通过 ！！");
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = false)
+    public Message reviewFail(Long id) throws Exception {
+        if (EmptyUtil.Companion.isNullOrEmpty(id)) {
+            return MessageUtil.createMessage(false, "访客申请信息审核失败 ！！！");
+        }
+        AccessInfo accessInfo = accessInfoMapper.selectByPrimaryKey(id);
+        if (accessInfo.getIsVerify().equals(Constants.ONE)) {
+            return MessageUtil.createMessage(false, "该访客申请信息审核已经成功！ 无法继续审核 ！！！！！");
+        } else {
+            accessInfo.setIsVerify(Constants.THREE);
+            accessInfoMapper.updateByPrimaryKey(accessInfo);
+            return MessageUtil.createMessage(true, "访客申请信息审核成功 ！该访客申请信息验证通过 ！！");
+        }
+    }
 }

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+
+<div th:replace="public/base_update :: html"></div>
+
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+<!--Form Advance-->
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div id="validation" class="card card card-default scrollspy" style="height: 700px;">
+            <div class="card-content">
+                <h4 class="card-title">访客申请信息审核</h4><label style="color:black">
+            </label>
+                <form class="col s12" id="sendForm" action="#">
+                    <input type="hidden" id="id" name="id" th:value="${accessInfoVO.id}">
+                    <div class="row">
+
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="accessName" name="accessName" type="text" th:value="${accessInfoVO.accessName}"
+                                   data-error=".errorTxt2">
+                            <div class="errorTxt2"></div>
+                            <label for="accessName">访客姓名</label>
+                        </div>
+
+
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="accessPhonenumber" name="accessPhonenumber" type="text" th:value="${accessInfoVO.accessPhonenumber}">
+                            <label for="accessPhonenumber">手机号码</label>
+                        </div>
+
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="accessIdcard" name="accessIdcard" type="text" th:value="${accessInfoVO.accessIdcard}">
+                            <label for="accessIdcard">身份证号码</label>
+                        </div>
+
+
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="intervieweeName" name="intervieweeName" type="text" th:value="${accessInfoVO.intervieweeName}"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label for="intervieweeName">被访问者</label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="intervieweePhonenumber" name="intervieweePhonenumber" type="text" th:value="${accessInfoVO.intervieweePhonenumber}"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label for="intervieweePhonenumber">手机号码</label>
+                        </div>
+
+
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="accessTime" name="accessTime" type="text" class="datepicker"  th:placeholder="${#dates.format(accessInfoVO.accessTime, 'yyyy/MM/dd')}" th:value="${#dates.format(accessInfoVO.accessTime, 'yyyy/MM/dd')}"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label for="accessTime">预约到访</label>
+                        </div>
+
+
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="accessReason" name="accessReason" type="text" th:value="${accessInfoVO.accessReason}"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label for="accessReason">访问理由</label>
+                        </div>
+
+                        <div class="input-field col s4 l4 xl4">
+                            <input type="hidden" id="myEnterpriseName" th:value="${accessInfoVO.enterpriseName}">
+                            <select name="enterpriseName" id="enterpriseName">
+                            </select>
+                            <label for="enterpriseName">访问公司</label>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button id="send_btnSuccess" class="btn cyan waves-effect waves-light left" type="button"
+                                    name="action">予以审核通过
+                                <i class="material-icons right">send</i>
+                            </button>
+                            <button id="send_btnFail" class="btn cyan waves-effect waves-light right" type="button"
+                                    name="action">不予审核通过
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="public/base_update_script :: html"></div>
+<script th:inline="javascript">
+    $(function () {
+        var nurIdSelect  = $("#enterpriseName");
+
+        var flag = $('#myEnterpriseName').val();
+
+        $.getJSON(CTX+"/api/accessinfo/enterpriseInfoAllSelect/index.ahsj?&token="+TOKEN, function (result){
+            if (flag == null || flag == "" ){
+                nurIdSelect.prepend("<option value='0'>选择公司</option>");
+
+                $(result).each(function (i) {
+                    nurIdSelect.append("<option value='" + this.name + "'>" + this.name + "</option>")
+                });
+            }else {
+                for (var j = 0;j<result.length;++j){
+                    if (flag == result[j].id){
+                        nurIdSelect.append("<option value='" + result[j].name + "'>" + result[j].name + "</option>");
+                    }
+                }
+                $(result).each(function (i) {
+                    nurIdSelect.append("<option value='" + this.name + "'>" + this.name + "</option>")
+                })
+            }
+
+            nurIdSelect.formSelect();
+        });
+        formCheck();
+        initSelect();
+        getSelectHome();
+        getCompany();
+        var select1 = $(".select2-container");
+        if (select1) {
+            select1.css('display', 'none');
+        }
+    });
+
+
+
+
+    enterpriseNameSelect.change(function () {
+        var enterpriseName = enterpriseNameSelect.val();
+        localStorage.setItem("enterpriseName", enterpriseName);
+        var careLevelId = localStorage.getItem("careLevelId");
+        localStorage.removeItem("careLevel");
+
+        if (careLevelId == 0) {
+            careLevelId = null;
+        }
+        if (enterpriseName == "选择公司") {
+            enterpriseName = null;
+        }
+        var hisHospitalManage = {
+            "enterpriseName": enterpriseName
+            ,
+            "careLevel": careLevelId
+        }
+        $.ahsjajax(
+            CTX + "/api/accessinfo/enterpriseInfoAll/index.ahsj",
+            hisHospitalManage,
+            function (msg) {
+                data = msg;
+                getContent();
+                var dataLength = data.length;
+                goPage(1, 10, dataLength);
+
+                if (msg.success) {
+                    M.toast({html: msg.message});
+                    return false;
+                } else {
+                    //M.toast({html: msg.message});
+                    return false;
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }
+        );
+    })
+
+    function initSelect() {
+        $("#type").select2({
+            minimumInputLength: 1,
+            maximumInputLength: 20
+        })
+    }
+
+    function getSelectHome() {
+        $.ahsjajax(
+            CTX + "/api/accessinfo/enterpriseInfoAll/index.ahsj",
+            null,
+            function (data) {
+                $(data).each(function (i) {
+                    enterpriseNameSelect.append(
+                        "<option value='" + this.name + "'>" + this.name + "</option>")
+                })
+                enterpriseNameSelect.formSelect();
+                if (msg.success) {
+                    M.toast({html: msg.message});
+                    return false;
+                } else {
+                    //M.toast({html: msg.message});
+                    return false;
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            })
+    }
+
+    function formCheck() {
+        $("#sendForm").validate({
+
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+                dialog.confirm('确定提交吗?', function (index, layero) {
+                    var queryString = $('#sendForm').serialize();
+                    console.log("queryString is" + queryString);
+
+                    $.ahsjajax(
+                        CTX + "/api/accessinfo/update/accessinfo.ahsj",
+                        queryString,
+                        function (msg) {
+                            if (msg.success) {
+                                M.toast({html: msg.message});
+                                parent.grid.search();
+                                dialog.parentclose();
+                                return false;
+                            } else {
+                                M.toast({html: msg.message});
+                                return false;
+                            }
+                        },
+                        function () {
+                            M.toast({html: "网络异常"});
+                            return false;
+                        }
+                    );
+                });
+            }
+
+        });
+
+        $("#send_btnSuccess").click(function () {
+            dialog.confirm('确定提交吗?', function (index, layero) {
+                var id = [[${accessInfoVO.id}]];
+                $.ahsjajax(
+                    CTX + "/api/accessinfo/reviewSuccess.ahsj",
+                    {"id": id},
+                    function (msg) {
+                        if (msg.success) {
+                            M.toast({html: msg.message});
+                            parent.grid.search();
+                            dialog.parentclose();
+                            return false;
+                        } else {
+                            M.toast({html: msg.message});
+                            return false;
+                        }
+                    },
+                    function () {
+                        M.toast({html: "网络异常"});
+                        return false;
+                    }
+                );
+            });
+        });
+
+        $("#send_btnFail").click(function () {
+            dialog.confirm('确定提交吗?', function (index, layero) {
+                var id = [[${accessInfoVO.id}]];
+                $.ahsjajax(
+                    CTX + "/api/accessinfo/reviewFail.ahsj",
+                    {"id": id},
+                    function (msg) {
+                        if (msg.success) {
+                            M.toast({html: msg.message});
+                            parent.grid.search();
+                            dialog.parentclose();
+                            return false;
+                        } else {
+                            M.toast({html: msg.message});
+                            return false;
+                        }
+                    },
+                    function () {
+                        M.toast({html: "网络异常"});
+                        return false;
+                    }
+                );
+            });
+        });
+    }
+
+    $("input").change(function () {
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</body>
+
+</html>

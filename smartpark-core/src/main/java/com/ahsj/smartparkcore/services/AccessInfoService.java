@@ -49,7 +49,35 @@ public interface AccessInfoService {
      **/
     AccessInfo selectById(Long id) throws Exception;
 
-    Message updateAccessinfo(AccessInfoDTO accessInfoDTO)throws Exception;
+    /**
+     * @return core.message.Message
+     * @功能说明
+     * @Params [accessInfoDTO]
+     * @Author XJP
+     * @Date 2019/10/22
+     * @Time 18:21
+     **/
+    Message updateAccessinfo(AccessInfoDTO accessInfoDTO) throws Exception;
+
+    /**
+     * @return core.message.Message
+     * @功能说明
+     * @Params [id]
+     * @Author XJP
+     * @Date 2019/10/22
+     * @Time 18:21
+     **/
+    Message reviewSuccess(Long id) throws Exception;
+
+    /**
+     * @return core.message.Message
+     * @功能说明
+     * @Params [id]
+     * @Author XJP
+     * @Date 2019/10/22
+     * @Time 18:21
+     **/
+    Message reviewFail(Long id) throws Exception;
 
     /**
      * @return com.ahsj.smartparkcore.entity.po.AccessInfo

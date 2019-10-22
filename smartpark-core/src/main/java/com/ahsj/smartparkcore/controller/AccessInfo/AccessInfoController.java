@@ -83,6 +83,16 @@ public class AccessInfoController extends BaseController {
         modelAndView.addObject("accessInfoVO", accessInfoVO);
         return modelAndView;
     }
+    @GetMapping("/audit.ahsj")
+    public ModelAndView audit(String token, @RequestParam("id") Long id) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/accessinfo/audit");
+        AccessInfo accessInfo = accessInfoService.selectById(id);
+        AccessInfoVO accessInfoVO = new AccessInfoVO();
+        BeanUtils.copyProperties(accessInfo, accessInfoVO);
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("accessInfoVO", accessInfoVO);
+        return modelAndView;
+    }
 
     /**
      * @return org.springframework.http.ResponseEntity<core.message.Message>
@@ -167,7 +177,31 @@ public class AccessInfoController extends BaseController {
         return ResponseEntity.ok(accessInfoService.queryList(pageBean));
     }
 
+    /**
+     *@功能说明
+     *@Params [id]
+     *@return core.message.Message
+     *@Author XJP
+     *@Date 2019/10/22
+     *@Time 18:20
+    **/
+    @PostMapping("/reviewSuccess.ahsj")
+    public Message reviewSuccess(@RequestParam("id") Long id) throws Exception {
+        return accessInfoService.reviewSuccess(id);
+    }
 
+    /**
+     *@功能说明
+     *@Params [id]
+     *@return core.message.Message
+     *@Author XJP
+     *@Date 2019/10/22
+     *@Time 18:20
+    **/
+    @PostMapping("/reviewFail.ahsj")
+    public Message reviewFail(@RequestParam("id") Long id) throws Exception {
+        return accessInfoService.reviewFail(id);
+    }
 
 
 

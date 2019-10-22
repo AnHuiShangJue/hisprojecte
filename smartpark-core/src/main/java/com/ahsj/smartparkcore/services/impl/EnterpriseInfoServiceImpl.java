@@ -95,13 +95,13 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
     @Transactional(readOnly = false)
     public Message addEnterpriseInfo(EnterpriseInfoDTO enterpriseInfoDTO, MultipartFile[] file, String relateKet, String relatePage) throws Exception {
         if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getProvinceId()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getCityId())
-                || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getAreaId()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getAddress())){
+                || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getAreaId()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getAddress())) {
             return MessageUtil.createMessage(false, "企业信息新增失败 ！ 公司地址不能为空！！");
         }
-        if(EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getIdCard())){
+        if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getIdCard())) {
             return MessageUtil.createMessage(false, "企业信息新增失败 ！ 身份证号不能为空！！");
         }
-        if(EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getOperatingPeriodStart()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getOperatingPeriodEnd())){
+        if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getOperatingPeriodStart()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getOperatingPeriodEnd())) {
             return MessageUtil.createMessage(false, "企业信息新增失败 ！ 注册时间或者有效期时间不能为空！！");
         }
         EnterpriseInfo enterpriseInfo = new EnterpriseInfo();
@@ -143,13 +143,13 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
     @Transactional(readOnly = false)
     public Message updateEnterpriseInfo(EnterpriseInfoDTO enterpriseInfoDTO, MultipartFile[] file, String relateKet, String relatePage) throws Exception {
         if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getProvinceId()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getCityId())
-                || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getAreaId()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getAddress())){
+                || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getAreaId()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getAddress())) {
             return MessageUtil.createMessage(false, "企业信息新增失败 ！ 公司地址不能为空！！");
         }
-        if(EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getIdCard())){
+        if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getIdCard())) {
             return MessageUtil.createMessage(false, "企业信息新增失败 ！ 身份证号不能为空！！");
         }
-        if(EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getOperatingPeriodStart()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getOperatingPeriodEnd())){
+        if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getOperatingPeriodStart()) || EmptyUtil.Companion.isNullOrEmpty(enterpriseInfoDTO.getOperatingPeriodEnd())) {
             return MessageUtil.createMessage(false, "企业信息新增失败 ！ 注册时间或者有效期时间不能为空！！");
         }
         EnterpriseInfo enterpriseInfo = new EnterpriseInfo();
@@ -214,22 +214,18 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
      **/
     @Override
     @Transactional(readOnly = false)
-    public Message auditEnterpriseInfo(EnterpriseInfo enterpriseInfo, String audit) {
-        if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo)) {
+    public Message auditEnterpriseInfo(Long id) {
+        if (EmptyUtil.Companion.isNullOrEmpty(id)) {
             return MessageUtil.createMessage(false, "企业信息审核失败 ！！！");
-        } else if (enterpriseInfo.getIsVerify().equals(Constants.ONE)) {
+        }
+        EnterpriseInfo enterpriseInfo = enterpriseInfoMapper.selectByPrimaryKey(id);
+
+        if (enterpriseInfo.getIsVerify().equals(Constants.ONE)) {
             return MessageUtil.createMessage(false, "该企业信息审核已经成功！ 无法继续审核 ！！！！！");
         } else {
-            if (StringUtils.equals(audit, Constants.SUCCESSFUL)) {
-                enterpriseInfo.setIsVerify(Constants.ONE);
-                enterpriseInfoMapper.updateByPrimaryKey(enterpriseInfo);
-                return MessageUtil.createMessage(true, "企业信息审核成功 ！该企业验证通过 ！！");
-            } else if (StringUtils.equals(audit, Constants.ERROR)) {
-                enterpriseInfo.setIsVerify(Constants.TWO);
-                enterpriseInfoMapper.updateByPrimaryKey(enterpriseInfo);
-                return MessageUtil.createMessage(true, "企业信息审核成功 ！该企业验证失败 ！！");
-            }
-            return MessageUtil.createMessage(false, "企业信息审核失败 ！！！");
+            enterpriseInfo.setIsVerify(Constants.ONE);
+            enterpriseInfoMapper.updateByPrimaryKey(enterpriseInfo);
+            return MessageUtil.createMessage(true, "企业信息审核成功 ！该企业验证通过 ！！");
         }
     }
 
@@ -268,7 +264,7 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
             String substring = StringUtils.substring(address, 0, 3);
             String substring1 = StringUtils.substring(address, 3, 6);
             String substring2 = StringUtils.substring(address, 6, 9);
-            String addressName = StringUtils.substring(address, 9,address.length());
+            String addressName = StringUtils.substring(address, 9, address.length());
             Region region = regionService.queryRegionName(substring);
             Region region1 = regionService.queryRegionName(substring1);
             Region region2 = regionService.queryRegionName(substring2);
@@ -309,21 +305,59 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
         }
     }
 
+    /**
+     *@功能说明
+     *@Params []
+     *@return java.util.List<com.ahsj.smartparkcore.entity.po.EnterpriseInfo>
+     *@Author XJP
+     *@Date 2019/10/22
+     *@Time 17:55
+    **/
     @Override
     @Transactional(readOnly = true)
     public List<EnterpriseInfo> enterpriseInfoAll() throws Exception {
         List<EnterpriseInfo> enterpriseInfo = enterpriseInfoMapper.enterpriseInfoAll();
         return enterpriseInfo;
     }
-
+/**
+ *@功能说明
+ *@Params [enterpriseInfo]
+ *@return com.ahsj.smartparkcore.entity.po.EnterpriseInfo
+ *@Author XJP
+ *@Date 2019/10/22
+ *@Time 17:55
+**/
     @Override
     @Transactional(readOnly = true)
     public EnterpriseInfo queryEnterpriseInfo(EnterpriseInfo enterpriseInfo) throws Exception {
         EnterpriseInfo enterpriseInfo1 = enterpriseInfoMapper.queryEnterpriseInfo(enterpriseInfo);
-        if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo1)){
+        if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfo1)) {
             return new EnterpriseInfo();
-        }else {
+        } else {
             return enterpriseInfo1;
+        }
+    }
+/**
+ *@功能说明
+ *@Params [id]
+ *@return core.message.Message
+ *@Author XJP
+ *@Date 2019/10/22
+ *@Time 17:55
+**/
+    @Override
+    @Transactional(readOnly = false)
+    public Message reviewFail(Long id) throws Exception {
+        if (EmptyUtil.Companion.isNullOrEmpty(id)) {
+            return MessageUtil.createMessage(false, "企业信息审核失败 ！！！");
+        }
+        EnterpriseInfo enterpriseInfo = enterpriseInfoMapper.selectByPrimaryKey(id);
+        if (enterpriseInfo.getIsVerify().equals(Constants.ONE)) {
+            return MessageUtil.createMessage(false, "该企业信息审核已经成功！ 无法继续审核 ！！！！！");
+        } else {
+            enterpriseInfo.setIsVerify(Constants.THREE);
+            enterpriseInfoMapper.updateByPrimaryKey(enterpriseInfo);
+            return MessageUtil.createMessage(true, "企业信息审核成功 ！该企业验证通过 ！！");
         }
     }
 

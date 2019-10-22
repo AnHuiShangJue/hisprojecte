@@ -202,9 +202,14 @@ public class EnterpriseInfoController extends BaseController {
      * @Date 2019/9/2
      * @Time 17:40
      **/
-    @PostMapping("/update/audit.ahsj")
-    public Message auditEnterpriseInfo(EnterpriseInfo enterpriseInfo, @RequestParam("audit") String audit) {
-        return enterpriseInfoService.auditEnterpriseInfo(enterpriseInfo, audit);
+    @PostMapping("/reviewSuccess.ahsj")
+    public Message reviewSuccess(@RequestParam("id") Long id) throws Exception {
+        return enterpriseInfoService.auditEnterpriseInfo(id);
+    }
+
+    @PostMapping("/reviewFail.ahsj")
+    public Message reviewFail(@RequestParam("id") Long id) throws Exception {
+        return enterpriseInfoService.reviewFail(id);
     }
 
     /**

@@ -136,7 +136,7 @@
 
                     <div class="row">
                         <div class="input-field col s12">
-                            <button id="send_btnSuccess" class="btn cyan waves-effect waves-light right" type="button"
+                            <button id="send_btnSuccess" class="btn cyan waves-effect waves-light left" type="button"
                                     name="action">予以审核通过
                                 <i class="material-icons right">send</i>
                             </button>
@@ -293,9 +293,9 @@
 
         $("#send_btnSuccess").click(function () {
             dialog.confirm('确定提交吗?', function (index, layero) {
-                var id = [[${hisDrugLossReporting.id}]];
+                var id = [[${enterpriseInfoVO.id}]];
                 $.ahsjajax(
-                    CTX + "/api/drugLoss/reviewSuccess.ahsj",
+                    CTX + "/api/enterprise/reviewSuccess.ahsj",
                     {"id": id},
                     function (msg) {
                         if (msg.success) {
@@ -318,9 +318,9 @@
 
         $("#send_btnFail").click(function () {
             dialog.confirm('确定提交吗?', function (index, layero) {
-                var id = [[${hisDrugLossReporting.id}]];
+                var id = [[${enterpriseInfoVO.id}]];
                 $.ahsjajax(
-                    CTX + "/api/drugLoss/reviewFail.ahsj",
+                    CTX + "/api/enterprise/reviewFail.ahsj",
                     {"id": id},
                     function (msg) {
                         if (msg.success) {

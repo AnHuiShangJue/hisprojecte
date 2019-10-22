@@ -264,6 +264,9 @@
     <if test="parameter.accessPhonenumber != null and parameter.accessPhonenumber != ''">
       and a.access_phonenumber like concat('%',#{parameter.accessPhonenumber,jdbcType=VARCHAR},'%')
     </if>
+    <if test="parameter.isVerify != null and parameter.isVerify != ''">
+      and a.is_verify = #{parameter.isVerify,jdbcType=INTEGER}
+    </if>
     <if test="parameter.orders != null and parameter.orders != ''">
       order by ${parameter.orders}
     </if>

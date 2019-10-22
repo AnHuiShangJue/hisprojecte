@@ -63,6 +63,36 @@
 
                             </div>
 
+                            <div class="row">
+                                <div class="col s1">
+                                    <h6>是否审核</h6>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input id="enable" name="isVerify" type="radio" value="1"  />
+                                        <span>已审核</span>
+                                    </label>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input id="unEnable" name="isVerify" type="radio" value="2"/>
+                                        <span>未审核</span>
+                                    </label>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input id="noSelect" name="isVerify" type="radio" value="3" />
+                                        <span>审核未通过</span>
+                                    </label>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input id="nSelect" name="isVerify" type="radio" value="0" checked/>
+                                        <span>不选择</span>
+                                    </label>
+                                </div>
+                            </div>
+
                         </form>
                     </div>
                     <div class="row">
@@ -88,7 +118,7 @@
                                 <div class="col s4 m4 l4 xl4 offset-xl8">
                                     <a id="createBtn" class="btn waves-effect waves-light red"><i
                                             class="material-icons  white-text tooltipped " data-position="bottom"
-                                            data-delay="50" data-tooltip="增加新的项目信息">add</i></a>
+                                            data-delay="50" data-tooltip="访客申请信息新增">add</i></a>
 
                                 </div>
                             </div>
@@ -208,6 +238,12 @@
     function edit(id) {
         var url = CTX + "/api/accessinfo/updateAccessinfo.ahsj?token=" + TOKEN+"&id=" + id;
         dialog.show(url, "访客申请信息修改");
+
+    }
+
+    function Verify(id) {
+        var url = CTX + "/api/accessinfo/audit.ahsj?token=" + TOKEN+ "&id=" + id;
+        dialog.show(url, "访客申请信息审核");
 
     }
 

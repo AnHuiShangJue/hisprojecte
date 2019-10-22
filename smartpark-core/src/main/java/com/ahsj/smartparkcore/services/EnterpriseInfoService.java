@@ -59,7 +59,7 @@ public interface EnterpriseInfoService {
      * @Date 2019/9/2
      * @Time 17:40
      **/
-    Message auditEnterpriseInfo(EnterpriseInfo enterpriseInfo, String audit);
+    Message auditEnterpriseInfo(Long id) throws Exception;
 
     /**
      * @return com.ahsj.smartparkcore.entity.po.EnterpriseInfo
@@ -110,4 +110,14 @@ public interface EnterpriseInfoService {
      * @Time 15:34
      **/
     EnterpriseInfo queryEnterpriseInfo(EnterpriseInfo enterpriseInfo) throws Exception;
+
+    /**
+     * @return core.message.Message
+     * @功能说明
+     * @Params [id]
+     * @Author XJP
+     * @Date 2019/10/22
+     * @Time 17:54
+     **/
+    Message reviewFail(Long id) throws Exception;
 }
