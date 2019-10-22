@@ -164,6 +164,7 @@ public class BookServicelmpl implements BookService {
         for (Site siteDTO : siteDTOS) {
             BookDTO bookDTO = new BookDTO();
             bookDTO.setBookType(2);
+            bookDTO.setBookTypeName("场地");
             bookDTO.setTargetId(siteDTO.getId());
             bookDTO.setArea(siteDTO.getArea());
             bookDTO.setCapacity(siteDTO.getCapacity());
@@ -179,6 +180,7 @@ public class BookServicelmpl implements BookService {
         for (ConferenceRoomInfo conferenceRoomInfoVO : conferenceRoomInfoVOS) {
             BookDTO bookDTO = new BookDTO();
             bookDTO.setBookType(1);
+            bookDTO.setBookTypeName("会议室");
             bookDTO.setTargetId(conferenceRoomInfoVO.getId());
             bookDTO.setArea(conferenceRoomInfoVO.getArea());
             bookDTO.setCapacity(conferenceRoomInfoVO.getCapacity());
@@ -194,6 +196,7 @@ public class BookServicelmpl implements BookService {
         for (StationInfo stationInfo : stationInfos) {
             BookDTO bookDTO = new BookDTO();
             bookDTO.setBookType(3);
+            bookDTO.setBookTypeName("工位");
             bookDTO.setTargetId(stationInfo.getId());
             bookDTO.setArea(stationInfo.getArea());
             bookDTO.setCapacity(stationInfo.getCapacity());
