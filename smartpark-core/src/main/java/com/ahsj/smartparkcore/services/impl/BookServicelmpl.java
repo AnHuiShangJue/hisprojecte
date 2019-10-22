@@ -172,6 +172,7 @@ public class BookServicelmpl implements BookService {
             bookDTO.setName(siteDTO.getSiteName());
             bookDTO.setPhoneNumber(siteDTO.getPhoneNumber());
             bookDTO.setContactName(siteDTO.getName());
+            bookDTO.setPrice(siteDTO.getPrice());
             list.add(bookDTO);
         }
         List<ConferenceRoomInfo> conferenceRoomInfoVOS = conferenceRoomInfoMapper.selectAll();
@@ -186,6 +187,7 @@ public class BookServicelmpl implements BookService {
             bookDTO.setName(conferenceRoomInfoVO.getConferenceName());
             bookDTO.setPhoneNumber(conferenceRoomInfoVO.getPhoneNumber());
             bookDTO.setContactName(conferenceRoomInfoVO.getName());
+            bookDTO.setPrice(conferenceRoomInfoVO.getPrice());
             list.add(bookDTO);
         }
         List<StationInfo> stationInfos = stationInfoMapper.selectAll();
@@ -200,6 +202,7 @@ public class BookServicelmpl implements BookService {
             bookDTO.setName(stationInfo.getTitle());
             bookDTO.setPhoneNumber(stationInfo.getPhoneNumber());
             bookDTO.setContactName(stationInfo.getName());
+            bookDTO.setPrice(stationInfo.getPrice());
             list.add(bookDTO);
         }
         return list;
