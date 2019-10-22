@@ -45,7 +45,7 @@
                <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
                <!--selectByExampleQueryId="false"/>-->
 
-        <table tableName="lease" domainObjectName="Lease" enableCountByExample="false"
+        <table tableName="join_enterprise_review" domainObjectName="JoinEnterpriseReview" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"/>
 
