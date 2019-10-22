@@ -136,12 +136,12 @@ Scripts
                         send_form,
                         function (responseEntity) {
                             if (responseEntity.code>0) {
-                                M.toast({html: responseEntity.message});
+                                M.toast({html: responseEntity.message+responseEntity.data});
                                 parent.grid.search();
                                 dialog.parentclose();
                                 return true;
                             } else {
-                                M.toast({html: responseEntity.message});
+                                M.toast({html: responseEntity.message+responseEntity.data});
                                 return false;
                             }
                         },
