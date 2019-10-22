@@ -178,6 +178,12 @@ public class LeaseServiceImpl implements LeaseService {
     public LeaseDTO selectLease(LeaseVO lease) throws Exception {
         if (lease.getTargetType() == 1) {//会议室
             ConferenceRoomInfo conferenceRoomInfo = conferenceRoomInfoMapper.selectByPrimaryKey(lease.getTargetId());
+            if (conferenceRoomInfo.getDescription() == null) {
+                conferenceRoomInfo.setDescription("");
+            }
+            if (conferenceRoomInfo.getPhoneNumber() == null) {
+                conferenceRoomInfo.setPhoneNumber("");
+            }
             lease.setArea(conferenceRoomInfo.getArea());
             lease.setCapacity(conferenceRoomInfo.getCapacity());
             lease.setDescription(conferenceRoomInfo.getDescription());
@@ -192,6 +198,12 @@ public class LeaseServiceImpl implements LeaseService {
         }
         if (lease.getTargetType() == 2) {//场地
             Site site = siteMapper.selectByPrimaryKey(lease.getTargetId());
+            if (site.getDescription() == null) {
+                site.setDescription("");
+            }
+            if (site.getPhoneNumber() == null) {
+                site.setPhoneNumber("");
+            }
             lease.setArea(site.getArea());
             lease.setCapacity(site.getCapacity());
             lease.setDescription(site.getDescription());
@@ -206,6 +218,12 @@ public class LeaseServiceImpl implements LeaseService {
         }
         if (lease.getTargetType() == 3) {//工位
             StationInfo stationInfo = stationInfoMapper.selectByPrimaryKey(lease.getTargetId());
+            if (stationInfo.getDescription() == null) {
+                stationInfo.setDescription("");
+            }
+            if (stationInfo.getPhoneNumber() == null) {
+                stationInfo.setPhoneNumber("");
+            }
             lease.setArea(stationInfo.getArea());
             lease.setCapacity(stationInfo.getCapacity());
             lease.setDescription(stationInfo.getDescription());

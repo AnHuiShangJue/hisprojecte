@@ -163,6 +163,12 @@ public class BookServicelmpl implements BookService {
         List<Site> siteDTOS = siteMapper.selectAll();
         for (Site siteDTO : siteDTOS) {
             BookDTO bookDTO = new BookDTO();
+            if (siteDTO.getDescription() == null) {
+                siteDTO.setDescription("");
+            }
+            if (siteDTO.getPhoneNumber() == null) {
+                siteDTO.setPhoneNumber("");
+            }
             bookDTO.setBookType(2);
             bookDTO.setBookTypeName("场地");
             bookDTO.setTargetId(siteDTO.getId());
@@ -179,6 +185,12 @@ public class BookServicelmpl implements BookService {
         List<ConferenceRoomInfo> conferenceRoomInfoVOS = conferenceRoomInfoMapper.selectAll();
         for (ConferenceRoomInfo conferenceRoomInfoVO : conferenceRoomInfoVOS) {
             BookDTO bookDTO = new BookDTO();
+            if (conferenceRoomInfoVO.getDescription() == null) {
+                conferenceRoomInfoVO.setDescription("");
+            }
+            if (conferenceRoomInfoVO.getPhoneNumber() == null) {
+                conferenceRoomInfoVO.setPhoneNumber("");
+            }
             bookDTO.setBookType(1);
             bookDTO.setBookTypeName("会议室");
             bookDTO.setTargetId(conferenceRoomInfoVO.getId());
@@ -195,6 +207,12 @@ public class BookServicelmpl implements BookService {
         List<StationInfo> stationInfos = stationInfoMapper.selectAll();
         for (StationInfo stationInfo : stationInfos) {
             BookDTO bookDTO = new BookDTO();
+            if (stationInfo.getDescription() == null) {
+                stationInfo.setDescription("");
+            }
+            if (stationInfo.getPhoneNumber() == null) {
+                stationInfo.setPhoneNumber("");
+            }
             bookDTO.setBookType(3);
             bookDTO.setBookTypeName("工位");
             bookDTO.setTargetId(stationInfo.getId());
@@ -222,7 +240,16 @@ public class BookServicelmpl implements BookService {
     @Override
     @Transactional(readOnly = true)
     public PageBean<BookDTO> listByDate(PageBean<BookDTO> pageBean) throws Exception {
-        pageBean.setData(CodeHelper.getInstance().setCodeValue(bookMapper.listByDate(pageBean)));
+        List<BookDTO> bookDTOS = bookMapper.listByDate(pageBean);
+        for (BookDTO bookDTO : bookDTOS) {
+            if (bookDTO.getDescription() == null) {
+                bookDTO.setDescription("");
+            }
+            if (bookDTO.getPhoneNumber() == null) {
+                bookDTO.setPhoneNumber("");
+            }
+        }
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(bookDTOS));
         return pageBean;
     }
 }
