@@ -164,6 +164,7 @@ public class BookServicelmpl implements BookService {
         for (Site siteDTO : siteDTOS) {
             BookDTO bookDTO = new BookDTO();
             bookDTO.setBookType(2);
+            bookDTO.setBookTypeName("场地");
             bookDTO.setTargetId(siteDTO.getId());
             bookDTO.setArea(siteDTO.getArea());
             bookDTO.setCapacity(siteDTO.getCapacity());
@@ -172,12 +173,14 @@ public class BookServicelmpl implements BookService {
             bookDTO.setName(siteDTO.getSiteName());
             bookDTO.setPhoneNumber(siteDTO.getPhoneNumber());
             bookDTO.setContactName(siteDTO.getName());
+            bookDTO.setPrice(siteDTO.getPrice());
             list.add(bookDTO);
         }
         List<ConferenceRoomInfo> conferenceRoomInfoVOS = conferenceRoomInfoMapper.selectAll();
         for (ConferenceRoomInfo conferenceRoomInfoVO : conferenceRoomInfoVOS) {
             BookDTO bookDTO = new BookDTO();
             bookDTO.setBookType(1);
+            bookDTO.setBookTypeName("会议室");
             bookDTO.setTargetId(conferenceRoomInfoVO.getId());
             bookDTO.setArea(conferenceRoomInfoVO.getArea());
             bookDTO.setCapacity(conferenceRoomInfoVO.getCapacity());
@@ -186,12 +189,14 @@ public class BookServicelmpl implements BookService {
             bookDTO.setName(conferenceRoomInfoVO.getConferenceName());
             bookDTO.setPhoneNumber(conferenceRoomInfoVO.getPhoneNumber());
             bookDTO.setContactName(conferenceRoomInfoVO.getName());
+            bookDTO.setPrice(conferenceRoomInfoVO.getPrice());
             list.add(bookDTO);
         }
         List<StationInfo> stationInfos = stationInfoMapper.selectAll();
         for (StationInfo stationInfo : stationInfos) {
             BookDTO bookDTO = new BookDTO();
             bookDTO.setBookType(3);
+            bookDTO.setBookTypeName("工位");
             bookDTO.setTargetId(stationInfo.getId());
             bookDTO.setArea(stationInfo.getArea());
             bookDTO.setCapacity(stationInfo.getCapacity());
@@ -200,6 +205,7 @@ public class BookServicelmpl implements BookService {
             bookDTO.setName(stationInfo.getTitle());
             bookDTO.setPhoneNumber(stationInfo.getPhoneNumber());
             bookDTO.setContactName(stationInfo.getName());
+            bookDTO.setPrice(stationInfo.getPrice());
             list.add(bookDTO);
         }
         return list;
