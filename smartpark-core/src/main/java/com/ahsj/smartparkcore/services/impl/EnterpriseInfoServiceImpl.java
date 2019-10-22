@@ -120,7 +120,7 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
                 return MessageUtil.createMessage(false, "企业信息新增失败 ！ 该企业已存在 ！！");
             }
             enterpriseInfo.setIsVerify(Constants.TWO);
-            enterpriseInfo.setIsEnable(Constants.TWO);
+            enterpriseInfo.setIsEnable(Constants.ONE);
             enterpriseInfoMapper.insert(enterpriseInfo);
             legalPerson.setEnterpriseId(enterpriseInfo.getId());
             legalPersonService.insert(legalPerson);

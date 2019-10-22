@@ -1,16 +1,10 @@
 package com.ahsj.smartparkcore.services.impl;
 
-import com.ahsj.smartparkcore.common.Constants;
 import com.ahsj.smartparkcore.core.CodeHelper;
-import com.ahsj.smartparkcore.core.ResultModel;
-import com.ahsj.smartparkcore.core.ResultStatus;
 import com.ahsj.smartparkcore.dao.StationInfoMapper;
 import com.ahsj.smartparkcore.entity.dto.StationInfoDTO;
-import com.ahsj.smartparkcore.entity.po.EnterpriseInfo;
 import com.ahsj.smartparkcore.entity.po.Region;
-import com.ahsj.smartparkcore.entity.po.Site;
 import com.ahsj.smartparkcore.entity.po.StationInfo;
-import com.ahsj.smartparkcore.entity.vo.SiteVo;
 import com.ahsj.smartparkcore.entity.vo.StationInfoVO;
 import com.ahsj.smartparkcore.services.RegionService;
 import com.ahsj.smartparkcore.services.StationInfoService;
@@ -18,18 +12,13 @@ import core.entity.PageBean;
 import core.message.Message;
 import core.message.MessageUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.ss.formula.functions.T;
-import org.dozer.DozerBeanMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import org.yaml.snakeyaml.events.Event;
 import utils.EmptyUtil;
 
 /**
@@ -44,9 +33,9 @@ import utils.EmptyUtil;
  */
 
 @Service
-public class StationInfoImpl implements StationInfoService {
+public class StationInfoServiceImpl implements StationInfoService {
 
-    private Logger log = LoggerFactory.getLogger(StationInfoImpl.class.getSimpleName());
+    private Logger log = LoggerFactory.getLogger(StationInfoServiceImpl.class.getSimpleName());
 
     @Autowired
     StationInfoMapper stationInfoMapper;
@@ -64,7 +53,7 @@ public class StationInfoImpl implements StationInfoService {
      **/
     @Override
     @Transactional(readOnly = true)
-    public PageBean<StationInfo> queryList(PageBean<StationInfo> pageBean) {
+    public PageBean<StationInfoDTO> queryList(PageBean<StationInfoDTO> pageBean) {
         pageBean.setData(CodeHelper.getInstance().setCodeValue(stationInfoMapper.queryList(pageBean)));
         return pageBean;
     }
@@ -115,7 +104,7 @@ public class StationInfoImpl implements StationInfoService {
         Region region3 = regionService.selectById(infoDTO.getAreaId());
         stationInfo.setLocation(region1.getName() + region2.getName() + region3.getName() + stationInfo.getLocation());
         stationInfo.setBookType(3);
-        stationInfo.setIsEnable((short) 2);
+        stationInfo.setIsEnable((short) 1);
         stationInfo.setIsLease(2);
         stationInfo.setIsVerify(2);
         StationInfo stationInfo1 = stationInfoMapper.selectByTitle(stationInfo.getTitle());

@@ -190,12 +190,12 @@
                         "className": "center-align"
                     },
                     {
-                        "title": "名称",
+                        "title": "公司名称",
                         "data": "name",
                         "name": "name"
                     },
                     {
-                        "title": "地址",
+                        "title": "公司地址",
                         "data": "address",
                         "name": "address"
                     },
@@ -265,6 +265,12 @@
 
     function edit(id) {
         var url = CTX + "/api/enterprise/updateEnterprise.ahsj?token=" + TOKEN+ "&id=" + id;
+        dialog.show(url, "企业信息修改");
+
+    }
+
+    function Verify(id) {
+        var url = CTX + "/api/enterprise/audit.ahsj?token=" + TOKEN+ "&id=" + id;
         dialog.show(url, "企业信息修改");
 
     }

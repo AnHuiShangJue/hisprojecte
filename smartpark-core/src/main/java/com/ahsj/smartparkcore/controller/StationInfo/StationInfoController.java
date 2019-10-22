@@ -1,8 +1,7 @@
 package com.ahsj.smartparkcore.controller.StationInfo;
 
-import com.ahsj.smartparkcore.entity.dto.EnterpriseInfoDTO;
+import com.ahsj.smartparkcore.entity.dto.SiteDTO;
 import com.ahsj.smartparkcore.entity.dto.StationInfoDTO;
-import com.ahsj.smartparkcore.entity.po.EnterpriseInfo;
 import com.ahsj.smartparkcore.entity.po.StationInfo;
 import com.ahsj.smartparkcore.entity.vo.StationInfoVO;
 import com.ahsj.smartparkcore.services.StationInfoService;
@@ -59,11 +58,9 @@ public class StationInfoController extends BaseController {
      * @Time 18:15
      **/
     @PostMapping("/list.ahsj")
-    public ResponseEntity<PageBean<StationInfo>> queryList(StationInfoDTO stationInfoDTO) throws Exception {
-        DozerBeanMapper mapper = new DozerBeanMapper();
-        StationInfo map = mapper.map(stationInfoDTO, StationInfo.class);
-        PageBean<StationInfo> pageBean = new PageBean<>();
-        pageBean.setParameter(map);
+    public ResponseEntity<PageBean<StationInfoDTO>> queryList(StationInfoDTO stationInfoDTO) throws Exception {
+        PageBean<StationInfoDTO> pageBean = new PageBean<>();
+        pageBean.setParameter(stationInfoDTO);
         return ResponseEntity.ok(stationInfoService.queryList(pageBean));
     }
 

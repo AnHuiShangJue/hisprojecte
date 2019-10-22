@@ -51,46 +51,67 @@
                                     <input id="name" name="name" type="text"/>
                                     <label for="name">名称<span style="font-size: 12px"></span></label>
                                 </div>
-
                                 <div class="col input-field s4 m4 l4">
-                                    <input id="legalName" name="legalName" type="text"/>
-                                    <label for="legalName">法人名称<span style="font-size: 12px"></span></label>
+                                    <input id="phoneNumber" name="phoneNumber" type="text"/>
+                                    <label for="phoneNumber">联系人电话<span style="font-size: 12px"></span></label>
+                                </div>
+                                <div class="col input-field s4 m4 l4">
+                                    <input id="location" name="location" type="text"/>
+                                    <label for="location">地点<span style="font-size: 12px"></span></label>
                                 </div>
 
 
                             </div>
-                           <!-- <div class="row">
-                                <div class="col  s1 m1 l1 xl1">
-                                    <div ahsj:radio name="scale" id="scale" type="code" typeKey="is_company_size"
-                                         title="公司規模" cssdefault="radiotdefault" haveDefault="true" value="0"></div>
-                                </div>
-                            </div>-->
+
 
                             <div class="row">
                                 <div class="col s1">
-                                    <h6>公司规模</h6>
+                                    <h6>租赁类型</h6>
                                 </div>
                                 <div class="col s1" style="padding-top:6px">
                                     <label>
-                                        <input id="enable" name="scale" type="radio" value="1"  />
-                                        <span>大型</span>
+                                        <input id="enable" name="bookType" type="radio" value="1"  />
+                                        <span>会议室</span>
                                     </label>
                                 </div>
                                 <div class="col s1" style="padding-top:6px">
                                     <label>
-                                        <input id="unEnable" name="scale" type="radio" value="2"/>
-                                        <span>中型</span>
+                                        <input id="unEnable" name="bookType" type="radio" value="2"/>
+                                        <span>场地</span>
                                     </label>
                                 </div>
                                 <div class="col s1" style="padding-top:6px">
                                     <label>
-                                        <input id="noSelect" name="scale" type="radio" value="3" />
-                                        <span>微型</span>
+                                        <input id="noSelect" name="bookType" type="radio" value="3" />
+                                        <span>工位</span>
                                     </label>
                                 </div>
                                 <div class="col s1" style="padding-top:6px">
                                     <label>
-                                        <input id="nSelect" name="scale" type="radio" value="0" checked/>
+                                        <input id="nSelect" name="bookType" type="radio" value="0" checked/>
+                                        <span>不选择</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s1">
+                                    <h6>是否租赁</h6>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input id="enable1" name="isLease" type="radio" value="1"  />
+                                        <span>以租赁</span>
+                                    </label>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input id="unEnable1" name="isLease" type="radio" value="2"/>
+                                        <span>未租赁</span>
+                                    </label>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input id="nSelect1" name="isLease" type="radio" value="0" checked/>
                                         <span>不选择</span>
                                     </label>
                                 </div>
@@ -118,9 +139,9 @@
                         </label>
                             <div class="row">
                                 <div class="col s4 m4 l4 xl4 offset-xl8">
-                                    <a id="createBtn" class="btn waves-effect waves-light red"><i
+                                    <!--<a id="createBtn" class="btn waves-effect waves-light red"><i
                                             class="material-icons  white-text tooltipped " data-position="bottom"
-                                            data-delay="50" data-tooltip="增加新的项目信息">add</i></a>
+                                            data-delay="50" data-tooltip="增加新的项目信息">add</i></a>-->
 
                                 </div>
                             </div>
@@ -223,9 +244,8 @@
                         "title": "创建时间",
                         "data": "createDate",
                         "name": "create_date"
-                    },
-
-                    {
+                    }
+                  /*  {
                         "title": "操作",
                         "width": "180px",
                         "className": "centered",
@@ -241,7 +261,7 @@
                             // 返回自定义内容
                             return rtnBtn;
                         }
-                    }
+                    }*/
                 ],
                 "order": [
                     [1, 'asc']

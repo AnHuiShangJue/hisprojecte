@@ -1,6 +1,8 @@
 package com.ahsj.smartparkcore.dao;
 
+import com.ahsj.smartparkcore.entity.dto.StationInfoDTO;
 import com.ahsj.smartparkcore.entity.po.StationInfo;
+import com.ahsj.smartparkcore.entity.vo.StationInfoVO;
 import core.entity.PageBean;
 
 import java.util.List;
@@ -28,7 +30,7 @@ public interface StationInfoMapper {
      *@Date 2019/10/19
      *@Time 18:15
     **/
-    List<StationInfo> queryList(PageBean<StationInfo> pageBean);
+    List<StationInfoDTO> queryList(PageBean<StationInfoDTO> pageBean);
 
     StationInfo selectByTitle(String title);
 

@@ -2,6 +2,8 @@ package com.ahsj.smartparkcore.entity.vo;
 
 import com.ahsj.smartparkcore.entity.po.StationInfo;
 
+import java.math.BigDecimal;
+
 /**
  * Copyright (C), 2019-2019, 安徽商角有限公司
  * FileName: StationInfoVO
@@ -20,6 +22,26 @@ public class StationInfoVO extends StationInfo {
     private Long cityId;
 
     private Long areaId;
+
+    private BigDecimal upPrice;//上区间
+
+    private BigDecimal lowPrice;//下区间
+
+    public BigDecimal getUpPrice() {
+        return upPrice;
+    }
+
+    public void setUpPrice(BigDecimal upPrice) {
+        this.upPrice = upPrice;
+    }
+
+    public BigDecimal getLowPrice() {
+        return lowPrice;
+    }
+
+    public void setLowPrice(BigDecimal lowPrice) {
+        this.lowPrice = lowPrice;
+    }
 
     public Long getProvinceId() {
         return provinceId;

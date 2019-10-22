@@ -68,6 +68,7 @@ public class SiteServiceslmpl implements SiteServices {
         Region region3 = regionService.selectById(siteDTO.getAreaId());
         site.setLocation(region1.getName() + region2.getName() + region3.getName() + site.getLocation());
         site.setBookType(2);
+        site.setIsEnable((short)1);
         if (EmptyUtil.Companion.isNullOrEmpty(siteMapper.selectBySiteName(site.getSiteName()))) {
             siteMapper.insert(site);
             return new ResponseEntity<>(new ResultModel(ResultStatus.SUCCESS_INSERT), HttpStatus.OK);

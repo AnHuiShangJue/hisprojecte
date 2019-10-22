@@ -114,6 +114,26 @@ public class EnterpriseInfoController extends BaseController {
         return modelAndView;
     }
 
+
+    @GetMapping("/audit.ahsj")
+    public ModelAndView audit(String token, @RequestParam("id") Long id) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/enterprise/audit");
+        EnterpriseInfoVO enterpriseInfoVO = enterpriseInfoService.selectById(id);
+        SysAttachmentInfo sysAttachmentInfo = new SysAttachmentInfo();
+        sysAttachmentInfo.setRelateId(888L);
+        sysAttachmentInfo.setRelateKey("8");
+        sysAttachmentInfo.setRelatePage("8");
+        List<SysAttachmentInfo> sysAttachmentInfos = sysAttachmentInfoService.querySysAttachmentInfo(sysAttachmentInfo);
+        SysAttachmentInfo sysAttachmentInfo1 = sysAttachmentInfos.get(0);
+        String  length = Constants.FILE_PATHS_LOCAL;
+        sysAttachmentInfo1.setLocation(StringUtils.substring(sysAttachmentInfo1.getLocation(),length.length(),sysAttachmentInfo1.getLocation().length()));
+        String replace = sysAttachmentInfo1.getLocation().replace(Constants.STATIC, Constants.SMARTPARKCORE);
+        enterpriseInfoVO.setFilePath(replace);
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("enterpriseInfoVO", enterpriseInfoVO);
+        return modelAndView;
+    }
+
     /**
      * @return core.message.Message
      * @功能说明 新增 企业信息
@@ -182,7 +202,7 @@ public class EnterpriseInfoController extends BaseController {
      * @Date 2019/9/2
      * @Time 17:40
      **/
-    @PostMapping("/audit.ahsj")
+    @PostMapping("/update/audit.ahsj")
     public Message auditEnterpriseInfo(EnterpriseInfo enterpriseInfo, @RequestParam("audit") String audit) {
         return enterpriseInfoService.auditEnterpriseInfo(enterpriseInfo, audit);
     }

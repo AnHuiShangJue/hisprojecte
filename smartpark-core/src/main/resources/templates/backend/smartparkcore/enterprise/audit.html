@@ -11,7 +11,7 @@
     <div class="col s12 m12 l12">
         <div id="validation" class="card card card-default scrollspy" style="height: 800px;">
             <div class="card-content">
-                <h4 class="card-title">企业信息修改</h4><label style="color:black">
+                <h4 class="card-title">企业信息审核</h4><label style="color:black">
             </label>
                 <form class="col s12" id="sendForm" action="#">
                     <input type="hidden" id="id" name="id" th:value="${enterpriseInfoVO.id}">
@@ -134,10 +134,14 @@
                         <label for="operatingPeriodEnd">营业期限</label>
                     </div>
 
-                    <div class="row" style="margin-bottom: 160px">
+                    <div class="row">
                         <div class="input-field col s12">
-                            <button id="send_btn" class="btn cyan waves-effect waves-light right" type="submit"
-                                    name="action">提交
+                            <button id="send_btnSuccess" class="btn cyan waves-effect waves-light right" type="button"
+                                    name="action">予以审核通过
+                                <i class="material-icons right">send</i>
+                            </button>
+                            <button id="send_btnFail" class="btn cyan waves-effect waves-light right" type="button"
+                                    name="action">不予审核通过
                                 <i class="material-icons right">send</i>
                             </button>
                         </div>
@@ -243,8 +247,8 @@
     }
 
     function formCheck() {
-        $("#sendForm").validate({
 
+        $("#sendForm").validate({
             errorElement: 'div',
             errorPlacement: function (error, element) {
                 var placement = $(element).data('error');
@@ -285,6 +289,56 @@
                 });
             }
 
+        });
+
+        $("#send_btnSuccess").click(function () {
+            dialog.confirm('确定提交吗?', function (index, layero) {
+                var id = [[${hisDrugLossReporting.id}]];
+                $.ahsjajax(
+                    CTX + "/api/drugLoss/reviewSuccess.ahsj",
+                    {"id": id},
+                    function (msg) {
+                        if (msg.success) {
+                            M.toast({html: msg.message});
+                            parent.grid.search();
+                            dialog.parentclose();
+                            return false;
+                        } else {
+                            M.toast({html: msg.message});
+                            return false;
+                        }
+                    },
+                    function () {
+                        M.toast({html: "网络异常"});
+                        return false;
+                    }
+                );
+            });
+        });
+
+        $("#send_btnFail").click(function () {
+            dialog.confirm('确定提交吗?', function (index, layero) {
+                var id = [[${hisDrugLossReporting.id}]];
+                $.ahsjajax(
+                    CTX + "/api/drugLoss/reviewFail.ahsj",
+                    {"id": id},
+                    function (msg) {
+                        if (msg.success) {
+                            M.toast({html: msg.message});
+                            parent.grid.search();
+                            dialog.parentclose();
+                            return false;
+                        } else {
+                            M.toast({html: msg.message});
+                            return false;
+                        }
+                    },
+                    function () {
+                        M.toast({html: "网络异常"});
+                        return false;
+                    }
+                );
+            });
         });
     }
 
