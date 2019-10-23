@@ -80,6 +80,14 @@ public class StationInfoController extends BaseController {
         modelAndView.addObject("stationInfoVO", stationInfoVO);
         return modelAndView;
     }
+    @GetMapping("/audit.ahsj")
+    public ModelAndView audit(String token, @RequestParam("id") Long id) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/stationinfo/audit");
+        StationInfoVO stationInfoVO = stationInfoService.selectById(id);
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("stationInfoVO", stationInfoVO);
+        return modelAndView;
+    }
 
     /**
      * @return core.message.Message
@@ -122,4 +130,30 @@ public class StationInfoController extends BaseController {
     public ResponseEntity<Message> updateSetDisable(@RequestParam("ids[]") Long[] ids) throws Exception {
         return new ResponseEntity<>((stationInfoService.updateSetDisable(ids)), HttpStatus.OK);
     }
+/**
+ *@功能说明
+ *@Params [id]
+ *@return core.message.Message
+ *@Author XJP
+ *@Date 2019/10/23
+ *@Time 10:06
+**/
+    @PostMapping("/reviewSuccess.ahsj")
+    public Message reviewSuccess(@RequestParam("id") Long id) throws Exception {
+        return stationInfoService.reviewSuccess(id);
+    }
+
+/**
+ *@功能说明
+ *@Params [id]
+ *@return core.message.Message
+ *@Author XJP
+ *@Date 2019/10/23
+ *@Time 10:06
+**/
+    @PostMapping("/reviewFail.ahsj")
+    public Message reviewFail(@RequestParam("id") Long id) throws Exception {
+        return stationInfoService.reviewFail(id);
+    }
+
 }

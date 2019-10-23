@@ -30,7 +30,7 @@ public interface LeaseService {
      * @Date 2019/10/19
      * @Time 17:39
      **/
-    PageBean<LeaseVO> queryList(PageBean<LeaseVO> pageBean) throws Exception;
+    PageBean<LeaseDTO> queryList(PageBean<LeaseDTO> pageBean) throws Exception;
 
     /**
      * @return java.util.List<com.ahsj.smartparkcore.entity.vo.LeaseVO>

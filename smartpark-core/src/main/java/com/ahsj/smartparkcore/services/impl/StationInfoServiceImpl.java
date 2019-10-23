@@ -1,8 +1,10 @@
 package com.ahsj.smartparkcore.services.impl;
 
+import com.ahsj.smartparkcore.common.Constants;
 import com.ahsj.smartparkcore.core.CodeHelper;
 import com.ahsj.smartparkcore.dao.StationInfoMapper;
 import com.ahsj.smartparkcore.entity.dto.StationInfoDTO;
+import com.ahsj.smartparkcore.entity.po.AccessInfo;
 import com.ahsj.smartparkcore.entity.po.Region;
 import com.ahsj.smartparkcore.entity.po.StationInfo;
 import com.ahsj.smartparkcore.entity.vo.StationInfoVO;
@@ -129,10 +131,10 @@ public class StationInfoServiceImpl implements StationInfoService {
     @Transactional(readOnly = false)
     public Message updateStationinfo(StationInfoDTO stationInfoDTO, MultipartFile[] file, String relateKet, String relatePage) throws Exception {
         if (EmptyUtil.Companion.isNullOrEmpty(stationInfoDTO.getProvinceId()) || EmptyUtil.Companion.isNullOrEmpty(stationInfoDTO.getCityId())
-                || EmptyUtil.Companion.isNullOrEmpty(stationInfoDTO.getAreaId()) || EmptyUtil.Companion.isNullOrEmpty(stationInfoDTO.getLocation())){
+                || EmptyUtil.Companion.isNullOrEmpty(stationInfoDTO.getAreaId()) || EmptyUtil.Companion.isNullOrEmpty(stationInfoDTO.getLocation())) {
             return MessageUtil.createMessage(false, "工位信息新增失败 ！ 工位地址不能为空！！");
         }
-        if(EmptyUtil.Companion.isNullOrEmpty(stationInfoDTO.getTitle())){
+        if (EmptyUtil.Companion.isNullOrEmpty(stationInfoDTO.getTitle())) {
             return MessageUtil.createMessage(false, "工位信息修改失败 ！！！");
         }
         StationInfo stationInfo = new StationInfo();
@@ -187,5 +189,53 @@ public class StationInfoServiceImpl implements StationInfoService {
             }
         }
         return MessageUtil.createMessage(true, "修改工位状态成功。");
+    }
+
+    /**
+     * @return core.message.Message
+     * @功能说明
+     * @Params [id]
+     * @Author XJP
+     * @Date 2019/10/23
+     * @Time 10:10
+     **/
+    @Override
+    @Transactional(readOnly = false)
+    public Message reviewSuccess(Long id) throws Exception {
+        if (EmptyUtil.Companion.isNullOrEmpty(id)) {
+            return MessageUtil.createMessage(false, "工位信息审核失败 ！！！");
+        }
+        StationInfo stationInfo = stationInfoMapper.selectByPrimaryKey(id);
+        if (stationInfo.getIsVerify().equals(Constants.ONE)) {
+            return MessageUtil.createMessage(false, "该工位信息审核已经成功！ 无法继续审核 ！！！！！");
+        } else {
+            stationInfo.setIsVerify(Constants.ONE);
+            stationInfoMapper.updateByPrimaryKey(stationInfo);
+            return MessageUtil.createMessage(true, "工位申请信息审核成功 ！该工位申请信息验证通过 ！！");
+        }
+    }
+
+    /**
+     * @return core.message.Message
+     * @功能说明
+     * @Params [id]
+     * @Author XJP
+     * @Date 2019/10/23
+     * @Time 10:10
+     **/
+    @Override
+    @Transactional(readOnly = false)
+    public Message reviewFail(Long id) throws Exception {
+        if (EmptyUtil.Companion.isNullOrEmpty(id)) {
+            return MessageUtil.createMessage(false, "工位申请信息审核失败 ！！！");
+        }
+        StationInfo stationInfo = stationInfoMapper.selectByPrimaryKey(id);
+        if (stationInfo.getIsVerify().equals(Constants.ONE)) {
+            return MessageUtil.createMessage(false, "该工位申请信息审核已经成功！ 无法继续审核 ！！！！！");
+        } else {
+            stationInfo.setIsVerify(Constants.THREE);
+            stationInfoMapper.updateByPrimaryKey(stationInfo);
+            return MessageUtil.createMessage(true, "工位申请信息审核成功 ！该工位申请信息验证通过 ！！");
+        }
     }
 }

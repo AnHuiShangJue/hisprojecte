@@ -1,5 +1,6 @@
 package com.ahsj.smartparkcore.dao;
 
+import com.ahsj.smartparkcore.entity.dto.LeaseDTO;
 import com.ahsj.smartparkcore.entity.po.Lease;
 import com.ahsj.smartparkcore.entity.vo.LeaseVO;
 import core.entity.PageBean;
@@ -22,7 +23,7 @@ public interface LeaseMapper {
 
     int updateByPrimaryKey(Lease lease);
 
-    List<LeaseVO> queryList(PageBean<LeaseVO> pageBean);
+    List<LeaseDTO> queryList(PageBean<LeaseDTO> pageBean);
 
     List<LeaseVO> List();
 

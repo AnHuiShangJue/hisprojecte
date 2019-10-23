@@ -60,6 +60,84 @@
                                     <label for="upPrice">价格上区间<span style="font-size: 12px"></span></label>
                                 </div>
                             </div>
+
+
+
+                            <div class="row">
+                                <div class="col s1">
+                                    <h6>是否启用</h6>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input name="isEnable" type="radio" value="1"  />
+                                        <span>已启用</span>
+                                    </label>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input  name="isEnable" type="radio" value="2"/>
+                                        <span>未启用</span>
+                                    </label>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input  name="isEnable" type="radio" value="0" checked/>
+                                        <span>不选择</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s1">
+                                    <h6>是否租赁</h6>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input name="isLease" type="radio" value="1"  />
+                                        <span>已租赁</span>
+                                    </label>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input  name="isLease" type="radio" value="2"/>
+                                        <span>未租赁</span>
+                                    </label>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input  name="isLease" type="radio" value="0" checked/>
+                                        <span>不选择</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s1">
+                                    <h6>是否审核</h6>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input name="isVerify" type="radio" value="1"  />
+                                        <span>已审核</span>
+                                    </label>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input  name="isVerify" type="radio" value="2"/>
+                                        <span>未审核</span>
+                                    </label>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input  name="isVerify" type="radio" value="2"/>
+                                        <span>审核未通过</span>
+                                    </label>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input  name="isVerify" type="radio" value="0" checked/>
+                                        <span>不选择</span>
+                                    </label>
+                                </div>
+                            </div>
                         </form>
                     </div>
 
@@ -227,8 +305,8 @@
     }
 
     function isVerify(id) {
-        var url = CTX + "/api/site/isVerify/index.ahsj?token=" + TOKEN + "&id=" + id;
-        dialog.show(url, "审核场地");
+        var url = CTX + "/api/stationinfo/audit.ahsj?token=" + TOKEN + "&id=" + id;
+        dialog.show(url, "审核工位");
     }
 
 

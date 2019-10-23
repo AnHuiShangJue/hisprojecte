@@ -50,7 +50,7 @@ public class LeaseController extends BaseController {
      * @Date 2019/10/19
      * @Time 17:40
      **/
-    @RequestMapping("/index.ahsj")
+    @GetMapping("/index.ahsj")
     public ModelAndView index(String token) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/lease/list");
         modelAndView.addObject("token", token);
@@ -65,10 +65,10 @@ public class LeaseController extends BaseController {
      * @Date 2019/10/19
      * @Time 17:39
      **/
-    @RequestMapping("/list.ahsj")
-    public ResponseEntity<PageBean<LeaseVO>> queryList(LeaseVO leaseVO) throws Exception {
-        PageBean<LeaseVO> pageBean = new PageBean<>();
-        pageBean.setParameter(leaseVO);
+    @PostMapping("/list.ahsj")
+    public ResponseEntity<PageBean<LeaseDTO>> queryList(LeaseDTO leaseDTO) throws Exception {
+        PageBean<LeaseDTO> pageBean = new PageBean<>();
+        pageBean.setParameter(leaseDTO);
         return ResponseEntity.ok(leaseService.queryList(pageBean));
     }
 
@@ -81,7 +81,7 @@ public class LeaseController extends BaseController {
      * @Date 2019/10/19
      * @Time 17:29
      **/
-    @RequestMapping("/allList.ahsj")
+    @PostMapping("/allList.ahsj")
     public List<LeaseVO> allList() throws Exception {
         List<LeaseVO> list = leaseService.List();
         return list;
@@ -95,7 +95,7 @@ public class LeaseController extends BaseController {
      * @Date 2019/10/19
      * @Time 17:29
      **/
-    @RequestMapping("/isLeaseList.ahsj")
+    @PostMapping("/isLeaseList.ahsj")
     public List<LeaseVO> isLeaseList() throws Exception {
         List<LeaseVO> list = leaseService.isLeaseList();
         return list;
@@ -109,7 +109,7 @@ public class LeaseController extends BaseController {
      * @Date 2019/10/19
      * @Time 17:29
      **/
-    @RequestMapping("/noLeaseList.ahsj")
+    @PostMapping("/noLeaseList.ahsj")
     public List<LeaseVO> noLeaseList() throws Exception {
         List<LeaseVO> list = leaseService.noLeaseList();
         return list;
@@ -124,10 +124,7 @@ public class LeaseController extends BaseController {
      * @Time 15:23
      **/
     @RequestMapping("/getLease.ahsj")
-    public LeaseDTO selectLease(Long targetType,Long targetId) throws Exception {
-        LeaseVO leaseVO =new LeaseVO();
-        leaseVO.setTargetType(targetType);
-        leaseVO.setTargetId(targetId);
+    public LeaseDTO selectLease(LeaseVO leaseVO) throws Exception {
         return leaseService.selectLease(leaseVO);
     }
 

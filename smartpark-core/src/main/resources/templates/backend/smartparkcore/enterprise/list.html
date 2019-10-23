@@ -56,15 +56,7 @@
                                     <input id="legalName" name="legalName" type="text"/>
                                     <label for="legalName">法人名称<span style="font-size: 12px"></span></label>
                                 </div>
-
-
                             </div>
-                           <!-- <div class="row">
-                                <div class="col  s1 m1 l1 xl1">
-                                    <div ahsj:radio name="scale" id="scale" type="code" typeKey="is_company_size"
-                                         title="公司規模" cssdefault="radiotdefault" haveDefault="true" value="0"></div>
-                                </div>
-                            </div>-->
 
                             <div class="row">
                                 <div class="col s1">
@@ -91,6 +83,64 @@
                                 <div class="col s1" style="padding-top:6px">
                                     <label>
                                         <input id="nSelect" name="scale" type="radio" value="0" checked/>
+                                        <span>不选择</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s1">
+                                    <h6>单位性质</h6>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input name="unitNature" type="radio" value="1"  />
+                                        <span>国有制</span>
+                                    </label>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input  name="unitNature" type="radio" value="2"/>
+                                        <span>集体所有制</span>
+                                    </label>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input  name="unitNature" type="radio" value="3" />
+                                        <span>私有制</span>
+                                    </label>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input  name="unitNature" type="radio" value="3" />
+                                        <span>股份制</span>
+                                    </label>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input  name="unitNature" type="radio" value="0" checked/>
+                                        <span>不选择</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s1">
+                                    <h6>是否启用</h6>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input name="isEnable" type="radio" value="1"  />
+                                        <span>已启用</span>
+                                    </label>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input  name="isEnable" type="radio" value="2"/>
+                                        <span>未启用</span>
+                                    </label>
+                                </div>
+                                <div class="col s1" style="padding-top:6px">
+                                    <label>
+                                        <input  name="isEnable" type="radio" value="0" checked/>
                                         <span>不选择</span>
                                     </label>
                                 </div>
@@ -271,7 +321,7 @@
 
     function Verify(id) {
         var url = CTX + "/api/enterprise/audit.ahsj?token=" + TOKEN+ "&id=" + id;
-        dialog.show(url, "企业信息修改");
+        dialog.show(url, "企业信息审核");
 
     }
 
