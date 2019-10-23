@@ -1,9 +1,7 @@
 package com.ahsj.smartparkcore.dao;
 
 import com.ahsj.smartparkcore.entity.dto.BookDTO;
-import com.ahsj.smartparkcore.entity.dto.ReserveSiteDTO;
 import com.ahsj.smartparkcore.entity.po.Book;
-import com.ahsj.smartparkcore.entity.po.ReserveSite;
 import core.entity.PageBean;
 
 import java.util.List;
@@ -25,5 +23,5 @@ public interface BookMapper {
 
     List<BookDTO> list(PageBean<BookDTO> pageBean);
 
-    List<BookDTO> listByDate(PageBean<BookDTO> pageBean);
+    List<Book> listByDate(PageBean<BookDTO> pageBean);
 }

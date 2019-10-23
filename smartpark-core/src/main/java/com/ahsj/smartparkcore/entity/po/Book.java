@@ -1,11 +1,6 @@
 package com.ahsj.smartparkcore.entity.po;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import core.code.CodeValueColumn;
-import core.code.Constants;
 import core.entity.BaseEntity;
-import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -13,17 +8,25 @@ import java.util.Date;
 public class Book extends BaseEntity {
     private Long id;
 
+    private Long createUserId;
+
+    private Long updateUserId;
+
     private Date createDate;
 
     private Date updateDate;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    private Integer bookType;
+
     private Date startTime;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date endTime;
+
+    private Integer isAudit;
+
+    private Integer isCancel;
+
+    private Integer isPay;
 
     private BigDecimal paymentAmount;
 
@@ -39,53 +42,7 @@ public class Book extends BaseEntity {
 
     private String description;
 
-    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "book_type", typeName = "bookTypeName")
-    private Integer bookType;
-    private String bookTypeName;
-
-    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_audit", typeName = "isAuditName")
-    private Integer isAudit;
-    private String isAuditName;
-
-    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_cancel", typeName = "isCancelName")
-    private Integer isCancel;
-    private String isCancelName;
-
-    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_pay", typeName = "isPayName")
-    private Integer isPay;
-    private String isPayName;
-
-    public String getBookTypeName() {
-        return bookTypeName;
-    }
-
-    public void setBookTypeName(String bookTypeName) {
-        this.bookTypeName = bookTypeName;
-    }
-
-    public String getIsAuditName() {
-        return isAuditName;
-    }
-
-    public void setIsAuditName(String isAuditName) {
-        this.isAuditName = isAuditName;
-    }
-
-    public String getIsCancelName() {
-        return isCancelName;
-    }
-
-    public void setIsCancelName(String isCancelName) {
-        this.isCancelName = isCancelName;
-    }
-
-    public String getIsPayName() {
-        return isPayName;
-    }
-
-    public void setIsPayName(String isPayName) {
-        this.isPayName = isPayName;
-    }
+    private Date visitTime;
 
     public Long getId() {
         return id;
@@ -95,22 +52,30 @@ public class Book extends BaseEntity {
         this.id = id;
     }
 
-    @Override
+
+
+    public void setCreateUserId(Long createUserId) {
+        this.createUserId = createUserId;
+    }
+
+
+
+    public void setUpdateUserId(Long updateUserId) {
+        this.updateUserId = updateUserId;
+    }
+
     public Date getCreateDate() {
         return createDate;
     }
 
-    @Override
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
-    @Override
     public Date getUpdateDate() {
         return updateDate;
     }
 
-    @Override
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
@@ -184,7 +149,7 @@ public class Book extends BaseEntity {
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        this.phoneNumber = phoneNumber == null ? null : phoneNumber.trim();
     }
 
     public String getSubscriberName() {
@@ -192,7 +157,7 @@ public class Book extends BaseEntity {
     }
 
     public void setSubscriberName(String subscriberName) {
-        this.subscriberName = subscriberName;
+        this.subscriberName = subscriberName == null ? null : subscriberName.trim();
     }
 
     public Long getTargetId() {
@@ -208,7 +173,7 @@ public class Book extends BaseEntity {
     }
 
     public void setRemarks(String remarks) {
-        this.remarks = remarks;
+        this.remarks = remarks == null ? null : remarks.trim();
     }
 
     public String getDescription() {
@@ -216,6 +181,14 @@ public class Book extends BaseEntity {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = description == null ? null : description.trim();
+    }
+
+    public Date getVisitTime() {
+        return visitTime;
+    }
+
+    public void setVisitTime(Date visitTime) {
+        this.visitTime = visitTime;
     }
 }

@@ -33,6 +33,11 @@ public class BookDTO extends Book {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    private Date visitTime;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date endTime;
 
     @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_audit", typeName = "isAuditName")
@@ -46,6 +51,16 @@ public class BookDTO extends Book {
     @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_pay", typeName = "isPayName")
     private Integer isPay;
     private String isPayName;
+
+    @Override
+    public Date getVisitTime() {
+        return visitTime;
+    }
+
+    @Override
+    public void setVisitTime(Date visitTime) {
+        this.visitTime = visitTime;
+    }
 
     private BigDecimal paymentAmount;
 
@@ -73,7 +88,6 @@ public class BookDTO extends Book {
     private BigDecimal price;
 
     private String contactName;
-
 
 
     public Double getArea() {
