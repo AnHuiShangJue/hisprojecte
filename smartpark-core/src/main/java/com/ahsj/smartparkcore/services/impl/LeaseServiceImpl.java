@@ -50,9 +50,17 @@ public class LeaseServiceImpl implements LeaseService {
     @Autowired
     StationInfoMapper stationInfoMapper;
 
+    /**
+     * @return core.entity.PageBean<com.ahsj.smartparkcore.entity.dto.LeaseDTO>
+     * @功能说明
+     * @Params [pageBean]
+     * @Author XJP
+     * @Date 2019/10/23
+     * @Time 9:48
+     **/
     @Override
     @Transactional(readOnly = true)
-    public PageBean<LeaseVO> queryList(PageBean<LeaseVO> pageBean) {
+    public PageBean<LeaseDTO> queryList(PageBean<LeaseDTO> pageBean) {
         pageBean.setData(CodeHelper.getInstance().setCodeValue(leaseMapper.queryList(pageBean)));
         return pageBean;
     }

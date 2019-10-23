@@ -301,6 +301,15 @@
         <if test="parameter.upPrice != null and parameter.upPrice != ''">
             and price &lt;=  #{parameter.upPrice,jdbcType=DECIMAL}
         </if>
+        <if test="parameter.isEnable != null and parameter.isEnable != ''">
+            and is_enable =  #{parameter.isEnable,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.isLease != null and parameter.isLease != ''">
+            and is_lease =  #{parameter.isLease,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.isVerify != null and parameter.isVerify != ''">
+            and is_verify =  #{parameter.isVerify,jdbcType=INTEGER}
+        </if>
         <if test="parameter.orders != null and parameter.orders != ''">
             order by ${parameter.orders}
         </if>

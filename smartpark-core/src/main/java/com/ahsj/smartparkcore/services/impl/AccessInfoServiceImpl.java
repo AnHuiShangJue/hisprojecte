@@ -123,6 +123,14 @@ public class AccessInfoServiceImpl implements AccessInfoService {
 
     }
 
+    /**
+     * @return core.message.Message
+     * @功能说明
+     * @Params [id]
+     * @Author XJP
+     * @Date 2019/10/23
+     * @Time 10:08
+     **/
     @Override
     @Transactional(readOnly = false)
     public Message reviewSuccess(Long id) throws Exception {

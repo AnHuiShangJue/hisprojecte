@@ -313,6 +313,12 @@
         <if test="parameter.scale != null and parameter.scale != ''">
             and e.scale = #{parameter.scale,jdbcType=SMALLINT}
         </if>
+        <if test="parameter.unitNature != null and parameter.unitNature != ''">
+            and e.unit_nature = #{parameter.unitNature,jdbcType=SMALLINT}
+        </if>
+        <if test="parameter.isEnable != null and parameter.isEnable != ''">
+            and e.is_enable =  #{parameter.isEnable,jdbcType=INTEGER}
+        </if>
         <if test="parameter.orders != null and parameter.orders != ''">
             order by ${parameter.orders}
         </if>

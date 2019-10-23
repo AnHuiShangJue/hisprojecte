@@ -66,9 +66,9 @@ public class LeaseController extends BaseController {
      * @Time 17:39
      **/
     @PostMapping("/list.ahsj")
-    public ResponseEntity<PageBean<LeaseVO>> queryList(LeaseVO leaseVO) throws Exception {
-        PageBean<LeaseVO> pageBean = new PageBean<>();
-        pageBean.setParameter(leaseVO);
+    public ResponseEntity<PageBean<LeaseDTO>> queryList(LeaseDTO leaseDTO) throws Exception {
+        PageBean<LeaseDTO> pageBean = new PageBean<>();
+        pageBean.setParameter(leaseDTO);
         return ResponseEntity.ok(leaseService.queryList(pageBean));
     }
 

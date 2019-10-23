@@ -48,7 +48,7 @@
                             <label for="unifiedSocialCreditCode">组织机构代码</label>
                         </div>
                     <div class="input-field col s4 l4 xl4">
-                        <input id="registeredCapital" name="registeredCapital" type="text"
+                        <input id="registeredCapital" name="registeredCapital" type="number"
                                data-error=".errorTxt1">
                         <div class="errorTxt1"></div>
                         <label for="registeredCapital">注册资本</label>
@@ -150,7 +150,7 @@
                 "2": "/api/region/getDataByParentId.ahsj",
                 "3": "/api/region/getDataByParentId.ahsj"
             },//每一级从后端获取数据的地址
-            value: {"1": -1},//每一级select的默认value,此时表示第一级选中北京,具体代表的地址看数据库，北京在本数据库中为1
+            value: {"1": 12},//每一级select的默认value,此时表示第一级选中北京,具体代表的地址看数据库，北京在本数据库中为1
             level: 3,//表示一共拥有几级联动，三级联动就写3，四级就写4，一次类推
             now: 1,//固定值，表示当前为第几级
             param: 0,//参数值，传向后端的参数，0表示获取所有的省份,因为所有省份的父ID为0
