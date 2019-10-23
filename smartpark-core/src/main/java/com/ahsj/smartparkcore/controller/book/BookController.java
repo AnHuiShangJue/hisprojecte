@@ -202,5 +202,17 @@ public class BookController extends BaseController {
         return bookService.listByDate(pageBean);
     }
 
+    /**
+     * @Description 预约看房
+     * @Params: [bookDTO]
+     * @Author: dingli
+     * @Return: org.springframework.http.ResponseEntity<com.ahsj.smartparkcore.core.ResultModel>
+     * @Date 2019/10/15
+     * @Time 10:57
+     **/
+    @RequestMapping("/visit.ahsj")
+    public ResponseEntity<ResultModel> visit(BookDTO bookDTO) throws Exception {
+        return bookService.visit(bookDTO);
+    }
 }
 

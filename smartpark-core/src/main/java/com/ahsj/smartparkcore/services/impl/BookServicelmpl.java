@@ -269,4 +269,29 @@ public class BookServicelmpl implements BookService {
         pageBean.setData(CodeHelper.getInstance().setCodeValue(bs));
         return pageBean;
     }
+
+    /**
+     * @Description 预约看房
+     * @Params: [bookDTO]
+     * @Author: dingli
+     * @Return: org.springframework.http.ResponseEntity<com.ahsj.smartparkcore.core.ResultModel>
+     * @Date 2019/10/23
+     * @Time 15:09
+     **/
+    @Override
+    @Transactional(readOnly = false)
+    public ResponseEntity<ResultModel> visit(BookDTO bookDTO) throws Exception {
+        DozerBeanMapper mapper = new DozerBeanMapper();
+        //DTO转化为PO 存入数据库
+        Book book = mapper.map(bookDTO, Book.class);
+        //预留 新增订单 对接付钱接口
+        //订单增加后  设置状态为已付未取消
+        book.setIsPay(2); //已付
+        book.setIsCancel(2);//未取消
+        book.setIsAudit(2);//未审核
+        //预留设置支付金额
+//        book.setPaymentAmount(支付接口支付金额);
+        bookMapper.insert(book);
+        return new ResponseEntity<>(new ResultModel(ResultStatus.SUCCESS_INSERT), HttpStatus.OK);
+    }
 }
