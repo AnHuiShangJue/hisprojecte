@@ -331,4 +331,8 @@
     <select id="enterpriseInfoAll" resultMap="BaseResultMap">
         select  id, name from  enterprise_info
     </select>
+
+    <select id="queryListAll" resultMap="BaseResultMap">
+        select  <include refid="Base_Column_List"/> from  enterprise_info
+    </select>
 </mapper>

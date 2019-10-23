@@ -306,27 +306,28 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
     }
 
     /**
-     *@功能说明
-     *@Params []
-     *@return java.util.List<com.ahsj.smartparkcore.entity.po.EnterpriseInfo>
-     *@Author XJP
-     *@Date 2019/10/22
-     *@Time 17:55
-    **/
+     * @return java.util.List<com.ahsj.smartparkcore.entity.po.EnterpriseInfo>
+     * @功能说明
+     * @Params []
+     * @Author XJP
+     * @Date 2019/10/22
+     * @Time 17:55
+     **/
     @Override
     @Transactional(readOnly = true)
     public List<EnterpriseInfo> enterpriseInfoAll() throws Exception {
         List<EnterpriseInfo> enterpriseInfo = enterpriseInfoMapper.enterpriseInfoAll();
         return enterpriseInfo;
     }
-/**
- *@功能说明
- *@Params [enterpriseInfo]
- *@return com.ahsj.smartparkcore.entity.po.EnterpriseInfo
- *@Author XJP
- *@Date 2019/10/22
- *@Time 17:55
-**/
+
+    /**
+     * @return com.ahsj.smartparkcore.entity.po.EnterpriseInfo
+     * @功能说明
+     * @Params [enterpriseInfo]
+     * @Author XJP
+     * @Date 2019/10/22
+     * @Time 17:55
+     **/
     @Override
     @Transactional(readOnly = true)
     public EnterpriseInfo queryEnterpriseInfo(EnterpriseInfo enterpriseInfo) throws Exception {
@@ -337,14 +338,15 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
             return enterpriseInfo1;
         }
     }
-/**
- *@功能说明
- *@Params [id]
- *@return core.message.Message
- *@Author XJP
- *@Date 2019/10/22
- *@Time 17:55
-**/
+
+    /**
+     * @return core.message.Message
+     * @功能说明
+     * @Params [id]
+     * @Author XJP
+     * @Date 2019/10/22
+     * @Time 17:55
+     **/
     @Override
     @Transactional(readOnly = false)
     public Message reviewFail(Long id) throws Exception {
@@ -358,6 +360,25 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
             enterpriseInfo.setIsVerify(Constants.THREE);
             enterpriseInfoMapper.updateByPrimaryKey(enterpriseInfo);
             return MessageUtil.createMessage(true, "企业信息审核成功 ！该企业验证通过 ！！");
+        }
+    }
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.po.EnterpriseInfo>
+     * @功能说明
+     * @Params []
+     * @Author XJP
+     * @Date 2019/10/23
+     * @Time 14:48
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<EnterpriseInfo> queryListAll() throws Exception {
+        List<EnterpriseInfo> enterpriseInfos = enterpriseInfoMapper.queryListAll();
+        if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfos)) {
+            return null;
+        } else {
+            return enterpriseInfos;
         }
     }
 

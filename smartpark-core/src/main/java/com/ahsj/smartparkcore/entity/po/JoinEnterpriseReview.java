@@ -1,6 +1,8 @@
 package com.ahsj.smartparkcore.entity.po;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import core.entity.BaseEntity;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -15,8 +17,12 @@ public class JoinEnterpriseReview  extends BaseEntity {
 
     private String auditOpinion;
 
+    @JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date updateDate;
 
+    @JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date createDate;
 
     private String remarks;

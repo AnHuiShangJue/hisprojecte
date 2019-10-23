@@ -56,4 +56,6 @@ public interface EnterpriseInfoMapper extends BaseMapper<EnterpriseInfo> {
     int updateByCompanyId(EnterpriseInfo enterpriseInfo);
 
     List<EnterpriseInfo> enterpriseInfoAll();
+
+    List<EnterpriseInfo> queryListAll();
 }

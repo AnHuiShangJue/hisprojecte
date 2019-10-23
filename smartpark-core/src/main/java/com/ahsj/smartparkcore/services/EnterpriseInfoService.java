@@ -120,4 +120,14 @@ public interface EnterpriseInfoService {
      * @Time 17:54
      **/
     Message reviewFail(Long id) throws Exception;
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.po.EnterpriseInfo>
+     * @功能说明
+     * @Params []
+     * @Author XJP
+     * @Date 2019/10/23
+     * @Time 14:45
+     **/
+    List<EnterpriseInfo> queryListAll() throws Exception;
 }

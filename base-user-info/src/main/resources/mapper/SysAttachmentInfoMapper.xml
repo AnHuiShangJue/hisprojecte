@@ -411,6 +411,7 @@
             <if test="versionNo != null">
                 and version_no = #{versionNo,jdbcType=INTEGER}
             </if>
+            order by id desc
         </trim>
     </select>
 

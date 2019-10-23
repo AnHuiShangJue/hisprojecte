@@ -56,6 +56,8 @@ public class JoinEnterpriseReviewServiceImpl implements JoinEnterpriseReviewServ
 
     private static final String filePath = Constants.FILE_PATHS;
 
+    private static final String SUB_FILEPATH = Constants.FILE_PATHS_LOCAL;
+
     @Autowired
     JoinEnterpriseReviewMapper joinEnterpriseReviewMapper;
 
@@ -115,8 +117,8 @@ public class JoinEnterpriseReviewServiceImpl implements JoinEnterpriseReviewServ
         sysAttachmentInfo.setRelatePage(relatePage);
         List<SysAttachmentInfo> sysAttachmentInfos = sysAttachmentInfoService.querySysAttachmentInfo(sysAttachmentInfo);
         SysAttachmentInfo sysAttachmentInfo1 = sysAttachmentInfos.get(0);
-        String length = Constants.FILE_PATHS_LOCAL;
-        sysAttachmentInfo1.setLocation(StringUtils.substring(sysAttachmentInfo1.getLocation(), length.length(), sysAttachmentInfo1.getLocation().length()));
+//        String length = Constants.FILE_PATHS_LOCAL;
+        //sysAttachmentInfo1.setLocation(StringUtils.substring(sysAttachmentInfo1.getLocation(), length.length(), sysAttachmentInfo1.getLocation().length()));
         String replace = sysAttachmentInfo1.getLocation().replace(Constants.STATIC, Constants.SMARTPARKCORE);
         enterpriseReviewVO.setFilePath(replace);
         return enterpriseReviewVO;
@@ -149,8 +151,11 @@ public class JoinEnterpriseReviewServiceImpl implements JoinEnterpriseReviewServ
             String size = ZipUtils.convertFileSize(file.getSize());
             //文件上传的路径
             String dirPath = filePath + dateDir + "/";
+            String afterPath = StringUtils.substringAfter(dirPath, SUB_FILEPATH);
             // 获取文件上传的全路径（防止文件名称相同）
             String fullFilePath = dirPath + fileCode + suffix;
+
+            String fullFilePaths = afterPath + fileCode + suffix;
             FileOperateUtil.mkDir(new File(dirPath));
             BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(fullFilePath));
             Long aLong = Long.valueOf(file.getSize());
@@ -179,7 +184,7 @@ public class JoinEnterpriseReviewServiceImpl implements JoinEnterpriseReviewServ
             //上传时间
             sysAttachmentInfo.setUploadDate(new Date());
             //附件路径
-            sysAttachmentInfo.setLocation(fullFilePath);
+            sysAttachmentInfo.setLocation(fullFilePaths);
             list.add(sysAttachmentInfo);
             //保存数据
             //  sysAttachmentInfoService.addSaveSysAttachmentInfo(sysAttachmentInfo);
