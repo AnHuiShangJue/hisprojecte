@@ -11,38 +11,23 @@ package com.ahsj.wxapplet.common.utils;
 **/
 public class OrderReturnInfo {
 
-    private String returnCode;
-    private String returnMsg;
-    private String resultCode;
+    private String return_code;
+    private String return_msg;
+    private String result_code;
     private String appid;
-    private String mchId;
-    private String nonceStr;
+    private String mch_id;
+    private String nonce_str;
     private String sign;
-    private String prepayId;
-    private String tradeType;
+    private String prepay_id;
+    private String trade_type;
 
-    public String getReturnCode() {
-        return returnCode;
+
+    public String getReturn_code() {
+        return return_code;
     }
 
-    public void setReturnCode(String returnCode) {
-        this.returnCode = returnCode;
-    }
-
-    public String getReturnMsg() {
-        return returnMsg;
-    }
-
-    public void setReturnMsg(String returnMsg) {
-        this.returnMsg = returnMsg;
-    }
-
-    public String getResultCode() {
-        return resultCode;
-    }
-
-    public void setResultCode(String resultCode) {
-        this.resultCode = resultCode;
+    public void setReturn_code(String return_code) {
+        this.return_code = return_code;
     }
 
     public String getAppid() {
@@ -53,22 +38,6 @@ public class OrderReturnInfo {
         this.appid = appid;
     }
 
-    public String getMchId() {
-        return mchId;
-    }
-
-    public void setMchId(String mchId) {
-        this.mchId = mchId;
-    }
-
-    public String getNonceStr() {
-        return nonceStr;
-    }
-
-    public void setNonceStr(String nonceStr) {
-        this.nonceStr = nonceStr;
-    }
-
     public String getSign() {
         return sign;
     }
@@ -77,19 +46,51 @@ public class OrderReturnInfo {
         this.sign = sign;
     }
 
-    public String getPrepayId() {
-        return prepayId;
+    public String getReturn_msg() {
+        return return_msg;
     }
 
-    public void setPrepayId(String prepayId) {
-        this.prepayId = prepayId;
+    public void setReturn_msg(String return_msg) {
+        this.return_msg = return_msg;
     }
 
-    public String getTradeType() {
-        return tradeType;
+    public String getResult_code() {
+        return result_code;
     }
 
-    public void setTradeType(String tradeType) {
-        this.tradeType = tradeType;
+    public void setResult_code(String result_code) {
+        this.result_code = result_code;
+    }
+
+    public String getMch_id() {
+        return mch_id;
+    }
+
+    public void setMch_id(String mch_id) {
+        this.mch_id = mch_id;
+    }
+
+    public String getNonce_str() {
+        return nonce_str;
+    }
+
+    public void setNonce_str(String nonce_str) {
+        this.nonce_str = nonce_str;
+    }
+
+    public String getPrepay_id() {
+        return prepay_id;
+    }
+
+    public void setPrepay_id(String prepay_id) {
+        this.prepay_id = prepay_id;
+    }
+
+    public String getTrade_type() {
+        return trade_type;
+    }
+
+    public void setTrade_type(String trade_type) {
+        this.trade_type = trade_type;
     }
 }

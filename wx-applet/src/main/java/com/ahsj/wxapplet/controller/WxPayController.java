@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -48,7 +49,8 @@ public class WxPayController {
      * @Return java.util.Map
      * @Params [request, openid, mch_id, money, title, appId]
     **/
-    @RequestMapping(value = "/weixin/payment")
+    @RequestMapping(value = "/weixin/payment.ahsj")
+    @ResponseBody
     public Map payment(HttpServletRequest request
             , @RequestParam(value = "openid",required = false)String openid
             , @RequestParam(value = "mch_id",required = false)String mch_id
@@ -80,13 +82,13 @@ public class WxPayController {
         xStream.alias("xml", OrderReturnInfo.class);
 
         OrderReturnInfo returnInfo = (OrderReturnInfo)xStream.fromXML(result);
-        if ("SUCCESS".equals(returnInfo.getResultCode()) && returnInfo.getResultCode().equals(returnInfo.getResultCode())) {
+        if ("SUCCESS".equals(returnInfo.getReturn_code()) && returnInfo.getReturn_code().equals(returnInfo.getResult_code())) {
             SignInfo signInfo = new SignInfo();
             signInfo.setAppId(Configure.getAppID());
             long time = System.currentTimeMillis() / 1000;
             signInfo.setTimeStamp(String.valueOf(time));
             signInfo.setNonceStr(getRandomStringByLength(32));
-            signInfo.setRepay_id("prepay_id=" + returnInfo.getPrepayId());
+            signInfo.setRepay_id("prepay_id=" + returnInfo.getPrepay_id());
             signInfo.setSignType("MD5");
             //生成签名
             String sign1 = Signature.getSign(signInfo);

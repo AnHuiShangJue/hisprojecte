@@ -47,6 +47,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("/api/organization/info/inner/**").permitAll()  // 内部organization信息访问路由全部开放
                 .antMatchers("/assets/**").permitAll()  // 资源文件开放
                 .antMatchers("/assets/**").permitAll()  // 资源文件开放
+                .antMatchers("/api/WxPay/**").permitAll()  // 资源文件开放
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();

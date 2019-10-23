@@ -8,15 +8,14 @@ package com.ahsj.wxapplet.common.utils;
  * @Params 
 **/
 public class Configure {
-
-        private static String key = "xxxxxxNOBVmszxxxxxxxxxxxxxxxxxxx";
-
+        // 商户支付秘钥
+        private static String key = "wx9eec243b070bf766";
         //小程序ID    
         private static String appID = "wx42ebbFFFFFFFFFF";
         //商户号
-        private static String mch_id = "1499111112";
+        private static String mch_id = "1305638280";
         // 小程序的secret
-        private static String secret = "xxxxxxxxxxxxxxxxxxx";
+        private static String secret = "8963ca9ce2dd28783d7373b920324474";
 
         public static String getSecret() {
         return secret;
