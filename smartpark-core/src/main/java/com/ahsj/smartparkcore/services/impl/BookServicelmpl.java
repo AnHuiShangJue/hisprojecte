@@ -240,16 +240,7 @@ public class BookServicelmpl implements BookService {
     @Override
     @Transactional(readOnly = true)
     public PageBean<BookDTO> listByDate(PageBean<BookDTO> pageBean) throws Exception {
-        List<BookDTO> bookDTOS = bookMapper.listByDate(pageBean);
-        for (BookDTO bookDTO : bookDTOS) {
-            if (bookDTO.getDescription() == null) {
-                bookDTO.setDescription("");
-            }
-            if (bookDTO.getPhoneNumber() == null) {
-                bookDTO.setPhoneNumber("");
-            }
-        }
-        pageBean.setData(CodeHelper.getInstance().setCodeValue(bookDTOS));
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(bookMapper.listByDate(pageBean)));
         return pageBean;
     }
 }
