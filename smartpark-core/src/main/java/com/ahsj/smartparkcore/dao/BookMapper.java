@@ -25,5 +25,5 @@ public interface BookMapper {
 
     List<BookDTO> list(PageBean<BookDTO> pageBean);
 
-    List<BookDTO> listByDate(PageBean<BookDTO> pageBean);
+    List<Book> listByDate(PageBean<BookDTO> pageBean);
 }

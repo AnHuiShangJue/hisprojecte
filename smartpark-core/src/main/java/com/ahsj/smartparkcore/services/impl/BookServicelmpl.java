@@ -11,6 +11,7 @@ import com.ahsj.smartparkcore.entity.dto.BookDTO;
 import com.ahsj.smartparkcore.entity.dto.ReserveSiteDTO;
 import com.ahsj.smartparkcore.entity.dto.SiteDTO;
 import com.ahsj.smartparkcore.entity.po.*;
+import com.ahsj.smartparkcore.entity.vo.BookVO;
 import com.ahsj.smartparkcore.entity.vo.ConferenceRoomInfoVO;
 import com.ahsj.smartparkcore.services.BookService;
 import core.entity.PageBean;
@@ -169,6 +170,9 @@ public class BookServicelmpl implements BookService {
             if (siteDTO.getPhoneNumber() == null) {
                 siteDTO.setPhoneNumber("");
             }
+            if (siteDTO.getSiteName() == null) {
+                siteDTO.setSiteName("");
+            }
             bookDTO.setBookType(2);
             bookDTO.setBookTypeName("场地");
             bookDTO.setTargetId(siteDTO.getId());
@@ -191,6 +195,9 @@ public class BookServicelmpl implements BookService {
             if (conferenceRoomInfoVO.getPhoneNumber() == null) {
                 conferenceRoomInfoVO.setPhoneNumber("");
             }
+            if (conferenceRoomInfoVO.getConferenceName() == null) {
+                conferenceRoomInfoVO.setConferenceName("");
+            }
             bookDTO.setBookType(1);
             bookDTO.setBookTypeName("会议室");
             bookDTO.setTargetId(conferenceRoomInfoVO.getId());
@@ -212,6 +219,9 @@ public class BookServicelmpl implements BookService {
             }
             if (stationInfo.getPhoneNumber() == null) {
                 stationInfo.setPhoneNumber("");
+            }
+            if (stationInfo.getTitle() == null) {
+                stationInfo.setTitle("");
             }
             bookDTO.setBookType(3);
             bookDTO.setBookTypeName("工位");
@@ -240,7 +250,23 @@ public class BookServicelmpl implements BookService {
     @Override
     @Transactional(readOnly = true)
     public PageBean<BookDTO> listByDate(PageBean<BookDTO> pageBean) throws Exception {
-        pageBean.setData(CodeHelper.getInstance().setCodeValue(bookMapper.listByDate(pageBean)));
+        List<Book> books = bookMapper.listByDate(pageBean);
+        List<BookDTO> bs = new ArrayList<>();
+        for (Book book : books) {
+            if (book.getDescription() == null) {
+                book.setDescription("");
+            }
+            if (book.getPhoneNumber() == null) {
+                book.setPhoneNumber("");
+            }
+            if (book.getSubscriberName() == null) {
+                book.setSubscriberName("");
+            }
+            DozerBeanMapper mapper = new DozerBeanMapper(); //对象转换组件
+            BookDTO bk = mapper.map(book, BookDTO.class);
+            bs.add(bk);
+        }
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(bs));
         return pageBean;
     }
 }
