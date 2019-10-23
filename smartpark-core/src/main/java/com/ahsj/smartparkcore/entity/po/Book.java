@@ -1,9 +1,11 @@
 package com.ahsj.smartparkcore.entity.po;
 
+import core.entity.BaseEntity;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Book {
+public class Book extends BaseEntity {
     private Long id;
 
     private Long createUserId;
@@ -50,17 +52,13 @@ public class Book {
         this.id = id;
     }
 
-    public Long getCreateUserId() {
-        return createUserId;
-    }
+
 
     public void setCreateUserId(Long createUserId) {
         this.createUserId = createUserId;
     }
 
-    public Long getUpdateUserId() {
-        return updateUserId;
-    }
+
 
     public void setUpdateUserId(Long updateUserId) {
         this.updateUserId = updateUserId;
