@@ -1,19 +1,28 @@
 package com.ahsj.smartparkcore.controller.joinEnterpriseReview;
 
+import com.ahsj.smartparkcore.common.Constants;
+import com.ahsj.smartparkcore.common.utils.ZipUtils;
 import com.ahsj.smartparkcore.entity.dto.JoinEnterpriseReviewDTO;
+import com.ahsj.smartparkcore.entity.sys.SysAttachmentInfo;
 import com.ahsj.smartparkcore.entity.vo.JoinEnterpriseReviewVO;
 import com.ahsj.smartparkcore.services.JoinEnterpriseReviewService;
 import com.ahsj.smartparkcore.services.SysAttachmentInfoService;
+import com.alibaba.fastjson.JSONObject;
 import core.controller.BaseController;
 import core.message.Message;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 /**
@@ -30,6 +39,9 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/api/joinenterprisereview")
 public class JoinEnterpriseReviewController extends BaseController {
+    private static final String filePath = Constants.FILE_PATHS_WX;
+    private static final Long FILE_SIZE = 10485760L;
+
 
     @Autowired
     JoinEnterpriseReviewService joinEnterpriseReviewService;
@@ -64,4 +76,5 @@ public class JoinEnterpriseReviewController extends BaseController {
         JoinEnterpriseReviewVO enterpriseReviewVO = joinEnterpriseReviewService.queryJoinEnterpriseReview(id,relateKet,relatePage);
         return new ResponseEntity<>((enterpriseReviewVO), HttpStatus.OK);
     }
+
 }

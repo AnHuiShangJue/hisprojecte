@@ -42,6 +42,7 @@ public class Constants {
     public static final String HIS_SYS_EXCEL_PROJECT_CH_FILE_URL = resourseUrl.getJarResourcesPaths() + "/config/LocList.xml";
 
     public static final String FILE_PATHS = resourseUrl.getJarResourcesPaths() + "/static/assets/upload/";
+    public static final String FILE_PATHS_WX = resourseUrl.getJarResourcesPaths() + "/static/assets/upload/wximg";
 
     public static final String FILE_PATHS_LOCAL = resourseUrl.getJarResourcesPaths();
 
