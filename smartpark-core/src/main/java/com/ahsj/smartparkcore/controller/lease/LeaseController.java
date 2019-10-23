@@ -50,7 +50,7 @@ public class LeaseController extends BaseController {
      * @Date 2019/10/19
      * @Time 17:40
      **/
-    @GetMapping("/index.ahsj")
+    @RequestMapping("/index.ahsj")
     public ModelAndView index(String token) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/lease/list");
         modelAndView.addObject("token", token);
@@ -65,7 +65,7 @@ public class LeaseController extends BaseController {
      * @Date 2019/10/19
      * @Time 17:39
      **/
-    @PostMapping("/list.ahsj")
+    @RequestMapping("/list.ahsj")
     public ResponseEntity<PageBean<LeaseVO>> queryList(LeaseVO leaseVO) throws Exception {
         PageBean<LeaseVO> pageBean = new PageBean<>();
         pageBean.setParameter(leaseVO);
@@ -81,7 +81,7 @@ public class LeaseController extends BaseController {
      * @Date 2019/10/19
      * @Time 17:29
      **/
-    @PostMapping("/allList.ahsj")
+    @RequestMapping("/allList.ahsj")
     public List<LeaseVO> allList() throws Exception {
         List<LeaseVO> list = leaseService.List();
         return list;
@@ -95,7 +95,7 @@ public class LeaseController extends BaseController {
      * @Date 2019/10/19
      * @Time 17:29
      **/
-    @PostMapping("/isLeaseList.ahsj")
+    @RequestMapping("/isLeaseList.ahsj")
     public List<LeaseVO> isLeaseList() throws Exception {
         List<LeaseVO> list = leaseService.isLeaseList();
         return list;
@@ -109,7 +109,7 @@ public class LeaseController extends BaseController {
      * @Date 2019/10/19
      * @Time 17:29
      **/
-    @PostMapping("/noLeaseList.ahsj")
+    @RequestMapping("/noLeaseList.ahsj")
     public List<LeaseVO> noLeaseList() throws Exception {
         List<LeaseVO> list = leaseService.noLeaseList();
         return list;
@@ -124,7 +124,10 @@ public class LeaseController extends BaseController {
      * @Time 15:23
      **/
     @RequestMapping("/getLease.ahsj")
-    public LeaseDTO selectLease(LeaseVO leaseVO) throws Exception {
+    public LeaseDTO selectLease(Long targetType,Long targetId) throws Exception {
+        LeaseVO leaseVO =new LeaseVO();
+        leaseVO.setTargetType(targetType);
+        leaseVO.setTargetId(targetId);
         return leaseService.selectLease(leaseVO);
     }
 

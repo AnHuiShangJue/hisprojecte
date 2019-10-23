@@ -182,7 +182,7 @@ public class BookController extends BaseController {
      * @Date 2019/10/21
      * @Time 16:29
      **/
-    @RequestMapping("/getAll")
+    @RequestMapping("/getAll.ahsj")
     public List<BookDTO> selectAllBook() throws Exception {
         return bookService.selectAllBook();
     }
@@ -195,7 +195,7 @@ public class BookController extends BaseController {
      * @Date 2019/10/21
      * @Time 16:48
      **/
-    @RequestMapping("/getBook")
+    @RequestMapping("/getBook.ahsj")
     PageBean<BookDTO> listByDate(BookDTO bookDTO, String token) throws Exception {
         PageBean<BookDTO> pageBean = new PageBean<>();
         pageBean.setParameter(bookDTO);
