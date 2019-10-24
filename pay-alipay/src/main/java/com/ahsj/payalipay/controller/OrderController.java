@@ -60,7 +60,7 @@ public class OrderController {
      */
 
 //支付宝回调函数
-    @RequestMapping("/alipay_callback.do")
+    @RequestMapping("/alipay_callback.do.ahsj")
     public Message alipayCallback(HttpServletRequest request, String token) throws Exception {
         Map<String, String> params = Maps.newHashMap();
         Map requestParams = request.getParameterMap();
@@ -126,7 +126,7 @@ public class OrderController {
     }
 
     //异步回调
-    @PostMapping("/alipay_asynchronous.do")
+    @PostMapping("/alipay_asynchronous.do.ahsj")
     public String asynchronous(HttpServletRequest request, String token) throws Exception {
         Map<String, String> params = Maps.newHashMap();
         Map requestParams = request.getParameterMap();

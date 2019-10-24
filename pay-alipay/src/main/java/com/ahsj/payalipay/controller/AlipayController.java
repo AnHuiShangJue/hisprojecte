@@ -84,7 +84,7 @@ public class AlipayController {
      * @Date 2019/10/16
      * @Time 11:13
      **/
-    @RequestMapping("/list/pay")
+    @RequestMapping("/list/pay.ahsj")
     public void payController(HttpServletRequest request, HttpServletResponse response, Alipay alipay) throws Exception {
         alipay.setType(OrderStatusEnum.NO_PAY.getCode());//未支付
         int insert = alipayService.insert(alipay);
@@ -123,7 +123,7 @@ public class AlipayController {
      * @Date 2019/10/16
      * @Time 17:44
      **/
-    @RequestMapping("/list/show")
+    @RequestMapping("/list/show.ahsj")
     public AlipaymentOrder showOrder(HttpServletRequest request, HttpServletResponse response, AlipaymentOrder alipaymentOrder, String token) throws Exception {
         AlipaymentOrder ao = alipaymentOrderService.selectAlipaymentOrder(alipaymentOrder);
         if (!EmptyUtil.Companion.isNullOrEmpty(ao)) {//如果库里有直接查询
@@ -156,7 +156,7 @@ public class AlipayController {
      * @Date 2019/10/18
      * @Time 11:33
      **/
-    @RequestMapping("/list/refund")
+    @RequestMapping("/list/refund.ahsj")
     public Message refund(HttpServletRequest request, HttpServletResponse response, ReturnAlipay returnAlipay, String token) throws Exception {
         int id = returnAlipayService.insert(returnAlipay);
         log.info("------新增商家退款记录成功------");
@@ -195,7 +195,7 @@ public class AlipayController {
      * @Date 2019/10/17
      * @Time 12:27
      **/
-    @RequestMapping("/list/refundQuery")
+    @RequestMapping("/list/refundQuery.ahsj")
     public AlipayTradeRefund refundQuery(HttpServletRequest request, HttpServletResponse response, AlipayTradeRefund alipayTradeRefund, String token) throws Exception {
 
         AlipayTradeRefund ar = alipayTradeRefundService.selectAlipayTradeRefund(alipayTradeRefund);
@@ -231,7 +231,7 @@ public class AlipayController {
      * @Date 2019/10/18
      * @Time 15:21
      **/
-    @RequestMapping("/list/close")
+    @RequestMapping("/list/close.ahsj")
     public Message close(HttpServletRequest request, HttpServletResponse response, Alipay alipay, String token) throws Exception {
         Alipay al = alipayService.selectByNumber(alipay.getNumber());
         if (EmptyUtil.Companion.isNullOrEmpty(al)) {
