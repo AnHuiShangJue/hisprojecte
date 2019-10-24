@@ -2,9 +2,9 @@ server:
   port: 5000
 
 eureka:
-#  instance:
-#    hostname: 192.168.0.107
-#    prefer-ip-address: true
+  #  instance:
+  #    hostname: 192.168.0.107
+  #    prefer-ip-address: true
   client:
     #    表示是否将自己注册到Eureka Server，默认为true
     registerWithEureka: true
@@ -45,8 +45,8 @@ spring:
   datasource:
     #      url: jdbc:log4jdbc:mysql://127.0.0.1:3306/his-userinfo?useUnicode=true&characterEncoding=utf8&useSSL=true
     url: jdbc:log4jdbc:mysql://192.168.0.105:3306/his-translate?useUnicode=true&characterEncoding=utf8&useSSL=true
-    username: root
-    password: 123456
+    username: ahsj
+    password: shangjue0603
     driver-class-name: net.sf.log4jdbc.DriverSpy
     type: com.zaxxer.hikari.HikariDataSource
   #    secondary:

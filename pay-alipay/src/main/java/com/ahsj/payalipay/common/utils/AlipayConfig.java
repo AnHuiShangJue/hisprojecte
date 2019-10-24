@@ -23,6 +23,7 @@ public class AlipayConfig {
     // 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问  return_url.jsp
     public static String return_url = "http://localhost:8022/payalipay/api/order/alipay_callback.do";
 
+
     // 签名方式
     public static String sign_type = "RSA2";
 
@@ -32,6 +33,9 @@ public class AlipayConfig {
     // 支付宝沙箱网关
     public static String gatewayUrl = "https://openapi.alipaydev.com/gateway.do";
 
+    public static String json = "json";
+
+    public static String appKey = "";
 
 //↑↑↑↑↑↑↑↑↑↑请在这里配置您的基本信息↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 

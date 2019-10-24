@@ -3,7 +3,7 @@ server:
 
 eureka:
   instance:
-    ipAddress: 192.168.0.99
+    ipAddress: 192.168.0.125
     prefer-ip-address: true
     ## 心跳间隔，5秒
     lease-renewal-interval-in-seconds: 5
@@ -18,7 +18,7 @@ eureka:
     #    设置与Eureka Server交互的地址，查询服务和注册服务都需要依赖这个地址。默认是http://localhost:8761/eureka ；多个地址可使用 , 分隔。
     serviceUrl:
       #      defaultZone: http://47.92.192.210:8760/eureka/,http://47.92.192.210:8761/eureka/
-#      defaultZone: http://192.168.0.99:8760/eureka/
+      #      defaultZone: http://192.168.0.99:8760/eureka/
       defaultZone: http://127.0.0.1:8760/eureka/,http://127.0.0.1:8761/eureka/
       #客户端缓存时间 默认环境下是30秒，生产环境下改成5s
       # 定时刷新本地缓存时间
@@ -34,11 +34,11 @@ security:
     client:
       clientId: bd1c0a783ccdd1c9b9e4
       clientSecret: 1a9030fbca47a5b2c28e92f19050bb77824b5ad1
-      accessTokenUri:  http://localhost:8003/uaa/oauth/token
-      userAuthorizationUri: http://localhost:8003/uaa/oauth/authorize
+      accessTokenUri:  http://localhost:7000/uaa/oauth/token
+      userAuthorizationUri: http://localhost:7000/uaa/oauth/authorize
       clientAuthenticationScheme: form
     resource:
-      userInfoUri: http://localhost:8003/uaa/user
+      userInfoUri: http://localhost:7000/uaa/user
       preferTokenInfo: false
 
 zuul:

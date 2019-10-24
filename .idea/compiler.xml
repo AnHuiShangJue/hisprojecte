@@ -5,6 +5,12 @@
       <profile default="true" name="Default" enabled="true" />
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="assets.global.com.anhuishangjue.global.main" target="1.8" />
+      <module name="assets.global.com.anhuishangjue.global.test" target="1.8" />
+      <module name="com.ahsj.pay-alipay.main" target="1.8" />
+      <module name="com.ahsj.pay-alipay.test" target="1.8" />
+      <module name="global.js.com.anhuishangjue.js.main" target="1.8" />
+      <module name="global.js.com.anhuishangjue.js.test" target="1.8" />
       <module name="hisprojecte.AHSJTemp.main" target="1.8" />
       <module name="hisprojecte.AHSJTemp.node_modules.acorn-globals.main" target="1.8" />
       <module name="hisprojecte.AHSJTemp.node_modules.acorn-globals.node_modules.acorn.main" target="1.8" />
@@ -34,6 +40,20 @@
       <module name="hisprojecte.sys-user-info.main" target="1.8" />
       <module name="hisprojecte.sys-user-info.test" target="1.8" />
       <module name="hisprojecte.zuulsmartpark.main" target="1.8" />
+      <module name="js.plugins.com.anhuishangjue.plugins.main" target="1.8" />
+      <module name="js.plugins.com.anhuishangjue.plugins.test" target="1.8" />
+      <module name="out.com.anhuishangjue.out.main" target="1.8" />
+      <module name="out.com.anhuishangjue.out.test" target="1.8" />
+      <module name="plugins.adamwdraper-Numeral-js-7de892f.com.anhuishangjue.adamwdraper-Numeral-js-7de892f.main" target="1.8" />
+      <module name="plugins.adamwdraper-Numeral-js-7de892f.com.anhuishangjue.adamwdraper-Numeral-js-7de892f.test" target="1.8" />
+      <module name="production.com.anhuishangjue.production.main" target="1.8" />
+      <module name="production.com.anhuishangjue.production.test" target="1.8" />
+      <module name="resources.com.anhuishangjue.resources.main" target="1.8" />
+      <module name="resources.com.anhuishangjue.resources.test" target="1.8" />
+      <module name="static.assets.com.anhuishangjue.assets.main" target="1.8" />
+      <module name="static.assets.com.anhuishangjue.assets.test" target="1.8" />
+      <module name="static.com.anhuishangjue.static.main" target="1.8" />
+      <module name="static.com.anhuishangjue.static.test" target="1.8" />
       <module name="zuulsmartpark.main" target="1.8" />
       <module name="zuulsmartpark.test" target="1.8" />
     </bytecodeTargetLevel>

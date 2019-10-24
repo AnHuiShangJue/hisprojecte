@@ -15,7 +15,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 // https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity4
     compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '3.0.4.RELEASE'
-   
+
 
     //自定义组件
     // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
@@ -78,7 +78,10 @@ dependencies {
     compile group: 'org.opendaylight.controller', name: 'config-api', version: '0.8.4'
 // https://mvnrepository.com/artifact/com.alibaba/fastjson
     compile group: 'com.alibaba', name: 'fastjson', version: '1.2.58'
-
+//自定义架包
+    compile files('libs/SmileService1.9.1.jar')
+    compile files('libs/commons-logging-1.1.1.jar')
+    compile files('libs/fastjson-1.1.45.jar')
 }
 sourceSets {
     main {
