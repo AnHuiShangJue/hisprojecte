@@ -139,7 +139,7 @@
             loadingMessage: 'Loading...',
             dataTable: {
                 "ajax": {
-                    "url": CTX + "/api/book/list.index.ahsj?token=" + TOKEN, // ajax source
+                    "url": CTX + "/api/book/list.ahsj?token=" + TOKEN, // ajax source
                 },
                 "columns": [
                     {
@@ -221,8 +221,8 @@
 
     $("#createBtn").click(
         function addSize() {
-            var url = CTX + "/api/site/add/index.ahsj?token=" + TOKEN;
-            dialog.show(url, "新增场地");
+            var url = CTX + "/api/book/add/index.ahsj?token=" + TOKEN;
+            dialog.show(url, "新增预约");
         })
 
     function update(id) {

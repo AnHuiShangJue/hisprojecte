@@ -264,7 +264,7 @@
         where is_cancel =2 and is_pay = 1
         and book_type = #{bookType,jdbcType=INTEGER}
         and target_id = #{targetId,jdbcType=BIGINT}
-        and not ( start_time &gt; = #{endTime,jdbcType=TIMESTAMP} or end_time &lt;= #{startTime,jdbcType=TIMESTAMP});
+        and not ( start_time &gt;= #{endTime,jdbcType=TIMESTAMP} or end_time &lt;= #{startTime,jdbcType=TIMESTAMP});
     </select>
 
     <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">

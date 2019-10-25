@@ -183,7 +183,7 @@ Scripts
                 dialog.confirm('确定提交吗?', function (index, layero) {
                     var send_form = $('#sendForm').serialize();
                     $.ahsjajax(
-                        CTX + "/api/site/update.index.ahsj?token=" + TOKEN,
+                        CTX + "/api/site/update.ahsj?token=" + TOKEN,
                         send_form,
                         function (responseEntity) {
                             if (responseEntity.code > 0) {
