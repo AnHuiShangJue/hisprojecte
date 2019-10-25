@@ -1,5 +1,6 @@
 package com.ahsj.payalipay.service.impl.impl;
 
+import com.ahsj.payalipay.common.utils.Constants;
 import com.ahsj.payalipay.common.utils.MockInfo;
 import com.ahsj.payalipay.service.impl.service.SmilePayService;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,20 @@ public class SmilePayServiceImpl implements SmilePayService {
      * @Time 17:13
      */
 
+
+    @Override
+    public void response(Map smileToPayResponse) {
+        if (smileToPayResponse != null) {
+            String code = (String) smileToPayResponse.get("code");
+            String metaInfo = (String) smileToPayResponse.get("metainfo");
+
+            if (Constants.CODE_SUCCESS.equalsIgnoreCase(code) && metaInfo != null) {  //equalsIgnoreCase不区分大小写判断是否相等
+                // 将metaInfo发送给商户服务端，由商户服务端发起刷脸初始化OpenAPI的调用
+
+            }
+        }
+    }
+
     private Map mockInfo() {
         Map merchantInfo = new HashMap();
         //以下信息请根据真实情况填写
@@ -50,8 +65,4 @@ public class SmilePayServiceImpl implements SmilePayService {
         return merchantInfo;
     }
 
-    @Override
-    public void response(Map smileToPayResponse) {
-
-    }
 }

@@ -23,10 +23,10 @@ public class PayAlipayApplicationTests {
 
 
 
-
-      JSONObject jsonObject =JSON.parseObject( JSON.parseObject(jsonEntity).get("alipay_trade_query_response").toString());
+        //JSONObject jsonObject =  JSON.parseObject(jsonEntity);
+     JSONObject jsonObject =JSON.parseObject( JSON.parseObject(jsonEntity).get("alipay_trade_query_response").toString());
        // Object alipay_trade_refund_response = JSON.parseObject(jsonEntity).get("alipay_trade_refund_response")
-        System.out.println(jsonObject.get("msg"));
+        System.out.println(jsonObject.getString("msg"));
 
 
 

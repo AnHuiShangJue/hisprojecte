@@ -1,6 +1,5 @@
 package com.ahsj.wxapplet.controller;
 
-import com.ahsj.wxapplet.common.utils.HttpRequest;
 import com.ahsj.wxapplet.entity.UserInfo;
 import com.ahsj.wxapplet.services.UserService;
 import com.alibaba.fastjson.JSONObject;
