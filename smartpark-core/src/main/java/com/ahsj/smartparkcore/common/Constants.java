@@ -38,6 +38,7 @@ public class Constants {
     public static final String SMARTPARKCORE= "smartparkcore";
 
     public static final String  STATIC= "static";
+    public static final String  LOCALHOST= "http://localhost:8022";
 
     public static final String HIS_SYS_EXCEL_PROJECT_CH_FILE_URL = resourseUrl.getJarResourcesPaths() + "/config/LocList.xml";
 

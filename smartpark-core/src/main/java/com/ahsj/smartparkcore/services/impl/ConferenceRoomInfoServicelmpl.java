@@ -189,7 +189,7 @@ public class ConferenceRoomInfoServicelmpl implements ConferenceRoomInfoService 
                 continue;
             }
             SysAttachmentInfo sysAttachmentInfo1 = sysAttachmentInfos.get(0);
-            String replace = sysAttachmentInfo1.getLocation().replace(Constants.STATIC, Constants.SMARTPARKCORE);
+            String replace = Constants.LOCALHOST+sysAttachmentInfo1.getLocation().replace(Constants.STATIC, Constants.SMARTPARKCORE);
             conferenceRoomInfoVO.setFilePath(replace);
         }
         return conferenceRoomInfoVOS;
