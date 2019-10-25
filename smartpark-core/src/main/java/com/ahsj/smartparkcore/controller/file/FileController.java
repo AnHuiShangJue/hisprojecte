@@ -8,14 +8,14 @@ import com.ahsj.smartparkcore.entity.sys.SysAttachmentInfo;
 import com.ahsj.smartparkcore.feign.IOrganizationService;
 import com.ahsj.smartparkcore.services.SysAttachmentInfoService;
 import core.controller.BaseController;
+import core.message.Message;
+import core.message.MessageUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -48,11 +48,22 @@ public class FileController extends BaseController {
 
     private static final String SUB_FILEPATH = Constants.FILE_PATHS_LOCAL;
 
-    @Value("${file.paths}")
-    private String filePath;
+    private static final String filePath = Constants.FILE_PATHS;
+
+
+
+    @GetMapping("/uplaod.ahsj")
+    public ModelAndView addEnterprise(String token, @RequestParam("relateKet") String relateKet, @RequestParam("relatePage") String relatePage,@RequestParam("id") Long id) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/file/upload");
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("relateKet", relateKet);
+        modelAndView.addObject("relatePage", relatePage);
+        modelAndView.addObject("relateId", id);
+        return modelAndView;
+    }
 
     @PostMapping("/uploadFile.ahsj")
-    public void uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("relateKet") String relateKet, @RequestParam("relatePage") String relatePage, @RequestParam("relateId") Long relateId) {
+    public Message uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("relateKet") String relateKet, @RequestParam("relatePage") String relatePage, @RequestParam("relateId") Long relateId) {
         BaseLoginUser baseLoginUser = new BaseLoginUser();
         LocalDate now = LocalDate.now();
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyyMMdd");
@@ -108,10 +119,10 @@ public class FileController extends BaseController {
             //保存数据
             //  sysAttachmentInfoService.addSaveSysAttachmentInfo(sysAttachmentInfo);
             sysAttachmentInfoService.addSaveSysAttachmentInfoList(list);//调用addSaveSysAttachmentInfoList保存到数据库的方法
-            // return MessageUtil.createMessage(true, "上传成功!");
+             return MessageUtil.createMessage(true, "上传成功!");
         } catch (Exception e) {
             e.printStackTrace();
-            // return MessageUtil.createMessage(true, "上传失败!");
+            return MessageUtil.createMessage(true, "上传失败!");
         }
 
     }

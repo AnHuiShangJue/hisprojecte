@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+<head>
+    <style>
+    </style>
+</head>
+
+<div th:replace="public/base_list :: html"></div>
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+
+<div class="row">
+    <div id="title" class="col s12 m12 l12"><h5 class="center">图片上传</h5></div>
+    <div class="col s2 m2 l2 right"style="width:  38.66667%">
+<!--        <button class="btn cyan waves-effect waves-light right" type="button" id="excelDownloadFile" name="">导入文件模板下载(Import file template download)</button>-->
+    </div>
+
+    <input type="hidden" id="vouchers" value=""/>
+</div>
+
+<div id="file-upload" class="section">
+    <form method="post" id="excelUploadFileForm" enctype="multipart/form-data">
+        <div class="row section">
+            <div class="col s12 m12 l12">
+                <input type="file" id="input-file-now" name="file" class="dropify" value="" multiple="multiple" data-default-file=""/>
+            </div>
+            <input type="hidden" id="relateKet" th:value="${relateKet}"/>
+            <input type="hidden" id="relatePage" th:value="${relatePage}"/>
+            <input type="hidden" id="relateId" th:value="${relateId}"/>
+        </div>
+    </form>
+</div>
+
+<div class="row">
+  <!--  <div class="col s2 m2 l2 right">
+        <button class="btn cyan waves-effect waves-light right" type="button" name="">下载文件</button>
+    </div>-->
+    <div class="col s2 m2 l2 right" style="width:  38.66667%">
+        <button class="btn cyan waves-effect waves-light right" id="excelUploadFile" type="button" name="">提交文件(Submit file)
+        </button>
+    </div>
+</div>
+
+<!--<div class="row">
+    <div class="col s12 m12 l12">
+        <table>
+            <tr>
+                <td>导入(Import)<span style="color: green" id="importList">0</span>条(datas)！</td>
+            </tr>
+
+            <tr>
+                <td>验证成功通过(Successful verification)<span style="color: green" id="successNum">0</span>条(datas)！</td>
+            </tr>
+
+            <tr>
+                <td><span style="color: red" id="faildNum">0</span>条数据导入失败(Datas import failed)！</td>
+            </tr>
+
+            <tr id="errorWhy"></tr>
+
+            <tr id="errorList" style="border: none"></tr>
+
+
+        </table>
+
+    </div>
+</div>-->
+
+<div class="row" style="margin-top: 15px">
+    <div class="col s2 m2 l2 right" style="width:  38.66667%">
+<!--        <button class="btn cyan waves-effect waves-light right" id="errorListInfo" type="button" name="">下载导入错误信息(Download import error message)</button>-->
+    </div>
+</div>
+
+<div th:replace="public/base_list_script :: html"></div>
+<script>
+
+    $(function () {
+        $("#excelUploadFile").click(function () {
+            dialog.confirm("确定导入文件吗", function (index, layero) {
+                var fordata = new FormData();
+                alert(88);
+               var excelUploadFileForm = new FormData($("#excelUploadFileForm")[0]);
+              // fordata.append('file',$('#excelUploadFileForm')[0].files[0]);
+                excelUploadFileForm.append('relateKet',$('#relateKet').val());
+                excelUploadFileForm.append('relatePage',$('#relatePage').val());
+                excelUploadFileForm.append('relateId',$('#relateId').val());
+                var file = $("#input-file-now").val();
+                alert(88);
+                if (file == null || file == "") {
+                    dialog.warn("请选择导入文件！");
+                } else {
+                    alert(88);
+                    $.ajax({
+                        url: CTX + "/api/file/uploadFile.ahsj" + "?token=" + TOKEN,
+                        type: "POST",
+                        data: excelUploadFileForm,
+                        dataType: "json",
+                        processData: false,  // 告诉jQuery不要去处理发送的数据
+                        contentType: false,   // 告诉jQuery不要去设置Content-Type请求头
+                        success: function (msg) {
+                           /* console.log(msg);
+                            var errorWhy = '';
+                            var errorList = '';
+                            var fileInfo = msg.data;
+                            $("#faildNum").html(fileInfo.faildNum);
+                            $("#vouchers").val(fileInfo.vouchers);
+                            $("#successNum").html(fileInfo.successNum);
+                            $("#importList").html(fileInfo.importListSize);//errorWhy
+                            if (fileInfo.faildNum > 0) {
+                                errorWhy = '<td>' + '失败原因(Reason for failure):' + '</td>';
+                                $("#errorWhy").html(errorWhy);
+                            }
+                            $.each(fileInfo.errorList, function (index, item) {
+                                var num = index + 1;
+                                errorList += '  <tr><td>' + num + ':' + item + '</td></tr>';
+                            });
+                            $("#errorList").html(errorList);*/
+                        }
+                    })
+                }
+            })
+        });
+
+        //导入下载模板
+        $("#excelDownloadFile").click(function () {
+            var importExcelUrl = $("#importExcelUrl").val();
+            var url = CTX + importExcelUrl + "?token=" + TOKEN;
+            window.location = url;
+        });
+
+        //下载错误信息
+        $("#errorListInfo").click(function () {
+            var vouchers = $("#vouchers").val();
+            var errorExcelUrl = $("#errorExcelUrl").val();
+            var url = CTX + errorExcelUrl + "?token=" + TOKEN+"&vouchers="+vouchers;
+            window.location = url;
+        })
+    });
+
+</script>
+</body>
+</html>

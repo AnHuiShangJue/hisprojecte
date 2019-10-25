@@ -280,7 +280,8 @@
                             rtnBtn = rtnBtn +
                                 "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改工位\" onclick='update(" + row.id + ");'> <i class='material-icons'>edit</i></a>" +
                                 "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"设置启用\" href='javascript:;' onclick='setDisable(" + row.id + ");'> <i class='material-icons'>info</i></a>" +
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"审核\" href='javascript:;' onclick='isVerify(" + row.id + ");'> <i class='material-icons'>input</i></a>";
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"审核\" href='javascript:;' onclick='isVerify(" + row.id + ");'> <i class='material-icons'>input</i></a>"+
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"上传图片\" href='javascript:;' onclick='upload(" + row.id + ");'> <i class='material-icons'>file_upload</i></a>";
                             // 返回自定义内容
                             return rtnBtn;
                         }
@@ -297,7 +298,7 @@
         function addSize() {
             var url = CTX + "/api/stationinfo/addStationinfo.ahsj?token=" + TOKEN;
             dialog.show(url, "新增工位");
-        })
+        });
 
     function update(id) {
         var url = CTX + "/api/stationinfo/updateStationinfo.ahsj?token=" + TOKEN + "&id=" + id;
@@ -307,6 +308,10 @@
     function isVerify(id) {
         var url = CTX + "/api/stationinfo/audit.ahsj?token=" + TOKEN + "&id=" + id;
         dialog.show(url, "审核工位");
+    }
+    function upload(id) {
+        var url = CTX + "/api/file/uplaod.ahsj?token=" + TOKEN + "&id=" + id+"&relateKet=stationinfo&relatePage=list";
+        dialog.show(url, "图片上传");
     }
 
 
