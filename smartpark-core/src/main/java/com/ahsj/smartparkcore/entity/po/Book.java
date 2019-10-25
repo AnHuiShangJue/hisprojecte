@@ -1,6 +1,10 @@
 package com.ahsj.smartparkcore.entity.po;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import core.code.CodeValueColumn;
+import core.code.Constants;
 import core.entity.BaseEntity;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -12,21 +16,37 @@ public class Book extends BaseEntity {
 
     private Long updateUserId;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd ")
     private Date createDate;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd ")
     private Date updateDate;
 
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "book_type", typeName = "bookTypeName")
     private Integer bookType;
+    private String bookTypeName;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd ")
     private Date startTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd ")
     private Date endTime;
 
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_audit", typeName = "isAuditName")
     private Integer isAudit;
+    private String isAuditName;
 
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_cancel", typeName = "isCancelName")
     private Integer isCancel;
+    private String isCancelName;
 
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_pay", typeName = "isPayName")
     private Integer isPay;
+    private String isPayName;
 
     private BigDecimal paymentAmount;
 
@@ -53,11 +73,9 @@ public class Book extends BaseEntity {
     }
 
 
-
     public void setCreateUserId(Long createUserId) {
         this.createUserId = createUserId;
     }
-
 
 
     public void setUpdateUserId(Long updateUserId) {
@@ -190,5 +208,38 @@ public class Book extends BaseEntity {
 
     public void setVisitTime(Date visitTime) {
         this.visitTime = visitTime;
+    }
+
+
+    public String getBookTypeName() {
+        return bookTypeName;
+    }
+
+    public void setBookTypeName(String bookTypeName) {
+        this.bookTypeName = bookTypeName;
+    }
+
+    public String getIsAuditName() {
+        return isAuditName;
+    }
+
+    public void setIsAuditName(String isAuditName) {
+        this.isAuditName = isAuditName;
+    }
+
+    public String getIsCancelName() {
+        return isCancelName;
+    }
+
+    public void setIsCancelName(String isCancelName) {
+        this.isCancelName = isCancelName;
+    }
+
+    public String getIsPayName() {
+        return isPayName;
+    }
+
+    public void setIsPayName(String isPayName) {
+        this.isPayName = isPayName;
     }
 }

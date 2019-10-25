@@ -18,10 +18,11 @@ public class AlipayConfig {
     public static String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiYlQbuhB4V/sqf43lHLE8Sv5uTEVQUwGmUpE8NQsFXuOSK9hoXtdb65XglUxr2gAYXPdt9gTvSt4AbwFsfKAGNCjVGf9vKL3atcUoOzGh6KnMICUY5U+1Gz6tXmWUCOaIsbt5SZTm6/s86VoAUw2OQm+efOtB27J/tHkxImZzjXxMRrj/EV4vx81WlaIFpgmRQc89XBRXg6/WmiWk9AtN0920VUAyErzf2k5MEYNA0p9UgcpSQi3l3TweVxIwBiI0GXcJZwTLzAcVDN4AmzPPWfFsBIepEVr9TdAHoVvbGZOj86rDllecLQBajXyBFLFNEt/kPCrEbkMEvFp1z14bwIDAQAB";
 
     // 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-    public static String notify_url = "http://localhost:8022/payalipay/api/order/alipay_asynchronous.do";
+    public static String notify_url = "http://localhost:8022/payalipay/api/order/alipay_asynchronous.do.ahsj";
 
     // 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问  return_url.jsp
-    public static String return_url = "http://localhost:8022/payalipay/api/order/alipay_callback.do";
+    public static String return_url = "http://localhost:8022/payalipay/api/order/alipay_callback.do.ahsj";
+
 
     // 签名方式
     public static String sign_type = "RSA2";
@@ -32,6 +33,9 @@ public class AlipayConfig {
     // 支付宝沙箱网关
     public static String gatewayUrl = "https://openapi.alipaydev.com/gateway.do";
 
+    public static String json = "json";
+
+    public static String appKey = "";
 
 //↑↑↑↑↑↑↑↑↑↑请在这里配置您的基本信息↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 

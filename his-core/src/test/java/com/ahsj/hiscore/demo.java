@@ -1,29 +1,42 @@
-package com.ahsj.hiscore;
-
+import com.ahsj.hiscore.controller.ward.HisWardsController;
+import com.ahsj.hiscore.entity.HisWard;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
-import java.util.ArrayList;
+import javax.annotation.Resource;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 /**
- * @Description
- * @Author dingli
- * @Date 2019/8/15
- * @Time 11:10
- **/
-public class demo {
-/** className demo
- *@author dingli
- *@date 2019/8/15 11:10
+ *
  */
-@Test
-public void init(){
+@SpringBootTest(classes = HisWardsController.class)
 
-}
+@RunWith(SpringJUnit4ClassRunner.class)
+
+@WebAppConfiguration
+
+public class demo {
+
+    @Resource
+
+    private HisWardsController hisWardsController;
 
 
+    @Test
+
+    public void testIndex() throws Exception {
+
+        /*TestCase.assertEquals(this.sampleController.index(),
+
+                "Greetings from Spring Boot!");*/
+        List<HisWard> wardAll = hisWardsController.getWardAll();
+        for (HisWard hisWard : wardAll) {
+            System.out.println(hisWard);
+        }
+
+    }
 
 }
