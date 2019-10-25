@@ -71,7 +71,7 @@ public class JoinEnterpriseReviewController extends BaseController {
      * @Date 2019/10/22
      * @Time 17:14
      **/
-    @PostMapping("/query/joinenterprisereview.ahsj")
+    @RequestMapping("/query/joinenterprisereview.ahsj")
     public ResponseEntity<JoinEnterpriseReviewVO> queryJoinEnterpriseReview(String relateKet, String relatePage, Long id) throws Exception {
         JoinEnterpriseReviewVO enterpriseReviewVO = joinEnterpriseReviewService.queryJoinEnterpriseReview(id,relateKet,relatePage);
         return new ResponseEntity<>((enterpriseReviewVO), HttpStatus.OK);

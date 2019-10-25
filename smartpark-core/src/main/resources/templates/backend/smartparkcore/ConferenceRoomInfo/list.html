@@ -195,6 +195,11 @@
                         "name": "phone_number"
                     },
                     {
+                        "title": "联系人姓名",
+                        "data": "name",
+                        "name": "name"
+                    },
+                    {
                         "title": "价格",
                         "data": "price",
                         "name": "price"
@@ -208,7 +213,9 @@
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn + "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='edit(" + row.id + ");'> <i class='material-icons'>edit</i></a>" +
-                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick='deleteInit(" + row.id + ");'> <i class='material-icons'>delete</i></a>";
+                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick='deleteInit(" + row.id + ");'> <i class='material-icons'>delete</i></a>"+
+                            "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"上传图片\" href='javascript:;' onclick='upload(" + row.id + ");'> <i class='material-icons'>file_upload</i></a>";
+
                             // 返回自定义内容
                             return rtnBtn;
                         }
@@ -226,6 +233,11 @@
     function edit(id) {
         var url = CTX + "/api/conferenceRoomInfo/update/index.ahsj?token=" + TOKEN + "&id=" + id;
         dialog.show(url, "修改会议室信息");
+    }
+
+    function upload(id) {
+        var url = CTX + "/api/file/uplaod.ahsj?token=" + TOKEN + "&id=" + id+"&relateKet=conferenceRoomInfo&relatePage=list";
+        dialog.show(url, "图片上传");
     }
 
     function deleteInit(ids) {

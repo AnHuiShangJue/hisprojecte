@@ -1,32 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ahsj.smartparkcore.dao.BookMapper">
     <resultMap id="BaseResultMap" type="com.ahsj.smartparkcore.entity.po.Book">
-        <id column="id" jdbcType="BIGINT" property="id"/>
-        <result column="create_user_id" jdbcType="BIGINT" property="createUserId"/>
-        <result column="update_user_id" jdbcType="BIGINT" property="updateUserId"/>
-        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
-        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
-        <result column="book_type" jdbcType="INTEGER" property="bookType"/>
-        <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
-        <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
-        <result column="is_audit" jdbcType="INTEGER" property="isAudit"/>
-        <result column="is_cancel" jdbcType="INTEGER" property="isCancel"/>
-        <result column="is_pay" jdbcType="INTEGER" property="isPay"/>
-        <result column="payment_amount" jdbcType="DECIMAL" property="paymentAmount"/>
-        <result column="deposit" jdbcType="DECIMAL" property="deposit"/>
-        <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber"/>
-        <result column="subscriber_name" jdbcType="VARCHAR" property="subscriberName"/>
-        <result column="target_id" jdbcType="BIGINT" property="targetId"/>
-        <result column="remarks" jdbcType="VARCHAR" property="remarks"/>
-        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="create_user_id" property="createUserId" jdbcType="BIGINT"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="BIGINT"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="book_type" property="bookType" jdbcType="INTEGER"/>
+        <result column="start_time" property="startTime" jdbcType="TIMESTAMP"/>
+        <result column="end_time" property="endTime" jdbcType="TIMESTAMP"/>
+        <result column="is_audit" property="isAudit" jdbcType="INTEGER"/>
+        <result column="is_cancel" property="isCancel" jdbcType="INTEGER"/>
+        <result column="is_pay" property="isPay" jdbcType="INTEGER"/>
+        <result column="payment_amount" property="paymentAmount" jdbcType="DECIMAL"/>
+        <result column="deposit" property="deposit" jdbcType="DECIMAL"/>
+        <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR"/>
+        <result column="subscriber_name" property="subscriberName" jdbcType="VARCHAR"/>
+        <result column="target_id" property="targetId" jdbcType="BIGINT"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="visit_time" property="visitTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
     id, create_user_id, update_user_id, create_date, update_date, book_type, start_time, 
     end_time, is_audit, is_cancel, is_pay, payment_amount, deposit, phone_number, subscriber_name, 
-    target_id, remarks, description
+    target_id, remarks, description, visit_time
   </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
         from book
@@ -36,21 +37,21 @@
     delete from book
     where id = #{id,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="com.ahsj.smartparkcore.entity.po.Book" keyProperty="id" useGeneratedKeys="true">
+    <insert id="insert" parameterType="com.ahsj.smartparkcore.entity.po.Book">
     insert into book (id, create_user_id, update_user_id, 
       create_date, update_date, book_type, 
       start_time, end_time, is_audit, 
       is_cancel, is_pay, payment_amount, 
       deposit, phone_number, subscriber_name, 
-      target_id, remarks, description
-      )
+      target_id, remarks, description, 
+      visit_time)
     values (#{id,jdbcType=BIGINT}, #{createUserId,jdbcType=BIGINT}, #{updateUserId,jdbcType=BIGINT}, 
       #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{bookType,jdbcType=INTEGER}, 
       #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{isAudit,jdbcType=INTEGER}, 
       #{isCancel,jdbcType=INTEGER}, #{isPay,jdbcType=INTEGER}, #{paymentAmount,jdbcType=DECIMAL}, 
       #{deposit,jdbcType=DECIMAL}, #{phoneNumber,jdbcType=VARCHAR}, #{subscriberName,jdbcType=VARCHAR}, 
-      #{targetId,jdbcType=BIGINT}, #{remarks,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
-      )
+      #{targetId,jdbcType=BIGINT}, #{remarks,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{visitTime,jdbcType=TIMESTAMP})
   </insert>
     <insert id="insertSelective" parameterType="com.ahsj.smartparkcore.entity.po.Book">
         insert into book
@@ -109,6 +110,9 @@
             <if test="description != null">
                 description,
             </if>
+            <if test="visitTime != null">
+                visit_time,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -164,6 +168,9 @@
             </if>
             <if test="description != null">
                 #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="visitTime != null">
+                #{visitTime,jdbcType=TIMESTAMP},
             </if>
         </trim>
     </insert>
@@ -221,6 +228,9 @@
             <if test="description != null">
                 description = #{description,jdbcType=VARCHAR},
             </if>
+            <if test="visitTime != null">
+                visit_time = #{visitTime,jdbcType=TIMESTAMP},
+            </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
@@ -242,7 +252,8 @@
       subscriber_name = #{subscriberName,jdbcType=VARCHAR},
       target_id = #{targetId,jdbcType=BIGINT},
       remarks = #{remarks,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR}
+      description = #{description,jdbcType=VARCHAR},
+      visit_time = #{visitTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 
@@ -253,7 +264,7 @@
         where is_cancel =2 and is_pay = 1
         and book_type = #{bookType,jdbcType=INTEGER}
         and target_id = #{targetId,jdbcType=BIGINT}
-        and not ( start_time &gt; = #{endTime,jdbcType=TIMESTAMP} or end_time &lt;= #{startTime,jdbcType=TIMESTAMP});
+        and not ( start_time &gt;= #{endTime,jdbcType=TIMESTAMP} or end_time &lt;= #{startTime,jdbcType=TIMESTAMP});
     </select>
 
     <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
@@ -283,7 +294,7 @@
         <include refid="Base_Column_List"/>
         from book
         where 1=1
-        and  start_time &lt;= now()
+        and start_time &lt;= now()
         <if test="parameter.orders != null and parameter.orders != ''">
             order by ${parameter.orders}
         </if>

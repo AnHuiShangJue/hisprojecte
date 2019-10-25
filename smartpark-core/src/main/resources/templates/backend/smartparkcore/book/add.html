@@ -13,78 +13,60 @@
                 <form class="col s12" id="sendForm" action="#">
                     <div class="row">
                         <div class="input-field col s4 l4 xl4">
-                            <input id="siteName" name="siteName" type="text"
-                                   data-error=".errorTxt1">
-                            <div class="errorTxt1"></div>
-                            <label for="siteName">场地名称<span style="font-size: 12px"></span></label>
-                        </div>
-                        <div class="input-field col s4 l4 xl4">
-                            <input id="title" name="title" type="text"
-                                   data-error=".errorTxt1">
-                            <div class="errorTxt1"></div>
-                            <label for="title">标题<span style="font-size: 12px"></span></label>
+                            <select ahsj:select name="bookType" type="code" id="book_type" typeKey="book_type"
+                                    cssClass=""
+                            ></select>
+                            <label for="book_type">预约类型<span style="font-size: 12px"></span></label>
                         </div>
 
                         <div class="input-field col s4 l4 xl4">
-                            <input id="location" name="location" type="text"
+                            <input id="startTime" name="startTime" type="text" class="datepicker"
                                    data-error=".errorTxt1">
                             <div class="errorTxt1"></div>
-                            <label for="location">地点<span style="font-size: 12px"></span></label>
+                            <label for="startTime">预定开始时间<span style="font-size: 12px"></span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="endTime" name="endTime" type="text" class="datepicker"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label for="endTime">预定结束时间<span style="font-size: 12px"></span></label>
                         </div>
 
                         <div class="input-field col s4 l4 xl4">
-                            <input id="price" name="price" type="text"
-                                   data-error=".errorTxt1">
-                            <div class="errorTxt1"></div>
-                            <label for="price">价格<span style="font-size: 12px"></span></label>
+                            <select ahsj:select name="isAudit" type="code" id="isAudit" typeKey="is_audit"
+                                    cssClass=""
+                            ></select>
+                            <label for="isAudit">是否审核<span style="font-size: 12px"></span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4">
-                            <input id="area" name="area" type="text"
+                            <select ahsj:select name="isCancel" type="code" id="isCancel" typeKey="is_cancel"
+                                    cssClass=""
+                            ></select>
+                            <label for="isCancel">是否取消<span style="font-size: 12px"></span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <select ahsj:select name="isPay" type="code" id="isPay" typeKey="is_pay"
+                                    cssClass=""
+                            ></select>
+                            <label for="isPay">是否付费<span style="font-size: 12px"></span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="paymentAmount" name="paymentAmount" type="text"
                                    data-error=".errorTxt1">
                             <div class="errorTxt1"></div>
-                            <label for="area">面积<span style="font-size: 12px"></span></label>
+                            <label for="paymentAmount">收费金额<span style="font-size: 12px"></span></label>
                         </div>
-
+                        <div class="input-field col s4 l4 xl4">
+                            <input id="subscriberName" name="subscriberName" type="text"
+                                   data-error=".errorTxt1">
+                            <div class="errorTxt1"></div>
+                            <label for="subscriberName">预约人姓名<span style="font-size: 12px"></span></label>
+                        </div>
                         <div class="input-field col s4 l4 xl4">
                             <input id="phoneNumber" name="phoneNumber" type="text"
                                    data-error=".errorTxt1">
                             <div class="errorTxt1"></div>
-                            <label for="phoneNumber">联系电话<span style="font-size: 12px"></span></label>
-                        </div>
-                        <div class="input-field col s4 l4 xl4">
-                            <input id="name" name="name" type="text"
-                                   data-error=".errorTxt1">
-                            <div class="errorTxt1"></div>
-                            <label for="name">姓名<span style="font-size: 12px"></span></label>
-                        </div>
-
-                        <div class="input-field col s4 l4 xl4">
-                            <input id="capacity" name="capacity" type="text"
-                                   data-error=".errorTxt1">
-                            <div class="errorTxt1"></div>
-                            <label for="capacity">容纳人数<span style="font-size: 12px"></span></label>
-                        </div>
-
-                        <div class="input-field col s4 l4 xl4">
-                            <input id="description" name="description" type="text"
-                                   data-error=".errorTxt1">
-                            <div class="errorTxt1"></div>
-                            <label for="description">描述<span style="font-size: 12px"></span></label>
-                        </div>
-                        <div class="input-field col s4 l4 xl4">
-                            <select ahsj:select name="isLease" type="code" id="is_lease" typeKey="is_lease"
-                                    cssClass=""></select>
-                            <label for="is_lease">是否租赁<span style="font-size: 12px"></span></label>
-                        </div>
-                        <div class="input-field col s4 l4 xl4">
-                            <select ahsj:select name="isEnable" type="code" id="is_enable" typeKey="is_enable"
-                                    cssClass=""></select>
-                            <label for="is_enable">是否启用<span style="font-size: 12px"></span></label>
-                        </div>
-                        <div class="input-field col s4 l4 xl4">
-                            <select ahsj:select name="isVerify" type="code" id="is_verify" typeKey="is_verify"
-                                    cssClass=""></select>
-                            <label for="is_verify">是否审核<span style="font-size: 12px"></span></label>
+                            <label for="phoneNumber">预约人手机号<span style="font-size: 12px"></span></label>
                         </div>
                     </div>
                     <div class="row">
@@ -97,7 +79,6 @@
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
 </div>
@@ -141,16 +122,16 @@ Scripts
                 dialog.confirm('确定提交吗?', function (index, layero) {
                     var send_form = $('#sendForm').serialize();
                     $.ahsjajax(
-                        CTX + "/api/site/save.index.ahsj?token=" + TOKEN,
+                        CTX + "/api/book/save.ahsj?token=" + TOKEN,
                         send_form,
                         function (responseEntity) {
-                            if (responseEntity.code>0) {
-                                M.toast({html: responseEntity.message+responseEntity.data});
+                            if (responseEntity.code > 0) {
+                                M.toast({html: responseEntity.message + responseEntity.data});
                                 parent.grid.search();
                                 dialog.parentclose();
                                 return true;
                             } else {
-                                M.toast({html: msg.message+responseEntity.data});
+                                M.toast({html: msg.message + responseEntity.data});
                                 return false;
                             }
                         },

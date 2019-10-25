@@ -57,7 +57,7 @@ public class StationInfoController extends BaseController {
      * @Date 2019/10/19
      * @Time 18:15
      **/
-    @PostMapping("/list.ahsj")
+    @RequestMapping("/list.ahsj")
     public ResponseEntity<PageBean<StationInfoDTO>> queryList(StationInfoDTO stationInfoDTO) throws Exception {
         PageBean<StationInfoDTO> pageBean = new PageBean<>();
         pageBean.setParameter(stationInfoDTO);
@@ -97,7 +97,7 @@ public class StationInfoController extends BaseController {
      * @Date 2019/9/2
      * @Time 15:52
      **/
-    @PostMapping("/add/stationinfo.ahsj")
+    @RequestMapping("/add/stationinfo.ahsj")
     public ResponseEntity<Message> addStationinfo(StationInfoDTO infoDTO, @RequestParam(value = "file", required = false) MultipartFile[] file, String relateKet, String relatePage) throws Exception {
         Message message = stationInfoService.addStationinfo(infoDTO, file, relateKet, relatePage);
         return new ResponseEntity<>((message), HttpStatus.OK);
@@ -111,7 +111,7 @@ public class StationInfoController extends BaseController {
      * @Date 2019/9/2
      * @Time 15:52
      **/
-    @PostMapping("/update/stationinfo.ahsj")
+    @RequestMapping("/update/stationinfo.ahsj")
     public ResponseEntity<Message> updateStationinfo(StationInfoDTO stationInfoDTO, @RequestParam(value = "file", required = false) MultipartFile[] file, String relateKet, String relatePage) throws Exception {
         Message message = stationInfoService.updateStationinfo(stationInfoDTO, file, relateKet, relatePage);
         return new ResponseEntity<>((message), HttpStatus.OK);
@@ -125,8 +125,7 @@ public class StationInfoController extends BaseController {
      * @Date 2019/10/21
      * @Time 15:18
      **/
-    @ResponseBody
-    @PostMapping("/setEnable.ahsj")
+    @RequestMapping("/setEnable.ahsj")
     public ResponseEntity<Message> updateSetDisable(@RequestParam("ids[]") Long[] ids) throws Exception {
         return new ResponseEntity<>((stationInfoService.updateSetDisable(ids)), HttpStatus.OK);
     }
@@ -138,7 +137,7 @@ public class StationInfoController extends BaseController {
  *@Date 2019/10/23
  *@Time 10:06
 **/
-    @PostMapping("/reviewSuccess.ahsj")
+    @RequestMapping("/reviewSuccess.ahsj")
     public Message reviewSuccess(@RequestParam("id") Long id) throws Exception {
         return stationInfoService.reviewSuccess(id);
     }
@@ -151,7 +150,7 @@ public class StationInfoController extends BaseController {
  *@Date 2019/10/23
  *@Time 10:06
 **/
-    @PostMapping("/reviewFail.ahsj")
+    @RequestMapping("/reviewFail.ahsj")
     public Message reviewFail(@RequestParam("id") Long id) throws Exception {
         return stationInfoService.reviewFail(id);
     }

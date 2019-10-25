@@ -28,7 +28,7 @@ public class SiteController extends BaseController {
      * @Date 2019/9/5
      * @Time 10:23
      **/
-    @RequestMapping("/list.index.ahsj")
+    @RequestMapping("/list.ahsj")
     @ResponseBody
     public ResponseEntity<PageBean<SiteDTO>> list(SiteDTO siteDTO, String token) throws Exception {
         PageBean<SiteDTO> pageBean = new PageBean<>();
@@ -44,7 +44,7 @@ public class SiteController extends BaseController {
      * @Date 2019/9/5
      * @Time 11:26
      **/
-    @RequestMapping("/save.index.ahsj")
+    @RequestMapping("/save.ahsj")
     @ResponseBody
     public ResponseEntity<ResultModel> save(SiteDTO siteDTO) throws Exception {
         return siteServices.save(siteDTO);
@@ -58,7 +58,7 @@ public class SiteController extends BaseController {
      * @Date 2019/9/5
      * @Time 11:26
      **/
-    @RequestMapping("/update.index.ahsj")
+    @RequestMapping("/update.ahsj")
     @ResponseBody
     public ResponseEntity<ResultModel> update(SiteDTO siteDTO) throws Exception {
         return siteServices.update(siteDTO);

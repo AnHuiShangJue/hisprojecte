@@ -58,7 +58,7 @@ public class BookController extends BaseController {
      * @Date 2019/10/14
      * @Time 13:08
      **/
-    @RequestMapping("/list.index.ahsj")
+    @RequestMapping("/list.ahsj")
     @ResponseBody
     public ResponseEntity<PageBean<BookDTO>> list(BookDTO bookDTO, String token) throws Exception {
         PageBean<BookDTO> pageBean = new PageBean<>();
@@ -77,6 +77,22 @@ public class BookController extends BaseController {
     @RequestMapping(value = "/list/index.ahsj")
     ModelAndView list(String token) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/book/list");
+        modelAndView.addObject("title", "预约信息");
+        modelAndView.addObject("token", token);
+        return modelAndView;
+    }
+
+    /**
+     * @Description 新增预约
+     * @Params: [token]
+     * @Author: dingli
+     * @Return: org.springframework.web.servlet.ModelAndView
+     * @Date 2019/10/25
+     * @Time 10:26
+     **/
+    @RequestMapping(value = "/add/index.ahsj")
+    ModelAndView add(String token) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/book/add");
         modelAndView.addObject("title", "预约信息");
         modelAndView.addObject("token", token);
         return modelAndView;
@@ -107,7 +123,7 @@ public class BookController extends BaseController {
      * @Date 2019/10/14
      * @Time 15:18
      **/
-    @RequestMapping("/update.index.ahsj")
+    @RequestMapping("/update.ahsj")
     @ResponseBody
     public ResponseEntity<ResultModel> update(BookDTO bookDTO) throws Exception {
         return bookService.update(bookDTO);
@@ -138,7 +154,7 @@ public class BookController extends BaseController {
      * @Date 2019/10/14
      * @Time 17:52
      **/
-    @RequestMapping("/isAudit.index.ahsj")
+    @RequestMapping("/isAudit.ahsj")
     @ResponseBody
     public ResponseEntity<ResultModel> isAudit(BookDTO bookDTO) throws Exception {
         return bookService.update(bookDTO);
@@ -169,7 +185,7 @@ public class BookController extends BaseController {
      * @Date 2019/10/15
      * @Time 10:57
      **/
-    @RequestMapping("/save.index.ahsj")
+    @RequestMapping("/save.ahsj")
     public ResponseEntity<ResultModel> save(BookDTO bookDTO) throws Exception {
         return bookService.save(bookDTO);
     }
