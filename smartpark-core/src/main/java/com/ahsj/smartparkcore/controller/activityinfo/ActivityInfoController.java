@@ -40,7 +40,7 @@ public class ActivityInfoController extends BaseController {
      * @Return core.entity.PageBean<com.ahsj.smartparkcore.entity.po.ActivityInfo>
      * @Params [model, activityInfo]
     **/
-    @RequestMapping(value = "/list.ahsj", method = {RequestMethod.POST})
+    @RequestMapping(value = "/list.ahsj")
     public ResponseEntity<PageBean<ActivityInfo>> list(ActivityInfoDTO activityInfoDTO) throws Exception {
         DozerBeanMapper mapper = new DozerBeanMapper();
         ActivityInfo activityInfo =mapper.map(activityInfoDTO,ActivityInfo.class);
@@ -168,6 +168,20 @@ public class ActivityInfoController extends BaseController {
         }else {
             return activityInfoService.reviewError(id,remarks);
         }
+    }
+
+    /**
+     * @Description
+     * @Author  muxu
+     * @Date  2019/10/24
+     * @Time 16:27
+     * @Return
+     * @Params
+    **/
+    @RequestMapping(value = "/selectById.ahsj")
+    public ActivityInfo selectById(@RequestParam(value="id", required=true) Long id)throws Exception{
+//        if (EmptyUtil.Companion.isNullOrEmpty(id))
+        return activityInfoService.selectById(id);
     }
 
     /**
