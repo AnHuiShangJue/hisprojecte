@@ -56,9 +56,7 @@ public class ActivityPersonnelInfoController extends BaseController {
      **/
     @RequestMapping(value = "/save.ahsj")
     public ResponseEntity<ResultModel> save(ActivityPersonnelInfoDTO activityPersonnelInfoDTO)throws Exception{
-        if (EmptyUtil.Companion.isNullOrEmpty(activityPersonnelInfoDTO.getAge())|| EmptyUtil.Companion.isNullOrEmpty(activityPersonnelInfoDTO.getSex())||
-                EmptyUtil.Companion.isNullOrEmpty(activityPersonnelInfoDTO.getPhoneNumber())|| EmptyUtil.Companion.isNullOrEmpty(activityPersonnelInfoDTO.getIdcard())||
-                EmptyUtil.Companion.isNullOrEmpty(activityPersonnelInfoDTO.getEmail())|| EmptyUtil.Companion.isNullOrEmpty(activityPersonnelInfoDTO.getName()))
+        if (EmptyUtil.Companion.isNullOrEmpty(activityPersonnelInfoDTO.getName()))
         {
             return new ResponseEntity<>(new ResultModel(ResultStatus.ERROR_INFO_NOTCOMPELETE), HttpStatus.OK);
 
