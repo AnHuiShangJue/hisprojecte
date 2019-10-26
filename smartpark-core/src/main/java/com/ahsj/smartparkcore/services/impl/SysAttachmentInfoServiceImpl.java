@@ -98,11 +98,11 @@ public class SysAttachmentInfoServiceImpl implements SysAttachmentInfoService {
     @Transactional(readOnly = true)
     public List<SysAttachmentInfo> querySysAttachmentInfo(SysAttachmentInfo sysAttachmentInfo) throws Exception {
         if (EmptyUtil.Companion.isNullOrEmpty(sysAttachmentInfo)) {
-            return null;
+            return new ArrayList<>();
         } else {
             List<SysAttachmentInfo> sysAttachmentInfos = iSysAttachmentInfoService.querySysAttachmentInfo(sysAttachmentInfo);
             if (CollectionUtils.isEmpty(sysAttachmentInfos)) {
-                return null;
+                return new ArrayList<>();
             } else {
                 return sysAttachmentInfos;
             }

@@ -3,6 +3,7 @@ package com.ahsj.smartparkcore.dao;
 
 import com.ahsj.smartparkcore.entity.dto.SiteDTO;
 import com.ahsj.smartparkcore.entity.po.Site;
+import com.ahsj.smartparkcore.entity.vo.SiteVo;
 import core.entity.PageBean;
 
 import java.util.List;

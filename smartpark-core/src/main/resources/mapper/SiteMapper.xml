@@ -23,6 +23,11 @@
     <result column="book_type" property="bookType" jdbcType="INTEGER" />
     <result column="enterprise_id" property="enterpriseId" jdbcType="BIGINT" />
   </resultMap>
+
+  <!--自定义SQL-->
+  <resultMap id="ResultMap" type="com.ahsj.smartparkcore.entity.vo.SiteVo" extends="BaseResultMap">
+
+  </resultMap>
   <sql id="Base_Column_List" >
     id, site_name, title, location, price, area, name, phone_number, description, is_enable, 
     capacity, environmental_label, create_date, create_user_id, update_date, update_user_id, 
