@@ -273,7 +273,7 @@ public class BookServicelmpl implements BookService {
 
            SysAttachmentInfo sysAttachmentInfo = new SysAttachmentInfo();
             sysAttachmentInfo.setRelateId(stationInfo.getId());
-            sysAttachmentInfo.setRelateKey("stationInfo");
+            sysAttachmentInfo.setRelateKey("stationinfo");
             sysAttachmentInfo.setRelatePage("list");
             List<SysAttachmentInfo> sysAttachmentInfos = sysAttachmentInfoService.querySysAttachmentInfo(sysAttachmentInfo);
             if (EmptyUtil.Companion.isNullOrEmpty(sysAttachmentInfos)){
