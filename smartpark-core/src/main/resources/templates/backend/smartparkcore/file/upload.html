@@ -32,9 +32,6 @@
 </div>
 
 <div class="row">
-  <!--  <div class="col s2 m2 l2 right">
-        <button class="btn cyan waves-effect waves-light right" type="button" name="">下载文件</button>
-    </div>-->
     <div class="col s2 m2 l2 right" style="width:  38.66667%">
         <button class="btn cyan waves-effect waves-light right" id="excelUploadFile" type="button" name="">提交文件(Submit file)
         </button>
@@ -78,19 +75,14 @@
     $(function () {
         $("#excelUploadFile").click(function () {
             dialog.confirm("确定导入文件吗", function (index, layero) {
-                var fordata = new FormData();
-                alert(88);
                var excelUploadFileForm = new FormData($("#excelUploadFileForm")[0]);
-              // fordata.append('file',$('#excelUploadFileForm')[0].files[0]);
                 excelUploadFileForm.append('relateKet',$('#relateKet').val());
                 excelUploadFileForm.append('relatePage',$('#relatePage').val());
                 excelUploadFileForm.append('relateId',$('#relateId').val());
                 var file = $("#input-file-now").val();
-                alert(88);
                 if (file == null || file == "") {
                     dialog.warn("请选择导入文件！");
                 } else {
-                    alert(88);
                     $.ajax({
                         url: CTX + "/api/file/uploadFile.ahsj" + "?token=" + TOKEN,
                         type: "POST",
@@ -98,24 +90,20 @@
                         dataType: "json",
                         processData: false,  // 告诉jQuery不要去处理发送的数据
                         contentType: false,   // 告诉jQuery不要去设置Content-Type请求头
-                        success: function (msg) {
-                           /* console.log(msg);
-                            var errorWhy = '';
-                            var errorList = '';
-                            var fileInfo = msg.data;
-                            $("#faildNum").html(fileInfo.faildNum);
-                            $("#vouchers").val(fileInfo.vouchers);
-                            $("#successNum").html(fileInfo.successNum);
-                            $("#importList").html(fileInfo.importListSize);//errorWhy
-                            if (fileInfo.faildNum > 0) {
-                                errorWhy = '<td>' + '失败原因(Reason for failure):' + '</td>';
-                                $("#errorWhy").html(errorWhy);
+                        success: function (responseEntity) {
+                            if (responseEntity.success) {
+                                M.toast({html: responseEntity.message});
+                                dialog.parentclose();
+                                parent.grid.search();
+                                return false;
+                            } else {
+                                M.toast({html: responseEntity.message});
+                                return false;
                             }
-                            $.each(fileInfo.errorList, function (index, item) {
-                                var num = index + 1;
-                                errorList += '  <tr><td>' + num + ':' + item + '</td></tr>';
-                            });
-                            $("#errorList").html(errorList);*/
+                        },
+                        errors:function () {
+                            M.toast({html: "网络异常"});
+                            return false;
                         }
                     })
                 }

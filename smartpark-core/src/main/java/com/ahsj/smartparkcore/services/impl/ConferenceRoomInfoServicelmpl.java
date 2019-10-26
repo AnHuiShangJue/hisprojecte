@@ -1,5 +1,6 @@
 package com.ahsj.smartparkcore.services.impl;
 
+import com.ahsj.smartparkcore.common.Constants;
 import com.ahsj.smartparkcore.core.CodeHelper;
 import com.ahsj.smartparkcore.core.ResultModel;
 import com.ahsj.smartparkcore.core.ResultStatus;
@@ -7,10 +8,13 @@ import com.ahsj.smartparkcore.dao.ConferenceRoomInfoMapper;
 import com.ahsj.smartparkcore.entity.dto.ConferenceRoomInfoDTO;
 import com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo;
 import com.ahsj.smartparkcore.entity.po.Region;
+import com.ahsj.smartparkcore.entity.sys.SysAttachmentInfo;
 import com.ahsj.smartparkcore.entity.vo.ConferenceRoomInfoVO;
 import com.ahsj.smartparkcore.entity.vo.SiteVo;
 import com.ahsj.smartparkcore.services.ConferenceRoomInfoService;
+import com.ahsj.smartparkcore.services.EnterpriseInfoService;
 import com.ahsj.smartparkcore.services.RegionService;
+import com.ahsj.smartparkcore.services.SysAttachmentInfoService;
 import core.entity.PageBean;
 import org.apache.commons.lang3.StringUtils;
 import org.dozer.DozerBeanMapper;
@@ -20,6 +24,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import utils.EmptyUtil;
 
 import java.util.List;
 
@@ -28,6 +33,15 @@ public class ConferenceRoomInfoServicelmpl implements ConferenceRoomInfoService 
     @Autowired
     ConferenceRoomInfoMapper conferenceRoomInfoMapper;
 
+    @Autowired
+    SysAttachmentInfoService sysAttachmentInfoService;
+
+    @Autowired
+    EnterpriseInfoService enterpriseInfoService;
+
+    private static final String filePath = Constants.FILE_PATHS;
+
+    private static final String SUB_FILEPATH = Constants.FILE_PATHS_LOCAL;
 
     @Autowired
     RegionService regionService;
@@ -164,6 +178,20 @@ public class ConferenceRoomInfoServicelmpl implements ConferenceRoomInfoService 
     @Override
     @Transactional(readOnly = true)
     public List<ConferenceRoomInfoVO> listForView() throws Exception {
-        return conferenceRoomInfoMapper.listForView();
+        List<ConferenceRoomInfoVO> conferenceRoomInfoVOS = conferenceRoomInfoMapper.listForView();
+        for (ConferenceRoomInfoVO conferenceRoomInfoVO : conferenceRoomInfoVOS) {
+            SysAttachmentInfo sysAttachmentInfo = new SysAttachmentInfo();
+            sysAttachmentInfo.setRelateId(conferenceRoomInfoVO.getId());
+            sysAttachmentInfo.setRelateKey("conferenceRoomInfo");
+            sysAttachmentInfo.setRelatePage("list");
+            List<SysAttachmentInfo> sysAttachmentInfos = sysAttachmentInfoService.querySysAttachmentInfo(sysAttachmentInfo);
+            if (EmptyUtil.Companion.isNullOrEmpty(sysAttachmentInfos)){
+                continue;
+            }
+            SysAttachmentInfo sysAttachmentInfo1 = sysAttachmentInfos.get(0);
+            String replace = Constants.LOCALHOST+sysAttachmentInfo1.getLocation().replace(Constants.STATIC, Constants.SMARTPARKCORE);
+            conferenceRoomInfoVO.setFilePath(replace);
+        }
+        return conferenceRoomInfoVOS;
     }
 }

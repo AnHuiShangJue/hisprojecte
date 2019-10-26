@@ -91,10 +91,10 @@
                                        class="btn waves-effect waves-light red"><i
                                             class="material-icons  white-text tooltipped " data-position="bottom"
                                             data-delay="50" data-tooltip="新增">新增</i></a>
-                                 <!--   <a id="deleteManyBtn"
-                                       class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
-                                            class="material-icons white-text tooltipped" data-position="bottom"
-                                            data-delay="50" data-tooltip="批量删除">delete</i></a>-->
+                                    <!--   <a id="deleteManyBtn"
+                                          class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
+                                               class="material-icons white-text tooltipped" data-position="bottom"
+                                               data-delay="50" data-tooltip="批量删除">delete</i></a>-->
                                 </div>
                             </div>
                             <!--Form Advance-->
@@ -210,8 +210,10 @@
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn +
                                 "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改场地\" onclick='update(" + row.id + ");'> <i class='material-icons'>edit</i></a>" +
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"设置启用\" href='javascript:;' onclick='setIsEnable(" + row.id + ");'> <i class='material-icons'>info</i></a>"+
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"审核\" href='javascript:;' onclick='isVerify(" + row.id + ");'> <i class='material-icons'>input</i></a>";
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"设置启用\" href='javascript:;' onclick='setIsEnable(" + row.id + ");'> <i class='material-icons'>info</i></a>" +
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"审核\" href='javascript:;' onclick='isVerify(" + row.id + ");'> <i class='material-icons'>input</i></a>" +
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"上传图片\" href='javascript:;' onclick='upload(" + row.id + ");'> <i class='material-icons'>file_upload</i></a>";
+
                             // 返回自定义内容
                             return rtnBtn;
                         }
@@ -231,19 +233,26 @@
         })
 
     function update(id) {
-        var url = CTX + "/api/site/update/index.ahsj?token=" + TOKEN+"&id="+id;
+        var url = CTX + "/api/site/update/index.ahsj?token=" + TOKEN + "&id=" + id;
         dialog.show(url, "修改场地");
     }
+
     function isVerify(id) {
-        var url = CTX + "/api/site/isVerify/index.ahsj?token=" + TOKEN+"&id="+id;
+        var url = CTX + "/api/site/isVerify/index.ahsj?token=" + TOKEN + "&id=" + id;
         dialog.show(url, "审核场地");
     }
+
+    function upload(id) {
+        var url = CTX + "/api/file/uplaod.ahsj?token=" + TOKEN + "&id=" + id+"&relateKet=site&relatePage=list";
+        dialog.show(url, "图片上传");
+    }
+
     function setIsEnable(ids) {
         dialog.confirm('确定修改场地启用状态吗?', function (index, layero) {
             $.ahsjajax(CTX + "/api/site/setEnable.ahsj",
                 {"ids": ids},
                 function (responseEntity) {
-                    if (responseEntity.code>0) {
+                    if (responseEntity.code > 0) {
                         swal.close();
                         M.toast({
                             html: responseEntity.message, completeCallback: function () {

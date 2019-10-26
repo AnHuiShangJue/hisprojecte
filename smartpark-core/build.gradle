@@ -53,8 +53,10 @@ dependencies {
     // https://mvnrepository.com/artifact/io.github.openfeign/feign-httpclient
     compile group: 'io.github.openfeign', name: 'feign-httpclient', version: '9.5.1'
 
-    
-    
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools
+    compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.0.4.RELEASE'
+
+
 
     // https://mvnrepository.com/artifact/dom4j/dom4j
     compile group: 'dom4j', name: 'dom4j', version: '1.6.1'
