@@ -1,5 +1,6 @@
 package com.ahsj.smartparkcore.services.impl;
 
+import com.ahsj.smartparkcore.common.Constants;
 import com.ahsj.smartparkcore.core.CodeHelper;
 import com.ahsj.smartparkcore.core.ResultModel;
 import com.ahsj.smartparkcore.core.ResultStatus;
@@ -11,9 +12,14 @@ import com.ahsj.smartparkcore.entity.dto.BookDTO;
 import com.ahsj.smartparkcore.entity.dto.ReserveSiteDTO;
 import com.ahsj.smartparkcore.entity.dto.SiteDTO;
 import com.ahsj.smartparkcore.entity.po.*;
+import com.ahsj.smartparkcore.entity.sys.SysAttachmentInfo;
 import com.ahsj.smartparkcore.entity.vo.BookVO;
 import com.ahsj.smartparkcore.entity.vo.ConferenceRoomInfoVO;
+import com.ahsj.smartparkcore.entity.vo.SiteVo;
+import com.ahsj.smartparkcore.entity.vo.StationInfoVO;
 import com.ahsj.smartparkcore.services.BookService;
+import com.ahsj.smartparkcore.services.EnterpriseInfoService;
+import com.ahsj.smartparkcore.services.SysAttachmentInfoService;
 import core.entity.PageBean;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +46,16 @@ public class BookServicelmpl implements BookService {
 
     @Autowired
     StationInfoMapper stationInfoMapper;
+
+    @Autowired
+    SysAttachmentInfoService sysAttachmentInfoService;
+
+    @Autowired
+    EnterpriseInfoService enterpriseInfoService;
+
+    private static final String filePath = Constants.FILE_PATHS;
+
+    private static final String SUB_FILEPATH = Constants.FILE_PATHS_LOCAL;
 
     /**
      * @return org.springframework.http.ResponseEntity<com.ahsj.smartparkcore.core.ResultModel>
@@ -162,32 +178,62 @@ public class BookServicelmpl implements BookService {
     public List<BookDTO> selectAllBook() throws Exception {
         List<BookDTO> list = new ArrayList<>();
         List<Site> siteDTOS = siteMapper.selectAll();
-        for (Site siteDTO : siteDTOS) {
+        for (Site site : siteDTOS) {
             BookDTO bookDTO = new BookDTO();
-            if (siteDTO.getDescription() == null) {
-                siteDTO.setDescription("");
+            if (site.getDescription() == null) {
+                site.setDescription("");
             }
-            if (siteDTO.getPhoneNumber() == null) {
-                siteDTO.setPhoneNumber("");
+            if (site.getPhoneNumber() == null) {
+                site.setPhoneNumber("");
             }
-            if (siteDTO.getSiteName() == null) {
-                siteDTO.setSiteName("");
+            if (site.getSiteName() == null) {
+                site.setSiteName("");
             }
+
+            SysAttachmentInfo sysAttachmentInfo = new SysAttachmentInfo();
+            sysAttachmentInfo.setRelateId(site.getId());
+            sysAttachmentInfo.setRelateKey("site");
+            sysAttachmentInfo.setRelatePage("list");
+            List<SysAttachmentInfo> sysAttachmentInfos = sysAttachmentInfoService.querySysAttachmentInfo(sysAttachmentInfo);
+            if (EmptyUtil.Companion.isNullOrEmpty(sysAttachmentInfos)){
+                continue;
+            }
+            SysAttachmentInfo sysAttachmentInfo1 = sysAttachmentInfos.get(0);
+            String replace = Constants.LOCALHOST+sysAttachmentInfo1.getLocation().replace(Constants.STATIC, Constants.SMARTPARKCORE);
+            site.setFilePath(replace);
+
+
+
             bookDTO.setBookType(2);
             bookDTO.setBookTypeName("场地");
-            bookDTO.setTargetId(siteDTO.getId());
-            bookDTO.setArea(siteDTO.getArea());
-            bookDTO.setCapacity(siteDTO.getCapacity());
-            bookDTO.setDescription(siteDTO.getDescription());
-            bookDTO.setLocation(siteDTO.getLocation());
-            bookDTO.setName(siteDTO.getSiteName());
-            bookDTO.setPhoneNumber(siteDTO.getPhoneNumber());
-            bookDTO.setContactName(siteDTO.getName());
-            bookDTO.setPrice(siteDTO.getPrice());
+            bookDTO.setTargetId(site.getId());
+            bookDTO.setArea(site.getArea());
+            bookDTO.setCapacity(site.getCapacity());
+            bookDTO.setDescription(site.getDescription());
+            bookDTO.setLocation(site.getLocation());
+            bookDTO.setName(site.getSiteName());
+            bookDTO.setPhoneNumber(site.getPhoneNumber());
+            bookDTO.setContactName(site.getName());
+            bookDTO.setPrice(site.getPrice());
+            bookDTO.setFilePath(site.getFilePath());
             list.add(bookDTO);
         }
         List<ConferenceRoomInfo> conferenceRoomInfoVOS = conferenceRoomInfoMapper.selectAll();
         for (ConferenceRoomInfo conferenceRoomInfoVO : conferenceRoomInfoVOS) {
+          SysAttachmentInfo sysAttachmentInfo = new SysAttachmentInfo();
+            sysAttachmentInfo.setRelateId(conferenceRoomInfoVO.getId());
+            sysAttachmentInfo.setRelateKey("conferenceRoomInfo");
+            sysAttachmentInfo.setRelatePage("list");
+            List<SysAttachmentInfo> sysAttachmentInfos = sysAttachmentInfoService.querySysAttachmentInfo(sysAttachmentInfo);
+            if (EmptyUtil.Companion.isNullOrEmpty(sysAttachmentInfos)){
+                continue;
+            }
+            SysAttachmentInfo sysAttachmentInfo1 = sysAttachmentInfos.get(0);
+            String replace = Constants.LOCALHOST+sysAttachmentInfo1.getLocation().replace(Constants.STATIC, Constants.SMARTPARKCORE);
+            conferenceRoomInfoVO.setFilePath(replace);
+
+
+
             BookDTO bookDTO = new BookDTO();
             if (conferenceRoomInfoVO.getDescription() == null) {
                 conferenceRoomInfoVO.setDescription("");
@@ -209,6 +255,7 @@ public class BookServicelmpl implements BookService {
             bookDTO.setPhoneNumber(conferenceRoomInfoVO.getPhoneNumber());
             bookDTO.setContactName(conferenceRoomInfoVO.getName());
             bookDTO.setPrice(conferenceRoomInfoVO.getPrice());
+            bookDTO.setFilePath(conferenceRoomInfoVO.getFilePath());
             list.add(bookDTO);
         }
         List<StationInfo> stationInfos = stationInfoMapper.selectAll();
@@ -223,6 +270,22 @@ public class BookServicelmpl implements BookService {
             if (stationInfo.getTitle() == null) {
                 stationInfo.setTitle("");
             }
+
+           SysAttachmentInfo sysAttachmentInfo = new SysAttachmentInfo();
+            sysAttachmentInfo.setRelateId(stationInfo.getId());
+            sysAttachmentInfo.setRelateKey("stationInfo");
+            sysAttachmentInfo.setRelatePage("list");
+            List<SysAttachmentInfo> sysAttachmentInfos = sysAttachmentInfoService.querySysAttachmentInfo(sysAttachmentInfo);
+            if (EmptyUtil.Companion.isNullOrEmpty(sysAttachmentInfos)){
+                continue;
+            }
+            SysAttachmentInfo sysAttachmentInfo1 = sysAttachmentInfos.get(0);
+            String replace = Constants.LOCALHOST+sysAttachmentInfo1.getLocation().replace(Constants.STATIC, Constants.SMARTPARKCORE);
+            stationInfo.setFilePath(replace);
+
+
+
+
             bookDTO.setBookType(3);
             bookDTO.setBookTypeName("工位");
             bookDTO.setTargetId(stationInfo.getId());
@@ -234,6 +297,7 @@ public class BookServicelmpl implements BookService {
             bookDTO.setPhoneNumber(stationInfo.getPhoneNumber());
             bookDTO.setContactName(stationInfo.getName());
             bookDTO.setPrice(stationInfo.getPrice());
+            bookDTO.setFilePath(stationInfo.getFilePath());
             list.add(bookDTO);
         }
         return list;

@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Site extends BaseEntity {
+
     private Long id;
 
     private String siteName;
@@ -53,6 +54,17 @@ public class Site extends BaseEntity {
     private Date createDate;
 
     private Date updateDate;
+
+
+    private String filePath;
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
 
     public Integer getBookType() {
         return bookType;

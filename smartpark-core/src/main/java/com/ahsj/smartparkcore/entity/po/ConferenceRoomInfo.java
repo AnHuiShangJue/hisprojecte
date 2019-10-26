@@ -50,6 +50,16 @@ public class ConferenceRoomInfo  extends BaseEntity {
 
     private Integer bookType;
 
+    private String filePath;
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
     public Integer getBookType() {
         return bookType;
     }
