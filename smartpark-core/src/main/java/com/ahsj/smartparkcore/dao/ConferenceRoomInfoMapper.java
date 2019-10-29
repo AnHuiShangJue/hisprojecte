@@ -8,7 +8,8 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-public interface ConferenceRoomInfoMapper extends BaseMapper<ConferenceRoomInfo>{
+public interface ConferenceRoomInfoMapper {
+
     int deleteByPrimaryKey(Long id);
 
     int insert(ConferenceRoomInfo record);
@@ -34,4 +35,6 @@ public interface ConferenceRoomInfoMapper extends BaseMapper<ConferenceRoomInfo>
     List<ConferenceRoomInfoVO> listForView();
 
     List<ConferenceRoomInfo> selectAll();
+
+    List<ConferenceRoomInfo> selectByIds(List<Long> ids);
 }

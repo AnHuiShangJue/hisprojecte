@@ -5,6 +5,7 @@ import com.ahsj.smartparkcore.core.CodeHelper;
 import com.ahsj.smartparkcore.dao.StationInfoMapper;
 import com.ahsj.smartparkcore.entity.dto.StationInfoDTO;
 import com.ahsj.smartparkcore.entity.po.AccessInfo;
+import com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo;
 import com.ahsj.smartparkcore.entity.po.Region;
 import com.ahsj.smartparkcore.entity.po.StationInfo;
 import com.ahsj.smartparkcore.entity.vo.StationInfoVO;
@@ -22,6 +23,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import utils.EmptyUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Copyright (C), 2019-2019, 安徽商角有限公司
@@ -212,6 +216,30 @@ public class StationInfoServiceImpl implements StationInfoService {
             stationInfo.setIsVerify(Constants.ONE);
             stationInfoMapper.updateByPrimaryKey(stationInfo);
             return MessageUtil.createMessage(true, "工位申请信息审核成功 ！该工位申请信息验证通过 ！！");
+        }
+    }
+
+    /**
+     *@功能说明
+     *@Params [ids]
+     *@return java.util.List<com.ahsj.smartparkcore.entity.po.StationInfo>
+     *@Author XJP
+     *@Date 2019/10/29
+     *@Time 15:27
+    **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<StationInfo> selectByIds(List<Long> ids) throws Exception {
+        if (EmptyUtil.Companion.isNullOrEmpty(ids)){
+            return new ArrayList<>();
+        }else {
+            System.out.println(ids.size());
+            List<StationInfo> stationInfos = stationInfoMapper.selectByIds(ids);
+            if (EmptyUtil.Companion.isNullOrEmpty(stationInfos)){
+                return new ArrayList<>();
+            }else {
+                return stationInfos;
+            }
         }
     }
 

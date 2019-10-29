@@ -314,6 +314,6 @@
         select
         <include refid="Base_Column_List"/>
         from book
-        where open_id = #{openId,jdbcType=VARCHAR}
+        where is_pay = 2 and open_id = #{openId,jdbcType=VARCHAR}
     </select>
 </mapper>

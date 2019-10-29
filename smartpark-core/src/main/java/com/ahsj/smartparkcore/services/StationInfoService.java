@@ -8,6 +8,8 @@ import core.entity.PageBean;
 import core.message.Message;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 /**
  * Copyright (C), 2019-2019, 安徽商角有限公司
  * FileName: StationInfoService
@@ -89,4 +91,14 @@ public interface StationInfoService {
      * @Time 10:07
      **/
     Message reviewSuccess(Long id) throws Exception;
+
+    /**
+     *@功能说明
+     *@Params [ids]
+     *@return java.util.List<com.ahsj.smartparkcore.entity.po.StationInfo>
+     *@Author XJP
+     *@Date 2019/10/29
+     *@Time 15:23
+    **/
+    List<StationInfo> selectByIds(List<Long> ids) throws Exception;
 }

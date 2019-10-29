@@ -302,4 +302,14 @@
         <include refid="Base_Column_List"/>
         from conference_room_info
     </select>
+
+    <select id="selectByIds" resultMap="BaseResultMap" parameterType="java.util.List">
+        select <include refid="Base_Column_List"/>
+        from conference_room_info c
+        where c.id in
+        <foreach item="item" index="index" collection="list"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

@@ -242,8 +242,45 @@ public class BookController extends BaseController {
      * @Time 10:34
      **/
     @RequestMapping("/visitByOpenId.ahsj")
-    public  List<BookVO> visitByOpenId(BookDTO bookDTO) throws Exception {
+    public List<BookVO> visitByOpenId(BookDTO bookDTO) throws Exception {
         return bookService.visitByOpenId(bookDTO);
+    }
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     * @功能说明 根据openId查询全部订单
+     * @Params [bookDTO]
+     * @Author XJP
+     * @Date 2019/10/29
+     * @Time 13:28
+     **/
+    @RequestMapping("/visitByOpenIdAndOrder.ahsj")
+    public List<BookVO> visitByOpenIdAndOrder(BookDTO bookDTO) throws Exception {
+        return bookService.visitByOpenIdAndOrder(bookDTO);
+    }
+    /**
+     *@功能说明
+     *@Params [bookDTO]
+     *@return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     *@Author XJP
+     *@Date 2019/10/29
+     *@Time 15:15
+    **/
+    @RequestMapping("/stationVisitByOpenIdAndOrder.ahsj")
+    public List<BookVO> stationVisitByOpenIdAndOrder(BookDTO bookDTO) throws Exception {
+        return bookService.stationVisitByOpenIdAndOrder(bookDTO);
+    }
+    /**
+     *@功能说明
+     *@Params [bookDTO]
+     *@return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     *@Author XJP
+     *@Date 2019/10/29
+     *@Time 15:15
+    **/
+    @RequestMapping("/siteVisitByOpenIdAndOrder.ahsj")
+    public List<BookVO> siteVisitByOpenIdAndOrder(BookDTO bookDTO) throws Exception {
+        return bookService.siteVisitByOpenIdAndOrder(bookDTO);
     }
 }
 

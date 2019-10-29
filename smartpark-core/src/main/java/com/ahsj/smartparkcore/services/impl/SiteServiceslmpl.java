@@ -6,6 +6,7 @@ import com.ahsj.smartparkcore.core.ResultModel;
 import com.ahsj.smartparkcore.core.ResultStatus;
 import com.ahsj.smartparkcore.dao.SiteMapper;
 import com.ahsj.smartparkcore.entity.dto.SiteDTO;
+import com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo;
 import com.ahsj.smartparkcore.entity.po.Region;
 import com.ahsj.smartparkcore.entity.po.Site;
 import com.ahsj.smartparkcore.entity.vo.SiteVo;
@@ -22,6 +23,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utils.EmptyUtil;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Service
@@ -68,7 +71,7 @@ public class SiteServiceslmpl implements SiteServices {
         Region region3 = regionService.selectById(siteDTO.getAreaId());
         site.setLocation(region1.getName() + region2.getName() + region3.getName() + site.getLocation());
         site.setBookType(2);
-        site.setIsEnable((short)1);
+        site.setIsEnable((short) 1);
         if (EmptyUtil.Companion.isNullOrEmpty(siteMapper.selectBySiteName(site.getSiteName()))) {
             siteMapper.insert(site);
             return new ResponseEntity<>(new ResultModel(ResultStatus.SUCCESS_INSERT), HttpStatus.OK);
@@ -169,7 +172,7 @@ public class SiteServiceslmpl implements SiteServices {
         String substring = StringUtils.substring(site.getLocation(), 0, 3);
         String substring1 = StringUtils.substring(site.getLocation(), 3, 6);
         String substring2 = StringUtils.substring(site.getLocation(), 6, 9);
-        String addressName = StringUtils.substring(site.getLocation(), 9,site.getLocation().length());
+        String addressName = StringUtils.substring(site.getLocation(), 9, site.getLocation().length());
         Region region = regionService.queryRegionName(substring);
         Region region1 = regionService.queryRegionName(substring1);
         Region region2 = regionService.queryRegionName(substring2);
@@ -178,5 +181,29 @@ public class SiteServiceslmpl implements SiteServices {
         siteVo.setAreaId(region2.getId());
         siteVo.setLocation(addressName);
         return siteVo;
+    }
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.po.Site>
+     * @功能说明
+     * @Params [ids]
+     * @Author XJP
+     * @Date 2019/10/29
+     * @Time 15:28
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<Site> selectByIds(List<Long> ids) throws Exception {
+        if (EmptyUtil.Companion.isNullOrEmpty(ids)){
+            return new ArrayList<>();
+        }else {
+            System.out.println(ids.size());
+            List<Site> sites = siteMapper.selectByIds(ids);
+            if (EmptyUtil.Companion.isNullOrEmpty(sites)){
+                return new ArrayList<>();
+            }else {
+                return sites;
+            }
+        }
     }
 }
