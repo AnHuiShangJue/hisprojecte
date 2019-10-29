@@ -5,10 +5,15 @@ import com.ahsj.smartparkcore.entity.dto.SiteDTO;
 import com.ahsj.smartparkcore.entity.po.Site;
 import com.ahsj.smartparkcore.entity.vo.SiteVo;
 import core.entity.PageBean;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+import java.util.List;
+
+@Mapper
 public interface SiteMapper {
+
     int deleteByPrimaryKey(Long id);
 
     int insert(Site record);
@@ -30,4 +35,6 @@ public interface SiteMapper {
     List<Site> selectAll()throws Exception;
 
     List<Site> selectByIds(List<Long> ids);
+
+    List<SiteVo> listForView();
 }

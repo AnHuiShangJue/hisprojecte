@@ -2,12 +2,13 @@ package com.ahsj.smartparkcore.dao;
 
 import com.ahsj.smartparkcore.entity.dto.StationInfoDTO;
 import com.ahsj.smartparkcore.entity.po.StationInfo;
-import com.ahsj.smartparkcore.entity.vo.StationInfoVO;
 import core.entity.PageBean;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-import java.util.logging.XMLFormatter;
 
+
+@Mapper
 public interface StationInfoMapper {
 
     int deleteByPrimaryKey(Long id);
@@ -23,26 +24,42 @@ public interface StationInfoMapper {
     int updateByPrimaryKey(StationInfo record);
 
     /**
-     *@功能说明
-     *@Params [pageBean]
-     *@return java.util.List<com.ahsj.smartparkcore.entity.po.StationInfo>
-     *@Author XJP
-     *@Date 2019/10/19
-     *@Time 18:15
-    **/
+     * @return java.util.List<com.ahsj.smartparkcore.entity.po.StationInfo>
+     * @功能说明
+     * @Params [pageBean]
+     * @Author XJP
+     * @Date 2019/10/19
+     * @Time 18:15
+     **/
     List<StationInfoDTO> queryList(PageBean<StationInfoDTO> pageBean);
 
+    /**
+     * @return com.ahsj.smartparkcore.entity.po.StationInfo
+     * @功能说明
+     * @Params [title]
+     * @Author XJP
+     * @Date 2019/10/29
+     * @Time 17:12
+     **/
     StationInfo selectByTitle(String title);
 
-    List<StationInfo> selectAll()throws Exception;
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.po.StationInfo>
+     * @功能说明
+     * @Params []
+     * @Author XJP
+     * @Date 2019/10/29
+     * @Time 17:12
+     **/
+    List<StationInfo> selectAll() throws Exception;
 
     /**
-     *@功能说明
-     *@Params [ids]
-     *@return java.util.List<com.ahsj.smartparkcore.entity.po.StationInfo>
-     *@Author XJP
-     *@Date 2019/10/29
-     *@Time 15:28
-    **/
+     * @return java.util.List<com.ahsj.smartparkcore.entity.po.StationInfo>
+     * @功能说明
+     * @Params [ids]
+     * @Author XJP
+     * @Date 2019/10/29
+     * @Time 15:28
+     **/
     List<StationInfo> selectByIds(List<Long> ids);
 }

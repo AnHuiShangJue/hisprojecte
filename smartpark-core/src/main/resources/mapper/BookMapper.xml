@@ -316,21 +316,21 @@
         from book
         where is_pay = 2 and open_id = #{openId,jdbcType=VARCHAR}
     </select>
-    <select id="ConferenceRoomInfovisitByOpenId" resultMap="BaseResultMap"  parameterType="com.ahsj.smartparkcore.entity.dto.BookDTO">
+    <select id="ConferenceRoomInfovisitByOpenId" resultMap="BaseResultMap"  parameterType="com.ahsj.smartparkcore.entity.po.Book">
         select
         <include refid="Base_Column_List"/>
         from book
         where is_pay = 2 and book_type = 1 and  open_id = #{openId,jdbcType=VARCHAR}
     </select>
 
-    <select id="stationVisitByOpenId" resultMap="BaseResultMap"  parameterType="com.ahsj.smartparkcore.entity.dto.BookDTO">
+    <select id="stationVisitByOpenId" resultMap="BaseResultMap"  parameterType="com.ahsj.smartparkcore.entity.po.Book">
         select
         <include refid="Base_Column_List"/>
         from book
         where is_pay = 2 and book_type = 3 and  open_id = #{openId,jdbcType=VARCHAR}
     </select>
 
-    <select id="siteVisitByOpenId" resultMap="BaseResultMap"  parameterType="com.ahsj.smartparkcore.entity.dto.BookDTO">
+    <select id="siteVisitByOpenId" resultMap="BaseResultMap"  parameterType="com.ahsj.smartparkcore.entity.po.Book">
         select
         <include refid="Base_Column_List"/>
         from book

@@ -454,7 +454,7 @@ public class BookServicelmpl implements BookService {
         }else {
             Book book = new Book();
             BeanUtils.copyProperties(bookDTO,book);
-            List<Book> books = bookMapper.ConferenceRoomInfovisitByOpenId(bookDTO);
+            List<Book> books = bookMapper.ConferenceRoomInfovisitByOpenId(book);
             List<Long> ids = books.stream().map(Book::getTargetId).collect(Collectors.toList());
          List<ConferenceRoomInfo> conferenceRoomInfos = conferenceRoomInfoService.selectByIds(ids);
             List<BookVO> list = new ArrayList<>();
@@ -496,7 +496,7 @@ public class BookServicelmpl implements BookService {
         }else {
             Book book = new Book();
             BeanUtils.copyProperties(bookDTO,book);
-            List<Book> books = bookMapper.stationVisitByOpenId(bookDTO);
+            List<Book> books = bookMapper.stationVisitByOpenId(book);
             List<Long> ids = books.stream().map(Book::getTargetId).collect(Collectors.toList());
             List<StationInfo> stationInfos = stationInfoService.selectByIds(ids);
             List<BookVO> list = new ArrayList<>();
@@ -538,11 +538,13 @@ public class BookServicelmpl implements BookService {
         }else {
             Book book = new Book();
             BeanUtils.copyProperties(bookDTO,book);
-            List<Book> books = bookMapper.siteVisitByOpenId(bookDTO);
+            List<Book> books = bookMapper.siteVisitByOpenId(book);
             List<Long> ids = books.stream().map(Book::getTargetId).collect(Collectors.toList());
             List<Site> sites = siteServices.selectByIds(ids);
+            sites.toString();
             List<BookVO> list = new ArrayList<>();
             for (Site site : sites) {
+                System.out.println(site.toString());
                 BookVO bookVO = new BookVO();
                 SysAttachmentInfo sysAttachmentInfo = new SysAttachmentInfo();
                 sysAttachmentInfo.setRelateId(site.getId());

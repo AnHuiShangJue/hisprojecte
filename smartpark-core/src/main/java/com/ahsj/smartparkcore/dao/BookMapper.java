@@ -35,7 +35,7 @@ public interface BookMapper {
      * @Date 2019/10/29
      * @Time 16:00
      **/
-    List<Book> ConferenceRoomInfovisitByOpenId(BookDTO bookDTO);
+    List<Book> ConferenceRoomInfovisitByOpenId(Book book);
 
     /**
      * @return java.util.List<com.ahsj.smartparkcore.entity.po.Book>
@@ -45,7 +45,7 @@ public interface BookMapper {
      * @Date 2019/10/29
      * @Time 16:00
      **/
-    List<Book> stationVisitByOpenId(BookDTO bookDTO);
+    List<Book> stationVisitByOpenId(Book book);
 
     /**
      * @return java.util.List<com.ahsj.smartparkcore.entity.po.Book>
@@ -55,5 +55,5 @@ public interface BookMapper {
      * @Date 2019/10/29
      * @Time 16:00
      **/
-    List<Book> siteVisitByOpenId(BookDTO bookDTO);
+    List<Book> siteVisitByOpenId(Book book);
 }

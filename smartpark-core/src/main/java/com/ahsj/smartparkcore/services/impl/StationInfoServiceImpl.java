@@ -233,7 +233,6 @@ public class StationInfoServiceImpl implements StationInfoService {
         if (EmptyUtil.Companion.isNullOrEmpty(ids)){
             return new ArrayList<>();
         }else {
-            System.out.println(ids.size());
             List<StationInfo> stationInfos = stationInfoMapper.selectByIds(ids);
             if (EmptyUtil.Companion.isNullOrEmpty(stationInfos)){
                 return new ArrayList<>();
