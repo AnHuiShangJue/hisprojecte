@@ -1,6 +1,8 @@
 package com.ahsj.smartparkcore.services;
 
+import com.ahsj.smartparkcore.entity.po.EnterpriseInfo;
 import com.ahsj.smartparkcore.entity.sys.SysAttachmentInfo;
+import core.entity.PageBean;
 import core.message.Message;
 
 import java.util.List;
@@ -29,7 +31,7 @@ public interface SysAttachmentInfoService {
     Message addSaveSysAttachmentInfo(SysAttachmentInfo sysAttachmentInfo) throws Exception;
 
     /**
-     * @return com.ahsj.hiscore.entity.sys.SysAttachmentInfo
+     * @return com.ahsj.hiscore.entity.sys.SysAttachmentInfoDTO
      * @功能说明 主键查询id
      * @Params [id]
      * @Author XJP
@@ -49,7 +51,7 @@ public interface SysAttachmentInfoService {
     Message addSaveSysAttachmentInfoList(List<SysAttachmentInfo> list) throws Exception;
 
     /**
-     * @return java.util.List<com.ahsj.hiscore.entity.sys.SysAttachmentInfo>
+     * @return java.util.List<com.ahsj.hiscore.entity.sys.SysAttachmentInfoDTO>
      * @功能说明 通过附件关联key和附件来源地址查询集合
      * @Params [sysAttachmentInfo]
      * @Author XJP
@@ -88,5 +90,13 @@ public interface SysAttachmentInfoService {
      **/
     Message deleteSysAttachmentInfoById(Long id) throws Exception;
 
-
+/**
+ *@功能说明
+ *@Params [pageBean]
+ *@return core.entity.PageBean<com.ahsj.smartparkcore.entity.po.EnterpriseInfo>
+ *@Author XJP
+ *@Date 2019/10/28
+ *@Time 9:53
+**/
+    PageBean<SysAttachmentInfo> queryList(PageBean<SysAttachmentInfo> pageBean);
 }

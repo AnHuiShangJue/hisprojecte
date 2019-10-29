@@ -26,6 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utils.EmptyUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -47,19 +48,19 @@ public class ConferenceRoomInfoServicelmpl implements ConferenceRoomInfoService 
     RegionService regionService;
 
     /**
-     *@Description 新增会议室
-     *@Params [conferenceRoomInfoDTO]
-     *@return com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo
-     *@Author zhushixiang
-     *@Date 2019-09-05
-     *@Time 11:31
-    **/
+     * @return com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo
+     * @Description 新增会议室
+     * @Params [conferenceRoomInfoDTO]
+     * @Author zhushixiang
+     * @Date 2019-09-05
+     * @Time 11:31
+     **/
     @Override
     @Transactional(readOnly = false)
     public ResponseEntity<ResultModel> save(ConferenceRoomInfoDTO conferenceRoomInfoDTO) throws Exception {
         DozerBeanMapper mapper = new DozerBeanMapper();
         //DTO转化为PO 存入数据库
-        ConferenceRoomInfo conferenceRoomInfo =mapper.map(conferenceRoomInfoDTO,ConferenceRoomInfo.class);
+        ConferenceRoomInfo conferenceRoomInfo = mapper.map(conferenceRoomInfoDTO, ConferenceRoomInfo.class);
         Region region1 = regionService.selectById(conferenceRoomInfoDTO.getProvinceId());
         Region region2 = regionService.selectById(conferenceRoomInfoDTO.getCityId());
         Region region3 = regionService.selectById(conferenceRoomInfoDTO.getAreaId());
@@ -69,49 +70,49 @@ public class ConferenceRoomInfoServicelmpl implements ConferenceRoomInfoService 
         conferenceRoomInfo.setIsLease(2);
         conferenceRoomInfo.setBookType(1);
         int flag = conferenceRoomInfoMapper.insert(conferenceRoomInfo);
-        if(flag != 0){
+        if (flag != 0) {
             return new ResponseEntity<>(new ResultModel(ResultStatus.SUCCESS_INSERT), HttpStatus.OK);
-        }else{
+        } else {
             return new ResponseEntity<>(new ResultModel(ResultStatus.ERROR_INSERT), HttpStatus.OK);
         }
     }
 
     /**
-     *@Description 更新会议室信息
-     *@Params [conferenceRoomInfoDTO]
-     *@return com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo
-     *@Author zhushixiang
-     *@Date 2019-09-05
-     *@Time 14:34
-    **/
+     * @return com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo
+     * @Description 更新会议室信息
+     * @Params [conferenceRoomInfoDTO]
+     * @Author zhushixiang
+     * @Date 2019-09-05
+     * @Time 14:34
+     **/
     @Override
     @Transactional(readOnly = false)
     public ResponseEntity<ResultModel> update(ConferenceRoomInfoDTO conferenceRoomInfoDTO) throws Exception {
         DozerBeanMapper mapper = new DozerBeanMapper();
         //DTO转化为PO 存入数据库
-        ConferenceRoomInfo conferenceRoomInfo =mapper.map(conferenceRoomInfoDTO,ConferenceRoomInfo.class);
+        ConferenceRoomInfo conferenceRoomInfo = mapper.map(conferenceRoomInfoDTO, ConferenceRoomInfo.class);
         Region region1 = regionService.selectById(conferenceRoomInfoDTO.getProvinceId());
         Region region2 = regionService.selectById(conferenceRoomInfoDTO.getCityId());
         Region region3 = regionService.selectById(conferenceRoomInfoDTO.getAreaId());
         conferenceRoomInfo.setLocation(region1.getName() + region2.getName() + region3.getName() + conferenceRoomInfoDTO.getLocation());
 
         int flag = conferenceRoomInfoMapper.updateByPrimaryKeySelective(conferenceRoomInfo);
-        if(flag !=0){
+        if (flag != 0) {
             return new ResponseEntity<>(new ResultModel(ResultStatus.SUCCESS_UPDATE), HttpStatus.OK);
-        }else{
+        } else {
             return new ResponseEntity<>(new ResultModel(ResultStatus.ERROR_UPDATE), HttpStatus.OK);
         }
 
     }
 
     /**
-     *@Description
-     *@Params [id]
-     *@return com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo
-     *@Author zhushixiang
-     *@Date 2019-09-05
-     *@Time 15:24
-    **/
+     * @return com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo
+     * @Description
+     * @Params [id]
+     * @Author zhushixiang
+     * @Date 2019-09-05
+     * @Time 15:24
+     **/
     @Override
     @Transactional(readOnly = true)
     public ConferenceRoomInfoVO selectById(Long id) throws Exception {
@@ -123,7 +124,7 @@ public class ConferenceRoomInfoServicelmpl implements ConferenceRoomInfoService 
         String substring = StringUtils.substring(conferenceRoomInfo.getLocation(), 0, 3);
         String substring1 = StringUtils.substring(conferenceRoomInfo.getLocation(), 3, 6);
         String substring2 = StringUtils.substring(conferenceRoomInfo.getLocation(), 6, 9);
-        String addressName = StringUtils.substring(conferenceRoomInfo.getLocation(), 9,conferenceRoomInfo.getLocation().length());
+        String addressName = StringUtils.substring(conferenceRoomInfo.getLocation(), 9, conferenceRoomInfo.getLocation().length());
         Region region = regionService.queryRegionName(substring);
         Region region1 = regionService.queryRegionName(substring1);
         Region region2 = regionService.queryRegionName(substring2);
@@ -135,30 +136,30 @@ public class ConferenceRoomInfoServicelmpl implements ConferenceRoomInfoService 
     }
 
     /**
-     *@Description 删除
-     *@Params [id]
-     *@return void
-     *@Author zhushixiang
-     *@Date 2019-09-05
-     *@Time 15:27
-    **/
+     * @return void
+     * @Description 删除
+     * @Params [id]
+     * @Author zhushixiang
+     * @Date 2019-09-05
+     * @Time 15:27
+     **/
     @Override
     @Transactional(readOnly = false)
     public ResponseEntity<ResultModel> delete(Long[] ids) throws Exception {
-        for (int i = 0; i <ids.length ; i++) {
+        for (int i = 0; i < ids.length; i++) {
             conferenceRoomInfoMapper.deleteByPrimaryKey(ids[i]);
         }
         return new ResponseEntity<>(new ResultModel(ResultStatus.SUCCESS_DELETE), HttpStatus.OK);
     }
 
     /**
-     *@Description 分页查询
-     *@Params [pageBean]
-     *@return org.springframework.http.ResponseEntity<com.ahsj.smartparkcore.core.ResultModel>
-     *@Author zhushixiang
-     *@Date 2019-09-05
-     *@Time 15:50
-    **/
+     * @return org.springframework.http.ResponseEntity<com.ahsj.smartparkcore.core.ResultModel>
+     * @Description 分页查询
+     * @Params [pageBean]
+     * @Author zhushixiang
+     * @Date 2019-09-05
+     * @Time 15:50
+     **/
     @Override
     @Transactional(readOnly = true)
     public PageBean<ConferenceRoomInfoVO> list(PageBean<ConferenceRoomInfo> pageBean) throws Exception {
@@ -168,13 +169,13 @@ public class ConferenceRoomInfoServicelmpl implements ConferenceRoomInfoService 
     }
 
     /**
-     *@Description  分页查询（前端对接）
-     *@Params []
-     *@return java.util.List<com.ahsj.smartparkcore.entity.vo.ConferenceRoomInfoVO>
-     *@Author zhushixiang
-     *@Date 2019-10-17
-     *@Time 13:48
-    **/
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.ConferenceRoomInfoVO>
+     * @Description 分页查询（前端对接）
+     * @Params []
+     * @Author zhushixiang
+     * @Date 2019-10-17
+     * @Time 13:48
+     **/
     @Override
     @Transactional(readOnly = true)
     public List<ConferenceRoomInfoVO> listForView() throws Exception {
@@ -185,13 +186,37 @@ public class ConferenceRoomInfoServicelmpl implements ConferenceRoomInfoService 
             sysAttachmentInfo.setRelateKey("conferenceRoomInfo");
             sysAttachmentInfo.setRelatePage("list");
             List<SysAttachmentInfo> sysAttachmentInfos = sysAttachmentInfoService.querySysAttachmentInfo(sysAttachmentInfo);
-            if (EmptyUtil.Companion.isNullOrEmpty(sysAttachmentInfos)){
+            if (EmptyUtil.Companion.isNullOrEmpty(sysAttachmentInfos)) {
                 continue;
             }
             SysAttachmentInfo sysAttachmentInfo1 = sysAttachmentInfos.get(0);
-            String replace = Constants.LOCALHOST+sysAttachmentInfo1.getLocation().replace(Constants.STATIC, Constants.SMARTPARKCORE);
+            String replace = Constants.LOCALHOST + sysAttachmentInfo1.getLocation().replace(Constants.STATIC, Constants.SMARTPARKCORE);
             conferenceRoomInfoVO.setFilePath(replace);
         }
         return conferenceRoomInfoVOS;
+    }
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo>
+     * @功能说明
+     * @Params [ids]
+     * @Author XJP
+     * @Date 2019/10/29
+     * @Time 13:36
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<ConferenceRoomInfo> selectByIds(List<Long> ids) throws Exception {
+        if (EmptyUtil.Companion.isNullOrEmpty(ids)){
+            return new ArrayList<>();
+        }else {
+            System.out.println(ids.size());
+            List<ConferenceRoomInfo> conferenceRoomInfos = conferenceRoomInfoMapper.selectByIds(ids);
+            if (EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfos)){
+                return new ArrayList<>();
+            }else {
+                return conferenceRoomInfos;
+            }
+        }
     }
 }

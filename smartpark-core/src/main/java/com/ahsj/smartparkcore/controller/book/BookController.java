@@ -4,6 +4,8 @@ import com.ahsj.smartparkcore.core.ResultModel;
 import com.ahsj.smartparkcore.core.ResultStatus;
 import com.ahsj.smartparkcore.entity.dto.BookDTO;
 import com.ahsj.smartparkcore.entity.dto.SiteDTO;
+import com.ahsj.smartparkcore.entity.po.Book;
+import com.ahsj.smartparkcore.entity.vo.BookVO;
 import com.ahsj.smartparkcore.services.BookService;
 import core.controller.BaseController;
 import core.entity.PageBean;
@@ -229,6 +231,56 @@ public class BookController extends BaseController {
     @RequestMapping("/visit.ahsj")
     public ResponseEntity<ResultModel> visit(BookDTO bookDTO) throws Exception {
         return bookService.visit(bookDTO);
+    }
+
+    /**
+     * @Description 根据openId查询预约
+     * @Params: [bookDTO]
+     * @Author: dingli
+     * @Return: org.springframework.http.ResponseEntity<com.ahsj.smartparkcore.core.ResultModel>
+     * @Date 2019/10/29
+     * @Time 10:34
+     **/
+    @RequestMapping("/visitByOpenId.ahsj")
+    public List<BookVO> visitByOpenId(BookDTO bookDTO) throws Exception {
+        return bookService.visitByOpenId(bookDTO);
+    }
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     * @功能说明 根据openId查询全部订单
+     * @Params [bookDTO]
+     * @Author XJP
+     * @Date 2019/10/29
+     * @Time 13:28
+     **/
+    @RequestMapping("/visitByOpenIdAndOrder.ahsj")
+    public List<BookVO> ConferenceRoomInfovisitByOpenIdAndOrder(BookDTO bookDTO) throws Exception {
+        return bookService.ConferenceRoomInfovisitByOpenIdAndOrder(bookDTO);
+    }
+    /**
+     *@功能说明
+     *@Params [bookDTO]
+     *@return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     *@Author XJP
+     *@Date 2019/10/29
+     *@Time 15:15
+    **/
+    @RequestMapping("/stationVisitByOpenIdAndOrder.ahsj")
+    public List<BookVO> stationVisitByOpenIdAndOrder(BookDTO bookDTO) throws Exception {
+        return bookService.stationVisitByOpenIdAndOrder(bookDTO);
+    }
+    /**
+     *@功能说明
+     *@Params [bookDTO]
+     *@return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     *@Author XJP
+     *@Date 2019/10/29
+     *@Time 15:15
+    **/
+    @RequestMapping("/siteVisitByOpenIdAndOrder.ahsj")
+    public List<BookVO> siteVisitByOpenIdAndOrder(BookDTO bookDTO) throws Exception {
+        return bookService.siteVisitByOpenIdAndOrder(bookDTO);
     }
 }
 

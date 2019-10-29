@@ -35,4 +35,14 @@ public interface StationInfoMapper {
     StationInfo selectByTitle(String title);
 
     List<StationInfo> selectAll()throws Exception;
+
+    /**
+     *@功能说明
+     *@Params [ids]
+     *@return java.util.List<com.ahsj.smartparkcore.entity.po.StationInfo>
+     *@Author XJP
+     *@Date 2019/10/29
+     *@Time 15:28
+    **/
+    List<StationInfo> selectByIds(List<Long> ids);
 }

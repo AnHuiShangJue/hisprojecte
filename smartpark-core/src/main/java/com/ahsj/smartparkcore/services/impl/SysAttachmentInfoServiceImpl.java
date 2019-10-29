@@ -1,9 +1,14 @@
 package com.ahsj.smartparkcore.services.impl;
 
+import com.ahsj.smartparkcore.core.CodeHelper;
+import com.ahsj.smartparkcore.dao.SysAttachmentInfoMapper;
+import com.ahsj.smartparkcore.entity.dto.SysAttachmentInfoDTO;
 import com.ahsj.smartparkcore.entity.dto.SysAttachmentInfoFeign;
+import com.ahsj.smartparkcore.entity.po.EnterpriseInfo;
 import com.ahsj.smartparkcore.entity.sys.SysAttachmentInfo;
 import com.ahsj.smartparkcore.feign.ISysAttachmentInfoService;
 import com.ahsj.smartparkcore.services.SysAttachmentInfoService;
+import core.entity.PageBean;
 import core.message.Message;
 import core.message.MessageUtil;
 import org.apache.commons.collections.CollectionUtils;
@@ -34,6 +39,9 @@ public class SysAttachmentInfoServiceImpl implements SysAttachmentInfoService {
     @Autowired
     ISysAttachmentInfoService iSysAttachmentInfoService;
 
+    @Autowired
+    SysAttachmentInfoMapper sysAttachmentInfoMapper;
+
 
     /**
      * @return core.message.Message
@@ -51,7 +59,7 @@ public class SysAttachmentInfoServiceImpl implements SysAttachmentInfoService {
     }
 
     /**
-     * @return com.ahsj.hiscore.entity.sys.SysAttachmentInfo
+     * @return com.ahsj.hiscore.entity.sys.SysAttachmentInfoDTO
      * @功能说明 主键查询id
      * @Params [id]
      * @Author XJP
@@ -87,7 +95,7 @@ public class SysAttachmentInfoServiceImpl implements SysAttachmentInfoService {
     }
 
     /**
-     * @return java.util.List<com.ahsj.hiscore.entity.sys.SysAttachmentInfo>
+     * @return java.util.List<com.ahsj.hiscore.entity.sys.SysAttachmentInfoDTO>
      * @功能说明 通过附件关联key和附件来源地址查询集合
      * @Params [sysAttachmentInfo]
      * @Author XJP
@@ -204,5 +212,12 @@ public class SysAttachmentInfoServiceImpl implements SysAttachmentInfoService {
                 return MessageUtil.createMessage(true, "删除成功。");
             }
         }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public PageBean<SysAttachmentInfo> queryList(PageBean<SysAttachmentInfo> pageBean) {
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(sysAttachmentInfoMapper.queryList(pageBean)));
+        return pageBean;
     }
 }

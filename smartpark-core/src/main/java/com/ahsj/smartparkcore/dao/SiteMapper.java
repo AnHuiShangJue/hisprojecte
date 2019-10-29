@@ -28,4 +28,6 @@ public interface SiteMapper {
     int setEnable(Site record)throws Exception;
 
     List<Site> selectAll()throws Exception;
+
+    List<Site> selectByIds(List<Long> ids);
 }

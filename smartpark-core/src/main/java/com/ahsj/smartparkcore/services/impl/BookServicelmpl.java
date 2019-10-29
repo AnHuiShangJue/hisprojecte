@@ -17,11 +17,10 @@ import com.ahsj.smartparkcore.entity.vo.BookVO;
 import com.ahsj.smartparkcore.entity.vo.ConferenceRoomInfoVO;
 import com.ahsj.smartparkcore.entity.vo.SiteVo;
 import com.ahsj.smartparkcore.entity.vo.StationInfoVO;
-import com.ahsj.smartparkcore.services.BookService;
-import com.ahsj.smartparkcore.services.EnterpriseInfoService;
-import com.ahsj.smartparkcore.services.SysAttachmentInfoService;
+import com.ahsj.smartparkcore.services.*;
 import core.entity.PageBean;
 import org.dozer.DozerBeanMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +30,7 @@ import utils.EmptyUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BookServicelmpl implements BookService {
@@ -46,6 +46,15 @@ public class BookServicelmpl implements BookService {
 
     @Autowired
     StationInfoMapper stationInfoMapper;
+
+    @Autowired
+    SiteServices siteServices;
+
+    @Autowired
+    ConferenceRoomInfoService conferenceRoomInfoService;
+
+    @Autowired
+    StationInfoService stationInfoService;
 
     @Autowired
     SysAttachmentInfoService sysAttachmentInfoService;
@@ -195,13 +204,12 @@ public class BookServicelmpl implements BookService {
             sysAttachmentInfo.setRelateKey("site");
             sysAttachmentInfo.setRelatePage("list");
             List<SysAttachmentInfo> sysAttachmentInfos = sysAttachmentInfoService.querySysAttachmentInfo(sysAttachmentInfo);
-            if (EmptyUtil.Companion.isNullOrEmpty(sysAttachmentInfos)){
+            if (EmptyUtil.Companion.isNullOrEmpty(sysAttachmentInfos)) {
                 continue;
             }
             SysAttachmentInfo sysAttachmentInfo1 = sysAttachmentInfos.get(0);
-            String replace = Constants.LOCALHOST+sysAttachmentInfo1.getLocation().replace(Constants.STATIC, Constants.SMARTPARKCORE);
+            String replace = Constants.LOCALHOST + sysAttachmentInfo1.getLocation().replace(Constants.STATIC, Constants.SMARTPARKCORE);
             site.setFilePath(replace);
-
 
 
             bookDTO.setBookType(2);
@@ -220,18 +228,17 @@ public class BookServicelmpl implements BookService {
         }
         List<ConferenceRoomInfo> conferenceRoomInfoVOS = conferenceRoomInfoMapper.selectAll();
         for (ConferenceRoomInfo conferenceRoomInfoVO : conferenceRoomInfoVOS) {
-          SysAttachmentInfo sysAttachmentInfo = new SysAttachmentInfo();
+            SysAttachmentInfo sysAttachmentInfo = new SysAttachmentInfo();
             sysAttachmentInfo.setRelateId(conferenceRoomInfoVO.getId());
             sysAttachmentInfo.setRelateKey("conferenceRoomInfo");
             sysAttachmentInfo.setRelatePage("list");
             List<SysAttachmentInfo> sysAttachmentInfos = sysAttachmentInfoService.querySysAttachmentInfo(sysAttachmentInfo);
-            if (EmptyUtil.Companion.isNullOrEmpty(sysAttachmentInfos)){
+            if (EmptyUtil.Companion.isNullOrEmpty(sysAttachmentInfos)) {
                 continue;
             }
             SysAttachmentInfo sysAttachmentInfo1 = sysAttachmentInfos.get(0);
-            String replace = Constants.LOCALHOST+sysAttachmentInfo1.getLocation().replace(Constants.STATIC, Constants.SMARTPARKCORE);
+            String replace = Constants.LOCALHOST + sysAttachmentInfo1.getLocation().replace(Constants.STATIC, Constants.SMARTPARKCORE);
             conferenceRoomInfoVO.setFilePath(replace);
-
 
 
             BookDTO bookDTO = new BookDTO();
@@ -271,19 +278,17 @@ public class BookServicelmpl implements BookService {
                 stationInfo.setTitle("");
             }
 
-           SysAttachmentInfo sysAttachmentInfo = new SysAttachmentInfo();
+            SysAttachmentInfo sysAttachmentInfo = new SysAttachmentInfo();
             sysAttachmentInfo.setRelateId(stationInfo.getId());
-            sysAttachmentInfo.setRelateKey("stationInfo");
+            sysAttachmentInfo.setRelateKey("stationinfo");
             sysAttachmentInfo.setRelatePage("list");
             List<SysAttachmentInfo> sysAttachmentInfos = sysAttachmentInfoService.querySysAttachmentInfo(sysAttachmentInfo);
-            if (EmptyUtil.Companion.isNullOrEmpty(sysAttachmentInfos)){
+            if (EmptyUtil.Companion.isNullOrEmpty(sysAttachmentInfos)) {
                 continue;
             }
             SysAttachmentInfo sysAttachmentInfo1 = sysAttachmentInfos.get(0);
-            String replace = Constants.LOCALHOST+sysAttachmentInfo1.getLocation().replace(Constants.STATIC, Constants.SMARTPARKCORE);
+            String replace = Constants.LOCALHOST + sysAttachmentInfo1.getLocation().replace(Constants.STATIC, Constants.SMARTPARKCORE);
             stationInfo.setFilePath(replace);
-
-
 
 
             bookDTO.setBookType(3);
@@ -350,7 +355,7 @@ public class BookServicelmpl implements BookService {
         Book book = mapper.map(bookDTO, Book.class);
         //预留 新增订单 对接付钱接口
         //订单增加后  设置状态为已付未取消
-        book.setIsPay(2); //已付
+        book.setIsPay(2); //未付
         book.setIsCancel(2);//未取消
         book.setIsAudit(2);//未审核
         //预留设置支付金额
@@ -358,4 +363,206 @@ public class BookServicelmpl implements BookService {
         bookMapper.insert(book);
         return new ResponseEntity<>(new ResultModel(ResultStatus.SUCCESS_INSERT), HttpStatus.OK);
     }
+
+    /**
+     * @Description
+     * @Params: [bookDTO]
+     * @Author: dingli
+     * @Return: java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     * @Date 2019/10/29
+     * @Time 10:44
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<BookVO> visitByOpenId(BookDTO bookDTO) throws Exception {
+        List<Book> books = bookMapper.visitByOpenId(bookDTO);
+        List<BookVO> list = new ArrayList<>();
+        for (Book book : books) {
+            DozerBeanMapper mapper = new DozerBeanMapper(); //对象转换组件
+            BookVO bookVO = mapper.map(book, BookVO.class);
+            if (bookVO.getBookType() == 2) {
+                SiteVo siteVo = siteServices.selectByPrimaryKey(bookVO.getTargetId());
+                SysAttachmentInfo sysAttachmentInfo = new SysAttachmentInfo();
+                sysAttachmentInfo.setRelateId(bookVO.getTargetId());
+                sysAttachmentInfo.setRelateKey(Constants.SITE);
+                sysAttachmentInfo.setRelatePage(Constants.LIST);
+                List<SysAttachmentInfo> sysAttachmentInfos = sysAttachmentInfoService.querySysAttachmentInfo(sysAttachmentInfo);
+                if (EmptyUtil.Companion.isNullOrEmpty(sysAttachmentInfos)) {
+                    continue;
+                }
+                SysAttachmentInfo sysAttachmentInfo1 = sysAttachmentInfos.get(0);
+                String replace = Constants.LOCALHOST + sysAttachmentInfo1.getLocation().replace(Constants.STATIC, Constants.SMARTPARKCORE);
+                bookVO.setFilePath(replace);
+                bookVO.setName(siteVo.getName());
+                bookVO.setPrice(siteVo.getPrice());
+                bookVO.setBookTypeName(Constants.site);
+            }
+            if (bookVO.getBookType() == 3) {
+                StationInfoVO stationInfoVO = stationInfoService.selectById(bookVO.getTargetId());
+                SysAttachmentInfo sysAttachmentInfo = new SysAttachmentInfo();
+                sysAttachmentInfo.setRelateId(bookVO.getTargetId());
+                sysAttachmentInfo.setRelateKey(Constants.STATIONINFO);
+                sysAttachmentInfo.setRelatePage(Constants.LIST);
+                List<SysAttachmentInfo> sysAttachmentInfos = sysAttachmentInfoService.querySysAttachmentInfo(sysAttachmentInfo);
+                if (EmptyUtil.Companion.isNullOrEmpty(sysAttachmentInfos)) {
+                    continue;
+                }
+                SysAttachmentInfo sysAttachmentInfo1 = sysAttachmentInfos.get(0);
+                String replace = Constants.LOCALHOST + sysAttachmentInfo1.getLocation().replace(Constants.STATIC, Constants.SMARTPARKCORE);
+                bookVO.setFilePath(replace);
+                bookVO.setName(stationInfoVO.getName());
+                bookVO.setPrice(stationInfoVO.getPrice());
+                bookVO.setBookTypeName(Constants.StationInfo);
+
+
+            }
+            if (bookVO.getBookType() == 1) {
+                ConferenceRoomInfoVO conferenceRoomInfoVO = conferenceRoomInfoService.selectById(bookVO.getTargetId());
+                SysAttachmentInfo sysAttachmentInfo = new SysAttachmentInfo();
+                sysAttachmentInfo.setRelateId(bookVO.getTargetId());
+                sysAttachmentInfo.setRelateKey(Constants.CONFERENCEROOMINFO);
+                sysAttachmentInfo.setRelatePage(Constants.LIST);
+                List<SysAttachmentInfo> sysAttachmentInfos = sysAttachmentInfoService.querySysAttachmentInfo(sysAttachmentInfo);
+                if (EmptyUtil.Companion.isNullOrEmpty(sysAttachmentInfos)) {
+                    continue;
+                }
+                SysAttachmentInfo sysAttachmentInfo1 = sysAttachmentInfos.get(0);
+                String replace = Constants.LOCALHOST + sysAttachmentInfo1.getLocation().replace(Constants.STATIC, Constants.SMARTPARKCORE);
+                bookVO.setFilePath(replace);
+                bookVO.setName(conferenceRoomInfoVO.getName());
+                bookVO.setPrice(conferenceRoomInfoVO.getPrice());
+                bookVO.setBookTypeName(Constants.ConferenceRoomInfo);
+            }
+            list.add(bookVO);
+        }
+        return list;
+    }
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     * @功能说明
+     * @Params [bookDTO]
+     * @Author XJP
+     * @Date 2019/10/29
+     * @Time 13:29
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<BookVO> ConferenceRoomInfovisitByOpenIdAndOrder(BookDTO bookDTO) throws Exception {
+        if (EmptyUtil.Companion.isNullOrEmpty(bookDTO)){
+            return new ArrayList<>();
+        }else {
+            Book book = new Book();
+            BeanUtils.copyProperties(bookDTO,book);
+            List<Book> books = bookMapper.ConferenceRoomInfovisitByOpenId(bookDTO);
+            List<Long> ids = books.stream().map(Book::getTargetId).collect(Collectors.toList());
+         List<ConferenceRoomInfo> conferenceRoomInfos = conferenceRoomInfoService.selectByIds(ids);
+            List<BookVO> list = new ArrayList<>();
+            for (ConferenceRoomInfo conferenceRoomInfo : conferenceRoomInfos) {
+                BookVO bookVO = new BookVO();
+                SysAttachmentInfo sysAttachmentInfo = new SysAttachmentInfo();
+                sysAttachmentInfo.setRelateId(conferenceRoomInfo.getId());
+                sysAttachmentInfo.setRelateKey(Constants.CONFERENCEROOMINFO);
+                sysAttachmentInfo.setRelatePage(Constants.LIST);
+                List<SysAttachmentInfo> sysAttachmentInfos = sysAttachmentInfoService.querySysAttachmentInfo(sysAttachmentInfo);
+                if (EmptyUtil.Companion.isNullOrEmpty(sysAttachmentInfos)) {
+                    continue;
+                }
+                SysAttachmentInfo sysAttachmentInfo1 = sysAttachmentInfos.get(0);
+                String replace = Constants.LOCALHOST + sysAttachmentInfo1.getLocation().replace(Constants.STATIC, Constants.SMARTPARKCORE);
+                bookVO.setFilePath(replace);
+                bookVO.setName(conferenceRoomInfo.getName());
+                bookVO.setPrice(conferenceRoomInfo.getPrice());
+                bookVO.setBookTypeName(Constants.ConferenceRoomInfo);
+                list.add(bookVO);
+            }
+            return list;
+        }
+    }
+
+    /**
+     *@功能说明
+     *@Params [bookDTO]
+     *@return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     *@Author XJP
+     *@Date 2019/10/29
+     *@Time 15:16
+    **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<BookVO> stationVisitByOpenIdAndOrder(BookDTO bookDTO) throws Exception {
+        if (EmptyUtil.Companion.isNullOrEmpty(bookDTO)){
+            return new ArrayList<>();
+        }else {
+            Book book = new Book();
+            BeanUtils.copyProperties(bookDTO,book);
+            List<Book> books = bookMapper.stationVisitByOpenId(bookDTO);
+            List<Long> ids = books.stream().map(Book::getTargetId).collect(Collectors.toList());
+            List<StationInfo> stationInfos = stationInfoService.selectByIds(ids);
+            List<BookVO> list = new ArrayList<>();
+            for (StationInfo stationInfo : stationInfos) {
+                BookVO bookVO = new BookVO();
+                SysAttachmentInfo sysAttachmentInfo = new SysAttachmentInfo();
+                sysAttachmentInfo.setRelateId(stationInfo.getId());
+                sysAttachmentInfo.setRelateKey(Constants.STATIONINFO);
+                sysAttachmentInfo.setRelatePage(Constants.LIST);
+                List<SysAttachmentInfo> sysAttachmentInfos = sysAttachmentInfoService.querySysAttachmentInfo(sysAttachmentInfo);
+                if (EmptyUtil.Companion.isNullOrEmpty(sysAttachmentInfos)) {
+                    continue;
+                }
+                SysAttachmentInfo sysAttachmentInfo1 = sysAttachmentInfos.get(0);
+                String replace = Constants.LOCALHOST + sysAttachmentInfo1.getLocation().replace(Constants.STATIC, Constants.SMARTPARKCORE);
+                bookVO.setFilePath(replace);
+                bookVO.setName(stationInfo.getName());
+                bookVO.setPrice(stationInfo.getPrice());
+                bookVO.setBookTypeName(Constants.StationInfo);
+                list.add(bookVO);
+            }
+            return list;
+        }
+    }
+
+    /**
+     *@功能说明
+     *@Params [bookDTO]
+     *@return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     *@Author XJP
+     *@Date 2019/10/29
+     *@Time 15:16
+    **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<BookVO> siteVisitByOpenIdAndOrder(BookDTO bookDTO) throws Exception {
+        if (EmptyUtil.Companion.isNullOrEmpty(bookDTO)){
+            return new ArrayList<>();
+        }else {
+            Book book = new Book();
+            BeanUtils.copyProperties(bookDTO,book);
+            List<Book> books = bookMapper.siteVisitByOpenId(bookDTO);
+            List<Long> ids = books.stream().map(Book::getTargetId).collect(Collectors.toList());
+            List<Site> sites = siteServices.selectByIds(ids);
+            List<BookVO> list = new ArrayList<>();
+            for (Site site : sites) {
+                BookVO bookVO = new BookVO();
+                SysAttachmentInfo sysAttachmentInfo = new SysAttachmentInfo();
+                sysAttachmentInfo.setRelateId(site.getId());
+                sysAttachmentInfo.setRelateKey(Constants.SITE);
+                sysAttachmentInfo.setRelatePage(Constants.LIST);
+                List<SysAttachmentInfo> sysAttachmentInfos = sysAttachmentInfoService.querySysAttachmentInfo(sysAttachmentInfo);
+                if (EmptyUtil.Companion.isNullOrEmpty(sysAttachmentInfos)) {
+                    continue;
+                }
+                SysAttachmentInfo sysAttachmentInfo1 = sysAttachmentInfos.get(0);
+                String replace = Constants.LOCALHOST + sysAttachmentInfo1.getLocation().replace(Constants.STATIC, Constants.SMARTPARKCORE);
+                bookVO.setFilePath(replace);
+                bookVO.setName(site.getName());
+                bookVO.setPrice(site.getPrice());
+                bookVO.setBookTypeName(Constants.site);
+                list.add(bookVO);
+            }
+            return list;
+        }
+    }
+
+
 }

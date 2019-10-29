@@ -16,6 +16,8 @@ public class Book extends BaseEntity {
 
     private Long updateUserId;
 
+    private String openId;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy/MM/dd ")
     private Date createDate;
@@ -241,5 +243,14 @@ public class Book extends BaseEntity {
 
     public void setIsPayName(String isPayName) {
         this.isPayName = isPayName;
+    }
+
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
     }
 }

@@ -21,11 +21,12 @@
         <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
         <result column="description" property="description" jdbcType="VARCHAR"/>
         <result column="visit_time" property="visitTime" jdbcType="TIMESTAMP"/>
+        <result column="open_id" property="openId" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
     id, create_user_id, update_user_id, create_date, update_date, book_type, start_time, 
     end_time, is_audit, is_cancel, is_pay, payment_amount, deposit, phone_number, subscriber_name, 
-    target_id, remarks, description, visit_time
+    target_id, remarks, description, visit_time, open_id
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
@@ -44,14 +45,14 @@
       is_cancel, is_pay, payment_amount, 
       deposit, phone_number, subscriber_name, 
       target_id, remarks, description, 
-      visit_time)
+      visit_time, open_id)
     values (#{id,jdbcType=BIGINT}, #{createUserId,jdbcType=BIGINT}, #{updateUserId,jdbcType=BIGINT}, 
       #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{bookType,jdbcType=INTEGER}, 
       #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{isAudit,jdbcType=INTEGER}, 
       #{isCancel,jdbcType=INTEGER}, #{isPay,jdbcType=INTEGER}, #{paymentAmount,jdbcType=DECIMAL}, 
       #{deposit,jdbcType=DECIMAL}, #{phoneNumber,jdbcType=VARCHAR}, #{subscriberName,jdbcType=VARCHAR}, 
       #{targetId,jdbcType=BIGINT}, #{remarks,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{visitTime,jdbcType=TIMESTAMP})
+      #{visitTime,jdbcType=TIMESTAMP}, #{openId,jdbcType=VARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.ahsj.smartparkcore.entity.po.Book">
         insert into book
@@ -113,6 +114,9 @@
             <if test="visitTime != null">
                 visit_time,
             </if>
+            <if test="openId != null">
+                open_id,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -171,6 +175,9 @@
             </if>
             <if test="visitTime != null">
                 #{visitTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="openId != null">
+                #{openId,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -231,6 +238,9 @@
             <if test="visitTime != null">
                 visit_time = #{visitTime,jdbcType=TIMESTAMP},
             </if>
+            <if test="openId != null">
+                open_id = #{openId,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
@@ -253,10 +263,10 @@
       target_id = #{targetId,jdbcType=BIGINT},
       remarks = #{remarks,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
-      visit_time = #{visitTime,jdbcType=TIMESTAMP}
+      visit_time = #{visitTime,jdbcType=TIMESTAMP},
+      open_id = #{openId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-
     <select id="selectTime" parameterType="com.ahsj.smartparkcore.entity.dto.BookDTO" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -298,5 +308,32 @@
         <if test="parameter.orders != null and parameter.orders != ''">
             order by ${parameter.orders}
         </if>
+    </select>
+
+    <select id="visitByOpenId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from book
+        where is_pay = 2 and open_id = #{openId,jdbcType=VARCHAR}
+    </select>
+    <select id="ConferenceRoomInfovisitByOpenId" resultMap="BaseResultMap"  parameterType="com.ahsj.smartparkcore.entity.dto.BookDTO">
+        select
+        <include refid="Base_Column_List"/>
+        from book
+        where is_pay = 2 and book_type = 1 and  open_id = #{openId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="stationVisitByOpenId" resultMap="BaseResultMap"  parameterType="com.ahsj.smartparkcore.entity.dto.BookDTO">
+        select
+        <include refid="Base_Column_List"/>
+        from book
+        where is_pay = 2 and book_type = 3 and  open_id = #{openId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="siteVisitByOpenId" resultMap="BaseResultMap"  parameterType="com.ahsj.smartparkcore.entity.dto.BookDTO">
+        select
+        <include refid="Base_Column_List"/>
+        from book
+        where is_pay = 2 and book_type = 2 and  open_id = #{openId,jdbcType=VARCHAR}
     </select>
 </mapper>
