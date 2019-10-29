@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import utils.EmptyUtil;
 
@@ -39,6 +40,7 @@ public class ActivityPersonnelInfoController extends BaseController {
      * @Params [activityInfoDTO]
     **/
     @RequestMapping(value = "/list.ahsj", method = {RequestMethod.POST})
+    @ResponseBody
     public ResponseEntity<PageBean<ActivityPersonnelInfo>> list(ActivityPersonnelInfoDTO activityPersonnelInfoDTO) throws Exception {
         DozerBeanMapper mapper = new DozerBeanMapper();
         ActivityPersonnelInfo activityPersonnelInfo =mapper.map(activityPersonnelInfoDTO,ActivityPersonnelInfo.class);
@@ -55,6 +57,7 @@ public class ActivityPersonnelInfoController extends BaseController {
      * @Params [activityInfoDTO]
      **/
     @RequestMapping(value = "/save.ahsj")
+    @ResponseBody
     public ResponseEntity<ResultModel> save(ActivityPersonnelInfoDTO activityPersonnelInfoDTO)throws Exception{
         if (EmptyUtil.Companion.isNullOrEmpty(activityPersonnelInfoDTO.getName()))
         {
@@ -74,6 +77,7 @@ public class ActivityPersonnelInfoController extends BaseController {
      **/
 
     @RequestMapping(value = "/update.ahsj",method = {RequestMethod.POST})
+    @ResponseBody
     public ResponseEntity<ResultModel>update(ActivityPersonnelInfoDTO activityPersonnelInfoDTO)throws Exception{
         if (EmptyUtil.Companion.isNullOrEmpty(activityPersonnelInfoDTO.getAge())|| EmptyUtil.Companion.isNullOrEmpty(activityPersonnelInfoDTO.getSex())||
                 EmptyUtil.Companion.isNullOrEmpty(activityPersonnelInfoDTO.getPhoneNumber())|| EmptyUtil.Companion.isNullOrEmpty(activityPersonnelInfoDTO.getIdcard())||
@@ -95,6 +99,7 @@ public class ActivityPersonnelInfoController extends BaseController {
      **/
 
     @RequestMapping(value = "/delete.ahsj",method = {RequestMethod.POST})
+    @ResponseBody
     public ResponseEntity<ResultModel> delete(Map<String, Object> model, HttpServletRequest request, @RequestParam(value="ids", required=true) Long[] ids)throws Exception{
         for (int i = 0; i <ids.length ; i++) {
             ActivityPersonnelInfo activityPersonnelInfo = activityPersonnelInfoService.selectById(ids[i]);
@@ -114,6 +119,7 @@ public class ActivityPersonnelInfoController extends BaseController {
      * @Params
     **/
     @RequestMapping(value = "/reviewSuccess.ahsj",method = {RequestMethod.POST})
+    @ResponseBody
     public ResponseEntity<ResultModel>reviewSuccess(Map<String, Object> model, HttpServletRequest request
             , @RequestParam(value="id", required=true) Long id
             , @RequestParam(value="remarks", required=true) String remarks)throws Exception{
@@ -134,6 +140,7 @@ public class ActivityPersonnelInfoController extends BaseController {
      * @Params
     **/
     @RequestMapping(value = "/reviewError.ahsj",method = {RequestMethod.POST})
+    @ResponseBody
     public ResponseEntity<ResultModel>reviewError(Map<String, Object> model, HttpServletRequest request
             , @RequestParam(value="id", required=true) Long id
             , @RequestParam(value="remarks", required=true) String remarks)throws Exception{
@@ -143,6 +150,23 @@ public class ActivityPersonnelInfoController extends BaseController {
         }else {
             return activityPersonnelInfoService.reviewError(id,remarks);
         }
+    }
+
+
+    /**
+     * @Description
+     * @Author  muxu
+     * @Date  2019/10/29
+     * @Time 11:33
+     * @Return
+     * @Params
+    **/
+    @RequestMapping(value = "/listMyActivity.ahsj")
+    @ResponseBody
+    public PageBean<ActivityPersonnelInfo> listMyActivity(ActivityPersonnelInfo activityPersonnelInfo) throws Exception {
+        PageBean<ActivityPersonnelInfo> pageBean = new PageBean<ActivityPersonnelInfo>();
+        pageBean.setParameter(activityPersonnelInfo);
+        return activityPersonnelInfoService.listMyActivity(pageBean);
     }
 
 

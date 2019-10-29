@@ -80,5 +80,15 @@ public interface ActivityPersonnelInfoService {
 
     ResponseEntity<ResultModel> reviewError(Long id,String remarks)throws Exception;
 
+    /**
+     * @Description
+     * @Author  muxu
+     * @Date  2019/10/29
+     * @Time 11:31
+     * @Return
+     * @Params
+    **/
+
+    PageBean<ActivityPersonnelInfo> listMyActivity(PageBean<ActivityPersonnelInfo> pageBean)throws Exception;
 
 }

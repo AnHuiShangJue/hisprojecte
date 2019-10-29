@@ -17,10 +17,11 @@
     <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="activity_id" property="activityId" jdbcType="BIGINT" />
     <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="open_id" property="openId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, name, age, sex, phone_number, idcard, email, create_date, create_user_id, update_date, 
-    update_user_id, is_review, user_id, activity_id, remarks
+    update_user_id, is_review, user_id, activity_id, remarks,open_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -36,12 +37,12 @@
     insert into activity_personnel_info (id, name, age, 
       sex, phone_number, idcard, 
       email, create_date, create_user_id, 
-      update_date, update_user_id, is_review, 
+      update_date, update_user_id, is_review, open_id,
       user_id, activity_id, remarks)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
       #{sex,jdbcType=INTEGER}, #{phoneNumber,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{createDate,jdbcType=DATE}, #{createUserId,jdbcType=BIGINT}, 
-      #{updateDate,jdbcType=DATE}, #{updateUserId,jdbcType=BIGINT}, #{isReview,jdbcType=INTEGER}, 
+      #{updateDate,jdbcType=DATE}, #{updateUserId,jdbcType=BIGINT}, #{isReview,jdbcType=INTEGER}, #{openId,jdbcType=VARCHAR},
       #{userId,jdbcType=BIGINT}, #{activityId,jdbcType=BIGINT}, #{remarks,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ahsj.smartparkcore.entity.po.ActivityPersonnelInfo" >
@@ -195,7 +196,8 @@
       is_review = #{isReview,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=BIGINT},
       activity_id = #{activityId,jdbcType=BIGINT},
-      remarks = #{remarks,jdbcType=VARCHAR}
+      remarks = #{remarks,jdbcType=VARCHAR},
+      open_id = #{openId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 
@@ -229,5 +231,14 @@
     <if test="parameter.orders != null and parameter.orders != ''">
       order by ${parameter.orders}
     </if>
+  </select>
+  <select id="listMyActivity" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
+  select
+  b.name as activity_name,b.event_location as event_location,
+  a.*
+  from activity_personnel_info as a
+  left join activity_info as b on a.activity_id = b.id
+  where
+  a.open_id = #{parameter.openId,jdbcType=VARCHAR}
   </select>
 </mapper>
