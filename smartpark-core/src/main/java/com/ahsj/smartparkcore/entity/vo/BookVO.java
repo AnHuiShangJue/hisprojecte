@@ -41,6 +41,16 @@ public class BookVO extends Book {
 
     private String description;
 
+    private String filePath;
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
     @Override
     public Long getId() {
         return id;
