@@ -309,4 +309,11 @@
             order by ${parameter.orders}
         </if>
     </select>
+
+    <select id="visitByOpenId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from book
+        where open_id = #{openId,jdbcType=VARCHAR}
+    </select>
 </mapper>

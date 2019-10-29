@@ -73,4 +73,6 @@ public interface BookService {
     PageBean<BookDTO> listByDate(PageBean<BookDTO> pageBean) throws Exception;
 
     ResponseEntity<ResultModel> visit(BookDTO bookDTO) throws Exception;
+
+    List<BookVO> visitByOpenId(BookDTO bookDTO) throws Exception;
 }
