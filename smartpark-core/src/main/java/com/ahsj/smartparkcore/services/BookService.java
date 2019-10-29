@@ -84,7 +84,7 @@ public interface BookService {
      * @Date 2019/10/29
      * @Time 13:29
      **/
-    List<BookVO> visitByOpenIdAndOrder(BookDTO bookDTO) throws Exception;
+    List<BookVO> ConferenceRoomInfovisitByOpenIdAndOrder(BookDTO bookDTO) throws Exception;
 
     /**
      * @return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>

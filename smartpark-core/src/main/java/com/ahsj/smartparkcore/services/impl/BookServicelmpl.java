@@ -448,13 +448,13 @@ public class BookServicelmpl implements BookService {
      **/
     @Override
     @Transactional(readOnly = true)
-    public List<BookVO> visitByOpenIdAndOrder(BookDTO bookDTO) throws Exception {
+    public List<BookVO> ConferenceRoomInfovisitByOpenIdAndOrder(BookDTO bookDTO) throws Exception {
         if (EmptyUtil.Companion.isNullOrEmpty(bookDTO)){
             return new ArrayList<>();
         }else {
             Book book = new Book();
             BeanUtils.copyProperties(bookDTO,book);
-            List<Book> books = bookMapper.visitByOpenId(bookDTO);
+            List<Book> books = bookMapper.ConferenceRoomInfovisitByOpenId(bookDTO);
             List<Long> ids = books.stream().map(Book::getTargetId).collect(Collectors.toList());
          List<ConferenceRoomInfo> conferenceRoomInfos = conferenceRoomInfoService.selectByIds(ids);
             List<BookVO> list = new ArrayList<>();
@@ -496,7 +496,7 @@ public class BookServicelmpl implements BookService {
         }else {
             Book book = new Book();
             BeanUtils.copyProperties(bookDTO,book);
-            List<Book> books = bookMapper.visitByOpenId(bookDTO);
+            List<Book> books = bookMapper.stationVisitByOpenId(bookDTO);
             List<Long> ids = books.stream().map(Book::getTargetId).collect(Collectors.toList());
             List<StationInfo> stationInfos = stationInfoService.selectByIds(ids);
             List<BookVO> list = new ArrayList<>();
@@ -538,7 +538,7 @@ public class BookServicelmpl implements BookService {
         }else {
             Book book = new Book();
             BeanUtils.copyProperties(bookDTO,book);
-            List<Book> books = bookMapper.visitByOpenId(bookDTO);
+            List<Book> books = bookMapper.siteVisitByOpenId(bookDTO);
             List<Long> ids = books.stream().map(Book::getTargetId).collect(Collectors.toList());
             List<Site> sites = siteServices.selectByIds(ids);
             List<BookVO> list = new ArrayList<>();

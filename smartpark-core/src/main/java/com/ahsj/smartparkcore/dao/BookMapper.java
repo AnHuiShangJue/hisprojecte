@@ -26,4 +26,34 @@ public interface BookMapper {
     List<Book> listByDate(PageBean<BookDTO> pageBean);
 
     List<Book> visitByOpenId(BookDTO bookDTO);
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.po.Book>
+     * @功能说明
+     * @Params [bookDTO]
+     * @Author XJP
+     * @Date 2019/10/29
+     * @Time 16:00
+     **/
+    List<Book> ConferenceRoomInfovisitByOpenId(BookDTO bookDTO);
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.po.Book>
+     * @功能说明
+     * @Params [bookDTO]
+     * @Author XJP
+     * @Date 2019/10/29
+     * @Time 16:00
+     **/
+    List<Book> stationVisitByOpenId(BookDTO bookDTO);
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.po.Book>
+     * @功能说明
+     * @Params [bookDTO]
+     * @Author XJP
+     * @Date 2019/10/29
+     * @Time 16:00
+     **/
+    List<Book> siteVisitByOpenId(BookDTO bookDTO);
 }

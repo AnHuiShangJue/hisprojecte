@@ -255,8 +255,8 @@ public class BookController extends BaseController {
      * @Time 13:28
      **/
     @RequestMapping("/visitByOpenIdAndOrder.ahsj")
-    public List<BookVO> visitByOpenIdAndOrder(BookDTO bookDTO) throws Exception {
-        return bookService.visitByOpenIdAndOrder(bookDTO);
+    public List<BookVO> ConferenceRoomInfovisitByOpenIdAndOrder(BookDTO bookDTO) throws Exception {
+        return bookService.ConferenceRoomInfovisitByOpenIdAndOrder(bookDTO);
     }
     /**
      *@功能说明
