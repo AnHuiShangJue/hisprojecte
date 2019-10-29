@@ -6,6 +6,7 @@ import com.ahsj.smartparkcore.core.ResultStatus;
 import com.ahsj.smartparkcore.dao.ActivityPersonnelInfoMapper;
 import com.ahsj.smartparkcore.entity.dto.ActivityPersonnelInfoDTO;
 import com.ahsj.smartparkcore.entity.po.ActivityPersonnelInfo;
+import com.ahsj.smartparkcore.feign.IUserService;
 import com.ahsj.smartparkcore.services.ActivityPersonnelInfoService;
 import core.entity.PageBean;
 import org.dozer.DozerBeanMapper;
@@ -19,6 +20,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class ActivityPersonnelInfoServiceImpl implements ActivityPersonnelInfoService {
     @Autowired
     ActivityPersonnelInfoMapper activityPersonnelInfoMapper;
+
+    @Autowired
+    IUserService iUserService;
 
 
 
@@ -148,5 +152,21 @@ public class ActivityPersonnelInfoServiceImpl implements ActivityPersonnelInfoSe
         activityPersonnelInfo.setRemarks(remarks);
         activityPersonnelInfoMapper.updateByPrimaryKey(activityPersonnelInfo);
         return new ResponseEntity<>(new ResultModel(ResultStatus.ERROR_REVIEW), HttpStatus.OK);
+    }
+
+    /**
+     * @Description
+     * @Author  muxu
+     * @Date  2019/10/29
+     * @Time 11:32
+     * @Return
+     * @Params
+    **/
+
+    @Override
+    @Transactional(readOnly = true)
+    public PageBean<ActivityPersonnelInfo> listMyActivity(PageBean<ActivityPersonnelInfo> pageBean) throws Exception {
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(activityPersonnelInfoMapper.listMyActivity(pageBean)));
+        return pageBean;
     }
 }

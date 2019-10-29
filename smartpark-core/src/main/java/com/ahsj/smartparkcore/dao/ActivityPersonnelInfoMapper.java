@@ -22,4 +22,6 @@ public interface ActivityPersonnelInfoMapper extends BaseMapper<ActivityPersonne
 
     List<? extends ActivityPersonnelInfo> list(PageBean<ActivityPersonnelInfo> activityInfoPageBean);
 
+    List<? extends ActivityPersonnelInfo> listMyActivity(PageBean<ActivityPersonnelInfo> activityInfoPageBean);
+
 }
