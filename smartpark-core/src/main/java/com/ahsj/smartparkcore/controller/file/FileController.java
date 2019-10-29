@@ -4,15 +4,22 @@ import com.ahsj.smartparkcore.common.Constants;
 import com.ahsj.smartparkcore.common.utils.FileOperateUtil;
 import com.ahsj.smartparkcore.common.utils.ZipUtils;
 import com.ahsj.smartparkcore.controller.BaseLoginUser;
+import com.ahsj.smartparkcore.entity.dto.EnterpriseInfoDTO;
+import com.ahsj.smartparkcore.entity.dto.SysAttachmentInfoDTO;
+import com.ahsj.smartparkcore.entity.po.EnterpriseInfo;
 import com.ahsj.smartparkcore.entity.sys.SysAttachmentInfo;
+import com.ahsj.smartparkcore.entity.vo.SysAttachmentInfoVO;
 import com.ahsj.smartparkcore.feign.IOrganizationService;
 import com.ahsj.smartparkcore.services.SysAttachmentInfoService;
 import core.controller.BaseController;
+import core.entity.PageBean;
 import core.message.Message;
 import core.message.MessageUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -50,6 +57,13 @@ public class FileController extends BaseController {
 
     private static final String filePath = Constants.FILE_PATHS;
 
+    @GetMapping("/index.ahsj")
+    public ModelAndView index(String token) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/file/list");
+        modelAndView.addObject("token", token);
+        return modelAndView;
+    }
+
 
 
     @GetMapping("/uplaod.ahsj")
@@ -62,13 +76,22 @@ public class FileController extends BaseController {
         return modelAndView;
     }
 
+    @PostMapping("/list.ahsj")
+    public ResponseEntity<PageBean<SysAttachmentInfo>> queryList(SysAttachmentInfoDTO sysAttachmentInfoDTO) {
+        DozerBeanMapper mapper = new DozerBeanMapper();
+        SysAttachmentInfo map = mapper.map(sysAttachmentInfoDTO, SysAttachmentInfo.class);
+        PageBean<SysAttachmentInfo> pageBean = new PageBean<>();
+        pageBean.setParameter(map);
+        return ResponseEntity.ok(sysAttachmentInfoService.queryList(pageBean));
+    }
+
     @PostMapping("/uploadFile.ahsj")
     public Message uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("relateKet") String relateKet, @RequestParam("relatePage") String relatePage, @RequestParam("relateId") Long relateId) {
         BaseLoginUser baseLoginUser = new BaseLoginUser();
         LocalDate now = LocalDate.now();
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyyMMdd");
         String dateDir = now.format(df);
-        // SysAttachmentInfo sysAttachmentInfo = new SysAttachmentInfo();
+        // SysAttachmentInfoDTO sysAttachmentInfo = new SysAttachmentInfoDTO();
         List<SysAttachmentInfo> list = new ArrayList<>();
         try {
             String fileCode = String.valueOf(System.nanoTime());
