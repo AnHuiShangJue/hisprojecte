@@ -93,12 +93,22 @@ public interface StationInfoService {
     Message reviewSuccess(Long id) throws Exception;
 
     /**
-     *@功能说明
-     *@Params [ids]
-     *@return java.util.List<com.ahsj.smartparkcore.entity.po.StationInfo>
-     *@Author XJP
-     *@Date 2019/10/29
-     *@Time 15:23
-    **/
+     * @return java.util.List<com.ahsj.smartparkcore.entity.po.StationInfo>
+     * @功能说明
+     * @Params [ids]
+     * @Author XJP
+     * @Date 2019/10/29
+     * @Time 15:23
+     **/
     List<StationInfo> selectByIds(List<Long> ids) throws Exception;
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.po.StationInfo>
+     * @功能说明
+     * @Params []
+     * @Author XJP
+     * @Date 2019/10/30
+     * @Time 13:29
+     **/
+    List<StationInfoVO> listForView() throws Exception;
 }

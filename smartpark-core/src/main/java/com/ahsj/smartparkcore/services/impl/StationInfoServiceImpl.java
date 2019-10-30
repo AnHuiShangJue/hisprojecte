@@ -8,9 +8,12 @@ import com.ahsj.smartparkcore.entity.po.AccessInfo;
 import com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo;
 import com.ahsj.smartparkcore.entity.po.Region;
 import com.ahsj.smartparkcore.entity.po.StationInfo;
+import com.ahsj.smartparkcore.entity.sys.SysAttachmentInfo;
+import com.ahsj.smartparkcore.entity.vo.SiteVo;
 import com.ahsj.smartparkcore.entity.vo.StationInfoVO;
 import com.ahsj.smartparkcore.services.RegionService;
 import com.ahsj.smartparkcore.services.StationInfoService;
+import com.ahsj.smartparkcore.services.SysAttachmentInfoService;
 import core.entity.PageBean;
 import core.message.Message;
 import core.message.MessageUtil;
@@ -48,6 +51,9 @@ public class StationInfoServiceImpl implements StationInfoService {
 
     @Autowired
     RegionService regionService;
+
+    @Autowired
+    SysAttachmentInfoService sysAttachmentInfoService;
 
     /**
      * @return core.entity.PageBean<com.ahsj.smartparkcore.entity.po.StationInfo>
@@ -220,26 +226,54 @@ public class StationInfoServiceImpl implements StationInfoService {
     }
 
     /**
-     *@功能说明
-     *@Params [ids]
-     *@return java.util.List<com.ahsj.smartparkcore.entity.po.StationInfo>
-     *@Author XJP
-     *@Date 2019/10/29
-     *@Time 15:27
-    **/
+     * @return java.util.List<com.ahsj.smartparkcore.entity.po.StationInfo>
+     * @功能说明
+     * @Params [ids]
+     * @Author XJP
+     * @Date 2019/10/29
+     * @Time 15:27
+     **/
     @Override
     @Transactional(readOnly = true)
     public List<StationInfo> selectByIds(List<Long> ids) throws Exception {
-        if (EmptyUtil.Companion.isNullOrEmpty(ids)){
+        if (EmptyUtil.Companion.isNullOrEmpty(ids)) {
             return new ArrayList<>();
-        }else {
+        } else {
             List<StationInfo> stationInfos = stationInfoMapper.selectByIds(ids);
-            if (EmptyUtil.Companion.isNullOrEmpty(stationInfos)){
+            if (EmptyUtil.Companion.isNullOrEmpty(stationInfos)) {
                 return new ArrayList<>();
-            }else {
+            } else {
                 return stationInfos;
             }
         }
+    }
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.po.StationInfo>
+     * @功能说明
+     * @Params []
+     * @Author XJP
+     * @Date 2019/10/30
+     * @Time 13:29
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<StationInfoVO> listForView() throws Exception {
+        List<StationInfoVO> stationInfoVOS = stationInfoMapper.listForView();
+        for (StationInfoVO stationInfoVO : stationInfoVOS) {
+            SysAttachmentInfo sysAttachmentInfo = new SysAttachmentInfo();
+            sysAttachmentInfo.setRelateId(stationInfoVO.getId());
+            sysAttachmentInfo.setRelateKey(Constants.STATIONINFO);
+            sysAttachmentInfo.setRelatePage(Constants.LIST);
+            List<SysAttachmentInfo> sysAttachmentInfos = sysAttachmentInfoService.querySysAttachmentInfo(sysAttachmentInfo);
+            if (EmptyUtil.Companion.isNullOrEmpty(sysAttachmentInfos)) {
+                continue;
+            }
+            SysAttachmentInfo sysAttachmentInfo1 = sysAttachmentInfos.get(0);
+            String replace = Constants.LOCALHOST + sysAttachmentInfo1.getLocation().replace(Constants.STATIC, Constants.SMARTPARKCORE);
+            stationInfoVO.setFilePath(replace);
+        }
+        return stationInfoVOS;
     }
 
     /**

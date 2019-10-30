@@ -1,5 +1,6 @@
 package com.ahsj.smartparkcore.services.impl;
 
+import com.ahsj.smartparkcore.common.Constants;
 import com.ahsj.smartparkcore.core.CodeHelper;
 import com.ahsj.smartparkcore.core.ResultModel;
 import com.ahsj.smartparkcore.core.ResultStatus;
@@ -7,10 +8,13 @@ import com.ahsj.smartparkcore.dao.ActivityInfoMapper;
 import com.ahsj.smartparkcore.entity.dto.ActivityInfoDTO;
 import com.ahsj.smartparkcore.entity.po.ActivityInfo;
 import com.ahsj.smartparkcore.entity.po.Region;
+import com.ahsj.smartparkcore.entity.sys.SysAttachmentInfo;
 import com.ahsj.smartparkcore.entity.vo.ActivityInfoVO;
 import com.ahsj.smartparkcore.entity.vo.ConferenceRoomInfoVO;
+import com.ahsj.smartparkcore.entity.vo.StationInfoVO;
 import com.ahsj.smartparkcore.services.ActivityInfoService;
 import com.ahsj.smartparkcore.services.RegionService;
+import com.ahsj.smartparkcore.services.SysAttachmentInfoService;
 import core.entity.PageBean;
 import org.apache.commons.lang3.StringUtils;
 import org.dozer.DozerBeanMapper;
@@ -20,6 +24,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import utils.EmptyUtil;
+
+import java.util.List;
 
 @Service
 public class ActivityInfoServiceImpl implements ActivityInfoService {
@@ -28,6 +35,9 @@ public class ActivityInfoServiceImpl implements ActivityInfoService {
 
     @Autowired
     RegionService regionService;
+
+    @Autowired
+    SysAttachmentInfoService sysAttachmentInfoService;
     /**
      * @Description list
      * @Author  muxu
@@ -214,6 +224,41 @@ public class ActivityInfoServiceImpl implements ActivityInfoService {
         activityInfo.setRemarks(remarks);
         activityInfoMapper.updateByPrimaryKey(activityInfo);
         return new ResponseEntity<>(new ResultModel(ResultStatus.ERROR_REVIEW), HttpStatus.OK);
+    }
+
+    /**
+     *@功能说明
+     *@Params []
+     *@return java.util.List<com.ahsj.smartparkcore.entity.vo.ActivityInfoVO>
+     *@Author XJP
+     *@Date 2019/10/30
+     *@Time 14:05
+    **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<ActivityInfoVO> listForView() throws Exception {
+        List<ActivityInfoVO> activityInfoVOS = activityInfoMapper.listForView();
+        for (ActivityInfoVO activityInfoVO : activityInfoVOS) {
+            if (activityInfoVO.getIsPublic()== 1){
+                activityInfoVO.setIsPublicName(Constants.PUBLIC_EVENT);
+            }
+            if (activityInfoVO.getIsPublic()== 2){
+                activityInfoVO.setIsPublicName(Constants.ACTIVITIES_ARE_LIMITED_COMPANY_MEMBERS);
+            }
+            SysAttachmentInfo sysAttachmentInfo = new SysAttachmentInfo();
+            sysAttachmentInfo.setRelateId(activityInfoVO.getId());
+            sysAttachmentInfo.setRelateKey(Constants.ACTIVITYINFO);
+            sysAttachmentInfo.setRelatePage(Constants.LIST);
+            List<SysAttachmentInfo> sysAttachmentInfos = sysAttachmentInfoService.querySysAttachmentInfo(sysAttachmentInfo);
+            if (EmptyUtil.Companion.isNullOrEmpty(sysAttachmentInfos)) {
+                continue;
+            }
+            SysAttachmentInfo sysAttachmentInfo1 = sysAttachmentInfos.get(0);
+            String replace = Constants.LOCALHOST + sysAttachmentInfo1.getLocation().replace(Constants.STATIC, Constants.SMARTPARKCORE);
+            activityInfoVO.setFilePath(replace);
+
+        }
+        return activityInfoVOS;
     }
 
 }

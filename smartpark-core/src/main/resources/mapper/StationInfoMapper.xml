@@ -30,6 +30,9 @@
     <resultMap id="ResultMap" type="com.ahsj.smartparkcore.entity.dto.StationInfoDTO" extends="BaseResultMap">
 
     </resultMap>
+    <resultMap id="ResultMapVO" type="com.ahsj.smartparkcore.entity.vo.StationInfoVO" extends="BaseResultMap">
+
+    </resultMap>
 
     <sql id="Base_Column_List">
     id, title, location, price, area, name, phone_number, description, is_enable, environmental_label, 
@@ -336,5 +339,11 @@
                  open="(" separator="," close=")">
             #{item}
         </foreach>
+    </select>
+
+    <select id="listForView"  resultMap="ResultMapVO">
+        select
+        <include refid="Base_Column_List" />
+        from station_info
     </select>
 </mapper>

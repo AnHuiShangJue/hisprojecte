@@ -3,6 +3,7 @@ package com.ahsj.smartparkcore.controller.StationInfo;
 import com.ahsj.smartparkcore.entity.dto.SiteDTO;
 import com.ahsj.smartparkcore.entity.dto.StationInfoDTO;
 import com.ahsj.smartparkcore.entity.po.StationInfo;
+import com.ahsj.smartparkcore.entity.vo.SiteVo;
 import com.ahsj.smartparkcore.entity.vo.StationInfoVO;
 import com.ahsj.smartparkcore.services.StationInfoService;
 import core.controller.BaseController;
@@ -15,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 /**
  * Copyright (C), 2019-2019, 安徽商角有限公司
@@ -153,6 +156,20 @@ public class StationInfoController extends BaseController {
     @RequestMapping("/reviewFail.ahsj")
     public Message reviewFail(@RequestParam("id") Long id) throws Exception {
         return stationInfoService.reviewFail(id);
+    }
+
+    /**
+     *@功能说明
+     *@Params []
+     *@return java.util.List<com.ahsj.smartparkcore.entity.po.StationInfo>
+     *@Author XJP
+     *@Date 2019/10/30
+     *@Time 13:29
+    **/
+    @RequestMapping("listForView.ahsj")
+    @ResponseBody
+    public List<StationInfoVO> listForView() throws Exception {
+        return stationInfoService.listForView();
     }
 
 }

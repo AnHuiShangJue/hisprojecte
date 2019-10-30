@@ -2,9 +2,11 @@ package com.ahsj.smartparkcore.dao;
 
 import com.ahsj.smartparkcore.entity.dto.StationInfoDTO;
 import com.ahsj.smartparkcore.entity.po.StationInfo;
+import com.ahsj.smartparkcore.entity.vo.StationInfoVO;
 import core.entity.PageBean;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.security.cert.X509Certificate;
 import java.util.List;
 
 
@@ -62,4 +64,15 @@ public interface StationInfoMapper {
      * @Time 15:28
      **/
     List<StationInfo> selectByIds(List<Long> ids);
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.StationInfoVO>
+     * @功能说明
+     * @Params []
+     * @Author XJP
+     * @Date 2019/10/30
+     * @Time 13:34
+     **/
+    List<StationInfoVO> listForView();
+
 }
