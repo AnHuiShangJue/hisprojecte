@@ -196,8 +196,17 @@ public class ActivityPersonnelInfoServiceImpl implements ActivityPersonnelInfoSe
         BeanUtils.copyProperties(activityPersonnelInfoDTO,activityPersonnelInfo);
         List<ActivityPersonnelInfoVO> activityPersonnelInfoVOS = activityPersonnelInfoMapper.listForView(activityPersonnelInfo);
         for (ActivityPersonnelInfoVO activityPersonnelInfoVO : activityPersonnelInfoVOS) {
+            if (activityPersonnelInfoVO.getIsReview()==1){
+                activityPersonnelInfoVO.setIsReviewName(Constants.EXAMINATION_PASSED);
+            }
+            if (activityPersonnelInfoVO.getIsReview()==2){
+                activityPersonnelInfoVO.setIsReviewName(Constants.AUDIT_FAILED);
+            }
+            if (activityPersonnelInfoVO.getIsReview()==3){
+                activityPersonnelInfoVO.setIsReviewName(Constants.UNREVIEWED);
+            }
             SysAttachmentInfo sysAttachmentInfo = new SysAttachmentInfo();
-            sysAttachmentInfo.setRelateId(activityPersonnelInfoVO.getId());
+            sysAttachmentInfo.setRelateId(activityPersonnelInfoVO.getActivityId());
             sysAttachmentInfo.setRelateKey(Constants.STATIONINFO);
             sysAttachmentInfo.setRelatePage(Constants.LIST);
             List<SysAttachmentInfo> sysAttachmentInfos = sysAttachmentInfoService.querySysAttachmentInfo(sysAttachmentInfo);

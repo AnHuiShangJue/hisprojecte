@@ -25,6 +25,12 @@ public class Constants {
 
     public static final Integer THREE= 3;
 
+    public static final String EXAMINATION_PASSED= "审核通过";
+
+    public static final String AUDIT_FAILED= "审核未通过";
+
+    public static final String UNREVIEWED= "未审核";
+
     public static final String ConferenceRoomInfo= "会议室";
 
     public static final String site = "场地";

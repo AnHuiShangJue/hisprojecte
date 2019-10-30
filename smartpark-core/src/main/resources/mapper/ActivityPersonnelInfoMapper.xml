@@ -19,7 +19,10 @@
         <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
         <result column="open_id" property="openId" jdbcType="VARCHAR"/>
     </resultMap>
-    <resultMap id="ResultMap" type="com.ahsj.smartparkcore.entity.vo.ActivityPersonnelInfoVO" extends="BaseResultMap"></resultMap>
+    <resultMap id="ResultMap" type="com.ahsj.smartparkcore.entity.vo.ActivityPersonnelInfoVO" extends="BaseResultMap">
+        <result column="activity_name" property="activityName" jdbcType="VARCHAR"/>
+        <result column="event_location" property="eventLocation" jdbcType="VARCHAR"/>
+    </resultMap>
     <sql id="Base_Column_List">
     id, name, age, sex, phone_number, idcard, email, create_date, create_user_id, update_date, 
     update_user_id, is_review, user_id, activity_id, remarks,open_id
