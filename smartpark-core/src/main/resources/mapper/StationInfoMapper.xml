@@ -415,7 +415,7 @@
         where title = #{title,jdbcType=VARCHAR} AND patent_id = #{patentId,jdbcType=BIGINT}
     </select>
 
-    <select id="selectAllpantent" resultMap="BaseResultMap">
+<!--    <select id="selectAllpantent" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from station_info
@@ -427,5 +427,5 @@
         <include refid="Base_Column_List"/>
         from station_info
         where title = #{title,jdbcType=VARCHAR} AND patent_id = #{patentId,jdbcType=BIGINT}
-    </select>
+    </select>-->
 </mapper>
