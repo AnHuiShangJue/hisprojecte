@@ -262,6 +262,7 @@
                             rtnBtn = rtnBtn +
                                 "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看医嘱详细信息\" onclick='medicalOrderDetail(\"" + row.number + "\","+row.type+");'><i class='material-icons'>visibility</i></a>"+
                                 "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"打印（Print）\" onclick='print(\"" + row.number + "\");'> <i class='material-icons'>print</i></a>"+
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"续接打印（Continue printing）\" onclick='ContinePrint(\"" + row.number + "\");'> <i class='material-icons'>print</i></a>"+
                                 "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='editMedicalOrder(" + row.id + ");'> <i class='material-icons'>edit</i></a>" ;
                                 // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick='deleteInitForMedicalOrder(" + row.id + ");'> <i class='material-icons'>delete</i></a>";
 
@@ -279,6 +280,18 @@
     }
 
     function print(number) {
+        var hosptalregistNumber = $("#number").val();
+        dialog.confirm('确定打印吗?', function (index, layero) {
+            if (number != "" && number != null && number != undefined) {
+                var url = CTX + "/api/medicalOrderDetail/printDoctorAdvice/index.ahsj?number=" + number + "&token=" + TOKEN+"&hosptalregistNumber="+hosptalregistNumber;
+                dialog.showDialog(url, "打印凭证预览", "800px", "700px");
+            } else {
+                dialog.warn("没有需要打印的内容！")
+            }
+        });
+    }
+
+    function ContinePrint(number) {
         var hosptalregistNumber = $("#number").val();
         dialog.confirm('确定打印吗?', function (index, layero) {
             if (number != "" && number != null && number != undefined) {
