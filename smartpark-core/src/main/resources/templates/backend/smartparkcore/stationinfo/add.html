@@ -43,7 +43,18 @@
                             </select>
                         </div>
                     </div>
-
+                    <div class="input-field col s4 l4 xl4">
+                        <input id="startTime" name="startTime" type="text"  readonly
+                               data-error=".errorTxt1">
+                        <div class="errorTxt1"></div>
+                        <label for="startTime">开始时间<span style="font-size: 12px"></span></label>
+                    </div>
+                    <div class="input-field col s4 l4 xl4">
+                        <input id="endTime" name="endTime" type="text" readonly
+                               data-error=".errorTxt1">
+                        <div class="errorTxt1"></div>
+                        <label for="endTime">结束时间<span style="font-size: 12px"></span></label>
+                    </div>
                     <div class="input-field col s4 l4 xl4">
                         <input id="location" name="location" type="text"
                                data-error=".errorTxt1">
@@ -90,6 +101,13 @@
                         <label for="description">描述<span style="font-size: 12px"></span></label>
                     </div>
 
+                    <div class="input-field col s4 m4 l4">
+                        <div class="">
+                            <select name="patentId" id="patentId">
+                                <option value='0'>选择父工位</option>
+                            </select>
+                        </div>
+                    </div>
 
                     <div class="row" style="margin-bottom: 160px">
                         <div class="input-field col s12">
@@ -109,11 +127,20 @@
 <div th:replace="public/base_update_script :: html"></div>
 <script th:inline="javascript">
 
-
+    $("#endTime").bind('click', function (event) {
+        timePacker($(this), event)
+        M.updateTextFields();
+    });
+    $("#startTime").bind('click', function (event) {
+        timePacker($(this), event)
+        M.updateTextFields();
+    });
     $(function () {
+        getSelectName();
         formCheck();
         initSelect();
         // getSelectHome();
+
         $("#select_1").linkselect({
             url: {
                 "1": "/api/region/getDataByParentId.ahsj",
@@ -215,6 +242,24 @@
     $("input").change(function () {
         $(this).val($(this).val().trim());
     });
+
+    function getSelectName() {
+        var patentId = $("#patentId");
+        $.ahsjajax(
+            CTX + "/api/stationinfo/selectAllpantent.ahsj",
+            null,
+            function (data) {
+                $(data).each(function (i) {
+                    patentId.append(
+                        "<option value='" + this.id + "'>" + this.title + "</option>")
+                })
+                patentId.formSelect();
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            })
+    }
 </script>
 
 </body>

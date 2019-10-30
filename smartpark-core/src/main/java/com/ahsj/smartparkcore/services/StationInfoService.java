@@ -111,4 +111,14 @@ public interface StationInfoService {
      * @Time 13:29
      **/
     List<StationInfoVO> listForView() throws Exception;
+
+    /***
+     * @Description 查询所有父工位
+     * @Params: []
+     * @Author: dingli
+     * @Return: com.ahsj.smartparkcore.entity.po.StationInfo
+     *@Date 2019/10/29
+     *@Time 17:31
+     **/
+    List<StationInfo> selectAllpantent() throws Exception;
 }

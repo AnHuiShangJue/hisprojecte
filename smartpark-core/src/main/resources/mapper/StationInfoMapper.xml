@@ -1,45 +1,45 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ahsj.smartparkcore.dao.StationInfoMapper">
     <resultMap id="BaseResultMap" type="com.ahsj.smartparkcore.entity.po.StationInfo">
-        <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="title" property="title" jdbcType="VARCHAR"/>
-        <result column="location" property="location" jdbcType="VARCHAR"/>
-        <result column="price" property="price" jdbcType="DECIMAL"/>
-        <result column="area" property="area" jdbcType="DOUBLE"/>
-        <result column="name" property="name" jdbcType="VARCHAR"/>
-        <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR"/>
-        <result column="description" property="description" jdbcType="VARCHAR"/>
-        <result column="is_enable" property="isEnable" jdbcType="SMALLINT"/>
-        <result column="environmental_label" property="environmentalLabel" jdbcType="VARCHAR"/>
-        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
-        <result column="create_user_id" property="createUserId" jdbcType="BIGINT"/>
-        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
-        <result column="update_user_id" property="updateUserId" jdbcType="BIGINT"/>
-        <result column="is_lease" property="isLease" jdbcType="INTEGER"/>
-        <result column="is_verify" property="isVerify" jdbcType="INTEGER"/>
-        <result column="book_type" property="bookType" jdbcType="INTEGER"/>
-        <result column="enterprise_id" property="enterpriseId" jdbcType="BIGINT"/>
-        <result column="number" property="number" jdbcType="INTEGER"/>
-        <result column="start_time" property="startTime" jdbcType="TIMESTAMP"/>
-        <result column="end_time" property="endTime" jdbcType="TIMESTAMP"/>
-        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="area" jdbcType="DOUBLE" property="area"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="create_user_id" jdbcType="BIGINT" property="createUserId"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="end_time" jdbcType="VARCHAR" property="endTime"/>
+        <result column="enterprise_id" jdbcType="BIGINT" property="enterpriseId"/>
+        <result column="environmental_label" jdbcType="VARCHAR" property="environmentalLabel"/>
+        <result column="is_enable" jdbcType="SMALLINT" property="isEnable"/>
+        <result column="is_lease" jdbcType="INTEGER" property="isLease"/>
+        <result column="is_verify" jdbcType="INTEGER" property="isVerify"/>
+        <result column="location" jdbcType="VARCHAR" property="location"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="number" jdbcType="INTEGER" property="number"/>
+        <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber"/>
+        <result column="book_type" jdbcType="INTEGER" property="bookType"/>
+        <result column="capacity" jdbcType="VARCHAR" property="capacity"/>
+        <result column="price" jdbcType="DECIMAL" property="price"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="start_time" jdbcType="VARCHAR" property="startTime"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="update_user_id" jdbcType="BIGINT" property="updateUserId"/>
+        <result column="patent_id" jdbcType="BIGINT" property="patentId"/>
     </resultMap>
 
-
-    <resultMap id="ResultMap" type="com.ahsj.smartparkcore.entity.dto.StationInfoDTO" extends="BaseResultMap">
-
+    <resultMap id="ResultMap" type="com.ahsj.smartparkcore.entity.vo.StationInfoVO" extends="BaseResultMap">
     </resultMap>
     <resultMap id="ResultMapVO" type="com.ahsj.smartparkcore.entity.vo.StationInfoVO" extends="BaseResultMap">
 
     </resultMap>
 
     <sql id="Base_Column_List">
-    id, title, location, price, area, name, phone_number, description, is_enable, environmental_label, 
-    create_date, create_user_id, update_date, update_user_id, is_lease, is_verify, enterprise_id, 
-    number, start_time, end_time, remark,book_type
+    id, area, create_date, create_user_id, description, end_time, enterprise_id, environmental_label,
+    is_enable, is_lease, is_verify, location, name, number, phone_number, book_type,
+    capacity, price, remark, start_time, title, update_date, update_user_id, patent_id
   </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from station_info
@@ -50,20 +50,24 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
     <insert id="insert" parameterType="com.ahsj.smartparkcore.entity.po.StationInfo">
-    insert into station_info (id, title, location, 
-      price, area, name, phone_number, 
-      description, is_enable, environmental_label, 
-      create_date, create_user_id, update_date, 
-      update_user_id, is_lease, is_verify, 
-      enterprise_id, number, start_time, 
-      end_time, remark,book_type)
-    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, 
-      #{price,jdbcType=DECIMAL}, #{area,jdbcType=DOUBLE}, #{name,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, 
-      #{description,jdbcType=VARCHAR}, #{isEnable,jdbcType=SMALLINT}, #{environmentalLabel,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, 
-      #{updateUserId,jdbcType=BIGINT}, #{isLease,jdbcType=INTEGER}, #{isVerify,jdbcType=INTEGER}, 
-      #{enterpriseId,jdbcType=BIGINT}, #{number,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, 
-      #{endTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR},#{bookType,jdbcType=INTEGER})
+    insert into station_info (id, area, create_date,
+      create_user_id, description, end_time,
+      enterprise_id, environmental_label, is_enable,
+      is_lease, is_verify, location,
+      name, number, phone_number,
+      book_type, capacity, price,
+      remark, start_time, title,
+      update_date, update_user_id, patent_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{area,jdbcType=DOUBLE}, #{createDate,jdbcType=TIMESTAMP},
+      #{createUserId,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR},
+      #{enterpriseId,jdbcType=BIGINT}, #{environmentalLabel,jdbcType=VARCHAR}, #{isEnable,jdbcType=SMALLINT},
+      #{isLease,jdbcType=INTEGER}, #{isVerify,jdbcType=INTEGER}, #{location,jdbcType=VARCHAR},
+      #{name,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, #{phoneNumber,jdbcType=VARCHAR},
+      #{bookType,jdbcType=INTEGER}, #{capacity,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL},
+      #{remark,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+      #{updateDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{patentId,jdbcType=BIGINT}
+      )
   </insert>
     <insert id="insertSelective" parameterType="com.ahsj.smartparkcore.entity.po.StationInfo">
         insert into station_info
@@ -71,32 +75,8 @@
             <if test="id != null">
                 id,
             </if>
-            <if test="title != null">
-                title,
-            </if>
-            <if test="location != null">
-                location,
-            </if>
-            <if test="price != null">
-                price,
-            </if>
             <if test="area != null">
                 area,
-            </if>
-            <if test="name != null">
-                name,
-            </if>
-            <if test="phoneNumber != null">
-                phone_number,
-            </if>
-            <if test="description != null">
-                description,
-            </if>
-            <if test="isEnable != null">
-                is_enable,
-            </if>
-            <if test="environmentalLabel != null">
-                environmental_label,
             </if>
             <if test="createDate != null">
                 create_date,
@@ -104,11 +84,20 @@
             <if test="createUserId != null">
                 create_user_id,
             </if>
-            <if test="updateDate != null">
-                update_date,
+            <if test="description != null">
+                description,
             </if>
-            <if test="updateUserId != null">
-                update_user_id,
+            <if test="endTime != null">
+                end_time,
+            </if>
+            <if test="enterpriseId != null">
+                enterprise_id,
+            </if>
+            <if test="environmentalLabel != null">
+                environmental_label,
+            </if>
+            <if test="isEnable != null">
+                is_enable,
             </if>
             <if test="isLease != null">
                 is_lease,
@@ -116,52 +105,52 @@
             <if test="isVerify != null">
                 is_verify,
             </if>
-            <if test="enterpriseId != null">
-                enterprise_id,
+            <if test="location != null">
+                location,
+            </if>
+            <if test="name != null">
+                name,
             </if>
             <if test="number != null">
                 number,
             </if>
-            <if test="startTime != null">
-                start_time,
+            <if test="phoneNumber != null">
+                phone_number,
             </if>
-            <if test="endTime != null">
-                end_time,
+            <if test="bookType != null">
+                book_type,
+            </if>
+            <if test="capacity != null">
+                capacity,
+            </if>
+            <if test="price != null">
+                price,
             </if>
             <if test="remark != null">
                 remark,
+            </if>
+            <if test="startTime != null">
+                start_time,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="patentId != null">
+                patent_id,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 #{id,jdbcType=BIGINT},
             </if>
-            <if test="title != null">
-                #{title,jdbcType=VARCHAR},
-            </if>
-            <if test="location != null">
-                #{location,jdbcType=VARCHAR},
-            </if>
-            <if test="price != null">
-                #{price,jdbcType=DECIMAL},
-            </if>
             <if test="area != null">
                 #{area,jdbcType=DOUBLE},
-            </if>
-            <if test="name != null">
-                #{name,jdbcType=VARCHAR},
-            </if>
-            <if test="phoneNumber != null">
-                #{phoneNumber,jdbcType=VARCHAR},
-            </if>
-            <if test="description != null">
-                #{description,jdbcType=VARCHAR},
-            </if>
-            <if test="isEnable != null">
-                #{isEnable,jdbcType=SMALLINT},
-            </if>
-            <if test="environmentalLabel != null">
-                #{environmentalLabel,jdbcType=VARCHAR},
             </if>
             <if test="createDate != null">
                 #{createDate,jdbcType=TIMESTAMP},
@@ -169,11 +158,20 @@
             <if test="createUserId != null">
                 #{createUserId,jdbcType=BIGINT},
             </if>
-            <if test="updateDate != null">
-                #{updateDate,jdbcType=TIMESTAMP},
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
             </if>
-            <if test="updateUserId != null">
-                #{updateUserId,jdbcType=BIGINT},
+            <if test="endTime != null">
+                #{endTime,jdbcType=VARCHAR},
+            </if>
+            <if test="enterpriseId != null">
+                #{enterpriseId,jdbcType=BIGINT},
+            </if>
+            <if test="environmentalLabel != null">
+                #{environmentalLabel,jdbcType=VARCHAR},
+            </if>
+            <if test="isEnable != null">
+                #{isEnable,jdbcType=SMALLINT},
             </if>
             <if test="isLease != null">
                 #{isLease,jdbcType=INTEGER},
@@ -181,52 +179,52 @@
             <if test="isVerify != null">
                 #{isVerify,jdbcType=INTEGER},
             </if>
-            <if test="enterpriseId != null">
-                #{enterpriseId,jdbcType=BIGINT},
+            <if test="location != null">
+                #{location,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
             </if>
             <if test="number != null">
                 #{number,jdbcType=INTEGER},
             </if>
-            <if test="startTime != null">
-                #{startTime,jdbcType=TIMESTAMP},
+            <if test="phoneNumber != null">
+                #{phoneNumber,jdbcType=VARCHAR},
             </if>
-            <if test="endTime != null">
-                #{endTime,jdbcType=TIMESTAMP},
+            <if test="bookType != null">
+                #{bookType,jdbcType=INTEGER},
+            </if>
+            <if test="capacity != null">
+                #{capacity,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=DECIMAL},
             </if>
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null">
+                #{startTime,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="patentId != null">
+                #{patentId,jdbcType=BIGINT},
             </if>
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.smartparkcore.entity.po.StationInfo">
         update station_info
         <set>
-            <if test="title != null">
-                title = #{title,jdbcType=VARCHAR},
-            </if>
-            <if test="location != null">
-                location = #{location,jdbcType=VARCHAR},
-            </if>
-            <if test="price != null">
-                price = #{price,jdbcType=DECIMAL},
-            </if>
             <if test="area != null">
                 area = #{area,jdbcType=DOUBLE},
-            </if>
-            <if test="name != null">
-                name = #{name,jdbcType=VARCHAR},
-            </if>
-            <if test="phoneNumber != null">
-                phone_number = #{phoneNumber,jdbcType=VARCHAR},
-            </if>
-            <if test="description != null">
-                description = #{description,jdbcType=VARCHAR},
-            </if>
-            <if test="isEnable != null">
-                is_enable = #{isEnable,jdbcType=SMALLINT},
-            </if>
-            <if test="environmentalLabel != null">
-                environmental_label = #{environmentalLabel,jdbcType=VARCHAR},
             </if>
             <if test="createDate != null">
                 create_date = #{createDate,jdbcType=TIMESTAMP},
@@ -234,11 +232,20 @@
             <if test="createUserId != null">
                 create_user_id = #{createUserId,jdbcType=BIGINT},
             </if>
-            <if test="updateDate != null">
-                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
             </if>
-            <if test="updateUserId != null">
-                update_user_id = #{updateUserId,jdbcType=BIGINT},
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=VARCHAR},
+            </if>
+            <if test="enterpriseId != null">
+                enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+            </if>
+            <if test="environmentalLabel != null">
+                environmental_label = #{environmentalLabel,jdbcType=VARCHAR},
+            </if>
+            <if test="isEnable != null">
+                is_enable = #{isEnable,jdbcType=SMALLINT},
             </if>
             <if test="isLease != null">
                 is_lease = #{isLease,jdbcType=INTEGER},
@@ -246,50 +253,77 @@
             <if test="isVerify != null">
                 is_verify = #{isVerify,jdbcType=INTEGER},
             </if>
-            <if test="enterpriseId != null">
-                enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+            <if test="location != null">
+                location = #{location,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
             </if>
             <if test="number != null">
                 number = #{number,jdbcType=INTEGER},
             </if>
-            <if test="startTime != null">
-                start_time = #{startTime,jdbcType=TIMESTAMP},
+            <if test="phoneNumber != null">
+                phone_number = #{phoneNumber,jdbcType=VARCHAR},
             </if>
-            <if test="endTime != null">
-                end_time = #{endTime,jdbcType=TIMESTAMP},
+            <if test="bookType != null">
+                book_type = #{bookType,jdbcType=INTEGER},
+            </if>
+            <if test="capacity != null">
+                capacity = #{capacity,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=DECIMAL},
             </if>
             <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="patentId != null">
+                patent_id = #{patentId,jdbcType=BIGINT},
             </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.ahsj.smartparkcore.entity.po.StationInfo">
     update station_info
-    set title = #{title,jdbcType=VARCHAR},
-      location = #{location,jdbcType=VARCHAR},
-      price = #{price,jdbcType=DECIMAL},
-      area = #{area,jdbcType=DOUBLE},
-      name = #{name,jdbcType=VARCHAR},
-      phone_number = #{phoneNumber,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
-      is_enable = #{isEnable,jdbcType=SMALLINT},
-      environmental_label = #{environmentalLabel,jdbcType=VARCHAR},
+    set area = #{area,jdbcType=DOUBLE},
       create_date = #{createDate,jdbcType=TIMESTAMP},
       create_user_id = #{createUserId,jdbcType=BIGINT},
-      update_date = #{updateDate,jdbcType=TIMESTAMP},
-      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      description = #{description,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=VARCHAR},
+      enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      environmental_label = #{environmentalLabel,jdbcType=VARCHAR},
+      is_enable = #{isEnable,jdbcType=SMALLINT},
       is_lease = #{isLease,jdbcType=INTEGER},
       is_verify = #{isVerify,jdbcType=INTEGER},
-      enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      location = #{location,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
       number = #{number,jdbcType=INTEGER},
-      start_time = #{startTime,jdbcType=TIMESTAMP},
-      end_time = #{endTime,jdbcType=TIMESTAMP},
-      remark = #{remark,jdbcType=VARCHAR}
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      book_type = #{bookType,jdbcType=INTEGER},
+      capacity = #{capacity,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      remark = #{remark,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      patent_id = #{patentId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
-
     <!--自定义SQL-->
+
     <select id="queryList" parameterType="core.entity.PageBean" resultMap="ResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -299,19 +333,19 @@
             and location like concat('%', #{parameter.location,jdbcType=VARCHAR},'%')
         </if>
         <if test="parameter.lowPrice != null and parameter.lowPrice != ''">
-            and price &gt;=  #{parameter.lowPrice,jdbcType=DECIMAL}
+            and price &gt;= #{parameter.lowPrice,jdbcType=DECIMAL}
         </if>
         <if test="parameter.upPrice != null and parameter.upPrice != ''">
-            and price &lt;=  #{parameter.upPrice,jdbcType=DECIMAL}
+            and price &lt;= #{parameter.upPrice,jdbcType=DECIMAL}
         </if>
         <if test="parameter.isEnable != null and parameter.isEnable != ''">
-            and is_enable =  #{parameter.isEnable,jdbcType=INTEGER}
+            and is_enable = #{parameter.isEnable,jdbcType=INTEGER}
         </if>
         <if test="parameter.isLease != null and parameter.isLease != ''">
-            and is_lease =  #{parameter.isLease,jdbcType=INTEGER}
+            and is_lease = #{parameter.isLease,jdbcType=INTEGER}
         </if>
         <if test="parameter.isVerify != null and parameter.isVerify != ''">
-            and is_verify =  #{parameter.isVerify,jdbcType=INTEGER}
+            and is_verify = #{parameter.isVerify,jdbcType=INTEGER}
         </if>
         <if test="parameter.orders != null and parameter.orders != ''">
             order by ${parameter.orders}
@@ -332,7 +366,8 @@
     </select>
 
     <select id="selectByIds" resultMap="BaseResultMap" parameterType="java.util.List">
-        select <include refid="Base_Column_List"/>
+        select
+        <include refid="Base_Column_List"/>
         from station_info c
         where c.id in
         <foreach item="item" index="index" collection="list"
@@ -345,5 +380,19 @@
         select
         <include refid="Base_Column_List" />
         from station_info
+    </select>
+
+    <select id="selectAllpantent" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from station_info
+        where patent_id = '0'
+    </select>
+    <select id="selectByStationInfo" resultMap="BaseResultMap"
+            parameterType="com.ahsj.smartparkcore.entity.po.StationInfo">
+        select
+        <include refid="Base_Column_List"/>
+        from station_info
+        where title = #{title,jdbcType=VARCHAR} AND patent_id = #{patentId,jdbcType=BIGINT}
     </select>
 </mapper>

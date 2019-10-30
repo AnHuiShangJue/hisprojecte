@@ -119,7 +119,8 @@ public class StationInfoServiceImpl implements StationInfoService {
         stationInfo.setIsEnable((short) 1);
         stationInfo.setIsLease(2);
         stationInfo.setIsVerify(2);
-        StationInfo stationInfo1 = stationInfoMapper.selectByTitle(stationInfo.getTitle());
+        // StationInfo stationInfo1 = stationInfoMapper.selectByTitle(stationInfo.getTitle());
+        StationInfo stationInfo1 = stationInfoMapper.selectByStationInfo(stationInfo);
         if (!EmptyUtil.Companion.isNullOrEmpty(stationInfo1)) {
             return MessageUtil.createMessage(false, "工位信息新增失败 ！ 该工位已存在 ！！");
         } else {
@@ -246,6 +247,20 @@ public class StationInfoServiceImpl implements StationInfoService {
                 return stationInfos;
             }
         }
+    }
+
+    /**
+     * @Description 查询所有父工位
+     * @Params: []
+     * @Author: dingli
+     * @Return: com.ahsj.smartparkcore.entity.po.StationInfo
+     * @Date 2019/10/29
+     * @Time 17:32
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<StationInfo> selectAllpantent() throws Exception {
+        return stationInfoMapper.selectAllpantent();
     }
 
     /**
