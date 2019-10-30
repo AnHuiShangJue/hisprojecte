@@ -245,10 +245,22 @@ public class BookController extends BaseController {
     public List<BookVO> visitByOpenId(BookDTO bookDTO) throws Exception {
         return bookService.visitByOpenId(bookDTO);
     }
+    /**
+     *@功能说明
+     *@Params [bookDTO]
+     *@return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     *@Author XJP
+     *@Date 2019/10/30
+     *@Time 11:21
+    **/
+    @RequestMapping("/visitByOpenIdAndOrders.ahsj")
+    public List<BookVO> visitByOpenIdAndOrder(BookDTO bookDTO) throws Exception {
+        return bookService.visitByOpenIdAndOrder(bookDTO);
+    }
 
     /**
      * @return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
-     * @功能说明 根据openId查询全部订单
+     * @功能说明 根据openId查询全部会议室订单
      * @Params [bookDTO]
      * @Author XJP
      * @Date 2019/10/29
@@ -258,14 +270,93 @@ public class BookController extends BaseController {
     public List<BookVO> ConferenceRoomInfovisitByOpenIdAndOrder(BookDTO bookDTO) throws Exception {
         return bookService.ConferenceRoomInfovisitByOpenIdAndOrder(bookDTO);
     }
+
     /**
-     *@功能说明
-     *@Params [bookDTO]
-     *@return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
-     *@Author XJP
-     *@Date 2019/10/29
-     *@Time 15:15
-    **/
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     * @功能说明 根据openId查询未支付会议室订单
+     * @Params [bookDTO]
+     * @Author XJP
+     * @Date 2019/10/30
+     * @Time 9:58
+     **/
+    @RequestMapping("/visitByOpenIdAndOrderAndNoPay.ahsj")
+    public List<BookVO> ConferenceRoomInfovisitByOpenIdAndOrderAndNoPay(BookDTO bookDTO) throws Exception {
+        return bookService.ConferenceRoomInfovisitByOpenIdAndOrderAndNoPay(bookDTO);
+    }
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     * @功能说明 根据openId查询支付会议室订单
+     * @Params [bookDTO]
+     * @Author XJP
+     * @Date 2019/10/30
+     * @Time 9:58
+     **/
+    @RequestMapping("/visitByOpenIdAndOrderAndPay.ahsj")
+    public List<BookVO> ConferenceRoomInfovisitByOpenIdAndOrderAndPay(BookDTO bookDTO) throws Exception {
+        return bookService.ConferenceRoomInfovisitByOpenIdAndOrderAndPay(bookDTO);
+    }
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     * @功能说明 根据openId查询取消会议室订单
+     * @Params [bookDTO]
+     * @Author XJP
+     * @Date 2019/10/30
+     * @Time 9:58
+     **/
+    @RequestMapping("/visitByOpenIdAndOrderCancel.ahsj")
+    public List<BookVO> ConferenceRoomInfovisitByOpenIdAndOrderCancel(BookDTO bookDTO) throws Exception {
+        return bookService.ConferenceRoomInfovisitByOpenIdAndOrderCancel(bookDTO);
+    }
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     * @功能说明
+     * @Params [bookDTO]
+     * @Author XJP
+     * @Date 2019/10/30
+     * @Time 10:51
+     **/
+    @RequestMapping("/sitevisitByOpenIdAndOrderCancel.ahsj")
+    public List<BookVO> SitevisitByOpenIdAndOrderCancel(BookDTO bookDTO) throws Exception {
+        return bookService.SitevisitByOpenIdAndOrderCancel(bookDTO);
+    }
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     * @功能说明
+     * @Params [bookDTO]
+     * @Author XJP
+     * @Date 2019/10/30
+     * @Time 10:53
+     **/
+    @RequestMapping("/sitevisitByOpenIdAndOrderAndPay.ahsj")
+    public List<BookVO> SitesitevisitByOpenIdAndOrderAndPay(BookDTO bookDTO) throws Exception {
+        return bookService.SitesitevisitByOpenIdAndOrderAndPay(bookDTO);
+    }
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     * @功能说明
+     * @Params [bookDTO]
+     * @Author XJP
+     * @Date 2019/10/30
+     * @Time 10:55
+     **/
+    @RequestMapping("/sitevisitByOpenIdAndOrderAndNoPay.ahsj")
+    public List<BookVO> SitevisitByOpenIdAndOrderAndNoPay(BookDTO bookDTO) throws Exception {
+        return bookService.SitevisitByOpenIdAndOrderAndNoPay(bookDTO);
+    }
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     * @功能说明
+     * @Params [bookDTO]
+     * @Author XJP
+     * @Date 2019/10/29
+     * @Time 15:15
+     **/
     @RequestMapping("/stationVisitByOpenIdAndOrder.ahsj")
     public List<BookVO> stationVisitByOpenIdAndOrder(BookDTO bookDTO) throws Exception {
         return bookService.stationVisitByOpenIdAndOrder(bookDTO);
@@ -275,9 +366,46 @@ public class BookController extends BaseController {
      *@Params [bookDTO]
      *@return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
      *@Author XJP
-     *@Date 2019/10/29
-     *@Time 15:15
+     *@Date 2019/10/30
+     *@Time 11:13
     **/
+    @RequestMapping("/stationvisitByOpenIdAndOrderAndNoPay.ahsj")
+    public List<BookVO> stationvisitByOpenIdAndOrderAndNoPay(BookDTO bookDTO) throws Exception {
+        return bookService.stationvisitByOpenIdAndOrderAndNoPay(bookDTO);
+    }
+    /**
+     *@功能说明
+     *@Params [bookDTO]
+     *@return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     *@Author XJP
+     *@Date 2019/10/30
+     *@Time 11:13
+    **/
+    @RequestMapping("/stationvisitByOpenIdAndOrderAndPay.ahsj")
+    public List<BookVO> sitevisitByOpenIdAndOrderAndPay(BookDTO bookDTO) throws Exception {
+        return bookService.sitevisitByOpenIdAndOrderAndPay(bookDTO);
+    }
+    /**
+     *@功能说明
+     *@Params [bookDTO]
+     *@return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     *@Author XJP
+     *@Date 2019/10/30
+     *@Time 11:13
+    **/
+    @RequestMapping("/stationvisitByOpenIdAndOrderCancel.ahsj")
+    public List<BookVO> stationvisitByOpenIdAndOrderCancel(BookDTO bookDTO) throws Exception {
+        return bookService.stationvisitByOpenIdAndOrderCancel(bookDTO);
+    }
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     * @功能说明
+     * @Params [bookDTO]
+     * @Author XJP
+     * @Date 2019/10/29
+     * @Time 15:15
+     **/
     @RequestMapping("/siteVisitByOpenIdAndOrder.ahsj")
     public List<BookVO> siteVisitByOpenIdAndOrder(BookDTO bookDTO) throws Exception {
         return bookService.siteVisitByOpenIdAndOrder(bookDTO);

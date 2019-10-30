@@ -316,24 +316,84 @@
         from book
         where is_pay = 2 and open_id = #{openId,jdbcType=VARCHAR}
     </select>
+    <select id="visitByOpenIdAndOrder" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from book
+        where is_pay = 1 and open_id = #{openId,jdbcType=VARCHAR}
+    </select>
     <select id="ConferenceRoomInfovisitByOpenId" resultMap="BaseResultMap"  parameterType="com.ahsj.smartparkcore.entity.po.Book">
         select
         <include refid="Base_Column_List"/>
         from book
-        where is_pay = 2 and book_type = 1 and  open_id = #{openId,jdbcType=VARCHAR}
+        where book_type = 1 and  open_id = #{openId,jdbcType=VARCHAR}
+    </select>
+    <select id="ConferenceRoomInfovisitByOpenIdAndOrderAndNoPay" resultMap="BaseResultMap"  parameterType="com.ahsj.smartparkcore.entity.po.Book">
+        select
+        <include refid="Base_Column_List"/>
+        from book
+        where is_pay = 2 and  book_type = 1 and  open_id = #{openId,jdbcType=VARCHAR}
+    </select>
+    <select id="ConferenceRoomInfovisitByOpenIdAndOrderAndPay" resultMap="BaseResultMap"  parameterType="com.ahsj.smartparkcore.entity.po.Book">
+        select
+        <include refid="Base_Column_List"/>
+        from book
+        where is_pay = 1 and  book_type = 1 and  open_id = #{openId,jdbcType=VARCHAR}
+    </select>
+    <select id="ConferenceRoomInfovisitByOpenIdAndOrderCancel" resultMap="BaseResultMap"  parameterType="com.ahsj.smartparkcore.entity.po.Book">
+        select
+        <include refid="Base_Column_List"/>
+        from book
+        where is_cancel = 1 and  book_type = 1 and  open_id = #{openId,jdbcType=VARCHAR}
     </select>
 
     <select id="stationVisitByOpenId" resultMap="BaseResultMap"  parameterType="com.ahsj.smartparkcore.entity.po.Book">
         select
         <include refid="Base_Column_List"/>
         from book
-        where is_pay = 2 and book_type = 3 and  open_id = #{openId,jdbcType=VARCHAR}
+        where   book_type = 3 and  open_id = #{openId,jdbcType=VARCHAR}
+    </select>
+    <select id="sitevisitByOpenIdAndOrderAndPay" resultMap="BaseResultMap"  parameterType="com.ahsj.smartparkcore.entity.po.Book">
+        select
+        <include refid="Base_Column_List"/>
+        from book
+        where  is_pay = 1 and book_type = 3 and  open_id = #{openId,jdbcType=VARCHAR}
+    </select>
+    <select id="stationvisitByOpenIdAndOrderAndNoPay" resultMap="BaseResultMap"  parameterType="com.ahsj.smartparkcore.entity.po.Book">
+        select
+        <include refid="Base_Column_List"/>
+        from book
+        where is_pay = 2 and  book_type = 3 and  open_id = #{openId,jdbcType=VARCHAR}
+    </select>
+    <select id="stationvisitByOpenIdAndOrderCancel" resultMap="BaseResultMap"  parameterType="com.ahsj.smartparkcore.entity.po.Book">
+        select
+        <include refid="Base_Column_List"/>
+        from book
+        where  is_cancel = 1 and  book_type = 3 and  open_id = #{openId,jdbcType=VARCHAR}
     </select>
 
     <select id="siteVisitByOpenId" resultMap="BaseResultMap"  parameterType="com.ahsj.smartparkcore.entity.po.Book">
         select
         <include refid="Base_Column_List"/>
         from book
-        where is_pay = 2 and book_type = 2 and  open_id = #{openId,jdbcType=VARCHAR}
+        where  book_type = 2 and  open_id = #{openId,jdbcType=VARCHAR}
+    </select>
+    <select id="SitevisitByOpenIdAndOrderAndNoPay" resultMap="BaseResultMap"  parameterType="com.ahsj.smartparkcore.entity.po.Book">
+        select
+        <include refid="Base_Column_List"/>
+        from book
+        where is_pay = 2 and  book_type = 2 and  open_id = #{openId,jdbcType=VARCHAR}
+    </select>
+    <select id="SitesitevisitByOpenIdAndOrderAndPay" resultMap="BaseResultMap"  parameterType="com.ahsj.smartparkcore.entity.po.Book">
+        select
+        <include refid="Base_Column_List"/>
+        from book
+        where is_pay = 1 and  book_type = 2 and  open_id = #{openId,jdbcType=VARCHAR}
+    </select>
+    <select id="SitevisitByOpenIdAndOrderCancel" resultMap="BaseResultMap"  parameterType="com.ahsj.smartparkcore.entity.po.Book">
+        select
+        <include refid="Base_Column_List"/>
+        from book
+        where is_cancel = 1 and book_type = 2 and  open_id = #{openId,jdbcType=VARCHAR}
     </select>
 </mapper>
