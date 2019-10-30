@@ -24,6 +24,12 @@ public class SmartparkCoreApplicationTests {
         }
     }
 
+
+
+
+
+
+
     @Test
     public void test2() {
         LocalUtil lu = LocalUtil.getInstance();

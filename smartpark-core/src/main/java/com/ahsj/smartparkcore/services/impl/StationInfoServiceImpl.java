@@ -5,11 +5,15 @@ import com.ahsj.smartparkcore.core.CodeHelper;
 import com.ahsj.smartparkcore.dao.StationInfoMapper;
 import com.ahsj.smartparkcore.entity.dto.StationInfoDTO;
 import com.ahsj.smartparkcore.entity.po.AccessInfo;
+import com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo;
 import com.ahsj.smartparkcore.entity.po.Region;
 import com.ahsj.smartparkcore.entity.po.StationInfo;
+import com.ahsj.smartparkcore.entity.sys.SysAttachmentInfo;
+import com.ahsj.smartparkcore.entity.vo.SiteVo;
 import com.ahsj.smartparkcore.entity.vo.StationInfoVO;
 import com.ahsj.smartparkcore.services.RegionService;
 import com.ahsj.smartparkcore.services.StationInfoService;
+import com.ahsj.smartparkcore.services.SysAttachmentInfoService;
 import core.entity.PageBean;
 import core.message.Message;
 import core.message.MessageUtil;
@@ -22,6 +26,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import utils.EmptyUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Copyright (C), 2019-2019, 安徽商角有限公司
@@ -45,6 +52,9 @@ public class StationInfoServiceImpl implements StationInfoService {
     @Autowired
     RegionService regionService;
 
+    @Autowired
+    SysAttachmentInfoService sysAttachmentInfoService;
+
     /**
      * @return core.entity.PageBean<com.ahsj.smartparkcore.entity.po.StationInfo>
      * @功能说明
@@ -55,7 +65,7 @@ public class StationInfoServiceImpl implements StationInfoService {
      **/
     @Override
     @Transactional(readOnly = true)
-    public PageBean<StationInfoDTO> queryList(PageBean<StationInfoDTO> pageBean) {
+    public PageBean<StationInfoVO> queryList(PageBean<StationInfoVO> pageBean) {
         pageBean.setData(CodeHelper.getInstance().setCodeValue(stationInfoMapper.queryList(pageBean)));
         return pageBean;
     }
@@ -109,7 +119,8 @@ public class StationInfoServiceImpl implements StationInfoService {
         stationInfo.setIsEnable((short) 1);
         stationInfo.setIsLease(2);
         stationInfo.setIsVerify(2);
-        StationInfo stationInfo1 = stationInfoMapper.selectByTitle(stationInfo.getTitle());
+        // StationInfo stationInfo1 = stationInfoMapper.selectByTitle(stationInfo.getTitle());
+        StationInfo stationInfo1 = stationInfoMapper.selectByStationInfo(stationInfo);
         if (!EmptyUtil.Companion.isNullOrEmpty(stationInfo1)) {
             return MessageUtil.createMessage(false, "工位信息新增失败 ！ 该工位已存在 ！！");
         } else {
@@ -214,6 +225,76 @@ public class StationInfoServiceImpl implements StationInfoService {
             return MessageUtil.createMessage(true, "工位申请信息审核成功 ！该工位申请信息验证通过 ！！");
         }
     }
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.po.StationInfo>
+     * @功能说明
+     * @Params [ids]
+     * @Author XJP
+     * @Date 2019/10/29
+     * @Time 15:27
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<StationInfo> selectByIds(List<Long> ids) throws Exception {
+        if (EmptyUtil.Companion.isNullOrEmpty(ids)) {
+            return new ArrayList<>();
+        } else {
+            List<StationInfo> stationInfos = stationInfoMapper.selectByIds(ids);
+            if (EmptyUtil.Companion.isNullOrEmpty(stationInfos)) {
+                return new ArrayList<>();
+            } else {
+                return stationInfos;
+            }
+        }
+    }
+
+    /**
+     * @Description 查询所有父工位
+     * @Params: []
+     * @Author: dingli
+     * @Return: com.ahsj.smartparkcore.entity.po.StationInfo
+     * @Date 2019/10/29
+     * @Time 17:32
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<StationInfo> selectAllpantent() throws Exception {
+        return stationInfoMapper.selectAllpantent();
+    }
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.po.StationInfo>
+     * @功能说明
+     * @Params []
+     * @Author XJP
+     * @Date 2019/10/30
+     * @Time 13:29
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<StationInfoVO> listForView() throws Exception {
+        List<StationInfoVO> stationInfoVOS = stationInfoMapper.listForView();
+        for (StationInfoVO stationInfoVO : stationInfoVOS) {
+            SysAttachmentInfo sysAttachmentInfo = new SysAttachmentInfo();
+            sysAttachmentInfo.setRelateId(stationInfoVO.getId());
+            sysAttachmentInfo.setRelateKey(Constants.STATIONINFO);
+            sysAttachmentInfo.setRelatePage(Constants.LIST);
+            List<SysAttachmentInfo> sysAttachmentInfos = sysAttachmentInfoService.querySysAttachmentInfo(sysAttachmentInfo);
+            if (EmptyUtil.Companion.isNullOrEmpty(sysAttachmentInfos)) {
+                continue;
+            }
+            SysAttachmentInfo sysAttachmentInfo1 = sysAttachmentInfos.get(0);
+            String replace = Constants.LOCALHOST + sysAttachmentInfo1.getLocation().replace(Constants.STATIC, Constants.SMARTPARKCORE);
+            stationInfoVO.setFilePath(replace);
+        }
+        return stationInfoVOS;
+    }
+/*    @Override
+    @Transactional(readOnly = true)
+    public List<StationInfo> selectAllpantent() throws Exception {
+        return stationInfoMapper.selectAllpantent();
+    }*/
 
     /**
      * @return core.message.Message

@@ -241,8 +241,8 @@ public class EnterpriseInfoController extends BaseController {
      * @Time 14:49
      **/
     @RequestMapping("/queryListAll.ahsj")
-    public ResponseEntity<List<EnterpriseInfo>> queryEnterpriseInfo() throws Exception {
-        List<EnterpriseInfo> enterpriseInfos = enterpriseInfoService.queryListAll();
+    public ResponseEntity<List<EnterpriseInfo>> queryEnterpriseInfo(EnterpriseInfoDTO enterpriseInfoDTO) throws Exception {
+        List<EnterpriseInfo> enterpriseInfos = enterpriseInfoService.queryListAll(enterpriseInfoDTO);
         return ResponseEntity.ok(enterpriseInfos);
     }
 
@@ -260,7 +260,7 @@ public class EnterpriseInfoController extends BaseController {
         LocalDate now = LocalDate.now();
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyyMMdd");
         String dateDir = now.format(df);
-        // SysAttachmentInfo sysAttachmentInfo = new SysAttachmentInfo();
+        // SysAttachmentInfoDTO sysAttachmentInfo = new SysAttachmentInfoDTO();
         List<SysAttachmentInfo> list = new ArrayList<>();
         try {
             String fileCode = String.valueOf(System.nanoTime());

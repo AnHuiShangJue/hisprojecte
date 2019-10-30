@@ -1,16 +1,22 @@
 package com.ahsj.smartparkcore.services.impl;
 
 
+import com.ahsj.smartparkcore.common.Constants;
 import com.ahsj.smartparkcore.core.CodeHelper;
 import com.ahsj.smartparkcore.core.ResultModel;
 import com.ahsj.smartparkcore.core.ResultStatus;
 import com.ahsj.smartparkcore.dao.SiteMapper;
 import com.ahsj.smartparkcore.entity.dto.SiteDTO;
+import com.ahsj.smartparkcore.entity.po.ConferenceRoomInfo;
 import com.ahsj.smartparkcore.entity.po.Region;
 import com.ahsj.smartparkcore.entity.po.Site;
+import com.ahsj.smartparkcore.entity.sys.SysAttachmentInfo;
+import com.ahsj.smartparkcore.entity.vo.ConferenceRoomInfoVO;
 import com.ahsj.smartparkcore.entity.vo.SiteVo;
+import com.ahsj.smartparkcore.services.EnterpriseInfoService;
 import com.ahsj.smartparkcore.services.RegionService;
 import com.ahsj.smartparkcore.services.SiteServices;
+import com.ahsj.smartparkcore.services.SysAttachmentInfoService;
 import core.entity.PageBean;
 import org.apache.commons.lang3.StringUtils;
 import org.dozer.DozerBeanMapper;
@@ -22,6 +28,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utils.EmptyUtil;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Service
@@ -32,6 +40,16 @@ public class SiteServiceslmpl implements SiteServices {
 
     @Autowired
     RegionService regionService;
+
+    @Autowired
+    SysAttachmentInfoService sysAttachmentInfoService;
+
+    @Autowired
+    EnterpriseInfoService enterpriseInfoService;
+
+    private static final String filePath = Constants.FILE_PATHS;
+
+    private static final String SUB_FILEPATH = Constants.FILE_PATHS_LOCAL;
 
     private Logger logger = Logger.getLogger(SiteServiceslmpl.class.getSimpleName());
 
@@ -68,7 +86,7 @@ public class SiteServiceslmpl implements SiteServices {
         Region region3 = regionService.selectById(siteDTO.getAreaId());
         site.setLocation(region1.getName() + region2.getName() + region3.getName() + site.getLocation());
         site.setBookType(2);
-        site.setIsEnable((short)1);
+        site.setIsEnable((short) 1);
         if (EmptyUtil.Companion.isNullOrEmpty(siteMapper.selectBySiteName(site.getSiteName()))) {
             siteMapper.insert(site);
             return new ResponseEntity<>(new ResultModel(ResultStatus.SUCCESS_INSERT), HttpStatus.OK);
@@ -169,7 +187,7 @@ public class SiteServiceslmpl implements SiteServices {
         String substring = StringUtils.substring(site.getLocation(), 0, 3);
         String substring1 = StringUtils.substring(site.getLocation(), 3, 6);
         String substring2 = StringUtils.substring(site.getLocation(), 6, 9);
-        String addressName = StringUtils.substring(site.getLocation(), 9,site.getLocation().length());
+        String addressName = StringUtils.substring(site.getLocation(), 9, site.getLocation().length());
         Region region = regionService.queryRegionName(substring);
         Region region1 = regionService.queryRegionName(substring1);
         Region region2 = regionService.queryRegionName(substring2);
@@ -178,5 +196,56 @@ public class SiteServiceslmpl implements SiteServices {
         siteVo.setAreaId(region2.getId());
         siteVo.setLocation(addressName);
         return siteVo;
+    }
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.po.Site>
+     * @功能说明
+     * @Params [ids]
+     * @Author XJP
+     * @Date 2019/10/29
+     * @Time 15:28
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<Site> selectByIds(List<Long> ids) throws Exception {
+        if (EmptyUtil.Companion.isNullOrEmpty(ids)) {
+            return new ArrayList<>();
+        } else {
+            List<Site> sites = siteMapper.selectByIds(ids);
+            if (EmptyUtil.Companion.isNullOrEmpty(sites)) {
+                return new ArrayList<>();
+            } else {
+                return sites;
+            }
+        }
+    }
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.SiteVo>
+     * @功能说明
+     * @Params []
+     * @Author XJP
+     * @Date 2019/10/29
+     * @Time 16:18
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<SiteVo> listForView() throws Exception {
+        List<SiteVo> siteVos = siteMapper.listForView();
+        for (SiteVo siteVo : siteVos) {
+            SysAttachmentInfo sysAttachmentInfo = new SysAttachmentInfo();
+            sysAttachmentInfo.setRelateId(siteVo.getId());
+            sysAttachmentInfo.setRelateKey(Constants.SITE);
+            sysAttachmentInfo.setRelatePage(Constants.LIST);
+            List<SysAttachmentInfo> sysAttachmentInfos = sysAttachmentInfoService.querySysAttachmentInfo(sysAttachmentInfo);
+            if (EmptyUtil.Companion.isNullOrEmpty(sysAttachmentInfos)) {
+                continue;
+            }
+            SysAttachmentInfo sysAttachmentInfo1 = sysAttachmentInfos.get(0);
+            String replace = Constants.LOCALHOST + sysAttachmentInfo1.getLocation().replace(Constants.STATIC, Constants.SMARTPARKCORE);
+            siteVo.setFilePath(replace);
+        }
+        return siteVos;
     }
 }

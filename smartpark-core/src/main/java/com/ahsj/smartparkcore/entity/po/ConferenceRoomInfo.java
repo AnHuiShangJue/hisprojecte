@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class ConferenceRoomInfo  extends BaseEntity {
+
     private Long id;
 
     private String location;
@@ -49,6 +50,16 @@ public class ConferenceRoomInfo  extends BaseEntity {
     private String conferenceName;
 
     private Integer bookType;
+
+    private String filePath;
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
 
     public Integer getBookType() {
         return bookType;

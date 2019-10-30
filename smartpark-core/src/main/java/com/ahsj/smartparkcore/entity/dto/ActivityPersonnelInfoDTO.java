@@ -1,9 +1,9 @@
 package com.ahsj.smartparkcore.entity.dto;
 
 import com.ahsj.smartparkcore.entity.po.ActivityPersonnelInfo;
+import core.code.CodeValueColumn;
+import core.code.Constants;
 import lombok.Data;
-
-import java.util.Date;
 
 @Data
 public class ActivityPersonnelInfoDTO extends ActivityPersonnelInfo {
@@ -21,11 +21,15 @@ public class ActivityPersonnelInfoDTO extends ActivityPersonnelInfo {
 
     private String email;
 
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_audit", typeName = "isReviewName")
     private Integer isReview;
+    private String isReviewName;
 
     private Long userId;
 
     private Long activityId;
+
+    private String openId;
 
     @Override
     public Long getId() {
@@ -125,5 +129,23 @@ public class ActivityPersonnelInfoDTO extends ActivityPersonnelInfo {
     @Override
     public void setActivityId(Long activityId) {
         this.activityId = activityId;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+
+    @Override
+    public String getIsReviewName() {
+        return isReviewName;
+    }
+
+    @Override
+    public void setIsReviewName(String isReviewName) {
+        this.isReviewName = isReviewName;
     }
 }

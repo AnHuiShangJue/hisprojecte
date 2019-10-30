@@ -57,5 +57,5 @@ public interface EnterpriseInfoMapper extends BaseMapper<EnterpriseInfo> {
 
     List<EnterpriseInfo> enterpriseInfoAll();
 
-    List<EnterpriseInfo> queryListAll();
+    List<EnterpriseInfo> queryListAll(EnterpriseInfo enterpriseInfo);
 }

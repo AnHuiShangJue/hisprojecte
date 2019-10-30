@@ -1,6 +1,5 @@
 package com.ahsj.smartparkcore.controller.StationInfo;
 
-import com.ahsj.smartparkcore.entity.dto.SiteDTO;
 import com.ahsj.smartparkcore.entity.dto.StationInfoDTO;
 import com.ahsj.smartparkcore.entity.po.StationInfo;
 import com.ahsj.smartparkcore.entity.vo.StationInfoVO;
@@ -8,13 +7,14 @@ import com.ahsj.smartparkcore.services.StationInfoService;
 import core.controller.BaseController;
 import core.entity.PageBean;
 import core.message.Message;
-import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 /**
  * Copyright (C), 2019-2019, 安徽商角有限公司
@@ -58,9 +58,9 @@ public class StationInfoController extends BaseController {
      * @Time 18:15
      **/
     @RequestMapping("/list.ahsj")
-    public ResponseEntity<PageBean<StationInfoDTO>> queryList(StationInfoDTO stationInfoDTO) throws Exception {
-        PageBean<StationInfoDTO> pageBean = new PageBean<>();
-        pageBean.setParameter(stationInfoDTO);
+    public ResponseEntity<PageBean<StationInfoVO>> queryList(StationInfoVO stationInfoVO) throws Exception {
+        PageBean<StationInfoVO> pageBean = new PageBean<>();
+        pageBean.setParameter(stationInfoVO);
         return ResponseEntity.ok(stationInfoService.queryList(pageBean));
     }
 
@@ -80,6 +80,7 @@ public class StationInfoController extends BaseController {
         modelAndView.addObject("stationInfoVO", stationInfoVO);
         return modelAndView;
     }
+
     @GetMapping("/audit.ahsj")
     public ModelAndView audit(String token, @RequestParam("id") Long id) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/stationinfo/audit");
@@ -129,30 +130,51 @@ public class StationInfoController extends BaseController {
     public ResponseEntity<Message> updateSetDisable(@RequestParam("ids[]") Long[] ids) throws Exception {
         return new ResponseEntity<>((stationInfoService.updateSetDisable(ids)), HttpStatus.OK);
     }
-/**
- *@功能说明
- *@Params [id]
- *@return core.message.Message
- *@Author XJP
- *@Date 2019/10/23
- *@Time 10:06
-**/
+
+    /**
+     * @return core.message.Message
+     * @功能说明
+     * @Params [id]
+     * @Author XJP
+     * @Date 2019/10/23
+     * @Time 10:06
+     **/
     @RequestMapping("/reviewSuccess.ahsj")
     public Message reviewSuccess(@RequestParam("id") Long id) throws Exception {
         return stationInfoService.reviewSuccess(id);
     }
 
-/**
- *@功能说明
- *@Params [id]
- *@return core.message.Message
- *@Author XJP
- *@Date 2019/10/23
- *@Time 10:06
-**/
+    /**
+     * @return core.message.Message
+     * @功能说明
+     * @Params [id]
+     * @Author XJP
+     * @Date 2019/10/23
+     * @Time 10:06
+     **/
     @RequestMapping("/reviewFail.ahsj")
     public Message reviewFail(@RequestParam("id") Long id) throws Exception {
         return stationInfoService.reviewFail(id);
     }
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.po.StationInfo>
+     * @功能说明
+     * @Params []
+     * @Author XJP
+     * @Date 2019/10/30
+     * @Time 13:29
+     **/
+    @RequestMapping("listForView.ahsj")
+    @ResponseBody
+    public List<StationInfoVO> listForView() throws Exception {
+        return stationInfoService.listForView();
+    }
+
+    @RequestMapping("/selectAllpantent.ahsj")
+    public List<StationInfo> selectAllpantent() throws Exception {
+        return stationInfoService.selectAllpantent();
+    }
+
 
 }

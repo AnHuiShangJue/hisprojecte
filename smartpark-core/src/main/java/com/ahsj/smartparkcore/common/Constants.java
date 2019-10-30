@@ -25,6 +25,12 @@ public class Constants {
 
     public static final Integer THREE= 3;
 
+    public static final String EXAMINATION_PASSED= "审核通过";
+
+    public static final String AUDIT_FAILED= "审核未通过";
+
+    public static final String UNREVIEWED= "未审核";
+
     public static final String ConferenceRoomInfo= "会议室";
 
     public static final String site = "场地";
@@ -35,9 +41,24 @@ public class Constants {
 
     public static final String NO_LEASE= "未租赁";
 
+    public static final String PUBLIC_EVENT= "活动公开";
+
+    public static final String ACTIVITIES_ARE_LIMITED_COMPANY_MEMBERS= "活动仅限公司成员";
+
     public static final String SMARTPARKCORE= "smartparkcore";
 
     public static final String  STATIC= "static";
+
+    public static final String  LIST= "list";
+
+    public static final String  STATIONINFO= "stationinfo";
+
+    public static final String  SITE= "site";
+
+    public static final String  ACTIVITYINFO= "activityinfo";
+
+    public static final String  CONFERENCEROOMINFO= "conferenceRoomInfo";
+
     public static final String  LOCALHOST= "http://localhost:8022";
 
     public static final String HIS_SYS_EXCEL_PROJECT_CH_FILE_URL = resourseUrl.getJarResourcesPaths() + "/config/LocList.xml";

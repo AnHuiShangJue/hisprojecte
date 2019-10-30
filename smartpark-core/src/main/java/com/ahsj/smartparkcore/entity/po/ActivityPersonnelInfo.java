@@ -1,5 +1,7 @@
 package com.ahsj.smartparkcore.entity.po;
 
+import core.code.CodeValueColumn;
+import core.code.Constants;
 import core.entity.BaseEntity;
 
 import java.util.Date;
@@ -23,7 +25,9 @@ public class ActivityPersonnelInfo extends BaseEntity {
 
     private Date updateDate;
 
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_audit", typeName = "isReviewName")
     private Integer isReview;
+    private String isReviewName;
 
     private Long userId;
 
@@ -32,6 +36,13 @@ public class ActivityPersonnelInfo extends BaseEntity {
     private Date createLowDate;
 
     private String remarks;
+
+    private String openId;
+
+    private String activityName;
+
+    private String eventLocation;
+
 
     public Long getId() {
         return id;
@@ -143,5 +154,37 @@ public class ActivityPersonnelInfo extends BaseEntity {
 
     public void setCreateLowDate(Date createLowDate) {
         this.createLowDate = createLowDate;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
+
+    public String getEventLocation() {
+        return eventLocation;
+    }
+
+    public void setEventLocation(String eventLocation) {
+        this.eventLocation = eventLocation;
+    }
+
+    public String getIsReviewName() {
+        return isReviewName;
+    }
+
+    public void setIsReviewName(String isReviewName) {
+        this.isReviewName = isReviewName;
     }
 }

@@ -64,7 +64,7 @@ public class JoinEnterpriseReviewController extends BaseController {
     }
 
     /**
-     * @return org.springframework.http.ResponseEntity<com.ahsj.smartparkcore.entity.sys.SysAttachmentInfo>
+     * @return org.springframework.http.ResponseEntity<com.ahsj.smartparkcore.entity.sys.SysAttachmentInfoDTO>
      * @功能说明
      * @Params [relateKet, relatePage, relateId]
      * @Author XJP

@@ -7,6 +7,8 @@ import com.ahsj.smartparkcore.entity.vo.SiteVo;
 import core.entity.PageBean;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 /**
  * @Description
  * @Author dingli
@@ -76,4 +78,23 @@ public interface SiteServices {
      **/
     SiteVo selectByPrimaryKey(Long id) throws Exception;
 
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.po.Site>
+     * @功能说明
+     * @Params [ids]
+     * @Author XJP
+     * @Date 2019/10/29
+     * @Time 15:25
+     **/
+    List<Site> selectByIds(List<Long> ids) throws Exception;
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.SiteVo>
+     * @功能说明
+     * @Params []
+     * @Author XJP
+     * @Date 2019/10/29
+     * @Time 16:14
+     **/
+    List<SiteVo> listForView() throws Exception;
 }

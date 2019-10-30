@@ -73,4 +73,136 @@ public interface BookService {
     PageBean<BookDTO> listByDate(PageBean<BookDTO> pageBean) throws Exception;
 
     ResponseEntity<ResultModel> visit(BookDTO bookDTO) throws Exception;
+
+    List<BookVO> visitByOpenId(BookDTO bookDTO) throws Exception;
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     * @功能说明
+     * @Params [bookDTO]
+     * @Author XJP
+     * @Date 2019/10/29
+     * @Time 13:29
+     **/
+    List<BookVO> ConferenceRoomInfovisitByOpenIdAndOrder(BookDTO bookDTO) throws Exception;
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     * @功能说明
+     * @Params [bookDTO]
+     * @Author XJP
+     * @Date 2019/10/29
+     * @Time 15:15
+     **/
+    List<BookVO> stationVisitByOpenIdAndOrder(BookDTO bookDTO) throws Exception;
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     * @功能说明
+     * @Params [bookDTO]
+     * @Author XJP
+     * @Date 2019/10/29
+     * @Time 15:15
+     **/
+    List<BookVO> siteVisitByOpenIdAndOrder(BookDTO bookDTO) throws Exception;
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     * @功能说明
+     * @Params [bookDTO]
+     * @Author XJP
+     * @Date 2019/10/30
+     * @Time 9:59
+     **/
+    List<BookVO> ConferenceRoomInfovisitByOpenIdAndOrderAndNoPay(BookDTO bookDTO) throws Exception;
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     * @功能说明
+     * @Params [bookDTO]
+     * @Author XJP
+     * @Date 2019/10/30
+     * @Time 10:16
+     **/
+    List<BookVO> ConferenceRoomInfovisitByOpenIdAndOrderCancel(BookDTO bookDTO) throws Exception;
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     * @功能说明
+     * @Params [bookDTO]
+     * @Author XJP
+     * @Date 2019/10/30
+     * @Time 10:21
+     **/
+    List<BookVO> ConferenceRoomInfovisitByOpenIdAndOrderAndPay(BookDTO bookDTO) throws Exception;
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     * @功能说明
+     * @Params [bookDTO]
+     * @Author XJP
+     * @Date 2019/10/30
+     * @Time 10:55
+     **/
+    List<BookVO> SitevisitByOpenIdAndOrderCancel(BookDTO bookDTO) throws Exception;
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     * @功能说明
+     * @Params [bookDTO]
+     * @Author XJP
+     * @Date 2019/10/30
+     * @Time 10:55
+     **/
+    List<BookVO> SitesitevisitByOpenIdAndOrderAndPay(BookDTO bookDTO) throws Exception;
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     * @功能说明
+     * @Params [bookDTO]
+     * @Author XJP
+     * @Date 2019/10/30
+     * @Time 10:55
+     **/
+    List<BookVO> SitevisitByOpenIdAndOrderAndNoPay(BookDTO bookDTO) throws Exception;
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     * @功能说明
+     * @Params [bookDTO]
+     * @Author XJP
+     * @Date 2019/10/30
+     * @Time 11:14
+     **/
+    List<BookVO> sitevisitByOpenIdAndOrderAndPay(BookDTO bookDTO) throws Exception;
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     * @功能说明
+     * @Params [bookDTO]
+     * @Author XJP
+     * @Date 2019/10/30
+     * @Time 11:14
+     **/
+    List<BookVO> stationvisitByOpenIdAndOrderCancel(BookDTO bookDTO) throws Exception;
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     * @功能说明
+     * @Params [bookDTO]
+     * @Author XJP
+     * @Date 2019/10/30
+     * @Time 11:14
+     **/
+    List<BookVO> stationvisitByOpenIdAndOrderAndNoPay(BookDTO bookDTO) throws Exception;
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.BookVO>
+     * @功能说明
+     * @Params [bookDTO]
+     * @Author XJP
+     * @Date 2019/10/30
+     * @Time 11:21
+     **/
+    List<BookVO> visitByOpenIdAndOrder(BookDTO bookDTO) throws Exception;
 }

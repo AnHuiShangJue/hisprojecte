@@ -90,6 +90,16 @@ public class BookDTO extends Book {
     private String contactName;
 
 
+    private String filePath;
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
     public Double getArea() {
         return area;
     }

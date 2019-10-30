@@ -373,10 +373,10 @@ public class EnterpriseInfoServiceImpl extends BaseLoginUser implements Enterpri
      **/
     @Override
     @Transactional(readOnly = true)
-    public List<EnterpriseInfo> queryListAll() throws Exception {
-        List<EnterpriseInfo> enterpriseInfos = enterpriseInfoMapper.queryListAll();
+    public List<EnterpriseInfo> queryListAll(EnterpriseInfoDTO enterpriseInfo) throws Exception {
+        List<EnterpriseInfo> enterpriseInfos = enterpriseInfoMapper.queryListAll(enterpriseInfo);
         if (EmptyUtil.Companion.isNullOrEmpty(enterpriseInfos)) {
-            return null;
+            return new ArrayList<>();
         } else {
             return enterpriseInfos;
         }
