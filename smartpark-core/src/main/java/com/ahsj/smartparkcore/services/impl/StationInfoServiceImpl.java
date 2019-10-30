@@ -113,7 +113,8 @@ public class StationInfoServiceImpl implements StationInfoService {
         stationInfo.setIsEnable((short) 1);
         stationInfo.setIsLease(2);
         stationInfo.setIsVerify(2);
-        StationInfo stationInfo1 = stationInfoMapper.selectByTitle(stationInfo.getTitle());
+        // StationInfo stationInfo1 = stationInfoMapper.selectByTitle(stationInfo.getTitle());
+        StationInfo stationInfo1 = stationInfoMapper.selectByStationInfo(stationInfo);
         if (!EmptyUtil.Companion.isNullOrEmpty(stationInfo1)) {
             return MessageUtil.createMessage(false, "工位信息新增失败 ！ 该工位已存在 ！！");
         } else {
@@ -220,26 +221,40 @@ public class StationInfoServiceImpl implements StationInfoService {
     }
 
     /**
-     *@功能说明
-     *@Params [ids]
-     *@return java.util.List<com.ahsj.smartparkcore.entity.po.StationInfo>
-     *@Author XJP
-     *@Date 2019/10/29
-     *@Time 15:27
-    **/
+     * @return java.util.List<com.ahsj.smartparkcore.entity.po.StationInfo>
+     * @功能说明
+     * @Params [ids]
+     * @Author XJP
+     * @Date 2019/10/29
+     * @Time 15:27
+     **/
     @Override
     @Transactional(readOnly = true)
     public List<StationInfo> selectByIds(List<Long> ids) throws Exception {
-        if (EmptyUtil.Companion.isNullOrEmpty(ids)){
+        if (EmptyUtil.Companion.isNullOrEmpty(ids)) {
             return new ArrayList<>();
-        }else {
+        } else {
             List<StationInfo> stationInfos = stationInfoMapper.selectByIds(ids);
-            if (EmptyUtil.Companion.isNullOrEmpty(stationInfos)){
+            if (EmptyUtil.Companion.isNullOrEmpty(stationInfos)) {
                 return new ArrayList<>();
-            }else {
+            } else {
                 return stationInfos;
             }
         }
+    }
+
+    /**
+     * @Description 查询所有父工位
+     * @Params: []
+     * @Author: dingli
+     * @Return: com.ahsj.smartparkcore.entity.po.StationInfo
+     * @Date 2019/10/29
+     * @Time 17:32
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<StationInfo> selectAllpantent() throws Exception {
+        return stationInfoMapper.selectAllpantent();
     }
 
     /**

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 /**
  * Copyright (C), 2019-2019, 安徽商角有限公司
  * FileName: StationInfoController
@@ -80,6 +82,7 @@ public class StationInfoController extends BaseController {
         modelAndView.addObject("stationInfoVO", stationInfoVO);
         return modelAndView;
     }
+
     @GetMapping("/audit.ahsj")
     public ModelAndView audit(String token, @RequestParam("id") Long id) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/stationinfo/audit");
@@ -129,30 +132,44 @@ public class StationInfoController extends BaseController {
     public ResponseEntity<Message> updateSetDisable(@RequestParam("ids[]") Long[] ids) throws Exception {
         return new ResponseEntity<>((stationInfoService.updateSetDisable(ids)), HttpStatus.OK);
     }
-/**
- *@功能说明
- *@Params [id]
- *@return core.message.Message
- *@Author XJP
- *@Date 2019/10/23
- *@Time 10:06
-**/
+
+    /**
+     * @return core.message.Message
+     * @功能说明
+     * @Params [id]
+     * @Author XJP
+     * @Date 2019/10/23
+     * @Time 10:06
+     **/
     @RequestMapping("/reviewSuccess.ahsj")
     public Message reviewSuccess(@RequestParam("id") Long id) throws Exception {
         return stationInfoService.reviewSuccess(id);
     }
 
-/**
- *@功能说明
- *@Params [id]
- *@return core.message.Message
- *@Author XJP
- *@Date 2019/10/23
- *@Time 10:06
-**/
+    /**
+     * @return core.message.Message
+     * @功能说明
+     * @Params [id]
+     * @Author XJP
+     * @Date 2019/10/23
+     * @Time 10:06
+     **/
     @RequestMapping("/reviewFail.ahsj")
     public Message reviewFail(@RequestParam("id") Long id) throws Exception {
         return stationInfoService.reviewFail(id);
+    }
+
+    /**
+     * @Description 查询所有的父工位
+     * @Params: [id]
+     * @Author: dingli
+     * @Return: core.message.Message
+     * @Date 2019/10/29
+     * @Time 17:33
+     **/
+    @RequestMapping("/selectAllpantent.ahsj")
+    public List<StationInfo> selectAllpantent() throws Exception {
+        return stationInfoService.selectAllpantent();
     }
 
 }

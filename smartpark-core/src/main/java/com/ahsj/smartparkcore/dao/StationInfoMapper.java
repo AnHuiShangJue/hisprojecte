@@ -62,4 +62,8 @@ public interface StationInfoMapper {
      * @Time 15:28
      **/
     List<StationInfo> selectByIds(List<Long> ids);
+
+    List<StationInfo> selectAllpantent();
+
+    StationInfo selectByStationInfo(StationInfo record);
 }

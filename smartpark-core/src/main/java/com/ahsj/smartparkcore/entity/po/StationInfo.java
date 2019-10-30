@@ -1,8 +1,10 @@
 package com.ahsj.smartparkcore.entity.po;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import core.code.CodeValueColumn;
 import core.code.Constants;
 import core.entity.BaseEntity;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -31,6 +33,8 @@ public class StationInfo extends BaseEntity {
 
     private Date updateDate;
 
+    private Long patentId;
+
     @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_verify", typeName = "verifyName")
     private Integer isVerify;
     private String verifyName;
@@ -47,9 +51,10 @@ public class StationInfo extends BaseEntity {
 
     private Integer number;
 
-    private Date startTime;
 
-    private Date endTime;
+    private String startTime;
+
+    private String endTime;
 
     private String remark;
 
@@ -58,6 +63,14 @@ public class StationInfo extends BaseEntity {
     private String capacity;
 
     private String filePath;
+
+    public Long getPatentId() {
+        return patentId;
+    }
+
+    public void setPatentId(Long patentId) {
+        this.patentId = patentId;
+    }
 
     public String getFilePath() {
         return filePath;
@@ -235,19 +248,19 @@ public class StationInfo extends BaseEntity {
         this.number = number;
     }
 
-    public Date getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
