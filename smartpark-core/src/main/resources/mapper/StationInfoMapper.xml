@@ -37,9 +37,6 @@
     id, area, create_date, create_user_id, description, end_time, enterprise_id, environmental_label,
     is_enable, is_lease, is_verify, location, name, number, phone_number, book_type,
     capacity, price, remark, start_time, title, update_date, update_user_id, patent_id
-    id, area, create_date, create_user_id, description, end_time, enterprise_id, environmental_label,
-    is_enable, is_lease, is_verify, location, name, number, phone_number, book_type,
-    capacity, price, remark, start_time, title, update_date, update_user_id, patent_id
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select

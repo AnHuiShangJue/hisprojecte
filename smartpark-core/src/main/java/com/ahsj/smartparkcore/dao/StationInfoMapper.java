@@ -33,7 +33,7 @@ public interface StationInfoMapper {
      * @Date 2019/10/19
      * @Time 18:15
      **/
-    List<StationInfoDTO> queryList(PageBean<StationInfoDTO> pageBean);
+    List<StationInfoVO> queryList(PageBean<StationInfoVO> pageBean);
 
     /**
      * @return com.ahsj.smartparkcore.entity.po.StationInfo

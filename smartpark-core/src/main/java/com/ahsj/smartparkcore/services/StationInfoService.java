@@ -30,7 +30,7 @@ public interface StationInfoService {
      * @Date 2019/10/21
      * @Time 15:18
      **/
-    PageBean<StationInfoDTO> queryList(PageBean<StationInfoDTO> pageBean) throws Exception;
+    PageBean<StationInfoVO> queryList(PageBean<StationInfoVO> pageBean) throws Exception;
 
     /**
      * @return com.ahsj.smartparkcore.entity.vo.StationInfoVO

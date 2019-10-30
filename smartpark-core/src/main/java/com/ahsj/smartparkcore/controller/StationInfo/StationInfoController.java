@@ -58,9 +58,9 @@ public class StationInfoController extends BaseController {
      * @Time 18:15
      **/
     @RequestMapping("/list.ahsj")
-    public ResponseEntity<PageBean<StationInfoDTO>> queryList(StationInfoDTO stationInfoDTO) throws Exception {
-        PageBean<StationInfoDTO> pageBean = new PageBean<>();
-        pageBean.setParameter(stationInfoDTO);
+    public ResponseEntity<PageBean<StationInfoVO>> queryList(StationInfoVO stationInfoVO) throws Exception {
+        PageBean<StationInfoVO> pageBean = new PageBean<>();
+        pageBean.setParameter(stationInfoVO);
         return ResponseEntity.ok(stationInfoService.queryList(pageBean));
     }
 

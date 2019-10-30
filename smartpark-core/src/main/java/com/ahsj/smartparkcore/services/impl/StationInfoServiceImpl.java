@@ -65,7 +65,7 @@ public class StationInfoServiceImpl implements StationInfoService {
      **/
     @Override
     @Transactional(readOnly = true)
-    public PageBean<StationInfoDTO> queryList(PageBean<StationInfoDTO> pageBean) {
+    public PageBean<StationInfoVO> queryList(PageBean<StationInfoVO> pageBean) {
         pageBean.setData(CodeHelper.getInstance().setCodeValue(stationInfoMapper.queryList(pageBean)));
         return pageBean;
     }
