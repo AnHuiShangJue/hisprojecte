@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ahsj.smartparkcore.dao.StationInfoMapper">
     <resultMap id="BaseResultMap" type="com.ahsj.smartparkcore.entity.po.StationInfo">
         <id column="id" jdbcType="BIGINT" property="id"/>
@@ -31,10 +31,12 @@
     <resultMap id="ResultMap" type="com.ahsj.smartparkcore.entity.vo.StationInfoVO" extends="BaseResultMap">
     </resultMap>
     <resultMap id="ResultMapVO" type="com.ahsj.smartparkcore.entity.vo.StationInfoVO" extends="BaseResultMap">
-
     </resultMap>
 
     <sql id="Base_Column_List">
+    id, area, create_date, create_user_id, description, end_time, enterprise_id, environmental_label,
+    is_enable, is_lease, is_verify, location, name, number, phone_number, book_type,
+    capacity, price, remark, start_time, title, update_date, update_user_id, patent_id
     id, area, create_date, create_user_id, description, end_time, enterprise_id, environmental_label,
     is_enable, is_lease, is_verify, location, name, number, phone_number, book_type,
     capacity, price, remark, start_time, title, update_date, update_user_id, patent_id
@@ -50,6 +52,24 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
     <insert id="insert" parameterType="com.ahsj.smartparkcore.entity.po.StationInfo">
+    insert into station_info (id, area, create_date,
+      create_user_id, description, end_time,
+      enterprise_id, environmental_label, is_enable,
+      is_lease, is_verify, location,
+      name, number, phone_number,
+      book_type, capacity, price,
+      remark, start_time, title,
+      update_date, update_user_id, patent_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{area,jdbcType=DOUBLE}, #{createDate,jdbcType=TIMESTAMP},
+      #{createUserId,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR},
+      #{enterpriseId,jdbcType=BIGINT}, #{environmentalLabel,jdbcType=VARCHAR}, #{isEnable,jdbcType=SMALLINT},
+      #{isLease,jdbcType=INTEGER}, #{isVerify,jdbcType=INTEGER}, #{location,jdbcType=VARCHAR},
+      #{name,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, #{phoneNumber,jdbcType=VARCHAR},
+      #{bookType,jdbcType=INTEGER}, #{capacity,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL},
+      #{remark,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+      #{updateDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{patentId,jdbcType=BIGINT}
+      )
     insert into station_info (id, area, create_date,
       create_user_id, description, end_time,
       enterprise_id, environmental_label, is_enable,
@@ -376,10 +396,23 @@
         </foreach>
     </select>
 
-    <select id="listForView"  resultMap="ResultMapVO">
+    <select id="listForView" resultMap="ResultMapVO">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from station_info
+    </select>
+    <select id="selectAllpantent" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from station_info
+        where patent_id = '0'
+    </select>
+    <select id="selectByStationInfo" resultMap="BaseResultMap"
+            parameterType="com.ahsj.smartparkcore.entity.po.StationInfo">
+        select
+        <include refid="Base_Column_List"/>
+        from station_info
+        where title = #{title,jdbcType=VARCHAR} AND patent_id = #{patentId,jdbcType=BIGINT}
     </select>
 
     <select id="selectAllpantent" resultMap="BaseResultMap">

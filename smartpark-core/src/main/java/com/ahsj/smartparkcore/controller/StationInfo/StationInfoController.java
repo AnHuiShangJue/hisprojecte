@@ -1,15 +1,12 @@
 package com.ahsj.smartparkcore.controller.StationInfo;
 
-import com.ahsj.smartparkcore.entity.dto.SiteDTO;
 import com.ahsj.smartparkcore.entity.dto.StationInfoDTO;
 import com.ahsj.smartparkcore.entity.po.StationInfo;
-import com.ahsj.smartparkcore.entity.vo.SiteVo;
 import com.ahsj.smartparkcore.entity.vo.StationInfoVO;
 import com.ahsj.smartparkcore.services.StationInfoService;
 import core.controller.BaseController;
 import core.entity.PageBean;
 import core.message.Message;
-import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -161,30 +158,23 @@ public class StationInfoController extends BaseController {
     }
 
     /**
-     *@功能说明
-     *@Params []
-     *@return java.util.List<com.ahsj.smartparkcore.entity.po.StationInfo>
-     *@Author XJP
-     *@Date 2019/10/30
-     *@Time 13:29
-    **/
+     * @return java.util.List<com.ahsj.smartparkcore.entity.po.StationInfo>
+     * @功能说明
+     * @Params []
+     * @Author XJP
+     * @Date 2019/10/30
+     * @Time 13:29
+     **/
     @RequestMapping("listForView.ahsj")
     @ResponseBody
     public List<StationInfoVO> listForView() throws Exception {
         return stationInfoService.listForView();
     }
 
-    /**
-     * @Description 查询所有的父工位
-     * @Params: [id]
-     * @Author: dingli
-     * @Return: core.message.Message
-     * @Date 2019/10/29
-     * @Time 17:33
-     **/
     @RequestMapping("/selectAllpantent.ahsj")
     public List<StationInfo> selectAllpantent() throws Exception {
         return stationInfoService.selectAllpantent();
     }
+
 
 }

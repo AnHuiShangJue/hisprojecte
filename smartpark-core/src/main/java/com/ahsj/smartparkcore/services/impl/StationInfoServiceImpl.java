@@ -290,6 +290,11 @@ public class StationInfoServiceImpl implements StationInfoService {
         }
         return stationInfoVOS;
     }
+/*    @Override
+    @Transactional(readOnly = true)
+    public List<StationInfo> selectAllpantent() throws Exception {
+        return stationInfoMapper.selectAllpantent();
+    }*/
 
     /**
      * @return core.message.Message

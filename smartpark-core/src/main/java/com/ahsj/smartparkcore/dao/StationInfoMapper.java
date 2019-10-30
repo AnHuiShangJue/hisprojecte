@@ -75,8 +75,11 @@ public interface StationInfoMapper {
      **/
     List<StationInfoVO> listForView();
 
-
     List<StationInfo> selectAllpantent();
 
     StationInfo selectByStationInfo(StationInfo record);
+
+   // List<StationInfo> selectAllpantent();
+
+//    StationInfo selectByStationInfo(StationInfo record);
 }
