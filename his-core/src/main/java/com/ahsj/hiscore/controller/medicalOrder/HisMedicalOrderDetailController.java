@@ -374,15 +374,25 @@ public class HisMedicalOrderDetailController extends BaseController {
      *@Time 18:10
      **/
     @RequestMapping("printDoctorAdvice/index.ahsj")
-    ModelAndView printDoctorAdvice(String number, String token,String hosptalregistNumber) throws Exception {
+    //type代表是续打还是非续打 1是非续打 2续打
+    ModelAndView printDoctorAdvice(String number, String token,String hosptalregistNumber,@RequestParam(value = "type",required = true)Integer type,Integer continueCount,Integer isFirst) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("title", "打印凭证预览");
         modelAndView.addObject("token", token);
         HisMedicalOrder hisMedicalOrder = hisMedicalOrderService.selectByNumber(number);
-        if(hisMedicalOrder.getType() == 1)
-            modelAndView.setViewName("backend/hiscore/medicalorder/doctorAdvice");
-        else if(hisMedicalOrder.getType() == 2)
-            modelAndView.setViewName("backend/hiscore/medicalorder/temporaryOrders");
+        if(hisMedicalOrder.getType() == 1) {
+            if(type == 1)
+                modelAndView.setViewName("backend/hiscore/medicalorder/doctorAdvice");
+            else
+                modelAndView.setViewName("backend/hiscore/medicalorder/continuePrintForDoctorAdvice");
+        }
+        else if(hisMedicalOrder.getType() == 2){
+            if(type == 1)
+                modelAndView.setViewName("backend/hiscore/medicalorder/temporaryOrders");
+            else
+                modelAndView.setViewName("backend/hiscore/medicalorder/continuePrintForDoctorAdvice");
+        }
+
         HisHospitalManage hisHospitalManage = hisHospitalManageService.selectByHospNumber(hosptalregistNumber);
         if(hisHospitalManage.getSex()==1)
             hisHospitalManage.setSexName("男");
@@ -462,6 +472,8 @@ public class HisMedicalOrderDetailController extends BaseController {
 
         }
         modelAndView.addObject("hisMedicalOrderDetailList",hisMedicalOrderDetailList);
+        modelAndView.addObject("continueCount",continueCount);
+        modelAndView.addObject("isFirst",isFirst);
         return modelAndView;
     }
 

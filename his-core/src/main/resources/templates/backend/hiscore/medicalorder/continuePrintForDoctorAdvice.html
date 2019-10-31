@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
 <head>
@@ -32,85 +30,62 @@
       data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
 
 <div class="row">
-    <div class="row valign-wrapper" style="margin-top: 30px;height: 35px;">
+    <div class="row valign-wrapper" style="margin-top: 30px;height: 35px;" th:if="${isFirst} ne null">
         <div class="col s12 m12 l12 center">
-            <h5 class="black-text fontsize02" style="padding: 0;margin: 0;text-align: center;">中柬第一医院临时医嘱单</h5>
-            <p class="black-text fontsize02" style="padding: 0;margin: 0;text-align: center">The first china-cambodia hospital temporary medical order sheet</p>
+            <h5 class="black-text fontsize02" style="padding: 0;margin: 0;text-align: center"></h5>
+            <p class="black-text fontsize02" style="padding: 0;margin: 0;text-align: center"></p>
         </div>
     </div>
 
     <input id="hosptalregistNumber" th:value="${hisMedicalOrder.hosptalregistNumber}" type="hidden">
     <input id="medicalOrderNumber" th:value="${hisMedicalOrder.number}" type="hidden">
     <input id="type" th:value="${hisMedicalOrder.type}" type="hidden">
+    <input id="continueCount" th:value="${continueCount}" type="hidden">
+    <input id="isFirst" th:value="${isFirst}" type="hidden">
 
-    <div class="row valign-wrapper" style="height: 45px;">
+
+    <div class="row valign-wrapper" style="height: 45px;"th:if="${isFirst} ne null">
         <div class="col s12 m12 l12">
             <table border="0" cellspacing="0" cellpadding="0" style="width: 95%;margin: 0 auto;">
 
                 <tr>
                     <td >
-                        <label>姓名(name)</label>
-                        <label th:text="${hisHospitalManage.patientName}"></label>
+                        <!--<label>姓名(name)</label>-->
+                        <!--<label th:text="${hisHospitalManage.patientName}"></label>-->
                     </td>
                     <td >
-                        <label>性别(sex)</label>
-                        <label th:text="${hisHospitalManage.sexName}"></label>
+                        <!--<label>性别(sex)</label>-->
+                        <!--<label th:text="${hisHospitalManage.sexName}"></label>-->
                     </td>
                     <td >
-                        <label>年龄(age)</label>
-                        <label th:text="${hisHospitalManage.age}"></label>
+                        <!--<label>年龄(age)</label>-->
+                        <!--<label th:text="${hisHospitalManage.age}"></label>-->
                     </td>
                     <td >
-                        <label id="now"></label>
+                        <!--<label id="now"></label>-->
                     </td>
 
                 </tr>
                 <tr>
                     <td style="height: 25px">
-                        <label>科室(Department)</label>
-                        <label th:text="${hisHospitalManage.departmentName}"></label>
+                        <!--<label>科室(Department)</label>-->
+                        <!--<label th:text="${hisHospitalManage.departmentName}"></label>-->
                     </td>
                     <td style="height: 25px">
-                        <label>床号(Bed No)</label>
-                        <label th:text="${hisHospitalManage.bedsNumber}"></label>
+                        <!--<label>床号(Bed No)</label>-->
+                        <!--<label th:text="${hisHospitalManage.bedsNumber}"></label>-->
                     </td>
                     <td colspan="2" style="height: 25px">
-                        <label>住院编号(Hospital number)</label>
-                        <label th:text="${hisHospitalManage.number}"></label>
+                        <!--<label>住院编号(Hospital number)</label>-->
+                        <!--<label th:text="${hisHospitalManage.number}"></label>-->
                     </td>
                 </tr>
             </table>
         </div>
     </div>
-
     <div class="row valign-wrapper">
         <div class="col s12 m12 l12"  id="firstPage">
             <table border="0" cellspacing="0" cellpadding="0" border-collapse="collapse" style="width: 95%;margin: 0 auto;" id="table_id">
-                <!--                <tr>-->
-                <!--                    <th style="border:1px solid black;"><div style="transform: scale(0.5);height: 50px;">开始时间(The start time)</div></th>-->
-                <!--                    <th style="border:1px solid black;width:200px;"><div style="transform: scale(0.5);">医嘱内容(Medical content)</div></th>-->
-                <!--                    <th style="border:1px solid black;"><div style="transform: scale(0.5);">医师签名(Physician signature)</div></th>-->
-                <!--                    <th style="border:1px solid black;"><div style="transform: scale(0.5);">执行时间(execution time)</div></th>-->
-                <!--                    <th style="border:1px solid black;"><div style="transform: scale(0.5);">执行人签名(Signature of executor)</div></th>-->
-                <!--                    <th style="border:1px solid black;"><div style="transform: scale(0.5);">核对人签名(Check signature)</div></th>-->
-                <!--                    <th style="border:1px solid black;width:70px;"><div style="transform: scale(0.5);">停止时间(Stop time)</div></th>-->
-                <!--                    <th style="border:1px solid black;"><div style="transform: scale(0.5);">停止护士签名(Stop nurse signature)</div></th>-->
-                <!--                    <th style="border:1px solid black;"><div style="transform: scale(0.5);">停止医师签名(Stop physician signature)</div></th>-->
-
-                <!--                </tr>-->
-
-                <!--                <tr th:each="c:${hisMedicalOrderDetailList}" class="trCount">-->
-                <!--                    <td th:text="${#dates.format(c.startTime, 'yyyy-MM-dd HH:mm:ss')}" style="border:1px solid black;" th:if="${c.startTime} ne null" ></td>-->
-                <!--                    <td th:text="${#dates.format(new java.util.Date().getTime(), 'yyyy-MM-dd HH:mm:ss')}" style="border:1px solid black;" th:if="${c.startTime} eq null"></td>-->
-                <!--                    <td th:text="${c.name}" style="border:1px solid black;"></td>-->
-                <!--                    <td style="border:1px solid black;" ></td>-->
-                <!--                    <td style="border:1px solid black;"></td>-->
-                <!--                    <td style="border:1px solid black;"></td>-->
-                <!--                    <td style="border:1px solid black;"></td>-->
-                <!--                    <td style="border:1px solid black;"></td>-->
-                <!--                    <td style="border:1px solid black;"></td>-->
-                <!--                    <td style="border:1px solid black;"></td>-->
-                <!--                </tr>-->
             </table>
         </div>
         <div id="addpage">
@@ -125,8 +100,13 @@ Scripts
 
 <div th:replace="public/base_print_script :: html"></div>
 <script th:inline="javascript">
+    var isFirst =0;
+    if(isNullOrEmpty($("#isFirst").val())){
+        isFirst = 1;
+    }
+    var continueCount = numeral($("#continueCount").val()).value();
     $(document).ready(function () {
-        document.getElementById("now").innerHTML=getDay();
+        // document.getElementById("now").innerHTML=getDay();
         printShow();
         // var trCount=document.getElementsByClassName("trCount").length;
         // console.log(trCount);
@@ -144,10 +124,25 @@ Scripts
                     var dataCount = data.length;
                     //console.log(dataCount);
 
-                    if(dataCount<=17){
-                        //$("#firstPage").height(auto);
+                    if((dataCount+continueCount)<=17+isFirst){
                         var trs;
-                        trs = "<tr><td style=\"border:1px solid black;width:70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">开始时间(The start time)</p></td>" +
+                        if(continueCount > 0){
+                            for (var i = 0; i <continueCount ; i++) {
+                                trs += "<tr><td style=\"border:0px solid black;width:70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\"></p></td>" +
+                                    "<td style=\"border:0px solid black;width:190px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\"></p></td>" +
+                                    "<td style=\"border:0px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\"></p></td>" +
+                                    "<td style=\"border:0px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\"></p></td>" +
+                                    "<td style=\"border:0px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 10px\"></p></td>" +
+                                    "<td style=\"border:0px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\"></p></td>" +
+                                    "<td style=\"border:0px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\"></p></td>" +
+                                    "<td style=\"border:0px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\"></p></td>" +
+                                    "<td style=\"border:0px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\"></p></td>" +
+                                    "<td style=\"border:0px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\"></p></td></tr>";
+                            }
+                        }
+                        //$("#firstPage").height(auto);
+
+                        trs += "<tr><td style=\"border:1px solid black;width:70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">开始时间(The start time)</p></td>" +
                             "<td style=\"border:1px solid black;width:190px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">医嘱内容(Medical content)</p></td>" +
                             "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">医师签名(Physician signature)</p></td>" +
                             "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">执行时间(execution time)</p></td>" +
@@ -155,17 +150,27 @@ Scripts
                             "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">核对人签名(Check signature)</p></td>" +
                             "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止时间(Stop time)</p></td>" +
                             "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止护士签名(Stop nurse signature)</p></td>" +
-                            "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止医师签名(Stop physician signature)</p></td>"+
-                            "<td style=\"border:1px solid black;width:70px;text-align: center\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+1+"</p></td></tr>"
-
+                            "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止医师签名(Stop physician signature)</p></td>" +
+                            "<td style=\"border:1px solid black;width:70px;text-align: center\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(continueCount+1)+"</p></td></tr>";
                         for(var i = 0 ; i < data.length ; i++){
+                            // if(continueCount > i){
+                            //     trs +="<tr class=\"trCount\"><td style=\"border:0px solid black;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\"></p></td>" +
+                            //         "<td style=\"border:0px solid black;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\"></p></td>" +
+                            //         "<td style=\"border:0px solid black;\"></td>" +
+                            //         "<td style=\"border:0px solid black;\"></td>" +
+                            //         "<td style=\"border:0px solid black;\"></td>" +
+                            //         "<td style=\"border:0px solid black;\"></td>" +
+                            //         "<td style=\"border:0px solid black;\"></td>" +
+                            //         "<td style=\"border:0px solid black;\"></td>" +
+                            //         "<td style=\"border:0px solid black;\"></td></tr>";
+                            //     continue;
+                            // }
                             if (isNullOrEmpty(data[i].startTime)) {
                                 data[i].startTime = getDay();
                             }
                             if (isNullOrEmpty(data[i].name)) {
                                 data[i].name = "";
                             }
-
                             trs += "<tr class=\"trCount\"><td style=\"border:1px solid black;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+ data[i].startTime +"</p></td>" +
                                 "<td style=\"border:1px solid black;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+ data[i].name +"</p></td>" +
                                 "<td style=\"border:1px solid black;\"></td>" +
@@ -174,16 +179,30 @@ Scripts
                                 "<td style=\"border:1px solid black;\"></td>" +
                                 "<td style=\"border:1px solid black;\"></td>" +
                                 "<td style=\"border:1px solid black;\"></td>" +
-                                "<td style=\"border:1px solid black;\"></td>"+
-                                "<td style=\"border:1px solid black;text-align: center\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(i+2)+"</p></td></tr>";
+                                "<td style=\"border:1px solid black;\"></td>" +
+                                "<td style=\"border:1px solid black;width:70px;text-align: center\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(i+2+continueCount)+"</p></td></tr>";
                         }
                         $("#table_id").append(trs);
                     }
-                    if(dataCount>17){
+                    else if((dataCount+continueCount)>17+isFirst){
                         $("#firstPage").height(1006);
                         //第一页肯定显示
                         var trs;
-                        trs = "<tr><td style=\"border:1px solid black;width:70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">开始时间(The start time)</p></td>" +
+                        if(continueCount > 0){
+                            for (var i = 0; i <continueCount ; i++) {
+                                trs += "<tr><td style=\"border:0px solid black;width:70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\"></p></td>" +
+                                    "<td style=\"border:0px solid black;width:190px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\"></p></td>" +
+                                    "<td style=\"border:0px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\"></p></td>" +
+                                    "<td style=\"border:0px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\"></p></td>" +
+                                    "<td style=\"border:0px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 10px\"></p></td>" +
+                                    "<td style=\"border:0px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\"></p></td>" +
+                                    "<td style=\"border:0px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\"></p></td>" +
+                                    "<td style=\"border:0px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\"></p></td>" +
+                                    "<td style=\"border:0px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\"></p></td>" +
+                                    "<td style=\"border:0px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\"></p></td></tr>";
+                            }
+                        }
+                        trs += "<tr><td style=\"border:1px solid black;width:70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">开始时间(The start time)</p></td>" +
                             "<td style=\"border:1px solid black;width:190px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">医嘱内容(Medical content)</p></td>" +
                             "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">医师签名(Physician signature)</p></td>" +
                             "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">执行时间(execution time)</p></td>" +
@@ -191,10 +210,10 @@ Scripts
                             "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">核对人签名(Check signature)</p></td>" +
                             "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止时间(Stop time)</p></td>" +
                             "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止护士签名(Stop nurse signature)</p></td>" +
-                            "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止医师签名(Stop physician signature)</p></td>"+
-                            "<td style=\"border:1px solid black;width:70px;text-align: center\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+1+"</p></td></tr>"
+                            "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止医师签名(Stop physician signature)</p></td>" +
+                            "<td style=\"border:1px solid black;width:70px;text-align: center\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(continueCount+1)+"</p></td></tr>";
 
-                        for(var i = 0 ; i < 17 ; i++){
+                        for(var i = 0 ; i < 17+isFirst-continueCount ; i++){
                             if (isNullOrEmpty(data[i].startTime)) {
                                 data[i].startTime = getDay();
                             }
@@ -211,7 +230,7 @@ Scripts
                                 "<td style=\"border:1px solid black;\"></td>" +
                                 "<td style=\"border:1px solid black;\"></td>" +
                                 "<td style=\"border:1px solid black;\"></td>" +
-                                "<td style=\"border:1px solid black;text-align: center\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(i+2)+"</p></td></tr>";
+                                "<td style=\"border:1px solid black;width:70px;text-align: center\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(i+2+continueCount)+"</p></td></tr>";
                         }
                         $("#table_id").append(trs);
 
@@ -244,8 +263,8 @@ Scripts
                     // }else{
                     //     totalPage=parseInt(num/pageSize);
                     // }
-                    //第二页最多显示18条
-                    if(dataCount>17){
+                    //第二页最多显示30条
+                    if((dataCount+continueCount)<=35+isFirst){
 
                         var adddiv;
                         adddiv = "";
@@ -262,7 +281,7 @@ Scripts
                         trss = "";
 
                         //for(var i=1 ;i < totalPage;i++) {
-                        for (var j = 17; j < dataCount; j++) {
+                        for (var j = 17+isFirst-continueCount; j < dataCount; j++) {
                             //console.log(data[j]);
                             if (isNullOrEmpty(data[j].startTime)) {
                                 data[j].startTime = getDay();
@@ -280,7 +299,7 @@ Scripts
                                 "<td style=\"border:1px solid black;width: 70px\"></td>" +
                                 "<td style=\"border:1px solid black;width: 70px\"></td>" +
                                 "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;text-align: center;width: 70px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-18)+"</p></td></tr>";
+                                "<td style=\"border:1px solid black;width:70px;text-align: center\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-18+continueCount-isFirst)+"</p></td></tr>";
                         }
 
                         //var tableId = 'table_id' + i;
@@ -289,7 +308,7 @@ Scripts
 
                     }
 
-                    if(dataCount<=53 &&dataCount>35){
+                    if((dataCount+continueCount)<=53+isFirst&&(dataCount+continueCount)>35+isFirst){
                         var adddiv;
                         adddiv = "";
                         for(var i=1 ;i <= 2;i++){
@@ -302,7 +321,7 @@ Scripts
                         var trss;
                         trss = "";
 
-                        for (var j = 17; j < 35; j++) {
+                        for (var j = 17+isFirst-continueCount; j < 35+isFirst-continueCount; j++) {
                             //console.log(data[j]);
                             if (isNullOrEmpty(data[j].startTime)) {
                                 data[j].startTime = getDay();
@@ -320,14 +339,14 @@ Scripts
                                 "<td style=\"border:1px solid black;width: 70px\"></td>" +
                                 "<td style=\"border:1px solid black;width: 70px\"></td>" +
                                 "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;text-align: center;width: 70px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-18)+"</p></td></tr>";
+                                "<td style=\"border:1px solid black;width:70px;text-align: center\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-18+continueCount-isFirst)+"</p></td></tr>";
                         }
 
                         $("#table_id1").append(trss);
 
                         var trss2;
                         trss2 = "";
-                        for (var j = 35; j < dataCount; j++) {
+                        for (var j = 35+isFirst-continueCount; j < dataCount; j++) {
                             //console.log(data[j]);
                             if (isNullOrEmpty(data[j].startTime)) {
                                 data[j].startTime = getDay();
@@ -345,14 +364,14 @@ Scripts
                                 "<td style=\"border:1px solid black;width: 70px\"></td>" +
                                 "<td style=\"border:1px solid black;width: 70px\"></td>" +
                                 "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;text-align: center;width: 70px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-36)+"</p></td></tr>";
+                                "<td style=\"border:1px solid black;width:70px;text-align: center\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-36+continueCount-isFirst)+"</p></td></tr>";
                         }
 
                         $("#table_id2").append(trss2);
 
                     }
 
-                    if(dataCount<=71&&dataCount>53){
+                    if((dataCount+continueCount)<=71+isFirst&&d(ataCount+continueCount)>53+isFirst){
                         var adddiv;
                         adddiv = "";
                         for(var i=1 ;i <= 3;i++){
@@ -365,7 +384,7 @@ Scripts
                         var trss;
                         trss = "";
 
-                        for (var j = 17; j < 35; j++) {
+                        for (var j = 17+isFirst-continueCount; j < 35+isFirst-continueCount; j++) {
                             //console.log(data[j]);
                             if (isNullOrEmpty(data[j].startTime)) {
                                 data[j].startTime = getDay();
@@ -383,13 +402,13 @@ Scripts
                                 "<td style=\"border:1px solid black;width: 70px\"></td>" +
                                 "<td style=\"border:1px solid black;width: 70px\"></td>" +
                                 "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;text-align: center;width: 70px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-18)+"</p></td></tr>";
+                                "<td style=\"border:1px solid black;width:70px;text-align: center\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-18+continueCount-isFirst)+"</p></td></tr>";
                         }
 
                         $("#table_id1").append(trss);
                         var trss2;
                         trss2 = "";
-                        for (var j = 35; j < 53; j++) {
+                        for (var j = 35+isFirst-continueCount; j < 53+isFirst-continueCount; j++) {
                             //console.log(data[j]);
                             if (isNullOrEmpty(data[j].startTime)) {
                                 data[j].startTime = getDay();
@@ -407,14 +426,14 @@ Scripts
                                 "<td style=\"border:1px solid black;width: 70px\"></td>" +
                                 "<td style=\"border:1px solid black;width: 70px\"></td>" +
                                 "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;text-align: center;width: 70px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-36)+"</p></td></tr>";
+                                "<td style=\"border:1px solid black;width:70px;text-align: center\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-36+continueCount-isFirst)+"</p></td></tr>";
                         }
 
                         $("#table_id2").append(trss2);
 
                         var trss3;
                         trss3 = "";
-                        for (var j = 53; j < dataCount; j++) {
+                        for (var j = 53+isFirst-continueCount; j < dataCount; j++) {
                             //console.log(data[j]);
                             if (isNullOrEmpty(data[j].startTime)) {
                                 data[j].startTime = getDay();
@@ -432,7 +451,7 @@ Scripts
                                 "<td style=\"border:1px solid black;width: 70px\"></td>" +
                                 "<td style=\"border:1px solid black;width: 70px\"></td>" +
                                 "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;text-align: center;width: 70px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-54)+"</p></td></tr>";
+                                "<td style=\"border:1px solid black;width:70px;text-align: center\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-54+continueCount-isFirst)+"</p></td></tr>";
                         }
 
                         $("#table_id3").append(trss3);
