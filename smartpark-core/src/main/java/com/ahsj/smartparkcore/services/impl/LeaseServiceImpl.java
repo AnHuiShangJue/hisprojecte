@@ -15,6 +15,7 @@ import com.ahsj.smartparkcore.entity.vo.LeaseVO;
 import com.ahsj.smartparkcore.services.LeaseService;
 import core.entity.PageBean;
 import org.dozer.DozerBeanMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -182,8 +183,8 @@ public class LeaseServiceImpl implements LeaseService {
      * @Time 14:54
      **/
     @Override
-    @Transactional(readOnly = false)
-    public LeaseDTO selectLease(LeaseVO lease) throws Exception {
+    @Transactional(readOnly = true)
+    public LeaseVO selectLease(LeaseDTO lease) throws Exception {
         if (lease.getTargetType() == 1) {//会议室
             ConferenceRoomInfo conferenceRoomInfo = conferenceRoomInfoMapper.selectByPrimaryKey(lease.getTargetId());
             if (conferenceRoomInfo.getDescription() == null) {
@@ -200,9 +201,9 @@ public class LeaseServiceImpl implements LeaseService {
             lease.setPhoneNumber(conferenceRoomInfo.getPhoneNumber());
             lease.setContactName(conferenceRoomInfo.getName());
             lease.setPrice(conferenceRoomInfo.getPrice());
-            DozerBeanMapper mapper = new DozerBeanMapper(); //对象转换组件
-            LeaseDTO LeaseDTO = mapper.map(lease, LeaseDTO.class);
-            return LeaseDTO;
+            LeaseVO leaseVO = new LeaseVO();
+            BeanUtils.copyProperties(lease,leaseVO);
+            return leaseVO;
         }
         if (lease.getTargetType() == 2) {//场地
             Site site = siteMapper.selectByPrimaryKey(lease.getTargetId());
@@ -220,9 +221,9 @@ public class LeaseServiceImpl implements LeaseService {
             lease.setPhoneNumber(site.getPhoneNumber());
             lease.setContactName(site.getName());
             lease.setPrice(site.getPrice());
-            DozerBeanMapper mapper = new DozerBeanMapper(); //对象转换组件
-            LeaseDTO LeaseDTO = mapper.map(lease, LeaseDTO.class);
-            return LeaseDTO;
+            LeaseVO leaseVO = new LeaseVO();
+            BeanUtils.copyProperties(lease,leaseVO);
+            return leaseVO;
         }
         if (lease.getTargetType() == 3) {//工位
             StationInfo stationInfo = stationInfoMapper.selectByPrimaryKey(lease.getTargetId());
@@ -240,10 +241,11 @@ public class LeaseServiceImpl implements LeaseService {
             lease.setPhoneNumber(stationInfo.getPhoneNumber());
             lease.setContactName(stationInfo.getName());
             lease.setPrice(stationInfo.getPrice());
-            DozerBeanMapper mapper = new DozerBeanMapper(); //对象转换组件
-            LeaseDTO LeaseDTO = mapper.map(lease, LeaseDTO.class);
-            return LeaseDTO;
+            LeaseVO leaseVO = new LeaseVO();
+            BeanUtils.copyProperties(lease,leaseVO);
+            return leaseVO;
+        }else {
+            return new LeaseVO();
         }
-        return new LeaseDTO();
     }
 }

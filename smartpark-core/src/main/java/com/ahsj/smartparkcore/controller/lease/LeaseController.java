@@ -124,8 +124,8 @@ public class LeaseController extends BaseController {
      * @Time 15:23
      **/
     @RequestMapping("/getLease.ahsj")
-    public LeaseDTO selectLease(LeaseVO leaseVO) throws Exception {
-        return leaseService.selectLease(leaseVO);
+    public LeaseVO selectLease(LeaseDTO leaseDTO) throws Exception {
+        return leaseService.selectLease(leaseDTO);
     }
 
 }
