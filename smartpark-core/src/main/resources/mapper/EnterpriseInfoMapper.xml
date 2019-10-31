@@ -332,7 +332,10 @@
         select  id, name from  enterprise_info
     </select>
 
-    <select id="queryListAll" resultMap="BaseResultMap">
-        select  <include refid="Base_Column_List"/> from  enterprise_info
+    <select id="queryListAll" resultMap="BaseResultMap" parameterType="com.ahsj.smartparkcore.entity.po.EnterpriseInfo">
+        select  <include refid="Base_Column_List"/> from  enterprise_info e where  1=1
+        <if test="name != null and name != ''">
+            and e.name like concat('%', #{name,jdbcType=VARCHAR},'%')
+        </if>
     </select>
 </mapper>

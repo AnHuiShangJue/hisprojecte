@@ -1,0 +1,80 @@
+/*日历插件样式表*/
+*{
+    padding:0;
+    margin:0;
+}
+.timePacker{
+    /*width: 350px;*/
+    /*height: 190px;*/
+    border: 2px solid #C5C8CC;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+.timePacker-title{
+    width: auto;
+    padding: 4px;
+    font-size: 14px;
+    font-family: 微软雅黑;
+    font-weight: 600;
+}
+.timePacker-content{
+    width: 380px;
+    height: 160px;
+}
+.timePacker-content ul {
+    width: 380px;
+    height: 160px;
+    overflow: hidden;
+}
+.timePacker-content ul .hoursList {
+    float: left;
+    display: block;
+    width: 50px;
+    height: 30px;
+    background-color: #F6F7F7;
+    color: #000000;
+    font-size: 14px;
+    font-family: 微软雅黑;
+    text-align: center;
+    line-height: 30px;
+    margin: 4px 4px;
+    cursor: pointer;
+}
+.timePackerSelect{
+    color: white!important;
+    background-color: #007BDB!important;
+}
+/*.nowTime{*/
+/*color: #007BDB;*/
+/*}*/
+.timePacker-content ul .mList {
+    float: left;
+    display: block;
+    width: 30px;
+    height: 20px;
+    background-color: #F6F7F7;
+    /*color: #000000;*/
+    font-size: 14px;
+    font-family: 微软雅黑;
+    text-align: center;
+    line-height: 20px;
+    margin: 4px 4px;
+    cursor: pointer;
+}
+.timePacker-content ul .hoursList:hover,.timePacker-content ul .mList:hover{
+    color: white!important;
+    background-color: #007BDB!important;
+}
+.timePacker-back-hours{
+    display: block;
+    width: 22px;
+    height: 18px;
+    float: right;
+    cursor: pointer;
+    margin-right: 16px;
+}
+.timePacker-back-hours img{
+    width: 100%;
+    height: 100%;
+}

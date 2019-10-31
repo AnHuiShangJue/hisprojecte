@@ -241,8 +241,8 @@ public class EnterpriseInfoController extends BaseController {
      * @Time 14:49
      **/
     @RequestMapping("/queryListAll.ahsj")
-    public ResponseEntity<List<EnterpriseInfo>> queryEnterpriseInfo() throws Exception {
-        List<EnterpriseInfo> enterpriseInfos = enterpriseInfoService.queryListAll();
+    public ResponseEntity<List<EnterpriseInfo>> queryEnterpriseInfo(EnterpriseInfoDTO enterpriseInfoDTO) throws Exception {
+        List<EnterpriseInfo> enterpriseInfos = enterpriseInfoService.queryListAll(enterpriseInfoDTO);
         return ResponseEntity.ok(enterpriseInfos);
     }
 

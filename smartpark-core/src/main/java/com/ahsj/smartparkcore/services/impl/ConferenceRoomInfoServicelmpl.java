@@ -210,7 +210,6 @@ public class ConferenceRoomInfoServicelmpl implements ConferenceRoomInfoService 
         if (EmptyUtil.Companion.isNullOrEmpty(ids)){
             return new ArrayList<>();
         }else {
-            System.out.println(ids.size());
             List<ConferenceRoomInfo> conferenceRoomInfos = conferenceRoomInfoMapper.selectByIds(ids);
             if (EmptyUtil.Companion.isNullOrEmpty(conferenceRoomInfos)){
                 return new ArrayList<>();

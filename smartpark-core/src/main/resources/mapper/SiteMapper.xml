@@ -321,4 +321,9 @@
       #{item}
     </foreach>
   </select>
+  <select id="listForView"  resultMap="ResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from site
+  </select>
 </mapper>

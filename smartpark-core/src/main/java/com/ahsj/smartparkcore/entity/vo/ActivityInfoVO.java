@@ -55,6 +55,17 @@ public class ActivityInfoVO extends ActivityInfo {
 
     private Long areaId;
 
+
+    private String filePath;
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
     public Long getProvinceId() {
         return provinceId;
     }

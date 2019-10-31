@@ -129,5 +129,5 @@ public interface EnterpriseInfoService {
      * @Date 2019/10/23
      * @Time 14:45
      **/
-    List<EnterpriseInfo> queryListAll() throws Exception;
+    List<EnterpriseInfo> queryListAll(EnterpriseInfoDTO enterpriseInfoDTO) throws Exception;
 }

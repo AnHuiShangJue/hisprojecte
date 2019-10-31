@@ -6,6 +6,7 @@ import com.ahsj.smartparkcore.dao.ActivityInfoMapper;
 import com.ahsj.smartparkcore.entity.dto.ActivityInfoDTO;
 import com.ahsj.smartparkcore.entity.po.ActivityInfo;
 import com.ahsj.smartparkcore.entity.vo.ActivityInfoVO;
+import com.ahsj.smartparkcore.entity.vo.StationInfoVO;
 import com.ahsj.smartparkcore.services.ActivityInfoService;
 import core.controller.BaseController;
 import core.entity.PageBean;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import utils.EmptyUtil;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 
@@ -180,7 +182,6 @@ public class ActivityInfoController extends BaseController {
     **/
     @RequestMapping(value = "/selectById.ahsj")
     public ActivityInfo selectById(@RequestParam(value="id", required=true) Long id)throws Exception{
-//        if (EmptyUtil.Companion.isNullOrEmpty(id))
         return activityInfoService.selectById(id);
     }
 
@@ -251,5 +252,11 @@ public class ActivityInfoController extends BaseController {
         modelAndView.addObject("token", token);
         modelAndView.addObject("activityInfo", activityInfoService.selectById(id));
         return modelAndView;
+    }
+
+    @RequestMapping("listForView.ahsj")
+    @ResponseBody
+    public List<ActivityInfoVO> listForView() throws Exception {
+        return activityInfoService.listForView();
     }
 }

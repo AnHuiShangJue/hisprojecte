@@ -3,6 +3,8 @@ package com.ahsj.smartparkcore.controller.site;
 import com.ahsj.smartparkcore.core.ResultModel;
 import com.ahsj.smartparkcore.core.ResultStatus;
 import com.ahsj.smartparkcore.entity.dto.SiteDTO;
+import com.ahsj.smartparkcore.entity.vo.ConferenceRoomInfoVO;
+import com.ahsj.smartparkcore.entity.vo.SiteVo;
 import com.ahsj.smartparkcore.services.SiteServices;
 import core.controller.BaseController;
 import core.entity.PageBean;
@@ -12,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import utils.EmptyUtil;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/site")
@@ -171,6 +175,20 @@ public class SiteController extends BaseController {
         modelAndView.addObject("token", token);
         modelAndView.addObject("siteDTO", siteServices.selectByPrimaryKey(id));
         return modelAndView;
+    }
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.SiteVo>
+     * @功能说明
+     * @Params []
+     * @Author XJP
+     * @Date 2019/10/29
+     * @Time 16:19
+     **/
+    @RequestMapping("listForView.ahsj")
+    @ResponseBody
+    public List<SiteVo> listForView() throws Exception {
+        return siteServices.listForView();
     }
 
 }

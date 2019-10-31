@@ -227,7 +227,7 @@
   </update>
 <!--  自定义sql-->
 
-  <resultMap id="BaseResultMapVO" type="com.ahsj.smartparkcore.entity.vo.ActivityInfoVO">
+  <resultMap id="BaseResultMapVO" type="com.ahsj.smartparkcore.entity.vo.ActivityInfoVO" extends="BaseResultMap">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="event_location" jdbcType="VARCHAR" property="eventLocation" />
@@ -254,5 +254,10 @@
     <if test="parameter.orders != null and parameter.orders != ''">
       order by ${parameter.orders}
     </if>
+  </select>
+  <select id="listForView" resultMap="BaseResultMapVO" parameterType="com.ahsj.smartparkcore.entity.vo.ActivityInfoVO">
+    select
+    <include refid="Base_Column_List"/>
+    from activity_info
   </select>
 </mapper>

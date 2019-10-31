@@ -9,7 +9,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-@Data
 public class ActivityPersonnelInfoVO extends ActivityPersonnelInfo {
     private Long id;
 
@@ -41,6 +40,15 @@ public class ActivityPersonnelInfoVO extends ActivityPersonnelInfo {
 
     private String remarks;
 
+    private String filePath;
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
 
     @Override
     public Long getId() {

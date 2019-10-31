@@ -87,4 +87,14 @@ public interface SiteServices {
      * @Time 15:25
      **/
     List<Site> selectByIds(List<Long> ids) throws Exception;
+
+    /**
+     * @return java.util.List<com.ahsj.smartparkcore.entity.vo.SiteVo>
+     * @功能说明
+     * @Params []
+     * @Author XJP
+     * @Date 2019/10/29
+     * @Time 16:14
+     **/
+    List<SiteVo> listForView() throws Exception;
 }
