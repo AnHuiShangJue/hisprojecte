@@ -57,6 +57,8 @@ dependencies {
 // https://mvnrepository.com/artifact/org.jxls/jxls
     compile group: 'org.jxls', name: 'jxls', version: '2.4.6'
 
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.1.3.RELEASE'
+
 
     // https://mvnrepository.com/artifact/org.jxls/jxls-poi
     compile group: 'org.jxls', name: 'jxls-poi', version: '1.0.9'
