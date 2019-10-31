@@ -1,0 +1,68 @@
+server:
+  port: 8555
+
+eureka:
+  #  instance:
+  #    hostname: 192.168.0.107
+  #    prefer-ip-address: true
+  client:
+    #    表示是否将自己注册到Eureka Server，默认为true
+    registerWithEureka: true
+    #    表示是否从Eureka Server获取注册信息，默认为true。
+    fetchRegistry: true
+    #    设置与Eureka Server交互的地址，查询服务和注册服务都需要依赖这个地址。默认是http://localhost:8761/eureka ；多个地址可使用 , 分隔。
+    serviceUrl:
+      #      defaultZone:  http://47.92.192.210:8760/eureka/,http://47.92.192.210:8761/eureka/
+      defaultZone: http://127.0.0.1:8760/eureka/ #,http://127.0.0.1:8761/eureka/
+  # 注册中心的自我保护，当注册应用下线时立即下线，开发环境使用，生产环境不使用
+#  server:
+#    enable-self-preservation: true
+spring:
+  #xjp 添加rabbitmq 配置
+  rabbitmq:
+    host: 192.168.0.105
+    username: anhuishangjue
+    password: shangjue0603
+    virtual-host: /ahsj
+    listener:
+      simple:
+        concurrency: 20
+        max-concurrency: 20
+        prefetch: 1
+        auto-startup: true
+    template:
+      retry:
+        enabled: true
+        initial-interval: 10000ms
+        max-interval: 30000ms
+        multiplier: 5
+      exchange: com.ahsj.exchange
+    publisher-confirms: true
+    port: 5672
+
+  application:
+    name: wisdom
+  datasource:
+    #      url: jdbc:log4jdbc:mysql://127.0.0.1:3306/his-userinfo?useUnicode=true&characterEncoding=utf8&useSSL=true
+    url: jdbc:log4jdbc:mysql://192.168.0.105:3306/his-translate?useUnicode=true&characterEncoding=utf8&useSSL=true
+    username: ahsj
+    password: shangjue0603
+    driver-class-name: net.sf.log4jdbc.DriverSpy
+    type: com.zaxxer.hikari.HikariDataSource
+  #    secondary:
+  #      url: jdbc:log4jdbc:mysql://127.0.0.1:3306/his-prac?useUnicode=true&characterEncoding=utf8&useSSL=true
+  #      username: root
+  #      password: 123456
+  #      driver-class-name: net.sf.log4jdbc.DriverSpy
+  #      type: com.zaxxer.hikari.HikariDataSource
+  thymeleaf:
+    # 这个开发配置为false，避免改了模板还要重启服务器
+    cache: false
+    # 这个是配置模板路径的，默认就是templates，可不用配置
+    # 这个可以不配置，检查模板位置
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    mode: HTML5
