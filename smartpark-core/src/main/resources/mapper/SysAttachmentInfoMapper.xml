@@ -420,13 +420,13 @@
         select
         <include refid="Base_Column_List"/>
         from `sys-user-info`.sys_attachment_info e where 1=1
-       <!-- <if test="parameter.name != null and parameter.name != ''">
-            and e.name like concat('%', #{parameter.name,jdbcType=VARCHAR},'%')
+     <if test="parameter.fileName != null and parameter.fileName != ''">
+            and e.file_name like concat('%', #{parameter.fileName,jdbcType=VARCHAR},'%')
         </if>
-        <if test="parameter.legalName != null and parameter.legalName != ''">
-            and e.legal_name like concat('%', #{parameter.legalName,jdbcType=VARCHAR},'%')
+        <if test="parameter.fileOrgName != null and parameter.fileOrgName != ''">
+            and e.file_org_name like concat('%', #{parameter.fileOrgName,jdbcType=VARCHAR},'%')
         </if>
-        <if test="parameter.unifiedSocialCreditCode != null and parameter.unifiedSocialCreditCode != ''">
+       <!-- <if test="parameter.unifiedSocialCreditCode != null and parameter.unifiedSocialCreditCode != ''">
             and e.unified_social_credit_code like concat('%', #{parameter.unifiedSocialCreditCode,jdbcType=VARCHAR},'%')
         </if>
         <if test="parameter.scale != null and parameter.scale != ''">

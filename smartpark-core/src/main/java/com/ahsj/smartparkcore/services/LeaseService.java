@@ -70,5 +70,5 @@ public interface LeaseService {
      * @Date 2019/10/21
      * @Time 14:52
      **/
-    LeaseDTO selectLease(LeaseVO leaseVO) throws Exception;
+    LeaseVO selectLease(LeaseDTO leaseVO) throws Exception;
 }
