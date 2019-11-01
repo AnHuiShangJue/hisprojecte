@@ -9,16 +9,17 @@ import org.springframework.web.servlet.ModelAndView;
 public class WisdomBayController {
 
     @RequestMapping("/list/index.ahsj")
-    ModelAndView listIndex(){
+    ModelAndView listIndex() {
         ModelAndView modelAndView = new ModelAndView("backend/wisdom/wisdom_bay");
-        modelAndView.addObject("title","");
+        modelAndView.addObject("title", "");
         return modelAndView;
     }
 
     @RequestMapping("/lanhu/index.ahsj")
-    ModelAndView lanhuIndex(){
-        ModelAndView modelAndView = new ModelAndView("backend/wisdom/lanhu");
-        modelAndView.addObject("title","");
+    ModelAndView lanhuIndex() {
+        ModelAndView modelAndView = new ModelAndView("backend/wisdom/index" +
+                "");
+        modelAndView.addObject("title", "");
         return modelAndView;
     }
 }
