@@ -32,7 +32,7 @@
 <div class="row">
     <div class="row valign-wrapper" style="margin-top: 30px;height: 35px;">
         <div class="col s12 m12 l12 center">
-            <h5 class="black-text fontsize02" style="padding: 0;margin: 0;text-align: center;">中柬第一医院长期医嘱单</h5>
+            <h5 class="black-text fontsize02" style="padding: 0;margin: 0;text-align: center">中柬第一医院长期医嘱单</h5>
             <p class="black-text fontsize02" style="padding: 0;margin: 0;text-align: center">The first china-cambodia hospital Long term medical advice sheet</p>
         </div>
     </div>
@@ -46,33 +46,33 @@
             <table border="0" cellspacing="0" cellpadding="0" style="width: 95%;margin: 0 auto;">
 
                 <tr>
-                    <td>
+                    <td >
                         <label>姓名(name)</label>
                         <label th:text="${hisHospitalManage.patientName}"></label>
                     </td>
-                    <td>
+                    <td >
                         <label>性别(sex)</label>
                         <label th:text="${hisHospitalManage.sexName}"></label>
                     </td>
-                    <td>
+                    <td >
                         <label>年龄(age)</label>
                         <label th:text="${hisHospitalManage.age}"></label>
                     </td>
-                    <td>
+                    <td >
                         <label id="now"></label>
                     </td>
 
                 </tr>
                 <tr>
-                    <td>
+                    <td style="height: 25px">
                         <label>科室(Department)</label>
                         <label th:text="${hisHospitalManage.departmentName}"></label>
                     </td>
-                    <td>
+                    <td style="height: 25px">
                         <label>床号(Bed No)</label>
                         <label th:text="${hisHospitalManage.bedsNumber}"></label>
                     </td>
-                    <td colspan="2">
+                    <td colspan="2" style="height: 25px">
                         <label>住院编号(Hospital number)</label>
                         <label th:text="${hisHospitalManage.number}"></label>
                     </td>
@@ -153,7 +153,8 @@ Scripts
                         "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">核对人签名(Check signature)</p></td>" +
                         "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止时间(Stop time)</p></td>" +
                         "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止护士签名(Stop nurse signature)</p></td>" +
-                        "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止医师签名(Stop physician signature)</p></td></tr>";
+                        "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止医师签名(Stop physician signature)</p></td>"+
+                        "<td style=\"border:1px solid black;width:70px;text-align: center\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+1+"</p></td></tr>"
 
                     for(var i = 0 ; i < data.length ; i++){
                         if (isNullOrEmpty(data[i].startTime)) {
@@ -171,7 +172,8 @@ Scripts
                             "<td style=\"border:1px solid black;\"></td>" +
                             "<td style=\"border:1px solid black;\"></td>" +
                             "<td style=\"border:1px solid black;\"></td>" +
-                            "<td style=\"border:1px solid black;\"></td></tr>";
+                            "<td style=\"border:1px solid black;\"></td>"+
+                            "<td style=\"border:1px solid black;text-align: center\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(i+2)+"</p></td></tr>";
                     }
                     $("#table_id").append(trs);
                     }
@@ -187,7 +189,8 @@ Scripts
                             "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">核对人签名(Check signature)</p></td>" +
                             "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止时间(Stop time)</p></td>" +
                             "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止护士签名(Stop nurse signature)</p></td>" +
-                            "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止医师签名(Stop physician signature)</p></td></tr>";
+                            "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止医师签名(Stop physician signature)</p></td>"+
+                            "<td style=\"border:1px solid black;width:70px;text-align: center\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+1+"</p></td></tr>"
 
                         for(var i = 0 ; i < 17 ; i++){
                             if (isNullOrEmpty(data[i].startTime)) {
@@ -205,7 +208,8 @@ Scripts
                                 "<td style=\"border:1px solid black;\"></td>" +
                                 "<td style=\"border:1px solid black;\"></td>" +
                                 "<td style=\"border:1px solid black;\"></td>" +
-                                "<td style=\"border:1px solid black;\"></td></tr>";
+                                "<td style=\"border:1px solid black;\"></td>" +
+                                "<td style=\"border:1px solid black;text-align: center\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(i+2)+"</p></td></tr>";
                         }
                         $("#table_id").append(trs);
 
@@ -238,8 +242,8 @@ Scripts
                     // }else{
                     //     totalPage=parseInt(num/pageSize);
                     // }
-                    //第二页最多显示30条
-                    if(dataCount<=36){
+                    //第二页最多显示18条
+                    if(dataCount>17){
 
                         var adddiv;
                         adddiv = "";
@@ -273,7 +277,8 @@ Scripts
                                     "<td style=\"border:1px solid black;width: 70px\"></td>" +
                                     "<td style=\"border:1px solid black;width: 70px\"></td>" +
                                     "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                    "<td style=\"border:1px solid black;width: 70px\"></td></tr>";
+                                    "<td style=\"border:1px solid black;width: 70px\"></td>" +
+                                    "<td style=\"border:1px solid black;text-align: center;width: 70px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-18)+"</p></td></tr>";
                             }
 
                             //var tableId = 'table_id' + i;
@@ -282,7 +287,7 @@ Scripts
 
                         }
 
-                    if(dataCount<=55){
+                    if(dataCount<=53 &&dataCount>35){
                         var adddiv;
                         adddiv = "";
                         for(var i=1 ;i <= 2;i++){
@@ -295,7 +300,7 @@ Scripts
                         var trss;
                         trss = "";
 
-                        for (var j = 17; j < 36; j++) {
+                        for (var j = 17; j < 35; j++) {
                             //console.log(data[j]);
                             if (isNullOrEmpty(data[j].startTime)) {
                                 data[j].startTime = getDay();
@@ -312,74 +317,15 @@ Scripts
                                 "<td style=\"border:1px solid black;width: 70px\"></td>" +
                                 "<td style=\"border:1px solid black;width: 70px\"></td>" +
                                 "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td></tr>";
+                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
+                                "<td style=\"border:1px solid black;text-align: center;width: 70px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-18)+"</p></td></tr>";
                         }
 
                         $("#table_id1").append(trss);
 
                         var trss2;
                         trss2 = "";
-                        for (var j = 36; j < dataCount; j++) {
-                            //console.log(data[j]);
-                            if (isNullOrEmpty(data[j].startTime)) {
-                                data[j].startTime = getDay();
-                            }
-                            if (isNullOrEmpty(data[j].name)) {
-                                data[j].name = "";
-                            }
-
-                            trss2 += "<tr class=\"trCount\"><td style=\"border:1px solid black;width: 70px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">" + data[j].startTime + "</p></td>" +
-                                "<td style=\"border:1px solid black;width: 190px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">" + data[j].name + "</p></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td></tr>";
-                        }
-
-                        $("#table_id2").append(trss2);
-
-                    }
-
-                    if(dataCount<=74){
-                        var adddiv;
-                        adddiv = "";
-                        for(var i=1 ;i <= 3;i++){
-                            adddiv += "<div style=\"height: 10mm;\"></div><div style=\"height: 286mm;\"><table class=\"table_add\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" border-collapse=\"collapse\" style=\"width: 95%;margin: 0 auto;\"></table></div>";
-                        }
-                        $("#addpage").append(adddiv);
-                        $(".table_add").each(function(i) {
-                            $(this).attr("id", "table_id" + (i + 1));
-                        });
-                        var trss;
-                        trss = "";
-
-                        for (var j = 17; j < 36; j++) {
-                            //console.log(data[j]);
-                            if (isNullOrEmpty(data[j].startTime)) {
-                                data[j].startTime = getDay();
-                            }
-                            if (isNullOrEmpty(data[j].name)) {
-                                data[j].name = "";
-                            }
-
-                            trss += "<tr class=\"trCount\"><td style=\"border:1px solid black;width: 70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">" + data[j].startTime + "</p></td>" +
-                                "<td style=\"border:1px solid black;width: 190px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">" + data[j].name + "</p></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td></tr>";
-                        }
-
-                        $("#table_id1").append(trss);
-                        var trss2;
-                        trss2 = "";
-                        for (var j = 36; j < 55; j++) {
+                        for (var j = 35; j < dataCount; j++) {
                             //console.log(data[j]);
                             if (isNullOrEmpty(data[j].startTime)) {
                                 data[j].startTime = getDay();
@@ -396,14 +342,77 @@ Scripts
                                 "<td style=\"border:1px solid black;width: 70px\"></td>" +
                                 "<td style=\"border:1px solid black;width: 70px\"></td>" +
                                 "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td></tr>";
+                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
+                                "<td style=\"border:1px solid black;text-align: center;width: 70px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-36)+"</p></td></tr>";
+                        }
+
+                        $("#table_id2").append(trss2);
+
+                    }
+
+                    if(dataCount<=71&&dataCount>53){
+                        var adddiv;
+                        adddiv = "";
+                        for(var i=1 ;i <= 3;i++){
+                            adddiv += "<div style=\"height: 10mm;\"></div><div style=\"height: 286mm;\"><table class=\"table_add\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" border-collapse=\"collapse\" style=\"width: 95%;margin: 0 auto;\"></table></div>";
+                        }
+                        $("#addpage").append(adddiv);
+                        $(".table_add").each(function(i) {
+                            $(this).attr("id", "table_id" + (i + 1));
+                        });
+                        var trss;
+                        trss = "";
+
+                        for (var j = 17; j < 35; j++) {
+                            //console.log(data[j]);
+                            if (isNullOrEmpty(data[j].startTime)) {
+                                data[j].startTime = getDay();
+                            }
+                            if (isNullOrEmpty(data[j].name)) {
+                                data[j].name = "";
+                            }
+
+                            trss += "<tr class=\"trCount\"><td style=\"border:1px solid black;width: 70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">" + data[j].startTime + "</p></td>" +
+                                "<td style=\"border:1px solid black;width: 190px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">" + data[j].name + "</p></td>" +
+                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
+                                "<td style=\"border:1px solid black;text-align: center;width: 70px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-18)+"</p></td></tr>";
+                        }
+
+                        $("#table_id1").append(trss);
+                        var trss2;
+                        trss2 = "";
+                        for (var j = 35; j < 53; j++) {
+                            //console.log(data[j]);
+                            if (isNullOrEmpty(data[j].startTime)) {
+                                data[j].startTime = getDay();
+                            }
+                            if (isNullOrEmpty(data[j].name)) {
+                                data[j].name = "";
+                            }
+
+                            trss2 += "<tr class=\"trCount\"><td style=\"border:1px solid black;width: 70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">" + data[j].startTime + "</p></td>" +
+                                "<td style=\"border:1px solid black;width: 190px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">" + data[j].name + "</p></td>" +
+                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
+                                "<td style=\"border:1px solid black;text-align: center;width: 70px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-36)+"</p></td></tr>";
                         }
 
                         $("#table_id2").append(trss2);
 
                         var trss3;
                         trss3 = "";
-                        for (var j = 55; j < dataCount; j++) {
+                        for (var j = 53; j < dataCount; j++) {
                             //console.log(data[j]);
                             if (isNullOrEmpty(data[j].startTime)) {
                                 data[j].startTime = getDay();
@@ -420,7 +429,8 @@ Scripts
                                 "<td style=\"border:1px solid black;width: 70px\"></td>" +
                                 "<td style=\"border:1px solid black;width: 70px\"></td>" +
                                 "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td></tr>";
+                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
+                                "<td style=\"border:1px solid black;text-align: center;width: 70px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-54)+"</p></td></tr>";
                         }
 
                         $("#table_id3").append(trss3);
