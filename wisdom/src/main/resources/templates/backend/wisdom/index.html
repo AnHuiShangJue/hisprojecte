@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<div th:replace="public/back_baselayout :: html"></div>
+</head>
+<body>
+<div class="row col s12 x12 l12 xl12">
+
+
+
+
+
+
+</div>
+<script th:inline="javascript">
+    $(window).load(function () {
+        setTimeout(function () {
+            Materialize.toast('<span>欢迎进入智慧湾</span>', 1500);
+        }, 3000);
+        window.onresize = function () {
+            var contentHeight = $(window).height() - $(".page-topbar").height() - $(".page-footer").height();
+            $('#frameContainer').height(contentHeight);
+        };
+    });
+    $('.one1').css("width", "480px");
+    $('.shoufenqin_box>div').hover(function () {
+        $('.shoufenqin_box>div').stop(true).animate({width: "160px"}, 220);
+        $(this).stop(true).animate({width: "650px"}, 220);
+        $(this).addClass("len").siblings().removeClass('len');
+    })
+</script>
+</body>
+
+</html>

@@ -17,6 +17,14 @@ public class WisdomBayController {
 
     @RequestMapping("/lanhu/index.ahsj")
     ModelAndView lanhuIndex(){
+        ModelAndView modelAndView = new ModelAndView("backend/wisdom/index");
+        modelAndView.addObject("title","");
+        modelAndView.addObject("title","");
+        return modelAndView;
+    }
+
+    @RequestMapping("/lanhu/index.ahsj")
+    ModelAndView lanhuIndex(){
         ModelAndView modelAndView = new ModelAndView("backend/wisdom/lanhu");
         modelAndView.addObject("title","");
         return modelAndView;
