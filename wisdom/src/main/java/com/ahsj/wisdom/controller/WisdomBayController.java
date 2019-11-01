@@ -11,7 +11,14 @@ public class WisdomBayController {
     @RequestMapping("/list/index.ahsj")
     ModelAndView listIndex(){
         ModelAndView modelAndView = new ModelAndView("backend/wisdom/wisdom_bay");
-        modelAndView.addObject("title","医疗信息系统");
+        modelAndView.addObject("title","");
+        return modelAndView;
+    }
+
+    @RequestMapping("/lanhu/index.ahsj")
+    ModelAndView lanhuIndex(){
+        ModelAndView modelAndView = new ModelAndView("backend/wisdom/lanhu");
+        modelAndView.addObject("title","");
         return modelAndView;
     }
 }
