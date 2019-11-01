@@ -50,6 +50,16 @@ public interface HisMediEnterDetailsService {
     PageBean<HisMediEnterDetails> list(PageBean<HisMediEnterDetails> pageBean)throws Exception;
 
     /**
+     *@Description 查询快过期的药品
+     *@Params
+     *@return
+     *@Author jin
+     *@Date 2019/11/1
+     *@Time 17:42
+    */
+    PageBean<HisMediEnterDetails> listOverdate(PageBean<HisMediEnterDetails> pageBean)throws Exception;
+
+    /**
      *@Description 通过药品id查询入库表中所有数据以pageBean分页对象传回查到的数据
      *@Params [pageBean]
      *@return core.entity.PageBean<com.ahsj.hiscore.entity.HisMediEnterDetails>
