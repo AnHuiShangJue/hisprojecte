@@ -18,11 +18,11 @@
     <result column="enter_number" jdbcType="VARCHAR" property="enterNumber" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, pharmacy_id, enter_count, validity_period, create_user_id, create_date, update_user_id, 
+    id, pharmacy_id, enter_count, validity_period, create_user_id, create_date, update_user_id,
     update_date, drugs_numb, drugs_name, drugs_spec, price,surplus,enter_number
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from his_medi_enter_details
     where id = #{id,jdbcType=BIGINT}
@@ -32,13 +32,13 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisMediEnterDetails" >
-    insert into his_medi_enter_details (id, pharmacy_id, enter_count, 
-      validity_period, create_user_id, create_date, 
-      update_user_id, update_date, drugs_numb, 
+    insert into his_medi_enter_details (id, pharmacy_id, enter_count,
+      validity_period, create_user_id, create_date,
+      update_user_id, update_date, drugs_numb,
       drugs_name, drugs_spec, price,surplus,enter_number
       )
     values (#{id,jdbcType=BIGINT}, #{pharmacyId,jdbcType=BIGINT}, #{enterCount,jdbcType=BIGINT},
-      #{validityPeriod,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{validityPeriod,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP},
       #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, #{drugsNumb,jdbcType=VARCHAR},
       #{drugsName,jdbcType=VARCHAR}, #{drugsSpec,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL},#{surplus,jdbcType=BIGINT},#{enterNumber,jdbcType=VARCHAR}
       )
@@ -231,6 +231,28 @@ where pharmacy_id= #{pharmacyId,jdbcType=BIGINT}
       order by ${parameter.orders}
     </if>
   </select>
+
+  <!--查询快过期的药品-->
+  <select id="listOverdate" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+    SELECT
+    a.*,b.sale_price as salePrice
+    FROM
+    his_medi_enter_details as a
+    left join his_pharmacy_detail as b on a.pharmacy_id=b.medicine_id
+    where
+    1= 1 and date_sub(a.validity_period,interval 3 month) &lt;= CURRENT_DATE AND a.surplus>0
+    <if test="parameter.drugsNumb != null and parameter.drugsNumb != ''">
+      and a.drugs_numb like concat('%' #{parameter.drugsNumb,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.drugsName != null and parameter.drugsName != ''">
+      and a.drugs_name like concat('%' #{parameter.drugsName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="parameter.orders != null and parameter.orders != ''">
+      order by ${parameter.orders}
+    </if>
+  </select>
+
+
 <!--通过药品id查询入库表中所有数据以pageBean分页对象传回查到的数据，且不显示库存小于等于0的药品-->
   <select id="listByPharmacyId" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
     SELECT

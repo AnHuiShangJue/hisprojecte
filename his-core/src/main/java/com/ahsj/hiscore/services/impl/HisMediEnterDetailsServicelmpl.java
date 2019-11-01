@@ -210,6 +210,21 @@ public class HisMediEnterDetailsServicelmpl implements HisMediEnterDetailsServic
     }
 
     /**
+     *@Description 查询快过期的药品
+     *@Params
+     *@return
+     *@Author jin
+     *@Date 2019/11/1
+     *@Time 17:42
+    */
+    @Override
+    @Transactional(readOnly = true)
+    public PageBean<HisMediEnterDetails> listOverdate(PageBean<HisMediEnterDetails> pageBean) throws Exception {
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisMediEnterDetailsMapper.listOverdate(pageBean)));
+        return pageBean;
+    }
+
+    /**
      *@Description 通过药品id查询入库表中所有数据以pageBean分页对象传回查到的数据
      *@Params [pageBean]
      *@return core.entity.PageBean<com.ahsj.hiscore.entity.HisMediEnterDetails>

@@ -32,6 +32,10 @@ public class HisMediEnterDetails extends BaseEntity {
 
     private String enterNumber;
 
+    @JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    private Date createDate;
+
     public String getEnterNumber() {
         return enterNumber;
     }
@@ -118,5 +122,15 @@ public class HisMediEnterDetails extends BaseEntity {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    @Override
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    @Override
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }
