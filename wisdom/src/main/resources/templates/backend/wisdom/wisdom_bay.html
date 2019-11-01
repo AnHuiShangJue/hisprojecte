@@ -3,41 +3,111 @@
       xmlns:ahsj="http://www.anhuishangjue.com">
 
 <div th:replace="public/base_list :: html"></div>
-
+<div th:replace="public/back_baselayout :: html"></div>
+<style>
+    .tab{
+        font-weight:bolder ;
+    }
+</style>
 <body>
 <header>
     <div class="row col s12 x12 l12 xl12">
-            <nav>
-                <div class="nav-wrapper" style="background-color: #ffffff;">
-                    <a href="#" class="brand-logo" > <img src="/assets/app-assets/images/avatar/智慧湾.png" width="200px" height="64px"/></a>
-                    <ul id="nav-mobile" class="right hide-on-med-and-down ">
-                        <li><a href="sass.html" style="color: #0b0b0b">首页</a></li>
-                        <li><a href="badges.html" style="color: #0b0b0b">关于智慧湾</a></li>
-                        <li><a href="collapsible.html" style="color: #0b0b0b">解决方案</a></li>
-                        <li><a href="collapsible.html" style="color: #0b0b0b">招聘与合作</a></li>
-                    </ul>
+                <img src="/assets/app-assets/images/wisdom/AppleTV3.png" width="100%"/>
+        <div style="font-size: 30px;margin-left: 20%;margin-top: 2%;">产品特色</div>
+        <nav class="nav-extended" style="width: 60%;text-align: center;margin: auto;margin-top: 2%;background-color: #ffffff" >
+            <div class="nav-content">
+                <ul class="tabs tabs-transparent">
+                    <li class="tab"><a href="#test1" style="color: #0C0C0C" >教学管理</a></li>
+                    <li class="tab"><a class="active" style="color: #0C0C0C" href="#test2">课程体系</a></li>
+                    <li class="tab disabled"><a href="#test3" style="color: #0C0C0C">师资合作</a></li>
+                    <li class="tab"><a href="#test4" style="color: #0C0C0C">商业级别AI系列</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <ul class="sidenav" id="mobile-demo">
+            <li><a href="sass.html">Sass</a></li>
+            <li><a href="badges.html">Components</a></li>
+            <li><a href="collapsible.html">JavaScript</a></li>
+        </ul>
+
+        <div id="test2"  style="margin-left: 25%;">
+            <div class="card" id="wq" style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 250px;height: 149px;margin-right: 4%;margin-top: 4%;border-radius: 25px"><img src="/assets/app-assets/images/wisdom/AppleTV.png" style="margin-left: 33%;margin-top: 2%;">
+               <br><span style="color: #ffffff;margin-left: 35%;font-size: 22px;">便捷管理</span>
+                <br><br><span style="color: #ffffff;">便捷文件管理是一款安卓设备上*方便的手机资源管理和文件管理软件。清新的界面加上强大的文件管理和传输功能,轻松连接即可实.</span>
+            </div>
+            <div class="card" id="wq1" style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 250px;height: 149px;margin-right: 4%;margin-top: 4%;border-radius: 25px"><img src="/assets/app-assets/images/wisdom/AppleTV1.png" style="margin-left: 33%;margin-top: 2%;">
+                <br><span style="color: #ffffff;margin-left: 35%;font-size: 22px;">有效控制</span>
+            </div>
+            <div class="card" id="wq2" style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 250px;height: 149px;margin-right: 4%;margin-top: 4%;border-radius: 25px"><img src="/assets/app-assets/images/wisdom/Grouping10.png" style="margin-left: 33%;margin-top: 2%;">
+                <br><span style="color: #ffffff;margin-left: 35%;font-size: 22px;">移动办公</span>
+            </div>
+        </div>
+        <div  id="test1" style="margin-left: 25%;">
+            <div class="card" id="wq3" style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 250px;height: 149px;margin-right: 4%;margin-top: 4%;border-radius: 25px">
+                <br><span style="color: #ffffff;margin-left: 35%;font-size: 22px;"></span>
+                <br><br><span style="color: #ffffff;"></span>
+            </div>
+            <div class="card" id="wq4" style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 250px;height: 149px;margin-right: 4%;margin-top: 4%;border-radius: 25px">
+                <br><span style="color: #ffffff;margin-left: 35%;font-size: 22px;"></span>
+            </div>
+            <div class="card" id="wq5" style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 250px;height: 149px;margin-right: 4%;margin-top: 4%;border-radius: 25px">
+                <br><span style="color: #ffffff;margin-left: 35%;font-size: 22px;"></span>
+            </div>
+        </div>
+        <div id="test3" class="col s12">Test 3</div>
+        <div id="test4" class="col s12">Test 4</div>
+            <div class="row" style="float: left;border: 1px;background-color: #030E3F;width: 1902px;height: 740px; margin-top: 7%;">
+                <div class="row col s6 x6 l6 xl6" style="margin-top: 2%;">
+                    <span style="font-size: 30px;margin-left: 40%;margin-top: 2%; color: #ffffff">认证服务</span>
+                    <div class="row col s6 x6 l6 xl6 " style="margin-left: 23%">
+                    <br><br><span style="color: #ffffff;letter-spacing: 0.56px; line-height: 56px;">通过NVIDIA 深度学习学院提供人工智能能力认证服务，深度学习学院聚焦于人工智能和深度学习，致力于在全世界范围内提供培训，学习如何解决最具挑战性的问题。通过线上自主学习，或者线下由 NVIDIA 认证的讲师来教授的培训课程。</span>
+                    </div>
                 </div>
-            </nav>
-            <div class="card">
-        <div class="card-image">
-                <img src="/assets/app-assets/images/avatar/人工智能实验室.png"/>
-                <span class="card-title">Card Title</span>
+                <div class="row col s6 x6 l6 xl6">
+                <img src="/assets/app-assets/images/wisdom/bitmap10.png" style="float: right;margin-top: 8%;">
+                </div>
             </div>
-            <div class="card-image ">
-                <img src="/assets/app-assets/images/avatar/产品特色.png"/>
-            </div>
-            </div>
-<!--            <div class="card-action">
-                <a href="#">This is a link</a>
-            </div>-->
     </div>
 </header>
 
 <div th:replace="public/base_list_script :: html"></div>
 
 <script type="text/javascript">
-
+$(function () {
+    $("#wq").click(function(){
+        $("#wq1").animate({width:'250px',height:'149px'});
+        $("#wq2").animate({width:'250px',height:'149px'});
+        $("#wq").animate({width:'454px',height:'294px'});
+    });
+    $("#wq1").click(function(){
+        $("#wq").animate({width:'250px',height:'149px'});
+        $("#wq2").animate({width:'250px',height:'149px'});
+        $("#wq1").animate({width:'454px',height:'294px'});
+    }) ;
+    $("#wq2").click(function(){
+        $("#wq").animate({width:'250px',height:'149px'});
+        $("#wq1").animate({width:'250px',height:'149px'});
+        $("#wq2").animate({width:'454px',height:'294px'});
+    });
+    $("#wq3").click(function(){
+        $("#wq4").animate({width:'200px',height:'200px'});
+        $("#wq5").animate({width:'200px',height:'200px'});
+        $("#wq3").animate({width:'554px',height:'394px'});
+    });
+    $("#wq4").click(function(){
+        $("#wq5").animate({width:'200px',height:'200px'});
+        $("#wq3").animate({width:'200px',height:'200px'});
+        $("#wq4").animate({width:'554px',height:'394px'});
+    }) ;
+    $("#wq5").click(function(){
+        $("#wq3").animate({width:'200px',height:'200px'});
+        $("#wq4").animate({width:'200px',height:'200px'});
+        $("#wq5").animate({width:'554px',height:'394px'});
+    });
+})
 </script>
 </body>
+<div th:replace="public/footer :: html"></div>
 </html>
 
