@@ -146,15 +146,15 @@ Scripts
                         //$("#firstPage").height(auto);
                     var trs;
                     trs = "<tr><td style=\"border:1px solid black;width:70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">开始时间(The start time)</p></td>" +
-                        "<td style=\"border:1px solid black;width:190px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">医嘱内容(Medical content)</p></td>" +
-                        "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">医师签名(Physician signature)</p></td>" +
-                        "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">执行时间(execution time)</p></td>" +
-                        "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 10px\">执行人签名(Signature of executor)</p></td>" +
-                        "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">核对人签名(Check signature)</p></td>" +
-                        "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止时间(Stop time)</p></td>" +
-                        "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止护士签名(Stop nurse signature)</p></td>" +
-                        "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止医师签名(Stop physician signature)</p></td>"+
-                        "<td style=\"border:1px solid black;width:70px;text-align: center\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+1+"</p></td></tr>"
+                        "<td style=\"border:1px solid black;width:190px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">医嘱内容(Medical content)</p></td>" +
+                        "<td style=\"border:1px solid black;width:70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">医师签名(Physician signature)</p></td>" +
+                        "<td style=\"border:1px solid black;width:70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">执行时间(execution time)</p></td>" +
+                        "<td style=\"border:1px solid black;width:70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 10px\">执行人签名(Signature of executor)</p></td>" +
+                        "<td style=\"border:1px solid black;width:70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">核对人签名(Check signature)</p></td>" +
+                        "<td style=\"border:1px solid black;width:70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止时间(Stop time)</p></td>" +
+                        "<td style=\"border:1px solid black;width:70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止护士签名(Stop nurse signature)</p></td>" +
+                        "<td style=\"border:1px solid black;width:70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止医师签名(Stop physician signature)</p></td>"+
+                        "<td style=\"border:1px solid black;width:70px;height: 50px;text-align: center\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+1+"</p></td></tr>"
 
                     for(var i = 0 ; i < data.length ; i++){
                         if (isNullOrEmpty(data[i].startTime)) {
@@ -165,15 +165,15 @@ Scripts
                         }
 
                         trs += "<tr class=\"trCount\"><td style=\"border:1px solid black;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+ data[i].startTime +"</p></td>" +
-                            "<td style=\"border:1px solid black;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+ data[i].name +"</p></td>" +
-                            "<td style=\"border:1px solid black;\"></td>" +
-                            "<td style=\"border:1px solid black;\"></td>" +
-                            "<td style=\"border:1px solid black;\"></td>" +
-                            "<td style=\"border:1px solid black;\"></td>" +
-                            "<td style=\"border:1px solid black;\"></td>" +
-                            "<td style=\"border:1px solid black;\"></td>" +
-                            "<td style=\"border:1px solid black;\"></td>"+
-                            "<td style=\"border:1px solid black;text-align: center\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(i+2)+"</p></td></tr>";
+                            "<td style=\"border:1px solid black;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+ data[i].name +"</p></td>" +
+                            "<td style=\"border:1px solid black;height: 50px\"></td>" +
+                            "<td style=\"border:1px solid black;height: 50px\"></td>" +
+                            "<td style=\"border:1px solid black;height: 50px\"></td>" +
+                            "<td style=\"border:1px solid black;height: 50px\"></td>" +
+                            "<td style=\"border:1px solid black;height: 50px\"></td>" +
+                            "<td style=\"border:1px solid black;height: 50px\"></td>" +
+                            "<td style=\"border:1px solid black;height: 50px\"></td>"+
+                            "<td style=\"border:1px solid black;text-align: center;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(i+2)+"</p></td></tr>";
                     }
                     $("#table_id").append(trs);
                     }
@@ -182,15 +182,15 @@ Scripts
                         //第一页肯定显示
                         var trs;
                         trs = "<tr><td style=\"border:1px solid black;width:70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">开始时间(The start time)</p></td>" +
-                            "<td style=\"border:1px solid black;width:190px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">医嘱内容(Medical content)</p></td>" +
-                            "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">医师签名(Physician signature)</p></td>" +
-                            "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">执行时间(execution time)</p></td>" +
-                            "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 10px\">执行人签名(Signature of executor)</p></td>" +
-                            "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">核对人签名(Check signature)</p></td>" +
-                            "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止时间(Stop time)</p></td>" +
-                            "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止护士签名(Stop nurse signature)</p></td>" +
-                            "<td style=\"border:1px solid black;width:70px;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止医师签名(Stop physician signature)</p></td>"+
-                            "<td style=\"border:1px solid black;width:70px;text-align: center\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+1+"</p></td></tr>"
+                            "<td style=\"border:1px solid black;width:190px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">医嘱内容(Medical content)</p></td>" +
+                            "<td style=\"border:1px solid black;width:70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">医师签名(Physician signature)</p></td>" +
+                            "<td style=\"border:1px solid black;width:70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">执行时间(execution time)</p></td>" +
+                            "<td style=\"border:1px solid black;width:70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 10px\">执行人签名(Signature of executor)</p></td>" +
+                            "<td style=\"border:1px solid black;width:70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">核对人签名(Check signature)</p></td>" +
+                            "<td style=\"border:1px solid black;width:70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止时间(Stop time)</p></td>" +
+                            "<td style=\"border:1px solid black;width:70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止护士签名(Stop nurse signature)</p></td>" +
+                            "<td style=\"border:1px solid black;width:70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">停止医师签名(Stop physician signature)</p></td>"+
+                            "<td style=\"border:1px solid black;width:70px;height: 50px;text-align: center\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+1+"</p></td></tr>"
 
                         for(var i = 0 ; i < 17 ; i++){
                             if (isNullOrEmpty(data[i].startTime)) {
@@ -201,15 +201,15 @@ Scripts
                             }
 
                             trs += "<tr class=\"trCount\"><td style=\"border:1px solid black;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+ data[i].startTime +"</p></td>" +
-                                "<td style=\"border:1px solid black;\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+ data[i].name +"</p></td>" +
-                                "<td style=\"border:1px solid black;\"></td>" +
-                                "<td style=\"border:1px solid black;\"></td>" +
-                                "<td style=\"border:1px solid black;\"></td>" +
-                                "<td style=\"border:1px solid black;\"></td>" +
-                                "<td style=\"border:1px solid black;\"></td>" +
-                                "<td style=\"border:1px solid black;\"></td>" +
-                                "<td style=\"border:1px solid black;\"></td>" +
-                                "<td style=\"border:1px solid black;text-align: center\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(i+2)+"</p></td></tr>";
+                                "<td style=\"border:1px solid black;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+ data[i].name +"</p></td>" +
+                                "<td style=\"border:1px solid black;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;height: 50px;text-align: center\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(i+2)+"</p></td></tr>";
                         }
                         $("#table_id").append(trs);
 
@@ -270,15 +270,15 @@ Scripts
                                 }
 
                                 trss += "<tr class=\"trCount\"><td style=\"border:1px solid black;width: 70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">" + data[j].startTime + "</p></td>" +
-                                    "<td style=\"border:1px solid black;width: 190px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">" + data[j].name + "</p></td>" +
-                                    "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                    "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                    "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                    "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                    "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                    "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                    "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                    "<td style=\"border:1px solid black;text-align: center;width: 70px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-18)+"</p></td></tr>";
+                                    "<td style=\"border:1px solid black;width: 190px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">" + data[j].name + "</p></td>" +
+                                    "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                    "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                    "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                    "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                    "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                    "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                    "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                    "<td style=\"border:1px solid black;text-align: center;width: 70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-18)+"</p></td></tr>";
                             }
 
                             //var tableId = 'table_id' + i;
@@ -310,15 +310,15 @@ Scripts
                             }
 
                             trss += "<tr class=\"trCount\"><td style=\"border:1px solid black;width: 70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">" + data[j].startTime + "</p></td>" +
-                                "<td style=\"border:1px solid black;width: 190px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">" + data[j].name + "</p></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;text-align: center;width: 70px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-18)+"</p></td></tr>";
+                                "<td style=\"border:1px solid black;width: 190px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">" + data[j].name + "</p></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;text-align: center;width: 70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-18)+"</p></td></tr>";
                         }
 
                         $("#table_id1").append(trss);
@@ -335,15 +335,15 @@ Scripts
                             }
 
                             trss2 += "<tr class=\"trCount\"><td style=\"border:1px solid black;width: 70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">" + data[j].startTime + "</p></td>" +
-                                "<td style=\"border:1px solid black;width: 190px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">" + data[j].name + "</p></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;text-align: center;width: 70px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-36)+"</p></td></tr>";
+                                "<td style=\"border:1px solid black;width: 190px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">" + data[j].name + "</p></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;text-align: center;width: 70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-36)+"</p></td></tr>";
                         }
 
                         $("#table_id2").append(trss2);
@@ -373,15 +373,15 @@ Scripts
                             }
 
                             trss += "<tr class=\"trCount\"><td style=\"border:1px solid black;width: 70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">" + data[j].startTime + "</p></td>" +
-                                "<td style=\"border:1px solid black;width: 190px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">" + data[j].name + "</p></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;text-align: center;width: 70px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-18)+"</p></td></tr>";
+                                "<td style=\"border:1px solid black;width: 190px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">" + data[j].name + "</p></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;text-align: center;width: 70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-18)+"</p></td></tr>";
                         }
 
                         $("#table_id1").append(trss);
@@ -397,15 +397,15 @@ Scripts
                             }
 
                             trss2 += "<tr class=\"trCount\"><td style=\"border:1px solid black;width: 70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">" + data[j].startTime + "</p></td>" +
-                                "<td style=\"border:1px solid black;width: 190px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">" + data[j].name + "</p></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;text-align: center;width: 70px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-36)+"</p></td></tr>";
+                                "<td style=\"border:1px solid black;width: 190px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">" + data[j].name + "</p></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;text-align: center;width: 70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-36)+"</p></td></tr>";
                         }
 
                         $("#table_id2").append(trss2);
@@ -422,15 +422,15 @@ Scripts
                             }
 
                             trss3 += "<tr class=\"trCount\"><td style=\"border:1px solid black;width: 70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">" + data[j].startTime + "</p></td>" +
-                                "<td style=\"border:1px solid black;width: 190px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">" + data[j].name + "</p></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;width: 70px\"></td>" +
-                                "<td style=\"border:1px solid black;text-align: center;width: 70px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-54)+"</p></td></tr>";
+                                "<td style=\"border:1px solid black;width: 190px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">" + data[j].name + "</p></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;width: 70px;height: 50px\"></td>" +
+                                "<td style=\"border:1px solid black;text-align: center;width: 70px;height: 50px\"><p style=\"padding:0px;margin:0px;font-size: 10px;line-height: 11px\">"+(j+2-54)+"</p></td></tr>";
                         }
 
                         $("#table_id3").append(trss3);

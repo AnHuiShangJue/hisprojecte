@@ -382,15 +382,15 @@ public class HisMedicalOrderDetailController extends BaseController {
         HisMedicalOrder hisMedicalOrder = hisMedicalOrderService.selectByNumber(number);
         if(hisMedicalOrder.getType() == 1) {
             if(type == 1)
-                modelAndView.setViewName("backend/hiscore/medicalorder/doctorAdvice");
+                modelAndView.setViewName("backend/hiscore/medicalorder/newDoctorAdvice");
             else
-                modelAndView.setViewName("backend/hiscore/medicalorder/continuePrintForDoctorAdvice");
+                modelAndView.setViewName("backend/hiscore/medicalorder/newContinuePrintForDoctorAdvice");
         }
         else if(hisMedicalOrder.getType() == 2){
             if(type == 1)
                 modelAndView.setViewName("backend/hiscore/medicalorder/temporaryOrders");
             else
-                modelAndView.setViewName("backend/hiscore/medicalorder/continuePrintForDoctorAdvice");
+                modelAndView.setViewName("backend/hiscore/medicalorder/newContinuePrintForDoctorAdvice");
         }
 
         HisHospitalManage hisHospitalManage = hisHospitalManageService.selectByHospNumber(hosptalregistNumber);
