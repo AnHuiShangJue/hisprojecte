@@ -501,7 +501,7 @@
     vertical-align: top;
     position: relative;
     height: 160px;
-    width: 120px;
+    width: 6.3%;
     /*transition: .5s;*/
 }
 .shoufenqin_box>div .big_sfq{
@@ -510,7 +510,7 @@
 }
 .shoufenqin_box>div span{
     display: inline-block;
-    width: 16px;
+    width: 0.83%;
     height: 100%;
     font-size: .7rem;
     color: #fff;
