@@ -22,4 +22,11 @@ public class WisdomBayController {
         modelAndView.addObject("title", "");
         return modelAndView;
     }
+
+    @RequestMapping("/contactus/index.ahsj")
+    ModelAndView contactusIndex(){
+        ModelAndView modelAndView = new ModelAndView("backend/wisdom/contact_us");
+        modelAndView.addObject("title","");
+        return modelAndView;
+    }
 }
