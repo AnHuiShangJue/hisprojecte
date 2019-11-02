@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<div th:replace="public/back_baselayout :: html"></div>
+</head>
+<body>
+
+<div class="row" style=" position: relative;    border-color: #E5E5E5;
+  top: 60px; width: 100%">
+    <a href="#" class="brand-logo"> <img src="/assets/app-assets/images/wisdom/two.png" height="110px"/></a>
+</div>
+<div style="
+  height:1px;
+  position: relative;
+  top: 100px;
+  width: 100%;
+  background:rgba(255,255,255,1);
+  border-width: 2px;
+  "></div>
+<div class="contain" style="
+top: 166px;
+    position: relative;
+    left: 26.5%;
+    width: 21.6%;
+    height: 12.2%;">
+    <img src="/assets/app-assets/images/wisdom/three.png" height="90px" width="90px"/>
+</div>
+<div class="contain" style="
+     top: 45px;
+    position: relative;
+    left: 47.7%;
+    width: 21.6%;
+    height: 12.2%;">
+    <img src="/assets/app-assets/images/wisdom/four.png" height="90px" width="90px"/>
+</div>
+<div class="contain" style="
+    top: -50px;
+    position: relative;
+    left: 71.75%;
+    width: 21.6%;
+    height: 12.2%;;">
+    <img src="/assets/app-assets/images/wisdom/five.png" height="90px" width="90px"/>
+</div>
+
+<!--<div th:replace="public/footer :: html"></div>-->
+<script th:inline="javascript">
+    $(window).load(function () {
+        setTimeout(function () {
+            Materialize.toast('<span>欢迎进入智慧湾</span>', 1500);
+        }, 3000);
+        window.onresize = function () {
+            var contentHeight = $(window).height() - $(".page-topbar").height() - $(".page-footer").height();
+            $('#frameContainer').height(contentHeight);
+        };
+    });
+    $('.one1').css("width", "480px");
+    $('.shoufenqin_box>div').hover(function () {
+        $('.shoufenqin_box>div').stop(true).animate({width: "160px"}, 220);
+        $(this).stop(true).animate({width: "650px"}, 220);
+        $(this).addClass("len").siblings().removeClass('len');
+    })
+</script>
+</body>
+
+</html>
