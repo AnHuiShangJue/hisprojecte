@@ -10,7 +10,7 @@ public class WisdomBayController {
 
     @RequestMapping("/list/index.ahsj")
     ModelAndView listIndex() {
-        ModelAndView modelAndView = new ModelAndView("backend/wisdom/test1");
+        ModelAndView modelAndView = new ModelAndView("backend/wisdom/wisdom_bay");
         modelAndView.addObject("title", "");
         return modelAndView;
     }
@@ -49,6 +49,12 @@ public class WisdomBayController {
     ModelAndView aboutwisdomIndex(){
         ModelAndView modelAndView = new ModelAndView("backend/wisdom/aboutwisdom");
         modelAndView.addObject("title","关于智慧湾");
+        return modelAndView;
+    }
+    @RequestMapping("/organization/index.ahsj")
+    ModelAndView organization(){
+        ModelAndView modelAndView = new ModelAndView("backend/wisdom/organization");
+        modelAndView.addObject("title","");
         return modelAndView;
     }
 }
