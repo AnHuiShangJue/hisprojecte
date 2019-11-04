@@ -22,10 +22,33 @@ public class WisdomBayController {
         return modelAndView;
     }
 
+    /**
+     *@Description 跳转至联系我们页面
+     *@Params
+     *@return
+     *@Author jin
+     *@Date 2019/11/4
+     *@Time 11:43
+    */
     @RequestMapping("/contactus/index.ahsj")
     ModelAndView contactusIndex(){
         ModelAndView modelAndView = new ModelAndView("backend/wisdom/contact_us");
-        modelAndView.addObject("title","");
+        modelAndView.addObject("title","联系我们");
+        return modelAndView;
+    }
+
+    /**
+     *@Description 跳转关于智慧湾页面
+     *@Params
+     *@return
+     *@Author jin
+     *@Date 2019/11/4
+     *@Time 11:41
+    */
+    @RequestMapping("/aboutwisdom/index.ahsj")
+    ModelAndView aboutwisdomIndex(){
+        ModelAndView modelAndView = new ModelAndView("backend/wisdom/aboutwisdom");
+        modelAndView.addObject("title","关于智慧湾");
         return modelAndView;
     }
 }
