@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:ahsj="http://www.anhuishangjue.com">
+
+<div th:replace="public/base_list :: html" ></div>
+<head>
+    <style>
+        .background-image-contactus{
+            width:100%;
+            height:10%;
+            margin-top: 2%;
+        }
+        .organization-chinese-font{
+            width:180px;
+            height:62px;
+            font-size:44px;
+            font-family:PingFangSC-Medium,PingFang SC;
+            font-weight:500;
+            color:rgba(56,52,52,1);
+            line-height:62px;
+        }
+        .organization-english-font{
+            width:382px;
+            height:45px;
+            font-size:32px;
+            font-family:PingFangSC-Medium,PingFang SC;
+            font-weight:500;
+            color:rgba(105,102,102,1);
+            line-height:45px;
+        }
+        .underline{
+            width: 76%;
+            height: 3px;
+            text-align: center;
+            position: relative;
+            background-color:#CFCFCF;
+        }
+        .underline-fount{
+            width:135px;
+            height:62px;
+            font-size:44px;
+            font-family:PingFangSC-Light,PingFang SC;
+            font-weight:300;
+            color:rgba(197,194,194,1);
+            line-height:62px;
+        }.detail{
+        }.detail1{
+            width: 18%;
+            height: 62px;
+            background-color:rgba(255,171,116,1);
+        }.detail2{
+            width: 18%;
+            height: 62px;
+            background:rgba(236,115,101,1);
+        }.detail3{
+            width: 18%;
+            height: 62px;
+            background:rgba(77,121,194,1);
+        }.detail4{
+            width: 18%;
+            height: 62px;
+            background:rgba(47,47,92,1);
+        }.fount{
+            width:89px;
+            height:41px;
+            font-size:29px;
+            font-family:PingFangSC-Medium,PingFang SC;
+            font-weight:500;
+            color:rgba(255,255,255,1);
+            line-height:41px;
+        }.fount1{
+            width:153px;
+            height:245px;
+            font-size:18px;
+            font-family:PingFangSC-Regular,PingFang SC;
+            font-weight:400;
+            color:rgba(136,136,136,1);
+            line-height:35px;
+            letter-spacing:4px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="row">
+    <div th:replace="public/back_baselayout :: html" class="row"></div>
+    <div class="row background-image-contactus">
+        <img src="/assets/app-assets/images/wisdom/contactus.png" style="width: 100%"/>
+    </div>
+    <div class="row">
+        <div class="row col s12 x12 l12 xl12" style="text-align: center">
+            <span class="organization-chinese-font">组织架构</span>
+            <br><span class="organization-english-font">Organizational structure</span>
+        </div>
+    </div>
+    <div class="row" style="text-align: -webkit-center;">
+        <img src="/assets/app-assets/images/wisdom/department01.png" style="margin-right: 5%;">
+        <img src="/assets/app-assets/images/wisdom/department02.png" style="margin-right: 10%;">
+        <img src="/assets/app-assets/images/wisdom/department03.png" style="margin-left: 10%;">
+        <img src="/assets/app-assets/images/wisdom/department04.png" style="margin-left: 5%;">
+        <br><div class="underline"></div>
+        <br><span class="underline-fount">智慧湾</span>
+    </div>
+    <div class="row col s12 x12 l12 xl12 detail" style="margin-left: 11%;    width: 89%;">
+        <div class="detail1 row col s3 x3 l3 xl3" style="width: 17%;text-align: center"><span class="fount">资讯部</span></div>
+        <div class="detail2 row col s3 x3 l3 xl3" style="width: 17%;margin-left: 3%;text-align: center"><span class="fount">研发部</span></div>
+        <div class="detail3 row col s3 x3 l3 xl3" style="width: 17%;margin-left: 18%;text-align: center"><span class="fount">综合部</span></div>
+        <div class="detail4 row col s3 x3 l3 xl3" style="width: 17%;margin-left: 3%;text-align: center"><span class="fount">外联部</span></div>
+    </div>
+    <div class="row col s12 x12 l12 xl12 detail" style="margin-left: 17%;    width: 83%;">
+        <br><div class="fount1  row col s3 x3 l3 xl3"  style="width: 19%;"><span>资讯总监</span><br><span>咨询顾问</span><br><span>资讯经理</span><br><span>业务专家(兼)</span><br><span>项目经理</span><br><span>分析员</span><br><span>PTA</span></div>
+        <div class="fount1 row col s3 x3 l3 xl3"  style="width: 20%;margin-left: 3%;" ><span>项目经理</span><br><span>产品经理</span><br><span>架构师</span><br><span>开发组长</span><br><span>开发测试</span><br><span>运维</span></div>
+        <div class="fount1 row col s3 x3 l3 xl3"  style="width: 14%;margin-left: 18%;" ><span>商务经理</span><br><span>客服经理</span></div>
+        <div class="fount1 row col s3 x3 l3 xl3"  style="width: 14%;margin-left: 7%;" ><span>行政专员</span><br><span>人事专员</span><br><span>财务专员</span></div>
+    </div>
+</div>
+</body>
+<div th:replace="public/footer :: html"></div>
+<script>
+</script>
+</html>

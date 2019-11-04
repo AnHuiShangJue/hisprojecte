@@ -51,4 +51,10 @@ public class WisdomBayController {
         modelAndView.addObject("title","关于智慧湾");
         return modelAndView;
     }
+    @RequestMapping("/organization/index.ahsj")
+    ModelAndView organization(){
+        ModelAndView modelAndView = new ModelAndView("backend/wisdom/organization");
+        modelAndView.addObject("title","");
+        return modelAndView;
+    }
 }
