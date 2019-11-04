@@ -42,6 +42,9 @@ public interface HisMediEnterDetailsMapper extends BaseMapper<HisMediEnterDetail
      **/
     List<? extends HisMediEnterDetails> list(PageBean<HisMediEnterDetails> pageBean);
 
+
+    List<? extends HisMediEnterDetails> listOverdate(PageBean<HisMediEnterDetails> pageBean);
+
     /**
      * @return java.util.List<com.ahsj.hiscore.entity.HisMediEnterDetails>
      * @Description 根据药品ID查找且排序

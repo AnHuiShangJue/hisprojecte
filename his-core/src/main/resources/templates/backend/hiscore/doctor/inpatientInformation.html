@@ -7,11 +7,11 @@
       data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
 
 <nav class="nav-extended">
-    <div class="nav-wrapper teal purple lighten-5" >
+    <div class="nav-wrapper teal purple lighten-5">
         <input id="patientName" th:value="  '姓名：'+ ${patientName} + '   性别：'+ ${hisHospitalManage.sexName}+ '   年龄：'+ ${hisHospitalManage.age} + '   身份证号：'+ ${hisHospitalManage.idcard} +
          '   手机号：'+ ${hisHospitalManage.phoneNumber} + '     病床：'+ ${hisHospitalManage.bedsNumber}" th:readonly="true"/>
     </div>
-    <div class="nav-content " >
+    <div class="nav-content ">
         <ul class="tabs tabs-transparent">
             <li class="tab"><a class="active" href="#test2">医嘱查看与填写</a></li>
             <li class="tab"><a href="#test1">护嘱查看</a></li>
@@ -41,32 +41,31 @@
     </div>
 </div>
 <div id="test2" class="col s12">
-        <div class="col s12 x12 l12 xl12">
-            <div class="container">
-                <div class="row">
-                    <div class="col s12 x12 l12 xl12">
-                        <div class="card">
-                            <div class="card-content">
-                                <h4 class="card-title">操作台
-                                </h4><label style="color:black">Console
-                            </label>
-                                <div class="row">
-                                    <div class="col s2 m2 l2 xl2 offset-xl10">
-                                        <a id="createBtn" class="btn waves-effect waves-light red"><i
-                                                class="material-icons  white-text tooltipped " data-position="bottom"
-                                                data-delay="50" data-tooltip="新增">add</i></a>
-                                      <!--  <a id="deleteManyBtn"
-                                           class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
-                                                class="material-icons white-text tooltipped" data-position="bottom"
-                                                data-delay="50" data-tooltip="批量删除">delete</i></a>-->
-                                    </div>
+    <div class="col s12 x12 l12 xl12">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 x12 l12 xl12">
+                    <div class="card">
+                        <div class="card-content">
+                            <h4 class="card-title">操作台
+                            </h4><label style="color:black">Console
+                        </label>
+                            <div class="row">
+                                <div class="col s2 m2 l2 xl2 offset-xl10">
+                                    <a id="createBtn" class="btn waves-effect waves-light red"><i
+                                            class="material-icons  white-text tooltipped " data-position="bottom"
+                                            data-delay="50" data-tooltip="新增">add</i></a>
+                                    <!--  <a id="deleteManyBtn"
+                                         class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
+                                              class="material-icons white-text tooltipped" data-position="bottom"
+                                              data-delay="50" data-tooltip="批量删除">delete</i></a>-->
                                 </div>
-                                <!--Form Advance-->
-                                <div class="row">
-                                    <div id="refreshtable1" class="col l12 m12 l12 xl12">
-                                        <table id="data-table-simple-medicalOrder" class="display">
-                                        </table>
-                                    </div>
+                            </div>
+                            <!--Form Advance-->
+                            <div class="row">
+                                <div id="refreshtable1" class="col l12 m12 l12 xl12">
+                                    <table id="data-table-simple-medicalOrder" class="display">
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -74,6 +73,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </div>
 <div>
     <input type="hidden" id="recordId" th:value="${medicalRecordId}">
@@ -139,7 +139,7 @@
                         "title": "所属病床",
                         "data": "bedNumber",
                         "name": ""
-                    },{
+                    }, {
                         "title": "编号",
                         "data": "number",
                         "name": "number"
@@ -178,14 +178,16 @@
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn +
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"护嘱明细查看\" onclick=\"visitDetails('"+ row.number + "');\"> <i class='material-icons'>visibility</i></a>";
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"护嘱明细查看\" onclick=\"visitDetails('" + row.number + "');\"> <i class='material-icons'>visibility</i></a>";
                             return rtnBtn;
                             // 返回自定义内容
 
                         }
                     }
                 ],
-                "order":  [ [1, 'asc'] ]
+                "order": [
+                    [1, 'asc']
+                ],
             }
         });
 
@@ -201,7 +203,7 @@
             loadingMessage: 'Loading...',
             dataTable: {
                 "ajax": {
-                    "url": CTX + "/api/hisMedicalOrder/listByRecordId.ahsj?token=" + TOKEN + "&recordId="+ $("#recordId").val(), // ajax source
+                    "url": CTX + "/api/hisMedicalOrder/listByRecordId.ahsj?token=" + TOKEN + "&recordId=" + $("#recordId").val(), // ajax source
                 },
                 "columns": [
                     {
@@ -260,11 +262,11 @@
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn +
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看医嘱详细信息\" onclick='medicalOrderDetail(\"" + row.number + "\","+row.type+");'><i class='material-icons'>visibility</i></a>"+
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"打印（Print）\" onclick='print(\"" + row.number + "\");'> <i class='material-icons'>print</i></a>"+
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"续接打印（Continue printing）\" onclick='ContinePrint(\"" + row.number + "\");'> <i class='material-icons'>print</i></a>"+
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='editMedicalOrder(" + row.id + ");'> <i class='material-icons'>edit</i></a>" ;
-                                // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick='deleteInitForMedicalOrder(" + row.id + ");'> <i class='material-icons'>delete</i></a>";
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看医嘱详细信息\" onclick='medicalOrderDetail(\"" + row.number + "\"," + row.type + ");'><i class='material-icons'>visibility</i></a>" +
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"打印（Print）\" onclick='print(\"" + row.number + "\");'> <i class='material-icons'>print</i></a>" +
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"续接打印（Continue printing）\" onclick='ContinuePrint(\"" + row.number + "\");'> <i class='material-icons'>print</i></a>" +
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='editMedicalOrder(" + row.id + ");'> <i class='material-icons'>edit</i></a>";
+                            // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick='deleteInitForMedicalOrder(" + row.id + ");'> <i class='material-icons'>delete</i></a>";
 
                             return rtnBtn;
                             // 返回自定义内容
@@ -283,7 +285,7 @@
         var hosptalregistNumber = $("#number").val();
         dialog.confirm('确定打印吗?', function (index, layero) {
             if (number != "" && number != null && number != undefined) {
-                var url = CTX + "/api/medicalOrderDetail/printDoctorAdvice/index.ahsj?number=" + number + "&token=" + TOKEN+"&hosptalregistNumber="+hosptalregistNumber;
+                var url = CTX + "/api/medicalOrderDetail/printDoctorAdvice/index.ahsj?number=" + number + "&token=" + TOKEN + "&hosptalregistNumber=" + hosptalregistNumber + "&type=" + 1;
                 dialog.showDialog(url, "打印凭证预览", "800px", "700px");
             } else {
                 dialog.warn("没有需要打印的内容！")
@@ -291,31 +293,63 @@
         });
     }
 
-    function ContinePrint(number) {
+    function ContinuePrint(number) {
         var hosptalregistNumber = $("#number").val();
-        dialog.confirm('确定打印吗?', function (index, layero) {
-            if (number != "" && number != null && number != undefined) {
-                var url = CTX + "/api/medicalOrderDetail/printDoctorAdvice/index.ahsj?number=" + number + "&token=" + TOKEN+"&hosptalregistNumber="+hosptalregistNumber;
-                dialog.showDialog(url, "打印凭证预览", "800px", "700px");
-            } else {
-                dialog.warn("没有需要打印的内容！")
+        layer.open({
+            content: '请输入医嘱单右侧序号（Please enter the number on the right side of the doctor\'s order）：'+'<input id="continueCount" type="number">'
+            ,btn: ['首页续接打印（Home continued printing）', '非首页续接打印（Non-home page continued printing）']
+            ,yes: function(index, layero){
+                //按钮【按钮一】的回调
+                if (number != "" && number != null && number != undefined) {
+                    var url = CTX + "/api/medicalOrderDetail/printDoctorAdvice/index.ahsj?number=" + number + "&token=" + TOKEN + "&hosptalregistNumber=" + hosptalregistNumber + "&type=" + 2+"&continueCount="+$("#continueCount").val()+"&isFirst=1";
+                    dialog.showDialog(url, "打印凭证预览", "700px", "700px");
+                } else {
+                    dialog.warn("没有需要打印的内容！")
+                }
+            }
+            ,btn2: function(index, layero){
+                //按钮【按钮二】的回调
+                if (number != "" && number != null && number != undefined) {
+                    var url = CTX + "/api/medicalOrderDetail/printDoctorAdvice/index.ahsj?number=" + number + "&token=" + TOKEN + "&hosptalregistNumber=" + hosptalregistNumber + "&type=" + 2+"&continueCount="+$("#continueCount").val();
+                    dialog.showDialog(url, "打印凭证预览", "700px", "700px");
+                } else {
+                    dialog.warn("没有需要打印的内容！")
+                }
+
+                return false ;
+            }
+            ,cancel: function(){
+                //右上角关闭回调
+
+                // return false ;
             }
         });
+
+        // dialog.confirm('确定打印吗?', function (index, layero) {
+        //     if (number != "" && number != null && number != undefined) {
+        //         var url = CTX + "/api/medicalOrderDetail/printDoctorAdvice/index.ahsj?number=" + number + "&token=" + TOKEN + "&hosptalregistNumber=" + hosptalregistNumber + "&type=" + 2;
+        //         dialog.showDialog(url, "打印凭证预览", "800px", "700px");
+        //     } else {
+        //         dialog.warn("没有需要打印的内容！")
+        //     }
+        // });
     }
+
     //查看护嘱明细
     function visitDetails(number) {
-        var url = CTX+"/api/hisAnkle/listDetails/index.ahsj?token=" + TOKEN + "&number=" + number;
+        var url = CTX + "/api/hisAnkle/listDetails/index.ahsj?token=" + TOKEN + "&number=" + number;
         dialog.show(url, "护嘱记录明细");
     }
+
     //查看医嘱明细
-    function medicalOrderDetail(number,type) {
+    function medicalOrderDetail(number, type) {
         var hosptalregistNumber = $("#number").val()
-        var url = CTX+ "/api/medicalOrderDetail/listDetailByNumber/index.ahsj?token="+TOKEN+"&number="+number+"&isDischarged="+[[${hisHospitalManage.isDischarged}]]+"&hosptalregistNumber="+hosptalregistNumber+"&type="+type;
+        var url = CTX + "/api/medicalOrderDetail/listDetailByNumber/index.ahsj?token=" + TOKEN + "&number=" + number + "&isDischarged=" + [[${hisHospitalManage.isDischarged}]] + "&hosptalregistNumber=" + hosptalregistNumber + "&type=" + type;
         dialog.show(url, "查看医嘱详细信息");
     }
 
     function editMedicalOrder(id) {
-        var url = CTX+ "/api/hisMedicalOrder/update/index.ahsj?token="+TOKEN+"&id="+id ;
+        var url = CTX + "/api/hisMedicalOrder/update/index.ahsj?token=" + TOKEN + "&id=" + id;
         dialog.show(url, "医嘱信息管理");
     }
 
@@ -349,12 +383,11 @@
     }
 
 
-
     function initBtn() {
         //新增按钮
         $("#createBtn").click(function () {
-            var url = CTX +"/api/hisMedicalOrder/update/index.ahsj?token="+TOKEN+ "&recordId="+ $("#recordId").val()+ "&hosptalregistId="+ [[${hisHospitalManage.id}]]+
-                "&patientId="+ [[${hisHospitalManage.patientId}]];
+            var url = CTX + "/api/hisMedicalOrder/update/index.ahsj?token=" + TOKEN + "&recordId=" + $("#recordId").val() + "&hosptalregistId=" + [[${hisHospitalManage.id}]] +
+                "&patientId=" + [[${hisHospitalManage.patientId}]];
             dialog.show(url, "医嘱信息添加")
         });
         $("#deleteManyBtn").click(function () {
@@ -374,7 +407,7 @@
         });
     }
 
-    $("input").change(function(){
+    $("input").change(function () {
         $(this).val($(this).val().trim());
     });
 </script>

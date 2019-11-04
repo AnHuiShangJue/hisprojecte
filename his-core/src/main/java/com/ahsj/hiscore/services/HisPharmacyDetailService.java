@@ -56,7 +56,7 @@ public interface HisPharmacyDetailService {
     Message delete(Long[] ids)throws Exception;
 
     /**
-     *@Description 
+     *@Description
      *@Params [id]
      *@return com.ahsj.hiscore.entity.HisPharmacyDetail
      *@Author zhushixiang
