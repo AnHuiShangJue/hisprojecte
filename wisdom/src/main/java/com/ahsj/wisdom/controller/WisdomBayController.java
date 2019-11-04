@@ -10,7 +10,7 @@ public class WisdomBayController {
 
     @RequestMapping("/list/index.ahsj")
     ModelAndView listIndex() {
-        ModelAndView modelAndView = new ModelAndView("backend/wisdom/test1");
+        ModelAndView modelAndView = new ModelAndView("backend/wisdom/wisdom_bay");
         modelAndView.addObject("title", "");
         return modelAndView;
     }
