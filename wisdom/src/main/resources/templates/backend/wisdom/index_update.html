@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <div th:replace="public/back_baselayout :: html"></div>
-<script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-<div class="row col s12 x12 l12 xl12" id="introduce">
+<div class="row col s12 x12 l12 xl12">
     <div class="row col s12 x12 l12 xl12" style="background:rgba(11,13,50,1); height:677px;">
         <div class="row">
             <div class="row col s6 x6 l6 xl6" style="
@@ -17,7 +15,7 @@
     line-height: 70px;
     margin-left: 8%;
     padding-top: 7%;
-" >{{wisdomIndex.introduce}}
+">智慧湾介绍
             </div>
             <div class="row col s6 x6 l6 xl6" style="  width: 700px;
     height: 270px;
@@ -277,31 +275,15 @@ height:595px;
         $(this).stop(true).animate({width: "650px"}, 220);
         $(this).addClass("len").siblings().removeClass('len');
     })
-
-
+</script>
+<script>
     $('.one1').css("width", '480px');
     $('.shoufenqin_box>div').hover(function () {
         $('.shoufenqin_box>div').stop(true).animate({width: "120px"}, 500);
         $(this).stop(true).animate({width: "480px"}, 500);
         $(this).addClass("len").siblings().removeClass('len');
     })
-    new Vue({
-        el: '#introduce',
-        data() {
-            return {
-                wisdomIndex: null
-            }
-        },
-        mounted() {
-            axios
-                .post('/api/wisdombay/selectAll.ahsj')
-                .then(response => (this.wisdomIndex = response))
-                .catch(function (error) { // 请求失败处理
-                    console.log(error);
-                });
-        }
-    })
-
-
 </script>
+
+
 </html>
