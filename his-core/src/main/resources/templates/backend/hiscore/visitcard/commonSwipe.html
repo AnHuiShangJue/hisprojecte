@@ -177,9 +177,9 @@
     function initBtn() {
         //搜索按钮
         $('#searchBtn').click(function () {
-            var reg1 = new RegExp(/^R\d{13}$/);
-            var reg2 = new RegExp(/^HR\d{13}$/);
-            var reg3 = new RegExp(/^HM\d{13}$/);
+            var reg1 = new RegExp(/^R\d{9}$/);
+            var reg2 = new RegExp(/^HR\d{9}$/);
+            var reg3 = new RegExp(/^HM\d{9}$/);
             commonNumber = $("#commonNumber").val();
             if(reg1.test(commonNumber) || reg2.test(commonNumber) || reg3.test(commonNumber)  ){
                 grid.search();

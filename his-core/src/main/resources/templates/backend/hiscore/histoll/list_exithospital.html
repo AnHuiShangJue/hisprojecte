@@ -201,7 +201,7 @@ function  resetNumber(){}
     function initBtn() {
         //搜索按钮
         $('#searchBtn').click(function () {
-            var reg = new RegExp(/^HR\d{13}$/);
+            var reg = new RegExp(/^HR\d{9}$/);
             var MedicalRecordId = $("#MedicalRecordId").val();
             if(reg.test(MedicalRecordId)){
                 grid.search();

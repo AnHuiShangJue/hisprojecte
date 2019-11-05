@@ -199,8 +199,8 @@
     function initBtn() {
         //搜索按钮
         $('#searchBtn').click(function () {
-            var reg1 = new RegExp(/^R\d{13}$/);
-            var reg2 = new RegExp(/^HM\d{13}$/);
+            var reg1 = new RegExp(/^R\d{9}$/);
+            var reg2 = new RegExp(/^HM\d{9}$/);
             var registerNumber = $("#registerNumber").val();
             if(reg1.test(registerNumber)||reg2.test(registerNumber)){
                 grid.search();

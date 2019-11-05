@@ -228,7 +228,7 @@
     function initBtn() {
         //搜索按钮
         $('#searchBtn').click(function () {
-            var reg1 = new RegExp(/^HR\d{13}$/);
+            var reg1 = new RegExp(/^HR\d{9}$/);
             var MedicalRecordId = $("#MedicalRecordId").val();
             if(reg1.test(MedicalRecordId)){
                 grid.search();

@@ -182,8 +182,8 @@
     //搜索按钮
     function initBtn() {
         $('#searchBtn').click(function () {
-            var reg1 = new RegExp(/^HTR\d{13}$/);
-            var reg2 = new RegExp(/^HM\d{13}$/);
+            var reg1 = new RegExp(/^HTR\d{9}$/);
+            var reg2 = new RegExp(/^HM\d{9}$/);
             var number = $("#number").val();
             if (reg1.test(number) || reg2.test(number)) {
                 grid.search();
