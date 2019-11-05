@@ -44,21 +44,32 @@ public class WisdomBayController {
         return modelAndView;
     }
 
+    /**
+     * @Description 欢迎页
+     * @Params: []
+     * @Author: dingli
+     * @Return: org.springframework.web.servlet.ModelAndView
+     * @Date 2019/11/5
+     * @Time 14:18
+     **/
     @RequestMapping("/lanhu/index.ahsj")
-    ModelAndView lanhuIndex() {
+    ModelAndView lanhuIndex() throws Exception {
+        List<WisdomIndex> wisdomIndices = wisdomIndexService.selectAll();
+        WisdomIndex wisdomIndex = wisdomIndices.get(0);
         ModelAndView modelAndView = new ModelAndView("backend/wisdom/index");
-        modelAndView.addObject("title", "");
+        modelAndView.addObject("title", "欢迎页");
+        modelAndView.addObject("wisdomIndex", wisdomIndex);
         return modelAndView;
     }
 
     /**
-     *@Description 跳转至联系我们页面
-     *@Params
-     *@return
-     *@Author jin
-     *@Date 2019/11/4
-     *@Time 11:43
-    */
+     * @return
+     * @Description 跳转至联系我们页面
+     * @Params
+     * @Author jin
+     * @Date 2019/11/4
+     * @Time 11:43
+     */
     @RequestMapping("/contactus/index.ahsj")
     ModelAndView contactusIndex() {
         ModelAndView modelAndView = new ModelAndView("backend/wisdom/contact_us");
@@ -126,28 +137,29 @@ public class WisdomBayController {
         ModelAndView modelAndView = new ModelAndView("backend/wisdom/upload");
         modelAndView.addObject("title", "");
         modelAndView.addObject("name", "1.jpg");
-        modelAndView.addObject("title","联系我们");
+        modelAndView.addObject("title", "联系我们");
         return modelAndView;
     }
 
     /**
-     *@Description 跳转关于智慧湾页面
-     *@Params
-     *@return
-     *@Author jin
-     *@Date 2019/11/4
-     *@Time 11:41
-    */
+     * @return
+     * @Description 跳转关于智慧湾页面
+     * @Params
+     * @Author jin
+     * @Date 2019/11/4
+     * @Time 11:41
+     */
     @RequestMapping("/aboutwisdom/index.ahsj")
-    ModelAndView aboutwisdomIndex(){
+    ModelAndView aboutwisdomIndex() {
         ModelAndView modelAndView = new ModelAndView("backend/wisdom/aboutwisdom");
-        modelAndView.addObject("title","关于智慧湾");
+        modelAndView.addObject("title", "关于智慧湾");
         return modelAndView;
     }
+
     @RequestMapping("/organization/index.ahsj")
-    ModelAndView organization(){
+    ModelAndView organization() throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/wisdom/organization");
-        modelAndView.addObject("title","");
+        modelAndView.addObject("title", "");
         return modelAndView;
     }
 
@@ -160,7 +172,7 @@ public class WisdomBayController {
      * @Time 16:16
      **/
     @RequestMapping("/selectAll.ahsj")
-    public  List<WisdomIndex> selectAll() throws Exception {
+    public List<WisdomIndex> selectAll() throws Exception {
         return wisdomIndexService.selectAll();
     }
 }

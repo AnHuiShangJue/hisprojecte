@@ -1,11 +1,9 @@
 package com.ahsj.wisdom.dao;
 
 import com.ahsj.wisdom.entity.WisdomIndex;
-import org.apache.ibatis.annotations.Mapper;
-
 
 import java.util.List;
-@Mapper
+
 public interface WisdomIndexMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -18,7 +16,6 @@ public interface WisdomIndexMapper {
     int updateByPrimaryKeySelective(WisdomIndex record);
 
     int updateByPrimaryKey(WisdomIndex record);
-
     /**
      * @Description 获取所有的值
      * @Params: []
@@ -38,5 +35,4 @@ public interface WisdomIndexMapper {
      * @Time 16:39
      **/
     int updateByName(WisdomIndex record);
-
 }
