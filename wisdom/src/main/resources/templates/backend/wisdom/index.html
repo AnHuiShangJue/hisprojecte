@@ -10,7 +10,7 @@
 <div th:replace="public/back_baselayout :: html"></div>
 
 <div class="row col s12 x12 l12 xl12">
-    <div class="row" style="background:rgba(11,13,50,1); height:677px; background-image: url('/assets/app-assets/images/wisdom/y.png')">
+    <div class="row" style="background:rgba(11,13,50,1); height:677px; ">
         <div class="row">
             <div class="row col s6 x6 l6 xl6" style="
     height: 140px;
@@ -23,7 +23,11 @@
     padding-top: 7%;">
                 <span th:text="${wisdomIndex.introduceOne}"></span>
             </div>
-
+            <div>
+            <img src="/assets/app-assets/images/wisdom/x.png" alt="" style="    width: 1448px;
+    height: 677px;
+    margin-left: 455px;
+    margin-top: -160px;"></div>
             <div class="row col s6 x6 l6 xl6" style="  width: 700px;
     height: 270px;
     font-size: 32px;
@@ -32,8 +36,10 @@
     color: rgba(255,255,255,1);
     line-height: 45px;
     margin-left: 8%;
-    margin-top: 6%;">
-                <span th:text="${wisdomIndex.detailsOne}"></span>
+    margin-top: -21%;">
+                <span style="  z-index: 10;
+    width: 689px;
+    position: absolute;" th:text="${wisdomIndex.detailsOne}"></span>
             </div>
         </div>
     </div>
