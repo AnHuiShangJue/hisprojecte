@@ -1,81 +1,231 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ahsj.wisdom.dao.WisdomIndexMapper">
-    <resultMap id="BaseResultMap" type="com.ahsj.wisdom.entity.WisdomIndex">
-        <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="name" property="name" jdbcType="VARCHAR"/>
-        <result column="value" property="value" jdbcType="VARCHAR"/>
-    </resultMap>
-    <sql id="Base_Column_List">
-    id, name, value
+  <resultMap id="BaseResultMap" type="com.ahsj.wisdom.entity.WisdomIndex">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="introduce_one" jdbcType="VARCHAR" property="introduceOne" />
+    <result column="details_one" jdbcType="VARCHAR" property="detailsOne" />
+    <result column="introduce_two" jdbcType="VARCHAR" property="introduceTwo" />
+    <result column="spell" jdbcType="VARCHAR" property="spell" />
+    <result column="details_two" jdbcType="VARCHAR" property="detailsTwo" />
+    <result column="one1" jdbcType="VARCHAR" property="one1" />
+    <result column="one2" jdbcType="VARCHAR" property="one2" />
+    <result column="one3" jdbcType="VARCHAR" property="one3" />
+    <result column="one4" jdbcType="VARCHAR" property="one4" />
+    <result column="one5" jdbcType="VARCHAR" property="one5" />
+    <result column="one6" jdbcType="VARCHAR" property="one6" />
+    <result column="one7" jdbcType="VARCHAR" property="one7" />
+    <result column="one8" jdbcType="VARCHAR" property="one8" />
+    <result column="one9" jdbcType="VARCHAR" property="one9" />
+    <result column="one10" jdbcType="VARCHAR" property="one10" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, introduce_one, details_one, introduce_two, spell, details_two, one1, one2, one3, 
+    one4, one5, one6, one7, one8, one9, one10
   </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
-        select
-        <include refid="Base_Column_List"/>
-        from wisdom_index
-        where id = #{id,jdbcType=BIGINT}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wisdom_index
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from wisdom_index
     where id = #{id,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="com.ahsj.wisdom.entity.WisdomIndex">
-    insert into wisdom_index (id, name, value
-      )
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}
-      )
+  <insert id="insert" parameterType="com.ahsj.wisdom.entity.WisdomIndex">
+    insert into wisdom_index (id, introduce_one, details_one, 
+      introduce_two, spell, details_two, 
+      one1, one2, one3, one4, 
+      one5, one6, one7, one8, 
+      one9, one10)
+    values (#{id,jdbcType=BIGINT}, #{introduceOne,jdbcType=VARCHAR}, #{detailsOne,jdbcType=VARCHAR}, 
+      #{introduceTwo,jdbcType=VARCHAR}, #{spell,jdbcType=VARCHAR}, #{detailsTwo,jdbcType=VARCHAR}, 
+      #{one1,jdbcType=VARCHAR}, #{one2,jdbcType=VARCHAR}, #{one3,jdbcType=VARCHAR}, #{one4,jdbcType=VARCHAR}, 
+      #{one5,jdbcType=VARCHAR}, #{one6,jdbcType=VARCHAR}, #{one7,jdbcType=VARCHAR}, #{one8,jdbcType=VARCHAR}, 
+      #{one9,jdbcType=VARCHAR}, #{one10,jdbcType=VARCHAR})
   </insert>
-    <insert id="insertSelective" parameterType="com.ahsj.wisdom.entity.WisdomIndex">
-        insert into wisdom_index
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="name != null">
-                name,
-            </if>
-            <if test="value != null">
-                value,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=BIGINT},
-            </if>
-            <if test="name != null">
-                #{name,jdbcType=VARCHAR},
-            </if>
-            <if test="value != null">
-                #{value,jdbcType=VARCHAR},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.wisdom.entity.WisdomIndex">
-        update wisdom_index
-        <set>
-            <if test="name != null">
-                name = #{name,jdbcType=VARCHAR},
-            </if>
-            <if test="value != null">
-                value = #{value,jdbcType=VARCHAR},
-            </if>
-        </set>
-        where id = #{id,jdbcType=BIGINT}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.ahsj.wisdom.entity.WisdomIndex">
+  <insert id="insertSelective" parameterType="com.ahsj.wisdom.entity.WisdomIndex">
+    insert into wisdom_index
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="introduceOne != null">
+        introduce_one,
+      </if>
+      <if test="detailsOne != null">
+        details_one,
+      </if>
+      <if test="introduceTwo != null">
+        introduce_two,
+      </if>
+      <if test="spell != null">
+        spell,
+      </if>
+      <if test="detailsTwo != null">
+        details_two,
+      </if>
+      <if test="one1 != null">
+        one1,
+      </if>
+      <if test="one2 != null">
+        one2,
+      </if>
+      <if test="one3 != null">
+        one3,
+      </if>
+      <if test="one4 != null">
+        one4,
+      </if>
+      <if test="one5 != null">
+        one5,
+      </if>
+      <if test="one6 != null">
+        one6,
+      </if>
+      <if test="one7 != null">
+        one7,
+      </if>
+      <if test="one8 != null">
+        one8,
+      </if>
+      <if test="one9 != null">
+        one9,
+      </if>
+      <if test="one10 != null">
+        one10,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="introduceOne != null">
+        #{introduceOne,jdbcType=VARCHAR},
+      </if>
+      <if test="detailsOne != null">
+        #{detailsOne,jdbcType=VARCHAR},
+      </if>
+      <if test="introduceTwo != null">
+        #{introduceTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="spell != null">
+        #{spell,jdbcType=VARCHAR},
+      </if>
+      <if test="detailsTwo != null">
+        #{detailsTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="one1 != null">
+        #{one1,jdbcType=VARCHAR},
+      </if>
+      <if test="one2 != null">
+        #{one2,jdbcType=VARCHAR},
+      </if>
+      <if test="one3 != null">
+        #{one3,jdbcType=VARCHAR},
+      </if>
+      <if test="one4 != null">
+        #{one4,jdbcType=VARCHAR},
+      </if>
+      <if test="one5 != null">
+        #{one5,jdbcType=VARCHAR},
+      </if>
+      <if test="one6 != null">
+        #{one6,jdbcType=VARCHAR},
+      </if>
+      <if test="one7 != null">
+        #{one7,jdbcType=VARCHAR},
+      </if>
+      <if test="one8 != null">
+        #{one8,jdbcType=VARCHAR},
+      </if>
+      <if test="one9 != null">
+        #{one9,jdbcType=VARCHAR},
+      </if>
+      <if test="one10 != null">
+        #{one10,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.wisdom.entity.WisdomIndex">
     update wisdom_index
-    set name = #{name,jdbcType=VARCHAR},
-      value = #{value,jdbcType=VARCHAR}
+    <set>
+      <if test="introduceOne != null">
+        introduce_one = #{introduceOne,jdbcType=VARCHAR},
+      </if>
+      <if test="detailsOne != null">
+        details_one = #{detailsOne,jdbcType=VARCHAR},
+      </if>
+      <if test="introduceTwo != null">
+        introduce_two = #{introduceTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="spell != null">
+        spell = #{spell,jdbcType=VARCHAR},
+      </if>
+      <if test="detailsTwo != null">
+        details_two = #{detailsTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="one1 != null">
+        one1 = #{one1,jdbcType=VARCHAR},
+      </if>
+      <if test="one2 != null">
+        one2 = #{one2,jdbcType=VARCHAR},
+      </if>
+      <if test="one3 != null">
+        one3 = #{one3,jdbcType=VARCHAR},
+      </if>
+      <if test="one4 != null">
+        one4 = #{one4,jdbcType=VARCHAR},
+      </if>
+      <if test="one5 != null">
+        one5 = #{one5,jdbcType=VARCHAR},
+      </if>
+      <if test="one6 != null">
+        one6 = #{one6,jdbcType=VARCHAR},
+      </if>
+      <if test="one7 != null">
+        one7 = #{one7,jdbcType=VARCHAR},
+      </if>
+      <if test="one8 != null">
+        one8 = #{one8,jdbcType=VARCHAR},
+      </if>
+      <if test="one9 != null">
+        one9 = #{one9,jdbcType=VARCHAR},
+      </if>
+      <if test="one10 != null">
+        one10 = #{one10,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.wisdom.entity.WisdomIndex">
+    update wisdom_index
+    set introduce_one = #{introduceOne,jdbcType=VARCHAR},
+      details_one = #{detailsOne,jdbcType=VARCHAR},
+      introduce_two = #{introduceTwo,jdbcType=VARCHAR},
+      spell = #{spell,jdbcType=VARCHAR},
+      details_two = #{detailsTwo,jdbcType=VARCHAR},
+      one1 = #{one1,jdbcType=VARCHAR},
+      one2 = #{one2,jdbcType=VARCHAR},
+      one3 = #{one3,jdbcType=VARCHAR},
+      one4 = #{one4,jdbcType=VARCHAR},
+      one5 = #{one5,jdbcType=VARCHAR},
+      one6 = #{one6,jdbcType=VARCHAR},
+      one7 = #{one7,jdbcType=VARCHAR},
+      one8 = #{one8,jdbcType=VARCHAR},
+      one9 = #{one9,jdbcType=VARCHAR},
+      one10 = #{one10,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-    <select id="selectAll" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from wisdom_index
-    </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from wisdom_index
+  </select>
 
-    <update id="updateByName" parameterType="com.ahsj.wisdom.entity.WisdomIndex">
+  <update id="updateByName" parameterType="com.ahsj.wisdom.entity.WisdomIndex">
     update wisdom_index
     set  value = #{value,jdbcType=VARCHAR}
     where name = #{name,jdbcType=VARCHAR}
