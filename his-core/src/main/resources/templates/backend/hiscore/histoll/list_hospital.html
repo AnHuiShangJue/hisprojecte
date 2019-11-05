@@ -300,8 +300,8 @@
                     jsonData,
                     function (msg) {
                         if (msg.success) {
-                            data = msg.message.substring(16);//截取成功信息
-                            number = msg.message.substring(0,16); //截取交易流水号
+                            data = msg.message.substring(14);//截取成功信息
+                            number = msg.message.substring(0,14); //截取交易流水号
                             M.toast({html: data});
                             grid.search();
                             $("#print_btn").attr("disabled", false);

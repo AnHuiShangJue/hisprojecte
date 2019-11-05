@@ -125,12 +125,12 @@
                             <div class="card-content">
                                 <form class="col s12" id="sendForm" action="#">
                                     <div class="input-field col s4 l4 xl4">
-                                        <input readonly type="number" id="money"  name="money">
+                                        <input readonly type="number" id="money" name="money">
                                         <label class="active" for="money">总应收金额<span style="font-size: 12px">(Total receivable amount
 
 )</span>:</label>
                                     </div>
-                                    <input type="hidden" id="register_number" name="registerNumber" />
+                                    <input type="hidden" id="register_number" name="registerNumber"/>
                                     <div class="input-field col s4 l4 xl4">
                                         <input type="number" name="actualCharge" id="actualCharge"
                                                data-error=".errorTxt2">
@@ -190,7 +190,7 @@
     $(document).ready(function () {
         initBtn();
         initTable();
-        $("#print_btn").attr("disabled",true);
+        $("#print_btn").attr("disabled", true);
     });
     $(function () {
         formCheck();
@@ -202,25 +202,25 @@
             var reg1 = new RegExp(/^R\d{9}$/);
             var reg2 = new RegExp(/^HM\d{9}$/);
             var registerNumber = $("#registerNumber").val();
-            if(reg1.test(registerNumber)||reg2.test(registerNumber)){
+            if (reg1.test(registerNumber) || reg2.test(registerNumber)) {
                 grid.search();
                 getCharge();
-            }else{
+            } else {
                 dialog.warn("所输入的数据不符合格式要求！请输入R开头的编号")
             }
         });
         //重置按钮
         $('#resetBtn').click(function () {
-           grid.reset();
-            $("#patientName").attr("value","");
-            $("#sex").attr("value","");
-            $("#department_id").attr("value","");
-            $("#doctorName").attr("value","");
-            $("#actualCharge").attr("value","");
-            $("#money").attr("value","");
-            $("#recoverTheFee").attr("value","");
-            $("#remark").attr("value","");
-            $("#print_btn").attr("disabled",true);
+            grid.reset();
+            $("#patientName").attr("value", "");
+            $("#sex").attr("value", "");
+            $("#department_id").attr("value", "");
+            $("#doctorName").attr("value", "");
+            $("#actualCharge").attr("value", "");
+            $("#money").attr("value", "");
+            $("#recoverTheFee").attr("value", "");
+            $("#remark").attr("value", "");
+            $("#print_btn").attr("disabled", true);
         });
         $("#actualCharge").change(function () {
             //实际收款金额
@@ -234,83 +234,87 @@
                     var ac = numeral(actualCharge);
                     var m = numeral(money);
                     var rt = numeral(recoverTheFee);
-                    if(ac.value() < m.value()){
+                    if (ac.value() < m.value()) {
                         dialog.warn("总金额小于应收金额，请重新输入!!!")
-                    }else{
+                    } else {
                         //如果实际收款大于应收款
-                            changeInputValue("recoverTheFee",numeral(ac.value()).subtract(m.value()).format('0.00'));
+                        changeInputValue("recoverTheFee", numeral(ac.value()).subtract(m.value()).format('0.00'));
                     }
                 }
             }
         });
     }
-    function validform(sendForm){
+
+    function validform(sendForm) {
         return $(sendForm).validate({
-            rules : {
-                actualCharge : {
-                    required : true,
+            rules: {
+                actualCharge: {
+                    required: true,
                 },
             },
-            messages : {
-                actualCharge : {
-                    required : "请输入实际收款金额",
+            messages: {
+                actualCharge: {
+                    required: "请输入实际收款金额",
                 },
             },
             errorElement: 'div',
         });
     }
+
     var number;
     $("#send_btn").click(function () {
-        if(validform("#sendForm").form()) {
-        dialog.confirm('确定提交吗?', function (index, layero) {
-            checkMoney();
-            var hisTollRecord = $("#sendForm").serialize();
-            var json = grid.getDataTable().ajax.json().data;
-            var hisTollHospiModel = {
-                "hisTollRecord": strToObj(hisTollRecord),
-                "hisTollDetailsList": json
-            };
-            var jsonData = JSON.stringify(hisTollHospiModel);
-            if(json!=null&&json!=""&&json!=undefined){
-            $.ahsjajax(
-                CTX + "/api/hisTollRecord/outpatient/save.ahsj",
-                jsonData,
-                function (msg) {
-                    if (msg.success) {
-                        data = msg.message.substring(16);//截取成功信息
-                        number = msg.message.substring(0,16); //截取交易流水号
-                        M.toast({html: data});
-                        grid.search();
-                        $("#print_btn").attr("disabled", false);
-                        dialog.success(data);
-                        return true;
-                    } else {
-                        M.toast({html: msg.message});
-                        return false;
-                    }
-                },
-                null, null, null, function () {
-                    M.toast({html: "网络异常"});
-                    return false;
-                }, "application/json; charset=UTF-8"
-            );}
-            else{
-                dialog.warn("找不到门诊费用结算信息！")
-            }
-        })}});
+        if (validform("#sendForm").form()) {
+            dialog.confirm('确定提交吗?', function (index, layero) {
+                checkMoney();
+                var hisTollRecord = $("#sendForm").serialize();
+                var json = grid.getDataTable().ajax.json().data;
+                var hisTollHospiModel = {
+                    "hisTollRecord": strToObj(hisTollRecord),
+                    "hisTollDetailsList": json
+                };
+                var jsonData = JSON.stringify(hisTollHospiModel);
+                if (json != null && json != "" && json != undefined) {
+                    $.ahsjajax(
+                        CTX + "/api/hisTollRecord/outpatient/save.ahsj",
+                        jsonData,
+                        function (msg) {
+                            if (msg.success) {
+                                data = msg.message.substring(14);//截取成功信息
+                                number = msg.message.substring(0, 14); //截取交易流水号
+                                M.toast({html: data});
+                                grid.search();
+                                $("#print_btn").attr("disabled", false);
+                                dialog.success(data);
+                                return true;
+                            } else {
+                                M.toast({html: msg.message});
+                                return false;
+                            }
+                        },
+                        null, null, null, function () {
+                            M.toast({html: "网络异常"});
+                            return false;
+                        }, "application/json; charset=UTF-8"
+                    );
+                } else {
+                    dialog.warn("找不到门诊费用结算信息！")
+                }
+            })
+        }
+    });
 
     //刷卡支付  预留等待补充
     $('#swipe_btn').click(function () {
         //就诊卡编号 预留等待补充
         var visitCardNumber = '002';
         dialog.confirm('确定刷卡结算吗?', function (index, layero) {
-            if(!isNullOrEmpty(visitCardNumber)) {
+            if (!isNullOrEmpty(visitCardNumber)) {
                 $.ahsjajax(CTX + "/api/visitCard/swipe.ahsj",
                     {"visitCardNumber": visitCardNumber},
                     function (msg) {
                         if (msg.success) {
                             data = msg.message.substring(16);//截取成功信息
-                            number = msg.message.substring(0,16); //截取交易流水号
+                            number = msg.message.substring(0, 16); //截取交易流水号
                             M.toast({
                                 html: msg.message, completeCallback: function () {
                                 }
@@ -331,61 +335,62 @@
                         });
                     }
                 );
-            }else {
+            } else {
                 dialog.warn("无对应就诊卡信息");
             }
         });
     });
 
     $("#print_btn").click(function () {
-/*        dialog.confirm('确定打印吗?', function (index, layero) {
-            if (number != "" && number != null && number != undefined) {
-                var url = CTX + "/api/hisTollDetails/printHospitalOne/index.ahsj?number="+ number+"&token="+TOKEN;
-                dialog.showDialog(url, "打印凭证预览", "700px", "700px");
-            } else {
-                dialog.warn("没有需要打印的内容！")
-            }});*/
+        /*        dialog.confirm('确定打印吗?', function (index, layero) {
+                    if (number != "" && number != null && number != undefined) {
+                        var url = CTX + "/api/hisTollDetails/printHospitalOne/index.ahsj?number="+ number+"&token="+TOKEN;
+                        dialog.showDialog(url, "打印凭证预览", "700px", "700px");
+                    } else {
+                        dialog.warn("没有需要打印的内容！")
+                    }});*/
 
         layer.open({
             content: '打印小票（Print a small ticket）'
-            ,btn: ['财务联（Financial union）', '科室联（Department）', '自由联（Free association）']
-            ,yes: function(index, layero){
+            , btn: ['财务联（Financial union）', '科室联（Department）', '自由联（Free association）']
+            , yes: function (index, layero) {
                 //按钮【按钮一】的回调
                 if (number != "" && number != null && number != undefined) {
-                    var url = CTX + "/api/hisTollDetails/printHospitalOne/index.ahsj?number="+ number+"&token="+TOKEN+"&type=1";
+                    var url = CTX + "/api/hisTollDetails/printHospitalOne/index.ahsj?number=" + number + "&token=" + TOKEN + "&type=1";
                     dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                 } else {
                     dialog.warn("没有需要打印的内容！")
                 }
             }
-            ,btn2: function(index, layero){
+            , btn2: function (index, layero) {
                 //按钮【按钮二】的回调
                 if (number != "" && number != null && number != undefined) {
-                    var url = CTX + "/api/hisTollDetails/printHospitalOne/index.ahsj?number="+ number+"&token="+TOKEN+"&type=2";
+                    var url = CTX + "/api/hisTollDetails/printHospitalOne/index.ahsj?number=" + number + "&token=" + TOKEN + "&type=2";
                     dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                 } else {
                     dialog.warn("没有需要打印的内容！")
                 }
 
-                return false ;
+                return false;
             }
-            ,btn3: function(index, layero){
+            , btn3: function (index, layero) {
                 //按钮【按钮三】的回调
                 if (number != "" && number != null && number != undefined) {
-                    var url = CTX + "/api/hisTollDetails/printHospitalOne/index.ahsj?number="+ number+"&token="+TOKEN+"&type=3";
+                    var url = CTX + "/api/hisTollDetails/printHospitalOne/index.ahsj?number=" + number + "&token=" + TOKEN + "&type=3";
                     dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                 } else {
                     dialog.warn("没有需要打印的内容！")
                 }
-                return false ;
+                return false;
             }
-            ,cancel: function(){
+            , cancel: function () {
                 //右上角关闭回调
 
                 // return false ;
             }
         });
     });
+
     function initTable() {
         grid.init({
             src: $("#data-table-simple"),
@@ -402,7 +407,7 @@
                 },
                 "pageLength": 200,
                 "columns": [
-                {
+                    {
                         "title": "名称",
                         "data": "name", //实体字段
                         "name": "name"   //库中字段
@@ -429,12 +434,14 @@
                         "name": "isPay"
                     }
                 ],
-                "order" : [ [ 1, 'asc' ] ]
+                "order": [[1, 'asc']]
             }
         });
     }
+
     function formCheck() {
     }
+
     function getCharge() {
 
         var registerNumber = $("#registerNumber").val();
@@ -446,12 +453,12 @@
                 function (data) {
                     console.log(data)
                     if (!isNullOrEmpty(data.id)) {
-                        changeInputValue("patientName",data.patientName);
-                        changeInputValue("sex",data.sexName);
-                        changeInputValue("department_id",data.departmentName);
-                        changeInputValue("doctorName",data.doctorName);
-                        changeInputValue("money",data.money);
-                        $("#register_number").attr("value",$("#registerNumber").val());
+                        changeInputValue("patientName", data.patientName);
+                        changeInputValue("sex", data.sexName);
+                        changeInputValue("department_id", data.departmentName);
+                        changeInputValue("doctorName", data.doctorName);
+                        changeInputValue("money", data.money);
+                        $("#register_number").attr("value", $("#registerNumber").val());
                         return true;
                     } else {
                         dialog.warn(registerNumber + "号不存在！")
@@ -479,17 +486,17 @@
                 var ac = numeral(actualCharge);
                 var m = numeral(money);
                 var rt = numeral(recoverTheFee);
-                if(ac.value() < m.value()){
+                if (ac.value() < m.value()) {
                     dialog.warn("总金额小于应收金额，请重新输入!!!")
-                }else{
+                } else {
                     //如果实际收款大于应收款
-                    changeInputValue("recoverTheFee",numeral(ac.value()).subtract(m.value()).format('0.00'));
+                    changeInputValue("recoverTheFee", numeral(ac.value()).subtract(m.value()).format('0.00'));
                 }
             }
         }
     }
 
-    $("input").change(function(){
+    $("input").change(function () {
         $(this).val($(this).val().trim());
     });
 </script>
