@@ -3,20 +3,17 @@
       xmlns:ahsj="http://www.anhuishangjue.com">
 
 <div th:replace="public/base_list :: html"></div>
-<div th:replace="public/back_baselayout :: html"></div>
 <style>
     .tab{
         font-weight:bolder ;
     }
 </style>
-
 <body>
-<header>
-
-    <div class="row col s12 x12 l12 xl12">
-                <img src="/assets/app-assets/images/wisdom/AppleTV3.png" width="100%"/>
+    <div class="row col s12 x12 l12 xl12" style="width: 1903px; height: 1080px">
+        <div th:replace="public/back_baselayout :: html"></div>
+        <img src="/assets/app-assets/images/wisdom/AppleTV3.png" width="100%"/>
         <div class="row" style="font-size: 30px;margin-left: 20%;margin-top: 2%;width: 50%;">产品特色</div>
-        <nav class="nav-extended row" style="width: 70%;text-align: center;margin: auto;margin-top: 2%;background-color: #ffffff" >
+<!--        <nav class="nav-extended row" style="width: 70%;text-align: center;margin: auto;margin-top: 2%;background-color: #ffffff" >
             <div class="nav-content">
                 <ul class="tabs tabs-transparent">
                     <li class="tab"><a href="#test1" style="color: #0C0C0C" >教学管理</a></li>
@@ -25,16 +22,8 @@
                     <li class="tab"><a href="#test4" style="color: #0C0C0C">商业级别AI系列</a></li>
                 </ul>
             </div>
-        </nav>
-
-        <ul class="sidenav" id="mobile-demo">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">JavaScript</a></li>
-        </ul>
-
-
-        <div  id="test1" style="margin-left: 25%;">
+        </nav>-->
+<!--        <div  id="test1" style="margin-left: 25%;">
             <div class="card" id="wq3" style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 250px;height: 149px;margin-right: 4%;margin-top: 4%;border-radius: 25px">
                 <br><span style="color: #ffffff;margin-left: 35%;font-size: 22px;"></span>
                 <br><br><span style="color: #ffffff;"></span>
@@ -45,7 +34,7 @@
             <div class="card" id="wq5" style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 250px;height: 149px;margin-right: 4%;margin-top: 4%;border-radius: 25px">
                 <br><span style="color: #ffffff;margin-left: 35%;font-size: 22px;"></span>
             </div>
-        </div>
+        </div>-->
         <div id="test2"  style="margin-left: 25%;">
             <div class="card" id="wq" style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 250px;height: 149px;margin-right: 4%;margin-top: 4%;border-radius: 25px"><img src="/assets/app-assets/images/wisdom/AppleTV.png" style="margin-left: 33%;margin-top: 2%;">
                <br><span style="color: #ffffff;margin-left: 35%;font-size: 22px;">便捷管理</span>
@@ -58,8 +47,8 @@
                 <br><span style="color: #ffffff;margin-left: 35%;font-size: 22px;">移动办公</span>
             </div>
         </div>
-        <div id="test3" class="col s12"></div>
-        <div id="test4" class="col s12"></div>
+<!--        <div id="test3" class="col s12"></div>
+        <div id="test4" class="col s12"></div>-->
             <div style="float: left;border: 1px;background-color: #030E3F;width: 100%;height: 740px; margin-top: 7%;">
                 <div class="row col s6 x6 l6 xl6" style="margin-top: 2%;">
                     <span style="font-size: 30px;margin-left: 40%;margin-top: 2%; color: #ffffff">认证服务</span>
@@ -72,7 +61,6 @@
                 </div>
             </div>
     </div>
-</header>
 
 <div th:replace="public/base_list_script :: html"></div>
 
@@ -93,25 +81,8 @@ $(function () {
         $("#wq1").animate({width:'250px',height:'149px'});
         $("#wq2").animate({width:'454px',height:'294px'});
     });
-    $("#wq3").click(function(){
-        $("#wq4").animate({width:'200px',height:'200px'});
-        $("#wq5").animate({width:'200px',height:'200px'});
-        $("#wq3").animate({width:'554px',height:'394px'});
-    });
-    $("#wq4").click(function(){
-        $("#wq5").animate({width:'200px',height:'200px'});
-        $("#wq3").animate({width:'200px',height:'200px'});
-        $("#wq4").animate({width:'554px',height:'394px'});
-    }) ;
-    $("#wq5").click(function(){
-        $("#wq3").animate({width:'200px',height:'200px'});
-        $("#wq4").animate({width:'200px',height:'200px'});
-        $("#wq5").animate({width:'554px',height:'394px'});
-    });
-
 })
 </script>
 </body>
-<div th:replace="public/footer :: html"></div>
 </html>
 
