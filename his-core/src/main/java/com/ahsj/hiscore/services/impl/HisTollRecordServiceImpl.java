@@ -85,7 +85,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
     public Message addHisTollRecord(List<HisCharge> record, HisTollRecord hisTollRecord) throws Exception {
         String createdate = new SimpleDateFormat("yyyyMMddHHmmSS").format(new Date());//当前时间年月日
         String medicalRecordId = record.get(0).getMedicalRecordId();
-        String number = createdate + String.format("%03d", hisTollRecordMapper.selectNumCount(createdate) + 1);
+        String number = createdate + String.format("%05d", hisTollRecordMapper.selectNumCount(createdate) + 1);
         boolean flase = true;
         for (HisCharge hc : record) {
             if (hc.getIsPay() == 2) { //未付生成新的订单

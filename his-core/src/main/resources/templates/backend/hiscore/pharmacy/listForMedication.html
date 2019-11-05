@@ -55,11 +55,11 @@
                                 <div class="col  s1 m1 l1 xl1">
                                     <h6>模糊搜索</h6><label style="color:black">Fuzzy search</label>
                                 </div>
-                                <div class="col input-field s2 m2 l2 xl2">
+                            <!--    <div class="col input-field s2 m2 l2 xl2">
                                     <input id="number" name="drugsNumb" type="text"/>
                                     <label for="number">药品编号<span style="font-size: 12px">(Drug number
 )</span></label>
-                                </div>
+                                </div>-->
                                 <div class="col input-field s2 m2 l2 xl2">
                                     <input id="name" name="drugsName" type="text"/>
                                     <label for="name">药品名称<span style="font-size: 12px">(Drug Name)</span></label>
@@ -70,7 +70,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col  s1 m1 l1 xl1">
+                                <!--<div class="col  s1 m1 l1 xl1">
                                     <div ahsj:radio name="medicalInsuranceSign" id="medicalInsuranceSign" type="code" typeKey="medical_insurance_sign"
                                          title="药品类型" cssdefault="radiotdefault" haveDefault="true" value="0"></div>
                                 </div>
@@ -95,7 +95,7 @@
                                 <div class="col  s1 m1 l1 xl1">
                                     <div ahsj:radio name="narcoticDrugs" id="narcoticDrugs" type="code" typeKey="narcotic_drugs"
                                          title="麻醉类药品" cssdefault="radiotdefault" haveDefault="true" value="0"></div>
-                                </div>
+                                </div>-->
                             </div>
                         </form>
                     </div>
@@ -105,9 +105,9 @@
                             <a class="waves-effect waves-light btn" id="searchBtn"><i
                                     class="material-icons  white-text tooltipped " data-position="bottom"
                                     data-delay="50" data-tooltip="搜索">search</i></a>
-                            <a id="resetBtn" class="waves-effect waves-light btn"><i
+                            <!--<a id="resetBtn" class="waves-effect waves-light btn"><i
                                     class="material-icons  white-text tooltipped " data-position="bottom"
-                                    data-delay="50" data-tooltip="重置">youtube_searched_for</i></a>
+                                    data-delay="50" data-tooltip="重置">youtube_searched_for</i></a>-->
                         </div>
                     </div>
                 </div>
@@ -191,22 +191,20 @@
                         "orderable": false,//取消排序功能
                         "className": "center-align"/*center-align代表中心对齐*/
                     },
-                    {
+                 /*   {
                         "title": "药品编号",
                         "data": "drugsNumb",
                         "name": "drugs_numb"
-                    },
+                    },*/
                     {
                         "title": "药品名称",
                         "data": "drugsName",
                         "name": "drugs_name",
-                        "orderable": false//取消排序功能
                     },
                     {
                         "title": "药品拼音码",
                         "data": "drugsAlias",
                         "name": "drugs_alias",
-                        "orderable": false//取消排序功能
                     },
                     {
                         "title": "药品规格",
@@ -214,21 +212,21 @@
                         "name": "drugs_spec",
                         "orderable": false
                     },
-                    {
+                    /*{
                         "title": "售价",
                         "data": "salePrice",
                         "name": "sale_price"
-                    }, {
+                    }, *//*{
                         "title": "库存",
                         "data": "stock",
                         "name": "stock"
-                    },
-                    {
+                    },*/
+                    /*{
                         "title": "库存警告值",
                         "data": "stockWarn",
                         "name": "stock_warn"
-                    },
-                    {
+                    },*/
+                    /*{
                         "title": "固定库存",
                         "data": "normalStock",
                         "name": "normal_stock"
@@ -256,14 +254,13 @@
                         "title": "药品类型",
                         "data": "medicalinsurancesign",
                         "name": "medical_insurance_sign"
-                    },
+                    },*/
                     {
                         "title": "原产地",
                         "data": "placeoriginName",
                         "name": "placeOrigin",
-                        "orderable": false
                     },
-                    {
+                    /*{
                         "title": "是否停用",
                         "data": "disabled",
                         "name": "disable"
@@ -288,7 +285,7 @@
                         "data": "remarks",
                         "name": "remarks",
                         "orderable": false
-                    },
+                    },*/
                     {
                         "title": "操作",
                         "width": "240px",

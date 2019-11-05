@@ -213,8 +213,8 @@
                     {"visitCardNumber": visitCardNumber,"commonNumber":commonNumber},
                     function (msg) {
                         if (msg.success) {
-                            data = msg.message.substring(16);//截取成功信息
-                            tollNumber = msg.message.substring(0,16); //截取交易流水号
+                            data = msg.message.substring(12);//截取成功信息
+                            tollNumber = msg.message.substring(0,12); //截取交易流水号
                             M.toast({
                                 html: msg.message, completeCallback: function () {
                                 }

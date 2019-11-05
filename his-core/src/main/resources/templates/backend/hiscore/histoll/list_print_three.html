@@ -146,9 +146,10 @@
             </tr>
             <tr>
 
-                <td><p style="margin: 0;padding: 0;">出院日期</p><p style="margin: 0;padding: 0;">Out of the hospital date</p></td>
-                <td><label id="createDate"></label></td>
-                <td colspan="8"><label></label></td>
+                <td ><p style="margin: 0;padding: 0;">出院日期</p><p style="margin: 0;padding: 0;">Out of the hospital date</p></td>
+                <td colspan="2"><label ></label></td>
+                <td><p style="margin: 0;padding: 0;">交易流水号</p><p style="margin: 0;padding: 0;">Transaction flow number</p></td>
+                <td colspan="6"><label id="number1"></label></td>
 
             </tr>
             <tr>
@@ -219,6 +220,7 @@ Scripts
                 var recoverTheFee;
                 var money;
                 var jsons = data[0];
+                $("#number1").html(number);
                 $("#createName").html(jsons.createName);
                 $("#totalPrices").html(jsons.totalPrices.toFixed(2));
             //    $("#createDate").html(jsons.createDate);

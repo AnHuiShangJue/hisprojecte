@@ -80,6 +80,11 @@
                                            class="datepicker"/>
                                     <label for="upTime">上区间<span style="font-size: 12px">(upper interval)</span></label>
                                 </div>
+                                <div class="col input-field s2 m2 l2 xl2">
+                                    <input id="createName" name="createName" type="text"/>
+                                    <label for="createName">收费人<span
+                                            style="font-size: 12px">(toll gatherer)</span></label>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -295,8 +300,8 @@
                         (upTime == null || upTime == "" || upTime == undefined) &&
                         (years != null && years != "" && years != undefined) &&
                         (months != null && months != "" && months != undefined)) {
-                        $("#minTime").html(years + "年"+months+"月")
-                        $("#maxTime").html(years + "年"+months+"月")
+                        $("#minTime").html(years + "年" + months + "月")
+                        $("#maxTime").html(years + "年" + months + "月")
                     }
                     return true;
                 } else {
