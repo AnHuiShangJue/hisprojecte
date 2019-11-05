@@ -70,11 +70,11 @@ public class HisRegisteredServiceImpl implements HisRegisteredService {
             if (!message.isSuccess()) return MessageUtil.createMessage(false, "挂号失败！病人建档发生错误！请检查所填入的信息是否合法或者联系管理员");
         }           //获取当前日期转成string类型的
         Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
         String createdate = sdf.format(date);
         int count = hisRegisteredMapper.selectNumbCount(createdate) + 1;
         //编号
-        String number = createdate + String.format("%05d", count);
+        String number = createdate + String.format("%03d", count);
         number = "R" + number;
         //序号
         String serial = String.valueOf(count);

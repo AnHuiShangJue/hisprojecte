@@ -59,7 +59,7 @@ public class HisHosptalregistServiceImpl implements HisHosptalregistService {
             hisPatientInfo.setSex(hisHosptalregist.getSex());
             hisPatientInfo.setAge(hisHosptalregist.getAge());
             HisPatientInfo check = hisPatientInfoMapper.selectByIdcard(hisPatientInfo.getIdcard());
-            String createdate = new SimpleDateFormat("yyyyMMdd").format(new Date());//当前时间年月日
+            String createdate = new SimpleDateFormat("yyMMdd").format(new Date());//当前时间年月日
             if (EmptyUtil.Companion.isNullOrEmpty(hisHosptalregist.getId())) {
                 if (!EmptyUtil.Companion.isNullOrEmpty(hisHosptalregist.getMedicalNumber())) {
                     HisMedicalRecord check1 = hisMedicalRecordService.selectByMedicalRecordId(hisHosptalregist.getMedicalNumber());
@@ -73,7 +73,7 @@ public class HisHosptalregistServiceImpl implements HisHosptalregistService {
                                 HisMedical hisMedical = hisMedicalMapper.selectByRecordId(hisMedicalRecord.getId());
                                 if (!EmptyUtil.Companion.isNullOrEmpty(hisMedical)) {
                                     hisPatientService.saveOrUpdate(hisPatientInfo);//更新病人信息
-                                    hisHosptalregist.setNumber("HR" + createdate + String.format("%05d", hisHosptalregistMapper.selectNumCount(createdate) + 1));//设置编号
+                                    hisHosptalregist.setNumber("HR" + createdate + String.format("%03d", hisHosptalregistMapper.selectNumCount(createdate) + 1));//设置编号
                                     hisHosptalregist.setPatientId(hisPatientInfoMapper.selectByIdcard(hisPatientInfo.getIdcard()).getId());
                                     hisMedical.setChiefcomplaint(hisHosptalregist.getOutpatientDiagnosis());
                                     hisHosptalregistMapper.insert(hisHosptalregist);//入院登记
@@ -98,7 +98,7 @@ public class HisHosptalregistServiceImpl implements HisHosptalregistService {
                         //身份证号存在,把主键给新传入的病人对象
 //                        if (check.getName().equals(hisPatientInfo.getName())) {//身份证号与名字相同
                             hisPatientService.saveOrUpdate(hisPatientInfo);//更新病人信息
-                            hisHosptalregist.setNumber("HR" + createdate + String.format("%05d", hisHosptalregistMapper.selectNumCount(createdate) + 1));//设置编号
+                            hisHosptalregist.setNumber("HR" + createdate + String.format("%03d", hisHosptalregistMapper.selectNumCount(createdate) + 1));//设置编号
                             hisHosptalregist.setPatientId(hisPatientInfoMapper.selectByIdcard(hisPatientInfo.getIdcard()).getId());
                             hisHosptalregist.setMedicalNumber(null);
                             hisHosptalregistMapper.insert(hisHosptalregist);//入院登记
@@ -108,7 +108,7 @@ public class HisHosptalregistServiceImpl implements HisHosptalregistService {
                         }*/
                     } else { //身份证号不存在
                         hisPatientService.saveOrUpdate(hisPatientInfo);//更新病人信息
-                        hisHosptalregist.setNumber("HR" + createdate + String.format("%05d", hisHosptalregistMapper.selectNumCount(createdate) + 1));//设置编号
+                        hisHosptalregist.setNumber("HR" + createdate + String.format("%03d", hisHosptalregistMapper.selectNumCount(createdate) + 1));//设置编号
                         hisHosptalregist.setPatientId(hisPatientInfoMapper.selectByIdcard(hisPatientInfo.getIdcard()).getId());
                         hisHosptalregist.setMedicalNumber(null);
                         hisHosptalregistMapper.insert(hisHosptalregist);//入院登记

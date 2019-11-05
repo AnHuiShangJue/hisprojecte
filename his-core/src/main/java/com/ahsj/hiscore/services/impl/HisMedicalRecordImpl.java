@@ -115,7 +115,7 @@ public class HisMedicalRecordImpl implements HisMedicalRecordService {
         HisMedicalRecord check;
         String name = "HM";
         Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
         String createdate = sdf.format(date);
         int count = hisMedicalRecordMapper.selectMedicalCount(createdate) + 1;
         HisMedicalRecord hisMedicalRecord = new HisMedicalRecord();
@@ -187,7 +187,7 @@ public class HisMedicalRecordImpl implements HisMedicalRecordService {
             }
         }
         //编号
-        String number = name + createdate + String.format("%05d", count);
+        String number = name + createdate + String.format("%03d", count);
         //序号
         hisMedicalRecord.setMedicalRecordId(number);
         hisMedicalRecord.setDoctorId(new Long(userId));
