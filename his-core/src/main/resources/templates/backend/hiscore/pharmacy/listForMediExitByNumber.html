@@ -201,12 +201,12 @@
         //搜索按钮
         $('#searchBtn').click(function () {
             //就诊编号
-            var reg1 = new RegExp(/^HM\d{9}$/);
-            var reg2 = new RegExp(/^HHM\d{9}$/);
+            var reg1 = new RegExp(/^HM\d{13}$/);
+            var reg2 = new RegExp(/^HHM\d{13}$/);
             //交易流水号
-            var reg3 = new RegExp(/^HTR\d{9}$/);
+            var reg3 = new RegExp(/^HTR\d{13}$/);
             //住院编号
-            var reg4 = new RegExp(/^HR\d{9}$/);
+            var reg4 = new RegExp(/^HR\d{13}$/);
             var number = $("#number").val();
             if (reg1.test(number) ||
                 reg2.test(number) ||

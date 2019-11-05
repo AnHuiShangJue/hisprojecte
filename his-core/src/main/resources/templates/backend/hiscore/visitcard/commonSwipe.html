@@ -177,9 +177,9 @@
     function initBtn() {
         //搜索按钮
         $('#searchBtn').click(function () {
-            var reg1 = new RegExp(/^R\d{9}$/);
-            var reg2 = new RegExp(/^HR\d{9}$/);
-            var reg3 = new RegExp(/^HM\d{9}$/);
+            var reg1 = new RegExp(/^R\d{13}$/);
+            var reg2 = new RegExp(/^HR\d{13}$/);
+            var reg3 = new RegExp(/^HM\d{13}$/);
             commonNumber = $("#commonNumber").val();
             if(reg1.test(commonNumber) || reg2.test(commonNumber) || reg3.test(commonNumber)  ){
                 grid.search();
@@ -213,8 +213,8 @@
                     {"visitCardNumber": visitCardNumber,"commonNumber":commonNumber},
                     function (msg) {
                         if (msg.success) {
-                            data = msg.message.substring(16);//截取成功信息
-                            tollNumber = msg.message.substring(0,16); //截取交易流水号
+                            data = msg.message.substring(12);//截取成功信息
+                            tollNumber = msg.message.substring(0,12); //截取交易流水号
                             M.toast({
                                 html: msg.message, completeCallback: function () {
                                 }

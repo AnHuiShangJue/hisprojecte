@@ -199,8 +199,8 @@
     function initBtn() {
         //搜索按钮
         $('#searchBtn').click(function () {
-            var reg1 = new RegExp(/^R\d{9}$/);
-            var reg2 = new RegExp(/^HM\d{9}$/);
+            var reg1 = new RegExp(/^R\d{13}$/);
+            var reg2 = new RegExp(/^HM\d{13}$/);
             var registerNumber = $("#registerNumber").val();
             if (reg1.test(registerNumber) || reg2.test(registerNumber)) {
                 grid.search();
@@ -263,45 +263,43 @@
 
     var number;
     $("#send_btn").click(function () {
-        if (validform("#sendForm").form()) {
-            dialog.confirm('确定提交吗?', function (index, layero) {
-                checkMoney();
-                var hisTollRecord = $("#sendForm").serialize();
-                var json = grid.getDataTable().ajax.json().data;
-                var hisTollHospiModel = {
-                    "hisTollRecord": strToObj(hisTollRecord),
-                    "hisTollDetailsList": json
-                };
-                var jsonData = JSON.stringify(hisTollHospiModel);
-                if (json != null && json != "" && json != undefined) {
-                    $.ahsjajax(
-                        CTX + "/api/hisTollRecord/outpatient/save.ahsj",
-                        jsonData,
-                        function (msg) {
-                            if (msg.success) {
-                                data = msg.message.substring(14);//截取成功信息
-                                number = msg.message.substring(0, 14); //截取交易流水号
-                                M.toast({html: data});
-                                grid.search();
-                                $("#print_btn").attr("disabled", false);
-                                dialog.success(data);
-                                return true;
-                            } else {
-                                M.toast({html: msg.message});
-                                return false;
-                            }
-                        },
-                        null, null, null, function () {
-                            M.toast({html: "网络异常"});
-                            return false;
-                        }, "application/json; charset=UTF-8"
-                    );
-                } else {
-                    dialog.warn("找不到门诊费用结算信息！")
-                }
-            })
-        }
-    });
+        if(validform("#sendForm").form()) {
+        dialog.confirm('确定提交吗?', function (index, layero) {
+            checkMoney();
+            var hisTollRecord = $("#sendForm").serialize();
+            var json = grid.getDataTable().ajax.json().data;
+            var hisTollHospiModel = {
+                "hisTollRecord": strToObj(hisTollRecord),
+                "hisTollDetailsList": json
+            };
+            var jsonData = JSON.stringify(hisTollHospiModel);
+            if(json!=null&&json!=""&&json!=undefined){
+            $.ahsjajax(
+                CTX + "/api/hisTollRecord/outpatient/save.ahsj",
+                jsonData,
+                function (msg) {
+                    if (msg.success) {
+                        data = msg.message.substring(16);//截取成功信息
+                        number = msg.message.substring(0,16); //截取交易流水号
+                        M.toast({html: data});
+                        grid.search();
+                        $("#print_btn").attr("disabled", false);
+                        dialog.success(data);
+                        return true;
+                    } else {
+                        M.toast({html: msg.message});
+                        return false;
+                    }
+                },
+                null, null, null, function () {
+                    M.toast({html: "网络异常"});
+                    return false;
+                }, "application/json; charset=UTF-8"
+            );}
+            else{
+                dialog.warn("找不到门诊费用结算信息！")
+            }
+        })}});
 
     //刷卡支付  预留等待补充
     $('#swipe_btn').click(function () {
@@ -314,7 +312,7 @@
                     function (msg) {
                         if (msg.success) {
                             data = msg.message.substring(16);//截取成功信息
-                            number = msg.message.substring(0, 16); //截取交易流水号
+                            number = msg.message.substring(0,16); //截取交易流水号
                             M.toast({
                                 html: msg.message, completeCallback: function () {
                                 }
@@ -390,7 +388,6 @@
             }
         });
     });
-
     function initTable() {
         grid.init({
             src: $("#data-table-simple"),
@@ -407,7 +404,7 @@
                 },
                 "pageLength": 200,
                 "columns": [
-                    {
+                {
                         "title": "名称",
                         "data": "name", //实体字段
                         "name": "name"   //库中字段
@@ -434,14 +431,12 @@
                         "name": "isPay"
                     }
                 ],
-                "order": [[1, 'asc']]
+                "order" : [ [ 1, 'asc' ] ]
             }
         });
     }
-
     function formCheck() {
     }
-
     function getCharge() {
 
         var registerNumber = $("#registerNumber").val();
@@ -453,12 +448,12 @@
                 function (data) {
                     console.log(data)
                     if (!isNullOrEmpty(data.id)) {
-                        changeInputValue("patientName", data.patientName);
-                        changeInputValue("sex", data.sexName);
-                        changeInputValue("department_id", data.departmentName);
-                        changeInputValue("doctorName", data.doctorName);
-                        changeInputValue("money", data.money);
-                        $("#register_number").attr("value", $("#registerNumber").val());
+                        changeInputValue("patientName",data.patientName);
+                        changeInputValue("sex",data.sexName);
+                        changeInputValue("department_id",data.departmentName);
+                        changeInputValue("doctorName",data.doctorName);
+                        changeInputValue("money",data.money);
+                        $("#register_number").attr("value",$("#registerNumber").val());
                         return true;
                     } else {
                         dialog.warn(registerNumber + "号不存在！")
@@ -486,17 +481,17 @@
                 var ac = numeral(actualCharge);
                 var m = numeral(money);
                 var rt = numeral(recoverTheFee);
-                if (ac.value() < m.value()) {
+                if(ac.value() < m.value()){
                     dialog.warn("总金额小于应收金额，请重新输入!!!")
-                } else {
+                }else{
                     //如果实际收款大于应收款
-                    changeInputValue("recoverTheFee", numeral(ac.value()).subtract(m.value()).format('0.00'));
+                    changeInputValue("recoverTheFee",numeral(ac.value()).subtract(m.value()).format('0.00'));
                 }
             }
         }
     }
 
-    $("input").change(function () {
+    $("input").change(function(){
         $(this).val($(this).val().trim());
     });
 </script>

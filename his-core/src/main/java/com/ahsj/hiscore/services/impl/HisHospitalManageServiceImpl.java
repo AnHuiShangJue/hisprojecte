@@ -543,10 +543,10 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
                     hisTollRecord.setCreateDate(date);
                     hisTollRecord.setUpdateDate(date);
                     hisTollRecord.setDeposit(h.getRestDeposit().subtract(hisProject.getPrice()));
-                    String createdate1 = new SimpleDateFormat("yyMMdd").format(new Date());
+                    String createdate1 = new SimpleDateFormat("yyyyMMdd").format(new Date());
                     int count = hisTollRecordMapper.selectNumbCount(createdate1) + 1;
                     //编号
-                    String number1 = createdate1 + String.format("%03d", count);
+                    String number1 = createdate1 + String.format("%05d", count);
                     number1 = "HTR" + number1;
                     hisTollRecord.setNumber(number1);
                     hisTollRecord.setMedicalRecordId(hisMedicalRecord.getMedicalRecordId());

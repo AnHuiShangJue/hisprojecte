@@ -124,7 +124,7 @@ public class HisVisitCardServicelmpl implements HisVisitCardService {
             if (!EmptyUtil.Companion.isNullOrEmpty(hisVisitCard)) {
                 BigDecimal balance1 = hv.getBalance();//卡内余额
                 String createdate = new SimpleDateFormat("yyyyMMddHHmmSS").format(new Date());//当前时间年月日
-                String number = createdate + String.format("%03d", hisTollRecordMapper.selectNumCount(createdate) + 1);
+                String number = createdate + String.format("%05d", hisTollRecordMapper.selectNumCount(createdate) + 1);
                 HisTollRecord hisTollRecord = new HisTollRecord();
                 hisTollRecord.setMoney(hisVisitCard.getBalance());
                 hisTollRecord.setActualCharge(hisVisitCard.getBalance());
@@ -376,7 +376,7 @@ public class HisVisitCardServicelmpl implements HisVisitCardService {
             HisVisitCard hv = hisVisitCardMapper.selectByPrimaryKey(hisVisitCard.getId());
             if (!EmptyUtil.Companion.isNullOrEmpty(hisVisitCard)) {
                 String createdate = new SimpleDateFormat("yyyyMMddHHmmSS").format(new Date());//当前时间年月日
-                String number = createdate + String.format("%03d", hisTollRecordMapper.selectNumCount(createdate) + 1);
+                String number = createdate + String.format("%05d", hisTollRecordMapper.selectNumCount(createdate) + 1);
                 HisTollRecord hisTollRecord = new HisTollRecord();
                 hisTollRecord.setMoney(new BigDecimal(0));
                 hisTollRecord.setActualCharge(new BigDecimal(0));

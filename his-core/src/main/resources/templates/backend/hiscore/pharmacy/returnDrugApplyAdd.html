@@ -425,8 +425,8 @@
         });
         //搜索按钮
         $('#searchBtn').click(function () {
-            var reg1 = new RegExp(/^HM\d{9}$/);
-            var reg2 = new RegExp(/^HTR\d{9}$/);
+            var reg1 = new RegExp(/^HM\d{13}$/);
+            var reg2 = new RegExp(/^HTR\d{13}$/);
             var recordNumber = $("#recordNumber").val();
             if(reg1.test(recordNumber)|| reg2.test(recordNumber)){
                 grid.search();

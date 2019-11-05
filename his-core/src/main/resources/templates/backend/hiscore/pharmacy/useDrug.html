@@ -151,9 +151,9 @@
     function initBtn() {
         $('#searchBtn').click(function () {
             var medicalNumber = $("#medicalNumber").val();
-            var reg1 = new RegExp(/^HM\d{9}$/);
-            var reg2 = new RegExp(/^hm\d{9}$/);
-            var reg3 = new RegExp(/^HHM\d{9}$/);
+            var reg1 = new RegExp(/^HM\d{13}$/);
+            var reg2 = new RegExp(/^hm\d{13}$/);
+            var reg3 = new RegExp(/^HHM\d{13}$/);
             if (reg1.test(medicalNumber) ||
                 reg2.test(medicalNumber) ||
                 reg3.test(medicalNumber)) {

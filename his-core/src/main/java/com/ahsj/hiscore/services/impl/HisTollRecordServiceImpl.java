@@ -85,7 +85,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
     public Message addHisTollRecord(List<HisCharge> record, HisTollRecord hisTollRecord) throws Exception {
         String createdate = new SimpleDateFormat("yyyyMMddHHmmSS").format(new Date());//当前时间年月日
         String medicalRecordId = record.get(0).getMedicalRecordId();
-        String number = createdate + String.format("%03d", hisTollRecordMapper.selectNumCount(createdate) + 1);
+        String number = createdate + String.format("%05d", hisTollRecordMapper.selectNumCount(createdate) + 1);
         boolean flase = true;
         for (HisCharge hc : record) {
             if (hc.getIsPay() == 2) { //未付生成新的订单
@@ -185,11 +185,11 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             return MessageUtil.createMessage(false, "总金额小于应收金额，请重新输入!!!");
         }
         Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         String createdate = sdf.format(date);
         int count = hisTollRecordMapper.selectNumbCount(createdate) + 1;
         //编号
-        String number = createdate + String.format("%03d", count);
+        String number = createdate + String.format("%05d", count);
         number = "HTR" + number;
         hisTollRecord.setNumber(number);
         hisTollRecord.setType(2);
@@ -367,11 +367,11 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             return MessageUtil.createMessage(false, "总金额小于应收金额，请重新输入!!!");
         }
         Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         String createdate = sdf.format(date);
         int count = hisTollRecordMapper.selectNumbCount(createdate) + 1;
         //编号
-        String number = createdate + String.format("%03d", count);
+        String number = createdate + String.format("%05d", count);
         number = "HTR" + number;
         if ("R".equals(hisTollRecord.getRegisterNumber().substring(0, 1))) {
             hisTollRecord.setMedicalRecordId(hisMedicalRecord.getMedicalRecordId());
@@ -467,10 +467,10 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         if (sumPrice.compareTo(hisTollRecord1.getRecoverTheFee()) != 0) {
             return MessageUtil.createMessage(false, "退款金额不一致");
         }
-        String createdate = new SimpleDateFormat("yyMMdd").format(new Date());
+        String createdate = new SimpleDateFormat("yyyyMMdd").format(new Date());
         int count = hisTollRecordMapper.selectNumbCount(createdate) + 1;
         //编号
-        String number = createdate + String.format("%03d", count);
+        String number = createdate + String.format("%05d", count);
         number = "HTR" + number;
 
 
@@ -517,11 +517,11 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         //处理住院交易
         HisTollRecord hisTollRecord = hisTollHospiModel.getHisTollRecord();
         Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         String createdate = sdf.format(date);
         int count = hisTollRecordMapper.selectNumbCount(createdate) + 1;
         //编号
-        String number = createdate + String.format("%03d", count);
+        String number = createdate + String.format("%05d", count);
         number = "HTR" + number;
         PageBean<HisTollDetails> pageBean = new PageBean<HisTollDetails>();
         HisTollDetails hd = new HisTollDetails();
@@ -731,13 +731,13 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             hisTollRecord.setIsSettlement(2);
         //生成交易流水号
         Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         String createdate = sdf.format(date);
         int count = hisTollRecordMapper.selectNumbCount(createdate) + 1;
         boolean flag = false;
         String number = "";
         while (true) {
-            number = "HTR" + createdate + String.format("%03d", count);
+            number = "HTR" + createdate + String.format("%05d", count);
             HisTollRecord checkNumber = hisTollRecordMapper.selectByNumber(number);
             if (EmptyUtil.Companion.isNullOrEmpty(checkNumber))
                 break;
@@ -939,11 +939,11 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             if (sumPrice.compareTo(hisRefundProjectInfo.getRefundSumProce()) != 0) {
                 return MessageUtil.createMessage(false, "退款金额不一致");
             }
-            String createdate = new SimpleDateFormat("yyMMdd").format(new Date());
+            String createdate = new SimpleDateFormat("yyyyMMdd").format(new Date());
             int count = hisTollRecordMapper.selectNumbCount(createdate) + 1;
             //编号
             HisTollRecord hisTollRecord1 = hisTollRecordMapper.selectByNumber(hisRefundProjectInfo.getTollRecordNumber());//
-            String number = createdate + String.format("%03d", count);
+            String number = createdate + String.format("%05d", count);
             number = "HTR" + number;
             HisTollRecord hisTollRecord = new HisTollRecord();
             hisTollRecord.setMoney(new BigDecimal(0));
