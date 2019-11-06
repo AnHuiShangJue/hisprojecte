@@ -9,7 +9,8 @@
 </style>
 <div th:replace="public/back_baselayout :: html"></div>
 
-<div class="row col s12 x12 l12 xl12">
+<div class="row col s12 x12 l12 xl12" style="width:1920px;
+height:1559px;">
     <div class="row" style="background:rgba(11,13,50,1); height:677px; ">
         <div class="row">
             <div class="row col s6 x6 l6 xl6" style="
@@ -21,7 +22,10 @@
     line-height: 70px;
     margin-left: 8%;
     padding-top: 7%;">
-                <span th:text="${wisdomIndex.introduceOne}"></span>
+                <span th:text="${wisdomIndex.introduceOne}" style="
+    z-index: 10;
+    position: absolute;
+"></span>
             </div>
             <div>
             <img src="/assets/app-assets/images/wisdom/x.png" alt="" style="    width: 1448px;
@@ -81,10 +85,9 @@ position: relative;
             <span th:text="${wisdomIndex.detailsTwo}"></span>
         </div>
     </div>
-
-    <div class="row col s12 x12 l12 xl12" style="width:75%;
-height:595px;
-    margin-left: 10%;">
+    <div class="row col s12 x12 l12 xl12" style="    width: 1264px;
+    height: 344px;
+    margin-left: 261px;">
         <div class="shoufenqin">
             <div class="container">
                 <div class="shoufenqin_box">
