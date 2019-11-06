@@ -98,6 +98,7 @@ public class TreatmentPlanController extends BaseMedicineController {
             for (HisRecordProject h :
                     hisRecordProjectList) {
                 h.setId(h.getProjectId());
+                h.setHisProjectNum(h.getNum());
             }
             modelAndView.addObject("hisMedicalProjectList", hisRecordProjectList);
         } else {
