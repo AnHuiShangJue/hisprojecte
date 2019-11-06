@@ -110,6 +110,8 @@ public class HisRecordProject extends BaseEntity {
 
     private String medicalNumber ;
 
+    private Integer hisProjectNum;
+
     public String getMedicalNumber() {
         return medicalNumber;
     }
@@ -557,5 +559,13 @@ public class HisRecordProject extends BaseEntity {
 
     public void setTypesName(String typesName) {
         this.typesName = typesName;
+    }
+
+    public Integer getHisProjectNum() {
+        return hisProjectNum;
+    }
+
+    public void setHisProjectNum(Integer hisProjectNum) {
+        this.hisProjectNum = hisProjectNum;
     }
 }
