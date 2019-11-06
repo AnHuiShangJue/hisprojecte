@@ -125,13 +125,30 @@ public class PageInterceptor implements Interceptor {
                         insert.setVersionNo(0);
                     }
 
-                    insert.setCreateDate(Calendar.getInstance().getTime());
+                    //判断是否拥有更新时间了
                     if (principal != null) {
-                        insert.setCreateUserId(principal.getId().toString());
-                        insert.setUpdateUserId(principal.getId().toString());
+                        //判断是否拥有创建人了
+                        if(EmptyUtil.Companion.isNullOrEmpty(insert.getCreateUserId())) {
+                            insert.setCreateUserId(principal.getId().toString());
+                            //判断是否拥有创建时间了
+                            if(EmptyUtil.Companion.isNullOrEmpty(insert.getCreateDate())) {
+                                insert.setCreateDate(Calendar.getInstance().getTime());
+                            }
+                        }else{
+                            insert.setUpdateUserId(principal.getId().toString());
+                            insert.setUpdateDate(Calendar.getInstance().getTime());
+                        }
+                    }else{
+                        //判断是否拥有创建时间了
+                        if(EmptyUtil.Companion.isNullOrEmpty(insert.getCreateDate())) {
+                            insert.setCreateDate(Calendar.getInstance().getTime());
+                        }
+                        //判断是否拥有更新时间了
+                        if(EmptyUtil.Companion.isNullOrEmpty(insert.getUpdateDate())){
+                            insert.setUpdateDate(Calendar.getInstance().getTime());
+                        }
                     }
 
-                    insert.setUpdateDate(Calendar.getInstance().getTime());
                 }
             } else if (parameterObject instanceof Map) {
                 Map<String, List> map = (Map<String, List>) parameterObject;
@@ -155,13 +172,29 @@ public class PageInterceptor implements Interceptor {
                                     insert.setVersionNo(0);
                                 }
 
-                                insert.setCreateDate(Calendar.getInstance().getTime());
+                                //判断是否拥有更新时间了
                                 if (principal != null) {
-                                    insert.setCreateUserId(principal.getId().toString());
-                                    insert.setUpdateUserId(principal.getId().toString());
+                                    //判断是否拥有创建人了
+                                    if(EmptyUtil.Companion.isNullOrEmpty(insert.getCreateUserId())) {
+                                        insert.setCreateUserId(principal.getId().toString());
+                                        //判断是否拥有创建时间了
+                                        if(EmptyUtil.Companion.isNullOrEmpty(insert.getCreateDate())) {
+                                            insert.setCreateDate(Calendar.getInstance().getTime());
+                                        }
+                                    }else{
+                                        insert.setUpdateUserId(principal.getId().toString());
+                                        insert.setUpdateDate(Calendar.getInstance().getTime());
+                                    }
+                                }else{
+                                    //判断是否拥有创建时间了
+                                    if(EmptyUtil.Companion.isNullOrEmpty(insert.getCreateDate())) {
+                                        insert.setCreateDate(Calendar.getInstance().getTime());
+                                    }
+                                    //判断是否拥有更新时间了
+                                    if(EmptyUtil.Companion.isNullOrEmpty(insert.getUpdateDate())){
+                                        insert.setUpdateDate(Calendar.getInstance().getTime());
+                                    }
                                 }
-
-                                insert.setUpdateDate(Calendar.getInstance().getTime());
                             }
                         }
                     } catch (Exception e) {

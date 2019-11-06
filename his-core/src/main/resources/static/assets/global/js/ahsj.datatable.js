@@ -38,7 +38,7 @@ var Datatable = function () {
                 dataTable: {
                     // "dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r><'table-scrollable't><'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>", // datatable layout
                     "dom": "<'display't><'row'<'col l5 m5 l5 xl5'i><'col l7 m7 l7 xl7 'p>>",
-                    "pageLength": 10, // default records per page
+                    "pageLength": 100, // default records per page
                     language: {
                         "lengthMenu": "每页显示 _MENU_ 条记录",
                         "zeroRecords": "没有检索到数据",

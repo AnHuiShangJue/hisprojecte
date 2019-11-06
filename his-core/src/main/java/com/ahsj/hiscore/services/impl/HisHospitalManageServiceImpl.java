@@ -203,6 +203,8 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
                 hisHospitalManage.setTollDetailsId(check1.getTollDetailsId());
                 hisHospitalManage.setRestDeposit(check1.getRestDeposit());
                 hisHospitalManage.setIsDischarged(check1.getIsDischarged());
+                hisHospitalManage.setCreateDate(check1.getCreateDate());
+                hisHospitalManage.setUpdateDate(check1.getUpdateDate());
                 HisPatientInfo checkIfExit = hisPatientInfoMapper.selectByPrimaryKey(hisPatientInfo1.getId());
                 if (EmptyUtil.Companion.isNullOrEmpty(checkIfExit)) {
                     return MessageUtil.createMessage(false, "更新失败!所变更的病人信息不存在!");
