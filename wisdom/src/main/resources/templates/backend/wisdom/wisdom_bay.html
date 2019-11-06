@@ -11,12 +11,12 @@
 <body>
     <div class="row col s12 x12 l12 xl12" style="width: 1903px; height: 1080px">
         <div th:replace="public/back_baselayout :: html"></div>
-        <img src="/assets/app-assets/images/wisdom/AppleTV3.png" width="100%"/>
+        <img src="/assets/app-assets/images/wisdom/AppleTV3.png" width="100%" />
         <div class="row" style="font-size: 30px;margin-left: 20%;margin-top: 2%;width: 50%;">产品特色</div>
-        <div id="test2"  style="margin-left: 25%;">
+        <div id="test2"  style="margin-left: 25%; height: 373px;">
             <div class="card" id="wq" style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 250px;height: 149px;margin-right: 4%;margin-top: 4%;border-radius: 25px"><img src="/assets/app-assets/images/wisdom/AppleTV.png" style="margin-left: 33%;margin-top: 2%;">
                <br><span style="color: #ffffff;margin-left: 35%;font-size: 22px;">便捷管理</span>
-                <br><br><span style="color: #ffffff;">便捷文件管理是一款安卓设备上*方便的手机资源管理和文件管理软件。清新的界面加上强大的文件管理和传输功能,轻松连接即可实.</span>
+                <br><br><span style="color: #ffffff; font-size: 13px;">便捷文件管理是一款安卓设备上*方便的手机资源管理和文件管理软件。清新的界面加上强大的文件管理和传输功能,轻松连接即可实.</span>
             </div>
             <div class="card" id="wq1" style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 250px;height: 149px;margin-right: 4%;margin-top: 4%;border-radius: 25px"><img src="/assets/app-assets/images/wisdom/AppleTV1.png" style="margin-left: 33%;margin-top: 2%;">
                 <br><span style="color: #ffffff;margin-left: 35%;font-size: 22px;">有效控制</span>
@@ -29,7 +29,7 @@
                 <div class="row col s6 x6 l6 xl6" style="margin-top: 2%;">
                     <span style="font-size: 30px;margin-left: 40%;margin-top: 2%; color: #ffffff">认证服务</span>
                     <div class="row col s6 x6 l6 xl6 " style="margin-left: 23%">
-                    <br><br><span style="color: #ffffff;letter-spacing: 0.56px; line-height: 56px;">通过NVIDIA 深度学习学院提供人工智能能力认证服务，深度学习学院聚焦于人工智能和深度学习，致力于在全世界范围内提供培训，学习如何解决最具挑战性的问题。通过线上自主学习，或者线下由 NVIDIA 认证的讲师来教授的培训课程。</span>
+                    <br><br><span style="color: #ffffff;letter-spacing: 0.56px; line-height: 56px; font-size:20px;">通过NVIDIA 深度学习学院提供人工智能能力认证服务，深度学习学院聚焦于人工智能和深度学习，致力于在全世界范围内提供培训，学习如何解决最具挑战性的问题。通过线上自主学习，或者线下由 NVIDIA 认证的讲师来教授的培训课程。</span>
                     </div>
                 </div>
                 <div class="row col s6 x6 l6 xl6">
@@ -47,17 +47,17 @@ $(function () {
     $("#wq").click(function(){
         $("#wq1").animate({width:'250px',height:'149px'});
         $("#wq2").animate({width:'250px',height:'149px'});
-        $("#wq").animate({width:'454px',height:'294px'});
+        $("#wq").animate({width:'338px',height:'294px'});
     });
     $("#wq1").click(function(){
         $("#wq").animate({width:'250px',height:'149px'});
         $("#wq2").animate({width:'250px',height:'149px'});
-        $("#wq1").animate({width:'454px',height:'294px'});
+        $("#wq1").animate({width:'338px',height:'294px'});
     }) ;
     $("#wq2").click(function(){
         $("#wq").animate({width:'250px',height:'149px'});
         $("#wq1").animate({width:'250px',height:'149px'});
-        $("#wq2").animate({width:'454px',height:'294px'});
+        $("#wq2").animate({width:'338px',height:'294px'});
     });
 })
 </script>
