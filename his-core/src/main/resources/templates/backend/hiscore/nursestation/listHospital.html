@@ -50,6 +50,32 @@
                                 <label for="MedicalRecordId">请输入住院编号<span style="font-size: 12px">(Please enter the hospitalization number
 )</span></label>
                             </div>
+
+
+                            <div class="input-field col s4 l4 xl4">
+                                <select ahsj:select name="type" id="type" type="code" typeKey="record_type" cssClass="">
+                                </select>
+                                <label for="type">收费类别<span style="font-size: 12px">(type of charge
+)</span></label>
+                            </div>
+
+                            <div class="input-field col s4 l4 xl4">
+                                <input id="name" name="name" type="text"/>
+                                <label for="name">收费名称<span style="font-size: 12px">(charge name
+)</span></label>
+                            </div>
+
+                            <div class="row">
+                                <div class="col s2 m2 l2 xl2 offset-l1">
+                                    <a class="waves-effect waves-light btn" id="searchBtn"><i
+                                            class="material-icons  white-text tooltipped " data-position="bottom"
+                                            data-delay="50" data-tooltip="搜索">search</i></a>
+                                    <a id="resetBtn" class="waves-effect waves-light btn"><i
+                                            class="material-icons  white-text tooltipped " data-position="bottom"
+                                            data-delay="50" data-tooltip="重置">youtube_searched_for</i></a>
+                                </div>
+                            </div>
+
                         </form>
                         <p></p>
                         <div class="row">
@@ -227,6 +253,11 @@
                         "title": "是否付费",
                         "data": "payName",
                         "name": "isPay"
+                    },
+                    {
+                        "title": "收费时间",
+                        "data": "updateDate",
+                        "name": "update_date"
                     }
                 ],
                 "order" : [ [ 1, 'asc' ] ],
@@ -323,6 +354,15 @@
     }
 
     function initBtn() {
+
+        //搜索按钮
+        $('#searchBtn').click(function () {
+            grid.search();
+        });
+        $('#resetBtn').click(function () {
+            grid.reset();
+        });
+
 
         $("#print_btn2").click(function () {
             var url = CTX + "/api/nursestation/reminder/index.ahsj?token=" + TOKEN +"&MedicalRecordId="+$("#MedicalRecordId").val()+ "&money=" + $("#money").val() + "&restDeposit="+$("#restDeposit").val()+"&patientName="+$("#patientName").val()+"&depositWarning="+$("#depositWarning").val();

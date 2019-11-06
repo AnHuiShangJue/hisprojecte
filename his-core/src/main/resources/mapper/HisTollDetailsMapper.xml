@@ -205,6 +205,16 @@
     <!--  自定义sql-->
     <select id="listByMecordIdForHospital" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
         select
+        q.update_date as update_date,
+         a.target_id as target_id,
+            a.num as num,
+            a.money as price ,
+            a.name as name,
+            a.isPay as isPay,
+            a.type as type,
+            a.money * a.num as money
+          from (
+             select
             a.target_id as target_id,
             a.num as num,
             a.money as price ,
@@ -313,6 +323,16 @@
             ) a
         where a.num != 0
         order by a.isPay desc
+        ) as  a
+        left join his_toll_details as q on a.target_id = q.target_id
+        where  1=1
+         <if test="parameter.type != null and parameter.type != ''" >
+          and a.type = #{parameter.type,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.name != null and parameter.name != ''">
+            and a.name like concat('%' #{parameter.name},'%')
+        </if>
+
     </select>
 
     <!--根据就诊记录查询出花费明细（花费的是项目或者药品）id 对应的是具体付费的id以及库中的target_id，项目中对应的是项目记录，药品对应的是用药明细,用于门诊付费-->
