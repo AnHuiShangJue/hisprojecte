@@ -1,6 +1,7 @@
 package com.ahsj.wisdom.service;
 
 import com.ahsj.wisdom.entity.WisdomIndex;
+import core.message.Message;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,4 +30,14 @@ public interface WisdomIndexService {
      * @Time 16:43
      **/
     int updateByName(WisdomIndex record) throws Exception;
+
+    /**
+     * @Description 修改智慧湾首页
+     * @Params: [record]
+     * @Author: dingli
+     * @Return: int
+     * @Date 2019/11/6
+     * @Time 10:21
+     **/
+    Message updateByPrimaryKeySelective(WisdomIndex record);
 }

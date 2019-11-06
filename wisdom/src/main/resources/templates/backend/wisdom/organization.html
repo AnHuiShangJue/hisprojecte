@@ -2,89 +2,108 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:ahsj="http://www.anhuishangjue.com">
 
-<div th:replace="public/base_list :: html" ></div>
+<div th:replace="public/base_list :: html"></div>
 <head>
     <style>
-        .all{
+        .all {
             width: 1903px;
             height: 1080px;
         }
-        .background-image-contactus{
+
+        .background-image-contactus {
             width: 1903px;
             margin-top: 44px
         }
-        .organization-chinese-font{
-            width:180px;
-            height:62px;
-            font-size:44px;
-            font-family:PingFangSC-Medium,PingFang SC;
-            font-weight:500;
-            color:rgba(56,52,52,1);
-            line-height:62px;
+
+        .organization-chinese-font {
+            width: 180px;
+            height: 62px;
+            font-size: 44px;
+            font-family: PingFangSC-Medium, PingFang SC;
+            font-weight: 500;
+            color: rgba(56, 52, 52, 1);
+            line-height: 62px;
         }
-        .organization-english-font{
-            width:382px;
-            height:45px;
-            font-size:32px;
-            font-family:PingFangSC-Medium,PingFang SC;
-            font-weight:500;
-            color:rgba(105,102,102,1);
-            line-height:45px;
+
+        .organization-english-font {
+            width: 382px;
+            height: 45px;
+            font-size: 32px;
+            font-family: PingFangSC-Medium, PingFang SC;
+            font-weight: 500;
+            color: rgba(105, 102, 102, 1);
+            line-height: 45px;
         }
-        .underline{
+
+        .underline {
             width: 1469px;
             height: 3px;
-            background-color:#CFCFCF;
+            background-color: #CFCFCF;
         }
-        .underline-fount{
-            width:135px;
-            height:62px;
-            font-size:44px;
-            font-family:PingFangSC-Light,PingFang SC;
-            font-weight:300;
-            color:rgba(197,194,194,1);
-            line-height:62px;
-        }.detail{
-        }.detail1{
+
+        .underline-fount {
+            width: 135px;
+            height: 62px;
+            font-size: 44px;
+            font-family: PingFangSC-Light, PingFang SC;
+            font-weight: 300;
+            color: rgba(197, 194, 194, 1);
+            line-height: 62px;
+        }
+
+        .detail {
+        }
+
+        .detail1 {
             width: 18%;
             height: 62px;
-            background-color:rgba(255,171,116,1);
-        }.detail2{
+            background-color: rgba(255, 171, 116, 1);
+        }
+
+        .detail2 {
             width: 18%;
             height: 62px;
-            background:rgba(236,115,101,1);
-        }.detail3{
+            background: rgba(236, 115, 101, 1);
+        }
+
+        .detail3 {
             width: 18%;
             height: 62px;
-            background:rgba(47,47,92,1);
-        }.detail4{
+            background: rgba(47, 47, 92, 1);
+        }
+
+        .detail4 {
             width: 18%;
             height: 62px;
-            background:rgba(77,121,194,1);
-        }.fount{
-            width:89px;
-            height:41px;
-            font-size:29px;
-            font-family:PingFangSC-Medium,PingFang SC;
-            font-weight:500;
-            color:rgba(255,255,255,1);
-            line-height:41px;
-        }.fount1{
-            width:153px;
-            height:245px;
-            font-size:18px;
-            font-family:PingFangSC-Regular,PingFang SC;
-            font-weight:400;
-            color:rgba(136,136,136,1);
-            line-height:35px;
-            letter-spacing:4px;
+            background: rgba(77, 121, 194, 1);
+        }
+
+        .fount {
+            height: 41px;
+            font-size: 29px;
+            font-family: PingFangSC-Medium, PingFang SC;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 1);
+            line-height: 41px;
+            margin-top: 10px;
+        }
+
+        .fount1 {
+            width: 153px;
+            height: 245px;
+            font-size: 18px;
+            font-family: PingFangSC-Regular, PingFang SC;
+            font-weight: 400;
+            color: rgba(136, 136, 136, 1);
+            line-height: 35px;
+            letter-spacing: 4px;
         }
     </style>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<div  class="all">
+<div class="all">
     <div th:replace="public/back_baselayout :: html" class="row"></div>
     <div class="row">
         <img src="/assets/app-assets/images/wisdom/contactus.png" class="background-image-contactus"/>
@@ -100,22 +119,54 @@
         <img src="/assets/app-assets/images/wisdom/department02.png" style="margin-right: 200px;">
         <img src="/assets/app-assets/images/wisdom/department03.png" style="margin-left: 200px;">
         <img src="/assets/app-assets/images/wisdom/department04.png" style="margin-left: 100px;">
-        <br><div class="underline"></div>
+        <br>
+        <div class="underline"></div>
         <br><span class="underline-fount" style="margin-left: 666px;">智慧湾</span>
     </div>
     <div class="row col s12 x12 l12 xl12 detail" style="margin-left: 209px;width: 1694px;">
-        <div class="detail1 row col s3 x3 l3 xl3" style="width: 288px;text-align: center"><span class="fount">资讯部</span></div>
-        <div class="detail2 row col s3 x3 l3 xl3" style="width: 288px;margin-left: 3%;text-align: center"><span class="fount">研发部</span></div>
-        <div class="detail3 row col s3 x3 l3 xl3" style="width: 288px;margin-left: 265px;text-align: center"><span class="fount">综合部</span></div>
-        <div class="detail4 row col s3 x3 l3 xl3" style="width: 288px;margin-left: 3%;text-align: center"><span class="fount">外联部</span></div>
+        <div class="detail1 row col s3 x3 l3 xl3" style="width: 288px;text-align: center">
+            <div class="fount">资讯部</div>
+        </div>
+        <div class="detail2 row col s3 x3 l3 xl3" style="width: 288px;margin-left: 3%;text-align: center">
+            <div class="fount">研发部</div>
+        </div>
+        <div class="detail3 row col s3 x3 l3 xl3" style="width: 288px;margin-left: 265px;text-align: center">
+            <div class="fount">综合部</div>
+        </div>
+        <div class="detail4 row col s3 x3 l3 xl3" style="width: 288px;margin-left: 3%;text-align: center">
+            <div class="fount">外联部</div>
+        </div>
     </div>
     <div class="row col s12 x12 l12 xl12 detail" style="margin-left: 294px;    width: 83%;">
-        <br><div class="fount1  row col s3 x3 l3 xl3"  style="width: 297px;"><span>资讯总监</span><br><span>咨询顾问</span><br><span>资讯经理</span><br><span>业务专家(兼)</span><br><span>项目经理</span><br><span>分析员</span><br><span>PTA</span></div>
-        <div class="fount1 row col s3 x3 l3 xl3"  style="width: 20%;margin-left: 47px;" ><span>项目经理</span><br><span>产品经理</span><br><span>架构师</span><br><span>开发组长</span><br><span>开发测试</span><br><span>运维</span></div>
-        <div class="fount1 row col s3 x3 l3 xl3"  style="width: 14%;margin-left: 237px;" ><span>商务经理</span><br><span>客服经理</span></div>
-        <div class="fount1 row col s3 x3 l3 xl3"  style="width: 14%;margin-left: 121px;" ><span>行政专员</span><br><span>人事专员</span><br><span>财务专员</span></div>
+        <br>
+        <div class="fount1  row col s3 x3 l3 xl3" style="width: 297px;">
+            <div>资讯总监</div>
+            <div>咨询顾问</div>
+            <div>资讯经理</div>
+            <div>业务专家(兼)</div>
+            <div>项目经理</div>
+            <div>分析员</div>
+            <div>PTA</div>
+        </div>
+        <div class="fount1 row col s3 x3 l3 xl3" style="width: 20%;margin-left: 47px;">
+            <div>项目经理</div>
+            <div>产品经理</div>
+            <div>架构师</div>
+            <div>开发组长</div>
+            <div>开发测试</div>
+            <div>运维</div>
+        </div>
+        <div class="fount1 row col s3 x3 l3 xl3" style="width: 14%;margin-left: 237px;">
+            <div>商务经理</div>
+            <div>客服经理</div>
+        </div>
+        <div class="fount1 row col s3 x3 l3 xl3" style="width: 14%;margin-left: 121px;">
+            <div>行政专员</div>
+            <div>人事专员</div>
+            <div>财务专员</div>
+        </div>
     </div>
-    <div th:replace="public/footer :: html" ></div>
+    <div th:replace="public/footer :: html"></div>
 </div>
 </body>
 <script>

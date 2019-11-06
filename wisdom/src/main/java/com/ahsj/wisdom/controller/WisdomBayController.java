@@ -18,17 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import utils.EmptyUtil;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 @RestController
 @RequestMapping("/api/wisdombay")
@@ -174,5 +166,28 @@ public class WisdomBayController {
     @RequestMapping("/selectAll.ahsj")
     public List<WisdomIndex> selectAll() throws Exception {
         return wisdomIndexService.selectAll();
+    }
+
+    @RequestMapping("/lanhuUpdate/index.ahsj")
+    ModelAndView lanhuIndexUpdate() throws Exception {
+        List<WisdomIndex> wisdomIndices = wisdomIndexService.selectAll();
+        WisdomIndex wisdomIndex = wisdomIndices.get(0);
+        ModelAndView modelAndView = new ModelAndView("backend/wisdom/index_update");
+        modelAndView.addObject("title", "欢迎页");
+        modelAndView.addObject("wisdomIndex", wisdomIndex);
+        return modelAndView;
+    }
+
+    /**
+     * @Description 修改智慧湾首页
+     * @Params: [record]
+     * @Author: dingli
+     * @Return: void
+     * @Date 2019/11/6
+     * @Time 10:24
+     **/
+    @RequestMapping("/toUpdateIndex.ahsj")
+    public Message updateIndex(WisdomIndex record) {
+        return wisdomIndexService.updateByPrimaryKeySelective(record);
     }
 }
