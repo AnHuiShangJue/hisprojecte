@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
-
 </head>
 <body>
-    <style>
-        #lanhu{
-             height: 120px;
-        }
-    </style>
+<style>
+    #lanhu {
+        height: 120px;
+    }
+</style>
 <div th:replace="public/back_baselayout :: html"></div>
 
 <div class="row col s12 x12 l12 xl12">
-    <div class="row" style="background:rgba(11,13,50,1); height:677px;">
+    <div class="row" style="background:rgba(11,13,50,1); height:677px; ">
         <div class="row">
             <div class="row col s6 x6 l6 xl6" style="
     height: 140px;
@@ -24,6 +23,11 @@
     padding-top: 7%;">
                 <span th:text="${wisdomIndex.introduceOne}"></span>
             </div>
+            <div>
+            <img src="/assets/app-assets/images/wisdom/x.png" alt="" style="    width: 1448px;
+    height: 677px;
+    margin-left: 455px;
+    margin-top: -160px;"></div>
             <div class="row col s6 x6 l6 xl6" style="  width: 700px;
     height: 270px;
     font-size: 32px;
@@ -32,14 +36,16 @@
     color: rgba(255,255,255,1);
     line-height: 45px;
     margin-left: 8%;
-    margin-top: 6%;" >
-                <span th:text="${wisdomIndex.detailsOne}"></span>
+    margin-top: -21%;">
+                <span style="  z-index: 10;
+    width: 689px;
+    position: absolute;" th:text="${wisdomIndex.detailsOne}"></span>
             </div>
         </div>
     </div>
     <div class="row col s12 x12 l12 xl12" style="width:100%;
 height:595px;
-background:rgba(255,255,255,1);" >
+background:rgba(255,255,255,1);">
         <div class="row " style="width:auto;
 height:108px;
 font-size:39px;
@@ -49,7 +55,7 @@ color:rgba(19,18,18,1);
 line-height:54px;
 position: relative;
     margin-left: 8%;
-    top: 17%;" >   <span th:text="${wisdomIndex.introduceTwo}"></span>
+    top: 17%;"><span th:text="${wisdomIndex.introduceTwo}"></span>
         </div>
         <div class="row " style="width:auto;
 height:36px;
@@ -60,7 +66,7 @@ color:rgba(19,18,18,1);
 line-height:36px;
 position: relative;
     margin-left: 8%;
-    top: 11%;">   <span th:text="${wisdomIndex.spell}"></span>
+    top: 11%;"><span th:text="${wisdomIndex.spell}"></span>
         </div>
         <div class="row " style="    width: 80%;
     height: 64px;
@@ -78,7 +84,6 @@ position: relative;
 
     <div class="row col s12 x12 l12 xl12" style="width:75%;
 height:595px;
-/*background:rgba(255,255,255,1);*/
     margin-left: 10%;">
         <div class="shoufenqin">
             <div class="container">
@@ -88,14 +93,14 @@ height:595px;
                             <div>
                                 <img src=""
                                      alt="">
-                                <p>   <span th:text="${wisdomIndex.one1}"></span></p>
+                                <p th:text="${wisdomIndex.one1}"></p>
                                 <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one1"><i>——</i>查看更多</a>
                             </div>
                             <img src="/assets/app-assets/images/wisdom/1.jpg" alt="">
                         </div>
                         <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one1" class="small">
                             <img src="" alt="">
-                            <span> <span th:text="${wisdomIndex.one1}"></span>
+                            <span th:text="${wisdomIndex.one1}"></span>
                         </a>
                     </div>
                     <div class="one2 ">
@@ -103,14 +108,14 @@ height:595px;
                             <div>
                                 <img src=""
                                      alt="">
-                                <p> <span th:text="${wisdomIndex.one2}"></p>
+                                <p th:text="${wisdomIndex.one2}"></p>
                                 <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one2"><i>——</i>查看更多</a>
                             </div>
                             <img src="/assets/app-assets/images/wisdom/2.jpg" alt="">
                         </div>
                         <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one2" class="small">
                             <img src="#" alt="">
-                            <span> <span th:text="${wisdomIndex.one2}"></span>
+                            <span th:text="${wisdomIndex.one2}"></span>
                         </a>
                     </div>
                     <div class="one3 ">
@@ -118,14 +123,14 @@ height:595px;
                             <div>
                                 <img src="#"
                                      alt="">
-                                <p> <span th:text="${wisdomIndex.one3}"></p>
+                                <p th:text="${wisdomIndex.one3}"></p>
                                 <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one3"><i>——</i>查看更多</a>
                             </div>
                             <img src="/assets/app-assets/images/wisdom/3.jpg" alt="">
                         </div>
                         <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one3" class="small">
                             <img src="" alt="">
-                            <span> <span th:text="${wisdomIndex.one3}"></span>
+                            <span th:text="${wisdomIndex.one3}"></span>
                         </a>
                     </div>
                     <div class="one4 ">
@@ -133,14 +138,14 @@ height:595px;
                             <div>
                                 <img src=""
                                      alt="">
-                                <p> <span th:text="${wisdomIndex.one4}"></p>
+                                <p th:text="${wisdomIndex.one4}"></p>
                                 <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one4"><i>——</i>查看更多</a>
                             </div>
                             <img src="/assets/app-assets/images/wisdom/4.jpg" alt="">
                         </div>
                         <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one4" class="small">
                             <img src="" alt="">
-                            <span> <span th:text="${wisdomIndex.one4}"></span>
+                            <span th:text="${wisdomIndex.one4}"></span>
                         </a>
                     </div>
                     <div class="one5 ">
@@ -148,14 +153,14 @@ height:595px;
                             <div>
                                 <img src=""
                                      alt="">
-                                <p> <span th:text="${wisdomIndex.one5}"></p>
+                                <p th:text="${wisdomIndex.one5}"></p>
                                 <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one5"><i>——</i>查看更多</a>
                             </div>
                             <img src="/assets/app-assets/images/wisdom/5.jpg" alt="">
                         </div>
                         <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one5" class="small">
                             <img src="" alt="">
-                            <span> <span th:text="${wisdomIndex.one5}"></span>
+                            <span th:text="${wisdomIndex.one5}"></span>
                         </a>
                     </div>
                     <div class="one6 ">
@@ -163,28 +168,28 @@ height:595px;
                             <div>
                                 <img src=""
                                      alt="">
-                                <p> <span th:text="${wisdomIndex.one6}"></p>
+                                <p th:text="${wisdomIndex.one6}"></p>
                                 <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one6"><i>——</i>查看更多</a>
                             </div>
                             <img src="/assets/app-assets/images/wisdom/6.jpg" alt="">
                         </div>
                         <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one6" class="small">
                             <img src="" alt="">
-                            <span> <span th:text="${wisdomIndex.one6}"></span>
+                            <span th:text="${wisdomIndex.one6}"></span>
                         </a>
                     </div>
                     <div class="one7 ">
                         <div class="big_sfq">
                             <div>
                                 <img src="" alt="">
-                                <p> <span th:text="${wisdomIndex.one7}"></p>
+                                <p th:text="${wisdomIndex.one7}"></p>
                                 <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one7"><i>——</i>查看更多</a>
                             </div>
                             <img src="/assets/app-assets/images/wisdom/7.jpg" alt="">
                         </div>
                         <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one7" class="small">
                             <img src="" alt="">
-                            <span> <span th:text="${wisdomIndex.one7}"></span>
+                            <span th:text="${wisdomIndex.one7}"></span>
                         </a>
                     </div>
                 </div>
