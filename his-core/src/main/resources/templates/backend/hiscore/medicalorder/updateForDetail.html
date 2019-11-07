@@ -101,6 +101,7 @@
 
 <div th:replace="public/base_update_script :: html"></div>
 <script th:inline="javascript">
+
     $(function () {
         var enLang = {
             name: "en",
@@ -130,6 +131,12 @@
     });
     $(document).ready(function () {
         //病房
+        if(isNullOrEmpty($("#isSkinTest").val())) {
+            changeSelectValue("isSkinTest", 1);
+        }
+        if(isNullOrEmpty($("#startTime").val())){
+            $("#startTime").val(new Date());
+        }
     });
 
 
@@ -177,6 +184,22 @@
     $("input").change(function () {
         $(this).val($(this).val().trim());
     });
+
+    function getDay(){
+        var myDate = new Date();
+        var year = myDate.getFullYear();
+        var month = myDate.getMonth() + 1;
+        var date = myDate.getDate();
+        var h = myDate.getHours();
+        var m = myDate.getMinutes();
+        var s = myDate.getSeconds();
+        if(m<=9){
+            var now = year + "-" + month + "-" + date + " " + h + ":" +"0"+ m /*+ ":" + s*/;
+        }else {
+            var now = year + "-" + month + "-" + date + " " + h + ":" + m /*+ ":" + s*/;
+        }
+        return now;
+    }
 </script>
 
 </body>

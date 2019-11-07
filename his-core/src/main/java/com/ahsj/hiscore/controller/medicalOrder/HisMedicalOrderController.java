@@ -3,6 +3,7 @@ package com.ahsj.hiscore.controller.medicalOrder;
 import com.ahsj.hiscore.core.CodeHelper;
 import com.ahsj.hiscore.entity.*;
 import com.ahsj.hiscore.services.HisHospitalManageService;
+import com.ahsj.hiscore.services.HisInfusionService;
 import com.ahsj.hiscore.services.HisMedicalOrderDetailService;
 import com.ahsj.hiscore.services.HisMedicalOrderService;
 import core.controller.BaseController;
@@ -32,6 +33,9 @@ public class HisMedicalOrderController extends BaseController {
 
     @Autowired
     HisHospitalManageService hisHospitalManageService;
+
+    @Autowired
+    HisInfusionService hisInfusionService;
     /**
      *@Description 根据就诊记录编号查看医嘱
      *@Params [model, request, hisAnkle]
@@ -120,7 +124,11 @@ public class HisMedicalOrderController extends BaseController {
         List<HisMedicalOrderDetail> hisMedicalOrderDetailList = CodeHelper.getInstance().setCodeValue(hisMedicalOrderDetailService.selectByNumberAscAndNotStop(number));
         if(EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetailList)||hisMedicalOrderDetailList.size()==0)
             return new ArrayList<>();
+        String infusionNumber = "";//记录医嘱单编号
+        Integer flag = 0;//记录输液单的起始
         for (HisMedicalOrderDetail hisMedicalOrderDetail : hisMedicalOrderDetailList) {
+            //记录拼接医嘱内容
+            StringBuffer stringBuffer = new StringBuffer(hisMedicalOrderDetail.getName());
             if(EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getAnName())){
                 hisMedicalOrderDetail.setAnName("");
             } if(EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getPnName())){
@@ -132,6 +140,40 @@ public class HisMedicalOrderController extends BaseController {
             } if(EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getStopUserName())){
                 hisMedicalOrderDetail.setStopUserName("");
             }
+            if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getIntervalsName())) {
+                stringBuffer.append("  "+hisMedicalOrderDetail.getIntervalsName());
+            }
+            if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getTotalAmount())) {
+                stringBuffer.append("  "+hisMedicalOrderDetail.getTotalAmount());
+            }
+
+            //设置医嘱单符号
+            //从是医嘱单的开始   记录编号若编号不一致重新开始一次
+            //标记输液单起始符号 「代表开始  |代表其中包含药品 」代表结束
+            if(!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getIsInfusionList())) {
+                if (hisMedicalOrderDetail.getIsInfusionList() == 1) {
+                    if (EmptyUtil.Companion.isNullOrEmpty(infusionNumber)|| flag == -1) {
+                        infusionNumber = hisMedicalOrderDetail.getInfusionNumber();
+                        flag = 0;
+                    }
+                    List<HisInfusion> hisInfusionList = hisInfusionService.selectByNumber(infusionNumber);
+                    if (flag == 0) {
+                        stringBuffer.append("  「" +
+                                "");
+                        flag++;
+                    } else {
+                        if (flag + 1 == hisInfusionList.size()) {
+                            stringBuffer.append("  」");
+                            flag = -1;
+                        } else {
+                            stringBuffer.append("  |");
+                            flag++;
+                        }
+                    }
+
+                }
+            }
+            hisMedicalOrderDetail.setName(stringBuffer.toString());
         }
         return hisMedicalOrderDetailList;
     }

@@ -31,15 +31,15 @@
 <div class="row">
     <div class="row valign-wrapper" style="margin-top: 30px">
         <div class="col s12 m12 l12 center" style="margin: 0 auto;">
-            <h4 style="text-align: center;padding: 0;margin: 0;font-size: 10px">中柬第一医院</h4>
-            <p style="text-align: center;padding: 0;margin: 0;font-size: 10px">The first china-cambodia hospital</p>
+            <h4 style="text-align: center;padding: 0;margin: 0;font-size: 10px">中柬第一医院治疗诊疗单</h4>
+            <p style="text-align: center;padding: 0;margin: 0;font-size: 10px">The first china-cambodia hospital Treatment list</p>
         </div>
     </div>
     <div class="row valign-wrapper">
         <table style="border: none;margin: 0 auto;font-size: 10px;width: 95%;">
-            <tr>
-                <td colspan="2"><label>治疗诊疗单(Treatment list)</label></td>
-            </tr>
+            <!--<tr>-->
+                <!--<td colspan="2" style="text-align: center"><label>治疗诊疗单(Treatment list)</label></td>-->
+            <!--</tr>-->
             <tr>
                 <td><label>就诊编号(Visit number)</label></td>
                 <td><label><span id=numbers></span></label></td>
@@ -56,56 +56,58 @@
                 <td>创建时间(Creation time)</td>
                 <td><label><span id="date"></span></label></td>
             </tr>
-            <tr>
-                <td colspan="2"><label class="fontsize01">门诊诊断(Outpatient diagnosis)</label></td>
-            </tr>
-            <tr>
-                <td>现病史(Current medical history)</td>
-                <td><label><span id="nowCondition"></span></label></td>
-            </tr>
-            <tr>
-                <td>既往史(Past history)</td>
-                <td><label><span id="hiscondition"></span></label></td>
-            </tr>
-            <tr>
-                <td>主诉(Chief complaint)</td>
-                <td><label><span id="chiefcomplaint"></span></label></td>
-            </tr>
-            <tr>
-                <td>个人史(Personal history)</td>
-                <td><label><span id="personalHistory"></span></label></td>
-            </tr>
-            <tr>
-                <td>过敏史(allergies)</td>
-                <td><label><span id="allergies"></span></label></td>
-            </tr>
-            <tr>
-                <td>家族史(Family history)</td>
-                <td><label><span id="familyHistory"></span></label></td>
-            </tr>
-            <tr>
-                <td>其他诊断(Other diagnosis)</td>
-                <td><label><span id="other"></span></label></td>
-            </tr>
-            <tr>
-                <td>血压(blood pressure)</td>
-                <td><label><span id="bloodPressure"></span></label></td>
-            </tr>
-            <tr>
-                <td>体温(body temperature)</td>
-                <td><label><span id="bodyTemperature"></span></label></td>
-            </tr>
-            <tr>
-                <td>体重(weight)</td>
-                <td><label><span id="bodyWeight"></span></label></td>
-            </tr>
-            <tr>
-                <td>心率(Heart rate)</td>
-                <td><label><span id="heartRate"></span></label></td>
-            </tr>
-            <tr>
-                <td colspan="2"><label>药物治疗方案(Drug treatment plan)</label></td>
-            </tr>
+            <!--<tr>-->
+                <!--<td colspan="2"><label class="fontsize01">门诊诊断(Outpatient diagnosis)</label></td>-->
+            <!--</tr>-->
+            <td>诊断结果(diagnostic result)</td>
+            <td><label><span id="other"></span></label></td>
+            <!--<tr>-->
+                <!--<td>现病史(Current medical history)</td>-->
+                <!--<td><label><span id="nowCondition"></span></label></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td>既往史(Past history)</td>-->
+                <!--<td><label><span id="hiscondition"></span></label></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td>主诉(Chief complaint)</td>-->
+                <!--<td><label><span id="chiefcomplaint"></span></label></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td>个人史(Personal history)</td>-->
+                <!--<td><label><span id="personalHistory"></span></label></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td>过敏史(allergies)</td>-->
+                <!--<td><label><span id="allergies"></span></label></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td>家族史(Family history)</td>-->
+                <!--<td><label><span id="familyHistory"></span></label></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td>其他诊断(Other diagnosis)</td>-->
+                <!--<td><label><span id="other"></span></label></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td>血压(blood pressure)</td>-->
+                <!--<td><label><span id="bloodPressure"></span></label></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td>体温(body temperature)</td>-->
+                <!--<td><label><span id="bodyTemperature"></span></label></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td>体重(weight)</td>-->
+                <!--<td><label><span id="bodyWeight"></span></label></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td>心率(Heart rate)</td>-->
+                <!--<td><label><span id="heartRate"></span></label></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td colspan="2"><label>药物治疗方案(Drug treatment plan)</label></td>-->
+            <!--</tr>-->
         </table>
     </div>
 
@@ -159,7 +161,8 @@
             function (data) {
                 var jsons = data[0];
                 if (!isNullOrEmpty(jsons)) {//有
-                    var trs = "<tr><td><label>名称(name)</label></td><td><label>规格(drugsSpec)</label></td><td><label>用法用量(usage and dosage)</label></td><td><label>数目(number)</label></td><!--<td type=\"hidden\"><label>单价(price)</label></td><td type=\"hidden\"><label>单项总价(Single item total price)</label></td>--></tr>";
+                    // var trs = "<tr><td><label>名称(name)</label></td><td><label>规格(drugsSpec)</label></td><td><label>用法用量(usage and dosage)</label></td><td><label>数目(number)</label></td><!--<td type=\"hidden\"><label>单价(price)</label></td><td type=\"hidden\"><label>单项总价(Single item total price)</label></td>--></tr>";
+                   var trs ="";
                     $.each(data, function (index, item) {
                         if (isNullOrEmpty(item.name)) {
                             item.name = ""
@@ -179,7 +182,7 @@
                         if (isNullOrEmpty(item.description)) {
                             item.description = ""
                         }
-                        trs += "<tr><td><p> " + item.drugsName + "(" + item.tdrugsName + ")" + "</p></td><td ><p>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</p></td><td ><p> " + item.description + "(" + item.tdescription + ")" + "</p></td><td ><p> " + item.count + "</p></td></tr >";
+                        trs += "<tr><td><p> " + item.drugsName + "(" + item.tdrugsName + ")" + "</p></td><td ><p>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</p></td><td ><p> " + item.count + "</p></td><td ><p> " + item.description + "(" + item.tdescription + ")" + "</p></td></tr >";
                     });
                     $("#drug").append(trs);
                 } else {
@@ -232,42 +235,42 @@
                 /* if (data.thiscondition == null) {
                      data.thiscondition=""
                  }*/
-                if (data.hiscondition != null && data.hiscondition != "" && data.hiscondition != undefined) {
-                    $("#hiscondition").html(data.hiscondition);
-                }
+                // if (data.hiscondition != null && data.hiscondition != "" && data.hiscondition != undefined) {
+                //     $("#hiscondition").html(data.hiscondition);
+                // }
                 /*if (data.tnowCondition == null) {
                     data.tnowCondition=""
                 }*/
-                if (data.nowCondition != null && data.nowCondition != "" && data.nowCondition != undefined) {
-
-                    $("#nowCondition").html(data.nowCondition);
-                }
+                // if (data.nowCondition != null && data.nowCondition != "" && data.nowCondition != undefined) {
+                //
+                //     $("#nowCondition").html(data.nowCondition);
+                // }
                 /* if (data.tchiefcomplaint ==null) {
                      data.tchiefcomplaint=""
                  }*/
-                if (data.chiefcomplaint != null && data.chiefcomplaint != "" && data.chiefcomplaint != undefined) {
-                    $("#chiefcomplaint").html(data.chiefcomplaint);
-                }
+                // if (data.chiefcomplaint != null && data.chiefcomplaint != "" && data.chiefcomplaint != undefined) {
+                //     $("#chiefcomplaint").html(data.chiefcomplaint);
+                // }
                 /* if (data.tpersonalHistory == null) {
                      data.tpersonalHistory=""
                  }*/
-                if (data.personalHistory != null && data.personalHistory != "" && data.personalHistory != undefined) {
-                    $("#personalHistory").html(data.personalHistory);
-                }
+                // if (data.personalHistory != null && data.personalHistory != "" && data.personalHistory != undefined) {
+                //     $("#personalHistory").html(data.personalHistory);
+                // }
                 /* if (data.tallergies == null) {
                      data.tallergies=""
                  }*/
-                if (data.allergies != null && data.allergies != "" && data.allergies != undefined) {
-
-                    $("#allergies").html(data.allergies);
-                }
+                // if (data.allergies != null && data.allergies != "" && data.allergies != undefined) {
+                //
+                //     $("#allergies").html(data.allergies);
+                // }
                 /* if (data.tfamilyHistory ==null) {
                      data.tfamilyHistory=""
                  }*/
-                if (data.familyHistory != null && data.familyHistory != "" && data.familyHistory != undefined) {
-
-                    $("#familyHistory").html(data.familyHistory);
-                }
+                // if (data.familyHistory != null && data.familyHistory != "" && data.familyHistory != undefined) {
+                //
+                //     $("#familyHistory").html(data.familyHistory);
+                // }
                 /*   if (data.tother ==null  &&data.tother!=""&&data.tother!=undefined) {
                        data.tother=""
                    }*/
