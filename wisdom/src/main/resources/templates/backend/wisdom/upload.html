@@ -43,39 +43,38 @@
 
     $(function () {
         $("#excelUploadFile").click(function () {
-            dialog.confirm("确定修改吗", function (index, layero) {
-                var file = $("#input-file-now").val();
-                var excelUploadFileForm = new FormData($("#excelUploadFileForm")[0]);
-                if (file == null || file == "") {
-                    dialog.warn("请选择导入文件！");
-                } else {
-                        $.ajax({
-                            url: "/api/wisdombay/uploadFile.ahsj",
-                            type: "POST",
-                            data: excelUploadFileForm,
-                            dataType: "json",
-                            processData: false,  // 告诉jQuery不要去处理发送的数据
-                            contentType: false,   // 告诉jQuery不要去设置Content-Type请求头
-                            success: function (msg) {
-                                if (msg.success) {
-                                    M.toast({html: msg.message});
-                                    window.history.back(-1);
-                                    return false;
-                                } else {
-                                    M.toast({html: msg.message});
-                                    return false;
-                                }
-                            },
-                            errors: function () {
-                                M.toast({html: "网络异常"});
-                                return false;
-                            }
-                        })
+            var file = $("#input-file-now").val();
+            var excelUploadFileForm = new FormData($("#excelUploadFileForm")[0]);
+            if (file == null || file == "") {
+                dialog.warn("请选择导入文件！");
+            } else {
+                $.ajax({
+                    url: "/api/wisdombay/uploadFile.ahsj",
+                    type: "POST",
+                    data: excelUploadFileForm,
+                    dataType: "json",
+                    processData: false,  // 告诉jQuery不要去处理发送的数据
+                    contentType: false,   // 告诉jQuery不要去设置Content-Type请求头
+                    success: function (msg) {
+                        if (msg.success) {
+                            M.toast({html: msg.message});
+                            dialog.parentclose();
+                            return false;
+                        } else {
+                            M.toast({html: msg.message});
+                            return false;
+                        }
+                    },
+                    errors: function () {
+                        M.toast({html: "网络异常"});
+                        return false;
                     }
+                })
+            }
 
-            })
-        });
+        })
     });
+
 
 </script>
 </body>

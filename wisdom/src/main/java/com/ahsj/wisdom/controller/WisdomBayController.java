@@ -10,10 +10,7 @@ import core.message.MessageUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import utils.EmptyUtil;
@@ -128,7 +125,7 @@ public class WisdomBayController {
     ModelAndView upload(String name) {
         ModelAndView modelAndView = new ModelAndView("backend/wisdom/upload");
         modelAndView.addObject("title", "");
-        modelAndView.addObject("name", "1.jpg");
+        modelAndView.addObject("name", name);
         modelAndView.addObject("title", "联系我们");
         return modelAndView;
     }
@@ -187,7 +184,7 @@ public class WisdomBayController {
      * @Time 10:24
      **/
     @RequestMapping("/toUpdateIndex.ahsj")
-    public Message updateIndex(WisdomIndex record) {
+    public Message updateIndex( WisdomIndex record) {
         return wisdomIndexService.updateByPrimaryKeySelective(record);
     }
 }
