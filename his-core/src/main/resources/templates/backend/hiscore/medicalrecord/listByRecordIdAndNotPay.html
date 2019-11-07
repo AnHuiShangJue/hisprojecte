@@ -206,10 +206,12 @@
         $("#selectForTreamentBtn").click(function () {
             // var ids = grid.getSelectedRows();
             var ids =cacheIds;
-            if (ids.length < 2) {
-                dialog.warn("请至少选择两条数据（Please select at least two data）");
-                return;
-            }
+
+            // if (ids.length < 2) {
+            //     dialog.warn("请至少选择两条数据（Please select at least two data）");
+            //     return;
+            // }
+
             $.ahsjajax(
                 CTX + "/api/medicationDetails/selectByIds.ahsj?token=" + TOKEN,
                 {"ids":ids.join(',')},

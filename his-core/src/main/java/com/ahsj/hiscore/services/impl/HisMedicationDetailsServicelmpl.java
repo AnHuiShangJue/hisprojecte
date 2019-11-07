@@ -501,6 +501,8 @@ public class HisMedicationDetailsServicelmpl implements HisMedicationDetailsServ
         return medicationDetailsList;
     }
 
+
+
     /**
      *@Description 查询出当前就诊编号未付费的药品
      *@Params [recordId]

@@ -166,8 +166,8 @@ public class HisMedicalRecordController extends BaseController {
 
     /**
      *@Description 医生端的门诊病人
-     *@Params 
-     *@return 
+     *@Params
+     *@return
      *@Author jin
      *@Date 2019/9/26
      *@Time 17:08
@@ -178,7 +178,7 @@ public class HisMedicalRecordController extends BaseController {
         modelAndView.addObject("title", "医疗信息系统");
         modelAndView.addObject("token", token);
         modelAndView.addObject("userId", getId());
-        
+
         return modelAndView;
     }
 

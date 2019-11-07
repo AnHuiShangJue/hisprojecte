@@ -39,8 +39,8 @@
         <result column="mId" property="mId" jdbcType="BIGINT"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, medication_id, description, remarks, is_pay, is_back, is_del, count, drugs_numb, 
-    drugs_name, drugs_alias, drugs_spec, prescription, mental_medicine, large_unit, small_unit, 
+    id, medication_id, description, remarks, is_pay, is_back, is_del, count, drugs_numb,
+    drugs_name, drugs_alias, drugs_spec, prescription, mental_medicine, large_unit, small_unit,
     conversion_rate, disable, level, medical_insurance_sign, placeOrigin, base_medicine,
     narcotic_drugs, create_user_id, create_date, update_user_id, update_date, total_price,medical_record_id,is_out,exit_id,alreadyout
   </sql>
@@ -55,25 +55,25 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
     <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisMedicationDetails" useGeneratedKeys="true" keyProperty="id">
-    insert into his_medication_details (id, medication_id, description, 
-      remarks, is_pay, is_back, 
+    insert into his_medication_details (id, medication_id, description,
+      remarks, is_pay, is_back,
       is_del,count, drugs_numb,
-      drugs_name, drugs_alias, drugs_spec, 
-      prescription, mental_medicine, large_unit, 
-      small_unit, conversion_rate, disable, 
-      level, medical_insurance_sign, placeOrigin, 
-      base_medicine, narcotic_drugs, create_user_id, 
+      drugs_name, drugs_alias, drugs_spec,
+      prescription, mental_medicine, large_unit,
+      small_unit, conversion_rate, disable,
+      level, medical_insurance_sign, placeOrigin,
+      base_medicine, narcotic_drugs, create_user_id,
       create_date, update_user_id, update_date,
       total_price,medical_record_id,is_out,exit_id,alreadyout)
-    values (#{id,jdbcType=BIGINT}, #{medicationId,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, 
-      #{remarks,jdbcType=VARCHAR}, #{isPay,jdbcType=INTEGER}, #{isBack,jdbcType=INTEGER}, 
-      #{isDel,jdbcType=INTEGER}, #{count,jdbcType=INTEGER}, #{drugsNumb,jdbcType=VARCHAR}, 
-      #{drugsName,jdbcType=VARCHAR}, #{drugsAlias,jdbcType=VARCHAR}, #{drugsSpec,jdbcType=VARCHAR}, 
-      #{prescription,jdbcType=INTEGER}, #{mentalMedicine,jdbcType=INTEGER}, #{largeUnit,jdbcType=VARCHAR}, 
-      #{smallUnit,jdbcType=VARCHAR}, #{conversionRate,jdbcType=DECIMAL}, #{disable,jdbcType=INTEGER}, 
-      #{level,jdbcType=INTEGER}, #{medicalInsuranceSign,jdbcType=INTEGER}, #{placeorigin,jdbcType=VARCHAR}, 
-      #{baseMedicine,jdbcType=INTEGER}, #{narcoticDrugs,jdbcType=INTEGER}, #{createUserId,jdbcType=BIGINT}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=BIGINT}, #{medicationId,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR},
+      #{remarks,jdbcType=VARCHAR}, #{isPay,jdbcType=INTEGER}, #{isBack,jdbcType=INTEGER},
+      #{isDel,jdbcType=INTEGER}, #{count,jdbcType=INTEGER}, #{drugsNumb,jdbcType=VARCHAR},
+      #{drugsName,jdbcType=VARCHAR}, #{drugsAlias,jdbcType=VARCHAR}, #{drugsSpec,jdbcType=VARCHAR},
+      #{prescription,jdbcType=INTEGER}, #{mentalMedicine,jdbcType=INTEGER}, #{largeUnit,jdbcType=VARCHAR},
+      #{smallUnit,jdbcType=VARCHAR}, #{conversionRate,jdbcType=DECIMAL}, #{disable,jdbcType=INTEGER},
+      #{level,jdbcType=INTEGER}, #{medicalInsuranceSign,jdbcType=INTEGER}, #{placeorigin,jdbcType=VARCHAR},
+      #{baseMedicine,jdbcType=INTEGER}, #{narcoticDrugs,jdbcType=INTEGER}, #{createUserId,jdbcType=BIGINT},
+      #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP},
       #{totalPrice,jdbcType=DECIMAL}, #{medicalRecordId,jdbcType=BIGINT},#{isOut,jdbcType=INTEGER},#{exitId,jdbcType=BIGINT},#{alreadyout,jdbcType=INTEGER})
   </insert>
     <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisMedicationDetails">

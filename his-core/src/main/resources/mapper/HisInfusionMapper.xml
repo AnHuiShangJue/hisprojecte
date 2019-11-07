@@ -32,13 +32,13 @@
     <result column="start_time_varchar" jdbcType="VARCHAR" property="startTimeVarchar" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, record_id, hosptalregist_number, start_time, patient_id, usages, intervals, speed, 
-    duration, drugs_numb, drugname, single_dose, single_unit, is_skin_test, dosage, unit, 
+    id, record_id, hosptalregist_number, start_time, patient_id, usages, intervals, speed,
+    duration, drugs_numb, drugname, single_dose, single_unit, is_skin_test, dosage, unit,
     price, create_user_id, create_date, update_user_id, update_date, remarks, number,
     type, project_id, nurse_id,medication_id,start_time_varchar
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from his_infusion
     where id = #{id,jdbcType=BIGINT}
@@ -48,23 +48,23 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisInfusion">
-    insert into his_infusion (id, record_id, hosptalregist_number, 
-      start_time, patient_id, usages, 
-      intervals, speed, duration, 
-      drugs_numb, drugname, single_dose, 
-      single_unit, is_skin_test, dosage, 
-      unit, price, create_user_id, 
+    insert into his_infusion (id, record_id, hosptalregist_number,
+      start_time, patient_id, usages,
+      intervals, speed, duration,
+      drugs_numb, drugname, single_dose,
+      single_unit, is_skin_test, dosage,
+      unit, price, create_user_id,
       create_date, update_user_id, update_date,
-      remarks, number, type, 
+      remarks, number, type,
       project_id, nurse_id,medication_id,start_time_varchar)
-    values (#{id,jdbcType=BIGINT}, #{recordId,jdbcType=VARCHAR}, #{hosptalregistNumber,jdbcType=VARCHAR}, 
-      #{startTime,jdbcType=TIMESTAMP}, #{patientId,jdbcType=BIGINT}, #{usages,jdbcType=VARCHAR}, 
-      #{intervals,jdbcType=INTEGER}, #{speed,jdbcType=VARCHAR}, #{duration,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{recordId,jdbcType=VARCHAR}, #{hosptalregistNumber,jdbcType=VARCHAR},
+      #{startTime,jdbcType=TIMESTAMP}, #{patientId,jdbcType=BIGINT}, #{usages,jdbcType=VARCHAR},
+      #{intervals,jdbcType=INTEGER}, #{speed,jdbcType=VARCHAR}, #{duration,jdbcType=VARCHAR},
       #{drugsNumb,jdbcType=VARCHAR}, #{drugname,jdbcType=VARCHAR}, #{singleDose,jdbcType=INTEGER},
-      #{singleUnit,jdbcType=VARCHAR}, #{isSkinTest,jdbcType=INTEGER}, #{dosage,jdbcType=VARCHAR}, 
-      #{unit,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{createUserId,jdbcType=BIGINT}, 
+      #{singleUnit,jdbcType=VARCHAR}, #{isSkinTest,jdbcType=INTEGER}, #{dosage,jdbcType=VARCHAR},
+      #{unit,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{createUserId,jdbcType=BIGINT},
       #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP},
-      #{remarks,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{remarks,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},
       #{projectId,jdbcType=BIGINT}, #{nurseId,jdbcType=BIGINT},#{medicationId,jdbcType=BIGINT},#{startTimeVarchar,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisInfusion">

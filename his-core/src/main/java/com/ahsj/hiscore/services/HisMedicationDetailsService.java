@@ -153,6 +153,7 @@ public interface HisMedicationDetailsService {
      **/
     List<HisMedicationDetails> selectPrint(String number) throws Exception;
 
+
     /**
      *@Description 查询出当前就诊编号未付费的药品
      *@Params [id]
