@@ -167,6 +167,9 @@
         <if test="parameter.number != null and parameter.number != ''">
             and d.number like concat('%' #{parameter.number},'%')
         </if>
+        <if test="parameter.patientName != null and parameter.patientName != ''">
+            and i.name like concat('%' #{parameter.patientName},'%')
+        </if>
         <if test="parameter.createName != null and parameter.createName != ''">
             and u.user_name like concat('%' #{parameter.createName},'%')
         </if>
@@ -210,14 +213,19 @@ where d.number=#{number}
         select distinct COALESCE(sum(a.paid_amount-a.retrieve_amount),0) as amount_receivable ,
         min(a.create_date) as minTime ,max(a.create_date) as maxTime
         from (
-        select d.number ,p.create_date,p.paid_amount as paid_amount, p.retrieve_amount as retrieve_amount,u.user_name
+        select d.number ,p.create_date,p.paid_amount as paid_amount, p.retrieve_amount as
+        retrieve_amount,u.user_name,i.name
         from his_registeredpay as p
         LEFT JOIN his_registered as d on p.registered_id = d.id
         LEFT JOIN `his-userinfo`.user_info as u on p.create_user_id=u.id
+        LEFT JOIN his_patient_info as i on i.id = d.patient_id
         where
         1=1
         <if test="number != null and number != ''">
             and d.number like concat('%' #{number},'%')
+        </if>
+        <if test="patientName != null and patientName != ''">
+            and i.name like concat('%' #{patientName},'%')
         </if>
         <if test="createName != null and createName != ''">
             and u.user_name like concat('%' #{createName},'%')
