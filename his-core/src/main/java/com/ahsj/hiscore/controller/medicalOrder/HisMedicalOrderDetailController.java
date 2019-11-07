@@ -375,7 +375,7 @@ public class HisMedicalOrderDetailController extends BaseController {
      **/
     @RequestMapping("printDoctorAdvice/index.ahsj")
     //type代表是续打还是非续打 1是非续打 2续打
-    ModelAndView printDoctorAdvice(String number, String token,String hosptalregistNumber,@RequestParam(value = "type",required = true)Integer type,Integer continueCount,Integer isFirst) throws Exception {
+    ModelAndView printDoctorAdvice(String number, String token,String hosptalregistNumber,@RequestParam(value = "type",required = false)Integer type,Integer continueCount,Integer isFirst) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("title", "打印凭证预览");
         modelAndView.addObject("token", token);
