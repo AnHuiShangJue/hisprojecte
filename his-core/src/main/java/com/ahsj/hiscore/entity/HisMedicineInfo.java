@@ -126,6 +126,10 @@ public class HisMedicineInfo extends BaseEntity {
 
     private String chineseEnglishName;
 
+    @CodeValueColumn(type = Constants.GLOBAL_DATA_ORANGIATION, typeKey = "", typeName = "departmentIdName")
+    private Long departmentId;
+    private String departmentIdName;
+
     public String getTranslateKhmer() {
         return translateKhmer;
     }
@@ -452,5 +456,21 @@ public class HisMedicineInfo extends BaseEntity {
 
     public void setNarcoticDrugsId(Long narcoticDrugsId) {
         this.narcoticDrugsId = narcoticDrugsId;
+    }
+
+    public Long getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Long departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public String getDepartmentIdName() {
+        return departmentIdName;
+    }
+
+    public void setDepartmentIdName(String departmentIdName) {
+        this.departmentIdName = departmentIdName;
     }
 }

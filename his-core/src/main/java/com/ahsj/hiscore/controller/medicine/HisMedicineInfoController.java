@@ -86,6 +86,7 @@ public class HisMedicineInfoController extends BaseController {
             , @RequestParam(value="narcoticDrugs", required=true) Integer narcoticDrugs
             , @RequestParam(value="remarks", required=false) String remarks
             , @RequestParam(value="enterPrice", required=false) Double enterPrice
+            , @RequestParam(value="departmentId", required=false) Long departmentId
     ) throws Exception {
         HisMedicineInfo hisMedicineInfo = new HisMedicineInfo();
         if(null != request.getParameter("id")){
@@ -141,6 +142,9 @@ public class HisMedicineInfoController extends BaseController {
         }
         if(null != request.getParameter("enterPrice")){
             hisMedicineInfo.setEnterPrice(enterPrice);
+        }
+        if(null != request.getParameter("departmentId")){
+            hisMedicineInfo.setDepartmentId(departmentId);
         }
      return  hisMedicineInfoService.saveOrUpdate(hisMedicineInfo);
     }
