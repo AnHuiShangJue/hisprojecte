@@ -41,9 +41,16 @@
                             <div class="errorTxt1"></div>
                             <label for="startTime">医嘱开始时间<span style="font-size: 12px">(Recording time)</span></label>
                         </div>
-                        <div class="input-field col s4 l4 xl4">
+                        <div class="input-field col s4 l4 xl4" th:if="${hisMedicalOrderDetail.isSkinTest} ne null">
                             <select ahsj:select name="isSkinTest" id="isSkinTest" type="code" typeKey="is_skin_test"
-                                    th:value="${hisMedicalOrderDetail.isSkinTest}">
+                                    th:value="${hisMedicalOrderDetail.isSkinTest}" >
+                            </select>
+                            <label for="isSkinTest">是否皮试<span style="font-size: 12px">(Whether skin test
+)</span></label>
+                        </div>
+                        <div class="input-field col s4 l4 xl4" th:if="${hisMedicalOrderDetail.isSkinTest} eq null">
+                            <select ahsj:select name="isSkinTest" id="isSkinTest" type="code" typeKey="is_skin_test"
+                                    th:value="${1}" >
                             </select>
                             <label for="isSkinTest">是否皮试<span style="font-size: 12px">(Whether skin test
 )</span></label>
@@ -131,12 +138,12 @@
     });
     $(document).ready(function () {
         //病房
-        if(isNullOrEmpty($("#isSkinTest").val())) {
-            changeSelectValue("isSkinTest", 1);
-        }
-        if(isNullOrEmpty($("#startTime").val())){
-            $("#startTime").val(new Date());
-        }
+        // if(isNullOrEmpty($("#isSkinTest").val())) {
+        //     changeSelectValue("isSkinTest", 1);
+        // }
+        // if(isNullOrEmpty($("#startTime").val())){
+        //     $("#startTime").val(new Date());
+        // }
     });
 
 

@@ -397,7 +397,8 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
             hisMedicalOrderDetail.setNumber(medicalOrderNumber);
             hisMedicalOrderDetail.setName(hisPharmacyDetail.getDrugsName() + hisPharmacyDetail.getDrugsSpec());
             hisMedicalOrderDetail.setSpecification(hisPharmacyDetail.getDrugsSpec());
-            hisMedicalOrderDetail.setIsSkinTest(2);
+            hisMedicalOrderDetail.setIsSkinTest(1);
+            hisMedicalOrderDetail.setStartTime(new Date());
             hisMedicalOrderDetail.setMedicalOrderType(2);
             hisMedicalOrderDetail.setTargetId(hisPharmacyDetail.getId());
             BoolMessage message = (BoolMessage) saveOrUpdate(hisMedicalOrderDetail);
@@ -424,7 +425,8 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
             HisMedicalOrderDetail hisMedicalOrderDetail = new HisMedicalOrderDetail();
             hisMedicalOrderDetail.setNumber(medicalOrderNumber);
             hisMedicalOrderDetail.setName(hisProject.getName());
-            hisMedicalOrderDetail.setIsSkinTest(2);
+            hisMedicalOrderDetail.setIsSkinTest(1);
+            hisMedicalOrderDetail.setStartTime(new Date());
             //3代表医嘱为项目医嘱
             hisMedicalOrderDetail.setMedicalOrderType(3);
             hisMedicalOrderDetail.setTargetId(ids[i]);
