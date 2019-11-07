@@ -6,6 +6,7 @@
         <result column="medicine_id" jdbcType="BIGINT" property="medicineId"/>
         <result column="count" jdbcType="INTEGER" property="count"/>
         <result column="create_user_id" jdbcType="BIGINT" property="createUserId"/>
+        <result column="department_id" jdbcType="BIGINT" property="departmentId"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createDate"/>
         <result column="update_user_id" jdbcType="BIGINT" property="updateUserId"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateDate"/>
@@ -68,6 +69,7 @@
         remarks,
         validity_period,
         stock_warn,
+        department_id,
         normal_stock
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -91,7 +93,7 @@
                                          mental_medicine, large_unit, small_unit,
                                          conversion_rate, disable, level,
                                          medical_insurance_sign, placeOrigin, base_medicine,
-                                         narcotic_drugs, remarks, validity_period, stock_warn, normal_stock)
+                                         narcotic_drugs, remarks, validity_period, stock_warn, department_id,normal_stock)
         values (#{id,jdbcType=BIGINT}, #{medicineId,jdbcType=BIGINT}, #{count,jdbcType=INTEGER},
                 #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT},
                 #{updateDate,jdbcType=TIMESTAMP}, #{enterPrice,jdbcType=DECIMAL}, #{salePrice,jdbcType=DECIMAL},
@@ -103,7 +105,7 @@
                 #{medicalInsuranceSign,jdbcType=INTEGER}, #{placeorigin,jdbcType=INTEGER},
                 #{baseMedicine,jdbcType=INTEGER},
                 #{narcoticDrugs,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}, #{validityPeriod,jdbcType=TIMESTAMP},
-                #{stockWarn,jdbcType=INTEGER}, #{normalStock,jdbcType=INTEGER})
+                #{stockWarn,jdbcType=INTEGER}, #{departmentId,jdbcType=BIGINT}, #{normalStock,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisPharmacyDetail">
         insert into his_pharmacy_detail
@@ -204,6 +206,9 @@
             <if test="normalStock != null">
                 normal_stock,
             </if>
+            <if test="departmentId != null">
+                department_id,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -301,6 +306,9 @@
             </if>
             <if test="normalStock != null">
                 #{normalStock,jdbcType=INTEGER},
+            </if>
+            <if test="departmentId != null">
+                #{departmentId,jdbcType=BIGINT},
             </if>
         </trim>
     </insert>
@@ -400,6 +408,9 @@
             <if test="normalStock != null">
                 normal_stock = #{normalStock,jdbcType=INTEGER},
             </if>
+            <if test="departmentId != null">
+                department_id = #{departmentId,jdbcType=BIGINT},
+            </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
@@ -410,6 +421,7 @@
             create_user_id         = #{createUserId,jdbcType=BIGINT},
             create_time            = #{createDate,jdbcType=TIMESTAMP},
             update_user_id         = #{updateUserId,jdbcType=BIGINT},
+            department_id          = #{departmentId,jdbcType=BIGINT},
             update_time            = #{updateDate,jdbcType=TIMESTAMP},
             enter_price            = #{enterPrice,jdbcType=DECIMAL},
             sale_price             = #{salePrice,jdbcType=DECIMAL},
@@ -540,6 +552,9 @@
         </if>
         <if test="parameter.narcoticDrugs != null and parameter.narcoticDrugs != ''">
             and narcotic_drugs = #{parameter.narcoticDrugs,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.departmentId != null and parameter.departmentId != ''">
+            and department_id = #{parameter.departmentId,jdbcType=BIGINT}
         </if>
         <if test="parameter.orders != null and parameter.orders != ''">
             order by ${parameter.orders}
