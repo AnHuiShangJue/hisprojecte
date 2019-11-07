@@ -67,6 +67,7 @@ public class HisMediEnterDetailsServicelmpl implements HisMediEnterDetailsServic
                 hisPharmacyDetailInsert.setMedicineId(checkPharmacyId.getMedicineId());
                 hisPharmacyDetailInsert.setStock(hisMediEnterDetails.getEnterCount().intValue());
                 hisPharmacyDetailInsert.setSaleCounts(0);
+                hisPharmacyDetailInsert.setDepartmentId(checkId.getDepartmentId());
                 hisPharmacyDetailInsert.setEnterPrice(hisMediEnterDetails.getPrice());
                 hisPharmacyDetailInsert.setDrugsNumb(checkPharmacyId.getDrugsNumb());
                 hisPharmacyDetailInsert.setDrugsName(checkPharmacyId.getDrugsName());
@@ -134,6 +135,7 @@ public class HisMediEnterDetailsServicelmpl implements HisMediEnterDetailsServic
                 HisMedicineInfo hisMedicineInfo=hisMedicineInfoMapper.selectByPrimaryKey(medicinePurchasingPlan.getPharmacyId());
                 HisPharmacyDetail hisPharmacyDetailInsert = new HisPharmacyDetail();
                 hisPharmacyDetailInsert.setMedicineId(hisMedicineInfo.getId());
+                hisPharmacyDetailInsert.setDepartmentId(hisMedicineInfo.getDepartmentId());
                 hisPharmacyDetailInsert.setStock(hisMediEnterDetails.getEnterCount().intValue());
                 if(!EmptyUtil.Companion.isNullOrEmpty(hisMediEnterDetails.getPrice()))
                     hisPharmacyDetailInsert.setEnterPrice(hisMediEnterDetails.getPrice());
@@ -163,6 +165,8 @@ public class HisMediEnterDetailsServicelmpl implements HisMediEnterDetailsServic
                 hisPharmacyDetailList.add(hisPharmacyDetailInsert);
 
             }else {
+                HisMedicineInfo hisMedicineInfo=hisMedicineInfoMapper.selectByPrimaryKey(medicinePurchasingPlan.getPharmacyId());
+                checkPharmacyId.setDepartmentId(hisMedicineInfo.getDepartmentId());
                 checkPharmacyId.setStock(checkPharmacyId.getStock()+hisMediEnterDetails.getEnterCount().intValue());
                 hisMediEnterDetailsList.add(hisMediEnterDetails);
                 hisPharmacyDetailService.UpdateForPart(checkPharmacyId);

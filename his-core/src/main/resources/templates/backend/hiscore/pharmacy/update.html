@@ -96,6 +96,12 @@
                             <label for="normalStock">固定库存<span style="font-size: 12px">(Fixed stock
 )</span></label>
                         </div>
+                        <div class="col input-field s4 l4 xl4">
+                            <select ahsj:select name="departmentId" id="departmentId" type="depart" typeKey="2"
+                                    departKbn="1" th:value="${hisPharmacyDetail.departmentId}">
+                            </select> <!--departKbn="1"  1是医疗 2是非医疗 -->   <!--typeKey="2"   1是部门 2是科室-->
+                            <label for="departmentId">科 室<span style="font-size: 12px">(Department)</span></label>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">

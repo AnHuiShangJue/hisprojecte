@@ -9,7 +9,6 @@ import com.ahsj.hiscore.dao.HisMedicineInfoMapper;
 import com.ahsj.hiscore.dao.HisPharmacyDetailMapper;
 import com.ahsj.hiscore.entity.HisMedicineInfo;
 import com.ahsj.hiscore.entity.HisPharmacyDetail;
-import com.ahsj.hiscore.entity.HisProject;
 import com.ahsj.hiscore.entity.Translate;
 import com.ahsj.hiscore.entity.TranslateModel.HisMedicineInfoTranslate;
 import com.ahsj.hiscore.entity.TranslateModel.TranslateDelete;
@@ -134,6 +133,8 @@ public class HisMedicineInfoServiceImpl implements HisMedicineInfoService {
                         hisPharmacyDetail.setSmallUnit(hisMedicineInfo.getSmallUnit());
                     if (EmptyUtil.Companion.isNullOrEmpty(hisMedicineInfo.getConversionRate()))
                         hisPharmacyDetail.setConversionRate(hisMedicineInfo.getConversionRate());
+                    if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicineInfo.getDepartmentId()))
+                        hisPharmacyDetail.setDepartmentId(hisMedicineInfo.getDepartmentId());
                     hisPharmacyDetail.setLevel(hisMedicineInfo.getLevel());
                     hisPharmacyDetail.setMedicalInsuranceSign(hisMedicineInfo.getMedicalInsuranceSign());
                     hisPharmacyDetail.setPlaceorigin(hisMedicineInfo.getPlaceorigin());
@@ -161,6 +162,27 @@ public class HisMedicineInfoServiceImpl implements HisMedicineInfoService {
             } else {
                 return MessageUtil.createMessage(false, "更新失败!无此药品信息");
             }
+        }
+    }
+
+
+    /**
+     * @Description
+     * @Author  muxu
+     * @Date  2019/11/7
+     * @Time 19:29
+     * @Return
+     * @Params
+    **/
+    @Override
+    @Transactional(readOnly = false)
+    public Message updateDepartmentId(HisMedicineInfo hisMedicineInfo) throws Exception {
+        HisMedicineInfo check = hisMedicineInfoMapper.selectByPrimaryKey(hisMedicineInfo.getId());
+        if (!EmptyUtil.Companion.isNullOrEmpty(check)){
+            hisMedicineInfoMapper.updateByPrimaryKey(hisMedicineInfo);
+            return MessageUtil.createMessage(true,"更新成功！");
+        }else {
+            return MessageUtil.createMessage(false,"无该药品，数据异常，请联系管理员！！");
         }
     }
 

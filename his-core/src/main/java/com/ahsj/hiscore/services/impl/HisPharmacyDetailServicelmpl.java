@@ -9,6 +9,7 @@ import com.ahsj.hiscore.entity.sys.SysCodeDetail;
 import com.ahsj.hiscore.feign.ICodeService;
 import com.ahsj.hiscore.feign.ITranslateService;
 import com.ahsj.hiscore.services.HisMediEnterDetailsService;
+import com.ahsj.hiscore.services.HisMedicineInfoService;
 import com.ahsj.hiscore.services.HisPharmacyDetailService;
 import com.ahsj.hiscore.services.MedicinePurchasingPlanService;
 import core.entity.PageBean;
@@ -67,6 +68,9 @@ public class HisPharmacyDetailServicelmpl implements HisPharmacyDetailService {
     @Autowired
     HisMedicinePurchasingPlanRecordMapper hisMedicinePurchasingPlanRecordMapper;
 
+    @Autowired
+    HisMedicineInfoService hisMedicineInfoService;
+
 
     /**
      * @return core.entity.PageBean<com.ahsj.hiscore.entity.HisPharmacyDetail>
@@ -101,6 +105,11 @@ public class HisPharmacyDetailServicelmpl implements HisPharmacyDetailService {
             return MessageUtil.createMessage(true, "新增成功！");
             //更新（修改）
         } else {
+            if (!EmptyUtil.Companion.isNullOrEmpty(hisPharmacyDetail.getMedicineId())){
+                HisMedicineInfo hisMedicineInfo = hisMedicineInfoMapper.selectByPrimaryKey(hisPharmacyDetail.getMedicineId());
+                hisMedicineInfo.setDepartmentId(hisPharmacyDetail.getDepartmentId());
+                hisMedicineInfoService.updateDepartmentId(hisMedicineInfo);
+            }
             hisPharmacyDetailMapper.updateByPrimaryKeySelective(hisPharmacyDetail);
             return MessageUtil.createMessage(true, "更新成功");
         }

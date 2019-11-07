@@ -23,6 +23,17 @@ public interface HisMedicineInfoService {
      **/
     Message saveOrUpdate(HisMedicineInfo hisMedicineInfo) throws Exception;
 
+
+    /**
+     * @Description 更新药品科室
+     * @Author  muxu
+     * @Date  2019/11/7
+     * @Time 19:28
+     * @Return core.message.Message
+     * @Params [hisMedicineInfo]
+    **/
+    Message updateDepartmentId(HisMedicineInfo hisMedicineInfo) throws Exception;
+
     /**
      * @return
      * @Description 删除
