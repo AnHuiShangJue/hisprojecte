@@ -169,9 +169,17 @@ Scripts
 <script th:inline="javascript">
     $(function () {
         formCheck();
-
+        changeDept();
     });
 
+    
+    function changeDept() {
+        if (isNullOrEmpty([[${hisMedicineInfo.departmentId}]])){
+            changeSelectValue("departmentId",65);
+        }
+
+    }
+    
     function formCheck() {
         $("#sendForm").validate({
             rules: {
