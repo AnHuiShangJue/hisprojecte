@@ -70,6 +70,11 @@
                                 </div>
                             </div>
                             <div class="row">
+                                    <div class="col  s3 m3 l3 xl3">
+                                        <select ahsj:select name="departmentId" id="departmentId" type="depart" typeKey="2" departKbn="1" th:value="${departmentId}">
+                                        </select>
+                                        <label for="departmentId">科 室</label>
+                                    </div>
                                 <!--<div class="col  s1 m1 l1 xl1">
                                     <div ahsj:radio name="medicalInsuranceSign" id="medicalInsuranceSign" type="code" typeKey="medical_insurance_sign"
                                          title="药品类型" cssdefault="radiotdefault" haveDefault="true" value="0"></div>
@@ -318,6 +323,7 @@
                 ],
             }
         });
+        grid.search();
     }
 
 

@@ -3,6 +3,7 @@ package com.ahsj.hiscore.controller.medicine;
 import com.ahsj.hiscore.controller.BaseMedicineController;
 import com.ahsj.hiscore.entity.*;
 import com.ahsj.hiscore.entity.model.HisMedicalModel;
+import com.ahsj.hiscore.feign.IUserService;
 import com.ahsj.hiscore.services.*;
 import core.entity.PageBean;
 import core.message.Message;
@@ -55,6 +56,9 @@ public class TreatmentPlanController extends BaseMedicineController {
 
     @Autowired
     HisInfusionService hisInfusionService;
+
+    @Autowired
+    IUserService iUserService;
 
     /**
      * @return org.springframework.web.servlet.ModelAndView
@@ -224,11 +228,14 @@ public class TreatmentPlanController extends BaseMedicineController {
      * @Time 02:43
      **/
     @RequestMapping("project/index.ahsj")
-    ModelAndView projectIndex(HisPrescription hisPrescription, String token,@RequestParam(value = "medicalOrderNumber",required = false) String medicalOrderNumber) {
+    ModelAndView projectIndex(HisPrescription hisPrescription, String token,@RequestParam(value = "medicalOrderNumber",required = false) String medicalOrderNumber) throws Exception {
+        UserInfo userLoginId = iUserService.getUserLoginId(getUserId());
+
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/medicalrecord/list_project");
         modelAndView.addObject("token", token);
         if(!EmptyUtil.Companion.isNullOrEmpty(medicalOrderNumber))
             modelAndView.addObject("medicalOrderNumber", medicalOrderNumber);
+            modelAndView.addObject("departmentId", userLoginId.getDeptId());
         return modelAndView;
     }
 
