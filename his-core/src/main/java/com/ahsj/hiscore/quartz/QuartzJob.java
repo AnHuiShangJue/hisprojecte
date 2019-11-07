@@ -53,7 +53,7 @@ public class QuartzJob {
      * @Date 2019-07-20
      * @Time 16:04
      **/
-    @Scheduled(cron = "0 59 23 * * ?")
+    @Scheduled(cron = "0 59 2 * * ?")
     public void djob() {
         logger.info("-------------------开始日结-----------------------");
         hisDailyRecordService.startCalculate();
@@ -61,7 +61,7 @@ public class QuartzJob {
     }
 
 //    @Scheduled(cron = "0/5 * * * * ?")
-    @Scheduled(cron = "0 59 23 * * ?")
+    @Scheduled(cron = "0 59 2 * * ?")
     public void job() {
         logger.info("-------------------开始住院数据操作-----------------------");
         hisHospitalManageService.startAddDate();
@@ -77,7 +77,7 @@ public class QuartzJob {
      *@Time 10:46
     **/
 //        @Scheduled(cron = "0/5 * * * * ?")
-    @Scheduled(cron = "0 59 23 * * ?")
+    @Scheduled(cron = "0 59 2 * * ?")
     public void druglossjob()throws Exception {
         logger.info("-------------------扫描药品信息-----------------------");
         hisDrugLossReportingService.startScanDrug();
@@ -92,7 +92,7 @@ public class QuartzJob {
      * @Return
      * @Params
     **/
-    @Scheduled(cron = "0 59 23 * * ?")
+    @Scheduled(cron = "0 59 22 * * ?")
     public void careLeveladdjob()throws Exception {
         logger.info("-------------------开始日结-----------------------");
         hisHospitalManageService.startAddcareLevel();
@@ -108,7 +108,7 @@ public class QuartzJob {
      *@Date 2019/8/8
      *@Time 16:44
     **/
-    @Scheduled(cron = "0 59 23 * * ?")
+    @Scheduled(cron = "0 59 2 * * ?")
     public void TranslateInfojob() throws Exception {
         logger.info("-------------------翻译信息开始-----------------------");
         translateInfoService.TranslateInfojob();
@@ -123,7 +123,7 @@ public class QuartzJob {
      *@Date 2019-09-25
      *@Time 21:33
     **/
-    @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(cron = "0 0 2 * * ?")
 //    @Scheduled(cron = "0/30 * * * * ?")
     public void createInfusionByMedicalOrder()throws Exception {
         logger.info("-------------------扫描医嘱详细信息，生成输液单-----------------------");
@@ -139,7 +139,7 @@ public class QuartzJob {
      *@Date 2019-10-04
      *@Time 23:42
     **/
-    @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(cron = "0 0 2 * * ?")
 //    @Scheduled(cron = "0/30 * * * * ?")
     public void createChargeDetailsForMedicalOrder()throws Exception {
         logger.info("-------------------扫描在住院病人长期医嘱详细药品与项目信息，生成收费明细-----------------------");

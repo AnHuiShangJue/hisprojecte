@@ -459,7 +459,13 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
         for (HisHospitalManage hd : hisHospitalManageList) {
             Date date = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            hd.setHospitalizationDay(String.valueOf((date.getTime() - hd.getCreateDate().getTime()) / (24 * 60 * 60 * 1000) + 1));
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            int day1 = calendar.get(Calendar.DAY_OF_YEAR);
+            calendar.setTime(hd.getCreateDate());
+            int day2 = calendar.get(Calendar.DAY_OF_YEAR);
+            hd.setHospitalizationDay(String.valueOf(day1-day2+1));
+//            hd.setHospitalizationDay(String.valueOf((date.getTime() - hd.getCreateDate().getTime()) / (24 * 60 * 60 * 1000) + 1));
         }
         return null;
     }
