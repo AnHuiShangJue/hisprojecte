@@ -140,6 +140,7 @@
         </div>
     </div>
 </div>
+<input type="hidden" id="departmentId" th:value="${departmentId}">
 <input id="medicalOrderNumber" type="hidden" th:value="${medicalOrderNumber}">
 
 
@@ -167,7 +168,7 @@
             loadingMessage: 'Loading...',
             dataTable: {
                 "ajax": {
-                    "url": CTX + "/api/hisProject/list.ahsj?token=" + TOKEN, // ajax source
+                    "url": CTX + "/api/hisProject/list.ahsj?token=" + TOKEN+"&departmentId="+$("#departmentId").val(), // ajax source
                 },
                 "columns": [
                     {
