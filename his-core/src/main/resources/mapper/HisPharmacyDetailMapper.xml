@@ -557,9 +557,7 @@
         <if test="parameter.departmentId != null and parameter.departmentId != ''">
             and m.department_id = #{parameter.departmentId,jdbcType=INTEGER}
         </if>
-        <if test="parameter.departmentId != null and parameter.departmentId != ''">
-            and department_id = #{parameter.departmentId,jdbcType=BIGINT}
-        </if>
+
         <if test="parameter.orders != null and parameter.orders != ''">
             order by ${parameter.orders}
         </if>
