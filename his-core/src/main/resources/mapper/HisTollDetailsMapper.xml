@@ -208,11 +208,11 @@
         q.update_date as update_date,
          a.target_id as target_id,
             a.num as num,
-            a.money as price ,
+            a.price as price ,
             a.name as name,
             a.isPay as isPay,
             a.type as type,
-            a.money * a.num as money,
+            a.money as money,
             a.create_date as create_date
           from (
              select

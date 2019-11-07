@@ -3,6 +3,7 @@ package com.ahsj.hiscore.controller.medicalOrder;
 import com.ahsj.hiscore.common.utils.ZipUtils;
 import com.ahsj.hiscore.core.CodeHelper;
 import com.ahsj.hiscore.entity.*;
+import com.ahsj.hiscore.feign.IUserService;
 import com.ahsj.hiscore.services.*;
 import core.controller.BaseController;
 import core.entity.PageBean;
@@ -45,6 +46,10 @@ public class HisMedicalOrderDetailController extends BaseController {
 
     @Autowired
     HisInfusionService hisInfusionService;
+
+
+    @Autowired
+    IUserService iUserService;
     /**
      *@Description 根据医嘱编号查看医嘱详细信息
      *@Params [number, token]
@@ -147,17 +152,20 @@ public class HisMedicalOrderDetailController extends BaseController {
      **/
     @RequestMapping("/update/index.ahsj")
     ModelAndView UpdateIndex(HisMedicalOrderDetail hisMedicalOrderDetail, String token)throws Exception{
+        UserInfo userLoginId = iUserService.getUserLoginId(getUserId());
         ModelAndView modelAndView = new ModelAndView();
         if(!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getId())){
             modelAndView.setViewName("backend/hiscore/medicalorder/updateForDetail");
             modelAndView.addObject("hisMedicalOrderDetail",hisMedicalOrderDetailService.selectById(hisMedicalOrderDetail.getId()));
             modelAndView.addObject("title","修改医嘱详细信息(Modify medical details)");
+            modelAndView.addObject("departmentId", userLoginId.getDeptId());
         }else{
             //普通医嘱
             if(hisMedicalOrderDetail.getMedicalOrderType() == 1){
                 modelAndView.setViewName("backend/hiscore/medicalorder/updateForDetail");
                 hisMedicalOrderDetail.setIsFirstEdit(1);
                 modelAndView.addObject("hisMedicalOrderDetail",hisMedicalOrderDetail);
+                modelAndView.addObject("departmentId", userLoginId.getDeptId());
                 modelAndView.addObject("title","添加普通医嘱（Add general medical advice）");
             }
             //用药医嘱
@@ -167,6 +175,7 @@ public class HisMedicalOrderDetailController extends BaseController {
                 hisMedicalOrderDetail.setIsFirstEdit(1);
                 modelAndView.addObject("hisMedicalOrderDetail",hisMedicalOrderDetail);
                 modelAndView.addObject("type",1);
+                modelAndView.addObject("departmentId", userLoginId.getDeptId());
                 if(!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getNumber()))
                     modelAndView.addObject("medicalOrderNumber", hisMedicalOrderDetail.getNumber());
 
@@ -175,6 +184,7 @@ public class HisMedicalOrderDetailController extends BaseController {
             else if(hisMedicalOrderDetail.getMedicalOrderType() == 3){
                 modelAndView.setViewName("backend/hiscore/medicalrecord/list_project");
                 hisMedicalOrderDetail.setIsFirstEdit(1);
+                modelAndView.addObject("departmentId", userLoginId.getDeptId());
                 modelAndView.addObject("hisMedicalOrderDetail",hisMedicalOrderDetail);
                 if(!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getNumber()))
                     modelAndView.addObject("medicalOrderNumber", hisMedicalOrderDetail.getNumber());

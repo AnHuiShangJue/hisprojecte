@@ -32,6 +32,7 @@
         <result column="base_medicine" jdbcType="INTEGER" property="baseMedicine"/>
         <result column="narcotic_drugs" jdbcType="INTEGER" property="narcoticDrugs"/>
         <result column="remarks" jdbcType="VARCHAR" property="remarks"/>
+        <result column="dept_name" jdbcType="VARCHAR" property="deptName"/>
         <result column="validity_period" jdbcType="TIMESTAMP" property="validityPeriod"/>
         <result column="stock_warn" jdbcType="INTEGER" property="stockWarn"/>
         <result column="normal_stock" jdbcType="INTEGER" property="normalStock"/>
@@ -520,42 +521,43 @@
 
     <select id="listForMedication" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
         SELECT
-        his_pharmacy_detail.*
+        p.*,o.name as dept_name
         FROM
-        his_pharmacy_detail
+        his_pharmacy_detail as p left join his_medicine_info m on m.id = p.medicine_id
+        left join `his-userinfo`.organization as o on m.department_id = o.id
         where
-        1= 1 and his_pharmacy_detail.stock > 0 and his_pharmacy_detail.disable = 2 and his_pharmacy_detail.is_obtained =
-        2
+        1= 1 and p.stock > 0 and p.disable = 2 and p.is_obtained =2
         <if test="parameter.drugsNumb != null and parameter.drugsNumb != ''">
-            and drugs_numb like concat('%' #{parameter.drugsNumb,jdbcType=VARCHAR},'%')
+            and p.drugs_numb like concat('%' #{parameter.drugsNumb,jdbcType=VARCHAR},'%')
         </if>
         <if test="parameter.drugsName != null and parameter.drugsName != ''">
-            and drugs_name like concat('%' #{parameter.drugsName,jdbcType=VARCHAR},'%')
+            and p.drugs_name like concat('%' #{parameter.drugsName,jdbcType=VARCHAR},'%')
         </if>
         <if test="parameter.drugsAlias != null and parameter.drugsAlias != ''">
-            and drugs_alias like concat('%' #{parameter.drugsAlias,jdbcType=VARCHAR},'%')
+            and p.drugs_alias like concat('%' #{parameter.drugsAlias,jdbcType=VARCHAR},'%')
         </if>
         <if test="parameter.prescription != null and parameter.prescription != ''">
-            and prescription = #{parameter.prescription,jdbcType=INTEGER}
+            and p.prescription = #{parameter.prescription,jdbcType=INTEGER}
         </if>
         <if test="parameter.mentalMedicine != null and parameter.mentalMedicine != ''">
-            and mental_medicine = #{parameter.mentalMedicine,jdbcType=INTEGER}
+            and p.mental_medicine = #{parameter.mentalMedicine,jdbcType=INTEGER}
         </if>
         <if test="parameter.level != null and parameter.level != ''">
-            and level = #{parameter.level,jdbcType=INTEGER}
+            and p.level = #{parameter.level,jdbcType=INTEGER}
         </if>
         <if test="parameter.medicalInsuranceSign != null and parameter.medicalInsuranceSign != ''">
-            and medical_insurance_sign = #{parameter.medicalInsuranceSign,jdbcType=INTEGER}
+            and p.medical_insurance_sign = #{parameter.medicalInsuranceSign,jdbcType=INTEGER}
         </if>
         <if test="parameter.baseMedicine != null and parameter.baseMedicine != ''">
-            and base_medicine = #{parameter.baseMedicine,jdbcType=INTEGER}
+            and p.base_medicine = #{parameter.baseMedicine,jdbcType=INTEGER}
         </if>
         <if test="parameter.narcoticDrugs != null and parameter.narcoticDrugs != ''">
-            and narcotic_drugs = #{parameter.narcoticDrugs,jdbcType=INTEGER}
+            and p.narcotic_drugs = #{parameter.narcoticDrugs,jdbcType=INTEGER}
         </if>
         <if test="parameter.departmentId != null and parameter.departmentId != ''">
-            and department_id = #{parameter.departmentId,jdbcType=BIGINT}
+            and m.department_id = #{parameter.departmentId,jdbcType=INTEGER}
         </if>
+
         <if test="parameter.orders != null and parameter.orders != ''">
             order by ${parameter.orders}
         </if>

@@ -135,7 +135,6 @@ public class HisPprojectController extends BaseController {
     @ResponseBody
     @PostMapping("/list.ahsj")
     public PageBean<HisProject> queryList(HisProject hisProject) throws Exception {
-
         if (EmptyUtil.Companion.isNullOrEmpty(hisProject.getType())) {
             PageBean<HisProject> pageBean = new PageBean<>();
             pageBean.setParameter(hisProject);

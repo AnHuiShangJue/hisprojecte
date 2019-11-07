@@ -146,6 +146,32 @@ public class HisPharmacyDetail extends BaseEntity {
     private Long departmentId;
     private String departmentIdName;
 
+    private String deptName;
+
+    public Long getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Long departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public String getDepartmentIdName() {
+        return departmentIdName;
+    }
+
+    public void setDepartmentIdName(String departmentIdName) {
+        this.departmentIdName = departmentIdName;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
     public Integer getStockNum() {
         return stockNum;
     }
@@ -561,21 +587,5 @@ public class HisPharmacyDetail extends BaseEntity {
 
     public void setIsObtainedId(Long isObtainedId) {
         this.isObtainedId = isObtainedId;
-    }
-
-    public Long getDepartmentId() {
-        return departmentId;
-    }
-
-    public void setDepartmentId(Long departmentId) {
-        this.departmentId = departmentId;
-    }
-
-    public String getDepartmentIdName() {
-        return departmentIdName;
-    }
-
-    public void setDepartmentIdName(String departmentIdName) {
-        this.departmentIdName = departmentIdName;
     }
 }

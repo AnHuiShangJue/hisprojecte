@@ -67,6 +67,11 @@
                                     </select>
                                     <label for="type">类别<span style="font-size: 12px">(Project category)</span></label>
                                 </div>
+                                <div class="col input-field s4 m4 l4">
+                                    <select ahsj:select name="departmentId" id="departmentId" type="depart" typeKey="2" departKbn="1" th:value="${departmentId}">
+                                    </select>
+                                    <label for="departmentId">科 室<span style="font-size: 12px">(Department)</span></label>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col s1">
@@ -140,7 +145,7 @@
         </div>
     </div>
 </div>
-<input type="hidden" id="departmentId" th:value="${departmentId}">
+<input type="hidden" id="departmentIds" th:value="${departmentId}">
 <input id="medicalOrderNumber" type="hidden" th:value="${medicalOrderNumber}">
 
 
@@ -168,7 +173,7 @@
             loadingMessage: 'Loading...',
             dataTable: {
                 "ajax": {
-                    "url": CTX + "/api/hisProject/list.ahsj?token=" + TOKEN+"&departmentId="+$("#departmentId").val(), // ajax source
+                    "url": CTX + "/api/hisProject/list.ahsj?token=" + TOKEN, // ajax source
                 },
                 "columns": [
                     {
@@ -254,6 +259,7 @@
                 ],
             }
         });
+        grid.search();
     }
 
 
