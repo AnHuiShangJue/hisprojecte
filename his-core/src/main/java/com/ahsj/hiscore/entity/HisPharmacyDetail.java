@@ -142,6 +142,25 @@ public class HisPharmacyDetail extends BaseEntity {
     private Long disableId;
     private Long isObtainedId;
 
+    private Long departmentId;
+
+    private String deptName;
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+    public Long getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Long departmentId) {
+        this.departmentId = departmentId;
+    }
 
     public Integer getStockNum() {
         return stockNum;
