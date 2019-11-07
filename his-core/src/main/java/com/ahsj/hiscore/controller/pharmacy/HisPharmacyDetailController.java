@@ -126,6 +126,7 @@ public class HisPharmacyDetailController extends BaseMedicineController {
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/pharmacy/listForMedication");
         modelAndView.addObject("title", "医生开药");
         modelAndView.addObject("token", token);
+        modelAndView.addObject("departmentId", getDeptId());
         Integer type =0;//listForMedication页面可以开普通用药，医嘱用药以及门诊输液单用药   定义type变量来标识属于哪种用药 0代表门诊普通开药 1代表医嘱用药 2代表门诊输液单用药
         if (!EmptyUtil.Companion.isNullOrEmpty(medicalOrderNumber)) {
             modelAndView.addObject("medicalOrderNumber", medicalOrderNumber);

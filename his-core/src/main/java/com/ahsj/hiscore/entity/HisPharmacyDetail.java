@@ -142,25 +142,9 @@ public class HisPharmacyDetail extends BaseEntity {
     private Long disableId;
     private Long isObtainedId;
 
+    @CodeValueColumn(type = Constants.GLOBAL_DATA_ORANGIATION, typeKey = "", typeName = "departmentIdName")
     private Long departmentId;
-
-    private String deptName;
-
-    public String getDeptName() {
-        return deptName;
-    }
-
-    public void setDeptName(String deptName) {
-        this.deptName = deptName;
-    }
-
-    public Long getDepartmentId() {
-        return departmentId;
-    }
-
-    public void setDepartmentId(Long departmentId) {
-        this.departmentId = departmentId;
-    }
+    private String departmentIdName;
 
     public Integer getStockNum() {
         return stockNum;
