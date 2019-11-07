@@ -561,6 +561,9 @@
         <if test="parameter.userName != null and parameter.userName != ''">
             and o.user_name like concat('%' #{parameter.userName},'%')
         </if>
+        <if test="parameter.patientName != null and parameter.patientName != ''">
+            and i.name like concat('%' #{parameter.patientName},'%')
+        </if>
         <if test="parameter.attenchType != null and parameter.attenchType != ''">
             and t.attench_type = #{parameter.attenchType}
         </if>
@@ -592,9 +595,11 @@ where  t.number = #{number}
         as money, min(a.create_date) as minTime ,max(a.create_date) as maxTime
         from (
         select
-        distinct h.number , h.actual_charge,h.recover_the_fee, h.create_date,u.user_name
+        distinct h.number , h.actual_charge,h.recover_the_fee, h.create_date,u.user_name,i.name
         from his_toll_record h
         LEFT JOIN `his-userinfo`.user_info as u on h.create_user_id=u.id
+        LEFT JOIN his_medical_record as m on h.medical_record_id = m.medical_record_id
+        LEFT JOIN his_patient_info as i on i.id = m.patient_id
         where
         1=1
         <if test="lowTime != null ">
@@ -611,6 +616,9 @@ where  t.number = #{number}
         </if>
         <if test="number != null and number != ''">
             and number like concat('%' #{number},'%')
+        </if>
+        <if test="patientName != null and patientName != ''">
+            and i.name like concat('%' #{patientName},'%')
         </if>
         <if test="userName != null and userName != ''">
             and u.user_name like concat('%' #{userName},'%')
