@@ -152,6 +152,15 @@ public interface HisMedicationDetailsService {
      * @Time 11:17
      **/
     List<HisMedicationDetails> selectPrint(String number) throws Exception;
+    /**
+     *@Description shuyedan
+     *@Params
+     *@return
+     *@Author jin
+     *@Date 2019/11/8
+     *@Time 18:43
+    */
+    List<HisMedicationDetails> infusionPrint(String number) throws Exception;
 
 
     /**
