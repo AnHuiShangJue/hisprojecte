@@ -445,7 +445,7 @@ medicalRecordId != null">
             and a.create_date &gt;= #{parameter.lowCreateDate,jdbcType=TIMESTAMP}
         </if>
     </select>
-    <select id="selectPrint" resultMap="BaseResultMap" parameterType="com.ahsj.hiscore.entity.HisMedicalRecord">
+    <select id="selectPrint" resultMap="BaseResultMap" parameterType="java.lang.String">
         select m.create_date,
                m.medical_record_id,
                u.`name`    as `name`
