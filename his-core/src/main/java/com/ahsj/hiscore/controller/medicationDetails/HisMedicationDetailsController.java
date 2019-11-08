@@ -135,6 +135,20 @@ public class HisMedicationDetailsController extends BaseController {
     }
 
     /**
+     *@Description
+     *@Params
+     *@return
+     *@Author jin
+     *@Date 2019/11/8
+     *@Time 18:43
+    */
+    @ResponseBody
+    @RequestMapping("infusionPrint.ahsj")
+    public List<HisMedicationDetails> infusionPrint(String number) throws Exception {
+        return hisMedicationDetailsService.infusionPrint(number);
+    }
+
+    /**
      * @Description 查看历史用药
      * @Params: [token, numbers]
      * @Author: dingli
