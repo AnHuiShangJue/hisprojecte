@@ -883,7 +883,7 @@
 
         )
         where
-        a.toll_record_id =( SELECT h.id from his_toll_record as h where h.number='HTR2019101000010'
+        a.toll_record_id =( SELECT h.id from his_toll_record as h where h.number=#{number}
         )  limit 1,2)
         and
         e.ward_id = (select id from his_ward as w where w.number = (  SELECT
@@ -904,7 +904,7 @@
 
         )
         where
-        a.toll_record_id =( SELECT h.id from his_toll_record as h where h.number='HTR2019101000010'
+        a.toll_record_id =( SELECT h.id from his_toll_record as h where h.number=#{number}
         )  limit 1))
         ) when d.type =4 then (select g.price from his_application_for_drug_return_details
         as g where g.id = d.target_id) when d.type =5 then( select p.price from his_record_project
