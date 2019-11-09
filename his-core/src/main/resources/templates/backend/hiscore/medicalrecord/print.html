@@ -112,6 +112,9 @@
     </div>
 
     <div class="row valign-wrapper">
+        <table id="infusion" style="border: none;margin: 0 auto;font-size: 10px"></table>
+    </div>
+    <div class="row valign-wrapper">
         <table id="drug" style="border: none;margin: 0 auto;font-size: 10px"></table>
     </div>
     <input type="hidden" id="number" name="id" th:value="${number}">
@@ -129,6 +132,7 @@
 
 <script th:inline="javascript">
     $(document).ready(function () {
+        printShowInfusion()
         printShow();
         printShow1();
         printShow2();
@@ -153,6 +157,50 @@
         );
     }
 
+    //输液单
+    function printShowInfusion() {
+        $.ahsjajax(
+            CTX + "/api/medicationDetails/infusionPrint.ahsj",
+            {"number": number},
+            function (data) {
+                var jsons = data[0];
+                if (!isNullOrEmpty(jsons)) {//有
+                    // var trs = "<tr><td><label>名称(name)</label></td><td><label>规格(drugsSpec)</label></td><td><label>用法用量(usage and dosage)</label></td><td><label>数目(number)</label></td><!--<td type=\"hidden\"><label>单价(price)</label></td><td type=\"hidden\"><label>单项总价(Single item total price)</label></td>--></tr>";
+                    var trs ="";
+                    $.each(data, function (index, item) {
+                        if (isNullOrEmpty(item.name)) {
+                            item.name = ""
+                        }
+                        if (isNullOrEmpty(item.tranName)) {
+                            item.tranName = ""
+                        }
+                        if (isNullOrEmpty(item.drugsSpec)) {
+                            item.drugsSpec = ""
+                        }
+                        if (isNullOrEmpty(item.tdrugsSpec)) {
+                            item.tdrugsSpec = ""
+                        }
+                        if (isNullOrEmpty(item.tdescription)) {
+                            item.tdescription = ""
+                        }
+                        if (isNullOrEmpty(item.description)) {
+                            item.description = ""
+                        }
+                        trs += "<tr><td><p>-</p></td><td><p> " + item.drugsName + "(" + item.tdrugsName + ")" + "</p></td><td ><p>" + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</p></td><td ><p> " + item.count + "</p></td><td ><p> " + item.description + "(" + item.tdescription + ")" + "</p></td></tr >";
+                    });
+                    $("#infusion").append(trs);
+                } else {
+                    $("#tabledrug").attr("style", "display:none;");
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }
+        );
+    }
+
+    //药品
     function printShow() {
         $.ahsjajax(
             CTX + "/api/medicationDetails/selectPrint.ahsj",
@@ -195,6 +243,7 @@
         );
     }
 
+    //项目
     function printShow1() {
         $.ahsjajax(
             CTX + "/api/hisProject/selectPrint.ahsj",
