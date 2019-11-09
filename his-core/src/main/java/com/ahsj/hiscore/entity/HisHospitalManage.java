@@ -80,6 +80,8 @@ public class HisHospitalManage extends BaseEntity {
 
     private String wardNumber;
 
+    private Integer bedNumber;
+
     @CodeValueColumn(type = Constants.GLOBAL_DATA_ORANGIATION, typeKey = "", typeName = "departmentIdName")
     private Long departmentId;
     private String departmentIdName;
@@ -719,5 +721,13 @@ public class HisHospitalManage extends BaseEntity {
 
     public void setMedicalOrderDetailId(Long medicalOrderDetailId) {
         this.medicalOrderDetailId = medicalOrderDetailId;
+    }
+
+    public Integer getBedNumber() {
+        return bedNumber;
+    }
+
+    public void setBedNumber(Integer bedNumber) {
+        this.bedNumber = bedNumber;
     }
 }

@@ -16,6 +16,8 @@
                     <input type="hidden" id="id" name="id" th:value="${hisHospitalManage.id}"/>
                     <input type="hidden" id="id1" name="patientId" th:value="${hisHospitalManage.patientId}"/>
                     <input type="hidden" id="id2" name="hosptalRegistId" th:value="${hisHospitalManage.hosptalRegistId}"/>
+                    <input type="hidden" id="bedNumber" name="bedNumber" th:value="${hisHospitalManage.bedNumber}"/>
+                    <input type="hidden" id="bedIds" name="bedId" th:value="${hisHospitalManage.bedId}"/>
                     <div class="input-field col s4 l4 xl4">
                         <input id="name" name="patientName" type="text" th:value="${hisHospitalManage.patientName}"/>
                         <label for="name">姓 名<span style="font-size: 12px">(name)</span></label>
@@ -119,9 +121,11 @@ Scripts
         // getDoctor();
         getNurse();
         getWard();
+        getBed([[${hisHospitalManage.wardNumber}]]);
 
 
     });
+
 
     var docSelect = $("#doctorId");
     var wardIdSelect = $("#wardId");
@@ -239,67 +243,111 @@ Scripts
     });
 
     function getBed(wardNumber) {
+        var thebednumber = $("#bedNumber").val();
+        var thebedid =$("#bedIds").val();
+        var thewardNumber = [[${hisHospitalManage.wardNumber}]];
 
-        $.getJSON(CTX + "/api/hisbeds/getBed.ahsj?wardNumber=" + wardNumber + "&token=" + TOKEN, function (result) {
-            bedIdSelect.empty();
-            $(result).each(function (i) {
-                bedIdSelect.append(
-                    "<option value='" + this.id + "'>" + this.number + "</option>")
-            });
-            bedIdSelect.formSelect();
-/*            if (flag == null || flag == "" ){
-                bedIdSelect.prepend("<option value='0'>选择病房</option>");
-
+        if (wardNumber != thewardNumber){
+            $.getJSON(CTX + "/api/hisbeds/getBed.ahsj?wardNumber=" + wardNumber + "&token=" + TOKEN, function (result) {
+                bedIdSelect.empty();
+                // bedIdSelect.append(
+                //     "<option value='" + thebedid + "'>" + thebednumber + "</option>")
                 $(result).each(function (i) {
                     bedIdSelect.append(
                         "<option value='" + this.id + "'>" + this.number + "</option>")
                 });
+                bedIdSelect.formSelect();
+                /*            if (flag == null || flag == "" ){
+                                bedIdSelect.prepend("<option value='0'>选择病房</option>");
 
-            }else {
-                for (var j = 0;j<result.length;++j){
-                    if (flag == result[j].id){
-                        bedIdSelect.append("<option value='" + result[j].id + "'>" + result[j].number + "</option>");
-                    }
-                }
+                                $(result).each(function (i) {
+                                    bedIdSelect.append(
+                                        "<option value='" + this.id + "'>" + this.number + "</option>")
+                                });
+
+                            }else {
+                                for (var j = 0;j<result.length;++j){
+                                    if (flag == result[j].id){
+                                        bedIdSelect.append("<option value='" + result[j].id + "'>" + result[j].number + "</option>");
+                                    }
+                                }
+                                $(result).each(function (i) {
+                                    bedIdSelect.append("<option value='" + this.id + "'>" + this.number + "</option>")
+                                })
+                            }*/
+
+            })
+
+        }else {
+            $.getJSON(CTX + "/api/hisbeds/getBed.ahsj?wardNumber=" + wardNumber + "&token=" + TOKEN, function (result) {
+                bedIdSelect.empty();
+                bedIdSelect.append(
+                    "<option value='" + thebedid + "'>" + thebednumber + "</option>")
                 $(result).each(function (i) {
-                    bedIdSelect.append("<option value='" + this.id + "'>" + this.number + "</option>")
-                })
-            }*/
+                    bedIdSelect.append(
+                        "<option value='" + this.id + "'>" + this.number + "</option>")
+                });
+                bedIdSelect.formSelect();
+                /*            if (flag == null || flag == "" ){
+                                bedIdSelect.prepend("<option value='0'>选择病房</option>");
 
-        })
+                                $(result).each(function (i) {
+                                    bedIdSelect.append(
+                                        "<option value='" + this.id + "'>" + this.number + "</option>")
+                                });
+
+                            }else {
+                                for (var j = 0;j<result.length;++j){
+                                    if (flag == result[j].id){
+                                        bedIdSelect.append("<option value='" + result[j].id + "'>" + result[j].number + "</option>");
+                                    }
+                                }
+                                $(result).each(function (i) {
+                                    bedIdSelect.append("<option value='" + this.id + "'>" + this.number + "</option>")
+                                })
+                            }*/
+
+            })
+
+        }
     }
+
 
 
     function getBed2(wardNumber) {
 
-        $.getJSON(CTX + "/api/hisbeds/getBed.ahsj?wardNumber=" + wardNumber + "&token=" + TOKEN, function (result) {
-            console.log(result);
-            bedIdSelect.empty();
-            // $(result).each(function (i) {
-            //     bedIdSelect.append(
-            //         "<option value='" + this.id + "'>" + this.number + "</option>")
-            // });
-            // bedIdSelect.formSelect();
-                        if (flag == null || flag == "" ){
-                            bedIdSelect.prepend("<option value='0'>选择病房</option>");
+        // $.getJSON(CTX + "/api/hisbeds/getBedAll.ahsj?wardNumber=" + wardNumber + "&token=" + TOKEN, function (result) {
+        //     console.log(result);
+        //     bedIdSelect.empty();
+        //     // $(result).each(function (i) {
+        //     //     bedIdSelect.append(
+        //     //         "<option value='" + this.id + "'>" + this.number + "</option>")
+        //     // });
+        //     // bedIdSelect.formSelect();
+        //                 if (flag == null || flag == "" ){
+        //                     bedIdSelect.prepend("<option value='0'>选择病房</option>");
+        //
+        //                     $(result).each(function (i) {
+        //                         bedIdSelect.append(
+        //                             "<option value='" + this.id + "'>" + this.number + "</option>")
+        //                     });
+        //
+        //                 }else {
+        //                     console.log("flag:"+flag);
+        //                     for (var j = 0;j<result.length;++j){
+        //                         if (flag == result[j].id){
+        //                             bedIdSelect.append("<option value='" + result[j].id + "'>" + result[j].number + "</option>");
+        //                         }
+        //                     }
+        //                     // $(result).each(function (i) {
+        //                     //     bedIdSelect.append("<option value='" + this.id + "'>" + this.number + "</option>")
+        //                     // })
+        //                 }
+        //
+        // })
+        bedIdSelect.append("<option value='" + this.id + "'>" + this.number + "</option>")
 
-                            $(result).each(function (i) {
-                                bedIdSelect.append(
-                                    "<option value='" + this.id + "'>" + this.number + "</option>")
-                            });
 
-                        }else {
-                            for (var j = 0;j<result.length;++j){
-                                if (flag == result[j].id){
-                                    bedIdSelect.append("<option value='" + result[j].id + "'>" + result[j].number + "</option>");
-                                }
-                            }
-                            $(result).each(function (i) {
-                                bedIdSelect.append("<option value='" + this.id + "'>" + this.number + "</option>")
-                            })
-                        }
-
-        })
     }
 
 
