@@ -9,31 +9,31 @@
 
 <div class="row">
     <div class="col s12 m12 l12">
-        <!--<div class="section section-data-tables">-->
-            <!--<div class="card">-->
-                <!--<div class="card-content">-->
-                    <!--<form id="searchForm" class="row" action="">-->
-                        <!--<div class="row">-->
-                            <!--<div class="col input-field s3 m3 l3">-->
-                                <!--<input id="number" name="number" type="text"/>-->
-                                <!--<label for="number">就诊卡编号<span style="font-size: 12px">(Visit card number-->
-<!--)</span></label>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</form>-->
-                <!--</div>-->
-                <!--<div class="row">-->
-                    <!--<div class="col s2 m2 l2 xl2 offset-l1">-->
-                        <!--<a class="waves-effect waves-light btn" id="searchBtn"><i-->
-                                <!--class="material-icons  white-text tooltipped " data-position="bottom"-->
-                                <!--data-delay="50" data-tooltip="搜索">search</i></a>-->
-                        <!--<a id="resetBtn" class="waves-effect waves-light btn"><i-->
-                                <!--class="material-icons  white-text tooltipped " data-position="bottom"-->
-                                <!--data-delay="50" data-tooltip="重置">youtube_searched_for</i></a>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
+        <div class="section section-data-tables">
+            <div class="card">
+                <div class="card-content">
+                    <form id="searchForm" class="row" action="">
+                        <div class="row">
+                            <div class="col input-field s3 m3 l3">
+                                <input id="number" name="number" type="text"/>
+                                <label for="number">就诊卡编号<span style="font-size: 12px">(Visit card number
+)</span></label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="row">
+                    <div class="col s2 m2 l2 xl2 offset-l1">
+                        <a class="waves-effect waves-light btn" id="searchBtn"><i
+                                class="material-icons  white-text tooltipped " data-position="bottom"
+                                data-delay="50" data-tooltip="搜索">search</i></a>
+                        <a id="resetBtn" class="waves-effect waves-light btn"><i
+                                class="material-icons  white-text tooltipped " data-position="bottom"
+                                data-delay="50" data-tooltip="重置">youtube_searched_for</i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="validation" class="card card card-default scrollspy">
             <div class="card-content" style="height: 600px;">
                 <h4 class="card-title">挂号信息新增</h4><label style="color:black">Registered information added</label>
@@ -132,15 +132,6 @@
 
     });
 
-    $(document).ready(function(){
-        changeSelect();
-
-    }
-
-    function changeSelect() {
-        changeSelectValue("orgId",23)
-    }
-
     function getSelectData() {
         registeredCategory = $("#registeredCategory").children('option:selected').val();//这就是selected的值
         payType = $("#payType").children('option:selected').val();//这就是selected的值
@@ -189,42 +180,42 @@
         });
 
         //根据输入就诊卡编号拉取病人信息
-        // $("#searchBtn").click(function () {
-        //     var number = $("#number").val();//获取就诊卡编号
-        //     if (!isNullOrEmpty(number)) {
-        //         //获取基本信息
-        //         $.ahsjajax(
-        //             CTX + "/api/visitCard/getPatientInfoByNumber.ahsj",
-        //             {"number": number},
-        //             function (data) {
-        //                 if (!isNullOrEmpty(data.id)) {
-        //                     //填充病人基本信息  设置其不可编辑
-        //                     changeInputValue("patientName",data.name);
-        //                     changeInputValue("idcard",data.idcard);
-        //                     $("#patientName").attr("readonly","readonly");
-        //                     $("#idcard").attr("readonly","readonly");
-        //                     //支付方式设置为就诊卡支付
-        //                     changeSelectValue("payType",2);
-        //                     //填充应收实际找零均为0  且不可修改
-        //                     changeInputValue("money",0);
-        //                     changeInputValue("paidAmount",0);
-        //                     changeInputValue("retrieveAmount",0);
-        //                     $("#money").attr("readonly","readonly");
-        //                     $("#paidAmount").attr("readonly","readonly");
-        //                     $("#retrieveAmount").attr("readonly","readonly");
-        //                     return true;
-        //                 } else {
-        //                     dialog.warn(number + "号不存在！")
-        //                     return false;
-        //                 }
-        //             },
-        //             function () {
-        //                 Materialize.toast("网络异常");
-        //                 return false;
-        //             }
-        //         );
-        //     }
-        // });
+        $("#searchBtn").click(function () {
+            var number = $("#number").val();//获取就诊卡编号
+            if (!isNullOrEmpty(number)) {
+                //获取基本信息
+                $.ahsjajax(
+                    CTX + "/api/visitCard/getPatientInfoByNumber.ahsj",
+                    {"number": number},
+                    function (data) {
+                        if (!isNullOrEmpty(data.id)) {
+                            //填充病人基本信息  设置其不可编辑
+                            changeInputValue("patientName",data.name);
+                            changeInputValue("idcard",data.idcard);
+                            $("#patientName").attr("readonly","readonly");
+                            $("#idcard").attr("readonly","readonly");
+                            //支付方式设置为就诊卡支付
+                            changeSelectValue("payType",2);
+                            //填充应收实际找零均为0  且不可修改
+                            changeInputValue("money",0);
+                            changeInputValue("paidAmount",0);
+                            changeInputValue("retrieveAmount",0);
+                            $("#money").attr("readonly","readonly");
+                            $("#paidAmount").attr("readonly","readonly");
+                            $("#retrieveAmount").attr("readonly","readonly");
+                            return true;
+                        } else {
+                            dialog.warn(number + "号不存在！")
+                            return false;
+                        }
+                    },
+                    function () {
+                        Materialize.toast("网络异常");
+                        return false;
+                    }
+                );
+            }
+        });
 
         //重置搜索条件
         $("#resetBtn").click(function () {
@@ -243,7 +234,6 @@
     }
 
     function formCheck() {
-
         $("#sendForm").validate({
             rules: {
                 patientName: {

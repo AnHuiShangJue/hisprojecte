@@ -206,135 +206,135 @@
     <select id="listByMecordIdForHospital" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
         select
         q.update_date as update_date,
-         a.target_id as target_id,
-            a.num as num,
-            a.price as price ,
-            a.name as name,
-            a.isPay as isPay,
-            a.type as type,
-            a.money as money,
-            a.create_date as create_date
-          from (
-             select
-            a.target_id as target_id,
-            a.num as num,
-            a.money as price ,
-            a.name as name,
-            a.isPay as isPay,
-            a.type as type,
-            a.money * a.num as money,
+        a.target_id as target_id,
+        a.num as num,
+        a.price as price ,
+        a.name as name,
+        a.isPay as isPay,
+        a.type as type,
+        a.money as money,
+        a.create_date as create_date
+        from (
+        select
+        a.target_id as target_id,
+        a.num as num,
+        a.money as price ,
+        a.name as name,
+        a.isPay as isPay,
+        a.type as type,
+        a.money * a.num as money,
         a.create_date as create_date
         from(
-                select
-                    a.name as name,
-                    b.id as target_id,
-                    b.price as money,
-                    b.is_payed as isPay,
-                    b.num as num,
-                    2 as type,
-                    b.create_date as create_date
-                from
-                    his_project as a
-                        left join
-                        his_record_project as b on b.project_id = a.id
-                        left join
-                        his_medical_record as c on b.record_id = c.id
-                where c.medical_record_id = #{parameter.MedicalRecordId,jdbcType=VARCHAR}
+        select
+        a.name as name,
+        b.id as target_id,
+        b.price as money,
+        b.is_payed as isPay,
+        b.num as num,
+        2 as type,
+        b.create_date as create_date
+        from
+        his_project as a
+        left join
+        his_record_project as b on b.project_id = a.id
+        left join
+        his_medical_record as c on b.record_id = c.id
+        where c.medical_record_id = #{parameter.MedicalRecordId,jdbcType=VARCHAR}
 
-                UNION ALL
+        UNION ALL
 
-                select
-                    d.drugs_name as name,
-                    e.id as target_id,
-                    d.sale_price as money,
-                    e.is_pay as isPay,
-                    e.count as num,
-                    1 as type,
-                    e.create_date as create_date
-                from
-                    his_pharmacy_detail as d
-                        left join
-                        his_medication_details as e on e. medication_id = d.id
-                        left join
-                        his_medical_record as f on e.medical_record_id = f.id
-                where f.medical_record_id = #{parameter.MedicalRecordId,jdbcType=VARCHAR}
+        select
+        d.drugs_name as name,
+        e.id as target_id,
+        d.sale_price as money,
+        e.is_pay as isPay,
+        e.count as num,
+        1 as type,
+        e.create_date as create_date
+        from
+        his_pharmacy_detail as d
+        left join
+        his_medication_details as e on e. medication_id = d.id
+        left join
+        his_medical_record as f on e.medical_record_id = f.id
+        where f.medical_record_id = #{parameter.MedicalRecordId,jdbcType=VARCHAR}
 
-                UNION ALL
+        UNION ALL
 
-                select
-                    b.name as name,
-                    a.id as target_id,
-                    b.money as money ,
-                    2 as isPay,
-                    a.hospitalization_day - b.pay_days as num,
-                    3 as type,
+        select
+        b.name as name,
+        a.id as target_id,
+        b.money as money ,
+        2 as isPay,
+        a.hospitalization_day - b.pay_days as num,
+        3 as type,
         a.create_date as create_date
-                from
-                    his_hospital_manage as a
-                        left join
-                        (select a.id ,SUM(a.num) as pay_days,
-                                a.money as money,
-                                a.name
-                         from
-                             (
-                                 select
-                                     g.id ,
-                                    CONCAT("住院",w.number,"号病房",h.number,"号病床费用") as name,
-                                     h.price as money,
-                                     substring_index(substring_index(g.pay_hospitalization_day,',',b.help_topic_id+1),',',-1) as num ,
-                                     substring_index(substring_index(g.toll_details_id,',',b.help_topic_id+1),',',-1) as target_id
-                                 from
-                                     his_bed as h
-                                        	LEFT JOIN his_ward as w on w.id = h.ward_id
-                                         left join his_hospital_manage as g on h.id = g.bed_id
-                                         left join his_medical_record as f on g.medical_number = f.id
-                                         join
-                                         mysql.help_topic b
-                                         on b.help_topic_id &lt; (length(g.pay_hospitalization_day) -
-                                                                  length(replace(g.pay_hospitalization_day,',',''))+1)
-                                 order by g.id
-                             ) as a
-                         GROUP BY a.id) as b on a.id = b.id
-                where a.medical_number = #{parameter.MedicalRecordId,jdbcType=VARCHAR}
+        from
+        his_hospital_manage as a
+        left join
+        (select a.id ,SUM(a.num) as pay_days,
+        a.money as money,
+        a.name
+        from
+        (
+        select
+        g.id ,
+        CONCAT("住院",w.number,"号病房",h.number,"号病床费用") as name,
+        h.price as money,
+        substring_index(substring_index(g.pay_hospitalization_day,',',b.help_topic_id+1),',',-1) as num ,
+        substring_index(substring_index(g.toll_details_id,',',b.help_topic_id+1),',',-1) as target_id
+        from
+        his_bed as h
+        LEFT JOIN his_ward as w on w.id = h.ward_id
+        left join his_hospital_manage as g on h.id = g.bed_id
+        left join his_medical_record as f on g.medical_number = f.id
+        join
+        mysql.help_topic b
+        on b.help_topic_id &lt; (length(g.pay_hospitalization_day) -
+        length(replace(g.pay_hospitalization_day,',',''))+1)
+        order by g.id
+        ) as a
+        GROUP BY a.id) as b on a.id = b.id
+        where a.medical_number = #{parameter.MedicalRecordId,jdbcType=VARCHAR}
 
-                UNION ALL
+        UNION ALL
 
-                select
-                    k.name as name,
-                    k.target_id as target_id,
-                    k.money as money ,
-                    k.isPay as isPay,
-                    k.num as num,
-                    k.type as type,
+        select
+        k.name as name,
+        k.target_id as target_id,
+        k.money as money ,
+        k.isPay as isPay,
+        k.num as num,
+        k.type as type,
         k.create_date as create_date
-                from(
-                        select
-                            CONCAT("住院",w.number,"号病房",h.number,"号病床费用") as name,
-                            h.price as money,
-                            substring_index(substring_index(z.pay_hospitalization_day,',',b.help_topic_id+1),',',-1) as num ,
-                            substring_index(substring_index(z.toll_details_id,',',b.help_topic_id+1),',',-1) as target_id,
-                            1 as isPay,
-                            3 as type,
+        from(
+        select
+        CONCAT("住院",w.number,"号病房",h.number,"号病床费用") as name,
+        h.price as money,
+        substring_index(substring_index(z.pay_hospitalization_day,',',b.help_topic_id+1),',',-1) as num ,
+        substring_index(substring_index(z.toll_details_id,',',b.help_topic_id+1),',',-1) as target_id,
+        1 as isPay,
+        3 as type,
         z.create_date as create_date
-                        from
-                            his_bed as h
-                            	LEFT JOIN his_ward as w on w.id = h.ward_id
-                                left join his_hospital_manage as z on h.id = z.bed_id
-                                left join his_medical_record as f on z.medical_number = f.id
-                                join
-                                mysql.help_topic b
-                                on b.help_topic_id &lt; (length(z.pay_hospitalization_day) -
-                                                         length(replace(z.pay_hospitalization_day,',',''))+1)
-                        where z.medical_number = #{parameter.MedicalRecordId,jdbcType=VARCHAR}
-                        order by z.id ) as k
-            ) a
+        from
+        his_bed as h
+        LEFT JOIN his_ward as w on w.id = h.ward_id
+        left join his_hospital_manage as z on h.id = z.bed_id
+        left join his_medical_record as f on z.medical_number = f.id
+        join
+        mysql.help_topic b
+        on b.help_topic_id &lt; (length(z.pay_hospitalization_day) -
+        length(replace(z.pay_hospitalization_day,',',''))+1)
+        where z.medical_number = #{parameter.MedicalRecordId,jdbcType=VARCHAR}
+        order by z.id ) as k
+        ) a
         where a.num != 0
         order by a.isPay desc
-        ) as  a
+        ) as a
         left join his_toll_details as q on a.target_id = q.target_id
-        where  1=1
-         <if test="parameter.type != null and parameter.type != ''" >
-          and a.type = #{parameter.type,jdbcType=INTEGER}
+        where 1=1
+        <if test="parameter.type != null and parameter.type != ''">
+            and a.type = #{parameter.type,jdbcType=INTEGER}
         </if>
         <if test="parameter.name != null and parameter.name != ''">
             and a.name like concat('%' #{parameter.name},'%')
@@ -627,7 +627,8 @@
         =#{parameter.tollRecordId} limit 1)
         ) and e.number = (SELECT substring_index( substring_index( a.`name`, ',', b.help_topic_id
         + 1 ), ',' ,- 1 ) AS `name` FROM his_toll_details a JOIN mysql.help_topic b ON b.help_topic_id
-        &lt; ( length(a.name) - length( REPLACE (a.name, ',', '') ) + 1 ) where a.toll_record_id =#{parameter.tollRecordId} limit
+        &lt; ( length(a.name) - length( REPLACE (a.name, ',', '') ) + 1 ) where a.toll_record_id
+        =#{parameter.tollRecordId} limit
         1,2 )
         )
         when d.type
@@ -636,9 +637,11 @@
         d.type=3 then (select CONCAT("住院",( SELECT substring_index( substring_index(
         a.`name`, ',', b.help_topic_id + 1 ), ',' ,- 1 ) AS `name` FROM his_toll_details a JOIN mysql.help_topic
         b ON b.help_topic_id &lt; ( length(a.name) - length( REPLACE (a.name, ',', '') ) + 1 ) where a.toll_record_id
-        =#{parameter.tollRecordId} limit 1),"号病房", ( SELECT substring_index( substring_index( a.`name`, ',', b.help_topic_id
+        =#{parameter.tollRecordId} limit 1),"号病房", ( SELECT substring_index( substring_index( a.`name`, ',',
+        b.help_topic_id
         + 1 ), ',' ,- 1 ) AS `name` FROM his_toll_details a JOIN mysql.help_topic b ON b.help_topic_id
-        &lt; ( length(a.name) - length( REPLACE (a.name, ',', '') ) + 1 ) where a.toll_record_id =#{parameter.tollRecordId} limit
+        &lt; ( length(a.name) - length( REPLACE (a.name, ',', '') ) + 1 ) where a.toll_record_id
+        =#{parameter.tollRecordId} limit
         1,2 ), "号病床费用") from his_toll_details as h WHERE h.id=d.id) else d.name end as name, d.money
         FROM `his_toll_details` as d LEFT JOIN `his-userinfo`.user_info as i on i.id = d.create_user_id
         LEFT JOIN his_toll_record as h on h.id = d.toll_record_id where d.toll_record_id =( SELECT
@@ -664,7 +667,17 @@
         d.type=3 then (select m.hospitalization_day from his_hospital_manage as m where m.id = d.target_id)
         when d.type=4 then (select g.return_count from his_application_for_drug_return_details as g
         where g.id = d.target_id) when d.type = 5 then( select p.refund_num from his_refund_project
-        as p where p.id = d.target_id ) end as num , case when d.type=1 then (select s.sale_price from
+        as p where p.id = d.target_id ) end as num ,
+         		case
+		when d.type =1 	then (select m.create_date from his_medication_details as m where m.id = d.target_id)
+		  when d.type=2 then (select h.create_date from his_record_project as h where h.id = d.target_id)
+				when d.type=3 then (select m.create_date from his_hospital_manage as m where m.id = d.target_id)
+		  when d.type=4 then (select g.create_date from his_application_for_drug_return_details as g
+        where g.id = d.target_id)
+				when d.type = 5 then( select p.create_date from his_refund_project
+        as p where p.id = d.target_id )
+end as update_date,
+         case when d.type=1 then (select s.sale_price from
         his_pharmacy_detail as s where s.id = (select m.medication_id from his_medication_details as
         m where m.id = d.target_id) ) when d.type=2 then ( select h.price from his_record_project as
         h where h.id = d.target_id ) when d.type=3 then (
@@ -859,7 +872,19 @@
         d.type=3 then (select m.hospitalization_day from his_hospital_manage as m where m.id = d.target_id)
         when d.type=4 then (select g.return_count from his_application_for_drug_return_details as g
         where g.id = d.target_id) when d.type = 5 then( select p.refund_num from his_refund_project
-        as p where p.id = d.target_id ) end as num , case when d.type=1 then (select s.sale_price from
+        as p where p.id = d.target_id ) end as num ,
+         		case
+		when d.type =1 	then (select m.create_date from his_medication_details as m where m.id = d.target_id)
+		  when d.type=2 then (select h.create_date from his_record_project as h where h.id = d.target_id)
+				when d.type=3 then (select m.create_date from his_hospital_manage as m where m.id = d.target_id)
+		  when d.type=4 then (select g.create_date from his_application_for_drug_return_details as g
+        where g.id = d.target_id)
+				when d.type = 5 then( select p.create_date from his_refund_project
+        as p where p.id = d.target_id )
+end as update_date,
+
+
+         case when d.type=1 then (select s.sale_price from
         his_pharmacy_detail as s where s.id = (select m.medication_id from his_medication_details as
         m where m.id = d.target_id) ) when d.type=2 then ( select h.price from his_record_project as
         h where h.id = d.target_id ) when d.type=3 then (
@@ -883,7 +908,7 @@
 
         )
         where
-        a.toll_record_id =( SELECT h.id from his_toll_record as h where h.number='HTR2019101000010'
+        a.toll_record_id =( SELECT h.id from his_toll_record as h where h.number=#{number}
         )  limit 1,2)
         and
         e.ward_id = (select id from his_ward as w where w.number = (  SELECT
@@ -904,7 +929,7 @@
 
         )
         where
-        a.toll_record_id =( SELECT h.id from his_toll_record as h where h.number='HTR2019101000010'
+        a.toll_record_id =( SELECT h.id from his_toll_record as h where h.number=#{number}
         )  limit 1))
         ) when d.type =4 then (select g.price from his_application_for_drug_return_details
         as g where g.id = d.target_id) when d.type =5 then( select p.price from his_record_project

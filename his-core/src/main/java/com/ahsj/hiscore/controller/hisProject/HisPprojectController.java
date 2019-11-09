@@ -183,7 +183,6 @@ public class HisPprojectController extends BaseController {
     @ResponseBody
     @PostMapping("/addHisProject.ahsj")
     public Message addHisProject(HisProject hisProject) throws Exception {
-        hisProject.setCreateUserId(getUserId());
         return hisProjectService.insertSelective(hisProject);
     }
 

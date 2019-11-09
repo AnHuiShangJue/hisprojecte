@@ -5,6 +5,7 @@ import com.ahsj.hiscore.common.utils.JsonUtils;
 import com.ahsj.hiscore.controller.BaseLoginUser;
 import com.ahsj.hiscore.core.CodeHelper;
 import com.ahsj.hiscore.dao.HisMedicalOrderDetailMapper;
+import com.ahsj.hiscore.dao.HisRecordProjectMapper;
 import com.ahsj.hiscore.entity.*;
 import com.ahsj.hiscore.entity.TranslateModel.HisMedicalOrderDetailTranslate;
 import com.ahsj.hiscore.entity.TranslateModel.TranslateModels;
@@ -71,6 +72,9 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
 
     @Autowired
     AmqpTemplate amqpTemplat;
+
+    @Autowired
+    HisRecordProjectMapper hisRecordProjectMapper;
 
 
 
@@ -459,6 +463,27 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
             //已经停嘱设置不可编辑
 //        hisMedicalOrderDetail.setIsFirstEdit(2);
             hisMedicalOrderDetail.setStopUserId(loginUser);
+            HisMedicationDetails hisMedicationDetails = hisMedicationDetailsService.selectById(hisMedicalOrderDetail.getCorrespondId());
+           if(hisMedicalOrderDetail.getMedicalOrderType() == 2) {
+               if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicationDetails)) {
+                   //2代表未付钱
+                   if (hisMedicationDetails.getIsPay() == 2) {
+                       hisMedicationDetailsService.deleteById(hisMedicationDetails.getId());
+                   } else if (hisMedicationDetails.getIsPay() == 1) {
+                       returnMessage.append(hisMedicationDetails.getDrugsNumb() + ",");
+                   }
+               }
+           }
+           if(hisMedicalOrderDetail.getMedicalOrderType() == 3) {
+               HisRecordProject hisRecordProject = hisRecordProjectService.selectByPrimaryKey(hisMedicalOrderDetail.getCorrespondId());
+               if (!EmptyUtil.Companion.isNullOrEmpty(hisRecordProject)) {
+                   if (hisRecordProject.getIsPayed() == 2) {
+                       hisRecordProjectService.deleteById(hisRecordProject.getId());
+                   } else if (hisRecordProject.getIsPayed() == 1) {
+                       returnMessage.append("项目已付费，请走退项目流程（The project has been paid, please go back to the project process）");
+                   }
+               }
+           }
             hisMedicalOrderDetailMapper.updateByPrimaryKeySelective(hisMedicalOrderDetail);
             return MessageUtil.createMessage(true, "停嘱成功(Stop success)    " + returnMessage.toString());
         }
@@ -484,6 +509,14 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
             if(!EmptyUtil.Companion.isNullOrEmpty(returnMessage)){
                 returnMessage.append("药品已付费，请走出库-退药流程(The existence of drugs has been paid, please go out of the library - withdrawal process)");
             }
+        /*    HisRecordProject hisRecordProject = hisRecordProjectService.selectByPrimaryKey(hisMedicalOrderDetail.getCorrespondId());
+            if (!EmptyUtil.Companion.isNullOrEmpty(hisRecordProject)) {
+                if (hisRecordProject.getIsPayed() == 2) {
+                    hisRecordProjectService.deleteById(hisRecordProject.getId());
+                } else if (hisRecordProject.getIsPayed() == 1) {
+                    returnMessage.append("项目已付费，请走退项目流程（The project has been paid, please go back to the project process）");
+                }
+            }*/
             return MessageUtil.createMessage(true, "停嘱成功(Stop success)    " + returnMessage.toString());
         }else {
             hisMedicalOrderDetail.setIsStop(1);
@@ -515,6 +548,7 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
             }
 
             hisMedicalOrderDetailMapper.updateByPrimaryKeySelective(hisMedicalOrderDetail);
+
             return MessageUtil.createMessage(true, "停嘱成功(Stop success)    " + returnMessage.toString());
         }
     }
@@ -697,6 +731,23 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
             //已经停嘱设置不可编辑
 //        hisMedicalOrderDetail.setIsFirstEdit(2);
             hisMedicalOrderDetail.setStopUserId(loginUser);
+            HisMedicationDetails hisMedicationDetails = hisMedicationDetailsService.selectById(hisMedicalOrderDetail.getCorrespondId());
+            if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicationDetails)) {
+                //2代表未付钱
+                if (hisMedicationDetails.getIsPay() == 2) {
+                    hisMedicationDetailsService.deleteById(hisMedicationDetails.getId());
+                } else if (hisMedicationDetails.getIsPay() == 1) {
+                    returnMessage.append(hisMedicationDetails.getDrugsNumb() + ",");
+                }
+            }
+            HisRecordProject hisRecordProject = hisRecordProjectService.selectByPrimaryKey(hisMedicalOrderDetail.getCorrespondId());
+            if (!EmptyUtil.Companion.isNullOrEmpty(hisRecordProject)) {
+                if (hisRecordProject.getIsPayed() == 2) {
+                    hisRecordProjectService.deleteById(hisRecordProject.getId());
+                } else if (hisRecordProject.getIsPayed() == 1 && hisRecordProject.getIsChecked() == 2) {
+                    returnMessage.append("项目已付费且未检查，请走退项目流程（The project has been paid not check, please go back to the project process）");
+                }
+            }
             hisMedicalOrderDetailMapper.updateByPrimaryKeySelective(hisMedicalOrderDetail);
             return MessageUtil.createMessage(true, "取消成功(Cancle success)    " + returnMessage.toString());
         }
@@ -717,10 +768,19 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
                         returnMessage.append(hisMedicationDetails.getDrugsNumb() + ",");
                     }
                 }
+
                 hisMedicalOrderDetailMapper.updateByPrimaryKeySelective(medicalOrderDetail);
             }
             if (!EmptyUtil.Companion.isNullOrEmpty(returnMessage)) {
                 returnMessage.append("药品已付费，请走出库-退药流程(The existence of drugs has been paid, please go out of the library - withdrawal process)");
+            }
+            HisRecordProject hisRecordProject = hisRecordProjectService.selectByPrimaryKey(hisMedicalOrderDetail.getCorrespondId());
+            if (!EmptyUtil.Companion.isNullOrEmpty(hisRecordProject)) {
+                if (hisRecordProject.getIsPayed() == 2) {
+                    hisRecordProjectService.deleteById(hisRecordProject.getId());
+                } else if (hisRecordProject.getIsPayed() == 1 && hisRecordProject.getIsChecked() == 2) {
+                    returnMessage.append("项目已付费且未检查，请走退项目流程（The project has been paid not check, please go back to the project process）");
+                }
             }
             return MessageUtil.createMessage(true, "取消成功(Cancle success)    " + returnMessage.toString());
         }
