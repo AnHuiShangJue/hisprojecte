@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import utils.EmptyUtil;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/api/hisTollRecord/")
@@ -587,5 +589,22 @@ public class HisTollRecordController extends BaseController {
     @ResponseBody
     HisHospitalManage checkIsInpatient(String token, String tollNumber) throws Exception {
         return hisTollRecordService.checkIsInpatient(tollNumber);
+    }
+
+
+    @RequestMapping("printAllInformation/index.ahsj")
+    ModelAndView printAllInformation(String token, String HRNumber) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/hisFinance/printAllInformation");
+        modelAndView.addObject("title", "打印所有消費信息");
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("HRNumber", HRNumber);
+        return modelAndView;
+    }
+
+    @RequestMapping("printAllInformation.ahsj")
+    @ResponseBody
+    List<HisTollRecordDetails> printAllInformations(String token,String HRNumber)throws Exception{
+        List<HisTollRecordDetails> hisTollRecordDetails = hisTollRecordService.selectAllInformationByHRNumber(HRNumber);
+        return hisTollRecordDetails;
     }
 }

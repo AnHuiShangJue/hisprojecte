@@ -237,4 +237,7 @@ public interface HisProjectMapper extends BaseMapper<HisProject> {
      *@Time 13:50
     **/
     List<HisProject> selectForListForProjectByIds(Long[] ids);
+
+
+    HisProject selectByNumber(String number);
 }

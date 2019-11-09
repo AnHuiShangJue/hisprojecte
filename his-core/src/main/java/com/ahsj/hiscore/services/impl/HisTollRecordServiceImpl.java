@@ -1024,6 +1024,13 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         return hisHospitalManage;
     }
 
+    //打印所有在医院产生的费用信息
+    @Override
+    @Transactional(readOnly = true)
+    public List<HisTollRecordDetails> selectAllInformationByHRNumber(String hrNumber) throws Exception {
+        return hisTollRecordMapper.selectAllInformationByHRNumber(hrNumber);
+    }
+
 
     /**
      *@Description 根据就诊编号HHM查询交易流水号

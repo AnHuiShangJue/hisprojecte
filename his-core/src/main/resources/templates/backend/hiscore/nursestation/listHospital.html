@@ -171,6 +171,13 @@
                                             hidden="true">打 印（print）
                                         <i class="mdi-content-send right"></i>
                                     </button>
+                                    <button id="print_btn1"
+                                            class="btn cyan waves-effect waves-light right"
+                                            type="button"
+                                            name="action"
+                                            >打印住院产生所有费用信息（print all）
+                                        <i class="mdi-content-send right"></i>
+                                    </button>
 
                                 </div>
                                 <h4 class="card-title">催款单打印记录</h4><label style="color:black">Dunning list print record</label>
@@ -369,6 +376,11 @@
             grid.reset();
         });
 
+        $("#print_btn1").click(function () {
+            var MedicalRecordId = $("#MedicalRecordId").val();
+            var url = CTX + "/api/hisTollRecord/printAllInformation/index.ahsj?token="+TOKEN +"&HRNumber="+MedicalRecordId
+            dialog.showDialog(url, "打印凭证预览", "700px", "700px");
+        });
 
         $("#print_btn2").click(function () {
             var url = CTX + "/api/nursestation/reminder/index.ahsj?token=" + TOKEN +"&MedicalRecordId="+$("#MedicalRecordId").val()+ "&money=" + $("#money").val() + "&restDeposit="+$("#restDeposit").val()+"&patientName="+$("#patientName").val()+"&depositWarning="+$("#depositWarning").val();

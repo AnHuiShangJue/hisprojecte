@@ -263,6 +263,9 @@ public interface HisTollRecordService {
     **/
     HisHospitalManage checkIsInpatient(String tollNumber)throws Exception;
 
+    //打印所有在医院产生的费用信息
+    List<HisTollRecordDetails> selectAllInformationByHRNumber(String hrNumber)throws Exception ;
+
 
     /**
      *@Description 根据就诊编号HHM查询交易流水号

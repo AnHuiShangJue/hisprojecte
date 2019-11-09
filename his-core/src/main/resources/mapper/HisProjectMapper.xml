@@ -519,4 +519,10 @@ from his_project
             #{item}
         </foreach>
     </select>
+
+    <select id="selectByNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+         select his_project.*
+from his_project
+where number =#{number,jdbcType=VARCHAR}
+    </select>
 </mapper>

@@ -873,4 +873,11 @@ public class HisProjectServiceImpl implements HisProjectService {
     public List<HisProject> selectForListForProjectByIds(Long[] ids) throws Exception {
         return CodeHelper.getInstance().setCodeValue(hisProjectMapper.selectForListForProjectByIds(ids));
     }
+
+    //根据项目编号查询项目信息
+    @Override
+    @Transactional(readOnly = true)
+    public HisProject selectByNumber(String number) throws Exception {
+        return CodeHelper.getInstance().setCodeValue(hisProjectMapper.selectByNumber(number));
+    }
 }

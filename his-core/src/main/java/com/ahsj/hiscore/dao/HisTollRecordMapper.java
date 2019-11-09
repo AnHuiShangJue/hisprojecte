@@ -228,4 +228,6 @@ public interface HisTollRecordMapper extends BaseMapper<HisTollRecord> {
     List<String> listNumberByMedicalNumber(String medicalNumber);
 
 
+    ////打印所有在医院产生的费用信息
+    List<HisTollRecordDetails> selectAllInformationByHRNumber(String hrNumber);
 }

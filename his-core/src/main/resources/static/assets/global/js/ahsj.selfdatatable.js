@@ -101,6 +101,53 @@ var AHSJDT = function () {
             });
             return getNums;
         },
+        getUsages: function () {
+            getUsages = [];
+            var i = 0;
+            $('tbody > tr > td  > input[name="usages"]', table).each(function () {
+                getUsages[i] = $(this).val();
+                i++;
+            });
+            return getUsages;
+        },
+
+        getIntervals: function () {
+            getIntervals = [];
+            var i = 0;
+            $('tbody > tr > td  > input[name="intervals"]', table).each(function () {
+                getIntervals[i] = $(this).val();
+                i++;
+            });
+            return getIntervals;
+        },
+
+        getStartTime: function () {
+            getStartTime = [];
+            var i = 0;
+            $('tbody > tr > td  > input[name="startTime"]', table).each(function () {
+                getStartTime[i] = $(this).val();
+                i++;
+            });
+            return getStartTime;
+        },
+        getNumbers: function () {
+            getNumbers = [];
+            var i = 0;
+            $('tbody > tr > td  > input[name="number"]', table).each(function () {
+                getNumbers[i] = $(this).val();
+                i++;
+            });
+            return getNumbers;
+        },
+        getDrugsNumbs: function () {
+            getDrugsNumbs = [];
+            var i = 0;
+            $('tbody > tr > td  > input[name="drugsNumb"]', table).each(function () {
+                getDrugsNumbs[i] = $(this).val();
+                i++;
+            });
+            return getDrugsNumbs;
+        },
 
         hisProjectOrderNums: function () {
             hisProjectOrderNums = [];

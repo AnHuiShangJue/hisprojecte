@@ -209,4 +209,7 @@ public interface HisProjectService {
      *@Time 13:50
     **/
     List<HisProject> selectForListForProjectByIds(Long[] ids)throws Exception;
+
+    //根据项目编号查询项目信息
+    HisProject selectByNumber(String number)throws Exception;
 }

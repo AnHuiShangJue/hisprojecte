@@ -1,11 +1,14 @@
 package com.ahsj.hiscore.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import core.code.CodeValueColumn;
 import core.code.Constants;
 import core.entity.BaseEntity;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class HisTollRecordDetails extends BaseEntity {
   Long id;
@@ -33,6 +36,20 @@ public class HisTollRecordDetails extends BaseEntity {
     BigDecimal depositWarning;
 
     BigDecimal money;
+
+    String name;
+
+    Integer num;
+
+    BigDecimal price;
+
+    BigDecimal total;
+
+    @DateTimeFormat(pattern="MM-dd-yyyy ")
+    @JsonFormat(pattern="MM-dd-yyyy ",timezone = "GMT+8")
+    Date createDate;
+
+
 
     public String getPatientName() {
         return patientName;
@@ -98,5 +115,47 @@ public class HisTollRecordDetails extends BaseEntity {
 
     public void setDepositWarning(BigDecimal depositWarning) {
         this.depositWarning = depositWarning;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(Integer num) {
+        this.num = num;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
+
+    @Override
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    @Override
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }
