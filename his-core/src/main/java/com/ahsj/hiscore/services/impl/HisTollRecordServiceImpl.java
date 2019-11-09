@@ -1023,4 +1023,20 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         hisHospitalManage.setRetrunPrice(sumPrice);*/
         return hisHospitalManage;
     }
+
+
+    /**
+     *@Description 根据就诊编号HHM查询交易流水号
+     *@Params
+     *@return
+     *@Author jin
+     *@Date 2019/11/9
+     *@Time 16:47
+    */
+    @Override
+    @Transactional(readOnly = true)
+    public List<String> listNumberByMedicalNumber(String medicalNumber) throws Exception {
+        return hisTollRecordMapper.listNumberByMedicalNumber(medicalNumber);
+
+    }
 }

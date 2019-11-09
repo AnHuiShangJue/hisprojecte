@@ -45,6 +45,9 @@ public class NurseStationController extends BaseMedicineController {
     @Autowired
     HisInoutTwentyfourHoursService hisInoutTwentyfourHoursService;
 
+    @Autowired
+    HisTollRecordService hisTollRecordService;
+
 
 
     /**
@@ -506,6 +509,25 @@ public class NurseStationController extends BaseMedicineController {
         return modelAndView;
     }
 
+
+    /**
+     *@Description 跳转收费打印页面
+     *@Params
+     *@return
+     *@Author jin
+     *@Date 2019/11/9
+     *@Time 16:34
+    */
+    @RequestMapping(value = "printcharge/print/index.ahsj")
+    public ModelAndView printCharge(String token,String medicalNumber) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/nursestation/print_charge_details.html");
+        modelAndView.addObject("title", "收费打印");
+        modelAndView.addObject("token", token);
+        //根据就诊编号HHM查找交易流水号
+        List<String> list = hisTollRecordService.listNumberByMedicalNumber(medicalNumber);
+        modelAndView.addObject("numbers",list);
+        return modelAndView;
+    }
 
 
 }

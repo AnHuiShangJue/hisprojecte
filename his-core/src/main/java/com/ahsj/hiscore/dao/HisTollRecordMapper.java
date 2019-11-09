@@ -215,4 +215,17 @@ public interface HisTollRecordMapper extends BaseMapper<HisTollRecord> {
     List<HisTollRecord> pharmacyInventoryDetail(PageBean<HisTollRecord> pageBean) throws Exception;
 
 
+
+    /**
+     *@Description 根据就诊编号HHM查询交易流水号
+     *@Params
+     *@return
+     *@Author jin
+     *@Date 2019/11/9
+     *@Time 16:40
+    */
+
+    List<String> listNumberByMedicalNumber(String medicalNumber);
+
+
 }

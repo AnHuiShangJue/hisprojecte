@@ -251,7 +251,8 @@
                                 "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"护理记录(Nursing record)\" onclick='nuserrecord(\"" + row.number + "\");'><i class='material-icons'>assignment</i></a>"+
                                 "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"输液单(Infusion list)\" onclick=\"infusion('"+ row.medicalNumber +"',"+row.patientId+");\"> <i class='material-icons'>healing</i></a>"+
                                 "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"医嘱护嘱记录\" onclick=\"history("+row.patientId+");\"> <i class='material-icons'>assignment</i></a>"+
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看病人收费信息(View patient billing information)\" onclick=\"hosDetail('" + row.number + "'," + row.depositWarning + ");\"><i class='material-icons'>attach_money</i></a>";
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看病人收费信息(View patient billing information)\" onclick=\"hosDetail('" + row.number + "'," + row.depositWarning + ");\"><i class='material-icons'>attach_money</i></a>"+
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"住院费用明细(Hospitalization expenses)\" onclick=\"print('" + row.medicalNumber + "');\"><i class='material-icons'>print</i></a>";
                             // 返回自定义内容
                             return rtnBtn;
                             // 返回自定义内容
@@ -304,6 +305,11 @@
     function hosDetail(medicalNumber,depositWarning) {
         var url = CTX+ "/api/nursestation/hosToll/index.ahsj?token="+TOKEN+"&medicalNumber="+medicalNumber+"&depositWarning="+depositWarning;
         dialog.show(url, "查看住院病人收费情况");
+    }
+
+    function print(medicalNumber) {
+        var url = CTX+ "/api/nursestation/printcharge/print/index.ahsj?token="+TOKEN+"&medicalNumber="+medicalNumber;
+        dialog.showDialog(url, "收费项目打印", "700px", "700px");
     }
 
     function initBtn() {

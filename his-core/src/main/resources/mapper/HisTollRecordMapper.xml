@@ -1047,5 +1047,11 @@ from  his_toll_record as t
         </if>
     </select>
 
+    <!--根据就诊编号HHM查询交易流水号-->
+    <select id="listNumberByMedicalNumber" resultType="string" parameterType="java.lang.String">
+        select number
+        from his_toll_record
+        where medical_record_id = #{medical_record_id ,jdbcType=VARCHAR}
+    </select>
 </mapper>
 
