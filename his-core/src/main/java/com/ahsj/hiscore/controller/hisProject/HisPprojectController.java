@@ -198,7 +198,6 @@ public class HisPprojectController extends BaseController {
     @ResponseBody
     @PostMapping("/updateHisProject.ahsj")
     public Message updateHisProject(HisProject hisProject) throws Exception {
-        hisProject.setUpdateUserId(getUserId());
         Message message = hisProjectService.updateByPrimaryKeySelective(hisProject);
         return message;
     }

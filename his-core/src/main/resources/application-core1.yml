@@ -44,7 +44,7 @@ spring:
   #xjp 添加rabbitmq 配置
   rabbitmq:
     host: 192.168.0.99
-    username: anhuishangjue
+    username:
     password: shangjue0603
     virtual-host: /
     listener:
