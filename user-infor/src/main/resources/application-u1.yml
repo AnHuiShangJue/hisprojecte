@@ -88,7 +88,7 @@ security:
     resource:
       id: eureka-userinfo
       #授权用户信息访问接口，改成走网关层进行处理
-      user-info-uri: http://localhost:7000/user
+      userInfoUri: http://localhost:8003/uaa/user
       prefer-token-info: false
 ribbon:
   ReadTimeout: 120000  # 请求处理的超时时间
