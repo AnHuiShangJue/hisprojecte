@@ -64,12 +64,9 @@
                         <label for="wardId">病房编号<span style="font-size: 12px">(Ward number)</span></label>
                     </div>
                     <div class="input-field col s4 l4 xl4">
-                        <select   name="bedId" id="bedId"
-                                  data-error=".errorTxt4"  th:value="${hisHospitalManage.bedId}">
-                            <div class="errorTxt4"></div>
-                            <option th:value="0"> 选择病床</option>
+                        <input type="hidden" id="mybedId" th:value="${hisHospitalManage.bedId}">
+                        <select   name="bedId" id="bedId">
                         </select>
-
                         <label for="bedId">病床编号<span style="font-size: 12px">(Hospital bed number)</span></label>
                     </div>
                     <div class="input-field col s4 l4 xl4">
@@ -111,6 +108,7 @@ Scripts
 <div th:replace="public/base_update_script :: html"></div>
 <script th:inline="javascript">
     var wardNumber;
+    // var selectNumber = $("#wardId").val();
 
     $("select[name='departmentId']").change(function () {
         getDoctor()
@@ -118,7 +116,7 @@ Scripts
     var wardSel = $("#wardId");
 
     $(document).ready(function() {
-        getDoctor();
+        // getDoctor();
         getNurse();
         getWard();
 
@@ -177,6 +175,8 @@ Scripts
                     if (flag == result[j].id){
                         nurIdSelect.append("<option value='" + result[j].id + "'>" + result[j].number + "</option>");
                         wardNumber = result[j].number;
+                        // console.log(wardNumber);
+                        getBed2(wardNumber);
                     }
                 }
                 $(result).each(function (i) {
@@ -222,7 +222,9 @@ Scripts
 
     var doctorId = docSelect.val();
 
+
     var bedIdSelect = $("#bedId");
+    var flag = $('#mybedId').val();
     wardSel.change(function () {
         if (wardSel.val() == 0) {
             bedIdSelect.empty();
@@ -245,8 +247,62 @@ Scripts
                     "<option value='" + this.id + "'>" + this.number + "</option>")
             });
             bedIdSelect.formSelect();
+/*            if (flag == null || flag == "" ){
+                bedIdSelect.prepend("<option value='0'>选择病房</option>");
+
+                $(result).each(function (i) {
+                    bedIdSelect.append(
+                        "<option value='" + this.id + "'>" + this.number + "</option>")
+                });
+
+            }else {
+                for (var j = 0;j<result.length;++j){
+                    if (flag == result[j].id){
+                        bedIdSelect.append("<option value='" + result[j].id + "'>" + result[j].number + "</option>");
+                    }
+                }
+                $(result).each(function (i) {
+                    bedIdSelect.append("<option value='" + this.id + "'>" + this.number + "</option>")
+                })
+            }*/
+
         })
     }
+
+
+    function getBed2(wardNumber) {
+
+        $.getJSON(CTX + "/api/hisbeds/getBed.ahsj?wardNumber=" + wardNumber + "&token=" + TOKEN, function (result) {
+            console.log(result);
+            bedIdSelect.empty();
+            // $(result).each(function (i) {
+            //     bedIdSelect.append(
+            //         "<option value='" + this.id + "'>" + this.number + "</option>")
+            // });
+            // bedIdSelect.formSelect();
+                        if (flag == null || flag == "" ){
+                            bedIdSelect.prepend("<option value='0'>选择病房</option>");
+
+                            $(result).each(function (i) {
+                                bedIdSelect.append(
+                                    "<option value='" + this.id + "'>" + this.number + "</option>")
+                            });
+
+                        }else {
+                            for (var j = 0;j<result.length;++j){
+                                if (flag == result[j].id){
+                                    bedIdSelect.append("<option value='" + result[j].id + "'>" + result[j].number + "</option>");
+                                }
+                            }
+                            $(result).each(function (i) {
+                                bedIdSelect.append("<option value='" + this.id + "'>" + this.number + "</option>")
+                            })
+                        }
+
+        })
+    }
+
+
 
     $(function () {
         formCheck();
