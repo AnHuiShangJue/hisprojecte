@@ -7,39 +7,7 @@
       data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
 
 <div class="row">
-    <div class="breadcrumbs-inline pt-3 pb-1" id="breadcrumbs-wrapper">
-        <!-- Search for small screen-->
-        <div class="container">
-            <div class="row">
-                <div class="col s10 m6 l6 breadcrumbs-left">
-                    <h5 class="breadcrumbs-title mt-0 mb-0 display-inline hide-on-small-and-down">DataTable</h5>
-                    <ol class="breadcrumbs mb-0">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a>
-                        </li>
-                        <li class="breadcrumb-item"><a href="#">Table</a>
-                        </li>
-                        <li class="breadcrumb-item active">DataTable
-                        </li>
-                    </ol>
-                </div>
-                <div class="col s2 m6 l6"><a
-                        class="btn btn-floating dropdown-settings waves-effect waves-light breadcrumbs-btn right"
-                        href="#!" data-target="dropdown1"><i class="material-icons">expand_more </i><i
-                        class="material-icons right">arrow_drop_down</i></a>
-                    <ul class="dropdown-content" id="dropdown1" tabindex="0">
-                        <li tabindex="0"><a class="grey-text text-darken-2"
-                                            href="user-profile-page.html">Profile<span
-                                class="new badge red">2</span></a></li>
-                        <li tabindex="0"><a class="grey-text text-darken-2" href="app-contacts.html">Contacts</a>
-                        </li>
-                        <li tabindex="0"><a class="grey-text text-darken-2" href="page-faq.html">FAQ</a></li>
-                        <li class="divider" tabindex="-1"></li>
-                        <li tabindex="0"><a class="grey-text text-darken-2" href="user-login.html">Logout</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <div class="col s12 xl12 m12 l12 ">
         <div class="container">
             <div class="row">
@@ -60,7 +28,7 @@
                                             data-delay="50" data-tooltip="打印（Add medical advice）">print</i></a>-->
                                     <a id="createBtn" class="btn waves-effect waves-light red"><i
                                             class="material-icons  white-text tooltipped " data-position="bottom"
-                                            data-delay="50" data-tooltip="新增医嘱88（Add medical advice）">add</i></a>
+                                            data-delay="50" data-tooltip="新增医嘱（Add medical advice）">add</i></a>
                                    <!-- <a id="deleteManyBtn"
                                        class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
                                             class="material-icons white-text tooltipped" data-position="bottom"
@@ -83,10 +51,13 @@
                                 </div>
                             </div>
                             <!--设置医嘱中用药医嘱为一组（病人未出院才可设置）-->
-                            <div class="row" th:if="${isDischarged} eq 1">
+                            <div class="row">
                                 <a id="combinationMedicine" class="btn waves-effect waves-light "><i
                                         class="material-icons  white-text tooltipped " data-position="bottom"
                                         data-delay="50" data-tooltip="组合药品（Combination medicine）">settings_ethernet</i></a>
+                                <a id="saveTemplate" class="btn waves-effect waves-light "><i
+                                        class="material-icons  white-text tooltipped " data-position="bottom"
+                                        data-delay="50" data-tooltip="保存为模板（Save as template）">spellcheck</i></a>
                             </div>
                             <!--Form Advance-->
                             <div class="row">
@@ -171,7 +142,7 @@
                         "data": "number",
                         "name": "number"
                     },*/ {
-                        "title": "医嘱名称/医嘱内容",
+                        "title": "医嘱内容",
                         "data": "name",
                         "name": "name"
                     },
@@ -184,13 +155,9 @@
                         "title": "是否停嘱",
                         "data": "isStopName",
                         "name": "is_stop"
-                    },{
-                        "title": "是否皮试",
-                        "data": "isSkinTestName",
-                        "name": "is_skin_test"
                     },
                     {
-                        "title": "医嘱开始时间",
+                        "title": "开始时间",
                         "data": "startTime",
                         "name": "start_time"
                     },
@@ -215,22 +182,22 @@
                         "name": "intervals"
                     },
                     {
-                        "title": "总量",
+                        "title": "用量",
                         "data": "totalAmount",
                         "name": "total_amount"
                     },
 
-                    {
-                        "title": "校对护士姓名",
-                        "data": "pnName",
-                        "name": ""
-                    },
-
-                    {
-                        "title": "核准护士姓名",
-                        "data": "anName",
-                        "name": ""
-                    },
+                    // {
+                    //     "title": "校对护士姓名",
+                    //     "data": "pnName",
+                    //     "name": ""
+                    // },
+                    //
+                    // {
+                    //     "title": "核准护士姓名",
+                    //     "data": "anName",
+                    //     "name": ""
+                    // },
                     {
                         "title": "停嘱时间",
                         "data": "stopDate",
@@ -242,21 +209,26 @@
                         "name": ""
                     },
 
-                    {
-                        "title": "停嘱校对护士姓名",
-                        "data": "spnName",
-                        "name": ""
-                    },
-
-                    {
-                        "title": "停嘱核准护士姓名",
-                        "data": "sanName",
-                        "name": ""
-                    },
+                    // {
+                    //     "title": "停嘱校对护士姓名",
+                    //     "data": "spnName",
+                    //     "name": ""
+                    // },
+                    //
+                    // {
+                    //     "title": "停嘱核准护士姓名",
+                    //     "data": "sanName",
+                    //     "name": ""
+                    // },
                     {
                         "title": "输液单编号",
                         "data": "infusionNumber",
                         "name": "infusion_number"
+                    },
+                    {
+                        "title": "是否皮试",
+                        "data": "isSkinTestName",
+                        "name": "is_skin_test"
                     },
                     {
                         "title": "操作",
@@ -613,9 +585,10 @@
         });
         //新增按钮
         $("#createBtn").click(function () {
-            var url = CTX +"/api/medicalOrderDetail/update/index.ahsj?token="+TOKEN + "&number=" +$("#number").val()+"&medicalOrderType="+$("#medicalOrderType").val();
+            // var url = CTX +"/api/medicalOrderDetail/update/index.ahsj?token="+TOKEN + "&number=" +$("#number").val()+"&medicalOrderType="+$("#medicalOrderType").val();
+            var url = CTX +"/api/medicalOrderDetail/createOrder/index.ahsj?token="+TOKEN + "&number=" +$("#number").val()+"&medicalOrderType="+$("#medicalOrderType").val();
             dialog.show(url, "添加新医嘱（Add a new order）")
-    });
+    })
         $("#deleteManyBtn").click(function () {
             var ids = grid.getSelectedRows();
             if (ids.length == 0) {
@@ -625,6 +598,8 @@
             deleteInit(ids.join(','));
             grid.search();
         });
+
+
 
         //组合用药医嘱
         $("#combinationMedicine").click(function () {
@@ -665,6 +640,76 @@
                 });
 
             }
+        });
+
+
+        //保存勾选的医嘱为模板
+        $('#saveTemplate').click(function () {
+            var ids = cacheIds;
+            var orderNumber = $("#number").val();
+            layer.open({
+                content:"确定保存为模板（Sure save Template）",
+                btn:['保存为私人模板（Personal Use）','保存为公共模板(All Use)','取消（No）'],
+                yes:function (index,layro) {
+                    $.ahsjajax(CTX + "/api/medicalOrderTemplate/saveForTemlate.ahsj",
+                        //1代表私人模板
+                        {"ids": ids,"orderNumber":orderNumber,"type":1},
+                        function (msg) {
+                            if (msg.success) {
+                                M.toast({
+                                    html: msg.message, completeCallback: function () {
+                                    }
+                                });
+                                grid.search();
+                                layer.closeAll();
+                            } else {
+                                M.toast({
+                                    html: msg.message, completeCallback: function () {
+                                    }
+                                });
+                            }
+                        },
+                        function (data) {
+                            M.toast({
+                                html: "网络异常", completeCallback: function () {
+                                }
+                            });
+                        }
+                    );
+
+                },
+                bth2:function(){
+                    $.ahsjajax(CTX + "/api/medicalOrderTemplate/saveForTemlate.ahsj",
+                        //2代表公共模板
+                        {"ids": ids,"orderNumber":orderNumber,"type":2},
+                        function (msg) {
+                            if (msg.success) {
+                                M.toast({
+                                    html: msg.message, completeCallback: function () {
+                                    }
+                                });
+                                grid.search();
+                                layer.closeAll();
+                            } else {
+                                M.toast({
+                                    html: msg.message, completeCallback: function () {
+                                    }
+                                });
+                            }
+                        },
+                        function (data) {
+                            M.toast({
+                                html: "网络异常", completeCallback: function () {
+                                }
+                            });
+                        }
+                    );
+            },
+                btn3:function(){
+                    layer.closeAll();
+                }
+            })
+
         });
 
 

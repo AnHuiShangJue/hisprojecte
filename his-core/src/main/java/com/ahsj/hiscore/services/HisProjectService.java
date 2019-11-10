@@ -212,4 +212,6 @@ public interface HisProjectService {
 
     //根据项目编号查询项目信息
     HisProject selectByNumber(String number)throws Exception;
+    //模糊查询（or）
+    PageBean<HisProject> listForAll(PageBean<HisProject> pageBean)throws Exception;
 }

@@ -24,8 +24,8 @@ public class HisInfusion extends BaseEntity {
 
     private String usages;
 
-    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "intervals", typeName = "intervalsName")
-    private Integer intervals;
+//    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "intervals", typeName = "intervalsName")
+    private String intervals;
     private String intervalsName;
 
     private String speed;
@@ -149,13 +149,13 @@ public class HisInfusion extends BaseEntity {
         this.usages = usages == null ? null : usages.trim();
     }
 
-    public Integer getIntervals() {
-        return intervals;
-    }
-
-    public void setIntervals(Integer intervals) {
-        this.intervals = intervals;
-    }
+//    public Integer getIntervals() {
+//        return intervals;
+//    }
+//
+//    public void setIntervals(Integer intervals) {
+//        this.intervals = intervals;
+//    }
 
     public String getSpeed() {
         return speed;
@@ -411,7 +411,14 @@ public class HisInfusion extends BaseEntity {
     public void setMedicineId(Long medicineId) {
         this.medicineId = medicineId;
     }
-//    @Override
+
+
+
+    public void setIntervals(String intervals) {
+        this.intervals = intervals;
+    }
+
+    //    @Override
 //    public String toString() {
 //        return "{" +
 //                "id=" + id +

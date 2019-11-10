@@ -402,7 +402,7 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
             hisMedicalOrderDetail.setName(hisPharmacyDetail.getDrugsName() + hisPharmacyDetail.getDrugsSpec());
             hisMedicalOrderDetail.setSpecification(hisPharmacyDetail.getDrugsSpec());
             hisMedicalOrderDetail.setIsSkinTest(1);
-            hisMedicalOrderDetail.setStartTime(new Date());
+            hisMedicalOrderDetail.setStartTime(new Date().toString());
             hisMedicalOrderDetail.setMedicalOrderType(2);
             hisMedicalOrderDetail.setTargetId(hisPharmacyDetail.getId());
             BoolMessage message = (BoolMessage) saveOrUpdate(hisMedicalOrderDetail);
@@ -430,7 +430,7 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
             hisMedicalOrderDetail.setNumber(medicalOrderNumber);
             hisMedicalOrderDetail.setName(hisProject.getName());
             hisMedicalOrderDetail.setIsSkinTest(1);
-            hisMedicalOrderDetail.setStartTime(new Date());
+            hisMedicalOrderDetail.setStartTime(new Date().toString());
             //3代表医嘱为项目医嘱
             hisMedicalOrderDetail.setMedicalOrderType(3);
             hisMedicalOrderDetail.setTargetId(ids[i]);
@@ -688,7 +688,7 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
             //此步设置的是就诊记录编号 "HM" 命名不规范注意
             hisInfusion.setHosptalregistNumber(hisMedicalOrder.getRecordId());
             //输液单起始日期 是医嘱的开始时间还是当前时间
-            hisInfusion.setStartTime(hisMedicalOrderDetail.getStartTime());
+            hisInfusion.setStartTimeVarchar(hisMedicalOrderDetail.getStartTime());
             hisInfusion.setPatientId(hisMedicalOrder.getPatientId());
             hisInfusion.setUsages(hisMedicalOrderDetail.getUsages());
             hisInfusion.setIntervals(hisMedicalOrderDetail.getIntervals());
@@ -964,5 +964,101 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
         }
 
 
+    }
+
+    //保存用药医嘱
+
+    @Override
+    @Transactional(readOnly = false)
+    public Message saveMedicineOrder(String[] drugsNumbs, Integer[] nums, String[] usages, String[] intervals, String[] startTimes, String orderNumber) throws Exception {
+        for (int i = 0; i <drugsNumbs.length ; i++) {
+            if(EmptyUtil.Companion.isNullOrEmpty(usages[i])){
+                usages[i]="";
+            }
+            if(EmptyUtil.Companion.isNullOrEmpty(intervals[i])){
+                intervals[i]="";
+            }
+            if(EmptyUtil.Companion.isNullOrEmpty(startTimes[i])){
+                startTimes[i]="";
+            }
+            HisPharmacyDetail hisPharmacyDetail = hisPharmacyDetailService.selectByDrugsNumb(drugsNumbs[i]);
+            HisMedicalOrderDetail hisMedicalOrderDetail =new HisMedicalOrderDetail();
+            hisMedicalOrderDetail.setNumber(orderNumber);
+            hisMedicalOrderDetail.setName(hisPharmacyDetail.getDrugsName()+"  "+hisPharmacyDetail.getDrugsSpec());
+            hisMedicalOrderDetail.setIsSkinTest(1);
+            hisMedicalOrderDetail.setUsages(usages[i]);
+            hisMedicalOrderDetail.setIntervals(intervals[i]);
+            hisMedicalOrderDetail.setStartTime(startTimes[i]);
+            hisMedicalOrderDetail.setTotalAmount(BigDecimal.valueOf(nums[i]));
+            hisMedicalOrderDetail.setMedicalOrderType(2);
+            hisMedicalOrderDetail.setTargetId(hisPharmacyDetail.getId());
+            hisMedicalOrderDetail.setIsStop(2);
+            //生成对应的用药明细
+            HisMedicationDetails hisMedicationDetails = new HisMedicationDetails();
+            hisMedicationDetails.setMedicationId(hisPharmacyDetail.getId());
+            hisMedicationDetails.setDescription(usages[i]);
+            hisMedicationDetails.setIsPay(2);
+            hisMedicationDetails.setIsBack(2);
+            hisMedicationDetails.setIsDel(2);
+            hisMedicationDetails.setIsOut(2);
+            hisMedicationDetails.setCount(nums[i]);
+            hisMedicationDetails.setDrugsNumb(hisPharmacyDetail.getDrugsNumb());
+            hisMedicationDetails.setDrugsName(hisPharmacyDetail.getDrugsName());
+            hisMedicationDetails.setDrugsAlias(hisPharmacyDetail.getDrugsAlias());
+            hisMedicationDetails.setDrugsSpec(hisPharmacyDetail.getDrugsSpec());
+            hisMedicationDetails.setTotalPrice(BigDecimal.valueOf(nums[i]).multiply(hisPharmacyDetail.getSalePrice()));
+
+            HisMedicalOrder hisMedicalOrder = hisMedicalOrderService.selectByNumber(orderNumber);
+            HisMedicalRecord hisMedicalRecord = hisMedicalRecordService.selectByMedicalRecordId(hisMedicalOrder.getRecordId());
+            hisMedicationDetails.setMedicalRecordId(hisMedicalRecord.getId());
+            hisMedicationDetailsService.insert(hisMedicationDetails);
+            hisMedicalOrderDetail.setCorrespondId(hisMedicationDetails.getId());
+            saveOrUpdate(hisMedicalOrderDetail);
+        }
+        return MessageUtil.createMessage(true, "新增成功（Add Success）");
+    }
+
+    //保存项目医嘱
+
+    @Override
+    @Transactional(readOnly = false)
+    public Message saveProjectOrder(String[] numbers, Integer[] nums, String[] startTimes, String orderNumber) throws Exception {
+        for (int i = 0; i <numbers.length ; i++) {
+            if(EmptyUtil.Companion.isNullOrEmpty(startTimes[i])){
+                startTimes[i]="";
+            }
+            HisProject hisProject = hisProjectService.selectByNumber(numbers[i]);
+            HisMedicalOrderDetail hisMedicalOrderDetail =new HisMedicalOrderDetail();
+            hisMedicalOrderDetail.setNumber(orderNumber);
+            hisMedicalOrderDetail.setName(hisProject.getName());
+            hisMedicalOrderDetail.setIsSkinTest(1);
+            hisMedicalOrderDetail.setStartTime(startTimes[i]);
+            hisMedicalOrderDetail.setTotalAmount(BigDecimal.valueOf(nums[i]));
+            hisMedicalOrderDetail.setMedicalOrderType(3);
+            hisMedicalOrderDetail.setTargetId(hisProject.getId());
+            hisMedicalOrderDetail.setIsStop(2);
+            //生成对应的用药明细
+            HisRecordProject hisRecordProject = new HisRecordProject();
+            hisRecordProject.setProjectId(hisProject.getId());
+            hisRecordProject.setIsPayed((short)2);
+            hisRecordProject.setIsBack(2);
+            hisRecordProject.setIsChecked((short)2);
+            hisRecordProject.setNum(nums[i]);
+            hisRecordProject.setName(hisProject.getName());
+            hisRecordProject.setNumber(hisProject.getNumber());
+            hisRecordProject.setDescription(hisProject.getDescription());
+            hisRecordProject.setType(hisProject.getType());
+            hisRecordProject.setPrice(hisProject.getPrice());
+            hisRecordProject.setPinyinCode(hisProject.getPinyinCode());
+            hisRecordProject.setUnit(hisProject.getUnit());
+
+            HisMedicalOrder hisMedicalOrder = hisMedicalOrderService.selectByNumber(orderNumber);
+            HisMedicalRecord hisMedicalRecord = hisMedicalRecordService.selectByMedicalRecordId(hisMedicalOrder.getRecordId());
+            hisRecordProject.setRecordId(hisMedicalRecord.getId());
+            hisRecordProjectService.insert(hisRecordProject);
+            hisMedicalOrderDetail.setCorrespondId(hisRecordProject.getId());
+            saveOrUpdate(hisMedicalOrderDetail);
+        }
+        return MessageUtil.createMessage(true, "新增成功（Add Success）");
     }
 }

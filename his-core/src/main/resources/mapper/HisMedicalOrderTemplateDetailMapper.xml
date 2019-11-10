@@ -14,7 +14,7 @@
     <result column="dosage" property="dosage" jdbcType="VARCHAR" />
     <result column="total_amount" property="totalAmount" jdbcType="DOUBLE" />
     <result column="remarks" property="remarks" jdbcType="VARCHAR" />
-    <result column="intervals" property="intervals" jdbcType="INTEGER" />
+    <result column="intervals" property="intervals" jdbcType="VARCHAR" />
     <result column="proofreading_nurse_id" property="proofreadingNurseId" jdbcType="BIGINT" />
     <result column="approved_nurse_id" property="approvedNurseId" jdbcType="BIGINT" />
     <result column="is_stop" property="isStop" jdbcType="INTEGER" />
@@ -57,7 +57,7 @@
       #{orderNum,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{isSkinTest,jdbcType=INTEGER}, 
       #{specification,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{usages,jdbcType=VARCHAR}, 
       #{dosage,jdbcType=VARCHAR}, #{totalAmount,jdbcType=DOUBLE}, #{remarks,jdbcType=VARCHAR}, 
-      #{intervals,jdbcType=INTEGER}, #{proofreadingNurseId,jdbcType=BIGINT}, #{approvedNurseId,jdbcType=BIGINT}, 
+      #{intervals,jdbcType=VARCHAR}, #{proofreadingNurseId,jdbcType=BIGINT}, #{approvedNurseId,jdbcType=BIGINT},
       #{isStop,jdbcType=INTEGER}, #{stopDate,jdbcType=TIMESTAMP}, #{stopUserId,jdbcType=BIGINT}, 
       #{stopPrfingNurseId,jdbcType=BIGINT}, #{stopApdNurseId,jdbcType=BIGINT}, #{createUserId,jdbcType=BIGINT}, 
       #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}
@@ -177,7 +177,7 @@
         #{remarks,jdbcType=VARCHAR},
       </if>
       <if test="intervals != null" >
-        #{intervals,jdbcType=INTEGER},
+        #{intervals,jdbcType=VARCHAR},
       </if>
       <if test="proofreadingNurseId != null" >
         #{proofreadingNurseId,jdbcType=BIGINT},
@@ -251,7 +251,7 @@
         remarks = #{remarks,jdbcType=VARCHAR},
       </if>
       <if test="intervals != null" >
-        intervals = #{intervals,jdbcType=INTEGER},
+        intervals = #{intervals,jdbcType=VARCHAR},
       </if>
       <if test="proofreadingNurseId != null" >
         proofreading_nurse_id = #{proofreadingNurseId,jdbcType=BIGINT},
@@ -302,7 +302,7 @@
       dosage = #{dosage,jdbcType=VARCHAR},
       total_amount = #{totalAmount,jdbcType=DOUBLE},
       remarks = #{remarks,jdbcType=VARCHAR},
-      intervals = #{intervals,jdbcType=INTEGER},
+      intervals = #{intervals,jdbcType=VARCHAR},
       proofreading_nurse_id = #{proofreadingNurseId,jdbcType=BIGINT},
       approved_nurse_id = #{approvedNurseId,jdbcType=BIGINT},
       is_stop = #{isStop,jdbcType=INTEGER},
@@ -365,7 +365,7 @@ order by order_num desc
       #{item.orderNum,jdbcType=INTEGER}, #{item.name,jdbcType=VARCHAR}, #{item.isSkinTest,jdbcType=INTEGER},
       #{item.specification,jdbcType=VARCHAR}, #{item.unit,jdbcType=VARCHAR}, #{item.usages,jdbcType=VARCHAR},
       #{item.dosage,jdbcType=VARCHAR}, #{item.totalAmount,jdbcType=DOUBLE}, #{item.remarks,jdbcType=VARCHAR},
-      #{item.intervals,jdbcType=INTEGER}, #{item.proofreadingNurseId,jdbcType=BIGINT}, #{item.approvedNurseId,jdbcType=BIGINT},
+      #{item.intervals,jdbcType=VARCHAR}, #{item.proofreadingNurseId,jdbcType=BIGINT}, #{item.approvedNurseId,jdbcType=BIGINT},
       #{item.isStop,jdbcType=INTEGER}, #{item.stopDate,jdbcType=TIMESTAMP}, #{item.stopUserId,jdbcType=BIGINT},
       #{item.stopPrfingNurseId,jdbcType=BIGINT}, #{item.stopApdNurseId,jdbcType=BIGINT}, #{item.createUserId,jdbcType=BIGINT},
       #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=BIGINT}, #{item.updateDate,jdbcType=TIMESTAMP}

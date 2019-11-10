@@ -171,6 +171,16 @@ public class HisPprojectController extends BaseController {
         return hisProjectPageBean;
     }
 
+    //模糊查询（or）
+    @ResponseBody
+    @RequestMapping("/listForAll.ahsj")
+    public PageBean<HisProject> listForAll(HisProject hisProject) throws Exception {
+        PageBean<HisProject> pageBean = new PageBean<>();
+        pageBean.setParameter(hisProject);
+        PageBean<HisProject> hisProjectPageBean = hisProjectService.listForAll(pageBean);
+        return hisProjectPageBean;
+    }
+
 
     /**
      * @return core.message.Message

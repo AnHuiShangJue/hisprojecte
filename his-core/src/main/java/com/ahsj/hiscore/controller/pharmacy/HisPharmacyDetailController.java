@@ -79,6 +79,15 @@ public class HisPharmacyDetailController extends BaseMedicineController {
         return hisPharmacyDetailService.list(pharmacyDetailPageBean);
     }
 
+    //模糊查询（or）
+    @ResponseBody
+    @RequestMapping(value = "listForAll.ahsj", method = {RequestMethod.GET, RequestMethod.POST})
+    public PageBean<HisPharmacyDetail> listForAll(Map<String, Object> model, HttpServletRequest request, HisPharmacyDetail hisPharmacyDetail) throws Exception {
+        PageBean<HisPharmacyDetail> pharmacyDetailPageBean = new PageBean<HisPharmacyDetail>();
+        pharmacyDetailPageBean.setParameter(hisPharmacyDetail);
+        return hisPharmacyDetailService.listForAll(pharmacyDetailPageBean);
+    }
+
 
     /**
      * @return org.springframework.web.servlet.ModelAndView

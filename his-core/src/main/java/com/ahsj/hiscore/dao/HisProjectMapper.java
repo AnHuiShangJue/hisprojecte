@@ -240,4 +240,7 @@ public interface HisProjectMapper extends BaseMapper<HisProject> {
 
 
     HisProject selectByNumber(String number);
+
+    //模糊查询（or）
+    List<? extends HisProject> listForAll(PageBean<HisProject> pageBean);
 }

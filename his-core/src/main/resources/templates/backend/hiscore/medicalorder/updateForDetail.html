@@ -31,28 +31,29 @@
                         </div>
                         <div class="input-field col s4 l4 xl4">
                             <input id="name" name="name" type="text" th:value="${hisMedicalOrderDetail.name}"/>
-                            <label for="name">医嘱名称/医嘱内容<span style="font-size: 12px">(Medical name/Medical content
+                            <label for="name">医嘱内容<span style="font-size: 12px">(Medical name/Medical content
 )</span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4 jeinpbox" >
-                            <input id="startTime" class="jeinput" name="startTime" type="text" data-error=".errorTxt1" autocomplete="off"
-                                   th:placeholder="${#dates.format(hisMedicalOrderDetail.startTime, 'yyyy-MM-dd HH:mm:ss')}"
-                                   th:value="${#dates.format(hisMedicalOrderDetail.startTime, 'yyyy-MM-dd HH:mm:ss')}"/>
-                            <div class="errorTxt1"></div>
+                            <!--<input id="startTime" class="jeinput" name="startTime" type="text" data-error=".errorTxt1" autocomplete="off"-->
+                                   <!--th:placeholder="${#dates.format(hisMedicalOrderDetail.startTime, 'yyyy-MM-dd HH:mm:ss')}"-->
+                                   <!--th:value="${#dates.format(hisMedicalOrderDetail.startTime, 'yyyy-MM-dd HH:mm:ss')}"/>-->
+                            <!--<div class="errorTxt1"></div>-->
+                            <input id="startTime" type="text" name="startTime" th:value="${hisMedicalOrderDetail.startTime}">
                             <label for="startTime">医嘱开始时间<span style="font-size: 12px">(Recording time)</span></label>
                         </div>
-                        <div class="input-field col s4 l4 xl4" th:if="${hisMedicalOrderDetail.isSkinTest} ne null">
-                            <select ahsj:select name="isSkinTest" id="isSkinTest" type="code" typeKey="is_skin_test"
-                                    th:value="${hisMedicalOrderDetail.isSkinTest}" >
-                            </select>
-                            <label for="isSkinTest">是否皮试<span style="font-size: 12px">(Whether skin test
-)</span></label>
-                        </div>
+                        <!--<div class="input-field col s4 l4 xl4" th:if="${hisMedicalOrderDetail.isSkinTest} ne null">-->
+                            <!--<select ahsj:select name="isSkinTest" id="isSkinTest" type="code" typeKey="is_skin_test"-->
+                                    <!--th:value="${hisMedicalOrderDetail.isSkinTest}" >-->
+                            <!--</select>-->
+                            <!--<label for="isSkinTest">是否皮试<span style="font-size: 12px">(Whether skin test-->
+<!--)</span></label>-->
+                        <!--</div>-->
                         <div class="input-field col s4 l4 xl4" th:if="${hisMedicalOrderDetail.isSkinTest} eq null">
                             <select ahsj:select name="isSkinTest" id="isSkinTest" type="code" typeKey="is_skin_test"
                                     th:value="${1}" >
                             </select>
-                            <label for="isSkinTest">是否皮试<span style="font-size: 12px">(Whether skin test
+                            <label for="isSkinTest">是否需要皮试<span style="font-size: 12px">(Whether skin test
 )</span></label>
                         </div>
 
@@ -63,9 +64,11 @@
 )</span></label>
                         </div>
                         <div class="input-field col s4 l4 xl4">
-                            <select ahsj:select name="intervals" id="intervals" type="code" typeKey="intervals"
+                            <!--<select ahsj:select name="intervals" id="intervals" type="code" typeKey="intervals"-->
+                                    <!--th:value="${hisMedicalOrderDetail.intervals}">-->
+                            <!--</select>-->
+                            <input  name="intervals" id="intervals" type="text"
                                     th:value="${hisMedicalOrderDetail.intervals}">
-                            </select>
                             <label for="intervals">间隔<span style="font-size: 12px">(Interval
 )</span></label>
                         </div>
@@ -74,16 +77,16 @@
                                    th:value="${hisMedicalOrderDetail.totalAmount}"
                                    data-error=".errorTxt1">
                             <div class="errorTxt1"></div>
-                            <label for="totalAmount">用量(默认值为1)<span style="font-size: 12px">(Dosage（The default is 1）
+                            <label for="totalAmount">用量<span style="font-size: 12px">(Dosage（The default is 1）
 )</span></label>
                         </div>
-
+<!--
                         <div class="input-field col s4 l4 xl4" th:if="${hisMedicalOrderDetail.id} eq null">
                             <input id="orderNum" name="orderNum" type="number"
                                    th:value="${hisMedicalOrderDetail.orderNum}"/>
                             <label for="orderNum">序号(如非序号有误，请勿填写)<span style="font-size: 12px">(Serial number (Do not fill in normal)
 )</span></label>
-                        </div>
+                        </div>-->
                     </div>
                     <div class="row"> <!--th:if="${hisMedicalOrderDetail.isFirstEdit} eq 1"-->
                         <div class="input-field col s12" >
@@ -110,30 +113,30 @@
 <script th:inline="javascript">
 
     $(function () {
-        var enLang = {
-            name: "en",
-            month: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
-            weeks: ["SUN", "MON", "TUR", "WED", "THU", "FRI", "SAT"],
-            times: ["Hour", "Minute", "Second"],
-            timetxt: ["Time", "Start Time", "End Time"],
-            backtxt: "Back",
-            clear: "Clear",
-            today: "Now",
-            yes: "Confirm",
-            close: "Close"
-        };
-
-        jeDate("#startTime", {
-            theme: {bgcolor: "#00A1CB", pnColor: "#00CCFF"},
-            minDate: "1900-01-01",              //最小日期
-            maxDate: "2099-12-31",              //最大日期
-            method: {
-                choose: function (params) {
-
-                }
-            },
-            format: "YYYY-MM-DD hh:mm:00"
-        });
+        // var enLang = {
+        //     name: "en",
+        //     month: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
+        //     weeks: ["SUN", "MON", "TUR", "WED", "THU", "FRI", "SAT"],
+        //     times: ["Hour", "Minute", "Second"],
+        //     timetxt: ["Time", "Start Time", "End Time"],
+        //     backtxt: "Back",
+        //     clear: "Clear",
+        //     today: "Now",
+        //     yes: "Confirm",
+        //     close: "Close"
+        // };
+        //
+        // jeDate("#startTime", {
+        //     theme: {bgcolor: "#00A1CB", pnColor: "#00CCFF"},
+        //     minDate: "1900-01-01",              //最小日期
+        //     maxDate: "2099-12-31",              //最大日期
+        //     method: {
+        //         choose: function (params) {
+        //
+        //         }
+        //     },
+        //     format: "YYYY-MM-DD hh:mm:00"
+        // });
         formCheck();
     });
     $(document).ready(function () {

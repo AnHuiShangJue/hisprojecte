@@ -8,7 +8,7 @@
     <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
     <result column="patient_id" jdbcType="BIGINT" property="patientId" />
     <result column="usages" jdbcType="VARCHAR" property="usages" />
-    <result column="intervals" jdbcType="INTEGER" property="intervals" />
+    <result column="intervals" jdbcType="VARCHAR" property="intervals" />
     <result column="speed" jdbcType="VARCHAR" property="speed" />
     <result column="duration" jdbcType="VARCHAR" property="duration" />
     <result column="drugs_numb" jdbcType="VARCHAR" property="drugsNumb" />
@@ -59,7 +59,7 @@
       project_id, nurse_id,medication_id,start_time_varchar)
     values (#{id,jdbcType=BIGINT}, #{recordId,jdbcType=VARCHAR}, #{hosptalregistNumber,jdbcType=VARCHAR},
       #{startTime,jdbcType=TIMESTAMP}, #{patientId,jdbcType=BIGINT}, #{usages,jdbcType=VARCHAR},
-      #{intervals,jdbcType=INTEGER}, #{speed,jdbcType=VARCHAR}, #{duration,jdbcType=VARCHAR},
+      #{intervals,jdbcType=VARCHAR}, #{speed,jdbcType=VARCHAR}, #{duration,jdbcType=VARCHAR},
       #{drugsNumb,jdbcType=VARCHAR}, #{drugname,jdbcType=VARCHAR}, #{singleDose,jdbcType=INTEGER},
       #{singleUnit,jdbcType=VARCHAR}, #{isSkinTest,jdbcType=INTEGER}, #{dosage,jdbcType=VARCHAR},
       #{unit,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{createUserId,jdbcType=BIGINT},
@@ -175,7 +175,7 @@
         #{usages,jdbcType=VARCHAR},
       </if>
       <if test="intervals != null">
-        #{intervals,jdbcType=INTEGER},
+        #{intervals,jdbcType=VARCHAR},
       </if>
       <if test="speed != null">
         #{speed,jdbcType=VARCHAR},
@@ -262,7 +262,7 @@
         usages = #{usages,jdbcType=VARCHAR},
       </if>
       <if test="intervals != null">
-        intervals = #{intervals,jdbcType=INTEGER},
+        intervals = #{intervals,jdbcType=VARCHAR},
       </if>
       <if test="speed != null">
         speed = #{speed,jdbcType=VARCHAR},
@@ -337,7 +337,7 @@
       start_time = #{startTime,jdbcType=TIMESTAMP},
       patient_id = #{patientId,jdbcType=BIGINT},
       usages = #{usages,jdbcType=VARCHAR},
-      intervals = #{intervals,jdbcType=INTEGER},
+      intervals = #{intervals,jdbcType=VARCHAR},
       speed = #{speed,jdbcType=VARCHAR},
       duration = #{duration,jdbcType=VARCHAR},
       drugs_numb = #{drugsNumb,jdbcType=VARCHAR},
@@ -376,7 +376,7 @@
     <foreach collection="list" item="item" index="index" separator=",">
       (#{item.id,jdbcType=BIGINT}, #{item.recordId,jdbcType=VARCHAR}, #{item.hosptalregistNumber,jdbcType=VARCHAR},
       #{item.startTime,jdbcType=TIMESTAMP}, #{item.patientId,jdbcType=BIGINT}, #{item.usages,jdbcType=VARCHAR},
-      #{item.intervals,jdbcType=INTEGER}, #{item.speed,jdbcType=VARCHAR}, #{item.duration,jdbcType=VARCHAR},
+      #{item.intervals,jdbcType=VARCHAR}, #{item.speed,jdbcType=VARCHAR}, #{item.duration,jdbcType=VARCHAR},
       #{item.drugsNumb,jdbcType=VARCHAR}, #{item.drugname,jdbcType=VARCHAR}, #{item.singleDose,jdbcType=INTEGER},
       #{item.singleUnit,jdbcType=VARCHAR}, #{item.isSkinTest,jdbcType=INTEGER}, #{item.dosage,jdbcType=VARCHAR},
       #{item.unit,jdbcType=VARCHAR}, #{item.price,jdbcType=DECIMAL}, #{item.createUserId,jdbcType=BIGINT},

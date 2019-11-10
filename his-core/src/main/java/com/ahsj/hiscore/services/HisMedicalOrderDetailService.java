@@ -148,4 +148,12 @@ public interface HisMedicalOrderDetailService {
      *@Time 23:44
     **/
     void createChargeDetailsForMedicalOrder()throws Exception;
+
+    //保存用药医嘱
+    Message saveMedicineOrder(String[] drugsNumbs, Integer[] nums, String[] usages, String[] intervals, String[] startTimes, String orderNumber)throws Exception;
+
+    //保存项目医嘱
+    Message saveProjectOrder(String[] numbers, Integer[] nums, String[] startTimes, String orderNumber)throws Exception;
+
+
 }

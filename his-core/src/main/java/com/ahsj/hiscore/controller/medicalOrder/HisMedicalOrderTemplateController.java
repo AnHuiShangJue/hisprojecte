@@ -131,4 +131,13 @@ public class HisMedicalOrderTemplateController extends BaseController {
         List<HisMedicalOrderTemplate> hisMedicalOrderTemplates = hisMedicalOrderTemplateService.selectTemplate(createUserId);
         return  hisMedicalOrderTemplates;
     }
+
+
+    @RequestMapping(value = "saveForTemlate.ahsj", method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    Message  saveForTemlate(String token,Long[] ids,String orderNumber,Integer type)throws Exception{
+//            hisMedicalOrderTemplateService.saveForTemlate(ids,orderNumber)
+        return MessageUtil.createMessage(false, "开发中");
+    }
+
 }

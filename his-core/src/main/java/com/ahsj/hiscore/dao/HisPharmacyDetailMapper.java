@@ -194,4 +194,7 @@ public interface HisPharmacyDetailMapper extends BaseMapper<HisPharmacyDetail> {
      *@Time 14:58
     **/
     List<HisPharmacyDetail> selectForListForMedicationByIds(Long[] ids);
+
+    //模糊查询（or）
+    List<? extends HisPharmacyDetail> listForAll(PageBean<HisPharmacyDetail> pharmacyDetailPageBean);
 }

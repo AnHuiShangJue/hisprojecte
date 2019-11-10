@@ -172,7 +172,7 @@ public class HisInfusionController extends BaseController {
             , @RequestParam(value="units", required=false) String[] units   //单位
             , @RequestParam(value="usages", required=false) String usages  //用法
             , @RequestParam(value="duration", required=false) String duration  //持续时间
-            , @RequestParam(value="intervals", required=false) Integer intervals  //间隔
+            , @RequestParam(value="intervals", required=false) String intervals  //间隔
             , @RequestParam(value="dosages", required=false) String dosages   //总用量
             , @RequestParam(value="isSkinTest", required=false) Integer isSkinTest   //总用量
             , @RequestParam(value="nurseId", required=false) Long nurseId //护士id

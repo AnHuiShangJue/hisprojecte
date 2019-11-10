@@ -989,4 +989,11 @@ public class HisPharmacyDetailServicelmpl implements HisPharmacyDetailService {
 
         return null;
     }
+    //模糊查询（or）
+    @Override
+    @Transactional(readOnly = true)
+    public PageBean<HisPharmacyDetail> listForAll(PageBean<HisPharmacyDetail> pharmacyDetailPageBean) throws Exception {
+        pharmacyDetailPageBean.setData(CodeHelper.getInstance().setCodeValue(hisPharmacyDetailMapper.listForAll(pharmacyDetailPageBean)));
+        return pharmacyDetailPageBean;
+    }
 }

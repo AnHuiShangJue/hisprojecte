@@ -880,4 +880,13 @@ public class HisProjectServiceImpl implements HisProjectService {
     public HisProject selectByNumber(String number) throws Exception {
         return CodeHelper.getInstance().setCodeValue(hisProjectMapper.selectByNumber(number));
     }
+
+    //模糊查询（or）
+
+    @Override
+    @Transactional(readOnly = true)
+    public PageBean<HisProject> listForAll(PageBean<HisProject> pageBean) throws Exception {
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisProjectMapper.listForAll(pageBean)));
+        return pageBean;
+    }
 }

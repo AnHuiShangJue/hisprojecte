@@ -263,6 +263,20 @@
             order by ${parameter.orders}
         </if>
     </select>
+
+
+    <select id="listForAll" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
+        select
+        his_project.*
+        from his_project
+        <if test="parameter.name != null and parameter.name != ''">
+            where name like concat('%', #{parameter.name,jdbcType=INTEGER},'%')
+            or pinyin_code like concat('%', #{parameter.name,jdbcType=INTEGER},'%')
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
     <select id="queryListAll" resultMap="BaseResultMap" parameterType="com.ahsj.hiscore.entity.HisProject">
         select
         p.* ,o.name as dept_name

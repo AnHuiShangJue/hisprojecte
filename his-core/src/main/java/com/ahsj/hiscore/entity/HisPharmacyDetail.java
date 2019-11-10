@@ -148,6 +148,8 @@ public class HisPharmacyDetail extends BaseEntity {
 
     private String deptName;
 
+    private String all;
+
     public Long getDepartmentId() {
         return departmentId;
     }
@@ -587,5 +589,13 @@ public class HisPharmacyDetail extends BaseEntity {
 
     public void setIsObtainedId(Long isObtainedId) {
         this.isObtainedId = isObtainedId;
+    }
+
+    public String getAll() {
+        return all;
+    }
+
+    public void setAll(String all) {
+        this.all = all;
     }
 }

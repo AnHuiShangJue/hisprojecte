@@ -28,8 +28,8 @@ public class HisMedicalOrderDetail extends BaseEntity {
 
     private String dosage;
 
-    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "intervals", typeName = "intervalsName")
-    private Integer intervals;
+//    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "intervals", typeName = "intervalsName")
+    private String intervals;
     private String intervalsName;
 
     private Long proofreadingNurseId;
@@ -77,9 +77,9 @@ public class HisMedicalOrderDetail extends BaseEntity {
 
     private String content;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    private Date startTime;
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
+//    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    private String startTime;
 
     private Long targetId;
     //1代表是第一次编辑 可以进行编辑  其他代表不可以 无需设置字典
@@ -404,13 +404,13 @@ public class HisMedicalOrderDetail extends BaseEntity {
         this.usages = usages;
     }
 
-    public Integer getIntervals() {
-        return intervals;
-    }
-
-    public void setIntervals(Integer intervals) {
-        this.intervals = intervals;
-    }
+//    public Integer getIntervals() {
+//        return intervals;
+//    }
+//
+//    public void setIntervals(Integer intervals) {
+//        this.intervals = intervals;
+//    }
 
     public String getIntervalsName() {
         return intervalsName;
@@ -444,13 +444,13 @@ public class HisMedicalOrderDetail extends BaseEntity {
         this.content = content;
     }
 
-    public Date getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
+//    public Date getStartTime() {
+//        return startTime;
+//    }
+//
+//    public void setStartTime(Date startTime) {
+//        this.startTime = startTime;
+//    }
 
     public Long getTargetId() {
         return targetId;
@@ -522,6 +522,22 @@ public class HisMedicalOrderDetail extends BaseEntity {
 
     public void setRemarkSign(String remarkSign) {
         this.remarkSign = remarkSign;
+    }
+
+    public String getIntervals() {
+        return intervals;
+    }
+
+    public void setIntervals(String intervals) {
+        this.intervals = intervals;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
     @Override

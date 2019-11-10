@@ -231,4 +231,7 @@ public interface HisPharmacyDetailService {
      *@Time 23:47
     **/
     Message addCombinationMedicine(Long[] ids)throws Exception;
+
+    //模糊查询（or）
+    PageBean<HisPharmacyDetail> listForAll(PageBean<HisPharmacyDetail> pharmacyDetailPageBean)throws Exception;
 }

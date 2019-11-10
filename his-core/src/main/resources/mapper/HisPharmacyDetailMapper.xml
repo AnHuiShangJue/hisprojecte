@@ -518,6 +518,20 @@
         </if>
     </select>
 
+    <select id="listForAll" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        SELECT
+        his_pharmacy_detail.*
+        FROM
+        his_pharmacy_detail
+        <if test="parameter.drugsName !=null  and parameter.drugsName != ''">
+            where drugs_name like concat('%' #{parameter.drugsName,jdbcType=VARCHAR},'%')
+            or drugs_alias like concat('%' #{parameter.drugsName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
 
     <select id="listForMedication" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
         SELECT

@@ -143,7 +143,7 @@ public class HisMedicalOrderDetailController extends BaseController {
     }
 
     /**
-     *@Description 新增或修改
+     *@Description 跳转开医嘱界面
      *@Params [hisDoctorInfo, token]
      *@return org.springframework.web.servlet.ModelAndView
      *@Author zhushixiang
@@ -193,6 +193,35 @@ public class HisMedicalOrderDetailController extends BaseController {
         modelAndView.addObject("token", token);
         return modelAndView;
     }
+
+    /**
+     *@Description 跳转开医嘱界面
+     *@Params [hisDoctorInfo, token]
+     *@return org.springframework.web.servlet.ModelAndView
+     *@Author zhushixiang
+     *@Date 2019-11-09
+     *@Time 17:32
+     **/
+    @RequestMapping("/createOrder/index.ahsj")
+    ModelAndView createOrder(HisMedicalOrderDetail hisMedicalOrderDetail, String token)throws Exception{
+        UserInfo userLoginId = iUserService.getUserLoginId(getUserId());
+        ModelAndView modelAndView = new ModelAndView();
+        if(hisMedicalOrderDetail.getMedicalOrderType() == 1){
+            modelAndView.setViewName("backend/hiscore/medicalorder/updateForDetail");
+            modelAndView.addObject("departmentId", userLoginId.getDeptId());
+            modelAndView.addObject("title","添加普通医嘱（Add general advice）");
+        }else if(hisMedicalOrderDetail.getMedicalOrderType() == 2){
+            modelAndView.setViewName("backend/hiscore/medicalorder/creatMedicineOrder");
+        }else if(hisMedicalOrderDetail.getMedicalOrderType() == 3){
+            modelAndView.setViewName("backend/hiscore/medicalorder/creatProjectOrder");
+        }
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("hisMedicalOrderDetail",hisMedicalOrderDetail);
+        modelAndView.addObject("orderNumber", hisMedicalOrderDetail.getNumber());
+        return modelAndView;
+    }
+
+
 
     /**
      *@Description 临时医嘱
@@ -504,6 +533,51 @@ public class HisMedicalOrderDetailController extends BaseController {
         if(null != request.getParameter("ids")){
             return  hisMedicalOrderDetailService.addCombinationMedicine(ids);
         }else  return MessageUtil.createMessage(false,"参数异常(Abnormal parameter)");
+    }
+
+
+
+
+    /**
+     *@Description 保存用药医嘱
+     *@Params [model, request, id]
+     *@return core.message.Message
+     *@Author zhushixiang
+     *@Date 2019-11-09
+     *@Time 18:18
+     **/
+    @RequestMapping(value = "saveMedicineOrder.ahsj")
+    @ResponseBody
+    //传来的ID为医嘱明细ID
+    public Message saveMedicineOrder (Map<String, Object> model, HttpServletRequest request
+            , @RequestParam(value="drugsNumbs", required=false) String[] drugsNumbs
+            , @RequestParam(value="nums", required=false) Integer[] nums
+            , @RequestParam(value="usages", required=false) String[] usages
+            , @RequestParam(value="intervals", required=false) String[] intervals
+            , @RequestParam(value="startTimes", required=false) String[] startTimes
+            , @RequestParam(value="orderNumber", required=false) String orderNumber
+    ) throws Exception {
+        return hisMedicalOrderDetailService.saveMedicineOrder(drugsNumbs,nums,usages,intervals,startTimes,orderNumber);
+    }
+
+    /**
+     *@Description 保存项目医嘱
+     *@Params [model, request, id]
+     *@return core.message.Message
+     *@Author zhushixiang
+     *@Date 2019-11-09
+     *@Time 18:18
+     **/
+    @RequestMapping(value = "saveProjectOrder.ahsj")
+    @ResponseBody
+    //传来的ID为医嘱明细ID
+    public Message saveProjectOrder (Map<String, Object> model, HttpServletRequest request
+            , @RequestParam(value="numbers", required=false) String[] numbers
+            , @RequestParam(value="nums", required=false) Integer[] nums
+            , @RequestParam(value="startTimes", required=false) String[] startTimes
+            , @RequestParam(value="orderNumber", required=false) String orderNumber
+    ) throws Exception {
+        return hisMedicalOrderDetailService.saveProjectOrder(numbers,nums,startTimes,orderNumber);
     }
 
 }

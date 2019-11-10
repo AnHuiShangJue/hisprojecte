@@ -10,7 +10,7 @@
     <result column="unit" property="unit" jdbcType="VARCHAR" />
     <result column="usages" property="usages" jdbcType="VARCHAR" />
     <result column="dosage" property="dosage" jdbcType="VARCHAR" />
-    <result column="intervals" property="intervals" jdbcType="INTEGER" />
+    <result column="intervals" property="intervals" jdbcType="VARCHAR" />
     <result column="proofreading_nurse_id" property="proofreadingNurseId" jdbcType="BIGINT" />
     <result column="approved_nurse_id" property="approvedNurseId" jdbcType="BIGINT" />
     <result column="stop_date" property="stopDate" jdbcType="VARCHAR" />
@@ -28,7 +28,7 @@
     <result column="is_approved" property="isApproved" jdbcType="INTEGER" />
     <result column="medical_order_type" property="medicalOrderType" jdbcType="INTEGER" />
     <result column="content" property="content" jdbcType="VARCHAR" />
-    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="start_time" property="startTime" jdbcType="VARCHAR" />
     <result column="target_id" property="targetId" jdbcType="BIGINT" />
     <result column="is_first_edit" property="isFirstEdit" jdbcType="INTEGER" />
     <result column="is_stop_proofreading" property="isStopProofreading" jdbcType="INTEGER" />
@@ -64,12 +64,12 @@
                                           ,correspond_id,is_infusion_list,infusion_number)
     values (#{id,jdbcType=BIGINT}, #{number,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
             #{isSkinTest,jdbcType=INTEGER}, #{specification,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR},
-            #{usages,jdbcType=VARCHAR}, #{dosage,jdbcType=VARCHAR}, #{intervals,jdbcType=INTEGER},
+            #{usages,jdbcType=VARCHAR}, #{dosage,jdbcType=VARCHAR}, #{intervals,jdbcType=VARCHAR},
             #{proofreadingNurseId,jdbcType=BIGINT}, #{approvedNurseId,jdbcType=BIGINT}, #{stopDate,jdbcType=VARCHAR},
             #{stopUserId,jdbcType=BIGINT}, #{stopPrfingNurseId,jdbcType=BIGINT}, #{stopApdNurseId,jdbcType=BIGINT},
             #{totalAmount,jdbcType=DECIMAL}, #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP},
             #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, #{orderNum,jdbcType=INTEGER},#{isStop,jdbcType=INTEGER},#{isProofreading,jdbcType=INTEGER},#{isApproved,jdbcType=INTEGER},#{medicalOrderType,jdbcType=INTEGER}
-             ,#{content,jdbcType=VARCHAR},#{startTime,jdbcType=TIMESTAMP},#{targetId,jdbcType=BIGINT},#{isFirstEdit,jdbcType=INTEGER},#{isStopProofreading,jdbcType=INTEGER},#{isstopapproved,jdbcType=INTEGER},#{correspondId,jdbcType=BIGINT}
+             ,#{content,jdbcType=VARCHAR},#{startTime,jdbcType=VARCHAR},#{targetId,jdbcType=BIGINT},#{isFirstEdit,jdbcType=INTEGER},#{isStopProofreading,jdbcType=INTEGER},#{isstopapproved,jdbcType=INTEGER},#{correspondId,jdbcType=BIGINT}
              ,#{isInfusionList,jdbcType=INTEGER},#{infusionNumber,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisMedicalOrderDetail" >
@@ -204,7 +204,7 @@
         #{dosage,jdbcType=VARCHAR},
       </if>
       <if test="intervals != null" >
-        #{intervals,jdbcType=INTEGER},
+        #{intervals,jdbcType=VARCHAR},
       </if>
       <if test="proofreadingNurseId != null" >
         #{proofreadingNurseId,jdbcType=BIGINT},
@@ -258,7 +258,7 @@
         #{content,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null" >
-        #{startTime,jdbcType=TIMESTAMP},
+        #{startTime,jdbcType=VARCHAR},
       </if>
       <if test="targetId != null" >
         #{targetId,jdbcType=BIGINT},
@@ -308,7 +308,7 @@
         dosage = #{dosage,jdbcType=VARCHAR},
       </if>
       <if test="intervals != null" >
-        intervals = #{intervals,jdbcType=INTEGER},
+        intervals = #{intervals,jdbcType=VARCHAR},
       </if>
       <if test="proofreadingNurseId != null" >
         proofreading_nurse_id = #{proofreadingNurseId,jdbcType=BIGINT},
@@ -362,7 +362,7 @@
         content = #{content,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null" >
-        start_time = #{startTime,jdbcType=TIMESTAMP},
+        start_time = #{startTime,jdbcType=VARCHAR},
       </if>
       <if test="targetId != null" >
         target_id = #{targetId,jdbcType=BIGINT},
@@ -397,7 +397,7 @@
         unit = #{unit,jdbcType=VARCHAR},
         usages = #{usages,jdbcType=VARCHAR},
         dosage = #{dosage,jdbcType=VARCHAR},
-        intervals = #{intervals,jdbcType=INTEGER},
+        intervals = #{intervals,jdbcType=VARCHAR},
         proofreading_nurse_id = #{proofreadingNurseId,jdbcType=BIGINT},
         approved_nurse_id = #{approvedNurseId,jdbcType=BIGINT},
         stop_date = #{stopDate,jdbcType=VARCHAR},
@@ -415,7 +415,7 @@
         is_approved = #{isApproved,jdbcType=INTEGER},
         medical_order_type = #{medicalOrderType,jdbcType=INTEGER},
         content = #{content,jdbcType=VARCHAR},
-        start_time = #{startTime,jdbcType=TIMESTAMP},
+        start_time = #{startTime,jdbcType=VARCHAR},
         target_id = #{targetId,jdbcType=BIGINT},
         is_first_edit = #{isFirstEdit,jdbcType=INTEGER},
         is_stop_proofreading = #{isStopProofreading,jdbcType=INTEGER},
@@ -505,12 +505,12 @@
     <foreach collection="list" item="item" index="index" separator="," >
       (#{item.id,jdbcType=BIGINT}, #{item.number,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR},
       #{item.isSkinTest,jdbcType=INTEGER}, #{item.specification,jdbcType=VARCHAR}, #{item.unit,jdbcType=VARCHAR},
-      #{item.usages,jdbcType=VARCHAR}, #{item.dosage,jdbcType=VARCHAR}, #{item.intervals,jdbcType=INTEGER},
+      #{item.usages,jdbcType=VARCHAR}, #{item.dosage,jdbcType=VARCHAR}, #{item.intervals,jdbcType=VARCHAR},
       #{item.proofreadingNurseId,jdbcType=BIGINT}, #{item.approvedNurseId,jdbcType=BIGINT}, #{item.stopDate,jdbcType=VARCHAR},
       #{item.stopUserId,jdbcType=BIGINT}, #{item.stopPrfingNurseId,jdbcType=BIGINT}, #{item.stopApdNurseId,jdbcType=BIGINT},
       #{item.totalAmount,jdbcType=DECIMAL}, #{item.createUserId,jdbcType=BIGINT}, #{item.createDate,jdbcType=TIMESTAMP},
       #{item.updateUserId,jdbcType=BIGINT}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.orderNum,jdbcType=INTEGER},#{item.isStop,jdbcType=INTEGER},#{item.isProofreading,jdbcType=INTEGER},#{item.isApproved,jdbcType=INTEGER}
-      ,#{item.medicalOrderType,jdbcType=INTEGER},#{item.content,jdbcType=VARCHAR},#{item.startTime,jdbcType=TIMESTAMP},#{item.targetId,jdbcType=BIGINT},#{item.isFirstEdit,jdbcType=INTEGER},#{item.isStopProofreading,jdbcType=INTEGER}
+      ,#{item.medicalOrderType,jdbcType=INTEGER},#{item.content,jdbcType=VARCHAR},#{item.startTime,jdbcType=VARCHAR},#{item.targetId,jdbcType=BIGINT},#{item.isFirstEdit,jdbcType=INTEGER},#{item.isStopProofreading,jdbcType=INTEGER}
       ,#{item.isstopapproved,jdbcType=INTEGER},#{item.correspondId,jdbcType=BIGINT},#{item.isInfusionList,jdbcType=INTEGER}, #{item.infusionNumber,jdbcType=VARCHAR})
     </foreach>
   </insert>

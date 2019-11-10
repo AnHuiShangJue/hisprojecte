@@ -1,0 +1,481 @@
+<!--新增用药医嘱-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="public/base_list :: html"></div>
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+<!-- Start Page Loading -->
+<div class="row">
+    <div class="col s12 x12 l12 xl12">
+        <div class="container">
+            <div class="section section-data-tables">
+                <div class="card">
+                    <div class="card-content">
+                        <form id="searchForm" class="row" action="">
+                            <div class="row">
+                                <div class="col input-field s3 m3 l3">
+                                    <!--all代表所有字段的模糊查询-->
+                                    <input id="drugsName" name="drugsName" type="text"/>
+                                    <label for="drugsName">查询<span style="font-size: 12px">(Search)</span></label>
+                                </div>
+                                <a class="waves-effect waves-light btn" id="searchBtn"><i
+                                        class="material-icons  white-text tooltipped " data-position="bottom"
+                                        data-delay="50" data-tooltip="搜索">search</i></a>
+                                <a id="resetBtn" class="waves-effect waves-light btn"><i
+                                        class="material-icons  white-text tooltipped " data-position="bottom"
+                                        data-delay="50" data-tooltip="重置">youtube_searched_for</i></a>
+
+                            </div>
+                        </form>
+                    </div>
+                    <!--<div class="row">-->
+                        <!--<div class="col s2 m2 l2 xl2 offset-l1">-->
+                            <!--<a class="waves-effect waves-light btn" id="searchBtn"><i-->
+                                    <!--class="material-icons  white-text tooltipped " data-position="bottom"-->
+                                    <!--data-delay="50" data-tooltip="搜索">search</i></a>-->
+                            <!--<a id="resetBtn" class="waves-effect waves-light btn"><i-->
+                                    <!--class="material-icons  white-text tooltipped " data-position="bottom"-->
+                                    <!--data-delay="50" data-tooltip="重置">youtube_searched_for</i></a>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s4 x4 l4 xl4">
+                    <div class="card" style="overflow: hidden">
+                        <div class="card-content">
+                            <h4 class="card-title">药品选择
+                            </h4><label style="color:black">Drug selection</label>
+                          <!--  <div class="row">
+                                <div class="col s2 m2 l2 xl2 offset-xl10">
+                                    <a id="btnAddtoList" class="btn waves-effect waves-light red">
+                                        <i class="material-icons  white-text tooltipped " data-position="bottom"
+                                           data-delay="50" data-tooltip="批量选择">playlist_add</i>
+                                    </a>
+                                </div>
+                            </div>-->
+                            <!--Form Advance-->
+                            <div class="row">
+                                <div id="medicine_list" class="col l12 m12 l12 xl12">
+                                    <table id="data-table-simple" class="display">
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s8 x8 l8 xl8">
+                    <div class="card" style="overflow: hidden;">
+                        <div class="card-content">
+                            <h4 class="card-title">用药医嘱列表
+                            </h4><label style="color:black">Pending list
+                        </label>
+                            <div class="row">
+                                <div class="col s4 m4 l4 xl4 right">
+                                    <a id="btnDeleteFromList"
+                                       class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1">
+                                        <i class="material-icons white-text tooltipped" data-position="bottom"
+                                           data-delay="50"
+                                           data-tooltip="批量移除">remove</i>
+                                    </a>
+                                    <button id="BtnMediEnter" class="btn cyan waves-effect waves-light right" type="submit" name="action">提交(submit
+                                        )
+                                        <i class="mdi-content-send right"></i>
+                                    </button>
+                                </div>
+
+
+                            </div>
+                            <!--Form Advance-->
+                        <!--    <form id="planForm" action="">
+                                <div class="row">
+                                    <div class="col input-field s6 m6 l6 xl6">
+                                        <input id="personInCharge" name="personInCharge" type="text"
+                                               data-error=".errorTxt1">
+                                        <div class="errorTxt1"></div>
+                                        <label for="personInCharge">输液单组数<span style="font-size: 12px">(principal
+)</span></label>
+                                    </div>
+                                    <div class="col input-field s6 m6 l6 xl6">
+                                        <input id="expectedTime" name="expectedTime" type="text" class="datepicker"
+                                               data-error=".errorTxt2">
+                                        <div class="errorTxt2"></div>
+                                        <label for="expectedTime">预采购时间<span style="font-size: 12px">(ពេលទិញជាមុន
+)</span></label>
+                                    </div>
+                                </div>
+                            </form>-->
+                            <div id="enter_medicine_list" class="col l12 m12 l12 xl12">
+                                <table id="data-table-simple-enter">
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input id="orderNumber" type="hidden" th:value="${orderNumber}">
+
+
+
+<div th:replace="public/base_list_script :: html"></div>
+<script type="text/javascript" th:src="@{/hiscore/assets/global/js/ahsj.selfdatatable.js}"></script>
+<script th:inline="javascript">
+    var gridEnterList = new AHSJDT();
+    var now =getDay();
+    var grid = new Datatable();
+    $(document).ready(function () {
+        initBtn();
+        initTable();
+    });
+    function initTable() {
+
+   /*     $("#planForm").validate({
+            rules: {
+                personInCharge: {
+                    required: true,
+                    minlength: 1
+                },
+                expectedTime: {
+                    required: true,
+                    minlength: 1
+                },
+            },
+            messages: {
+                personInCharge: {
+                    required: "请输入负责人姓名",
+                    minlength: "最少输入1个字符"
+                },
+                expectedTime: {
+                    required: "请输入预期采购时间",
+                    minlength: "最少输入1个字符"
+                },
+            },
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });*/
+        //选择列表
+        grid.init({
+            src: $("#data-table-simple"),
+            onSuccess: function (grid) {
+            },
+            onError: function (grid) {
+            },
+            onDataLoad: function (grid) {
+            },
+            loadingMessage: 'Loading...',
+            dataTable: {
+                "ajax": {
+                    "url": CTX + "/api/pharmacy/listForAll.ahsj?token=" + TOKEN, // ajax source
+                },
+                "columns": [
+                    {
+                        "title": "<label><input type=\"checkbox\"  id=\"checkAll\" class=\"select-all\" > <span></span></label> ",
+                        "render": function (data, type, row, meta) {
+                            return " <label> <input type=\"checkbox\" value=\"" + row.id + "\"> <span></span> </label>";
+                        },
+                        "width": "18px",
+                        "orderable": false,
+                        "className": "centered"
+                    },
+                  /*  {
+                        "title": "药品编号",
+                        "data": "drugsNumb",
+                        "name": "drugs_numb"
+                    },*/
+                    {
+                        "title": "名称",
+                        "data": "drugsName",
+                        "name": "drugs_name"
+                    },
+                  /*  {
+                        "title": "药品拼音码",
+                        "data": "drugsAlias",
+                        "name": "drugs_alias"
+                    },*/
+                    {
+                        "title": "规格",
+                        "data": "drugsSpec",
+                        "name": "drugs_spec"
+                    },
+                    {
+                        "title": "售价",
+                        "data": "salePrice",
+                        "name": "sale_p rice"
+                    },
+                    {
+                        "title": "操作",
+                        "width": "20px",
+                        "className": "centered",
+                        "orderable": false,
+                        "render": function (data, type, row) {
+                            var rtnBtn = "";
+                            var drugsName = row.drugsName.replace(/ /g,",");
+                            var drugsSpec = row.drugsSpec.replace(/ /g,",");
+                            //如果获取字符串，必须在参数外反转"
+                            rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"添加至用药医嘱\" href='javascript:;' onclick=add("
+                                + row.id + ",\"" + row.drugsNumb + "\",\"" + drugsName + "\",\"" + drugsSpec + "\",\""+ row.salePrice+"\")><i class='material-icons'>add</i></a>";
+                            // 返回自定义内容
+                            return rtnBtn;
+                        }
+                    }
+                ],
+                "order": [
+                    [1, 'asc']
+                ]
+            }
+        });
+
+// 待添加列表
+        gridEnterList.init({
+            src: $("#data-table-simple-enter"),
+            theads: [
+                {
+                    "title": "编号",
+                    "data": "drugsNumb",
+                    "name": "drugs_numb"
+                },
+                {
+                    "title": "名称",
+                    "data": "drugsName",
+                    "name": "drugs_name"
+                },
+                {
+                    "title": "规格",
+                    "data": "drugsSpec",
+                    "name": "drugs_spec"
+                },
+                {
+                    "title": "售价",
+                    "data": "salePrice",
+                    "name": "sale_price"
+                },
+                {
+                    "title": "数量",
+                    "width": "40px",
+                    "className": "centered",
+                    "render": function (row) {
+                        var rtnBtn = "";
+                        //如果获取字符串，必须在参数外反转"
+                        rtnBtn = rtnBtn +
+                            " <input id='num' name='num' type='number' value=\"" + 1 + "\" />"+
+                            " <input id='drugsNumb' name='drugsNumb' type='hidden' value=\"" + row.drugsNumb + "\" />"
+                        // 返回自定义内容
+                        return rtnBtn;
+                    }
+                },
+                {
+                    "title": "用法",
+                    "width": "120px",
+                    "className": "centered",
+                    "render": function (row) {
+                        var rtnBtn = "";
+                        //如果获取字符串，必须在参数外反转"
+                        rtnBtn = rtnBtn +
+                            " <input id='usages' name='usages' type='number' value='"+""+"'/>";
+                        // 返回自定义内容
+                        return rtnBtn;
+                    }
+                },
+                {
+                    "title": "间隔",
+                    "width": "40px",
+                    "className": "centered",
+                    "render": function (row) {
+                        var rtnBtn = "";
+                        //如果获取字符串，必须在参数外反转"
+                        rtnBtn = rtnBtn +
+                            " <input id='intervals' name='intervals' type='text' value='"+""+"'/>";
+                        // 返回自定义内容
+                        return rtnBtn;
+                    }
+                },
+                {
+                    "title": "开始时间",
+                    "width": "80px",
+                    "className": "centered",
+                    "render": function (row) {
+                        var rtnBtn = "";
+                        //如果获取字符串，必须在参数外反转"
+                        rtnBtn = rtnBtn +
+                            " <input id='startTime' name='startTime' type='text' value='"+now+"'/>";
+                        // 返回自定义内容
+                        return rtnBtn;
+                    }
+                },
+                {
+                    "title": "操作",
+                    "width": "120px",
+                    "className": "centered",
+                    "render": function (row) {
+                        var rtnBtn = "";
+                        //如果获取字符串，必须在参数外反转"
+                        rtnBtn = rtnBtn +
+                            "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"\" onclick='remove(" + row.id + ");'> <i class='material-icons'>remove</i></a>";
+                        // 返回自定义内容
+                        return rtnBtn;
+                    },
+                }
+            ],
+        });
+
+
+    }
+
+    //添加到list里
+    function add(id, drugsNumb, drugsName, drugsSpec,salePrice ) {
+        drugsName = drugsName.replace(/,/g," ");
+        drugsSpec = drugsSpec.replace(/,/g," ");
+
+        var selectRowsIds = gridEnterList.getIds();
+        if(selectRowsIds.length == 0){
+            id = 1;
+        }else {
+            id = ++selectRowsIds[selectRowsIds.length-1];
+        }
+        // if (selectRowsIds.length !== 0) {
+        //     for (var k = 0; k < selectRowsIds.length; k++) {
+        //         if (id == selectRowsIds[k]) {
+        //             id = null;
+        //         }
+        //     }
+        // }
+        if (null !== id) {
+            gridEnterList.addRow({"id": id,"drugsNumb":drugsNumb, "drugsName": drugsName, "drugsSpec": drugsSpec,"salePrice":salePrice});
+        }
+    }
+
+    //移除一列
+    function remove(id) {
+        gridEnterList.removeRow(id);
+    }
+
+    function initBtn() {
+        //批量添加按钮
+        $("#btnAddtoList").click(function () {
+            var ids = grid.getSelectedRows();
+            if (ids.length == 0) {
+                dialog.warn("请至少选择一条数据");
+                return;
+            }
+            var json = grid.getDataTable().ajax.json();
+            var selectRowsIds = gridEnterList.getIds();
+            var tmps = [];
+            var id
+            if(selectRowsIds.length==0 ){
+                id = 1
+            }else {
+                id = ++selectRowsIds[selectRowsIds.length - 1];
+            }
+
+
+                for (var i = 0; i < ids.length; i++) {
+
+                        tmps[i] = {
+                            "id": id,
+                            "drugsNumb": json.data[i].drugsNumb,
+                            "drugsName": json.data[i].drugsName,
+                            "drugsSpec": json.data[i].drugsSpec,
+                            "salePrice":json.data[i].salePrice
+                        }
+                        id++;
+
+                }
+
+            gridEnterList.addRows(tmps);
+            grid.initCheckbox();
+        });
+        $("#btnDeleteFromList").click(function () {
+            var ids = gridEnterList.getSelectedRows();
+            if (ids.length == 0) {
+                dialog.warn("请至少选择一条数据");
+                return;
+            }
+            gridEnterList.removeRows(ids);
+        });
+        //搜索按钮
+        $('#searchBtn').click(function () {
+            grid.search();
+        });
+        $('#resetBtn').click(function () {
+            grid.reset();
+        });
+
+        //提交按钮
+        $("#BtnMediEnter").click(function () {
+            dialog.confirm('确定提交吗?', function (index, layero){
+                var ids = gridEnterList.getIds();
+                var nums = gridEnterList.gernums();
+                var usages=gridEnterList.getUsages();
+                var intervals = gridEnterList.getIntervals();
+                var startTimes = gridEnterList.getStartTime();
+                var drugsNumbs = gridEnterList.getDrugsNumbs();
+                var orderNumber=$("#orderNumber").val()
+                // var personInCharge = $(" input[ name='personInCharge' ] ").val();
+                // var expectedTime = $(" input[ name='expectedTime' ] ").val();
+                $.ahsjajax(CTX + "/api/medicalOrderDetail/saveMedicineOrder.ahsj",
+                    {
+                        "drugsNumbs": drugsNumbs.join(','),
+                        "nums": nums.join(','),
+                        "usages": usages.join(','),
+                        "intervals": intervals.join(','),
+                        "startTimes":startTimes.join(','),
+                        "orderNumber":orderNumber
+                    },
+                    function (msg) {
+                        if (msg.success) {
+                            M.toast({
+                                html: msg.message, completeCallback: function () {
+                                }
+                            });
+                            parent.grid.search();
+                            dialog.parentclose();
+                        } else {
+                            M.toast({
+                                html: msg.message, completeCallback: function () {
+                                }
+                            });
+                        }
+                    },
+                    function (data) {
+                        M.toast({
+                            html: "网络异常", completeCallback: function () {
+                            }
+                        });
+                    }
+                );});
+        });
+    }
+
+    $("input").change(function(){
+        $(this).val($(this).val().trim());
+    });
+
+    function getDay(){
+        var myDate = new Date();
+        // var year = myDate.getFullYear();
+        var month = myDate.getMonth() + 1;
+        var date = myDate.getDate();
+        var h = myDate.getHours();
+        var m = myDate.getMinutes();
+        var s = myDate.getSeconds();
+        if(m<=9){
+            var now =  month + "/" + date + " " + h + ":" +"0"+ m /*+ ":" + s*/;
+        }else {
+            var now =  month + "/" + date + " " + h + ":" + m /*+ ":" + s*/;
+        }
+        return now;
+    }
+</script>
+</body>
+</html>
