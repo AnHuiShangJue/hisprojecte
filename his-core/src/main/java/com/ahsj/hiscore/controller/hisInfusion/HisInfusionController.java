@@ -470,7 +470,8 @@ public class HisInfusionController extends BaseController {
             modelAndView.addObject("hisInfusionList",hisInfusionList);
 
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String time =formatter.format(hisInfusionList.get(0).getUpdateDate());
+//            String time =formatter.format(hisInfusionList.get(0).getUpdateDate());
+        String time =formatter.format(hisInfusionList.get(0).getCreateDate());
             modelAndView.addObject("time",time);
         return modelAndView;
     }
