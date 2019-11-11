@@ -3,8 +3,11 @@ package com.ahsj.hiscore.services.impl;
 import com.ahsj.hiscore.core.CodeHelper;
 import com.ahsj.hiscore.dao.HisMedicalOrderTemplateDetailMapper;
 import com.ahsj.hiscore.dao.HisMedicalOrderTemplateMapper;
+import com.ahsj.hiscore.entity.HisMedicalOrderDetail;
 import com.ahsj.hiscore.entity.HisMedicalOrderTemplate;
-import com.ahsj.hiscore.entity.HisMedicalTemplate;
+import com.ahsj.hiscore.entity.HisMedicalOrderTemplateDetail;
+import com.ahsj.hiscore.services.HisMedicalOrderDetailService;
+import com.ahsj.hiscore.services.HisMedicalOrderTemplateDetailService;
 import com.ahsj.hiscore.services.HisMedicalOrderTemplateService;
 import core.entity.PageBean;
 import core.message.Message;
@@ -25,6 +28,12 @@ public class HisMedicalOrderTemplateServicelmpl implements HisMedicalOrderTempla
 
     @Autowired
     HisMedicalOrderTemplateDetailMapper hisMedicalOrderTemplateDetailMapper;
+
+    @Autowired
+    HisMedicalOrderDetailService hisMedicalOrderDetailService;
+
+    @Autowired
+    HisMedicalOrderTemplateDetailService hisMedicalOrderTemplateDetailService;
     /**
      *@Description 医嘱模板分页查询
      *@Params [pageBean]
@@ -135,5 +144,71 @@ public class HisMedicalOrderTemplateServicelmpl implements HisMedicalOrderTempla
     @Transactional(readOnly = true)
     public HisMedicalOrderTemplate selectByTemplateNumber(String templateNumber) throws Exception {
         return CodeHelper.getInstance().setCodeValue(hisMedicalOrderTemplateMapper.selectByTemplateNumber(templateNumber));
+    }
+
+    // //保存当前医嘱为模板
+
+    @Override
+    @Transactional(readOnly = false)
+    public Message saveForTemlate(Long[] ids, String orderNumber, Integer type, String templateName) throws Exception{
+        //ids为空数组说明保存所有医嘱模板
+        HisMedicalOrderTemplate hisMedicalOrderTemplate = new HisMedicalOrderTemplate();
+        hisMedicalOrderTemplate.setTemplateName(templateName);
+        if(type == 1){
+            hisMedicalOrderTemplate.setRemarks("1");
+        }else {
+            hisMedicalOrderTemplate.setRemarks("0");
+        }
+        saveOrUpdate(hisMedicalOrderTemplate);
+        if(EmptyUtil.Companion.isNullOrEmpty(ids) || ids.length ==  0){
+            List<HisMedicalOrderDetail> hisMedicalOrderDetailList = hisMedicalOrderDetailService.selectByOrderNumber(orderNumber);
+            if(EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetailList) || hisMedicalOrderDetailList.size() == 0){
+                return MessageUtil.createMessage(false,"不能保存空医嘱信息为模板(Can not Save null information)");
+            }else {
+                for (HisMedicalOrderDetail hisMedicalOrderDetail : hisMedicalOrderDetailList) {
+                    HisMedicalOrderTemplateDetail hisMedicalOrderTemplateDetail = new HisMedicalOrderTemplateDetail();
+                    hisMedicalOrderTemplateDetail.setTemplateNumber(hisMedicalOrderTemplate.getTemplateNumber());
+                    hisMedicalOrderTemplateDetail.setTemplateName(hisMedicalOrderTemplate.getTemplateName());
+                    hisMedicalOrderTemplateDetail.setName(hisMedicalOrderDetail.getName());
+                    hisMedicalOrderTemplateDetail.setIsSkinTest(hisMedicalOrderDetail.getIsSkinTest());
+                    hisMedicalOrderTemplateDetail.setName(hisMedicalOrderDetail.getName());
+                    hisMedicalOrderTemplateDetail.setUsages(hisMedicalOrderDetail.getUsages());
+                    if(!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getTotalAmount()))
+                        hisMedicalOrderTemplateDetail.setTotalAmount(hisMedicalOrderDetail.getTotalAmount().doubleValue());
+                    //remarks代表的是对应的医嘱类型
+                    if(!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getMedicalOrderType()))
+                        hisMedicalOrderTemplateDetail.setRemarks(hisMedicalOrderDetail.getMedicalOrderType().toString());
+                    hisMedicalOrderTemplateDetail.setIntervals(hisMedicalOrderDetail.getIntervals());
+                    //stopUserId代表的是对应的项目表ID或者药库表ID
+                    hisMedicalOrderTemplateDetail.setStopUserId(hisMedicalOrderDetail.getTargetId());
+
+                    hisMedicalOrderTemplateDetailService.saveOrUpdate(hisMedicalOrderTemplateDetail);
+                }
+
+            }
+        }
+        //否则说明保存的是选中的医嘱
+        else {
+            for (int i = 0; i <ids.length ; i++) {
+                HisMedicalOrderDetail hisMedicalOrderDetail = hisMedicalOrderDetailService.selectById(ids[i]);
+                HisMedicalOrderTemplateDetail hisMedicalOrderTemplateDetail = new HisMedicalOrderTemplateDetail();
+                hisMedicalOrderTemplateDetail.setTemplateNumber(hisMedicalOrderTemplate.getTemplateNumber());
+                hisMedicalOrderTemplateDetail.setTemplateName(hisMedicalOrderTemplate.getTemplateName());
+                hisMedicalOrderTemplateDetail.setName(hisMedicalOrderDetail.getName());
+                hisMedicalOrderTemplateDetail.setIsSkinTest(hisMedicalOrderDetail.getIsSkinTest());
+                hisMedicalOrderTemplateDetail.setName(hisMedicalOrderDetail.getName());
+                hisMedicalOrderTemplateDetail.setUsages(hisMedicalOrderDetail.getUsages());
+                if(!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getTotalAmount()))
+                    hisMedicalOrderTemplateDetail.setTotalAmount(hisMedicalOrderDetail.getTotalAmount().doubleValue());
+                //remarks代表的是对应的医嘱类型
+                if(!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getMedicalOrderType()))
+                    hisMedicalOrderTemplateDetail.setRemarks(hisMedicalOrderDetail.getMedicalOrderType().toString());
+                hisMedicalOrderTemplateDetail.setIntervals(hisMedicalOrderDetail.getIntervals());
+                //stopUserId代表的是对应的项目表ID或者药库表ID
+                hisMedicalOrderTemplateDetail.setStopUserId(hisMedicalOrderDetail.getTargetId());
+                hisMedicalOrderTemplateDetailService.saveOrUpdate(hisMedicalOrderTemplateDetail);
+            }
+        }
+        return MessageUtil.createMessage(true, "保存成功(Save Success)");
     }
 }

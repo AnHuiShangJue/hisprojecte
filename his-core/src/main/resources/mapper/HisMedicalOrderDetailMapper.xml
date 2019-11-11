@@ -538,4 +538,10 @@ where infusion_number =#{infusionNumber,jdbcType=VARCHAR}
     GROUP BY infusion_number
   </select>
 
+  <select id="selectByOrderNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select his_medical_order_detail.*
+    from his_medical_order_detail
+    where number =#{orderNumber,jdbcType=VARCHAR}
+  </select>
+
 </mapper>

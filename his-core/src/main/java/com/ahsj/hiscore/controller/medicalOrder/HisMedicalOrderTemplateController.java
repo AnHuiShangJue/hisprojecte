@@ -135,9 +135,10 @@ public class HisMedicalOrderTemplateController extends BaseController {
 
     @RequestMapping(value = "saveForTemlate.ahsj", method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    Message  saveForTemlate(String token,Long[] ids,String orderNumber,Integer type)throws Exception{
-//            hisMedicalOrderTemplateService.saveForTemlate(ids,orderNumber)
-        return MessageUtil.createMessage(false, "开发中");
+    Message  saveForTemlate(String token,@RequestParam(value = "ids",required = false) Long[]ids,String orderNumber,Integer type,String templateName)throws Exception{
+        //1:私人模板  2:公共模板
+        return hisMedicalOrderTemplateService.saveForTemlate(ids,orderNumber,type,templateName);
+//        return MessageUtil.createMessage(false, "开发中");
     }
 
 }

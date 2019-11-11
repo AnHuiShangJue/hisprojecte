@@ -66,4 +66,7 @@ public interface HisMedicalOrderTemplateService {
      *@Time 9:55
     **/
     HisMedicalOrderTemplate selectByTemplateNumber(String templateNumber)throws Exception;
+
+    //保存当前医嘱为模板
+    Message saveForTemlate(Long[] ids, String orderNumber, Integer type, String templateName)throws Exception;
 }

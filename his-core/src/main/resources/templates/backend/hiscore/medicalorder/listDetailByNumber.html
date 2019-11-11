@@ -648,12 +648,12 @@
             var ids = cacheIds;
             var orderNumber = $("#number").val();
             layer.open({
-                content:"确定保存为模板（Sure save Template）",
-                btn:['保存为私人模板（Personal Use）','保存为公共模板(All Use)','取消（No）'],
+                content:"<input id='templateName' name='templateName'>",
+                btn:['保存为私人模板（Personal Use）','保存为公共模板(All Use)'],
                 yes:function (index,layro) {
                     $.ahsjajax(CTX + "/api/medicalOrderTemplate/saveForTemlate.ahsj",
                         //1代表私人模板
-                        {"ids": ids,"orderNumber":orderNumber,"type":1},
+                        {"ids": cacheIds,"orderNumber":orderNumber,"type":1,"templateName":$("#templateName").val()},
                         function (msg) {
                             if (msg.success) {
                                 M.toast({
@@ -678,10 +678,10 @@
                     );
 
                 },
-                bth2:function(){
+                btn2:function(index,layro){
                     $.ahsjajax(CTX + "/api/medicalOrderTemplate/saveForTemlate.ahsj",
                         //2代表公共模板
-                        {"ids": ids,"orderNumber":orderNumber,"type":2},
+                        {"ids": cacheIds,"orderNumber":orderNumber,"type":2,"templateName":$("#templateName").val()},
                         function (msg) {
                             if (msg.success) {
                                 M.toast({
@@ -705,8 +705,10 @@
                         }
                     );
             },
-                btn3:function(){
-                    layer.closeAll();
+                cancel: function(){
+                    //右上角关闭回调
+
+                    //return false 开启该代码可禁止点击该按钮关闭
                 }
             })
 

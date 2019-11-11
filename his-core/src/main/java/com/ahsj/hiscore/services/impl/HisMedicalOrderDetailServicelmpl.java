@@ -349,6 +349,7 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
      * @Time 9:35
      **/
     @Override
+    @Transactional(readOnly = false)
     public Message addTemplate(String templateNumber, String number) throws Exception {
         List<HisMedicalOrderDetail> hisMedicalOrderDetailList = hisMedicalOrderDetailMapper.selectByNumber(number);
         List<HisMedicalOrderTemplateDetail> hisMedicalOrderTemplateDetailList = hisMedicalOrderTemplateDetailService.selectByTemplateNumber(templateNumber);
@@ -375,6 +376,58 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
                 hisMedicalOrderDetail.setUsages(hisMedicalOrderTemplateDetailList.get(i).getUsages());
             if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderTemplateDetailList.get(i).getSpecification()))
                 hisMedicalOrderDetail.setSpecification(hisMedicalOrderTemplateDetailList.get(i).getSpecification());
+            if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderTemplateDetailList.get(i).getRemarks()))
+                hisMedicalOrderDetail.setMedicalOrderType(Integer.valueOf(hisMedicalOrderTemplateDetailList.get(i).getRemarks()));
+            if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderTemplateDetailList.get(i).getStopUserId()))
+                hisMedicalOrderDetail.setTargetId(hisMedicalOrderTemplateDetailList.get(i).getStopUserId());
+
+            if(!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getMedicalOrderType())) {
+                if (hisMedicalOrderDetail.getMedicalOrderType() == 2) {
+                    HisPharmacyDetail hisPharmacyDetail = hisPharmacyDetailService.selectById(hisMedicalOrderDetail.getTargetId());
+                    //生成对应的用药明细
+                    HisMedicationDetails hisMedicationDetails = new HisMedicationDetails();
+                    hisMedicationDetails.setMedicationId(hisPharmacyDetail.getId());
+                    hisMedicationDetails.setDescription(hisMedicalOrderDetail.getUsages());
+                    hisMedicationDetails.setIsPay(2);
+                    hisMedicationDetails.setIsBack(2);
+                    hisMedicationDetails.setIsDel(2);
+                    hisMedicationDetails.setIsOut(2);
+                    hisMedicationDetails.setCount(hisMedicalOrderDetail.getTotalAmount().intValue());
+                    hisMedicationDetails.setDrugsNumb(hisPharmacyDetail.getDrugsNumb());
+                    hisMedicationDetails.setDrugsName(hisPharmacyDetail.getDrugsName());
+                    hisMedicationDetails.setDrugsAlias(hisPharmacyDetail.getDrugsAlias());
+                    hisMedicationDetails.setDrugsSpec(hisPharmacyDetail.getDrugsSpec());
+                    hisMedicationDetails.setTotalPrice(hisMedicalOrderDetail.getTotalAmount().multiply(hisPharmacyDetail.getSalePrice()));
+
+                    HisMedicalOrder hisMedicalOrder = hisMedicalOrderService.selectByNumber(number);
+                    HisMedicalRecord hisMedicalRecord = hisMedicalRecordService.selectByMedicalRecordId(hisMedicalOrder.getRecordId());
+                    hisMedicationDetails.setMedicalRecordId(hisMedicalRecord.getId());
+                    hisMedicationDetailsService.insert(hisMedicationDetails);
+                    hisMedicalOrderDetail.setCorrespondId(hisMedicationDetails.getId());
+                } else if (hisMedicalOrderDetail.getMedicalOrderType() == 3) {
+                    HisProject hisProject = hisProjectService.selectByPrimaryKey(hisMedicalOrderDetail.getTargetId());
+                    //生成对应的用药明细
+                    HisRecordProject hisRecordProject = new HisRecordProject();
+                    hisRecordProject.setProjectId(hisProject.getId());
+                    hisRecordProject.setIsPayed((short) 2);
+                    hisRecordProject.setIsBack(2);
+                    hisRecordProject.setIsChecked((short) 2);
+                    hisRecordProject.setNum(hisMedicalOrderDetail.getTotalAmount().intValue());
+                    hisRecordProject.setName(hisProject.getName());
+                    hisRecordProject.setNumber(hisProject.getNumber());
+                    hisRecordProject.setDescription(hisProject.getDescription());
+                    hisRecordProject.setType(hisProject.getType());
+                    hisRecordProject.setPrice(hisProject.getPrice());
+                    hisRecordProject.setPinyinCode(hisProject.getPinyinCode());
+                    hisRecordProject.setUnit(hisProject.getUnit());
+
+                    HisMedicalOrder hisMedicalOrder = hisMedicalOrderService.selectByNumber(number);
+                    HisMedicalRecord hisMedicalRecord = hisMedicalRecordService.selectByMedicalRecordId(hisMedicalOrder.getRecordId());
+                    hisRecordProject.setRecordId(hisMedicalRecord.getId());
+                    hisRecordProjectService.insert(hisRecordProject);
+                    hisMedicalOrderDetail.setCorrespondId(hisRecordProject.getId());
+                }
+            }
             hisMedicalOrderDetailList.add(0, hisMedicalOrderDetail);
         }
         if (hisMedicalOrderDetailList.size() == 0)
@@ -1060,5 +1113,10 @@ public class HisMedicalOrderDetailServicelmpl implements HisMedicalOrderDetailSe
             saveOrUpdate(hisMedicalOrderDetail);
         }
         return MessageUtil.createMessage(true, "新增成功（Add Success）");
+    }
+
+    @Override
+    public List<HisMedicalOrderDetail> selectByOrderNumber(String orderNumber) throws Exception {
+        return CodeHelper.getInstance().setCodeValue(hisMedicalOrderDetailMapper.selectByNumber(orderNumber));
     }
 }

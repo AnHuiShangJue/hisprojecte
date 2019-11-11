@@ -156,4 +156,6 @@ public interface HisMedicalOrderDetailService {
     Message saveProjectOrder(String[] numbers, Integer[] nums, String[] startTimes, String orderNumber)throws Exception;
 
 
+    //根据医嘱编号查询所有医嘱明细
+    List<HisMedicalOrderDetail> selectByOrderNumber(String orderNumber)throws Exception;
 }
