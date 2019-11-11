@@ -83,7 +83,36 @@
                 if (!isNullOrEmpty(jsons)) {//有
                     var trs = "<tr><td style=\"border: 1px solid grey;\"> 时间(time)</td><td colspan='3' style=\"border: 1px solid grey;\">药物(medicine)</td><td colspan='2' style=\"border: 1px solid grey;\">用法用量(Dosage)</td><td style=\"border: 1px solid grey;\">护士签名(Nurse signature)</td></tr>";
                     $.each(data, function (index, item) {
+
+                        if (isNullOrEmpty(item.startTime)) {
+                            item.startTime = ""
+                        }
+                        if (isNullOrEmpty(item.startTimeVarchar)) {
+                            item.startTimeVarchar = ""
+                        }
+                        if (isNullOrEmpty(item.singleDose)) {
+                            item.singleDose = ""
+                        }
+                        if (isNullOrEmpty(item.drugname)) {
+                            item.drugname = ""
+                        }
+                        if (isNullOrEmpty(item.singleUnit)) {
+                            item.singleUnit = ""
+                        }
+                        if (isNullOrEmpty(item.usages)) {
+                            item.usages = ""
+                        }
+                        if (isNullOrEmpty(item.totalAmount)) {
+                            item.totalAmount = ""
+                        }
+                        if (isNullOrEmpty(item.intervals)) {
+                            item.intervals = ""
+                        }
+                        if (isNullOrEmpty(item.dosage)) {
+                            item.dosage = ""
+                        }
                          if(isNullOrEmpty(item.medicationId)) {
+
                             // trs += "<tr><td><p class='black-text fontsize03'> " + item.drugsName + "</p></td><td ><p class='black-text fontsize03'> " + item.singleDose + "</p></td><td ><p class='black-text fontsize03'> " + item.unit + "</p></td><td ><p class='black-text fontsize03'></p></td><td><p class='black-text fontsize03'>" +item.price+";
                             trs += "<tr><td style=\"border: 1px solid grey;\"><p class='black-text fontsize03'> " + item.startTime + "</p></td><td colspan='3' style=\"border: 1px solid grey;\"><p class='black-text fontsize03'> " + item.drugname + "," + item.singleDose + " " + item.singleUnit + " </p></td><td colspan='2' style=\"border: 1px solid grey;\"><p class='black-text fontsize03'> " + item.usages + "," + item.dosage + "" + item.singleUnit + "," + item.intervals + "</p></td><td style=\"border: 1px solid grey;\"><p class='black-text fontsize03'> " + "      " + "</p></td></tr >";
                         }else {

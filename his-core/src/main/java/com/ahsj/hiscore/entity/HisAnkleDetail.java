@@ -29,8 +29,8 @@ public class HisAnkleDetail extends BaseEntity {
 
     private String remarks;
 
-    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "intervals", typeName = "intervalsName")
-    private Integer intervals;
+//    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "intervals", typeName = "intervalsName")
+    private String intervals;
     private String intervalsName;
 
     private Long proofreadingNurseId;
@@ -205,13 +205,7 @@ private Integer isProofreading;//校对
         this.usages = usages;
     }
 
-    public Integer getIntervals() {
-        return intervals;
-    }
 
-    public void setIntervals(Integer intervals) {
-        this.intervals = intervals;
-    }
 
     public Double getTotalAmount() {
         return totalAmount;
@@ -347,5 +341,13 @@ private Integer isProofreading;//校对
 
     public void setIsstopapproved(Integer isstopapproved) {
         this.isstopapproved = isstopapproved;
+    }
+
+    public String getIntervals() {
+        return intervals;
+    }
+
+    public void setIntervals(String intervals) {
+        this.intervals = intervals;
     }
 }

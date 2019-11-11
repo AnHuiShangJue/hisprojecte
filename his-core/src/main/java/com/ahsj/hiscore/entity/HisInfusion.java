@@ -149,14 +149,6 @@ public class HisInfusion extends BaseEntity {
         this.usages = usages == null ? null : usages.trim();
     }
 
-//    public Integer getIntervals() {
-//        return intervals;
-//    }
-//
-//    public void setIntervals(Integer intervals) {
-//        this.intervals = intervals;
-//    }
-
     public String getSpeed() {
         return speed;
     }
@@ -416,6 +408,10 @@ public class HisInfusion extends BaseEntity {
 
     public void setIntervals(String intervals) {
         this.intervals = intervals;
+    }
+
+    public String getIntervals() {
+        return intervals;
     }
 
     //    @Override

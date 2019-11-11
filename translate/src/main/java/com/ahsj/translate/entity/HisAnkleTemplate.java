@@ -17,7 +17,7 @@ public class HisAnkleTemplate extends BaseEntity implements Serializable {
     private String templateName;
 
     //@CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "intervals", typeName = "intervalsName")
-    private Integer intervals;
+    private String intervals;
     private String intervalsName;
 
     private Integer orderNum;
@@ -144,13 +144,7 @@ public class HisAnkleTemplate extends BaseEntity implements Serializable {
         this.remarks = remarks == null ? null : remarks.trim();
     }
 
-    public Integer getIntervals() {
-        return intervals;
-    }
 
-    public void setIntervals(Integer intervals) {
-        this.intervals = intervals;
-    }
 
     public Long getProofreadingNurseId() {
         return proofreadingNurseId;
@@ -251,5 +245,13 @@ public class HisAnkleTemplate extends BaseEntity implements Serializable {
 
     public void setIntervalsName(String intervalsName) {
         this.intervalsName = intervalsName;
+    }
+
+    public String getIntervals() {
+        return intervals;
+    }
+
+    public void setIntervals(String intervals) {
+        this.intervals = intervals;
     }
 }
