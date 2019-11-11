@@ -1,5 +1,6 @@
 package com.ahsj.hiscore.services;
 
+import com.ahsj.hiscore.common.utils.ZipUtils;
 import com.ahsj.hiscore.entity.HisMedicalOrderTemplate;
 import com.ahsj.hiscore.entity.HisMedicalOrderTemplateDetail;
 import core.entity.PageBean;
@@ -57,4 +58,10 @@ public interface HisMedicalOrderTemplateDetailService {
      *@Time 9:38
     **/
     List<HisMedicalOrderTemplateDetail> selectByTemplateNumber(String templateNumber);
+
+    //新增用药医嘱模板
+    Message saveMedicineOrder(String[] drugsNumbs, Integer[] nums, String[] usages, String[] intervals, String templateNumber)throws Exception;
+
+    //新增项目医嘱模板
+    Message saveProjectOrder(String[] numbers, Integer[] nums, String templateNumber)throws Exception;
 }

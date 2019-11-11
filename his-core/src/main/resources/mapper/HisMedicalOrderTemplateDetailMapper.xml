@@ -319,7 +319,8 @@
   <!--自定义sql-->
   <!--根据模板编号查看对应模板明细-->
   <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
-    select his_medical_order_template_detail.*
+    select his_medical_order_template_detail.*,
+    case when remarks = '1' then '普通医嘱' When remarks = '2'then '用药医嘱' When remarks = '3'then '项目医嘱' else '普通医嘱' end as orderType
     from his_medical_order_template_detail
   where template_number =#{parameter.templateNumber,jdbcType=VARCHAR}
     <if test="parameter.orders != null and parameter.orders != ''">

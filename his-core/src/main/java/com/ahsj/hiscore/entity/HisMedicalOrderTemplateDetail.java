@@ -55,6 +55,16 @@ public class HisMedicalOrderTemplateDetail extends BaseEntity {
 
     private Long stopApdNurseId;
 
+    private String orderType;
+
+    public String getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(String orderType) {
+        this.orderType = orderType;
+    }
+
     @JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date createDate;

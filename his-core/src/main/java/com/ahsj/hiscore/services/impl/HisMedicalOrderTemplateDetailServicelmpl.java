@@ -3,8 +3,10 @@ package com.ahsj.hiscore.services.impl;
 import com.ahsj.hiscore.core.CodeHelper;
 import com.ahsj.hiscore.dao.HisMedicalOrderTemplateDetailMapper;
 import com.ahsj.hiscore.dao.HisMedicalOrderTemplateMapper;
-import com.ahsj.hiscore.entity.HisMedicalOrderTemplateDetail;
+import com.ahsj.hiscore.entity.*;
 import com.ahsj.hiscore.services.HisMedicalOrderTemplateDetailService;
+import com.ahsj.hiscore.services.HisPharmacyDetailService;
+import com.ahsj.hiscore.services.HisProjectService;
 import core.entity.PageBean;
 import core.message.Message;
 import core.message.MessageUtil;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utils.EmptyUtil;
 
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,6 +26,12 @@ public class HisMedicalOrderTemplateDetailServicelmpl implements HisMedicalOrder
 
     @Autowired
     HisMedicalOrderTemplateMapper hisMedicalOrderTemplateMapper;
+
+    @Autowired
+    HisPharmacyDetailService hisPharmacyDetailService;
+
+    @Autowired
+    HisProjectService hisProjectService;
 
     /**
      * @return core.entity.PageBean<com.ahsj.hiscore.entity.HisMedicalOrderTemplateDetail>
@@ -160,5 +169,53 @@ public class HisMedicalOrderTemplateDetailServicelmpl implements HisMedicalOrder
     @Transactional(readOnly = true)
     public List<HisMedicalOrderTemplateDetail> selectByTemplateNumber(String templateNumber) {
         return CodeHelper.getInstance().setCodeValue(hisMedicalOrderTemplateDetailMapper.selectByTemplateNumberOrderByOrderNum(templateNumber));
+    }
+
+    @Override
+    @Transactional(readOnly = false)
+    public Message saveMedicineOrder(String[] drugsNumbs, Integer[] nums, String[] usages, String[] intervals, String templateNumber) throws Exception{
+        for (int i = 0; i <drugsNumbs.length ; i++) {
+            if(EmptyUtil.Companion.isNullOrEmpty(usages[i])){
+                usages[i]="";
+            }
+            if(EmptyUtil.Companion.isNullOrEmpty(intervals[i])){
+                intervals[i]="";
+            }
+            HisMedicalOrderTemplate hisMedicalOrderTemplate = hisMedicalOrderTemplateMapper.selectByTemplateNumber(templateNumber);
+            HisPharmacyDetail hisPharmacyDetail = hisPharmacyDetailService.selectByDrugsNumb(drugsNumbs[i]);
+            HisMedicalOrderTemplateDetail hisMedicalOrderTemplateDetail =new HisMedicalOrderTemplateDetail();
+            hisMedicalOrderTemplateDetail.setTemplateNumber(templateNumber);
+            hisMedicalOrderTemplateDetail.setTemplateName(hisMedicalOrderTemplate.getTemplateName());
+            hisMedicalOrderTemplateDetail.setName(hisPharmacyDetail.getDrugsName()+"  "+hisPharmacyDetail.getDrugsSpec());
+            hisMedicalOrderTemplateDetail.setIsSkinTest(1);
+            hisMedicalOrderTemplateDetail.setUsages(usages[i]);
+            hisMedicalOrderTemplateDetail.setIntervals(intervals[i]);
+            hisMedicalOrderTemplateDetail.setTotalAmount(nums[i].doubleValue());
+            hisMedicalOrderTemplateDetail.setRemarks("2");
+            hisMedicalOrderTemplateDetail.setStopUserId(hisPharmacyDetail.getId());
+            saveOrUpdate(hisMedicalOrderTemplateDetail);
+        }
+        return MessageUtil.createMessage(true, "新增成功（Add Success）");
+    }
+
+    //新增项目医嘱模板
+
+    @Override
+    @Transactional(readOnly = false)
+    public Message saveProjectOrder(String[] numbers, Integer[] nums, String templateNumber) throws Exception {
+        HisMedicalOrderTemplate hisMedicalOrderTemplate = hisMedicalOrderTemplateMapper.selectByTemplateNumber(templateNumber);
+        for (int i = 0; i <numbers.length ; i++) {
+            HisProject hisProject = hisProjectService.selectByNumber(numbers[i]);
+            HisMedicalOrderTemplateDetail hisMedicalOrderTemplateDetail =new HisMedicalOrderTemplateDetail();
+            hisMedicalOrderTemplateDetail.setTemplateNumber(templateNumber);
+            hisMedicalOrderTemplateDetail.setTemplateName(hisMedicalOrderTemplate.getTemplateName());
+            hisMedicalOrderTemplateDetail.setName(hisProject.getName());
+            hisMedicalOrderTemplateDetail.setIsSkinTest(1);
+            hisMedicalOrderTemplateDetail.setTotalAmount(nums[i].doubleValue());
+            hisMedicalOrderTemplateDetail.setRemarks("3");
+            hisMedicalOrderTemplateDetail.setStopUserId(hisProject.getId());
+            saveOrUpdate(hisMedicalOrderTemplateDetail);
+        }
+        return MessageUtil.createMessage(true, "新增成功（Add Success）");
     }
 }

@@ -79,7 +79,11 @@
                                            data-delay="50"
                                            data-tooltip="批量移除">remove</i>
                                     </a>
-                                    <button id="BtnMediEnter" class="btn cyan waves-effect waves-light right" type="submit" name="action">提交(submit
+                                    <button th:if="${isTemplate} eq null" id="BtnMediEnter" class="btn cyan waves-effect waves-light right" type="submit" name="action">提交(submit
+                                        )
+                                        <i class="mdi-content-send right"></i>
+                                    </button>
+                                    <button th:if="${isTemplate} ne null" id="commitTemplate" class="btn cyan waves-effect waves-light right" type="submit" name="action">提交(submit
                                         )
                                         <i class="mdi-content-send right"></i>
                                     </button>
@@ -118,6 +122,7 @@
     </div>
 </div>
 <input id="orderNumber" type="hidden" th:value="${orderNumber}">
+<input id="templateNumber" type="hidden" th:value="${templateNumber}">
 
 
 
@@ -455,6 +460,49 @@
                     }
                 );});
         });
+
+        $("#commitTemplate").click(function () {
+            dialog.confirm('确定提交吗?', function (index, layero){
+                var ids = gridEnterList.getIds();
+                var nums = gridEnterList.gernums();
+                var usages=gridEnterList.getUsages();
+                var intervals = gridEnterList.getIntervals();
+                var drugsNumbs = gridEnterList.getDrugsNumbs();
+                var templateNumber=$("#templateNumber").val();
+                // var personInCharge = $(" input[ name='personInCharge' ] ").val();
+                // var expectedTime = $(" input[ name='expectedTime' ] ").val();
+                $.ahsjajax(CTX + "/api/medicalOrderTemplateDetail/saveMedicineOrder.ahsj",
+                    {
+                        "drugsNumbs": drugsNumbs.join(','),
+                        "nums": nums.join(','),
+                        "usages": usages.join(','),
+                        "intervals": intervals.join(','),
+                        "templateNumber":templateNumber
+                    },
+                    function (msg) {
+                        if (msg.success) {
+                            M.toast({
+                                html: msg.message, completeCallback: function () {
+                                }
+                            });
+                            parent.grid.search();
+                            dialog.parentclose();
+                        } else {
+                            M.toast({
+                                html: msg.message, completeCallback: function () {
+                                }
+                            });
+                        }
+                    },
+                    function (data) {
+                        M.toast({
+                            html: "网络异常", completeCallback: function () {
+                            }
+                        });
+                    }
+                );});
+        });
+
     }
 
     $("input").change(function(){

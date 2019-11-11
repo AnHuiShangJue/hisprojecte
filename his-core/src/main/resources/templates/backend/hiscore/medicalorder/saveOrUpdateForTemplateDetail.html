@@ -39,11 +39,11 @@
                             <label for="isSkinTest">是否皮试<span style="font-size: 12px">(Whether skin test
 )</span></label>
                         </div>
-                        <div class="input-field col s4 l4 xl4">
-                            <input id="specification" name="specification" type="text" th:value="${hisMedicalOrderTemplateDetail.specification}" />
-                            <label for="specification">规格<span style="font-size: 12px">(specification
-)</span></label>
-                        </div>
+                        <!--<div class="input-field col s4 l4 xl4">-->
+                            <!--<input id="specification" name="specification" type="text" th:value="${hisMedicalOrderTemplateDetail.specification}" />-->
+                            <!--<label for="specification">规格<span style="font-size: 12px">(specification-->
+<!--)</span></label>-->
+                        <!--</div>-->
                         <!--<div class="input-field col s4 l4 xl4">-->
                             <!--<input id="unit" name="unit" type="text" th:value="${hisMedicalOrderTemplateDetail.unit}" data-error=".errorTxt2"/>-->
                             <!--<div class="errorTxt2"></div>-->
@@ -63,9 +63,8 @@
                             <!--<label for="dosage">用量<span style="font-size: 12px">(dosage)</span></label>-->
                         <!--</div>-->
                         <div class="input-field col s4 l4 xl4">
-                            <select ahsj:select name="intervals" id="intervals" type="code" typeKey="intervals" cssClass=""
+                            <input name="intervals" id="intervals" type="text"
                                     th:value="${hisMedicalOrderTemplateDetail.intervals}">
-                            </select>
                             <label for="intervals">间隔<span style="font-size: 12px">(Interval
 )</span></label>
                         </div>
@@ -77,10 +76,10 @@
                             <label for="totalAmount">用量<span style="font-size: 12px">(dosage
 )</span></label>
                         </div>
-                        <div class="input-field col s4 l4 xl4">
-                            <input id="remarks" name="remarks" type="text" th:value="${hisMedicalOrderTemplateDetail.remarks}" />
-                            <label for="remarks">备注<span style="font-size: 12px">(remark)</span></label>
-                        </div>
+                        <!--<div class="input-field col s4 l4 xl4">-->
+                            <!--<input id="remarks" name="remarks" type="text" th:value="${hisMedicalOrderTemplateDetail.remarks}" />-->
+                            <!--<label for="remarks">备注<span style="font-size: 12px">(remark)</span></label>-->
+                        <!--</div>-->
                         <div class="input-field col s4 l4 xl4" th:if="${hisMedicalOrderTemplateDetail.id} eq null">
                             <input id="orderNum" name="orderNum" type="number" th:value="${hisMedicalOrderTemplateDetail.orderNum}" />
                             <label for="orderNum">操作序号(如非插入序号请勿填写)<span style="font-size: 12px">(Operation number

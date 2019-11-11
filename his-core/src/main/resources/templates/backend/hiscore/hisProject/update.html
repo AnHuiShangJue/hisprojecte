@@ -34,6 +34,12 @@
                         </div>
 
                         <div class="input-field col s4 l4 xl4">
+                            <input id="pinyinCode" name="pinyinCode" type="text"
+                                    th:value="${hisProject.pinyinCode}">
+                            <label for="pinyinCode">项目拼音码<span style="font-size: 12px">(project pinyinCode)</span></label>
+                        </div>
+
+                        <div class="input-field col s4 l4 xl4">
                             <input id="price" name="price" type="number"
                                    data-error=".errorTxt1" th:value="${hisProject.price}">
                             <div class="errorTxt1"></div>

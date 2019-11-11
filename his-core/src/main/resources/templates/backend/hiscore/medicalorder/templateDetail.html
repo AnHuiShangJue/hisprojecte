@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com" >
 
 <div th:replace="public/base_list :: html"></div>
 <body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
@@ -9,9 +9,13 @@
     <div class="col s12 x12 l12 xl12">
         <div class="card">
             <div class="card-content">
-                <h4 class="card-title">医嘱模板明细
-                </h4><label style="color:black">Details of doctor's advice template
-            </label>
+                <h4 class="card-title">医嘱模板明细(Details of doctor's advice template)
+                </h4>
+                <div class="input-field col s4 l4 xl4 m4">
+                    <select ahsj:select name="medicalOrderType" id="medicalOrderType" type="code" typeKey="medical_order_detail_type">
+                    </select>
+                    <label for="medicalOrderType">选择医嘱类型<span style="font-size: 12px">(Select medical order type)</span></label>
+                </div>
                 <a id="addBtn" class="waves-effect waves-light btn"><i
                         class="material-icons  white-text tooltipped " data-position="bottom"
                         data-delay="50" data-tooltip="新增">add</i></a>
@@ -67,11 +71,11 @@
                         "orderable": false,
                         "className": "centered"
                     },
-                    {
-                        "title": "模板编号",
-                        "data": "templateNumber",
-                        "name": "template_number"
-                    },
+                    // {
+                    //     "title": "模板编号",
+                    //     "data": "templateNumber",
+                    //     "name": "template_number"
+                    // },
                     {
                         "title": "操作序号",
                         "data": "orderNum",//实体
@@ -82,44 +86,51 @@
                         "data": "name",//实体
                         "name": "name"//库
                     },
-                    {
-                        "title": "是否皮试",
-                        "data": "isSkinTestName",//实体
-                        "name": "is_skin_test"//库
-                    },
-                    {
-                        "title": "规格",
-                        "data": "specification",
-                        "name": "specification"
-                    },{
-                        "title": "单位",
-                        "data": "unit",
-                        "name": "unit"
-                    },
+
+                    // {
+                    //     "title": "规格",
+                    //     "data": "specification",
+                    //     "name": "specification"
+                    // },{
+                    //     "title": "单位",
+                    //     "data": "unit",
+                    //     "name": "unit"
+                    // },
                     {
                         "title": "用法",
                         "data": "usages",
                         "name": "usages"
                     },
-                    {
-                        "title": "用量",
-                        "data": "dosage",
-                        "name": "dosage"
-                    },
+                    // {
+                    //     "title": "用量",
+                    //     "data": "dosage",
+                    //     "name": "dosage"
+                    // },
                     {
                         "title": "间隔",
                         "data": "intervals",
                         "name": "intervals"
                     },
                     {
-                        "title": "总量",
+                        "title": "用量",
                         "data": "totalAmount",
                         "name": "total_amount"
                     },
                     {
-                        "title": "备注",
-                        "data": "remarks",
-                        "name": "remarks"
+                        "title": "医嘱类型",
+                        "data": "orderType",
+                        "name": "",
+                        "orderable": false,
+                    },
+                    // {
+                    //     "title": "备注",
+                    //     "data": "remarks",
+                    //     "name": "remarks"
+                    // },
+                    {
+                        "title": "是否皮试",
+                        "data": "isSkinTestName",//实体
+                        "name": "is_skin_test"//库
                     },
                     {
                         "title": "操作",
@@ -138,7 +149,7 @@
                         }
                     }
                 ],
-                "order":  [ [2, 'asc'] ]
+                "order":  [ [1, 'asc'] ]
             }
         });
     }
@@ -196,7 +207,7 @@
         });
 
         $('#addBtn').click(function () {
-            var url = CTX+"/api/medicalOrderTemplateDetail/saveOrUpdate/index.ahsj?token=" + TOKEN + "&templateNumber="+$("#templateNumber").val() + "&templateName="+$("#templateName").val();
+            var url = CTX+"/api/medicalOrderTemplateDetail/saveOrUpdate/index.ahsj?token=" + TOKEN + "&templateNumber="+$("#templateNumber").val() + "&templateName="+$("#templateName").val()+"&orderType="+$("#medicalOrderType").val();
             dialog.show(url, "添加医嘱模板");
 
         });

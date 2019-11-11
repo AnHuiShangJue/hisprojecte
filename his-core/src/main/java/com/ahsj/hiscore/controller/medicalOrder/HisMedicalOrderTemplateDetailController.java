@@ -90,15 +90,28 @@ public class HisMedicalOrderTemplateDetailController extends BaseController {
      *@Date 2019-06-25
      *@Time 11:29
      **/
-    @RequestMapping("saveOrUpdate/index.ahsj")
+    @RequestMapping(value = "saveOrUpdate/index.ahsj")
     ModelAndView saveOrUpdateIndex(HisMedicalOrderTemplateDetail hisMedicalOrderTemplateDetail,String token)throws Exception{
-        ModelAndView modelAndView = new ModelAndView("backend/hiscore/medicalorder/saveOrUpdateForTemplateDetail");
-        if(!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderTemplateDetail.getId())){
-            modelAndView.addObject("hisMedicalOrderTemplateDetail",hisMedicalOrderTemplateDetailService.selectById(hisMedicalOrderTemplateDetail.getId()));
-        }else{
-            modelAndView.addObject("hisMedicalOrderTemplateDetail",hisMedicalOrderTemplateDetail);
+        ModelAndView modelAndView = new ModelAndView();
+        if(hisMedicalOrderTemplateDetail.getOrderType().equals("1")) {
+            modelAndView.setViewName("backend/hiscore/medicalorder/saveOrUpdateForTemplateDetail");
+            if (!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderTemplateDetail.getId())) {
+                modelAndView.addObject("hisMedicalOrderTemplateDetail", hisMedicalOrderTemplateDetailService.selectById(hisMedicalOrderTemplateDetail.getId()));
+            } else {
+                modelAndView.addObject("hisMedicalOrderTemplateDetail", hisMedicalOrderTemplateDetail);
+            }
+            modelAndView.addObject("title","医嘱模板管理");
+        }//用药医嘱
+        else if(hisMedicalOrderTemplateDetail.getOrderType().equals('2')){
+            modelAndView.setViewName("backend/hiscore/medicalorder/creatMedicineOrder");
+            modelAndView.addObject("isTemplate",2);
+            modelAndView.addObject("templateNumber",hisMedicalOrderTemplateDetail.getTemplateNumber());
+        }//项目医嘱
+        else if(hisMedicalOrderTemplateDetail.getOrderType().equals('3')){
+            modelAndView.setViewName("backend/hiscore/medicalorder/creatProjectOrder");
+            modelAndView.addObject("isTemplate",3);
+            modelAndView.addObject("templateNumber",hisMedicalOrderTemplateDetail.getTemplateNumber());
         }
-        modelAndView.addObject("title","医嘱模板管理");
         modelAndView.addObject("token", token);
         return modelAndView;
     }
@@ -119,5 +132,29 @@ public class HisMedicalOrderTemplateDetailController extends BaseController {
         if(null != request.getParameter("ids")){
             return  hisMedicalOrderTemplateDetailService.delete(ids);
         }else  return MessageUtil.createMessage(false,"参数异常");
+    }
+
+    //新增用药医嘱模板
+    @RequestMapping(value = "saveMedicineOrder.ahsj")
+    @ResponseBody
+
+    public Message saveMedicineOrder (Map<String, Object> model, HttpServletRequest request
+            , @RequestParam(value="drugsNumbs", required=false) String[] drugsNumbs
+            , @RequestParam(value="nums", required=false) Integer[] nums
+            , @RequestParam(value="usages", required=false) String[] usages
+            , @RequestParam(value="intervals", required=false) String[] intervals
+            , @RequestParam(value="templateNumber", required=false) String templateNumber
+    ) throws Exception {
+        return hisMedicalOrderTemplateDetailService.saveMedicineOrder(drugsNumbs,nums,usages,intervals,templateNumber);
+    }
+    //新增项目医嘱模板
+    @RequestMapping(value = "saveProjectOrder.ahsj")
+    @ResponseBody
+    public Message saveProjectOrder (Map<String, Object> model, HttpServletRequest request
+            , @RequestParam(value="numbers", required=false) String[] numbers
+            , @RequestParam(value="nums", required=false) Integer[] nums
+            , @RequestParam(value="templateNumber", required=false) String templateNumber
+    ) throws Exception {
+        return hisMedicalOrderTemplateDetailService.saveProjectOrder(numbers,nums,templateNumber);
     }
 }

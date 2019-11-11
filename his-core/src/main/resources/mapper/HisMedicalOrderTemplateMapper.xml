@@ -128,7 +128,8 @@
   </update>
   <!--自定义sql-->
   <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
-        select a.*,b.user_name as createUserName
+        select a.*,b.user_name as createUserName,
+    case when a.remarks = '0' then '公共' else '私有' end as isPublic
         from his_medical_order_template as a
         left join `his-userinfo`.user_info as b on a.create_user_id = b.id
         where
