@@ -150,7 +150,7 @@ public class HisAnkleTemplateController extends BaseController {
             , @RequestParam(value="usages", required=false) String usages
             , @RequestParam(value="dosage", required=false) String dosage
             , @RequestParam(value="remarks", required=false) String remarks
-            , @RequestParam(value="intervals", required=false) Integer intervals
+            , @RequestParam(value="intervals", required=false) String intervals
 //            , @RequestParam(value="proofreadingNurseId", required=false) Long proofreadingNurseId
 //            , @RequestParam(value="approvedNurseId", required=false) Long approvedNurseId
 //            , @RequestParam(value="isStop", required=false) Integer isStop

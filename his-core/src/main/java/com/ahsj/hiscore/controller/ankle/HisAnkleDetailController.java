@@ -82,12 +82,12 @@ public class HisAnkleDetailController extends BaseController {
         }
         return modelAndView;
     }
-    
-    
+
+
     /**
      *@Description 跳转到打印输液单页面
-     *@Params 
-     *@return 
+     *@Params
+     *@return
      *@Author jin
      *@Date 2019/7/29
      *@Time 14:31
@@ -115,31 +115,31 @@ public class HisAnkleDetailController extends BaseController {
             HisAnkleDetail hisAnkleDetail = hisAnkleDetailService.selectByPrimaryId(id);
 
             hisPatientInfo.setSexName(hisPatientInfo.getSex()==1 ? "男":"女");
-            switch (hisAnkleDetail.getIntervals()){
-                case 1:hisAnkleDetail.setIntervalsName("qh");break;
-                case 2:hisAnkleDetail.setIntervalsName("q2h");break;
-                case 3:hisAnkleDetail.setIntervalsName("q4h");break;
-                case 4:hisAnkleDetail.setIntervalsName("q6h");break;
-                case 5:hisAnkleDetail.setIntervalsName("qd");break;
-                case 6:hisAnkleDetail.setIntervalsName("bid");break;
-                case 7:hisAnkleDetail.setIntervalsName("tid");break;
-                case 8:hisAnkleDetail.setIntervalsName("qid");break;
-                case 9:hisAnkleDetail.setIntervalsName("qn");break;
-                case 10:hisAnkleDetail.setIntervalsName("qod");break;
-                case 11:hisAnkleDetail.setIntervalsName("biw");break;
-                case 12:hisAnkleDetail.setIntervalsName("hs");break;
-                case 13:hisAnkleDetail.setIntervalsName("am");break;
-                case 14:hisAnkleDetail.setIntervalsName("pm");break;
-                case 15:hisAnkleDetail.setIntervalsName("St");break;
-                case 16:hisAnkleDetail.setIntervalsName("DC");break;
-                case 17:hisAnkleDetail.setIntervalsName("prn");break;
-                case 18:hisAnkleDetail.setIntervalsName("sos");break;
-                case 19:hisAnkleDetail.setIntervalsName("ac");break;
-                case 20:hisAnkleDetail.setIntervalsName("pc");break;
-                case 21:hisAnkleDetail.setIntervalsName("12n");break;
-                case 22:hisAnkleDetail.setIntervalsName("12mn");break;
-                default:break;
-            }
+//            switch (hisAnkleDetail.getIntervals()){
+//                case 1:hisAnkleDetail.setIntervalsName("qh");break;
+//                case 2:hisAnkleDetail.setIntervalsName("q2h");break;
+//                case 3:hisAnkleDetail.setIntervalsName("q4h");break;
+//                case 4:hisAnkleDetail.setIntervalsName("q6h");break;
+//                case 5:hisAnkleDetail.setIntervalsName("qd");break;
+//                case 6:hisAnkleDetail.setIntervalsName("bid");break;
+//                case 7:hisAnkleDetail.setIntervalsName("tid");break;
+//                case 8:hisAnkleDetail.setIntervalsName("qid");break;
+//                case 9:hisAnkleDetail.setIntervalsName("qn");break;
+//                case 10:hisAnkleDetail.setIntervalsName("qod");break;
+//                case 11:hisAnkleDetail.setIntervalsName("biw");break;
+//                case 12:hisAnkleDetail.setIntervalsName("hs");break;
+//                case 13:hisAnkleDetail.setIntervalsName("am");break;
+//                case 14:hisAnkleDetail.setIntervalsName("pm");break;
+//                case 15:hisAnkleDetail.setIntervalsName("St");break;
+//                case 16:hisAnkleDetail.setIntervalsName("DC");break;
+//                case 17:hisAnkleDetail.setIntervalsName("prn");break;
+//                case 18:hisAnkleDetail.setIntervalsName("sos");break;
+//                case 19:hisAnkleDetail.setIntervalsName("ac");break;
+//                case 20:hisAnkleDetail.setIntervalsName("pc");break;
+//                case 21:hisAnkleDetail.setIntervalsName("12n");break;
+//                case 22:hisAnkleDetail.setIntervalsName("12mn");break;
+//                default:break;
+//            }
             hisAnkleDetail.setIsSkinTestName(hisAnkleDetail.getIsSkinTest() == 1 ? "已皮试":"未皮试");
 
 
@@ -171,8 +171,8 @@ public class HisAnkleDetailController extends BaseController {
 
     /**
      *@Description 新增或更新
-     *@Params 
-     *@return 
+     *@Params
+     *@return
      *@Author jin
      *@Date 2019/7/17
      *@Time 15:18
@@ -189,7 +189,7 @@ public class HisAnkleDetailController extends BaseController {
             , @RequestParam(value="usages", required=false) String usages
             , @RequestParam(value="dosage", required=false) String dosage
             , @RequestParam(value="remarks", required=false) String remarks
-            , @RequestParam(value="intervals", required=false) Integer intervals
+            , @RequestParam(value="intervals", required=false) String intervals
             , @RequestParam(value="proofreadingNurseId", required=false) Long proofreadingNurseId
             , @RequestParam(value="approvedNurseId", required=false) Long approvedNurseId
             , @RequestParam(value="isStop", required=false) Integer isStop
@@ -269,12 +269,12 @@ public class HisAnkleDetailController extends BaseController {
         }
         return  hisAnkleDetailService.saveOrUpdate(hisAnkleDetail);
     }
-    
-    
+
+
     /**
      *@Description 查询模板并添加到护嘱明细中
-     *@Params 
-     *@return 
+     *@Params
+     *@return
      *@Author jin
      *@Date 2019/7/23
      *@Time 15:09
@@ -368,11 +368,11 @@ public class HisAnkleDetailController extends BaseController {
 
         }else  return MessageUtil.createMessage(false,"参数异常");
     }
-    
+
     /**
      *@Description 停嘱校对和核准  stopProofreading  stopApproved
-     *@Params 
-     *@return 
+     *@Params
+     *@return
      *@Author jin
      *@Date 2019/7/29
      *@Time 0:28

@@ -53,7 +53,7 @@ public class HisAnkle extends BaseEntity {
     private String usages;//用法
     private String dosage;//用量
     private String remarks;//护嘱备注
-    private Integer intervals;//护嘱间隔
+    private String intervals;//护嘱间隔
     private String pnNumber;//校对护士编号
     private String pnName;//校对护士姓名
     private String anNumber;//核准护士编号
@@ -194,13 +194,7 @@ public class HisAnkle extends BaseEntity {
         this.remarks = remarks;
     }
 
-    public Integer getIntervals() {
-        return intervals;
-    }
 
-    public void setIntervals(Integer intervals) {
-        this.intervals = intervals;
-    }
 
     public String getPnNumber() {
         return pnNumber;
@@ -386,5 +380,13 @@ public class HisAnkle extends BaseEntity {
 
     public void setTypeName(String typeName) {
         this.typeName = typeName;
+    }
+
+    public String getIntervals() {
+        return intervals;
+    }
+
+    public void setIntervals(String intervals) {
+        this.intervals = intervals;
     }
 }
