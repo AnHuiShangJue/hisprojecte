@@ -419,7 +419,7 @@ Scripts
                         console.log("queryString is" + queryString);
 
                         $.ahsjajax(
-                            CTX + "/api/hishospitalmanage/saveOrUpdate.ahsj?token=" + TOKEN,
+                            CTX + "/api/hishospitalmanage/saveOrUpdate.ahsj?token=" + TOKEN+"&bedIds="+bedIds,
                             queryString,
                             function (msg) {
                                 if (msg.success) {
