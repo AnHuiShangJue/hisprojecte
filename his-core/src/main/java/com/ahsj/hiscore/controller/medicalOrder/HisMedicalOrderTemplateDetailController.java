@@ -102,12 +102,12 @@ public class HisMedicalOrderTemplateDetailController extends BaseController {
             }
             modelAndView.addObject("title","医嘱模板管理");
         }//用药医嘱
-        else if(hisMedicalOrderTemplateDetail.getOrderType().equals('2')){
+        else if(hisMedicalOrderTemplateDetail.getOrderType().equals("2")){
             modelAndView.setViewName("backend/hiscore/medicalorder/creatMedicineOrder");
             modelAndView.addObject("isTemplate",2);
             modelAndView.addObject("templateNumber",hisMedicalOrderTemplateDetail.getTemplateNumber());
         }//项目医嘱
-        else if(hisMedicalOrderTemplateDetail.getOrderType().equals('3')){
+        else if(hisMedicalOrderTemplateDetail.getOrderType().equals("3")){
             modelAndView.setViewName("backend/hiscore/medicalorder/creatProjectOrder");
             modelAndView.addObject("isTemplate",3);
             modelAndView.addObject("templateNumber",hisMedicalOrderTemplateDetail.getTemplateNumber());
