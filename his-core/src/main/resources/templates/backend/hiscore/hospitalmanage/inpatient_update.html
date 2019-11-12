@@ -66,7 +66,7 @@
                         <label for="wardId">病房编号<span style="font-size: 12px">(Ward number)</span></label>
                     </div>
                     <div class="input-field col s4 l4 xl4">
-                        <input type="hidden" id="mybedId" th:value="${hisHospitalManage.bedId}">
+                        <input type="hidden" id="mybedId" name="mybedId" th:value="${hisHospitalManage.bedId}">
                         <select   name="bedId" id="bedId">
                         </select>
                         <label for="bedId">病床编号<span style="font-size: 12px">(Hospital bed number)</span></label>
