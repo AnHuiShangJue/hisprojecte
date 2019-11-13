@@ -55,9 +55,7 @@
                         </div>
                         <input type="hidden" id="medicalNumber" name="medicalNumber">
                         <div class="input-field col s3 l3 xl3">
-                            <input id="phonenumber" name="phonenumber" type="text"
-                                   data-error=".errorTxt4">
-                            <div class="errorTxt4"></div>
+                            <input id="phonenumber" name="phonenumber" type="text">
                             <label class="active" for="phonenumber">手机号<span style="font-size: 12px">(Phone Number
 )</span></label>
                         </div>
@@ -259,30 +257,13 @@ Scripts
             rules: {
                 name: {
                     required: true,
-                    minlength: 2
-                },
-              /*  idcard: {
-                    required: true,
-                    minlength: 1
-                },*/
-                phonenumber: {
-                    required: true,
-                    number: true,
                     minlength: 1
                 }
             },
             messages: {
                 name: {
                     required: "请输入名称",
-                    minlength: "最少包含2个字符"
-                },
-               /* idcard: {
-                    required: "请输入身份证号",
                     minlength: "最少包含1个字符"
-                },*/
-                phonenumber: {
-                    required: "请输入手机号",
-                    minlength: "最少包含1位数字"
                 }
             },
             errorElement: 'div',

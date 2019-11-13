@@ -617,6 +617,7 @@
                             // "name":name
                         },
                         function (msg) {
+
                             if (msg.success) {
                                 grid.search();
                                 M.toast({
@@ -624,6 +625,8 @@
                                     }
                                 });
                                 grid.search();
+                                cacheIds = new Array();
+
                             } else {
                                 M.toast({
                                     html: msg.message, completeCallback: function () {
