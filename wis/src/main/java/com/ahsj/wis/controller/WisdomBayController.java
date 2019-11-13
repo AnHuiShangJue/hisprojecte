@@ -140,7 +140,7 @@ public class WisdomBayController {
      */
     @RequestMapping("/aboutwisdom/index.ahsj")
     ModelAndView aboutwisdomIndex() {
-        ModelAndView modelAndView = new ModelAndView("backend/wisdom/aboutwisdom");
+        ModelAndView modelAndView = new ModelAndView("backend/wis/aboutwisdom");
         modelAndView.addObject("title", "关于智慧湾");
         return modelAndView;
     }
