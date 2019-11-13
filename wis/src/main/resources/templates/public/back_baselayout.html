@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="../bootstrap/js/jquery-1.12.0.min.js"></script>
+<script type="text/javascript" src="../bootstrap/js/bootstrap.js" ></script>
+<link rel="stylesheet" href="../bootstrap/css/bootstrap.css" />
+<body>
+
+<div id="lanhu" style="width: 1903px">
+    <div style="float: left;height: 109px">
+        <a href="/api/wisdombay/lanhu/index.ahsj" class="brand-logo" style="margin-top: 12px">
+            <img src="/bootstrap/images/wisdom/1.png" style="margin-top: 20px;margin-left: 125px" width="200px" height="64px"/>
+        </a>
+    </div>
+    <div style="float: right;margin-right: 50px">
+        <ul class="navigation " style="margin-top: 46px;margin-right: 125px">
+            <li ><a href="/api/wisdombay/lanhu/index.ahsj" style="color: #0b0b0b">首页</a></li>
+            <li ><a href="/api/wisdombay/aboutwisdom/index.ahsj" style="color: #0b0b0b">关于智慧湾</a></li>
+            <li><a class="dropdown-button" href="#!" data-activates="dropdown1" style="color: #0b0b0b">解决方案</a>
+<!--                <ul id="dropdown1" class="dropdown-content" style="margin-top: 30px">
+                    <li><a href="/api/wisdombay/list/index.ahsj">一</a></li>
+                    <li><a href="/api/wisdombay/twolist/index.ahsj">二</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">三</a></li>
+                </ul>-->
+            </li>
+            <li ><a href="/api/wisdombay/contactus/index.ahsj" style="color: #0b0b0b">招聘与合作</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    $(function () {
+        $(".navigation li").mouseover(function () {
+            $(".navigation li").css("background-color","");
+            $(this).css("background-color","rgba(0, 0, 0, .1)")
+        })
+        $(".navigation li").mouseout(function () {
+            $(this).css("background-color","")
+        })
+    })
+</script>
