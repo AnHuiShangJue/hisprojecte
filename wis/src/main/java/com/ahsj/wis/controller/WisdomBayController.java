@@ -61,7 +61,7 @@ public class WisdomBayController {
      */
     @RequestMapping("/contactus/index.ahsj")
     ModelAndView contactusIndex() {
-        ModelAndView modelAndView = new ModelAndView("backend/wisdom/contact_us");
+        ModelAndView modelAndView = new ModelAndView("backend/wis/contact_us");
         modelAndView.addObject("title", "");
         return modelAndView;
     }
