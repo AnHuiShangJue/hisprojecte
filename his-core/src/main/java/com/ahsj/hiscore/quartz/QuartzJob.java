@@ -29,6 +29,9 @@ public class QuartzJob {
 
     @Autowired
     TranslateInfoService translateInfoService;
+    
+    @Autowired
+    HisProjectService hisProjectService;
 
     @Autowired
     HisHospitalManageService hisHospitalManageService;
@@ -108,12 +111,12 @@ public class QuartzJob {
      *@Date 2019/8/8
      *@Time 16:44
     **/
-    @Scheduled(cron = "0 59 2 * * ?")
+/*    @Scheduled(cron = "0 59 2 * * ?")
     public void TranslateInfojob() throws Exception {
         logger.info("-------------------翻译信息开始-----------------------");
         translateInfoService.TranslateInfojob();
         logger.info("-------------------翻译信息结束-----------------------");
-    }
+    }*/
 
     /**
      *@Description 根据医嘱当时生成输液单(定时任务)
@@ -163,6 +166,19 @@ public class QuartzJob {
         logger.info("-------------------定时关闭启动-----------------------");
         iSecurityService.systemShutdownService();
         logger.info("-------------------关闭完成-----------------------");
+    }
+    
+    /**
+     *@功能说明  将没有翻译的项目筛选进行翻译
+     *@Params []
+     *@return void
+     *@Author XJP
+     *@Date 2019/11/13
+     *@Time 15:41
+    **/
+  //  @Scheduled(cron = "0 0 2 1 * *")
+    public void jobProject()throws Exception {
+        hisProjectService.jobProject();
     }
 }
 

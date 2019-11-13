@@ -14,6 +14,7 @@ import com.ahsj.hiscore.entity.HisProject;
 import com.ahsj.hiscore.entity.dto.HisProjectRes;
 import core.entity.PageBean;
 import core.message.Message;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -188,7 +189,7 @@ public interface HisProjectService {
      * @Date 2019/8/28
      * @Time 9:45
      **/
-    void exportExcels(Long[] ids, HttpServletRequest request, HttpServletResponse response, HttpSession session,String param,HisProject hisProject) throws Exception;
+    void exportExcels(Long[] ids, HttpServletRequest request, HttpServletResponse response, HttpSession session, String param, HisProject hisProject) throws Exception;
 
     /**
      * @return java.util.List<java.lang.Long>
@@ -201,17 +202,28 @@ public interface HisProjectService {
     List<Long> search(HisProjectRes hisProjectRes);
 
     /**
-     *@Description 根据IDs查询项目信息
-     *@Params [ids]
-     *@return java.util.List<com.ahsj.hiscore.entity.HisProject>
-     *@Author zhushixiang
-     *@Date 2019-10-08
-     *@Time 13:50
-    **/
-    List<HisProject> selectForListForProjectByIds(Long[] ids)throws Exception;
+     * @return java.util.List<com.ahsj.hiscore.entity.HisProject>
+     * @Description 根据IDs查询项目信息
+     * @Params [ids]
+     * @Author zhushixiang
+     * @Date 2019-10-08
+     * @Time 13:50
+     **/
+    List<HisProject> selectForListForProjectByIds(Long[] ids) throws Exception;
 
     //根据项目编号查询项目信息
-    HisProject selectByNumber(String number)throws Exception;
+    HisProject selectByNumber(String number) throws Exception;
+
     //模糊查询（or）
-    PageBean<HisProject> listForAll(PageBean<HisProject> pageBean)throws Exception;
+    PageBean<HisProject> listForAll(PageBean<HisProject> pageBean) throws Exception;
+
+    /**
+     * @return void
+     * @功能说明
+     * @Params []
+     * @Author XJP
+     * @Date 2019/11/13
+     * @Time 15:39
+     **/
+    void jobProject() throws Exception;
 }

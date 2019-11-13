@@ -889,4 +889,46 @@ public class HisProjectServiceImpl implements HisProjectService {
         pageBean.setData(CodeHelper.getInstance().setCodeValue(hisProjectMapper.listForAll(pageBean)));
         return pageBean;
     }
+
+    @Override
+    public void jobProject() throws Exception {
+        List<HisProject> hisProjectList1 = hisProjectMapper.queryProjectAll();
+        //  List<HisProject> hisProjectList = hisProjectService.queryAll();
+        List<Long> collect = hisProjectList1.stream().map(HisProject::getId)
+                .collect(Collectors.toList());
+        Translate translate = new Translate();
+        translate.setTranslateType(Constants.TRANSLATE_HIS_PROJECT);
+        List<Translate> translates = iTranslateService.queryTranslate(translate);
+        //根据TranslateId去重
+        List<Translate> arrayList = translates.stream().collect(
+                Collectors.collectingAndThen(Collectors.toCollection(
+                        () -> new TreeSet<>(Comparator.comparing(e -> e.getTranslateId()))), ArrayList::new)
+        );
+        List<Long> list = arrayList.stream().map(Translate::getTranslateId).collect(Collectors.toList());
+        List<Long> plist = getLongList(collect, list);
+
+        List<HisProject> subtractList  =  new ArrayList<>();
+        for (Long aLong : plist) {
+            HisProject hisProject = hisProjectMapper.selectByPrimaryKey(aLong);
+            subtractList.add(hisProject);
+        }
+        BaseLoginUser loginUser = new BaseLoginUser();
+        TranslateModels translateModels = new TranslateModels();
+        List<HisProjectTranslate> translateList = new ArrayList<>();
+        for (HisProject project : subtractList) {
+            HisProjectTranslate projectTranslate = new HisProjectTranslate();
+            BeanUtils.copyProperties(project, projectTranslate);
+            translateList.add(projectTranslate);
+        }
+        translateModels.setUserId(loginUser.getId());
+        translateModels.setHisProjectTranslates(translateList);
+        amqpTemplat.convertAndSend("com.ahsj.addProjectList", JsonUtils.serialize(translateModels));
+    }
+
+    public static List<Long> getLongList(List<Long> listA, List<Long> listB) {
+        // 差集（扣除）
+        Collection disjunction = org.apache.commons.collections.CollectionUtils.subtract(listA, listB);
+        List<Long> collect = (List<Long>) disjunction.stream().collect(Collectors.toList());
+        return collect;
+    }
 }
