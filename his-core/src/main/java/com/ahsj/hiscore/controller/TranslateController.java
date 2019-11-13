@@ -1,5 +1,7 @@
 package com.ahsj.hiscore.controller;
 
+import com.ahsj.hiscore.HisCoreApplication;
+import com.ahsj.hiscore.common.Constants;
 import com.ahsj.hiscore.common.utils.JsonUtils;
 import com.ahsj.hiscore.dao.HisMedicineInfoMapper;
 import com.ahsj.hiscore.dao.HisProjectMapper;
@@ -117,7 +119,7 @@ public class TranslateController {
         List<Long> collect = hisProjectList1.stream().map(HisProject::getId)
                 .collect(Collectors.toList());
         Translate translate = new Translate();
-        translate.setTranslateType("10004");
+        translate.setTranslateType(Constants.TRANSLATE_HIS_PROJECT);
         List<Translate> translates = iTranslateService.queryTranslate(translate);
         //根据TranslateId去重
     List<Translate> arrayList = translates.stream().collect(
@@ -199,4 +201,6 @@ public class TranslateController {
         List<Long> collect = (List<Long>) disjunction.stream().collect(Collectors.toList());
         return collect;
     }
+
+
 }
