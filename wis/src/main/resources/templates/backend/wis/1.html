@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<body id="scrollheader">
+<style>
+    #lanhu {
+        height: 120px;
+    }
+</style>
+<div th:replace="public/back_baselayout :: html"></div>
+
+<div class="row col s12 x12 l12 xl12" style="width:1903px;
+height:1559px;">
+    <div class="row" style="background:rgba(11,13,50,1); height:677px; ">
+        <div class="row">
+            <div class="row col s6 x6 l6 xl6" style="
+    height: 140px;
+    font-size: 50px;
+    font-family: PingFangSC-Semibold,PingFang SC;
+    font-weight: 600;
+    color: rgba(255,255,255,1);
+    line-height: 70px;
+    margin-left: 8%;
+    padding-top: 7%;">
+                <span th:text="${wisdomIndex.introduceOne}" style="
+    z-index: 10;
+    position: absolute;
+"></span>
+            </div>
+            <div id="rt-page-surround">
+                <!-- slider -->
+                <section id="rt-showcase-surround">
+                    <div id="rt-showcase" class="slider-container rt-overlay-dark">
+                        <div class="rt-container slider-container">
+                            <div class="rt-grid-12 rt-alpha rt-omega">
+                                <div class='csslider1 autoplay ' style="margin-top: -160px;">
+                                    <input name="cs_anchor1" id='cs_slide1_0' type="radio" class='cs_anchor slide'>
+                                    <input name="cs_anchor1" id='cs_slide1_1' type="radio" class='cs_anchor slide'>
+                                    <input name="cs_anchor1" id='cs_slide1_2' type="radio" class='cs_anchor slide'>
+                                    <input name="cs_anchor1" id='cs_play1' type="radio" class='cs_anchor' checked>
+                                    <input name="cs_anchor1" id='cs_pause1_0' type="radio" class='cs_anchor pause'>
+                                    <input name="cs_anchor1" id='cs_pause1_1' type="radio" class='cs_anchor pause'>
+                                    <input name="cs_anchor1" id='cs_pause1_2' type="radio" class='cs_anchor pause'>
+                                    <ul>
+                                        <div>
+                                            <img src="/assets/app-assets/images/wisdom/f1.jpg">
+                                        </div>
+                                        <li class='num0 img'>
+                                            <img src="/assets/app-assets/images/wisdom/f2.jpg">
+                                        </li>
+                                        <li class='num1 img'>
+                                            <img src="/assets/app-assets/images/wisdom/f3.jpg">
+                                        </li>
+                                        <li class='num2 img'>
+                                            <img src="/assets/app-assets/images/wisdom/f4.jpg">
+                                        </li>
+
+                                    </ul>
+                                    <div class='cs_arrowprev'>
+                                        <label class='num0' for='cs_slide1_0'><span><i></i></span></label>
+                                        <label class='num1' for='cs_slide1_1'><span><i></i></span></label>
+                                        <label class='num2' for='cs_slide1_2'><span><i></i></span></label>
+                                    </div>
+                                    <div class='cs_arrownext'>
+                                        <label class='num0' for='cs_slide1_0'><span><i></i></span></label>
+                                        <label class='num1' for='cs_slide1_1'><span><i></i></span></label>
+                                        <label class='num2' for='cs_slide1_2'><span><i></i></span></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- /slider -->
+            </div>
+            <div class="row col s6 x6 l6 xl6" style="  width: 700px;
+    height: 270px;
+    font-size: 32px;
+    font-family: PingFangSC-Regular,PingFang SC;
+    font-weight: 400;
+    color: rgba(255,255,255,1);
+    line-height: 45px;
+    margin-left: 8%;
+    margin-top: -21%;">
+                <span style="  z-index: 10;
+    width: 689px;
+    position: absolute;" th:text="${wisdomIndex.detailsOne}"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row col s12 x12 l12 xl12" style="width:100%;
+height:595px;
+background:rgba(255,255,255,1);">
+        <div class="row " style="width:auto;
+height:108px;
+font-size:39px;
+font-family:PingFangSC-Medium,PingFang SC;
+font-weight:500;
+color:rgba(19,18,18,1);
+line-height:54px;
+position: relative;
+    margin-left: 8%;
+    top: 17%;"><span id="staggered-test" th:text="${wisdomIndex.introduceTwo}"></span>
+        </div>
+        <div class="row " style="width:auto;
+height:36px;
+font-size:25px;
+font-family:PingFangSC-Regular,PingFang SC;
+font-weight:400;
+color:rgba(19,18,18,1);
+line-height:36px;
+position: relative;
+    margin-left: 8%;
+    top: 11%;"><span th:text="${wisdomIndex.spell}"></span>
+        </div>
+        <div class="row " style="    width: 80%;
+    height: 64px;
+    font-size: 23px;
+    font-family: PingFangSC-Medium,PingFang SC;
+    font-weight: 500;
+    color: rgba(109,109,109,1);
+    line-height: 32px;
+    position: relative;
+    margin-left: 8%;
+    margin-top: 9%;">
+            <span th:text="${wisdomIndex.detailsTwo}"></span>
+        </div>
+    </div>
+    <div class="row col s12 x12 l12 xl12" style="    width: 1264px;
+    height: 344px;
+    margin-left: 261px;">
+        <div class="shoufenqin">
+            <div class="container">
+                <div class="shoufenqin_box">
+                    <div class="one1 len">
+                        <div class="big_sfq">
+                            <div>
+                                <img src=""
+                                     alt="">
+                                <p th:text="${wisdomIndex.one1}"></p>
+                                <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one1"><i>——</i>查看更多</a>
+                            </div>
+                            <img src="/assets/app-assets/images/wisdom/1.jpg" alt="">
+                        </div>
+                        <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one1" class="small">
+                            <img src="" alt="">
+                            <span th:text="${wisdomIndex.one1}"></span>
+                        </a>
+                    </div>
+                    <div class="one2 ">
+                        <div class="big_sfq">
+                            <div>
+                                <img src=""
+                                     alt="">
+                                <p th:text="${wisdomIndex.one2}"></p>
+                                <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one2"><i>——</i>查看更多</a>
+                            </div>
+                            <img src="/assets/app-assets/images/wisdom/2.jpg" alt="">
+                        </div>
+                        <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one2" class="small">
+                            <img src="#" alt="">
+                            <span th:text="${wisdomIndex.one2}"></span>
+                        </a>
+                    </div>
+                    <div class="one3 ">
+                        <div class="big_sfq">
+                            <div>
+                                <img src="#"
+                                     alt="">
+                                <p th:text="${wisdomIndex.one3}"></p>
+                                <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one3"><i>——</i>查看更多</a>
+                            </div>
+                            <img src="/assets/app-assets/images/wisdom/3.jpg" alt="">
+                        </div>
+                        <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one3" class="small">
+                            <img src="" alt="">
+                            <span th:text="${wisdomIndex.one3}"></span>
+                        </a>
+                    </div>
+                    <div class="one4 ">
+                        <div class="big_sfq">
+                            <div>
+                                <img src=""
+                                     alt="">
+                                <p th:text="${wisdomIndex.one4}"></p>
+                                <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one4"><i>——</i>查看更多</a>
+                            </div>
+                            <img src="/assets/app-assets/images/wisdom/4.jpg" alt="">
+                        </div>
+                        <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one4" class="small">
+                            <img src="" alt="">
+                            <span th:text="${wisdomIndex.one4}"></span>
+                        </a>
+                    </div>
+                    <div class="one5 ">
+                        <div class="big_sfq">
+                            <div>
+                                <img src=""
+                                     alt="">
+                                <p th:text="${wisdomIndex.one5}"></p>
+                                <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one5"><i>——</i>查看更多</a>
+                            </div>
+                            <img src="/assets/app-assets/images/wisdom/5.jpg" alt="">
+                        </div>
+                        <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one5" class="small">
+                            <img src="" alt="">
+                            <span th:text="${wisdomIndex.one5}"></span>
+                        </a>
+                    </div>
+                    <div class="one6 ">
+                        <div class="big_sfq">
+                            <div>
+                                <img src=""
+                                     alt="">
+                                <p th:text="${wisdomIndex.one6}"></p>
+                                <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one6"><i>——</i>查看更多</a>
+                            </div>
+                            <img src="/assets/app-assets/images/wisdom/6.jpg" alt="">
+                        </div>
+                        <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one6" class="small">
+                            <img src="" alt="">
+                            <span th:text="${wisdomIndex.one6}"></span>
+                        </a>
+                    </div>
+                    <div class="one7 ">
+                        <div class="big_sfq">
+                            <div>
+                                <img src="" alt="">
+                                <p th:text="${wisdomIndex.one7}"></p>
+                                <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one7"><i>——</i>查看更多</a>
+                            </div>
+                            <img src="/assets/app-assets/images/wisdom/7.jpg" alt="">
+                        </div>
+                        <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one7" class="small">
+                            <img src="" alt="">
+                            <span th:text="${wisdomIndex.one7}"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<div th:replace="public/footer :: html"></div>
+<script th:inline="javascript">
+    $(window).load(function () {
+        setTimeout(function () {
+            Materialize.toast('<span>欢迎进入智慧湾</span>', 1500);
+        }, 3000);
+        window.onresize = function () {
+            var contentHeight = $(window).height() - $(".page-topbar").height() - $(".page-footer").height();
+            $('#frameContainer').height(contentHeight);
+        };
+    });
+
+    $('.one1').css("width", '480px');
+    $('.shoufenqin_box>div').hover(function () {
+        $('.shoufenqin_box>div').stop(true).animate({width: "120px"}, 500);
+        $(this).stop(true).animate({width: "480px"}, 500);
+        $(this).addClass("len").siblings().removeClass('len');
+    })
+
+
+</script>
+</html>
