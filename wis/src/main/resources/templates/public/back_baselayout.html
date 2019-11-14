@@ -13,11 +13,6 @@
 <!--<script src="/bootstrap/js/velocity.js"></script>
 <script src="/bootstrap/js/shutter.js"></script>-->
 <style>
-    .wow:first-child {
-        visibility: hidden;
-    }
-</style>
-<style>
 </style>
 <body>
 <nav class="navbar navbar-default" style="background-color: #ffffff;height: 110px;">
@@ -55,20 +50,5 @@
 </nav>
 </body>
 </html>
-<script src="/bootstrap/js/wow.js"></script>
 <script>
-    wow = new WOW(
-        {
-            animateClass: 'animated',
-            offset:       100,
-            callback:     function(box) {
-                console.log("WOW: animating <" + box.tagName.toLowerCase() + ">")
-            }
-        }
-    );    wow.init();
-    document.getElementById('moar').onclick = function() {
-        var section = document.createElement('section');
-        section.className = 'section--purple wow fadeInDown';
-        this.parentNode.insertBefore(section, this);
-    };
 </script>
