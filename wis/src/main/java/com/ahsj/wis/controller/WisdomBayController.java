@@ -28,7 +28,7 @@ public class WisdomBayController {
 
     @RequestMapping("/list/index.ahsj")
     ModelAndView listIndex() {
-        ModelAndView modelAndView = new ModelAndView("backend/wisdom/wisdom_bay");
+        ModelAndView modelAndView = new ModelAndView("backend/wis/wisdom_bay");
         modelAndView.addObject("title", "");
         return modelAndView;
     }
@@ -147,7 +147,7 @@ public class WisdomBayController {
 
     @RequestMapping("/organization/index.ahsj")
     ModelAndView organization() throws Exception {
-        ModelAndView modelAndView = new ModelAndView("backend/wisdom/organization");
+        ModelAndView modelAndView = new ModelAndView("backend/wis/organization");
         modelAndView.addObject("title", "");
         return modelAndView;
     }
