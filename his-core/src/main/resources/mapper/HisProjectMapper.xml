@@ -236,7 +236,7 @@
         select
         p.* ,o.name as dept_name , t.translate_Khmer as translate_Khmer ,CONCAT(p.name,'(',t.translate_Khmer,')') as chinese_english_name
         from his_project p left join `his-userinfo`.organization as o on p.department_id = o.id left join `his-translate`.translate t
-        on p.id =  t.translate_id WHERE t.translate_type = '10004' and t.translate_column = 'name'
+        on p.id =  t.translate_id WHERE  1=1
 
         <if test="parameter.name != null and parameter.name != ''">
             and p.name like concat('%', #{parameter.name,jdbcType=INTEGER},'%')
