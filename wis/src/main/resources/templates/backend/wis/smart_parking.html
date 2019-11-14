@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:ahsj="http://www.anhuishangjue.com">
+
+<style>
+    .tab {
+        font-weight: bolder;
+    }
+
+    .fountsize {
+        width: 123px;
+        height: 42px;
+        font-size: 27px;
+        font-family: PingFangSC-Light, PingFang SC;
+        position: absolute;
+        font-weight: 300;
+        color: rgba(255, 255, 255, 1);
+        line-height: 42px;
+    }
+</style>
+<body>
+<div th:replace="public/back_baselayout :: html"></div>
+<div class="container-fluid">
+    <div class="row">
+        <img src="/bootstrap/images/wisdom/path5.png" style="position: absolute;">
+        <img src="/bootstrap/images/wisdom/banner2x.png" class="img-responsive" alt="Responsive image" style="margin-top: -20px;"/>
+        <div class="" style="font-size: 30px;margin-left: 20%;margin-top: 2%;width: 50%;">产品特色</div>
+        <div id="test2" style="margin-left: 25%; height: 373px;">
+            <div class="col-xs-12 col-sm-12 col-md-12" id="wq"
+                 style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 19%;height: 45%;margin-right: 4%;margin-top: 4%;border-radius: 25px">
+                <img src="/bootstrap/images/wisdom/AppleTV.png" class="img-responsive center-block" >
+                <br><span style="color: #ffffff;margin-left: 29%;font-size: 136%;">便捷管理</span>
+                <br><br><span style="color: #ffffff; font-size: 13px;">便捷文件管理是一款安卓设备上*方便的手机资源管理和文件管理软件。清新的界面加上强大的文件管理和传输功能,轻松连接即可实.</span>
+            </div>
+            <div class="card " id="wq1"
+                 style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 19%;height: 45%;margin-right: 4%;margin-top: 4%;border-radius: 25px">
+                <img src="/bootstrap/images/wisdom/AppleTV1.png" class="img-responsive center-block" >
+                <br><span style="color: #ffffff;margin-left: 36%;font-size: 136%;">有效控制</span>
+            </div>
+            <div class="card" id="wq2"
+                 style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 19%;height: 45%;margin-right: 4%;margin-top: 4%;border-radius: 25px">
+                <img src="/bootstrap/images/wisdom/Grouping10.png" class="img-responsive center-block" >
+                <br><span style="color: #ffffff;margin-left: 35%;font-size: 136%;">移动办公</span>
+            </div>
+        </div>
+        <div class="row" style="float: left;border: 1px;background-color: #030E3F;width: 100.8%;height: 740px; margin-top: 7%;">
+            <div class="row col-xs-6 col-sm-6 col-md-6" style="margin-top: 2%;">
+                <span style="font-size: 30px;margin-left: 40%;margin-top: 2%; color: #ffffff">认证服务</span>
+                <div class="row col-xs-6 col-sm-6 col-md-6" style="margin-left: 23%">
+                    <br><br><span style="color: #ffffff;letter-spacing: 0.56px; line-height: 222%; font-size:131%;">通过NVIDIA 深度学习学院提供人工智能能力认证服务，深度学习学院聚焦于人工智能和深度学习，致力于在全世界范围内提供培训，学习如何解决最具挑战性的问题。通过线上自主学习，或者线下由 NVIDIA 认证的讲师来教授的培训课程。</span>
+                </div>
+            </div>
+            <div class="row col-xs-6 col-sm-6 col-md-6 img-responsive">
+                <img src="/bootstrap/images/wisdom/line1.png"
+                     style="margin-left: 50%; margin-top: 7.1%; position: absolute; z-index: 99;">
+                <div class="fountsize" style="margin-left: 39%;margin-top: 4%;font-size: 180%;">线上考试</div>
+                <img src="/bootstrap/images/wisdom/line2.png"
+                     style="margin-left: 36.5%; margin-top: 14.3%; position: absolute; z-index: 99;">
+                <div class="fountsize" style="margin-left: 30%;margin-top: 9%;font-size: 180%;">职业发展支持</div>
+                <img src="/bootstrap/images/wisdom/line3.png"
+                     style="margin-left: 31%; margin-top: 23.3%; position: absolute; z-index: 99;">
+                <div class="fountsize" style="margin-left: 24%;margin-top: 23%;font-size: 180%;">获得认证证书</div>
+                <img src="/bootstrap/images/wisdom/line4.png"
+                     style="margin-left: 39.5%; margin-top: 31.1%; position: absolute; z-index: 99;">
+                <div class="fountsize" style="margin-left: 29%;margin-top: 35%;font-size: 180%;">认证服务</div>
+                <img src="/bootstrap/images/wisdom/line5.png"
+                     style="margin-left: 45.9%; margin-top: 36.4%; position: absolute; z-index: 99;">
+                <div class="fountsize" style="margin-left: 35%;margin-top: 45%;font-size: 180%;">考试测评</div>
+                <img src="/bootstrap/images/wisdom/bitmap10.png"
+                     style="margin-left: 53.9%;margin-top: 14.4%;width: 30%;position: absolute;" >
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#wq").click(function () {
+            $("#wq1").animate({width: '19%', height: '45%'});
+            $("#wq2").animate({width: '19%', height: '45%'});
+            $("#wq").animate({width: '23%', height: '68%'});
+        });
+        $("#wq1").click(function () {
+            $("#wq").animate({width: '19%', height: '45%'});
+            $("#wq2").animate({width: '19%', height: '45%'});
+            $("#wq1").animate({width: '23%', height: '68%'});
+        });
+        $("#wq2").click(function () {
+            $("#wq").animate({width: '19%', height: '45%'});
+            $("#wq1").animate({width: '19%', height: '45%'});
+            $("#wq2").animate({width: '23%', height: '68%'});
+        });
+    })
+</script>
+</body>
+</html>
+

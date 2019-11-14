@@ -29,7 +29,42 @@ public class WisdomBayController {
     @RequestMapping("/list/index.ahsj")
     ModelAndView listIndex() {
         ModelAndView modelAndView = new ModelAndView("backend/wis/wisdom_bay");
-        modelAndView.addObject("title", "");
+        modelAndView.addObject("title", "人工智能实验室");
+        return modelAndView;
+    }
+
+    @RequestMapping("/intelligent/index.ahsj")
+    ModelAndView intelligentIndex() {
+        ModelAndView modelAndView = new ModelAndView("backend/wis/intelligent_acquisition");
+        modelAndView.addObject("title", "智能采集平台");
+        return modelAndView;
+    }
+
+    @RequestMapping("/smartpark/index.ahsj")
+    ModelAndView smartparkIndex() {
+        ModelAndView modelAndView = new ModelAndView("backend/wis/smart_park");
+        modelAndView.addObject("title", "智慧园区");
+        return modelAndView;
+    }
+
+    @RequestMapping("/smartparking/index.ahsj")
+    ModelAndView smartparkingIndex() {
+        ModelAndView modelAndView = new ModelAndView("backend/wis/smart_parking");
+        modelAndView.addObject("title", "智慧停车");
+        return modelAndView;
+    }
+
+    @RequestMapping("/socialcredit/index.ahsj")
+    ModelAndView socialcreditIndex() {
+        ModelAndView modelAndView = new ModelAndView("backend/wis/social_credit");
+        modelAndView.addObject("title", "社会信用");
+        return modelAndView;
+    }
+
+    @RequestMapping("/macroe/index.ahsj")
+    ModelAndView macroeIndex() {
+        ModelAndView modelAndView = new ModelAndView("backend/wis/macroeconomics");
+        modelAndView.addObject("title", "宏观经济");
         return modelAndView;
     }
 
