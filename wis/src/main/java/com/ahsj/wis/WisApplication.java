@@ -12,14 +12,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringCloudApplication
-@EnableDiscoveryClient
 @MapperScan("com.ahsj.wis.dao")
-@SpringBootApplication(scanBasePackages = {"com.ahsj.wisdom", "com.ahsj.wis.error"})
+@SpringBootApplication(scanBasePackages = {"com.ahsj.wisdom"})
 @EnableTransactionManagement //开启事务
-@EnableCaching //开启缓存
-@EnableFeignClients(value = "com.ahsj.wis")
-@EnableScheduling
-@RefreshScope
 public class WisApplication {
 
     public static void main(String[] args) {
