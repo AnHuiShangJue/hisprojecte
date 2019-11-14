@@ -58,7 +58,6 @@
                     success: function (msg) {
                         if (msg.success) {
                             M.toast({html: msg.message});
-                            dialog.parentclose();
                             return false;
                         } else {
                             M.toast({html: msg.message});

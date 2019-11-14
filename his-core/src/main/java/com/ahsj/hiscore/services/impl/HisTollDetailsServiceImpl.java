@@ -363,11 +363,9 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
                     hs.setObserveFee(hs.getObserveFee().add(hisTollDetail.getPrice()));
                 }
                 if (hisTollDetail.getType() == 14) {//检查
-                    hs.setExaminationFee(hs.getExaminationFee().add(hisTollDetail.getPrice()));
-                }
+                   }
             }
         }
-        hs.toString();
         return hs;
     }
 }

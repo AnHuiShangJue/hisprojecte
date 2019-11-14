@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
-</head>
 <body>
 <style type="text/css">
     #lanhu {
         height: 120px;
 
     }
+
     button {
         width: 200px;
         padding: 8px;
@@ -28,13 +28,12 @@
 </style>
 
 <div th:replace="public/back_baselayout :: html"></div>
-
 <div class="row col s12 x12 l12 xl12" style="width:1903px;
 height:1559px;">
     <form id="sendForm" action="#">
-    <div class="row" style="background:rgba(11,13,50,1); height:677px; ">
-        <div class="row">
-            <div class="row col s6 x6 l6 xl6" style="
+        <div class="row" style="background:rgba(11,13,50,1); height:677px; ">
+            <div class="row">
+                <div class="row col s6 x6 l6 xl6" style="
     height: 140px;
     font-size: 50px;
     font-family: PingFangSC-Semibold,PingFang SC;
@@ -47,13 +46,13 @@ height:1559px;">
     z-index: 10;
     position: absolute;
 "><input id="introduceOne" name="introduceOne" type="text" th:value="${wisdomIndex.introduceOne}"/></span>
-            </div>
-            <div>
-            <img src="/assets/app-assets/images/wisdom/x.png" alt="" style="    width: 1448px;
+                </div>
+                <div>
+                    <img src="/assets/app-assets/images/wisdom/x.png?t=" +${date}; alt="" style="    width: 1448px;
     height: 677px;
     margin-left: 455px;
     margin-top: -160px;"></div>
-            <div class="row col s6 x6 l6 xl6" style="  width: 700px;
+                <div class="row col s6 x6 l6 xl6" style="  width: 700px;
     height: 270px;
     font-size: 32px;
     font-family: PingFangSC-Regular,PingFang SC;
@@ -64,16 +63,17 @@ height:1559px;">
     margin-top: -21%;">
                 <span style="  z-index: 10;
     width: 689px;
-    position: absolute;" >   <textarea id="detailsOne" name="detailsOne" class="materialize-textarea" type="text" data-length="255"
-                                                                          th:text="${wisdomIndex.detailsOne}"></textarea></span>
+    position: absolute;">   <textarea id="detailsOne" name="detailsOne" class="materialize-textarea" type="text"
+                                      data-length="255"
+                                      th:text="${wisdomIndex.detailsOne}"></textarea></span>
+                </div>
             </div>
         </div>
-    </div>
         <input id="id" name="id" type="hidden" th:value="${wisdomIndex.id}"/>
-    <div class="row col s12 x12 l12 xl12" style="width:100%;
+        <div class="row col s12 x12 l12 xl12" style="width:100%;
 height:595px;
 background:rgba(255,255,255,1);">
-        <div class="row " style="width:auto;
+            <div class="row " style="width:auto;
 height:108px;
 font-size:39px;
 font-family:PingFangSC-Medium,PingFang SC;
@@ -84,8 +84,8 @@ position: relative;
     margin-left: 8%;
     top: 17%;"><span><input id="introduceTwo" name="introduceTwo" type="text"
                             th:value="${wisdomIndex.introduceTwo}"/></span>
-        </div>
-        <div class="row " style="width:auto;
+            </div>
+            <div class="row " style="width:auto;
 height:36px;
 font-size:25px;
 font-family:PingFangSC-Regular,PingFang SC;
@@ -95,8 +95,8 @@ line-height:36px;
 position: relative;
     margin-left: 8%;
     top: 11%;"><span><input id="spell" name="spell" type="text" th:value="${wisdomIndex.spell}"/></span>
-        </div>
-        <div class="row " style="    width: 80%;
+            </div>
+            <div class="row " style="    width: 80%;
     height: 64px;
     font-size: 23px;
     font-family: PingFangSC-Medium,PingFang SC;
@@ -108,13 +108,13 @@ position: relative;
     margin-top: 9%;">
            <textarea id="detailsTwo" name="detailsTwo" class="materialize-textarea" type="text" data-length="255"
                      th:text="${wisdomIndex.detailsTwo}"></textarea>
-        </div>
-        <button id="updatePicture" style="
+            </div>
+            <button id="updatePicture" style="
     margin-left: 1378px;
     margin-top: -772px;
 ">修改图片
-        </button>
-    </div>
+            </button>
+        </div>
         <div class="row col s12 x12 l12 xl12" style="width:75%;
 height:344px;
     margin-left: 10%;">
@@ -248,13 +248,12 @@ height:344px;
             $('#frameContainer').height(contentHeight);
         };
     });
-
     $('.one1').css("width", '480px');
     $('.shoufenqin_box>div').hover(function () {
         $('.shoufenqin_box>div').stop(true).animate({width: "120px"}, 500);
         $(this).stop(true).animate({width: "480px"}, 500);
         $(this).addClass("len").siblings().removeClass('len');
-    })
+    });
     $("input").change(function () {
         $(this).val($(this).val().trim());
     });
@@ -264,7 +263,7 @@ height:344px;
             url: "/api/wisdombay/toUpdateIndex.ahsj",
             data: $('#sendForm').serialize(),
             success: function (msg) {
-                console.log(msg)
+                console.log(msg);
                 if (msg.success) {
                     Materialize.toast('<span>' + msg.message + '</span>', 1500);
                     return true;
@@ -274,40 +273,39 @@ height:344px;
                 }
             },
         });
-    })
+    });
     $("#updatePicture").click(function () {
         var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=x.png";
         dialog.show(url, "修改图片");
-    })
+    });
     $("#one1").click(function () {
         var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=1.jpg";
         dialog.show(url, "修改图片");
-    })
+    });
     $("#one2").click(function () {
         var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=2.jpg";
         dialog.show(url, "修改图片");
-    })
+    });
     $("#one3").click(function () {
         var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=3.jpg";
         dialog.show(url, "修改图片");
-    })
+    });
     $("#one4").click(function () {
         var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=4.jpg";
         dialog.show(url, "修改图片");
-    })
+    });
     $("#one5").click(function () {
         var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=5.jpg";
         dialog.show(url, "修改图片");
-    })
+    });
     $("#one6").click(function () {
         var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=6.jpg";
         dialog.show(url, "修改图片");
-    })
+    });
     $("#one7").click(function () {
         var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=7.jpg";
         dialog.show(url, "修改图片");
-    })
-
+    });
 
 
 </script>

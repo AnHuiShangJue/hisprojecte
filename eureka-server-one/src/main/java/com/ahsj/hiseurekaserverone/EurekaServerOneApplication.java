@@ -6,13 +6,13 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 
 /**
- *@Description HIS系统的第一个服务节点
- *@Params
- *@return
- *@Author chenzhicai
- *@Date 2019-02-28
- *@Time 20:05
-**/
+ * @Description HIS系统的第一个服务节点
+ * @Params
+ * @return
+ * @Author chenzhicai
+ * @Date 2019-02-28
+ * @Time 20:05
+ **/
 @SpringBootApplication
 @EnableEurekaServer
 public class EurekaServerOneApplication {

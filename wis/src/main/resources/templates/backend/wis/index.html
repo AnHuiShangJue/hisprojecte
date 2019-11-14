@@ -3,181 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>智慧湾介绍</title>
+    <div th:replace="public/back_baselayout :: html"></div>
+
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css"/>
 </head>
+<body>
 <style>
-    .shoufenqin {
-        width: 100%;
-        height: 160px;
-    }
-
-    .shoufenqin_box {
-        width: 100%;
-        height: 160px;
-        font-size: 0;
-        overflow: hidden;
-    }
-
-    .shoufenqin_box > div {
-        display: inline-block;
-        vertical-align: top;
-        position: relative;
-        height: 160px;
-        width: 120px;
-        /*transition: .5s;*/
-    }
-
-    .shoufenqin_box > div .big_sfq {
-        opacity: 0;
-        transition: .3s;
-    }
-
-    .shoufenqin_box > div span {
-        display: inline-block;
-        width: 16px;
-        height: 100%;
-        font-size: .7rem;
-        color: #fff;
-        padding: 1rem 1rem;
-        box-sizing: border-box;
-    }
-
-    .shoufenqin_box > div > a > img {
-        position: absolute;
-        bottom: 1rem;
-        right: 1rem;
-    }
-
-    .one2 .big_sfq > div > p, .one2 .big_sfq > div > a {
-        color: #999 !important;
-    }
-
-    .one2 {
-        background: #fcead4;
-    }
-
-    .one3 {
-        background: #ffab74;
-    }
-
-    .one4 {
-        background: #ec7365;
-    }
-
-    .one5 {
-        background: #f1c65b;
-    }
-
-    .one6 {
-        background: #4d79c2;
-    }
-
-    .one7 {
-        background: #2f2f5c;
-        position: absolute !important;
-        right: 0;
-        top: 0;
-        z-index: 2510;
-    }
-
-    .one3 .big_sfq > div > p, .one4 .big_sfq > div > p, .one5 .big_sfq > div > p, .one6 .big_sfq > div > p, .one7 .big_sfq > div > p {
-        color: #fff !important;
-    }
-
-    .one3 .big_sfq > div > a, .one4 .big_sfq > div > a, .one5 .big_sfq > div > a, .one6 .big_sfq > div > a, .one7 .big_sfq > div > a {
-        color: #fff !important;
-    }
-
-    .one3 .big_sfq > div > a i, .one4 .big_sfq > div > a i, .one5 .big_sfq > div > a i, .one6 .big_sfq > div > a i, .one7 .big_sfq > div > a i {
-        color: #fff !important;
-    }
-
-    .shoufenqin_box {
-        position: relative;
-        background: #2f2f5c;
-    }
-
-    .shoufenqin_box .one1 {
-        background: #f9f9f9;
-    }
-
-    .big_sfq > img {
-        width: 100%;
-        vertical-align: top;
-    }
-
-    .big_sfq > div {
-        position: absolute;
-        left: 0;
-        top: 0;
-        padding: 1rem;
-        box-sizing: border-box;
-    }
-
-    .big_sfq > div > p {
-        color: #666;
-        font-size: .8rem;
-        margin: 1rem 0;
-    }
-
-    .big_sfq > div > a {
-        color: #666;
-        font-size: .6rem;
-
-    }
-
-    .big_sfq > div > a > i {
-        display: inline-block;
-        vertical-align: middle;
-        margin: 0 .5rem 0 0;
-        color: #b6b6b6;
-    }
-
-    .one1 > a > span {
-        color: #666;
-    }
-
-    .one2 > a > span {
-        color: #999;
-    }
-
-    .shoufenqin_box .len .big_sfq {
-        opacity: 1;
-    }
-
-    .shoufenqin_box .len .small {
-        opacity: 0 !important;
-    }
-
-    .shoufenqin_box .small {
-        position: absolute !important;
-        left: 0 !important;
-        top: 0 !important;
-        opacity: 1 !important;
-        z-index: 200 !important;
-        transition: .3s;
+    /* Make the image fully responsive */
+    .carousel-inner img {
         width: 100%;
         height: 100%;
     }
 </style>
-<body>
-<div th:replace="public/back_baselayout :: html"></div>
-<div class="container-fluid">
+<div class="container-fluid" style="margin-top: -20px;">
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12" style="height:677px;">
-            <div class="col-xs-12 col-sm-12 col-md-12  col-md-offset-1" style="
+        <div class="col-xs-12 col-sm-12 col-md-12" style="height:677px; ">
+            <div class="col-xs-6 col-sm-12 col-md-6  col-md-offset-1" style="
     height: 140px;
     font-size: 50px;
     font-family: PingFangSC-Semibold,PingFang SC;
     font-weight: 600;
     color: rgba(255,255,255,1);
     line-height: 70px;
-   margin-top: 10%;">
+   margin-top: 163px;">
                 <span th:text="${wisdomIndex.introduceOne}" style="
     z-index: 10;
     position: absolute;
 "></span>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12  col-md-offset-1" style="
+            <div class="col-xs-6 col-sm-12 col-md-6  col-md-offset-1" style="
     font-size: 32px;
     font-family: PingFangSC-Regular,PingFang SC;
     font-weight: 400;
@@ -190,39 +44,57 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12" style="height:677px;">
-            <div class="shutter">
-                <div class="shutter-img">
-                    <a href="#" data-shutter-title="Iron Man"><img src="/bootstrap/images/wisdom/shutter_1.jpg" alt="#"></a>
-                    <a href="#" data-shutter-title="Super Man"><img src="/bootstrap/images/wisdom/shutter_2.jpg"
-                                                                    alt="#"></a>
-                    <a href="#" data-shutter-title="The Hulk"><img src="/bootstrap/images/wisdom/shutter_3.jpg" alt="#"></a>
-                    <a href="#" data-shutter-title="The your"><img src="/bootstrap/images/wisdom/shutter_4.jpg" alt="#"></a>
-                </div>
-                <ul class="shutter-btn">
-                    <li class="prev"></li>
-                    <li class="next"></li>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div id="demo" class="carousel slide" style="    margin-top: -35.5%;
+    width: 100%;
+    height: 677px;" data-ride="carousel">
+
+                <!-- 指示符 -->
+                <ul class="carousel-indicators">
+                    <li data-target="#demo" data-slide-to="0" class="active"></li>
+                    <li data-target="#demo" data-slide-to="1"></li>
+                    <li data-target="#demo" data-slide-to="2"></li>
                 </ul>
-                <div class="shutter-desc">
-                    <p>Iron Man</p>
+
+                <!-- 轮播图片 -->
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://static.runoob.com/images/mix/img_fjords_wide.jpg">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://static.runoob.com/images/mix/img_nature_wide.jpg">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://static.runoob.com/images/mix/img_mountains_wide.jpg">
+                    </div>
                 </div>
+
+                <!-- 左右切换按钮 -->
+                <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </a>
+                <a class="carousel-control-next" href="#demo" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </a>
+
             </div>
         </div>
+
     </div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12" style="
 height:595px;
 background:rgba(255,255,255,1);">
-            <div class="col-xs-12 col-sm-12 col-md-12  col-md-offset-1" style="
+            <div class="col-xs-6 col-sm-6 col-md-6  col-md-offset-1" style="
     height: 140px;
     font-size: 50px;
     font-family: PingFangSC-Semibold,PingFang SC;
     font-weight: 600;
     line-height: 70px;
-   margin-top: 8%;">
+   margin-top: 81px;">
                 <span th:text="${wisdomIndex.introduceTwo}"></span>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12  col-md-offset-1" style="
+            <div class="col-xs-6 col-sm-6 col-md-6  col-md-offset-1" style="
   height:36px;
 font-size:25px;
 font-family:PingFangSC-Regular,PingFang SC;
@@ -230,7 +102,7 @@ font-weight:400;
 color:rgba(19,18,18,1);
 line-height:36px;
 position: relative;
-   margin-top: -2%;">
+   margin-top: -30px;">
                 <span th:text="${wisdomIndex.spell}"></span>
             </div>
             <div class="col-xs-11 col-sm-11 col-md-11  col-md-offset-1" style="
@@ -241,13 +113,15 @@ position: relative;
     color: rgba(109,109,109,1);
     line-height: 32px;
     position: relative;
-   margin-top: 5%;">
+   margin-top: 60px;">
                 <span th:text="${wisdomIndex.detailsTwo}"></span>
             </div>
         </div>
+
+
     </div>
     <div class="row">
-        <div class="col-xs-8 col-sm-8 col-md-8  col-md-offset-1" style="height: 344px;">
+        <div class="col-xs-8 col-sm-8 col-md-8  col-md-offset-2" style="height: 344px;">
             <div class="shoufenqin">
                 <div class="container">
                     <div class="shoufenqin_box" style="width: 1200px;">
@@ -257,11 +131,11 @@ position: relative;
                                     <img src=""
                                          alt="">
                                     <p th:text="${wisdomIndex.one1}"></p>
-                                    <a href=""><i>——</i>查看更多</a>
+                                    <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one1"><i>——</i>查看更多</a>
                                 </div>
                                 <img src="/bootstrap/images/wisdom/1.jpg" alt="">
                             </div>
-                            <a href="" class="small">
+                            <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one1" class="small">
                                 <img src="" alt="">
                                 <span th:text="${wisdomIndex.one1}"></span>
                             </a>
@@ -272,11 +146,11 @@ position: relative;
                                     <img src=""
                                          alt="">
                                     <p th:text="${wisdomIndex.one2}"></p>
-                                    <a href=""><i>——</i>查看更多</a>
+                                    <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one2"><i>——</i>查看更多</a>
                                 </div>
                                 <img src="/bootstrap/images/wisdom/2.jpg" alt="">
                             </div>
-                            <a href="" class="small">
+                            <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one2" class="small">
                                 <img src="#" alt="">
                                 <span th:text="${wisdomIndex.one2}"></span>
                             </a>
@@ -287,11 +161,11 @@ position: relative;
                                     <img src="#"
                                          alt="">
                                     <p th:text="${wisdomIndex.one3}"></p>
-                                    <a href=""><i>——</i>查看更多</a>
+                                    <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one3"><i>——</i>查看更多</a>
                                 </div>
                                 <img src="/bootstrap/images/wisdom/3.jpg" alt="">
                             </div>
-                            <a href="" class="small">
+                            <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one3" class="small">
                                 <img src="" alt="">
                                 <span th:text="${wisdomIndex.one3}"></span>
                             </a>
@@ -302,11 +176,11 @@ position: relative;
                                     <img src=""
                                          alt="">
                                     <p th:text="${wisdomIndex.one4}"></p>
-                                    <a href=""><i>——</i>查看更多</a>
+                                    <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one4"><i>——</i>查看更多</a>
                                 </div>
                                 <img src="/bootstrap/images/wisdom/4.jpg" alt="">
                             </div>
-                            <a href="" class="small">
+                            <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one4" class="small">
                                 <img src="" alt="">
                                 <span th:text="${wisdomIndex.one4}"></span>
                             </a>
@@ -317,7 +191,7 @@ position: relative;
                                     <img src=""
                                          alt="">
                                     <p th:text="${wisdomIndex.one5}"></p>
-                                    <a href=""><i>——</i>查看更多</a>
+                                    <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one5"><i>——</i>查看更多</a>
                                 </div>
                                 <img src="/bootstrap/images/wisdom/5.jpg" alt="">
                             </div>
@@ -360,24 +234,21 @@ position: relative;
             </div>
         </div>
     </div>
+
+
 </div>
+
 </body>
 <script>
+
     $('.one1').css("width", '480px');
     $('.shoufenqin_box>div').hover(function () {
         $('.shoufenqin_box>div').stop(true).animate({width: "120px"}, 500);
         $(this).stop(true).animate({width: "480px"}, 500);
         $(this).addClass("len").siblings().removeClass('len');
     })
-    $(function () {
-        $('.shutter').shutter({
-            shutterH: 677, // 容器高度
-            isAutoPlay: true, // 是否自动播放
-            playInterval: 5000, // 自动播放时间
-            curDisplay: 3, // 当前显示页
-            fullPage: false // 是否全屏展示
-        });
-    });
+
+
 </script>
 
 

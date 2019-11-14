@@ -1,14 +1,716 @@
-<!DOCTYPE html>
-<html lang="en"xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
-<head>
 
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="content-language" content="zh-CN" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="author" content="杭州博采网络科技股份有限公司-高端网站建设-http://www.bocweb.cn" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <title>江苏金融租赁</title>
+    <meta name="keywords" content="关键字" />
+    <meta name="description" content="描述" />
+    <link href="https://www.jsleasing.cn/favicon.ico" rel="shortcut icon">
+    <script>
+        var STATIC_URL  = "https://www.jsleasing.cn/web/bocweb/" ;
+        var UPLOAD_URL  = "https://www.jsleasing.cn/web/upload/" ;
+        var GLOBAL_URL = "https://www.jsleasing.cn/index.php/";
+        var SITE_URL = "https://www.jsleasing.cn/index.php/";
+        var UPLOADDO_URL = "https://www.jsleasing.cn/index.php/upload/";
+        var STATIC_VER = "v1";
+    </script>
+    <!-- PC站 -->
+    <link rel="stylesheet" href="https://www.jsleasing.cn/web/bocweb/web/css/style.css?v=v1" type="text/css" media="screen" charset="utf-8"><link rel="stylesheet" href="https://www.jsleasing.cn/web/bocweb/web/css/index1.css?v=v1" type="text/css" media="screen" charset="utf-8"><script src="https://www.jsleasing.cn/web/bocweb/web/js/jquery-1.11.3.min.js?v=v1" type="text/javascript" charset="utf-8"></script><script src="https://www.jsleasing.cn/web/bocweb/web/js/aos.js?v=v1" type="text/javascript" charset="utf-8"></script><script src="https://www.jsleasing.cn/web/bocweb/js/tools.js?v=v1" type="text/javascript" charset="utf-8"></script>		<link rel="stylesheet" href="https://www.jsleasing.cn/web/bocweb/web/css/swiper-4.2.6.min.css?v=v1" type="text/css" media="screen" charset="utf-8"><link rel="stylesheet" href="https://www.jsleasing.cn/web/bocweb/web/css/jquery.lineProgressbar.css?v=v1" type="text/css" media="screen" charset="utf-8">	</head>
 <body>
-<div class="row">
-    <div class="col s12"><span class="flow-text">This div is 12-columns wide on all screen sizes</span></div>
-    <div class="col s6 offset-s6"><span class="flow-text">6-columns (offset-by-6)</span></div>
+<div class="loading">
+    <div class="load_t">
+        <div class="load_t_l"></div>
+        <div class="load_t_r"></div>
+    </div>
+    <div class="load_con">
+        <div class="loadImg_box">
+            <img src="https://www.jsleasing.cn/web/bocweb/web/img/logo.png?v=v1" alt="" style="width:245px;">
+        </div>
+        <div id="progressbar4">
+            <div class="progressbar" >
+                <div class="proggress">
+                </div>
+                <div class="percentCount">100%</div>
+            </div>
+        </div>
+    </div>
+    <div class="load_b">
+    </div>
+</div>
+<div class="index_body">
+    <div class="header">
+        <div class="container1 header_out_div">
+            <div class="container header_inner">
+                <a href="https://www.jsleasing.cn/index.php/welcome.html" class="logo_box">
+                    <img src="https://www.jsleasing.cn/web/bocweb/web/img/logo.png?v=v1" alt="">
+                </a>
+                <div class="header_nav">
+                    <ul>
+                        <li cur="welcome">
+                            <a href="https://www.jsleasing.cn/index.php/welcome.html" >首页</a>
+                        </li>
+                        <li cur="about">
+                            <a href="https://www.jsleasing.cn/index.php/about/intro.html">关于我们</a>
+                        </li>
+                        <li cur="business">
+                            <a href="https://www.jsleasing.cn/index.php/business.html">业务领域</a>
+                        </li>
+                        <li cur="news">
+                            <a href="https://www.jsleasing.cn/index.php/news.html">新闻动态</a>
+                        </li>
+                        <li cur="join">
+                            <a href="https://www.jsleasing.cn/index.php/join/social.html">加入我们</a>
+                        </li>
+                        <li cur="investment">
+                            <a href="https://www.jsleasing.cn/index.php/investment/show.html">投资者关系</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="search_box">
+
+                    <form action="https://www.jsleasing.cn/index.php/search.html" accept-charset="utf-8" enctype="multipart/form-data" method="get" class="form" id="frm-sub" name="frm-sub">					<input type="text" onfocus="if(this.value=='请输入关键词'){this.value=''}" name="key" onblur="if(this.value==''){this.value='请输入关键词'}" maxlength="14"   class="search_inp">
+                        <button class="search_icon" type="button"></button>
+                    </form>			</div>
+                <div class="translate">
+                    <a href="https://www.jsleasing.cn/en" class="en">EN</a><span>/</span>
+                    <a href="https://www.jsleasing.cn/" class="cn">中</a>
+                    <a href="http://mail.jsleasing.cn/" id="neiwang" target="_blank">公司邮箱</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- mm -->
+    <dir class="m_nav">
+        <div class="m_logo">
+            <a href="https://www.jsleasing.cn/index.php/welcome.html">
+                <img src="https://www.jsleasing.cn/web/bocweb/web/img/mlogo.png?v=v1" style="width:120px;" alt="">
+            </a>
+            <a href="javascript:;" class="mm_sousuo"></a>
+            <em><a href="https://www.jsleasing.cn/en">EN</a></em>
+            <div class="mm_sousuo_cover">
+                <p>
+                    <img src="https://www.jsleasing.cn/web/bocweb/web/img/mlogo.png?v=v1" style="width:120px;" alt="">
+                </p>
+                <em>×</em>
+                <form action="" class="mm_form">
+                    <input type="text">
+                    <button class="mm_btn"></button>
+                </form>
+            </div>
+        </div>
+
+        <p class="menu_p" id="menu_p">
+            <em>
+                <i></i>
+                <i></i>
+                <i></i>
+            </em>
+        </p>
+        <nav>
+            <div class="sj_footer clearfix">
+                <div class="left_div">
+                    <div>
+                        <strong><a href="https://www.jsleasing.cn/index.php/about/intro.html">关于我们</a><i>+</i></strong>
+                    </div>
+                    <div>
+                        <strong><a href="https://www.jsleasing.cn/index.php/business.html">业务领域</a><i>+</i></strong>
+                    </div>
+                    <div>
+                        <strong><a href="https://www.jsleasing.cn/index.php/news.html">新闻动态</a><i>+</i></strong>
+                    </div>
+                    <div>
+                        <strong><a href="https://www.jsleasing.cn/index.php/join/social.html">加入我们</a> <i>+</i></strong>
+                    </div>
+                    <div>
+                        <strong><a href="https://www.jsleasing.cn/index.php/investment/show.html">投资者关系</a><i>+</i></strong>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </dir>
+    <!-- mm -->
+    <script>
+        $('.mm_sousuo_cover em').click(function(){
+            $(".mm_sousuo_cover").stop().slideUp();
+        })
+        $('.mm_sousuo').click(function(){
+            $(".mm_sousuo_cover").stop().slideDown();
+        })
+
+    </script>			<!-- 轮播 -->
+    <div class="container1">
+        <div class="index_carousel index_pc">
+            <div class="swiper-container index_carousel_con">
+                <div class="swiper-wrapper">
+
+                    <div class="swiper-slide">
+                        <a href="#">
+                            <video muted autoplay loop id="ivideo" src="https://www.jsleasing.cn/web/bocweb/web/img/aa.mp4?v=v1"></video>
+                            <div class="index_cover index_cover1">
+                                <div>
+                                    <img src="https://www.jsleasing.cn/web/bocweb/web/img/aa.png?v=v1" alt="">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="#">
+                            <img src="https://www.jsleasing.cn/web/bocweb/web/img/homeBanner2.jpg?v=v1" alt="">
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="#">
+                            <img src="https://www.jsleasing.cn/web/bocweb/web/img/homeBanner4.jpg?v=v1" alt="">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+
+        <div class="index_carousel index_mm">
+            <div class="swiper-container index_carousel_con">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <a href="javscript:;">
+                            <video muted autoplay loop id="ivideo1" src="https://www.jsleasing.cn/web/bocweb/web/img/aa.mp4?v=v1"></video>
+                            <div class="index_cover mm_cover_video">
+                                <div>
+                                    <img src="https://www.jsleasing.cn/web/bocweb/web/img/tu.png?v=v1" alt="" class="pc_busBanner">
+                                    <img src="https://www.jsleasing.cn/web/bocweb/web/img/mm_tu.png?v=v1" alt="" class="mm_busBanner mm_index_cover_img">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="javscript:;">
+                            <img src="https://www.jsleasing.cn/web/bocweb/web/img/index_mm2.jpg?v=v1" alt="">
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="javscript:;">
+                            <img src="https://www.jsleasing.cn/web/bocweb/web/img/index_mm1.jpg?v=v1" alt="">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </div>
+    <div class="container index_about">
+        <div class="index_about_l">
+            <h2>江苏金融租赁股份有限公司</h2>
+            <p>
+                江苏金融租赁股份有限公司成立于1985年6月，是经中国银行保险监督管理委员会批准从事融资租赁业务的国有非银行金融机构，是国内著名的金融租赁公司之一。公司于2018年3月1日在上交所挂牌上市（股票代码：600901）<a href="https://www.jsleasing.cn/index.php/about/intro.html" class="index_about_more">MORE>></a>
+            </p>
+        </div>
+        <div class="index_about_m">
+            <div class="index_about_tab">
+                <a href="javascript:;" class="active_a"><p>公司动态</p></a>
+                <a href="javascript:;"><p>媒体苏租</p></a>
+                <a href="javascript:;"><p>公司公告</p></a>
+            </div>
+            <div class="index_about_changebox">
+                <div>
+                    <a href="https://www.jsleasing.cn/index.php/news/newsDetail/324.html" >
+                        <p>
+                            <span>2019.09.26</span>
+                            <span>
+									江苏租赁斩获“2018-2019年度资产证券化·介甫奖”两项大奖									</span>
+                        </p>
+                    </a>
+                    <a href="https://www.jsleasing.cn/index.php/news/newsDetail/325.html" >
+                        <p>
+                            <span>2019.09.12</span>
+                            <span>
+									公司“码上租”荣获2018年度金融业服务小微企业优秀金融产品奖									</span>
+                        </p>
+                    </a>
+                    <a href="https://www.jsleasing.cn/index.php/news/newsDetail/322.html" >
+                        <p>
+                            <span>2019.09.12</span>
+                            <span>
+									公司召开“防风险、保安全、迎大庆”安全生产专题会议									</span>
+                        </p>
+                    </a>
+                </div>
+                <div>
+                    <a href="https://www.jsleasing.cn/index.php/news/newsDetail/47.html" >
+                        <p>
+                            <span>2018.11.05</span>
+                            <span>
+									(新华日报) 服务中小 服务三农 服务民生——江苏租赁助力中小企业…									</span>
+                        </p>
+                    </a>
+                    <a href="https://www.jsleasing.cn/index.php/news/newsDetail/46.html" >
+                        <p>
+                            <span>2018.06.12</span>
+                            <span>
+									（金融时报）江苏租赁：服务实体经济 打造行业排头兵									</span>
+                        </p>
+                    </a>
+                    <a href="https://www.jsleasing.cn/index.php/news/newsDetail/45.html" >
+                        <p>
+                            <span>2018.03.26</span>
+                            <span>
+									（人民日报）江苏金融租赁成为业内首家A股上市公司									</span>
+                        </p>
+                    </a>
+                </div>
+                <div>
+                    <a href="https://www.jsleasing.cn/index.php/news/newsDetail/314.html" >
+                        <p>
+                            <span>2019.08.30</span>
+                            <span>
+									苏租2019年第一期绿色租赁资产证券化 二季度募集资金使用情况说明									</span>
+                        </p>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        <div class="index_about_r">
+            <a href="https://mp.weixin.qq.com/s/elyCz14V_E6K6J5r_aWShw">
+                <img src="https://www.jsleasing.cn/web/upload/2019/05/05/155703858729855xss4.jpg" alt="">
+            </a>
+        </div>
+    </div>
+    <div class="shoufenqin">
+        <div class="container">
+            <div class="shoufenqin_box">
+                <div class="one1 len">
+                    <div class="big_sfq">
+                        <div>
+                            <img src="https://www.jsleasing.cn/web/upload/2018/12/21/15453791148971w31dg.png" alt="">
+                            <p>能源&环保</p>
+                            <a href="https://www.jsleasing.cn/index.php/business/info/15.html"><i>——</i>查看更多</a>
+                        </div>
+                        <img src="https://www.jsleasing.cn/web/upload/2018/12/21/15453789372189a0vkd.jpg" alt="">
+                    </div>
+                    <a href="https://www.jsleasing.cn/index.php/business/info/15.html" class="small">
+                        <img src="https://www.jsleasing.cn/web/upload/2018/12/21/15453791148971w31dg.png" alt="">
+                        <span>能源&环保</span>
+                    </a>
+                </div>
+                <div class="one2 ">
+                    <div class="big_sfq">
+                        <div>
+                            <img src="https://www.jsleasing.cn/web/upload/2018/12/26/15457944241237eane5.png" alt="">
+                            <p>高端装备</p>
+                            <a href="https://www.jsleasing.cn/index.php/business/info/18.html"><i>——</i>查看更多</a>
+                        </div>
+                        <img src="https://www.jsleasing.cn/web/upload/2019/03/26/15535806351547mx7xj.jpg" alt="">
+                    </div>
+                    <a href="https://www.jsleasing.cn/index.php/business/info/18.html" class="small">
+                        <img src="https://www.jsleasing.cn/web/upload/2018/12/26/15457944241237eane5.png" alt="">
+                        <span>高端装备</span>
+                    </a>
+                </div>
+                <div class="one3 ">
+                    <div class="big_sfq">
+                        <div>
+                            <img src="https://www.jsleasing.cn/web/upload/2018/12/21/154537944008382revg.png" alt="">
+                            <p>信息科技</p>
+                            <a href="https://www.jsleasing.cn/index.php/business/info/21.html"><i>——</i>查看更多</a>
+                        </div>
+                        <img src="https://www.jsleasing.cn/web/upload/2018/12/26/1545794219676879jfv.jpg" alt="">
+                    </div>
+                    <a href="https://www.jsleasing.cn/index.php/business/info/21.html" class="small">
+                        <img src="https://www.jsleasing.cn/web/upload/2018/12/21/154537944008382revg.png" alt="">
+                        <span>信息科技</span>
+                    </a>
+                </div>
+                <div class="one4 ">
+                    <div class="big_sfq">
+                        <div>
+                            <img src="https://www.jsleasing.cn/web/upload/2018/12/26/15457944468277zgpyi.png" alt="">
+                            <p>大健康</p>
+                            <a href="https://www.jsleasing.cn/index.php/business/info/16.html"><i>——</i>查看更多</a>
+                        </div>
+                        <img src="https://www.jsleasing.cn/web/upload/2019/02/20/15506561910456t0vx7.jpg" alt="">
+                    </div>
+                    <a href="https://www.jsleasing.cn/index.php/business/info/16.html" class="small">
+                        <img src="https://www.jsleasing.cn/web/upload/2018/12/26/15457944468277zgpyi.png" alt="">
+                        <span>大健康</span>
+                    </a>
+                </div>
+                <div class="one5 ">
+                    <div class="big_sfq">
+                        <div>
+                            <img src="https://www.jsleasing.cn/web/upload/2018/12/21/15453793152493xxdmc.png" alt="">
+                            <p>汽车金融</p>
+                            <a href="https://www.jsleasing.cn/index.php/business/info/19.html"><i>——</i>查看更多</a>
+                        </div>
+                        <img src="https://www.jsleasing.cn/web/upload/2019/02/20/1550657363654f71m0.jpg" alt="">
+                    </div>
+                    <a href="https://www.jsleasing.cn/index.php/business/info/19.html" class="small">
+                        <img src="https://www.jsleasing.cn/web/upload/2018/12/21/15453793152493xxdmc.png" alt="">
+                        <span>汽车金融</span>
+                    </a>
+                </div>
+                <div class="one6 ">
+                    <div class="big_sfq">
+                        <div>
+                            <img src="https://www.jsleasing.cn/web/upload/2018/12/24/15456374277953qz4ou.png" alt="">
+                            <p>工程机械</p>
+                            <a href="https://www.jsleasing.cn/index.php/business/info/20.html"><i>——</i>查看更多</a>
+                        </div>
+                        <img src="https://www.jsleasing.cn/web/upload/2018/12/21/15453797105857lgbk2.jpg" alt="">
+                    </div>
+                    <a href="https://www.jsleasing.cn/index.php/business/info/20.html" class="small">
+                        <img src="https://www.jsleasing.cn/web/upload/2018/12/24/15456374277953qz4ou.png" alt="">
+                        <span>工程机械</span>
+                    </a>
+                </div>
+                <div class="one7 ">
+                    <div class="big_sfq">
+                        <div>
+                            <img src="https://www.jsleasing.cn/web/upload/2018/12/21/154537923245nat30.png" alt="">
+                            <p>城市公用</p>
+                            <a href="https://www.jsleasing.cn/index.php/business/info/17.html"><i>——</i>查看更多</a>
+                        </div>
+                        <img src="https://www.jsleasing.cn/web/upload/2018/12/26/15457942592452qct9p.jpg" alt="">
+                    </div>
+                    <a href="https://www.jsleasing.cn/index.php/business/info/17.html" class="small">
+                        <img src="https://www.jsleasing.cn/web/upload/2018/12/21/154537923245nat30.png" alt="">
+                        <span>城市公用</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mmShoufengqin container750">
+        <div class="sfq_div m1" >
+            <a href="https://www.jsleasing.cn/index.php/business/info/15.html">
+                <img src="https://www.jsleasing.cn/web/upload/2018/12/21/15453789372189a0vkd.jpg" alt="">
+                <div>
+                    <img src="https://www.jsleasing.cn/web/upload/2018/12/21/15453791148971w31dg.png" alt="">
+                    <h2>能源&环保</h2>
+                    <em>—— 查看更多</em>
+                </div>
+            </a>
+        </div>
+        <div class="sfq_div m2" >
+            <a href="https://www.jsleasing.cn/index.php/business/info/18.html">
+                <img src="https://www.jsleasing.cn/web/upload/2019/03/26/15535806351547mx7xj.jpg" alt="">
+                <div>
+                    <img src="https://www.jsleasing.cn/web/upload/2018/12/26/15457944241237eane5.png" alt="">
+                    <h2>高端装备</h2>
+                    <em>—— 查看更多</em>
+                </div>
+            </a>
+        </div>
+        <div class="sfq_div m3" >
+            <a href="https://www.jsleasing.cn/index.php/business/info/21.html">
+                <img src="https://www.jsleasing.cn/web/upload/2018/12/26/1545794219676879jfv.jpg" alt="">
+                <div>
+                    <img src="https://www.jsleasing.cn/web/upload/2018/12/21/154537944008382revg.png" alt="">
+                    <h2>信息科技</h2>
+                    <em>—— 查看更多</em>
+                </div>
+            </a>
+        </div>
+        <div class="sfq_div m4" >
+            <a href="https://www.jsleasing.cn/index.php/business/info/16.html">
+                <img src="https://www.jsleasing.cn/web/upload/2019/02/20/15506561910456t0vx7.jpg" alt="">
+                <div>
+                    <img src="https://www.jsleasing.cn/web/upload/2018/12/26/15457944468277zgpyi.png" alt="">
+                    <h2>大健康</h2>
+                    <em>—— 查看更多</em>
+                </div>
+            </a>
+        </div>
+        <div class="sfq_div m5" >
+            <a href="https://www.jsleasing.cn/index.php/business/info/19.html">
+                <img src="https://www.jsleasing.cn/web/upload/2019/02/20/1550657363654f71m0.jpg" alt="">
+                <div>
+                    <img src="https://www.jsleasing.cn/web/upload/2018/12/21/15453793152493xxdmc.png" alt="">
+                    <h2>汽车金融</h2>
+                    <em>—— 查看更多</em>
+                </div>
+            </a>
+        </div>
+        <div class="sfq_div m6" >
+            <a href="https://www.jsleasing.cn/index.php/business/info/20.html">
+                <img src="https://www.jsleasing.cn/web/upload/2018/12/21/15453797105857lgbk2.jpg" alt="">
+                <div>
+                    <img src="https://www.jsleasing.cn/web/upload/2018/12/24/15456374277953qz4ou.png" alt="">
+                    <h2>工程机械</h2>
+                    <em>—— 查看更多</em>
+                </div>
+            </a>
+        </div>
+        <div class="sfq_div m7" >
+            <a href="https://www.jsleasing.cn/index.php/business/info/17.html">
+                <img src="https://www.jsleasing.cn/web/upload/2018/12/26/15457942592452qct9p.jpg" alt="">
+                <div>
+                    <img src="https://www.jsleasing.cn/web/upload/2018/12/21/154537923245nat30.png" alt="">
+                    <h2>城市公用</h2>
+                    <em>—— 查看更多</em>
+                </div>
+            </a>
+        </div>
+
+    </div>
+    <div class="footer">
+        <div class="container">
+            <div class="footer_top clearfix">
+                <div class="foot_t_l">
+                    <span>分享:</span>
+                    <div class="footer_share bdsharebuttonbox">
+                        <a class="bds_tsina" data-cmd="tsina"></a>
+                        <a class="bds_weixin" data-cmd="weixin"></a>
+                        <a class="bds_sqq" data-cmd="sqq"></a>
+                    </div>
+                </div>
+                <div class="foot_t_r float_r">
+                    <ul>
+                        <li>
+                            <a href="https://www.jsleasing.cn/index.php/about/intro.html">
+                                关于我们
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.jsleasing.cn/index.php/business/business.html">
+                                业务领域
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.jsleasing.cn/index.php/news/news.html">
+                                新闻动态
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.jsleasing.cn/index.php/join/social.html">
+                                加入我们
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.jsleasing.cn/index.php/investment/run.html">
+                                投资者关系
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="footer_bottom clearfix">
+                <div class="footer_b_l">
+                    <p>&copy; 2018 江苏金融租赁股份有限公司All Rights Reserved.</p>
+                    <p>
+                        <a href="https://www.jsleasing.cn/index.php/statement.html">法律声明</a>&emsp;&emsp;
+                        <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备09093059号-1</a>
+                    </p>
+                </div>
+                <div class="foot_b_r float_r">
+                    <div class="source_link">
+                        <a href="http://www.cbrc.gov.cn/" target="_blank">中国银保监会</a>
+                        <a href="http://www.csrc.gov.cn" target="_blank">中国证监会</a>
+                        <a href="https://www.jchc.cn" target="_blank">江苏交通控股</a>
+                        <a href="http://www.njcb.com.cn" target="_blank">南京银行</a>
+                        <a href="https://www.ifc.org/wps/wcm/connect/corp_ext_content/ifc_external_corporate_site/home" target="_blank">IFC</a>
+                        <a href="https://leasingsolutions.bnpparibas.com" target="_blank">BNP PARIBAS</a>
+                        <a href="http://www.citicpe.com/" target="_blank">中信产业基金</a>
+                    </div>
+                    <span>
+								<em>友情链接</em>
+								<i></i>
+							</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
+<script src="https://www.jsleasing.cn/web/bocweb/web/js/jquery.lineProgressbar.js?v=v1" type="text/javascript" charset="utf-8"></script><script src="https://www.jsleasing.cn/web/bocweb/web/js/swiper-4.2.6.min.js?v=v1" type="text/javascript" charset="utf-8"></script>	<script>
+    // 底部分享
+    window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdMiniList": false, "bdPic": "", "bdStyle": "1", "bdSize": "24" }, "share": {}, "selectShare": { "bdContainerClass": null, "bdSelectMiniList": ["tsina", "tqq", "weixin", "sqq"] } }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+    // 二级菜单
+    $('.first_li').hover(function(){
+        $('.sceond_nav').stop().slideToggle();
+    })
+    // 手机导航
+    $(".nav_btn").click(function () {
+        $("#nav_two").slideToggle("slow");
+    })
+
+    $("#menu_p").click(function(){
+        $(this).toggleClass("active_p");
+        $(this).next("nav").slideToggle();
+    })
+    $(".sj_footer").find("strong").click(function(){
+        var thisP=$(this).next().css("display");
+        if(thisP=="none"){
+            $(".sj_footer").find("p").slideUp();
+            $(".sj_footer").find("strong").removeClass("active_strong");
+            $(this).addClass("active_strong");
+            $(this).next().slideDown();
+        }else{
+            $(".sj_footer").find("strong").removeClass("active_strong");
+            $(this).next().slideUp();
+        }
+    });
+
+    // 搜索
+    $('.search_icon').click(function(){
+        $('.form .search_inp').addClass('inp_show');
+        $('.search_icon').addClass('after');
+    })
+    $('.search_inp').blur(function(){
+        $('.form .search_inp').removeClass('inp_show');
+        $(this).val("");
+        $('.search_icon').removeClass('after');
+    })
+
+    // loading
+    $('#progressbar4').LineProgressbar({
+        percentage: 100,
+        fillBackgroundColor: '#d6000f',
+        height: '2px'
+    });
+
+
+
+    window.onload = function(){
+        // 进度条消失
+        var timer6 = setTimeout(time6,200);
+        // logo隐藏
+        var timer3 = setTimeout(time3,300);
+        // 上下分开
+        var timer1 = setTimeout(time1,700);
+        //loading消失
+        var timer5 = setTimeout(time5,1500);
+        // swiper轮播初始化
+        var timer7 = setTimeout(time7,1500);
+
+        function time3(){
+            $('.loadImg_box img').addClass('loadImg_box_active');
+        }
+        function time1(){
+            $('.load_t').addClass('active_load_t');
+            $('.load_b').addClass('active_load_b');
+        }
+        function time5(){
+            $('.loading').stop().fadeOut();
+        }
+        function time6(){
+            $('#progressbar4').stop().fadeOut();
+        }
+
+        var ivideo = document.getElementById("ivideo");
+        var ivideo1 = document.getElementById("ivideo1");
+        function time7(){
+            // 首页轮播
+            var swipe1 = new Swiper('.index_pc .swiper-container', {
+                effect: 'fade',
+                loop : true,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                },
+                navigation: {
+                    nextEl: '.index_pc .swiper-button-next',
+                    prevEl: '.index_pc .swiper-button-prev',
+                },
+                pagination: {
+                    el: '.index_pc .swiper-pagination',
+                    clickable: true,
+                },
+                on:{
+                    transitionStart: function(){
+                        // for(i=0;i<this.slides.length;i++){
+                        // 	slide=this.slides.eq(i);
+                        // 	slide.find(".jiangxin_box").removeClass("active_jiangxin_box");
+                        // 	slide.find(".fuwu_png").removeClass("active_fuwu_png");
+                        // };
+                        ivideo.currentTime = 0;
+                        ivideo.play();
+                    },
+                    transitionEnd: function(){
+                        // slide=this.slides.eq(this.activeIndex);
+                        // slide.find(".jiangxin_box").addClass('active_jiangxin_box');
+                        // slide.find(".fuwu_png").addClass('active_fuwu_png');
+                        ivideo.currentTime = 0;
+                        ivideo.play();
+                    },
+                }
+            });
+
+            var swipe2 = new Swiper('.index_mm .swiper-container', {
+                effect: 'fade',
+                loop : true,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                },
+                navigation: {
+                    nextEl: '.index_mm .swiper-button-next',
+                    prevEl: '.index_mm .swiper-button-prev',
+                },
+                pagination: {
+                    el: '.index_mm .swiper-pagination',
+                    clickable: true,
+                },
+                on:{
+                    transitionStart: function(){
+                        ivideo1.currentTime = 0;
+                        ivideo1.play();
+                    },
+                    transitionEnd: function(){
+                        ivideo1.currentTime = 0;
+                        ivideo1.play();
+                    },
+                }
+            });
+
+        }
+
+    }
+
+    // index_about_tab
+    $('.index_about_tab a').click(function(){
+        $(this).addClass('active_a').siblings().removeClass('active_a');
+        $('.index_about_changebox>div').eq($(this).index()).css("display","block").siblings().css("display","none");
+    })
+
+    // 手风琴
+    $('.one1').css("width",'480px');
+    $('.shoufenqin_box>div').hover(function(){
+        $('.shoufenqin_box>div').stop(true).animate({width:"120px"},500);
+        $(this).stop(true).animate({width:"480px"},500);
+        $(this).addClass("len").siblings().removeClass('len');
+    })
+
+    // 底部链接
+    $('.foot_b_r span').click(function(){
+        $('.source_link').stop().slideToggle();
+        $(this).find("i").toggleClass("addRotate");
+        event.stopPropagation();
+    })
+
+    $(window).click(function(){
+        var aaa=$('.source_link').css('display');
+        if (aaa!='none') {
+            $('.source_link').stop().slideUp();
+            $('.foot_b_r span').find("i").removeClass("addRotate");
+        }
+    })
+
+</script>
 </html>

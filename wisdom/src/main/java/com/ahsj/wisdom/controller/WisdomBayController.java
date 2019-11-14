@@ -17,6 +17,7 @@ import utils.EmptyUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -184,7 +185,7 @@ public class WisdomBayController {
      * @Time 10:24
      **/
     @RequestMapping("/toUpdateIndex.ahsj")
-    public Message updateIndex( WisdomIndex record) {
+    public Message updateIndex(WisdomIndex record) {
         return wisdomIndexService.updateByPrimaryKeySelective(record);
     }
 }

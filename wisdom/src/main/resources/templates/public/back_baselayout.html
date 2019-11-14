@@ -22,7 +22,6 @@
         function stop() {
             return false;
         }
-
         document.oncontextmenu = stop;
     </script>
     <title>智慧湾</title>
@@ -73,7 +72,7 @@
           rel="stylesheet" media="screen,projection">
     <!--手风琴-->
     <link th:href="@{/assets/app-assets/css/wisdom.css}" rel="stylesheet"/>
-
+    <link th:href="@{/assets/slider/css/style.css}" type="text/css"   rel="stylesheet" />
 
     <style>
         .navigation li{
@@ -150,8 +149,12 @@
             type="text/javascript"></script>
     <script type="text/javascript" th:src="@{/assets/global/js/anhuishangjue.ajax.js}"></script>
     <script type="text/javascript" th:src="@{/assets/global/js/anhuishangjue.ajax.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/slider/js/gestures.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/slider/js/ie.js}"></script>
     <div th:replace="public/base_list_script :: html"></div>
     <!--手风琴插件-->
+    <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
 
     <div id="lanhu" style="width: 1903px">
         <div style="float: left;height: 109px">

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
-</head>
-<body>
+<body id="scrollheader">
 <style>
     #lanhu {
         height: 120px;
@@ -27,11 +26,52 @@ height:1559px;">
     position: absolute;
 "></span>
             </div>
-            <div>
-            <img src="/assets/app-assets/images/wisdom/x.png" alt="" style="    width: 1448px;
-    height: 677px;
-    margin-left: 455px;
-    margin-top: -160px;"></div>
+            <div id="rt-page-surround">
+                <!-- slider -->
+                <section id="rt-showcase-surround">
+                    <div id="rt-showcase" class="slider-container rt-overlay-dark">
+                        <div class="rt-container slider-container">
+                            <div class="rt-grid-12 rt-alpha rt-omega">
+                                <div class='csslider1 autoplay ' style="margin-top: -160px;">
+                                    <input name="cs_anchor1" id='cs_slide1_0' type="radio" class='cs_anchor slide'>
+                                    <input name="cs_anchor1" id='cs_slide1_1' type="radio" class='cs_anchor slide'>
+                                    <input name="cs_anchor1" id='cs_slide1_2' type="radio" class='cs_anchor slide'>
+                                    <input name="cs_anchor1" id='cs_play1' type="radio" class='cs_anchor' checked>
+                                    <input name="cs_anchor1" id='cs_pause1_0' type="radio" class='cs_anchor pause'>
+                                    <input name="cs_anchor1" id='cs_pause1_1' type="radio" class='cs_anchor pause'>
+                                    <input name="cs_anchor1" id='cs_pause1_2' type="radio" class='cs_anchor pause'>
+                                    <ul>
+                                        <div>
+                                            <img src="/assets/app-assets/images/wisdom/f1.jpg">
+                                        </div>
+                                        <li class='num0 img'>
+                                            <img src="/assets/app-assets/images/wisdom/f2.jpg">
+                                        </li>
+                                        <li class='num1 img'>
+                                            <img src="/assets/app-assets/images/wisdom/f3.jpg">
+                                        </li>
+                                        <li class='num2 img'>
+                                            <img src="/assets/app-assets/images/wisdom/f4.jpg">
+                                        </li>
+
+                                    </ul>
+                                    <div class='cs_arrowprev'>
+                                        <label class='num0' for='cs_slide1_0'><span><i></i></span></label>
+                                        <label class='num1' for='cs_slide1_1'><span><i></i></span></label>
+                                        <label class='num2' for='cs_slide1_2'><span><i></i></span></label>
+                                    </div>
+                                    <div class='cs_arrownext'>
+                                        <label class='num0' for='cs_slide1_0'><span><i></i></span></label>
+                                        <label class='num1' for='cs_slide1_1'><span><i></i></span></label>
+                                        <label class='num2' for='cs_slide1_2'><span><i></i></span></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- /slider -->
+            </div>
             <div class="row col s6 x6 l6 xl6" style="  width: 700px;
     height: 270px;
     font-size: 32px;
@@ -59,7 +99,7 @@ color:rgba(19,18,18,1);
 line-height:54px;
 position: relative;
     margin-left: 8%;
-    top: 17%;"><span th:text="${wisdomIndex.introduceTwo}"></span>
+    top: 17%;"><span id="staggered-test" th:text="${wisdomIndex.introduceTwo}"></span>
         </div>
         <div class="row " style="width:auto;
 height:36px;

@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-    <classPathEntry location="D:\upload\hisprojecte\libs\mysql-connector-java-5.1.30.jar"/>
+    <classPathEntry location="D:\ahsj\his\hisprojecte\libs\mysql-connector-java-5.1.30.jar"/>
 
     <context id="DB2Tables" targetRuntime="MyBatis3">
         <commentGenerator>
@@ -45,7 +45,7 @@
                <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
                <!--selectByExampleQueryId="false"/>-->
 
-        <table tableName="book" domainObjectName="Book" enableCountByExample="false"
+        <table tableName="Station_Info" domainObjectName="StationInfo" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"/>
 

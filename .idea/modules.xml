@@ -3,9 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AHSJTemp/AHSJTemp.iml" filepath="$PROJECT_DIR$/AHSJTemp/AHSJTemp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo/demo.iml" filepath="$PROJECT_DIR$/demo/demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/hisprojecte.zuulsmartpark.main.iml" filepath="$PROJECT_DIR$/.idea/modules/hisprojecte.zuulsmartpark.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/smartpark-core/smartpark-core.iml" filepath="$PROJECT_DIR$/smartpark-core/smartpark-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/translate/translate.iml" filepath="$PROJECT_DIR$/translate/translate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wisdom_gulf/wisdom_gulf.iml" filepath="$PROJECT_DIR$/wisdom_gulf/wisdom_gulf.iml" />
       <module fileurl="file://$PROJECT_DIR$/zuulsmartpark/zuulsmartpark.iml" filepath="$PROJECT_DIR$/zuulsmartpark/zuulsmartpark.iml" />
     </modules>
   </component>

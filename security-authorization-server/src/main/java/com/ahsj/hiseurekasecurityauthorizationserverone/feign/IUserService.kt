@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam
  *@Time 18:16
 **/
 
-@FeignClient(name = " eureka-zuul-inner",fallback = IUserServiceFallback::class, path = "/accounts/api/user/")
+/*@FeignClient(name = " eureka-zuul-inner",fallback = IUserServiceFallback::class, path = "/accounts/api/user/")*/
+@FeignClient(name = "eureka-userinfo",fallback = IUserServiceFallback::class, path = "/api/user/")
 interface IUserService {
 
     /**

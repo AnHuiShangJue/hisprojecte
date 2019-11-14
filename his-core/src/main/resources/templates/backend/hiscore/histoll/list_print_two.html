@@ -204,7 +204,6 @@ Scripts
         var now = year + "-" + month + "-" + date + " " + h + ":" + m + ":" + s;
         console.log(now);
         $("#settlementDate").html=now;
-
         printShow();
         printShow1();
         printShow2();
@@ -277,9 +276,6 @@ Scripts
                 $("#idcard").html(data.idcard);
                 $("#update_date").html(data.updateDate);
                 $("#phonenumber").html(data.phonenumber);
-
-
-
             },
             function () {
                 M.toast({html: "网络异常"});

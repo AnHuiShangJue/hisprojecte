@@ -1,6 +1,6 @@
 /**
  * 自主封装一个时间插件
- * $dom.bind('click',function(event){timePacker($(this),event)});
+ * $dom.bind('click',function(event){time_packer($(this),event)});
  * @author shuaiwu Li
  */
 
@@ -16,10 +16,10 @@ function timePacker(dom,e) {
     var inputText = dom.is("input") ? dom.val():dom.text();
     //插件容器布局
     var html = '';
-    html += '<div class="timePacker">';
-        html += '<div class="timePacker-hours" style="display: block;">';
-            html += '<div class="timePacker-title"><span>小时</span></div>';
-            html += '<div class="timePacker-content">';
+    html += '<div class="time_packer">';
+        html += '<div class="time_packer-hours" style="display: block;">';
+            html += '<div class="time_packer-title"><span>小时</span></div>';
+            html += '<div class="time_packer-content">';
                 html += '<ul>';
                     var i = 0;
                     while (i < 24)
@@ -40,9 +40,9 @@ function timePacker(dom,e) {
                 html += '</ul>';
             html +=  '</div>';
         html += '</div>';
-        html += '<div class="timePacker-minutes" style="display: none;">';
-            html += '<div class="timePacker-title"><span>分钟</span><span class="timePacker-back-hours" title="返回小时选择"><img src="./img/back.png"/> </span></div>';
-            html += '<div class="timePacker-content">';
+        html += '<div class="time_packer-minutes" style="display: none;">';
+            html += '<div class="time_packer-title"><span>分钟</span><span class="time_packer-back-hours" title="返回小时选择"><img src="./img/avatar-18.png"/> </span></div>';
+            html += '<div class="time_packer-content">';
                 html += '<ul>';
                     var m = 0;
                     while (m < 60)
@@ -64,16 +64,16 @@ function timePacker(dom,e) {
             html +=  '</div>';
         html += '</div>';
     html += '</div>';
-    if($(".timePacker").length > 0){
-        $(".timePacker").remove();
+    if($(".time_packer").length > 0){
+        $(".time_packer").remove();
     }
     $("body").append(html);
-    $(".timePacker").css({
+    $(".time_packer").css({
         position:"absolute",
         top:clientY,
         left:clientX
     });
-    var _con = $(".timePacker"); // 设置目标区域,如果当前鼠标点击非此插件区域则移除插件
+    var _con = $(".time_packer"); // 设置目标区域,如果当前鼠标点击非此插件区域则移除插件
     $(document).mouseup(function(e){
         if(!_con.is(e.target) && _con.has(e.target).length === 0){ // Mark 1
             _con.remove();
@@ -84,8 +84,8 @@ function timePacker(dom,e) {
         $(this).addClass("timePackerSelect").siblings().removeClass("timePackerSelect");
         hours = $(this).text();
         var timer = setTimeout(function () {
-            $(".timePacker-hours").css("display","none");
-            $(".timePacker-minutes").fadeIn();
+            $(".time_packer-hours").css("display","none");
+            $(".time_packer-minutes").fadeIn();
             if(minutes !== null){
                 var getTime = hours + ":" + minutes;
                 if(time_hm.test(getTime)){
@@ -97,10 +97,10 @@ function timePacker(dom,e) {
         },100);
     });
     //返回小时选择
-    $(".timePacker-back-hours").bind('click',function () {
+    $(".time_packer-back-hours").bind('click',function () {
         var timer = setTimeout(function () {
-            $(".timePacker-minutes").css("display","none");
-            $(".timePacker-hours").fadeIn();
+            $(".time_packer-minutes").css("display","none");
+            $(".time_packer-hours").fadeIn();
             clearTimeout(timer);
         },500);
     });

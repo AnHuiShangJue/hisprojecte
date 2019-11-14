@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringCloudApplication
 @EnableDiscoveryClient
-@MapperScan("com.ahsj.wisdom.dao")
+@MapperScan("com.ahsj.wisdo.dao")
 @SpringBootApplication(scanBasePackages = {"com.ahsj.wisdom","com.ahsj.wisdom.error"})
 @EnableTransactionManagement //开启事务
 @EnableCaching //开启缓存
