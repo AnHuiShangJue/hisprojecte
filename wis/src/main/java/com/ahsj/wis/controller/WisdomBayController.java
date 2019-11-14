@@ -187,4 +187,13 @@ public class WisdomBayController {
     public Message updateIndex(WisdomIndex record) {
         return wisdomIndexService.updateByPrimaryKeySelective(record);
     }
+
+
+
+    @RequestMapping("/test.ahsj")
+    ModelAndView text() throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/wis/demo");
+        modelAndView.addObject("title", "");
+        return modelAndView;
+    }
 }
