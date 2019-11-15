@@ -1,5 +1,7 @@
 package com.ahsj.wis.entity;
 
+import java.util.Date;
+
 public class WisdomIndex {
     private Long id;
 
@@ -39,9 +41,13 @@ public class WisdomIndex {
 
     private String one13;
 
-    private String one14;
+    private String remake1;
 
-    private String one15;
+    private String remake2;
+
+    private Date createDate;
+
+    private Date updateDate;
 
     public Long getId() {
         return id;
@@ -195,19 +201,35 @@ public class WisdomIndex {
         this.one13 = one13 == null ? null : one13.trim();
     }
 
-    public String getOne14() {
-        return one14;
+    public String getRemake1() {
+        return remake1;
     }
 
-    public void setOne14(String one14) {
-        this.one14 = one14 == null ? null : one14.trim();
+    public void setRemake1(String remake1) {
+        this.remake1 = remake1 == null ? null : remake1.trim();
     }
 
-    public String getOne15() {
-        return one15;
+    public String getRemake2() {
+        return remake2;
     }
 
-    public void setOne15(String one15) {
-        this.one15 = one15 == null ? null : one15.trim();
+    public void setRemake2(String remake2) {
+        this.remake2 = remake2 == null ? null : remake2.trim();
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 }

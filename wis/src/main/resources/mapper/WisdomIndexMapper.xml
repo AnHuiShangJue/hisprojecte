@@ -1,259 +1,282 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ahsj.wis.dao.WisdomIndexMapper">
-    <resultMap id="BaseResultMap" type="com.ahsj.wis.entity.WisdomIndex">
-        <id column="id" jdbcType="BIGINT" property="id"/>
-        <result column="introduce_one" jdbcType="VARCHAR" property="introduceOne"/>
-        <result column="details_one" jdbcType="VARCHAR" property="detailsOne"/>
-        <result column="introduce_two" jdbcType="VARCHAR" property="introduceTwo"/>
-        <result column="spell" jdbcType="VARCHAR" property="spell"/>
-        <result column="details_two" jdbcType="VARCHAR" property="detailsTwo"/>
-        <result column="one1" jdbcType="VARCHAR" property="one1"/>
-        <result column="one2" jdbcType="VARCHAR" property="one2"/>
-        <result column="one3" jdbcType="VARCHAR" property="one3"/>
-        <result column="one4" jdbcType="VARCHAR" property="one4"/>
-        <result column="one5" jdbcType="VARCHAR" property="one5"/>
-        <result column="one6" jdbcType="VARCHAR" property="one6"/>
-        <result column="one7" jdbcType="VARCHAR" property="one7"/>
-        <result column="one8" jdbcType="VARCHAR" property="one8"/>
-        <result column="one9" jdbcType="VARCHAR" property="one9"/>
-        <result column="one10" jdbcType="VARCHAR" property="one10"/>
-        <result column="one11" jdbcType="VARCHAR" property="one11"/>
-        <result column="one12" jdbcType="VARCHAR" property="one12"/>
-        <result column="one13" jdbcType="VARCHAR" property="one13"/>
-        <result column="one14" jdbcType="VARCHAR" property="one14"/>
-        <result column="one15" jdbcType="VARCHAR" property="one15"/>
-    </resultMap>
-    <sql id="Base_Column_List">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.wis.dao.WisdomIndexMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.wis.entity.WisdomIndex" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="introduce_one" property="introduceOne" jdbcType="VARCHAR" />
+    <result column="details_one" property="detailsOne" jdbcType="VARCHAR" />
+    <result column="introduce_two" property="introduceTwo" jdbcType="VARCHAR" />
+    <result column="spell" property="spell" jdbcType="VARCHAR" />
+    <result column="details_two" property="detailsTwo" jdbcType="VARCHAR" />
+    <result column="one1" property="one1" jdbcType="VARCHAR" />
+    <result column="one2" property="one2" jdbcType="VARCHAR" />
+    <result column="one3" property="one3" jdbcType="VARCHAR" />
+    <result column="one4" property="one4" jdbcType="VARCHAR" />
+    <result column="one5" property="one5" jdbcType="VARCHAR" />
+    <result column="one6" property="one6" jdbcType="VARCHAR" />
+    <result column="one7" property="one7" jdbcType="VARCHAR" />
+    <result column="one8" property="one8" jdbcType="VARCHAR" />
+    <result column="one9" property="one9" jdbcType="VARCHAR" />
+    <result column="one10" property="one10" jdbcType="VARCHAR" />
+    <result column="one11" property="one11" jdbcType="VARCHAR" />
+    <result column="one12" property="one12" jdbcType="VARCHAR" />
+    <result column="one13" property="one13" jdbcType="VARCHAR" />
+    <result column="remake1" property="remake1" jdbcType="VARCHAR" />
+    <result column="remake2" property="remake2" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
     id, introduce_one, details_one, introduce_two, spell, details_two, one1, one2, one3, 
-    one4, one5, one6, one7, one8, one9, one10, one11, one12, one13, one14, one15
+    one4, one5, one6, one7, one8, one9, one10, one11, one12, one13, remake1, remake2, 
+    create_date, update_date
   </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from wisdom_index
-        where id = #{id,jdbcType=BIGINT}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from wisdom_index
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from wisdom_index
     where id = #{id,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="com.ahsj.wis.entity.WisdomIndex">
+  <insert id="insert" parameterType="com.ahsj.wis.entity.WisdomIndex" >
     insert into wisdom_index (id, introduce_one, details_one, 
       introduce_two, spell, details_two, 
       one1, one2, one3, one4, 
       one5, one6, one7, one8, 
       one9, one10, one11, 
-      one12, one13, one14, 
-      one15)
+      one12, one13, remake1, 
+      remake2, create_date, update_date
+      )
     values (#{id,jdbcType=BIGINT}, #{introduceOne,jdbcType=VARCHAR}, #{detailsOne,jdbcType=VARCHAR}, 
       #{introduceTwo,jdbcType=VARCHAR}, #{spell,jdbcType=VARCHAR}, #{detailsTwo,jdbcType=VARCHAR}, 
       #{one1,jdbcType=VARCHAR}, #{one2,jdbcType=VARCHAR}, #{one3,jdbcType=VARCHAR}, #{one4,jdbcType=VARCHAR}, 
       #{one5,jdbcType=VARCHAR}, #{one6,jdbcType=VARCHAR}, #{one7,jdbcType=VARCHAR}, #{one8,jdbcType=VARCHAR}, 
       #{one9,jdbcType=VARCHAR}, #{one10,jdbcType=VARCHAR}, #{one11,jdbcType=VARCHAR}, 
-      #{one12,jdbcType=VARCHAR}, #{one13,jdbcType=VARCHAR}, #{one14,jdbcType=VARCHAR}, 
-      #{one15,jdbcType=VARCHAR})
+      #{one12,jdbcType=VARCHAR}, #{one13,jdbcType=VARCHAR}, #{remake1,jdbcType=VARCHAR}, 
+      #{remake2,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
+      )
   </insert>
-    <insert id="insertSelective" parameterType="com.ahsj.wis.entity.WisdomIndex">
-        insert into wisdom_index
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="introduceOne != null">
-                introduce_one,
-            </if>
-            <if test="detailsOne != null">
-                details_one,
-            </if>
-            <if test="introduceTwo != null">
-                introduce_two,
-            </if>
-            <if test="spell != null">
-                spell,
-            </if>
-            <if test="detailsTwo != null">
-                details_two,
-            </if>
-            <if test="one1 != null">
-                one1,
-            </if>
-            <if test="one2 != null">
-                one2,
-            </if>
-            <if test="one3 != null">
-                one3,
-            </if>
-            <if test="one4 != null">
-                one4,
-            </if>
-            <if test="one5 != null">
-                one5,
-            </if>
-            <if test="one6 != null">
-                one6,
-            </if>
-            <if test="one7 != null">
-                one7,
-            </if>
-            <if test="one8 != null">
-                one8,
-            </if>
-            <if test="one9 != null">
-                one9,
-            </if>
-            <if test="one10 != null">
-                one10,
-            </if>
-            <if test="one11 != null">
-                one11,
-            </if>
-            <if test="one12 != null">
-                one12,
-            </if>
-            <if test="one13 != null">
-                one13,
-            </if>
-            <if test="one14 != null">
-                one14,
-            </if>
-            <if test="one15 != null">
-                one15,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=BIGINT},
-            </if>
-            <if test="introduceOne != null">
-                #{introduceOne,jdbcType=VARCHAR},
-            </if>
-            <if test="detailsOne != null">
-                #{detailsOne,jdbcType=VARCHAR},
-            </if>
-            <if test="introduceTwo != null">
-                #{introduceTwo,jdbcType=VARCHAR},
-            </if>
-            <if test="spell != null">
-                #{spell,jdbcType=VARCHAR},
-            </if>
-            <if test="detailsTwo != null">
-                #{detailsTwo,jdbcType=VARCHAR},
-            </if>
-            <if test="one1 != null">
-                #{one1,jdbcType=VARCHAR},
-            </if>
-            <if test="one2 != null">
-                #{one2,jdbcType=VARCHAR},
-            </if>
-            <if test="one3 != null">
-                #{one3,jdbcType=VARCHAR},
-            </if>
-            <if test="one4 != null">
-                #{one4,jdbcType=VARCHAR},
-            </if>
-            <if test="one5 != null">
-                #{one5,jdbcType=VARCHAR},
-            </if>
-            <if test="one6 != null">
-                #{one6,jdbcType=VARCHAR},
-            </if>
-            <if test="one7 != null">
-                #{one7,jdbcType=VARCHAR},
-            </if>
-            <if test="one8 != null">
-                #{one8,jdbcType=VARCHAR},
-            </if>
-            <if test="one9 != null">
-                #{one9,jdbcType=VARCHAR},
-            </if>
-            <if test="one10 != null">
-                #{one10,jdbcType=VARCHAR},
-            </if>
-            <if test="one11 != null">
-                #{one11,jdbcType=VARCHAR},
-            </if>
-            <if test="one12 != null">
-                #{one12,jdbcType=VARCHAR},
-            </if>
-            <if test="one13 != null">
-                #{one13,jdbcType=VARCHAR},
-            </if>
-            <if test="one14 != null">
-                #{one14,jdbcType=VARCHAR},
-            </if>
-            <if test="one15 != null">
-                #{one15,jdbcType=VARCHAR},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.wis.entity.WisdomIndex">
-        update wisdom_index
-        <set>
-            <if test="introduceOne != null">
-                introduce_one = #{introduceOne,jdbcType=VARCHAR},
-            </if>
-            <if test="detailsOne != null">
-                details_one = #{detailsOne,jdbcType=VARCHAR},
-            </if>
-            <if test="introduceTwo != null">
-                introduce_two = #{introduceTwo,jdbcType=VARCHAR},
-            </if>
-            <if test="spell != null">
-                spell = #{spell,jdbcType=VARCHAR},
-            </if>
-            <if test="detailsTwo != null">
-                details_two = #{detailsTwo,jdbcType=VARCHAR},
-            </if>
-            <if test="one1 != null">
-                one1 = #{one1,jdbcType=VARCHAR},
-            </if>
-            <if test="one2 != null">
-                one2 = #{one2,jdbcType=VARCHAR},
-            </if>
-            <if test="one3 != null">
-                one3 = #{one3,jdbcType=VARCHAR},
-            </if>
-            <if test="one4 != null">
-                one4 = #{one4,jdbcType=VARCHAR},
-            </if>
-            <if test="one5 != null">
-                one5 = #{one5,jdbcType=VARCHAR},
-            </if>
-            <if test="one6 != null">
-                one6 = #{one6,jdbcType=VARCHAR},
-            </if>
-            <if test="one7 != null">
-                one7 = #{one7,jdbcType=VARCHAR},
-            </if>
-            <if test="one8 != null">
-                one8 = #{one8,jdbcType=VARCHAR},
-            </if>
-            <if test="one9 != null">
-                one9 = #{one9,jdbcType=VARCHAR},
-            </if>
-            <if test="one10 != null">
-                one10 = #{one10,jdbcType=VARCHAR},
-            </if>
-            <if test="one11 != null">
-                one11 = #{one11,jdbcType=VARCHAR},
-            </if>
-            <if test="one12 != null">
-                one12 = #{one12,jdbcType=VARCHAR},
-            </if>
-            <if test="one13 != null">
-                one13 = #{one13,jdbcType=VARCHAR},
-            </if>
-            <if test="one14 != null">
-                one14 = #{one14,jdbcType=VARCHAR},
-            </if>
-            <if test="one15 != null">
-                one15 = #{one15,jdbcType=VARCHAR},
-            </if>
-        </set>
-        where id = #{id,jdbcType=BIGINT}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.ahsj.wis.entity.WisdomIndex">
+  <insert id="insertSelective" parameterType="com.ahsj.wis.entity.WisdomIndex" >
+    insert into wisdom_index
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="introduceOne != null" >
+        introduce_one,
+      </if>
+      <if test="detailsOne != null" >
+        details_one,
+      </if>
+      <if test="introduceTwo != null" >
+        introduce_two,
+      </if>
+      <if test="spell != null" >
+        spell,
+      </if>
+      <if test="detailsTwo != null" >
+        details_two,
+      </if>
+      <if test="one1 != null" >
+        one1,
+      </if>
+      <if test="one2 != null" >
+        one2,
+      </if>
+      <if test="one3 != null" >
+        one3,
+      </if>
+      <if test="one4 != null" >
+        one4,
+      </if>
+      <if test="one5 != null" >
+        one5,
+      </if>
+      <if test="one6 != null" >
+        one6,
+      </if>
+      <if test="one7 != null" >
+        one7,
+      </if>
+      <if test="one8 != null" >
+        one8,
+      </if>
+      <if test="one9 != null" >
+        one9,
+      </if>
+      <if test="one10 != null" >
+        one10,
+      </if>
+      <if test="one11 != null" >
+        one11,
+      </if>
+      <if test="one12 != null" >
+        one12,
+      </if>
+      <if test="one13 != null" >
+        one13,
+      </if>
+      <if test="remake1 != null" >
+        remake1,
+      </if>
+      <if test="remake2 != null" >
+        remake2,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="introduceOne != null" >
+        #{introduceOne,jdbcType=VARCHAR},
+      </if>
+      <if test="detailsOne != null" >
+        #{detailsOne,jdbcType=VARCHAR},
+      </if>
+      <if test="introduceTwo != null" >
+        #{introduceTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="spell != null" >
+        #{spell,jdbcType=VARCHAR},
+      </if>
+      <if test="detailsTwo != null" >
+        #{detailsTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="one1 != null" >
+        #{one1,jdbcType=VARCHAR},
+      </if>
+      <if test="one2 != null" >
+        #{one2,jdbcType=VARCHAR},
+      </if>
+      <if test="one3 != null" >
+        #{one3,jdbcType=VARCHAR},
+      </if>
+      <if test="one4 != null" >
+        #{one4,jdbcType=VARCHAR},
+      </if>
+      <if test="one5 != null" >
+        #{one5,jdbcType=VARCHAR},
+      </if>
+      <if test="one6 != null" >
+        #{one6,jdbcType=VARCHAR},
+      </if>
+      <if test="one7 != null" >
+        #{one7,jdbcType=VARCHAR},
+      </if>
+      <if test="one8 != null" >
+        #{one8,jdbcType=VARCHAR},
+      </if>
+      <if test="one9 != null" >
+        #{one9,jdbcType=VARCHAR},
+      </if>
+      <if test="one10 != null" >
+        #{one10,jdbcType=VARCHAR},
+      </if>
+      <if test="one11 != null" >
+        #{one11,jdbcType=VARCHAR},
+      </if>
+      <if test="one12 != null" >
+        #{one12,jdbcType=VARCHAR},
+      </if>
+      <if test="one13 != null" >
+        #{one13,jdbcType=VARCHAR},
+      </if>
+      <if test="remake1 != null" >
+        #{remake1,jdbcType=VARCHAR},
+      </if>
+      <if test="remake2 != null" >
+        #{remake2,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.wis.entity.WisdomIndex" >
+    update wisdom_index
+    <set >
+      <if test="introduceOne != null" >
+        introduce_one = #{introduceOne,jdbcType=VARCHAR},
+      </if>
+      <if test="detailsOne != null" >
+        details_one = #{detailsOne,jdbcType=VARCHAR},
+      </if>
+      <if test="introduceTwo != null" >
+        introduce_two = #{introduceTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="spell != null" >
+        spell = #{spell,jdbcType=VARCHAR},
+      </if>
+      <if test="detailsTwo != null" >
+        details_two = #{detailsTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="one1 != null" >
+        one1 = #{one1,jdbcType=VARCHAR},
+      </if>
+      <if test="one2 != null" >
+        one2 = #{one2,jdbcType=VARCHAR},
+      </if>
+      <if test="one3 != null" >
+        one3 = #{one3,jdbcType=VARCHAR},
+      </if>
+      <if test="one4 != null" >
+        one4 = #{one4,jdbcType=VARCHAR},
+      </if>
+      <if test="one5 != null" >
+        one5 = #{one5,jdbcType=VARCHAR},
+      </if>
+      <if test="one6 != null" >
+        one6 = #{one6,jdbcType=VARCHAR},
+      </if>
+      <if test="one7 != null" >
+        one7 = #{one7,jdbcType=VARCHAR},
+      </if>
+      <if test="one8 != null" >
+        one8 = #{one8,jdbcType=VARCHAR},
+      </if>
+      <if test="one9 != null" >
+        one9 = #{one9,jdbcType=VARCHAR},
+      </if>
+      <if test="one10 != null" >
+        one10 = #{one10,jdbcType=VARCHAR},
+      </if>
+      <if test="one11 != null" >
+        one11 = #{one11,jdbcType=VARCHAR},
+      </if>
+      <if test="one12 != null" >
+        one12 = #{one12,jdbcType=VARCHAR},
+      </if>
+      <if test="one13 != null" >
+        one13 = #{one13,jdbcType=VARCHAR},
+      </if>
+      <if test="remake1 != null" >
+        remake1 = #{remake1,jdbcType=VARCHAR},
+      </if>
+      <if test="remake2 != null" >
+        remake2 = #{remake2,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.wis.entity.WisdomIndex" >
     update wisdom_index
     set introduce_one = #{introduceOne,jdbcType=VARCHAR},
       details_one = #{detailsOne,jdbcType=VARCHAR},
@@ -273,20 +296,21 @@
       one11 = #{one11,jdbcType=VARCHAR},
       one12 = #{one12,jdbcType=VARCHAR},
       one13 = #{one13,jdbcType=VARCHAR},
-      one14 = #{one14,jdbcType=VARCHAR},
-      one15 = #{one15,jdbcType=VARCHAR}
+      remake1 = #{remake1,jdbcType=VARCHAR},
+      remake2 = #{remake2,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
-    <select id="selectAll" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from wisdom_index
-    </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from wisdom_index
+  </select>
 
-    <update id="updateByName" parameterType="com.ahsj.wis.entity.WisdomIndex">
+  <update id="updateByName" parameterType="com.ahsj.wis.entity.WisdomIndex">
     update wisdom_index
     set  value = #{value,jdbcType=VARCHAR}
     where name = #{name,jdbcType=VARCHAR}
   </update>
-
 </mapper>

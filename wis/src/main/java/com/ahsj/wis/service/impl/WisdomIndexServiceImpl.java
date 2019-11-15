@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -60,7 +61,13 @@ public class WisdomIndexServiceImpl implements WisdomIndexService {
     @Override
     @Transactional(readOnly = false)
     public Message updateByPrimaryKeySelective(WisdomIndex record) {
-        int i = wisdomIndexMapper.updateByPrimaryKeySelective(record);
+        record.setUpdateDate(new Date());
+        WisdomIndex wisdomIndex = wisdomIndexMapper.selectByPrimaryKey(record.getId());
+        wisdomIndex.setId(null);
+        wisdomIndex.setCreateDate(new Date());
+        wisdomIndex.setUpdateDate(new Date());
+        wisdomIndexMapper.insert(wisdomIndex);  //保留之前的
+        int i = wisdomIndexMapper.updateByPrimaryKeySelective(record); //修改现在的
         if (i > 0) {
             return MessageUtil.createMessage(true, "修改成功");
         }
