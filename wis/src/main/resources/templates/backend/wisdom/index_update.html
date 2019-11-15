@@ -4032,6 +4032,26 @@
 
 
 </style>
+<style>
+    button {
+        width: 200px;
+        padding: 8px;
+        background-color: #428bca;
+        border-color: #357ebd;
+        color: #fff;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px; /* future proofing */
+        -khtml-border-radius: 10px; /* for old Konqueror browsers */
+        text-align: center;
+        vertical-align: middle;
+        border: 1px solid transparent;
+        font-weight: 900;
+        font-size: 125%;
+        border: solid 10px #4d4e53;
+        border-radius: 10px 40px 40px 10px;
+    }
+</style>
 <link rel="stylesheet" href="/bootstrap/css/libs/animate.css">
 <link rel="stylesheet" href="/bootstrap/css/site.css">
 <link rel="stylesheet" href="//cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
@@ -4061,8 +4081,8 @@
                              alt="First slide">
                         <div class="carousel-caption d-none d-md-block">
                             <h5 style="
-         font-size: 50px;"><input id="one8" name="one8" type="text" th:value="${wisdomIndex.one8}"/></h5>
-                            <p><input id="one9" name="one9" type="text" th:value="${wisdomIndex.one9}"/></p>
+         font-size: 50px;color: red;"><input id="one8" name="one8" type="text" th:value="${wisdomIndex.one8}"/></h5>
+                            <p style="color: red;"><input id="one9" name="one9" type="text" th:value="${wisdomIndex.one9}"/></p>
                         </div>
                     </div>
                     <div class="item">
@@ -4071,8 +4091,8 @@
                              alt="Second slide">
                         <div class="carousel-caption d-none d-md-block">
                             <h5 style="
-    font-size: 50px;"><input id="one10" name="one10" type="text" th:value="${wisdomIndex.one10}"/></h5>
-                            <p th:text="${wisdomIndex.one11}"><input id="one11" name="one11" type="text"
+    font-size: 50px; color: red;"><input id="one10" name="one10" type="text" th:value="${wisdomIndex.one10}"/></h5>
+                            <p  style="color: red;"><input id="one11" name="one11" type="text"
                                                                      th:value="${wisdomIndex.one11}"/></p>
                         </div>
                     </div>
@@ -4082,9 +4102,9 @@
                              alt="Third slide">
                         <div class="carousel-caption d-none d-md-block">
                             <h5 style="
-    font-size: 50px;" th:text="${wisdomIndex.one12}"><input id="one12" name="one12" type="text"
+    font-size: 50px; color: red;" ><input id="one12" name="one12" type="text"
                                                             th:value="${wisdomIndex.one12}"/></h5>
-                            <p th:text="${wisdomIndex.one13}"><input id="one13" name="one13" type="text"
+                            <p style="color: red;"><input id="one13" name="one13" type="text"
                                                                      th:value="${wisdomIndex.one13}"/></p>
                         </div>
                     </div>
@@ -4111,7 +4131,8 @@
     font-weight: 600;
     line-height: 70px;
    margin-top: 8%;">
-                    <span th:text="${wisdomIndex.introduceTwo}"></span>
+                    <span style="color: red;"><input id="introduceTwo" name="introduceTwo" type="text"
+                                 th:value="${wisdomIndex.introduceTwo}"/></span>
                 </div>
             </section>
             <section class="section&#45;&#45;green wow bounceInUp" data-wow-duration="1s" data-wow-offset="0">
@@ -4124,7 +4145,8 @@ color:rgba(19,18,18,1);
 line-height:36px;
 position: relative;
    margin-top: -2%;">
-                    <span th:text="${wisdomIndex.spell}"></span>
+                    <span style="color: red;"><input id="spell" name="spell" type="text"
+                                                                th:value="${wisdomIndex.spell}"/></span>
                 </div>
             </section>
             <section class="section&#45;&#45;green wow bounceIn" data-wow-duration="1s" data-wow-offset="0">
@@ -4137,7 +4159,9 @@ position: relative;
     line-height: 32px;
     position: relative;
    margin-top: 5%;">
-                    <span th:text="${wisdomIndex.detailsTwo}"></span>
+                    <span style="color: red;"><textarea id="detailsTwo" name="detailsTwo" class="materialize-textarea" type="text"
+                                    data-length="255"
+                                    th:text="${wisdomIndex.detailsTwo}"></textarea></span>
                 </div>
             </section>
         </div>
@@ -4152,104 +4176,107 @@ position: relative;
                                 <div class="big_sfq">
                                     <div>
                                         <img src="" alt="">
-                                        <p th:text="${wisdomIndex.one1}"></p>
+                                        <p ><input id="one1" name="one1" type="text" style="color: red;"
+                                                  th:value="${wisdomIndex.one1}"/></p>
                                         <a href=""><i>——</i>查看更多</a>
                                     </div>
                                     <img src="/bootstrap/images/wisdom/1.jpg" alt="">
                                 </div>
-                                <a href="" class="small">
-                                    <img src="" alt="">
-                                    <span th:text="${wisdomIndex.one1}"></span>
-                                </a>
+                                <!--   <a href="" class="small">
+                                       <img src="" alt="">
+                                       <span th:text="${wisdomIndex.one1}"></span>
+                                   </a>-->
                             </div>
                             <div class="one2 ">
                                 <div class="big_sfq">
                                     <div>
                                         <img src=""
                                              alt="">
-                                        <p th:text="${wisdomIndex.one2}"></p>
+                                        <p ><input style="color: red;" id="one2" name="one2" type="text" th:value="${wisdomIndex.one2}"/></p>
                                         <a href=""><i>——</i>查看更多</a>
                                     </div>
                                     <img src="/bootstrap/images/wisdom/2.jpg" alt="">
                                 </div>
-                                <a href="" class="small">
-                                    <img src="#" alt="">
-                                    <span th:text="${wisdomIndex.one2}"></span>
-                                </a>
+                                <!-- <a href="" class="small">
+                                     <img src="#" alt="">
+                                     <span th:text="${wisdomIndex.one2}"></span>
+                                 </a>-->
                             </div>
                             <div class="one3 ">
                                 <div class="big_sfq">
                                     <div>
                                         <img src="#"
                                              alt="">
-                                        <p th:text="${wisdomIndex.one3}"></p>
+                                        <p ><input  style="color: red;" id="one3" name="one3" type="text" th:value="${wisdomIndex.one3}"/></p>
                                         <a href=""><i>——</i>查看更多</a>
                                     </div>
                                     <img src="/bootstrap/images/wisdom/3.jpg" alt="">
                                 </div>
-                                <a href="" class="small">
-                                    <img src="" alt="">
-                                    <span th:text="${wisdomIndex.one3}"></span>
-                                </a>
+                                <!--  <a href="" class="small">
+                                      <img src="" alt="">
+                                      <span th:text="${wisdomIndex.one3}"></span>
+                                  </a>-->
                             </div>
                             <div class="one4 ">
                                 <div class="big_sfq">
                                     <div>
                                         <img src=""
                                              alt="">
-                                        <p th:text="${wisdomIndex.one4}"></p>
+                                        <p ><input style="color: red;" id="one4" name="one4" type="text"
+                                                  th:value="${wisdomIndex.one4}"/></p>
                                         <a href=""><i>——</i>查看更多</a>
                                     </div>
                                     <img src="/bootstrap/images/wisdom/4.jpg" alt="">
                                 </div>
-                                <a href="" class="small">
-                                    <img src="" alt="">
-                                    <span th:text="${wisdomIndex.one4}"></span>
-                                </a>
+                                <!-- <a href="" class="small">
+                                     <img src="" alt="">
+                                     <span th:text="${wisdomIndex.one4}"></span>
+                                 </a>-->
                             </div>
                             <div class="one5 ">
                                 <div class="big_sfq">
                                     <div>
                                         <img src=""
                                              alt="">
-                                        <p th:text="${wisdomIndex.one5}"></p>
+                                        <p ><input style="color: red;" id="one5" name="one5" type="text" th:value="${wisdomIndex.one5}"/></p>
                                         <a href=""><i>——</i>查看更多</a>
                                     </div>
                                     <img src="/bootstrap/images/wisdom/5.jpg" alt="">
                                 </div>
-                                <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one5" class="small">
-                                    <img src="" alt="">
-                                    <span th:text="${wisdomIndex.one5}"></span>
-                                </a>
+                                <!--  <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one5" class="small">
+                                      <img src="" alt="">
+                                      <span th:text="${wisdomIndex.one5}"></span>
+                                  </a>-->
                             </div>
                             <div class="one6 ">
                                 <div class="big_sfq">
                                     <div>
                                         <img src=""
                                              alt="">
-                                        <p th:text="${wisdomIndex.one6}"></p>
+                                        <p ><input style="color: red;" id="one6" name="one6" type="text"
+                                                  th:value="${wisdomIndex.one6}"/></p>
                                         <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one6"><i>——</i>查看更多</a>
                                     </div>
                                     <img src="/bootstrap/images/wisdom/6.jpg" alt="">
                                 </div>
-                                <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one6" class="small">
-                                    <img src="" alt="">
-                                    <span th:text="${wisdomIndex.one6}"></span>
-                                </a>
+                                <!--  <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one6" class="small">
+                                      <img src="" alt="">
+                                      <span th:text="${wisdomIndex.one6}"></span>
+                                  </a>-->
                             </div>
-                            <div class="one7 ">
+                            <div class="one7">
                                 <div class="big_sfq">
                                     <div>
                                         <img src="" alt="">
-                                        <p th:text="${wisdomIndex.one7}"></p>
+                                        <p ><input style="color: red;" id="one7" name="one7" type="text" th:value="${wisdomIndex.one7}"/></p>
                                         <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one7"><i>——</i>查看更多</a>
                                     </div>
                                     <img src="/bootstrap/images/wisdom/7.jpg" alt="">
                                 </div>
-                                <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one7" class="small">
-                                    <img src="" alt="">
-                                    <span th:text="${wisdomIndex.one7}"></span>
-                                </a>
+                                <!--  <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one7" class="small">
+                                      <img src="" alt="">
+                                      <span th:text="${wisdomIndex.one7}"></span>
+                                  </a>-->
                             </div>
                         </div>
                     </div>
@@ -4264,7 +4291,8 @@ position: relative;
                 <a href="">
                     <img src="/bootstrap/images/wisdom/1.jpg" alt="">
                     <div>
-                        <h2 th:text="${wisdomIndex.one1}"></h2>
+                        <h2 ><input name="one1" type="text" style="color: red;"
+                                   th:value="${wisdomIndex.one1}"/></h2>
                         <em>—— 查看更多</em>
                     </div>
                 </a>
@@ -4273,7 +4301,7 @@ position: relative;
                 <a href="">
                     <img src="/bootstrap/images/wisdom/2.jpg" alt="">
                     <div>
-                        <h2 th:text="${wisdomIndex.one2}"></h2>
+                        <h2 ><input name="one2" type="text" th:value="${wisdomIndex.one2}" style="color: red;"/></h2>
                         <em>—— 查看更多</em>
                     </div>
                 </a>
@@ -4282,7 +4310,8 @@ position: relative;
                 <a href="">
                     <img src="/bootstrap/images/wisdom/3.jpg" alt="">
                     <div>
-                        <h2 th:text="${wisdomIndex.one3}"></h2>
+                        <h2><input name="one3" type="text" style="color: red;"
+                                                                 th:value="${wisdomIndex.one3}"/></h2>
                         <em>—— 查看更多</em>
                     </div>
                 </a>
@@ -4291,7 +4320,7 @@ position: relative;
                 <a href="">
                     <img src="/bootstrap/images/wisdom/4.jpg" alt="">
                     <div>
-                        <h2 th:text="${wisdomIndex.one4}"></h2>
+                        <h2 ><input style="color: red;" name="one4" type="text" th:value="${wisdomIndex.one4}"/></h2>
                         <em>—— 查看更多</em>
                     </div>
                 </a>
@@ -4300,7 +4329,7 @@ position: relative;
                 <a href="">
                     <img src="/bootstrap/images/wisdom/5.jpg" alt="">
                     <div>
-                        <h2 th:text="${wisdomIndex.one5}"></h2>
+                        <h2 ><input style="color: red;" name="one5" type="text" th:value="${wisdomIndex.one5}"/></h2>
                         <em>—— 查看更多</em>
                     </div>
                 </a>
@@ -4309,7 +4338,8 @@ position: relative;
                 <a href="">
                     <img src="/bootstrap/images/wisdom/6.jpg" alt="">
                     <div>
-                        <h2 th:text="${wisdomIndex.one6}"></h2>
+                        <h2  ><input name="one6" type="text" style="color: red;"
+                                                                 th:value="${wisdomIndex.one6}"/></h2>
                         <em>—— 查看更多</em>
                     </div>
                 </a>
@@ -4318,18 +4348,17 @@ position: relative;
                 <a href="">
                     <img src="/bootstrap/images/wisdom/7.jpg" alt="">
                     <div>
-                        <h2 th:text="${wisdomIndex.one7}"></h2>
+                        <h2 ><input name="one7" type="text" style="color: red;"
+                                                                 th:value="${wisdomIndex.one7}"/></h2>
                         <em>—— 查看更多</em>
                     </div>
                 </a>
             </div>
-
         </div>
-
 
     </div>
 </div>
-
+<div th:replace="public/footer :: html"></div>
 </body>
 <script src="/bootstrap/js/wow.js"></script>
 <script>
@@ -4354,6 +4383,23 @@ position: relative;
         section.className = 'section--purple wow fadeInDown';
         this.parentNode.insertBefore(section, this);
     };
+    $("#send_btn").click(function () {
+        $.ajax({
+            type: "post",
+            url: "/api/wisdombay/toUpdateIndex.ahsj",
+            data: $('#sendForm').serialize(),
+            success: function (msg) {
+                console.log(msg)
+                if (msg.success) {
+                    Materialize.toast('<span>' + msg.message + '</span>', 1500);
+                    return true;
+                } else {
+                    Materialize.toast('<span>' + msg.message + '</span>', 1500);
+                    return false;
+                }
+            },
+        });
+    })
 </script>
 
 
