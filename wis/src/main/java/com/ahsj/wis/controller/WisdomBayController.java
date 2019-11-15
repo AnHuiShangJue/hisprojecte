@@ -227,8 +227,7 @@ public class WisdomBayController {
 
     @RequestMapping("/test.ahsj")
     ModelAndView text() throws Exception {
-        ModelAndView modelAndView = new ModelAndView("backend/wis/demo");
-        modelAndView.addObject("title", "");
+        ModelAndView modelAndView = new ModelAndView("public/footer");
         return modelAndView;
     }
 }
