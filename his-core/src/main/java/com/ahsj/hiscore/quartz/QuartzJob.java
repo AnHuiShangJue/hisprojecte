@@ -176,7 +176,7 @@ public class QuartzJob {
      *@Date 2019/11/13
      *@Time 15:41
     **/
-  //  @Scheduled(cron = "0 0 2 1 * *")
+  //@Scheduled(cron = "0 0 2 1 * *")
     public void jobProject()throws Exception {
         hisProjectService.jobProject();
     }
