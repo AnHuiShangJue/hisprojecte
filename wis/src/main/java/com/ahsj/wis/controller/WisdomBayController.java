@@ -1,7 +1,9 @@
 package com.ahsj.wis.controller;
 
 import com.ahsj.wis.Constants;
+import com.ahsj.wis.entity.WisdomBay;
 import com.ahsj.wis.entity.WisdomIndex;
+import com.ahsj.wis.service.WisdomBayService;
 import com.ahsj.wis.service.WisdomIndexService;
 import com.ahsj.wis.utils.DeletePicture;
 import core.message.Message;
@@ -26,10 +28,16 @@ public class WisdomBayController {
     @Autowired
     WisdomIndexService wisdomIndexService;
 
+    @Autowired
+    WisdomBayService wisdomBayService;
+
     @RequestMapping("/list/index.ahsj")
-    ModelAndView listIndex() {
+    ModelAndView listIndex()throws Exception {
+        List<WisdomBay> wisdomBays = wisdomBayService.selectAll();
+        WisdomBay wisdomBay = wisdomBays.get(0);
         ModelAndView modelAndView = new ModelAndView("backend/wis/wisdom_bay");
         modelAndView.addObject("title", "人工智能实验室");
+        modelAndView.addObject("wisdomBay",wisdomBay);
         return modelAndView;
     }
 
@@ -200,6 +208,39 @@ public class WisdomBayController {
         return wisdomIndexService.selectAll();
     }
 
+    /**
+     * @Description 获取所有人工智能实验室信息
+     * @Author  muxu
+     * @Date  2019/11/15
+     * @Time 15:31
+     * @Return java.util.List<com.ahsj.wis.entity.WisdomBay>
+     * @Params []
+    **/
+    @RequestMapping("/selectAllBay.ahsj")
+    public List<WisdomBay> selectAllBay() throws Exception {
+        return wisdomBayService.selectAll();
+    }
+
+
+    /**
+     * @Description 更新人工智能实验室信息ModelAndView
+     * @Author  muxu
+     * @Date  2019/11/15
+     * @Time 16:12
+     * @Return org.springframework.web.servlet.ModelAndView
+     * @Params []
+    **/
+    @RequestMapping("/wisdomBayUpdate/index.ahsj")
+    ModelAndView wisdomBayIndexUpdate() throws Exception {
+        List<WisdomBay> wisdomBays = wisdomBayService.selectAll();
+        WisdomBay wisdomBay = wisdomBays.get(0);
+        ModelAndView modelAndView = new ModelAndView("backend/wisdom/wisdom_bay_update");
+        modelAndView.addObject("title", "人工智能实验室");
+        modelAndView.addObject("wisdomBay", wisdomBay);
+        return modelAndView;
+    }
+
+
     @RequestMapping("/lanhuUpdate/index.ahsj")
     ModelAndView lanhuIndexUpdate() throws Exception {
         List<WisdomIndex> wisdomIndices = wisdomIndexService.selectAll();
@@ -223,7 +264,18 @@ public class WisdomBayController {
         return wisdomIndexService.updateByPrimaryKeySelective(record);
     }
 
-
+    /**
+     * @Description 更新人工智能实验室信息
+     * @Author  muxu
+     * @Date  2019/11/15
+     * @Time 15:46
+     * @Return org.springframework.web.servlet.ModelAndView
+     * @Params []
+    **/
+    @RequestMapping("/updateWisdomBayIndex.ahsj")
+    public Message updateWisdomBayIndex(WisdomBay record) {
+        return wisdomBayService.updateWisdomBay(record);
+    }
 
     @RequestMapping("/test.ahsj")
     ModelAndView text() throws Exception {
