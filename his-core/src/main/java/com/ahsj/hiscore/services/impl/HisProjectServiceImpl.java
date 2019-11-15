@@ -166,7 +166,7 @@ public class HisProjectServiceImpl implements HisProjectService {
        /*             List<HisProject> projectList = hisProjectMapper.queryProjectAll();
                     if (projectList.size() == 0) {
                         hisProject.setNumber(1L);*/
-                if(EmptyUtil.Companion.isNullOrEmpty(hisProject.getPinyinCode())){
+                if (EmptyUtil.Companion.isNullOrEmpty(hisProject.getPinyinCode())) {
                     /*String toFirstChar = PinyinUtils.ToFirstChar(hisProject.getName());
                     hisProject.setPinyinCode(toFirstChar);*/
                 }
@@ -288,8 +288,13 @@ public class HisProjectServiceImpl implements HisProjectService {
     @Transactional(readOnly = true)
     public PageBean<HisProject> queryList(PageBean<HisProject> pageBean) throws Exception {
         List<HisProject> hisProjectList = hisProjectMapper.queryList(pageBean);
+        List<HisProject> list = hisProjectMapper.getProjectTranslateAll();
         for (HisProject hisProject : hisProjectList) {
-            hisProject.setName(hisProject.getName()+"("+hisProject.getTranslateKhmer()+")");
+            for (HisProject translate : list) {
+                if (hisProject.getId().equals(translate.getTranslateId())) {
+                    hisProject.setName(hisProject.getName() + "(" + translate.getTranslateKhmer() + ")");
+                }
+            }
         }
         pageBean.setData(CodeHelper.getInstance().setCodeValue(hisProjectList));
         return pageBean;
@@ -861,13 +866,13 @@ public class HisProjectServiceImpl implements HisProjectService {
     }
 
     /**
-     *@Description 根据IDs查询项目信息
-     *@Params [ids]
-     *@return java.util.List<com.ahsj.hiscore.entity.HisProject>
-     *@Author zhushixiang
-     *@Date 2019-10-08
-     *@Time 13:46
-    **/
+     * @return java.util.List<com.ahsj.hiscore.entity.HisProject>
+     * @Description 根据IDs查询项目信息
+     * @Params [ids]
+     * @Author zhushixiang
+     * @Date 2019-10-08
+     * @Time 13:46
+     **/
     @Override
     @Transactional(readOnly = false)
     public List<HisProject> selectForListForProjectByIds(Long[] ids) throws Exception {
@@ -907,7 +912,7 @@ public class HisProjectServiceImpl implements HisProjectService {
         List<Long> list = arrayList.stream().map(Translate::getTranslateId).collect(Collectors.toList());
         List<Long> plist = getLongList(collect, list);
 
-        List<HisProject> subtractList  =  new ArrayList<>();
+        List<HisProject> subtractList = new ArrayList<>();
         for (Long aLong : plist) {
             HisProject hisProject = hisProjectMapper.selectByPrimaryKey(aLong);
             subtractList.add(hisProject);
