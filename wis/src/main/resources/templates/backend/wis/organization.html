@@ -86,45 +86,58 @@
             line-height: 35px;
             letter-spacing: 4px;
         }
+
+        .wow:first-child {
+            visibility: hidden;
+        }
     </style>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 <div th:replace="public/back_baselayout :: html"></div>
-<div class="container-fluid">
+<div class="container-fluid" style="margin-top: -50px;">
     <div class="row">
-        <img src="/bootstrap/images/wisdom/contactus.png" class="img-responsive background-image-contactus"
-             alt="Responsive image">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <p class="text-center" style="font-size: 44px;margin-top: 3%;">组织架构</p>
-            <br>
-            <p class="text-center" style="font-size: 44px;margin-top: -47px;color:rgba(105,102,102,1);">Organizational
-                structure</p>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 4%;">
-            <div class="col-xs-3 col-sm-3 col-md-3">
-                <img src="/bootstrap/images/wisdom/department01.png" class="img-responsive center-block"
-                     alt="Responsive image">
+        <section class="wow fadeInDown">
+            <img src="/bootstrap/images/wisdom/contactus.png" class="img-responsive background-image-contactus"
+                 alt="Responsive image">
+        </section>
+        <section class=" wow bounceInLeft" data-wow-offset="300">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <p class="text-center" style="font-size: 44px;margin-top: 2%;">组织架构</p>
+                <br>
+                <p class="text-center" style="font-size: 44px;margin-top: -47px;color:rgba(105,102,102,1);">
+                    Organizational
+                    structure</p>
             </div>
-            <div class="col-xs-3 col-sm-3 col-md-3">
-                <img src="/bootstrap/images/wisdom/department02.png" class="img-responsive center-block"
-                     alt="Responsive image">
+        </section>
+        <section class=" wow fadeInDown">
+            <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 4%;">
+                <div class="col-xs-3 col-sm-3 col-md-3">
+                    <img src="/bootstrap/images/wisdom/department01.png" class="img-responsive center-block"
+                         alt="Responsive image">
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3">
+                    <img src="/bootstrap/images/wisdom/department02.png" class="img-responsive center-block"
+                         alt="Responsive image">
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3">
+                    <img src="/bootstrap/images/wisdom/department03.png" class="img-responsive center-block"
+                         alt="Responsive image">
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3">
+                    <img src="/bootstrap/images/wisdom/department04.png" class="img-responsive center-block"
+                         alt="Responsive image">
+                </div>
             </div>
-            <div class="col-xs-3 col-sm-3 col-md-3">
-                <img src="/bootstrap/images/wisdom/department03.png" class="img-responsive center-block"
-                     alt="Responsive image">
+        </section>
+        <section class=" wow bounceInLeft" data-wow-offset="300">
+            <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: -7%;">
+                <div class="underline" style="margin-top: 8%;"></div>
+                <br>
+                <p class="underline-fount text-center">智慧湾</p>
             </div>
-            <div class="col-xs-3 col-sm-3 col-md-3">
-                <img src="/bootstrap/images/wisdom/department04.png" class="img-responsive center-block"
-                     alt="Responsive image">
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: -7%;">
-            <div class="underline" style="margin-top: 8%;"></div>
-            <br>
-            <p class="underline-fount text-center">智慧湾</p>
-        </div>
+        </section>
         <div class="col-xs-12 col-sm-12 col-md-12 detail">
             <div class=" col-xs-3 col-sm-3 col-md-3">
                 <div class="detail1  text-center center-block" style="width: 85%;">
@@ -147,38 +160,51 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 detail">
-            <br>
-            <div class="fount1 col-xs-3 col-sm-3 col-md-3 text-center">
-                <P>资讯总监</P>
-                <P>咨询顾问</P>
-                <P>资讯经理</P>
-                <P>业务专家(兼)</P>
-                <P>项目经理</P>
-                <P>分析员</P>
-                <P>PTA</P>
+        <section class=" wow bounceInLeft" data-wow-delay="1s">
+            <div class="col-xs-12 col-sm-12 col-md-12 detail">
+                <br>
+                <div class="fount1 col-xs-3 col-sm-3 col-md-3 text-center">
+                    <P>资讯总监</P>
+                    <P>咨询顾问</P>
+                    <P>资讯经理</P>
+                    <P>业务专家(兼)</P>
+                    <P>项目经理</P>
+                    <P>分析员</P>
+                    <P>PTA</P>
+                </div>
+                <div class="fount1 col-xs-3 col-sm-3 col-md-3 text-center">
+                    <p>项目经理</p>
+                    <p>产品经理</p>
+                    <p>架构师</p>
+                    <p>开发组长</p>
+                    <p>开发测试</p>
+                    <p>运维</p>
+                </div>
+                <div class="fount1 col-xs-3 col-sm-3 col-md-3 text-center">
+                    <p>商务经理</p>
+                    <p>客服经理</p>
+                </div>
+                <div class="fount1 col-xs-3 col-sm-3 col-md-3 text-center">
+                    <p>行政专员</p>
+                    <p>人事专员</p>
+                    <p>财务专员</p>
+                </div>
             </div>
-            <div class="fount1 col-xs-3 col-sm-3 col-md-3 text-center">
-                <p>项目经理</p>
-                <p>产品经理</p>
-                <p>架构师</p>
-                <p>开发组长</p>
-                <p>开发测试</p>
-                <p>运维</p>
-            </div>
-            <div class="fount1 col-xs-3 col-sm-3 col-md-3 text-center">
-                <p>商务经理</p>
-                <p>客服经理</p>
-            </div>
-            <div class="fount1 col-xs-3 col-sm-3 col-md-3 text-center">
-                <p>行政专员</p>
-                <p>人事专员</p>
-                <p>财务专员</p>
-            </div>
-        </div>
+        </section>
     </div>
 </div>
 </body>
+<script src="/bootstrap/js/wow.js"></script>
 <script>
+    wow = new WOW(
+        {
+            animateClass: 'animated',
+            offset: 100,
+            callback: function (box) {
+                console.log("WOW: animating <" + box.tagName.toLowerCase() + ">")
+            }
+        }
+    );
+    wow.init();
 </script>
 </html>
