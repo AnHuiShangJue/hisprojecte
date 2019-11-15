@@ -1,6 +1,7 @@
 package com.ahsj.hiscore.dao;
 
 import com.ahsj.hiscore.entity.HisProject;
+import com.ahsj.hiscore.entity.Translate;
 import core.entity.PageBean;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -243,4 +244,14 @@ public interface HisProjectMapper extends BaseMapper<HisProject> {
 
     //模糊查询（or）
     List<? extends HisProject> listForAll(PageBean<HisProject> pageBean);
+    
+    /**
+     *@功能说明 
+     *@Params []
+     *@return java.util.List<com.ahsj.hiscore.entity.Translate>
+     *@Author XJP
+     *@Date 2019/11/15
+     *@Time 9:43
+    **/
+    List<HisProject> getProjectTranslateAll();
 }

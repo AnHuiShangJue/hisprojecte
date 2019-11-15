@@ -102,6 +102,16 @@ public class HisProject extends BaseEntity implements Serializable {
 
     private String chineseEnglishName;
 
+    private Long translateId;
+
+    public Long getTranslateId() {
+        return translateId;
+    }
+
+    public void setTranslateId(Long translateId) {
+        this.translateId = translateId;
+    }
+
     public String getChineseEnglishName() {
         return chineseEnglishName;
     }
