@@ -87,7 +87,15 @@ public class PatientServiceImpl implements HisPatientService {
                         HisPatientInfo hisPatientInfo1 = hisPatientInfos.get(0);
                         String substring = StringUtils.substring(hisPatientInfo1.getIdcard(), 6);
                         Integer idNum =Integer.valueOf(substring);
-                        idNum = idNum+1;
+                        boolean flag = true;
+                        while(flag){
+                            idNum = idNum+1;
+                            UserInfo userCheck = iUserService.selectByName("未提供身份证"+idNum);
+                            if(EmptyUtil.Companion.isNullOrEmpty(userCheck.getId())){
+                                flag = false;
+                            }
+                        }
+
                         hisPatientInfo.setIdcard("未提供身份证"+idNum);
                     }
                 }
