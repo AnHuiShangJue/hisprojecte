@@ -282,4 +282,6 @@ public class WisdomBayController {
         ModelAndView modelAndView = new ModelAndView("public/footer");
         return modelAndView;
     }
+
+
 }

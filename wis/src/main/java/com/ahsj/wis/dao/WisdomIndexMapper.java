@@ -1,9 +1,11 @@
 package com.ahsj.wis.dao;
 
 import com.ahsj.wis.entity.WisdomIndex;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+@Mapper
 public interface WisdomIndexMapper {
     int deleteByPrimaryKey(Long id);
 

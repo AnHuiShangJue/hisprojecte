@@ -57,7 +57,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">修改文本</span>
                 </div>
-                <textarea class="form-control" aria-label="With textarea" style="width: 425%;height:400px"  th:text="${aboutWisdom.introduce}"></textarea>
+                <textarea id="introduce" class="form-control" aria-label="With textarea" style="width: 425%;height:400px"  th:text="${aboutWisdom.introduce}"></textarea>
             </div>
         </div>
     </section>
@@ -234,21 +234,21 @@
     wow.init();
 
     $("#send_btn").click(function () {
-        // $.ajax({
-        //     type: "post",
-        //     url: "/api/wisdombay/toUpdateIndex.ahsj",
-        //     data: $('#sendForm').serialize(),
-        //     success: function (msg) {
-        //         console.log(msg)
-        //         if (msg.success) {
-        //             Materialize.toast('<span>' + msg.message + '</span>', 1500);
-        //             return true;
-        //         } else {
-        //             Materialize.toast('<span>' + msg.message + '</span>', 1500);
-        //             return false;
-        //         }
-        //     },
-        // });
+        var introduce = $('#introduce').val()
+        console.log(introduce);
+        $.ajax({
+            type: "post",
+            url: "/api/aboutwisdom/toUpdateIndex.ahsj",
+            data: $('#sendForm').serialize(),
+            success: function (msg) {
+                console.log(msg)
+                if (msg.success) {
+                    return true;
+                } else {
+                    return false;
+                }
+            },
+        });
 
         // $('.toast').toast('show')
 
