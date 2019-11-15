@@ -1,13 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<script src="../bootstrap/js/jquery-1.12.0.min.js"></script>
-<script type="text/javascript" src="../bootstrap/js/bootstrap.js" ></script>
-<link rel="stylesheet" href="../bootstrap/css/bootstrap.css" />
+<script src="/bootstrap/js/jquery-1.12.0.min.js"></script>
+<script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.css"/>
+<link rel="stylesheet" href="/bootstrap/css/libs/animate.css">
+<link rel="stylesheet" href="/bootstrap/css/site.css">
+<style>
+    #bor{
+        height:1px;
+        background-color:rgba(0, 0, 0, .1);
+        box-shadow: 0px 1px 2px #888888;
+        margin-top: 30px;
+        margin: 0 auto;
+        width: 82%;
+    }
+</style>
 <body>
-
+<nav class="navbar navbar-default" style="background-color: #ffffff;height: 110px;border: none">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"
+             style="float:right;margin-top: 30px;margin-right: 70px;">
+            <ul class="nav navbar-nav" style="margin-right: 140px">
+                <li><a href="/api/wisdombay/lanhu/index.ahsj" style="color:#8c8c8c;font-size: 18px;">关于我们</a></li>
+                <li><a href="/api/wisdombay/aboutwisdom/index.ahsj" style="color: #8c8c8c;font-size: 18px;">组织架构</a></li>
+                <li><a href="/api/wisdombay/contactus/index.ahsj" style="color: #8c8c8c;font-size: 18px;">合作伙伴</a></li>
+                <li><a href="/api/wisdombay/contactus/index.ahsj" style="color: #8c8c8c;font-size: 18px;">联系我们</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="bor"></div>
+</nav>
 </body>
 </html>
+<script>
+</script>
