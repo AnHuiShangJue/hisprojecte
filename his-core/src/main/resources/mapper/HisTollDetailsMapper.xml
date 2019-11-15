@@ -204,7 +204,7 @@
     </update>
     <!--  自定义sql-->
     <select id="listByMecordIdForHospital" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
-        select
+        select distinct
         q.update_date as update_date,
         a.target_id as target_id,
         a.num as num,

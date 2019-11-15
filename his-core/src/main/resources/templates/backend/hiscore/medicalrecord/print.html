@@ -132,7 +132,7 @@
 
 <script th:inline="javascript">
     $(document).ready(function () {
-        printShowInfusion()
+        printShowInfusion();
         printShow();
         printShow1();
         printShow2();
@@ -351,10 +351,10 @@
             importCSS: false,
             debug: false,
             afterPrint: function () {
-                dialog.confirm('确定打印?', function (index, layero) {
-                    parent.parent.grid.search();
-                    dialog.parentclose();
-                });
+                // dialog.confirm('确定打印?', function (index, layero) {
+                //     parent.parent.grid.search();
+                //     dialog.parentclose();
+                // });
             }
         });
     }
