@@ -1,4 +1,4 @@
-package com.ahsj.wis.entity;
+package com.ahsj.wisdom.entity;
 
 public class WisdomIndex {
     private Long id;
