@@ -134,7 +134,7 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
                         List<HisMedicalRecord> hisMedicalRecord1 = hisMedicalRecordMapper.selectByMedicalRecordOrder(hisHospitalManage.getPatientId());
                         hisHospitalManage.setMedicalNumber(hisMedicalRecord1.get(0).getMedicalRecordId());
                         hisHospitalManage.setHospitalizationDay("1");
-                        hisHospitalManage.setDepositWarning(new BigDecimal(300));
+                        hisHospitalManage.setDepositWarning(new BigDecimal(2000));
                         hisHospitalManage.setPayHospitalizationDay("");
                         hisHospitalManage.setSex(hisPatientInfo1.getSex());
                         hisHospitalManage.setRestDeposit(new BigDecimal(0));
@@ -162,7 +162,7 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
                         //有待修改
                         hisPatientInfo1.setId(hisHospitalManage.getPatientId());
                         hisHospitalManage.setHospitalizationDay("1");
-                        hisHospitalManage.setDepositWarning(new BigDecimal(300));
+                        hisHospitalManage.setDepositWarning(new BigDecimal(2000));
                         hisHospitalManage.setPayHospitalizationDay("");
                         hisHospitalManage.setSex(hisPatientInfo1.getSex());
                         hisHospitalManage.setRestDeposit(new BigDecimal(0));
