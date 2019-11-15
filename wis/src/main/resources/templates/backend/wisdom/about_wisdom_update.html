@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+        .core-text-title {
+            font-size: 38px;
+            font-family: PingFangSC-Medium, PingFang SC;
+            font-weight: 500;
+            color: rgba(39, 39, 39, 1);
+            line-height: 53px;
+        }
+
+        .people-name-text {
+            font-size: 38px;
+            font-family: PingFangSC-Medium, PingFang SC;
+            font-weight: 500;
+            color: rgba(39, 39, 39, 1);
+            line-height: 53px;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+<div th:replace="public/back_baselayout :: html"></div>
+
+
+<div class="container-fluid">
+    <!--<div class="row">-->
+    <img src="/bootstrap/images/wisdom/bianzu.png" class="img-responsive" alt="Responsive image">
+
+    <section class="center-block wow slideInDown" data-wow-offset="0">
+        <!--背景图-->
+        <img class="img-responsive center-block visible-lg" src="/bootstrap/images/wisdom/juxin.png" alt="Responsive image" style="width:75%;margin-top: -20%;"/>
+        <!--小设备适配-->
+        <img class="img-responsive center-block visible-md" src="/bootstrap/images/wisdom/juxin2.png" alt="Responsive image" style="width:75%;margin-top: -20%;"/><!--ipad pro-->
+        <img class="img-responsive center-block visible-sm" src="/bootstrap/images/wisdom/juxin2.png" alt="Responsive image" style="width:75%;margin-top: -20%;"/>
+        <img class="img-responsive center-block visible-xs" src="/bootstrap/images/wisdom/juxin2.png" alt="Responsive image" style="width:75%;margin-top: -20%;"/>
+        <!--标题图-->
+        <img class="img-responsive center-block visible-lg" src="/bootstrap/images/wisdom/aboutwisdom.png" alt="Responsive image" style="width: 20%;margin-top: -39%;"/>
+        <!--小设备适配-->
+        <img class="img-responsive center-block visible-md" src="/bootstrap/images/wisdom/aboutwisdom.png" alt="Responsive image" style="width: 20%;margin-top: -90%;"/><!--ipad pro-->
+        <img class="img-responsive center-block visible-sm" src="/bootstrap/images/wisdom/aboutwisdom.png" alt="Responsive image" style="width: 20%;margin-top: -90%;"/>
+        <img class="img-responsive center-block visible-xs" src="/bootstrap/images/wisdom/aboutwisdom.png" alt="Responsive image" style="width: 20%;margin-top: -90%;"/>
+        <!--文字-->
+        <!--<div class="center-block" style="width:40%">-->
+            <!--<h3 class="text-center aboutwisdom-text" >苏州智慧湾科技发展有限公司是基于智慧城市、大数据及研发、产品管理（IPD）为核心的系统咨询公司，研究人与城市的生态关系。通过智慧城市建设、运行、分析，使用大数据和人工智能技术，建立一套评价与优化的城市智慧化建设运行体系。</h3>-->
+        <!--</div>-->
+        <div class="center-block" style="width:40%">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">修改文本</span>
+                </div>
+                <textarea class="form-control" aria-label="With textarea" style="width: 425%;height:400px"  th:text="${aboutWisdom.introduce}"></textarea>
+            </div>
+        </div>
+    </section>
+    <!--</div>-->
+
+</div>
+
+<div class="container-fluid" style="margin-top: 20%">
+    <!--<div class="row" style="">-->
+    <section class="wow fadeIn" data-wow-duration="1500ms">
+        <p class="core-text-title text-center" style="">核心能力</p>
+    </section>
+    <!--</div>-->
+    <!--<div class="row" style="">-->
+    <img class="center-block img-responsive" src="/bootstrap/images/wisdom/jiantou.png" alt="Responsive image" />
+    <!--</div>-->
+</div>
+
+<br>
+<br>
+
+<div class="container-fluid">
+    <!--<div class="row">-->
+
+    <div class="col-md-2">
+        <section class="wow rotateInDownLeft" data-wow-duration="150ms">
+            <img class="center-block img-responsive" src="/bootstrap/images/wisdom/design.png" alt="Responsive image"/>
+        </section>
+    </div>
+    <div class="col-md-2">
+        <section class="wow rotateInDownLeft" data-wow-duration="300ms">
+            <img class="center-block img-responsive" src="/bootstrap/images/wisdom/data.png" alt="Responsive image"/>
+        </section>
+    </div>
+    <div class="col-md-2">
+        <section class="wow rotateInDownLeft" data-wow-duration="600ms">
+            <img class="center-block img-responsive" src="/bootstrap/images/wisdom/source.png" alt="Responsive image"/>
+        </section>
+    </div>
+    <div class="col-md-2">
+        <section class="wow rotateInDownLeft" data-wow-duration="900ms">
+            <img class="center-block img-responsive" src="/bootstrap/images/wisdom/science.png" alt="Responsive image"/>
+        </section>
+
+    </div>
+    <div class="col-md-2">
+        <section class="wow rotateInDownLeft" data-wow-duration="1200ms">
+            <img class="center-block img-responsive" src="/bootstrap/images/wisdom/product.png" alt="Responsive image"/>
+        </section>
+
+    </div>
+    <div class="col-md-2">
+        <section class="wow rotateInDownLeft" data-wow-duration="1500ms">
+            <img class="center-block img-responsive" src="/bootstrap/images/wisdom/luodi.png" alt="Responsive image"/>
+        </section>
+
+    </div>
+    <!--</div>-->
+</div>
+
+<br>
+<br>
+
+<div class="container-fluid">
+    <!--<div class="row" style="">-->
+    <section class="wow fadeIn" data-wow-duration="1500ms">
+        <p class="core-text-title text-center" style="">合伙人</p>
+    </section>
+
+    <!--</div>-->
+    <!--<div class="row" style="">-->
+    <img class="center-block img-responsive" src="/bootstrap/images/wisdom/jiantou.png" alt="Responsive image"/>
+    <!--</div>-->
+</div>
+
+<br>
+<br>
+
+<div class="container-fluid">
+    <!--<div class="row" style="">-->
+    <div class="col-md-4">
+        <section class="wow slideInDown" data-wow-duration="500ms">
+            <div class="row" style="">
+                <img class="img-circle responsive-img center-block" src="/bootstrap/images/wisdom/shui.png" alt="Responsive image"/>
+            </div>
+            <div class="row">
+                <div class="row" style="">
+                    <h4 class="people-name-text text-center">水新莹</h4>
+                </div>
+                <div class="row" style="">
+                    <h4 class="text-center">浙江大学 管理学学士<br>科大讯飞智慧城市 咨询总监</h4>
+                </div>
+                <div class="row center-block" style="width: 55%">
+                    <p> 主要业绩:《电脑报》、《电脑迷》杂志专栏作家。编著《个人服务器一点通》等6本书籍和一系列专栏。《智慧芜湖整体规划》、《北京大兴大数据顶层规划》等。</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="col-md-4">
+        <section class="wow slideInDown" data-wow-duration="1000ms">
+            <div class="row" style="">
+                <img class="img-circle responsive-img center-block" src="/bootstrap/images/wisdom/hangyaoqiang.png" alt="Responsive image"/>
+            </div>
+            <div class="row">
+                <div class="row" style="">
+                    <!--<h4 class="people-name-text text-center">韩耀强</h4>-->
+                    <div class="input-group" style="margin-left: 35%;">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">修改姓名</span>
+                        </div>
+                        <textarea class="form-control" aria-label="With textarea" style="width: 80%"></textarea>
+                    </div>
+                </div>
+                <div class="row" style="">
+                    <!--<h4 class="text-center">北京大学博士</h4>-->
+                    <div class="input-group" style="margin-left: 25%;">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">修改职称</span>
+                        </div>
+                        <textarea class="form-control" aria-label="With textarea" style="width: 200%"></textarea>
+                    </div>
+                </div>
+                <div class="row center-block" style="width: 55%">
+                    <p>赛迪顾问股份有限公司资深咨询专家航天科工二院 高级咨询专家 主要业绩:《中国重点行业大数据应用研究》、《中国电信航空民用通信市场、业务与商用策略研究及支撑项 目》《北京朝阳区智慧城市顶层规划》、《智慧太湖新 城规划》、《杭州智慧城市总体规划》、《智慧芜湖整 体规划》、《贵阳云计算产业发展规划》等。</p>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+
+    <div class="col-md-4">
+        <section class="wow slideInDown" data-wow-duration="1500ms">
+            <div class="row" style="">
+                <img class="img-circle responsive-img center-block" src="/bootstrap/images/wisdom/yaole.png" alt="Responsive image"/>
+            </div>
+            <div class="row">
+                <div class="row" style="">
+                    <h4 class="people-name-text text-center">姚乐</h4>
+                </div>
+                <div class="row" style="">
+                    <h4 class="text-center">北京大学 管理学博士<br>CIO时代学院院长</h4>
+                </div>
+                <div class="row center-block" style="width: 55%">
+                    <p>中国新一代IT产业推进联盟秘书长 主要著作:《互联网+时代的数字化转型》、《赋能大数据教育:全国高校大数据教育教学经验谈》、《传统行业 遇上大数据 拥抱智能化未来》、《大数据的行业应用策 略》等。</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+
+    <!--</div>-->
+</div>
+
+<button id="send_btn" type="button" class="btn btn-success navbar-fixed-bottom" style="margin-bottom: 5%;margin-left: 95%;">修改</button>
+
+
+<div th:replace="public/footer :: html"></div>
+<script src="/bootstrap/js/wow.js"></script>
+
+<script>
+    wow = new WOW(
+        {
+            animateClass: 'animated',
+            offset:       100,
+            callback:     function(box) {
+                console.log("WOW: animating <" + box.tagName.toLowerCase() + ">")
+            }
+        }
+    );
+    wow.init();
+
+    $("#send_btn").click(function () {
+        // $.ajax({
+        //     type: "post",
+        //     url: "/api/wisdombay/toUpdateIndex.ahsj",
+        //     data: $('#sendForm').serialize(),
+        //     success: function (msg) {
+        //         console.log(msg)
+        //         if (msg.success) {
+        //             Materialize.toast('<span>' + msg.message + '</span>', 1500);
+        //             return true;
+        //         } else {
+        //             Materialize.toast('<span>' + msg.message + '</span>', 1500);
+        //             return false;
+        //         }
+        //     },
+        // });
+
+        // $('.toast').toast('show')
+
+        toastr.success("祝贺你成功了");
+    })
+
+
+</script>
+
+
+
+<!--<div th:replace="public/footer :: html"></div>-->
+</body>
+</html>
+
