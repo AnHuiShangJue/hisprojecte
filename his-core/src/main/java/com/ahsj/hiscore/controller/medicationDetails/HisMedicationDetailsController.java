@@ -1,9 +1,13 @@
 package com.ahsj.hiscore.controller.medicationDetails;
 
 import com.ahsj.hiscore.entity.HisInfusion;
+import com.ahsj.hiscore.entity.HisMedicalRecord;
 import com.ahsj.hiscore.entity.HisMedicationDetails;
+import com.ahsj.hiscore.entity.HisRegistered;
 import com.ahsj.hiscore.services.HisInfusionService;
+import com.ahsj.hiscore.services.HisMedicalRecordService;
 import com.ahsj.hiscore.services.HisMedicationDetailsService;
+import com.ahsj.hiscore.services.HisRegisteredService;
 import core.controller.BaseController;
 import core.entity.PageBean;
 import core.message.Message;
@@ -30,6 +34,12 @@ public class HisMedicationDetailsController extends BaseController {
 
     @Autowired
     HisInfusionService hisInfusionService;
+
+    @Autowired
+    HisMedicalRecordService hisMedicalRecordService;
+
+    @Autowired
+    HisRegisteredService hisRegisteredService;
 
     /**
      * @return
@@ -131,7 +141,25 @@ public class HisMedicationDetailsController extends BaseController {
     @ResponseBody
     @RequestMapping("selectPrint.ahsj")
     public List<HisMedicationDetails> selectPrint(String number) throws Exception {
-        return hisMedicationDetailsService.selectPrint(number);
+        HisRegistered hisRegistered =hisRegisteredService.selectByNumber(number);
+        HisMedicalRecord hisMedicalRecord = hisMedicalRecordService.selectByRegisterId(hisRegistered.getId());
+        List<HisInfusion> hisInfusionList = hisInfusionService.selectByRecordNumberAndNotPay(hisMedicalRecord.getMedicalRecordId());
+        List<HisMedicationDetails> hisMedicationDetailsList = hisMedicationDetailsService.selectPrint(number);
+        if(!EmptyUtil.Companion.isNullOrEmpty(hisInfusionList) && hisInfusionList.size() != 0) {
+            for (HisInfusion hisInfusion : hisInfusionList) {
+                if(!EmptyUtil.Companion.isNullOrEmpty(hisMedicationDetailsList) && hisMedicationDetailsList.size() != 0) {
+                    for (HisMedicationDetails hisMedicationDetails : hisMedicationDetailsList) {
+                        if (hisMedicationDetails.getDrugsNumb().equals(hisInfusion.getDrugsNumb())) {
+                            hisMedicationDetails.setCount(hisMedicationDetails.getCount() - Integer.valueOf(hisInfusion.getDosage()));
+                            if(hisMedicationDetails.getCount() <= 0)
+                                hisMedicationDetailsList.remove(hisMedicationDetails);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return hisMedicationDetailsList;
     }
 
     /**

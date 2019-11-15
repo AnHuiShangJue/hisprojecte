@@ -158,7 +158,7 @@
                             </div>
                             <div class="step-actions" style="position: relative;bottom: 1px">
                                 <div class="row">
-                                    <!--<div class="col m4 s12 mb-3" style="width: auto" th:if="${isSameUser}">-->
+                                    <!--<div class="col m4 s12 mb-3" style="width: auto" >-->
                                         <!--<button class="red btn btn-reset" type="reset">-->
                                             <!--<i class="material-icons left">clear</i>重置-->
                                         <!--</button>-->
@@ -187,19 +187,19 @@
                                 <div class="row">
                                     <div class="col s3 m3 l3 xl3 right">
                                         <a id="addProjectBtn"
-                                           class="btn waves-effect waves-light red " th:if="${isSameUser}">
+                                           class="btn waves-effect waves-light red " >
                                             <i class="material-icons white-text tooltipped" data-position="bottom"
                                                data-delay="50"
                                                data-tooltip="新增检查项目">add</i>
                                         </a>
                                         <a id="addProjectsBtn"
-                                           class="btn waves-effect waves-light red " th:if="${isSameUser}">
+                                           class="btn waves-effect waves-light red " >
                                             <i class="material-icons white-text tooltipped" data-position="bottom"
                                                data-delay="50"
                                                data-tooltip="使用检查项目组合">note_add</i>
                                         </a>
                                         <a id="deleteProjectListBtn"
-                                           class="btn waves-effect waves-light red" th:if="${isSameUser}">
+                                           class="btn waves-effect waves-light red" >
                                             <i class="material-icons white-text tooltipped" data-position="bottom"
                                                data-delay="50"
                                                data-tooltip="批量移除检查项目明细">remove</i>
@@ -216,7 +216,7 @@
                             <div class="step-actions" style="position: relative;bottom: 1px">
                                 <div class="row">
                                     <!--<div class="col m4 s12 mb-3" style="width: auto">-->
-                                        <!--<button class="red btn btn-reset" type="reset" th:if="${isSameUser}">-->
+                                        <!--<button class="red btn btn-reset" type="reset" >-->
                                             <!--<i class="material-icons left">clear</i>重置-->
                                         <!--</button>-->
                                     <!--</div>-->
@@ -239,7 +239,7 @@
                         <div class="step-title waves-effect">药 品 处 方</div>
                         <label>Drug prescription</label>
                         <div class="step-content">
-                            <!--<div th:if="${isSameUser}">-->
+                            <!--<div >-->
                             <div th:if="${true}">
                                 <div class="row">
                                     <div class="col s3 m3 l3 xl3 left">
@@ -249,19 +249,19 @@
                                     </div>
                                     <div class="col s3 m3 l3 xl3 right">
                                         <a id="addBtn"
-                                           class="btn waves-effect waves-light red " th:if="${isSameUser}">
+                                           class="btn waves-effect waves-light red " >
                                             <i class="material-icons white-text tooltipped" data-position="bottom"
                                                data-delay="50"
                                                data-tooltip="新增药品">add</i>
                                         </a>
                                         <a id="addByPrescriptionBtn"
-                                           class="btn waves-effect waves-light red " th:if="${isSameUser}">
+                                           class="btn waves-effect waves-light red " >
                                             <i class="material-icons white-text tooltipped" data-position="bottom"
                                                data-delay="50"
                                                data-tooltip="使用药方模版">note_add</i>
                                         </a>
                                         <a id="deleteListBtn"
-                                           class="btn waves-effect waves-light red" th:if="${isSameUser}">
+                                           class="btn waves-effect waves-light red" >
                                             <i class="material-icons white-text tooltipped" data-position="bottom"
                                                data-delay="50"
                                                data-tooltip="批量移除药品处方明细">remove</i>
@@ -294,7 +294,7 @@
                                     </div>
                                     <!--<div class="col m6 s12 mb-1" style="width: auto;margin-bottom: 5% !important;">-->
                                         <!--<button class="red btn mr-1 btn-reset" style="margin-right: -1% !important "-->
-                                                <!--type="reset" th:if="${isSameUser}">-->
+                                                <!--type="reset" >-->
                                             <!--<i class="material-icons left">clear</i>-->
                                             <!--重置-->
                                         <!--</button>-->
@@ -309,7 +309,7 @@
                         <div class="step-title waves-effect">输 液 处 方</div>
                         <label>Infusion prescription</label>
                         <div class="step-content">
-                            <!--<div th:if="${isSameUser}">-->
+                            <!--<div >-->
                             <div th:if="${true}">
                                 <div class="row">
                                     <div class="col s3 m3 l3 xl3 right">
@@ -343,7 +343,7 @@
                                     </div>
                                     <!--<div class="col m6 s12 mb-1" style="width: auto;margin-bottom: 5% !important;">-->
                                         <!--<button class="red btn mr-1 btn-reset" style="margin-right: -1% !important "-->
-                                                <!--type="reset" th:if="${isSameUser}">-->
+                                                <!--type="reset" >-->
                                             <!--<i class="material-icons left">clear</i>-->
                                             <!--重置-->
                                         <!--</button>-->
@@ -471,12 +471,12 @@
                     "className": "centered",
                     "render": function (row) {
                         var rtnBtn = "";
-                        if (isSameUser) {
+                        // if (isSameUser) {
 
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn +
                                 "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"移除\" onclick='remove(" + row.id + ",\""+row.drugsNumb+"\");'> <i class='material-icons'>remove</i></a>";
-                        }
+                        // }
                         // 返回自定义内容
                         return rtnBtn;
                     },
@@ -569,10 +569,10 @@
                     "render": function (row) {
                         var rtnBtn = "";
                         //如果获取字符串，必须在参数外反转"
-                        if (isSameUser) {
+                        // if (isSameUser) {
                             rtnBtn = rtnBtn +
                                 "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"移除\" onclick='removeForProject(" + row.id + ");'> <i class='material-icons'>remove</i></a>";
-                        }
+                        // }
                         // 返回自定义内容
                         return rtnBtn;
                     },
@@ -698,7 +698,7 @@
     });
 
     function initBtn() {
-        if (isSameUser) {
+        // if (isSameUser) {
             //药品明细
             $("#addBtn").click(function () {
                 var url = CTX + "/api/pharmacy/listForMedication/index.ahsj?token=" + TOKEN;
@@ -984,7 +984,7 @@
                     layer.close(index);
                 });
             });
-        }
+        // }
     }
 
     function strToObj(str) {
