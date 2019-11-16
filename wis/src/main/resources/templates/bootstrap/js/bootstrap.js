@@ -365,7 +365,7 @@ if (typeof jQuery === 'undefined') {
 
   Carousel.prototype.getItemIndex = function (item) {
     this.$items = item.parent().children('.item')
-    return this.$items.index(item || this.$active)
+    return this.$items.list(item || this.$active)
   }
 
   Carousel.prototype.getItemForDirection = function (direction, active) {
@@ -864,7 +864,7 @@ if (typeof jQuery === 'undefined') {
 
     if (!$items.length) return
 
-    var index = $items.index(e.target)
+    var index = $items.list(e.target)
 
     if (e.which == 38 && index > 0)                 index--         // up
     if (e.which == 40 && index < $items.length - 1) index++         // down
