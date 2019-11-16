@@ -1,9 +1,6 @@
 package com.ahsj.hiscore.controller.hisInfusion;
 
-import com.ahsj.hiscore.entity.HisInfusion;
-import com.ahsj.hiscore.entity.HisMedicalRecord;
-import com.ahsj.hiscore.entity.HisPatientInfo;
-import com.ahsj.hiscore.entity.HisPharmacyDetail;
+import com.ahsj.hiscore.entity.*;
 import com.ahsj.hiscore.services.*;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -468,6 +465,7 @@ public class HisInfusionController extends BaseController {
 
             modelAndView.addObject("hisPatientInfo",hisPatientInfo);
             modelAndView.addObject("hisInfusionList",hisInfusionList);
+        modelAndView.addObject("number",hospitalManageId);
 
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //            String time =formatter.format(hisInfusionList.get(0).getUpdateDate());
@@ -497,6 +495,8 @@ public class HisInfusionController extends BaseController {
         List<HisInfusion> hisInfusionList = hisInfusionService.listByHMForHospitalPrint(number);
 
         HisPatientInfo hisPatientInfo = hisPatientService.selectByMedicalRecordIdForInhospital(hospitalManageId);
+
+        HisHospitalManage hisHospitalManage = hisHospitalManageService.selectByNumber(hospitalManageId);
         if (EmptyUtil.Companion.isNullOrEmpty(hisPatientInfo.getSex())){
             modelAndView.addObject("sex", "");
         }else {
@@ -511,6 +511,7 @@ public class HisInfusionController extends BaseController {
 
         modelAndView.addObject("hisPatientInfo",hisPatientInfo);
         modelAndView.addObject("hisInfusionList",hisInfusionList);
+        modelAndView.addObject("number",hisHospitalManage.getNumber());
 
       /*  SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String time =formatter.format(hisInfusionList.get(0).getUpdateDate());

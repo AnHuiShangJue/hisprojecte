@@ -31,7 +31,7 @@
             <table border="1" cellspacing="0" class="table" id="table_id">
                 <tr>
                     <td>NO：</td>
-                    <td th:text="${hisInfusionList[0].number}" colspan="3"></td>
+                    <td th:text="${number}" colspan="3"></td>
                     <td>科别：</td>
                     <td th:text="${hisPatientInfo.departmentName}" colspan="2"></td>
                 </tr>
@@ -111,12 +111,12 @@
                         if (isNullOrEmpty(item.dosage)) {
                             item.dosage = ""
                         }
-                         if(isNullOrEmpty(item.medicationId)) {
+                         if(item.type == 1) {
 
                             // trs += "<tr><td><p class='black-text fontsize03'> " + item.drugsName + "</p></td><td ><p class='black-text fontsize03'> " + item.singleDose + "</p></td><td ><p class='black-text fontsize03'> " + item.unit + "</p></td><td ><p class='black-text fontsize03'></p></td><td><p class='black-text fontsize03'>" +item.price+";
                             trs += "<tr><td style=\"border: 1px solid grey;\"><p class='black-text fontsize03'> " + item.startTime + "</p></td><td colspan='3' style=\"border: 1px solid grey;\"><p class='black-text fontsize03'> " + item.drugname + "," + item.singleDose + " " + item.singleUnit + " </p></td><td colspan='2' style=\"border: 1px solid grey;\"><p class='black-text fontsize03'> " + item.usages + "," + item.dosage + "" + item.singleUnit + "," + item.intervals + "</p></td><td style=\"border: 1px solid grey;\"><p class='black-text fontsize03'> " + "      " + "</p></td></tr >";
                         }else {
-                            trs += "<tr><td style=\"border: 1px solid grey;\"><p class='black-text fontsize03'> " + item.startTimeVarchar + "</p></td><td colspan='3' style=\"border: 1px solid grey;\"><p class='black-text fontsize03'> " + item.drugname + " </p></td><td colspan='2' style=\"border: 1px solid grey;\"><p class='black-text fontsize03'> " + item.usages + "," + item.totalAmount + ","+item.intervals+"</p></td><td style=\"border: 1px solid grey;\"><p class='black-text fontsize03'> " + "      " + "</p></td></tr >";
+                            trs += "<tr><td style=\"border: 1px solid grey;\"><p class='black-text fontsize03'> " + item.startTimeVarchar + "</p></td><td colspan='3' style=\"border: 1px solid grey;\"><p class='black-text fontsize03'> " + item.drugname +","+ item.drugsSpec +" </p></td><td colspan='2' style=\"border: 1px solid grey;\"><p class='black-text fontsize03'> " + item.usages + "," + item.countNumber + ","+item.intervals+"</p></td><td style=\"border: 1px solid grey;\"><p class='black-text fontsize03'> " + "      " + "</p></td></tr >";
 
                         }
                     });

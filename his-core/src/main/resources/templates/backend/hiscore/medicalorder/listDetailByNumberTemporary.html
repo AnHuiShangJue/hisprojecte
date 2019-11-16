@@ -605,8 +605,8 @@
         $("#combinationMedicine").click(function () {
             // var ids = grid.getSelectedRows();
             var ids = cacheIds;
-            if (ids.length == 0 ||ids.length==1) {
-                dialog.warn("请至少选择两条数据(Please select at least two data)");
+            if (ids.length == 0 ) {
+                dialog.warn("请至少选择一条数据(Please select at least one data)");
                 return;
             }else {
                 dialog.confirm('确定添加该药品组合?(Make sure to add the drug combination?)', function (index, layero) {
