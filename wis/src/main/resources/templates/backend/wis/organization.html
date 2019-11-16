@@ -99,16 +99,14 @@
 <div class="container-fluid" style="margin-top: -50px;">
     <div class="row">
         <section class="wow fadeInDown">
-            <img src="/bootstrap/images/wisdom/contactus.png" class="img-responsive background-image-contactus"
+            <img src="/bootstrap/images/wisdom/contactus02.png" class="img-responsive background-image-contactus"
                  alt="Responsive image">
         </section>
         <section class=" wow bounceInLeft" data-wow-offset="300">
             <div class="col-xs-12 col-sm-12 col-md-12">
-                <p class="text-center" style="font-size: 44px;margin-top: 2%;">组织架构</p>
+                <p class="text-center" style="font-size: 44px;margin-top: 2%;" th:text="${organizationalStructure.title}"></p>
                 <br>
-                <p class="text-center" style="font-size: 44px;margin-top: -47px;color:rgba(105,102,102,1);">
-                    Organizational
-                    structure</p>
+                <p class="text-center" style="font-size: 44px;margin-top: -47px;color:rgba(105,102,102,1);" th:text="${organizationalStructure.titleEnglish}"></p>
             </div>
         </section>
         <section class=" wow fadeInDown">
@@ -141,22 +139,22 @@
         <div class="col-xs-12 col-sm-12 col-md-12 detail">
             <div class=" col-xs-3 col-sm-3 col-md-3">
                 <div class="detail1  text-center center-block" style="width: 85%;">
-                    <p class="fount">资讯部</p>
+                    <p class="fount" th:text="${organizationalStructure.departmentContent1}"></p>
                 </div>
             </div>
             <div class=" col-xs-3 col-sm-3 col-md-3">
                 <div class="detail2  text-center center-block" style="width: 85%;">
-                    <p class="fount">研发部</p>
+                    <p class="fount" th:text="${organizationalStructure.departmentContent2}"></p>
                 </div>
             </div>
             <div class=" col-xs-3 col-sm-3 col-md-3">
                 <div class="detail3 text-center center-block" style="width: 85%;">
-                    <p class="fount">综合部</p>
+                    <p class="fount" th:text="${organizationalStructure.departmentContent3}"></p>
                 </div>
             </div>
             <div class=" col-xs-3 col-sm-3 col-md-3">
                 <div class="detail4 text-center center-block" style="width: 85%;">
-                    <p class="fount">外联部</p>
+                    <p class="fount" th:text="${organizationalStructure.departmentContent4}"></p>
                 </div>
             </div>
         </div>
@@ -164,30 +162,39 @@
             <div class="col-xs-12 col-sm-12 col-md-12 detail">
                 <br>
                 <div class="fount1 col-xs-3 col-sm-3 col-md-3 text-center">
-                    <P>资讯总监</P>
-                    <P>咨询顾问</P>
-                    <P>资讯经理</P>
-                    <P>业务专家(兼)</P>
-                    <P>项目经理</P>
-                    <P>分析员</P>
-                    <P>PTA</P>
+                    <P th:text="${organizationalStructure.departmentName1}"></P>
+                    <P th:text="${organizationalStructure.departmentName2}"></P>
+                    <P th:text="${organizationalStructure.departmentName3}"></P>
+                    <P th:text="${organizationalStructure.departmentName4}"></P>
+                    <P th:text="${organizationalStructure.departmentName5}"></P>
+                    <P th:text="${organizationalStructure.departmentName6}"></P>
+                    <P th:text="${organizationalStructure.departmentName7}"></P>
                 </div>
                 <div class="fount1 col-xs-3 col-sm-3 col-md-3 text-center">
-                    <p>项目经理</p>
-                    <p>产品经理</p>
-                    <p>架构师</p>
-                    <p>开发组长</p>
-                    <p>开发测试</p>
-                    <p>运维</p>
+                    <P th:text="${organizationalStructure.departmentName8}"></P>
+                    <P th:text="${organizationalStructure.departmentName9}"></P>
+                    <P th:text="${organizationalStructure.departmentName10}"></P>
+                    <P th:text="${organizationalStructure.departmentName11}"></P>
+                    <P th:text="${organizationalStructure.departmentName12}"></P>
+                    <P th:text="${organizationalStructure.departmentName13}"></P>
+                    <P th:text="${organizationalStructure.departmentName14}"></P>
                 </div>
                 <div class="fount1 col-xs-3 col-sm-3 col-md-3 text-center">
-                    <p>商务经理</p>
-                    <p>客服经理</p>
+                    <P th:text="${organizationalStructure.departmentName15}"></P>
+                    <P th:text="${organizationalStructure.departmentName16}"></P>
+                    <P th:text="${organizationalStructure.departmentName17}"></P>
+                    <P th:text="${organizationalStructure.departmentName18}"></P>
+                    <P th:text="${organizationalStructure.departmentName19}"></P>
+                    <P th:text="${organizationalStructure.departmentName20}"></P>
+                    <P th:text="${organizationalStructure.departmentName21}"></P>
                 </div>
                 <div class="fount1 col-xs-3 col-sm-3 col-md-3 text-center">
-                    <p>行政专员</p>
-                    <p>人事专员</p>
-                    <p>财务专员</p>
+                    <P th:text="${organizationalStructure.departmentName22}"></P>
+                    <P th:text="${organizationalStructure.departmentName23}"></P>
+                    <P th:text="${organizationalStructure.departmentName25}"></P>
+                    <P th:text="${organizationalStructure.departmentName26}"></P>
+                    <P th:text="${organizationalStructure.departmentName27}"></P>
+                    <P th:text="${organizationalStructure.departmentName28}"></P>
                 </div>
             </div>
         </section>
