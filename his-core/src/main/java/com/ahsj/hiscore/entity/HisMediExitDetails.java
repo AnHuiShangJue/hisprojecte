@@ -59,6 +59,36 @@ public class HisMediExitDetails extends BaseEntity {
 
     private String tdescription;
 
+    private Integer sex;
+
+    private String sexName;
+
+    private Integer age;
+
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+
+    public String getSexName() {
+        return sexName;
+    }
+
+    public void setSexName(String sexName) {
+        this.sexName = sexName;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
     public String getTdescription() {
         return tdescription;
     }
