@@ -1,8 +1,12 @@
 package com.ahsj.wis.controller;
 
 import com.ahsj.wis.Constants;
+import com.ahsj.wis.entity.AboutWisdom;
+import com.ahsj.wis.entity.ContactUs;
 import com.ahsj.wis.entity.WisdomBay;
 import com.ahsj.wis.entity.WisdomIndex;
+import com.ahsj.wis.service.AboutWisdomService;
+import com.ahsj.wis.service.ContactUsUpdateService;
 import com.ahsj.wis.service.WisdomBayService;
 import com.ahsj.wis.service.WisdomIndexService;
 import com.ahsj.wis.utils.DeletePicture;
@@ -30,6 +34,12 @@ public class WisdomBayController {
 
     @Autowired
     WisdomBayService wisdomBayService;
+
+    @Autowired
+    AboutWisdomService aboutWisdomService;
+
+    @Autowired
+    ContactUsUpdateService contactUsUpdateService;
 
     @RequestMapping("/list/index.ahsj")
     ModelAndView listIndex() throws Exception {
@@ -103,9 +113,13 @@ public class WisdomBayController {
      * @Time 11:43
      */
     @RequestMapping("/contactus/index.ahsj")
-    ModelAndView contactusIndex() {
+    ModelAndView contactusIndex() throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/wis/contact_us");
-        modelAndView.addObject("title", "");
+        modelAndView.addObject("title", "联系我们");
+        ContactUs contactUs = contactUsUpdateService.select();
+        modelAndView.addObject("contactUs", contactUs);
+
+
         return modelAndView;
     }
 
@@ -182,9 +196,11 @@ public class WisdomBayController {
      * @Time 11:41
      */
     @RequestMapping("/aboutwisdom/index.ahsj")
-    ModelAndView aboutwisdomIndex() {
+    ModelAndView aboutwisdomIndex() throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/wis/aboutwisdom");
         modelAndView.addObject("title", "关于智慧湾");
+        AboutWisdom aboutWisdom = aboutWisdomService.select();
+        modelAndView.addObject("aboutWisdom", aboutWisdom);
         return modelAndView;
     }
 

@@ -1,7 +1,8 @@
 package com.ahsj.wis.controller;
 
-import com.ahsj.wis.entity.AboutWisdom;
-import com.ahsj.wis.service.AboutWisdomService;
+
+import com.ahsj.wis.entity.ContactUs;
+import com.ahsj.wis.service.ContactUsUpdateService;
 import core.message.Message;
 import core.message.MessageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,34 +14,33 @@ import utils.EmptyUtil;
 import java.util.Date;
 
 @RestController
-@RequestMapping("/api/aboutwisdom")
-public class AboutWisUpdateController {
+@RequestMapping("/api/contactus")
+public class ContactUsController {
 
     @Autowired
-    AboutWisdomService aboutWisdomService;
+    ContactUsUpdateService contactUsUpdateService;
 
-    @RequestMapping("/aboutWisUpdate/index.ahsj")
+    @RequestMapping("/contactUsUpdate/index.ahsj")
     ModelAndView aboutWisUpdate() throws Exception {
-        ModelAndView modelAndView = new ModelAndView("backend/wisdom/about_wisdom_update");
+        ModelAndView modelAndView = new ModelAndView("backend/wisdom/contact_us_update");
         modelAndView.addObject("title", "更新页面");
-        AboutWisdom aboutWisdom = aboutWisdomService.select();
-        modelAndView.addObject("aboutWisdom", aboutWisdom);
+        ContactUs contactUs = contactUsUpdateService.select();
+        modelAndView.addObject("contactUs", contactUs);
         return modelAndView;
     }
 
-
     /**
-     *@Description update
+     *@Description 新增
      *@Params
      *@return
      *@Author jin
-     *@Date 2019/11/15
-     *@Time 17:31
+     *@Date 2019/11/16
+     *@Time 17:19
     */
     @RequestMapping("/insert.ahsj")
-    public Message insert(AboutWisdom record) throws Exception {
+    public Message insert(ContactUs record) throws Exception {
         record.setCreateDate(new Date());
-        int a = aboutWisdomService.insert(record);
+        int a = contactUsUpdateService.insert(record);
         if (EmptyUtil.Companion.isNullOrEmpty(a)){
             return MessageUtil.createMessage(false,"修改失败");
         }else {

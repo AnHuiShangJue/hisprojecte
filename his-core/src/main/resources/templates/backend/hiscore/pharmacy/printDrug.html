@@ -41,17 +41,23 @@
                 <td><label><span id="recordNumber"></span></label></td>
             </tr>
             <tr>
-                <td><label>交易流水号(Transaction flow number)</label></td>
-                <td><label><span id="tollNumber"></span></label></td>
+                <td><label>姓名(Name)</label></td>
+                <td><label><span id="patientName"></span></label></td>
+                <td><label>性别(Sex)</label></td>
+                <td><label><span id="sex"></span></label></td>
+                <td><label>年龄(Age)</label></td>
+                <td><label><span id="age"></span></label></td>
+                <!--<td><label>交易流水号(Transaction flow number)</label></td>-->
+                <!--<td><label><span id="tollNumber"></span></label></td>-->
             </tr>
             <tr>
                 <td><label>出药人(Drug person)</label></td>
                 <td><label><span id="userName"></span></label></td>
             </tr>
-            <tr>
-                <td><label>出药时间(Drug delivery time)</label></td>
-                <td><label><span id="createDate"></span></label></td>
-            </tr>
+            <!--<tr>-->
+                <!--<td><label>出药时间(Drug delivery time)</label></td>-->
+                <!--<td><label><span id="createDate"></span></label></td>-->
+            <!--</tr>-->
             <tr>
                 <td colspan="2"><label>出药明细(Drug detail)</label></td>
 
@@ -85,7 +91,7 @@ Scripts
             function (data) {
                 var jsons = data[0];
                 if (!isNullOrEmpty(jsons)) {//有
-                    var trs = "<tr><td>名称(name)</td><td>数目(number)</td><td>规格(specification)</td><td>用法用量(usage and dosage)</td><td>有效期(Validity period)</td></tr>";
+                    var trs = "<tr><td>名称(name)</td><td>数目(No.)</td><td>规格(specification)</td><td>用法用量(Dosage)</td><td>有效期(Validity period)</td></tr>";
                     $.each(data, function (index, item) {
                         if (isNullOrEmpty(item.drugsName)) {
                             item.drugsName = ""
@@ -112,7 +118,9 @@ Scripts
                     $("#createDate").html(jsons.createDate);
                     $("#userName").html(jsons.userName);
                     $("#patientName").html(jsons.patientName);
-                    $("#tollNumber").html(jsons.tollNumber);
+                    $("#sex").html(jsons.sexName);
+                    $("#age").html(jsons.sex);
+                    // $("#tollNumber").html(jsons.tollNumber);
                     $("#table_id").append(trs);
                 }
             },
@@ -128,9 +136,9 @@ Scripts
             importCSS: false,
             debug: false,
             afterPrint: function () {
-                dialog.confirm('确定打印?', function (index, layero) {
-
-                });
+                // dialog.confirm('确定打印?', function (index, layero) {
+                //
+                // });
             }
         });
     }

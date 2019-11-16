@@ -46,21 +46,22 @@
 
 <div th:replace="public/back_baselayout :: html"></div>
 
+<form id="sendForm" action="#">
 
-<section class="container-fluid wow bounceInLeft" data-wow-offset="0">
+    <section class="container-fluid wow bounceInLeft" data-wow-offset="0">
         <div class="row">
             <img class="img-responsive" src="/bootstrap/images/wisdom/contactus.png" alt="Responsive image"/>
         </div>
-</section>
+    </section>
 
 
-<br>
-<br>
-<br>
+    <br>
+    <br>
+    <br>
 
-<div class="container-fluid" style="width:80%">
+    <div class="container-fluid" style="width:80%">
 
-    <!--<section class="container-fluid wow bounceInLeft" data-wow-offset="0">-->
+        <!--<section class="container-fluid wow bounceInLeft" data-wow-offset="0">-->
         <section class="col-md-4 wow bounceInLeft" data-wow-offset="0">
             <div class="row">
                 <div class="row">
@@ -77,7 +78,13 @@
                     </div>
                     <br>
                     <div class="row center-block" style="width: 60%;">
-                        <h4 class="card-contactus2-text-content text-center" th:text="${contactUs.address}"></h4>
+                        <!--<h4 class="card-contactus2-text-content text-center">苏州市吴中经济开发区吴中大道136号1幢A319室</h4>-->
+                        <div class="input-group" style="">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-muted">修改地址</span>
+                            </div>
+                            <textarea id="address" name="address" class="form-control" aria-label="With textarea" style="width: 150%" th:text="${contactUs.address}"></textarea>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -99,7 +106,13 @@
                     </div>
                     <br>
                     <div class="row center-block" style="width: 60%;">
-                        <h4 class="card-contactus2-text-content text-center" th:text="${contactUs.phone}"></h4>
+                        <!--<h4 class="card-contactus2-text-content text-center">18895326920</h4>-->
+                        <div class="input-group" style="">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-muted">修改号码</span>
+                            </div>
+                            <textarea id="phone" name="phone" class="form-control" aria-label="With textarea" style="width: 150%" th:text="${contactUs.phone}"></textarea>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -117,39 +130,39 @@
                 <br>
                 <div class="card-contactus2">
                     <div class="row" style="">
-                        <h4 class="card-contactus2-text-title text-center" >加入我们</h4>
+                        <h4 class="card-contactus2-text-title text-center">加入我们</h4>
                     </div>
                     <br>
                     <div class="row center-block" style="width: 60%;">
-                        <h4 class="card-contactus2-text-content text-center" th:text="${contactUs.email}"></h4>
+                        <!--<h4 class="card-contactus2-text-content text-center">hr@abscity.cn</h4>-->
+                        <div class="input-group" style="">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-muted">修改邮箱</span>
+                            </div>
+                            <textarea id="email" name="email" class="form-control" aria-label="With textarea" style="width: 150%" th:text="${contactUs.email}"></textarea>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-    <!--</section>-->
-
-
-    <!--<section class="container-fluid wow bounceInLeft" data-wow-offset="300">-->
-    <!--</section>-->
-
-    <!--<section class="container-fluid wow bounceInLeft" data-wow-offset="300">-->
-    <!--</section>-->
+        <button id="send_btn" type="button" class="btn btn-success navbar-fixed-bottom" style="margin-bottom: 5%;margin-left: 95%;">修改</button>
 
 
 
-</div>
-
-<br>
-<br>
-<br>
-
-
-<section class="container-fluid wow bounceInLeft" data-wow-offset="0">
-    <div class="row">
-        <img class="img-responsive center-block" src="/bootstrap/images/wisdom/group.png" alt="Responsive image"/>
     </div>
-</section>
+
+    <br>
+    <br>
+    <br>
+
+
+    <section class="container-fluid wow bounceInLeft" data-wow-offset="0">
+        <div class="row">
+            <img class="img-responsive center-block" src="/bootstrap/images/wisdom/group.png" alt="Responsive image"/>
+        </div>
+    </section>
+</form>
 
 <div th:replace="public/footer :: html"></div>
 <script src="/bootstrap/js/wow.js"></script>
@@ -166,7 +179,32 @@
         }
     );    wow.init();
 
+    $("#send_btn").click(function () {
+        var QueryString = $('#sendForm').serialize();
+        console.log("------》"+QueryString);
+        $.ajax({
+            type: "post",
+            url: "/api/contactus/insert.ahsj",
+            data:QueryString ,
+            success: function (msg) {
+                console.log(msg)
+                if (msg.success) {
+                    toastr.success(msg.message);
+                    return true;
+                } else {
+                    toastr.error(msg.message);
+                    return false;
+                }
+            },
+        });
+
+        // $('.toast').toast('show')
+
+    })
+
+
 </script>
 
 </body>
 </html>
+

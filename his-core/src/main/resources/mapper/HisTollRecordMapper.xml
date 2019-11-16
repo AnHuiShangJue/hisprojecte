@@ -1060,14 +1060,14 @@ from his_hospital_manage as a
 left join his_medical_record as b on a.medical_number = b.medical_record_id
 left join his_medication_details as c on b.id = c.medical_record_id
 left join his_pharmacy_detail as d on c.medication_id = d.id
-where a.number = #{hrNumber}
+where a.number = #{hrNumber} and c.is_back = 2
 
 UNION ALL
 select  c.name as name,c.num as num,c.price as price,(c.num*c.price) as total,c.create_date as create_date,a.patient_name as patient_name
 from his_hospital_manage as a
 left join his_medical_record as b on a.medical_number = b.medical_record_id
 left join his_record_project as c on b.id = c.record_id
-where a.number=#{hrNumber}
+where a.number=#{hrNumber} and c.is_back = 2
 
 UNION ALL
 select '住院费用' as name,a.hospitalization_day as num,b.price as price,(a.hospitalization_day*b.price)as total,a.create_date as create_date,a.patient_name as patient_name

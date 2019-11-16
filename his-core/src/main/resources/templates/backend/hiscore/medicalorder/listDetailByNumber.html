@@ -29,10 +29,10 @@
                                     <a id="createBtn" class="btn waves-effect waves-light red"><i
                                             class="material-icons  white-text tooltipped " data-position="bottom"
                                             data-delay="50" data-tooltip="新增医嘱（Add medical advice）">add</i></a>
-                                   <!-- <a id="deleteManyBtn"
-                                       class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
-                                            class="material-icons white-text tooltipped" data-position="bottom"
-                                            data-delay="50" data-tooltip="批量删除（batch deletion）">delete</i></a>-->
+                                    <!-- <a id="deleteManyBtn"
+                                        class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
+                                             class="material-icons white-text tooltipped" data-position="bottom"
+                                             data-delay="50" data-tooltip="批量删除（batch deletion）">delete</i></a>-->
                                 </div>
                                 <div class="input-field col s4 l4 xl4">
                                     <select id="chooseTemplate" name="chooseTemplate">
@@ -87,28 +87,28 @@
     var cacheIds = new Array();//定义数组保存缓存的ID
     $(document).ready(function () {
 
-      /*  var year = date.getFullYear(),
-            month = date.getMonth() + 1,//月份是从0开始的
-            day = date.getDate(),
-            hour = date.getHours(),
-            min = date.getMinutes(),
-            sec = date.getSeconds();
-        var newTime = year + '-' +
-            month + '-' +
-            day + ' ' +
-            hour + ':' +
-            min + ':' +
-            sec;*/
+        /*  var year = date.getFullYear(),
+              month = date.getMonth() + 1,//月份是从0开始的
+              day = date.getDate(),
+              hour = date.getHours(),
+              min = date.getMinutes(),
+              sec = date.getSeconds();
+          var newTime = year + '-' +
+              month + '-' +
+              day + ' ' +
+              hour + ':' +
+              min + ':' +
+              sec;*/
         //医嘱
         var medicalOrderSelect  = $("#chooseTemplate");
         $.getJSON(CTX+"/api/medicalOrderTemplate/getTemplate.ahsj?token="+TOKEN + "&createUserId=" + $("#UserId").val(),
 
             function (result){
-            $(result).each(function (i) {
-                medicalOrderSelect.append("<option value='" + this.templateNumber + "'>" + this.templateName + "</option>")
+                $(result).each(function (i) {
+                    medicalOrderSelect.append("<option value='" + this.templateNumber + "'>" + this.templateName + "</option>")
+                });
+                medicalOrderSelect.formSelect();
             });
-            medicalOrderSelect.formSelect();
-        });
         initBtn();
         initTable();
     });
@@ -137,11 +137,11 @@
                         "width": "18px",
                         "className": "centered"
                     },
-                  /* {
-                        "title": "医嘱编号",
-                        "data": "number",
-                        "name": "number"
-                    },*/ {
+                    /* {
+                          "title": "医嘱编号",
+                          "data": "number",
+                          "name": "number"
+                      },*/ {
                         "title": "医嘱内容",
                         "data": "name",
                         "name": "name"
@@ -161,11 +161,11 @@
                         "data": "startTime",
                         "name": "start_time"
                     },
-                   /* {
-                        "title": "单位",
-                        "data": "unit",
-                        "name": "unit"
-                    },*/
+                    /* {
+                         "title": "单位",
+                         "data": "unit",
+                         "name": "unit"
+                     },*/
                     {
                         "title": "用法",
                         "data": "usages",
@@ -240,8 +240,8 @@
                             //如果获取字符串，必须在参数外反转"
                             if([[${isDischarged}]] ==1) {
                                 rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='edit(" + row.id + ",\"" + row.number + "\");'> <i class='material-icons'>edit</i></a>" ;
-                                    // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"校对\" onclick=\"proofreading(" + row.id + ",'" + row.number + "');\"> <i class='material-icons'>playlist_add_check</i></a>" +
-                                    // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"核准\" onclick=\"isApproved(" + row.id + ",'" + row.number + "');\"> <i class='material-icons'>done</i></a>" +
+                                // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"校对\" onclick=\"proofreading(" + row.id + ",'" + row.number + "');\"> <i class='material-icons'>playlist_add_check</i></a>" +
+                                // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"核准\" onclick=\"isApproved(" + row.id + ",'" + row.number + "');\"> <i class='material-icons'>done</i></a>" +
                                 /*    "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick='deleteInit(" + row.id + ");'> <i class='material-icons'>delete</i></a>";*/
 
 
@@ -371,9 +371,9 @@
     }
 
 
-        //停嘱
-        function stop(id) {
-            dialog.confirm('确定停嘱（Sure Stop）?', function (index, layero) {
+    //停嘱
+    function stop(id) {
+        dialog.confirm('确定停嘱（Sure Stop）?', function (index, layero) {
             /*    $.ahsjajax(CTX + "/api/medicalOrderDetail/stopOrder.ahsj",
                     {"id": id,"stopDate":/!*$("#stopDate").val()*!/"0"},
                     function (msg) {
@@ -398,42 +398,42 @@
                         });
                     }
                 );*/
-                layer.open({
-                    title:'请输入停嘱时间（Please enter  the parking time）',
-                    content:'<div class="input-field"><input id="stopDate" name="stopDate"  type="text"  /></div> ',
-                    btn:['确认（confirm）','取消（cancel）'],
-                    yes:function(index,layro){
-                        $.ahsjajax(CTX + "/api/medicalOrderDetail/stopOrder.ahsj",
-                            {"id": id,"stopDate":$("#stopDate").val()},
-                            function (msg) {
-                                if (msg.success) {
-                                    M.toast({
-                                        html: msg.message, completeCallback: function () {
-                                        }
-                                    });
-                                    layer.closeAll();
-                                    grid.search();
-                                } else {
-                                    M.toast({
-                                        html: msg.message, completeCallback: function () {
-                                        }
-                                    });
-                                }
-                            },
-                            function (data) {
+            layer.open({
+                title:'请输入停嘱时间（Please enter  the parking time）',
+                content:'<div class="input-field"><input id="stopDate" name="stopDate"  type="text"  /></div> ',
+                btn:['确认（confirm）','取消（cancel）'],
+                yes:function(index,layro){
+                    $.ahsjajax(CTX + "/api/medicalOrderDetail/stopOrder.ahsj",
+                        {"id": id,"stopDate":$("#stopDate").val()},
+                        function (msg) {
+                            if (msg.success) {
                                 M.toast({
-                                    html: "网络异常", completeCallback: function () {
+                                    html: msg.message, completeCallback: function () {
+                                    }
+                                });
+                                layer.closeAll();
+                                grid.search();
+                            } else {
+                                M.toast({
+                                    html: msg.message, completeCallback: function () {
                                     }
                                 });
                             }
-                        );
-                    },
-                    btn2:function(){
-                        layer.closeAll();
-                    }
-                });
-
+                        },
+                        function (data) {
+                            M.toast({
+                                html: "网络异常", completeCallback: function () {
+                                }
+                            });
+                        }
+                    );
+                },
+                btn2:function(){
+                    layer.closeAll();
+                }
             });
+
+        });
     }
 
     function jieinput() {
@@ -588,7 +588,7 @@
             // var url = CTX +"/api/medicalOrderDetail/update/index.ahsj?token="+TOKEN + "&number=" +$("#number").val()+"&medicalOrderType="+$("#medicalOrderType").val();
             var url = CTX +"/api/medicalOrderDetail/createOrder/index.ahsj?token="+TOKEN + "&number=" +$("#number").val()+"&medicalOrderType="+$("#medicalOrderType").val();
             dialog.show(url, "添加新医嘱（Add a new order）")
-    })
+        })
         $("#deleteManyBtn").click(function () {
             var ids = grid.getSelectedRows();
             if (ids.length == 0) {
@@ -605,13 +605,13 @@
         $("#combinationMedicine").click(function () {
             // var ids = grid.getSelectedRows();
             var ids = cacheIds;
-            if (ids.length == 0 ||ids.length==1) {
-                dialog.warn("请至少选择两条数据(Please select at least two data)");
+            if (ids.length == 0) {
+                dialog.warn("请至少选择一条数据(Please select at least one data)");
                 return;
             }else {
-                dialog.confirm('确定添加该药品组合?(Make sure to add the drug combination?)', function (index, layero) {
+                dialog.confirm('确定添加输液单?(Make sure to add the infusion?)', function (index, layero) {
 
-                    $.ahsjajax(CTX + "/api/medicalOrderDetail/addCombinationMedicine.ahsj?=" + TOKEN,
+                    $.ahsjajax(CTX + "/api/medicalOrderDetail/addCombinationMedicine.ahsj?token=" + TOKEN,
                         {
                             "ids": ids.join(',')
                             // "name":name
@@ -707,7 +707,7 @@
                             });
                         }
                     );
-            },
+                },
                 cancel: function(){
                     //右上角关闭回调
 

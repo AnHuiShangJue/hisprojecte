@@ -77,7 +77,8 @@
             <img class="img-responsive center-block visible-xs" src="/bootstrap/images/wisdom/aboutwisdom.png" alt="Responsive image" style="width: 20%;margin-top: -90%;"/>
             <!--文字-->
             <div class="center-block" style="width:40%">
-                <h3 class="text-center aboutwisdom-text">苏州智慧湾科技发展有限公司是基于智慧城市、大数据及研发、产品管理（IPD）为核心的系统咨询公司，研究人与城市的生态关系。通过智慧城市建设、运行、分析，使用大数据和人工智能技术，建立一套评价与优化的城市智慧化建设运行体系。</h3>
+                <!--<h3 class="text-center aboutwisdom-text">苏州智慧湾科技发展有限公司是基于智慧城市、大数据及研发、产品管理（IPD）为核心的系统咨询公司，研究人与城市的生态关系。通过智慧城市建设、运行、分析，使用大数据和人工智能技术，建立一套评价与优化的城市智慧化建设运行体系。</h3>-->
+                <h3 class="text-center aboutwisdom-text" th:text="${aboutWisdom.introduce}"></h3>
             </div>
         </section>
     <!--</div>-->
@@ -164,13 +165,15 @@
                 </div>
                 <div class="row">
                     <div class="row" style="">
-                        <h4 class="people-name-text text-center">水新莹</h4>
+                        <h4 class="people-name-text text-center" th:text="${aboutWisdom.shui}"></h4>
                     </div>
                     <div class="row" style="">
-                        <h4 class="text-center">浙江大学 管理学学士<br>科大讯飞智慧城市 咨询总监</h4>
+                        <h4 class="text-center" th:text="${aboutWisdom.shuiP}"></h4>
                     </div>
-                    <div class="row center-block" style="width: 55%">
-                        <p> 主要业绩:《电脑报》、《电脑迷》杂志专栏作家。编著《个人服务器一点通》等6本书籍和一系列专栏。《智慧芜湖整体规划》、《北京大兴大数据顶层规划》等。</p>
+                    <br>
+                    <br>
+                    <div class="row center-block" style="width: 55%" >
+                        <p th:text="${aboutWisdom.shuiIntroduce}"></p>
                     </div>
                 </div>
             </section>
@@ -183,13 +186,15 @@
                 </div>
                 <div class="row">
                     <div class="row" style="">
-                        <h4 class="people-name-text text-center">韩耀强</h4>
+                        <h4 class="people-name-text text-center" th:text="${aboutWisdom.han}"></h4>
                     </div>
                     <div class="row" style="">
-                        <h4 class="text-center">北京大学博士</h4>
+                        <h4 class="text-center" th:text="${aboutWisdom.hanP}"></h4>
                     </div>
+                    <br>
+                    <br>
                     <div class="row center-block" style="width: 55%">
-                        <p>赛迪顾问股份有限公司资深咨询专家航天科工二院 高级咨询专家 主要业绩:《中国重点行业大数据应用研究》、《中国电信航空民用通信市场、业务与商用策略研究及支撑项 目》《北京朝阳区智慧城市顶层规划》、《智慧太湖新 城规划》、《杭州智慧城市总体规划》、《智慧芜湖整 体规划》、《贵阳云计算产业发展规划》等。</p>
+                        <p th:text="${aboutWisdom.hanIntroduce}"></p>
                     </div>
 
                 </div>
@@ -205,13 +210,15 @@
                 </div>
                 <div class="row">
                     <div class="row" style="">
-                        <h4 class="people-name-text text-center">姚乐</h4>
+                        <h4 class="people-name-text text-center" th:text="${aboutWisdom.yao}"></h4>
                     </div>
                     <div class="row" style="">
-                        <h4 class="text-center">北京大学 管理学博士<br>CIO时代学院院长</h4>
+                        <h4 class="text-center" th:text="${aboutWisdom.yaoP}"></h4>
                     </div>
+                    <br>
+                    <br>
                     <div class="row center-block" style="width: 55%">
-                        <p>中国新一代IT产业推进联盟秘书长 主要著作:《互联网+时代的数字化转型》、《赋能大数据教育:全国高校大数据教育教学经验谈》、《传统行业 遇上大数据 拥抱智能化未来》、《大数据的行业应用策 略》等。</p>
+                        <p th:text="${aboutWisdom.yaoIntroduce}"></p>
                     </div>
                 </div>
             </section>
