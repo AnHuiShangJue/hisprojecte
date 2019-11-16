@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utils.EmptyUtil;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -80,7 +81,7 @@ public class HisWardServiceImpl implements HisWradService {
     @Transactional(readOnly = false)
     @Override
     public Message saveOrUpdate(HisWard hisWard) throws Exception {
-         HisWard hisWard1 = hisWardMapper.gethisWardByNumber(hisWard.getNumber());
+        HisWard hisWard1 = hisWardMapper.gethisWardByNumber(hisWard.getNumber());
         //HisWard hisWard1 = hisWardMapper.selectByPrimaryKey(hisWard.getId());
         if (EmptyUtil.Companion.isNullOrEmpty(hisWard.getId())) {
             // 如果主健为空 则为新增
@@ -267,15 +268,15 @@ public class HisWardServiceImpl implements HisWradService {
             logger.info("------------根据id导出病房表------------");
         }
         if (StringUtils.equals(param, Constants.HIS_CH)) {//中文导出
-         //   psth = this.getClass().getClassLoader().getResource("templates/excel/export/HisWard_CH.xlsx").getPath();  //目标路径
+            //   psth = this.getClass().getClassLoader().getResource("templates/excel/export/HisWard_CH.xlsx").getPath();  //目标路径
             psth = Constants.HIS_SYS_EXCEL_HISWARD_CH_FILE_URL;
             logger.info("------------导出病房表中文版------------");
         }
-        if(StringUtils.equals(param, Constants.HIS_EN)){
+        if (StringUtils.equals(param, Constants.HIS_EN)) {
             logger.info("------------导出病房表英文版------------");
         }
         if (StringUtils.equals(param, Constants.HIS_KM)) {//高棉语导出
-          //  psth = this.getClass().getClassLoader().getResource("templates/excel/export/HisWard_KM.xlsx").getPath();  //目标路径
+            //  psth = this.getClass().getClassLoader().getResource("templates/excel/export/HisWard_KM.xlsx").getPath();  //目标路径
             psth = Constants.HIS_SYS_EXCEL_HISWARD_KM_FILE_URL;
             for (HisWard ward : hisWardAll) {
                 Translate translate = new Translate();
@@ -314,7 +315,7 @@ public class HisWardServiceImpl implements HisWradService {
         Map<String, Integer> map = new HashMap<String, Integer>();
         if (!EmptyUtil.Companion.isNullOrEmpty(successList) && successList.size() > 0) {
             for (int i = 0; i < successList.size(); i++) {
-                logger.info("---------正在导入的病房编号"+successList.get(i).getNumber()+"------------");
+                logger.info("---------正在导入的病房编号" + successList.get(i).getNumber() + "------------");
                 if (successList.get(i).getCount() < successList.get(i).getCurrentCount()) {
                     successList.get(i).setCurrentCount(successList.get(i).getCount());//如果总床数小于当前床数，令当前床数等于总床数
                 }
@@ -330,9 +331,24 @@ public class HisWardServiceImpl implements HisWradService {
             }
             hisWardMapper.importHisWard(successList);//批量插入
         }
-        map.put("success",successList.size());  //成功的条数
+        map.put("success", successList.size());  //成功的条数
         return map;
     }
 
-
+    /**
+     * @Description 住院管理选择病床
+     * @Params: [pageBean]
+     * @Author: dingli
+     * @Return: core.entity.PageBean<com.ahsj.hiscore.entity.HisWard>
+     * @Date 2019/11/16
+     * @Time 11:40
+     **/
+    @Transactional(readOnly = true)
+    @Override
+    public PageBean<HisWard> getHisWardAlls(PageBean<HisWard> pageBean) throws Exception {
+        List<HisWard> hisWardAlls = hisWardMapper.getHisWardAlls(pageBean);
+        hisWardAlls.stream().filter(a -> a.getCurrentCount() == null).forEach(b -> b.setCurrentCount(b.getCount()));
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisWardAlls));
+        return pageBean;
+    }
 }

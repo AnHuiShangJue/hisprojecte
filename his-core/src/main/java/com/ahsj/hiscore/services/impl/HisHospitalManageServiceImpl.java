@@ -309,7 +309,7 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
 
     @Override
     @Transactional(readOnly = true)
-    public HisHospitalManage selectById(Long id){
+    public HisHospitalManage selectById(Long id) {
         return CodeHelper.getInstance().setCodeValue(hisHospitalManageMapper.selectByPrimaryKey(id));
     }
 
@@ -420,12 +420,12 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
 
     /**
      * @Description 住院天数定时任务
-     * @Author  muxu
-     * @Date  2019/9/24
+     * @Author muxu
+     * @Date 2019/9/24
      * @Time 18:24
      * @Return void
      * @Params []
-    **/
+     **/
     @Override
     @Transactional(readOnly = false)
     public void startAddDate() {
@@ -464,7 +464,7 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
             int day1 = calendar.get(Calendar.DAY_OF_YEAR);
             calendar.setTime(hd.getCreateDate());
             int day2 = calendar.get(Calendar.DAY_OF_YEAR);
-            hd.setHospitalizationDay(String.valueOf(day1-day2+1));
+            hd.setHospitalizationDay(String.valueOf(day1 - day2 + 1));
 //            hd.setHospitalizationDay(String.valueOf((date.getTime() - hd.getCreateDate().getTime()) / (24 * 60 * 60 * 1000) + 1));
         }
         return null;
@@ -473,12 +473,12 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
 
     /**
      * @Description 护理费用定时任务
-     * @Author  muxu
-     * @Date  2019/9/24
+     * @Author muxu
+     * @Date 2019/9/24
      * @Time 18:28
      * @Return
      * @Params
-    **/
+     **/
     @Override
     @Transactional(readOnly = false)
     public void startAddcareLevel() {
@@ -488,15 +488,15 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
         logger.info(createdate);
 
         List<HisHospitalManage> hisHospitalManageList = hisHospitalManageMapper.selectByDate();
-        if (hisHospitalManageList.size()==0){
+        if (hisHospitalManageList.size() == 0) {
             logger.info("-------------------无护理消费人员-----------------------");
-        }else {
+        } else {
             logger.info("-------------------扫描到" + hisHospitalManageList.size() + "病人进行护理消费日结-----------------------");
             if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManageList) && !EmptyUtil.Companion.isNullOrEmpty(hisHospitalManageList.size())) {
                 Long[] ids = new Long[hisHospitalManageList.size()];
                 List<HisHospitalManage> hisHospitalManageList1 = new ArrayList<>();
                 int i = 0;
-                String number ="0";
+                String number = "0";
                 for (HisHospitalManage h : hisHospitalManageList
                 ) {
                     ids[i] = h.getId();
@@ -508,20 +508,20 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
                     HisTollRecord hisTollRecord = new HisTollRecord();
                     hisRecordProject.setRecordId(hisMedicalRecord.getId());
                     //一级护理
-                    if (hisHospitalManage1.getCareLevel()==1){
+                    if (hisHospitalManage1.getCareLevel() == 1) {
                         number = "120100003（ACAC001）";
-                    }else if (hisHospitalManage1.getCareLevel()==2){   //二级护理
+                    } else if (hisHospitalManage1.getCareLevel() == 2) {   //二级护理
                         number = "120100004（ACAB001）";
-                    }else if (hisHospitalManage1.getCareLevel()==3){   //三级护理
+                    } else if (hisHospitalManage1.getCareLevel() == 3) {   //三级护理
                         number = "120100005（ACAA001）";
-                    }else if (hisHospitalManage1.getCareLevel()==4){  //四级护理
+                    } else if (hisHospitalManage1.getCareLevel() == 4) {  //四级护理
                         number = "120100014（ACNZ001）";
-                    }else if (hisHospitalManage1.getCareLevel()==5){  //特级监护
+                    } else if (hisHospitalManage1.getCareLevel() == 5) {  //特级监护
                         number = "120100002（ACAD001）";
-                    }else if (hisHospitalManage1.getCareLevel()==6){  //重症监护
+                    } else if (hisHospitalManage1.getCareLevel() == 6) {  //重症监护
                         number = "120100015（ACNZ002）";
                     }
-                    HisProject hisProject =hisProjectMapper.queryHisProjectByNumber(number);
+                    HisProject hisProject = hisProjectMapper.queryHisProjectByNumber(number);
                     hisHospitalManage1.setRestDeposit(h.getRestDeposit().subtract(hisProject.getPrice()));
                     hisRecordProject.setName(hisProject.getName());
                     hisRecordProject.setType(hisProject.getType());
@@ -569,7 +569,7 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
                 hisHospitalManageMapper.updateBatchForDaily1(hisHospitalManageList1);
                 logger.info("-----------------护理费用日结人数为：" + hisHospitalManageList.size() + "-----------------------");
                 logger.info("-------------------结束护理费用日结-----------------------");
-        }else {
+            } else {
                 logger.info("-------------------护理费用日结结束，今天无可结算费用-----------------------");
             }
         }
@@ -760,8 +760,8 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
         if (EmptyUtil.Companion.isNullOrEmpty(hisHospitalManageBed)) {
             return new ArrayList<>();
         } else {
-           // List<HisHospitalManage> collect = hisHospitalManageBed.stream().filter(e -> e.getBedsNumber() != null).collect(Collectors.toList());
-         //   System.out.println("-------collect-----------"+collect.size());
+            // List<HisHospitalManage> collect = hisHospitalManageBed.stream().filter(e -> e.getBedsNumber() != null).collect(Collectors.toList());
+            //   System.out.println("-------collect-----------"+collect.size());
             return hisHospitalManageBed;
         }
     }
@@ -810,13 +810,13 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
     }
 
     /**
-     *@Description 根据交易流水号/就诊编号核对是否为住院
-     *@Params [tollNumber]
-     *@return com.ahsj.hiscore.entity.HisHospitalManage
-     *@Author zhushixiang
-     *@Date 2019-09-26
-     *@Time 22:08
-    **/
+     * @return com.ahsj.hiscore.entity.HisHospitalManage
+     * @Description 根据交易流水号/就诊编号核对是否为住院
+     * @Params [tollNumber]
+     * @Author zhushixiang
+     * @Date 2019-09-26
+     * @Time 22:08
+     **/
     @Override
     @Transactional(readOnly = true)
     public HisHospitalManage checkIsInpatient(String tollNumber) throws Exception {
@@ -824,17 +824,35 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
     }
 
     /**
-     *@Description 查询所有在住院病人且具有长期医嘱且未停嘱的用药与项目医嘱相关信息
-     *@Params []
-     *@return java.util.List<com.ahsj.hiscore.entity.HisHospitalManage>
-     *@Author zhushixiang
-     *@Date 2019-10-04
-     *@Time 23:53
-    **/
+     * @return java.util.List<com.ahsj.hiscore.entity.HisHospitalManage>
+     * @Description 查询所有在住院病人且具有长期医嘱且未停嘱的用药与项目医嘱相关信息
+     * @Params []
+     * @Author zhushixiang
+     * @Date 2019-10-04
+     * @Time 23:53
+     **/
     @Override
     @Transactional(readOnly = true)
     public List<HisHospitalManage> selectInpatientAndHaveLongTermMedicalAdvice() throws Exception {
         return hisHospitalManageMapper.selectInpatientAndHaveLongTermMedicalAdvice();
+    }
+
+    /**
+     * @Description 病床管理设置病床
+     * @Params: [id, hospitalNumber]
+     * @Author: dingli
+     * @Return: core.message.Message
+     * @Date 2019/11/16
+     * @Time 16:22
+     **/
+    @Override
+    @Transactional(readOnly = false)
+    public Message sedBed(HisHospitalManage hisHospitalManage) throws Exception {
+        int i = hisHospitalManageMapper.setBed(hisHospitalManage);
+        if (i > 0) {
+            return MessageUtil.createMessage(true, "设置病床成功！");
+        }
+        return MessageUtil.createMessage(false, "设置病床失败！");
     }
 }
 

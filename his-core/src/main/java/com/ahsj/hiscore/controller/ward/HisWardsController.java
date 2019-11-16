@@ -1,4 +1,5 @@
 package com.ahsj.hiscore.controller.ward;
+
 import com.ahsj.hiscore.common.Constants;
 import com.ahsj.hiscore.common.utils.*;
 import com.ahsj.hiscore.dao.HisWardMapper;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import utils.EmptyUtil;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -388,9 +390,9 @@ public class HisWardsController extends BaseController {
     public void error(HttpServletRequest request, @RequestParam("vouchers") String vouchers, HttpServletResponse response) throws Exception {
         HisImportInfo hisImportInfo = new HisImportInfo();
         hisImportInfo.setVoucher(vouchers);
-        List<HisImportInfo>hisImportInfoList =  hisImportInfoService.queryHisImportInfo(hisImportInfo);
+        List<HisImportInfo> hisImportInfoList = hisImportInfoService.queryHisImportInfo(hisImportInfo);
         List<String> collect = hisImportInfoList.stream().map(HisImportInfo::getUploadErrorInfo).collect(Collectors.toList());
-        String path  = null;
+        String path = null;
         path = this.getClass().getClassLoader().getResource("templates/errorImport/errorInfo.txt").getPath();
         path = Constants.HIS_SYS_EXCEL_PROJECT_ERROR_FILE_URL;
         //清空txt文件数据
@@ -399,8 +401,9 @@ public class HisWardsController extends BaseController {
         File file = new File(path);
         FileUtil.listToFile(collect, file);
         //导出
-        FileUtil.download(response,path);
+        FileUtil.download(response, path);
     }
+
     /**
      * @param response
      * @Description
@@ -412,9 +415,27 @@ public class HisWardsController extends BaseController {
     @GetMapping("/download.ahsj")
     @ResponseBody
     public void exportExcel(HttpServletResponse response) throws Exception {
-     //   String psth = this.getClass().getClassLoader().getResource("templates/excel/import/HisWard.xlsx").getPath();
-      String  psth =Constants.HIS_SYS_EXCEL_HISWARD_IMPORT_FILE_URL;
+        //   String psth = this.getClass().getClassLoader().getResource("templates/excel/import/HisWard.xlsx").getPath();
+        String psth = Constants.HIS_SYS_EXCEL_HISWARD_IMPORT_FILE_URL;
         FileUtil.download(response, psth);
     }
+
+    /**
+     * @Description 住院管理选择病床
+     * @Params: [model, hisWard]
+     * @Author: dingli
+     * @Return: core.entity.PageBean<com.ahsj.hiscore.entity.HisWard>
+     * @Date 2019/11/16
+     * @Time 11:38
+     **/
+    @ResponseBody
+    @RequestMapping(value = "listWard.ahsj", method = {RequestMethod.POST})
+    public PageBean<HisWard> listWard(HisWard hisWard) throws Exception {
+        PageBean<HisWard> pageBean = new PageBean<HisWard>();
+        pageBean.setParameter(hisWard);
+        pageBean = hisWradService.getHisWardAlls(pageBean);
+        return pageBean;
+    }
+
 
 }

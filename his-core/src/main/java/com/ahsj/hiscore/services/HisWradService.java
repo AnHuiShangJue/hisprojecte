@@ -122,7 +122,7 @@ public interface HisWradService {
      * @Date 2019/8/28
      * @Time 15:12
      **/
-    void exportExcels(Long[] ids,HisWard hisWard,String param, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception;
+    void exportExcels(Long[] ids, HisWard hisWard, String param, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception;
 
 
     /**
@@ -133,9 +133,16 @@ public interface HisWradService {
      * @Date 2019/8/29
      * @Time 13:23
      **/
-    Map importExcel(List<HisWard> list,String filename) throws Exception;
+    Map importExcel(List<HisWard> list, String filename) throws Exception;
 
-
-
+    /**
+     * @Description 病院管理选择病床
+     * @Params: [pageBean]
+     * @Author: dingli
+     * @Return: core.entity.PageBean<com.ahsj.hiscore.entity.HisWard>
+     * @Date 2019/11/16
+     * @Time 11:40
+     **/
+    PageBean<HisWard> getHisWardAlls(PageBean<HisWard> pageBean) throws Exception;
 
 }

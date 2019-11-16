@@ -134,16 +134,16 @@ public interface HisHospitalManageMapper extends BaseMapper<HisHospitalManage> {
      * @Params [hisHospitalManageList]
      **/
     void updateBatchForDaily(List<HisHospitalManage> hisHospitalManageList);
-    
-    
+
+
     /**
      * @Description 批量跟新押金
-     * @Author  muxu
-     * @Date  2019/9/24
+     * @Author muxu
+     * @Date 2019/9/24
      * @Time 20:25
      * @Return void
      * @Params [hisHospitalManageList]
-    **/
+     **/
     void updateBatchForDaily1(List<HisHospitalManage> hisHospitalManageList);
 
 
@@ -249,22 +249,32 @@ public interface HisHospitalManageMapper extends BaseMapper<HisHospitalManage> {
     HisHospitalManage selectNumber(String number);
 
     /**
-     *@Description 根据交易流水号核对是否为住院
-     *@Params [tollNumber]
-     *@return com.ahsj.hiscore.entity.HisHospitalManage
-     *@Author zhushixiang
-     *@Date 2019-09-26
-     *@Time 22:09
-    **/
+     * @return com.ahsj.hiscore.entity.HisHospitalManage
+     * @Description 根据交易流水号核对是否为住院
+     * @Params [tollNumber]
+     * @Author zhushixiang
+     * @Date 2019-09-26
+     * @Time 22:09
+     **/
     HisHospitalManage checkIsInpatient(String tollNumber);
 
     /**
-     *@Description 查询所有在住院病人且具有长期医嘱且未停嘱的用药与项目医嘱相关信息
-     *@Params []
-     *@return java.util.List<com.ahsj.hiscore.entity.HisHospitalManage>
-     *@Author zhushixiang
-     *@Date 2019-10-04
-     *@Time 23:54
-    **/
+     * @return java.util.List<com.ahsj.hiscore.entity.HisHospitalManage>
+     * @Description 查询所有在住院病人且具有长期医嘱且未停嘱的用药与项目医嘱相关信息
+     * @Params []
+     * @Author zhushixiang
+     * @Date 2019-10-04
+     * @Time 23:54
+     **/
     List<HisHospitalManage> selectInpatientAndHaveLongTermMedicalAdvice();
+
+    /**
+     * @Description 设置病床
+     * @Params: [hisHospitalManage]
+     * @Author: dingli
+     * @Return: int
+     * @Date 2019/11/16
+     * @Time 16:28
+     **/
+    int setBed(HisHospitalManage hisHospitalManage) throws Exception;
 }

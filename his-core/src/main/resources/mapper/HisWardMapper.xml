@@ -29,7 +29,7 @@
     delete from his_ward
     where id = #{id,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisWard"  useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisWard" useGeneratedKeys="true" keyProperty="id">
     insert into his_ward (id, number, type,
       create_user_id, create_date, update_user_id,
       update_date, count, current_count,
@@ -226,7 +226,7 @@
             #{item.updateUserId,jdbcType=BIGINT},
             #{item.updateDate,jdbcType=TIMESTAMP}, #{item.count,jdbcType=INTEGER},
             #{item.currentCount,jdbcType=INTEGER},
-           #{item.isEnable,jdbcType=INTEGER})
+            #{item.isEnable,jdbcType=INTEGER})
         </foreach>
     </insert>
 
@@ -246,5 +246,21 @@
             #{id,jdbcType=BIGINT}
         </foreach>
     </select>
+    <select id="getHisWardAlls" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select
+        w.number,w.type,w.count,(w.count-m.toll) as current_count
+        from his_ward as w
+        left JOIN (select m.ward_id ,count(1) as toll from his_hospital_manage as m WHERE m.is_discharged=1 GROUP BY
+        m.ward_id)
+        as m on m.ward_id = w.id
+        where
+        1=1
+        <if test="parameter.number != null and parameter.number != ''">
+            and w.number like concat('%', #{parameter.number,jdbcType=INTEGER},'%')
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders},current_count desc
+        </if>
 
+    </select>
 </mapper>

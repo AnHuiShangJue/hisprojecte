@@ -59,7 +59,7 @@
                         </select>
                         <label for="nurseId">护 士<span style="font-size: 12px">(Nurse)</span></label>
                     </div>
-                    <div class="input-field col s4 l4 xl4" >
+              <!--      <div class="input-field col s4 l4 xl4" >
                         <input type="hidden" id="mywardId" th:value="${hisHospitalManage.wardId}">
                         <select name="wardId" id="wardId">
                         </select>
@@ -70,7 +70,7 @@
                         <select   name="bedId" id="bedId">
                         </select>
                         <label for="bedId">病床编号<span style="font-size: 12px">(Hospital bed number)</span></label>
-                    </div>
+                    </div>-->
                     <div class="input-field col s4 l4 xl4">
                         <input id="depositWarning" name="depositWarning" type="text" th:value="${hisHospitalManage.depositWarning}"/>
                         <label for="depositWarning">最高欠费额度<span style="font-size: 12px">(The maximum amount due)</span></label>
@@ -414,7 +414,7 @@ Scripts
                 var bedIds = $("#bedId").val();
                 console.log("值是"+bedIds);
                 dialog.confirm('确定提交吗?', function (index, layero) {
-                    if (bedIds != null ){
+
                         var queryString = $('#sendForm').serialize();
                         console.log("queryString is" + queryString);
 
@@ -437,9 +437,7 @@ Scripts
                                 return false;
                             }
                         );
-                    }else {
-                        dialog.warn("该病房已无剩余病床，审核失败！！");
-                    }
+
                 });
 
             }
