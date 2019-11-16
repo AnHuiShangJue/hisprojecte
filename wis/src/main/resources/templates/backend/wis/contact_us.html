@@ -11,6 +11,12 @@
             visibility: hidden;
         }
 
+
+        .card-contactus{
+            width:10%;
+            height:90px;
+            margin: 0 auto;
+        }
         .card-contactus2{
             width: 85%;
             height: 202px;
@@ -34,7 +40,16 @@
             line-height:26px;
             letter-spacing:1px;
         }
+        .background-image-contactus-bottom{
+            width:100%;
+            height:13%;
+            margin-left:10px;
+        }
 
+        .background-image-contactus{
+            width:1903px;
+            margin-top: 45px;
+        }
     </style>
     <meta charset="UTF-8">
     <title th:text="${title}"></title>
@@ -77,7 +92,7 @@
                     </div>
                     <br>
                     <div class="row center-block" style="width: 60%;">
-                        <h4 class="card-contactus2-text-content text-center" th:text="${contactUs.address}"></h4>
+                        <h4 class="card-contactus2-text-content text-center">苏州市吴中经济开发区吴中大道136号1幢A319室</h4>
                     </div>
                 </div>
             </div>
@@ -99,7 +114,7 @@
                     </div>
                     <br>
                     <div class="row center-block" style="width: 60%;">
-                        <h4 class="card-contactus2-text-content text-center" th:text="${contactUs.phone}"></h4>
+                        <h4 class="card-contactus2-text-content text-center">18895326920</h4>
                     </div>
                 </div>
             </div>
@@ -117,11 +132,11 @@
                 <br>
                 <div class="card-contactus2">
                     <div class="row" style="">
-                        <h4 class="card-contactus2-text-title text-center" >加入我们</h4>
+                        <h4 class="card-contactus2-text-title text-center">加入我们</h4>
                     </div>
                     <br>
                     <div class="row center-block" style="width: 60%;">
-                        <h4 class="card-contactus2-text-content text-center" th:text="${contactUs.email}"></h4>
+                        <h4 class="card-contactus2-text-content text-center">hr@abscity.cn</h4>
                     </div>
                 </div>
             </div>

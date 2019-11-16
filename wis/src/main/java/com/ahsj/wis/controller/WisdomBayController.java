@@ -1,13 +1,7 @@
 package com.ahsj.wis.controller;
 
 import com.ahsj.wis.Constants;
-import com.ahsj.wis.entity.AboutWisdom;
-import com.ahsj.wis.entity.ContactUs;
-import com.ahsj.wis.entity.WisdomBay;
 import com.ahsj.wis.entity.WisdomIndex;
-import com.ahsj.wis.service.AboutWisdomService;
-import com.ahsj.wis.service.ContactUsUpdateService;
-import com.ahsj.wis.service.WisdomBayService;
 import com.ahsj.wis.service.WisdomIndexService;
 import com.ahsj.wis.utils.DeletePicture;
 import core.message.Message;
@@ -32,22 +26,10 @@ public class WisdomBayController {
     @Autowired
     WisdomIndexService wisdomIndexService;
 
-    @Autowired
-    WisdomBayService wisdomBayService;
-
-    @Autowired
-    AboutWisdomService aboutWisdomService;
-
-    @Autowired
-    ContactUsUpdateService contactUsUpdateService;
-
     @RequestMapping("/list/index.ahsj")
-    ModelAndView listIndex() throws Exception {
-        List<WisdomBay> wisdomBays = wisdomBayService.selectAll();
-        WisdomBay wisdomBay = wisdomBays.get(0);
+    ModelAndView listIndex() {
         ModelAndView modelAndView = new ModelAndView("backend/wis/wisdom_bay");
         modelAndView.addObject("title", "人工智能实验室");
-        modelAndView.addObject("wisdomBay", wisdomBay);
         return modelAndView;
     }
 
@@ -113,13 +95,9 @@ public class WisdomBayController {
      * @Time 11:43
      */
     @RequestMapping("/contactus/index.ahsj")
-    ModelAndView contactusIndex() throws Exception {
+    ModelAndView contactusIndex() {
         ModelAndView modelAndView = new ModelAndView("backend/wis/contact_us");
-        modelAndView.addObject("title", "联系我们");
-        ContactUs contactUs = contactUsUpdateService.select();
-        modelAndView.addObject("contactUs", contactUs);
-
-
+        modelAndView.addObject("title", "");
         return modelAndView;
     }
 
@@ -196,11 +174,9 @@ public class WisdomBayController {
      * @Time 11:41
      */
     @RequestMapping("/aboutwisdom/index.ahsj")
-    ModelAndView aboutwisdomIndex() throws Exception {
+    ModelAndView aboutwisdomIndex() {
         ModelAndView modelAndView = new ModelAndView("backend/wis/aboutwisdom");
         modelAndView.addObject("title", "关于智慧湾");
-        AboutWisdom aboutWisdom = aboutWisdomService.select();
-        modelAndView.addObject("aboutWisdom", aboutWisdom);
         return modelAndView;
     }
 
@@ -247,18 +223,6 @@ public class WisdomBayController {
         return wisdomIndexService.updateByPrimaryKeySelective(record);
     }
 
-    /**
-     * @Description 更新人工智能实验室信息
-     * @Author muxu
-     * @Date 2019/11/15
-     * @Time 15:46
-     * @Return org.springframework.web.servlet.ModelAndView
-     * @Params []
-     **/
-    @RequestMapping("/updateWisdomBayIndex.ahsj")
-    public Message updateWisdomBayIndex(WisdomBay record) {
-        return wisdomBayService.updateWisdomBay(record);
-    }
 
 
     @RequestMapping("/test.ahsj")
@@ -266,6 +230,4 @@ public class WisdomBayController {
         ModelAndView modelAndView = new ModelAndView("public/footer");
         return modelAndView;
     }
-
-
 }
