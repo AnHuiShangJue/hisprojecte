@@ -1,5 +1,6 @@
 package com.ahsj.hiscore.controller.hisProject;
 
+import com.ahsj.hiscore.common.Constants;
 import com.ahsj.hiscore.entity.*;
 import com.ahsj.hiscore.services.HisRecordProjectService;
 import com.ahsj.hiscore.services.HisRefundProjectDetailService;
@@ -105,7 +106,7 @@ public class HisRefundProjectController extends BaseController {
 
     /**
      * @return org.springframework.web.servlet.ModelAndView
-     * @功能说明 根据就诊编号 交易流水号 查看所就诊项目
+     * @功能说明 根据就诊编号 交易流水号 住院编号 查看所就诊项目
      * @Params [token]
      * @Author XJP
      * @Date 2019/8/16
@@ -113,9 +114,32 @@ public class HisRefundProjectController extends BaseController {
      **/
     @PostMapping("/query/list.ahsj")
     public PageBean<HisRecordProject> queryList(HisRecordProject hisRecordProject) {
+        String tollRecordNumber = hisRecordProject.getTollRecordNumber();
         PageBean<HisRecordProject> pageBean = new PageBean<>();
         if (EmptyUtil.Companion.isNullOrEmpty(hisRecordProject.getTollRecordNumber()) && EmptyUtil.Companion.isNullOrEmpty(hisRecordProject.getMedicalRecordId())) {
             return pageBean;
+        }
+//        HIS_HM = "HM"; //就诊记录编号 头部   medicalRecordId
+        if(tollRecordNumber.contains(Constants.HIS_HHM)) {
+            hisRecordProject.setMedicalRecordId(hisRecordProject.getTollRecordNumber());
+            hisRecordProject.setTollRecordNumber(null);
+            pageBean.setParameter(hisRecordProject);
+            PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryAddList(pageBean);
+            return hisProjectPageBean;
+        }
+//         HIS_HTR = "HTR"; //交易流水号 头部
+        if(tollRecordNumber.contains(Constants.HIS_HTR)) {
+            pageBean.setParameter(hisRecordProject);
+            PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryAddList(pageBean);
+            return hisProjectPageBean;
+        }
+//        HIS_HR = "HR";  //住院编号 头部
+        if(tollRecordNumber.contains(Constants.HIS_HR)) {
+            hisRecordProject.setHospitalNumber(hisRecordProject.getTollRecordNumber());
+            hisRecordProject.setTollRecordNumber(null);
+            pageBean.setParameter(hisRecordProject);
+            PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryAddList(pageBean);
+            return hisProjectPageBean;
         }
         pageBean.setParameter(hisRecordProject);
         PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryAddList(pageBean);
@@ -132,6 +156,23 @@ public class HisRefundProjectController extends BaseController {
      **/
     @PostMapping("/saveForAppEdit.ahsj")
     public Message saveForAppEdit(HisRefundProject hisRefundProject, @RequestParam("nums") Integer[] nums, @RequestParam("ids") Long[] ids) throws Exception {
+        String tollRecordNumber = hisRefundProject.getTollRecordNumber();
+        //        HIS_HM = "HM"; //就诊记录编号 头部   medicalRecordId
+        if(tollRecordNumber.contains(Constants.HIS_HHM)) {
+            hisRefundProject.setRecordNumber(hisRefundProject.getTollRecordNumber());
+            hisRefundProject.setTollRecordNumber(null);
+        }
+//         HIS_HTR = "HTR"; //交易流水号 头部
+  /*      if(tollRecordNumber.contains(Constants.HIS_HTR)) {
+            pageBean.setParameter(hisRecordProject);
+            PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryAddList(pageBean);
+            return hisProjectPageBean;
+        }*/
+//        HIS_HR = "HR";  //住院编号 头部
+        if(tollRecordNumber.contains(Constants.HIS_HR)) {
+            hisRefundProject.setHospitalNumber(hisRefundProject.getTollRecordNumber());
+            hisRefundProject.setTollRecordNumber(null);
+        }
 
         return hisRefundProjectService.saveForAppEdit(hisRefundProject, nums, ids, getUserName());
     }

@@ -360,7 +360,7 @@
     <select id="queryList" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
         select hrp.* ,hmr.medical_record_id ,t.number as his_toll_record_number from his_record_project hrp left join
         his_medical_record hmr on hrp.record_id = hmr.id left join his_toll_record t on t.medical_record_id =
-        hmr.medical_record_id
+        hmr.medical_record_id left join his_hospital_manage hhn on hhn.medical_number = t.medical_record_id
         where hrp.is_checked = 2 and hrp.is_back = 2 and hrp.is_payed = 1
 
         <if test="parameter.medicalRecordId != null and parameter.medicalRecordId != ''">
@@ -368,6 +368,9 @@
         </if>
         <if test="parameter.tollRecordNumber != null and parameter.tollRecordNumber != ''">
             and t.number =#{parameter.tollRecordNumber,jdbcType=VARCHAR}
+        </if>
+        <if test="parameter.hospitalNumber != null and parameter.hospitalNumber != ''">
+            and hhn.number =#{parameter.hospitalNumber,jdbcType=VARCHAR}
         </if>
         <if test="parameter.orders != null and parameter.orders != ''">
             order by ${parameter.orders}
@@ -377,11 +380,14 @@
     <select id="queryLists" parameterType="com.ahsj.hiscore.entity.HisRecordProject" resultMap="BaseResultMap">
         select hrp.* ,hmr.medical_record_id ,t.number as his_toll_record_number from his_record_project hrp left join
         his_medical_record hmr on hrp.record_id = hmr.id left join his_toll_record t on t.medical_record_id =
-        hmr.medical_record_id
+        hmr.medical_record_id left join his_hospital_manage hhn on hhn.medical_number = t.medical_record_id
         where hrp.is_checked = 2 and hrp.is_back = 2 and hrp.is_payed = 1
 
         <if test="medicalRecordId != null and medicalRecordId != ''">
             and hmr.medical_record_id =#{medicalRecordId,jdbcType=VARCHAR}
+        </if>
+        <if test="hospitalNumber != null and hospitalNumber != ''">
+            and hhn.number =#{parameter.hospitalNumber,jdbcType=VARCHAR}
         </if>
         <if test="tollRecordNumber != null and tollRecordNumber != ''">
             and t.number =#{tollRecordNumber,jdbcType=VARCHAR}

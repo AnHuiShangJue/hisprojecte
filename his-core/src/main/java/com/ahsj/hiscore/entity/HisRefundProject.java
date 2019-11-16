@@ -54,6 +54,22 @@ public class HisRefundProject extends BaseEntity {
 
     private String tollRecordNumber;
 
+
+    //住院编号
+    private String hospitalNumber;
+
+    //就诊编号
+//    private String recordNumber;
+
+
+    public String getHospitalNumber() {
+        return hospitalNumber;
+    }
+
+    public void setHospitalNumber(String hospitalNumber) {
+        this.hospitalNumber = hospitalNumber;
+    }
+
     public String getTollRecordNumber() {
         return tollRecordNumber;
     }

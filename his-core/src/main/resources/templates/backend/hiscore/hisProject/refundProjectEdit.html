@@ -45,13 +45,11 @@
                 <div class="card">
                     <div class="card-content">
                         <form id="searchForm" class="row" action="">
-
+                            <div>
                                 <div class="col input-field s3 m3 l3 xl3">
                                     <input id="tollRecordNumber" name="tollRecordNumber" type="text"/>
-                                    <label for="tollRecordNumber">请输入交易流水号<span style="font-size: 12px">(Please enter the transaction serial number
-)</span></label>
+                                    <label for="tollRecordNumber">请输入交易流水号/就诊编号/住院编号<span style="font-size: 12px">(Please enter the transaction serial number)</span></label>
                                 </div>
-
                             </div>
                         </form>
                     </div>
@@ -111,7 +109,8 @@
                             <form id="planForm" action="">
                                 <div class="row">
                                     <div class="col input-field s6 m6 l6 xl6">
-                                        <input id="patientName" name="patientName" type="text" th:value="${userLoginName}" readonly="readonly"
+                                        <input id="patientName" name="patientName" type="text"
+                                               th:value="${userLoginName}" readonly="readonly"
                                                data-error=".errorTxt1">
                                         <div class="errorTxt1"></div>
                                         <label for="patientName">申请退项目人姓名<span style="font-size: 12px">(Application for returnee name
@@ -142,7 +141,8 @@
 </div>
 <div class="row">
     <div class="input-field col s12">
-        <button id="BtnMediEnter" class="btn cyan waves-effect waves-light right" type="submit" name="action">提交退项目申请(Submit a refund application
+        <button id="BtnMediEnter" class="btn cyan waves-effect waves-light right" type="submit" name="action">
+            提交退项目申请(Submit a refund application
             )
             <i class="mdi-content-send right"></i>
         </button>
@@ -159,6 +159,7 @@
         initBtn();
         initTable();
     });
+
     function initTable() {
 
         $("#planForm").validate({
@@ -174,12 +175,12 @@
             },
             messages: {
                 personInCharge: {
-                  /*  required: "请输入负责人姓名",
-                    minlength: "最少输入1个字符"*/
+                    /*  required: "请输入负责人姓名",
+                      minlength: "最少输入1个字符"*/
                 },
                 expectedTime: {
-               /*     required: "请输入预期采购时间",
-                    minlength: "最少输入1个字符"*/
+                    /*     required: "请输入预期采购时间",
+                         minlength: "最少输入1个字符"*/
                 },
             },
             errorElement: 'div',
@@ -258,7 +259,7 @@
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"添加至待入库\" href='javascript:;' onclick=add("
-                                + row.id + ",'" + row.number + "','" + row.name + "','" + row.assitTypeName + "','"+row.price+"');>" +
+                                + row.id + ",'" + row.number + "','" + row.name + "','" + row.assitTypeName + "','" + row.price + "');>" +
                                 " <i class='material-icons'>add</i></a>";
                             // 返回自定义内容
                             return rtnBtn;
@@ -297,11 +298,11 @@
                     "data": "price",
                     "name": "price"
                 },
-             /*   {
-                    "title": "有效期",
-                    "data": "validityPeriod",
-                    "name": ""
-                },*/
+                /*   {
+                       "title": "有效期",
+                       "data": "validityPeriod",
+                       "name": ""
+                   },*/
                 {
                     "title": "项目数量",
                     "width": "60px",
@@ -335,7 +336,7 @@
     }
 
     //添加到list里
-    function add(id, number, name, assitTypeName,price,num ) {
+    function add(id, number, name, assitTypeName, price, num) {
         var selectRowsIds = gridEnterList.getIds();
         if (selectRowsIds.length !== 0) {
             for (var k = 0; k < selectRowsIds.length; k++) {
@@ -345,7 +346,14 @@
             }
         }
         if (null !== id) {
-            gridEnterList.addRow({"id": id, "number": number, "name": name, "assitTypeName": assitTypeName,"price":price ,"num":num  });
+            gridEnterList.addRow({
+                "id": id,
+                "number": number,
+                "name": name,
+                "assitTypeName": assitTypeName,
+                "price": price,
+                "num": num
+            });
         }
     }
 
@@ -405,7 +413,7 @@
         });
         $('#resetBtn').click(function () {
             grid.reset();
-            ids =gridEnterList.getIds();
+            ids = gridEnterList.getIds();
             gridEnterList.removeRows(ids);
         });
 
@@ -417,6 +425,7 @@
                 var nums = gridEnterList.gernums();
                 var recordNumber = $("#medicalRecordId").val();
                 var tollRecordNumber = $("#tollRecordNumber").val();
+
                 var patientName = $(" input[ name='patientName' ] ").val();
                 var phonenumber = $(" input[ name='phonenumber' ] ").val();
                 var idcard = $(" input[ name='idcard' ] ").val();
@@ -429,8 +438,8 @@
                         "nums": nums.join(','),
 
                         "patientName": patientName,
-                        "recordNumber":recordNumber,
-                        "tollRecordNumber":tollRecordNumber,
+                        "recordNumber": recordNumber,
+                        "tollRecordNumber": tollRecordNumber,
                         "remarks": remarks
                     },
                     function (msg) {

@@ -126,6 +126,9 @@ public class HisRefundProjectServiceImpl implements HisRefundProjectService {
             project.setTollRecordNumber(hisRefundProject.getTollRecordNumber());
             project.setMedicalRecordId(hisRefundProject.getRecordNumber());
             List<HisRecordProject> hisRecordProjects = hisRecordProjectService.queryLists(project);
+            if (EmptyUtil.Companion.isNullOrEmpty(hisRecordProjects)){
+
+            }
             HisRecordProject hisRecordProject = hisRecordProjects.get(0);
 
             SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmssSSS");

@@ -96,7 +96,14 @@ public class HisRecordProject extends BaseEntity {
 
     private Integer refundNum;
 
+    //交易流水号
     private String tollRecordNumber;
+
+    //住院编号
+    private String hospitalNumber;
+
+    //就诊编号
+    private String recordNumber;
 
     private BigDecimal projectSumPrice;
 
@@ -111,6 +118,22 @@ public class HisRecordProject extends BaseEntity {
     private String medicalNumber ;
 
     private Integer hisProjectNum;
+
+    public String getHospitalNumber() {
+        return hospitalNumber;
+    }
+
+    public void setHospitalNumber(String hospitalNumber) {
+        this.hospitalNumber = hospitalNumber;
+    }
+
+    public String getRecordNumber() {
+        return recordNumber;
+    }
+
+    public void setRecordNumber(String recordNumber) {
+        this.recordNumber = recordNumber;
+    }
 
     public String getMedicalNumber() {
         return medicalNumber;
