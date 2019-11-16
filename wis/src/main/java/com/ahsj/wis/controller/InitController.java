@@ -1,5 +1,9 @@
 package com.ahsj.wis.controller;
 
+import com.ahsj.wis.entity.Sys;
+import com.ahsj.wis.service.SysService;
+import core.message.Message;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,9 +25,16 @@ import java.util.List;
 @RestController
 public class InitController {
 
-    @RequestMapping(value = "/",method = {RequestMethod.POST,RequestMethod.GET})
-    public ModelAndView databasebackup() throws Exception{
-        ModelAndView modelAndView = new ModelAndView("backend/wis/home");
+    @Autowired
+    SysService sysService;
+
+    @RequestMapping(value = "/", method = {RequestMethod.POST, RequestMethod.GET})
+    public ModelAndView databasebackup() throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/admins/list");
+        List<Sys> sysAll = sysService.getSysAll();
+        modelAndView.addObject("list", sysAll);
         return modelAndView;
-        }
     }
+
+
+}
