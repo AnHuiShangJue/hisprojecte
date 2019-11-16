@@ -1,8 +1,9 @@
 package com.ahsj.wis.controller;
 
 import com.ahsj.wis.entity.Sys;
+import com.ahsj.wis.entity.WisdomIndex;
 import com.ahsj.wis.service.SysService;
-import core.message.Message;
+import com.ahsj.wis.service.WisdomIndexService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,15 +27,15 @@ import java.util.List;
 public class InitController {
 
     @Autowired
-    SysService sysService;
+    WisdomIndexService wisdomIndexService;
 
-    @RequestMapping(value = "/", method = {RequestMethod.POST, RequestMethod.GET})
-    public ModelAndView databasebackup() throws Exception {
-        ModelAndView modelAndView = new ModelAndView("backend/admins/list");
-        List<Sys> sysAll = sysService.getSysAll();
-        modelAndView.addObject("list", sysAll);
+    @RequestMapping(value = "/",method = {RequestMethod.POST,RequestMethod.GET})
+    public ModelAndView databasebackup() throws Exception{
+        List<WisdomIndex> wisdomIndices = wisdomIndexService.selectAll();
+        WisdomIndex wisdomIndex = wisdomIndices.get(0);
+        ModelAndView modelAndView = new ModelAndView("backend/wis/index");
+        modelAndView.addObject("title", "欢迎页");
+        modelAndView.addObject("wisdomIndex", wisdomIndex);
         return modelAndView;
+        }
     }
-
-
-}

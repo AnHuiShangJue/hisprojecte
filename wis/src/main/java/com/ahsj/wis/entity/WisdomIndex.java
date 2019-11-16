@@ -1,8 +1,5 @@
 package com.ahsj.wis.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
 
 public class WisdomIndex {
@@ -48,12 +45,8 @@ public class WisdomIndex {
 
     private String remake2;
 
-    @JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
-    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date createDate;
 
-    @JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
-    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date updateDate;
 
     public Long getId() {
