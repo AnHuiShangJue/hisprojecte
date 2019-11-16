@@ -49,7 +49,25 @@ public class HisTollRecordDetails extends BaseEntity {
     @JsonFormat(pattern="MM-dd-yyyy ",timezone = "GMT+8")
     Date createDate;
 
+    private Integer isBack;
+    private String isBackName;
 
+
+    public Integer getIsBack() {
+        return isBack;
+    }
+
+    public void setIsBack(Integer isBack) {
+        this.isBack = isBack;
+    }
+
+    public String getIsBackName() {
+        return isBackName;
+    }
+
+    public void setIsBackName(String isBackName) {
+        this.isBackName = isBackName;
+    }
 
     public String getPatientName() {
         return patientName;

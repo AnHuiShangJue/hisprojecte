@@ -854,6 +854,20 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
         }
         return MessageUtil.createMessage(false, "设置病床失败！");
     }
+
+    //强制出院
+    @Override
+    @Transactional(readOnly = false)
+    public Message forcedDischarge(HisHospitalManage hisHospitalManage) throws Exception {
+        if(!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage.getId())) {
+            HisHospitalManage hisHospitalManage1 = hisHospitalManageMapper.selectByPrimaryKey(hisHospitalManage.getId());
+            hisHospitalManage1.setIsDischarged(2);
+            hisHospitalManageMapper.updateByPrimaryKey(hisHospitalManage1);
+            return MessageUtil.createMessage(true, "强制出院成功（Success）");
+        }else {
+            return MessageUtil.createMessage(false, "强制出院失败，参数有误！（Fail）");
+        }
+    }
 }
 
 

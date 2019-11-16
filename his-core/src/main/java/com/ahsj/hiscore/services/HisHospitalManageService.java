@@ -245,4 +245,7 @@ public interface HisHospitalManageService {
      * @Time 16:21
      **/
     Message sedBed(HisHospitalManage hisHospitalManage) throws Exception;
+
+    //强制出院
+    Message forcedDischarge(HisHospitalManage hisHospitalManage)throws Exception;
 }

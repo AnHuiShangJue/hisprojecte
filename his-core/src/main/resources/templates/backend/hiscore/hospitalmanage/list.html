@@ -217,7 +217,10 @@
                                 "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"出院(Discharged)\" href='javascript:;' onclick='discharged(" + row.id + "," + row.isDischarged + ");'><i class='material-icons'>camera_front</i></a>" +
                                 "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看(View)\" href='javascript:;' onclick='view(" + row.patientId + "," + row.ids + "," + row.doctorId + "," + row.wardId + "," + row.bedId + "," + row.nurseId + "," + row.isHos + "," + row.id + ");'><i class='material-icons'>visibility</i></a>" +
                                 "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改(Edit)\" onclick='update(" + row.id + "," + row.isHos + ");'><i class='material-icons'>edit</i></a>" +
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"设置病床(Set up the bed)\" onclick='setBed(" + row.isHos + ",\"" + row.number + "\");'><i class='material-icons'>airline_seat_individual_suite</i></a>";
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"设置病床(Set up the bed)\" onclick='setBed(" + row.isHos + ",\"" + row.number + "\");'><i class='material-icons'>airline_seat_individual_suite</i></a>" ;
+                            if(row.isDischarged == 1) {
+                                rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"强制出院(Forced discharge)\" onclick='Forced(" + row.id + ",\"" + row.isDischarged + "\");'><i class='material-icons'>clear</i></a>";
+                            }
                             // 返回自定义内容
                             return rtnBtn;
                             // 返回自定义内容
@@ -264,6 +267,41 @@
         if (isDischarged == 1) {
             dialog.confirm('确定该病人出院?', function (index, layero) {
                 $.ahsjajax(CTX + "/api/hishospitalmanage/hosEnter.ahsj",
+                    {"id": id},
+                    function (msg) {
+                        if (msg.success) {
+                            swal.close();
+                            M.toast({
+                                html: msg.message, completeCallback: function () {
+                                }
+                            });
+                            grid.search();
+                        } else {
+                            M.toast({
+                                html: msg.message, completeCallback: function () {
+                                }
+                            });
+                        }
+                    },
+                    function (data) {
+                        M.toast({
+                            html: "网络异常", completeCallback: function () {
+                            }
+                        });
+                    }
+                );
+            });
+        } else if (isDischarged == 2) {
+            dialog.warn('该病人已出院，请勿重复操作！')
+        }
+
+    }
+
+    //强制出院
+    function Forced(id, isDischarged) {
+        if (isDischarged == 1) {
+            dialog.confirm('确定强制出院（Determine forced discharge）?', function (index, layero) {
+                $.ahsjajax(CTX + "/api/hishospitalmanage/forcedDischarge.ahsj",
                     {"id": id},
                     function (msg) {
                         if (msg.success) {

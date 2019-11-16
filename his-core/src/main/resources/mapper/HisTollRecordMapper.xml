@@ -1053,24 +1053,25 @@ from  his_toll_record as t
     </select>
 
     <select id="selectAllInformationByHRNumber" parameterType="java.lang.String" resultMap="HisTollRecordDetailsMapper">
-        select a.name,a.num,a.price,a.total,a.create_date,a.patient_name
+        select a.name,a.num,a.price,a.total,a.create_date,a.patient_name,a.is_back as isBack,
+        case when a.is_back = 1 then '已退回（already back）' else '' end as isBackName
 from(
-select c.drugs_name as name,c.count as num,d.sale_price as price,(c.count*d.sale_price)as total,c.create_date as create_date,a.patient_name as patient_name
+select c.drugs_name as name,c.count as num,d.sale_price as price,(c.count*d.sale_price)as total,c.create_date as create_date,a.patient_name as patient_name,c.is_back as is_back
 from his_hospital_manage as a
 left join his_medical_record as b on a.medical_number = b.medical_record_id
 left join his_medication_details as c on b.id = c.medical_record_id
 left join his_pharmacy_detail as d on c.medication_id = d.id
-where a.number = #{hrNumber} and c.is_back = 2
+where a.number = #{hrNumber}
 
 UNION ALL
-select  c.name as name,c.num as num,c.price as price,(c.num*c.price) as total,c.create_date as create_date,a.patient_name as patient_name
+select  c.name as name,c.num as num,c.price as price,(c.num*c.price) as total,c.create_date as create_date,a.patient_name as patient_name,c.is_back as is_back
 from his_hospital_manage as a
 left join his_medical_record as b on a.medical_number = b.medical_record_id
 left join his_record_project as c on b.id = c.record_id
-where a.number=#{hrNumber} and c.is_back = 2
+where a.number=#{hrNumber}
 
 UNION ALL
-select '住院费用' as name,a.hospitalization_day as num,b.price as price,(a.hospitalization_day*b.price)as total,a.create_date as create_date,a.patient_name as patient_name
+select '住院费用' as name,a.hospitalization_day as num,b.price as price,(a.hospitalization_day*b.price)as total,a.create_date as create_date,a.patient_name as patient_name,2 as is_back
 from his_hospital_manage as a
 left join his_bed as b on a.bed_id = b.id
 where a.number=#{hrNumber}

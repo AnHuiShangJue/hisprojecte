@@ -414,4 +414,12 @@ public class HisHospitalManageController extends BaseController {
     public Message setBed(HisHospitalManage hisHospitalManage) throws Exception { //id 接收的病床id，xml不能接收2个参数
         return hisHospitalManageService.sedBed(hisHospitalManage);
     }
+
+    //强制出院
+    @RequestMapping(value = "forcedDischarge.ahsj")
+    @ResponseBody
+    public Message forcedDischarge(HisHospitalManage hisHospitalManage) throws Exception {
+        return hisHospitalManageService.forcedDischarge(hisHospitalManage);
+    }
+
 }
