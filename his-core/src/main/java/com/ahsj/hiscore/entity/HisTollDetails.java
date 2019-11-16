@@ -77,6 +77,11 @@ public class HisTollDetails extends BaseEntity {
 
     private BigDecimal drugFee;//药品费
 
+
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_back", typeName = "isBackName")
+    private Integer isBack;
+    private String isBackName;
+
     public BigDecimal getDrugFee() {
         return drugFee;
     }
@@ -433,5 +438,23 @@ public class HisTollDetails extends BaseEntity {
 
     public void setCommonNumber(String commonNumber) {
         this.commonNumber = commonNumber;
+    }
+
+
+
+    public String getIsBackName() {
+        return isBackName;
+    }
+
+    public void setIsBackName(String isBackName) {
+        this.isBackName = isBackName;
+    }
+
+    public Integer getIsBack() {
+        return isBack;
+    }
+
+    public void setIsBack(Integer isBack) {
+        this.isBack = isBack;
     }
 }

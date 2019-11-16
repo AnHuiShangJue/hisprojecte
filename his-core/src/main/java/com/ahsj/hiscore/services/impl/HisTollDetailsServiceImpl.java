@@ -58,6 +58,16 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
         return pageBean;
     }
 
+
+    @Override
+    public PageBean<HisTollDetails> nurselistByMecordId(PageBean<HisTollDetails> pageBean) {
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisTollDetailsMapper.nurselistByMecordIdForHospital(pageBean)));
+        return pageBean;
+    }
+
+
+
+
     /**
      * @return core.entity.PageBean<com.ahsj.hiscore.entity.HisTollRecord>
      * @Description 门诊收费结算
