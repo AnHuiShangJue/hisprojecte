@@ -225,7 +225,7 @@
             loadingMessage: 'Loading...',
             dataTable: {
                 "ajax": {
-                    "url": CTX + "/api/hisTollDetails/hospital/list.ahsj?medicalRecordId="+ $("#MedicalRecordId").val(),
+                    "url": CTX + "/api/hisTollDetails/nursehospital/list.ahsj?medicalRecordId="+ $("#MedicalRecordId").val(),
                 },
                 "columns": [
                     {
@@ -260,6 +260,11 @@
                         "title": "是否付费",
                         "data": "payName",
                         "name": "isPay",
+                        "orderable": false
+                    }, {
+                        "title": "是否退回",
+                        "data": "isBackName",
+                        "name": "is_back",
                         "orderable": false
                     },
                     {

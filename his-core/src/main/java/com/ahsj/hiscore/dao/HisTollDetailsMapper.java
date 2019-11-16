@@ -25,6 +25,8 @@ public interface HisTollDetailsMapper extends BaseMapper<HisTollDetails> {
 
     List<HisTollDetails> listByMecordIdForHospital(PageBean<HisTollDetails> pageBean);//
 
+    List<HisTollDetails> nurselistByMecordIdForHospital(PageBean<HisTollDetails> pageBean);//
+
     List<? extends HisTollDetails> listForOutpatientCharges(PageBean<HisTollDetails> pageBean);
 
     List<HisTollDetails> selectForOutpatientChargesByMedicalRecordId(String medicalRecordId);

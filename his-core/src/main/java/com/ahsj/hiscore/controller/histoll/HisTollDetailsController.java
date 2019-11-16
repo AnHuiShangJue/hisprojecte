@@ -117,6 +117,31 @@ public class HisTollDetailsController extends BaseController {
     }
 
     /**
+     *@Description 护士站
+     *@Params
+     *@return
+     *@Author jin
+     *@Date 2019/11/16
+     *@Time 18:11
+    */
+    @RequestMapping("nursehospital/list.ahsj")
+    @ResponseBody
+    public PageBean<HisTollDetails> nursehospitalListIndex(HisTollDetails hisTollDetails) throws Exception {
+        PageBean<HisTollDetails> hisTollDetailsPageBean = new PageBean<HisTollDetails>();
+        HisHospitalManage hisHospitalManage = hisHospitalManageService.selectByHospNumber(hisTollDetails.getMedicalRecordId());
+        if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage)) {
+            hisTollDetails.setMedicalRecordId(hisHospitalManage.getMedicalNumber());
+            hisTollDetailsPageBean.setParameter(hisTollDetails);
+            System.out.println(hisTollDetailsService.nurselistByMecordId(hisTollDetailsPageBean));
+            return hisTollDetailsService.nurselistByMecordId(hisTollDetailsPageBean);
+        } else {
+            hisTollDetailsPageBean.setData(new ArrayList<HisTollDetails>());
+            return hisTollDetailsPageBean;
+        }
+    }
+
+
+    /**
      * @return org.springframework.web.servlet.ModelAndView
      * @Description 返回出院收费页面
      * @Params [token]
