@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.wis.dao.OrganizationalStructureMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.wis.entity.OrganizationalStructure" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="title_english" property="titleEnglish" jdbcType="VARCHAR" />
+    <result column="department_name1" property="departmentName1" jdbcType="VARCHAR" />
+    <result column="department_name2" property="departmentName2" jdbcType="VARCHAR" />
+    <result column="department_name3" property="departmentName3" jdbcType="VARCHAR" />
+    <result column="department_name4" property="departmentName4" jdbcType="VARCHAR" />
+    <result column="department_name5" property="departmentName5" jdbcType="VARCHAR" />
+    <result column="department_name6" property="departmentName6" jdbcType="VARCHAR" />
+    <result column="department_name7" property="departmentName7" jdbcType="VARCHAR" />
+    <result column="department_name8" property="departmentName8" jdbcType="VARCHAR" />
+    <result column="department_name9" property="departmentName9" jdbcType="VARCHAR" />
+    <result column="department_name10" property="departmentName10" jdbcType="VARCHAR" />
+    <result column="department_name11" property="departmentName11" jdbcType="VARCHAR" />
+    <result column="department_name12" property="departmentName12" jdbcType="VARCHAR" />
+    <result column="department_name13" property="departmentName13" jdbcType="VARCHAR" />
+    <result column="department_name14" property="departmentName14" jdbcType="VARCHAR" />
+    <result column="department_name15" property="departmentName15" jdbcType="VARCHAR" />
+    <result column="department_name16" property="departmentName16" jdbcType="VARCHAR" />
+    <result column="department_name17" property="departmentName17" jdbcType="VARCHAR" />
+    <result column="department_name18" property="departmentName18" jdbcType="VARCHAR" />
+    <result column="department_name19" property="departmentName19" jdbcType="VARCHAR" />
+    <result column="department_name20" property="departmentName20" jdbcType="VARCHAR" />
+    <result column="department_name21" property="departmentName21" jdbcType="VARCHAR" />
+    <result column="department_name22" property="departmentName22" jdbcType="VARCHAR" />
+    <result column="department_name23" property="departmentName23" jdbcType="VARCHAR" />
+    <result column="department_name25" property="departmentName25" jdbcType="VARCHAR" />
+    <result column="department_name26" property="departmentName26" jdbcType="VARCHAR" />
+    <result column="department_name27" property="departmentName27" jdbcType="VARCHAR" />
+    <result column="department_name28" property="departmentName28" jdbcType="VARCHAR" />
+    <result column="department_content1" property="departmentContent1" jdbcType="VARCHAR" />
+    <result column="department_content2" property="departmentContent2" jdbcType="VARCHAR" />
+    <result column="department_content3" property="departmentContent3" jdbcType="VARCHAR" />
+    <result column="department_content4" property="departmentContent4" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="department_title1" property="departmentTitle1" jdbcType="VARCHAR" />
+    <result column="department_title2" property="departmentTitle2" jdbcType="VARCHAR" />
+    <result column="department_title3" property="departmentTitle3" jdbcType="VARCHAR" />
+    <result column="department_title4" property="departmentTitle4" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title, title_english, department_name1, department_name2, department_name3, department_name4, 
+    department_name5, department_name6, department_name7, department_name8, department_name9, 
+    department_name10, department_name11, department_name12, department_name13, department_name14, 
+    department_name15, department_name16, department_name17, department_name18, department_name19, 
+    department_name20, department_name21, department_name22, department_name23, department_name25, 
+    department_name26, department_name27, department_name28, department_content1, department_content2, 
+    department_content3, department_content4, create_date, update_date, department_title1, 
+    department_title2, department_title3, department_title4
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from organizational_structure
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from organizational_structure
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.wis.entity.OrganizationalStructure" >
+    insert into organizational_structure (id, title, title_english, 
+      department_name1, department_name2, department_name3, 
+      department_name4, department_name5, department_name6, 
+      department_name7, department_name8, department_name9, 
+      department_name10, department_name11, department_name12, 
+      department_name13, department_name14, department_name15, 
+      department_name16, department_name17, department_name18, 
+      department_name19, department_name20, department_name21, 
+      department_name22, department_name23, department_name25, 
+      department_name26, department_name27, department_name28, 
+      department_content1, department_content2, 
+      department_content3, department_content4, 
+      create_date, update_date, department_title1, 
+      department_title2, department_title3, department_title4
+      )
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{titleEnglish,jdbcType=VARCHAR}, 
+      #{departmentName1,jdbcType=VARCHAR}, #{departmentName2,jdbcType=VARCHAR}, #{departmentName3,jdbcType=VARCHAR}, 
+      #{departmentName4,jdbcType=VARCHAR}, #{departmentName5,jdbcType=VARCHAR}, #{departmentName6,jdbcType=VARCHAR}, 
+      #{departmentName7,jdbcType=VARCHAR}, #{departmentName8,jdbcType=VARCHAR}, #{departmentName9,jdbcType=VARCHAR}, 
+      #{departmentName10,jdbcType=VARCHAR}, #{departmentName11,jdbcType=VARCHAR}, #{departmentName12,jdbcType=VARCHAR}, 
+      #{departmentName13,jdbcType=VARCHAR}, #{departmentName14,jdbcType=VARCHAR}, #{departmentName15,jdbcType=VARCHAR}, 
+      #{departmentName16,jdbcType=VARCHAR}, #{departmentName17,jdbcType=VARCHAR}, #{departmentName18,jdbcType=VARCHAR}, 
+      #{departmentName19,jdbcType=VARCHAR}, #{departmentName20,jdbcType=VARCHAR}, #{departmentName21,jdbcType=VARCHAR}, 
+      #{departmentName22,jdbcType=VARCHAR}, #{departmentName23,jdbcType=VARCHAR}, #{departmentName25,jdbcType=VARCHAR}, 
+      #{departmentName26,jdbcType=VARCHAR}, #{departmentName27,jdbcType=VARCHAR}, #{departmentName28,jdbcType=VARCHAR}, 
+      #{departmentContent1,jdbcType=VARCHAR}, #{departmentContent2,jdbcType=VARCHAR}, 
+      #{departmentContent3,jdbcType=VARCHAR}, #{departmentContent4,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{departmentTitle1,jdbcType=VARCHAR}, 
+      #{departmentTitle2,jdbcType=VARCHAR}, #{departmentTitle3,jdbcType=VARCHAR}, #{departmentTitle4,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.wis.entity.OrganizationalStructure" >
+    insert into organizational_structure
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="titleEnglish != null" >
+        title_english,
+      </if>
+      <if test="departmentName1 != null" >
+        department_name1,
+      </if>
+      <if test="departmentName2 != null" >
+        department_name2,
+      </if>
+      <if test="departmentName3 != null" >
+        department_name3,
+      </if>
+      <if test="departmentName4 != null" >
+        department_name4,
+      </if>
+      <if test="departmentName5 != null" >
+        department_name5,
+      </if>
+      <if test="departmentName6 != null" >
+        department_name6,
+      </if>
+      <if test="departmentName7 != null" >
+        department_name7,
+      </if>
+      <if test="departmentName8 != null" >
+        department_name8,
+      </if>
+      <if test="departmentName9 != null" >
+        department_name9,
+      </if>
+      <if test="departmentName10 != null" >
+        department_name10,
+      </if>
+      <if test="departmentName11 != null" >
+        department_name11,
+      </if>
+      <if test="departmentName12 != null" >
+        department_name12,
+      </if>
+      <if test="departmentName13 != null" >
+        department_name13,
+      </if>
+      <if test="departmentName14 != null" >
+        department_name14,
+      </if>
+      <if test="departmentName15 != null" >
+        department_name15,
+      </if>
+      <if test="departmentName16 != null" >
+        department_name16,
+      </if>
+      <if test="departmentName17 != null" >
+        department_name17,
+      </if>
+      <if test="departmentName18 != null" >
+        department_name18,
+      </if>
+      <if test="departmentName19 != null" >
+        department_name19,
+      </if>
+      <if test="departmentName20 != null" >
+        department_name20,
+      </if>
+      <if test="departmentName21 != null" >
+        department_name21,
+      </if>
+      <if test="departmentName22 != null" >
+        department_name22,
+      </if>
+      <if test="departmentName23 != null" >
+        department_name23,
+      </if>
+      <if test="departmentName25 != null" >
+        department_name25,
+      </if>
+      <if test="departmentName26 != null" >
+        department_name26,
+      </if>
+      <if test="departmentName27 != null" >
+        department_name27,
+      </if>
+      <if test="departmentName28 != null" >
+        department_name28,
+      </if>
+      <if test="departmentContent1 != null" >
+        department_content1,
+      </if>
+      <if test="departmentContent2 != null" >
+        department_content2,
+      </if>
+      <if test="departmentContent3 != null" >
+        department_content3,
+      </if>
+      <if test="departmentContent4 != null" >
+        department_content4,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="departmentTitle1 != null" >
+        department_title1,
+      </if>
+      <if test="departmentTitle2 != null" >
+        department_title2,
+      </if>
+      <if test="departmentTitle3 != null" >
+        department_title3,
+      </if>
+      <if test="departmentTitle4 != null" >
+        department_title4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="titleEnglish != null" >
+        #{titleEnglish,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName1 != null" >
+        #{departmentName1,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName2 != null" >
+        #{departmentName2,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName3 != null" >
+        #{departmentName3,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName4 != null" >
+        #{departmentName4,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName5 != null" >
+        #{departmentName5,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName6 != null" >
+        #{departmentName6,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName7 != null" >
+        #{departmentName7,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName8 != null" >
+        #{departmentName8,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName9 != null" >
+        #{departmentName9,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName10 != null" >
+        #{departmentName10,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName11 != null" >
+        #{departmentName11,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName12 != null" >
+        #{departmentName12,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName13 != null" >
+        #{departmentName13,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName14 != null" >
+        #{departmentName14,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName15 != null" >
+        #{departmentName15,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName16 != null" >
+        #{departmentName16,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName17 != null" >
+        #{departmentName17,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName18 != null" >
+        #{departmentName18,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName19 != null" >
+        #{departmentName19,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName20 != null" >
+        #{departmentName20,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName21 != null" >
+        #{departmentName21,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName22 != null" >
+        #{departmentName22,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName23 != null" >
+        #{departmentName23,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName25 != null" >
+        #{departmentName25,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName26 != null" >
+        #{departmentName26,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName27 != null" >
+        #{departmentName27,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName28 != null" >
+        #{departmentName28,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentContent1 != null" >
+        #{departmentContent1,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentContent2 != null" >
+        #{departmentContent2,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentContent3 != null" >
+        #{departmentContent3,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentContent4 != null" >
+        #{departmentContent4,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="departmentTitle1 != null" >
+        #{departmentTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentTitle2 != null" >
+        #{departmentTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentTitle3 != null" >
+        #{departmentTitle3,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentTitle4 != null" >
+        #{departmentTitle4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.wis.entity.OrganizationalStructure" >
+    update organizational_structure
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="titleEnglish != null" >
+        title_english = #{titleEnglish,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName1 != null" >
+        department_name1 = #{departmentName1,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName2 != null" >
+        department_name2 = #{departmentName2,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName3 != null" >
+        department_name3 = #{departmentName3,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName4 != null" >
+        department_name4 = #{departmentName4,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName5 != null" >
+        department_name5 = #{departmentName5,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName6 != null" >
+        department_name6 = #{departmentName6,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName7 != null" >
+        department_name7 = #{departmentName7,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName8 != null" >
+        department_name8 = #{departmentName8,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName9 != null" >
+        department_name9 = #{departmentName9,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName10 != null" >
+        department_name10 = #{departmentName10,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName11 != null" >
+        department_name11 = #{departmentName11,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName12 != null" >
+        department_name12 = #{departmentName12,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName13 != null" >
+        department_name13 = #{departmentName13,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName14 != null" >
+        department_name14 = #{departmentName14,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName15 != null" >
+        department_name15 = #{departmentName15,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName16 != null" >
+        department_name16 = #{departmentName16,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName17 != null" >
+        department_name17 = #{departmentName17,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName18 != null" >
+        department_name18 = #{departmentName18,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName19 != null" >
+        department_name19 = #{departmentName19,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName20 != null" >
+        department_name20 = #{departmentName20,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName21 != null" >
+        department_name21 = #{departmentName21,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName22 != null" >
+        department_name22 = #{departmentName22,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName23 != null" >
+        department_name23 = #{departmentName23,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName25 != null" >
+        department_name25 = #{departmentName25,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName26 != null" >
+        department_name26 = #{departmentName26,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName27 != null" >
+        department_name27 = #{departmentName27,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName28 != null" >
+        department_name28 = #{departmentName28,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentContent1 != null" >
+        department_content1 = #{departmentContent1,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentContent2 != null" >
+        department_content2 = #{departmentContent2,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentContent3 != null" >
+        department_content3 = #{departmentContent3,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentContent4 != null" >
+        department_content4 = #{departmentContent4,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="departmentTitle1 != null" >
+        department_title1 = #{departmentTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentTitle2 != null" >
+        department_title2 = #{departmentTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentTitle3 != null" >
+        department_title3 = #{departmentTitle3,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentTitle4 != null" >
+        department_title4 = #{departmentTitle4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.wis.entity.OrganizationalStructure" >
+    update organizational_structure
+    set title = #{title,jdbcType=VARCHAR},
+      title_english = #{titleEnglish,jdbcType=VARCHAR},
+      department_name1 = #{departmentName1,jdbcType=VARCHAR},
+      department_name2 = #{departmentName2,jdbcType=VARCHAR},
+      department_name3 = #{departmentName3,jdbcType=VARCHAR},
+      department_name4 = #{departmentName4,jdbcType=VARCHAR},
+      department_name5 = #{departmentName5,jdbcType=VARCHAR},
+      department_name6 = #{departmentName6,jdbcType=VARCHAR},
+      department_name7 = #{departmentName7,jdbcType=VARCHAR},
+      department_name8 = #{departmentName8,jdbcType=VARCHAR},
+      department_name9 = #{departmentName9,jdbcType=VARCHAR},
+      department_name10 = #{departmentName10,jdbcType=VARCHAR},
+      department_name11 = #{departmentName11,jdbcType=VARCHAR},
+      department_name12 = #{departmentName12,jdbcType=VARCHAR},
+      department_name13 = #{departmentName13,jdbcType=VARCHAR},
+      department_name14 = #{departmentName14,jdbcType=VARCHAR},
+      department_name15 = #{departmentName15,jdbcType=VARCHAR},
+      department_name16 = #{departmentName16,jdbcType=VARCHAR},
+      department_name17 = #{departmentName17,jdbcType=VARCHAR},
+      department_name18 = #{departmentName18,jdbcType=VARCHAR},
+      department_name19 = #{departmentName19,jdbcType=VARCHAR},
+      department_name20 = #{departmentName20,jdbcType=VARCHAR},
+      department_name21 = #{departmentName21,jdbcType=VARCHAR},
+      department_name22 = #{departmentName22,jdbcType=VARCHAR},
+      department_name23 = #{departmentName23,jdbcType=VARCHAR},
+      department_name25 = #{departmentName25,jdbcType=VARCHAR},
+      department_name26 = #{departmentName26,jdbcType=VARCHAR},
+      department_name27 = #{departmentName27,jdbcType=VARCHAR},
+      department_name28 = #{departmentName28,jdbcType=VARCHAR},
+      department_content1 = #{departmentContent1,jdbcType=VARCHAR},
+      department_content2 = #{departmentContent2,jdbcType=VARCHAR},
+      department_content3 = #{departmentContent3,jdbcType=VARCHAR},
+      department_content4 = #{departmentContent4,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      department_title1 = #{departmentTitle1,jdbcType=VARCHAR},
+      department_title2 = #{departmentTitle2,jdbcType=VARCHAR},
+      department_title3 = #{departmentTitle3,jdbcType=VARCHAR},
+      department_title4 = #{departmentTitle4,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--  自定义sql-->
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="com.ahsj.wis.entity.OrganizationalStructure">
+    select
+    <include refid="Base_Column_List" />
+    from organizational_structure
+  </select>
+
+</mapper>

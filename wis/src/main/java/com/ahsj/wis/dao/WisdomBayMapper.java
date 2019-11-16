@@ -20,4 +20,5 @@ public interface WisdomBayMapper {
     int updateByPrimaryKey(WisdomBay record);
 
     List<WisdomBay> selectAll();
+
 }

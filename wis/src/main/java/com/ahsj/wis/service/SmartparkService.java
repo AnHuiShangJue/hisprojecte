@@ -1,11 +1,11 @@
 package com.ahsj.wis.service;
 
-import com.ahsj.wis.entity.WisdomBay;
+import com.ahsj.wis.entity.Smartpark;
 import core.message.Message;
 
 import java.util.List;
 
-public interface WisdomBayService {
+public interface SmartparkService {
 
 
     /**
@@ -17,7 +17,7 @@ public interface WisdomBayService {
      * @Params
      **/
 
-    List<WisdomBay> selectAll() throws Exception;
+    List<Smartpark> selectAll() throws Exception;
 
 
     /**
@@ -29,5 +29,5 @@ public interface WisdomBayService {
      * @Params
      **/
 
-    Message updateWisdomBay(WisdomBay record);
+    Message updateSmartpark(Smartpark record);
 }

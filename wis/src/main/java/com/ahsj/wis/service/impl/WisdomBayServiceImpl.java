@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -30,6 +31,12 @@ public class WisdomBayServiceImpl implements WisdomBayService {
     @Override
     @Transactional(readOnly = false)
     public Message updateWisdomBay(WisdomBay record){
+        record.setUpdateDate(new Date());
+        WisdomBay wisdomBay = wisdomBayMapper.selectByPrimaryKey(record.getId());
+        wisdomBay.setId(null);
+        wisdomBay.setCreateDate(new Date());
+        wisdomBay.setUpdateDate(new Date());
+        wisdomBayMapper.insert(wisdomBay);
         int i = wisdomBayMapper.updateByPrimaryKeySelective(record);
         if (i>0){
             return MessageUtil.createMessage(true,"修改成功！");

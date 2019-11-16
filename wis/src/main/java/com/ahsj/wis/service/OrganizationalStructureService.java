@@ -1,13 +1,11 @@
 package com.ahsj.wis.service;
 
-import com.ahsj.wis.entity.WisdomBay;
+import com.ahsj.wis.entity.OrganizationalStructure;
 import core.message.Message;
 
 import java.util.List;
 
-public interface WisdomBayService {
-
-
+public interface OrganizationalStructureService {
     /**
      * @Description 获取所有人工智能实验室信息
      * @Author  muxu
@@ -17,7 +15,7 @@ public interface WisdomBayService {
      * @Params
      **/
 
-    List<WisdomBay> selectAll() throws Exception;
+    List<OrganizationalStructure> selectAll() throws Exception;
 
 
     /**
@@ -29,5 +27,5 @@ public interface WisdomBayService {
      * @Params
      **/
 
-    Message updateWisdomBay(WisdomBay record);
+    Message updateOrganization(OrganizationalStructure record);
 }

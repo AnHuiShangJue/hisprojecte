@@ -1,12 +1,11 @@
 package com.ahsj.wis.service;
 
-import com.ahsj.wis.entity.WisdomBay;
+import com.ahsj.wis.entity.Intelligent;
 import core.message.Message;
 
 import java.util.List;
 
-public interface WisdomBayService {
-
+public interface IntelligentService {
 
     /**
      * @Description 获取所有人工智能实验室信息
@@ -17,7 +16,7 @@ public interface WisdomBayService {
      * @Params
      **/
 
-    List<WisdomBay> selectAll() throws Exception;
+    List<Intelligent> selectAll() throws Exception;
 
 
     /**
@@ -29,5 +28,5 @@ public interface WisdomBayService {
      * @Params
      **/
 
-    Message updateWisdomBay(WisdomBay record);
+    Message updateIntelligent(Intelligent record);
 }
