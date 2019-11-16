@@ -9,13 +9,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AboutWisdomServiceImpl implements AboutWisdomService {
-//    @Autowired
-//    AboutWisdomMapper aboutWisdomMapper;
+    @Autowired
+    AboutWisdomMapper aboutWisdomMapper;
     @Override
     @Transactional(readOnly = false)
     public int insert(AboutWisdom record) throws Exception {
-//        int flag =
-        return 0;
+        return aboutWisdomMapper.insert(record);
 
+    }
+
+    @Override
+    @Transactional(readOnly = false)
+    public AboutWisdom select() throws Exception {
+        return aboutWisdomMapper.select().get(0);
     }
 }
