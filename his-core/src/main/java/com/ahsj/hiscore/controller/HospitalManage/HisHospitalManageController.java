@@ -126,7 +126,7 @@ public class HisHospitalManageController extends BaseController {
      **/
     @RequestMapping(value = "saveOrUpdate.ahsj")
     @ResponseBody
-    public Message saveOrUpdate(HisHospitalManage hisHospitalManage) throws Exception {
+    public Message saveOrUpdate( HisHospitalManage hisHospitalManage) throws Exception {
         hisHospitalManage.setBedId(0L);
         hisHospitalManage.setWardId(0L);
         return hisHospitalManageService.saveOrUpdate(hisHospitalManage);
@@ -195,22 +195,21 @@ public class HisHospitalManageController extends BaseController {
      **/
     @RequestMapping("view/index.ahsj")
     ModelAndView viewIndex(String token, HisHosptalregist hisHosptalregist, HisHospitalManage hisHospitalManage, Long id) throws Exception {
-        HisHospitalManage hisHospitalManage1 = hisHospitalManageMapper.selectByPrimaryKey(id);
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/hospitalmanage/view");
         modelAndView.addObject("title", "医疗信息系统");
         modelAndView.addObject("token", token);
         modelAndView.addObject("hisPatientInfo", hisPatientService.selectById(hisHosptalregist.getPatientId()));
         modelAndView.addObject("hisDoctorInfo", hisDoctorInfoService.selectById(hisUserDoctorService.selectByUserId(hisHosptalregist.getDoctorId()).getDoctorId()));
-        if (hisHospitalManage.getWardId() != 0) {
-            modelAndView.addObject("hisWard", hisWradService.selectByPrimaryKey(hisHospitalManage1.getWardId()));
+      /*  if (hisHospitalManage.getWardId() != 0) {
+            modelAndView.addObject("hisWard", hisWradService.selectByPrimaryKey(hisHospitalManage.getWardId()));
         }
         if (hisHospitalManage.getBedId() != 0) {
-            modelAndView.addObject("hisBed", hisBedService.selectByPrimaryKey(hisHospitalManage1.getBedId()));
-        }
+            modelAndView.addObject("hisBed", hisBedService.selectByPrimaryKey(hisHospitalManage.getBedId()));
+        }*/
         if (hisHosptalregist.getNurseId() != 0) {
             modelAndView.addObject("hisNurse", hisNurseService.selectById(hisUserNurseMapper.selectByUserId(hisHosptalregist.getNurseId()).getNurseId()));
         }
-        modelAndView.addObject("hisHospitalManage", hisHospitalManage1);
+        modelAndView.addObject("hisHospitalManage", hisHospitalManageMapper.selectByPrimaryKey(id));
         modelAndView.addObject("hisHosptalregist", hisHosptalregistMapper.selectByDepartmentId(hisHospitalManage.getIds()));
         return modelAndView;
     }

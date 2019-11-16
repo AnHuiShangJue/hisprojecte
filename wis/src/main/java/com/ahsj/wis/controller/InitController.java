@@ -1,8 +1,6 @@
 package com.ahsj.wis.controller;
 
-import com.ahsj.wis.entity.Sys;
 import com.ahsj.wis.entity.WisdomIndex;
-import com.ahsj.wis.service.SysService;
 import com.ahsj.wis.service.WisdomIndexService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +23,6 @@ import java.util.List;
 
 @RestController
 public class InitController {
-
     @Autowired
     WisdomIndexService wisdomIndexService;
 

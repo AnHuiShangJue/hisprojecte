@@ -68,7 +68,7 @@
                                 th:readonly="true"/>
                         <label for="nurseName">护士<span style="font-size: 12px">(Nursing)</span></label>
                     </div>
-                    <div class="input-field col s4 l4 xl4" th:if="${hisHosptalregist.wardId != 0}">
+                    <!--<div class="input-field col s4 l4 xl4" th:if="${hisHosptalregist.wardId != 0}">
                         <input  name="number" id="wardName" type="text"
                                 th:value="${hisWard.number}"
                                 th:readonly="true"/>
@@ -79,7 +79,7 @@
                                 th:value="${hisBed.number}"
                                 th:readonly="true"/>
                         <label for="bedName">病床编号<span style="font-size: 12px">(Bed number)</span></label>
-                    </div>
+                    </div>-->
                     <div class="input-field col s4 l4 xl4">
                         <input id="diseaseRegion" name="diseaseRegion" type="text" th:value="${hisHospitalManage.diseaseRegion}" th:readonly="true"/>
                         <label for="diseaseRegion">病区<span style="font-size: 12px">(disease Region)</span></label>
