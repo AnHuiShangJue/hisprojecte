@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.wis.dao.AboutWisdomMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.wis.entity.AboutWisdom" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="introduce" property="introduce" jdbcType="VARCHAR" />
+    <result column="shui" property="shui" jdbcType="VARCHAR" />
+    <result column="shui_p" property="shuiP" jdbcType="VARCHAR" />
+    <result column="shui_introduce" property="shuiIntroduce" jdbcType="VARCHAR" />
+    <result column="han" property="han" jdbcType="VARCHAR" />
+    <result column="han_p" property="hanP" jdbcType="VARCHAR" />
+    <result column="han_introduce" property="hanIntroduce" jdbcType="VARCHAR" />
+    <result column="yao" property="yao" jdbcType="VARCHAR" />
+    <result column="yao_p" property="yaoP" jdbcType="VARCHAR" />
+    <result column="yao_introduce" property="yaoIntroduce" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, introduce, shui, shui_p, shui_introduce, han, han_p, han_introduce, yao, yao_p,
+    yao_introduce, create_date, update_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from about_wisdom
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from about_wisdom
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.wis.entity.AboutWisdom" >
+    insert into about_wisdom (Id, introduce, shui,
+      shui_p, shui_introduce, han,
+      han_p, han_introduce, yao,
+      yao_p, yao_introduce, create_date,
+      update_date)
+    values (#{id,jdbcType=INTEGER}, #{introduce,jdbcType=VARCHAR}, #{shui,jdbcType=VARCHAR},
+      #{shuiP,jdbcType=VARCHAR}, #{shuiIntroduce,jdbcType=VARCHAR}, #{han,jdbcType=VARCHAR},
+      #{hanP,jdbcType=VARCHAR}, #{hanIntroduce,jdbcType=VARCHAR}, #{yao,jdbcType=VARCHAR},
+      #{yaoP,jdbcType=VARCHAR}, #{yaoIntroduce,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+      #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.wis.entity.AboutWisdom" >
+    insert into about_wisdom
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="introduce != null" >
+        introduce,
+      </if>
+      <if test="shui != null" >
+        shui,
+      </if>
+      <if test="shuiP != null" >
+        shui_p,
+      </if>
+      <if test="shuiIntroduce != null" >
+        shui_introduce,
+      </if>
+      <if test="han != null" >
+        han,
+      </if>
+      <if test="hanP != null" >
+        han_p,
+      </if>
+      <if test="hanIntroduce != null" >
+        han_introduce,
+      </if>
+      <if test="yao != null" >
+        yao,
+      </if>
+      <if test="yaoP != null" >
+        yao_p,
+      </if>
+      <if test="yaoIntroduce != null" >
+        yao_introduce,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="introduce != null" >
+        #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="shui != null" >
+        #{shui,jdbcType=VARCHAR},
+      </if>
+      <if test="shuiP != null" >
+        #{shuiP,jdbcType=VARCHAR},
+      </if>
+      <if test="shuiIntroduce != null" >
+        #{shuiIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="han != null" >
+        #{han,jdbcType=VARCHAR},
+      </if>
+      <if test="hanP != null" >
+        #{hanP,jdbcType=VARCHAR},
+      </if>
+      <if test="hanIntroduce != null" >
+        #{hanIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="yao != null" >
+        #{yao,jdbcType=VARCHAR},
+      </if>
+      <if test="yaoP != null" >
+        #{yaoP,jdbcType=VARCHAR},
+      </if>
+      <if test="yaoIntroduce != null" >
+        #{yaoIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.wis.entity.AboutWisdom" >
+    update about_wisdom
+    <set >
+      <if test="introduce != null" >
+        introduce = #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="shui != null" >
+        shui = #{shui,jdbcType=VARCHAR},
+      </if>
+      <if test="shuiP != null" >
+        shui_p = #{shuiP,jdbcType=VARCHAR},
+      </if>
+      <if test="shuiIntroduce != null" >
+        shui_introduce = #{shuiIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="han != null" >
+        han = #{han,jdbcType=VARCHAR},
+      </if>
+      <if test="hanP != null" >
+        han_p = #{hanP,jdbcType=VARCHAR},
+      </if>
+      <if test="hanIntroduce != null" >
+        han_introduce = #{hanIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="yao != null" >
+        yao = #{yao,jdbcType=VARCHAR},
+      </if>
+      <if test="yaoP != null" >
+        yao_p = #{yaoP,jdbcType=VARCHAR},
+      </if>
+      <if test="yaoIntroduce != null" >
+        yao_introduce = #{yaoIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.wis.entity.AboutWisdom" >
+    update about_wisdom
+    set introduce = #{introduce,jdbcType=VARCHAR},
+      shui = #{shui,jdbcType=VARCHAR},
+      shui_p = #{shuiP,jdbcType=VARCHAR},
+      shui_introduce = #{shuiIntroduce,jdbcType=VARCHAR},
+      han = #{han,jdbcType=VARCHAR},
+      han_p = #{hanP,jdbcType=VARCHAR},
+      han_introduce = #{hanIntroduce,jdbcType=VARCHAR},
+      yao = #{yao,jdbcType=VARCHAR},
+      yao_p = #{yaoP,jdbcType=VARCHAR},
+      yao_introduce = #{yaoIntroduce,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <!--查询最新的一条记录-->
+  <select id="select" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from about_wisdom
+    where 1 = 1 order by create_date desc 
+  </select>
+
+</mapper>
