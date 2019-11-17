@@ -65,6 +65,8 @@ public class HisMediExitDetails extends BaseEntity {
 
     private Integer age;
 
+    private String doctorName;
+
     public Integer getSex() {
         return sex;
     }
@@ -291,5 +293,13 @@ public class HisMediExitDetails extends BaseEntity {
 
     public void setMediEnterId(Long mediEnterId) {
         this.mediEnterId = mediEnterId;
+    }
+
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
     }
 }
