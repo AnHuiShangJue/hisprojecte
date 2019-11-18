@@ -159,7 +159,7 @@ public class WisdomBayController {
      * @Time 9:41
      **/
     @RequestMapping("/wisdomBay/index.ahsj")
-    ModelAndView wisdomBay(String parameter) {
+    ModelAndView wisdomBay(String parameter) throws Exception{
         ModelAndView modelAndView = new ModelAndView("backend/wisdom/wisdom_bay");
         modelAndView.addObject("title", "");
         modelAndView.addObject("parameter", parameter);
@@ -175,7 +175,7 @@ public class WisdomBayController {
      * @Time 10:44
      **/
     @PostMapping("/uploadFile.ahsj")
-    public Message uploadFile(@RequestParam("file") MultipartFile file, String name) {
+    public Message uploadFile(@RequestParam("file") MultipartFile file, String name) throws Exception{
         String fileName = file.getOriginalFilename();//获取文件名加后缀
         if (file.getSize() > 10 * 1024 * 1024) {
             return MessageUtil.createMessage(false, "修改失败,文件太大，请上传小于10M的图片");
@@ -206,7 +206,7 @@ public class WisdomBayController {
      * @Time 11:25
      **/
     @RequestMapping("/wisdomBay/upload.ahsj")
-    ModelAndView upload(String name) {
+    ModelAndView upload(String name) throws Exception{
         ModelAndView modelAndView = new ModelAndView("backend/wisdom/upload");
         modelAndView.addObject("title", "");
         modelAndView.addObject("name", name);
@@ -376,7 +376,7 @@ public class WisdomBayController {
      * @Time 10:24
      **/
     @RequestMapping("/toUpdateIndex.ahsj")
-    public Message updateIndex(WisdomIndex record) {
+    public Message updateIndex(WisdomIndex record)throws Exception {
         return wisdomIndexService.updateByPrimaryKeySelective(record);
     }
 
