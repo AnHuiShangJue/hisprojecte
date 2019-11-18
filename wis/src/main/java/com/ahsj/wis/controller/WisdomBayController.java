@@ -74,6 +74,7 @@ public class WisdomBayController {
         List<Smartpark> smartparks = smartparkService.selectAll();
         Smartpark smartpark = smartparks.get(0);
         ModelAndView modelAndView = new ModelAndView("backend/wis/smart_park");
+        modelAndView.addObject("smartpark", "智慧园区");
         modelAndView.addObject("smartpark", smartpark);
         return modelAndView;
     }
@@ -302,7 +303,7 @@ public class WisdomBayController {
         List<Smartparking> smartparkings = smartparkingService.selectAll();
         Smartparking smartparking = smartparkings.get(0);
         ModelAndView modelAndView = new ModelAndView("backend/wisdom/smartparking_update");
-        modelAndView.addObject("title", "智慧园区");
+        modelAndView.addObject("title", "智慧停车");
         modelAndView.addObject("smartparking", smartparking);
         return modelAndView;
     }
@@ -312,7 +313,7 @@ public class WisdomBayController {
         List<Smartpark> smartparks = smartparkService.selectAll();
         Smartpark smartpark = smartparks.get(0);
         ModelAndView modelAndView = new ModelAndView("backend/wisdom/smartpark_update");
-        modelAndView.addObject("title", "智慧停车");
+        modelAndView.addObject("title", "智慧园区");
         modelAndView.addObject("smartpark", smartpark);
         return modelAndView;
     }
