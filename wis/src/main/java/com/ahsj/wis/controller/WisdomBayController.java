@@ -60,7 +60,7 @@ public class WisdomBayController {
     }
 
     @RequestMapping("/intelligent/index.ahsj")
-    ModelAndView intelligentIndex() throws Exception{
+    ModelAndView intelligentIndex() throws Exception {
         List<Intelligent> intelligents = intelligentService.selectAll();
         Intelligent intelligent = intelligents.get(0);
         ModelAndView modelAndView = new ModelAndView("backend/wis/intelligent_acquisition");
@@ -70,7 +70,7 @@ public class WisdomBayController {
     }
 
     @RequestMapping("/smartpark/index.ahsj")
-    ModelAndView smartparkIndex() throws Exception{
+    ModelAndView smartparkIndex() throws Exception {
         List<Smartpark> smartparks = smartparkService.selectAll();
         Smartpark smartpark = smartparks.get(0);
         ModelAndView modelAndView = new ModelAndView("backend/wis/smart_park");
@@ -80,7 +80,7 @@ public class WisdomBayController {
     }
 
     @RequestMapping("/smartparking/index.ahsj")
-    ModelAndView smartparkingIndex() throws Exception{
+    ModelAndView smartparkingIndex() throws Exception {
         List<Smartparking> smartparkings = smartparkingService.selectAll();
         Smartparking smartparking = smartparkings.get(0);
         ModelAndView modelAndView = new ModelAndView("backend/wis/smart_parking");
@@ -90,17 +90,17 @@ public class WisdomBayController {
     }
 
     @RequestMapping("/socialcredit/index.ahsj")
-    ModelAndView socialcreditIndex()throws Exception {
+    ModelAndView socialcreditIndex() throws Exception {
         List<Socialcredit> socialcredits = socialcreditService.selectAll();
         Socialcredit socialcredit = socialcredits.get(0);
         ModelAndView modelAndView = new ModelAndView("backend/wis/social_credit");
         modelAndView.addObject("title", "社会信用");
-        modelAndView.addObject("socialcredit",socialcredit);
+        modelAndView.addObject("socialcredit", socialcredit);
         return modelAndView;
     }
 
     @RequestMapping("/macroe/index.ahsj")
-    ModelAndView macroeIndex()throws Exception {
+    ModelAndView macroeIndex() throws Exception {
         List<macroe> macroes1 = macroeService.selectAll();
         macroe macroe2 = macroes1.get(0);
         ModelAndView modelAndView = new ModelAndView("backend/wis/macroeconomics");
@@ -246,12 +246,12 @@ public class WisdomBayController {
 
     /**
      * @Description 获取所有人工智能实验室信息
-     * @Author  muxu
-     * @Date  2019/11/15
+     * @Author muxu
+     * @Date 2019/11/15
      * @Time 15:31
      * @Return java.util.List<com.ahsj.wis.entity.WisdomBay>
      * @Params []
-    **/
+     **/
     @RequestMapping("/selectAllBay.ahsj")
     public List<WisdomBay> selectAllBay() throws Exception {
         return wisdomBayService.selectAll();
@@ -260,12 +260,12 @@ public class WisdomBayController {
 
     /**
      * @Description 更新人工智能实验室信息ModelAndView
-     * @Author  muxu
-     * @Date  2019/11/15
+     * @Author muxu
+     * @Date 2019/11/15
      * @Time 16:12
      * @Return org.springframework.web.servlet.ModelAndView
      * @Params []
-    **/
+     **/
     @RequestMapping("/wisdomBayUpdate/index.ahsj")
     ModelAndView wisdomBayIndexUpdate() throws Exception {
         List<WisdomBay> wisdomBays = wisdomBayService.selectAll();
@@ -330,12 +330,12 @@ public class WisdomBayController {
 
     /**
      * @Description 更新组织架构信息ModelAndView
-     * @Author  muxu
-     * @Date  2019/11/15
+     * @Author muxu
+     * @Date 2019/11/15
      * @Time 16:12
      * @Return org.springframework.web.servlet.ModelAndView
      * @Params []
-    **/
+     **/
     @RequestMapping("/organizationUpdate/index.ahsj")
     ModelAndView organizationIndexUpdate() throws Exception {
         List<OrganizationalStructure> organizationalStructures = organizationalStructureService.selectAll();
@@ -345,7 +345,6 @@ public class WisdomBayController {
         modelAndView.addObject("organizationalStructure", organizationalStructure);
         return modelAndView;
     }
-
 
 
     @RequestMapping("/lanhuUpdate/index.ahsj")

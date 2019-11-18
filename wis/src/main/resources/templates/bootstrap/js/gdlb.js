@@ -31,7 +31,7 @@ function imgscrool(obj){
 	if ($(obj+" .banner .num li")) {
 
 	$(obj+" .banner .num li").hover(function(){
-		var index=$(this).list();
+		var index=$(this).index();
 		i=index;
 		$(obj+" .banner .img").stop().animate({left:-index*width},1000)	
 		$(this).addClass("on").siblings().removeClass("on")		

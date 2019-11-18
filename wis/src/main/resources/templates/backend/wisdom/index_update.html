@@ -8,6 +8,26 @@
 <link rel="stylesheet" href="/bootstrap/css/site.css">
 <link rel="stylesheet" href="//cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bootstrap/css/index.css">
+<style>
+    button {
+        width: 200px;
+        padding: 8px;
+        background-color: #428bca;
+        border-color: #357ebd;
+        color: #fff;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px; /* future proofing */
+        -khtml-border-radius: 10px; /* for old Konqueror browsers */
+        text-align: center;
+        vertical-align: middle;
+        border: 1px solid transparent;
+        font-weight: 900;
+        font-size: 125%;
+        border: solid 10px #4d4e53;
+        border-radius: 10px 40px 40px 10px;
+    }
+</style>
 <body>
 <div th:replace="public/update_back_baselayout :: html"></div>
 <form id="sendForm" action="#">
@@ -17,7 +37,7 @@
         <div class="row">
             <section class="section--green wow slideInLeft" data-wow-duration="1s" data-wow-offset="100">
                 <div id="myCarousel" class="carousel slide" style="
-    margin-top: -4.6%;">
+    margin-top: -4.1%;">
                     <!-- 轮播（Carousel）指标 -->
                     <ol class="carousel-indicators">
                         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -34,7 +54,7 @@
                                 <h5 style="
          font-size: 50px;color: black;"><input id="one8" name="one8" type="text" th:value="${wisdomIndex.one8}"/></h5>
                                 <p style="color: black;"><input id="one9" name="one9" type="text"
-                                                              th:value="${wisdomIndex.one9}"/></p>
+                                                                th:value="${wisdomIndex.one9}"/></p>
                             </div>
                         </div>
                         <div class="item">
@@ -45,7 +65,7 @@
                                 <h5 style="
     font-size: 50px; color: black;"><input id="one10" name="one10" type="text" th:value="${wisdomIndex.one10}"/></h5>
                                 <p style="color: black;"><input id="one11" name="one11" type="text"
-                                                              th:value="${wisdomIndex.one11}"/></p>
+                                                                th:value="${wisdomIndex.one11}"/></p>
                             </div>
                         </div>
                         <div class="item">
@@ -55,9 +75,9 @@
                             <div class="carousel-caption d-none d-md-block">
                                 <h5 style="
     font-size: 50px; color: black;"><input id="one12" name="one12" type="text"
-                                         th:value="${wisdomIndex.one12}"/></h5>
+                                           th:value="${wisdomIndex.one12}"/></h5>
                                 <p style="color: black;"><input id="one13" name="one13" type="text"
-                                                              th:value="${wisdomIndex.one13}"/></p>
+                                                                th:value="${wisdomIndex.one13}"/></p>
                             </div>
                         </div>
                     </div>
@@ -70,6 +90,31 @@
                         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4  col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+                    <div  class="visible-lg" style="
+    width:255px;
+height:140px;
+font-size:50px;
+font-family:PingFangSC-Semibold,PingFang SC;
+font-weight:600;
+color:rgba(255,255,255,1);
+line-height:70px;margin-top: -85%;">
+                        <span style="color: black;"><input id="introduceOne" name="introduceOne" type="text"
+                                                                           th:value="${wisdomIndex.introduceOne}"/></span>
+                    </div>
+                    <div  class="visible-lg" style="
+  width:700px;
+height:270px;
+font-size:32px;
+font-family:PingFangSC-Regular,PingFang SC;
+font-weight:400;
+color:rgba(255,255,255,1);
+line-height:45px;">
+                        <span style="color: black;"><input id="detailsOne" name="detailsOne" type="text"
+                                                                         th:value="${wisdomIndex.detailsOne}"/></span>
+                    </div>
+
                 </div>
             </section>
         </div>
@@ -85,7 +130,7 @@
     line-height: 70px;
    margin-top: 8%;">
                     <span style="color: black;"><input id="introduceTwo" name="introduceTwo" type="text"
-                                                     th:value="${wisdomIndex.introduceTwo}"/></span>
+                                                       th:value="${wisdomIndex.introduceTwo}"/></span>
                     </div>
                 </section>
                 <section class="section&#45;&#45;green wow bounceInUp" data-wow-duration="1s" data-wow-offset="0">
@@ -99,7 +144,7 @@ line-height:36px;
 position: relative;
    margin-top: -2%;">
                     <span style="color: black;"><input id="spell" name="spell" type="text"
-                                                     th:value="${wisdomIndex.spell}"/></span>
+                                                       th:value="${wisdomIndex.spell}"/></span>
                     </div>
                 </section>
                 <section class="section&#45;&#45;green wow bounceIn" data-wow-duration="1s" data-wow-offset="0">
@@ -113,9 +158,9 @@ position: relative;
     position: relative;
    margin-top: 5%;">
                     <span style="color: black;"><textarea id="detailsTwo" name="detailsTwo" class="materialize-textarea"
-                                                        type="text"
-                                                        data-length="255"
-                                                        th:text="${wisdomIndex.detailsTwo}"></textarea></span>
+                                                          type="text"
+                                                          data-length="255"
+                                                          th:text="${wisdomIndex.detailsTwo}"></textarea></span>
                     </div>
                 </section>
             </div>
@@ -337,8 +382,10 @@ position: relative;
             data: $('#sendForm').serialize(),
             success: function (msg) {
                 if (msg.success) {
+
+                    //   window.location.replace("/api/wisdombay/lanhuUpdate/index.ahsj");
+                    window.location.reload();
                     toastr.success(msg.message)
-                    window.location.replace("/api/wisdombay/lanhuUpdate/index.ahsj");
                     return true;
                 } else {
                     toastr.error(msg.message)
