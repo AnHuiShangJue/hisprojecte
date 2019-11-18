@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
-
 <div th:replace="public/base_list :: html"></div>
 <body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
       data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
@@ -49,7 +48,7 @@
                                 <input id="number" name="number" type="text"
                                        data-error=".errorTxt1">
                                 <div class="errorTxt1"></div>
-                                <label for="number">请输入交易流水号/就诊编号<span style="font-size: 12px">(Please enter the transaction serial number/Visit number
+                                <label for="number">请输入交易流水号/就诊编号/住院编号<span style="font-size: 12px">(Please enter the transaction serial number/Visit number/Hospital number
 
 )</span></label>
                             </div>
@@ -184,13 +183,15 @@
         $('#searchBtn').click(function () {
             var reg1 = new RegExp(/^HTR\d{13}$/);
             var reg2 = new RegExp(/^HM\d{13}$/);
+            var reg3 = new RegExp(/^HHM\d{13}$/);
+            var reg4 = new RegExp(/^HR\d{13}$/);
             var number = $("#number").val();
-            if (reg1.test(number) || reg2.test(number)) {
+            if (reg1.test(number) || reg2.test(number) || reg3.test(number) ||reg4.test(number)) {
                 grid.search();
                 getNumber();
                 $("#print_btn").attr("disabled", true);
             } else {
-                dialog.warn("所输入的数据不符合格式要求！请输入HTR开头的交易流水号")
+                dialog.warn("所输入的数据不符合格式要求！请输入正确格式的编号")
             }
         });
         //重置按钮
@@ -200,6 +201,7 @@
             $("#print_btn").attr("disabled", true);
         });
     }
+
     function resetNumber() {
         $("#patientName").attr("value", "");
         $("#phonenumber").attr("value", "");
@@ -213,6 +215,7 @@
         $("#reason").attr("value", "");
         $("#remark").attr("value", "");
     }
+
     function getNumber() {
         var number = $("#number").val();
         $.ahsjajax(
@@ -251,9 +254,9 @@
                 {"tollNumber": tollNumber},
                 function (data) {
                     if (!isNullOrEmpty(data.id)) {
-                        if(data.isDischarged == 1) {
+                        if (data.isDischarged == 1) {
                             dialog.warn(tollNumber + "未出院，请把要退费的金额冲入对应押金！要退费的金额为：" + $("#recoverTheFee").val() + "相关联住院编号为:" + data.number);
-                        }else {
+                        } else {
                             var json = grid.getDataTable().ajax.json().data;
                             var hisTollRecord = $("#sendForm").serialize();
                             var hisTollHospiModel = {
@@ -279,17 +282,17 @@
                                             dialog.warn("退款失败,该药品已经退费！");
                                             return false;
                                         }
-                                    },    null, null, null, function () {
+                                    }, null, null, null, function () {
                                         M.toast({html: "网络异常"});
                                         return false;
                                     }, "application/json; charset=UTF-8"
-                                );}
-                            else {
+                                );
+                            } else {
                                 dialog.warn("没有退费信息！")
                             }
                         }
                         return true;
-                    }else {
+                    } else {
                         var json = grid.getDataTable().ajax.json().data;
                         var hisTollRecord = $("#sendForm").serialize();
                         var hisTollHospiModel = {
@@ -315,12 +318,12 @@
                                         dialog.warn("退款失败,该药品已经退费！")
                                         return false;
                                     }
-                                },    null, null, null, function () {
+                                }, null, null, null, function () {
                                     M.toast({html: "网络异常"});
                                     return false;
                                 }, "application/json; charset=UTF-8"
-                            );}
-                        else {
+                            );
+                        } else {
                             dialog.warn("没有退费信息！")
                         }
                     }
@@ -332,14 +335,11 @@
             );
 
 
-
-
         });
     });
     $("#print_btn").click(function () {
         dialog.confirm('确定打印吗?', function (index, layero) {
             if (number != "" && number != null && number != undefined) {
-
 
 
                 // var url = CTX + "/api/hisTollRecord/printDrugFour/index.ahsj?number=" + number + "&token=" + TOKEN;
@@ -348,44 +348,43 @@
 
                 layer.open({
                     content: '打印小票（Print a small ticket）'
-                    ,btn: ['财务联（Financial union）', '科室联（Department）', '自由联（Free association）']
-                    ,yes: function(index, layero){
+                    , btn: ['财务联（Financial union）', '科室联（Department）', '自由联（Free association）']
+                    , yes: function (index, layero) {
                         //按钮【按钮一】的回调
                         if (number != "" && number != null && number != undefined) {
-                            var url = CTX + "/api/hisTollRecord/printDrugFour/index.ahsj?number="+ number+"&token="+TOKEN+"&type=1";
+                            var url = CTX + "/api/hisTollRecord/printDrugFour/index.ahsj?number=" + number + "&token=" + TOKEN + "&type=1";
                             dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                         } else {
                             dialog.warn("没有需要打印的内容！")
                         }
                     }
-                    ,btn2: function(index, layero){
+                    , btn2: function (index, layero) {
                         //按钮【按钮二】的回调
                         if (number != "" && number != null && number != undefined) {
-                            var url = CTX + "/api/hisTollRecord/printDrugFour/index.ahsj?number="+ number+"&token="+TOKEN+"&type=2";
+                            var url = CTX + "/api/hisTollRecord/printDrugFour/index.ahsj?number=" + number + "&token=" + TOKEN + "&type=2";
                             dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                         } else {
                             dialog.warn("没有需要打印的内容！")
                         }
 
-                        return false ;
+                        return false;
                     }
-                    ,btn3: function(index, layero){
+                    , btn3: function (index, layero) {
                         //按钮【按钮三】的回调
                         if (number != "" && number != null && number != undefined) {
-                            var url = CTX + "/api/hisTollRecord/printDrugFour/index.ahsj?number="+ number+"&token="+TOKEN+"&type=3";
+                            var url = CTX + "/api/hisTollRecord/printDrugFour/index.ahsj?number=" + number + "&token=" + TOKEN + "&type=3";
                             dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                         } else {
                             dialog.warn("没有需要打印的内容！")
                         }
-                        return false ;
+                        return false;
                     }
-                    ,cancel: function(){
+                    , cancel: function () {
                         //右上角关闭回调
 
                         //return false 开启该代码可禁止点击该按钮关闭
                     }
                 });
-
 
 
             } else {
@@ -446,7 +445,9 @@
                         "name": "remarks"
                     }
                 ],
-                "order": [ [ 2, 'asc' ] ]
+                "order": [
+                    [2, 'asc']
+                ]
             }
         });
     }

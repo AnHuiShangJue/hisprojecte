@@ -124,6 +124,8 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
                     hisHosptalregist.setWardId(hisHospitalManage.getWardId());*/
                     hisHosptalregist.setBedId(0L);
                     hisHosptalregist.setWardId(0L);  //新增时不设置病床病房给赋为0
+                    hisHospitalManage.setBedId(0L);
+                    hisHospitalManage.setWardId(0L);
                     hisHosptalregist.setDepartmentId(hisHospitalManage.getDepartmentId());
                     hisHosptalregist.setInpatientDiagnosis(hisHospitalManage.getInpatientDiagnosis());
                     hisHosptalregist.setRemark(hisHospitalManage.getRemarks());
