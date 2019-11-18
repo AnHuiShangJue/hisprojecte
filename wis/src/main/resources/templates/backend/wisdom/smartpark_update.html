@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="//cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="/bootstrap/css/index.css">
 <body>
-<div th:replace="public/back_baselayout :: html"></div>
+<div th:replace="public/update_back_baselayout :: html"></div>
 <form id="sendForm" action="#">
     <input id="id" name="id" type="hidden"
            th:value="${smartpark.id}"/>
@@ -81,7 +81,7 @@
     >修改文字
     </button>
 </div>
-<div th:replace="public/footer :: html"></div>
+<div th:replace="public/update_footer :: html"></div>
 <script src="/bootstrap/js/wow.js"></script>
 <script type="text/javascript">
     $(function () {

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://www.jq22.com/jquery/bootstrap-3.3.4.css">
+    <script type="text/javascript" src="/backend/admins/js/jquery-2.1.0.min.js"></script>
+</head>
+<body>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>智慧湾介绍</th>
+            <th>状态</th>
+            <th>拼音</th>
+            <th>手风琴1</th>
+            <th>手风琴2</th>
+            <th>手风琴3</th>
+            <th>手风琴4</th>
+            <th>手风琴5</th>
+            <th>手风琴6</th>
+            <th>手风琴7</th>
+            <th>轮播图 标题 1</th>
+            <th>轮播图 描述 1</th>
+            <th>轮播图 标题 2</th>
+            <th>轮播图 描述 2</th>
+            <th>轮播图 标题 3</th>
+            <th>轮播图 描述 3</th>
+            <th>创建时间</th>
+            <th>操作</th>
+            <th>添加</th>
+        </tr>
+        </thead>
+        <tbody id="con">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><a href="#">编辑</a>&nbsp;<a href="#">删除</a></td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+</body>
+<script>
+    $(function () {
+        $.post(
+            "/api/wisdombay/selectAll.ahsj",
+            function (msg) {
+                var cont = '';
+                $.each(msg, function (index, item) {
+                    cont += '<tr>' +
+                        '<td>' + item.id + '</td>' +
+                        '<td>' + item.introduceOne + '</td>' +
+                        '<td>' + item.detailsOne + '</td>' +
+                        '<td>' + item.spell + '</td>' +
+                        '<td>' + item.one1 + '</td>' +
+                        '<td>' + item.one2 + '</td>' +
+                        '<td>' + item.one3 + '</td>' +
+                        '<td>' + item.one4 + '</td>' +
+                        '<td>' + item.one5 + '</td>' +
+                        '<td>' + item.one6 + '</td>' +
+                        '<td>' + item.one7 + '</td>' +
+                        '<td>' + item.one8 + '</td>' +
+                        '<td>' + item.one9 + '</td>' +
+                        '<td>' + item.one10 + '</td>' +
+                        '<td>' + item.one11 + '</td>' +
+                        '<td>' + item.one12 + '</td>' +
+                        '<td>' + item.one13 + '</td>' +
+                        '<td>' + item.createDate + '</td>' +
+                        '<td>' +
+                        '<button value="' + item.id + '" class="edit edit' + index + '">编辑</button>' +
+                        '<button value="' + item.id + '" class="del del' + index + '">删除</button>' +
+                        '</td>' +
+                        '</tr>';
+                })
+                $('#con').html(cont);
+                $(".del").click(function () {
+                    var id = $(this).val();
+                    $.post(
+                        "/api/sys/delete.ahsj",
+                        {id: id},
+                        function (msg) {
+                            window.location.reload()
+                        }
+                    )
+                });
+                $(".edit").click(function () {
+                    location.href="/backend/admins/indexEdit.html?id="+$(this).val();
+
+                })
+            }
+        )
+    })
+</script>
+</html>
