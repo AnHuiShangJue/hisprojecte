@@ -101,7 +101,7 @@ font-weight:600;
 color:rgba(255,255,255,1);
 line-height:70px;margin-top: -85%;">
                         <span style="color: black;"><input id="introduceOne" name="introduceOne" type="text"
-                                                                           th:value="${wisdomIndex.introduceOne}"/></span>
+                                                           th:value="${wisdomIndex.introduceOne}"/></span>
                     </div>
                     <div  class="visible-lg" style="
   width:700px;
@@ -111,8 +111,9 @@ font-family:PingFangSC-Regular,PingFang SC;
 font-weight:400;
 color:rgba(255,255,255,1);
 line-height:45px;">
-                        <span style="color: black;"><input id="detailsOne" name="detailsOne" type="text"
-                                                                         th:value="${wisdomIndex.detailsOne}"/></span>
+                        <span style="color: black;"><textarea id="detailsOne" name="detailsOne" class="materialize-textarea"
+                                                              type="text"
+                                                              th:text="${wisdomIndex.detailsOne}"></textarea></span>
                     </div>
 
                 </div>
