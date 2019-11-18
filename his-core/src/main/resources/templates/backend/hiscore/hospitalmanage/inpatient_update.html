@@ -124,8 +124,8 @@ Scripts
     $(document).ready(function() {
         // getDoctor();
         getNurse();
-        getWard();
-        getBed([[${hisHospitalManage.wardNumber}]]);
+      //  getWard();
+     //   getBed([[${hisHospitalManage.wardNumber}]]);
 
 
     });
@@ -411,8 +411,8 @@ Scripts
                 }
             },
             submitHandler: function (form) {
-                var bedIds = $("#bedId").val();
-                console.log("值是"+bedIds);
+               /* var bedIds = $("#bedId").val();
+                console.log("值是"+bedIds);*/
                 dialog.confirm('确定提交吗?', function (index, layero) {
 
                         var queryString = $('#sendForm').serialize();

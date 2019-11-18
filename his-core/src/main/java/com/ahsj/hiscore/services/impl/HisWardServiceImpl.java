@@ -348,6 +348,7 @@ public class HisWardServiceImpl implements HisWradService {
     public PageBean<HisWard> getHisWardAlls(PageBean<HisWard> pageBean) throws Exception {
         List<HisWard> hisWardAlls = hisWardMapper.getHisWardAlls(pageBean);
         hisWardAlls.stream().filter(a -> a.getCurrentCount() == null).forEach(b -> b.setCurrentCount(b.getCount()));
+        hisWardAlls.stream().filter(a -> a.getCurrentCount() < 0).forEach(b -> b.setCurrentCount(0));
         pageBean.setData(CodeHelper.getInstance().setCodeValue(hisWardAlls));
         return pageBean;
     }

@@ -221,6 +221,6 @@
 
     <select id="getCount" resultType="com.ahsj.hiscore.entity.HisBed">
 select a.count, i.currentCount from  (select count(1)as  count from  his_bed) as a
-CROSS JOIN (select count(1) as currentCount from his_hospital_manage where is_discharged=1) as i
+CROSS JOIN (select count(1) as currentCount from his_hospital_manage where is_discharged=1 and bed_id !=0 ) as i
     </select>
 </mapper>
