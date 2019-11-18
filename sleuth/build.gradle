@@ -1,0 +1,22 @@
+
+dependencies {
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-config-server
+    implementation group: 'org.springframework.cloud', name: 'spring-cloud-config-server', version: '2.0.4.RELEASE'
+    implementation('io.zipkin.java:zipkin-server:2.12.2') {
+        //excluding a particular transitive dependency:
+        exclude group: 'org.slf4j',module: 'slf4j-api'
+    }
+    // https://mvnrepository.com/artifact/io.zipkin.java/zipkin-autoconfigure-ui
+    compile group: 'io.zipkin.java', name: 'zipkin-autoconfigure-ui', version: '2.12.2'
+
+}
+
+
+
+
+
+
+

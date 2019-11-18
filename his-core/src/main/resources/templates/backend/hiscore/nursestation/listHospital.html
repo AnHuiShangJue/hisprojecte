@@ -344,7 +344,9 @@
             //获取基本信息
             $.ahsjajax(
                 CTX + "/api/hisTollRecord/hospital/details.ahsj",
-                {"medicalRecordId": MedicalRecordId},
+                {"medicalRecordId": MedicalRecordId,
+
+                "isNurse":1},
                 function (data) {
                     if (!isNullOrEmpty(data)) {
                         changeInputValue("patientName",data.patientName);
@@ -518,7 +520,7 @@
                 // }else{
                     //如果实际收款大于应收款
                     // if(ac.value() >= m.value()){
-                        changeInputValue("deposit",numeral(ac.value()).subtract(m.value()).format('0.00'));
+                        changeInputValue("deposit",numeral(rd.value()).subtract(m.value()).format('0.00'));
                         changeInputValue("recoverTheFee",0);
                     // }else{
                     //     changeInputValue("deposit",numeral(ac.value()).subtract(m.value()).format('0.00'));
