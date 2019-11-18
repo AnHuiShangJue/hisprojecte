@@ -8,6 +8,7 @@ import core.message.MessageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import utils.EmptyUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -32,16 +33,23 @@ public class SocialcreditServiceImpl implements SocialcreditService {
     @Transactional(readOnly = false)
     public Message updateSocialcredit(Socialcredit record){
         record.setUpdateDate(new Date());
-        Socialcredit socialcredit = socialcreditMapper.selectByPrimaryKey(record.getId());
-        socialcredit.setId(null);
-        socialcredit.setCreateDate(new Date());
-        socialcredit.setUpdateDate(new Date());
-        socialcreditMapper.insert(socialcredit);
-        int i = socialcreditMapper.updateByPrimaryKeySelective(record);
-        if (i>0){
-            return MessageUtil.createMessage(true,"修改成功！");
-        }else {
-            return MessageUtil.createMessage(false,"修改失败！");
+        if (EmptyUtil.Companion.isNullOrEmpty(record.getId())) {
+            record.setUpdateDate(new Date());
+            record.setCreateDate(new Date());
+            socialcreditMapper.insert(record);
+            return MessageUtil.createMessage(true,"新增成功！");
+        } else {
+            Socialcredit socialcredit = socialcreditMapper.selectByPrimaryKey(record.getId());
+            socialcredit.setId(null);
+            socialcredit.setCreateDate(new Date());
+            socialcredit.setUpdateDate(new Date());
+            socialcreditMapper.insert(socialcredit);
+            int i = socialcreditMapper.updateByPrimaryKeySelective(record);
+            if (i > 0) {
+                return MessageUtil.createMessage(true, "修改成功！");
+            } else {
+                return MessageUtil.createMessage(false, "修改失败！");
+            }
         }
     }
 }

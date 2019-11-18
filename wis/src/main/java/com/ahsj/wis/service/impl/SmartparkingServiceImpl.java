@@ -8,6 +8,7 @@ import core.message.MessageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import utils.EmptyUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -32,16 +33,23 @@ public class SmartparkingServiceImpl implements SmartparkingService {
     @Transactional(readOnly = false)
     public Message updateSmartparking(Smartparking record){
         record.setUpdateDate(new Date());
-        Smartparking smartparking = smartparkingMapper.selectByPrimaryKey(record.getId());
-        smartparking.setId(null);
-        smartparking.setCreateDate(new Date());
-        smartparking.setUpdateDate(new Date());
-        smartparkingMapper.insert(smartparking);
-        int i = smartparkingMapper.updateByPrimaryKeySelective(record);
-        if (i>0){
-            return MessageUtil.createMessage(true,"修改成功！");
-        }else {
-            return MessageUtil.createMessage(false,"修改失败！");
+        if (EmptyUtil.Companion.isNullOrEmpty(record.getId())) {
+            record.setUpdateDate(new Date());
+            record.setCreateDate(new Date());
+            smartparkingMapper.insert(record);
+            return MessageUtil.createMessage(true,"新增成功！");
+        } else {
+            Smartparking smartparking = smartparkingMapper.selectByPrimaryKey(record.getId());
+            smartparking.setId(null);
+            smartparking.setCreateDate(new Date());
+            smartparking.setUpdateDate(new Date());
+            smartparkingMapper.insert(smartparking);
+            int i = smartparkingMapper.updateByPrimaryKeySelective(record);
+            if (i > 0) {
+                return MessageUtil.createMessage(true, "修改成功！");
+            } else {
+                return MessageUtil.createMessage(false, "修改失败！");
+            }
         }
     }
 }
