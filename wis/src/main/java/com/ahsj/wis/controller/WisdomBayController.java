@@ -49,6 +49,12 @@ public class WisdomBayController {
     @Autowired
     SocialcreditService socialcreditService;
 
+    @Autowired
+    ContactUsUpdateService contactUsUpdateService;
+
+    @Autowired
+    AboutWisdomService aboutWisdomService;
+
     @RequestMapping("/list/index.ahsj")
     ModelAndView listIndex() throws Exception {
         List<WisdomBay> wisdomBays = wisdomBayService.selectAll();
@@ -136,9 +142,11 @@ public class WisdomBayController {
      * @Time 11:43
      */
     @RequestMapping("/contactus/index.ahsj")
-    ModelAndView contactusIndex() {
+    ModelAndView contactusIndex() throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/wis/contact_us");
-        modelAndView.addObject("title", "");
+        modelAndView.addObject("title", "联系我们");
+        ContactUs contactUs = contactUsUpdateService.select();
+        modelAndView.addObject("contactUs", contactUs);
         return modelAndView;
     }
 
@@ -215,9 +223,11 @@ public class WisdomBayController {
      * @Time 11:41
      */
     @RequestMapping("/aboutwisdom/index.ahsj")
-    ModelAndView aboutwisdomIndex() {
+    ModelAndView aboutwisdomIndex() throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/wis/aboutwisdom");
         modelAndView.addObject("title", "关于智慧湾");
+        AboutWisdom aboutWisdom = aboutWisdomService.select();
+        modelAndView.addObject("aboutWisdom", aboutWisdom);
         return modelAndView;
     }
 

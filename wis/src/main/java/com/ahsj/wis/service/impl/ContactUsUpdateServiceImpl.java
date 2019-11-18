@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class ContactUsUpdateServiceImpl implements ContactUsUpdateService {
 
@@ -23,6 +25,11 @@ public class ContactUsUpdateServiceImpl implements ContactUsUpdateService {
     @Override
     @Transactional(readOnly = false)
     public ContactUs select() throws Exception {
-        return contactUsMapper.select().get(0);
+        List<ContactUs> list = contactUsMapper.select();
+        if (list.size() == 0){
+            return new ContactUs();
+        }else {
+            return list.get(0);
+        }
     }
 }
