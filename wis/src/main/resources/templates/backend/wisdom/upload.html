@@ -76,7 +76,8 @@
                 success: function (msg) {
                     if (msg.success) {
                         toastr.success(msg.message)
-                        window.location.replace("/api/wisdombay/lanhuUpdate/index.ahsj");
+                      //  window.location.replace("/api/wisdombay/lanhuUpdate/index.ahsj");
+                        window.history.back(-1);
                         return true;
                     } else {
                         toastr.error(msg.message)
