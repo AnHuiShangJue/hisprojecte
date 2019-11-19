@@ -8,6 +8,9 @@ import com.ahsj.wis.service.WisdomIndexService;
 import com.ahsj.wis.utils.DeletePicture;
 import core.message.Message;
 import core.message.MessageUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +24,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
 
+@Api(value = "/api/wisdombay", tags = "智慧湾")
 @RestController
 @RequestMapping("/api/wisdombay")
 public class WisdomBayController {
@@ -55,6 +59,7 @@ public class WisdomBayController {
     @Autowired
     AboutWisdomService aboutWisdomService;
 
+    @ApiOperation(value = "进入智慧湾", notes = "进入智慧湾")
     @RequestMapping("/list/index.ahsj")
     ModelAndView listIndex() throws Exception {
         List<WisdomBay> wisdomBays = wisdomBayService.selectAll();
@@ -249,6 +254,7 @@ public class WisdomBayController {
      * @Date 2019/11/4
      * @Time 16:16
      **/
+    @ApiOperation(value = "获取所有欢迎页的内容", notes = "获取所有欢迎页的内容")
     @RequestMapping("/selectAll.ahsj")
     public List<WisdomIndex> selectAll() throws Exception {
         return wisdomIndexService.selectAll();
