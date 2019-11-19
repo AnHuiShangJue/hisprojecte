@@ -250,7 +250,9 @@
         select
         w.number,w.type,w.count,(w.count-m.toll) as current_count
         from his_ward as w
-        left JOIN (select m.ward_id ,count(1) as toll from his_hospital_manage as m WHERE m.is_discharged=1 GROUP BY
+        left JOIN (select m.ward_id ,count(1) as toll from his_hospital_manage as m WHERE m.is_discharged=1
+        and m.bed_id !=0
+        GROUP BY
         m.ward_id)
         as m on m.ward_id = w.id
         where

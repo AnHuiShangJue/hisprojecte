@@ -151,6 +151,19 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         return hisTollRecordDetails;
     }
 
+
+    /*
+     *  为了护士站引入的查询消费明细
+     * */
+    @Override
+    @Transactional(readOnly = true)
+    public HisTollRecordDetails hospitalDetailsForNurse(String medicalNumber) throws Exception {
+        if (EmptyUtil.Companion.isNullOrEmpty(hisTollRecordMapper.hospitalDetails(medicalNumber)))
+            return new HisTollRecordDetails();
+        HisTollRecordDetails hisTollRecordDetails = CodeHelper.getInstance().setCodeValue(hisTollRecordMapper.hospitalDetails(medicalNumber));
+        return hisTollRecordDetails;
+    }
+
     /**
      * @return core.message.Message
      * @Description 保存住院收费信息

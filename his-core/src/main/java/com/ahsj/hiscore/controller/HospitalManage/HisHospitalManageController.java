@@ -126,9 +126,7 @@ public class HisHospitalManageController extends BaseController {
      **/
     @RequestMapping(value = "saveOrUpdate.ahsj")
     @ResponseBody
-    public Message saveOrUpdate( HisHospitalManage hisHospitalManage) throws Exception {
-        hisHospitalManage.setBedId(0L);
-        hisHospitalManage.setWardId(0L);
+    public Message saveOrUpdate(HisHospitalManage hisHospitalManage) throws Exception {
         return hisHospitalManageService.saveOrUpdate(hisHospitalManage);
     }
 

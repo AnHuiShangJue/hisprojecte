@@ -12,7 +12,7 @@ package com.ahsj.wis;
 public class Constants {
 
     //文件路径
-    public static final String ImagePath = System.getProperty("user.dir") + "/wisdom/src/main/resources/static/assets/app-assets/images/wisdom/";
+    public static final String ImagePath = System.getProperty("user.dir") + "/wis/src/main/resources/templates/bootstrap/images/wisdom/";
 
     public Constants() {
     }

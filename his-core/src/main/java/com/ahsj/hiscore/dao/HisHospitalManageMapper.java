@@ -277,4 +277,6 @@ public interface HisHospitalManageMapper extends BaseMapper<HisHospitalManage> {
      * @Time 16:28
      **/
     int setBed(HisHospitalManage hisHospitalManage) throws Exception;
+
+
 }

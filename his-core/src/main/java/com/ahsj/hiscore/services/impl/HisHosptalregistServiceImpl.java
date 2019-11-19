@@ -60,7 +60,7 @@ public class HisHosptalregistServiceImpl implements HisHosptalregistService {
             hisPatientInfo.setAge(hisHosptalregist.getAge());
             HisPatientInfo check = hisPatientInfoMapper.selectByIdcard(hisPatientInfo.getIdcard());
             String createdate = new SimpleDateFormat("yyyyMMdd").format(new Date());//当前时间年月日
-            if (EmptyUtil.Companion.isNullOrEmpty(hisHosptalregist.getId())) {
+            if (EmptyUtil.Companion.isNullOrEmpty(hisHosptalregist.getId())) {//新增
                 if (!EmptyUtil.Companion.isNullOrEmpty(hisHosptalregist.getMedicalNumber())) {
                     HisMedicalRecord check1 = hisMedicalRecordService.selectByMedicalRecordId(hisHosptalregist.getMedicalNumber());
                     HisMedicalRecord hisMedicalRecord = hisMedicalRecordService.selectByMedicalRecordId(hisHosptalregist.getMedicalNumber());

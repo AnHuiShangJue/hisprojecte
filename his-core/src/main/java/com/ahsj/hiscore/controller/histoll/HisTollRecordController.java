@@ -64,10 +64,13 @@ public class HisTollRecordController extends BaseController {
      **/
     @RequestMapping("hospital/details.ahsj")
     @ResponseBody
-    HisTollRecordDetails hospitalDetails(String medicalRecordId, String token) throws Exception {
+    HisTollRecordDetails hospitalDetails(String medicalRecordId, String token,Integer isNurse) throws Exception {
         HisHospitalManage hisHospitalManage = hisHospitalManageService.selectByHospNumber(medicalRecordId);
         if (EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage))
             return new HisTollRecordDetails();
+        if(isNurse==1){
+            return hisTollRecordService.hospitalDetailsForNurse(hisHospitalManage.getMedicalNumber());
+        }
         return hisTollRecordService.hospitalDetails(hisHospitalManage.getMedicalNumber());
     }
 

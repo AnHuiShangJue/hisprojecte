@@ -109,7 +109,7 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
         HisPatientInfo hisPatientInfo = hisPatientInfoMapper.selectByPrimaryKey(hisHospitalManage.getPatientId());
         HisHosptalregist hisHosptalregist = hisHosptalregistMapper.selectByPrimaryKey(hisHospitalManage.getHosptalRegistId());
         HisMedicalRecord hisMedicalRecord = new HisMedicalRecord();
-        if (EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage.getId())) {
+        if (EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage.getId())) {  //新增
             if (EmptyUtil.Companion.isNullOrEmpty(hisHospitalManageMapper.selectByNumber(hisHospitalManage.getMedicalNumber()))) {
                 if (check.size() > 0 && check.get(0).getIsDischarged() == 1) {
                     return MessageUtil.createMessage(false, "审核失败，该病人还未出院！");
@@ -120,8 +120,12 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
                     hisHosptalregist.setCareLevel(hisHospitalManage.getCareLevel());
                     hisHosptalregist.setDoctorId(hisHospitalManage.getDoctorId());
                     hisHosptalregist.setNurseId(hisHospitalManage.getNurseId());
-                    hisHosptalregist.setBedId(hisHospitalManage.getBedId());
-                    hisHosptalregist.setWardId(hisHospitalManage.getWardId());
+              /*      hisHosptalregist.setBedId(hisHospitalManage.getBedId());
+                    hisHosptalregist.setWardId(hisHospitalManage.getWardId());*/
+                    hisHosptalregist.setBedId(0L);
+                    hisHosptalregist.setWardId(0L);  //新增时不设置病床病房给赋为0
+                    hisHospitalManage.setBedId(0L);
+                    hisHospitalManage.setWardId(0L);
                     hisHosptalregist.setDepartmentId(hisHospitalManage.getDepartmentId());
                     hisHosptalregist.setInpatientDiagnosis(hisHospitalManage.getInpatientDiagnosis());
                     hisHosptalregist.setRemark(hisHospitalManage.getRemarks());
@@ -191,7 +195,7 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
             } else {
                 return MessageUtil.createMessage(false, "该条就诊编号已被使用过，已作废！！");
             }
-        } else {
+        } else {  //修改
             HisHospitalManage check1 = hisHospitalManageMapper.selectByPrimaryKey(hisHospitalManage.getId());
             if (!EmptyUtil.Companion.isNullOrEmpty(check1)) {
                 hisPatientInfo1.setId(hisHospitalManage.getPatientId());
@@ -205,6 +209,8 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
                 hisHospitalManage.setIsDischarged(check1.getIsDischarged());
                 hisHospitalManage.setCreateDate(check1.getCreateDate());
                 hisHospitalManage.setUpdateDate(check1.getUpdateDate());
+                hisHospitalManage.setWardId(check1.getWardId());
+                hisHospitalManage.setBedId(check1.getBedId());
                 HisPatientInfo checkIfExit = hisPatientInfoMapper.selectByPrimaryKey(hisPatientInfo1.getId());
                 if (EmptyUtil.Companion.isNullOrEmpty(checkIfExit)) {
                     return MessageUtil.createMessage(false, "更新失败!所变更的病人信息不存在!");

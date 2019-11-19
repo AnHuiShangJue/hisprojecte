@@ -33,7 +33,7 @@
             <section class="wow fadeInDown" style="font-size: 350%;">
                 <input id="title" name="title" type="text" class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;letter-spacing: 7px;font-size: 1em;margin-top: 3%;" th:value="${smartparking.title}">
                 <input id="description" name="description" type="text" class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;font-size: 0.4em;margin-top: 10%;" th:value="${smartparking.description}">
-                <img id="a1" src="/bootstrap/images/wisdom/fox-4589927_1920.jpg" class="img-responsive" alt="Responsive image" style="margin-top: -80px;"/>
+                <img id="a1" src="/bootstrap/images/wisdom/street-2701004_1920.jpg" class="img-responsive" alt="Responsive image" style="margin-top: -80px;height: 739px;width: 100%"/>
             </section>
             <section class="container-fluid wow bounceInLeft" data-wow-offset="0">
                 <input id="productTitle" name="productTitle" type="text" style="font-size: 30px; margin-left: 20%;margin-top: 2%;width: 50%;" th:value="${smartparking.productTitle}">
@@ -42,36 +42,34 @@
                 <div id="test2" style="margin-left: 25%; height: 373px;">
                     <div class="col-xs-12 col-sm-12 col-md-12" id="wq"
                          style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 19%;height: 45%;margin-right: 4%;margin-top: 4%;border-radius: 25px">
-                        <img id="a2" src="/bootstrap/images/wisdom/AppleTV.png" class="img-responsive center-block" >
+                        <img id="a2" src="/bootstrap/images/wisdom/AppleTV7.png" class="img-responsive center-block" style="    height: 102px;">
                         <br><input id="product1" name="product1" type="text" style="margin-left: 29%;font-size: 136%;" th:value="${smartparking.product1}">
                         <br><br><textarea id="productContent1" name="productContent1" type="text" data-length="255" style=" font-size: 13px;" class="materialize-textarea" th:text="${smartparking.productContent1}"></textarea>
                     </div>
                     <div class="card " id="wq1"
                          style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 19%;height: 45%;margin-right: 4%;margin-top: 4%;border-radius: 25px">
-                        <img id="a3" src="/bootstrap/images/wisdom/AppleTV1.png" class="img-responsive center-block" >
+                        <img id="a3" src="/bootstrap/images/wisdom/AppleTV8.png" class="img-responsive center-block" style="    height: 102px;">
                         <br><input id="product2" name="product2" type="text" style="margin-left: 36%;font-size: 136%;" th:value="${smartparking.product2}">
                         <br><br><textarea id="productContent2" name="productContent2" type="text" data-length="255" style=" font-size: 13px;" class="materialize-textarea" th:text="${smartparking.productContent2}"></textarea>
                     </div>
                     <div class="card" id="wq2"
                          style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 19%;height: 45%;margin-right: 4%;margin-top: 4%;border-radius: 25px">
-                        <img id="p1" src="/bootstrap/images/wisdom/Grouping10.png" class="img-responsive center-block" >
+                        <img id="p1" src="/bootstrap/images/wisdom/Grouping13.png" class="img-responsive center-block" style="    height: 102px;">
                         <br><input id="product3" name="product3" type="text" style="margin-left: 35%;font-size: 136%;" th:value="${smartparking.product3}">
                         <br><br><textarea id="productContent3" name="productContent3" type="text" data-length="255" style=" font-size: 13px;" class="materialize-textarea" th:text="${smartparking.productContent3}"></textarea>
                     </div>
                 </div>
             </section>
 
-            <div class="row" style="float: left;border: 1px;width: 100%;height: 740px; margin-top: 7%;">
-                <section class="wow fadeInDown row"  style="float: left;border: 1px;width: 100.8%;height: 740px; margin-top: 7%;">
+                <section class="wow fadeInDown row"  style="float: left;border: 1px;width: 100.8%; margin-top: 7%;">
                     <section class="container-fluid wow bounceInLeft" data-wow-offset="0">
                         <div class="col-xs-12 col-sm-12 col-md-12" style="position: absolute">
                             <input id="certificationTitle" name="certificationTitle" style="font-size: 30px;margin-left: 20%;margin-top: 2%;" type="text" th:value="${smartparking.certificationTitle}">
                             <br><br><textarea id="certification" name="certification" style="letter-spacing: 0.56px; line-height: 222%; font-size:131%;margin-left: 23%;" type="text" data-length="255" class="materialize-textarea" th:text="${smartparking.certification}"></textarea>
                         </div>
                     </section>
-                    <img id="a6" src="/bootstrap/images/wisdom/landscape-4611764_1920.jpg" class="img-responsive" alt="Responsive image" style=" height: 100%; width: 100%;margin-top: -13%;"/>
+                    <img id="a6" src="/bootstrap/images/wisdom/automobiles-1869873_1920.jpg" class="img-responsive" alt="Responsive image" style=" height: 739px; width: 100%;margin-top: -13%;"/>
                 </section>
-            </div>
         </div>
     </div>
 </form>
@@ -134,24 +132,24 @@
 
 
     $("#a1").click(function () {
-        var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=fox-4589927_1920.jpg";
+        var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=street-2701004_1920.jpg";
         window.location.href = url;
     });
 
     $("#a2").click(function () {
-        var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=AppleTV.png";
+        var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=AppleTV7.png";
         window.location.href = url;
     });
     $("#a3").click(function () {
-        var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=AppleTV1.png";
+        var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=AppleTV8.png";
         window.location.href = url;
     });
     $("#a6").click(function () {
-        var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=landscape-4611764_1920.jpg";
+        var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=automobiles-1869873_1920.jpg";
         window.location.href = url;
     });
     $("#p1").click(function () {
-        var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=Grouping10.png";
+        var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=Grouping13.png";
         window.location.href = url;
     })
 </script>

@@ -6,6 +6,9 @@ import com.ahsj.wis.service.AboutWisdomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import utils.EmptyUtil;
+
+import java.util.List;
 
 @Service
 public class AboutWisdomServiceImpl implements AboutWisdomService {
@@ -21,6 +24,11 @@ public class AboutWisdomServiceImpl implements AboutWisdomService {
     @Override
     @Transactional(readOnly = false)
     public AboutWisdom select() throws Exception {
-        return aboutWisdomMapper.select().get(0);
+        List<AboutWisdom> list = aboutWisdomMapper.select();
+        if(list.size() == 0){
+            return new AboutWisdom();
+        }else {
+            return list.get(0);
+        }
     }
 }

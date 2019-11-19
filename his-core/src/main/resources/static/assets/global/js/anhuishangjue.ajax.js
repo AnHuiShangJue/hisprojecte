@@ -28,19 +28,22 @@ $(function () {
                     errorfn(data);
                     return;
                 }
-                if (data.responseText == 'logout') {
-                    dialog.confirm("您尚未登录或登录时间过长,请重新登录!",function () {
-                        toLoginLayout();
-                    });
+                // if (data.responseText == 'logout') {
+                //     dialog.confirm("您尚未登录或登录时间过长,请重新登录!",function () {
+                //         toLoginLayout();
+                //     });
+                //
+                // } else if (data.responseText == 'nopemission') {
+                //     dialog.confirm("您没有足够的权限执行该操作",function () {
+                //         toLoginLayout();
+                //     });
+                // }
+                // else if (data.responseText == 'exception') {
+                //     dialog.warn("发生异常，请联系管理员!");
+                //     // M.toast({html: "<span>发生异常，请联系管理员!</span>"});
+                // }
+                dialog.warn("发生异常，请联系管理员!");
 
-                } else if (data.responseText == 'nopemission') {
-                    dialog.confirm("您没有足够的权限执行该操作",function () {
-                        toLoginLayout();
-                    });
-                } else if (data.responseText == 'exception') {
-                    dialog.warn("发生异常，请联系管理员!");
-                    // M.toast({html: "<span>发生异常，请联系管理员!</span>"});
-                }
             }
         });
     };

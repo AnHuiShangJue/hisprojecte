@@ -278,4 +278,8 @@ public interface HisTollRecordService {
 
     List<String> listNumberByMedicalNumber(String medicalNumber)throws Exception;
 
+    /*
+    *  为了护士站引入的查询消费明细
+    * */
+    HisTollRecordDetails   hospitalDetailsForNurse(String medicalNumber) throws Exception;
 }

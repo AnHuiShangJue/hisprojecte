@@ -37,7 +37,7 @@
         <div class="row">
             <section class="section--green wow slideInLeft" data-wow-duration="1s" data-wow-offset="100">
                 <div id="myCarousel" class="carousel slide" style="
-    margin-top: -4.6%;">
+    margin-top: -4.1%;">
                     <!-- 轮播（Carousel）指标 -->
                     <ol class="carousel-indicators">
                         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -47,37 +47,37 @@
                     <!-- 轮播（Carousel）项目 -->
                     <div class="carousel-inner">
                         <div class="item active">
-                            <img src="/bootstrap/images/wisdom/a1.jpg" class="img-responsive center-block"
-                                 style="width: 100%; height: 20%"
+                            <img id="a1" src="/bootstrap/images/wisdom/a1.jpg" class="img-responsive center-block"
+                                 style="width: 100%; height: 665px"
                                  alt="First slide">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5 style="
-         font-size: 50px;color: red;"><input id="one8" name="one8" type="text" th:value="${wisdomIndex.one8}"/></h5>
-                                <p style="color: red;"><input id="one9" name="one9" type="text"
-                                                              th:value="${wisdomIndex.one9}"/></p>
+         font-size: 50px;color: black;"><input id="one8" name="one8" type="text" th:value="${wisdomIndex.one8}"/></h5>
+                                <p style="color: black;"><input id="one9" name="one9" type="text"
+                                                                th:value="${wisdomIndex.one9}"/></p>
                             </div>
                         </div>
                         <div class="item">
-                            <img src="/bootstrap/images/wisdom/a2.jpg" class="img-responsive center-block"
-                                 style="width: 100%;  height: 20%"
+                            <img id="a2" src="/bootstrap/images/wisdom/a2.jpg" class="img-responsive center-block"
+                                 style="width: 100%;  height: 665px"
                                  alt="Second slide">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5 style="
-    font-size: 50px; color: red;"><input id="one10" name="one10" type="text" th:value="${wisdomIndex.one10}"/></h5>
-                                <p style="color: red;"><input id="one11" name="one11" type="text"
-                                                              th:value="${wisdomIndex.one11}"/></p>
+    font-size: 50px; color: black;"><input id="one10" name="one10" type="text" th:value="${wisdomIndex.one10}"/></h5>
+                                <p style="color: black;"><input id="one11" name="one11" type="text"
+                                                                th:value="${wisdomIndex.one11}"/></p>
                             </div>
                         </div>
                         <div class="item">
-                            <img src="/bootstrap/images/wisdom/a3.jpg" class="img-responsive center-block"
-                                 style="width: 100%;  height: 20% "
+                            <img id="a3" src="/bootstrap/images/wisdom/a3.jpg" class="img-responsive center-block"
+                                 style="width: 100%;  height: 665px "
                                  alt="Third slide">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5 style="
-    font-size: 50px; color: red;"><input id="one12" name="one12" type="text"
-                                         th:value="${wisdomIndex.one12}"/></h5>
-                                <p style="color: red;"><input id="one13" name="one13" type="text"
-                                                              th:value="${wisdomIndex.one13}"/></p>
+    font-size: 50px; color: black;"><input id="one12" name="one12" type="text"
+                                           th:value="${wisdomIndex.one12}"/></h5>
+                                <p style="color: black;"><input id="one13" name="one13" type="text"
+                                                                th:value="${wisdomIndex.one13}"/></p>
                             </div>
                         </div>
                     </div>
@@ -90,6 +90,32 @@
                         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4  col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+                    <div  class="visible-lg" style="
+    width:255px;
+height:140px;
+font-size:50px;
+font-family:PingFangSC-Semibold,PingFang SC;
+font-weight:600;
+color:rgba(255,255,255,1);
+line-height:70px;margin-top: -85%;">
+                        <span style="color: black;"><input id="introduceOne" name="introduceOne" type="text"
+                                                           th:value="${wisdomIndex.introduceOne}"/></span>
+                    </div>
+                    <div  class="visible-lg" style="
+  width:700px;
+height:270px;
+font-size:32px;
+font-family:PingFangSC-Regular,PingFang SC;
+font-weight:400;
+color:rgba(255,255,255,1);
+line-height:45px;">
+                        <span style="color: black;"><textarea id="detailsOne" name="detailsOne" class="materialize-textarea"
+                                                              type="text"
+                                                              th:text="${wisdomIndex.detailsOne}"></textarea></span>
+                    </div>
+
                 </div>
             </section>
         </div>
@@ -104,8 +130,8 @@
     font-weight: 600;
     line-height: 70px;
    margin-top: 8%;">
-                    <span style="color: red;"><input id="introduceTwo" name="introduceTwo" type="text"
-                                                     th:value="${wisdomIndex.introduceTwo}"/></span>
+                    <span style="color: black;"><input id="introduceTwo" name="introduceTwo" type="text"
+                                                       th:value="${wisdomIndex.introduceTwo}"/></span>
                     </div>
                 </section>
                 <section class="section&#45;&#45;green wow bounceInUp" data-wow-duration="1s" data-wow-offset="0">
@@ -118,8 +144,8 @@ color:rgba(19,18,18,1);
 line-height:36px;
 position: relative;
    margin-top: -2%;">
-                    <span style="color: red;"><input id="spell" name="spell" type="text"
-                                                     th:value="${wisdomIndex.spell}"/></span>
+                    <span style="color: black;"><input id="spell" name="spell" type="text"
+                                                       th:value="${wisdomIndex.spell}"/></span>
                     </div>
                 </section>
                 <section class="section&#45;&#45;green wow bounceIn" data-wow-duration="1s" data-wow-offset="0">
@@ -132,10 +158,10 @@ position: relative;
     line-height: 32px;
     position: relative;
    margin-top: 5%;">
-                    <span style="color: red;"><textarea id="detailsTwo" name="detailsTwo" class="materialize-textarea"
-                                                        type="text"
-                                                        data-length="255"
-                                                        th:text="${wisdomIndex.detailsTwo}"></textarea></span>
+                    <span style="color: black;"><textarea id="detailsTwo" name="detailsTwo" class="materialize-textarea"
+                                                          type="text"
+                                                          data-length="255"
+                                                          th:text="${wisdomIndex.detailsTwo}"></textarea></span>
                     </div>
                 </section>
             </div>
@@ -150,11 +176,11 @@ position: relative;
                                     <div class="big_sfq">
                                         <div>
                                             <img src="" alt="">
-                                            <p><input id="one1" name="one1" type="text" style="color: red;"
+                                            <p><input id="one1" name="one1" type="text" style="color: black;"
                                                       th:value="${wisdomIndex.one1}"/></p>
-                                            <a href=""><i>——</i>查看更多</a>
+                                            <a href="/api/wisdombay/intelligentUpdate/index.ahsj"><i>——</i>查看更多</a>
                                         </div>
-                                        <img src="/bootstrap/images/wisdom/1.jpg" alt="">
+                                        <img id="p1" src="/bootstrap/images/wisdom/1.jpg" alt="">
                                     </div>
                                     <!--   <a href="" class="small">
                                            <img src="" alt="">
@@ -166,11 +192,11 @@ position: relative;
                                         <div>
                                             <img src=""
                                                  alt="">
-                                            <p><input style="color: red;" id="one2" name="one2" type="text"
+                                            <p><input style="color: black;" id="one2" name="one2" type="text"
                                                       th:value="${wisdomIndex.one2}"/></p>
-                                            <a href=""><i>——</i>查看更多</a>
+                                            <a href="/api/wisdombay/smartparkUpdate/index.ahsj"><i>——</i>查看更多</a>
                                         </div>
-                                        <img src="/bootstrap/images/wisdom/2.jpg" alt="">
+                                        <img id="p2" src="/bootstrap/images/wisdom/2.jpg" alt="">
                                     </div>
                                     <!-- <a href="" class="small">
                                          <img src="#" alt="">
@@ -182,11 +208,11 @@ position: relative;
                                         <div>
                                             <img src="#"
                                                  alt="">
-                                            <p><input style="color: red;" id="one3" name="one3" type="text"
+                                            <p><input style="color: black;" id="one3" name="one3" type="text"
                                                       th:value="${wisdomIndex.one3}"/></p>
-                                            <a href=""><i>——</i>查看更多</a>
+                                            <a href="/api/wisdombay/smartparkingUpdate/index.ahsj"><i>——</i>查看更多</a>
                                         </div>
-                                        <img src="/bootstrap/images/wisdom/3.jpg" alt="">
+                                        <img id="p3" src="/bootstrap/images/wisdom/3.jpg" alt="">
                                     </div>
                                     <!--  <a href="" class="small">
                                           <img src="" alt="">
@@ -198,11 +224,11 @@ position: relative;
                                         <div>
                                             <img src=""
                                                  alt="">
-                                            <p><input style="color: red;" id="one4" name="one4" type="text"
+                                            <p><input style="color: black;" id="one4" name="one4" type="text"
                                                       th:value="${wisdomIndex.one4}"/></p>
-                                            <a href=""><i>——</i>查看更多</a>
+                                            <a href="/api/wisdombay/socialcreditUpdate/index.ahsj"><i>——</i>查看更多</a>
                                         </div>
-                                        <img src="/bootstrap/images/wisdom/4.jpg" alt="">
+                                        <img id="p4" src="/bootstrap/images/wisdom/4.jpg" alt="">
                                     </div>
                                     <!-- <a href="" class="small">
                                          <img src="" alt="">
@@ -214,11 +240,11 @@ position: relative;
                                         <div>
                                             <img src=""
                                                  alt="">
-                                            <p><input style="color: red;" id="one5" name="one5" type="text"
+                                            <p><input style="color: black;" id="one5" name="one5" type="text"
                                                       th:value="${wisdomIndex.one5}"/></p>
-                                            <a href=""><i>——</i>查看更多</a>
+                                            <a href="/api/wisdombay/wisdomBayUpdate/index.ahsj"><i>——</i>查看更多</a>
                                         </div>
-                                        <img src="/bootstrap/images/wisdom/5.jpg" alt="">
+                                        <img id="p5" src="/bootstrap/images/wisdom/5.jpg" alt="">
                                     </div>
                                     <!--  <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one5" class="small">
                                           <img src="" alt="">
@@ -230,11 +256,11 @@ position: relative;
                                         <div>
                                             <img src=""
                                                  alt="">
-                                            <p><input style="color: red;" id="one6" name="one6" type="text"
+                                            <p><input style="color: black;" id="one6" name="one6" type="text"
                                                       th:value="${wisdomIndex.one6}"/></p>
-                                            <a href=""><i>——</i>查看更多</a>
+                                            <a href="/api/wisdombay/macroeUpdate/index.ahsj"><i>——</i>查看更多</a>
                                         </div>
-                                        <img src="/bootstrap/images/wisdom/6.jpg" alt="">
+                                        <img id="p6" src="/bootstrap/images/wisdom/6.jpg" alt="">
                                     </div>
                                     <!--  <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one6" class="small">
                                           <img src="" alt="">
@@ -245,11 +271,11 @@ position: relative;
                                     <div class="big_sfq">
                                         <div>
                                             <img src="" alt="">
-                                            <p><input style="color: red;" id="one7" name="one7" type="text"
+                                            <p><input style="color: black;" id="one7" name="one7" type="text"
                                                       th:value="${wisdomIndex.one7}"/></p>
-                                            <a href=""><i>——</i>查看更多</a>
+                                            <a href="/api/aboutwisdom/aboutWisUpdate/index.ahsj"><i>——</i>查看更多</a>
                                         </div>
-                                        <img src="/bootstrap/images/wisdom/7.jpg" alt="">
+                                        <img id="p7" src="/bootstrap/images/wisdom/7.jpg" alt="">
                                     </div>
                                     <!--  <a href="/api/wisdombay/wisdomBay/index.ahsj?parameter=one7" class="small">
                                           <img src="" alt="">
@@ -269,7 +295,7 @@ position: relative;
                     <a href="/api/wisdombay/intelligent/index.ahsj">
                         <img src="/bootstrap/images/wisdom/1.jpg" alt="">
                         <div>
-                            <h2><input name="one1" type="text" style="color: red;"
+                            <h2><input name="one1" type="text" style="color: black;"
                                        th:value="${wisdomIndex.one1}"/></h2>
                             <em>—— 查看更多</em>
                         </div>
@@ -279,7 +305,7 @@ position: relative;
                     <a href="/api/wisdombay/smartpark/index.ahsj">
                         <img src="/bootstrap/images/wisdom/2.jpg" alt="">
                         <div>
-                            <h2><input name="one2" type="text" th:value="${wisdomIndex.one2}" style="color: red;"/></h2>
+                            <h2><input name="one2" type="text" th:value="${wisdomIndex.one2}" style="color: black;"/></h2>
                             <em>—— 查看更多</em>
                         </div>
                     </a>
@@ -288,17 +314,17 @@ position: relative;
                     <a href="/api/wisdombay/smartparking/index.ahsj">
                         <img src="/bootstrap/images/wisdom/3.jpg" alt="">
                         <div>
-                            <h2><input name="one3" type="text" style="color: red;"
+                            <h2><input name="one3" type="text" style="color: black;"
                                        th:value="${wisdomIndex.one3}"/></h2>
                             <em>—— 查看更多</em>
                         </div>
                     </a>
                 </div>
                 <div class="sfq_div m4">
-                    <a href="/api/wisdombay/socialcredit/index.ahsj">
+                    <a href="/api/wisdombay/socialcblackit/index.ahsj">
                         <img src="/bootstrap/images/wisdom/4.jpg" alt="">
                         <div>
-                            <h2><input style="color: red;" name="one4" type="text" th:value="${wisdomIndex.one4}"/></h2>
+                            <h2><input style="color: black;" name="one4" type="text" th:value="${wisdomIndex.one4}"/></h2>
                             <em>—— 查看更多</em>
                         </div>
                     </a>
@@ -307,7 +333,7 @@ position: relative;
                     <a href="/api/wisdombay/list/index.ahsj">
                         <img src="/bootstrap/images/wisdom/5.jpg" alt="">
                         <div>
-                            <h2><input style="color: red;" name="one5" type="text" th:value="${wisdomIndex.one5}"/></h2>
+                            <h2><input style="color: black;" name="one5" type="text" th:value="${wisdomIndex.one5}"/></h2>
                             <em>—— 查看更多</em>
                         </div>
                     </a>
@@ -316,7 +342,7 @@ position: relative;
                     <a href="/api/wisdombay/macroe/index.ahsj">
                         <img src="/bootstrap/images/wisdom/6.jpg" alt="">
                         <div>
-                            <h2><input name="one6" type="text" style="color: red;"
+                            <h2><input name="one6" type="text" style="color: black;"
                                        th:value="${wisdomIndex.one6}"/></h2>
                             <em>—— 查看更多</em>
                         </div>
@@ -326,7 +352,7 @@ position: relative;
                     <a href="/api/wisdombay/aboutwisdom/index.ahsj">
                         <img src="/bootstrap/images/wisdom/7.jpg" alt="">
                         <div>
-                            <h2><input name="one7" type="text" style="color: red;"
+                            <h2><input name="one7" type="text" style="color: black;"
                                        th:value="${wisdomIndex.one7}"/></h2>
                             <em>—— 查看更多</em>
                         </div>
@@ -337,11 +363,12 @@ position: relative;
         </div>-->
     </div>
 </form>
-<button id="send_btn" style="
-    margin-left: 1378px;
-    margin-top: -45px;
-">修改文字
-</button>
+<div class="col-xs-4 col-sm-4 col-md-4  col-md-offset-8">
+    <button id="send_btn" style="
+    margin-top: -22%;"
+    >修改文字
+    </button>
+</div>
 <div th:replace="public/update_footer :: html"></div>
 </body>
 <script src="/bootstrap/js/wow.js"></script>
@@ -355,12 +382,14 @@ position: relative;
             url: "/api/wisdombay/toUpdateIndex.ahsj",
             data: $('#sendForm').serialize(),
             success: function (msg) {
-                console.log(msg)
                 if (msg.success) {
-                    alert(msg.message)
+
+                    //   window.location.replace("/api/wisdombay/lanhuUpdate/index.ahsj");
+                    window.location.reload();
+                    toastr.success(msg.message)
                     return true;
                 } else {
-                    alert(msg.message)
+                    toastr.error(msg.message)
                     return false;
                 }
             },
@@ -372,6 +401,48 @@ position: relative;
         $(this).stop(true).animate({width: "480px"}, 500);
         $(this).addClass("len").siblings().removeClass('len');
     })
+    $("#a1").click(function () {
+        var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=a1.jpg";
+        window.location.href = url;
+    })
+    $("#a2").click(function () {
+        var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=a2.jpg";
+        window.location.href = url;
+    })
+    $("#a3").click(function () {
+        var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=a3.jpg";
+        window.location.href = url;
+    })
+    $("#p1").click(function () {
+        var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=1.jpg";
+        window.location.href = url;
+    })
+    $("#p2").click(function () {
+        var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=2.jpg";
+        window.location.href = url;
+    })
+    $("#p3").click(function () {
+        var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=3.jpg";
+        window.location.href = url;
+    })
+    $("#p4").click(function () {
+        var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=4.jpg";
+        window.location.href = url;
+    })
+    $("#p5").click(function () {
+        var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=5.jpg";
+        window.location.href = url;
+    })
+    $("#p6").click(function () {
+        var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=6.jpg";
+        window.location.href = url;
+    })
+    $("#p7").click(function () {
+        var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=7.jpg";
+        window.location.href = url;
+    })
+
+
     wow = new WOW(
         {
             animateClass: 'animated',
@@ -389,6 +460,5 @@ position: relative;
     };
 
 </script>
-
 
 </html>

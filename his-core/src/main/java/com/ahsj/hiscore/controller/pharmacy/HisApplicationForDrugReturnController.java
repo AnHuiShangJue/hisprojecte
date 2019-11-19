@@ -1,9 +1,11 @@
 package com.ahsj.hiscore.controller.pharmacy;
 
 import com.ahsj.hiscore.entity.HisApplicationForDrugReturn;
+import com.ahsj.hiscore.entity.HisHospitalManage;
 import com.ahsj.hiscore.entity.HisPatientInfo;
 import com.ahsj.hiscore.services.HisApplicationForDrugReturnDetailsService;
 import com.ahsj.hiscore.services.HisApplicationForDrugReturnService;
+import com.ahsj.hiscore.services.HisHospitalManageService;
 import com.ahsj.hiscore.services.HisPatientService;
 import core.entity.PageBean;
 import core.message.Message;
@@ -32,6 +34,9 @@ public class HisApplicationForDrugReturnController {
 
     @Autowired
     HisPatientService hisPatientService;
+
+    @Autowired
+    HisHospitalManageService hisHospitalManageService;
 
     /**
      * @return org.springframework.web.servlet.ModelAndView
@@ -220,10 +225,17 @@ public class HisApplicationForDrugReturnController {
                 (hisApplicationForDrugReturnService.getNumber(number))) {//交易流水号
             return hisApplicationForDrugReturnService.getNumber(number);
         }
-        if (number.substring(0, 2).equals("HM") && !EmptyUtil.Companion.isNullOrEmpty
-                (hisApplicationForDrugReturnService.selectByRecordNumber(number))) {//就诊编号
+        if ((number.substring(0, 2).equals("HM") || number.substring(0, 3).equals("HHM")) && !EmptyUtil.Companion.isNullOrEmpty
+                (hisApplicationForDrugReturnService.selectByRecordNumber(number))
+        ) {//就诊编号
             return hisApplicationForDrugReturnService.selectByRecordNumber(number);
         }
+        if (number.substring(0, 2).equals("HR")&& !EmptyUtil.Companion.isNullOrEmpty
+                (hisApplicationForDrugReturnService.selectByRecordNumber(number))) { //住院编号
+            HisHospitalManage hisHospitalManage = hisHospitalManageService.selectNumber(number);
+            if(!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage)){
+            return hisApplicationForDrugReturnService.selectByRecordNumber(hisHospitalManage.getMedicalNumber());
+        }}
         return new HisApplicationForDrugReturn();
     }
 

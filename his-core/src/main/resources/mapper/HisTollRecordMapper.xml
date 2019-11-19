@@ -608,16 +608,16 @@ where  t.number = #{number}
         where
         1=1
         <if test="lowTime != null ">
-            and date(create_date) &gt;= #{lowTime,jdbcType=TIMESTAMP}
+            and date(h.create_date) &gt;= #{lowTime,jdbcType=TIMESTAMP}
         </if>
         <if test="upTime != null">
-            and date(create_date) &lt;= #{upTime,jdbcType=TIMESTAMP}
+            and date(h.create_date) &lt;= #{upTime,jdbcType=TIMESTAMP}
         </if>
         <if test="months != null and months != ''">
-            and month(create_date)=#{months}
+            and month(h.create_date)=#{months}
         </if>
         <if test="years != null and years != ''">
-            and YEAR(create_date) = #{years}
+            and YEAR(h.create_date) = #{years}
         </if>
         <if test="number != null and number != ''">
             and number like concat('%' #{number},'%')
