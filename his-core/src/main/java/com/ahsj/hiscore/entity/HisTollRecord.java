@@ -67,6 +67,10 @@ public class HisTollRecord extends BaseEntity {
 
     private Integer stock;
 
+
+
+
+
     public String getTypes() {
         return types;
     }

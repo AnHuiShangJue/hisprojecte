@@ -113,11 +113,25 @@ public class HisRecordProject extends BaseEntity {
 
     private String vouchers;
 
-    private String tranName ;
+    private String tranName;
 
-    private String medicalNumber ;
+    private String medicalNumber;
 
     private Integer hisProjectNum;
+
+    private BigDecimal restDeposit;
+
+    private BigDecimal deposit;
+
+    private BigDecimal prices;
+
+    public BigDecimal getPrices() {
+        return prices;
+    }
+
+    public void setPrices(BigDecimal prices) {
+        this.prices = prices;
+    }
 
     public String getHospitalNumber() {
         return hospitalNumber;
@@ -460,7 +474,6 @@ public class HisRecordProject extends BaseEntity {
     }
 
 
-
     public String getIsBackName() {
         return isBackName;
     }
@@ -507,6 +520,22 @@ public class HisRecordProject extends BaseEntity {
 
     public void setTunit(String tunit) {
         this.tunit = tunit;
+    }
+
+    public BigDecimal getRestDeposit() {
+        return restDeposit;
+    }
+
+    public void setRestDeposit(BigDecimal restDeposit) {
+        this.restDeposit = restDeposit;
+    }
+
+    public BigDecimal getDeposit() {
+        return deposit;
+    }
+
+    public void setDeposit(BigDecimal deposit) {
+        this.deposit = deposit;
     }
 
     @Override

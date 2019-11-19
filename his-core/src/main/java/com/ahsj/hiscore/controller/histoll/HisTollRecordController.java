@@ -64,11 +64,11 @@ public class HisTollRecordController extends BaseController {
      **/
     @RequestMapping("hospital/details.ahsj")
     @ResponseBody
-    HisTollRecordDetails hospitalDetails(String medicalRecordId, String token,Integer isNurse) throws Exception {
+    HisTollRecordDetails hospitalDetails(String medicalRecordId, String token, Integer isNurse) throws Exception {
         HisHospitalManage hisHospitalManage = hisHospitalManageService.selectByHospNumber(medicalRecordId);
         if (EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage))
             return new HisTollRecordDetails();
-        if(isNurse==1){
+        if (isNurse == 1) {
             return hisTollRecordService.hospitalDetailsForNurse(hisHospitalManage.getMedicalNumber());
         }
         return hisTollRecordService.hospitalDetails(hisHospitalManage.getMedicalNumber());
@@ -176,10 +176,10 @@ public class HisTollRecordController extends BaseController {
      * @Date 2019/7/22
      * @Time 12:22
      **/
-    @RequestMapping(value = "list/details.ahsj" ,method = {RequestMethod.POST})
+    @RequestMapping(value = "list/details.ahsj", method = {RequestMethod.POST})
     @ResponseBody
     public PageBean<HisTollRecord> list(HisTollRecord hisTollRecord) throws Exception {
-        if (hisTollRecord.getLowTime()!=null || hisTollRecord.getUpTime()!=null ) {
+        if (hisTollRecord.getLowTime() != null || hisTollRecord.getUpTime() != null) {
             hisTollRecord.setYears(null);
             hisTollRecord.setMonths(null);
         }
@@ -552,7 +552,7 @@ public class HisTollRecordController extends BaseController {
      * @Time 10:56
      **/
     @RequestMapping("getDrugDetails/index.ahsj")
-    ModelAndView getDrugDetails(String token, String drugsNumb,String stock,String drugsName) throws Exception {
+    ModelAndView getDrugDetails(String token, String drugsNumb, String stock, String drugsName) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/hisFinance/pharmacyDetail");
         modelAndView.addObject("title", "药库盘点详细信息");
         modelAndView.addObject("drugsNumb", drugsNumb);
@@ -572,7 +572,7 @@ public class HisTollRecordController extends BaseController {
      **/
     @RequestMapping("/pharmacyInventoryDetail.ahsj")
     @ResponseBody
-    public PageBean<HisTollRecord> pharmacyInventoryDetail(HisTollRecord hisTollRecord ) throws Exception {
+    public PageBean<HisTollRecord> pharmacyInventoryDetail(HisTollRecord hisTollRecord) throws Exception {
 
         PageBean<HisTollRecord> pageBean = new PageBean<HisTollRecord>();
         pageBean.setParameter(hisTollRecord);
@@ -606,7 +606,7 @@ public class HisTollRecordController extends BaseController {
 
     @RequestMapping("printAllInformation.ahsj")
     @ResponseBody
-    List<HisTollRecordDetails> printAllInformations(String token,String HRNumber)throws Exception{
+    List<HisTollRecordDetails> printAllInformations(String token, String HRNumber) throws Exception {
         List<HisTollRecordDetails> hisTollRecordDetails = hisTollRecordService.selectAllInformationByHRNumber(HRNumber);
         return hisTollRecordDetails;
     }

@@ -117,13 +117,13 @@ public class HisTollDetailsController extends BaseController {
     }
 
     /**
-     *@Description 护士站
-     *@Params
-     *@return
-     *@Author jin
-     *@Date 2019/11/16
-     *@Time 18:11
-    */
+     * @return
+     * @Description 护士站
+     * @Params
+     * @Author jin
+     * @Date 2019/11/16
+     * @Time 18:11
+     */
     @RequestMapping("nursehospital/list.ahsj")
     @ResponseBody
     public PageBean<HisTollDetails> nursehospitalListIndex(HisTollDetails hisTollDetails) throws Exception {
@@ -407,7 +407,6 @@ public class HisTollDetailsController extends BaseController {
     }
 
 
-
     /**
      * @Description 门诊收费打印
      * @Params: [token, number]
@@ -505,5 +504,22 @@ public class HisTollDetailsController extends BaseController {
     @ResponseBody
     HisTollDetails printShowThere(String number) throws Exception {//没有明细
         return hisTollDetailsService.printShowThere(number);
+    }
+
+    /**
+     * @Description 住院退药
+     * @Params: [token]
+     * @Author: dingli
+     * @Return: org.springframework.web.servlet.ModelAndView
+     * @Date 2019/11/19
+     * @Time 10:07
+     **/
+    @RequestMapping("hospitalDrugReturn/index.ahsj")
+    ModelAndView hospitalDrugReturn(String token) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/histoll/list_drugReturn_hospital");
+        modelAndView.addObject("title", "住院退药");
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("loginName", getUserName());
+        return modelAndView;
     }
 }

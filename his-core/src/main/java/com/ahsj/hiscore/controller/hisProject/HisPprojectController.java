@@ -601,16 +601,34 @@ public class HisPprojectController extends BaseController {
 
 
     /**
-     *@Description 根据IDs查询项目信息
-     *@Params [ids]
-     *@return java.util.List<com.ahsj.hiscore.entity.HisPharmacyDetail>
-     *@Author zhushixiang
-     *@Date 2019-10-08
-     *@Time 13:45
-    **/
+     * @return java.util.List<com.ahsj.hiscore.entity.HisPharmacyDetail>
+     * @Description 根据IDs查询项目信息
+     * @Params [ids]
+     * @Author zhushixiang
+     * @Date 2019-10-08
+     * @Time 13:45
+     **/
     @ResponseBody
     @RequestMapping(value = "selectForListForProjectByIds.ahsj")
     public List<HisProject> selectForListForProjectByIds(Long[] ids) throws Exception {
         return hisProjectService.selectForListForProjectByIds(ids);
+    }
+
+    /**
+     * @Description 跳转住院退项目收费
+     * @Params: [token]
+     * @Author: dingli
+     * @Return: org.springframework.web.servlet.ModelAndView
+     * @Date 2019/11/19
+     * @Time 14:07
+     **/
+    @ResponseBody
+    @RequestMapping("refundHospital/index.ahsj")
+    public ModelAndView refundHospital(String token) {
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/histoll/refundPriceListOne_hospital");
+        modelAndView.addObject("title", "住院退项目");
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("loginName", getUserName());
+        return modelAndView;
     }
 }

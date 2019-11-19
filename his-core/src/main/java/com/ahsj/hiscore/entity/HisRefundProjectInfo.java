@@ -14,6 +14,8 @@ public class HisRefundProjectInfo extends BaseEntity {
 
     private BigDecimal refundSumProce;
 
+    private BigDecimal deposit; //剩余押金
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss ")
     private Date createDate;
@@ -165,6 +167,14 @@ public class HisRefundProjectInfo extends BaseEntity {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks == null ? null : remarks.trim();
+    }
+
+    public BigDecimal getDeposit() {
+        return deposit;
+    }
+
+    public void setDeposit(BigDecimal deposit) {
+        this.deposit = deposit;
     }
 
     @Override

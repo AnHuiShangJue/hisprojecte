@@ -865,14 +865,43 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
     @Override
     @Transactional(readOnly = false)
     public Message forcedDischarge(HisHospitalManage hisHospitalManage) throws Exception {
-        if(!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage.getId())) {
+        if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage.getId())) {
             HisHospitalManage hisHospitalManage1 = hisHospitalManageMapper.selectByPrimaryKey(hisHospitalManage.getId());
             hisHospitalManage1.setIsDischarged(2);
             hisHospitalManageMapper.updateByPrimaryKey(hisHospitalManage1);
             return MessageUtil.createMessage(true, "强制出院成功（Success）");
-        }else {
+        } else {
             return MessageUtil.createMessage(false, "强制出院失败，参数有误！（Fail）");
         }
+    }
+
+    /**
+     * @Description 根据交易流水号查押金
+     * @Params: [number]
+     * @Author: dingli
+     * @Return: com.ahsj.hiscore.entity.HisHospitalManage
+     * @Date 2019/11/19
+     * @Time 10:30
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public HisHospitalManage selectByTollNumber(String number) throws Exception {
+        return hisHospitalManageMapper.selectByTollNumber(number);
+    }
+
+
+    /**
+     * @Description 根据就诊编号查询押金
+     * @Params: [number]
+     * @Author: dingli
+     * @Return: com.ahsj.hiscore.entity.HisHospitalManage
+     * @Date 2019/11/19
+     * @Time 10:35
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public HisHospitalManage selectByMedicalNumber(String number) throws Exception {
+        return hisHospitalManageMapper.selectByMedicalNumber(number);
     }
 }
 

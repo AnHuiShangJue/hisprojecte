@@ -278,5 +278,15 @@ public interface HisHospitalManageMapper extends BaseMapper<HisHospitalManage> {
      **/
     int setBed(HisHospitalManage hisHospitalManage) throws Exception;
 
+    /**
+     * @Description 根据交易流水号查押金
+     * @Params: [tollNumber]
+     * @Author: dingli
+     * @Return: com.ahsj.hiscore.entity.HisHospitalManage
+     * @Date 2019/11/19
+     * @Time 10:31
+     **/
+    HisHospitalManage selectByTollNumber(String number);
 
+    HisHospitalManage selectByMedicalNumber(String number);
 }
