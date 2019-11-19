@@ -96,6 +96,13 @@ public class HisRecordProjectServiceImpl implements HisRecordProjectService {
         return pageBean;
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public PageBean<HisRecordProject> queryPriceList(PageBean<HisRecordProject> pageBean) {
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisRecordProjectMapper.queryPriceList(pageBean)));
+        return pageBean;
+    }
+
     /**
      * @return com.ahsj.hiscore.entity.HisRecordProject
      * @功能说明

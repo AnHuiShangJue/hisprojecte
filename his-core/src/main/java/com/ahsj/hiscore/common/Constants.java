@@ -48,7 +48,8 @@ public class Constants {
     public static final String HIS_EN = "en";
 
 
-    public static final String HIS_HHM = "HHM"; //就诊记录编号 头部
+    public static final String HIS_HHM = "HHM"; //就诊记录编号 头部  空降
+    public static final String HIS_HM = "HM"; //就诊记录编号 头部
     public static final String HIS_HTR = "HTR"; //交易流水号 头部
     public static final String HIS_HR = "HR";  //住院编号 头部
 

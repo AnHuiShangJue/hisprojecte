@@ -47,7 +47,7 @@
                         <form id="searchForm" class="row" action="">
                             <div class="col input-field s3 m3 l3 xl3">
                                 <input id="tollRecordNumber" name="tollRecordNumber" type="text"/>
-                                <label for="tollRecordNumber">请输入交易流水号<span style="font-size: 12px">(Please enter the transaction serial number
+                                <label for="tollRecordNumber">请输入交易流水号/就诊编号/住院编号<span style="font-size: 12px">(Please enter transaction serial number/medical treatment number/admission number
 )</span></label>
                             </div>
 
@@ -175,13 +175,16 @@
     function initBtn() {
         $('#searchBtn').click(function () {
             var reg1 = new RegExp(/^HTR\d{13}$/);
+            var reg2 = new RegExp(/^HHM\d{13}$/);
+            var reg3 = new RegExp(/^HM\d{13}$/);
+            var reg4 = new RegExp(/^HR\d{13}$/);
             var number = $("#tollRecordNumber").val();
-            if (reg1.test(number)) {
+            if (reg1.test(number) || reg2.test(number) || reg3.test(number) || reg4.test(number)) {
                 grid.search();
                 getNumber();
                 $("#print_btn").attr("disabled", true);
             } else {
-                dialog.warn("所输入的数据不符合格式要求！请输入HTR开头的交易流水号")
+                dialog.warn("所输入的数据不符合格式要求！请输入HTR开头的交易流水号/HR开头的住院编号/HHM开头的就诊记录编号")
             }
         });
         //重置按钮

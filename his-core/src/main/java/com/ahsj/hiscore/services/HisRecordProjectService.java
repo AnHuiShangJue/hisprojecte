@@ -55,6 +55,7 @@ public interface HisRecordProjectService {
      * @Time 17:38
      **/
     PageBean<HisRecordProject> queryAddList(PageBean<HisRecordProject> pageBean);
+    PageBean<HisRecordProject> queryPriceList(PageBean<HisRecordProject> pageBean);
 
     /**
      * @return com.ahsj.hiscore.entity.HisRecordProject

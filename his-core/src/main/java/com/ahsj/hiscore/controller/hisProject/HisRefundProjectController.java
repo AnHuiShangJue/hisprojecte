@@ -120,7 +120,7 @@ public class HisRefundProjectController extends BaseController {
             return pageBean;
         }
 //        HIS_HM = "HM"; //就诊记录编号 头部   medicalRecordId
-        if(tollRecordNumber.contains(Constants.HIS_HHM)) {
+        if (tollRecordNumber.contains(Constants.HIS_HHM) || tollRecordNumber.contains(Constants.HIS_HM)) {
             hisRecordProject.setMedicalRecordId(hisRecordProject.getTollRecordNumber());
             hisRecordProject.setTollRecordNumber(null);
             pageBean.setParameter(hisRecordProject);
@@ -128,13 +128,13 @@ public class HisRefundProjectController extends BaseController {
             return hisProjectPageBean;
         }
 //         HIS_HTR = "HTR"; //交易流水号 头部
-        if(tollRecordNumber.contains(Constants.HIS_HTR)) {
+        if (tollRecordNumber.contains(Constants.HIS_HTR)) {
             pageBean.setParameter(hisRecordProject);
             PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryAddList(pageBean);
             return hisProjectPageBean;
         }
 //        HIS_HR = "HR";  //住院编号 头部
-        if(tollRecordNumber.contains(Constants.HIS_HR)) {
+        if (tollRecordNumber.contains(Constants.HIS_HR)) {
             hisRecordProject.setHospitalNumber(hisRecordProject.getTollRecordNumber());
             hisRecordProject.setTollRecordNumber(null);
             pageBean.setParameter(hisRecordProject);
@@ -158,20 +158,20 @@ public class HisRefundProjectController extends BaseController {
     public Message saveForAppEdit(HisRefundProject hisRefundProject, @RequestParam("nums") Integer[] nums, @RequestParam("ids") Long[] ids) throws Exception {
         String tollRecordNumber = hisRefundProject.getTollRecordNumber();
         //        HIS_HM = "HM"; //就诊记录编号 头部   medicalRecordId
-        if(tollRecordNumber.contains(Constants.HIS_HHM)) {
+        if (tollRecordNumber.contains(Constants.HIS_HM) || tollRecordNumber.contains(Constants.HIS_HHM)) {
             hisRefundProject.setRecordNumber(hisRefundProject.getTollRecordNumber());
             hisRefundProject.setTollRecordNumber(null);
+            return hisRefundProjectService.saveForAppEdit(hisRefundProject, nums, ids, getUserName());
         }
 //         HIS_HTR = "HTR"; //交易流水号 头部
-  /*      if(tollRecordNumber.contains(Constants.HIS_HTR)) {
-            pageBean.setParameter(hisRecordProject);
-            PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryAddList(pageBean);
-            return hisProjectPageBean;
-        }*/
+        if (tollRecordNumber.contains(Constants.HIS_HTR)) {
+            return hisRefundProjectService.saveForAppEdit(hisRefundProject, nums, ids, getUserName());
+        }
 //        HIS_HR = "HR";  //住院编号 头部
-        if(tollRecordNumber.contains(Constants.HIS_HR)) {
+        if (tollRecordNumber.contains(Constants.HIS_HR)) {
             hisRefundProject.setHospitalNumber(hisRefundProject.getTollRecordNumber());
             hisRefundProject.setTollRecordNumber(null);
+            return hisRefundProjectService.saveForAppEdit(hisRefundProject, nums, ids, getUserName());
         }
 
         return hisRefundProjectService.saveForAppEdit(hisRefundProject, nums, ids, getUserName());

@@ -1,5 +1,6 @@
 package com.ahsj.hiscore.controller.hisProject;
 
+import com.ahsj.hiscore.common.Constants;
 import com.ahsj.hiscore.entity.*;
 import com.ahsj.hiscore.services.*;
 import core.controller.BaseController;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import utils.EmptyUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -69,14 +71,14 @@ public class HisRefundProjectPriceController extends BaseController {
 
     /**
      * @return org.springframework.web.servlet.ModelAndView
-     * @功能说明  退项目打印 页面
+     * @功能说明 退项目打印 页面
      * @Params [token]
      * @Author XJP
      * @Date 2019/8/19
      * @Time 14:42
      **/
     @GetMapping("/print.ahsj")
-    public ModelAndView print(String token ,HisRefundProjectInfo hisRefundProjectInfo) throws Exception {
+    public ModelAndView print(String token, HisRefundProjectInfo hisRefundProjectInfo) throws Exception {
 
         List<HisRefundProjectInfo> printlylist = hisRefundProjectInfoService.printlylist(hisRefundProjectInfo);
         HisRefundProjectInfo info = printlylist.get(printlylist.size() - 1);
@@ -100,8 +102,39 @@ public class HisRefundProjectPriceController extends BaseController {
      * @Time 18:59
      **/
     @PostMapping("/refundProjectList.ahsj")
-    public PageBean<HisRecordProject>pageBeanList(HisRecordProject hisRecordProject) throws Exception {
+    public PageBean<HisRecordProject> pageBeanList(HisRecordProject hisRecordProject) throws Exception {
+        String tollRecordNumber = hisRecordProject.getTollRecordNumber();
         PageBean<HisRecordProject> pageBean = new PageBean<HisRecordProject>();
+        if (!EmptyUtil.Companion.isNullOrEmpty(tollRecordNumber)) {
+            //        HIS_HM = "HM"; //就诊记录编号 头部   medicalRecordId
+            if(tollRecordNumber.contains(Constants.HIS_HHM) || tollRecordNumber.contains(Constants.HIS_HM)) {
+                hisRecordProject.setRecordNumber(hisRecordProject.getTollRecordNumber());
+                hisRecordProject.setTollRecordNumber(null);
+                pageBean.setParameter(hisRecordProject);
+//                PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryAddList(pageBean);
+                PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryPriceList(pageBean);
+                return hisProjectPageBean;
+            }
+//         HIS_HTR = "HTR"; //交易流水号 头部
+            if (tollRecordNumber.contains(Constants.HIS_HTR)) {
+                pageBean.setParameter(hisRecordProject);
+//                PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryAddList(pageBean);
+                PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryPriceList(pageBean);
+                return hisProjectPageBean;
+            }
+//        HIS_HR = "HR";  //住院编号 头部
+            if (tollRecordNumber.contains(Constants.HIS_HR)) {
+                hisRecordProject.setHospitalNumber(hisRecordProject.getTollRecordNumber());
+                hisRecordProject.setTollRecordNumber(null);
+                pageBean.setParameter(hisRecordProject);
+//                PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryAddList(pageBean);
+                PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryPriceList(pageBean);
+                return hisProjectPageBean;
+
+
+            }
+        }
+
         pageBean.setParameter(hisRecordProject);
         pageBean = hisRecordProjectService.pageBeanList(pageBean);
         return pageBean;
@@ -117,7 +150,7 @@ public class HisRefundProjectPriceController extends BaseController {
      **/
     @PostMapping("/printlyList.ahsj")
     public List<HisRefundProjectDetail> HisRecordProjectLists(HisRefundProjectDetail hisRefundProjectDetail) throws Exception {
-        List<HisRefundProjectDetail> hisRefundProjectDetails =hisRefundProjectDetailService.HisRecordProjectLists(hisRefundProjectDetail);
+        List<HisRefundProjectDetail> hisRefundProjectDetails = hisRefundProjectDetailService.HisRecordProjectLists(hisRefundProjectDetail);
         return hisRefundProjectDetails;
     }
 
@@ -131,7 +164,7 @@ public class HisRefundProjectPriceController extends BaseController {
      **/
     @PostMapping("/save.ahsj")
     public Message saveHisRefundProjectInfo(HisRefundProjectInfo hisRefundProjectInfo) throws Exception {
-      //  return hisRefundProjectService.saveHisRefundProjectInfo(hisRefundProjectInfo);
+        //  return hisRefundProjectService.saveHisRefundProjectInfo(hisRefundProjectInfo);
         return hisTollRecordService.hisProjectSave(hisRefundProjectInfo);  //dingli
     }
 

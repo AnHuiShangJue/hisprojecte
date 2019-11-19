@@ -52,7 +52,8 @@
     delete from his_record_project
     where id = #{id,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisRecordProject" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisRecordProject" useGeneratedKeys="true"
+            keyProperty="id">
     insert into his_record_project (id, record_id, create_date, 
       create_user_id, update_date, update_user_id, 
       name, description, type, 
@@ -319,10 +320,12 @@
     </select>
 
     <select id="selectByRecordIdNotIsCheckdOrIsPayed" parameterType="java.lang.Long" resultMap="BaseResultMap">
-        select <include refid="Base_Column_List"/>
+        select
+        <include refid="Base_Column_List"/>
         from
-            his_record_project
-        where his_record_project.record_id = #{id,jdbcType=BIGINT} and his_record_project.is_payed = 2 and his_record_project.is_checked = 2;
+        his_record_project
+        where his_record_project.record_id = #{id,jdbcType=BIGINT} and his_record_project.is_payed = 2 and
+        his_record_project.is_checked = 2;
     </select>
 
 
@@ -543,7 +546,31 @@ where record_id #={medicalRecordId,jdbcType=BIGINT} and is_payed = 2
         select
         <include refid="Base_Column_List"/>
         from his_record_project
-        where record_id =(select id from his_medical_record where medical_record_id  =#{parameter.medicalNumber})
+        where record_id =(select id from his_medical_record where medical_record_id =#{parameter.medicalNumber})
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+
+    <!--xjp-->
+    <select id="queryPriceList" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        SELECT p.number,p.name,p.price,p.type, hrp.refund_num as refund_num ,p.price * hrp.refund_num as
+        project_sum_price from his_refund_project
+        hrp LEFT JOIN his_project p on hrp.record_project_id = p.id LEFT JOIN his_hospital_manage hhm on hhm.number =
+        hrp.record_number LEFT JOIN his_toll_record htr on htr.medical_record_id =hrp.record_number WHERE hrp.is_back =
+        2 and hrp.is_review = 1
+
+
+        <if test="parameter.recordNumber != null and parameter.recordNumber != ''">
+            and hrp.record_number =#{parameter.recordNumber,jdbcType=VARCHAR}
+        </if>
+        <if test="parameter.tollRecordNumber != null and parameter.tollRecordNumber != ''">
+            and htr.number =#{parameter.tollRecordNumber,jdbcType=VARCHAR}
+        </if>
+        <if test="parameter.hospitalNumber != null and parameter.hospitalNumber != ''">
+            and hhm.number =#{parameter.hospitalNumber,jdbcType=VARCHAR}
+        </if>
         <if test="parameter.orders != null and parameter.orders != ''">
             order by ${parameter.orders}
         </if>
