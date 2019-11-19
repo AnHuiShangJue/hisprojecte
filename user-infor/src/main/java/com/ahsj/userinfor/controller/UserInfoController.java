@@ -41,10 +41,50 @@ public class UserInfoController extends BaseOAController{
     }
 
 
-    @RequestMapping("/info/saveOrUpdateUserInfo.ahsj")
-    @ResponseBody
+//    @RequestMapping("/info/saveOrUpdateUserInfo.ahsj")
+//    @ResponseBody
     public Message innerSaveOrUpdateUserInfo(@RequestBody UserInfo user)  {
         return userInfoService.saveOrUpdateUserInfo(user);
+    }
+
+    @RequestMapping("/info/saveOrUpdateUserInfo.ahsj")
+    @ResponseBody
+    public Message innerSaveOrUpdateUserInfo(@RequestParam("userId") String userId,
+                                            @RequestParam("password") String password,
+                                            @RequestParam("userName") String userName,
+                                            @RequestParam(value = "sex",required = false) String sex,
+                                            @RequestParam(value = "deptId",required = false) String deptId,
+                                            @RequestParam(value = "delFlag",required = false) String delFlag,
+                                            @RequestParam(value = "isInitData",required = false) String isInitData,
+                                            @RequestParam(value = "telPhone",required = false) String telPhone){
+        UserInfo user = new UserInfo();
+        user.setUserId(userId);
+        user.setPassword(password);
+        user.setUserName(userName);
+        if(EmptyUtil.Companion.isNullOrEmpty(sex)){
+            user.setSex(sex);
+        }else{
+            user.setSex("1");
+        }
+        if(EmptyUtil.Companion.isNullOrEmpty(deptId)){
+            user.setDelFlag(deptId);
+        }else{
+            user.setDelFlag("1");
+        }
+
+        if(EmptyUtil.Companion.isNullOrEmpty(isInitData)){
+            user.setIsInitData(isInitData);
+        }else{
+            user.setIsInitData("1");
+        }
+        if(EmptyUtil.Companion.isNullOrEmpty(telPhone)){
+            user.setTelPhone(telPhone);
+        }
+        else{
+            user.setTelPhone("");
+        }
+        return userInfoService.saveOrUpdateUserInfo(user);
+
     }
 
     @RequestMapping("/delete.ahsj")

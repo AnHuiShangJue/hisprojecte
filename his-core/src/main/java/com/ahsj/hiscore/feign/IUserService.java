@@ -49,4 +49,14 @@ public interface IUserService {
     @LoadBalanced
      UserInfo getUserId(@RequestParam("id") Long id);
 
+    @PostMapping(value = "info/saveOrUpdateUserInfo.ahsj")
+    @LoadBalanced
+    BoolMessage saveOrUpdateUserInfo(@RequestParam("userId") String userId,
+                                             @RequestParam("password") String password,
+                                             @RequestParam("userName") String userName,
+                                             @RequestParam("sex") String sex,
+                                             @RequestParam("deptId") String deptId,
+                                             @RequestParam("delFlag") String delFlag,
+                                             @RequestParam("isInitData") String isInitData,
+                                             @RequestParam("telPhone") String telPhone);
 }

@@ -43,4 +43,10 @@ public class IUserServiceFallback implements IUserService {
         logger.error("服务获取异常,不能够访问组织服务");
         return new UserInfo();
     }
+
+    @Override
+    public BoolMessage saveOrUpdateUserInfo(String userId, String password, String userName, String sex, String deptId, String delFlag, String isInitData, String telPhone) {
+        logger.error("saveOrUpdateUserInfo,服务获取异常,不能够访问用户服务");
+        return (BoolMessage) MessageUtil.createMessage(false,"saveOrUpdateUserInfo,服务获取异常,不能够访问用户服务");
+    }
 }

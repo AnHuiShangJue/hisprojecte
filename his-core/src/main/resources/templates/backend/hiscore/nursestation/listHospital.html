@@ -387,7 +387,7 @@
 
         $("#print_btn1").click(function () {
             var MedicalRecordId = $("#MedicalRecordId").val();
-            var url = CTX + "/api/hisTollRecord/printAllInformation/index.ahsj?token="+TOKEN +"&HRNumber="+MedicalRecordId+"&isNurse="+2
+            var url = CTX + "/api/hisTollRecord/printAllInformation/index.ahsj?token="+TOKEN +"&HRNumber="+MedicalRecordId
             dialog.showDialog(url, "打印凭证预览", "700px", "700px");
         });
 
