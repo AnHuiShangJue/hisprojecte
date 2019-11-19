@@ -247,5 +247,25 @@ public interface HisHospitalManageService {
     Message sedBed(HisHospitalManage hisHospitalManage) throws Exception;
 
     //强制出院
-    Message forcedDischarge(HisHospitalManage hisHospitalManage)throws Exception;
+    Message forcedDischarge(HisHospitalManage hisHospitalManage) throws Exception;
+
+    /**
+     * @Description 根据交易流水号号查押金
+     * @Params: [number]
+     * @Author: dingli
+     * @Return: com.ahsj.hiscore.entity.HisHospitalManage
+     * @Date 2019/11/19
+     * @Time 10:29
+     **/
+    HisHospitalManage selectByTollNumber(String number) throws Exception;
+
+    /**
+     * @Description 根据就诊编号查询押金
+     * @Params: [number]
+     * @Author: dingli
+     * @Return: com.ahsj.hiscore.entity.HisHospitalManage
+     * @Date 2019/11/19
+     * @Time 10:35
+     **/
+    HisHospitalManage selectByMedicalNumber(String number) throws Exception;
 }

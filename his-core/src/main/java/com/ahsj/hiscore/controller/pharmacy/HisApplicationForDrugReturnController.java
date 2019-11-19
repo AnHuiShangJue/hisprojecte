@@ -13,17 +13,15 @@ import core.message.MessageUtil;
 import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import utils.EmptyUtil;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("/api/returnDrug/")
 public class HisApplicationForDrugReturnController {
     @Autowired
@@ -223,19 +221,38 @@ public class HisApplicationForDrugReturnController {
     public HisApplicationForDrugReturn getDrugDetails(String number) throws Exception {
         if (number.substring(0, 3).equals("HTR") && !EmptyUtil.Companion.isNullOrEmpty
                 (hisApplicationForDrugReturnService.getNumber(number))) {//交易流水号
+            HisHospitalManage hisHospitalManage = hisHospitalManageService.selectByTollNumber(number);
+            if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage)) {
+                HisApplicationForDrugReturn hisApplicationForDrugReturn = hisApplicationForDrugReturnService.getNumber(number);
+                hisApplicationForDrugReturn.setRestDeposit(hisHospitalManage.getRestDeposit());
+                hisApplicationForDrugReturn.setDeposit(hisApplicationForDrugReturn.getTotalPrice().add(hisHospitalManage.getRestDeposit()));
+                return hisApplicationForDrugReturn;
+            }
             return hisApplicationForDrugReturnService.getNumber(number);
         }
         if ((number.substring(0, 2).equals("HM") || number.substring(0, 3).equals("HHM")) && !EmptyUtil.Companion.isNullOrEmpty
                 (hisApplicationForDrugReturnService.selectByRecordNumber(number))
         ) {//就诊编号
+            HisHospitalManage hisHospitalManage = hisHospitalManageService.selectByMedicalNumber(number);
+            if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage)) {
+                HisApplicationForDrugReturn hisApplicationForDrugReturn = hisApplicationForDrugReturnService.selectByRecordNumber(number);
+                hisApplicationForDrugReturn.setRestDeposit(hisHospitalManage.getRestDeposit());
+                hisApplicationForDrugReturn.setDeposit(hisApplicationForDrugReturn.getTotalPrice().add(hisHospitalManage.getRestDeposit()));
+                return hisApplicationForDrugReturn;
+            }
             return hisApplicationForDrugReturnService.selectByRecordNumber(number);
         }
-        if (number.substring(0, 2).equals("HR")&& !EmptyUtil.Companion.isNullOrEmpty
-                (hisApplicationForDrugReturnService.selectByRecordNumber(number))) { //住院编号
+        if (number.substring(0, 2).equals("HR")) { //住院编号
             HisHospitalManage hisHospitalManage = hisHospitalManageService.selectNumber(number);
-            if(!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage)){
+            if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage) && !EmptyUtil.Companion.isNullOrEmpty
+                    (hisApplicationForDrugReturnService.selectByRecordNumber(hisHospitalManage.getMedicalNumber()))) {
+                HisApplicationForDrugReturn hisApplicationForDrugReturn = hisApplicationForDrugReturnService.selectByRecordNumber(hisHospitalManage.getMedicalNumber());
+                hisApplicationForDrugReturn.setRestDeposit(hisHospitalManage.getRestDeposit());
+                hisApplicationForDrugReturn.setDeposit(hisApplicationForDrugReturn.getTotalPrice().add(hisHospitalManage.getRestDeposit()));
+                return hisApplicationForDrugReturn;
+            }
             return hisApplicationForDrugReturnService.selectByRecordNumber(hisHospitalManage.getMedicalNumber());
-        }}
+        }
         return new HisApplicationForDrugReturn();
     }
 
@@ -273,5 +290,33 @@ public class HisApplicationForDrugReturnController {
         return hisPatientService.selectByMedicalRecordId(medicalNumber);
     }
 
+    /**
+     * @Description 获取押金
+     * @Params: [number]
+     * @Author: dingli
+     * @Return: com.ahsj.hiscore.entity.HisHospitalManage
+     * @Date 2019/11/19
+     * @Time 10:37
+     **/
+    @RequestMapping("getRestDeposit.ahsj")
+    public HisHospitalManage getRestDeposit(String number) throws Exception {
+        if (number.substring(0, 3).equals("HTR") && !EmptyUtil.Companion.isNullOrEmpty
+                (hisApplicationForDrugReturnService.getNumber(number))) {//交易流水号
+            return hisHospitalManageService.selectByTollNumber(number);
+        }
+        if ((number.substring(0, 2).equals("HM") || number.substring(0, 3).equals("HHM")) && !EmptyUtil.Companion.isNullOrEmpty
+                (hisApplicationForDrugReturnService.selectByRecordNumber(number))
+        ) {//就诊编号
+            return hisHospitalManageService.selectByMedicalNumber(number);
+        }
+        if (number.substring(0, 2).equals("HR") && !EmptyUtil.Companion.isNullOrEmpty
+                (hisApplicationForDrugReturnService.selectByRecordNumber(number))) { //住院编号
+            HisHospitalManage hisHospitalManage = hisHospitalManageService.selectNumber(number);
+            if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage)) {
+                return hisHospitalManageService.selectByMedicalNumber(number);
+            }
+        }
+        return new HisHospitalManage();
+    }
 
 }

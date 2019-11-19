@@ -3,6 +3,7 @@ package com.ahsj.hiscore.controller.hisProject;
 import com.ahsj.hiscore.common.Constants;
 import com.ahsj.hiscore.entity.*;
 import com.ahsj.hiscore.services.*;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 import core.controller.BaseController;
 import core.entity.PageBean;
 import core.message.Message;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import utils.EmptyUtil;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -52,6 +54,9 @@ public class HisRefundProjectPriceController extends BaseController {
 
     @Autowired
     HisTollRecordService hisTollRecordService;
+
+    @Autowired
+    HisHospitalManageService hisHospitalManageService;
 
     /**
      * @return org.springframework.web.servlet.ModelAndView
@@ -107,19 +112,30 @@ public class HisRefundProjectPriceController extends BaseController {
         PageBean<HisRecordProject> pageBean = new PageBean<HisRecordProject>();
         if (!EmptyUtil.Companion.isNullOrEmpty(tollRecordNumber)) {
             //        HIS_HM = "HM"; //就诊记录编号 头部   medicalRecordId
-            if(tollRecordNumber.contains(Constants.HIS_HHM) || tollRecordNumber.contains(Constants.HIS_HM)) {
+            if (tollRecordNumber.contains(Constants.HIS_HHM) || tollRecordNumber.contains(Constants.HIS_HM)) {
                 hisRecordProject.setRecordNumber(hisRecordProject.getTollRecordNumber());
                 hisRecordProject.setTollRecordNumber(null);
                 pageBean.setParameter(hisRecordProject);
-//                PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryAddList(pageBean);
+                //    PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryAddList(pageBean);
                 PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryPriceList(pageBean);
+                HisHospitalManage hisHospitalManage = hisHospitalManageService.selectByMedicalNumber(tollRecordNumber);
+                if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage)) {
+                    hisProjectPageBean.getData().get(0).setRestDeposit(hisHospitalManage.getRestDeposit());
+                    hisProjectPageBean.getData().get(0).setDeposit(hisHospitalManage.getRestDeposit().add(hisProjectPageBean.getData().get(0).getPrices()));
+                }
                 return hisProjectPageBean;
             }
 //         HIS_HTR = "HTR"; //交易流水号 头部
             if (tollRecordNumber.contains(Constants.HIS_HTR)) {
+
+                HisHospitalManage hisHospitalManage = hisHospitalManageService.selectByTollNumber(tollRecordNumber);
                 pageBean.setParameter(hisRecordProject);
-//                PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryAddList(pageBean);
+                   //  PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryAddList(pageBean);
                 PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryPriceList(pageBean);
+                if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage)) {
+                    hisProjectPageBean.getData().get(0).setRestDeposit(hisHospitalManage.getRestDeposit());
+                    hisProjectPageBean.getData().get(0).setDeposit(hisHospitalManage.getRestDeposit().add( hisProjectPageBean.getData().get(0).getPrices()));
+                }
                 return hisProjectPageBean;
             }
 //        HIS_HR = "HR";  //住院编号 头部
@@ -127,10 +143,14 @@ public class HisRefundProjectPriceController extends BaseController {
                 hisRecordProject.setHospitalNumber(hisRecordProject.getTollRecordNumber());
                 hisRecordProject.setTollRecordNumber(null);
                 pageBean.setParameter(hisRecordProject);
-//                PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryAddList(pageBean);
+                //  PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryAddList(pageBean);
                 PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryPriceList(pageBean);
+                HisHospitalManage hisHospitalManage = hisHospitalManageService.selectNumber(tollRecordNumber);
+                if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage)) {
+                    hisProjectPageBean.getData().get(0).setRestDeposit(hisHospitalManage.getRestDeposit());
+                    hisProjectPageBean.getData().get(0).setDeposit(hisHospitalManage.getRestDeposit().add(hisProjectPageBean.getData().get(0).getPrices()));
+                }
                 return hisProjectPageBean;
-
 
             }
         }

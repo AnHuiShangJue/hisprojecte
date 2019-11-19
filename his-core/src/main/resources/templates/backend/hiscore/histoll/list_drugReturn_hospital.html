@@ -90,6 +90,12 @@
 
 )</span>:</label>
                             </div>
+                            <div class="input-field col s4 l4 xl4">
+                                <input type="text" readonly id="restDeposit" name="restDeposit">
+                                <label class="active" for="restDeposit">押金<span style="font-size: 12px">(Remaining deposit
+
+)</span></label>
+                            </div>
                         </div>
                         <input type="hidden" name="voucher" id="voucher">
                         <input type="hidden" name="recordNumber" id="recordNumber">
@@ -101,7 +107,7 @@
                 <div class="col s12 x12 l12 xl12">
                     <div class="card">
                         <div class="card-content">
-                            <h4 class="card-title">退药收费
+                            <h4 class="card-title">住院退药收费
                             </h4><label style="color:black">Drug withdrawal charge
                         </label>
                             <!--Form Advance-->
@@ -135,6 +141,12 @@
                                 <div class="input-field col s4 l4 xl4">
                                     <input type="number" readonly id="recoverTheFee" name="recoverTheFee">
                                     <label class="active" for="recoverTheFee">实际找零金额<span style="font-size: 12px">(Actual change amount
+
+)</span></label>
+                                </div>
+                                <div class="input-field col s4 l4 xl4">
+                                    <input type="text" readonly id="deposit" name="deposit">
+                                    <label class="active" for="deposit">剩余押金<span style="font-size: 12px">(The remaining deposit
 
 )</span></label>
                                 </div>
@@ -186,7 +198,7 @@
             var reg3 = new RegExp(/^HHM\d{13}$/);
             var reg4 = new RegExp(/^HR\d{13}$/);
             var number = $("#number").val();
-            if (reg1.test(number) || reg2.test(number) || reg3.test(number) ||reg4.test(number)) {
+            if (reg1.test(number) || reg2.test(number) || reg3.test(number) || reg4.test(number)) {
                 grid.search();
                 getNumber();
                 $("#print_btn").attr("disabled", true);
@@ -214,6 +226,8 @@
         $("#actualCharge").attr("value", "");
         $("#reason").attr("value", "");
         $("#remark").attr("value", "");
+        $("#deposit").attr("value", "");
+        $("#restDeposit").attr("value", "");
     }
 
     function getNumber() {
@@ -226,9 +240,11 @@
                     changeInputValue("patientName", data.patientName);
                     changeInputValue("phonenumber", data.phonenumber);
                     changeInputValue("idcard", data.idcard);
-                    changeInputValue("recoverTheFee", data.totalPrice);
+                    changeInputValue("recoverTheFee", 0);
                     changeInputValue("money", 0);
                     changeInputValue("actualCharge", 0);
+                    changeInputValue("restDeposit", data.restDeposit);
+                    changeInputValue("deposit", data.deposit);
                     M.updateTextFields();
                     return true;
                 } else {
@@ -253,9 +269,9 @@
                 CTX + "/api/hisTollRecord/checkIsInpatient.ahsj",
                 {"tollNumber": tollNumber},
                 function (data) {
-                    if (!isNullOrEmpty(data.id)) {
-                        if (data.isDischarged == 1) {
-                            dialog.warn(tollNumber + "未出院，请选择住院退药收费！要退费的金额为：" + $("#recoverTheFee").val() + "相关联住院编号为:" + data.number);
+                    if (!isNullOrEmpty(data.id)) { //
+                        if (data.isDischarged == 2) {
+                            dialog.warn("已出院，本窗口只支持住院退药");
                         } else {
                             var json = grid.getDataTable().ajax.json().data;
                             var hisTollRecord = $("#sendForm").serialize();
@@ -293,7 +309,8 @@
                         }
                         return true;
                     } else {
-                        var json = grid.getDataTable().ajax.json().data;
+                        dialog.warn("不支持未住院退费！")
+                       /* var json = grid.getDataTable().ajax.json().data;
                         var hisTollRecord = $("#sendForm").serialize();
                         var hisTollHospiModel = {
                             "hisTollRecord": strToObj(hisTollRecord),
@@ -325,7 +342,7 @@
                             );
                         } else {
                             dialog.warn("没有退费信息！")
-                        }
+                        }*/
                     }
                 },
                 function () {

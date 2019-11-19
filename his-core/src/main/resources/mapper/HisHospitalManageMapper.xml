@@ -550,4 +550,13 @@ where a.is_discharged = 1 and b.type = 1 and c.is_stop = 2 and c.medical_order_t
 
     </update>
 
+    <select id="selectByTollNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+ select * from his_hospital_manage as m where m.medical_number =(
+ select h.medical_record_id
+ from his_toll_record h where h.number = #{number,jdbcType=VARCHAR})
+    </select>
+
+    <select id="selectByMedicalNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+ select * from his_hospital_manage as m where m.medical_number = #{number,jdbcType=VARCHAR}
+    </select>
 </mapper>

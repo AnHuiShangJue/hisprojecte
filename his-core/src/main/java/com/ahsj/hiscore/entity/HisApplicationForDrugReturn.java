@@ -59,6 +59,9 @@ public class HisApplicationForDrugReturn extends BaseEntity {
     private Integer isPayed;
     private String isPayeds;
 
+    private BigDecimal restDeposit;
+    private BigDecimal deposit;
+
     public String getIsPayeds() {
         return isPayeds;
     }
@@ -247,5 +250,21 @@ public class HisApplicationForDrugReturn extends BaseEntity {
 
     public void setIsPayed(Integer isPayed) {
         this.isPayed = isPayed;
+    }
+
+    public BigDecimal getRestDeposit() {
+        return restDeposit;
+    }
+
+    public void setRestDeposit(BigDecimal restDeposit) {
+        this.restDeposit = restDeposit;
+    }
+
+    public BigDecimal getDeposit() {
+        return deposit;
+    }
+
+    public void setDeposit(BigDecimal deposit) {
+        this.deposit = deposit;
     }
 }
