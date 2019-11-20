@@ -100,11 +100,13 @@ public class HisRecordProjectServiceImpl implements HisRecordProjectService {
     @Transactional(readOnly = true)
     public PageBean<HisRecordProject> queryPriceList(PageBean<HisRecordProject> pageBean) {
         List<HisRecordProject> hisRecordProjects = hisRecordProjectMapper.queryPriceList(pageBean);
-        BigDecimal price = new BigDecimal("0");
-        for (HisRecordProject datum : hisRecordProjects) {
-            price = datum.getProjectSumPrice().add(price);
-        }
-        hisRecordProjects.get(0).setPrices(price);  //应退金额
+        if (!EmptyUtil.Companion.isNullOrEmpty(hisRecordProjects)) {
+            BigDecimal price = new BigDecimal("0");
+            for (HisRecordProject datum : hisRecordProjects) {
+                price = datum.getProjectSumPrice().add(price);
+            }
+            hisRecordProjects.get(0).setPrices(price);
+        } //应退金额
         pageBean.setData(CodeHelper.getInstance().setCodeValue(hisRecordProjects));
         return pageBean;
     }
