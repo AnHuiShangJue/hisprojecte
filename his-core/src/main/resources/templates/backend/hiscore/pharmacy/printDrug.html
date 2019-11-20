@@ -93,7 +93,7 @@ Scripts
             function (data) {
                 var jsons = data[0];
                 if (!isNullOrEmpty(jsons)) {//有
-                    var trs = "<tr><td>名称(name)</td><td>数目(No.)</td><td>规格(specification)</td><td>用法用量(Dosage)</td><td>有效期(Validity period)</td></tr>";
+                    var trs = "<tr><td>名称(name)</td><td>数目(No.)</td><td>规格(specification)</td><td>用法用量(Dosage)</td></tr>";
                     $.each(data, function (index, item) {
                         if (isNullOrEmpty(item.drugsName)) {
                             item.drugsName = ""
@@ -113,7 +113,7 @@ Scripts
                         if (isNullOrEmpty(item.drugsSpec)) {
                             item.drugsSpec = ""
                         }
-                        trs += "<tr><td><label> " + item.drugsName + "(" + item.tdrugsName + ")" + "</label></td><td ><label> " + item.exitCount + "</label></td><td ><label> " + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</label></td><td ><label> " + item.description + "(" + item.tdescription + ")" + "</label></td><td ><label> " + item.validityPeriod + "</label></td></tr >";
+                        trs += "<tr><td><label> " + item.drugsName + "(" + item.tdrugsName + ")" + "</label></td><td ><label> " + item.exitCount + "</label></td><td ><label> " + item.drugsSpec + "(" + item.tdrugsSpec + ")" + "</label></td><td ><label> " + item.description + "(" + item.tdescription + ")" + "</label></td></tr >";
                     });
                     var jsons = data[0];
                     $("#recordNumber").html(jsons.recordNumber);

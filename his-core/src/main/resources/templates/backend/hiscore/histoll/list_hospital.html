@@ -481,7 +481,8 @@
             //获取基本信息
             $.ahsjajax(
                 CTX + "/api/hisTollRecord/hospital/details.ahsj",
-                {"medicalRecordId": MedicalRecordId},
+                {"medicalRecordId": MedicalRecordId,
+                 "isNurse":2},
                 function (data) {
                     if (!isNullOrEmpty(data.id)) {
                         changeInputValue("patientName",data.patientName);

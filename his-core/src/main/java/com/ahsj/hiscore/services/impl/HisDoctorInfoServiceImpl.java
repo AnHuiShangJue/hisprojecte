@@ -93,7 +93,7 @@ public class HisDoctorInfoServiceImpl implements HisDoctorInfoService {
                 return MessageUtil.createMessage(true, "更新成功");
             }
         } else {
-            int doctorNum = hisDoctorInfoMapper.selectNumberCount() + 1;
+/*            int doctorNum = hisDoctorInfoMapper.selectNumberCount() + 1;
             boolean flag = false;
             String doctorNumber = "";
             while (true) {
@@ -104,7 +104,7 @@ public class HisDoctorInfoServiceImpl implements HisDoctorInfoService {
                 else
                     doctorNum++;
             }
-            hisDoctorInfo.setNumb(doctorNumber);
+            hisDoctorInfo.setNumb(doctorNumber);*/
             List<HisDoctorInfo> check = hisDoctorInfoMapper.selectForInsert(hisDoctorInfo);
             if (check.size() > 0) {
                 return MessageUtil.createMessage(false, "新增失败!身份证或工号已存在！");
@@ -126,7 +126,8 @@ public class HisDoctorInfoServiceImpl implements HisDoctorInfoService {
                     }
                     return MessageUtil.createMessage(false, "新增失败!" + userInfo.getUserId() + "该工号对应的账号已经存在了!请修改工号!");
                 }
-                BoolMessage message = iUserService.saveOrUpdateUserInfo(userInfo);
+                BoolMessage message = iUserService.saveOrUpdateUserInfo(userInfo.getUserId(),userInfo.getPassword(),userInfo.getUserName(),userInfo.getSex(),
+                        userInfo.getDeptId(),userInfo.getDelFlag(),userInfo.getIsInitData(),userInfo.getTelPhone());
                 if (message.isSuccess()) {
                     hisDoctorInfoMapper.insert(hisDoctorInfo);
                     UserInfo successUserInfo = iUserService.selectByName(userInfo.getUserId());

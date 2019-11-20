@@ -474,7 +474,11 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         HisTollRecord hisTollRecord1 = hisTollHospiModel.getHisTollRecord();
         if (!EmptyUtil.Companion.isNullOrEmpty(hisTollRecord1.getDeposit())) { //住院退费
             HisHospitalManage hisHospitalManage = hisHospitalManageService.selectByMedicalNumber(hisApplicationForDrugReturnService.selectByVoucher(hisApplicationForDrugReturnDetails.get(0).getVoucher()).getRecordNumber());
-            hisHospitalManage.setRestDeposit(hisTollRecord1.getDeposit());
+            if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage.getRestDeposit())) {
+                hisHospitalManage.setRestDeposit(hisTollRecord1.getDeposit().add(hisHospitalManage.getRestDeposit()));
+            } else {
+                hisHospitalManage.setRestDeposit(hisTollRecord1.getDeposit());
+            }
             hisHospitalManageService.update(hisHospitalManage);
         }
         BigDecimal sumPrice = new BigDecimal("0");
@@ -482,9 +486,9 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             HisApplicationForDrugReturnDetails hisApplicationForDrugReturnDetails1 = hisApplicationForDrugReturnDetailsMapper.selectByPrimaryKey(hisApplicationForDrugReturnDetails.get(i).getId());
             sumPrice = sumPrice.add(hisApplicationForDrugReturnDetails1.getTotalPrice());
         }
-        if (sumPrice.compareTo(hisTollRecord1.getRecoverTheFee()) != 0) {
+      /*  if (sumPrice.compareTo(hisTollRecord1.getRecoverTheFee()) != 0) {
             return MessageUtil.createMessage(false, "退款金额不一致");
-        }
+        }*/
         String createdate = new SimpleDateFormat("yyyyMMdd").format(new Date());
         int count = hisTollRecordMapper.selectNumbCount(createdate) + 1;
         //编号
@@ -952,7 +956,11 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             List<HisRecordProject> hisRecordProjectList = hisRecordProjectMapper.pricelistsBytollRecordNumber(hisRecordProject);
             if (!EmptyUtil.Companion.isNullOrEmpty(hisRefundProjectInfo.getDeposit())) { //住院退项目
                 HisHospitalManage hisHospitalManage = hisHospitalManageService.selectByMedicalNumber(hisRefundProjectInfo.getRecordNumber());
-                hisHospitalManage.setRestDeposit(hisRefundProjectInfo.getDeposit());
+                if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage.getRestDeposit())) {
+                    hisHospitalManage.setRestDeposit(hisRefundProjectInfo.getDeposit().add(hisHospitalManage.getRestDeposit()));
+                } else {
+                    hisHospitalManage.setRestDeposit(hisRefundProjectInfo.getDeposit());
+                }
                 hisHospitalManageService.update(hisHospitalManage);
             }
 
@@ -966,7 +974,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             String createdate = new SimpleDateFormat("yyyyMMdd").format(new Date());
             int count = hisTollRecordMapper.selectNumbCount(createdate) + 1;
             //编号
-            HisTollRecord hisTollRecord1 = hisTollRecordMapper.selectByNumber(hisRefundProjectInfo.getTollRecordNumber());//
+            // HisTollRecord hisTollRecord1 = hisTollRecordMapper.selectByNumber(hisRefundProjectInfo.getTollRecordNumber());//
             String number = createdate + String.format("%05d", count);
             number = "HTR" + number;
             HisTollRecord hisTollRecord = new HisTollRecord();
@@ -974,7 +982,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             hisTollRecord.setActualCharge(new BigDecimal(0));
             hisTollRecord.setRecoverTheFee(hisRefundProjectInfo.getRefundSumProce());
             hisTollRecord.setAttenchType(8);//退项目
-            hisTollRecord.setMedicalRecordId(hisTollRecord1.getMedicalRecordId());
+            hisTollRecord.setMedicalRecordId(hisRefundProjectInfo.getRecordNumber());
             hisTollRecord.setIsSettlement(2);//未结算
             hisTollRecord.setNumber(number);//交易流水号
             hisTollRecord.setType(2);

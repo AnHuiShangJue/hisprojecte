@@ -3,6 +3,7 @@ package com.ahsj.wis.controller;
 import com.ahsj.wis.entity.Sys;
 import com.ahsj.wis.service.SysService;
 import core.message.Message;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,7 @@ import java.util.List;
  * @create 2019/11/15
  * @since 1.0.0
  */
+@Api(value = "/api/sys", tags = "智慧湾后台管理")
 @RestController
 @RequestMapping("/api/sys")
 public class SysController {
@@ -29,6 +31,14 @@ public class SysController {
     @Autowired
     SysService sysService;
 
+    /**
+     *@功能说明 
+     *@Params []
+     *@return org.springframework.web.servlet.ModelAndView
+     *@Author XJP
+     *@Date 2019/11/20
+     *@Time 14:10
+    **/
     @GetMapping("/admin.ahsj")
     public ModelAndView listIndex() throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/admins/list");

@@ -15,9 +15,9 @@
                     <form class="col s12" id="sendForm" action="#">
                         <input type="hidden" id="id" name="id" th:value="${hisDoctorInfo.id}">
                         <div class="row">
-                            <div class="input-field col s4 l4 xl4" th:if="${hisDoctorInfo.id != null}">
+                            <div class="input-field col s4 l4 xl4" >
                                 <input id="numb" name="numb" type="text" th:value="${hisDoctorInfo.numb}"
-                                data-error=".errorTxt2" th:readonly="true"/>
+                                data-error=".errorTxt2"/>
                                 <div class="errorTxt2"></div>
                                 <label for="numb">医生工号<span style="font-size: 12px">(Doctor number)</span></label>
                             </div>
