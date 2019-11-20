@@ -268,4 +268,10 @@ public interface HisHospitalManageService {
      * @Time 10:35
      **/
     HisHospitalManage selectByMedicalNumber(String number) throws Exception;
+
+
+
+    //jin
+    //就诊历史
+//    PageBean<HisHospitalManage> selectAllByPatientId(PageBean<HisHospitalManage> pageBean)throws Exception;
 }

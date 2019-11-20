@@ -903,6 +903,13 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
     public HisHospitalManage selectByMedicalNumber(String number) throws Exception {
         return hisHospitalManageMapper.selectByMedicalNumber(number);
     }
+
+//    @Override
+//    @Transactional(readOnly = true)
+//    public PageBean<HisHospitalManage> selectAllByPatientId(PageBean<HisHospitalManage> pageBean) throws Exception {
+//        return CodeHelper.getInstance().setCodeValue(hisHospitalManageMapper.selectNumber(number));
+//        return hisHospitalManageMapper.selectAllByPatientId(pageBean);
+//    }
 }
 
 

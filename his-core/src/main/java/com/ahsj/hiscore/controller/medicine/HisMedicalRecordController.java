@@ -280,6 +280,14 @@ public class HisMedicalRecordController extends BaseController {
         pageBean.setParameter(hisMedicalRecord);
         return hisMedicalRecordService.listForMedicalHistoryByPatientId(pageBean);
     }
+    //查询所有的历史记录
+    @ResponseBody
+    @RequestMapping(value = "listForAllHistoryByPatientId.ahsj")
+    public PageBean<HisMedicalRecord> listForAllHistoryByPatientId(Map<String, Object> model, HttpServletRequest request, HisMedicalRecord hisMedicalRecord) throws Exception {
+        PageBean<HisMedicalRecord> pageBean = new PageBean<HisMedicalRecord>();
+        pageBean.setParameter(hisMedicalRecord);
+        return hisMedicalRecordService.listForAllHistoryByPatientId(pageBean);
+    }
 
     /**
      * @return org.springframework.web.servlet.ModelAndView

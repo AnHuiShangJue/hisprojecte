@@ -119,6 +119,8 @@ public interface HisMedicalRecordMapper {
     **/
     List<? extends HisMedicalRecord> listForMedicalHistoryByPatientId(PageBean<HisMedicalRecord> pageBean);
 
+
+
     /**
      * @Description
      * @Author  muxu
@@ -128,6 +130,9 @@ public interface HisMedicalRecordMapper {
      * @Params [pageBean]
     **/
     List<? extends HisMedicalRecord> listForAllMedicalHistoryByPatientId(PageBean<HisMedicalRecord> pageBean);
+
+    //jin
+    List<? extends HisMedicalRecord> listForAllHistoryByPatientId(PageBean<HisMedicalRecord> pageBean);
 
     /**
      * @Description 查询打印信息
