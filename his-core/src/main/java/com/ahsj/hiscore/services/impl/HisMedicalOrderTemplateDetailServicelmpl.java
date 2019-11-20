@@ -3,7 +3,10 @@ package com.ahsj.hiscore.services.impl;
 import com.ahsj.hiscore.core.CodeHelper;
 import com.ahsj.hiscore.dao.HisMedicalOrderTemplateDetailMapper;
 import com.ahsj.hiscore.dao.HisMedicalOrderTemplateMapper;
-import com.ahsj.hiscore.entity.*;
+import com.ahsj.hiscore.entity.HisMedicalOrderTemplate;
+import com.ahsj.hiscore.entity.HisMedicalOrderTemplateDetail;
+import com.ahsj.hiscore.entity.HisPharmacyDetail;
+import com.ahsj.hiscore.entity.HisProject;
 import com.ahsj.hiscore.services.HisMedicalOrderTemplateDetailService;
 import com.ahsj.hiscore.services.HisPharmacyDetailService;
 import com.ahsj.hiscore.services.HisProjectService;
@@ -15,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utils.EmptyUtil;
 
-import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -143,7 +145,7 @@ public class HisMedicalOrderTemplateDetailServicelmpl implements HisMedicalOrder
         for (Long id : ids) {
             HisMedicalOrderTemplateDetail forRemove = hisMedicalOrderTemplateDetailMapper.selectByPrimaryKey(id);
             for (int i = 0; i < hisMedicalOrderTemplateDetailList.size(); i++) {
-                if (forRemove.getId() == hisMedicalOrderTemplateDetailList.get(i).getId()) {
+                if (forRemove.getId().equals( hisMedicalOrderTemplateDetailList.get(i).getId())) {
                     hisMedicalOrderTemplateDetailList.remove(i);
                     break;
                 }
