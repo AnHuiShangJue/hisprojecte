@@ -83,10 +83,11 @@
 
 )</span>:</label>
                             </div>
+
                             <input type="hidden" name="voucher" id="voucher">
-                            <input type="hidden" name="recordNumber" id="recordNumber">
                             <input type="hidden" name="returnId" id="returnId" value="">
                             <input type="hidden" name="vouchers" id="vouchers">
+                            <input type="hidden" name="medicalRecordNumber" id="medicalRecordNumber">
                         </div>
                     </div>
                 </div>
@@ -169,8 +170,10 @@
         initBtn();
         initTable();
         $("#print_btn").attr("disabled", true);
+        $("#send_btn").attr("disabled", false);
     });
     var grid = new Datatable();
+
     //搜索按钮
     function initBtn() {
         $('#searchBtn').click(function () {
@@ -183,6 +186,7 @@
                 grid.search();
                 getNumber();
                 $("#print_btn").attr("disabled", true);
+
             } else {
                 dialog.warn("所输入的数据不符合格式要求！请输入HTR开头的交易流水号/HR开头的住院编号/HHM开头的就诊记录编号")
             }
@@ -192,8 +196,10 @@
             grid.reset();
             resetNumber();
             $("#print_btn").attr("disabled", true);
+            $("#send_btn").attr("disabled", false);
         });
     }
+
     function resetNumber() {
         $("#patientName").val("");
         $("#phonenumber").attr("value", "");
@@ -206,33 +212,37 @@
         $("#actualCharge").attr("value", "");
         $("#reason").val("");
         $("#remark").attr("value", "");
+        $("#deposit").attr("value", "");
+        $("#restDeposit").attr("value", "");
+        $("#medicalRecordNumber").attr("value", "");
     }
+
     function getNumber() {
         var tollRecordNumber = $("#tollRecordNumber").val();
         $.ahsjajax(
             CTX + "/api/hisProject/refund/price/refundProjectList.ahsj",
             {
-                "tollRecordNumber": tollRecordNumber
+                "tollRecordNumber": tollRecordNumber,
             },
             function (msg) {
-                var data =   msg.data;
-                if (data == null || data == ""){
+                var data = msg.data;
+                if (data == null || data == "") {
                     dialog.warn("没有退费信息！")
                 } else {
-                    var patientNames = data[0].patientNames;
+                    var patientNames = data[0].patientName;
                     var remarks = data[0].remarks;
-                    var vouchers = data[0].vouchers;
+                    var voucher = data[0].voucher;
                     $("#patientName").val(patientNames);
                     $("#reason").val(remarks);
                     changeInputValue("money", 0);
-                    changeInputValue("vouchers", vouchers);
-                    changeInputValue("returnId", vouchers);
+                    changeInputValue("voucher", voucher);
+                    changeInputValue("medicalRecordNumber", data[0].medicalRecordNumber);
+                    //  changeInputValue("returnId", vouchers);
                     changeInputValue("actualCharge", 0);
                     var sum = 0;
                     for (var i = 0; i < data.length; i++) {
                         var projectSumPrice = data[i].projectSumPrice;
                         sum = sum + projectSumPrice;
-
                     }
                     changeInputValue("recoverTheFee", sum.toFixed(2));
                 }
@@ -243,52 +253,64 @@
             }
         );
     }
+
     var number; //交易流水号
     $('#send_btn').click(function () {
         dialog.confirm('确定退费吗?', function (index, layero) {
             var refundSumProce = $("#recoverTheFee").val();
             var tollRecordNumber = $("#tollRecordNumber").val();
-            var voucher = $("#vouchers").val();
+            var voucher = $("#voucher").val();
             var returnId = $("#returnId").val();
-
+            var medicalRecordNumber = $("#medicalRecordNumber").val();
             $.ahsjajax(
                 CTX + "/api/hisTollRecord/checkIsInpatient.ahsj",
-                {"tollNumber": tollRecordNumber},
+                {
+                    "tollNumber": tollRecordNumber
+
+                },
                 function (data) {
                     if (!isNullOrEmpty(data.id)) {
-                        if(data.isDischarged == 1) {
-                            dialog.warn(tollRecordNumber + "未出院，请把要退费的金额冲入对应押金！要退费的金额为：" + $("#recoverTheFee").val() + "相关联住院编号为:" + data.number);
-                        }else {
-                            if (returnId != "" && returnId != null && returnId != undefined) {
-                                $.ahsjajax(
-                                    CTX + "/api/hisProject/refund/price/save.ahsj",
-                                    {"voucher": voucher, "tollRecordNumber": tollRecordNumber, "refundSumProce": refundSumProce},
-                                    function (msg) {
-                                        if (msg.success) {
-                                            data = msg.message.substring(0, 5);//截取成功信息
-                                            M.toast({html: data});
-                                            dialog.success("退款成功！");
-                                            number = msg.message.substring(5); //截取交易流水号
-                                            $("#print_btn").attr("disabled", false);
-                                            return true;
-                                        } else {
-                                            data = msg.message.substring(0, 5);//截取成功信息
-                                            dialog.warn(data);
-                                            return false;
-                                        }
-                                    }
-                                );
-                            }else {
-                                dialog.warn("没有退费信息！")
-                            }
-                        }
-                        return true;
-                    }
-                    else {
-                        if (returnId != "" && returnId != null && returnId != undefined) {
+                        dialog.warn("不支持住院退费！")
+                        /*     if (data.isDischarged == 2) {
+                                 dialog.warn("已出院，本窗口只支持住院退项目");
+                             } else {
+                                 $.ahsjajax(
+                                     CTX + "/api/hisProject/refund/price/save.ahsj",
+                                     {
+                                         "voucher": voucher,
+                                         "tollRecordNumber": tollRecordNumber,
+                                         "refundSumProce": refundSumProce,
+                                         "deposit": deposit,
+                                         "recordNumber": medicalRecordNumber
+                                     },
+                                     function (msg) {
+                                         if (msg.success) {
+                                             data = msg.message.substring(0, 5);//截取成功信息
+                                             M.toast({html: data});
+                                             dialog.success("退款成功！");
+                                             number = msg.message.substring(5); //截取交易流水号
+                                             $("#print_btn").attr("disabled", false);
+                                             return true;
+                                         } else {
+                                             data = msg.message.substring(0, 5);//截取成功信息
+                                             dialog.warn(data);
+                                             return false;
+                                         }
+                                     }
+                                 );
+                             }
+                             return true;*/
+                    } else {
+
+                        if (voucher != "" && voucher != null && voucher != undefined) {
                             $.ahsjajax(
                                 CTX + "/api/hisProject/refund/price/save.ahsj",
-                                {"voucher": voucher, "tollRecordNumber": tollRecordNumber, "refundSumProce": refundSumProce},
+                                {
+                                    "voucher": voucher,
+                                    "tollRecordNumber": tollRecordNumber,
+                                    "refundSumProce": refundSumProce,
+                                    "recordNumber": medicalRecordNumber
+                                },
                                 function (msg) {
                                     if (msg.success) {
                                         data = msg.message.substring(0, 5);//截取成功信息
@@ -296,6 +318,7 @@
                                         dialog.success("退款成功！");
                                         number = msg.message.substring(5); //截取交易流水号
                                         $("#print_btn").attr("disabled", false);
+                                        $("#send_btn").attr("disabled", true);
                                         return true;
                                     } else {
                                         data = msg.message.substring(0, 5);//截取成功信息
@@ -304,7 +327,7 @@
                                     }
                                 }
                             );
-                        }else {
+                        } else {
                             dialog.warn("没有退费信息！")
                         }
                     }
@@ -315,62 +338,63 @@
                 }
             );
         });
-   });
+    });
 
-/*    $("#print_btn").click(function () {
-        dialog.confirm('确定打印吗?', function (index, layero) {
-            var voucher = $("#vouchers").val();
-            var tollRecordNumber = $("#tollRecordNumber").val();
-            var refundSumProce = $("#recoverTheFee").val();
-            if (voucher != "" && voucher != null && voucher != undefined) {
-                var url = CTX + "/api/hisProject/refund/price/print.ahsj?tollRecordNumber=" + tollRecordNumber + "&refundSumProce="+refundSumProce+"&token=" + TOKEN+"&voucher="+voucher;
-                dialog.showDialog(url, "打印凭证预览", "700px", "700px");
-            } else {
-                dialog.warn("没有需要打印的内容！");
-            }
-        });
-    });*/
+    /*    $("#print_btn").click(function () {
+            dialog.confirm('确定打印吗?', function (index, layero) {
+                var voucher = $("#vouchers").val();
+                var tollRecordNumber = $("#tollRecordNumber").val();
+                var refundSumProce = $("#recoverTheFee").val();
+                if (voucher != "" && voucher != null && voucher != undefined) {
+                    var url = CTX + "/api/hisProject/refund/price/print.ahsj?tollRecordNumber=" + tollRecordNumber + "&refundSumProce="+refundSumProce+"&token=" + TOKEN+"&voucher="+voucher;
+                    dialog.showDialog(url, "打印凭证预览", "700px", "700px");
+                } else {
+                    dialog.warn("没有需要打印的内容！");
+                }
+            });
+        });*/
     $("#print_btn").click(function () {
         layer.open({
             content: '打印小票（Print a small ticket）'
-            ,btn: ['财务联（Financial union）', '科室联（Department）', '自由联（Free association）']
-            ,yes: function(index, layero){
+            , btn: ['财务联（Financial union）', '科室联（Department）', '自由联（Free association）']
+            , yes: function (index, layero) {
                 //按钮【按钮一】的回调
                 if (number != "" && number != null && number != undefined) {
-                    var url = CTX + "/api/hisTollRecord/printDrugFive/index.ahsj?number=" + number + "&token=" + TOKEN+"&type=1";
+                    var url = CTX + "/api/hisTollRecord/printDrugFive/index.ahsj?number=" + number + "&token=" + TOKEN + "&type=1";
                     dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                 } else {
                     dialog.warn("没有需要打印的内容！")
                 }
             }
-            ,btn2: function(index, layero){
+            , btn2: function (index, layero) {
                 //按钮【按钮二】的回调
                 if (number != "" && number != null && number != undefined) {
-                    var url = CTX + "/api/hisTollRecord/printDrugFive/index.ahsj?number=" + number + "&token=" + TOKEN+"&type=2";
+                    var url = CTX + "/api/hisTollRecord/printDrugFive/index.ahsj?number=" + number + "&token=" + TOKEN + "&type=2";
                     dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                 } else {
                     dialog.warn("没有需要打印的内容！")
                 }
 
-                return false ;
+                return false;
             }
-            ,btn3: function(index, layero){
+            , btn3: function (index, layero) {
                 //按钮【按钮三】的回调
                 if (number != "" && number != null && number != undefined) {
-                    var url = CTX + "/api/hisTollRecord/printDrugFive/index.ahsj?number=" + number + "&token=" + TOKEN+"&type=3";
+                    var url = CTX + "/api/hisTollRecord/printDrugFive/index.ahsj?number=" + number + "&token=" + TOKEN + "&type=3";
                     dialog.showDialog(url, "打印凭证预览", "700px", "700px");
                 } else {
                     dialog.warn("没有需要打印的内容！")
                 }
-                return false ;
+                return false;
             }
-            ,cancel: function(){
+            , cancel: function () {
                 //右上角关闭回调
 
                 // return false ;
             }
         });
     })
+
     function initTable() {
         grid.init({
             src: $("#data-table-simple"),
@@ -426,12 +450,14 @@
                         "name": "project_sum_price"
                     }
                 ],
-                "order": [ [ 2, 'asc' ] ]
+                "order": [
+                    [2, 'asc']
+                ]
             }
         });
     }
 
-    $("input").change(function(){
+    $("input").change(function () {
         $(this).val($(this).val().trim());
     });
 </script>

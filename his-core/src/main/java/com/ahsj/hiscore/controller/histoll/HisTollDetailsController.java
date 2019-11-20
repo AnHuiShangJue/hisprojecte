@@ -421,6 +421,7 @@ public class HisTollDetailsController extends BaseController {
         modelAndView.addObject("title", "打印凭证预览");
         modelAndView.addObject("token", token);
         modelAndView.addObject("number", number);
+        modelAndView.addObject("loginName", getUserName());
         return modelAndView;
     }
 
