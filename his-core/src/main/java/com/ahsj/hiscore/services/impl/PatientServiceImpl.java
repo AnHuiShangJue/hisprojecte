@@ -90,7 +90,7 @@ public class PatientServiceImpl implements HisPatientService {
                         boolean flag = true;
                         while(flag){
                             idNum = idNum+1;
-                            UserInfo userCheck = iUserService.getUserLoginId("未提供身份证"+idNum);
+                            UserInfo userCheck = iUserService.selectByName("未提供身份证"+idNum);
                             if(EmptyUtil.Companion.isNullOrEmpty(userCheck.getId())){
                                 flag = false;
                             }
@@ -111,7 +111,7 @@ public class PatientServiceImpl implements HisPatientService {
                 if (!EmptyUtil.Companion.isNullOrEmpty(hisPatientInfo.getPhonenumber())) {
                     userInfo.setTelPhone(hisPatientInfo.getPhonenumber().toString());
                 }
-                UserInfo userCheck = iUserService.getUserLoginId(userInfo.getUserId());
+                UserInfo userCheck = iUserService.selectByName(userInfo.getUserId());
                 if (!EmptyUtil.Companion.isNullOrEmpty(userCheck.getId())) {
                     //说明访问用户服务失败
                     if (userCheck.getId().equals(-1)) {
@@ -123,7 +123,7 @@ public class PatientServiceImpl implements HisPatientService {
                         ,userInfo.getSex(),userInfo.getDeptId(),userInfo.getDelFlag(),userInfo.getIsInitData(),userInfo.getTelPhone());
                 if (message.isSuccess()) {
                     hisPatientInfoMapper.insert(hisPatientInfo);
-                    UserInfo successUserInfo = iUserService.getUserLoginId(userInfo.getUserId());
+                    UserInfo successUserInfo = iUserService.selectByName(userInfo.getUserId());
                     HisUserPaitent hisUserPaitent = new HisUserPaitent();
                     hisUserPaitent.setUserId(successUserInfo.getId());
                     hisUserPaitent.setPatientId(hisPatientInfo.getId());
