@@ -4,6 +4,8 @@ import com.ahsj.wis.entity.Sys;
 import com.ahsj.wis.entity.WisdomIndex;
 import com.ahsj.wis.service.SysService;
 import com.ahsj.wis.service.WisdomIndexService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +25,7 @@ import java.util.List;
  * @create 2019/11/6
  * @since 1.0.0
  */
-
+@Api(value = "/", tags = "智慧湾初始化")
 @RestController
 public class InitController {
     @Autowired
@@ -33,6 +35,15 @@ public class InitController {
     @Autowired
     SysService sysService;
 
+    /**
+     * @return org.springframework.web.servlet.ModelAndView
+     * @功能说明
+     * @Params []
+     * @Author XJP
+     * @Date 2019/11/20
+     * @Time 13:42
+     **/
+    @ApiOperation(value = "进入智慧湾首页", notes = "进入智慧湾首页")
     @RequestMapping(value = "/", method = {RequestMethod.POST, RequestMethod.GET})
     public ModelAndView databasebackup() throws Exception {
         List<WisdomIndex> wisdomIndices = wisdomIndexService.selectAll();
@@ -44,6 +55,15 @@ public class InitController {
     }
 
 
+    /**
+     * @return org.springframework.web.servlet.ModelAndView
+     * @功能说明
+     * @Params []
+     * @Author XJP
+     * @Date 2019/11/20
+     * @Time 13:42
+     **/
+    @ApiOperation(value = "进入智慧湾后台管理页面", notes = "进入智慧湾后台管理页面")
     @GetMapping("/admin.ahsj")
     public ModelAndView listIndex() throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/admins/list");
@@ -52,6 +72,15 @@ public class InitController {
         return modelAndView;
     }
 
+    /**
+     * @return org.springframework.web.servlet.ModelAndView
+     * @功能说明
+     * @Params []
+     * @Author XJP
+     * @Date 2019/11/20
+     * @Time 13:43
+     **/
+    @ApiOperation(value = "进入智慧湾修改页面", notes = "进入智慧湾修改页面")
     @RequestMapping("/update.ahsj")
     ModelAndView lanhuIndexUpdate() throws Exception {
         List<WisdomIndex> wisdomIndices = wisdomIndexService.selectAll();

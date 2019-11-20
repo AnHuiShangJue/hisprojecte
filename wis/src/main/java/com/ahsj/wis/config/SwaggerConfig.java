@@ -34,7 +34,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("api文档")
+                .title("智慧湾开发api文档")
                 .description("restFUL 风格接口")
                 .version("1.0.0")
                 .build();
