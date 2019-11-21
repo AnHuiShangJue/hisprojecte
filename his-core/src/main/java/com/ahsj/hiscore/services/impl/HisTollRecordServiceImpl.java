@@ -474,11 +474,12 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         HisTollRecord hisTollRecord1 = hisTollHospiModel.getHisTollRecord();
         if (!EmptyUtil.Companion.isNullOrEmpty(hisTollRecord1.getDeposit())) { //住院退费
             HisHospitalManage hisHospitalManage = hisHospitalManageService.selectByMedicalNumber(hisApplicationForDrugReturnService.selectByVoucher(hisApplicationForDrugReturnDetails.get(0).getVoucher()).getRecordNumber());
-            if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage.getRestDeposit())) {
+        /*    if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage.getRestDeposit())) {
                 hisHospitalManage.setRestDeposit(hisTollRecord1.getDeposit().add(hisHospitalManage.getRestDeposit()));
             } else {
                 hisHospitalManage.setRestDeposit(hisTollRecord1.getDeposit());
-            }
+            }*/
+            hisHospitalManage.setRestDeposit(hisTollRecord1.getDeposit());
             hisHospitalManageService.update(hisHospitalManage);
         }
         BigDecimal sumPrice = new BigDecimal("0");
@@ -956,11 +957,12 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             List<HisRecordProject> hisRecordProjectList = hisRecordProjectMapper.pricelistsBytollRecordNumber(hisRecordProject);
             if (!EmptyUtil.Companion.isNullOrEmpty(hisRefundProjectInfo.getDeposit())) { //住院退项目
                 HisHospitalManage hisHospitalManage = hisHospitalManageService.selectByMedicalNumber(hisRefundProjectInfo.getRecordNumber());
-                if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage.getRestDeposit())) {
+              /*  if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage.getRestDeposit())) {
                     hisHospitalManage.setRestDeposit(hisRefundProjectInfo.getDeposit().add(hisHospitalManage.getRestDeposit()));
                 } else {
                     hisHospitalManage.setRestDeposit(hisRefundProjectInfo.getDeposit());
-                }
+                }*/
+                hisHospitalManage.setRestDeposit(hisRefundProjectInfo.getDeposit());
                 hisHospitalManageService.update(hisHospitalManage);
             }
 

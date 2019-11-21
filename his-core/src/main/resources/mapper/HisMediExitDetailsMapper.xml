@@ -17,6 +17,7 @@
         <result column="is_del" property="isDel" jdbcType="INTEGER"/>
         <result column="count" property="count" jdbcType="INTEGER"/>
         <result column="total_price" property="totalPrice" jdbcType="DECIMAL"/>
+        <result column="price" property="price" jdbcType="DECIMAL"/>
         <result column="drugs_numb" property="drugsNumb" jdbcType="VARCHAR"/>
         <result column="drugs_name" property="drugsName" jdbcType="VARCHAR"/>
         <result column="drugs_alias" property="drugsAlias" jdbcType="VARCHAR"/>
@@ -340,7 +341,7 @@ order by his_medi_exit_details.create_date desc
   </select>
 
     <select id="listByIds" resultMap="BaseResultMap">
-        select m.id ,e.toll_number,b.description,b.id as pharmacy_id,
+        select m.id ,e.toll_number,b.description,b.id as pharmacy_id,e.total_price,a.price,
         e.drugs_name,e.drugs_spec,e.exit_count,e.create_date,i.user_name,e.record_number,o.`name` as
         patient_Name,o.sex as sex, o.age as age,e.validity_period,d.user_name as doctorName
         from his_medi_exit_details as e

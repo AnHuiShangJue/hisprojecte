@@ -30,6 +30,8 @@ public class HisMediExitDetails extends BaseEntity {
 
     private BigDecimal totalPrice;
 
+    private BigDecimal price;
+
     private String drugsNumb;
 
     private String drugsName;
@@ -128,6 +130,14 @@ public class HisMediExitDetails extends BaseEntity {
     @Override
     public String getUserName() {
         return userName;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     @Override
