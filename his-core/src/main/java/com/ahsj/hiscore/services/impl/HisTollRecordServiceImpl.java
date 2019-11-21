@@ -514,7 +514,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             hisTollDetails.setIsSettlement(2);
             hisTollDetails.setName(h.getDrugsName());
             hisTollDetails.setTargetId(h.getId());
-            hisTollDetails.setMoney(h.getPrice());
+            hisTollDetails.setMoney((h.getPrice()).multiply(new BigDecimal(h.getReturnCount())));
             hisTollDetails.setType(4);//药品退费
             hisTollDetails.setTollRecordId(hisTollRecord.getId());
             hisTollDetailsService.insert(hisTollDetails);
@@ -992,7 +992,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             //明细
             // List<HisRecordProject> pricelistsBytollRecordNumber = hisRecordProjectService.pricelistsBytollRecordNumber(hisRecordProject);
             HisRefundProject hisRefundProject = new HisRefundProject();
-           // hisRefundProject.setTollRecordNumber(hisRefundProjectInfo.getTollRecordNumber());
+            // hisRefundProject.setTollRecordNumber(hisRefundProjectInfo.getTollRecordNumber());
             hisRefundProject.setRecordNumber(hisRefundProjectInfo.getRecordNumber());
             List<HisRefundProject> refundProjectList = hisRefundProjectMapper.queryHisRefundProject(hisRefundProject);
             for (HisRefundProject h : refundProjectList) {
@@ -1001,9 +1001,10 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
                 hisTollDetails.setIsSettlement(2);
                 hisTollDetails.setName(hisRecordProject1.getName());
                 hisTollDetails.setTargetId(h.getId());
-                hisTollDetails.setMoney(hisRecordProject1.getPrice());
+                hisTollDetails.setMoney(hisRecordProject1.getPrice().multiply(new BigDecimal(h.getRefundNum())));
                 hisTollDetails.setType(5);//项目退费
                 hisTollDetails.setTollRecordId(hisTollRecord.getId());
+                hisTollDetails.toString();
                 hisTollDetailsService.insert(hisTollDetails);
                 h.setIsBack(1);  //将退项目设置为已退
                 hisRefundProjectMapper.updateByHisRefundProjectListBack(refundProjectList);
