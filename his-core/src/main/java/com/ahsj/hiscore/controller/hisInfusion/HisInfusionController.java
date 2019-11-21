@@ -512,6 +512,9 @@ public class HisInfusionController extends BaseController {
         modelAndView.addObject("hisPatientInfo",hisPatientInfo);
         modelAndView.addObject("hisInfusionList",hisInfusionList);
         modelAndView.addObject("number",hisHospitalManage.getNumber());
+        if(EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage.getBedsNumber()))
+            hisHospitalManage.setBedsNumber(0);
+        modelAndView.addObject("bedNumber",hisHospitalManage.getBedsNumber());
 
       /*  SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String time =formatter.format(hisInfusionList.get(0).getUpdateDate());

@@ -118,6 +118,7 @@ public class HisMedicalRecordController extends BaseController {
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/medicalrecord/list");
         modelAndView.addObject("title", "医疗信息系统");
         modelAndView.addObject("token", token);
+        String deptId = getDeptId();
         modelAndView.addObject("userDepartId", getDeptId());
         return modelAndView;
     }

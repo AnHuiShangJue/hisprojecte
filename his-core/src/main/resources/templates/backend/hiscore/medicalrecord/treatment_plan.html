@@ -58,15 +58,6 @@
 )</span></label>
                                 </div>
                                 <div class="input-field col s12 x12 m12 l12 xl12">
-                                    <textarea type="text" id="hiscondition" class="materialize-textarea"
-                                              th:text="${hisMedical.hiscondition}"
-                                              name="hiscondition"
-                                              data-length="255"></textarea>
-                                    <label for="hiscondition" class="active">既 往 病 史<span style="font-size: 12px">(Past medical history
-
-)</span></label>
-                                </div>
-                                <div class="input-field col s12 x12 m12 l12 xl12">
                                     <textarea type="text" id="nowCondition" class="materialize-textarea"
                                               th:text="${hisMedical.nowCondition}"
                                               name="nowCondition"
@@ -76,6 +67,16 @@
 )</span></label>
                                 </div>
                                 <div class="input-field col s12 x12 m12 l12 xl12">
+                                    <textarea type="text" id="hiscondition" class="materialize-textarea"
+                                              th:text="${hisMedical.hiscondition}"
+                                              name="hiscondition"
+                                              data-length="255"></textarea>
+                                    <label for="hiscondition" class="active">既 往 病 史<span style="font-size: 12px">(Past medical history
+
+)</span></label>
+                                </div>
+
+                                <div class="input-field col s12 x12 m12 l12 xl12">
                                     <textarea type="text" id="personalHistory" class="materialize-textarea"
                                               th:text="${hisMedical.personalHistory}"
                                               name="personalHistory"
@@ -84,16 +85,16 @@
 
 )</span></label>
                                 </div>
-                                <div class="input-field col s12 x12 m12 l12 xl12">
-                                    <textarea type="text" id="allergies" class="materialize-textarea"
-                                              name="allergies"
-                                              th:text="${hisMedical.allergies}"
-                                              data-length="255">
-                                    </textarea>
-                                    <label for="allergies">过 敏 史<span style="font-size: 12px">(allergies
+                                <!--<div class="input-field col s12 x12 m12 l12 xl12">-->
+                                    <!--<textarea type="text" id="allergies" class="materialize-textarea"-->
+                                              <!--name="allergies"-->
+                                              <!--th:text="${hisMedical.allergies}"-->
+                                              <!--data-length="255">-->
+                                    <!--</textarea>-->
+                                    <!--<label for="allergies">过 敏 史<span style="font-size: 12px">(allergies-->
 
-)</span></label>
-                                </div>
+<!--)</span></label>-->
+                                <!--</div>-->
                                 <div class="input-field col s12 x12 m12 l12 xl12">
                                                                     <textarea type="text" id="familyHistory"
                                                                               class="materialize-textarea"
@@ -1126,7 +1127,7 @@
                         tmps[i] = {
                             "id": id,
                             "drugsNumb": json[j].drugsNumb,
-                            "drugname": json[j].drugsName + "  「",
+                            "drugname": "「  "+ json[j].drugsName ,
                             "drugsSpec": json[j].drugsSpec
                         };
                     }else if(sign == ids.length - 1){
@@ -1140,7 +1141,7 @@
                         tmps[i] = {
                             "id": id,
                             "drugsNumb": json[j].drugsNumb,
-                            "drugname": json[j].drugsName + "  |",
+                            "drugname": json[j].drugsName,
                             "drugsSpec": json[j].drugsSpec
                         };
                     }

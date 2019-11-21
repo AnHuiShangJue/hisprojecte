@@ -31,9 +31,11 @@
             <table border="1" cellspacing="0" class="table" id="table_id">
                 <tr>
                     <td>NO：</td>
-                    <td th:text="${number}" colspan="3"></td>
+                    <td th:text="${number}" colspan="2"></td>
+                    <td>床号：</td>
+                    <td th:text="${bedNumber}"></td>
                     <td>科别：</td>
-                    <td th:text="${hisPatientInfo.departmentName}" colspan="2"></td>
+                    <td th:text="${hisPatientInfo.departmentName}"></td>
                 </tr>
                 <tr>
                     <td style="border: 1px solid grey;">
@@ -137,10 +139,10 @@
             importCSS: false,
             debug: false,
             afterPrint: function () {
-                dialog.confirm('确定打印?', function (index, layero) {
-
-
-                })
+                // dialog.confirm('确定打印?', function (index, layero) {
+                //
+                //
+                // })
             }
         })
     }
