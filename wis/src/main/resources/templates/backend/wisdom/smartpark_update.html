@@ -33,7 +33,14 @@
             <section class="wow fadeInDown" style="font-size: 350%;">
                 <input id="title" name="title" type="text" class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;letter-spacing: 7px;font-size: 1em;margin-top: 3%;" th:value="${smartpark.title}">
                 <input id="description" name="description" type="text" class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;font-size: 0.4em;margin-top: 10%;" th:value="${smartpark.description}">
-                <img id="a1" src="/bootstrap/images/wisdom/milky-way-2695569_1920.jpg" class="img-responsive" alt="Responsive image" style="margin-top: -80px;height: 793px;width: 100%"/>
+                <section class="wow fadeInDown">
+                    <div style="position: absolute;font-size: 0.3em;margin-top: 29%;margin-left: 14%;width: 216px;" class="text-center">一<br><input  id="organizationalTitle1" name="organizationalTitle1" type="text"  th:value="${smartpark.organizationalTitle1}"><br><textarea id="organizationalStructure2" name="organizationalStructure2" type="text" class="materialize-textarea" style="width: 100%;height: 115px;"  th:text="${smartpark.organizationalStructure2}"></textarea></div>
+                    <div style="position: absolute;font-size: 0.3em;margin-top: 16%;margin-left: 15%;width: 214px;" class="text-center">二<br><input  id="organizationalTitle2" name="organizationalTitle2" type="text"  th:value="${smartpark.organizationalTitle2}"><br><textarea id="organizationalStructure1" name="organizationalStructure1" type="text" class="materialize-textarea" style="width: 100%;height: 75px;"  th:text="${smartpark.organizationalStructure1}"></textarea></div>
+                    <div style="position: absolute;font-size: 0.3em;margin-top: 16%;margin-left: 68%;width: 278px;" class="text-center">三<br><input  id="organizationalTitle3" name="organizationalTitle3" type="text"  th:value="${smartpark.organizationalTitle3}"><br><textarea id="organizationalStructure3" name="organizationalStructure3" type="text" class="materialize-textarea" style="width: 100%;height: 94px;"  th:text="${smartpark.organizationalStructure3}"></textarea></div>
+                    <div style="position: absolute;font-size: 0.3em;margin-top: 29%;margin-left: 75%;width: 100px;" class="text-center">综合<br><textarea id="organizationalStructure4" name="organizationalStructure4" type="text" class="materialize-textarea" style="width: 111%;height: 104px;"   th:text="${smartpark.organizationalStructure4}"></textarea></div>
+                    <div style="position: absolute;font-size: 0.2em;margin-top: 40%;margin-left: 41%;" class="text-center"><textarea id="organizationalStructure5" name="organizationalStructure5" type="text" class="materialize-textarea" style="width: 172%;height: 31px;"  th:text="${smartpark.organizationalStructure5}"></textarea></div>
+                </section>
+                <img id="a1" src="/bootstrap/images/wisdom/home01.png" class="img-responsive" alt="Responsive image" style="margin-top: -80px;width: 100%"/>
             </section>
             <section class="container-fluid wow bounceInLeft" data-wow-offset="0">
                 <input id="productTitle" name="productTitle" type="text" style="font-size: 30px; margin-left: 20%;margin-top: 2%;width: 50%;" th:value="${smartpark.productTitle}">
@@ -44,37 +51,56 @@
                          style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 19%;height: 45%;margin-right: 4%;margin-top: 4%;border-radius: 25px">
                         <img id="a2" src="/bootstrap/images/wisdom/AppleTV5.png" class="img-responsive center-block" style="    height: 102px;">
                         <br><input id="product1" name="product1" type="text" style="margin-left: 29%;font-size: 136%;" th:value="${smartpark.product1}">
-                        <br><br><textarea id="productContent1" name="productContent1" type="text" data-length="255" style=" font-size: 13px;" class="materialize-textarea" th:text="${smartpark.productContent1}"></textarea>
+                        <br><br><textarea id="productContent1" name="productContent1" type="text" data-length="255" style=" font-size: 13px;width: 100%;height: 71px;" class="materialize-textarea" th:text="${smartpark.productContent1}"></textarea>
                     </div>
                     <div class="card " id="wq1"
                          style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 19%;height: 45%;margin-right: 4%;margin-top: 4%;border-radius: 25px">
                         <img id="a3" src="/bootstrap/images/wisdom/AppleTV6.png" class="img-responsive center-block" style="    height: 102px;">
                         <br><input id="product2" name="product2" type="text" style="margin-left: 36%;font-size: 136%;" th:value="${smartpark.product2}">
-                        <br><br><textarea id="productContent2" name="productContent2" type="text" data-length="255" style=" font-size: 13px;" class="materialize-textarea" th:text="${smartpark.productContent2}"></textarea>
+                        <br><br><textarea id="productContent2" name="productContent2" type="text" data-length="255" style=" font-size: 13px;width: 100%;height: 71px;" class="materialize-textarea" th:text="${smartpark.productContent2}"></textarea>
                     </div>
                     <div class="card" id="wq2"
                          style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 19%;height: 45%;margin-right: 4%;margin-top: 4%;border-radius: 25px">
                         <img id="p1" src="/bootstrap/images/wisdom/Grouping12.png" class="img-responsive center-block" style="    height: 102px;">
                         <br><input id="product3" name="product3" type="text" style="margin-left: 35%;font-size: 136%;" th:value="${smartpark.product3}">
-                        <br><br><textarea id="productContent3" name="productContent3" type="text" data-length="255" style=" font-size: 13px;" class="materialize-textarea" th:text="${smartpark.productContent3}"></textarea>
+                        <br><br><textarea id="productContent3" name="productContent3" type="text" data-length="255" style=" font-size: 13px;width: 100%;height: 71px;" class="materialize-textarea" th:text="${smartpark.productContent3}"></textarea>
                     </div>
                 </div>
             </section>
-            <section class="wow fadeInDown row" style="float: left;border: 1px;width: 100.8%; margin-top: 7%;">
-                <section class="container-fluid wow bounceInLeft" data-wow-offset="0">
-                    <div class="col-xs-12 col-sm-12 col-md-12" style="position: absolute">
-                        <input id="certificationTitle" name="certificationTitle"
-                               style="font-size: 30px;margin-left: 20%;margin-top: 2%;" type="text"
-                               th:value="${smartpark.certificationTitle}">
-                        <br><br><textarea id="certification" name="certification"
-                                          style="letter-spacing: 0.56px; line-height: 222%; font-size:131%;margin-left: 23%;"
-                                          type="text" data-length="255" class="materialize-textarea"
-                                          th:text="${smartpark.certification}"></textarea>
+            <div class="row" style="float: left;border: 1px;background-color: #030E3F;width: 100.8%;height: 740px; margin-top: 7%;">
+                <section class="wow fadeInDown">
+                    <div class="row col-xs-6 col-sm-6 col-md-6" style="margin-top: 2%;">
+                        <input id="certificationTitle" name="certificationTitle" style="font-size: 30px;margin-left: 22%;margin-top: 2%;width: 53%;" type="text" th:value="${smartpark.certificationTitle}">
+                        <div class="row col-xs-6 col-sm-6 col-md-6" style="margin-left: 23%">
+                            <br><br><textarea id="certification" name="certification" style="letter-spacing: 0.56px; line-height: 222%; font-size:131%;width: 100%;height: 225px;" type="text" data-length="255" class="materialize-textarea" th:text="${smartpark.certification}"></textarea>
+                        </div>
                     </div>
                 </section>
-                <img id="a6" src="/bootstrap/images/wisdom/wanderer-4621118_1920.jpg" class="img-responsive"
-                     alt="Responsive image" style="height: 793px; width: 100%;margin-top: -13%;"/>
-            </section>
+                <div class="row col-xs-6 col-sm-6 col-md-6 img-responsive" style="margin-top: -5%;">
+                    <img src="/bootstrap/images/wisdom/line1.png"
+                         style="margin-left: 50%; margin-top: 13.4%; position: absolute; z-index: 99;width: 15%;">
+                    <section class="wow fadeIn" data-wow-duration="1500ms"  data-wow-delay="1s">
+                        <input id="pictureExtension1" name="pictureExtension1" type="text" class="fountsize" style="margin-left: 39%;margin-top: 4%;font-size: 180%;" th:value="${smartpark.pictureExtension1}">
+                    </section>
+                    <img src="/bootstrap/images/wisdom/line2.png"
+                         style="margin-left: 36.5%; margin-top: 14.3%; position: absolute; z-index: 99;width: 21%;">
+                    <section class="wow fadeIn" data-wow-duration="1500ms"  data-wow-delay="1s">
+                        <input id="pictureExtension2" name="pictureExtension2" type="text" class="fountsize" style="margin-left: 30%;margin-top: 9%;font-size: 180%; " th:value="${smartpark.pictureExtension2}">
+                    </section>
+                    <img src="/bootstrap/images/wisdom/line3.png"
+                         style="margin-left: 37%; margin-top: 22.3%; position: absolute; z-index: 99;width: 20%;">
+                    <section class="wow fadeIn" data-wow-duration="1500ms"  data-wow-delay="1s">
+                        <input id="pictureExtension3" name="pictureExtension3" type="text"  class="fountsize" style="margin-left: 24%;margin-top: 23%;font-size: 180%;" th:value="${smartpark.pictureExtension3}">
+                    </section>
+                    <img src="/bootstrap/images/wisdom/line4.png"
+                         style="margin-left: 39.5%; margin-top: 31.1%; position: absolute; z-index: 99;width: 17%;">
+                    <section class="wow fadeIn" data-wow-duration="1500ms"  data-wow-delay="1s">
+                        <input id="pictureExtension4" name="pictureExtension4" type="text"  class="fountsize" style="margin-left: 30%;margin-top: 37%;font-size: 180%;" th:value="${smartpark.pictureExtension4}">
+                    </section>
+                    <img src="/bootstrap/images/wisdom/bitmap10.png"
+                         style="margin-left: 53.9%;margin-top: 14.4%;width: 30%;position: absolute;" >
+                </div>
+            </div>
         </div>
     </div>
 </form>
@@ -137,10 +163,10 @@
     });
 
 
-    $("#a1").click(function () {
+/*    $("#a1").click(function () {
         var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=milky-way-2695569_1920.jpg";
         window.location.href = url;
-    });
+    });*/
 
     $("#a2").click(function () {
         var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=AppleTV5.png";
@@ -150,10 +176,10 @@
         var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=AppleTV6.png";
         window.location.href = url;
     });
-    $("#a6").click(function () {
+/*    $("#a6").click(function () {
         var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=wanderer-4621118_1920.jpg";
         window.location.href = url;
-    });
+    });*/
     $("#p1").click(function () {
         var url = "/api/wisdombay/wisdomBay/upload.ahsj?name=Grouping12.png";
         window.location.href = url;

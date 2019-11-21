@@ -28,12 +28,12 @@
             <h1 class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;letter-spacing: 7px;color: rgba(255,255,255,1);font-size: 1em;margin-top: 3%;" th:text="${wisdomBay.title}"></h1>
             <h3  class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;color: rgba(255,255,255,1);font-size: 0.4em;margin-top: 10%;" th:text="${wisdomBay.description}"></h3>
             <section class="wow fadeInDown">
-                <div style="position: absolute;font-size: 0.4em;color: #ffff;margin-top: 33%;margin-left: 15%;" class="text-center">一<br><p th:text="${wisdomBay.organizationalTitle1}"></p><p th:text="${wisdomBay.organizationalStructure1}"></p></div>
-                <div style="position: absolute;font-size: 0.4em;color: #ffff;margin-top: 25%;margin-left: 19%;" class="text-center">二<br><p th:text="${wisdomBay.organizationalTitle2}"></p><p th:text="${wisdomBay.organizationalStructure2}"></p></div>
-                <div style="position: absolute;font-size: 0.4em;color: #ffff;margin-top: 18%;margin-left: 23%;" class="text-center">三<br><p th:text="${wisdomBay.organizationalTitle3}"></p><p th:text="${wisdomBay.organizationalStructure3}"></p></div>
-                <div style="position: absolute;font-size: 0.4em;color: #ffff;margin-top: 19%;margin-left: 66%;" class="text-center">四<br><p th:text="${wisdomBay.organizationalTitle4}"></p><p th:text="${wisdomBay.organizationalStructure4}"></p></div>
-                <div style="position: absolute;font-size: 0.4em;color: #ffff;margin-top: 27%;margin-left: 68%;" class="text-center">五<br><p th:text="${wisdomBay.organizationalTitle5}"></p><p th:text="${wisdomBay.organizationalStructure5}"></p></div>
-                <div style="position: absolute;font-size: 0.4em;color: #ffff;margin-top: 34%;margin-left: 77%;" class="text-center">六<br><p th:text="${wisdomBay.organizationalTitle6}"></p><p th:text="${wisdomBay.organizationalStructure6}"></p></div>
+                <div style="position: absolute;font-size: 0.3em;color: #ffff;margin-top: 33%;margin-left: 15%;" class="text-center">一<br><p th:text="${wisdomBay.organizationalTitle1}"></p><p th:text="${wisdomBay.organizationalStructure1}"></p></div>
+                <div style="position: absolute;font-size: 0.3em;color: #ffff;margin-top: 26%;margin-left: 19%;" class="text-center">二<br><p th:text="${wisdomBay.organizationalTitle2}"></p><p th:text="${wisdomBay.organizationalStructure2}"></p></div>
+                <div style="position: absolute;font-size: 0.3em;color: #ffff;margin-top: 19%;margin-left: 23%;" class="text-center">三<br><p th:text="${wisdomBay.organizationalTitle3}"></p><p th:text="${wisdomBay.organizationalStructure3}"></p></div>
+                <div style="position: absolute;font-size: 0.3em;color: #ffff;margin-top: 20%;margin-left: 67%;" class="text-center">四<br><p th:text="${wisdomBay.organizationalTitle4}"></p><p th:text="${wisdomBay.organizationalStructure4}"></p></div>
+                <div style="position: absolute;font-size: 0.3em;color: #ffff;margin-top: 27%;margin-left: 71%;" class="text-center">五<br><p th:text="${wisdomBay.organizationalTitle5}"></p><p th:text="${wisdomBay.organizationalStructure5}"></p></div>
+                <div style="position: absolute;font-size: 0.3em;color: #ffff;margin-top: 34%;margin-left: 77%;" class="text-center">六<br><p th:text="${wisdomBay.organizationalTitle6}"></p><p th:text="${wisdomBay.organizationalStructure6}"></p></div>
             </section>
             <img src="/bootstrap/images/wisdom/path5.png" style="position: absolute;margin-left: 29%;margin-top: 21%; width: 9%;">
             <img src="/bootstrap/images/wisdom/path6.png" style="position: absolute; margin-left: 24%;margin-top: 28%;width: 8%;">
@@ -41,7 +41,7 @@
             <img src="/bootstrap/images/wisdom/path8.png" style="position: absolute; margin-top: 22%;margin-left: 61%;width: 8%;">
             <img src="/bootstrap/images/wisdom/path9.png" style="position: absolute; margin-top: 30%;margin-left: 66%;width: 9%;">
             <img src="/bootstrap/images/wisdom/path10@2x.png" style="position: absolute; margin-top: 36%;margin-left: 71%;width: 12%;">
-            <img src="/bootstrap/images/wisdom/banner2x.png" class="img-responsive" alt="Responsive image" style="margin-top: -80px;height: 739px;width: 100%;"/>
+            <img src="/bootstrap/images/wisdom/banner2x.png" class="img-responsive" alt="Responsive image" style="margin-top: -80px;width: 100%;"/>
         </section>
         <section class="wow fadeInDown">
             <div class="" style="font-size: 30px;margin-left: 20%;margin-top: 2%;width: 50%;" th:text="${wisdomBay.productTitle}"></div>
@@ -73,7 +73,7 @@
             <section class="wow fadeInDown">
                 <div class="row col-xs-6 col-sm-6 col-md-6" style="margin-top: 2%;">
                     <span style="font-size: 30px;margin-left: 40%;margin-top: 2%; color: #ffffff" th:text="${wisdomBay.certificationTitle}"></span>
-                    <div class="row col-xs-6 col-sm-6 col-md-6" style="margin-left: 23%">
+                    <div class="row col-xs-8 col-sm-8 col-md-8" style="margin-left: 17%">
                         <br><br><span style="color: #ffffff;letter-spacing: 0.56px; line-height: 222%; font-size:131%;" th:text="${wisdomBay.certification}"></span>
                     </div>
                 </div>
@@ -114,17 +114,17 @@
 <script src="/bootstrap/js/wow.js"></script>
 <script type="text/javascript">
     $(function () {
-        $("#wq").click(function () {
+        $("#wq").mouseover(function () {
             $("#wq1").animate({width: '19%', height: '45%'});
             $("#wq2").animate({width: '19%', height: '45%'});
             $("#wq").animate({width: '23%', height: '68%'});
         });
-        $("#wq1").click(function () {
+        $("#wq1").mouseover(function () {
             $("#wq").animate({width: '19%', height: '45%'});
             $("#wq2").animate({width: '19%', height: '45%'});
             $("#wq1").animate({width: '23%', height: '68%'});
         });
-        $("#wq2").click(function () {
+        $("#wq2").mouseover(function () {
             $("#wq").animate({width: '19%', height: '45%'});
             $("#wq1").animate({width: '19%', height: '45%'});
             $("#wq2").animate({width: '23%', height: '68%'});
