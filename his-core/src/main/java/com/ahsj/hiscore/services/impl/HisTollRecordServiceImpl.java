@@ -992,7 +992,8 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             //明细
             // List<HisRecordProject> pricelistsBytollRecordNumber = hisRecordProjectService.pricelistsBytollRecordNumber(hisRecordProject);
             HisRefundProject hisRefundProject = new HisRefundProject();
-            hisRefundProject.setTollRecordNumber(hisRefundProjectInfo.getTollRecordNumber());
+           // hisRefundProject.setTollRecordNumber(hisRefundProjectInfo.getTollRecordNumber());
+            hisRefundProject.setRecordNumber(hisRefundProjectInfo.getRecordNumber());
             List<HisRefundProject> refundProjectList = hisRefundProjectMapper.queryHisRefundProject(hisRefundProject);
             for (HisRefundProject h : refundProjectList) {
                 HisRecordProject hisRecordProject1 = hisRecordProjectService.selectByPrimaryKey(h.getRecordProjectId());

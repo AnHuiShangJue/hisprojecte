@@ -250,7 +250,8 @@
 
 
     <select id="queryHisRefundProject" parameterType="com.ahsj.hiscore.entity.HisRefundProject" resultMap="BaseResultMap">
-        select <include refid="Base_Column_List"/> from his_refund_project as p where  p.toll_record_number = #{tollRecordNumber,jdbcType=INTEGER} and p.is_review = 1
+        select <include refid="Base_Column_List"/>
+         from his_refund_project as p where  p.record_number = #{recordNumber,jdbcType=INTEGER} and p.is_review = 1
     </select>
 
 

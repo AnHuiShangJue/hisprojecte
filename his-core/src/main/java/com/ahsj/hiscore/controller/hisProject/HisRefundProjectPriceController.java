@@ -119,7 +119,7 @@ public class HisRefundProjectPriceController extends BaseController {
                 //    PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryAddList(pageBean);
                 PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryPriceList(pageBean);
                 HisHospitalManage hisHospitalManage = hisHospitalManageService.selectByMedicalNumber(tollRecordNumber);
-                if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage)) {
+                if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage)&&!EmptyUtil.Companion.isNullOrEmpty(pageBean.getData())) {
                     hisProjectPageBean.getData().get(0).setRestDeposit(hisHospitalManage.getRestDeposit());
                     hisProjectPageBean.getData().get(0).setDeposit(hisHospitalManage.getRestDeposit().add(hisProjectPageBean.getData().get(0).getPrices()));
                 }
