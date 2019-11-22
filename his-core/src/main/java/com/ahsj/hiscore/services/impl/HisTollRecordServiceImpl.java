@@ -474,11 +474,6 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         HisTollRecord hisTollRecord1 = hisTollHospiModel.getHisTollRecord();
         if (!EmptyUtil.Companion.isNullOrEmpty(hisTollRecord1.getDeposit())) { //住院退费
             HisHospitalManage hisHospitalManage = hisHospitalManageService.selectByMedicalNumber(hisApplicationForDrugReturnService.selectByVoucher(hisApplicationForDrugReturnDetails.get(0).getVoucher()).getRecordNumber());
-        /*    if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage.getRestDeposit())) {
-                hisHospitalManage.setRestDeposit(hisTollRecord1.getDeposit().add(hisHospitalManage.getRestDeposit()));
-            } else {
-                hisHospitalManage.setRestDeposit(hisTollRecord1.getDeposit());
-            }*/
             hisHospitalManage.setRestDeposit(hisTollRecord1.getDeposit());
             hisHospitalManageService.update(hisHospitalManage);
         }
@@ -487,9 +482,6 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             HisApplicationForDrugReturnDetails hisApplicationForDrugReturnDetails1 = hisApplicationForDrugReturnDetailsMapper.selectByPrimaryKey(hisApplicationForDrugReturnDetails.get(i).getId());
             sumPrice = sumPrice.add(hisApplicationForDrugReturnDetails1.getTotalPrice());
         }
-      /*  if (sumPrice.compareTo(hisTollRecord1.getRecoverTheFee()) != 0) {
-            return MessageUtil.createMessage(false, "退款金额不一致");
-        }*/
         String createdate = new SimpleDateFormat("yyyyMMdd").format(new Date());
         int count = hisTollRecordMapper.selectNumbCount(createdate) + 1;
         //编号
@@ -997,6 +989,8 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             List<HisRefundProject> refundProjectList = hisRefundProjectMapper.queryHisRefundProject(hisRefundProject);
             for (HisRefundProject h : refundProjectList) {
                 HisRecordProject hisRecordProject1 = hisRecordProjectService.selectByPrimaryKey(h.getRecordProjectId());
+                hisRecordProject1.setIsBack(1);//已退回
+                hisRecordProjectService.update(hisRecordProject1);
                 HisTollDetails hisTollDetails = new HisTollDetails();
                 hisTollDetails.setIsSettlement(2);
                 hisTollDetails.setName(hisRecordProject1.getName());
