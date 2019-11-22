@@ -366,7 +366,7 @@
         hmr.medical_record_id left join his_hospital_manage hhn on hhn.medical_number = t.medical_record_id
         where hrp.is_checked = 2 and hrp.is_back = 2 and hrp.is_payed = 1*/
 
-        select DISTINCT hrp.number ,hrp.name ,hrp.price,hrp.type,hrp.create_date ,hrp.num from his_record_project hrp left join
+        select DISTINCT hrp.number ,hrp.id,hrp.name ,hrp.price,hrp.type,hrp.create_date ,hrp.num from his_record_project hrp left join
         his_medical_record hmr on hrp.record_id = hmr.id left join his_toll_record t on t.medical_record_id =
         hmr.medical_record_id left join his_hospital_manage hhn on hhn.medical_number = t.medical_record_id
         where hrp.is_checked = 2 and hrp.is_back = 2 and hrp.is_payed = 1
