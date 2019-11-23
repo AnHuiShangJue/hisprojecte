@@ -112,7 +112,11 @@ Scripts
             function (data) {
                 if (!isNullOrEmpty(data)) {
                     $("#deposit").html(data.restDeposit);
-                    $("#fee").html(data.money.toFixed(2));
+                    if(data.restDeposit >= 0){
+                        $("#fee").html(0.00);
+                    }else {
+                        $("#fee").html(data.money.toFixed(2));
+                    }
                     $("#HospitalNumber").html(HRNumber);
 
                 }

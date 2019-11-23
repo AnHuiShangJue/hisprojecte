@@ -1086,5 +1086,12 @@ order by create_date,name
         from his_toll_record
         where medical_record_id = #{medical_record_id ,jdbcType=VARCHAR}
     </select>
+
+    <select id="selectByHRNumberForAllDeposit" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select b.*
+        from his_hospital_manage as a
+        left join his_toll_record as b on a.medical_number = b.medical_record_id
+        where a.number =#{number,jdbcType=VARCHAR} and b.actual_charge > 0 and b.attench_type = 2
+    </select>
 </mapper>
 

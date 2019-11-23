@@ -86,6 +86,8 @@ public class HisTollDetails extends BaseEntity {
     private Integer isBack;
     private String isBackName;
 
+    private Double allDeposit;
+
     public BigDecimal getDrugFee() {
         return drugFee;
     }
@@ -475,5 +477,13 @@ public class HisTollDetails extends BaseEntity {
 
     public void setToll(BigDecimal toll) {
         this.toll = toll;
+    }
+
+    public Double getAllDeposit() {
+        return allDeposit;
+    }
+
+    public void setAllDeposit(Double allDeposit) {
+        this.allDeposit = allDeposit;
     }
 }
