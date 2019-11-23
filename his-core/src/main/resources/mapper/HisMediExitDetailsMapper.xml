@@ -341,7 +341,8 @@ order by his_medi_exit_details.create_date desc
   </select>
 
     <select id="listByIds" resultMap="BaseResultMap">
-        select m.id ,e.toll_number,b.description,b.id as pharmacy_id,e.total_price,a.price,
+        select m.id ,e.toll_number,b.description,b.id as pharmacy_id,coalesce(a.price*e.exit_count,0)as
+        total_price,a.price,
         e.drugs_name,e.drugs_spec,e.exit_count,e.create_date,i.user_name,e.record_number,o.`name` as
         patient_Name,o.sex as sex, o.age as age,e.validity_period,d.user_name as doctorName
         from his_medi_exit_details as e
@@ -398,7 +399,7 @@ order by his_medi_exit_details.create_date desc
         <if test="parameter.userName != null  and parameter.userName != ''">
             and i.user_name like concat('%' #{parameter.userName},'%')
         </if>
-        GROUP BY  d.toll_number
+        GROUP BY d.toll_number
         <if test="parameter.orders != null and parameter.orders != ''">
             order by ${parameter.orders}
         </if>

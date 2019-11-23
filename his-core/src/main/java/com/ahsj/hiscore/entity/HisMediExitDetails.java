@@ -69,6 +69,16 @@ public class HisMediExitDetails extends BaseEntity {
 
     private String doctorName;
 
+    private BigDecimal toll;
+
+    public BigDecimal getToll() {
+        return toll;
+    }
+
+    public void setToll(BigDecimal toll) {
+        this.toll = toll;
+    }
+
     public Integer getSex() {
         return sex;
     }

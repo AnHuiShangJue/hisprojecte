@@ -2,23 +2,28 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
 <head>
     <style>
-        body{
+        body {
             font-size: 10px;
             line-height: 10px;
             padding: 0;
             margin: 0;
         }
+
         table tr td {
             padding: 0;
             margin: 0;
         }
-        label{
+
+        label {
             font-size: 10px;
             padding: 0;
             margin: 0;
         }
-        p{
-            padding: 0;margin: 0;font-size: 10px;
+
+        p {
+            padding: 0;
+            margin: 0;
+            font-size: 10px;
         }
 
     </style>
@@ -30,15 +35,18 @@
 <div class="row">
     <div class="row valign-wrapper" style="margin-top: 30px">
         <div class="col s12 m12 l12 center">
-            <h4 class="col s12 m12 l12 center" style="text-align: center;padding: 0;margin: 0;font-size: 10px">中柬第一医院</h4>
+            <h4 class="col s12 m12 l12 center" style="text-align: center;padding: 0;margin: 0;font-size: 10px">
+                中柬第一医院</h4>
             <p style="text-align: center;padding: 0;margin: 0;font-size: 10px">The first china-cambodia hospital</p>
         </div>
     </div>
-    <div class="row valign-wrapper" >
+    <div class="row valign-wrapper">
         <table style="border: none;padding: 0;margin: 0;font-size: 10px">
             <tr>
                 <td><label>就诊编号(Visit number)</label></td>
                 <td><label><span id="recordNumber"></span></label></td>
+                <td><label>总价(total price)</label></td>
+                <td><label><span id="toll"></span></label></td>
             </tr>
             <tr>
                 <td><label>姓名(Name)</label></td>
@@ -123,7 +131,7 @@ Scripts
                     $("#doctorName").html(jsons.doctorName);
                     $("#sex").html(jsons.sexName);
                     $("#age").html(jsons.age);
-                    // $("#tollNumber").html(jsons.tollNumber);
+                    $("#toll").html(jsons.toll);                    // $("#tollNumber").html(jsons.tollNumber);
                     $("#table_id").append(trs);
                 }
             },
