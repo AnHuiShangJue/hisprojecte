@@ -20,5 +20,4 @@ public interface SmartparkingMapper {
     int updateByPrimaryKey(Smartparking record);
 
     List<Smartparking> selectAll();
-
 }

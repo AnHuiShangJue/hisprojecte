@@ -118,6 +118,7 @@ public class HisMedicalRecordController extends BaseController {
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/medicalrecord/list");
         modelAndView.addObject("title", "医疗信息系统");
         modelAndView.addObject("token", token);
+        String deptId = getDeptId();
         modelAndView.addObject("userDepartId", getDeptId());
         return modelAndView;
     }
@@ -279,6 +280,14 @@ public class HisMedicalRecordController extends BaseController {
         PageBean<HisMedicalRecord> pageBean = new PageBean<HisMedicalRecord>();
         pageBean.setParameter(hisMedicalRecord);
         return hisMedicalRecordService.listForMedicalHistoryByPatientId(pageBean);
+    }
+    //查询所有的历史记录
+    @ResponseBody
+    @RequestMapping(value = "listForAllHistoryByPatientId.ahsj")
+    public PageBean<HisMedicalRecord> listForAllHistoryByPatientId(Map<String, Object> model, HttpServletRequest request, HisMedicalRecord hisMedicalRecord) throws Exception {
+        PageBean<HisMedicalRecord> pageBean = new PageBean<HisMedicalRecord>();
+        pageBean.setParameter(hisMedicalRecord);
+        return hisMedicalRecordService.listForAllHistoryByPatientId(pageBean);
     }
 
     /**

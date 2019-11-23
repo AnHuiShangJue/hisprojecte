@@ -19,6 +19,6 @@ public interface SmartparkMapper {
 
     int updateByPrimaryKey(Smartpark record);
 
-    List<Smartpark> selectAll();
 
+    List<Smartpark> selectAll();
 }

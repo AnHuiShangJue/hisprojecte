@@ -3,6 +3,7 @@ package com.ahsj.hiscore.services.impl;
 import com.ahsj.hiscore.common.Constants;
 import com.ahsj.hiscore.core.CodeHelper;
 import com.ahsj.hiscore.dao.HisRecordProjectMapper;
+import com.ahsj.hiscore.entity.HisProject;
 import com.ahsj.hiscore.entity.HisRecordProject;
 import com.ahsj.hiscore.entity.HisRefundProject;
 import com.ahsj.hiscore.entity.Translate;
@@ -18,7 +19,10 @@ import utils.EmptyUtil;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 /**
  * @program: his
@@ -92,7 +96,12 @@ public class HisRecordProjectServiceImpl implements HisRecordProjectService {
     @Override
     @Transactional(readOnly = true)
     public PageBean<HisRecordProject> queryAddList(PageBean<HisRecordProject> pageBean) {
-        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisRecordProjectMapper.queryList(pageBean)));
+        List<HisRecordProject> hisRecordProjects = hisRecordProjectMapper.queryList(pageBean);
+   /*     ArrayList<HisRecordProject> collect = hisRecordProjects.stream().collect(
+                Collectors.collectingAndThen(Collectors.toCollection(
+                        () -> new TreeSet<>(Comparator.comparing(e -> e.getNumber()))), ArrayList::new)
+        );*/
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisRecordProjects));
         return pageBean;
     }
 
@@ -100,11 +109,13 @@ public class HisRecordProjectServiceImpl implements HisRecordProjectService {
     @Transactional(readOnly = true)
     public PageBean<HisRecordProject> queryPriceList(PageBean<HisRecordProject> pageBean) {
         List<HisRecordProject> hisRecordProjects = hisRecordProjectMapper.queryPriceList(pageBean);
-        BigDecimal price = new BigDecimal("0");
-        for (HisRecordProject datum : hisRecordProjects) {
-            price = datum.getProjectSumPrice().add(price);
-        }
-        hisRecordProjects.get(0).setPrices(price);  //应退金额
+        if (!EmptyUtil.Companion.isNullOrEmpty(hisRecordProjects)) {
+            BigDecimal price = new BigDecimal("0");
+            for (HisRecordProject datum : hisRecordProjects) {
+                price = datum.getProjectSumPrice().add(price);
+            }
+            hisRecordProjects.get(0).setPrices(price);
+        } //应退金额
         pageBean.setData(CodeHelper.getInstance().setCodeValue(hisRecordProjects));
         return pageBean;
     }

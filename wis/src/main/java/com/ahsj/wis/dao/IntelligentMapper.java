@@ -20,5 +20,4 @@ public interface IntelligentMapper {
     int updateByPrimaryKey(Intelligent record);
 
     List<Intelligent> selectAll();
-
 }

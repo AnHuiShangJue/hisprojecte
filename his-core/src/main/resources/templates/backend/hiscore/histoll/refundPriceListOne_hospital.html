@@ -92,7 +92,7 @@
                             <input type="hidden" name="voucher" id="voucher">
                             <input type="hidden" name="medicalRecordNumber" id="medicalRecordNumber">
                             <input type="hidden" name="returnId" id="returnId" value="">
-                            <input type="hidden" name="vouchers" id="vouchers">
+                          <!--  <input type="hidden" name="vouchers" id="vouchers">-->
                         </div>
                     </div>
                 </div>
@@ -181,6 +181,7 @@
         initBtn();
         initTable();
         $("#print_btn").attr("disabled", true);
+        $("#send_btn").attr("disabled", false);
     });
     var grid = new Datatable();
 
@@ -205,6 +206,7 @@
             grid.reset();
             resetNumber();
             $("#print_btn").attr("disabled", true);
+            $("#send_btn").attr("disabled", false);
         });
     }
 
@@ -222,6 +224,7 @@
         $("#remark").attr("value", "");
         $("#deposit").attr("value", "");
         $("#restDeposit").attr("value", "");
+        $("#send_btn").attr("disabled", false);
     }
 
     function getNumber() {
@@ -238,23 +241,23 @@
                 } else {
                     var patientNames = data[0].patientName;
                     var remarks = data[0].remarks;
-                    var vouchers = data[0].voucher;
+                    var voucher = data[0].voucher;
                     $("#patientName").val(patientNames);
                     $("#reason").val(remarks);
                     changeInputValue("money", 0);
-                    changeInputValue("vouchers", vouchers);
-                    changeInputValue("returnId", vouchers);
+                    changeInputValue("voucher", voucher);
+                    //changeInputValue("returnId", vouchers);
                     changeInputValue("actualCharge", 0);
                     changeInputValue("restDeposit", data[0].restDeposit);
                     changeInputValue("deposit", data[0].deposit);
                     changeInputValue("medicalRecordNumber", data[0].medicalRecordNumber);
-                    var sum = 0;
+                  /*  var sum = 0;
                     for (var i = 0; i < data.length; i++) {
                         var projectSumPrice = data[i].projectSumPrice;
                         sum = sum + projectSumPrice;
 
-                    }
-                    changeInputValue("recoverTheFee", sum.toFixed(2));
+                    }*/
+                    changeInputValue("recoverTheFee",0);
                 }
             },
             function () {
@@ -269,11 +272,10 @@
         dialog.confirm('确定退费吗?', function (index, layero) {
             var refundSumProce = $("#recoverTheFee").val();
             var tollRecordNumber = $("#tollRecordNumber").val();
-            var voucher = $("#vouchers").val();
+            var voucher = $("#voucher").val();
             var returnId = $("#returnId").val();
             var deposit = $("#deposit").val();
             var medicalRecordNumber = $("#medicalRecordNumber").val();
-            console.log(medicalRecordNumber+"-----")
             $.ahsjajax(
                 CTX + "/api/hisTollRecord/checkIsInpatient.ahsj",
                 {"tollNumber": tollRecordNumber},
@@ -282,7 +284,6 @@
                         if (data.isDischarged == 2) {
                             dialog.warn("已出院，本窗口只支持住院退项目");
                         } else {
-
                             $.ahsjajax(
                                 CTX + "/api/hisProject/refund/price/save.ahsj",
                                 {
@@ -290,7 +291,7 @@
                                     "tollRecordNumber": tollRecordNumber,
                                     "refundSumProce": refundSumProce,
                                     "deposit": deposit,
-                                    "recordNumber":medicalRecordNumber
+                                    "recordNumber": medicalRecordNumber
                                 },
                                 function (msg) {
                                     if (msg.success) {
@@ -299,6 +300,7 @@
                                         dialog.success("退款成功！");
                                         number = msg.message.substring(5); //截取交易流水号
                                         $("#print_btn").attr("disabled", false);
+                                        $("#send_btn").attr("disabled", true);
                                         return true;
                                     } else {
                                         data = msg.message.substring(0, 5);//截取成功信息
@@ -436,11 +438,7 @@
                         "data": "price",
                         "name": "price"
                     },
-                    {
-                        "title": "项目预约日期",
-                        "data": "createDate",
-                        "name": "create_date"
-                    },
+
                     {
                         "title": "项目数目",
                         "data": "refundNum",

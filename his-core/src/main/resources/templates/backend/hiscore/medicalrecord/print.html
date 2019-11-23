@@ -59,8 +59,8 @@
             <!--<tr>-->
                 <!--<td colspan="2"><label class="fontsize01">门诊诊断(Outpatient diagnosis)</label></td>-->
             <!--</tr>-->
-            <td>诊断结果(diagnostic result)</td>
-            <td><label><span id="other"></span></label></td>
+            <!--<td>诊断结果(diagnostic result)</td>-->
+            <!--<td><label><span id="other"></span></label></td>-->
             <!--<tr>-->
                 <!--<td>现病史(Current medical history)</td>-->
                 <!--<td><label><span id="nowCondition"></span></label></td>-->
@@ -322,10 +322,10 @@
                 /*   if (data.tother ==null  &&data.tother!=""&&data.tother!=undefined) {
                        data.tother=""
                    }*/
-                if (data.other != null && data.other != "" && data.other != undefined) {
-
-                    $("#other").html(data.other);
-                }
+                // if (data.other != null && data.other != "" && data.other != undefined) {
+                //
+                //     $("#other").html(data.other);
+                // }
                 if (data.bloodPressure != null && data.bloodPressure != "" && data.bloodPressure != undefined) {
                     $("#bloodPressure").html(data.bloodPressure + " mmhg");
                 }

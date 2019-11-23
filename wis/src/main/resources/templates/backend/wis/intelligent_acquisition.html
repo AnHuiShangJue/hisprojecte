@@ -27,7 +27,13 @@
         <section class="wow fadeInDown" style="font-size: 350%;">
             <h1 class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;letter-spacing: 7px;color: rgba(255,255,255,1);font-size: 1em;margin-top: 3%;" th:text="${intelligent.title}"></h1>
             <h3  class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;color: rgba(255,255,255,1);font-size: 0.4em;margin-top: 10%;" th:text="${intelligent.description}"></h3>
-            <img src="/bootstrap/images/wisdom/fox-4589927_1920.jpg" class="img-responsive" alt="Responsive image" style="margin-top: -80px;height: 739px;width: 100%;"/>
+            <section class="wow fadeInDown">
+                <div style="position: absolute;font-size: 0.3em;color: #ffff;margin-top: 28%;margin-left: 9%;width: 300px;" class="text-center container-fluid">一<br><p th:text="${intelligent.organizationalTitle1}"></p><p th:text="${intelligent.organizationalStructure1}"></p></div>
+                <div style="position: absolute;font-size: 0.3em;color: #ffff;margin-top: 15%;margin-left: 16%;width: 251px;" class="text-center">二<br><p th:text="${intelligent.organizationalTitle2}"></p><p th:text="${intelligent.organizationalStructure2}"></p></div>
+                <div style="position: absolute;font-size: 0.3em;color: #ffff;margin-top: 15%;margin-left: 67%;width: 259px;" class="text-center">三<br><p th:text="${intelligent.organizationalTitle3}"></p><p th:text="${intelligent.organizationalStructure3}"></p></div>
+                <div style="position: absolute;font-size: 0.3em;color: #ffff;margin-top: 28%;margin-left: 72%;width: 239px;" class="text-center">四<br><p th:text="${intelligent.organizationalTitle4}"></p><p th:text="${intelligent.organizationalStructure4}"></p></div>
+            </section>
+            <img src="/bootstrap/images/wisdom/face01.png" class="img-responsive" alt="Responsive image" style="margin-top: -80px;width: 100%;"/>
         </section>
         <section class="container-fluid wow bounceInLeft" data-wow-offset="0">
             <div class="" style="font-size: 30px;margin-left: 20%;margin-top: 2%;width: 50%;" th:text="${intelligent.productTitle}"></div>
@@ -54,15 +60,35 @@
                 </div>
             </div>
         </section>
-            <section class="wow fadeInDown row"  style="float: left;border: 1px;width: 100.8%;height: 740px; margin-top: 7%;">
-                <section class="container-fluid wow bounceInLeft" data-wow-offset="0">
-                    <div class="col-xs-12 col-sm-12 col-md-12" style="position: absolute">
-                    <span style="font-size: 30px;margin-left: 20%;margin-top: 2%; color: #ffffff" th:text="${intelligent.certificationTitle}"></span>
-                        <br><br><span style="color: #ffffff;letter-spacing: 0.56px; line-height: 222%; font-size:131%;margin-left: 8%;" th:text="${intelligent.certification}"></span>
+        <div class="row" style="float: left;border: 1px;background-color: #030E3F;width: 100.8%;height: 740px; margin-top: 7%;">
+            <section class="wow fadeInDown">
+                <div class="row col-xs-6 col-sm-6 col-md-6" style="margin-top: 2%;">
+                    <span style="font-size: 30px;margin-left: 40%;margin-top: 2%; color: #ffffff" th:text="${intelligent.certificationTitle}"></span>
+                    <div class="row col-xs-11 col-sm-11 col-md-11" style="margin-left: 5%">
+                        <br><br><span style="color: #ffffff;letter-spacing: 0.56px; line-height: 222%; font-size:131%;" th:text="${intelligent.certification}"></span>
+                    </div>
                 </div>
-                </section>
-                <img src="/bootstrap/images/wisdom/landscape-4611764_1920.jpg" class="img-responsive" alt="Responsive image" style=" height: 100%; width: 100%;margin-top: -7%;"/>
             </section>
+            <div class="row col-xs-6 col-sm-6 col-md-6 img-responsive" style="margin-top: -5%;">
+                <img src="/bootstrap/images/wisdom/line1.png"
+                     style="margin-left: 50%; margin-top: 13.4%; position: absolute; z-index: 99;width: 15%;">
+                <section class="wow fadeIn" data-wow-duration="1500ms"  data-wow-delay="1s">
+                    <div class="fountsize" style="margin-left: 42%;margin-top: 4%;font-size: 180%;" th:text="${intelligent.pictureExtension1}"></div>
+                </section>
+                <img src="/bootstrap/images/wisdom/line2.png"
+                     style="margin-left: 36.5%; margin-top: 14.3%; position: absolute; z-index: 99;width: 21%;">
+                <section class="wow fadeIn" data-wow-duration="1500ms"  data-wow-delay="1s">
+                    <div class="fountsize" style="margin-left: 30%;margin-top: 11%;font-size: 180%;" th:text="${intelligent.pictureExtension2}"></div>
+                </section>
+                <img src="/bootstrap/images/wisdom/line3.png"
+                     style="margin-left: 31%; margin-top: 23.3%; position: absolute; z-index: 99;width: 23%;">
+                <section class="wow fadeIn" data-wow-duration="1500ms"  data-wow-delay="1s">
+                    <div class="fountsize" style="margin-left: 24%;margin-top: 26%;font-size: 180%;" th:text="${intelligent.pictureExtension3}"></div>
+                </section>
+                <img src="/bootstrap/images/wisdom/bitmap10.png"
+                     style="margin-left: 53.9%;margin-top: 14.4%;width: 30%;position: absolute;" >
+            </div>
+        </div>
     </div>
 </div>
 <div th:replace="public/footer :: html"></div>

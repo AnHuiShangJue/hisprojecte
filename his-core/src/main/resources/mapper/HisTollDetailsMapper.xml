@@ -757,12 +757,15 @@
         SELECT i.user_name,d.type, abs(h.actual_charge- h.recover_the_fee)as total_prices , d.create_date,
         case when d.type=1
         then (select m.count from his_medication_details as m where m.id = d.target_id)
-
         when d.type=2 then (select h.num from his_record_project as h where h.id = d.target_id)
         when
         d.type=3 then (select m.hospitalization_day from his_hospital_manage as m where m.id = d.target_id)
         when d.type=4 then (select g.return_count from his_application_for_drug_return_details as g
-        where g.id = d.target_id) end as num , case when d.type=1 then (select s.sale_price from his_pharmacy_detail
+        where g.id = d.target_id)
+        when d.type = 5 then( select p.refund_num from his_refund_project
+        as p where p.id = d.target_id)
+        end as num ,
+        case when d.type=1 then (select s.sale_price from his_pharmacy_detail
         as s where s.id = (select m.medication_id from his_medication_details as m where m.id = d.target_id)
         ) when d.type=2 then ( select h.price from his_record_project as h where h.id = d.target_id
         )
@@ -781,7 +784,11 @@
         )
         when d.type
         =4 then (select g.price from his_application_for_drug_return_details as g where g.id = d.target_id)
-        end as price , case when
+        when d.type =5 then( select p.price from his_record_project
+        as p where p.id = ( select p.record_project_id from his_refund_project as p where p.id = d.target_id
+        ) )
+        end as price ,
+        case when
         d.type=3 then (select CONCAT("住院",( SELECT substring_index( substring_index(
         a.`name`, ',', b.help_topic_id + 1 ), ',' ,- 1 ) AS `name` FROM his_toll_details a JOIN mysql.help_topic
         b ON b.help_topic_id &lt; ( length(a.name) - length( REPLACE (a.name, ',', '') ) + 1 ) where a.toll_record_id

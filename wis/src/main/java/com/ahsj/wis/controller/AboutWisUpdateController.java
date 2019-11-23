@@ -4,6 +4,7 @@ import com.ahsj.wis.entity.AboutWisdom;
 import com.ahsj.wis.service.AboutWisdomService;
 import core.message.Message;
 import core.message.MessageUtil;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +13,7 @@ import utils.EmptyUtil;
 
 import java.util.Date;
 
+@Api(value = "/api/aboutwisdom", tags = "智慧湾修改")
 @RestController
 @RequestMapping("/api/aboutwisdom")
 public class AboutWisUpdateController {

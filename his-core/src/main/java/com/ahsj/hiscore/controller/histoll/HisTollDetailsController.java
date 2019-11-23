@@ -421,6 +421,7 @@ public class HisTollDetailsController extends BaseController {
         modelAndView.addObject("title", "打印凭证预览");
         modelAndView.addObject("token", token);
         modelAndView.addObject("number", number);
+        modelAndView.addObject("loginName", getUserName());
         return modelAndView;
     }
 
@@ -522,4 +523,22 @@ public class HisTollDetailsController extends BaseController {
         modelAndView.addObject("loginName", getUserName());
         return modelAndView;
     }
+
+    //计算出交付押金总额
+    @RequestMapping("printShowAllDespoit.ahsj")
+    @ResponseBody
+    HisTollDetails printShowAllDespoit(String number) throws Exception {//没有明细
+        //根据住院号搜索出所有与此住院号相关的收费明细且实际收费大于0（即交押金的那条数据的明细）
+        List<HisTollRecord> hisTollRecordList = hisTollRecordService.selectByHRNumberForAllDeposit(number);
+        BigDecimal allDeposit = new BigDecimal("0");
+        if(!EmptyUtil.Companion.isNullOrEmpty(hisTollRecordList)&&hisTollRecordList.size()!=0) {
+            for (HisTollRecord hisTollRecord : hisTollRecordList) {
+                allDeposit = allDeposit.add(hisTollRecord.getActualCharge());
+            }
+        }
+        HisTollDetails hisTollDetails = new HisTollDetails();
+        hisTollDetails.setToll(allDeposit);
+        return hisTollDetails;
+    }
+
 }

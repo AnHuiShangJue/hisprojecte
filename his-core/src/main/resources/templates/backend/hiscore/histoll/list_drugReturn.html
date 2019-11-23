@@ -175,6 +175,7 @@
         initBtn();
         initTable();
         $("#print_btn").attr("disabled", true);
+        $("#send_btn").attr("disabled", false);
     });
     var grid = new Datatable();
 
@@ -199,6 +200,8 @@
             grid.reset();
             resetNumber();
             $("#print_btn").attr("disabled", true);
+            $("#send_btn").attr("disabled", false);
+
         });
     }
 
@@ -276,6 +279,7 @@
                                             grid.reset();
                                             number = msg.message.substring(5); //截取交易流水号
                                             $("#print_btn").attr("disabled", false);
+                                            $("#send_btn").attr("disabled", true);
                                             return true;
                                         } else {
                                             M.toast({html: msg.message});

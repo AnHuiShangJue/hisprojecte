@@ -427,11 +427,13 @@
         $('#searchBtn').click(function () {
             var reg1 = new RegExp(/^HM\d{13}$/);
             var reg2 = new RegExp(/^HTR\d{13}$/);
+            var reg3 = new RegExp(/^HHM\d{13}$/);
+            var reg4 = new RegExp(/^HR\d{13}$/);
             var recordNumber = $("#recordNumber").val();
-            if(reg1.test(recordNumber)|| reg2.test(recordNumber)){
+            if(reg1.test(recordNumber)|| reg2.test(recordNumber)||reg3.test(recordNumber)||reg4.test(recordNumber)){
                 grid.search();
             }else{
-                dialog.warn("所输入的数据不符合格式要求！请输入HM/HTR开头的编号")
+                dialog.warn("所输入的数据不符合格式要求！请输入HM/HTR/HHM开头的编号")
             }
         });
         $('#resetBtn').click(function () {

@@ -439,23 +439,27 @@ public class HisMediExitDetailsServicelmpl implements HisMediExitDetailsService 
     @Transactional(readOnly = true)
     public List<HisMediExitDetails> listByIds(Long[] ids) throws Exception {
         List<HisMediExitDetails> hisMediExitDetails = hisMediExitDetailsMapper.listByIds(ids);
-        for (HisMediExitDetails h : hisMediExitDetails) {
-            Translate translate = new Translate();
-            translate.setTranslateId(h.getId());
-            translate.setTranslateType(Constants.TRANSLATE_HIS_MEDICINEINFO);
-            List<Translate> translates = iTranslateService.queryTranslate(translate);
-            if (!EmptyUtil.Companion.isNullOrEmpty(translates)) {
-                translates.stream().filter(f -> f.getTranslateChina().equals(h.getDrugsName())).forEach(e -> h.setTdrugsName(e.getTranslateKhmer()));
-                translates.stream().filter(f -> f.getTranslateChina().equals(h.getDrugsSpec())).forEach(e -> h.setTdrugsSpec(e.getTranslateKhmer()));
+        if (!EmptyUtil.Companion.isNullOrEmpty(hisMediExitDetails)) {
+            BigDecimal toll = new BigDecimal("0"); //总价格
+            for (HisMediExitDetails h : hisMediExitDetails) {
+                toll = toll.add(h.getTotalPrice()); //累加
+                Translate translate = new Translate();
+                translate.setTranslateId(h.getId());
+                translate.setTranslateType(Constants.TRANSLATE_HIS_MEDICINEINFO);
+                List<Translate> translates = iTranslateService.queryTranslate(translate);
+                if (!EmptyUtil.Companion.isNullOrEmpty(translates)) {
+                    translates.stream().filter(f -> f.getTranslateChina().equals(h.getDrugsName())).forEach(e -> h.setTdrugsName(e.getTranslateKhmer()));
+                    translates.stream().filter(f -> f.getTranslateChina().equals(h.getDrugsSpec())).forEach(e -> h.setTdrugsSpec(e.getTranslateKhmer()));
+                }
+                Translate translate1 = new Translate();
+                translate1.setTranslateId(h.getPharmacyId());
+                translate1.setTranslateType(Constants.TRANSLATE_HIS_MEDICATIONDETAILS);
+                List<Translate> translates2 = iTranslateService.queryTranslate(translate1);
+                if (!EmptyUtil.Companion.isNullOrEmpty(translates2)) {
+                    translates2.stream().filter(f -> f.getTranslateChina().equals(h.getDescription())).forEach(e -> h.setTdescription(e.getTranslateKhmer()));
+                }
             }
-            Translate translate1 = new Translate();
-            translate1.setTranslateId(h.getPharmacyId());
-            translate1.setTranslateType(Constants.TRANSLATE_HIS_MEDICATIONDETAILS);
-            List<Translate> translates2 = iTranslateService.queryTranslate(translate1);
-            if (!EmptyUtil.Companion.isNullOrEmpty(translates2)) {
-                translates2.stream().filter(f -> f.getTranslateChina().equals(h.getDescription())).forEach(e -> h.setTdescription(e.getTranslateKhmer()));
-            }
-
+            hisMediExitDetails.get(0).setToll(toll);
         }
         return CodeHelper.getInstance().setCodeValue(hisMediExitDetails);
 

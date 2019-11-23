@@ -27,7 +27,13 @@
         <section class="wow fadeInDown" style="font-size: 350%;">
             <h1 class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;letter-spacing: 7px;color: rgba(255,255,255,1);font-size: 1em;margin-top: 3%;" th:text="${smartparking.title}"></h1>
             <h3  class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;color: rgba(255,255,255,1);font-size: 0.4em;margin-top: 10%;" th:text="${smartparking.description}"></h3>
-            <img src="/bootstrap/images/wisdom/street-2701004_1920.jpg" class="img-responsive" alt="Responsive image" style="margin-top: -80px;height: 739px;width: 100%;"/>
+            <section class="wow fadeInDown">
+                <div style="position: absolute;font-size: 0.27em;color: #ffff;margin-top: 28%;margin-left: 9%;width: 300px;" class="text-center">一<br><p th:text="${smartparking.organizationalTitle1}"></p><p th:text="${smartparking.organizationalStructure1}"></p></div>
+                <div style="position: absolute;font-size: 0.27em;color: #ffff;margin-top: 15%;margin-left: 12%;width: 293px;" class="text-center">二<br><p th:text="${smartparking.organizationalTitle2}"></p><p th:text="${smartparking.organizationalStructure2}"></p></div>
+                <div style="position: absolute;font-size: 0.27em;color: #ffff;margin-top: 13%;margin-left: 67%;width: 306px;" class="text-center">三<br><p th:text="${smartparking.organizationalTitle3}"></p><p th:text="${smartparking.organizationalStructure3}"></p></div>
+                <div style="position: absolute;font-size: 0.27em;color: #ffff;margin-top: 27%;margin-left: 69%;width: 280px;" class="text-center">四<br><p th:text="${smartparking.organizationalTitle4}"></p><p th:text="${smartparking.organizationalStructure4}"></p></div>
+            </section>
+            <img src="/bootstrap/images/wisdom/car.png" class="img-responsive" alt="Responsive image" style="margin-top: -80px;width: 100%;"/>
         </section>
         <section class="container-fluid wow bounceInLeft" data-wow-offset="0">
             <div class="" style="font-size: 30px;margin-left: 20%;margin-top: 2%;width: 50%;" th:text="${smartparking.productTitle}"></div>
@@ -54,15 +60,40 @@
                 </div>
             </div>
         </section>
-        <section class="wow fadeInDown row"  style="float: left;border: 1px;width: 100.8%;height: 740px; margin-top: 7%;">
-            <section class="container-fluid wow bounceInLeft" data-wow-offset="0">
-                <div class="col-xs-12 col-sm-12 col-md-12" style="position: absolute">
-                    <span style="font-size: 30px;margin-left: 20%;margin-top: 2%; color: #ffffff" th:text="${smartparking.certificationTitle}"></span>
-                    <br><br><span style="color: #ffffff;letter-spacing: 0.56px; line-height: 222%; font-size:131%;margin-left: 8%;" th:text="${smartparking.certification}"></span>
+        <div class="row" style="float: left;border: 1px;background-color: #030E3F;width: 100.8%;height: 740px; margin-top: 7%;">
+            <section class="wow fadeInDown">
+                <div class="row col-xs-6 col-sm-6 col-md-6" style="margin-top: 2%;">
+                    <span style="font-size: 24px;margin-left: 22%;margin-top: 2%; color: #ffffff" th:text="${smartparking.certificationTitle}"></span>
+                    <div class="row col-xs-11 col-sm-11 col-md-11" style="margin-left: 5%">
+                        <br><br><span style="color: #ffffff;letter-spacing: 0.56px; line-height: 222%; font-size:131%;" th:text="${smartparking.certification}"></span>
+                    </div>
                 </div>
             </section>
-            <img src="/bootstrap/images/wisdom/automobiles-1869873_1920.jpg" class="img-responsive" alt="Responsive image" style=" height: 100%; width: 100%;margin-top: -7%;"/>
-        </section>
+            <div class="row col-xs-6 col-sm-6 col-md-6 img-responsive" style="margin-top: -5%;">
+                <img src="/bootstrap/images/wisdom/line1.png"
+                     style="margin-left: 50%; margin-top: 13.4%; position: absolute; z-index: 99;width: 15%;">
+                <section class="wow fadeIn" data-wow-duration="1500ms"  data-wow-delay="1s">
+                    <div class="fountsize" style="margin-left: 42%;margin-top: 4%;font-size: 180%;" th:text="${smartparking.pictureExtension1}"></div>
+                </section>
+                <img src="/bootstrap/images/wisdom/line2.png"
+                     style="margin-left: 36.5%; margin-top: 14.3%; position: absolute; z-index: 99;width: 21%;">
+                <section class="wow fadeIn" data-wow-duration="1500ms"  data-wow-delay="1s">
+                    <div class="fountsize" style="margin-left: 30%;margin-top: 11%;font-size: 180%;" th:text="${smartparking.pictureExtension2}"></div>
+                </section>
+                <img src="/bootstrap/images/wisdom/line3.png"
+                     style="margin-left: 31%; margin-top: 23.3%; position: absolute; z-index: 99;width: 23%;">
+                <section class="wow fadeIn" data-wow-duration="1500ms"  data-wow-delay="1s">
+                    <div class="fountsize" style="margin-left: 24%;margin-top: 26%;font-size: 180%;" th:text="${smartparking.pictureExtension3}"></div>
+                </section>
+                <img src="/bootstrap/images/wisdom/line4.png"
+                     style="margin-left: 39.5%; margin-top: 31.1%; position: absolute; z-index: 99;width: 17%;">
+                <section class="wow fadeIn" data-wow-duration="1500ms"  data-wow-delay="1s">
+                    <div class="fountsize" style="margin-left: 30%;margin-top: 37%;font-size: 180%;" th:text="${smartparking.pictureExtension4}"></div>
+                </section>
+                <img src="/bootstrap/images/wisdom/bitmap10.png"
+                     style="margin-left: 53.9%;margin-top: 14.4%;width: 30%;position: absolute;" >
+            </div>
+        </div>
     </div>
 </div>
 <div th:replace="public/footer :: html"></div>

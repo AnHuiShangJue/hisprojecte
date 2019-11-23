@@ -32,6 +32,8 @@
                     <td><label class="black-text"  style="padding: 0;" id="name" ></label></td>
                     <td><label class="black-text fontsize01">总费用(Total cost)</label></td>
                     <td><label class="black-text"  style="padding: 0;" id="totalCost"></label></td>
+                    <td><label class="black-text fontsize01">住院号(HospitalNumber)</label></td>
+                    <td><label class="black-text"  style="padding: 0;" id="HospitalNumber"></label></td>
                 </tr>
                 <tr>
                     <td><label class="black-text fontsize01">剩余押金(deposit)</label></td>
@@ -110,7 +112,13 @@ Scripts
             function (data) {
                 if (!isNullOrEmpty(data)) {
                     $("#deposit").html(data.restDeposit);
-                    $("#fee").html(data.money.toFixed(2));
+                    if(data.restDeposit >= 0){
+                        $("#fee").html(0.00);
+                    }else {
+                        $("#fee").html(data.money.toFixed(2));
+                    }
+                    $("#HospitalNumber").html(HRNumber);
+
                 }
             },
             function () {

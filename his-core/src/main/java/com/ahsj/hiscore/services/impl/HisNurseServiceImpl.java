@@ -106,7 +106,8 @@ public class HisNurseServiceImpl implements HisNurseService {
                     }
                     return MessageUtil.createMessage(false,"新增失败!"+userInfo.getUserId()+"该工号对应的账号已经存在了!请修改工号!");
                 }
-                BoolMessage message =  iUserService.saveOrUpdateUserInfo(userInfo);
+                BoolMessage message =  iUserService.saveOrUpdateUserInfo(userInfo.getUserId(),userInfo.getPassword(),userInfo.getUserName(),userInfo.getSex(),
+                        userInfo.getDeptId(),userInfo.getDelFlag(),userInfo.getIsInitData(),userInfo.getTelPhone());
                 if(message.isSuccess()){
                     hisNurseMapper.insert(hisNurse);
                     UserInfo successUserInfo = iUserService.selectByName(userInfo.getUserId());

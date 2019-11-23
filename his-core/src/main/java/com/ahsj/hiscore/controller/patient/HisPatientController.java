@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import utils.EmptyUtil;
 import utils.StringUtil;
 
+import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -476,4 +477,30 @@ public class HisPatientController extends BaseController {
         modelAndView.addObject("number", number);
         return modelAndView;
     }
+
+
+    @Autowired
+    HisHospitalManageService hisHospitalManageService;
+    //jin
+    //跳转病人的就诊历史记录
+    @RequestMapping("history/index.ahsj")
+    ModelAndView history(Long id,String token){
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/patient/history");
+        modelAndView.addObject("patientId",id);
+        modelAndView.addObject("token", token);
+        return modelAndView;
+    }
+
+
+    //jin
+    //查询历史就诊记录selectAllByPatientId
+//    @ResponseBody
+//    @RequestMapping(value = "history.ahsj", method = {RequestMethod.GET, RequestMethod.POST})
+//    public PageBean<HisHospitalManage> selectAllByPatientId(Map<String, Object> model, HttpServletRequest request, HisHospitalManage hisHospitalManage) throws Exception {
+//        PageBean<HisHospitalManage> patientInfoPageBean = new PageBean<HisHospitalManage>();
+//        patientInfoPageBean.setParameter(hisHospitalManage);
+//        return hisHospitalManageService.selectAllByPatientId(patientInfoPageBean);
+//    }
+
+
 }

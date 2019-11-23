@@ -5,6 +5,7 @@ import com.ahsj.wis.entity.ContactUs;
 import com.ahsj.wis.service.ContactUsUpdateService;
 import core.message.Message;
 import core.message.MessageUtil;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import utils.EmptyUtil;
 
 import java.util.Date;
 
+@Api(value = "/api/contactus", tags = "智慧湾联系我们")
 @RestController
 @RequestMapping("/api/contactus")
 public class ContactUsController {

@@ -30,6 +30,8 @@ public class HisMediExitDetails extends BaseEntity {
 
     private BigDecimal totalPrice;
 
+    private BigDecimal price;
+
     private String drugsNumb;
 
     private String drugsName;
@@ -66,6 +68,16 @@ public class HisMediExitDetails extends BaseEntity {
     private Integer age;
 
     private String doctorName;
+
+    private BigDecimal toll;
+
+    public BigDecimal getToll() {
+        return toll;
+    }
+
+    public void setToll(BigDecimal toll) {
+        this.toll = toll;
+    }
 
     public Integer getSex() {
         return sex;
@@ -128,6 +140,14 @@ public class HisMediExitDetails extends BaseEntity {
     @Override
     public String getUserName() {
         return userName;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     @Override

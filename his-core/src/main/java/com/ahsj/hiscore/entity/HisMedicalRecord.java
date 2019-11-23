@@ -121,6 +121,14 @@ public class HisMedicalRecord extends BaseEntity {
 
     private Long fnurseId;
 
+    //gospitalmanage 表的创建更新时间
+    @JsonFormat(pattern = "yyyy/MM/dd HH:MM:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:MM:ss")
+    private Date inTime;
+    @JsonFormat(pattern = "yyyy/MM/dd HH:MM:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:MM:ss")
+    private Date outTime;
+
 
     public Double getSumPrice() {
         return sumPrice;
@@ -544,5 +552,21 @@ public class HisMedicalRecord extends BaseEntity {
 
     public void setIsDischargeName(String isDischargeName) {
         this.isDischargeName = isDischargeName;
+    }
+
+    public Date getInTime() {
+        return inTime;
+    }
+
+    public void setInTime(Date inTime) {
+        this.inTime = inTime;
+    }
+
+    public Date getOutTime() {
+        return outTime;
+    }
+
+    public void setOutTime(Date outTime) {
+        this.outTime = outTime;
     }
 }

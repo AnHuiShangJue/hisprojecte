@@ -106,6 +106,9 @@ public interface HisMedicalRecordService {
      **/
     PageBean<HisMedicalRecord> listForMedicalHistoryByPatientId(PageBean<HisMedicalRecord> pageBean) throws Exception;
 
+    //jin
+    PageBean<HisMedicalRecord> listForAllHistoryByPatientId(PageBean<HisMedicalRecord> pageBean) throws Exception;
+
     /**
      * @return core.entity.PageBean<com.ahsj.hiscore.entity.HisMedicalRecord>
      * @Description 查看病人所有历史病历不包括正在住院的那一条

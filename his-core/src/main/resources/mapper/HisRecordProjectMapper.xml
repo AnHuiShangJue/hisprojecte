@@ -361,11 +361,25 @@
 
 
     <select id="queryList" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
-        select hrp.* ,hmr.medical_record_id ,t.number as his_toll_record_number from his_record_project hrp left join
+/*        select hrp.* ,hmr.medical_record_id ,t.number as his_toll_record_number from his_record_project hrp left join
+        his_medical_record hmr on hrp.record_id = hmr.id left join his_toll_record t on t.medical_record_id =
+        hmr.medical_record_id left join his_hospital_manage hhn on hhn.medical_number = t.medical_record_id
+        where hrp.is_checked = 2 and hrp.is_back = 2 and hrp.is_payed = 1*/
+
+        select DISTINCT hrp.number ,hrp.id,hrp.name ,hrp.price,hrp.type,hrp.create_date ,hrp.num from his_record_project hrp left join
         his_medical_record hmr on hrp.record_id = hmr.id left join his_toll_record t on t.medical_record_id =
         hmr.medical_record_id left join his_hospital_manage hhn on hhn.medical_number = t.medical_record_id
         where hrp.is_checked = 2 and hrp.is_back = 2 and hrp.is_payed = 1
 
+        <if test="parameter.medicalRecordId != null and parameter.medicalRecordId != ''">
+            and hmr.medical_record_id =#{parameter.medicalRecordId,jdbcType=VARCHAR}
+        </if>
+        <if test="parameter.name != null and parameter.name != ''">
+            and hrp.name like concat ('%' #{parameter.name,jdbcType = VARCHAR},'%')
+        </if>
+        <if test="parameter.number != null and parameter.number != ''">
+            and hrp.number like concat ('%' #{parameter.number,jdbcType = VARCHAR},'%')
+        </if>
         <if test="parameter.medicalRecordId != null and parameter.medicalRecordId != ''">
             and hmr.medical_record_id =#{parameter.medicalRecordId,jdbcType=VARCHAR}
         </if>
@@ -555,16 +569,15 @@ where record_id #={medicalRecordId,jdbcType=BIGINT} and is_payed = 2
 
     <!--xjp-->
     <select id="queryPriceList" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
-        SELECT p.number,p.name,p.price,p.type, hrp.refund_num as refund_num ,p.price * hrp.refund_num
-        as project_sum_price,hrp.voucher,z.name as patient_name ,r.medical_record_id as medical_record_number
-        from his_refund_project hrp LEFT JOIN his_project
-        p on hrp.record_project_id = p.id LEFT JOIN his_hospital_manage hhm on hhm.number = hrp.record_number
+        SELECT distinct(hrp.id) ,p.number,p.name,p.price,p.type, hrp.refund_num as refund_num ,p.price * hrp.refund_num
+        as project_sum_price,hrp.voucher,z.name as patient_name ,r.medical_record_id as medical_record_number,
+        hrp.remarks
+        from his_refund_project hrp
+        LEFT JOIN his_record_project  p on hrp.record_project_id = p.id
         LEFT JOIN his_toll_record htr on htr.medical_record_id =hrp.record_number
         left join  his_medical_record as r  on r.medical_record_id =htr.medical_record_id
         left join his_patient_info as z on z.id = r.patient_id
-        WHERE hrp.is_back =
-        2 and hrp.is_review = 1
-
+        WHERE hrp.is_back =2 and hrp.is_review = 1
         <if test="parameter.recordNumber != null and parameter.recordNumber != ''">
             and hrp.record_number =#{parameter.recordNumber,jdbcType=VARCHAR}
         </if>

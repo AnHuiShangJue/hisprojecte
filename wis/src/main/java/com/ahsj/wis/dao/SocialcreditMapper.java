@@ -4,6 +4,7 @@ import com.ahsj.wis.entity.Socialcredit;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+
 @Mapper
 public interface SocialcreditMapper {
     int deleteByPrimaryKey(Long id);
@@ -19,5 +20,4 @@ public interface SocialcreditMapper {
     int updateByPrimaryKey(Socialcredit record);
 
     List<Socialcredit> selectAll();
-
 }

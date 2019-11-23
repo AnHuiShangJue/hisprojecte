@@ -289,4 +289,8 @@ public interface HisHospitalManageMapper extends BaseMapper<HisHospitalManage> {
     HisHospitalManage selectByTollNumber(String number);
 
     HisHospitalManage selectByMedicalNumber(String number);
+
+    //jin
+    //根据病人id查询就诊记录
+    List<HisHospitalManage> selectAllByPatientId(PageBean<HisHospitalManage> pageBean);
 }
