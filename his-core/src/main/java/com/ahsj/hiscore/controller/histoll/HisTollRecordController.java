@@ -121,6 +121,10 @@ public class HisTollRecordController extends BaseController {
             }
         }
         hisHospitalManageService.selectByNumber(hisTollHospiModel.getHisTollRecord().getMedicalRecordId()).getMedicalNumber();
+        //是1走护士,非1走住院收费
+        if(!hisTollHospiModel.getIsNurse().equals(1)){
+           return hisTollRecordService.hospitalSaveForRestDepo(hisTollHospiModel);
+        }else
         return hisTollRecordService.hospitalSave(hisTollHospiModel);
     }
 

@@ -345,7 +345,6 @@
             $.ahsjajax(
                 CTX + "/api/hisTollRecord/hospital/details.ahsj",
                 {"medicalRecordId": MedicalRecordId,
-
                 "isNurse":1},
                 function (data) {
                     if (!isNullOrEmpty(data)) {
@@ -414,7 +413,8 @@
                         var json = grid.getDataTable().ajax.json().data;
                         var hisTollHospiModel = {
                             "hisTollRecord": strToObj(hisTollRecord),
-                            "hisTollDetailsList": json
+                            "hisTollDetailsList": json,
+                            "isNurse":1
                         };
                         var jsonData = JSON.stringify(hisTollHospiModel);
                         if(json!=null&&json!=""&&json!=undefined){

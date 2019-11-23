@@ -131,6 +131,9 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         return MessageUtil.createMessage(true, "付款成功");
     }
 
+
+
+
     /**
      * @return com.ahsj.hiscore.entity.HisTollRecordDetails
      * @Description 查询住院收费细节信息
@@ -212,10 +215,8 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
 
         //修改住院押金
         HisHospitalManage hisHospitalManage = hisHospitalManageMapper.selectByNumber(hisTollRecord.getMedicalRecordId());
-        if (hisHospitalManage.getRestDeposit().compareTo(new BigDecimal("0")) >= 1) {
-            hisHospitalManage.setRestDeposit(hisHospitalManage.getRestDeposit().add(hisTollRecord.getDeposit()));
-        } else
-            hisHospitalManage.setRestDeposit(hisTollRecord.getDeposit());
+        hisHospitalManage.setRestDeposit(hisHospitalManage.getRestDeposit().add(hisTollRecord.getMoney()));
+
         //无收费记录，则为交押金
         hisTollRecord.setDeposit(hisHospitalManage.getRestDeposit());
         hisTollRecordMapper.insert(hisTollRecord);
@@ -247,6 +248,56 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         return MessageUtil.createMessage(true, number + "收费成功！");
     }
 
+    /**
+     * @param Message
+     * @return
+     * @Description 住院押金充值
+     * @Author: czc
+     * @Date 2019/11/23
+     * @Time 20:49
+     **/
+    @Override
+    @Transactional(readOnly = false)
+    public Message hospitalSaveForRestDepo(HisTollHospiModel hisTollHospiModel) throws Exception{
+        //处理住院交易
+        HisTollRecord hisTollRecord = hisTollHospiModel.getHisTollRecord();
+        if (EmptyUtil.Companion.isNullOrEmpty(hisTollRecord.getActualCharge())) {
+            hisTollRecord.setActualCharge(new BigDecimal("0"));
+        }
+        HisTollDetails hd = new HisTollDetails();
+
+
+
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        String createdate = sdf.format(date);
+        int count = hisTollRecordMapper.selectNumbCount(createdate) + 1;
+        //编号
+        String number = createdate + String.format("%05d", count);
+        number = "HTR" + number;
+        hisTollRecord.setNumber(number);
+        hisTollRecord.setType(2);
+        hisTollRecord.setIsSettlement(2);
+        hisTollRecord.setAttenchType(2);
+
+
+        HisHospitalManage hisHospitalManage = hisHospitalManageMapper.selectByNumber(hisTollRecord.getMedicalRecordId());
+        hisHospitalManage.setRestDeposit(hisHospitalManage.getRestDeposit().add(hisTollRecord.getActualCharge()));
+
+        //住院押金充值中总应收为0,以做区分
+        hisTollRecord.setMoney(new BigDecimal(0));
+        hisTollRecord.setDeposit(hisHospitalManage.getRestDeposit());
+        hisTollRecordMapper.insert(hisTollRecord);
+        hisHospitalManageMapper.updateByPrimaryKey(hisHospitalManage);
+        hd.setName("住院押金充值");
+        hd.setMoney(hisTollRecord.getActualCharge());
+        hd.setType(3);
+        hd.setTollRecordId(hisTollRecord.getId());
+        hd.setTargetId(null);
+        hisTollDetailsService.insert(hd);
+        return MessageUtil.createMessage(true, number + "押金交付成功！，当前总押金为" + hisHospitalManage.getRestDeposit());
+
+    }
     /**
      * @return void
      * @Description 处理住院数据状态

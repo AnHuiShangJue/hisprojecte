@@ -9,6 +9,7 @@ public class HisTollHospiModel {
 
     HisTollRecord hisTollRecord;
     List<HisTollDetails> hisTollDetailsList;
+    Integer isNurse;
 
     List<HisApplicationForDrugReturnDetails> hisApplicationForDrugReturnDetailsList;
 
@@ -34,5 +35,13 @@ public class HisTollHospiModel {
 
     public void setHisTollDetailsList(List<HisTollDetails> hisTollDetailsList) {
         this.hisTollDetailsList = hisTollDetailsList;
+    }
+
+    public Integer getIsNurse() {
+        return isNurse;
+    }
+
+    public void setIsNurse(Integer isNurse) {
+        this.isNurse = isNurse;
     }
 }

@@ -29,6 +29,17 @@ public interface HisTollRecordService {
 
     Message hospitalSave(HisTollHospiModel hisTollHospiModel);
 
+
+    /**
+     * @param Message
+     * @return
+     * @Description 住院押金充值
+     * @Author: czc
+     * @Date 2019/11/23
+     * @Time 20:49
+     **/
+    Message hospitalSaveForRestDepo(HisTollHospiModel hisTollHospiModel) throws Exception;
+
     Message hospitalExit(HisTollHospiModel hisTollHospiModel);
 
     /**
@@ -282,4 +293,6 @@ public interface HisTollRecordService {
     *  为了护士站引入的查询消费明细
     * */
     HisTollRecordDetails   hospitalDetailsForNurse(String medicalNumber) throws Exception;
+
+
 }
