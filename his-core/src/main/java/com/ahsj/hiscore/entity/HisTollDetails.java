@@ -35,6 +35,8 @@ public class HisTollDetails extends BaseEntity {
 
     private BigDecimal recoverTheFee;
 
+    private BigDecimal toll;
+
     private String description;
 
     private String number;
@@ -56,6 +58,8 @@ public class HisTollDetails extends BaseEntity {
     private String patientName;
 
     private Integer age;
+
+    private Integer count;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateDate;
@@ -441,7 +445,6 @@ public class HisTollDetails extends BaseEntity {
     }
 
 
-
     public String getIsBackName() {
         return isBackName;
     }
@@ -456,5 +459,21 @@ public class HisTollDetails extends BaseEntity {
 
     public void setIsBack(Integer isBack) {
         this.isBack = isBack;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public BigDecimal getToll() {
+        return toll;
+    }
+
+    public void setToll(BigDecimal toll) {
+        this.toll = toll;
     }
 }
