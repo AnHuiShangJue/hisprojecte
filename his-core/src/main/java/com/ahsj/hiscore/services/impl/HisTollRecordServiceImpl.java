@@ -215,7 +215,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
 
         //修改住院押金
         HisHospitalManage hisHospitalManage = hisHospitalManageMapper.selectByNumber(hisTollRecord.getMedicalRecordId());
-        hisHospitalManage.setRestDeposit(hisHospitalManage.getRestDeposit().divide(hisTollRecord.getActualCharge()));
+        hisHospitalManage.setRestDeposit(hisHospitalManage.getRestDeposit().subtract(hisTollRecord.getMoney()));
 
         //无收费记录，则为交押金
         hisTollRecord.setDeposit(hisHospitalManage.getRestDeposit());
@@ -1120,5 +1120,11 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
     public List<String> listNumberByMedicalNumber(String medicalNumber) throws Exception {
         return hisTollRecordMapper.listNumberByMedicalNumber(medicalNumber);
 
+    }
+    //根据住院号搜索出所有与此住院号相关的收费明细且实际收费大于0（即交押金的那条数据的明细）
+    @Override
+    @Transactional(readOnly = true)
+    public List<HisTollRecord> selectByHRNumberForAllDeposit(String number) {
+        return hisTollRecordMapper.selectByHRNumberForAllDeposit(number);
     }
 }
