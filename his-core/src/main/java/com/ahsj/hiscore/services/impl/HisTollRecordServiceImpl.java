@@ -317,8 +317,8 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         }
         for (HisTollDetails h1 : hisTollDetails) {
             if (h1.getType().equals(3)) {
-                payDays.append("," + h1.getNum());
-                payDaysId.append("," + h1.getTargetId());
+                 payDays.append("," + h1.getNum());
+                payDaysId.append("," + h1.getId());
                 hisHospitalManage.setPayHospitalizationDay(payDays.toString());
                 hisHospitalManage.setTollDetailsId(payDaysId.toString());
             }

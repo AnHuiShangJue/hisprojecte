@@ -202,7 +202,7 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
                 hisHospitalManage.setSex(hisHospitalManage.getSex());
                 hisHospitalManage.setDepartmentId(check1.getDepartmentId());
                 hisHospitalManage.setDoctorId(check1.getDoctorId());
-                hisHospitalManage.setHospitalizationDay(check1.getHospitalizationDay());
+//                hisHospitalManage.setHospitalizationDay(check1.getHospitalizationDay());
                 hisHospitalManage.setPayHospitalizationDay(check1.getPayHospitalizationDay());
                 hisHospitalManage.setTollDetailsId(check1.getTollDetailsId());
                 hisHospitalManage.setRestDeposit(check1.getRestDeposit());
