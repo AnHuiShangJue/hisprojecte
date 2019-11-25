@@ -141,4 +141,12 @@ public class HisMedicalOrderTemplateController extends BaseController {
 //        return MessageUtil.createMessage(false, "开发中");
     }
 
+    //一键设置医嘱开始时间
+    @RequestMapping(value = "setTime.ahsj", method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    Message setTime(String token,String orderNumber,String orderStartTime)throws Exception{
+        return hisMedicalOrderTemplateService.setTime(orderNumber,orderStartTime);
+//        return MessageUtil.createMessage(false, "开发中");
+    }
+
 }

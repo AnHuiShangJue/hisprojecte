@@ -1,8 +1,10 @@
 package com.ahsj.hiscore.services.impl;
 
 import com.ahsj.hiscore.core.CodeHelper;
+import com.ahsj.hiscore.dao.HisMedicalOrderDetailMapper;
 import com.ahsj.hiscore.dao.HisMedicalOrderTemplateDetailMapper;
 import com.ahsj.hiscore.dao.HisMedicalOrderTemplateMapper;
+import com.ahsj.hiscore.entity.HisMedicalOrder;
 import com.ahsj.hiscore.entity.HisMedicalOrderDetail;
 import com.ahsj.hiscore.entity.HisMedicalOrderTemplate;
 import com.ahsj.hiscore.entity.HisMedicalOrderTemplateDetail;
@@ -34,6 +36,9 @@ public class HisMedicalOrderTemplateServicelmpl implements HisMedicalOrderTempla
 
     @Autowired
     HisMedicalOrderTemplateDetailService hisMedicalOrderTemplateDetailService;
+
+    @Autowired
+    HisMedicalOrderDetailMapper hisMedicalOrderDetailMapper;
     /**
      *@Description 医嘱模板分页查询
      *@Params [pageBean]
@@ -210,5 +215,20 @@ public class HisMedicalOrderTemplateServicelmpl implements HisMedicalOrderTempla
             }
         }
         return MessageUtil.createMessage(true, "保存成功(Save Success)");
+    }
+//一键设置医嘱开始时间
+    @Override
+    @Transactional(readOnly = false)
+    public Message setTime(String orderNumber, String orderStartTime) throws Exception {
+        List<HisMedicalOrderDetail> hisMedicalOrderDetailList = hisMedicalOrderDetailService.selectByOrderNumber(orderNumber);
+        if(!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetailList)&&hisMedicalOrderDetailList.size()!=0){
+            for (HisMedicalOrderDetail hisMedicalOrderDetail : hisMedicalOrderDetailList) {
+                hisMedicalOrderDetail.setStartTime(orderStartTime);
+                hisMedicalOrderDetailMapper.updateByPrimaryKeySelective(hisMedicalOrderDetail);
+            }
+            return MessageUtil.createMessage(true, "设置成功（Set Success）");
+        }else {
+            return MessageUtil.createMessage(false, "没有可以设置的医嘱");
+        }
     }
 }
