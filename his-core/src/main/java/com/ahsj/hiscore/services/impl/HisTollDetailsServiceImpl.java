@@ -287,6 +287,7 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
         List<HisTollDetails> hisTollDetails = hisTollDetailsMapper.listByNumberLeave(number);//所有收费明细
         BigDecimal drugFee = new BigDecimal("0");//药品费用
         BigDecimal toll = new BigDecimal("0");//住院总费用
+        BigDecimal a = new BigDecimal("0");//退费
         if (!EmptyUtil.Companion.isNullOrEmpty(hisTollDetails)) {
             for (HisTollDetails h : hisTollDetails) {
                 toll = toll.add(h.getMoneys());
@@ -331,9 +332,12 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
                         }
                     }
                 }
+                if (h.getType() == 4 || h.getType() == 5) {//退钱
+                    a = a.add(h.getMoneys().multiply(new BigDecimal(h.getNum())));
+                }
             }
         }
-        hisTollDetails.get(0).setToll(toll);
+        hisTollDetails.get(0).setToll(toll.subtract(a));
         hisTollDetails.get(0).setDrugFee(drugFee);
         return hisTollDetails;
     }
