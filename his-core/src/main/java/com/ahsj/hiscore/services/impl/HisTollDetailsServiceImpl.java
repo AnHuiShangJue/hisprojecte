@@ -333,7 +333,7 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
                     }
                 }
                 if (h.getType() == 4 || h.getType() == 5) {//退钱
-                    a = a.add(h.getMoneys().multiply(new BigDecimal(h.getNum())));
+                    a = a.add(h.getMoneys());
                 }
             }
         }
