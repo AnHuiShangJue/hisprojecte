@@ -9,7 +9,6 @@ import com.ahsj.wis.utils.DeletePicture;
 import core.message.Message;
 import core.message.MessageUtil;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,14 +19,19 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import utils.EmptyUtil;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Api(value = "/api/wisdombay", tags = "智慧湾")
 @RestController
 @RequestMapping("/api/wisdombay")
 public class WisdomBayController {
+    private static String UPLOAD_PATH = "File/image/upload";
 
     @Autowired
     WisdomIndexService wisdomIndexService;
@@ -132,7 +136,7 @@ public class WisdomBayController {
     ModelAndView lanhuIndex() throws Exception {
         List<WisdomIndex> wisdomIndices = wisdomIndexService.selectAll();
         WisdomIndex wisdomIndex = wisdomIndices.get(0);
-        ModelAndView modelAndView = new ModelAndView("backend/wis/index");
+        ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("title", "欢迎页");
         modelAndView.addObject("wisdomIndex", wisdomIndex);
         return modelAndView;
@@ -164,7 +168,7 @@ public class WisdomBayController {
      * @Time 9:41
      **/
     @RequestMapping("/wisdomBay/index.ahsj")
-    ModelAndView wisdomBay(String parameter) throws Exception{
+    ModelAndView wisdomBay(String parameter) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/wisdom/wisdom_bay");
         modelAndView.addObject("title", "");
         modelAndView.addObject("parameter", parameter);
@@ -180,17 +184,22 @@ public class WisdomBayController {
      * @Time 10:44
      **/
     @PostMapping("/uploadFile.ahsj")
-    public Message uploadFile(@RequestParam("file") MultipartFile file, String name) throws Exception{
+    public Message uploadFile(@RequestParam("file") MultipartFile file, String name) throws Exception {
         String fileName = file.getOriginalFilename();//获取文件名加后缀
+
         if (file.getSize() > 10 * 1024 * 1024) {
             return MessageUtil.createMessage(false, "修改失败,文件太大，请上传小于10M的图片");
+        }
+        Path directory = Paths.get(UPLOAD_PATH);
+        if (!Files.exists(directory)) {
+            Files.createDirectories(directory);
         }
         if (!EmptyUtil.Companion.isNullOrEmpty(fileName) && !EmptyUtil.Companion.isNullOrEmpty(name)) {
             String returnUrl = Constants.ImagePath;//存储路径
             try {
                 DeletePicture.deletePicture(name); //删除原图片
                 //将上传的文件写到服务器上指定的文件。
-                FileOutputStream imgOut = new FileOutputStream(new File(returnUrl, name));//根据 dir 抽象路径名和 img 路径名字符串创建一个新 File 实例。
+                FileOutputStream imgOut = new FileOutputStream(new File(UPLOAD_PATH , name));//根据 dir 抽象路径名和 img 路径名字符串创建一个新 File 实例。
                 imgOut.write(file.getBytes());//返回一个字节数组文件的内容
                 imgOut.close();
                 return MessageUtil.createMessage(true, "修改成功!");
@@ -211,7 +220,7 @@ public class WisdomBayController {
      * @Time 11:25
      **/
     @RequestMapping("/wisdomBay/upload.ahsj")
-    ModelAndView upload(String name) throws Exception{
+    ModelAndView upload(String name) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/wisdom/upload");
         modelAndView.addObject("title", "");
         modelAndView.addObject("name", name);
@@ -286,10 +295,10 @@ public class WisdomBayController {
     ModelAndView wisdomBayIndexUpdate() throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/wisdom/wisdom_bay_update");
         List<WisdomBay> wisdomBays = wisdomBayService.selectAll();
-        if (EmptyUtil.Companion.isNullOrEmpty(wisdomBays)){
+        if (EmptyUtil.Companion.isNullOrEmpty(wisdomBays)) {
             WisdomBay wisdomBay = new WisdomBay();
-            modelAndView.addObject("wisdomBay",wisdomBay);
-        }else {
+            modelAndView.addObject("wisdomBay", wisdomBay);
+        } else {
             WisdomBay wisdomBay = wisdomBays.get(0);
             modelAndView.addObject("wisdomBay", wisdomBay);
         }
@@ -301,10 +310,10 @@ public class WisdomBayController {
     ModelAndView intelligentUpdate() throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/wisdom/intelligent_acquisition_update");
         List<Intelligent> intelligents = intelligentService.selectAll();
-        if (EmptyUtil.Companion.isNullOrEmpty(intelligents)){
+        if (EmptyUtil.Companion.isNullOrEmpty(intelligents)) {
             Intelligent intelligent = new Intelligent();
-            modelAndView.addObject("intelligent",intelligent);
-        }else {
+            modelAndView.addObject("intelligent", intelligent);
+        } else {
             Intelligent intelligent = intelligents.get(0);
             modelAndView.addObject("intelligent", intelligent);
         }
@@ -317,10 +326,10 @@ public class WisdomBayController {
     ModelAndView macroeUpdate() throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/wisdom/macroeconomics_update");
         List<macroe> macroes1 = macroeService.selectAll();
-        if(EmptyUtil.Companion.isNullOrEmpty(macroes1)){
+        if (EmptyUtil.Companion.isNullOrEmpty(macroes1)) {
             macroe macroe3 = new macroe();
             modelAndView.addObject("macroe", macroe3);
-        }else {
+        } else {
             macroe macroe2 = macroes1.get(0);
             modelAndView.addObject("macroe", macroe2);
         }
@@ -333,10 +342,10 @@ public class WisdomBayController {
     ModelAndView smartparkingUpdate() throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/wisdom/smartparking_update");
         List<Smartparking> smartparkings = smartparkingService.selectAll();
-        if (EmptyUtil.Companion.isNullOrEmpty(smartparkings)){
+        if (EmptyUtil.Companion.isNullOrEmpty(smartparkings)) {
             Smartparking smartparking = new Smartparking();
             modelAndView.addObject("smartparking", smartparking);
-        }else {
+        } else {
             Smartparking smartparking = smartparkings.get(0);
             modelAndView.addObject("smartparking", smartparking);
         }
@@ -348,10 +357,10 @@ public class WisdomBayController {
     ModelAndView smartparkUpdate() throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/wisdom/smartpark_update");
         List<Smartpark> smartparks = smartparkService.selectAll();
-        if (EmptyUtil.Companion.isNullOrEmpty(smartparks)){
+        if (EmptyUtil.Companion.isNullOrEmpty(smartparks)) {
             Smartpark smartpark = new Smartpark();
             modelAndView.addObject("smartpark", smartpark);
-        }else {
+        } else {
             Smartpark smartpark = smartparks.get(0);
             modelAndView.addObject("smartpark", smartpark);
         }
@@ -363,10 +372,10 @@ public class WisdomBayController {
     ModelAndView socialcreditUpdate() throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/wisdom/social_credit_update");
         List<Socialcredit> socialcredits = socialcreditService.selectAll();
-        if (EmptyUtil.Companion.isNullOrEmpty(socialcredits)){
+        if (EmptyUtil.Companion.isNullOrEmpty(socialcredits)) {
             Socialcredit socialcredit = new Socialcredit();
             modelAndView.addObject("socialcredit", socialcredit);
-        }else {
+        } else {
             Socialcredit socialcredit = socialcredits.get(0);
             modelAndView.addObject("socialcredit", socialcredit);
         }
@@ -386,10 +395,10 @@ public class WisdomBayController {
     ModelAndView organizationIndexUpdate() throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/wisdom/organizational_structure_update");
         List<OrganizationalStructure> organizationalStructures = organizationalStructureService.selectAll();
-        if (EmptyUtil.Companion.isNullOrEmpty(organizationalStructures)){
+        if (EmptyUtil.Companion.isNullOrEmpty(organizationalStructures)) {
             OrganizationalStructure organizationalStructure = new OrganizationalStructure();
             modelAndView.addObject("organizationalStructure", organizationalStructure);
-        }else {
+        } else {
             OrganizationalStructure organizationalStructure = organizationalStructures.get(0);
             modelAndView.addObject("organizationalStructure", organizationalStructure);
         }
@@ -417,7 +426,7 @@ public class WisdomBayController {
      * @Time 10:24
      **/
     @RequestMapping("/toUpdateIndex.ahsj")
-    public Message updateIndex(WisdomIndex record)throws Exception {
+    public Message updateIndex(WisdomIndex record) throws Exception {
         return wisdomIndexService.updateByPrimaryKeySelective(record);
     }
 
