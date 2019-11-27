@@ -109,20 +109,29 @@
 <script src="/bootstrap/js/wow.js"></script>
 <script type="text/javascript">
     $(function () {
-        $("#wq").mouseover(function () {
-            $("#wq1").animate({width: '19%', height: '45%'});
-            $("#wq2").animate({width: '19%', height: '45%'});
+        $("#wq").mouseenter(function () {
+            /*  $("#wq1").animate({width: '19%', height: '45%'});
+              $("#wq2").animate({width: '19%', height: '45%'});*/
             $("#wq").animate({width: '23%', height: '68%'});
         });
-        $("#wq1").mouseover(function () {
-            $("#wq").animate({width: '19%', height: '45%'});
-            $("#wq2").animate({width: '19%', height: '45%'});
+        $("#wq1").mouseenter(function () {
+            /*  $("#wq").animate({width: '19%', height: '45%'});
+              $("#wq2").animate({width: '19%', height: '45%'});*/
             $("#wq1").animate({width: '23%', height: '68%'});
         });
-        $("#wq2").mouseover(function () {
-            $("#wq").animate({width: '19%', height: '45%'});
-            $("#wq1").animate({width: '19%', height: '45%'});
+        $("#wq2").mouseenter(function () {
+            /*     $("#wq").animate({width: '19%', height: '45%'});
+                 $("#wq1").animate({width: '19%', height: '45%'});*/
             $("#wq2").animate({width: '23%', height: '68%'});
+        });
+        $("#wq").mouseleave(function(){
+            $("#wq").animate({width: '19%', height: '45%'});
+        });
+        $("#wq1").mouseleave(function(){
+            $("#wq1").animate({width: '19%', height: '45%'});
+        });
+        $("#wq2").mouseleave(function(){
+            $("#wq2").animate({width: '19%', height: '45%'});
         });
     });
 
