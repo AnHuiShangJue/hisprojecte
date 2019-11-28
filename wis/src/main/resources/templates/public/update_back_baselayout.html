@@ -20,22 +20,23 @@
 <style>
 </style>
 <body>
-<nav class="navbar navbar-default" style="background-color: #ffffff;height: 110px;">
+<nav class="navbar navbar-default" style=" background-color: transparent;height: 110px; z-index: 1;border: transparent;">
     <div class="container-fluid">
+
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <img src="/bootstrap/images/wisdom/1.png" style="margin-left: 85px;margin-top: 25px;">
+            <img src="/bootstrap/images/wisdom/mmexport1574846450642.jpg" style="margin-left: 85px;margin-top: 25px;">
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"
              style="float:right;margin-top: 30px;margin-right: 70px;">
             <ul class="nav navbar-nav">
-                <li><a href="/api/wisdombay/lanhuUpdate/index.ahsj" style="color: #0f0f0f;    font-size: 18px;">首页</a></li>
-                <li><a href="/api/aboutwisdom/aboutWisUpdate/index.ahsj" style="color: #0f0f0f;    font-size: 18px;">关于智慧湾</a></li>
+                <li><a href="/api/wisdombay/lanhuUpdate/index.ahsj" style="color: rgba(255,255,255,1);    font-size: 18px;">首页</a></li>
+                <li><a href="/api/aboutwisdom/aboutWisUpdate/index.ahsj" style="color:rgba(255,255,255,1);    font-size: 18px;">关于智慧湾</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false" style="color: #0f0f0f;    font-size: 18px;">解决方案 <span
+                       aria-expanded="false" style="color: rgba(255,255,255,1);   font-size: 18px;background-color: transparent;">解决方案 <span
                             class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="/api/wisdombay/intelligentUpdate/index.ahsj">智能采集平台</a></li>
@@ -48,7 +49,7 @@
                         <li><a href="/api/aboutwisdom/aboutWisUpdate/index.ahsj">更多</a></li>
                     </ul>
                 </li>
-                <li><a href="/api/contactus/contactUsUpdate/index.ahsj" style="color: #0f0f0f;    font-size: 18px;">招聘与合作</a></li>
+                <li><a href="/api/contactus/contactUsUpdate/index.ahsj" style="color:rgba(255,255,255,1);    font-size: 18px;">招聘与合作</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -56,4 +57,9 @@
 </body>
 </html>
 <script>
+    $(function () {
+        $("#ew").click(function () {
+            alert(55)
+        })
+    })
 </script>
