@@ -136,7 +136,7 @@ public class WisdomBayController {
     ModelAndView lanhuIndex() throws Exception {
         List<WisdomIndex> wisdomIndices = wisdomIndexService.selectAll();
         WisdomIndex wisdomIndex = wisdomIndices.get(0);
-        ModelAndView modelAndView = new ModelAndView("index");
+        ModelAndView modelAndView = new ModelAndView("backend/wis/index");
         modelAndView.addObject("title", "欢迎页");
         modelAndView.addObject("wisdomIndex", wisdomIndex);
         return modelAndView;
