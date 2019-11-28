@@ -28,6 +28,7 @@
         width: 22%;
         height: 45%;
         margin-right: 4%;
+        margin-left: 4%;
         margin-top: 10%;
         border-radius: 25px
     }
@@ -59,7 +60,7 @@
             <div class="" style="font-size: 30px;margin-left: 20%;margin-top: 2%;width: 50%;" th:text="${wisdomBay.productTitle}"></div>
         </section>
         <section class="wow fadeInDown">
-            <div id="test2" style="margin-left: 15%; height: 373px;">
+            <div id="test2" style="margin-left: 13%; height: 373px;">
                 <div class="card wisdombay-card-content" id="wq"
                      style="">
                     <img src="/bootstrap/images/wisdom/AppleTV.png" class="img-responsive center-block" style="    height: 102px;">
@@ -166,24 +167,6 @@
                 $("#wq2").animate({width: '31%', height: '80%'});
             }
         });
-        // $("#wq").mouseleave(function(){
-        //     if (!(($("#wq1").is(":animated")) && ($("#wq2").is(":animated")))) {
-        //     // if ($("#wq").is(":animated")){
-        //         $("#wq").animate({width: '22%', height: '45%'});
-        //     }
-        // });
-        // $("#wq1").mouseleave(function(){
-        //     if (!(($("#wq").is(":animated")) && ($("#wq2").is(":animated")))) {
-        //     // if ($("#wq1").is(":animated")){
-        //         $("#wq1").animate({width: '22%', height: '45%'});
-        //     }
-        // });
-        // $("#wq2").mouseleave(function(){
-        //     if (!(($("#wq1").is(":animated")) && ($("#wq").is(":animated")))) {
-        //     // if ($("#wq2").is(":animated")){
-        //         $("#wq2").animate({width: '22%', height: '45%'});
-        //     }
-        // });
     });
 
     wow = new WOW(

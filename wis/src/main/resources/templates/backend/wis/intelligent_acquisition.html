@@ -19,6 +19,17 @@
     .wow:first-child {
         visibility: hidden;
     }
+    .wisdombay-card-content{
+        float: left;
+        border: 1px;
+        background-color: rgb(14, 11, 63);
+        width: 22%;
+        height: 45%;
+        margin-right: 4%;
+        margin-left: 4%;
+        margin-top: 10%;
+        border-radius: 25px
+    }
 </style>
 <body>
 <div th:replace="public/back_baselayout :: html"></div>
@@ -39,24 +50,33 @@
             <div class="" style="font-size: 30px;margin-left: 20%;margin-top: 2%;width: 50%;" th:text="${intelligent.productTitle}"></div>
         </section>
         <section class="wow fadeInDown">
-            <div id="test2" style="margin-left: 25%; height: 373px;">
-                <div class="col-xs-12 col-sm-12 col-md-12" id="wq"
-                     style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 19%;height: 45%;margin-right: 4%;margin-top: 4%;border-radius: 25px">
+            <div id="test2" style="margin-left: 13%; height: 373px;">
+                <div class="card wisdombay-card-content" id="wq"
+                     style="">
                     <img src="/bootstrap/images/wisdom/AppleTV11.png" class="img-responsive center-block"  style="    height: 102px;">
-                    <br><span style="color: #ffffff;margin-left: 29%;font-size: 136%;" th:text="${intelligent.product1}"></span>
-                    <br><br><span style="color: #ffffff; font-size: 13px;" th:text="${intelligent.productContent1}"></span>
+                    <br><span style="color: #ffffff;margin-left: 37%;font-size: 136%;" th:text="${intelligent.product1}"></span>
+                    <br><br>
+                    <div class="center-block" style="width:80%">
+                        <span style="color: #ffffff; font-size: 13px;" th:text="${intelligent.productContent1}"></span>
+                    </div>
                 </div>
-                <div class="card " id="wq1"
+                <div class="card wisdombay-card-content" id="wq1"
                      style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 19%;height: 45%;margin-right: 4%;margin-top: 4%;border-radius: 25px">
                     <img src="/bootstrap/images/wisdom/AppleTV12.png" class="img-responsive center-block"  style="    height: 102px;">
-                    <br><span style="color: #ffffff;margin-left: 36%;font-size: 136%;"  th:text="${intelligent.product2}"></span>
-                    <br><br><span style="color: #ffffff; font-size: 13px;" th:text="${intelligent.productContent2}"></span>
+                    <br><span style="color: #ffffff;margin-left: 39%;font-size: 136%;"  th:text="${intelligent.product2}"></span>
+                    <br><br>
+                    <div class="center-block" style="width:80%">
+                        <span style="color: #ffffff; font-size: 13px;" th:text="${intelligent.productContent2}"></span>
+                    </div>
                 </div>
-                <div class="card" id="wq2"
+                <div class="card wisdombay-card-content" id="wq2"
                      style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 19%;height: 45%;margin-right: 4%;margin-top: 4%;border-radius: 25px">
                     <img src="/bootstrap/images/wisdom/Grouping15.png" class="img-responsive center-block"  style="    height: 102px;">
-                    <br><span style="color: #ffffff;margin-left: 35%;font-size: 136%;" th:text="${intelligent.product3}"></span>
-                    <br><br><span style="color: #ffffff; font-size: 13px;" th:text="${intelligent.productContent3}"></span>
+                    <br><span style="color: #ffffff;margin-left: 37%;font-size: 136%;" th:text="${intelligent.product3}"></span>
+                    <br><br>
+                    <div class="center-block" style="width:80%">
+                        <span style="color: #ffffff; font-size: 13px;" th:text="${intelligent.productContent3}"></span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -94,30 +114,60 @@
 <div th:replace="public/footer :: html"></div>
 <script src="/bootstrap/js/wow.js"></script>
 <script type="text/javascript">
+    // $(function () {
+    //     $("#wq").mouseenter(function () {
+    //         /*  $("#wq1").animate({width: '19%', height: '45%'});
+    //           $("#wq2").animate({width: '19%', height: '45%'});*/
+    //         $("#wq").animate({width: '23%', height: '68%'});
+    //     });
+    //     $("#wq1").mouseenter(function () {
+    //         /*  $("#wq").animate({width: '19%', height: '45%'});
+    //           $("#wq2").animate({width: '19%', height: '45%'});*/
+    //         $("#wq1").animate({width: '23%', height: '68%'});
+    //     });
+    //     $("#wq2").mouseenter(function () {
+    //         /*     $("#wq").animate({width: '19%', height: '45%'});
+    //              $("#wq1").animate({width: '19%', height: '45%'});*/
+    //         $("#wq2").animate({width: '23%', height: '68%'});
+    //     });
+    //     $("#wq").mouseleave(function(){
+    //         $("#wq").animate({width: '19%', height: '45%'});
+    //     });
+    //     $("#wq1").mouseleave(function(){
+    //         $("#wq1").animate({width: '19%', height: '45%'});
+    //     });
+    //     $("#wq2").mouseleave(function(){
+    //         $("#wq2").animate({width: '19%', height: '45%'});
+    //     });
+    // });
+
     $(function () {
         $("#wq").mouseenter(function () {
-            /*  $("#wq1").animate({width: '19%', height: '45%'});
-              $("#wq2").animate({width: '19%', height: '45%'});*/
-            $("#wq").animate({width: '23%', height: '68%'});
+            if (!(($("#wq1").is(":animated")) && ($("#wq2").is(":animated")))){
+
+                $("#wq1").animate({width: '22%', height: '45%'});
+                $("#wq2").animate({width: '22%', height: '45%'});
+
+                $("#wq").animate({width: '31%', height: '80%'});
+            }
         });
         $("#wq1").mouseenter(function () {
-            /*  $("#wq").animate({width: '19%', height: '45%'});
-              $("#wq2").animate({width: '19%', height: '45%'});*/
-            $("#wq1").animate({width: '23%', height: '68%'});
+            if (!(($("#wq2").is(":animated")) && ($("#wq").is(":animated")))) {
+
+                $("#wq2").animate({width: '22%', height: '45%'});
+                $("#wq").animate({width: '22%', height: '45%'});
+
+                $("#wq1").animate({width: '31%', height: '80%'});
+            }
         });
         $("#wq2").mouseenter(function () {
-            /*     $("#wq").animate({width: '19%', height: '45%'});
-                 $("#wq1").animate({width: '19%', height: '45%'});*/
-            $("#wq2").animate({width: '23%', height: '68%'});
-        });
-        $("#wq").mouseleave(function(){
-            $("#wq").animate({width: '19%', height: '45%'});
-        });
-        $("#wq1").mouseleave(function(){
-            $("#wq1").animate({width: '19%', height: '45%'});
-        });
-        $("#wq2").mouseleave(function(){
-            $("#wq2").animate({width: '19%', height: '45%'});
+            if (!(($("#wq1").is(":animated")) && ($("#wq").is(":animated")))){
+
+                $("#wq").animate({width: '22%', height: '45%'});
+                $("#wq1").animate({width: '22%', height: '45%'});
+
+                $("#wq2").animate({width: '31%', height: '80%'});
+            }
         });
     });
 
