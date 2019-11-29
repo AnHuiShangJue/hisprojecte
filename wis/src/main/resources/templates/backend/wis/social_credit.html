@@ -27,7 +27,6 @@
         height: 45%;
         margin-right: 4%;
         margin-left: 4%;
-        margin-top: 10%;
         border-radius: 25px
     }
 </style>
@@ -36,16 +35,16 @@
 <div class="container-fluid">
     <div class="row">
         <section class="" style="font-size: 350%;">
-            <h1 class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;letter-spacing: 7px;color: rgba(255,255,255,1);font-size: 1em;margin-top: 3%;" th:text="${socialcredit.title}"></h1>
-            <h3  class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;color: rgba(255,255,255,1);font-size: 0.4em;margin-top: 10%;" th:text="${socialcredit.description}"></h3>
+            <h1 class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;letter-spacing: 7px;color: rgba(255,255,255,1);font-size: 1em;margin-top: 8%;" th:text="${socialcredit.title}"></h1>
+            <h3  class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;color: rgba(255,255,255,1);font-size: 0.4em;margin-top: 15%;" th:text="${socialcredit.description}"></h3>
             <section class="wow fadeInDown">
-                <div style="position: absolute;font-size: 0.4em;color:rgba(255,255,255,1);margin-top: 34%;margin-left: 17%;" class="text-center">一<br><p th:text="${socialcredit.organizationalStructure2}"></p></div>
-                <div style="position: absolute;font-size: 0.4em;color:rgba(255,255,255,1);margin-top: 28%;margin-left: 12%;" class="text-center">二<br><p th:text="${socialcredit.organizationalStructure1}"></p></div>
-                <div style="position: absolute;font-size: 0.4em;color:rgba(255,255,255,1);margin-top: 21%;margin-left: 18%;" class="text-center">三<br><p th:text="${socialcredit.organizationalStructure3}"></p></div>
-                <div style="position: absolute;font-size: 0.4em;color:rgba(255,255,255,1);margin-top: 15%;margin-left: 30%;" class="text-center">四<br><p th:text="${socialcredit.organizationalStructure4}"></p></div>
-                <div style="position: absolute;font-size: 0.4em;color:rgba(255,255,255,1);margin-top: 15%;margin-left: 74%;" class="text-center">五<br><p th:text="${socialcredit.organizationalStructure5}"></p></div>
-                <div style="position: absolute;font-size: 0.4em;color:rgba(255,255,255,1);margin-top: 21%;margin-left: 81%;" class="text-center">六<br><p th:text="${socialcredit.organizationalStructure6}"></p></div>
-                <div style="position: absolute;font-size: 0.4em;color:rgba(255,255,255,1);margin-top: 33%;margin-left: 77%;" class="text-center">七<br><p th:text="${socialcredit.organizationalStructure7}"></p></div>
+                <div style="position: absolute;font-size: 0.4em;color:rgba(255,255,255,1);margin-top: 36%;margin-left: 17%;" class="text-center">一<br><p th:text="${socialcredit.organizationalStructure2}"></p></div>
+                <div style="position: absolute;font-size: 0.4em;color:rgba(255,255,255,1);margin-top: 31%;margin-left: 12%;" class="text-center">二<br><p th:text="${socialcredit.organizationalStructure1}"></p></div>
+                <div style="position: absolute;font-size: 0.4em;color:rgba(255,255,255,1);margin-top: 24%;margin-left: 18%;" class="text-center">三<br><p th:text="${socialcredit.organizationalStructure3}"></p></div>
+                <div style="position: absolute;font-size: 0.4em;color:rgba(255,255,255,1);margin-top: 18%;margin-left: 27%;" class="text-center">四<br><p th:text="${socialcredit.organizationalStructure4}"></p></div>
+                <div style="position: absolute;font-size: 0.4em;color:rgba(255,255,255,1);margin-top: 21%;margin-left: 74%;" class="text-center">五<br><p th:text="${socialcredit.organizationalStructure5}"></p></div>
+                <div style="position: absolute;font-size: 0.4em;color:rgba(255,255,255,1);margin-top: 29%;margin-left: 81%;" class="text-center">六<br><p th:text="${socialcredit.organizationalStructure6}"></p></div>
+                <div style="position: absolute;font-size: 0.4em;color:rgba(255,255,255,1);margin-top: 36%;margin-left: 74%;" class="text-center">七<br><p th:text="${socialcredit.organizationalStructure7}"></p></div>
             </section>
             <img src="/bootstrap/images/wisdom/face02.png" class="img-responsive" alt="Responsive image" style="margin-top: -190px;width: 100%;"/>
         </section>
@@ -157,31 +156,24 @@
 
     $(function () {
         $("#wq").mouseenter(function () {
-            if (!(($("#wq1").is(":animated")) && ($("#wq2").is(":animated")))){
-
-                $("#wq1").animate({width: '22%', height: '45%'});
-                $("#wq2").animate({width: '22%', height: '45%'});
-
-                $("#wq").animate({width: '31%', height: '80%'});
-            }
+                $("#wq").stop().animate({width: '31%', height: '80%'});
         });
         $("#wq1").mouseenter(function () {
-            if (!(($("#wq2").is(":animated")) && ($("#wq").is(":animated")))) {
-
-                $("#wq2").animate({width: '22%', height: '45%'});
-                $("#wq").animate({width: '22%', height: '45%'});
-
-                $("#wq1").animate({width: '31%', height: '80%'});
-            }
+                $("#wq1").stop(true).animate({width: '31%', height: '80%'});
         });
         $("#wq2").mouseenter(function () {
-            if (!(($("#wq1").is(":animated")) && ($("#wq").is(":animated")))){
+                $("#wq2").stop(true).animate({width: '31%', height: '80%'});
+        });
 
-                $("#wq").animate({width: '22%', height: '45%'});
-                $("#wq1").animate({width: '22%', height: '45%'});
+        $("#wq").mouseleave(function(){
+            $("#wq").stop(true).animate({width: '22%', height: '45%'});
 
-                $("#wq2").animate({width: '31%', height: '80%'});
-            }
+        });
+        $("#wq1").mouseleave(function(){
+            $("#wq1").stop(true).animate({width: '22%', height: '45%'});
+        });
+        $("#wq2").mouseleave(function(){
+            $("#wq2").stop(true).animate({width: '22%', height: '45%'});
         });
     });
 
