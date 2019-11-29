@@ -143,33 +143,33 @@
 
     $(function () {
         $("#wq").mouseenter(function () {
-            if (!(($("#wq1").is(":animated")) && ($("#wq2").is(":animated")))){
 
-                $("#wq1").animate({width: '22%', height: '45%'});
-                $("#wq2").animate({width: '22%', height: '45%'});
-
-                $("#wq").animate({width: '31%', height: '80%'});
-            }
+                $("#wq").stop(true).animate({width: '31%', height: '80%'});
         });
         $("#wq1").mouseenter(function () {
-            if (!(($("#wq2").is(":animated")) && ($("#wq").is(":animated")))) {
 
-                $("#wq2").animate({width: '22%', height: '45%'});
-                $("#wq").animate({width: '22%', height: '45%'});
-
-                $("#wq1").animate({width: '31%', height: '80%'});
-            }
+                $("#wq1").stop(true).animate({width: '31%', height: '80%'});
         });
         $("#wq2").mouseenter(function () {
-            if (!(($("#wq1").is(":animated")) && ($("#wq").is(":animated")))){
 
-                $("#wq").animate({width: '22%', height: '45%'});
-                $("#wq1").animate({width: '22%', height: '45%'});
-
-                $("#wq2").animate({width: '31%', height: '80%'});
-            }
+                $("#wq2").stop(true).animate({width: '31%', height: '80%'});
         });
+
+            $("#wq").mouseleave(function(){
+                $("#wq").stop(true).animate({width: '22%', height: '45%'});
+
+            });
+            $("#wq1").mouseleave(function(){
+                $("#wq1").stop(true).animate({width: '22%', height: '45%'});
+            });
+            $("#wq2").mouseleave(function(){
+                $("#wq2").stop(true).animate({width: '22%', height: '45%'});
+            });
+
+
     });
+
+
 
     wow = new WOW(
         {
