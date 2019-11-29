@@ -19,42 +19,64 @@
     .wow:first-child {
         visibility: hidden;
     }
+
+    .wisdombay-card-content{
+        float: left;
+        border: 1px;
+        background-color: rgb(14, 11, 63);
+        width: 22%;
+        height: 45%;
+        margin-right: 4%;
+        margin-left: 4%;
+        border-radius: 25px
+    }
 </style>
 <body>
 <div th:replace="public/back_baselayout :: html"></div>
 <div class="container-fluid">
     <div class="row">
         <section class="" style="font-size: 350%;">
-            <h1 class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;letter-spacing: 7px;color: rgba(255,255,255,1);font-size: 1em;margin-top: 3%;" th:text="${macroe.title}"></h1>
-            <h3  class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;color: rgba(255,255,255,1);font-size: 0.4em;margin-top: 10%;" th:text="${macroe.description}"></h3>
-            <img src="/bootstrap/images/wisdom/nature-4549913_1920.jpg" class="img-responsive" alt="Responsive image" style="margin-top: -190px;height: 739px;width: 100%;"/>
+            <h1 class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;letter-spacing: 7px;color: rgba(255,255,255,1);font-size: 1em;margin-top: 10%;" th:text="${macroe.title}"></h1>
+            <h3  class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;color: rgba(255,255,255,1);font-size: 0.4em;margin-top: 19%;" th:text="${macroe.description}"></h3>
+            <img src="/bootstrap/images/wisdom/nature-4549913_1920.jpg" class="img-responsive" alt="Responsive image" style="margin-top: -190px;height:100%;width: 100%;"/>
         </section>
         <section class="container-fluid wow bounceInLeft" data-wow-offset="0">
             <div class="" style="font-size: 30px;margin-left: 20%;margin-top: 2%;width: 50%;" th:text="${macroe.productTitle}"></div>
         </section>
         <section class="wow fadeInDown">
-            <div id="test2" style="margin-left: 25%; height: 373px;">
-                <div class="col-xs-12 col-sm-12 col-md-12" id="wq"
-                     style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 19%;height: 45%;margin-right: 4%;margin-top: 4%;border-radius: 25px">
+            <div id="test2" style="margin-left: 13%; height: 373px;">
+                <div class="card wisdombay-card-content" id="wq"
+                     style="">
                     <img src="/bootstrap/images/wisdom/AppleTV2.png" class="img-responsive center-block" style="    height: 102px;">
-                    <br><span style="color: #ffffff;margin-left: 29%;font-size: 136%;" th:text="${macroe.product1}"></span>
-                    <br><br><span style="color: #ffffff; font-size: 13px;" th:text="${macroe.productContent1}"></span>
+                    <br><span style="color: #ffffff;margin-left: 37%;font-size: 136%;" th:text="${macroe.product1}"></span>
+                    <br><br>
+                    <div class="center-block" style="width:80%">
+                        <span style="color: #ffffff; font-size: 13px;" th:text="${macroe.productContent1}"></span>
+                    </div>
                 </div>
-                <div class="card " id="wq1"
-                     style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 19%;height: 45%;margin-right: 4%;margin-top: 4%;border-radius: 25px">
+                <div class="card wisdombay-card-content" id="wq1"
+                     style="">
                     <img src="/bootstrap/images/wisdom/AppleTV4.png" class="img-responsive center-block" style="    height: 102px;">
-                    <br><span style="color: #ffffff;margin-left: 36%;font-size: 136%;"  th:text="${macroe.product2}"></span>
-                    <br><br><span style="color: #ffffff; font-size: 13px;" th:text="${macroe.productContent2}"></span>
+                    <br><span style="color: #ffffff;margin-left: 39%;font-size: 136%;"  th:text="${macroe.product2}"></span>
+                    <br><br>
+                    <div class="center-block" style="width:80%">
+                        <span style="color: #ffffff; font-size: 13px;" th:text="${macroe.productContent2}"></span>
+                    </div>
+
                 </div>
-                <div class="card" id="wq2"
-                     style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 19%;height: 45%;margin-right: 4%;margin-top: 4%;border-radius: 25px">
+                <div class="card wisdombay-card-content" id="wq2"
+                     style="">
                     <img src="/bootstrap/images/wisdom/Grouping11.png" class="img-responsive center-block" style="    height: 102px;">
-                    <br><span style="color: #ffffff;margin-left: 35%;font-size: 136%;" th:text="${macroe.product3}"></span>
-                    <br><br><span style="color: #ffffff; font-size: 13px;" th:text="${macroe.productContent3}"></span>
+                    <br><span style="color: #ffffff;margin-left: 37%;font-size: 136%;" th:text="${macroe.product3}"></span>
+                    <br><br>
+                    <div class="center-block" style="width:80%">
+                        <span style="color: #ffffff; font-size: 13px;" th:text="${macroe.productContent3}"></span>
+                    </div>
+
                 </div>
             </div>
         </section>
-        <section class="wow fadeInDown row"  style="float: left;border: 1px;width: 100.8%;height: 740px; margin-top: 7%;">
+        <section class="wow fadeInDown row"  style="float: left;border: 1px;width: 100.8%;height:100%; margin-top: 7%;">
             <section class="container-fluid wow bounceInLeft" data-wow-offset="0">
                 <div class="col-xs-12 col-sm-12 col-md-12" style="position: absolute">
                     <span style="font-size: 30px;margin-left: 20%;margin-top: 2%; color: #ffffff" th:text="${macroe.certificationTitle}"></span>
@@ -70,30 +92,27 @@
 <script type="text/javascript">
     $(function () {
         $("#wq").mouseenter(function () {
-            /*  $("#wq1").animate({width: '19%', height: '45%'});
-              $("#wq2").animate({width: '19%', height: '45%'});*/
-            $("#wq").animate({width: '23%', height: '68%'});
+                $("#wq").stop(true).animate({width: '31%', height: '80%'});
         });
         $("#wq1").mouseenter(function () {
-            /*  $("#wq").animate({width: '19%', height: '45%'});
-              $("#wq2").animate({width: '19%', height: '45%'});*/
-            $("#wq1").animate({width: '23%', height: '68%'});
+                $("#wq1").stop(true).animate({width: '31%', height: '80%'});
         });
         $("#wq2").mouseenter(function () {
-            /*     $("#wq").animate({width: '19%', height: '45%'});
-                 $("#wq1").animate({width: '19%', height: '45%'});*/
-            $("#wq2").animate({width: '23%', height: '68%'});
+                $("#wq2").stop(true).animate({width: '31%', height: '80%'});
         });
+
         $("#wq").mouseleave(function(){
-            $("#wq").animate({width: '19%', height: '45%'});
+            $("#wq").stop(true).animate({width: '22%', height: '45%'});
+
         });
         $("#wq1").mouseleave(function(){
-            $("#wq1").animate({width: '19%', height: '45%'});
+            $("#wq1").stop(true).animate({width: '22%', height: '45%'});
         });
         $("#wq2").mouseleave(function(){
-            $("#wq2").animate({width: '19%', height: '45%'});
+            $("#wq2").stop(true).animate({width: '22%', height: '45%'});
         });
     });
+
 
     wow = new WOW(
         {

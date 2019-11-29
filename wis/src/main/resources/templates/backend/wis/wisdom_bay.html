@@ -28,7 +28,7 @@
         width: 22%;
         height: 45%;
         margin-right: 4%;
-        margin-top: 10%;
+        margin-left: 4%;
         border-radius: 25px
     }
 </style>
@@ -37,8 +37,8 @@
 <div class="container-fluid">
     <div class="row">
         <section class="" style="font-size: 350%;">
-            <h1 class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;letter-spacing: 7px;color: rgba(255,255,255,1);font-size: 1em;margin-top: 3%;" th:text="${wisdomBay.title}"></h1>
-            <h3  class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;color: rgba(255,255,255,1);font-size: 0.4em;margin-top: 10%;" th:text="${wisdomBay.description}"></h3>
+            <h1 class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;letter-spacing: 7px;color: rgba(255,255,255,1);font-size: 1em;margin-top: 8%;" th:text="${wisdomBay.title}"></h1>
+            <h3  class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;color: rgba(255,255,255,1);font-size: 0.4em;margin-top: 15%;" th:text="${wisdomBay.description}"></h3>
             <section class="wow fadeInDown">
                 <div style="position: absolute;font-size: 0.3em;color:rgba(255,255,255,1);margin-top: 33%;margin-left: 15%;" class="text-center">一<br><p th:text="${wisdomBay.organizationalTitle1}"></p><p th:text="${wisdomBay.organizationalStructure1}"></p></div>
                 <div style="position: absolute;font-size: 0.3em;color:rgba(255,255,255,1);margin-top: 26%;margin-left: 19%;" class="text-center">二<br><p th:text="${wisdomBay.organizationalTitle2}"></p><p th:text="${wisdomBay.organizationalStructure2}"></p></div>
@@ -59,7 +59,7 @@
             <div class="" style="font-size: 30px;margin-left: 20%;margin-top: 2%;width: 50%;" th:text="${wisdomBay.productTitle}"></div>
         </section>
         <section class="wow fadeInDown">
-            <div id="test2" style="margin-left: 15%; height: 373px;">
+            <div id="test2" style="margin-left: 13%; height: 373px;">
                 <div class="card wisdombay-card-content" id="wq"
                      style="">
                     <img src="/bootstrap/images/wisdom/AppleTV.png" class="img-responsive center-block" style="    height: 102px;">
@@ -140,50 +140,25 @@
 
     $(function () {
         $("#wq").mouseenter(function () {
-            if (!(($("#wq1").is(":animated")) && ($("#wq2").is(":animated")))){
-
-                $("#wq1").animate({width: '22%', height: '45%'});
-                $("#wq2").animate({width: '22%', height: '45%'});
-
-                $("#wq").animate({width: '31%', height: '80%'});
-            }
+                $("#wq").stop(true).animate({width: '31%', height: '80%'});
         });
         $("#wq1").mouseenter(function () {
-            if (!(($("#wq2").is(":animated")) && ($("#wq").is(":animated")))) {
-
-                $("#wq2").animate({width: '22%', height: '45%'});
-                $("#wq").animate({width: '22%', height: '45%'});
-
-                $("#wq1").animate({width: '31%', height: '80%'});
-            }
+                $("#wq1").stop(true).animate({width: '31%', height: '80%'});
         });
         $("#wq2").mouseenter(function () {
-            if (!(($("#wq1").is(":animated")) && ($("#wq").is(":animated")))){
-
-                $("#wq").animate({width: '22%', height: '45%'});
-                $("#wq1").animate({width: '22%', height: '45%'});
-
-                $("#wq2").animate({width: '31%', height: '80%'});
-            }
+                $("#wq2").stop(true).animate({width: '31%', height: '80%'});
         });
-        // $("#wq").mouseleave(function(){
-        //     if (!(($("#wq1").is(":animated")) && ($("#wq2").is(":animated")))) {
-        //     // if ($("#wq").is(":animated")){
-        //         $("#wq").animate({width: '22%', height: '45%'});
-        //     }
-        // });
-        // $("#wq1").mouseleave(function(){
-        //     if (!(($("#wq").is(":animated")) && ($("#wq2").is(":animated")))) {
-        //     // if ($("#wq1").is(":animated")){
-        //         $("#wq1").animate({width: '22%', height: '45%'});
-        //     }
-        // });
-        // $("#wq2").mouseleave(function(){
-        //     if (!(($("#wq1").is(":animated")) && ($("#wq").is(":animated")))) {
-        //     // if ($("#wq2").is(":animated")){
-        //         $("#wq2").animate({width: '22%', height: '45%'});
-        //     }
-        // });
+
+        $("#wq").mouseleave(function(){
+            $("#wq").stop(true).animate({width: '22%', height: '45%'});
+
+        });
+        $("#wq1").mouseleave(function(){
+            $("#wq1").stop(true).animate({width: '22%', height: '45%'});
+        });
+        $("#wq2").mouseleave(function(){
+            $("#wq2").stop(true).animate({width: '22%', height: '45%'});
+        });
     });
 
     wow = new WOW(
