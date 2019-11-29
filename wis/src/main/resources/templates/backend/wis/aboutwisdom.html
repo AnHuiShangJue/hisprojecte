@@ -58,33 +58,36 @@
 <div th:replace="public/back_baselayout :: html"></div>
 
 
-<div class="container-fluid"style="position: absolute;margin-top: -130px;z-index: -1">
-    <!--<div class="row">-->
+<div class="container-fluid" style="position: absolute;margin-top: -130px;z-index: -1">
     <div class="row">
-        <img src="/bootstrap/images/wisdom/bianzu.png" class="img-responsive" alt="Responsive image" style="width:100%">
+        <img src="/bootstrap/images/wisdom/org.png" class="img-responsive" alt="Responsive image" style="width:100%">
     </div>
-        <!--<img src="/bootstrap/images/wisdom/bianzu.png" class="" alt="Responsive image">-->
-
-    <!--</div>-->
 
 </div>
 
-<!--//////////////////////////-->
 <div class="container-fluid">
     <div class="row">
         <section class="center-block wow slideInDown" data-wow-offset="0">
             <!--背景图-->
-            <img class="img-responsive center-block visible-lg" src="/bootstrap/images/wisdom/juxin.png" alt="Responsive image" style="width:75%;margin-top: -20%;"/>
+            <img class="img-responsive center-block visible-lg" src="/bootstrap/images/wisdom/juxin.png"
+                 alt="Responsive image" style="width:75%;margin-top: 5%;"/>
             <!--小设备适配-->
-            <img class="img-responsive center-block visible-md" src="/bootstrap/images/wisdom/juxin2.png" alt="Responsive image" style="width:75%;margin-top: -20%;"/><!--ipad pro-->
-            <img class="img-responsive center-block visible-sm" src="/bootstrap/images/wisdom/juxin2.png" alt="Responsive image" style="width:75%;margin-top: -20%;"/>
-            <img class="img-responsive center-block visible-xs" src="/bootstrap/images/wisdom/juxin2.png" alt="Responsive image" style="width:75%;margin-top: -20%;"/>
+            <img class="img-responsive center-block visible-md" src="/bootstrap/images/wisdom/juxin2.png"
+                 alt="Responsive image" style="width:75%;margin-top: -5%;"/><!--ipad pro-->
+            <img class="img-responsive center-block visible-sm" src="/bootstrap/images/wisdom/juxin2.png"
+                 alt="Responsive image" style="width:75%;margin-top: -5%;"/>
+            <img class="img-responsive center-block visible-xs" src="/bootstrap/images/wisdom/juxin2.png"
+                 alt="Responsive image" style="width:75%;margin-top: -5%;"/>
             <!--标题图-->
-            <img class="img-responsive center-block visible-lg" src="/bootstrap/images/wisdom/aboutwisdom.png" alt="Responsive image" style="width: 20%;margin-top: -39%;"/>
+            <img class="img-responsive center-block visible-lg" src="/bootstrap/images/wisdom/aboutwisdom.png"
+                 alt="Responsive image" style="width: 20%;margin-top: -39%;"/>
             <!--小设备适配-->
-            <img class="img-responsive center-block visible-md" src="/bootstrap/images/wisdom/aboutwisdom.png" alt="Responsive image" style="width: 20%;margin-top: -90%;"/><!--ipad pro-->
-            <img class="img-responsive center-block visible-sm" src="/bootstrap/images/wisdom/aboutwisdom.png" alt="Responsive image" style="width: 20%;margin-top: -90%;"/>
-            <img class="img-responsive center-block visible-xs" src="/bootstrap/images/wisdom/aboutwisdom.png" alt="Responsive image" style="width: 20%;margin-top: -90%;"/>
+            <img class="img-responsive center-block visible-md" src="/bootstrap/images/wisdom/aboutwisdom.png"
+                 alt="Responsive image" style="width: 20%;margin-top: -110%;"/><!--ipad pro-->
+            <img class="img-responsive center-block visible-sm" src="/bootstrap/images/wisdom/aboutwisdom.png"
+                 alt="Responsive image" style="width: 20%;margin-top: -110%;"/>
+            <img class="img-responsive center-block visible-xs" src="/bootstrap/images/wisdom/aboutwisdom.png"
+                 alt="Responsive image" style="width: 20%;margin-top: -110%;"/>
             <!--文字-->
             <div class="center-block" style="width:40%">
                 <h3 class="text-center aboutwisdom-text" th:text="${aboutWisdom.introduce}"></h3>
@@ -93,17 +96,30 @@
 
     </div>
 </div>
-<!--/////////////////////////////-->
 
-<div class="container-fluid" style="margin-top: 20%">
-    <!--<div class="row" style="">-->
-        <section class="wow fadeIn" data-wow-duration="1500ms">
-            <p class="core-text-title text-center" style="">核心能力</p>
-        </section>
-    <!--</div>-->
-    <!--<div class="row" style="">-->
-        <img class="center-block img-responsive" src="/bootstrap/images/wisdom/jiantou.png" alt="Responsive image" />
-    <!--</div>-->
+<div class="container-fluid visible-lg" style="margin-top: 20%">
+    <section class="wow fadeIn" data-wow-duration="1500ms">
+        <p class="core-text-title text-center" style="">核心能力</p>
+    </section>
+    <img class="center-block img-responsive" src="/bootstrap/images/wisdom/jiantou.png" alt="Responsive image"/>
+</div>
+<div class="container-fluid visible-md" style="margin-top: 40%">
+    <section class="wow fadeIn" data-wow-duration="1500ms">
+        <p class="core-text-title text-center" style="">核心能力</p>
+    </section>
+    <img class="center-block img-responsive" src="/bootstrap/images/wisdom/jiantou.png" alt="Responsive image"/>
+</div>
+<div class="container-fluid visible-sm" style="margin-top: 40%">
+    <section class="wow fadeIn" data-wow-duration="1500ms">
+        <p class="core-text-title text-center" style="">核心能力</p>
+    </section>
+    <img class="center-block img-responsive" src="/bootstrap/images/wisdom/jiantou.png" alt="Responsive image"/>
+</div>
+<div class="container-fluid visible-xs" style="margin-top: 40%">
+    <section class="wow fadeIn" data-wow-duration="1500ms">
+        <p class="core-text-title text-center" style="">核心能力</p>
+    </section>
+    <img class="center-block img-responsive" src="/bootstrap/images/wisdom/jiantou.png" alt="Responsive image"/>
 </div>
 
 <br>
@@ -112,54 +128,39 @@
 <div class="container-fluid">
     <!--<div class="row">-->
 
-        <div class="col-md-2">
-            <section class="wow rotateInDownLeft" data-wow-duration="150ms">
-                <img class="center-block img-responsive" src="/bootstrap/images/wisdom/design.png" alt="Responsive image"/>
-            </section>
-        </div>
-        <div class="col-md-2">
-            <section class="wow rotateInDownLeft" data-wow-duration="300ms">
-                <img class="center-block img-responsive" src="/bootstrap/images/wisdom/data.png" alt="Responsive image"/>
-            </section>
-        </div>
-        <div class="col-md-2">
-            <section class="wow rotateInDownLeft" data-wow-duration="600ms">
-                <img class="center-block img-responsive" src="/bootstrap/images/wisdom/source.png" alt="Responsive image"/>
-            </section>
-        </div>
-        <div class="col-md-2">
-            <section class="wow rotateInDownLeft" data-wow-duration="900ms">
-                <img class="center-block img-responsive" src="/bootstrap/images/wisdom/science.png" alt="Responsive image"/>
-            </section>
-
-        </div>
-        <div class="col-md-2">
-            <section class="wow rotateInDownLeft" data-wow-duration="1200ms">
-                <img class="center-block img-responsive" src="/bootstrap/images/wisdom/product.png" alt="Responsive image"/>
-            </section>
-
-        </div>
-        <div class="col-md-2">
-            <section class="wow rotateInDownLeft" data-wow-duration="1500ms">
-                <img class="center-block img-responsive" src="/bootstrap/images/wisdom/luodi.png" alt="Responsive image"/>
-            </section>
-
-        </div>
-    <!--</div>-->
-</div>
-
-<br>
-<br>
-
-<div class="container-fluid">
-    <!--<div class="row" style="">-->
-        <section class="wow fadeIn" data-wow-duration="1500ms">
-            <p class="core-text-title text-center" style="">合伙人</p>
+    <div class="col-md-2">
+        <section class="wow rotateInDownLeft" data-wow-duration="150ms">
+            <img class="center-block img-responsive" src="/bootstrap/images/wisdom/design.png" alt="Responsive image"/>
+        </section>
+    </div>
+    <div class="col-md-2">
+        <section class="wow rotateInDownLeft" data-wow-duration="300ms">
+            <img class="center-block img-responsive" src="/bootstrap/images/wisdom/data.png" alt="Responsive image"/>
+        </section>
+    </div>
+    <div class="col-md-2">
+        <section class="wow rotateInDownLeft" data-wow-duration="600ms">
+            <img class="center-block img-responsive" src="/bootstrap/images/wisdom/source.png" alt="Responsive image"/>
+        </section>
+    </div>
+    <div class="col-md-2">
+        <section class="wow rotateInDownLeft" data-wow-duration="900ms">
+            <img class="center-block img-responsive" src="/bootstrap/images/wisdom/science.png" alt="Responsive image"/>
         </section>
 
-    <!--</div>-->
-    <!--<div class="row" style="">-->
-        <img class="center-block img-responsive" src="/bootstrap/images/wisdom/jiantou.png" alt="Responsive image"/>
+    </div>
+    <div class="col-md-2">
+        <section class="wow rotateInDownLeft" data-wow-duration="1200ms">
+            <img class="center-block img-responsive" src="/bootstrap/images/wisdom/product.png" alt="Responsive image"/>
+        </section>
+
+    </div>
+    <div class="col-md-2">
+        <section class="wow rotateInDownLeft" data-wow-duration="1500ms">
+            <img class="center-block img-responsive" src="/bootstrap/images/wisdom/luodi.png" alt="Responsive image"/>
+        </section>
+
+    </div>
     <!--</div>-->
 </div>
 
@@ -168,66 +169,84 @@
 
 <div class="container-fluid">
     <!--<div class="row" style="">-->
-        <div class="col-md-4">
-            <section class="wow slideInDown" data-wow-duration="500ms">
+    <section class="wow fadeIn" data-wow-duration="1500ms">
+        <p class="core-text-title text-center" style="">合伙人</p>
+    </section>
+
+    <!--</div>-->
+    <!--<div class="row" style="">-->
+    <img class="center-block img-responsive" src="/bootstrap/images/wisdom/jiantou.png" alt="Responsive image"/>
+    <!--</div>-->
+</div>
+
+<br>
+<br>
+
+<div class="container-fluid">
+    <!--<div class="row" style="">-->
+    <div class="col-md-4">
+        <section class="wow slideInDown" data-wow-duration="500ms">
+            <div class="row" style="">
+                <img class="img-circle responsive-img center-block" src="/bootstrap/images/wisdom/shui.png"
+                     alt="Responsive image"/>
+            </div>
+            <div class="row">
                 <div class="row" style="">
-                    <img class="img-circle responsive-img center-block" src="/bootstrap/images/wisdom/shui.png" alt="Responsive image"/>
+                    <h4 class="people-name-text text-center" th:text="${aboutWisdom.shui}"></h4>
                 </div>
-                <div class="row">
-                    <div class="row" style="">
-                        <h4 class="people-name-text text-center" th:text="${aboutWisdom.shui}"></h4>
-                    </div>
-                    <div class="row" style="">
-                        <h4 class="text-center" th:text="${aboutWisdom.shuiP}"></h4>
-                    </div>
-                    <div class="row center-block" style="width: 55%">
-                        <p th:text="${aboutWisdom.shuiIntroduce}"></p>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <div class="col-md-4">
-            <section class="wow slideInDown" data-wow-duration="1000ms">
                 <div class="row" style="">
-                    <img class="img-circle responsive-img center-block" src="/bootstrap/images/wisdom/hangyaoqiang.png" alt="Responsive image"/>
+                    <h4 class="text-center" th:text="${aboutWisdom.shuiP}"></h4>
                 </div>
-                <div class="row">
-                    <div class="row" style="">
-                        <h4 class="people-name-text text-center" th:text="${aboutWisdom.han}"></h4>
-                    </div>
-                    <div class="row" style="">
-                        <h4 class="text-center" th:text="${aboutWisdom.hanP}"></h4>
-                    </div>
-                    <div class="row center-block" style="width: 55%">
-                        <p th:text="${aboutWisdom.hanIntroduce}"></p>
-                    </div>
-
+                <div class="row center-block" style="width: 55%">
+                    <p th:text="${aboutWisdom.shuiIntroduce}"></p>
                 </div>
-            </section>
+            </div>
+        </section>
+    </div>
 
-        </div>
-
-
-        <div class="col-md-4">
-            <section class="wow slideInDown" data-wow-duration="1500ms">
+    <div class="col-md-4">
+        <section class="wow slideInDown" data-wow-duration="1000ms">
+            <div class="row" style="">
+                <img class="img-circle responsive-img center-block" src="/bootstrap/images/wisdom/hangyaoqiang.png"
+                     alt="Responsive image"/>
+            </div>
+            <div class="row">
                 <div class="row" style="">
-                    <img class="img-circle responsive-img center-block" src="/bootstrap/images/wisdom/yaole.png" alt="Responsive image"/>
+                    <h4 class="people-name-text text-center" th:text="${aboutWisdom.han}"></h4>
                 </div>
-                <div class="row">
-                    <div class="row" style="">
-                        <h4 class="people-name-text text-center" th:text="${aboutWisdom.yao}"></h4>
-                    </div>
-                    <div class="row" style="">
-                        <h4 class="text-center" th:text="${aboutWisdom.yaoP}"></h4>
-                    </div>
-                    <div class="row center-block" style="width: 55%">
-                        <p th:text="${aboutWisdom.yaoIntroduce}"></p>
-                    </div>
+                <div class="row" style="">
+                    <h4 class="text-center" th:text="${aboutWisdom.hanP}"></h4>
                 </div>
-            </section>
+                <div class="row center-block" style="width: 55%">
+                    <p th:text="${aboutWisdom.hanIntroduce}"></p>
+                </div>
 
-        </div>
+            </div>
+        </section>
+
+    </div>
+
+
+    <div class="col-md-4">
+        <section class="wow slideInDown" data-wow-duration="1500ms">
+            <div class="row" style="">
+                <img class="img-circle responsive-img center-block" src="/bootstrap/images/wisdom/yaole.png"
+                     alt="Responsive image"/>
+            </div>
+            <div class="row">
+                <div class="row" style="">
+                    <h4 class="people-name-text text-center" th:text="${aboutWisdom.yao}"></h4>
+                </div>
+                <div class="row" style="">
+                    <h4 class="text-center" th:text="${aboutWisdom.yaoP}"></h4>
+                </div>
+                <div class="row center-block" style="width: 55%">
+                    <p th:text="${aboutWisdom.yaoIntroduce}"></p>
+                </div>
+            </div>
+        </section>
+
+    </div>
 
 
     <!--</div>-->
@@ -239,8 +258,8 @@
     wow = new WOW(
         {
             animateClass: 'animated',
-            offset:       100,
-            callback:     function(box) {
+            offset: 100,
+            callback: function (box) {
                 console.log("WOW: animating <" + box.tagName.toLowerCase() + ">")
             }
         }
@@ -252,7 +271,6 @@
     //   this.parentNode.insertBefore(section, this);
     // };
 </script>
-
 
 
 <!--<div th:replace="public/footer :: html"></div>-->

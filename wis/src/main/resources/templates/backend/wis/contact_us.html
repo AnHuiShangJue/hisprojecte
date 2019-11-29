@@ -2,7 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 
-
 <head>
 
     <style>
@@ -12,42 +11,46 @@
         }
 
 
-        .card-contactus{
-            width:10%;
-            height:90px;
+        .card-contactus {
+            width: 10%;
+            height: 90px;
             margin: 0 auto;
-        }
-        .card-contactus2{
-            width: 85%;
-            height: 202px;
-            background:rgba(10,13,49,1);
-            border-radius:6px;
-            border:1px solid rgba(151,151,151,1);
-            margin: 0 auto;
-        }
-        .card-contactus2-text-title{
-            font-family:PingFangSC-Regular,PingFang SC;
-            font-weight:400;
-            color:rgba(255,255,255,1);
-            line-height:42px;
-            letter-spacing:2px;
-        }
-        .card-contactus2-text-content{
-            font-size:19px;
-            font-family:PingFangSC-Regular,PingFang SC;
-            font-weight:400;
-            color:rgba(255,255,255,1);
-            line-height:26px;
-            letter-spacing:1px;
-        }
-        .background-image-contactus-bottom{
-            width:100%;
-            height:13%;
-            margin-left:10px;
         }
 
-        .background-image-contactus{
-            width:1903px;
+        .card-contactus2 {
+            width: 85%;
+            height: 202px;
+            background: rgba(10, 13, 49, 1);
+            border-radius: 6px;
+            border: 1px solid rgba(151, 151, 151, 1);
+            margin: 0 auto;
+        }
+
+        .card-contactus2-text-title {
+            font-family: PingFangSC-Regular, PingFang SC;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 1);
+            line-height: 42px;
+            letter-spacing: 2px;
+        }
+
+        .card-contactus2-text-content {
+            font-size: 19px;
+            font-family: PingFangSC-Regular, PingFang SC;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 1);
+            line-height: 26px;
+            letter-spacing: 1px;
+        }
+
+        .background-image-contactus-bottom {
+            width: 100%;
+            height: 13%;
+            margin-left: 10px;
+        }
+
+        .background-image-contactus {
+            width: 1903px;
             margin-top: 45px;
         }
     </style>
@@ -63,123 +66,169 @@
 
 
 <section class="container-fluid wow bounceInLeft" data-wow-offset="0">
-        <div class="row">
-            <img class="img-responsive" src="/bootstrap/images/wisdom/contactus.png" alt="Responsive image" style="width:100%;position: absolute;margin-top: -11.5%;z-index: -1;"/>
-        </div>
+    <div class="row">
+        <img class="img-responsive visible-lg" src="/bootstrap/images/wisdom/org01.png" alt="Responsive image"
+             style="width:100%;position: absolute;margin-top: -11.5%;z-index: -1;"/>
+        <img class="img-responsive visible-md visible-sm visible-xs" src="/bootstrap/images/wisdom/org01.png" alt="Responsive image"
+             style="width:100%;position: absolute;margin-top: -16.5%;z-index: -1;"/>
+    </div>
 </section>
-
-
-<br>
-<br>
-<br>
-
-<div class="container-fluid" style="width:80%">
-
-    <!--<section class="container-fluid wow bounceInLeft" data-wow-offset="0">-->
-        <section class="col-md-4 wow bounceInLeft" data-wow-offset="0">
+<br><br><br>
+<div class="container-fluid visible-lg" style="width:80%;margin-top: 280px">
+    <section class="col-md-4 wow bounceInLeft" data-wow-offset="0">
+        <div class="row">
             <div class="row">
-                <div class="row">
-                    <img class="img-responsive center-block" src="/bootstrap/images/wisdom/route.png"
-                         alt="Responsive image"/>
-                </div>
+                <img class="img-responsive center-block" src="/bootstrap/images/wisdom/route.png"
+                     alt="Responsive image"/>
             </div>
+        </div>
 
-            <div class="row">
+        <div class="row">
+            <br>
+            <div class="center-block card-contactus2">
+                <div class="row" style="">
+                    <h4 class="card-contactus2-text-title text-center">地址</h4>
+                </div>
                 <br>
-                <div class="center-block card-contactus2">
-                    <div class="row" style="">
-                        <h4 class="card-contactus2-text-title text-center">地址</h4>
-                    </div>
-                    <br>
-                    <div class="row center-block" style="width: 60%;">
-                        <h4 class="card-contactus2-text-content text-center" th:text="${contactUs.address}"></h4>
-                    </div>
+                <div class="row center-block" style="width: 60%;">
+                    <h4 class="card-contactus2-text-content text-center" th:text="${contactUs.address}"></h4>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="col-md-4 wow slideInDown" data-wow-offset="0">
+    <section class="col-md-4 wow slideInDown" data-wow-offset="0">
+        <div class="row">
             <div class="row">
-                <div class="row">
-                    <img class="img-responsive center-block" src="/bootstrap/images/wisdom/dianhua.png"
-                         alt="Responsive image"/>
-                </div>
+                <img class="img-responsive center-block" src="/bootstrap/images/wisdom/dianhua.png"
+                     alt="Responsive image"/>
             </div>
+        </div>
 
-            <div class="row">
+        <div class="row">
+            <br>
+            <div class="center-block card-contactus2">
+                <div class="row" style="">
+                    <h4 class="card-contactus2-text-title text-center">电话</h4>
+                </div>
                 <br>
-                <div class="center-block card-contactus2">
-                    <div class="row" style="">
-                        <h4 class="card-contactus2-text-title text-center">电话</h4>
-                    </div>
-                    <br>
-                    <div class="row center-block" style="width: 60%;">
-                        <h4 class="card-contactus2-text-content text-center" th:text="${contactUs.phone}"></h4>
-                    </div>
+                <div class="row center-block" style="width: 60%;">
+                    <h4 class="card-contactus2-text-content text-center" th:text="${contactUs.phone}"></h4>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="col-md-4 wow slideInRight">
+    <section class="col-md-4 wow slideInRight">
+        <div class="row">
             <div class="row">
-                <div class="row">
-                    <img class="img-responsive center-block" src="/bootstrap/images/wisdom/jiaruwomen.png"
-                         alt="Responsive image"/>
-                </div>
+                <img class="img-responsive center-block" src="/bootstrap/images/wisdom/jiaruwomen.png"
+                     alt="Responsive image"/>
             </div>
+        </div>
 
-            <div class="row">
+        <div class="row">
+            <br>
+            <div class="card-contactus2">
+                <div class="row" style="">
+                    <h4 class="card-contactus2-text-title text-center">加入我们</h4>
+                </div>
                 <br>
-                <div class="card-contactus2">
-                    <div class="row" style="">
-                        <h4 class="card-contactus2-text-title text-center">加入我们</h4>
-                    </div>
-                    <br>
-                    <div class="row center-block" style="width: 60%;">
-                        <h4 class="card-contactus2-text-content text-center" th:text="${contactUs.email}">hr@abscity.cn</h4>
-                    </div>
+                <div class="row center-block" style="width: 60%;">
+                    <h4 class="card-contactus2-text-content text-center" th:text="${contactUs.email}">hr@abscity.cn</h4>
                 </div>
             </div>
-        </section>
-
-    <!--</section>-->
-
-
-    <!--<section class="container-fluid wow bounceInLeft" data-wow-offset="300">-->
-    <!--</section>-->
-
-    <!--<section class="container-fluid wow bounceInLeft" data-wow-offset="300">-->
-    <!--</section>-->
-
-
-
+        </div>
+    </section>
 </div>
+<div class="container-fluid  visible-md visible-sm visible-xs" style="width:80%;margin-top: 130px">
+    <section class="col-md-4 wow bounceInLeft" data-wow-offset="0">
+        <div class="row">
+            <div class="row">
+                <img class="img-responsive center-block" src="/bootstrap/images/wisdom/route.png"
+                     alt="Responsive image"/>
+            </div>
+        </div>
 
-<br>
-<br>
-<br>
+        <div class="row">
+            <br>
+            <div class="center-block card-contactus2">
+                <div class="row" style="">
+                    <h4 class="card-contactus2-text-title text-center">地址</h4>
+                </div>
+                <br>
+                <div class="row center-block" style="width: 60%;">
+                    <h4 class="card-contactus2-text-content text-center" th:text="${contactUs.address}"></h4>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <section class="col-md-4 wow slideInDown" data-wow-offset="0">
+        <div class="row">
+            <div class="row">
+                <img class="img-responsive center-block" src="/bootstrap/images/wisdom/dianhua.png"
+                     alt="Responsive image"/>
+            </div>
+        </div>
 
+        <div class="row">
+            <br>
+            <div class="center-block card-contactus2">
+                <div class="row" style="">
+                    <h4 class="card-contactus2-text-title text-center">电话</h4>
+                </div>
+                <br>
+                <div class="row center-block" style="width: 60%;">
+                    <h4 class="card-contactus2-text-content text-center" th:text="${contactUs.phone}"></h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="col-md-4 wow slideInRight">
+        <div class="row">
+            <div class="row">
+                <img class="img-responsive center-block" src="/bootstrap/images/wisdom/jiaruwomen.png"
+                     alt="Responsive image"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <br>
+            <div class="card-contactus2">
+                <div class="row" style="">
+                    <h4 class="card-contactus2-text-title text-center">加入我们</h4>
+                </div>
+                <br>
+                <div class="row center-block" style="width: 60%;">
+                    <h4 class="card-contactus2-text-content text-center" th:text="${contactUs.email}">hr@abscity.cn</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<br><br><br>
 <section class="container-fluid wow bounceInLeft" data-wow-offset="0">
     <div class="row">
-        <img class="img-responsive center-block" src="/bootstrap/images/wisdom/group.png" alt="Responsive image" style="width:75%"/>
+        <img class="img-responsive center-block" src="/bootstrap/images/wisdom/group.png" alt="Responsive image"
+             style="width:75%"/>
     </div>
 </section>
 
 <div th:replace="public/footer :: html"></div>
 <script src="/bootstrap/js/wow.js"></script>
-
-
 <script>
     wow = new WOW(
         {
             animateClass: 'animated',
-            offset:       100,
-            callback:     function(box) {
+            offset: 100,
+            callback: function (box) {
                 console.log("WOW: animating <" + box.tagName.toLowerCase() + ">")
             }
         }
-    );    wow.init();
+    );
+    wow.init();
 
 </script>
 
