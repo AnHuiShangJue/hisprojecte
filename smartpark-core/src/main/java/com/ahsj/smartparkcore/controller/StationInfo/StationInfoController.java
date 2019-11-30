@@ -42,7 +42,7 @@ public class StationInfoController extends BaseController {
      * @Date 2019/10/19
      * @Time 18:04
      **/
-    @GetMapping("/index.ahsj")
+    @RequestMapping("/index.ahsj")
     public ModelAndView index(String token) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/stationinfo/list");
         modelAndView.addObject("token", token);
@@ -65,14 +65,14 @@ public class StationInfoController extends BaseController {
     }
 
 
-    @GetMapping("/addStationinfo.ahsj")
+    @RequestMapping("/addStationinfo.ahsj")
     public ModelAndView addStationinfo(String token) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/stationinfo/add");
         modelAndView.addObject("token", token);
         return modelAndView;
     }
 
-    @GetMapping("/updateStationinfo.ahsj")
+    @RequestMapping("/updateStationinfo.ahsj")
     public ModelAndView addStationinfo(String token, @RequestParam("id") Long id) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/stationinfo/update");
         StationInfoVO stationInfoVO = stationInfoService.selectById(id);
@@ -81,7 +81,8 @@ public class StationInfoController extends BaseController {
         return modelAndView;
     }
 
-    @GetMapping("/audit.ahsj")
+
+    @RequestMapping("/audit.ahsj")
     public ModelAndView audit(String token, @RequestParam("id") Long id) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/smartparkcore/stationinfo/audit");
         StationInfoVO stationInfoVO = stationInfoService.selectById(id);

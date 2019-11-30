@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -229,7 +230,7 @@ public class BookController extends BaseController {
      * @Time 10:57
      **/
     @RequestMapping("/visit.ahsj")
-    public ResponseEntity<ResultModel> visit(BookDTO bookDTO) throws Exception {
+    public ResponseEntity<ResultModel> visit(BookDTO bookDTO,String token) throws Exception {
         return bookService.visit(bookDTO);
     }
 
