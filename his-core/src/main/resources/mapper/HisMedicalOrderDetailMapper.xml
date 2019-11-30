@@ -433,7 +433,9 @@
     b.user_name as pnName,
     c.user_name as anName,
     d.user_name as sanName,
-    e.user_name as spnName,f.user_name as stopUserName
+    e.user_name as spnName,f.user_name as stopUserName,
+    case when a.medical_order_type = 3 then h.is_payed when a.medical_order_type = 2 then g.is_pay else 2 end as isPay
+
     FROM
     his_medical_order_detail as a
     left join `his-userinfo`.user_info as b on a.proofreading_nurse_id = b.id
@@ -441,6 +443,8 @@
     left join `his-userinfo`.user_info as d on a.stop_prfing_nurse_id = d.id
     left join `his-userinfo`.user_info as e on a.stop_apd_nurse_id = e.id
     left join `his-userinfo`.user_info as f on a.stop_user_id = f.id
+      left join his_medication_details as g on g.id = a.correspond_id
+      left join his_record_project as h on h.id = a.correspond_id
     where
     a.number = #{parameter.number,jdbcType = VARCHAR}
     <if test="parameter.orders != null and parameter.orders != ''">
