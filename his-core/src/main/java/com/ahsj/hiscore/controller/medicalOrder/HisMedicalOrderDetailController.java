@@ -517,7 +517,7 @@ public class HisMedicalOrderDetailController extends BaseController {
     }
 
     /**
-     *@Description 医嘱添加药品组合
+     *@Description 医嘱添加输液单
      *@Params [model, request, id]
      *@return core.message.Message
      *@Author zhushixiang

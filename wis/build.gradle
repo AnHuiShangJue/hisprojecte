@@ -7,11 +7,29 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.0.0'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.0.4.RELEASE'
 
-    
+
+    //junit 5
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.3.2'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.3.2'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.3.2'
+
+
+
+    // https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.8.0'
+
+    // https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.8.0'
+
+
+
+    //断言
+  /*  testCompile group: 'org.assertj', name: 'assertj-core', version: '3.11.1'*/
+
     //Thymeleaf组件
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-
 
     //自定义组件
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.3'
@@ -19,7 +37,6 @@ dependencies {
     compile group: 'com.alibaba', name: 'fastjson', version: '1.2.54'
 
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-amqp', version: '2.0.4.RELEASE'
-
 
     compile group: 'io.github.openfeign', name: 'feign-httpclient', version: '9.5.1'
 

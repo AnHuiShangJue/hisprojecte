@@ -270,6 +270,14 @@ public class HisMedicalRecordImpl implements HisMedicalRecordService {
         return pageBean;
     }
 
+    //jin
+    @Override
+    @Transactional(readOnly = true)
+    public PageBean<HisMedicalRecord> listForAllHistoryByPatientId(PageBean<HisMedicalRecord> pageBean) throws Exception {
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisMedicalRecordMapper.listForAllHistoryByPatientId(pageBean)));
+        return pageBean;
+    }
+
     /**
      * @return core.entity.PageBean<com.ahsj.hiscore.entity.HisMedicalRecord>
      * @Description 查看病人所有历史病历不包括正在住院的那一条

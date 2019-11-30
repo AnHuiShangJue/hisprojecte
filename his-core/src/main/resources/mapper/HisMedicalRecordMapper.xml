@@ -445,6 +445,31 @@ medicalRecordId != null">
             and a.create_date &gt;= #{parameter.lowCreateDate,jdbcType=TIMESTAMP}
         </if>
     </select>
+
+    <select id="listForAllHistoryByPatientId" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
+        select a.*,
+        b.name as pName,
+        b.idcard as idCard,
+        f.id as hospitalManageId,
+        f.number as hosNumber,
+        f.medical_number as medicalNumber,
+        f.is_discharged as isDischarged,
+        f.create_date as inTime,
+        f.update_date as outTime
+        from his_medical_record as a
+        left join his_patient_info as b on a.patient_id = b.id
+        left join his_hospital_manage as f on a.medical_record_id = f.medical_number
+        where 1=1 and a.patient_id = #{parameter.patientId,jdbcType=BIGINT} order by a.create_date desc
+        <if test="parameter.medicalRecordId != null and parameter.medicalRecordId != ''">
+            and a.medical_record_id like concat('%' #{parameter.medicalRecordId,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.highCreateDate != null">
+            and a.create_date &lt;= #{parameter.highCreateDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="parameter.lowCreateDate != null">
+            and a.create_date &gt;= #{parameter.lowCreateDate,jdbcType=TIMESTAMP}
+        </if>
+    </select>
     <select id="selectPrint" resultMap="BaseResultMap" parameterType="java.lang.String">
         select m.create_date,
                m.medical_record_id,

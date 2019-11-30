@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahsj.wis.dao.SocialcreditMapper" >
+  <resultMap id="BaseResultMap" type="com.ahsj.wis.entity.Socialcredit" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="product_title" property="productTitle" jdbcType="VARCHAR" />
+    <result column="product1" property="product1" jdbcType="VARCHAR" />
+    <result column="product2" property="product2" jdbcType="VARCHAR" />
+    <result column="product3" property="product3" jdbcType="VARCHAR" />
+    <result column="certification_title" property="certificationTitle" jdbcType="VARCHAR" />
+    <result column="certification" property="certification" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="product_content1" property="productContent1" jdbcType="VARCHAR" />
+    <result column="product_content2" property="productContent2" jdbcType="VARCHAR" />
+    <result column="product_content3" property="productContent3" jdbcType="VARCHAR" />
+    <result column="organizational_structure1" property="organizationalStructure1" jdbcType="VARCHAR" />
+    <result column="organizational_structure2" property="organizationalStructure2" jdbcType="VARCHAR" />
+    <result column="organizational_structure3" property="organizationalStructure3" jdbcType="VARCHAR" />
+    <result column="organizational_structure4" property="organizationalStructure4" jdbcType="VARCHAR" />
+    <result column="organizational_structure5" property="organizationalStructure5" jdbcType="VARCHAR" />
+    <result column="organizational_structure6" property="organizationalStructure6" jdbcType="VARCHAR" />
+    <result column="organizational_structure7" property="organizationalStructure7" jdbcType="VARCHAR" />
+    <result column="picture_extension1" property="pictureExtension1" jdbcType="VARCHAR" />
+    <result column="picture_extension2" property="pictureExtension2" jdbcType="VARCHAR" />
+    <result column="picture_extension3" property="pictureExtension3" jdbcType="VARCHAR" />
+    <result column="picture_extension4" property="pictureExtension4" jdbcType="VARCHAR" />
+    <result column="picture_extension5" property="pictureExtension5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title, description, product_title, product1, product2, product3, certification_title, 
+    certification, create_date, update_date, product_content1, product_content2, product_content3, 
+    organizational_structure1, organizational_structure2, organizational_structure3, 
+    organizational_structure4, organizational_structure5, organizational_structure6, 
+    organizational_structure7, picture_extension1, picture_extension2, picture_extension3, 
+    picture_extension4, picture_extension5
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from socialcredit
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from socialcredit
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ahsj.wis.entity.Socialcredit" >
+    insert into socialcredit (id, title, description, 
+      product_title, product1, product2, 
+      product3, certification_title, certification, 
+      create_date, update_date, product_content1, 
+      product_content2, product_content3, organizational_structure1, 
+      organizational_structure2, organizational_structure3, 
+      organizational_structure4, organizational_structure5, 
+      organizational_structure6, organizational_structure7, 
+      picture_extension1, picture_extension2, picture_extension3, 
+      picture_extension4, picture_extension5)
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{productTitle,jdbcType=VARCHAR}, #{product1,jdbcType=VARCHAR}, #{product2,jdbcType=VARCHAR}, 
+      #{product3,jdbcType=VARCHAR}, #{certificationTitle,jdbcType=VARCHAR}, #{certification,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{productContent1,jdbcType=VARCHAR}, 
+      #{productContent2,jdbcType=VARCHAR}, #{productContent3,jdbcType=VARCHAR}, #{organizationalStructure1,jdbcType=VARCHAR}, 
+      #{organizationalStructure2,jdbcType=VARCHAR}, #{organizationalStructure3,jdbcType=VARCHAR}, 
+      #{organizationalStructure4,jdbcType=VARCHAR}, #{organizationalStructure5,jdbcType=VARCHAR}, 
+      #{organizationalStructure6,jdbcType=VARCHAR}, #{organizationalStructure7,jdbcType=VARCHAR}, 
+      #{pictureExtension1,jdbcType=VARCHAR}, #{pictureExtension2,jdbcType=VARCHAR}, #{pictureExtension3,jdbcType=VARCHAR}, 
+      #{pictureExtension4,jdbcType=VARCHAR}, #{pictureExtension5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ahsj.wis.entity.Socialcredit" >
+    insert into socialcredit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="productTitle != null" >
+        product_title,
+      </if>
+      <if test="product1 != null" >
+        product1,
+      </if>
+      <if test="product2 != null" >
+        product2,
+      </if>
+      <if test="product3 != null" >
+        product3,
+      </if>
+      <if test="certificationTitle != null" >
+        certification_title,
+      </if>
+      <if test="certification != null" >
+        certification,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="productContent1 != null" >
+        product_content1,
+      </if>
+      <if test="productContent2 != null" >
+        product_content2,
+      </if>
+      <if test="productContent3 != null" >
+        product_content3,
+      </if>
+      <if test="organizationalStructure1 != null" >
+        organizational_structure1,
+      </if>
+      <if test="organizationalStructure2 != null" >
+        organizational_structure2,
+      </if>
+      <if test="organizationalStructure3 != null" >
+        organizational_structure3,
+      </if>
+      <if test="organizationalStructure4 != null" >
+        organizational_structure4,
+      </if>
+      <if test="organizationalStructure5 != null" >
+        organizational_structure5,
+      </if>
+      <if test="organizationalStructure6 != null" >
+        organizational_structure6,
+      </if>
+      <if test="organizationalStructure7 != null" >
+        organizational_structure7,
+      </if>
+      <if test="pictureExtension1 != null" >
+        picture_extension1,
+      </if>
+      <if test="pictureExtension2 != null" >
+        picture_extension2,
+      </if>
+      <if test="pictureExtension3 != null" >
+        picture_extension3,
+      </if>
+      <if test="pictureExtension4 != null" >
+        picture_extension4,
+      </if>
+      <if test="pictureExtension5 != null" >
+        picture_extension5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="productTitle != null" >
+        #{productTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="product1 != null" >
+        #{product1,jdbcType=VARCHAR},
+      </if>
+      <if test="product2 != null" >
+        #{product2,jdbcType=VARCHAR},
+      </if>
+      <if test="product3 != null" >
+        #{product3,jdbcType=VARCHAR},
+      </if>
+      <if test="certificationTitle != null" >
+        #{certificationTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="certification != null" >
+        #{certification,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productContent1 != null" >
+        #{productContent1,jdbcType=VARCHAR},
+      </if>
+      <if test="productContent2 != null" >
+        #{productContent2,jdbcType=VARCHAR},
+      </if>
+      <if test="productContent3 != null" >
+        #{productContent3,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationalStructure1 != null" >
+        #{organizationalStructure1,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationalStructure2 != null" >
+        #{organizationalStructure2,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationalStructure3 != null" >
+        #{organizationalStructure3,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationalStructure4 != null" >
+        #{organizationalStructure4,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationalStructure5 != null" >
+        #{organizationalStructure5,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationalStructure6 != null" >
+        #{organizationalStructure6,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationalStructure7 != null" >
+        #{organizationalStructure7,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureExtension1 != null" >
+        #{pictureExtension1,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureExtension2 != null" >
+        #{pictureExtension2,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureExtension3 != null" >
+        #{pictureExtension3,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureExtension4 != null" >
+        #{pictureExtension4,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureExtension5 != null" >
+        #{pictureExtension5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.wis.entity.Socialcredit" >
+    update socialcredit
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="productTitle != null" >
+        product_title = #{productTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="product1 != null" >
+        product1 = #{product1,jdbcType=VARCHAR},
+      </if>
+      <if test="product2 != null" >
+        product2 = #{product2,jdbcType=VARCHAR},
+      </if>
+      <if test="product3 != null" >
+        product3 = #{product3,jdbcType=VARCHAR},
+      </if>
+      <if test="certificationTitle != null" >
+        certification_title = #{certificationTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="certification != null" >
+        certification = #{certification,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productContent1 != null" >
+        product_content1 = #{productContent1,jdbcType=VARCHAR},
+      </if>
+      <if test="productContent2 != null" >
+        product_content2 = #{productContent2,jdbcType=VARCHAR},
+      </if>
+      <if test="productContent3 != null" >
+        product_content3 = #{productContent3,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationalStructure1 != null" >
+        organizational_structure1 = #{organizationalStructure1,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationalStructure2 != null" >
+        organizational_structure2 = #{organizationalStructure2,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationalStructure3 != null" >
+        organizational_structure3 = #{organizationalStructure3,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationalStructure4 != null" >
+        organizational_structure4 = #{organizationalStructure4,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationalStructure5 != null" >
+        organizational_structure5 = #{organizationalStructure5,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationalStructure6 != null" >
+        organizational_structure6 = #{organizationalStructure6,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationalStructure7 != null" >
+        organizational_structure7 = #{organizationalStructure7,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureExtension1 != null" >
+        picture_extension1 = #{pictureExtension1,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureExtension2 != null" >
+        picture_extension2 = #{pictureExtension2,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureExtension3 != null" >
+        picture_extension3 = #{pictureExtension3,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureExtension4 != null" >
+        picture_extension4 = #{pictureExtension4,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureExtension5 != null" >
+        picture_extension5 = #{pictureExtension5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.wis.entity.Socialcredit" >
+    update socialcredit
+    set title = #{title,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      product_title = #{productTitle,jdbcType=VARCHAR},
+      product1 = #{product1,jdbcType=VARCHAR},
+      product2 = #{product2,jdbcType=VARCHAR},
+      product3 = #{product3,jdbcType=VARCHAR},
+      certification_title = #{certificationTitle,jdbcType=VARCHAR},
+      certification = #{certification,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      product_content1 = #{productContent1,jdbcType=VARCHAR},
+      product_content2 = #{productContent2,jdbcType=VARCHAR},
+      product_content3 = #{productContent3,jdbcType=VARCHAR},
+      organizational_structure1 = #{organizationalStructure1,jdbcType=VARCHAR},
+      organizational_structure2 = #{organizationalStructure2,jdbcType=VARCHAR},
+      organizational_structure3 = #{organizationalStructure3,jdbcType=VARCHAR},
+      organizational_structure4 = #{organizationalStructure4,jdbcType=VARCHAR},
+      organizational_structure5 = #{organizationalStructure5,jdbcType=VARCHAR},
+      organizational_structure6 = #{organizationalStructure6,jdbcType=VARCHAR},
+      organizational_structure7 = #{organizationalStructure7,jdbcType=VARCHAR},
+      picture_extension1 = #{pictureExtension1,jdbcType=VARCHAR},
+      picture_extension2 = #{pictureExtension2,jdbcType=VARCHAR},
+      picture_extension3 = #{pictureExtension3,jdbcType=VARCHAR},
+      picture_extension4 = #{pictureExtension4,jdbcType=VARCHAR},
+      picture_extension5 = #{pictureExtension5,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="com.ahsj.wis.entity.Socialcredit">
+    select
+    <include refid="Base_Column_List" />
+    from socialcredit
+  </select>
+</mapper>

@@ -32,6 +32,8 @@
                     <td><label class="black-text"  style="padding: 0;" id="name" ></label></td>
                     <td><label class="black-text fontsize01">总费用(Total cost)</label></td>
                     <td><label class="black-text"  style="padding: 0;" id="totalCost"></label></td>
+                    <td><label class="black-text fontsize01">住院号(HospitalNumber)</label></td>
+                    <td><label class="black-text"  style="padding: 0;" id="HospitalNumber"></label></td>
                 </tr>
                 <tr>
                     <td><label class="black-text fontsize01">剩余押金(deposit)</label></td>
@@ -74,12 +76,15 @@ Scripts
                 if (!isNullOrEmpty(data)) {
                     var patientName;//有
                     var totalCost = 0;
-                    var trs = "<tr><td><label class='black-text'>名称(name)</label></td><td><label class='black-text'>数量(num)</label></td><td><label class='black-text'>单价(price)</label></td><td><label class='black-text'>总价(total price)</label></td><td><label class='black-text'>时间(time)</label></td></tr>";
+                    var trs = "<tr><td><label class='black-text'>名称(name)</label></td><td><label class='black-text'>数量(num)</label></td><td><label class='black-text'>单价(price)</label></td><td><label class='black-text'>总价(total price)</label></td><td><label class='black-text'>是否退回(isBack)</label></td><td><label class='black-text'>时间(time)</label></td></tr>";
                     $.each(data, function (index, item) {
                         if(!isNullOrEmpty(item)){
                             patientName = item.patientName;
-                            trs += "<tr><td><label class='black-text fontsize02'> " + item.name + "</label></td><td ><label class='black-text fontsize02'>" + item.num + "</label></td><td ><label class='black-text fontsize02'> " + item.price + "</label></td><td ><label class='black-text fontsize02'>" + item.total + "</label></td><td ><label class='black-text fontsize02'> " + item.createDate + "</label></td></tr >";
-                            totalCost += item.price*item.num
+                            trs += "<tr><td><label class='black-text fontsize02'> " + item.name + "</label></td><td ><label class='black-text fontsize02'>" + item.num + "</label></td><td ><label class='black-text fontsize02'> " + item.price + "</label></td><td ><label class='black-text fontsize02'>" + item.total + "</label></td><td ><label class='black-text fontsize02'> " + item.isBackName + "</label></td><td ><label class='black-text fontsize02'> " + item.createDate + "</label></td></tr >";
+                            if(item.isBackName != '已退回（already back）'){
+                                totalCost += item.price*item.num
+                            }
+
                         }
                     });
                     // var jsons = data[0];
@@ -102,11 +107,18 @@ Scripts
     function printShow2() {
         $.ahsjajax(
             CTX + "/api/hisTollRecord/hospital/details.ahsj",
-            {"medicalRecordId": HRNumber},
+            {"medicalRecordId": HRNumber,
+            "isNurse":2},
             function (data) {
                 if (!isNullOrEmpty(data)) {
                     $("#deposit").html(data.restDeposit);
-                    $("#fee").html(data.money.toFixed(2));
+                    if(data.restDeposit >= 0){
+                        $("#fee").html(0.00);
+                    }else {
+                        $("#fee").html(data.money.toFixed(2));
+                    }
+                    $("#HospitalNumber").html(HRNumber);
+
                 }
             },
             function () {

@@ -2,8 +2,10 @@ package com.ahsj.hiscore.controller.pharmacy;
 
 import com.ahsj.hiscore.entity.HisApplicationForDrugReturn;
 import com.ahsj.hiscore.entity.HisApplicationForDrugReturnDetails;
+import com.ahsj.hiscore.entity.HisHospitalManage;
 import com.ahsj.hiscore.services.HisApplicationForDrugReturnDetailsService;
 import com.ahsj.hiscore.services.HisApplicationForDrugReturnService;
+import com.ahsj.hiscore.services.HisHospitalManageService;
 import core.controller.BaseController;
 import core.entity.PageBean;
 import core.message.Message;
@@ -31,6 +33,9 @@ public class HisApplicationForDrugReturnDetailsController extends BaseController
 
     @Autowired
     HisApplicationForDrugReturnService hisApplicationForDrugReturnService;
+
+    @Autowired
+    HisHospitalManageService hisHospitalManageService;
 
     /**
      * @return core.entity.PageBean<MedicinePurchasingPlan>
@@ -205,9 +210,17 @@ public class HisApplicationForDrugReturnDetailsController extends BaseController
             if (hd.getNumber().substring(0, 3).equals("HTR")) {//输入交易流水号
                 pageBean = hisApplicationForDrugReturnDetailsService.byNumber(pageBean);
             }
-            if (hd.getNumber().substring(0, 2).equals("HM")) {//输入的就诊编号
+            if (hd.getNumber().substring(0, 2).equals("HM")||hd.getNumber().substring(0, 3).equals("HHM")) {//输入的就诊编号
                 hd.setRecordNumber(hd.getNumber());//赋就诊编号
                 pageBean = hisApplicationForDrugReturnDetailsService.byByRecordNumber(pageBean);
+            }
+            if (hd.getNumber().substring(0, 2).equals("HR")) {//输入住院编号
+                HisHospitalManage hisHospitalManage = hisHospitalManageService.selectNumber(hd.getNumber());
+                if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage)) {
+                    hd.setNumber(hisHospitalManage.getMedicalNumber());
+                    hd.setRecordNumber(hisHospitalManage.getMedicalNumber());//赋就诊编号
+                    pageBean = hisApplicationForDrugReturnDetailsService.byByRecordNumber(pageBean);
+                }
             }
         } else {
             pageBean.setData(new ArrayList<HisApplicationForDrugReturnDetails>());

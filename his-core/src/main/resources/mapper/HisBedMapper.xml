@@ -12,6 +12,9 @@
         <result column="update_user_id" property="updateUserId" jdbcType="BIGINT"/>
         <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
         <result column="is_enable" property="isEnable" jdbcType="INTEGER"/>
+        <result column="mold" property="mold" jdbcType="INTEGER"/>
+        <result column="count" property="count" jdbcType="INTEGER"/>
+        <result column="currentCount" property="currentCount" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
     id, number, ward_id, type, price, create_user_id, create_date, update_user_id, update_date, 
@@ -184,7 +187,7 @@
         select
         <include refid="Base_Column_List"/>
         from `his_bed`
-        where number = #{number,jdbcType=INTEGER}  and  ward_id =#{wardId,jdbcType=BIGINT};
+        where number = #{number,jdbcType=INTEGER} and ward_id =#{wardId,jdbcType=BIGINT};
     </select>
 
     <delete id="deleteByWardId" parameterType="java.lang.Long">
@@ -200,4 +203,24 @@
         from `his_bed`
     </select>
 
+
+    <select id="getHisBedAlls" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+
+        select b.id,b.number,b.type,b.price ,2 as mold from his_bed as b where b.id not in (select m.bed_id from
+        his_hospital_manage as m WHERE m.is_discharged=1)
+        and b.ward_id =#{parameter.wardId,jdbcType=BIGINT}
+        union all
+        select b.id,b.number,b.type,b.price ,1 as mold from his_bed as b where b.id in (select m.bed_id from
+        his_hospital_manage as m WHERE m.is_discharged=1)
+        and b.ward_id =#{parameter.wardId,jdbcType=BIGINT}
+
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="com.ahsj.hiscore.entity.HisBed">
+select a.count, i.currentCount from  (select count(1)as  count from  his_bed) as a
+CROSS JOIN (select count(1) as currentCount from his_hospital_manage where is_discharged=1 and bed_id !=0 ) as i
+    </select>
 </mapper>

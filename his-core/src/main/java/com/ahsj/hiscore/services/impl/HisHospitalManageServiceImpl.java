@@ -109,7 +109,7 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
         HisPatientInfo hisPatientInfo = hisPatientInfoMapper.selectByPrimaryKey(hisHospitalManage.getPatientId());
         HisHosptalregist hisHosptalregist = hisHosptalregistMapper.selectByPrimaryKey(hisHospitalManage.getHosptalRegistId());
         HisMedicalRecord hisMedicalRecord = new HisMedicalRecord();
-        if (EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage.getId())) {
+        if (EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage.getId())) {  //新增
             if (EmptyUtil.Companion.isNullOrEmpty(hisHospitalManageMapper.selectByNumber(hisHospitalManage.getMedicalNumber()))) {
                 if (check.size() > 0 && check.get(0).getIsDischarged() == 1) {
                     return MessageUtil.createMessage(false, "审核失败，该病人还未出院！");
@@ -120,8 +120,12 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
                     hisHosptalregist.setCareLevel(hisHospitalManage.getCareLevel());
                     hisHosptalregist.setDoctorId(hisHospitalManage.getDoctorId());
                     hisHosptalregist.setNurseId(hisHospitalManage.getNurseId());
-                    hisHosptalregist.setBedId(hisHospitalManage.getBedId());
-                    hisHosptalregist.setWardId(hisHospitalManage.getWardId());
+              /*      hisHosptalregist.setBedId(hisHospitalManage.getBedId());
+                    hisHosptalregist.setWardId(hisHospitalManage.getWardId());*/
+                    hisHosptalregist.setBedId(0L);
+                    hisHosptalregist.setWardId(0L);  //新增时不设置病床病房给赋为0
+                    hisHospitalManage.setBedId(0L);
+                    hisHospitalManage.setWardId(0L);
                     hisHosptalregist.setDepartmentId(hisHospitalManage.getDepartmentId());
                     hisHosptalregist.setInpatientDiagnosis(hisHospitalManage.getInpatientDiagnosis());
                     hisHosptalregist.setRemark(hisHospitalManage.getRemarks());
@@ -191,20 +195,22 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
             } else {
                 return MessageUtil.createMessage(false, "该条就诊编号已被使用过，已作废！！");
             }
-        } else {
+        } else {  //修改
             HisHospitalManage check1 = hisHospitalManageMapper.selectByPrimaryKey(hisHospitalManage.getId());
             if (!EmptyUtil.Companion.isNullOrEmpty(check1)) {
                 hisPatientInfo1.setId(hisHospitalManage.getPatientId());
                 hisHospitalManage.setSex(hisHospitalManage.getSex());
                 hisHospitalManage.setDepartmentId(check1.getDepartmentId());
                 hisHospitalManage.setDoctorId(check1.getDoctorId());
-                hisHospitalManage.setHospitalizationDay(check1.getHospitalizationDay());
+//                hisHospitalManage.setHospitalizationDay(check1.getHospitalizationDay());
                 hisHospitalManage.setPayHospitalizationDay(check1.getPayHospitalizationDay());
                 hisHospitalManage.setTollDetailsId(check1.getTollDetailsId());
                 hisHospitalManage.setRestDeposit(check1.getRestDeposit());
                 hisHospitalManage.setIsDischarged(check1.getIsDischarged());
                 hisHospitalManage.setCreateDate(check1.getCreateDate());
                 hisHospitalManage.setUpdateDate(check1.getUpdateDate());
+                hisHospitalManage.setWardId(check1.getWardId());
+                hisHospitalManage.setBedId(check1.getBedId());
                 HisPatientInfo checkIfExit = hisPatientInfoMapper.selectByPrimaryKey(hisPatientInfo1.getId());
                 if (EmptyUtil.Companion.isNullOrEmpty(checkIfExit)) {
                     return MessageUtil.createMessage(false, "更新失败!所变更的病人信息不存在!");
@@ -309,7 +315,7 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
 
     @Override
     @Transactional(readOnly = true)
-    public HisHospitalManage selectById(Long id){
+    public HisHospitalManage selectById(Long id) {
         return CodeHelper.getInstance().setCodeValue(hisHospitalManageMapper.selectByPrimaryKey(id));
     }
 
@@ -420,12 +426,12 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
 
     /**
      * @Description 住院天数定时任务
-     * @Author  muxu
-     * @Date  2019/9/24
+     * @Author muxu
+     * @Date 2019/9/24
      * @Time 18:24
      * @Return void
      * @Params []
-    **/
+     **/
     @Override
     @Transactional(readOnly = false)
     public void startAddDate() {
@@ -464,7 +470,7 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
             int day1 = calendar.get(Calendar.DAY_OF_YEAR);
             calendar.setTime(hd.getCreateDate());
             int day2 = calendar.get(Calendar.DAY_OF_YEAR);
-            hd.setHospitalizationDay(String.valueOf(day1-day2+1));
+            hd.setHospitalizationDay(String.valueOf(day1 - day2 + 1));
 //            hd.setHospitalizationDay(String.valueOf((date.getTime() - hd.getCreateDate().getTime()) / (24 * 60 * 60 * 1000) + 1));
         }
         return null;
@@ -473,12 +479,12 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
 
     /**
      * @Description 护理费用定时任务
-     * @Author  muxu
-     * @Date  2019/9/24
+     * @Author muxu
+     * @Date 2019/9/24
      * @Time 18:28
      * @Return
      * @Params
-    **/
+     **/
     @Override
     @Transactional(readOnly = false)
     public void startAddcareLevel() {
@@ -488,15 +494,15 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
         logger.info(createdate);
 
         List<HisHospitalManage> hisHospitalManageList = hisHospitalManageMapper.selectByDate();
-        if (hisHospitalManageList.size()==0){
+        if (hisHospitalManageList.size() == 0) {
             logger.info("-------------------无护理消费人员-----------------------");
-        }else {
+        } else {
             logger.info("-------------------扫描到" + hisHospitalManageList.size() + "病人进行护理消费日结-----------------------");
             if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManageList) && !EmptyUtil.Companion.isNullOrEmpty(hisHospitalManageList.size())) {
                 Long[] ids = new Long[hisHospitalManageList.size()];
                 List<HisHospitalManage> hisHospitalManageList1 = new ArrayList<>();
                 int i = 0;
-                String number ="0";
+                String number = "0";
                 for (HisHospitalManage h : hisHospitalManageList
                 ) {
                     ids[i] = h.getId();
@@ -508,20 +514,20 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
                     HisTollRecord hisTollRecord = new HisTollRecord();
                     hisRecordProject.setRecordId(hisMedicalRecord.getId());
                     //一级护理
-                    if (hisHospitalManage1.getCareLevel()==1){
+                    if (hisHospitalManage1.getCareLevel() == 1) {
                         number = "120100003（ACAC001）";
-                    }else if (hisHospitalManage1.getCareLevel()==2){   //二级护理
+                    } else if (hisHospitalManage1.getCareLevel() == 2) {   //二级护理
                         number = "120100004（ACAB001）";
-                    }else if (hisHospitalManage1.getCareLevel()==3){   //三级护理
+                    } else if (hisHospitalManage1.getCareLevel() == 3) {   //三级护理
                         number = "120100005（ACAA001）";
-                    }else if (hisHospitalManage1.getCareLevel()==4){  //四级护理
+                    } else if (hisHospitalManage1.getCareLevel() == 4) {  //四级护理
                         number = "120100014（ACNZ001）";
-                    }else if (hisHospitalManage1.getCareLevel()==5){  //特级监护
+                    } else if (hisHospitalManage1.getCareLevel() == 5) {  //特级监护
                         number = "120100002（ACAD001）";
-                    }else if (hisHospitalManage1.getCareLevel()==6){  //重症监护
+                    } else if (hisHospitalManage1.getCareLevel() == 6) {  //重症监护
                         number = "120100015（ACNZ002）";
                     }
-                    HisProject hisProject =hisProjectMapper.queryHisProjectByNumber(number);
+                    HisProject hisProject = hisProjectMapper.queryHisProjectByNumber(number);
                     hisHospitalManage1.setRestDeposit(h.getRestDeposit().subtract(hisProject.getPrice()));
                     hisRecordProject.setName(hisProject.getName());
                     hisRecordProject.setType(hisProject.getType());
@@ -569,7 +575,7 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
                 hisHospitalManageMapper.updateBatchForDaily1(hisHospitalManageList1);
                 logger.info("-----------------护理费用日结人数为：" + hisHospitalManageList.size() + "-----------------------");
                 logger.info("-------------------结束护理费用日结-----------------------");
-        }else {
+            } else {
                 logger.info("-------------------护理费用日结结束，今天无可结算费用-----------------------");
             }
         }
@@ -760,8 +766,8 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
         if (EmptyUtil.Companion.isNullOrEmpty(hisHospitalManageBed)) {
             return new ArrayList<>();
         } else {
-           // List<HisHospitalManage> collect = hisHospitalManageBed.stream().filter(e -> e.getBedsNumber() != null).collect(Collectors.toList());
-         //   System.out.println("-------collect-----------"+collect.size());
+            // List<HisHospitalManage> collect = hisHospitalManageBed.stream().filter(e -> e.getBedsNumber() != null).collect(Collectors.toList());
+            //   System.out.println("-------collect-----------"+collect.size());
             return hisHospitalManageBed;
         }
     }
@@ -810,13 +816,13 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
     }
 
     /**
-     *@Description 根据交易流水号/就诊编号核对是否为住院
-     *@Params [tollNumber]
-     *@return com.ahsj.hiscore.entity.HisHospitalManage
-     *@Author zhushixiang
-     *@Date 2019-09-26
-     *@Time 22:08
-    **/
+     * @return com.ahsj.hiscore.entity.HisHospitalManage
+     * @Description 根据交易流水号/就诊编号核对是否为住院
+     * @Params [tollNumber]
+     * @Author zhushixiang
+     * @Date 2019-09-26
+     * @Time 22:08
+     **/
     @Override
     @Transactional(readOnly = true)
     public HisHospitalManage checkIsInpatient(String tollNumber) throws Exception {
@@ -824,18 +830,86 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
     }
 
     /**
-     *@Description 查询所有在住院病人且具有长期医嘱且未停嘱的用药与项目医嘱相关信息
-     *@Params []
-     *@return java.util.List<com.ahsj.hiscore.entity.HisHospitalManage>
-     *@Author zhushixiang
-     *@Date 2019-10-04
-     *@Time 23:53
-    **/
+     * @return java.util.List<com.ahsj.hiscore.entity.HisHospitalManage>
+     * @Description 查询所有在住院病人且具有长期医嘱且未停嘱的用药与项目医嘱相关信息
+     * @Params []
+     * @Author zhushixiang
+     * @Date 2019-10-04
+     * @Time 23:53
+     **/
     @Override
     @Transactional(readOnly = true)
     public List<HisHospitalManage> selectInpatientAndHaveLongTermMedicalAdvice() throws Exception {
         return hisHospitalManageMapper.selectInpatientAndHaveLongTermMedicalAdvice();
     }
+
+    /**
+     * @Description 病床管理设置病床
+     * @Params: [id, hospitalNumber]
+     * @Author: dingli
+     * @Return: core.message.Message
+     * @Date 2019/11/16
+     * @Time 16:22
+     **/
+    @Override
+    @Transactional(readOnly = false)
+    public Message sedBed(HisHospitalManage hisHospitalManage) throws Exception {
+        int i = hisHospitalManageMapper.setBed(hisHospitalManage);
+        if (i > 0) {
+            return MessageUtil.createMessage(true, "设置病床成功！");
+        }
+        return MessageUtil.createMessage(false, "设置病床失败！");
+    }
+
+    //强制出院
+    @Override
+    @Transactional(readOnly = false)
+    public Message forcedDischarge(HisHospitalManage hisHospitalManage) throws Exception {
+        if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage.getId())) {
+            HisHospitalManage hisHospitalManage1 = hisHospitalManageMapper.selectByPrimaryKey(hisHospitalManage.getId());
+            hisHospitalManage1.setIsDischarged(2);
+            hisHospitalManageMapper.updateByPrimaryKey(hisHospitalManage1);
+            return MessageUtil.createMessage(true, "强制出院成功（Success）");
+        } else {
+            return MessageUtil.createMessage(false, "强制出院失败，参数有误！（Fail）");
+        }
+    }
+
+    /**
+     * @Description 根据交易流水号查押金
+     * @Params: [number]
+     * @Author: dingli
+     * @Return: com.ahsj.hiscore.entity.HisHospitalManage
+     * @Date 2019/11/19
+     * @Time 10:30
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public HisHospitalManage selectByTollNumber(String number) throws Exception {
+        return hisHospitalManageMapper.selectByTollNumber(number);
+    }
+
+
+    /**
+     * @Description 根据就诊编号查询押金
+     * @Params: [number]
+     * @Author: dingli
+     * @Return: com.ahsj.hiscore.entity.HisHospitalManage
+     * @Date 2019/11/19
+     * @Time 10:35
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public HisHospitalManage selectByMedicalNumber(String number) throws Exception {
+        return hisHospitalManageMapper.selectByMedicalNumber(number);
+    }
+
+//    @Override
+//    @Transactional(readOnly = true)
+//    public PageBean<HisHospitalManage> selectAllByPatientId(PageBean<HisHospitalManage> pageBean) throws Exception {
+//        return CodeHelper.getInstance().setCodeValue(hisHospitalManageMapper.selectNumber(number));
+//        return hisHospitalManageMapper.selectAllByPatientId(pageBean);
+//    }
 }
 
 

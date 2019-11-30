@@ -17,6 +17,7 @@
         <result column="is_del" property="isDel" jdbcType="INTEGER"/>
         <result column="count" property="count" jdbcType="INTEGER"/>
         <result column="total_price" property="totalPrice" jdbcType="DECIMAL"/>
+        <result column="price" property="price" jdbcType="DECIMAL"/>
         <result column="drugs_numb" property="drugsNumb" jdbcType="VARCHAR"/>
         <result column="drugs_name" property="drugsName" jdbcType="VARCHAR"/>
         <result column="drugs_alias" property="drugsAlias" jdbcType="VARCHAR"/>
@@ -340,9 +341,10 @@ order by his_medi_exit_details.create_date desc
   </select>
 
     <select id="listByIds" resultMap="BaseResultMap">
-        select m.id ,e.toll_number,b.description,b.id as pharmacy_id,
+        select m.id ,e.toll_number,b.description,b.id as pharmacy_id,coalesce(a.price*e.exit_count,0)as
+        total_price,a.price,
         e.drugs_name,e.drugs_spec,e.exit_count,e.create_date,i.user_name,e.record_number,o.`name` as
-        patient_Name,e.validity_period
+        patient_Name,o.sex as sex, o.age as age,e.validity_period,d.user_name as doctorName
         from his_medi_exit_details as e
         LEFT JOIN his_medicine_info as m on m.drugs_numb = e.drugs_numb
         LEFT JOIN `his-userinfo`.user_info as i on i.id = e.create_user_id
@@ -350,6 +352,7 @@ order by his_medi_exit_details.create_date desc
         LEFT JOIN his_patient_info as o on o.id =r.patient_id
         left join his_related_medicationandexit as a on a.exit_id = e.id
         left join his_medication_details as b on a.medication_detail_id = b.id
+        left join`his-userinfo`.user_info as d on r.doctor_id = d.id
         where e.id in
         (select r.exit_id from his_related_medicationandexit as r where r.medication_detail_id in
         <foreach collection="array" item="id" index="index"
@@ -396,7 +399,7 @@ order by his_medi_exit_details.create_date desc
         <if test="parameter.userName != null  and parameter.userName != ''">
             and i.user_name like concat('%' #{parameter.userName},'%')
         </if>
-        GROUP BY  d.toll_number
+        GROUP BY d.toll_number
         <if test="parameter.orders != null and parameter.orders != ''">
             order by ${parameter.orders}
         </if>

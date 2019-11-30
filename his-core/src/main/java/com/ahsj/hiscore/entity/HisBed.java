@@ -19,6 +19,9 @@ public class HisBed extends BaseEntity {
 
     private Date updateDate;
 
+    private Integer count;
+    private Integer currentCount;
+
     @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "hospital_bed", typeName = "hospitalbed")
     private Integer type;
 
@@ -27,6 +30,10 @@ public class HisBed extends BaseEntity {
     @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_enable", typeName = "enable")
     private Integer isEnable;
     private String enable;
+
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "mold", typeName = "molds")
+    private Integer mold;
+    private String molds;
 
     @Override
     public Date getCreateDate() {
@@ -112,4 +119,35 @@ public class HisBed extends BaseEntity {
         this.isEnable = isEnable;
     }
 
+    public Integer getMold() {
+        return mold;
+    }
+
+    public void setMold(Integer mold) {
+        this.mold = mold;
+    }
+
+    public String getMolds() {
+        return molds;
+    }
+
+    public void setMolds(String molds) {
+        this.molds = molds;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public Integer getCurrentCount() {
+        return currentCount;
+    }
+
+    public void setCurrentCount(Integer currentCount) {
+        this.currentCount = currentCount;
+    }
 }

@@ -1,4 +1,5 @@
 package com.ahsj.hiscore.controller.bed;
+
 import com.ahsj.hiscore.entity.HisBed;
 import com.ahsj.hiscore.services.HisBedService;
 import com.ahsj.hiscore.services.HisWradService;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import utils.EmptyUtil;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
@@ -166,5 +168,39 @@ public class HisBedController extends BaseController {
         return hisBedService.selectHisBedAll();
     }
 
+    /**
+     * @Description 住院管理选择病床
+     * @Params: [numbers, hisBed]
+     * @Author: dingli
+     * @Return: core.entity.PageBean<com.ahsj.hiscore.entity.HisBed>
+     * @Date 2019/11/16
+     * @Time 14:29
+     **/
+    @RequestMapping("/getBedlist/index.ahsj")
+    @ResponseBody
+    public PageBean<HisBed> getBedlist(Integer numbers, HisBed hisBed) throws Exception {
+        PageBean<HisBed> pageBean = new PageBean<HisBed>();
+        if (numbers != null && !EmptyUtil.Companion.isNullOrEmpty(hisWradService.gethisWardByNumber(numbers).getId())) {//查找
+            hisBed.setWardId(hisWradService.gethisWardByNumber(numbers).getId());
+            pageBean.setParameter(hisBed);
+            pageBean = hisBedService.getHisBedAlls(pageBean);
+        } else {
+            pageBean.setData(new ArrayList<HisBed>());
+        }
+        return pageBean;
+    }
 
+    /**
+     * @Description 统计总床数
+     * @Params: []
+     * @Author: dingli
+     * @Return: java.util.List<com.ahsj.hiscore.entity.HisBed>
+     * @Date 2019/11/16
+     * @Time 18:01
+     **/
+    @RequestMapping("/getCount.ahsj")
+    @ResponseBody
+    public HisBed getCount() throws Exception {
+        return hisBedService.getCount();
+    }
 }

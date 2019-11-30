@@ -117,6 +117,31 @@ public class HisTollDetailsController extends BaseController {
     }
 
     /**
+     * @return
+     * @Description 护士站
+     * @Params
+     * @Author jin
+     * @Date 2019/11/16
+     * @Time 18:11
+     */
+    @RequestMapping("nursehospital/list.ahsj")
+    @ResponseBody
+    public PageBean<HisTollDetails> nursehospitalListIndex(HisTollDetails hisTollDetails) throws Exception {
+        PageBean<HisTollDetails> hisTollDetailsPageBean = new PageBean<HisTollDetails>();
+        HisHospitalManage hisHospitalManage = hisHospitalManageService.selectByHospNumber(hisTollDetails.getMedicalRecordId());
+        if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage)) {
+            hisTollDetails.setMedicalRecordId(hisHospitalManage.getMedicalNumber());
+            hisTollDetailsPageBean.setParameter(hisTollDetails);
+            System.out.println(hisTollDetailsService.nurselistByMecordId(hisTollDetailsPageBean));
+            return hisTollDetailsService.nurselistByMecordId(hisTollDetailsPageBean);
+        } else {
+            hisTollDetailsPageBean.setData(new ArrayList<HisTollDetails>());
+            return hisTollDetailsPageBean;
+        }
+    }
+
+
+    /**
      * @return org.springframework.web.servlet.ModelAndView
      * @Description 返回出院收费页面
      * @Params [token]
@@ -382,7 +407,6 @@ public class HisTollDetailsController extends BaseController {
     }
 
 
-
     /**
      * @Description 门诊收费打印
      * @Params: [token, number]
@@ -397,6 +421,7 @@ public class HisTollDetailsController extends BaseController {
         modelAndView.addObject("title", "打印凭证预览");
         modelAndView.addObject("token", token);
         modelAndView.addObject("number", number);
+        modelAndView.addObject("loginName", getUserName());
         return modelAndView;
     }
 
@@ -481,4 +506,39 @@ public class HisTollDetailsController extends BaseController {
     HisTollDetails printShowThere(String number) throws Exception {//没有明细
         return hisTollDetailsService.printShowThere(number);
     }
+
+    /**
+     * @Description 住院退药
+     * @Params: [token]
+     * @Author: dingli
+     * @Return: org.springframework.web.servlet.ModelAndView
+     * @Date 2019/11/19
+     * @Time 10:07
+     **/
+    @RequestMapping("hospitalDrugReturn/index.ahsj")
+    ModelAndView hospitalDrugReturn(String token) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/histoll/list_drugReturn_hospital");
+        modelAndView.addObject("title", "住院退药");
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("loginName", getUserName());
+        return modelAndView;
+    }
+
+    //计算出交付押金总额
+    @RequestMapping("printShowAllDespoit.ahsj")
+    @ResponseBody
+    HisTollDetails printShowAllDespoit(String number) throws Exception {//没有明细
+        //根据住院号搜索出所有与此住院号相关的收费明细且实际收费大于0（即交押金的那条数据的明细）
+        List<HisTollRecord> hisTollRecordList = hisTollRecordService.selectByHRNumberForAllDeposit(number);
+        BigDecimal allDeposit = new BigDecimal("0");
+        if(!EmptyUtil.Companion.isNullOrEmpty(hisTollRecordList)&&hisTollRecordList.size()!=0) {
+            for (HisTollRecord hisTollRecord : hisTollRecordList) {
+                allDeposit = allDeposit.add(hisTollRecord.getActualCharge());
+            }
+        }
+        HisTollDetails hisTollDetails = new HisTollDetails();
+        hisTollDetails.setToll(allDeposit);
+        return hisTollDetails;
+    }
+
 }

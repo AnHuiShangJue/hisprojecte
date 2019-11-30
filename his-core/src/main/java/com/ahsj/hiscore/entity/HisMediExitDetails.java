@@ -30,6 +30,8 @@ public class HisMediExitDetails extends BaseEntity {
 
     private BigDecimal totalPrice;
 
+    private BigDecimal price;
+
     private String drugsNumb;
 
     private String drugsName;
@@ -58,6 +60,48 @@ public class HisMediExitDetails extends BaseEntity {
     private Long mediEnterId;
 
     private String tdescription;
+
+    private Integer sex;
+
+    private String sexName;
+
+    private Integer age;
+
+    private String doctorName;
+
+    private BigDecimal toll;
+
+    public BigDecimal getToll() {
+        return toll;
+    }
+
+    public void setToll(BigDecimal toll) {
+        this.toll = toll;
+    }
+
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+
+    public String getSexName() {
+        return sexName;
+    }
+
+    public void setSexName(String sexName) {
+        this.sexName = sexName;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
 
     public String getTdescription() {
         return tdescription;
@@ -96,6 +140,14 @@ public class HisMediExitDetails extends BaseEntity {
     @Override
     public String getUserName() {
         return userName;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     @Override
@@ -261,5 +313,13 @@ public class HisMediExitDetails extends BaseEntity {
 
     public void setMediEnterId(Long mediEnterId) {
         this.mediEnterId = mediEnterId;
+    }
+
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
     }
 }

@@ -77,12 +77,14 @@
                                          title="查询条件" cssdefault="radiotdefault" haveDefault="true" value="0"></div>
                                 </div>
                                 <div class="col  s1 m1 l1 xl1">
-                                    <div ahsj:radio name="isDischarged" id="isDischarged" type="code" typeKey="is_discharged"
+                                    <div ahsj:radio name="isDischarged" id="isDischarged" type="code"
+                                         typeKey="is_discharged"
                                          title="查询条件" cssdefault="radiotdefault" haveDefault="true" value="0"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col  s1 m1 l1 xl1">
-                                        <select ahsj:select name="departmentId" id="departmentId" type="depart" typeKey="2" departKbn="1">
+                                        <select ahsj:select name="departmentId" id="departmentId" type="depart"
+                                                typeKey="2" departKbn="1">
                                         </select>
                                         <label for="departmentId">科 室</label>
                                     </div>
@@ -111,7 +113,7 @@
         <div class="col s12 x12 l12 xl12">
             <div class="card">
                 <div class="card-content">
-                    <h4 class="card-title">住   院
+                    <h4 class="card-title">住 院
                     </h4><label style="color:black">Hospitalization
                 </label>
                     <div class="row">
@@ -141,7 +143,6 @@
     });
 
 
-
     function initTable() {
         grid.init({
             src: $("#data-table-simple"),
@@ -154,33 +155,33 @@
             loadingMessage: 'Loading...',
             dataTable: {
                 "ajax": {
-                    "url": CTX+"/api/hishospitalmanage/list.ahsj?", // ajax source
+                    "url": CTX + "/api/hishospitalmanage/list.ahsj?", // ajax source
                 },
                 "columns": [
                     {
-                        "title":"住院编号",
-                        "data":"number",
-                        "name":"number"
-                    },{
-                        "title":"就诊编号",
-                        "data":"medicalNumber",
-                        "name":"medical_number"
-                    },{
-                        "title":"姓名",
-                        "data":"names",
-                        "name":"names"
-                    },{
-                        "title":"年龄",
-                        "data":"ages",
-                        "name":"ages"
-                    },{
-                        "title":"性别",
-                        "data":"sexsName",
-                        "name":"sexs"
-                    },{
-                        "title":"身份证号",
-                        "data":"idcards",
-                        "name":"idcards"
+                        "title": "住院编号",
+                        "data": "number",
+                        "name": "number"
+                    }, {
+                        "title": "就诊编号",
+                        "data": "medicalNumber",
+                        "name": "medical_number"
+                    }, {
+                        "title": "姓名",
+                        "data": "names",
+                        "name": "names"
+                    }, {
+                        "title": "年龄",
+                        "data": "ages",
+                        "name": "ages"
+                    }, {
+                        "title": "性别",
+                        "data": "sexsName",
+                        "name": "sexs"
+                    }, {
+                        "title": "身份证号",
+                        "data": "idcards",
+                        "name": "idcards"
                     },
                     {
                         "title": "科别",
@@ -188,22 +189,22 @@
                         "name": "department_id"
                     },
                     {
-                        "title":"来源",
-                        "data":"isReName",
-                        "name":"is_re"
-                    },{
-                        "title":"住院状态",
-                        "data":"isHosName",
-                        "name":"is_hos"
-                    },{
-                        "title":"出院状态",
-                        "data":"isDischargedName",
-                        "name":"is_discharged"
-                    },{
-                        "title":"登记时间",
-                        "data":"joinDate",
-                        "name":"join_date"
-                    },{
+                        "title": "来源",
+                        "data": "isReName",
+                        "name": "is_re"
+                    }, {
+                        "title": "住院状态",
+                        "data": "isHosName",
+                        "name": "is_hos"
+                    }, {
+                        "title": "出院状态",
+                        "data": "isDischargedName",
+                        "name": "is_discharged"
+                    }, {
+                        "title": "登记时间",
+                        "data": "joinDate",
+                        "name": "join_date"
+                    }, {
                         "title": "操作",
                         "width": "120px",
                         "className": "centered",
@@ -212,10 +213,14 @@
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn +
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"办理（Handle）\" onclick='detail(" + row.patientId + "," + row.ids + "," + row.doctorId + "," + row.isHos + ");'><i class='material-icons'>input</i></a>"+
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"出院(Discharged)\" href='javascript:;' onclick='discharged(" + row.id + "," + row.isDischarged + ");'><i class='material-icons'>camera_front</i></a>"+
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看(View)\" href='javascript:;' onclick='view(" + row.patientId + "," + row.ids + "," + row.doctorId + "," + row.wardId + "," + row.bedId + "," + row.nurseId + "," + row.isHos + "," + row.id + ");'><i class='material-icons'>visibility</i></a>"+
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改(Edit)\" onclick='update(" + row.id + "," + row.isHos + ");'><i class='material-icons'>edit</i></a>";
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"办理（Handle）\" onclick='detail(" + row.patientId + "," + row.ids + "," + row.doctorId + "," + row.isHos + ");'><i class='material-icons'>input</i></a>" +
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"出院(Discharged)\" href='javascript:;' onclick='discharged(" + row.id + "," + row.isDischarged + ");'><i class='material-icons'>camera_front</i></a>" +
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看(View)\" href='javascript:;' onclick='view(" + row.patientId + "," + row.ids + "," + row.doctorId + "," + row.wardId + "," + row.bedId + "," + row.nurseId + "," + row.isHos + "," + row.id + ");'><i class='material-icons'>visibility</i></a>" +
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改(Edit)\" onclick='update(" + row.id + "," + row.isHos + ");'><i class='material-icons'>edit</i></a>" +
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"设置病床(Set up the bed)\" onclick='setBed(" + row.isHos + ",\"" + row.number + "\");'><i class='material-icons'>airline_seat_individual_suite</i></a>" ;
+                            if(row.isDischarged == 1) {
+                                rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"强制出院(Forced discharge)\" onclick='Forced(" + row.id + ",\"" + row.isDischarged + "\");'><i class='material-icons'>clear</i></a>";
+                            }
                             // 返回自定义内容
                             return rtnBtn;
                             // 返回自定义内容
@@ -231,34 +236,34 @@
 
     }
 
-    function detail(patientId,ids,doctorId,isHos) {
-        if (isHos==2||isHos==3){
+    function detail(patientId, ids, doctorId, isHos) {
+        if (isHos == 2 || isHos == 3) {
             dialog.warn("已审核或审核未通过，请勿重复操作！")
-        }else {
-        var url = CTX+ "/api/hishospitalmanage/update/index.ahsj?token="+TOKEN+"&patientId="+patientId+"&ids="+ids+"&doctorId="+doctorId;
-        dialog.show(url, "信息审核");
-    }
+        } else {
+            var url = CTX + "/api/hishospitalmanage/update/index.ahsj?token=" + TOKEN + "&patientId=" + patientId + "&ids=" + ids + "&doctorId=" + doctorId;
+            dialog.show(url, "信息审核");
+        }
     }
 
-    function view(patientId,ids,doctorId,wardId,bedId,nurseId,isHos,id) {
-        if (isHos==1 || isHos==2) {
+    function view(patientId, ids, doctorId, wardId, bedId, nurseId, isHos, id) {
+        if (isHos == 1 || isHos == 2) {
             dialog.warn("未审核或审核未通过，无病人住院信息！")
-        }else {
-            var url = CTX + "/api/hishospitalmanage/view/index.ahsj?token=" + TOKEN + "&patientId=" + patientId + "&ids=" + ids + "&doctorId=" + doctorId + "&wardId=" + wardId + "&bedId=" + bedId + "&nurseId=" + nurseId +"&id=" + id;
+        } else {
+            var url = CTX + "/api/hishospitalmanage/view/index.ahsj?token=" + TOKEN + "&patientId=" + patientId + "&ids=" + ids + "&doctorId=" + doctorId + "&wardId=" + wardId + "&bedId=" + bedId + "&nurseId=" + nurseId + "&id=" + id;
             dialog.show(url, "审核信息查看");
-    }
+        }
     }
 
-    function update(id,isHos) {
-        if (isHos==1 || isHos==2) {
+    function update(id, isHos) {
+        if (isHos == 1 || isHos == 2) {
             dialog.warn("未审核或审核未通过，无病人住院信息！")
-        }else {
+        } else {
             var url = CTX + "/api/hishospitalmanage/inpatientUpdate/index.ahsj?token=" + TOKEN + "&id=" + id;
             dialog.show(url, "住院信息修改");
-    }
+        }
     }
 
-    function discharged(id,isDischarged) {
+    function discharged(id, isDischarged) {
         if (isDischarged == 1) {
             dialog.confirm('确定该病人出院?', function (index, layero) {
                 $.ahsjajax(CTX + "/api/hishospitalmanage/hosEnter.ahsj",
@@ -286,12 +291,46 @@
                     }
                 );
             });
-        }else if(isDischarged==2) {
+        } else if (isDischarged == 2) {
             dialog.warn('该病人已出院，请勿重复操作！')
         }
 
     }
 
+    //强制出院
+    function Forced(id, isDischarged) {
+        if (isDischarged == 1) {
+            dialog.confirm('确定强制出院（Determine forced discharge）?', function (index, layero) {
+                $.ahsjajax(CTX + "/api/hishospitalmanage/forcedDischarge.ahsj",
+                    {"id": id},
+                    function (msg) {
+                        if (msg.success) {
+                            swal.close();
+                            M.toast({
+                                html: msg.message, completeCallback: function () {
+                                }
+                            });
+                            grid.search();
+                        } else {
+                            M.toast({
+                                html: msg.message, completeCallback: function () {
+                                }
+                            });
+                        }
+                    },
+                    function (data) {
+                        M.toast({
+                            html: "网络异常", completeCallback: function () {
+                            }
+                        });
+                    }
+                );
+            });
+        } else if (isDischarged == 2) {
+            dialog.warn('该病人已出院，请勿重复操作！')
+        }
+
+    }
 
 
     function initBtn() {
@@ -304,9 +343,18 @@
         });
     }
 
-    $("input").change(function(){
+    $("input").change(function () {
         $(this).val($(this).val().trim());
     });
+
+    function setBed(isHos,number) {
+        if (isHos == 1 || isHos == 2) {
+            dialog.warn("未审核或审核未通过，不能选择病床！")
+        } else {
+            var url = CTX + "/api/hishospitalmanage/setBed/index.ahsj?token=" + TOKEN + "&number=" + number;
+            dialog.show(url, "选择病床");
+        }
+    }
 </script>
 </body>
 </html>

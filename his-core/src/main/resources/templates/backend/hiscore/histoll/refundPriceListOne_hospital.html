@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com">
+
+<div th:replace="public/base_list :: html"></div>
+<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark 2-columns  "
+      data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
+<!-- Start Page Loading -->
+<div class="row">
+    <div class="breadcrumbs-inline pt-3 pb-1" id="breadcrumbs-wrapper">
+        <!-- Search for small screen-->
+        <div class="container">
+            <div class="row">
+                <div class="col s10 m6 l6 breadcrumbs-left">
+                    <h5 class="breadcrumbs-title mt-0 mb-0 display-inline hide-on-small-and-down">DataTable</h5>
+                    <ol class="breadcrumbs mb-0">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#">Table</a>
+                        </li>
+                        <li class="breadcrumb-item active">DataTable
+                        </li>
+                    </ol>
+                </div>
+                <div class="col s2 m6 l6"><a
+                        class="btn btn-floating dropdown-settings waves-effect waves-light breadcrumbs-btn right"
+                        href="#!" data-target="dropdown1"><i class="material-icons">expand_more </i><i
+                        class="material-icons right">arrow_drop_down</i></a>
+                    <ul class="dropdown-content" id="dropdown1" tabindex="0">
+                        <li tabindex="0"><a class="grey-text text-darken-2"
+                                            href="user-profile-page.html">Profile<span
+                                class="new badge red">2</span></a></li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="app-contacts.html">Contacts</a>
+                        </li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="page-faq.html">FAQ</a></li>
+                        <li class="divider" tabindex="-1"></li>
+                        <li tabindex="0"><a class="grey-text text-darken-2" href="user-login.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 x12 l12 xl12">
+        <div class="container">
+            <div class="section section-data-tables">
+                <div class="card">
+                    <div class="card-content">
+                        <form id="searchForm" class="row" action="">
+                            <div class="col input-field s3 m3 l3 xl3">
+                                <input id="tollRecordNumber" name="tollRecordNumber" type="text"/>
+                                <label for="tollRecordNumber">请输入交易流水号/就诊编号/住院编号<span style="font-size: 12px">(Please enter transaction serial number/medical treatment number/admission number
+)</span></label>
+                            </div>
+
+                        </form>
+                        <div class="row">
+                            <div class="col s2 m2 l2 xl2 offset-l1">
+                                <a class="waves-effect waves-light btn" id="searchBtn"><i
+                                        class="material-icons  white-text tooltipped " data-position="bottom"
+                                        data-delay="50" data-tooltip="搜索">search</i></a>
+                                <a id="resetBtn" class="waves-effect waves-light btn"><i
+                                        class="material-icons  white-text tooltipped " data-position="bottom"
+                                        data-delay="50" data-tooltip="重置">youtube_searched_for</i></a>
+                            </div>
+                        </div>
+                        <p></p>
+                        <div class="row">
+                            <div class="input-field col s4 l4 xl4">
+                                <input readonly id="loginName" type="text"
+                                       th:value="${loginName}">
+                                <label for="loginName">操作人<span style="font-size: 12px">(Operator
+
+)</span></label>
+                            </div>
+                            <div class="input-field col s4 l4 xl4">
+                                <input readonly type="text" id="patientName" value=""/>
+                                <label class="active" for="patientName">退项目人姓名<span style="font-size: 12px">(Returnee name
+
+)</span>:</label>
+                            </div>
+                            <div class="input-field col s4 l4 xl4">
+                                <input readonly type="text" id="reason" value=""/>
+                                <label class="active" for="reason">退项目原因<span style="font-size: 12px">(Reason for returning the project
+
+)</span>:</label>
+                            </div>
+                            <div class="input-field col s4 l4 xl4">
+                                <input type="text" readonly id="restDeposit" name="restDeposit">
+                                <label class="active" for="restDeposit">押金<span style="font-size: 12px">(Remaining deposit
+
+)</span></label>
+                            </div>
+                            <input type="hidden" name="voucher" id="voucher">
+                            <input type="hidden" name="medicalRecordNumber" id="medicalRecordNumber">
+                            <input type="hidden" name="returnId" id="returnId" value="">
+                          <!--  <input type="hidden" name="vouchers" id="vouchers">-->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 x12 l12 xl12">
+                        <div class="card">
+                            <div class="card-content">
+                                <h4 class="card-title">住院退项目收费
+                                </h4><label style="color:black">Retirement fee
+                            </label>
+                                <!--Form Advance-->
+                                <div class="row">
+                                    <div id="refreshtable" class="col l12 m12 l12 xl12">
+                                        <table id="data-table-simple" class="display">
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 x12 l12 xl12">
+                        <div class="card">
+                            <div class="card-content">
+                                <form class="col s12" id="sendForm" action="#">
+                                    <div class="input-field col s4 l4 xl4">
+                                        <input readonly type="number" id="money" name="money">
+                                        <label class="active" for="money">总应收金额<span style="font-size: 12px">(Total receivable amount
+
+)</span>:</label>
+                                    </div>
+                                    <div class="input-field col s4 l4 xl4">
+                                        <input type="number" readonly name="actualCharge" id="actualCharge">
+                                        <label for="actualCharge">实际收款金额<span style="font-size: 12px">(Actual collection amount
+
+)</span></label>
+                                    </div>
+                                    <div class="input-field col s4 l4 xl4">
+                                        <input type="number" readonly id="recoverTheFee" name="recoverTheFee">
+                                        <label class="active" for="recoverTheFee">实际找零金额<span style="font-size: 12px">(Actual change amount
+
+)</span></label>
+                                    </div>
+                                    <div class="input-field col s4 l4 xl4">
+                                        <input type="text" readonly id="deposit" name="deposit">
+                                        <label class="active" for="deposit">剩余押金<span style="font-size: 12px">(The remaining deposit
+
+)</span></label>
+                                    </div>
+                                </form>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <button id="print_btn"
+                                                class="btn cyan waves-effect waves-light right"
+                                                type="button"
+                                                name="action"
+                                                hidden="true">打 印（print）
+                                            <i class="mdi-content-send right"></i>
+                                        </button>
+                                        <button id="send_btn"
+                                                class="btn cyan waves-effect waves-light right"
+                                                type="button"
+                                                name="action"
+                                                hidden="true">退 款（Refund
+                                            ）
+                                            <i class="mdi-content-send right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div th:replace="public/base_list_script :: html"></div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        initBtn();
+        initTable();
+        $("#print_btn").attr("disabled", true);
+        $("#send_btn").attr("disabled", false);
+    });
+    var grid = new Datatable();
+
+    //搜索按钮
+    function initBtn() {
+        $('#searchBtn').click(function () {
+            var reg1 = new RegExp(/^HTR\d{13}$/);
+            var reg2 = new RegExp(/^HHM\d{13}$/);
+            var reg3 = new RegExp(/^HM\d{13}$/);
+            var reg4 = new RegExp(/^HR\d{13}$/);
+            var number = $("#tollRecordNumber").val();
+            if (reg1.test(number) || reg2.test(number) || reg3.test(number) || reg4.test(number)) {
+                grid.search();
+                getNumber();
+                $("#print_btn").attr("disabled", true);
+            } else {
+                dialog.warn("所输入的数据不符合格式要求！请输入HTR开头的交易流水号/HR开头的住院编号/HHM开头的就诊记录编号")
+            }
+        });
+        //重置按钮
+        $('#resetBtn').click(function reset() {
+            grid.reset();
+            resetNumber();
+            $("#print_btn").attr("disabled", true);
+            $("#send_btn").attr("disabled", false);
+        });
+    }
+
+    function resetNumber() {
+        $("#patientName").val("");
+        $("#phonenumber").attr("value", "");
+        $("#idcard").attr("value", "");
+        $("#recoverTheFee").attr("value", "");
+        $("#voucher").attr("value", "");
+        $("#medicalRecordNumber").attr("value", "");
+        $("#returnId").attr("value", "");
+        $("#money").attr("value", "");
+        $("#actualCharge").attr("value", "");
+        $("#reason").val("");
+        $("#remark").attr("value", "");
+        $("#deposit").attr("value", "");
+        $("#restDeposit").attr("value", "");
+        $("#send_btn").attr("disabled", false);
+    }
+
+    function getNumber() {
+        var tollRecordNumber = $("#tollRecordNumber").val();
+        $.ahsjajax(
+            CTX + "/api/hisProject/refund/price/refundProjectList.ahsj",
+            {
+                "tollRecordNumber": tollRecordNumber
+            },
+            function (msg) {
+                var data = msg.data;
+                if (data == null || data == "") {
+                    dialog.warn("没有退费信息！")
+                } else {
+                    var patientNames = data[0].patientName;
+                    var remarks = data[0].remarks;
+                    var voucher = data[0].voucher;
+                    $("#patientName").val(patientNames);
+                    $("#reason").val(remarks);
+                    changeInputValue("money", 0);
+                    changeInputValue("voucher", voucher);
+                    //changeInputValue("returnId", vouchers);
+                    changeInputValue("actualCharge", 0);
+                    changeInputValue("restDeposit", data[0].restDeposit);
+                    changeInputValue("deposit", data[0].deposit);
+                    changeInputValue("medicalRecordNumber", data[0].medicalRecordNumber);
+                  /*  var sum = 0;
+                    for (var i = 0; i < data.length; i++) {
+                        var projectSumPrice = data[i].projectSumPrice;
+                        sum = sum + projectSumPrice;
+
+                    }*/
+                    changeInputValue("recoverTheFee",0);
+                }
+            },
+            function () {
+                M.toast({html: "网络异常"});
+                return false;
+            }
+        );
+    }
+
+    var number; //交易流水号
+    $('#send_btn').click(function () {
+        dialog.confirm('确定退费吗?', function (index, layero) {
+            var refundSumProce = $("#recoverTheFee").val();
+            var tollRecordNumber = $("#tollRecordNumber").val();
+            var voucher = $("#voucher").val();
+            var returnId = $("#returnId").val();
+            var deposit = $("#deposit").val();
+            var medicalRecordNumber = $("#medicalRecordNumber").val();
+            $.ahsjajax(
+                CTX + "/api/hisTollRecord/checkIsInpatient.ahsj",
+                {"tollNumber": tollRecordNumber},
+                function (data) {
+                    if (!isNullOrEmpty(data.id)) {
+                        if (data.isDischarged == 2) {
+                            dialog.warn("已出院，本窗口只支持住院退项目");
+                        } else {
+                            $.ahsjajax(
+                                CTX + "/api/hisProject/refund/price/save.ahsj",
+                                {
+                                    "voucher": voucher,
+                                    "tollRecordNumber": tollRecordNumber,
+                                    "refundSumProce": refundSumProce,
+                                    "deposit": deposit,
+                                    "recordNumber": medicalRecordNumber
+                                },
+                                function (msg) {
+                                    if (msg.success) {
+                                        data = msg.message.substring(0, 5);//截取成功信息
+                                        M.toast({html: data});
+                                        dialog.success("退款成功！");
+                                        number = msg.message.substring(5); //截取交易流水号
+                                        $("#print_btn").attr("disabled", false);
+                                        $("#send_btn").attr("disabled", true);
+                                        return true;
+                                    } else {
+                                        data = msg.message.substring(0, 5);//截取成功信息
+                                        dialog.warn(data);
+                                        return false;
+                                    }
+                                }
+                            );
+                        }
+                        return true;
+                    } else {
+                        dialog.warn("不支持未住院退费！")
+                        /*           if (returnId != "" && returnId != null && returnId != undefined) {
+                                       $.ahsjajax(
+                                           CTX + "/api/hisProject/refund/price/save.ahsj",
+                                           {"voucher": voucher, "tollRecordNumber": tollRecordNumber, "refundSumProce": refundSumProce},
+                                           function (msg) {
+                                               if (msg.success) {
+                                                   data = msg.message.substring(0, 5);//截取成功信息
+                                                   M.toast({html: data});
+                                                   dialog.success("退款成功！");
+                                                   number = msg.message.substring(5); //截取交易流水号
+                                                   $("#print_btn").attr("disabled", false);
+                                                   return true;
+                                               } else {
+                                                   data = msg.message.substring(0, 5);//截取成功信息
+                                                   dialog.warn(data);
+                                                   return false;
+                                               }
+                                           }
+                                       );
+                                   }else {
+                                       dialog.warn("没有退费信息！")
+                                   }*/
+                    }
+                },
+                function () {
+                    M.toast({html: "网络异常"});
+                    return false;
+                }
+            );
+        });
+    });
+
+    /*    $("#print_btn").click(function () {
+            dialog.confirm('确定打印吗?', function (index, layero) {
+                var voucher = $("#vouchers").val();
+                var tollRecordNumber = $("#tollRecordNumber").val();
+                var refundSumProce = $("#recoverTheFee").val();
+                if (voucher != "" && voucher != null && voucher != undefined) {
+                    var url = CTX + "/api/hisProject/refund/price/print.ahsj?tollRecordNumber=" + tollRecordNumber + "&refundSumProce="+refundSumProce+"&token=" + TOKEN+"&voucher="+voucher;
+                    dialog.showDialog(url, "打印凭证预览", "700px", "700px");
+                } else {
+                    dialog.warn("没有需要打印的内容！");
+                }
+            });
+        });*/
+    $("#print_btn").click(function () {
+        layer.open({
+            content: '打印小票（Print a small ticket）'
+            , btn: ['财务联（Financial union）', '科室联（Department）', '自由联（Free association）']
+            , yes: function (index, layero) {
+                //按钮【按钮一】的回调
+                if (number != "" && number != null && number != undefined) {
+                    var url = CTX + "/api/hisTollRecord/printDrugFive/index.ahsj?number=" + number + "&token=" + TOKEN + "&type=1";
+                    dialog.showDialog(url, "打印凭证预览", "700px", "700px");
+                } else {
+                    dialog.warn("没有需要打印的内容！")
+                }
+            }
+            , btn2: function (index, layero) {
+                //按钮【按钮二】的回调
+                if (number != "" && number != null && number != undefined) {
+                    var url = CTX + "/api/hisTollRecord/printDrugFive/index.ahsj?number=" + number + "&token=" + TOKEN + "&type=2";
+                    dialog.showDialog(url, "打印凭证预览", "700px", "700px");
+                } else {
+                    dialog.warn("没有需要打印的内容！")
+                }
+
+                return false;
+            }
+            , btn3: function (index, layero) {
+                //按钮【按钮三】的回调
+                if (number != "" && number != null && number != undefined) {
+                    var url = CTX + "/api/hisTollRecord/printDrugFive/index.ahsj?number=" + number + "&token=" + TOKEN + "&type=3";
+                    dialog.showDialog(url, "打印凭证预览", "700px", "700px");
+                } else {
+                    dialog.warn("没有需要打印的内容！")
+                }
+                return false;
+            }
+            , cancel: function () {
+                //右上角关闭回调
+
+                // return false ;
+            }
+        });
+    })
+
+    function initTable() {
+        grid.init({
+            src: $("#data-table-simple"),
+            onSuccess: function (grid) {
+            },
+            onError: function (grid) {
+            },
+            onDataLoad: function (grid) {
+            },
+            loadingMessage: 'Loading...',
+            dataTable: {
+                "ajax": {
+                    "url": CTX + "/api/hisProject/refund/price/refundProjectList.ahsj"
+                },
+                "pageLength": 200,
+                "columns": [
+                    {
+                        "title": "项目编号",
+                        "data": "number",
+                        "name": "number"
+                    },
+                    {
+                        "title": "项目名称",
+                        "data": "name",
+                        "name": "name",
+                        "orderable": false
+                    },
+                    {
+                        "title": "项目类型",
+                        "data": "assitTypeName",
+                        "name": "type",
+                        "orderable": false
+                    },
+                    {
+                        "title": "项目标准",
+                        "data": "price",
+                        "name": "price"
+                    },
+
+                    {
+                        "title": "项目数目",
+                        "data": "refundNum",
+                        "name": "refund_num",
+                        "orderable": false
+                    },
+                    {
+                        "title": "单项总价",
+                        "data": "projectSumPrice",
+                        "name": "project_sum_price"
+                    }
+                ],
+                "order": [
+                    [2, 'asc']
+                ]
+            }
+        });
+    }
+
+    $("input").change(function () {
+        $(this).val($(this).val().trim());
+    });
+</script>
+
+</div>
+</div>
+</body>
+</html>
+

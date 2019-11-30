@@ -1,8 +1,10 @@
 package com.ahsj.wis.entity;
 
+import core.entity.BaseEntity;
+
 import java.util.Date;
 
-public class AboutWisdom {
+public class AboutWisdom extends BaseEntity {
     private Integer id;
 
     private String introduce;

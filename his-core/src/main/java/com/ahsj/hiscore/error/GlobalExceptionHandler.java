@@ -36,7 +36,7 @@ import java.io.PrintWriter;
  * @since 1.0.0
  */
 
-@ControllerAdvice(basePackages = "com.ahsj.hiscore")
+//@ControllerAdvice(basePackages = "com.ahsj.hiscore")
 public class GlobalExceptionHandler {
 
     private static final String logExceptionFormat = "Capture Exception By GlobalExceptionHandler: Code: %s Detail: %s";

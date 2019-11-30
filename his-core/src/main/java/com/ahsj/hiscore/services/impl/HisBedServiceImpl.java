@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utils.EmptyUtil;
+
 import java.util.Date;
 import java.util.List;
 
@@ -55,15 +56,13 @@ public class HisBedServiceImpl implements HisBedService {
                 } else {
                     return MessageUtil.createMessage(false, "新增失败,病床已满！");
                 }
-           } else {
+            } else {
                 return MessageUtil.createMessage(false, "新增失败," + hisBed.getNumber() + "号病床已经存在！");
             }
-        }
-        else {//主键不为空  修改
+        } else {//主键不为空  修改
             if (!EmptyUtil.Companion.isNullOrEmpty(bed) && bed.getId() != hisBed.getId()) {//当前病床下是否有该病床号
                 return MessageUtil.createMessage(false, "更新失败," + hisBed.getNumber() + "号病床已经存在！");
-            }
-            else {
+            } else {
                 hisBed.setUpdateDate(new Date());
                 hisBedMapper.updateByPrimaryKeySelective(hisBed);
                 return MessageUtil.createMessage(true, "更新成功!");
@@ -243,5 +242,30 @@ public class HisBedServiceImpl implements HisBedService {
         }
     }
 
+    /**
+     * @Description 住院管理选择病床
+     * @Params: [pageBean]
+     * @Author: dingli
+     * @Return: core.entity.PageBean<com.ahsj.hiscore.entity.HisBed>
+     * @Date 2019/11/16
+     * @Time 14:34
+     **/
+    public PageBean<HisBed> getHisBedAlls(PageBean<HisBed> pageBean) throws Exception {
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisBedMapper.getHisBedAlls(pageBean)));
+        return pageBean;
+    }
 
+    /**
+     * @Description 统计总床数
+     * @Params: []
+     * @Author: dingli
+     * @Return: com.ahsj.hiscore.entity.HisBed
+     * @Date 2019/11/16
+     * @Time 18:02
+     **/
+    @Override
+    @Transactional(readOnly = true)
+    public HisBed getCount() throws Exception {
+        return hisBedMapper.getCount();
+    }
 }

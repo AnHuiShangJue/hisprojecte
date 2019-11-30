@@ -447,6 +447,7 @@
   <select id="listByRemarkForPrint" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
         a.*
+        ,d.drugs_spec as drugsSpec
         ,c.name as nurseName
         ,d.count as countNumber
         ,d.small_unit as smallUnit
@@ -454,7 +455,7 @@
         from his_infusion as a
         LEFT JOIN his_user_nurse as b on b.user_id = a.nurse_id
         LEFT JOIN his_nurse as c on b.nurse_id = c.id
-        LEFT JOIN his_medication_details as d on a.drugs_numb = d.id
+        LEFT JOIN his_medication_details as d on a.medication_id = d.id
         LEFT JOIN his_patient_info as e on a.patient_id = e.id
         where a.remarks = #{remarks,jdbcType = VARCHAR}
     </select>

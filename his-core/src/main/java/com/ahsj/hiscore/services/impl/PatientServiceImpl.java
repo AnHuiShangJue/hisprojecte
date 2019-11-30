@@ -119,7 +119,8 @@ public class PatientServiceImpl implements HisPatientService {
                     }
                     return MessageUtil.createMessage(false, "新增失败!" + userCheck.getUserId() + "该用户名对应的账号已经存在了!请修改用户名!");
                 }
-                BoolMessage message = iUserService.saveOrUpdateUserInfo(userInfo);
+                BoolMessage message = iUserService.saveOrUpdateUserInfo(userInfo.getUserId(),userInfo.getPassword(),userInfo.getUserName()
+                        ,userInfo.getSex(),userInfo.getDeptId(),userInfo.getDelFlag(),userInfo.getIsInitData(),userInfo.getTelPhone());
                 if (message.isSuccess()) {
                     hisPatientInfoMapper.insert(hisPatientInfo);
                     UserInfo successUserInfo = iUserService.selectByName(userInfo.getUserId());

@@ -126,8 +126,7 @@ public class HisHospitalManageController extends BaseController {
      **/
     @RequestMapping(value = "saveOrUpdate.ahsj")
     @ResponseBody
-    public Message saveOrUpdate(Long bedIds,HisHospitalManage hisHospitalManage) throws Exception {
-        hisHospitalManage.setBedId(bedIds);
+    public Message saveOrUpdate(HisHospitalManage hisHospitalManage) throws Exception {
         return hisHospitalManageService.saveOrUpdate(hisHospitalManage);
     }
 
@@ -157,16 +156,16 @@ public class HisHospitalManageController extends BaseController {
      * @Params [token, hisRegistered]
      **/
     @RequestMapping("update/index.ahsj")
-    ModelAndView updateIndex(String token, HisHospitalManage hisHospitalManage,Long hosptalRegistId) throws Exception {
+    ModelAndView updateIndex(String token, HisHospitalManage hisHospitalManage, Long hosptalRegistId) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/hospitalmanage/update");
         modelAndView.addObject("title", "医疗信息系统");
         modelAndView.addObject("token", token);
-        if (EmptyUtil.Companion.isNullOrEmpty(hosptalRegistId)){
+        if (EmptyUtil.Companion.isNullOrEmpty(hosptalRegistId)) {
             modelAndView.addObject("hisPatientInfo", hisPatientService.selectById(hisHospitalManage.getPatientId()));
             modelAndView.addObject("hisDoctorInfo", hisDoctorInfoService.selectById(hisHospitalManage.getDoctorId()));
             modelAndView.addObject("hisHospitalManage", hisHospitalManage);
             modelAndView.addObject("hisHosptalregist", hisHosptalregistService.selectById(hisHospitalManage.getIds()));
-        }else {
+        } else {
             HisHosptalregist hisHosptalregist = hisHosptalregistService.selectById(hosptalRegistId);
             modelAndView.addObject("hisPatientInfo", hisPatientService.selectById(hisHosptalregist.getPatientId()));
             modelAndView.addObject("hisDoctorInfo", hisDoctorInfoService.selectById(hisHosptalregist.getDoctorId()));
@@ -193,18 +192,18 @@ public class HisHospitalManageController extends BaseController {
      * @Params
      **/
     @RequestMapping("view/index.ahsj")
-    ModelAndView viewIndex(String token, HisHosptalregist hisHosptalregist, HisHospitalManage hisHospitalManage,Long id) throws Exception {
+    ModelAndView viewIndex(String token, HisHosptalregist hisHosptalregist, HisHospitalManage hisHospitalManage, Long id) throws Exception {
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/hospitalmanage/view");
         modelAndView.addObject("title", "医疗信息系统");
         modelAndView.addObject("token", token);
         modelAndView.addObject("hisPatientInfo", hisPatientService.selectById(hisHosptalregist.getPatientId()));
         modelAndView.addObject("hisDoctorInfo", hisDoctorInfoService.selectById(hisUserDoctorService.selectByUserId(hisHosptalregist.getDoctorId()).getDoctorId()));
-        if (hisHospitalManage.getWardId() != 0) {
+      /*  if (hisHospitalManage.getWardId() != 0) {
             modelAndView.addObject("hisWard", hisWradService.selectByPrimaryKey(hisHospitalManage.getWardId()));
         }
         if (hisHospitalManage.getBedId() != 0) {
             modelAndView.addObject("hisBed", hisBedService.selectByPrimaryKey(hisHospitalManage.getBedId()));
-        }
+        }*/
         if (hisHosptalregist.getNurseId() != 0) {
             modelAndView.addObject("hisNurse", hisNurseService.selectById(hisUserNurseMapper.selectByUserId(hisHosptalregist.getNurseId()).getNurseId()));
         }
@@ -367,11 +366,11 @@ public class HisHospitalManageController extends BaseController {
         } else {//24h内
             HisPatientInfo hisPatientInfo = hisPatientService.selectById(hisHospitalManage.getPatientId());
             modelAndView = new ModelAndView("backend/hiscore/doctor/dieIn24hours");
-            modelAndView.addObject("hisPatientInfo",hisPatientInfo);
-            modelAndView.addObject("doctorId",hisHospitalManage.getDoctorId());
-            modelAndView.addObject("departmentName",hisHospitalManage.getDepartmentIdName());
-            modelAndView.addObject("departmentId",hisHospitalManage.getDepartmentId());
-            modelAndView.addObject("bedId",hisHospitalManage.getBedId());
+            modelAndView.addObject("hisPatientInfo", hisPatientInfo);
+            modelAndView.addObject("doctorId", hisHospitalManage.getDoctorId());
+            modelAndView.addObject("departmentName", hisHospitalManage.getDepartmentIdName());
+            modelAndView.addObject("departmentId", hisHospitalManage.getDepartmentId());
+            modelAndView.addObject("bedId", hisHospitalManage.getBedId());
 //            modelAndView.addObject("bedName",hisHospitalManage.getBedId());
 
 
@@ -381,6 +380,44 @@ public class HisHospitalManageController extends BaseController {
         modelAndView.addObject("number", hisHospitalManage.getNumber());
         modelAndView.addObject("loginName", getUserName());
         return modelAndView;
+    }
+
+    /**
+     * @Description 住院管理设置病床
+     * @Params: [token, id]
+     * @Author: dingli
+     * @Return: org.springframework.web.servlet.ModelAndView
+     * @Date 2019/11/16
+     * @Time 13:24
+     **/
+    @RequestMapping(value = "setBed/index.ahsj")
+    public ModelAndView setBed(String number, String token) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/hospitalmanage/set_bed");
+        modelAndView.addObject("title", "选择病床");
+        modelAndView.addObject("token", token);
+        modelAndView.addObject("number", number);
+        return modelAndView;
+    }
+
+    /**
+     * @Description 设置病床
+     * @Params: [bedIds, hisHospitalManage]
+     * @Author: dingli
+     * @Return: core.message.Message
+     * @Date 2019/11/16
+     * @Time 16:19
+     **/
+    @RequestMapping(value = "setBed.ahsj")
+    @ResponseBody
+    public Message setBed(HisHospitalManage hisHospitalManage) throws Exception { //id 接收的病床id，xml不能接收2个参数
+        return hisHospitalManageService.sedBed(hisHospitalManage);
+    }
+
+    //强制出院
+    @RequestMapping(value = "forcedDischarge.ahsj")
+    @ResponseBody
+    public Message forcedDischarge(HisHospitalManage hisHospitalManage) throws Exception {
+        return hisHospitalManageService.forcedDischarge(hisHospitalManage);
     }
 
 }

@@ -6,4 +6,6 @@ public interface AboutWisdomService {
 
     int insert(AboutWisdom record)throws Exception;
 
+    AboutWisdom select()throws Exception;
+
 }

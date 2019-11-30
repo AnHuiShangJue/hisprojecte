@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="jQuery,easyform,form validation,javascript,js,jq,jquery,表单验证,插件">
+    <meta name="description" content="jQuery.Easyform表单验证插件">
+
+    <title>jQuery.Easyform Demo</title>
+
+    <meta name="description" content="">
+    <meta http-equiv="cleartype" content="on">
+    <link rel="stylesheet" href="/backend/admins/css/platform-1.css">
+    <link rel="stylesheet" href="/backend/admins/js/easyform/easyform.css">
+    <link rel="stylesheet" href="/backend/admins/css/tab.css">
+    <script type="text/javascript" src="/backend/admins/js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src=/backend/js/xjp.js"></script>
+
+</head>
+<body>
+<div class="page">
+    <div class="header">
+        <a class="link title-ani" data-letters="Easyform">Easyform</a>
+        <br>
+    </div>
+    <div class="form-div" style="height: 800px;width: 1200px;">
+        <form id="sendForm" action="#" method="#">
+         <!--   <table>
+                <tr>
+                    <td>名字</td>-->
+                  <!--  <td>--><input name="name" type="text" id="uid"
+                               data-easyform="length:4 16;char-normal;real-time;ajax:ajax_demo(1);"
+                               data-message=""
+                               data-easytip="position:top;class:easy-blue;" data-message-ajax="">
+           <!--         </td>
+                </tr>
+                <br>
+                <tr>-->
+                 <!--   <td>路径</td>
+                    <td>--><input name="url" type="text" id="psw1" data-easyform="length:6 16;"
+                               data-message=""
+                               data-easytip="class:easy-blue;"><!--</td>
+                </tr>
+            </table>-->
+
+            <div class="buttons" id="send_btn" style="margin-top: 50px;">
+                <input value="添加" type="submit" style="margin-right:20px; margin-top:20px;">
+            </div>
+
+            <br class="clear">
+        </form>
+    </div>
+</div>
+<script>
+    $(function () {
+        //获取参数
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if(r != null) return decodeURI(r[2]);
+            return null;
+        }
+        var userId=GetQueryString("id");//调用
+        alert(userId)
+        $("#send_btn").click(function () {
+            /*  window.location.href("/api/wisdombay/lanhuUpdate/index.ahsj");
+              $.post(
+                  "/api/sys/add.ahsj",
+                  $('#sendForm').serialize(),
+                  function (msg) {
+                      alert(88)
+                      if (msg==200) {
+
+                      }
+                  }
+              )*/
+
+
+            $.ajax({
+                type: "post",
+                url: "/api/sys/add.ahsj",
+                data: $('#sendForm').serialize(),
+                success: function (msg) {
+                    if (msg.success) {
+                        toastr.success(msg.message)
+                        window.location.replace("/api/wisdombay/lanhuUpdate/index.ahsj");
+                        return true;
+                    } else {
+                        toastr.error(msg.message)
+                        return false;
+                    }
+                },
+            });
+        })
+    })
+
+</script>
+
+</body>
+</html>

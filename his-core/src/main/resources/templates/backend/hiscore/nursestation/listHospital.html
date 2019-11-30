@@ -225,7 +225,7 @@
             loadingMessage: 'Loading...',
             dataTable: {
                 "ajax": {
-                    "url": CTX + "/api/hisTollDetails/hospital/list.ahsj?medicalRecordId="+ $("#MedicalRecordId").val(),
+                    "url": CTX + "/api/hisTollDetails/nursehospital/list.ahsj?medicalRecordId="+ $("#MedicalRecordId").val(),
                 },
                 "columns": [
                     {
@@ -261,17 +261,22 @@
                         "data": "payName",
                         "name": "isPay",
                         "orderable": false
+                    }, {
+                        "title": "是否退回",
+                        "data": "isBackName",
+                        "name": "is_back",
+                        "orderable": false
                     },
                     {
                         "title": "创建时间",
                         "data": "createDate",
                         "name": "create_date"
                     },
-                    {
-                        "title": "收费时间",
-                        "data": "updateDate",
-                        "name": "update_date"
-                    }
+                    // {
+                    //     "title": "收费时间",
+                    //     "data": "updateDate",
+                    //     "name": "update_date"
+                    // }
                 ],
                 "order" : [ [ 7, 'desc' ] ],
                 // "rowCallback":function (row, data) {
@@ -339,7 +344,8 @@
             //获取基本信息
             $.ahsjajax(
                 CTX + "/api/hisTollRecord/hospital/details.ahsj",
-                {"medicalRecordId": MedicalRecordId},
+                {"medicalRecordId": MedicalRecordId,
+                "isNurse":1},
                 function (data) {
                     if (!isNullOrEmpty(data)) {
                         changeInputValue("patientName",data.patientName);
@@ -370,9 +376,11 @@
 
         //搜索按钮
         $('#searchBtn').click(function () {
+            getCharge();
             grid.search();
         });
         $('#resetBtn').click(function () {
+            getCharge();
             grid.reset();
         });
 
@@ -389,7 +397,7 @@
 
         var number ; //交易流水号
         $("#send_btn").click(function () {
-            if($("#money").val() != 0) {//需要付费的内容
+            if(!isNullOrEmpty($("#money").val())&& $("#money").val() != 0) {//需要付费的内容
                 var a = $("#restDeposit").val();//余额
                 var b = $("#depositWarning").val();//欠款
                 var c =  $("#money").val();//
@@ -405,7 +413,8 @@
                         var json = grid.getDataTable().ajax.json().data;
                         var hisTollHospiModel = {
                             "hisTollRecord": strToObj(hisTollRecord),
-                            "hisTollDetailsList": json
+                            "hisTollDetailsList": json,
+                            "isNurse":1
                         };
                         var jsonData = JSON.stringify(hisTollHospiModel);
                         if(json!=null&&json!=""&&json!=undefined){
@@ -420,9 +429,11 @@
                                         grid.search();
                                         $("#print_btn").attr("disabled", false);
                                         dialog.success(data);
+                                        getCharge();
                                         return true;
                                     } else {
                                         M.toast({html: msg.message});
+                                        getCharge();
                                         return false;
                                     }
                                 },
@@ -497,7 +508,8 @@
         var restDeposit = $("#restDeposit").val();
         //本次提交的押金
         var deposit = $("#deposit").val();
-        if (money.length > 0) {
+        // if (money.length > 0) {
+        if(!isNullOrEmpty(money) && money!=0){
             if (!isNullOrEmpty(actualCharge)) {
                 var ac = numeral(actualCharge);
                 var m = numeral(money);
@@ -508,7 +520,7 @@
                 // }else{
                     //如果实际收款大于应收款
                     // if(ac.value() >= m.value()){
-                        changeInputValue("deposit",numeral(ac.value()).subtract(m.value()).format('0.00'));
+                        changeInputValue("deposit",numeral(rd.value()).subtract(m.value()).format('0.00'));
                         changeInputValue("recoverTheFee",0);
                     // }else{
                     //     changeInputValue("deposit",numeral(ac.value()).subtract(m.value()).format('0.00'));

@@ -143,5 +143,13 @@ public interface HisWardMapper {
      **/
     List<HisWard> selectByIds(Long[] ids) throws Exception;
 
-
+    /**
+     * @Description 住院管理选择病床
+     * @Params: [pageBean]
+     * @Author: dingli
+     * @Return: java.util.List<com.ahsj.hiscore.entity.HisWard>
+     * @Date 2019/11/16
+     * @Time 11:41
+     **/
+    List<HisWard> getHisWardAlls(PageBean<HisWard> pageBean) throws Exception;
 }

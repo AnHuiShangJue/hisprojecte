@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      xmlns:ahsj="http://www.anhuishangjue.com">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <style>
     .tab {
@@ -20,88 +19,96 @@
     .wow:first-child {
         visibility: hidden;
     }
+    .wisdombay-card-content{
+        float: left;
+        border: 1px;
+        background-color: rgb(14, 11, 63);
+        width: 22%;
+        height: 45%;
+        margin-right: 4%;
+        margin-left: 4%;
+        border-radius: 25px
+    }
 </style>
 <body>
 <div th:replace="public/back_baselayout :: html"></div>
 <div class="container-fluid">
     <div class="row">
-        <section class="wow fadeInDown" style="font-size: 350%;">
-            <h1 class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;letter-spacing: 7px;color: rgba(255,255,255,1);font-size: 1em;margin-top: 3%;">人工智能实验室</h1>
-            <h3  class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;color: rgba(255,255,255,1);font-size: 0.4em;margin-top: 10%;">人工智能实验室平台是一套适合大专院校、高职、高专的人工智能辅助教学的实验室应用平台软件，平台将教学与实践相结合…….</h3>
+        <section class="" style="font-size: 350%;">
+            <h1 class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;letter-spacing: 7px;color: rgba(255,255,255,1);font-size: 1em;margin-top: 8%;" th:text="${smartpark.title}"></h1>
+            <h3  class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;color: rgba(255,255,255,1);font-size: 0.4em;margin-top: 15%;" th:text="${smartpark.description}"></h3>
             <section class="wow fadeInDown">
-                <div style="position: absolute;font-size: 0.4em;color: #ffff;margin-top: 33%;margin-left: 15%;" class="text-center">一<br>准备工作<br>定项目，分小组</div>
-                <div style="position: absolute;font-size: 0.4em;color: #ffff;margin-top: 25%;margin-left: 19%;" class="text-center">二<br>课题引入<br>项目背景分析</div>
-                <div style="position: absolute;font-size: 0.4em;color: #ffff;margin-top: 18%;margin-left: 23%;" class="text-center">三<br>头脑风暴<br>项目核心问题讨论</div>
-                <div style="position: absolute;font-size: 0.4em;color: #ffff;margin-top: 19%;margin-left: 66%;" class="text-center">四<br>动手实践<br>实施项目(搭建+编程</div>
-                <div style="position: absolute;font-size: 0.4em;color: #ffff;margin-top: 27%;margin-left: 68%;" class="text-center">五<br>成果展示<br>各小组吴示项目成果，总结收获</div>
-                <div style="position: absolute;font-size: 0.4em;color: #ffff;margin-top: 34%;margin-left: 77%;" class="text-center">六<br>点评讨论<br>就清示项目本身进行讨论和点评</div>
+                <div style="position: absolute;font-size: 0.3em;color:rgba(255,255,255,1);margin-top: 30%;margin-left: 14%;width: 216px;" class="text-center">一<br><p th:text="${smartpark.organizationalTitle1}"></p><p th:text="${smartpark.organizationalStructure2}"></p></div>
+                <div style="position: absolute;font-size: 0.3em;color:rgba(255,255,255,1);margin-top: 19%;margin-left: 15%;width: 214px;" class="text-center">二<br><p th:text="${smartpark.organizationalTitle2}"></p><p th:text="${smartpark.organizationalStructure1}"></p></div>
+                <div style="position: absolute;font-size: 0.3em;color:rgba(255,255,255,1);margin-top: 19%;margin-left: 68%;width: 278px;" class="text-center">三<br><p th:text="${smartpark.organizationalTitle3}"></p><p th:text="${smartpark.organizationalStructure3}"></p></div>
+                <div style="position: absolute;font-size: 0.3em;color:rgba(255,255,255,1);margin-top: 31%;margin-left: 75%;width: 100px;" class="text-center">综合<br><p th:text="${smartpark.organizationalStructure4}"></p></div>
+                <div style="position: absolute;font-size: 0.2em;color:rgba(255,255,255,1);margin-top: 40%;margin-left: 41%;" class="text-center"><p th:text="${smartpark.organizationalStructure5}"></p></div>
             </section>
-            <img src="/bootstrap/images/wisdom/path5.png" style="position: absolute;margin-left: 29%;margin-top: 21%; width: 9%;">
-            <img src="/bootstrap/images/wisdom/path6.png" style="position: absolute; margin-left: 24%;margin-top: 28%;width: 8%;">
-            <img src="/bootstrap/images/wisdom/path7.png" style="position: absolute; margin-top: 34%;margin-left: 20%;width: 14%;">
-            <img src="/bootstrap/images/wisdom/path8.png" style="position: absolute; margin-top: 22%;margin-left: 61%;width: 8%;">
-            <img src="/bootstrap/images/wisdom/path9.png" style="position: absolute; margin-top: 30%;margin-left: 66%;width: 9%;">
-            <img src="/bootstrap/images/wisdom/path10@2x.png" style="position: absolute; margin-top: 36%;margin-left: 71%;width: 12%;">
-            <img src="/bootstrap/images/wisdom/banner2x.png" class="img-responsive" alt="Responsive image" style="margin-top: -80px;"/>
+            <img src="/bootstrap/images/wisdom/home01.png" class="img-responsive" alt="Responsive image" style="margin-top: -60px;"/>
+        </section>
+        <section class="container-fluid wow bounceInLeft" data-wow-offset="0">
+            <div class="" style="font-size: 30px;margin-left: 20%;margin-top: 2%;width: 50%;" th:text="${smartpark.productTitle}"></div>
         </section>
         <section class="wow fadeInDown">
-            <div class="" style="font-size: 30px;margin-left: 20%;margin-top: 2%;width: 50%;">产品特色</div>
-        </section>
-        <section class="wow fadeInDown">
-            <div id="test2" style="margin-left: 25%; height: 373px;">
-                <div class="col-xs-12 col-sm-12 col-md-12" id="wq"
-                     style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 19%;height: 45%;margin-right: 4%;margin-top: 4%;border-radius: 25px">
-                    <img src="/bootstrap/images/wisdom/AppleTV.png" class="img-responsive center-block" >
-                    <br><span style="color: #ffffff;margin-left: 29%;font-size: 136%;">便捷管理</span>
-                    <br><br><span style="color: #ffffff; font-size: 13px;">便捷文件管理是一款安卓设备上*方便的手机资源管理和文件管理软件。清新的界面加上强大的文件管理和传输功能,轻松连接即可实.</span>
+            <div id="test2" style="margin-left: 13%; height: 373px;">
+                <div class="card wisdombay-card-content" id="wq"
+                     style="">
+                    <img src="/bootstrap/images/wisdom/AppleTV5.png" class="img-responsive center-block" style="    height: 102px;">
+                    <br><span style="color: #ffffff;margin-left: 37%;font-size: 136%;" th:text="${smartpark.product1}"></span>
+                    <br><br>
+                    <div class="center-block" style="width:80%">
+                        <span style="color: #ffffff; font-size: 13px;" th:text="${smartpark.productContent1}"></span>
+                    </div>
                 </div>
-                <div class="card " id="wq1"
-                     style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 19%;height: 45%;margin-right: 4%;margin-top: 4%;border-radius: 25px">
-                    <img src="/bootstrap/images/wisdom/AppleTV1.png" class="img-responsive center-block" >
-                    <br><span style="color: #ffffff;margin-left: 36%;font-size: 136%;">有效控制</span>
+                <div class="card wisdombay-card-content" id="wq1"
+                     style="">
+                    <img src="/bootstrap/images/wisdom/AppleTV6.png" class="img-responsive center-block" style="    height: 102px;">
+                    <br><span style="color: #ffffff;margin-left: 39%;font-size: 136%;"  th:text="${smartpark.product2}"></span>
+                    <br><br>
+                    <div class="center-block" style="width:80%">
+                        <span style="color: #ffffff; font-size: 13px;" th:text="${smartpark.productContent2}"></span>
+                    </div>
                 </div>
-                <div class="card" id="wq2"
-                     style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 19%;height: 45%;margin-right: 4%;margin-top: 4%;border-radius: 25px">
-                    <img src="/bootstrap/images/wisdom/Grouping10.png" class="img-responsive center-block" >
-                    <br><span style="color: #ffffff;margin-left: 35%;font-size: 136%;">移动办公</span>
+                <div class="card wisdombay-card-content" id="wq2"
+                     style="">
+                    <img src="/bootstrap/images/wisdom/Grouping12.png" class="img-responsive center-block" style="    height: 102px;">
+                    <br><span style="color: #ffffff;margin-left: 37%;font-size: 136%;" th:text="${smartpark.product3}"></span>
+                    <br><br>
+                    <div class="center-block" style="width:80%">
+                        <span style="color: #ffffff; font-size: 13px;" th:text="${smartpark.productContent3}"></span>
+                    </div>
                 </div>
             </div>
         </section>
-
         <div class="row" style="float: left;border: 1px;background-color: #030E3F;width: 100.8%;height: 740px; margin-top: 7%;">
             <section class="wow fadeInDown">
-                <div class="row col-xs-6 col-sm-6 col-md-6" style="margin-top: 2%;">
-                    <span style="font-size: 30px;margin-left: 40%;margin-top: 2%; color: #ffffff">认证服务</span>
-                    <div class="row col-xs-6 col-sm-6 col-md-6" style="margin-left: 23%">
-                        <br><br><span style="color: #ffffff;letter-spacing: 0.56px; line-height: 222%; font-size:131%;">通过NVIDIA 深度学习学院提供人工智能能力认证服务，深度学习学院聚焦于人工智能和深度学习，致力于在全世界范围内提供培训，学习如何解决最具挑战性的问题。通过线上自主学习，或者线下由 NVIDIA 认证的讲师来教授的培训课程。</span>
+                <div class="row text-center col-xs-6 col-sm-6 col-md-6" style="margin-top: 2%;">
+                    <span style="font-size: 28px;margin-top: 2%; color: #ffffff" th:text="${smartpark.certificationTitle}"></span>
+                    <div class="row col-xs-11 col-sm-11 col-md-11" style="margin-left: 7%">
+                        <br><br><span style="color: #ffffff;letter-spacing: 0.56px; line-height: 222%; font-size:131%;" th:text="${smartpark.certification}"></span>
                     </div>
                 </div>
             </section>
             <div class="row col-xs-6 col-sm-6 col-md-6 img-responsive" style="margin-top: -5%;">
                 <img src="/bootstrap/images/wisdom/line1.png"
-                     style="margin-left: 50%; margin-top: 13.4%; position: absolute; z-index: 99;width: 15%;">
+                     style="margin-left: 50%; margin-top: 17.4%; position: absolute; z-index: 99;width: 17%;">
                 <section class="wow fadeIn" data-wow-duration="1500ms"  data-wow-delay="1s">
-                    <div class="fountsize" style="margin-left: 39%;margin-top: 4%;font-size: 180%;">线上考试</div>
+                    <div class="fountsize" style="margin-left: 39%;margin-top: 4%;font-size: 180%;" th:text="${smartpark.pictureExtension1}"></div>
                 </section>
                 <img src="/bootstrap/images/wisdom/line2.png"
                      style="margin-left: 36.5%; margin-top: 14.3%; position: absolute; z-index: 99;width: 21%;">
                 <section class="wow fadeIn" data-wow-duration="1500ms"  data-wow-delay="1s">
-                    <div class="fountsize" style="margin-left: 30%;margin-top: 9%;font-size: 180%;">职业发展支持</div>
+                    <div class="fountsize" style="margin-left: 30%;margin-top: 9%;font-size: 180%;" th:text="${smartpark.pictureExtension2}"></div>
                 </section>
                 <img src="/bootstrap/images/wisdom/line3.png"
                      style="margin-left: 31%; margin-top: 23.3%; position: absolute; z-index: 99;width: 23%;">
                 <section class="wow fadeIn" data-wow-duration="1500ms"  data-wow-delay="1s">
-                    <div class="fountsize" style="margin-left: 24%;margin-top: 23%;font-size: 180%;">获得认证证书</div>
+                    <div class="fountsize" style="margin-left: 24%;margin-top: 23%;font-size: 180%;" th:text="${smartpark.pictureExtension3}"></div>
                 </section>
                 <img src="/bootstrap/images/wisdom/line4.png"
                      style="margin-left: 39.5%; margin-top: 31.1%; position: absolute; z-index: 99;width: 17%;">
                 <section class="wow fadeIn" data-wow-duration="1500ms"  data-wow-delay="1s">
-                    <div class="fountsize" style="margin-left: 30%;margin-top: 37%;font-size: 180%;">认证服务</div>
-                </section>
-                <img src="/bootstrap/images/wisdom/line5.png"
-                     style="margin-left: 45.9%; margin-top: 36.4%; position: absolute; z-index: 99;width: 14%;">
-                <section class="wow fadeIn" data-wow-duration="1500ms"  data-wow-delay="1s">
-                    <div class="fountsize" style="margin-left: 35%;margin-top: 45%;font-size: 180%;">考试测评</div>
+                    <div class="fountsize" style="margin-left: 30%;margin-top: 37%;font-size: 180%;" th:text="${smartpark.pictureExtension4}"></div>
                 </section>
                 <img src="/bootstrap/images/wisdom/bitmap10.png"
                      style="margin-left: 53.9%;margin-top: 14.4%;width: 30%;position: absolute;" >
@@ -112,23 +119,56 @@
 <div th:replace="public/footer :: html"></div>
 <script src="/bootstrap/js/wow.js"></script>
 <script type="text/javascript">
+    // $(function () {
+    //     $("#wq").mouseenter(function () {
+    //         /*  $("#wq1").animate({width: '19%', height: '45%'});
+    //           $("#wq2").animate({width: '19%', height: '45%'});*/
+    //         $("#wq").animate({width: '23%', height: '68%'});
+    //     });
+    //     $("#wq1").mouseenter(function () {
+    //         /*  $("#wq").animate({width: '19%', height: '45%'});
+    //           $("#wq2").animate({width: '19%', height: '45%'});*/
+    //         $("#wq1").animate({width: '23%', height: '68%'});
+    //     });
+    //     $("#wq2").mouseenter(function () {
+    //         /*     $("#wq").animate({width: '19%', height: '45%'});
+    //              $("#wq1").animate({width: '19%', height: '45%'});*/
+    //         $("#wq2").animate({width: '23%', height: '68%'});
+    //     });
+    //     $("#wq").mouseleave(function(){
+    //         $("#wq").animate({width: '19%', height: '45%'});
+    //     });
+    //     $("#wq1").mouseleave(function(){
+    //         $("#wq1").animate({width: '19%', height: '45%'});
+    //     });
+    //     $("#wq2").mouseleave(function(){
+    //         $("#wq2").animate({width: '19%', height: '45%'});
+    //     });
+    // });
+
     $(function () {
-        $("#wq").click(function () {
-            $("#wq1").animate({width: '19%', height: '45%'});
-            $("#wq2").animate({width: '19%', height: '45%'});
-            $("#wq").animate({width: '23%', height: '68%'});
+        $("#wq").mouseenter(function () {
+                $("#wq").stop(true).animate({width: '31%', height: '80%'});
         });
-        $("#wq1").click(function () {
-            $("#wq").animate({width: '19%', height: '45%'});
-            $("#wq2").animate({width: '19%', height: '45%'});
-            $("#wq1").animate({width: '23%', height: '68%'});
+        $("#wq1").mouseenter(function () {
+                $("#wq1").stop(true).animate({width: '31%', height: '80%'});
         });
-        $("#wq2").click(function () {
-            $("#wq").animate({width: '19%', height: '45%'});
-            $("#wq1").animate({width: '19%', height: '45%'});
-            $("#wq2").animate({width: '23%', height: '68%'});
+        $("#wq2").mouseenter(function () {
+                $("#wq2").stop().animate({width: '31%', height: '80%'});
+        });
+
+        $("#wq").mouseleave(function(){
+            $("#wq").stop(true).animate({width: '22%', height: '45%'});
+
+        });
+        $("#wq1").mouseleave(function(){
+            $("#wq1").stop(true).animate({width: '22%', height: '45%'});
+        });
+        $("#wq2").mouseleave(function(){
+            $("#wq2").stop(true).animate({width: '22%', height: '45%'});
         });
     });
+
 
     wow = new WOW(
         {

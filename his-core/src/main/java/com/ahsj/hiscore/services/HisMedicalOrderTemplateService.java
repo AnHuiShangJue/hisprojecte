@@ -69,4 +69,7 @@ public interface HisMedicalOrderTemplateService {
 
     //保存当前医嘱为模板
     Message saveForTemlate(Long[] ids, String orderNumber, Integer type, String templateName)throws Exception;
+
+    //一键设置医嘱开始时间
+    Message setTime(String orderNumber, String orderStartTime)throws Exception;
 }

@@ -17,11 +17,11 @@
     <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    Id, introduce, shui, shui_p, shui_introduce, han, han_p, han_introduce, yao, yao_p, 
+    Id, introduce, shui, shui_p, shui_introduce, han, han_p, han_introduce, yao, yao_p,
     yao_introduce, create_date, update_date
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from about_wisdom
     where Id = #{id,jdbcType=INTEGER}
@@ -31,15 +31,15 @@
     where Id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.ahsj.wis.entity.AboutWisdom" >
-    insert into about_wisdom (Id, introduce, shui, 
-      shui_p, shui_introduce, han, 
-      han_p, han_introduce, yao, 
-      yao_p, yao_introduce, create_date, 
+    insert into about_wisdom (Id, introduce, shui,
+      shui_p, shui_introduce, han,
+      han_p, han_introduce, yao,
+      yao_p, yao_introduce, create_date,
       update_date)
-    values (#{id,jdbcType=INTEGER}, #{introduce,jdbcType=VARCHAR}, #{shui,jdbcType=VARCHAR}, 
-      #{shuiP,jdbcType=VARCHAR}, #{shuiIntroduce,jdbcType=VARCHAR}, #{han,jdbcType=VARCHAR}, 
-      #{hanP,jdbcType=VARCHAR}, #{hanIntroduce,jdbcType=VARCHAR}, #{yao,jdbcType=VARCHAR}, 
-      #{yaoP,jdbcType=VARCHAR}, #{yaoIntroduce,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=INTEGER}, #{introduce,jdbcType=VARCHAR}, #{shui,jdbcType=VARCHAR},
+      #{shuiP,jdbcType=VARCHAR}, #{shuiIntroduce,jdbcType=VARCHAR}, #{han,jdbcType=VARCHAR},
+      #{hanP,jdbcType=VARCHAR}, #{hanIntroduce,jdbcType=VARCHAR}, #{yao,jdbcType=VARCHAR},
+      #{yaoP,jdbcType=VARCHAR}, #{yaoIntroduce,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
       #{updateDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.ahsj.wis.entity.AboutWisdom" >
@@ -185,4 +185,14 @@
       update_date = #{updateDate,jdbcType=TIMESTAMP}
     where Id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <!--查询最新的一条记录-->
+  <select id="select" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from about_wisdom
+    where 1 = 1 order by create_date desc 
+  </select>
+
 </mapper>

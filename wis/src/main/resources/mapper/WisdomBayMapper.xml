@@ -404,10 +404,11 @@
       product_content3 = #{productContent3,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
   <!--  自定义sql-->
   <select id="selectAll" resultMap="BaseResultMap" parameterType="com.ahsj.wis.entity.WisdomBay">
     select
-    <include refid="Base_Column_List"/>
+    <include refid="Base_Column_List" />
     from wisdom_bay
   </select>
 </mapper>

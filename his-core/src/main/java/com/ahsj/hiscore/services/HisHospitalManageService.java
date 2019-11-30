@@ -227,12 +227,51 @@ public interface HisHospitalManageService {
     HisHospitalManage checkIsInpatient(String tollNumber) throws Exception;
 
     /**
-     *@Description 查询所有在住院病人且具有长期医嘱且未停嘱的用药与项目医嘱相关信息
-     *@Params []
-     *@return java.util.List<com.ahsj.hiscore.entity.HisHospitalManage>
-     *@Author zhushixiang
-     *@Date 2019-10-04
-     *@Time 23:58
-    **/
-    List<HisHospitalManage> selectInpatientAndHaveLongTermMedicalAdvice()throws  Exception;
+     * @return java.util.List<com.ahsj.hiscore.entity.HisHospitalManage>
+     * @Description 查询所有在住院病人且具有长期医嘱且未停嘱的用药与项目医嘱相关信息
+     * @Params []
+     * @Author zhushixiang
+     * @Date 2019-10-04
+     * @Time 23:58
+     **/
+    List<HisHospitalManage> selectInpatientAndHaveLongTermMedicalAdvice() throws Exception;
+
+    /**
+     * @Description 设置病床
+     * @Params: [id, hospitalNumber]
+     * @Author: dingli
+     * @Return: core.message.Message
+     * @Date 2019/11/16
+     * @Time 16:21
+     **/
+    Message sedBed(HisHospitalManage hisHospitalManage) throws Exception;
+
+    //强制出院
+    Message forcedDischarge(HisHospitalManage hisHospitalManage) throws Exception;
+
+    /**
+     * @Description 根据交易流水号号查押金
+     * @Params: [number]
+     * @Author: dingli
+     * @Return: com.ahsj.hiscore.entity.HisHospitalManage
+     * @Date 2019/11/19
+     * @Time 10:29
+     **/
+    HisHospitalManage selectByTollNumber(String number) throws Exception;
+
+    /**
+     * @Description 根据就诊编号查询押金
+     * @Params: [number]
+     * @Author: dingli
+     * @Return: com.ahsj.hiscore.entity.HisHospitalManage
+     * @Date 2019/11/19
+     * @Time 10:35
+     **/
+    HisHospitalManage selectByMedicalNumber(String number) throws Exception;
+
+
+
+    //jin
+    //就诊历史
+//    PageBean<HisHospitalManage> selectAllByPatientId(PageBean<HisHospitalManage> pageBean)throws Exception;
 }

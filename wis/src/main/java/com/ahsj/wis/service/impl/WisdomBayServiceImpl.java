@@ -8,7 +8,9 @@ import core.message.MessageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import utils.EmptyUtil;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -30,11 +32,24 @@ public class WisdomBayServiceImpl implements WisdomBayService {
     @Override
     @Transactional(readOnly = false)
     public Message updateWisdomBay(WisdomBay record){
-        int i = wisdomBayMapper.updateByPrimaryKeySelective(record);
-        if (i>0){
-            return MessageUtil.createMessage(true,"修改成功！");
-        }else {
-            return MessageUtil.createMessage(false,"修改失败！");
+        record.setUpdateDate(new Date());
+        if (EmptyUtil.Companion.isNullOrEmpty(record.getId())) {
+            record.setUpdateDate(new Date());
+            record.setCreateDate(new Date());
+            wisdomBayMapper.insert(record);
+            return MessageUtil.createMessage(true,"新增成功！");
+        } else {
+            WisdomBay wisdomBay = wisdomBayMapper.selectByPrimaryKey(record.getId());
+            wisdomBay.setId(null);
+            wisdomBay.setCreateDate(new Date());
+            wisdomBay.setUpdateDate(new Date());
+            wisdomBayMapper.insert(wisdomBay);
+            int i = wisdomBayMapper.updateByPrimaryKeySelective(record);
+            if (i > 0) {
+                return MessageUtil.createMessage(true, "修改成功！");
+            } else {
+                return MessageUtil.createMessage(false, "修改失败！");
+            }
         }
     }
 }

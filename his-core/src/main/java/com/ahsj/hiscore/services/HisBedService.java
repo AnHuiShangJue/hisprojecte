@@ -117,4 +117,24 @@ public interface HisBedService {
      * @Time 16:31
      **/
     List<HisBed> selectHisBedAll() throws Exception;
+
+    /**
+     * @Description 住院管理设置病床
+     * @Params: [pageBean]
+     * @Author: dingli
+     * @Return: core.entity.PageBean<com.ahsj.hiscore.entity.HisBed>
+     * @Date 2019/11/16
+     * @Time 14:32
+     **/
+    PageBean<HisBed> getHisBedAlls(PageBean<HisBed> pageBean) throws Exception;
+
+    /**
+     * @Description 统计床数
+     * @Params: []
+     * @Author: dingli
+     * @Return: com.ahsj.hiscore.entity.HisBed
+     * @Date 2019/11/16
+     * @Time 18:01
+     **/
+    HisBed getCount() throws Exception;
 }

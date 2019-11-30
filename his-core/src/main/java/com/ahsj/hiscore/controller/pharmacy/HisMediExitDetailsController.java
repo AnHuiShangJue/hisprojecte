@@ -149,7 +149,19 @@ public class HisMediExitDetailsController extends BaseController {
     @ResponseBody
     public List<HisMediExitDetails> getDrug(@RequestParam(value = "ids", required = true) Long[] ids, String token) throws Exception {
         if (!EmptyUtil.Companion.isNullOrEmpty(ids)) {
-            return hisMediExitDetailsService.listByIds(ids);
+            List<HisMediExitDetails> hisMediExitDetailsList = hisMediExitDetailsService.listByIds(ids);
+            if(!EmptyUtil.Companion.isNullOrEmpty(hisMediExitDetailsList)&&hisMediExitDetailsList.size()!=0){
+                for (HisMediExitDetails hisMediExitDetails : hisMediExitDetailsList) {
+                    if(!EmptyUtil.Companion.isNullOrEmpty(hisMediExitDetails.getSex())){
+                        if(hisMediExitDetails.getSex() == 1){
+                            hisMediExitDetails.setSexName("男");
+                        }else {
+                            hisMediExitDetails.setSexName("女");
+                        }
+                    }
+                }
+            }
+            return hisMediExitDetailsList;
         }
         return new ArrayList<HisMediExitDetails>();
     }

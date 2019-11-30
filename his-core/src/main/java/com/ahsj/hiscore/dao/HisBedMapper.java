@@ -141,4 +141,24 @@ public interface HisBedMapper {
      * @Time 16:31
      **/
     List<HisBed> selectHisBedAll() throws Exception;
+
+    /**
+     * @Description 住院管理设置病床
+     * @Params: [pageBean]
+     * @Author: dingli
+     * @Return: java.util.List<com.ahsj.hiscore.entity.HisBed>
+     * @Date 2019/11/16
+     * @Time 14:35
+     **/
+    List<HisBed> getHisBedAlls(PageBean<HisBed> pageBean) throws Exception;
+
+    /**
+     * @Description 统计总床数
+     * @Params: []
+     * @Author: dingli
+     * @Return: com.ahsj.hiscore.entity.HisBed
+     * @Date 2019/11/16
+     * @Time 18:03
+     **/
+    HisBed getCount() throws Exception;
 }

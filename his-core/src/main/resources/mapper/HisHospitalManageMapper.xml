@@ -542,6 +542,27 @@ left join his_medical_order as b on a.number = b.hosptalregist_number
 where a.is_discharged = 1 and b.type = 1 and c.is_stop = 2 and c.medical_order_type != 1
     </select>
 
+    <update id="setBed" parameterType="com.ahsj.hiscore.entity.HisHospitalManage">
+       update his_hospital_manage as m set  m.ward_id =(
+		select b.ward_id from his_bed as b  WHERE b.id  =  #{id,jdbcType=BIGINT}),
+            m.bed_id= #{id,jdbcType=BIGINT}
+          where m.number = #{number,jdbcType=VARCHAR}
+
+    </update>
+
+    <select id="selectByTollNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+ select * from his_hospital_manage as m where m.medical_number =(
+ select h.medical_record_id
+ from his_toll_record h where h.number = #{number,jdbcType=VARCHAR})
+    </select>
+
+    <select id="selectByMedicalNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+ select * from his_hospital_manage as m where m.medical_number = #{number,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectAllByPatientId" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        select * from his_hospital_manage  where patient_id = #{parameter.id,jdbcType=BIGINT}
+    </select>
 
 
 </mapper>

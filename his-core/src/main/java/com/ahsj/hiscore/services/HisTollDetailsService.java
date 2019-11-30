@@ -18,6 +18,9 @@ public interface HisTollDetailsService {
 
     PageBean<HisTollDetails> listByMecordId(PageBean<HisTollDetails> pageBean);
 
+
+    PageBean<HisTollDetails> nurselistByMecordId(PageBean<HisTollDetails> pageBean);
+
     /**
      * @return core.entity.PageBean<com.ahsj.hiscore.entity.HisTollRecord>
      * @Description 门诊收费结算

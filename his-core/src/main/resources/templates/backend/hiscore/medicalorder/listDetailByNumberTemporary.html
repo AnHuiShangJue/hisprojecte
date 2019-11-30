@@ -58,6 +58,9 @@
                                 <a id="saveTemplate" class="btn waves-effect waves-light "><i
                                         class="material-icons  white-text tooltipped " data-position="bottom"
                                         data-delay="50" data-tooltip="保存为模板（Save as template）">spellcheck</i></a>
+                                <a id="setTime" class="btn waves-effect waves-light "><i
+                                        class="material-icons  white-text tooltipped " data-position="bottom"
+                                        data-delay="50" data-tooltip="一键设置医嘱开始时间（set order start time）">edit</i></a>
                             </div>
                             <!--Form Advance-->
                             <div class="row">
@@ -605,8 +608,8 @@
         $("#combinationMedicine").click(function () {
             // var ids = grid.getSelectedRows();
             var ids = cacheIds;
-            if (ids.length == 0 ||ids.length==1) {
-                dialog.warn("请至少选择两条数据(Please select at least two data)");
+            if (ids.length == 0 ) {
+                dialog.warn("请至少选择一条数据(Please select at least one data)");
                 return;
             }else {
                 dialog.confirm('确定添加该药品组合?(Make sure to add the drug combination?)', function (index, layero) {
@@ -624,6 +627,7 @@
                                     }
                                 });
                                 grid.search();
+                                cacheIds = new Array();
                             } else {
                                 M.toast({
                                     html: msg.message, completeCallback: function () {
@@ -704,6 +708,51 @@
                             });
                         }
                     );
+                },
+                cancel: function(){
+                    //右上角关闭回调
+
+                    //return false 开启该代码可禁止点击该按钮关闭
+                }
+            })
+
+        });
+
+        $('#setTime').click(function () {
+            var orderNumber = $("#number").val();
+            layer.open({
+                content:"<input id='orderStartTime' name='orderStartTime'placeholder='请输入医嘱开始时间：（Please Enter StartTime）'>",
+                btn:['确定（sure）','取消(cancle)'],
+                yes:function (index,layro) {
+                    $.ahsjajax(CTX + "/api/medicalOrderTemplate/setTime.ahsj",
+                        //1代表私人模板
+                        {"orderNumber":orderNumber,"orderStartTime":$("#orderStartTime").val()},
+                        function (msg) {
+                            if (msg.success) {
+                                M.toast({
+                                    html: msg.message, completeCallback: function () {
+                                    }
+                                });
+                                grid.search();
+                                layer.closeAll();
+                            } else {
+                                M.toast({
+                                    html: msg.message, completeCallback: function () {
+                                    }
+                                });
+                            }
+                        },
+                        function (data) {
+                            M.toast({
+                                html: "网络异常", completeCallback: function () {
+                                }
+                            });
+                        }
+                    );
+
+                },
+                btn2:function(index,layro){
+                    layer.closeAll();
                 },
                 cancel: function(){
                     //右上角关闭回调

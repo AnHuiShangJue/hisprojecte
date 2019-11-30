@@ -58,6 +58,14 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
         return pageBean;
     }
 
+
+    @Override
+    public PageBean<HisTollDetails> nurselistByMecordId(PageBean<HisTollDetails> pageBean) {
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisTollDetailsMapper.nurselistByMecordIdForHospital(pageBean)));
+        return pageBean;
+    }
+
+
     /**
      * @return core.entity.PageBean<com.ahsj.hiscore.entity.HisTollRecord>
      * @Description 门诊收费结算
@@ -278,8 +286,11 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
     public List<HisTollDetails> listByNumberLeave(String number) throws Exception {
         List<HisTollDetails> hisTollDetails = hisTollDetailsMapper.listByNumberLeave(number);//所有收费明细
         BigDecimal drugFee = new BigDecimal("0");//药品费用
+        BigDecimal toll = new BigDecimal("0");//住院总费用
+        BigDecimal a = new BigDecimal("0");//退费
         if (!EmptyUtil.Companion.isNullOrEmpty(hisTollDetails)) {
             for (HisTollDetails h : hisTollDetails) {
+                toll = toll.add(h.getMoneys());
                 Translate translate = new Translate();//翻译
                 if (h.getType() == 1 || h.getType() == 4) {//药品
                     drugFee = h.getMoneys().add(drugFee);
@@ -321,8 +332,12 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
                         }
                     }
                 }
+                if (h.getType() == 4 || h.getType() == 5) {//退钱
+                    a = a.add(h.getMoneys());
+                }
             }
         }
+        hisTollDetails.get(0).setToll(toll.subtract(a));
         hisTollDetails.get(0).setDrugFee(drugFee);
         return hisTollDetails;
     }
@@ -363,7 +378,7 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
                     hs.setObserveFee(hs.getObserveFee().add(hisTollDetail.getPrice()));
                 }
                 if (hisTollDetail.getType() == 14) {//检查
-                   }
+                }
             }
         }
         return hs;

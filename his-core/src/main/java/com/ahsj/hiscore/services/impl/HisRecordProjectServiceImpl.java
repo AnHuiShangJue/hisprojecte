@@ -3,6 +3,7 @@ package com.ahsj.hiscore.services.impl;
 import com.ahsj.hiscore.common.Constants;
 import com.ahsj.hiscore.core.CodeHelper;
 import com.ahsj.hiscore.dao.HisRecordProjectMapper;
+import com.ahsj.hiscore.entity.HisProject;
 import com.ahsj.hiscore.entity.HisRecordProject;
 import com.ahsj.hiscore.entity.HisRefundProject;
 import com.ahsj.hiscore.entity.Translate;
@@ -18,7 +19,10 @@ import utils.EmptyUtil;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 /**
  * @program: his
@@ -92,7 +96,27 @@ public class HisRecordProjectServiceImpl implements HisRecordProjectService {
     @Override
     @Transactional(readOnly = true)
     public PageBean<HisRecordProject> queryAddList(PageBean<HisRecordProject> pageBean) {
-        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisRecordProjectMapper.queryList(pageBean)));
+        List<HisRecordProject> hisRecordProjects = hisRecordProjectMapper.queryList(pageBean);
+   /*     ArrayList<HisRecordProject> collect = hisRecordProjects.stream().collect(
+                Collectors.collectingAndThen(Collectors.toCollection(
+                        () -> new TreeSet<>(Comparator.comparing(e -> e.getNumber()))), ArrayList::new)
+        );*/
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisRecordProjects));
+        return pageBean;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public PageBean<HisRecordProject> queryPriceList(PageBean<HisRecordProject> pageBean) {
+        List<HisRecordProject> hisRecordProjects = hisRecordProjectMapper.queryPriceList(pageBean);
+        if (!EmptyUtil.Companion.isNullOrEmpty(hisRecordProjects)) {
+            BigDecimal price = new BigDecimal("0");
+            for (HisRecordProject datum : hisRecordProjects) {
+                price = datum.getProjectSumPrice().add(price);
+            }
+            hisRecordProjects.get(0).setPrices(price);
+        } //应退金额
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisRecordProjects));
         return pageBean;
     }
 
@@ -435,19 +459,19 @@ public class HisRecordProjectServiceImpl implements HisRecordProjectService {
      **/
     @Override
     @Transactional(readOnly = true)
-    public Message insert(HisRecordProject hisRecordProject){
+    public Message insert(HisRecordProject hisRecordProject) {
         hisRecordProjectMapper.insert(hisRecordProject);
         return MessageUtil.createMessage(true, "新增医嘱项目成功（New medical order success）");
     }
 
     /**
      * @Description
-     * @Author  muxu
-     * @Date  2019/9/25
+     * @Author muxu
+     * @Date 2019/9/25
      * @Time 12:36
      * @Return
      * @Params
-    **/
+     **/
     @Override
     public void saveAboutCareLevel(HisRecordProject hisRecordProject) {
         hisRecordProjectMapper.insert(hisRecordProject);
@@ -477,13 +501,13 @@ public class HisRecordProjectServiceImpl implements HisRecordProjectService {
     }
 
     /**
-     *@Description 单条删除
-     *@Params [id]
-     *@return void
-     *@Author zhushixiang
-     *@Date 2019-09-25
-     *@Time 11:17
-    **/
+     * @return void
+     * @Description 单条删除
+     * @Params [id]
+     * @Author zhushixiang
+     * @Date 2019-09-25
+     * @Time 11:17
+     **/
     @Override
     @Transactional(readOnly = false)
     public void deleteById(Long id) {

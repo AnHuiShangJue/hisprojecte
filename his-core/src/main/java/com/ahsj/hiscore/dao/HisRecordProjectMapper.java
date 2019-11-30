@@ -92,6 +92,8 @@ public interface HisRecordProjectMapper {
      **/
     List<HisRecordProject> queryList(PageBean<HisRecordProject> pageBean);
 
+    List<HisRecordProject> queryPriceList(PageBean<HisRecordProject> pageBean);
+
     /**
      * @return java.util.List<com.ahsj.hiscore.entity.HisRecordProject>
      * @功能说明 查询申请退项目的列表记录明细

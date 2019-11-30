@@ -30,11 +30,10 @@ dir.eachDirRecurse { subDir ->
             projects << subDirName
             def lastIndex = subDirName.lastIndexOf(projectSymbol)
             def gradleModulePath = subDirName.substring(dir.canonicalPath.length(), lastIndex).replace(File.separator, ':')
-            println "include " + gradleModulePath
+            println "subDirName" +subDirName
             include gradleModulePath
         }
     }
 }
-include 'demo'
-include 'sys-base'
+
 

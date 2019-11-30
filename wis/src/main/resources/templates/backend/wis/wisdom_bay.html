@@ -19,21 +19,33 @@
     .wow:first-child {
         visibility: hidden;
     }
+
+
+    .wisdombay-card-content{
+        float: left;
+        border: 1px;
+        background-color: rgb(14, 11, 63);
+        width: 22%;
+        height: 45%;
+        margin-right: 4%;
+        margin-left: 4%;
+        border-radius: 25px
+    }
 </style>
 <body>
 <div th:replace="public/back_baselayout :: html"></div>
 <div class="container-fluid">
     <div class="row">
-        <section class="wow fadeInDown" style="font-size: 350%;">
-            <h1 class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;letter-spacing: 7px;color: rgba(255,255,255,1);font-size: 1em;margin-top: 3%;" th:text="${wisdomBay.title}"></h1>
-            <h3  class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;color: rgba(255,255,255,1);font-size: 0.4em;margin-top: 10%;" th:text="${wisdomBay.description}"></h3>
+        <section class="" style="font-size: 350%;">
+            <h1 class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;letter-spacing: 7px;color: rgba(255,255,255,1);font-size: 1em;margin-top: 8%;" th:text="${wisdomBay.title}"></h1>
+            <h3  class="col-xs-12 col-sm-12 col-md-12 text-center" style="position: absolute;color: rgba(255,255,255,1);font-size: 0.4em;margin-top: 15%;" th:text="${wisdomBay.description}"></h3>
             <section class="wow fadeInDown">
-            <div style="position: absolute;font-size: 0.4em;color: #ffff;margin-top: 33%;margin-left: 15%;" class="text-center">一<br><p th:text="${wisdomBay.organizationalTitle1}"></p><p th:text="${wisdomBay.organizationalStructure1}"></p></div>
-            <div style="position: absolute;font-size: 0.4em;color: #ffff;margin-top: 25%;margin-left: 19%;" class="text-center">二<br><p th:text="${wisdomBay.organizationalTitle2}"></p><p th:text="${wisdomBay.organizationalStructure2}"></p></div>
-            <div style="position: absolute;font-size: 0.4em;color: #ffff;margin-top: 18%;margin-left: 23%;" class="text-center">三<br><p th:text="${wisdomBay.organizationalTitle3}"></p><p th:text="${wisdomBay.organizationalStructure3}"></p></div>
-            <div style="position: absolute;font-size: 0.4em;color: #ffff;margin-top: 19%;margin-left: 66%;" class="text-center">四<br><p th:text="${wisdomBay.organizationalTitle4}"></p><p th:text="${wisdomBay.organizationalStructure4}"></p></div>
-            <div style="position: absolute;font-size: 0.4em;color: #ffff;margin-top: 27%;margin-left: 68%;" class="text-center">五<br><p th:text="${wisdomBay.organizationalTitle5}"></p><p th:text="${wisdomBay.organizationalStructure5}"></p></div>
-            <div style="position: absolute;font-size: 0.4em;color: #ffff;margin-top: 34%;margin-left: 77%;" class="text-center">六<br><p th:text="${wisdomBay.organizationalTitle6}"></p><p th:text="${wisdomBay.organizationalStructure6}"></p></div>
+                <div style="position: absolute;font-size: 0.3em;color:rgba(255,255,255,1);margin-top: 33%;margin-left: 15%;" class="text-center">一<br><p th:text="${wisdomBay.organizationalTitle1}"></p><p th:text="${wisdomBay.organizationalStructure1}"></p></div>
+                <div style="position: absolute;font-size: 0.3em;color:rgba(255,255,255,1);margin-top: 26%;margin-left: 19%;" class="text-center">二<br><p th:text="${wisdomBay.organizationalTitle2}"></p><p th:text="${wisdomBay.organizationalStructure2}"></p></div>
+                <div style="position: absolute;font-size: 0.3em;color:rgba(255,255,255,1);margin-top: 19%;margin-left: 23%;" class="text-center">三<br><p th:text="${wisdomBay.organizationalTitle3}"></p><p th:text="${wisdomBay.organizationalStructure3}"></p></div>
+                <div style="position: absolute;font-size: 0.3em;color:rgba(255,255,255,1);margin-top: 20%;margin-left: 67%;" class="text-center">四<br><p th:text="${wisdomBay.organizationalTitle4}"></p><p th:text="${wisdomBay.organizationalStructure4}"></p></div>
+                <div style="position: absolute;font-size: 0.3em;color:rgba(255,255,255,1);margin-top: 27%;margin-left: 71%;" class="text-center">五<br><p th:text="${wisdomBay.organizationalTitle5}"></p><p th:text="${wisdomBay.organizationalStructure5}"></p></div>
+                <div style="position: absolute;font-size: 0.3em;color:rgba(255,255,255,1);margin-top: 34%;margin-left: 77%;" class="text-center">六<br><p th:text="${wisdomBay.organizationalTitle6}"></p><p th:text="${wisdomBay.organizationalStructure6}"></p></div>
             </section>
             <img src="/bootstrap/images/wisdom/path5.png" style="position: absolute;margin-left: 29%;margin-top: 21%; width: 9%;">
             <img src="/bootstrap/images/wisdom/path6.png" style="position: absolute; margin-left: 24%;margin-top: 28%;width: 8%;">
@@ -41,68 +53,77 @@
             <img src="/bootstrap/images/wisdom/path8.png" style="position: absolute; margin-top: 22%;margin-left: 61%;width: 8%;">
             <img src="/bootstrap/images/wisdom/path9.png" style="position: absolute; margin-top: 30%;margin-left: 66%;width: 9%;">
             <img src="/bootstrap/images/wisdom/path10@2x.png" style="position: absolute; margin-top: 36%;margin-left: 71%;width: 12%;">
-            <img src="/bootstrap/images/wisdom/banner2x.png" class="img-responsive" alt="Responsive image" style="margin-top: -80px;"/>
+            <img src="/bootstrap/images/wisdom/banner2x.png" class="img-responsive" alt="Responsive image" style="margin-top: -60px;width: 100%;"/>
         </section>
         <section class="wow fadeInDown">
-        <div class="" style="font-size: 30px;margin-left: 20%;margin-top: 2%;width: 50%;" th:text="${wisdomBay.productTitle}"></div>
+            <div class="" style="font-size: 30px;margin-left: 20%;margin-top: 2%;width: 50%;" th:text="${wisdomBay.productTitle}"></div>
         </section>
         <section class="wow fadeInDown">
-        <div id="test2" style="margin-left: 25%; height: 373px;">
-            <div class="col-xs-12 col-sm-12 col-md-12" id="wq"
-                 style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 19%;height: 45%;margin-right: 4%;margin-top: 4%;border-radius: 25px">
-                <img src="/bootstrap/images/wisdom/AppleTV.png" class="img-responsive center-block" >
-                <br><span style="color: #ffffff;margin-left: 29%;font-size: 136%;" th:text="${wisdomBay.product1}"></span>
-                <br><br><span style="color: #ffffff; font-size: 13px;" th:text="${wisdomBay.productContent1}"></span>
+            <div id="test2" style="margin-left: 13%; height: 373px;">
+                <div class="card wisdombay-card-content" id="wq"
+                     style="">
+                    <img src="/bootstrap/images/wisdom/AppleTV.png" class="img-responsive center-block" style="    height: 102px;">
+                    <br><span style="color: #ffffff;margin-left: 37%;font-size: 136%;" th:text="${wisdomBay.product1}"></span>
+                    <br><br>
+                    <div class="center-block" style="width:80%">
+                        <span style="color: #ffffff; font-size: 13px;" th:text="${wisdomBay.productContent1}"></span>
+                    </div>
+                </div>
+                <div class="card wisdombay-card-content" id="wq1"
+                     style="">
+                    <img src="/bootstrap/images/wisdom/AppleTV1.png" class="img-responsive center-block" style="    height: 102px;">
+                    <br><span style="color: #ffffff;margin-left: 39%;font-size: 136%;"  th:text="${wisdomBay.product2}"></span>
+                    <br><br>
+                    <div class="center-block" style="width:80%">
+                        <span style="color: #ffffff; font-size: 13px;" th:text="${wisdomBay.productContent2}"></span>
+                    </div>
+                </div>
+                <div class="card wisdombay-card-content" id="wq2"
+                     style="">
+                    <img src="/bootstrap/images/wisdom/Grouping10.png" class="img-responsive center-block" style="    height: 102px;">
+                    <br><span style="color: #ffffff;margin-left: 37%;font-size: 136%;" th:text="${wisdomBay.product3}"></span>
+                    <br><br>
+                    <div class="center-block" style="width:80%">
+                        <span style="color: #ffffff; font-size: 13px;" th:text="${wisdomBay.productContent3}"></span>
+                    </div>
+                </div>
             </div>
-            <div class="card " id="wq1"
-                 style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 19%;height: 45%;margin-right: 4%;margin-top: 4%;border-radius: 25px">
-                <img src="/bootstrap/images/wisdom/AppleTV1.png" class="img-responsive center-block" >
-                <br><span style="color: #ffffff;margin-left: 36%;font-size: 136%;"  th:text="${wisdomBay.product2}"></span>
-                <br><br><span style="color: #ffffff; font-size: 13px;" th:text="${wisdomBay.productContent2}"></span>
-            </div>
-            <div class="card" id="wq2"
-                 style="float: left;border: 1px;background-color: rgb(14, 11, 63);width: 19%;height: 45%;margin-right: 4%;margin-top: 4%;border-radius: 25px">
-                <img src="/bootstrap/images/wisdom/Grouping10.png" class="img-responsive center-block" >
-                <br><span style="color: #ffffff;margin-left: 35%;font-size: 136%;" th:text="${wisdomBay.product3}"></span>
-                <br><br><span style="color: #ffffff; font-size: 13px;" th:text="${wisdomBay.productContent3}"></span>
-            </div>
-        </div>
         </section>
 
         <div class="row" style="float: left;border: 1px;background-color: #030E3F;width: 100.8%;height: 740px; margin-top: 7%;">
             <section class="wow fadeInDown">
-            <div class="row col-xs-6 col-sm-6 col-md-6" style="margin-top: 2%;">
-                <span style="font-size: 30px;margin-left: 40%;margin-top: 2%; color: #ffffff" th:text="${wisdomBay.certificationTitle}"></span>
-                <div class="row col-xs-6 col-sm-6 col-md-6" style="margin-left: 23%">
-                    <br><br><span style="color: #ffffff;letter-spacing: 0.56px; line-height: 222%; font-size:131%;" th:text="${wisdomBay.certification}"></span>
+                <div class="row col-xs-6 col-sm-6 col-md-6" style="margin-top: 2%;">
+                    <span style="font-size: 30px;margin-left: 40%;margin-top: 2%; color: #ffffff" th:text="${wisdomBay.certificationTitle}"></span>
+                    <div class="row col-xs-8 col-sm-8 col-md-8" style="margin-left: 17%">
+                        <br><br><span style="color: #ffffff;letter-spacing: 0.56px; line-height: 222%; font-size:131%;" th:text="${wisdomBay.certification}"></span>
+                    </div>
                 </div>
-            </div>
             </section>
             <div class="row col-xs-6 col-sm-6 col-md-6 img-responsive" style="margin-top: -5%;">
                 <img src="/bootstrap/images/wisdom/line1.png"
-                          style="margin-left: 50%; margin-top: 13.4%; position: absolute; z-index: 99;width: 15%;">
+                     style="margin-left: 50%; margin-top: 17.4%; position: absolute; z-index: 99;width: 17%;">
                 <section class="wow fadeIn" data-wow-duration="1500ms"  data-wow-delay="1s">
-                <div class="fountsize" style="margin-left: 39%;margin-top: 4%;font-size: 180%;" th:text="${wisdomBay.pictureExtension1}">线上考试</div>
+                    <div class="fountsize" style="margin-left: 39%;margin-top: 4%;font-size: 180%;" th:text="${wisdomBay.pictureExtension1}">线上考试</div>
                 </section>
                 <img src="/bootstrap/images/wisdom/line2.png"
-                          style="margin-left: 36.5%; margin-top: 14.3%; position: absolute; z-index: 99;width: 21%;">
+                     style="margin-left: 36.5%; margin-top: 14.3%; position: absolute; z-index: 99;width: 21%;">
                 <section class="wow fadeIn" data-wow-duration="1500ms"  data-wow-delay="1s">
-                <div class="fountsize" style="margin-left: 30%;margin-top: 9%;font-size: 180%;" th:text="${wisdomBay.pictureExtension2}">职业发展支持</div>
+                    <div class="fountsize" style="margin-left: 30%;margin-top: 9%;font-size: 180%;" th:text="${wisdomBay.pictureExtension2}">职业发展支持</div>
                 </section>
                 <img src="/bootstrap/images/wisdom/line3.png"
-                          style="margin-left: 31%; margin-top: 23.3%; position: absolute; z-index: 99;width: 23%;">
+                     style="margin-left: 31%; margin-top: 23.3%; position: absolute; z-index: 99;width: 23%;">
                 <section class="wow fadeIn" data-wow-duration="1500ms"  data-wow-delay="1s">
-                <div class="fountsize" style="margin-left: 24%;margin-top: 23%;font-size: 180%;" th:text="${wisdomBay.pictureExtension3}">获得认证证书</div>
+                    <div class="fountsize" style="margin-left: 24%;margin-top: 23%;font-size: 180%;" th:text="${wisdomBay.pictureExtension3}">获得认证证书</div>
                 </section>
                 <img src="/bootstrap/images/wisdom/line4.png"
-                          style="margin-left: 39.5%; margin-top: 31.1%; position: absolute; z-index: 99;width: 17%;">
+                     style="margin-left: 39.5%; margin-top: 31.1%; position: absolute; z-index: 99;width: 17%;">
                 <section class="wow fadeIn" data-wow-duration="1500ms"  data-wow-delay="1s">
-                <div class="fountsize" style="margin-left: 30%;margin-top: 37%;font-size: 180%;" th:text="${wisdomBay.pictureExtension4}">认证服务</div>
+                    <div class="fountsize" style="margin-left: 30%;margin-top: 37%;font-size: 180%;" th:text="${wisdomBay.pictureExtension4}">认证服务</div>
                 </section>
                 <img src="/bootstrap/images/wisdom/line5.png"
-                          style="margin-left: 45.9%; margin-top: 36.4%; position: absolute; z-index: 99;width: 14%;">
+                     style="margin-left: 45.9%; margin-top: 36.4%; position: absolute; z-index: 99;width: 14%;">
                 <section class="wow fadeIn" data-wow-duration="1500ms"  data-wow-delay="1s">
-                <div class="fountsize" style="margin-left: 35%;margin-top: 45%;font-size: 180%;" th:text="${wisdomBay.pictureExtension5}">考试测评</div>
+                    <div class="fountsize" style="margin-left: 35%;margin-top: 45%;font-size: 180%;" th:text="${wisdomBay.pictureExtension5}">考试测评</div>
                 </section>
                 <img src="/bootstrap/images/wisdom/bitmap10.png"
                      style="margin-left: 53.9%;margin-top: 14.4%;width: 30%;position: absolute;" >
@@ -113,21 +134,30 @@
 <div th:replace="public/footer :: html"></div>
 <script src="/bootstrap/js/wow.js"></script>
 <script type="text/javascript">
+    // 缩放动画
+
+
+
     $(function () {
-        $("#wq").click(function () {
-            $("#wq1").animate({width: '19%', height: '45%'});
-            $("#wq2").animate({width: '19%', height: '45%'});
-            $("#wq").animate({width: '23%', height: '68%'});
+        $("#wq").mouseenter(function () {
+                $("#wq").stop(true).animate({width: '31%', height: '80%'});
         });
-        $("#wq1").click(function () {
-            $("#wq").animate({width: '19%', height: '45%'});
-            $("#wq2").animate({width: '19%', height: '45%'});
-            $("#wq1").animate({width: '23%', height: '68%'});
+        $("#wq1").mouseenter(function () {
+                $("#wq1").stop(true).animate({width: '31%', height: '80%'});
         });
-        $("#wq2").click(function () {
-            $("#wq").animate({width: '19%', height: '45%'});
-            $("#wq1").animate({width: '19%', height: '45%'});
-            $("#wq2").animate({width: '23%', height: '68%'});
+        $("#wq2").mouseenter(function () {
+                $("#wq2").stop(true).animate({width: '31%', height: '80%'});
+        });
+
+        $("#wq").mouseleave(function(){
+            $("#wq").stop(true).animate({width: '22%', height: '45%'});
+
+        });
+        $("#wq1").mouseleave(function(){
+            $("#wq1").stop(true).animate({width: '22%', height: '45%'});
+        });
+        $("#wq2").mouseleave(function(){
+            $("#wq2").stop(true).animate({width: '22%', height: '45%'});
         });
     });
 

@@ -6,6 +6,8 @@ import core.message.Message;
 import java.util.List;
 
 public interface WisdomBayService {
+
+
     /**
      * @Description 获取所有人工智能实验室信息
      * @Author  muxu
@@ -13,7 +15,7 @@ public interface WisdomBayService {
      * @Time 15:26
      * @Return
      * @Params
-    **/
+     **/
 
     List<WisdomBay> selectAll() throws Exception;
 
@@ -25,7 +27,7 @@ public interface WisdomBayService {
      * @Time 15:36
      * @Return
      * @Params
-    **/
+     **/
 
     Message updateWisdomBay(WisdomBay record);
 }

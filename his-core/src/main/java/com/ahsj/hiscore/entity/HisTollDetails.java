@@ -35,6 +35,8 @@ public class HisTollDetails extends BaseEntity {
 
     private BigDecimal recoverTheFee;
 
+    private BigDecimal toll;
+
     private String description;
 
     private String number;
@@ -57,6 +59,8 @@ public class HisTollDetails extends BaseEntity {
 
     private Integer age;
 
+    private Integer count;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateDate;
 
@@ -76,6 +80,13 @@ public class HisTollDetails extends BaseEntity {
     private BigDecimal observeFee;//药品费
 
     private BigDecimal drugFee;//药品费
+
+
+    @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "is_back", typeName = "isBackName")
+    private Integer isBack;
+    private String isBackName;
+
+    private Double allDeposit;
 
     public BigDecimal getDrugFee() {
         return drugFee;
@@ -433,5 +444,46 @@ public class HisTollDetails extends BaseEntity {
 
     public void setCommonNumber(String commonNumber) {
         this.commonNumber = commonNumber;
+    }
+
+
+    public String getIsBackName() {
+        return isBackName;
+    }
+
+    public void setIsBackName(String isBackName) {
+        this.isBackName = isBackName;
+    }
+
+    public Integer getIsBack() {
+        return isBack;
+    }
+
+    public void setIsBack(Integer isBack) {
+        this.isBack = isBack;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public BigDecimal getToll() {
+        return toll;
+    }
+
+    public void setToll(BigDecimal toll) {
+        this.toll = toll;
+    }
+
+    public Double getAllDeposit() {
+        return allDeposit;
+    }
+
+    public void setAllDeposit(Double allDeposit) {
+        this.allDeposit = allDeposit;
     }
 }

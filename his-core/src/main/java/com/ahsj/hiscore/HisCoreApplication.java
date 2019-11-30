@@ -29,6 +29,7 @@ public class HisCoreApplication {
         SpringApplication.run(HisCoreApplication.class, args);
     }
 
+
 }
 
 

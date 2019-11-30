@@ -300,9 +300,9 @@ public class HisPharmacyDetailServicelmpl implements HisPharmacyDetailService {
             for (int j = i; j < hisMedicationDetailsList.size(); j++) {
                 if (hisMedicationDetailsList.get(i).getDrugsNumb().equals(hisMedicationDetailsList.get(j).getDrugsNumb())) {
                     tmps.add(hisMedicationDetailsList.get(j));
-                    if (i != j)
-                        continueCounts++;
-                } else {
+//                    if (i != j)
+//                        continueCounts++;
+//                } else {
                     break inner;
                 }
             }

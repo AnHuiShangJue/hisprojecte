@@ -121,6 +121,7 @@
 <script type="text/javascript" th:src="@{/hiscore/assets/global/js/ahsj.selfdatatable.js}"></script>
 <script type="text/javascript">
     var grid = new AHSJDT();
+    var a=[];
     $(document).ready(function () {
         initBtn();
         initTable();
@@ -200,6 +201,7 @@
     function initBtn() {
         //搜索按钮
         $('#searchBtn').click(function () {
+            a=[]
             //就诊编号
             var reg1 = new RegExp(/^HM\d{13}$/);
             var reg2 = new RegExp(/^HHM\d{13}$/);
@@ -223,13 +225,14 @@
         });
 
         $('#resetBtn').click(function () {
+            a=[]
             ids = grid.getIds();
             grid.removeRows(ids);
             $("#send_btn").attr("disabled", false);
         });
     }
 
-    var a=[];
+
     //刷新表格显示对应的用药明细
     function getMedicationDetail() {
         var number = $("#number").val();
@@ -301,6 +304,7 @@
         function() {
             dialog.confirm('确定打印吗?', function (index, layero) {
                 ids = a.join(",");//数组装字符串用-分割
+
                 if (ids != null && ids != undefined) {
                     var url = CTX + "/api/mediexit/printDrug.ahsj?ids=" + ids + "&token=" + TOKEN;
                     dialog.showDialog(url, "打印凭证预览", "700px", "700px");

@@ -237,36 +237,36 @@
                 dialog.warn("所输入的数据不符合格式要求！请输入HR开头的编号")
             }
         });}
-        $("#actualCharge").change(function () {
-            //实际收款金额
-            var actualCharge = $("#actualCharge").val();
-            //总收款金额
-            var money = $("#money").val();
-            //剩余押金
-            var restDeposit = $("#restDeposit").val();
-            //本次提交的押金
-            var deposit = $("#deposit").val();
-            if (money.length > 0) {
-                if (!isNullOrEmpty(actualCharge)) {
-                    var ac = numeral(actualCharge);
-                    var m = numeral(money);
-                    var rd = numeral(restDeposit);
-                    var totalMoney = ac.value()+rd.value();
-                    if(totalMoney < m.value()){
-                        dialog.warn("总金额小于应收金额，请重新输入!!!")
-                    }else{
-                        //如果实际收款大于应收款
-                        if(ac.value() >= m.value()){
-                            changeInputValue("deposit",numeral(ac.value()).subtract(m.value()).format('0.00'));
-                            changeInputValue("recoverTheFee",0);
-                        }else{
-                            changeInputValue("deposit",numeral(ac.value()).subtract(m.value()).format('0.00'));
-                            changeInputValue("recoverTheFee",0);
-                        }
-                    }
-                }
-            }
-        });
+        // $("#actualCharge").change(function () {
+        //     //实际收款金额
+        //     var actualCharge = $("#actualCharge").val();
+        //     //总收款金额
+        //     var money = $("#money").val();
+        //     //剩余押金
+        //     var restDeposit = $("#restDeposit").val();
+        //     //本次提交的押金
+        //     var deposit = $("#deposit").val();
+        //     if (money.length > 0) {
+        //         if (!isNullOrEmpty(actualCharge)) {
+        //             var ac = numeral(actualCharge);
+        //             var m = numeral(money);
+        //             var rd = numeral(restDeposit);
+        //             var totalMoney = ac.value()+rd.value();
+        //             if(totalMoney < m.value()){
+        //                 dialog.warn("总金额小于应收金额，请重新输入!!!")
+        //             }else{
+        //                 //如果实际收款大于应收款
+        //                 if(ac.value() >= m.value()){
+        //                     changeInputValue("deposit",numeral(ac.value()).subtract(m.value()).format('0.00'));
+        //                     changeInputValue("recoverTheFee",0);
+        //                 }else{
+        //                     changeInputValue("deposit",numeral(ac.value()).subtract(m.value()).format('0.00'));
+        //                     changeInputValue("recoverTheFee",0);
+        //                 }
+        //             }
+        //         }
+        //     }
+        // });
     function validform(sendForm){
         return $(sendForm).validate({
             rules : {
@@ -286,12 +286,13 @@
         $("#send_btn").click(function () {
             if(validform("#sendForm").form()) {
             dialog.confirm('确定结算吗?', function (index, layero) {
-                checkMoney();
+                // checkMoney();
                 var hisTollRecord = $("#sendForm").serialize();
                 var json = grid.getDataTable().ajax.json().data;
                 var hisTollHospiModel = {
                     "hisTollRecord": strToObj(hisTollRecord),
-                    "hisTollDetailsList": json
+                    "hisTollDetailsList": json,
+                    "isNurse":2
                 };
                 var jsonData = JSON.stringify(hisTollHospiModel);
                 if(json!=null&&json!=""&&json!=undefined){
@@ -481,7 +482,8 @@
             //获取基本信息
             $.ahsjajax(
                 CTX + "/api/hisTollRecord/hospital/details.ahsj",
-                {"medicalRecordId": MedicalRecordId},
+                {"medicalRecordId": MedicalRecordId,
+                 "isNurse":2},
                 function (data) {
                     if (!isNullOrEmpty(data.id)) {
                         changeInputValue("patientName",data.patientName);

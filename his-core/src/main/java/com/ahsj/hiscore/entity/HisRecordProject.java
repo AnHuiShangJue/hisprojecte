@@ -96,7 +96,14 @@ public class HisRecordProject extends BaseEntity {
 
     private Integer refundNum;
 
+    //交易流水号
     private String tollRecordNumber;
+
+    //住院编号
+    private String hospitalNumber;
+
+    //就诊编号
+    private String recordNumber;
 
     private BigDecimal projectSumPrice;
 
@@ -106,11 +113,41 @@ public class HisRecordProject extends BaseEntity {
 
     private String vouchers;
 
-    private String tranName ;
+    private String tranName;
 
-    private String medicalNumber ;
+    private String medicalNumber;
 
     private Integer hisProjectNum;
+
+    private BigDecimal restDeposit;
+
+    private BigDecimal deposit;
+
+    private BigDecimal prices;
+
+    public BigDecimal getPrices() {
+        return prices;
+    }
+
+    public void setPrices(BigDecimal prices) {
+        this.prices = prices;
+    }
+
+    public String getHospitalNumber() {
+        return hospitalNumber;
+    }
+
+    public void setHospitalNumber(String hospitalNumber) {
+        this.hospitalNumber = hospitalNumber;
+    }
+
+    public String getRecordNumber() {
+        return recordNumber;
+    }
+
+    public void setRecordNumber(String recordNumber) {
+        this.recordNumber = recordNumber;
+    }
 
     public String getMedicalNumber() {
         return medicalNumber;
@@ -437,7 +474,6 @@ public class HisRecordProject extends BaseEntity {
     }
 
 
-
     public String getIsBackName() {
         return isBackName;
     }
@@ -484,6 +520,22 @@ public class HisRecordProject extends BaseEntity {
 
     public void setTunit(String tunit) {
         this.tunit = tunit;
+    }
+
+    public BigDecimal getRestDeposit() {
+        return restDeposit;
+    }
+
+    public void setRestDeposit(BigDecimal restDeposit) {
+        this.restDeposit = restDeposit;
+    }
+
+    public BigDecimal getDeposit() {
+        return deposit;
+    }
+
+    public void setDeposit(BigDecimal deposit) {
+        this.deposit = deposit;
     }
 
     @Override
