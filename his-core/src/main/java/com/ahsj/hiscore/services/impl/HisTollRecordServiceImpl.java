@@ -258,14 +258,13 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
      **/
     @Override
     @Transactional(readOnly = false)
-    public Message hospitalSaveForRestDepo(HisTollHospiModel hisTollHospiModel) throws Exception{
+    public Message hospitalSaveForRestDepo(HisTollHospiModel hisTollHospiModel) throws Exception {
         //处理住院交易
         HisTollRecord hisTollRecord = hisTollHospiModel.getHisTollRecord();
         if (EmptyUtil.Companion.isNullOrEmpty(hisTollRecord.getActualCharge())) {
             hisTollRecord.setActualCharge(new BigDecimal("0"));
         }
         HisTollDetails hd = new HisTollDetails();
-
 
 
         Date date = new Date();
@@ -298,6 +297,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         return MessageUtil.createMessage(true, number + "押金交付成功！，当前总押金为" + hisHospitalManage.getRestDeposit());
 
     }
+
     /**
      * @return void
      * @Description 处理住院数据状态
@@ -317,7 +317,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         }
         for (HisTollDetails h1 : hisTollDetails) {
             if (h1.getType().equals(3)) {
-                 payDays.append("," + h1.getNum());
+                payDays.append("," + h1.getNum());
                 payDaysId.append("," + h1.getId());
                 hisHospitalManage.setPayHospitalizationDay(payDays.toString());
                 hisHospitalManage.setTollDetailsId(payDaysId.toString());
@@ -1017,7 +1017,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             String createdate = new SimpleDateFormat("yyyyMMdd").format(new Date());
             int count = hisTollRecordMapper.selectNumbCount(createdate) + 1;
             //编号
-            HisTollRecord hisTollRecord1 = hisTollRecordMapper.selectByNumber(hisRefundProjectInfo.getTollRecordNumber());//
+           //HisTollRecord hisTollRecord1 = hisTollRecordMapper.selectByNumber(hisRefundProjectInfo.getTollRecordNumber());//
             String number = createdate + String.format("%05d", count);
             number = "HTR" + number;
             HisTollRecord hisTollRecord = new HisTollRecord();
@@ -1025,7 +1025,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             hisTollRecord.setActualCharge(new BigDecimal(0));
             hisTollRecord.setRecoverTheFee(hisRefundProjectInfo.getRefundSumProce());
             hisTollRecord.setAttenchType(8);//退项目
-            hisTollRecord.setMedicalRecordId(hisTollRecord1.getMedicalRecordId());
+            hisTollRecord.setMedicalRecordId(hisRefundProjectInfo.getMedicalRecordNumber());
             hisTollRecord.setIsSettlement(2);//未结算
             hisTollRecord.setNumber(number);//交易流水号
             hisTollRecord.setType(2);
@@ -1121,6 +1121,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         return hisTollRecordMapper.listNumberByMedicalNumber(medicalNumber);
 
     }
+
     //根据住院号搜索出所有与此住院号相关的收费明细且实际收费大于0（即交押金的那条数据的明细）
     @Override
     @Transactional(readOnly = true)

@@ -595,7 +595,14 @@ public class HisTollRecordController extends BaseController {
     @RequestMapping("checkIsInpatient.ahsj")
     @ResponseBody
     HisHospitalManage checkIsInpatient(String token, String tollNumber) throws Exception {
-        return hisTollRecordService.checkIsInpatient(tollNumber);
+        if (!EmptyUtil.Companion.isNullOrEmpty(tollNumber)) {
+            return hisHospitalManageService.selectByMedicalNumber(tollNumber);
+        }//tollNumber 就诊编号
+        else {
+            return new HisHospitalManage();
+        }
+
+        //   return hisTollRecordService.checkIsInpatient(tollNumber);
     }
 
 
