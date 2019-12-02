@@ -529,13 +529,13 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             hisHospitalManageService.update(hisHospitalManage);
         }
         BigDecimal sumPrice = new BigDecimal("0");
-        for (int i = 0; i < hisApplicationForDrugReturnDetails.size(); i++) {
+      /*  for (int i = 0; i < hisApplicationForDrugReturnDetails.size(); i++) {
             HisApplicationForDrugReturnDetails hisApplicationForDrugReturnDetails1 = hisApplicationForDrugReturnDetailsMapper.selectByPrimaryKey(hisApplicationForDrugReturnDetails.get(i).getId());
             sumPrice = sumPrice.add(hisApplicationForDrugReturnDetails1.getTotalPrice());
         }
         if (sumPrice.compareTo(hisTollRecord1.getRecoverTheFee()) != 0) {
             return MessageUtil.createMessage(false, "退款金额不一致");
-        }
+        }*/
         String createdate = new SimpleDateFormat("yyyyMMdd").format(new Date());
         int count = hisTollRecordMapper.selectNumbCount(createdate) + 1;
         //编号

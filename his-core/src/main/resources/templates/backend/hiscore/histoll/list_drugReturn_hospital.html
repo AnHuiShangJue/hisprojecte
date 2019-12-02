@@ -247,6 +247,7 @@
                     changeInputValue("actualCharge", 0);
                     changeInputValue("restDeposit", data.restDeposit);
                     changeInputValue("deposit", data.deposit);
+                    changeInputValue("recordNumber", data.recordNumber);
                     M.updateTextFields();
                     return true;
                 } else {
@@ -266,7 +267,7 @@
     $('#send_btn').click(function () {
         dialog.confirm('确定退费吗?', function (index, layero) {
             //获取交易流水号
-            var tollNumber = $("#number").val();
+            var tollNumber = $("#recordNumber").val();
             $.ahsjajax(
                 CTX + "/api/hisTollRecord/checkIsInpatient.ahsj",
                 {"tollNumber": tollNumber},

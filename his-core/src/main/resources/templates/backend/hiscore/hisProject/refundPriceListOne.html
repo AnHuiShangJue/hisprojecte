@@ -265,8 +265,7 @@
             $.ahsjajax(
                 CTX + "/api/hisTollRecord/checkIsInpatient.ahsj",
                 {
-                    "tollNumber": tollRecordNumber
-
+                    "tollNumber": medicalRecordNumber
                 },
                 function (data) {
                     if (!isNullOrEmpty(data.id)) {
