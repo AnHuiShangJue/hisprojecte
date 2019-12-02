@@ -33,6 +33,7 @@
         <result column="idcard" property="idcard"/>
         <result column="number" property="number"/>
         <result column="is_back" property="isBack"/>
+        <result column="count" property="count" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
         id, create_user_id, create_date, update_user_id, update_date, toll_record_id, name,
@@ -356,7 +357,8 @@
         a.type as type,
         a.money as money,
         a.create_date as create_date,
-        a.is_back as is_back
+        a.is_back as is_back,
+        coalesce(a.count,0)as count
         from (
         select
         a.target_id as target_id,
@@ -367,7 +369,8 @@
         a.type as type,
         a.money * a.num as money,
         a.create_date as create_date,
-        a.is_back as is_back
+        a.is_back as is_back,
+        a.count as count
         from(
         select
         a.name as name,
@@ -377,13 +380,16 @@
         b.num as num,
         2 as type,
         b.create_date as create_date,
-        b.is_back as is_back
+        b.is_back as is_back,
+        d.refund_num as count
         from
         his_project as a
         left join
         his_record_project as b on b.project_id = a.id
         left join
         his_medical_record as c on b.record_id = c.id
+        left join
+        his_refund_project as d on d.record_project_id =b.id
         where c.medical_record_id = #{parameter.MedicalRecordId,jdbcType=VARCHAR}
 
         UNION ALL
@@ -396,13 +402,16 @@
         e.count as num,
         1 as type,
         e.create_date as create_date,
-        e.is_back as is_back
+        e.is_back as is_back,
+        z.return_count as count
         from
         his_pharmacy_detail as d
         left join
         his_medication_details as e on e. medication_id = d.id
         left join
         his_medical_record as f on e.medical_record_id = f.id
+        left join
+        his_application_for_drug_return_details as z on z.medication_detail_id =e.id
         where f.medical_record_id = #{parameter.MedicalRecordId,jdbcType=VARCHAR}
 
         UNION ALL
@@ -415,7 +424,8 @@
         a.hospitalization_day - b.pay_days as num,
         3 as type,
         a.create_date as create_date,
-        4 as is_back
+        4 as is_back,
+        0 as count
         from
         his_hospital_manage as a
         left join
@@ -454,7 +464,8 @@
         k.num as num,
         k.type as type,
         k.create_date as create_date,
-        4 as is_back
+        4 as is_back,
+        0 as count
         from(
         select
         CONCAT("住院",w.number,"号病房",h.number,"号病床费用") as name,
