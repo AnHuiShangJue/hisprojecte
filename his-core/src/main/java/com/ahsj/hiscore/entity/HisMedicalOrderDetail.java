@@ -115,6 +115,8 @@ public class HisMedicalOrderDetail extends BaseEntity {
 
     private String ttanslateName;
 
+    private Integer isPay;
+
     public String getTtanslateName() {
         return ttanslateName;
     }
@@ -595,5 +597,13 @@ public class HisMedicalOrderDetail extends BaseEntity {
                 ", sanName='" + sanName + '\'' +
                 ", ttanslateName='" + ttanslateName + '\'' +
                 '}';
+    }
+
+    public Integer getIsPay() {
+        return isPay;
+    }
+
+    public void setIsPay(Integer isPay) {
+        this.isPay = isPay;
     }
 }
