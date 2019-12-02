@@ -255,7 +255,6 @@
                     for (var i = 0; i < data.length; i++) {
                         var projectSumPrice = data[i].projectSumPrice;
                         sum = sum + projectSumPrice;
-
                     }*/
                     changeInputValue("recoverTheFee",0);
                 }
@@ -278,7 +277,7 @@
             var medicalRecordNumber = $("#medicalRecordNumber").val();
             $.ahsjajax(
                 CTX + "/api/hisTollRecord/checkIsInpatient.ahsj",
-                {"tollNumber": tollRecordNumber},
+                {"tollNumber": medicalRecordNumber},
                 function (data) {
                     if (!isNullOrEmpty(data.id)) {
                         if (data.isDischarged == 2) {

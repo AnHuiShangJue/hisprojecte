@@ -12,6 +12,8 @@ public class HisRefundProjectInfo extends BaseEntity {
 
     private String voucher;
 
+    private String medicalRecordNumber;
+
     private BigDecimal refundSumProce;
 
     private BigDecimal deposit; //剩余押金
@@ -175,6 +177,14 @@ public class HisRefundProjectInfo extends BaseEntity {
 
     public void setDeposit(BigDecimal deposit) {
         this.deposit = deposit;
+    }
+
+    public String getMedicalRecordNumber() {
+        return medicalRecordNumber;
+    }
+
+    public void setMedicalRecordNumber(String medicalRecordNumber) {
+        this.medicalRecordNumber = medicalRecordNumber;
     }
 
     @Override
