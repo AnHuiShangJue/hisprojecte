@@ -1003,6 +1003,11 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             List<HisRecordProject> hisRecordProjectList = hisRecordProjectMapper.pricelistsBytollRecordNumber(hisRecordProject);
             if (!EmptyUtil.Companion.isNullOrEmpty(hisRefundProjectInfo.getDeposit())) { //住院退项目
                 HisHospitalManage hisHospitalManage = hisHospitalManageService.selectByMedicalNumber(hisRefundProjectInfo.getRecordNumber());
+              /*  if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage.getRestDeposit())) {
+                    hisHospitalManage.setRestDeposit(hisRefundProjectInfo.getDeposit().add(hisHospitalManage.getRestDeposit()));
+                } else {
+                    hisHospitalManage.setRestDeposit(hisRefundProjectInfo.getDeposit());
+                }*/
                 hisHospitalManage.setRestDeposit(hisRefundProjectInfo.getDeposit());
                 hisHospitalManageService.update(hisHospitalManage);
             }
@@ -1017,7 +1022,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             String createdate = new SimpleDateFormat("yyyyMMdd").format(new Date());
             int count = hisTollRecordMapper.selectNumbCount(createdate) + 1;
             //编号
-           //HisTollRecord hisTollRecord1 = hisTollRecordMapper.selectByNumber(hisRefundProjectInfo.getTollRecordNumber());//
+            // HisTollRecord hisTollRecord1 = hisTollRecordMapper.selectByNumber(hisRefundProjectInfo.getTollRecordNumber());//
             String number = createdate + String.format("%05d", count);
             number = "HTR" + number;
             HisTollRecord hisTollRecord = new HisTollRecord();
@@ -1025,7 +1030,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             hisTollRecord.setActualCharge(new BigDecimal(0));
             hisTollRecord.setRecoverTheFee(hisRefundProjectInfo.getRefundSumProce());
             hisTollRecord.setAttenchType(8);//退项目
-            hisTollRecord.setMedicalRecordId(hisRefundProjectInfo.getMedicalRecordNumber());
+            hisTollRecord.setMedicalRecordId(hisRefundProjectInfo.getRecordNumber());
             hisTollRecord.setIsSettlement(2);//未结算
             hisTollRecord.setNumber(number);//交易流水号
             hisTollRecord.setType(2);
@@ -1033,7 +1038,8 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             //明细
             // List<HisRecordProject> pricelistsBytollRecordNumber = hisRecordProjectService.pricelistsBytollRecordNumber(hisRecordProject);
             HisRefundProject hisRefundProject = new HisRefundProject();
-            hisRefundProject.setTollRecordNumber(hisRefundProjectInfo.getTollRecordNumber());
+            // hisRefundProject.setTollRecordNumber(hisRefundProjectInfo.getTollRecordNumber());
+            hisRefundProject.setRecordNumber(hisRefundProjectInfo.getRecordNumber());
             List<HisRefundProject> refundProjectList = hisRefundProjectMapper.queryHisRefundProject(hisRefundProject);
             for (HisRefundProject h : refundProjectList) {
                 HisRecordProject hisRecordProject1 = hisRecordProjectService.selectByPrimaryKey(h.getRecordProjectId());
@@ -1041,9 +1047,10 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
                 hisTollDetails.setIsSettlement(2);
                 hisTollDetails.setName(hisRecordProject1.getName());
                 hisTollDetails.setTargetId(h.getId());
-                hisTollDetails.setMoney(hisRecordProject1.getPrice());
+                hisTollDetails.setMoney(hisRecordProject1.getPrice().multiply(new BigDecimal(h.getRefundNum())));
                 hisTollDetails.setType(5);//项目退费
                 hisTollDetails.setTollRecordId(hisTollRecord.getId());
+                hisTollDetails.toString();
                 hisTollDetailsService.insert(hisTollDetails);
                 h.setIsBack(1);  //将退项目设置为已退
                 hisRefundProjectMapper.updateByHisRefundProjectListBack(refundProjectList);
