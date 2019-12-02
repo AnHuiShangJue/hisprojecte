@@ -80,7 +80,7 @@ public class HisRefundProjectServiceImpl implements HisRefundProjectService {
         if (EmptyUtil.Companion.isNullOrEmpty(hisRefundProject.getPatientName()) || EmptyUtil.Companion.isNullOrEmpty(nums) || EmptyUtil.Companion.isNullOrEmpty(ids) || EmptyUtil.Companion.isNullOrEmpty(hisRefundProject.getRemarks())) {
             log.info("提交申请失败! 申请人不能为空 或 申请退项目数量不能为空 或  原因不能为空");
             return MessageUtil.createMessage(false, "提交申请失败! 申请人不能为空 或 申请退项目数量不能为空 或  原因不能为空");
-        } else if (EmptyUtil.Companion.isNullOrEmpty(hisRefundProject.getRecordNumber()) && EmptyUtil.Companion.isNullOrEmpty(hisRefundProject.getTollRecordNumber())) {
+        } else if (EmptyUtil.Companion.isNullOrEmpty(hisRefundProject.getRecordNumber()) && EmptyUtil.Companion.isNullOrEmpty(hisRefundProject.getTollRecordNumber()) && EmptyUtil.Companion.isNullOrEmpty(hisRefundProject.getHospitalNumber())) {
             log.info("提交申请失败! 就诊记录编号 或交易流水号 不能为空");
             return MessageUtil.createMessage(false, "提交申请失败!  就诊记录编号 或交易流水号 不能为空");
         } else if (!StringUtils.equals(userName, hisRefundProject.getPatientName())) {

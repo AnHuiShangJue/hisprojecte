@@ -404,7 +404,7 @@
             and hmr.medical_record_id =#{medicalRecordId,jdbcType=VARCHAR}
         </if>
         <if test="hospitalNumber != null and hospitalNumber != ''">
-            and hhn.number =#{parameter.hospitalNumber,jdbcType=VARCHAR}
+            and hhn.number =#{hospitalNumber,jdbcType=VARCHAR}
         </if>
         <if test="tollRecordNumber != null and tollRecordNumber != ''">
             and t.number =#{tollRecordNumber,jdbcType=VARCHAR}
