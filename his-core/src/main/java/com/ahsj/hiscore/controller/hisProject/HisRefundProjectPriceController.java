@@ -119,7 +119,7 @@ public class HisRefundProjectPriceController extends BaseController {
                 //    PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryAddList(pageBean);
                 PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryPriceList(pageBean);
                 HisHospitalManage hisHospitalManage = hisHospitalManageService.selectByMedicalNumber(tollRecordNumber);
-                if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage)&&!EmptyUtil.Companion.isNullOrEmpty(pageBean.getData())) {
+                if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage) && !EmptyUtil.Companion.isNullOrEmpty(pageBean.getData())) {
                     hisProjectPageBean.getData().get(0).setRestDeposit(hisHospitalManage.getRestDeposit());
                     hisProjectPageBean.getData().get(0).setDeposit(hisHospitalManage.getRestDeposit().add(hisProjectPageBean.getData().get(0).getPrices()));
                 }
@@ -127,7 +127,6 @@ public class HisRefundProjectPriceController extends BaseController {
             }
 //         HIS_HTR = "HTR"; //交易流水号 头部
             if (tollRecordNumber.contains(Constants.HIS_HTR)) {
-
                 HisHospitalManage hisHospitalManage = hisHospitalManageService.selectByTollNumber(tollRecordNumber);
                 pageBean.setParameter(hisRecordProject);
                 //  PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryAddList(pageBean);
@@ -147,10 +146,11 @@ public class HisRefundProjectPriceController extends BaseController {
                     pageBean.setParameter(hisRecordProject);
                     //    PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryAddList(pageBean);
                     PageBean<HisRecordProject> hisProjectPageBean = hisRecordProjectService.queryPriceList(pageBean);
+                    if (!EmptyUtil.Companion.isNullOrEmpty(hisProjectPageBean.getData())) {
                     hisProjectPageBean.getData().get(0).setRestDeposit(hisHospitalManage.getRestDeposit());
                     hisProjectPageBean.getData().get(0).setDeposit(hisHospitalManage.getRestDeposit().add(hisProjectPageBean.getData().get(0).getPrices()));
                     return hisProjectPageBean;
-                }
+                }}
             }
         }
         pageBean.setParameter(hisRecordProject);
