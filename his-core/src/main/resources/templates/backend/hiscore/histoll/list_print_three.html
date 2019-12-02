@@ -241,7 +241,7 @@ Scripts
         var m = myDate.getMinutes();
         var s = myDate.getSeconds();
         var now = year + "-" + month + "-" + date + " " + h + ":" + m + ":" + s;
-      //  console.log(now);
+        //  console.log(now);
         $("#settlementDate").html = now;
         printShow3();
         printShow();
@@ -360,6 +360,7 @@ Scripts
             }
         });
     }
+
     function printShow3() {
         $.ahsjajax(
             CTX + "/api/hisTollDetails/printShowLeave/index.ahsj",
@@ -376,7 +377,7 @@ Scripts
         );
     }
 
-    function printShowAllDespoit(){
+    function printShowAllDespoit() {
         $.ahsjajax(
             CTX + "/api/hisTollDetails/printShowAllDespoit.ahsj",
             {"number": HRNumber},
@@ -389,6 +390,7 @@ Scripts
             }
         );
     }
+
     $("input").change(function () {
         $(this).val($(this).val().trim());
     });

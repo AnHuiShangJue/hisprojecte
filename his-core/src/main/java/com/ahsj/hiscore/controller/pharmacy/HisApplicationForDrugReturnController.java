@@ -226,6 +226,7 @@ public class HisApplicationForDrugReturnController {
                 HisApplicationForDrugReturn hisApplicationForDrugReturn = hisApplicationForDrugReturnService.getNumber(number);
                 hisApplicationForDrugReturn.setRestDeposit(hisHospitalManage.getRestDeposit());
                 hisApplicationForDrugReturn.setDeposit(hisApplicationForDrugReturn.getTotalPrice().add(hisHospitalManage.getRestDeposit()));
+                hisApplicationForDrugReturn.setRecordNumber(hisHospitalManage.getMedicalNumber());
                 return hisApplicationForDrugReturn;
             }
             return hisApplicationForDrugReturnService.getNumber(number);
@@ -238,6 +239,7 @@ public class HisApplicationForDrugReturnController {
                 HisApplicationForDrugReturn hisApplicationForDrugReturn = hisApplicationForDrugReturnService.selectByRecordNumber(number);
                 hisApplicationForDrugReturn.setRestDeposit(hisHospitalManage.getRestDeposit());
                 hisApplicationForDrugReturn.setDeposit(hisApplicationForDrugReturn.getTotalPrice().add(hisHospitalManage.getRestDeposit()));
+                hisApplicationForDrugReturn.setRecordNumber(hisHospitalManage.getMedicalNumber());
                 return hisApplicationForDrugReturn;
             }
             return hisApplicationForDrugReturnService.selectByRecordNumber(number);
@@ -249,6 +251,7 @@ public class HisApplicationForDrugReturnController {
                 HisApplicationForDrugReturn hisApplicationForDrugReturn = hisApplicationForDrugReturnService.selectByRecordNumber(hisHospitalManage.getMedicalNumber());
                 hisApplicationForDrugReturn.setRestDeposit(hisHospitalManage.getRestDeposit());
                 hisApplicationForDrugReturn.setDeposit(hisApplicationForDrugReturn.getTotalPrice().add(hisHospitalManage.getRestDeposit()));
+                hisApplicationForDrugReturn.setRecordNumber(hisHospitalManage.getMedicalNumber());
                 return hisApplicationForDrugReturn;
             }
             return hisApplicationForDrugReturnService.selectByRecordNumber(hisHospitalManage.getMedicalNumber());

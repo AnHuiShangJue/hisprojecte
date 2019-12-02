@@ -232,6 +232,7 @@
                     changeInputValue("recoverTheFee", data.totalPrice);
                     changeInputValue("money", 0);
                     changeInputValue("actualCharge", 0);
+                    changeInputValue("recordNumber", data.recordNumber);
                     M.updateTextFields();
                     return true;
                 } else {
@@ -254,7 +255,7 @@
             var tollNumber = $("#number").val();
             $.ahsjajax(
                 CTX + "/api/hisTollRecord/checkIsInpatient.ahsj",
-                {"tollNumber": tollNumber},
+                {"tollNumber": recordNumber},
                 function (data) {
                     if (!isNullOrEmpty(data.id)) {
                         if (data.isDischarged == 1) {
