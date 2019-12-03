@@ -330,7 +330,7 @@ public class HisMediExitDetailsServicelmpl implements HisMediExitDetailsService 
             List<HisMedicationDetails> tmps = new ArrayList<HisMedicationDetails>();
             inner:
             for (int j = i; j < hisMedicationDetailsList.size(); j++) {
-                if (hisMedicationDetailsList.get(i).getDrugsNumb().equals(hisMedicationDetailsList.get(j).getDrugsNumb())) {
+                if (hisMedicationDetailsList.get(i).getId().equals(hisMedicationDetailsList.get(j).getId())) {
                     tmps.add(hisMedicationDetailsList.get(j));
                     if (i != j)
                         continueCounts++;
@@ -397,12 +397,14 @@ public class HisMediExitDetailsServicelmpl implements HisMediExitDetailsService 
             hisMediExitDetails.setExitNumber(hisMediEnterDetails.getEnterNumber());
             hisMediExitDetails.setRecordNumber(hisMedicationDetailsList.get(i).getRecordNumber());
             hisMediExitDetails.setMediEnterId(hisMedicationDetailsList.get(i).getMediEnterId());
-            hisMediExitDetailsList.add(hisMediExitDetails);
+//            hisMediExitDetailsList.add(hisMediExitDetails);
+            hisMediExitDetailsMapper.insert(hisMediExitDetails);
             HisMedicationDetails medicationDetails = hisMedicationDetailsMapper.selectByPrimaryKey(hisMedicationDetailsList.get(i).getId());
             medicationDetails.setIsOut(1);
             medicationDetailsList.add(medicationDetails);
             //定义一个对象用于将用药明细与出药表关联起来
             HisRelatedMedicationandexit hisRelatedMedicationandexit = new HisRelatedMedicationandexit();
+            hisRelatedMedicationandexit.setExitId(hisMediExitDetails.getId());
             hisRelatedMedicationandexit.setMedicationDetailId(medicationDetails.getId());
             hisRelatedMedicationandexit.setDrugsNumb(medicationDetails.getDrugsNumb());
             hisRelatedMedicationandexit.setValidityPeriod(hisMedicationDetailsList.get(i).getValidityPeriod());
@@ -412,16 +414,16 @@ public class HisMediExitDetailsServicelmpl implements HisMediExitDetailsService 
         }
         hisMediEnterDetailsService.updateBatch(hisMediEnterDetailsList);
         hisPharmacyDetailService.updateBatch(hisPharmacyDetailList);
-        saveForMultiple(hisMediExitDetailsList);
-        for (int i = 0; i < hisRelatedMedicationandexitList.size(); i++) {
-            for (int j = 0; j < hisMediExitDetailsList.size(); j++) {
-                if (hisMediExitDetailsList.get(j).getDrugsNumb().equals(medicationDetailsList.get(i).getDrugsNumb()) && hisMediExitDetailsList.get(j).getValidityPeriod().equals(hisRelatedMedicationandexitList.get(i).getValidityPeriod())) {
-                    List<HisMediExitDetails> hisMediExitDetails = hisMediExitDetailsMapper.selectByRecordNumberAndDrugsnumbAndValidityPeriod(hisMediExitDetailsList.get(j));
-                    hisRelatedMedicationandexitList.get(i).setExitId(hisMediExitDetails.get(0).getId());
-                    break;
-                }
-            }
-        }
+//        saveForMultiple(hisMediExitDetailsList);
+//        for (int i = 0; i < hisRelatedMedicationandexitList.size(); i++) {
+//            for (int j = 0; j < hisMediExitDetailsList.size(); j++) {
+////                if (hisMediExitDetailsList.get(j).getDrugsNumb().equals(medicationDetailsList.get(i).getDrugsNumb()) && hisMediExitDetailsList.get(j).getValidityPeriod().equals(hisRelatedMedicationandexitList.get(i).getValidityPeriod())) {
+//                    List<HisMediExitDetails> hisMediExitDetails = hisMediExitDetailsMapper.selectByRecordNumberAndDrugsnumbAndValidityPeriod(hisMediExitDetailsList.get(j));
+//                    hisRelatedMedicationandexitList.get(i).setExitId(hisMediExitDetails.get(0).getId());
+//                    break;
+////                }
+//            }
+//        }
         hisMedicationDetailsService.updateBatch(medicationDetailsList);
         hisRelatedMedicationandexitService.saveForMultiple(hisRelatedMedicationandexitList);
         return MessageUtil.createMessage(true, "出库成功");
