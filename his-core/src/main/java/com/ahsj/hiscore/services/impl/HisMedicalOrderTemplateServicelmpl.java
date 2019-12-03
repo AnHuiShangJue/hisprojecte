@@ -1,13 +1,11 @@
 package com.ahsj.hiscore.services.impl;
 
 import com.ahsj.hiscore.core.CodeHelper;
+import com.ahsj.hiscore.dao.HisInfusionMapper;
 import com.ahsj.hiscore.dao.HisMedicalOrderDetailMapper;
 import com.ahsj.hiscore.dao.HisMedicalOrderTemplateDetailMapper;
 import com.ahsj.hiscore.dao.HisMedicalOrderTemplateMapper;
-import com.ahsj.hiscore.entity.HisMedicalOrder;
-import com.ahsj.hiscore.entity.HisMedicalOrderDetail;
-import com.ahsj.hiscore.entity.HisMedicalOrderTemplate;
-import com.ahsj.hiscore.entity.HisMedicalOrderTemplateDetail;
+import com.ahsj.hiscore.entity.*;
 import com.ahsj.hiscore.services.HisMedicalOrderDetailService;
 import com.ahsj.hiscore.services.HisMedicalOrderTemplateDetailService;
 import com.ahsj.hiscore.services.HisMedicalOrderTemplateService;
@@ -39,6 +37,9 @@ public class HisMedicalOrderTemplateServicelmpl implements HisMedicalOrderTempla
 
     @Autowired
     HisMedicalOrderDetailMapper hisMedicalOrderDetailMapper;
+
+    @Autowired
+    HisInfusionMapper hisInfusionMapper;
     /**
      *@Description 医嘱模板分页查询
      *@Params [pageBean]
@@ -225,6 +226,15 @@ public class HisMedicalOrderTemplateServicelmpl implements HisMedicalOrderTempla
             for (HisMedicalOrderDetail hisMedicalOrderDetail : hisMedicalOrderDetailList) {
                 hisMedicalOrderDetail.setStartTime(orderStartTime);
                 hisMedicalOrderDetailMapper.updateByPrimaryKeySelective(hisMedicalOrderDetail);
+                if(!EmptyUtil.Companion.isNullOrEmpty(hisMedicalOrderDetail.getInfusionNumber())){
+                    List<HisInfusion> hisInfusionList = hisInfusionMapper.selectByNumber(hisMedicalOrderDetail.getInfusionNumber());
+                    if(!EmptyUtil.Companion.isNullOrEmpty(hisInfusionList) && hisInfusionList.size()!=0){
+                        for (HisInfusion hisInfusion : hisInfusionList) {
+                            hisInfusion.setStartTimeVarchar(hisMedicalOrderDetail.getStartTime());
+                            hisInfusionMapper.updateByPrimaryKeySelective(hisInfusion);
+                        }
+                    }
+                }
             }
             return MessageUtil.createMessage(true, "设置成功（Set Success）");
         }else {
