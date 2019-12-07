@@ -83,6 +83,8 @@ Scripts
                             trs += "<tr><td><label class='black-text fontsize02'> " + item.name + "</label></td><td ><label class='black-text fontsize02'>" + item.num + "</label></td><td ><label class='black-text fontsize02'> " + item.price + "</label></td><td ><label class='black-text fontsize02'>" + item.total + "</label></td><td ><label class='black-text fontsize02'> " + item.isBackName + "</label></td><td ><label class='black-text fontsize02'> " + item.createDate + "</label></td></tr >";
                             if(item.isBackName != '已退回（already back）'){
                                 totalCost += item.price*item.num
+                            }else {
+                                totalCost += item.price*item.alreadyBack
                             }
 
                         }
