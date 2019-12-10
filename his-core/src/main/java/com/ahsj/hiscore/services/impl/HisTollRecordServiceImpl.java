@@ -132,8 +132,6 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
     }
 
 
-
-
     /**
      * @return com.ahsj.hiscore.entity.HisTollRecordDetails
      * @Description 查询住院收费细节信息
@@ -541,8 +539,6 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         //编号
         String number = createdate + String.format("%05d", count);
         number = "HTR" + number;
-
-
         HisTollRecord hisTollRecord = new HisTollRecord();
         hisTollRecord.setMoney(new BigDecimal(0));
         hisTollRecord.setActualCharge(new BigDecimal(0));
@@ -560,7 +556,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             hisTollDetails.setIsSettlement(2);
             hisTollDetails.setName(h.getDrugsName());
             hisTollDetails.setTargetId(h.getId());
-            hisTollDetails.setMoney(h.getPrice());
+            hisTollDetails.setMoney(h.getPrice().multiply(new BigDecimal(h.getReturnCount())));
             hisTollDetails.setType(4);//药品退费
             hisTollDetails.setTollRecordId(hisTollRecord.getId());
             hisTollDetailsService.insert(hisTollDetails);
