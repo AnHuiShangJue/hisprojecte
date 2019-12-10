@@ -1039,6 +1039,8 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             List<HisRefundProject> refundProjectList = hisRefundProjectMapper.queryHisRefundProject(hisRefundProject);
             for (HisRefundProject h : refundProjectList) {
                 HisRecordProject hisRecordProject1 = hisRecordProjectService.selectByPrimaryKey(h.getRecordProjectId());
+                hisRecordProject1.setIsBack(1);//已退回
+                hisRecordProjectService.update(hisRecordProject1);
                 HisTollDetails hisTollDetails = new HisTollDetails();
                 hisTollDetails.setIsSettlement(2);
                 hisTollDetails.setName(hisRecordProject1.getName());
@@ -1046,7 +1048,6 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
                 hisTollDetails.setMoney(hisRecordProject1.getPrice().multiply(new BigDecimal(h.getRefundNum())));
                 hisTollDetails.setType(5);//项目退费
                 hisTollDetails.setTollRecordId(hisTollRecord.getId());
-                hisTollDetails.toString();
                 hisTollDetailsService.insert(hisTollDetails);
                 h.setIsBack(1);  //将退项目设置为已退
                 hisRefundProjectMapper.updateByHisRefundProjectListBack(refundProjectList);

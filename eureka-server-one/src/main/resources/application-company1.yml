@@ -3,6 +3,7 @@ server:
 
 eureka:
   instance:
+    #请修改成自己IP
     ipAddress: 192.168.0.105
     ## prefer-ip-address: true
     ## 心跳间隔，5秒

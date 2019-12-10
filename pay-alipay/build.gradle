@@ -26,8 +26,7 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-amqp
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-amqp', version: '2.0.4.RELEASE'
-
-
+    
     // https://mvnrepository.com/artifact/io.github.openfeign/feign-httpclient
     compile group: 'io.github.openfeign', name: 'feign-httpclient', version: '9.5.1'
 

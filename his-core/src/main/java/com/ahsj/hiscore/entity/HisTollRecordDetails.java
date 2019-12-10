@@ -52,6 +52,8 @@ public class HisTollRecordDetails extends BaseEntity {
     private Integer isBack;
     private String isBackName;
 
+    private Integer alreadyBack;
+
 
     public Integer getIsBack() {
         return isBack;
@@ -175,5 +177,13 @@ public class HisTollRecordDetails extends BaseEntity {
     @Override
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public Integer getAlreadyBack() {
+        return alreadyBack;
+    }
+
+    public void setAlreadyBack(Integer alreadyBack) {
+        this.alreadyBack = alreadyBack;
     }
 }

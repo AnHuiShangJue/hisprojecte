@@ -395,6 +395,7 @@
     ,a.nurse_id
     ,a.number
     ,a.start_time
+    ,a.start_time_varchar
     ,a.create_date
     ,c.name as nurseName
     from his_infusion as a

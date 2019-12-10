@@ -3,43 +3,88 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
-      <profile name="Maven default annotation processors profile" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="assets.global.js.com.anhuishangjue.js.main~1" target="1.8" />
-      <module name="assets.global.js.com.anhuishangjue.js.main~2" target="1.8" />
-      <module name="assets.global.js.com.anhuishangjue.js.test~1" target="1.8" />
-      <module name="assets.global.js.com.anhuishangjue.js.test~2" target="1.8" />
+      <module name="adamwdraper-Numeral-js-7de892f.com.anhuishangjue.adamwdraper-Numeral-js-7de892f.main" target="1.8" />
+      <module name="adamwdraper-Numeral-js-7de892f.com.anhuishangjue.adamwdraper-Numeral-js-7de892f.test" target="1.8" />
+      <module name="assets.com.anhuishangjue.assets.main" target="1.8" />
+      <module name="assets.com.anhuishangjue.assets.test" target="1.8" />
+      <module name="assets.global.com.anhuishangjue.global.main" target="1.8" />
+      <module name="assets.global.com.anhuishangjue.global.test" target="1.8" />
       <module name="com.ahsj.pay-alipay.main" target="1.8" />
       <module name="com.ahsj.pay-alipay.test" target="1.8" />
       <module name="com.anhuishangjue.adamwdraper-Numeral-js-7de892f.main" target="1.8" />
       <module name="com.anhuishangjue.adamwdraper-Numeral-js-7de892f.test" target="1.8" />
       <module name="com.anhuishangjue.assets.main" target="1.8" />
       <module name="com.anhuishangjue.assets.test" target="1.8" />
+      <module name="com.anhuishangjue.base-sms.main" target="1.8" />
+      <module name="com.anhuishangjue.base-sms.test" target="1.8" />
+      <module name="com.anhuishangjue.base-user-info.main" target="1.8" />
+      <module name="com.anhuishangjue.base-user-info.test" target="1.8" />
+      <module name="com.anhuishangjue.demo.main" target="1.8" />
+      <module name="com.anhuishangjue.demo.test" target="1.8" />
+      <module name="com.anhuishangjue.eureka-server-one.main" target="1.8" />
+      <module name="com.anhuishangjue.eureka-server-one.test" target="1.8" />
+      <module name="com.anhuishangjue.eureka-server-two.main" target="1.8" />
+      <module name="com.anhuishangjue.eureka-server-two.test" target="1.8" />
+      <module name="com.anhuishangjue.eureka_config_server.main" target="1.8" />
+      <module name="com.anhuishangjue.eureka_config_server.test" target="1.8" />
       <module name="com.anhuishangjue.global.main" target="1.8" />
       <module name="com.anhuishangjue.global.test" target="1.8" />
+      <module name="com.anhuishangjue.his-core.main" target="1.8" />
+      <module name="com.anhuishangjue.his-core.test" target="1.8" />
+      <module name="com.anhuishangjue.HIS.main" target="1.8" />
+      <module name="com.anhuishangjue.HIS.test" target="1.8" />
+      <module name="com.anhuishangjue.hystrix-dashboard.main" target="1.8" />
+      <module name="com.anhuishangjue.hystrix-dashboard.test" target="1.8" />
       <module name="com.anhuishangjue.js.main" target="1.8" />
       <module name="com.anhuishangjue.js.test" target="1.8" />
+      <module name="com.anhuishangjue.map.main" target="1.8" />
+      <module name="com.anhuishangjue.map.test" target="1.8" />
+      <module name="com.anhuishangjue.materialize-admin-template.main" target="1.8" />
+      <module name="com.anhuishangjue.materialize-admin-template.test" target="1.8" />
       <module name="com.anhuishangjue.out.main" target="1.8" />
       <module name="com.anhuishangjue.out.test" target="1.8" />
+      <module name="com.anhuishangjue.pay-alipay.main" target="1.8" />
+      <module name="com.anhuishangjue.pay-alipay.test" target="1.8" />
       <module name="com.anhuishangjue.plugins.main" target="1.8" />
       <module name="com.anhuishangjue.plugins.test" target="1.8" />
       <module name="com.anhuishangjue.production.main" target="1.8" />
       <module name="com.anhuishangjue.production.test" target="1.8" />
       <module name="com.anhuishangjue.resources.main" target="1.8" />
       <module name="com.anhuishangjue.resources.test" target="1.8" />
-      <module name="com.anhuishangjue.static.assets.main" target="1.8" />
-      <module name="com.anhuishangjue.static.assets.test" target="1.8" />
+      <module name="com.anhuishangjue.security-authorization-server.main" target="1.8" />
+      <module name="com.anhuishangjue.security-authorization-server.test" target="1.8" />
+      <module name="com.anhuishangjue.smartpark-core.main" target="1.8" />
+      <module name="com.anhuishangjue.smartpark-core.test" target="1.8" />
       <module name="com.anhuishangjue.static.main" target="1.8" />
       <module name="com.anhuishangjue.static.test" target="1.8" />
-      <module name="global.js.plugins.com.anhuishangjue.plugins.main~1" target="1.8" />
-      <module name="global.js.plugins.com.anhuishangjue.plugins.main~2" target="1.8" />
-      <module name="global.js.plugins.com.anhuishangjue.plugins.test~1" target="1.8" />
-      <module name="global.js.plugins.com.anhuishangjue.plugins.test~2" target="1.8" />
+      <module name="com.anhuishangjue.sys-base.main" target="1.8" />
+      <module name="com.anhuishangjue.sys-base.test" target="1.8" />
+      <module name="com.anhuishangjue.sys-security.main" target="1.8" />
+      <module name="com.anhuishangjue.sys-security.test" target="1.8" />
+      <module name="com.anhuishangjue.sysuserinfo.main" target="1.8" />
+      <module name="com.anhuishangjue.sysuserinfo.test" target="1.8" />
+      <module name="com.anhuishangjue.translate.main" target="1.8" />
+      <module name="com.anhuishangjue.translate.test" target="1.8" />
+      <module name="com.anhuishangjue.user-infor.main" target="1.8" />
+      <module name="com.anhuishangjue.user-infor.test" target="1.8" />
+      <module name="com.anhuishangjue.wis.main" target="1.8" />
+      <module name="com.anhuishangjue.wis.test" target="1.8" />
+      <module name="com.anhuishangjue.wisdom.main" target="1.8" />
+      <module name="com.anhuishangjue.wisdom.test" target="1.8" />
+      <module name="com.anhuishangjue.wx-applet.main" target="1.8" />
+      <module name="com.anhuishangjue.wx-applet.test" target="1.8" />
+      <module name="com.anhuishangjue.zuul-his.main" target="1.8" />
+      <module name="com.anhuishangjue.zuul-his.test" target="1.8" />
+      <module name="com.anhuishangjue.zuul-outer-one.main" target="1.8" />
+      <module name="com.anhuishangjue.zuul-outer-one.test" target="1.8" />
+      <module name="com.anhuishangjue.zuulsmartpark.main" target="1.8" />
+      <module name="com.anhuishangjue.zuulsmartpark.test" target="1.8" />
+      <module name="global.com.anhuishangjue.global.main" target="1.8" />
+      <module name="global.com.anhuishangjue.global.test" target="1.8" />
+      <module name="global.js.com.anhuishangjue.js.main" target="1.8" />
+      <module name="global.js.com.anhuishangjue.js.test" target="1.8" />
       <module name="hisprojecte.AHSJTemp.main" target="1.8" />
       <module name="hisprojecte.AHSJTemp.node_modules.acorn-globals.main" target="1.8" />
       <module name="hisprojecte.AHSJTemp.node_modules.acorn-globals.node_modules.acorn.main" target="1.8" />
@@ -69,40 +114,28 @@
       <module name="hisprojecte.sys-user-info.main" target="1.8" />
       <module name="hisprojecte.sys-user-info.test" target="1.8" />
       <module name="hisprojecte.zuulsmartpark.main" target="1.8" />
-      <module name="js.plugins.adamwdraper-Numeral-js-7de892f.com.anhuishangjue.adamwdraper-Numeral-js-7de892f.main~1" target="1.8" />
-      <module name="js.plugins.adamwdraper-Numeral-js-7de892f.com.anhuishangjue.adamwdraper-Numeral-js-7de892f.main~2" target="1.8" />
-      <module name="js.plugins.adamwdraper-Numeral-js-7de892f.com.anhuishangjue.adamwdraper-Numeral-js-7de892f.test~1" target="1.8" />
-      <module name="js.plugins.adamwdraper-Numeral-js-7de892f.com.anhuishangjue.adamwdraper-Numeral-js-7de892f.test~2" target="1.8" />
-      <module name="out.production.com.anhuishangjue.production.main" target="1.8" />
-      <module name="out.production.com.anhuishangjue.production.test" target="1.8" />
-      <module name="out.production.resources.com.anhuishangjue.resources.main" target="1.8" />
-      <module name="out.production.resources.com.anhuishangjue.resources.test" target="1.8" />
-      <module name="production.resources.static.com.anhuishangjue.static.main" target="1.8" />
-      <module name="production.resources.static.com.anhuishangjue.static.test" target="1.8" />
+      <module name="js.com.anhuishangjue.js.main" target="1.8" />
+      <module name="js.com.anhuishangjue.js.test" target="1.8" />
+      <module name="js.plugins.com.anhuishangjue.plugins.main" target="1.8" />
+      <module name="js.plugins.com.anhuishangjue.plugins.test" target="1.8" />
+      <module name="out.com.anhuishangjue.out.main" target="1.8" />
+      <module name="out.com.anhuishangjue.out.test" target="1.8" />
+      <module name="plugins.adamwdraper-Numeral-js-7de892f.com.anhuishangjue.adamwdraper-Numeral-js-7de892f.main" target="1.8" />
+      <module name="plugins.adamwdraper-Numeral-js-7de892f.com.anhuishangjue.adamwdraper-Numeral-js-7de892f.test" target="1.8" />
+      <module name="plugins.com.anhuishangjue.plugins.main" target="1.8" />
+      <module name="plugins.com.anhuishangjue.plugins.test" target="1.8" />
+      <module name="production.com.anhuishangjue.production.main" target="1.8" />
+      <module name="production.com.anhuishangjue.production.test" target="1.8" />
       <module name="resources.assets.com.anhuishangjue.assets.main" target="1.8" />
       <module name="resources.assets.com.anhuishangjue.assets.test" target="1.8" />
-      <module name="resources.assets.global.com.anhuishangjue.global.main" target="1.8" />
-      <module name="resources.assets.global.com.anhuishangjue.global.test" target="1.8" />
-      <module name="resources.static.assets.com.anhuishangjue.assets.main" target="1.8" />
-      <module name="resources.static.assets.com.anhuishangjue.assets.main~1" target="1.8" />
-      <module name="resources.static.assets.com.anhuishangjue.assets.test" target="1.8" />
-      <module name="resources.static.assets.com.anhuishangjue.assets.test~1" target="1.8" />
-      <module name="static.assets.global.com.anhuishangjue.global.main~1" target="1.8" />
-      <module name="static.assets.global.com.anhuishangjue.global.main~2" target="1.8" />
-      <module name="static.assets.global.com.anhuishangjue.global.test~1" target="1.8" />
-      <module name="static.assets.global.com.anhuishangjue.global.test~2" target="1.8" />
-      <module name="static.assets.global.js.com.anhuishangjue.js.main" target="1.8" />
-      <module name="static.assets.global.js.com.anhuishangjue.js.test" target="1.8" />
-      <module name="wisdom.out.com.anhuishangjue.out.main" target="1.8" />
-      <module name="wisdom.out.com.anhuishangjue.out.test" target="1.8" />
-      <module name="wisdom_gulf" target="1.8" />
+      <module name="resources.com.anhuishangjue.resources.main" target="1.8" />
+      <module name="resources.com.anhuishangjue.resources.test" target="1.8" />
+      <module name="static.assets.com.anhuishangjue.assets.main" target="1.8" />
+      <module name="static.assets.com.anhuishangjue.assets.test" target="1.8" />
+      <module name="static.com.anhuishangjue.static.main" target="1.8" />
+      <module name="static.com.anhuishangjue.static.test" target="1.8" />
       <module name="zuulsmartpark.main" target="1.8" />
       <module name="zuulsmartpark.test" target="1.8" />
     </bytecodeTargetLevel>
-  </component>
-  <component name="JavacSettings">
-    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="wisdom_gulf" options="-parameters" />
-    </option>
   </component>
 </project>

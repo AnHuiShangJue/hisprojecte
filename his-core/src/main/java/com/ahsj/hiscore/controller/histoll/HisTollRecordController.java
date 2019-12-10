@@ -619,6 +619,7 @@ public class HisTollRecordController extends BaseController {
     @ResponseBody
     List<HisTollRecordDetails> printAllInformations(String token, String HRNumber) throws Exception {
         List<HisTollRecordDetails> hisTollRecordDetails = hisTollRecordService.selectAllInformationByHRNumber(HRNumber);
+
         return hisTollRecordDetails;
     }
 }

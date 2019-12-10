@@ -298,11 +298,11 @@ public class HisPharmacyDetailServicelmpl implements HisPharmacyDetailService {
             List<HisMedicationDetails> tmps = new ArrayList<HisMedicationDetails>();
             inner:
             for (int j = i; j < hisMedicationDetailsList.size(); j++) {
-                if (hisMedicationDetailsList.get(i).getDrugsNumb().equals(hisMedicationDetailsList.get(j).getDrugsNumb())) {
+                if (hisMedicationDetailsList.get(i).getId().equals(hisMedicationDetailsList.get(j).getId())) {
                     tmps.add(hisMedicationDetailsList.get(j));
-//                    if (i != j)
-//                        continueCounts++;
-//                } else {
+                    if (i != j)
+                        continueCounts++;
+                } else {
                     break inner;
                 }
             }

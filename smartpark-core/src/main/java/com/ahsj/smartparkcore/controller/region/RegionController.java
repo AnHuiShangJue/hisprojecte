@@ -40,7 +40,7 @@ public class RegionController extends BaseController {
      * @Date 2019/10/17
      * @Time 9:25
      **/
-    @PostMapping("/add/accessinfo.ahsj")
+    @RequestMapping("/add/accessinfo.ahsj")
     public ResponseEntity<Message> addRegion(Region region) throws Exception {
         Message message = regionService.addRegion(region);
         return new ResponseEntity<>((message), HttpStatus.OK);
@@ -54,13 +54,13 @@ public class RegionController extends BaseController {
      * @Date 2019/10/17
      * @Time 10:34
      **/
-    @PostMapping("/queryRegion.ahsj")
+    @RequestMapping("/queryRegion.ahsj")
     public ResponseEntity<List<Region>> queryRegion(Region region) throws Exception {
         List<Region> list = regionService.queryRegion(region);
         return new ResponseEntity<>((list), HttpStatus.OK);
     }
 
-    @GetMapping("/queryRegions.ahsj")
+    @RequestMapping("/queryRegions.ahsj")
     public ResponseEntity<String> enterpriseInfoAllSelect(Region region, String token) throws Exception {
         List<Region> list = regionService.queryRegion(region);
         String toJSONString = JSON.toJSONString(list);

@@ -78,15 +78,18 @@ public class PatientServiceImpl implements HisPatientService {
             } else {
                 UserInfo userInfo = new UserInfo();
                 HisPatientInfo hisPatientInfo2 = new HisPatientInfo();
-                hisPatientInfo2.setIdcard("未提供身份证");
                 if (EmptyUtil.Companion.isNullOrEmpty(hisPatientInfo.getIdcard())){
+
+                    hisPatientInfo2.setIdcard("未提供身份证");
                     List<HisPatientInfo> hisPatientInfos =  hisPatientInfoMapper.hisPatientInfoAllOrder(hisPatientInfo2);
                     if (EmptyUtil.Companion.isNullOrEmpty(hisPatientInfos)){
                         hisPatientInfo.setIdcard("未提供身份证"+1);
                     }else {
-                        HisPatientInfo hisPatientInfo1 = hisPatientInfos.get(0);
-                        String substring = StringUtils.substring(hisPatientInfo1.getIdcard(), 6);
-                        Integer idNum =Integer.valueOf(substring);
+
+//                        HisPatientInfo hisPatientInfo1 = hisPatientInfos.get(0);
+//                        String substring = StringUtils.substring(hisPatientInfo1.getIdcard(), 6);
+                       // Integer idNum =Integer.valueOf(substring);
+                        Integer  idNum= hisPatientInfos.size();
                         boolean flag = true;
                         while(flag){
                             idNum = idNum+1;

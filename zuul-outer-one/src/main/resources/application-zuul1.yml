@@ -3,7 +3,8 @@ server:
 
 eureka:
   instance:
-    ipAddress: 192.168.0.125
+    #请修改成自己IP
+    ipAddress: 192.168.0.105
     prefer-ip-address: true
     ## 心跳间隔，5秒
     lease-renewal-interval-in-seconds: 5
@@ -64,6 +65,10 @@ zuul:
       path: /hiscore/**
       sensitiveHeaders: "*"
       serviceId: his-core
+    his-translate:
+      path: /histranslate/**
+      sensitiveHeaders: "*"
+      serviceId: his-translate
   retryable: true #让Ribbon客户端自动重试失败的请求
   add-proxy-headers: true #添加代理头
 

@@ -44,7 +44,7 @@
     delete from his_medi_exit_details
     where id = #{id,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisMediExitDetails">
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisMediExitDetails" useGeneratedKeys="true" keyProperty="id">
     insert into his_medi_exit_details (id, pharmacy_id, exit_count, 
       validity_period, create_user_id, create_date, 
       update_user_id, update_date, description, 
