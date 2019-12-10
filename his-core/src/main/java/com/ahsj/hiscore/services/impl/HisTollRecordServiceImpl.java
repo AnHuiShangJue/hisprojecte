@@ -249,7 +249,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
     }
 
     /**
-     * @param Message
+     * @param
      * @return
      * @Description 住院押金充值
      * @Author: czc
@@ -560,7 +560,8 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             hisTollDetails.setIsSettlement(2);
             hisTollDetails.setName(h.getDrugsName());
             hisTollDetails.setTargetId(h.getId());
-            hisTollDetails.setMoney(h.getPrice());
+//            hisTollDetails.setMoney(h.getPrice());
+            hisTollDetails.setMoney(h.getPrice().multiply(new BigDecimal(h.getReturnCount())));
             hisTollDetails.setType(4);//药品退费
             hisTollDetails.setTollRecordId(hisTollRecord.getId());
             hisTollDetailsService.insert(hisTollDetails);

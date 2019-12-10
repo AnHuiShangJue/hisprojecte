@@ -84,7 +84,7 @@ Scripts
                             if(item.isBackName != '已退回（already back）'){
                                 totalCost += item.price*item.num
                             }else {
-                                totalCost += item.price*item.alreadyBack
+                                totalCost += item.price*(item.num - item.alreadyBack)
                             }
 
                         }
