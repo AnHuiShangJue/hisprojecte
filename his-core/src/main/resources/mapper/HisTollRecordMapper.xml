@@ -1069,7 +1069,7 @@ select  c.name as name,c.num as num,c.price as price,(c.num*c.price) as total,c.
 from his_hospital_manage as a
 left join his_medical_record as b on a.medical_number = b.medical_record_id
 left join his_record_project as c on b.id = c.record_id
-left join his_refund_project as d on c.id = d.refund_num
+left join his_refund_project as d on c.id = d.record_project_id
 where a.number=#{hrNumber}
 
 UNION ALL

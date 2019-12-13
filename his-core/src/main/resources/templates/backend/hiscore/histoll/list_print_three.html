@@ -267,8 +267,8 @@ Scripts
                 $("#totalPrices").html(jsons.totalPrices.toFixed(2));
                 //    $("#createDate").html(jsons.createDate);
                 $("#recoverTheFee").html(jsons.recoverTheFee.toFixed(2));
-                $("#money").html(jsons.money);
-                $("#drugFee").html(jsons.drugFee);
+                $("#money").html(0);
+                $("#drugFee").html(0);
 
                 $("#depositRecharge").html((jsons.totalPrices - jsons.money).toFixed(2));
                 if (!isNullOrEmpty(jsons)) {//有
@@ -337,9 +337,9 @@ Scripts
             CTX + "/api/hisTollDetails/printShowThere/index.ahsj",
             {"number": number},
             function (data) {
-                $("#nursingFee").html(data.nursingFee);
-                $("#examinationFee").html(data.examinationFee);
-                $("#ObserveFee").html(data.observeFee);
+                $("#nursingFee").html(0);
+                $("#examinationFee").html(0);
+                $("#ObserveFee").html(0);
                 //$("#department").html(data.departmentIdName);
             },
             function () {
