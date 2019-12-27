@@ -266,8 +266,9 @@
                         "render": function (data, type, row) {
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
+                            var name = row.name.replace(/ /g,",");
                             rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"添加至待入库\" href='javascript:;' onclick=add("
-                                + row.id + ",'" + row.number + "','" + row.name + "','" + row.assitTypeName + "','" + row.price + "');>" +
+                                + row.id + ",'" + row.number + "','" + name + "','" + row.assitTypeName + "','" + row.price + "');>" +
                                 " <i class='material-icons'>add</i></a>";
                             // 返回自定义内容
                             return rtnBtn;
@@ -345,6 +346,7 @@
 
     //添加到list里
     function add(id, number, name, assitTypeName, price, num) {
+        name =name.replace(/,/g," ");
         var selectRowsIds = gridEnterList.getIds();
         if (selectRowsIds.length !== 0) {
             for (var k = 0; k < selectRowsIds.length; k++) {

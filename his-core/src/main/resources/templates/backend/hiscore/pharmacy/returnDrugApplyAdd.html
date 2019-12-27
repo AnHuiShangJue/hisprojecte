@@ -288,9 +288,11 @@
                         "orderable": false,
                         "render": function (data, type, row) {
                             var rtnBtn = "";
+                            var drugsName = row.drugsName.replace(/ /g,",");
+                            var drugsSpec = row.drugsSpec.replace(/ /g,",");
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn + "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"添加至待入库\" href='javascript:;' onclick=add("
-                                + row.id + ",'" + row.drugsNumb + "','" + row.drugsName + "','" + row.drugsSpec + "','"+row.validityPeriod+"');>" +
+                                + row.id + ",'" + row.drugsNumb + "','" + drugsName + "','" + drugsSpec + "','"+row.validityPeriod+"');>" +
                                 " <i class='material-icons'>add</i></a>";
                             // 返回自定义内容
                             return rtnBtn;
@@ -361,6 +363,8 @@
 
     //添加到list里
     function add(id, drugsNumb, drugsName, drugsSpec,validityPeriod ) {
+        drugsName = drugsName.replace(/,/g," ");
+        drugsSpec = drugsSpec.replace(/,/g," ");
         var selectRowsIds = gridEnterList.getIds();
         if (selectRowsIds.length !== 0) {
             for (var k = 0; k < selectRowsIds.length; k++) {
