@@ -29,7 +29,7 @@ public class QuartzJob {
 
     @Autowired
     TranslateInfoService translateInfoService;
-    
+
     @Autowired
     HisProjectService hisProjectService;
 
@@ -63,7 +63,7 @@ public class QuartzJob {
         logger.info("-------------------结束日结-----------------------");
     }
 
-//    @Scheduled(cron = "0/5 * * * * ?")
+//    @Scheduled(cron = "0/30 * * * * ?")
     @Scheduled(cron = "0 59 2 * * ?")
     public void job() {
         logger.info("-------------------开始住院数据操作-----------------------");
@@ -136,8 +136,8 @@ public class QuartzJob {
 
     /**
      *@Description 为所有正在住院的病人根据他们的长期医嘱每天定时生成对应的药品与项目收费明细（长期医嘱医生只需开一天的量即可）
-     *@Params 
-     *@return 
+     *@Params
+     *@return
      *@Author zhushixiang
      *@Date 2019-10-04
      *@Time 23:42
@@ -159,15 +159,15 @@ public class QuartzJob {
      *@Date 2019-10-10
      *@Time 9:24
     **/
-    //每月1号凌晨2:00自动关闭
-    @Scheduled(cron = "0 0 2 1 * *")
-//    @Scheduled(cron = "30 * * * * ?")
-    public void TimedOff()throws Exception {
-        logger.info("-------------------定时关闭启动-----------------------");
-        iSecurityService.systemShutdownService();
-        logger.info("-------------------关闭完成-----------------------");
-    }
-    
+//    //每月1号凌晨2:00自动关闭
+//    @Scheduled(cron = "0 0 2 1 * *")
+////    @Scheduled(cron = "30 * * * * ?")
+//    public void TimedOff()throws Exception {
+//        logger.info("-------------------定时关闭启动-----------------------");
+//        iSecurityService.systemShutdownService();
+//        logger.info("-------------------关闭完成-----------------------");
+//    }
+
     /**
      *@功能说明  将没有翻译的项目筛选进行翻译
      *@Params []
@@ -182,4 +182,3 @@ public class QuartzJob {
     }
 }
 
-    
