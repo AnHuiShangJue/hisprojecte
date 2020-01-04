@@ -19,6 +19,7 @@
       data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
 <div class="row" style="padding: 0;margin:0">
     <div class="row valign-wrapper">
+        <img th:src="@{/hiscore/assets/logo.jpg}" style="width: 100px">
         <div class="col s12 m12 l12 center" style="margin: 0 auto">
             <h4 style="text-align: center;padding: 0;margin: 0;font-size: 1px">中柬第一医院住院收费总结</h4>
             <p style="text-align: center;padding: 0;margin: 0;font-size: 1px">The first china-cambodia hospital summary of charges</p>
@@ -40,6 +41,8 @@
                     <td><label class="black-text"  style="padding: 0;" id="deposit" ></label></td>
                     <td><label class="black-text fontsize01">总应补缴费用(Payment fee)</label></td>
                     <td><label class="black-text"  style="padding: 0;" id="fee"></label></td>
+                    <td><label class="black-text fontsize01">主治医师姓名(doctorName)</label></td>
+                    <td><label class="black-text"  style="padding: 0;" id="doctorName" ></label></td>
                 </tr>
                 <!--<tr>-->
                     <!--<td colspan="2" style="text-align: center"><label class="black-text fontsize01">收费明细(Charge details)</label></td>-->
@@ -75,11 +78,13 @@ Scripts
             function (data) {
                 if (!isNullOrEmpty(data)) {
                     var patientName;//有
+                    var doctorName;
                     var totalCost = 0;
                     var trs = "<tr><td><label class='black-text'>名称(name)</label></td><td><label class='black-text'>数量(num)</label></td><td><label class='black-text'>单价(price)</label></td><td><label class='black-text'>总价(total price)</label></td><td><label class='black-text'>是否退回(isBack)</label></td><td><label class='black-text'>时间(time)</label></td></tr>";
                     $.each(data, function (index, item) {
                         if(!isNullOrEmpty(item)){
                             patientName = item.patientName;
+                            doctorName =item.doctorName;
                             trs += "<tr><td><label class='black-text fontsize02'> " + item.name + "</label></td><td ><label class='black-text fontsize02'>" + item.num + "</label></td><td ><label class='black-text fontsize02'> " + item.price + "</label></td><td ><label class='black-text fontsize02'>" + item.total + "</label></td><td ><label class='black-text fontsize02'> " + item.isBackName + "</label></td><td ><label class='black-text fontsize02'> " + item.createDate + "</label></td></tr >";
                             if(item.isBackName != '已退回（already back）'){
                                 totalCost += item.price*item.num
@@ -91,6 +96,7 @@ Scripts
                     });
                     // var jsons = data[0];
                     $("#name").html(patientName);
+                    $("#doctorName").html(doctorName);
                     totalCost = totalCost.toFixed(2);
                     $("#totalCost").html(totalCost);
                     // $("#createDate").html(jsons.createDate);

@@ -22,17 +22,19 @@
       data-open="click" data-menu="vertical-menu-nav-dark" data-col="2-columns">
 
 <div class="row" style="padding: 0;margin:0">
-    <div class="row valign-wrapper" style="margin: 0 auto">
-        <div class="col s12 m12 l12" th:if="${type} eq 1">
+    <div class="row valign-wrapper" style="margin: 0 auto" >
+        <div class="col s6 m6 l6">
+            <img src="../../../../static/assets/image/logo.jpg" alt="LOGO" height="187" width="227"/>
+        </div>
+        <div class="col s6 m6 l6" th:if="${type} eq 1">
             <label style="font-size: 1px">财务联(Financial union)</label>
 
         </div>
-        <div class="col s12 m12 l12" th:if="${type} eq 2">
+        <div class="col s6 m6 l6" th:if="${type} eq 2">
             <label style="font-size: 1px">科室联(Department)</label>
         </div>
-        <div class="col s12 m12 l12" th:if="${type} eq 3">
+        <div class="col s6 m6 l6" th:if="${type} eq 3">
             <label style="font-size: 1px">自由联(Free association)</label>
-
         </div>
     </div>
     <div class="row valign-wrapper">
