@@ -516,6 +516,20 @@
                     </if>
                 </foreach>
             </trim>
+            <trim prefix="count=case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.count!=null">
+                        when id=#{item.id} then #{item.count}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="total_price=case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.totalPrice!=null">
+                        when id=#{item.id} then #{item.totalPrice}
+                    </if>
+                </foreach>
+            </trim>
         </trim>
         where
         <foreach collection="list" separator="or" item="item" index="index">

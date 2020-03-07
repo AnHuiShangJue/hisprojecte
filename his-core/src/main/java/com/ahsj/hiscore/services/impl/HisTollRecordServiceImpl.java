@@ -338,7 +338,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             if (h1.getType().equals(2)) {
                 HisRecordProject tmp = new HisRecordProject();
                 tmp.setId(h1.getTargetId());
-
+                tmp.setPrice(h1.getPrice());
                 tmp.setIsPayed(new Short("1"));
                 hisRecordProjects.add(tmp);
             }
@@ -359,6 +359,8 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
                 HisMedicationDetails tmp = new HisMedicationDetails();
                 tmp.setId(h1.getTargetId());
                 tmp.setIsPay(1);
+                tmp.setTotalPrice(h1.getMoney());
+                    tmp.setCount(h1.getNum());
                 hisMedicationDetails.add(tmp);
             }
         }

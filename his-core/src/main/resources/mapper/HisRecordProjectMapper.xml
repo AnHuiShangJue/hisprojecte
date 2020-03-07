@@ -38,8 +38,8 @@
         <result column="remarks" property="remarks"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, record_id, create_date, create_user_id, update_date, update_user_id, name, description, 
-    type, price, number, pinyin_code, unit, department_id, check_description, check_number, 
+    id, record_id, create_date, create_user_id, update_date, update_user_id, name, description,
+    type, price, number, pinyin_code, unit, department_id, check_description, check_number,
     is_checked, is_payed, project_id,num,is_back
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
@@ -54,19 +54,19 @@
   </delete>
     <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisRecordProject" useGeneratedKeys="true"
             keyProperty="id">
-    insert into his_record_project (id, record_id, create_date, 
-      create_user_id, update_date, update_user_id, 
-      name, description, type, 
-      price, number, pinyin_code, 
-      unit, department_id, check_description, 
-      check_number, is_checked, is_payed, 
+    insert into his_record_project (id, record_id, create_date,
+      create_user_id, update_date, update_user_id,
+      name, description, type,
+      price, number, pinyin_code,
+      unit, department_id, check_description,
+      check_number, is_checked, is_payed,
       project_id,num,is_back)
-    values (#{id,jdbcType=BIGINT}, #{recordId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{createUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, 
-      #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{type,jdbcType=SMALLINT}, 
+    values (#{id,jdbcType=BIGINT}, #{recordId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP},
+      #{createUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT},
+      #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{type,jdbcType=SMALLINT},
       #{price,jdbcType=DECIMAL}, #{number,jdbcType=VARCHAR}, #{pinyinCode,jdbcType=VARCHAR},
-      #{unit,jdbcType=VARCHAR}, #{departmentId,jdbcType=BIGINT}, #{checkDescription,jdbcType=VARCHAR}, 
-      #{checkNumber,jdbcType=BIGINT}, #{isChecked,jdbcType=SMALLINT}, #{isPayed,jdbcType=SMALLINT}, 
+      #{unit,jdbcType=VARCHAR}, #{departmentId,jdbcType=BIGINT}, #{checkDescription,jdbcType=VARCHAR},
+      #{checkNumber,jdbcType=BIGINT}, #{isChecked,jdbcType=SMALLINT}, #{isPayed,jdbcType=SMALLINT},
       #{projectId,jdbcType=BIGINT},
       #{num,jdbcType=INTEGER},#{isBack,jdbcType=SMALLINT}
       )
@@ -349,6 +349,13 @@
                 <foreach collection="list" item="item" index="index">
                     <if test="item.isPayed!=null">
                         when id=#{item.id} then #{item.isPayed}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="price=case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.price!=null">
+                        when id=#{item.id} then #{item.price}
                     </if>
                 </foreach>
             </trim>

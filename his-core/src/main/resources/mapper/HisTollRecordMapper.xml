@@ -1056,12 +1056,11 @@ from  his_toll_record as t
         select a.name,a.num,a.price,a.total,a.create_date,a.patient_name,a.is_back as isBack,a.doctorName,
         case when a.is_back = 1 then '已退回（already back）' else '' end as isBackName,a.alreadyBack
 from(
-select c.drugs_name as name,c.count as num,(c.total_price/c.count) as price,(c.count*d.sale_price)as total,c.create_date as create_date,a.patient_name as patient_name,c.is_back as is_back,e.return_count as alreadyBack
+select c.drugs_name as name,c.count as num,(c.total_price/c.count) as price,c.total_price as total,c.create_date as create_date,a.patient_name as patient_name,c.is_back as is_back,e.return_count as alreadyBack
 ,f.user_name as doctorName
 from his_hospital_manage as a
 left join his_medical_record as b on a.medical_number = b.medical_record_id
 left join his_medication_details as c on b.id = c.medical_record_id
-left join his_pharmacy_detail as d on c.medication_id = d.id
 left join his_application_for_drug_return_details as e on c.id = e.medication_detail_id
 left join `his-userinfo`.user_info as f on a.doctor_id = f.id
 where a.number = #{hrNumber}
