@@ -539,22 +539,15 @@
 
     <!--根据就诊编号查看用药明细-->
     <select id="listForMedicationDetailsByNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select distinct a.drugs_numb,a.drugs_name,a.drugs_spec,a.count,a.total_price,a.is_pay,a.is_out,a.id,z.surplus as surplus,
-           z.validity_period as validityPeriod,z.id as mediEnterId,z.medical_record_id as recordNumber,d.number as tollNumber,a.description as description
-    FROM his_medication_details as a
-           left join his_medical_record as b on a.medical_record_id = b.id
-           left join(
-        select b.drugs_numb as drugs_numb,b.validity_period as validity_period,b.id as id,c.medical_record_id as medical_record_id,b.surplus as surplus
-        FROM his_medication_details as a
-               left join his_medi_enter_details as b on a.drugs_numb = b.drugs_numb
-               left join his_medical_record as c  on c.id = a.medical_record_id
-        WHERE c.medical_record_id =#{medicalRecordId,jdbcType=VARCHAR} and b.surplus &gt; 0 and b.validity_period &gt;= CURRENT_DATE
-      )z on z.drugs_numb =a.drugs_numb
-           left join his_toll_details as c on a.id = c.target_id
-           left join his_toll_record as d on c.toll_record_id = d.id
-    WHERE a.is_out = 2 and a.is_pay=1 and b.medical_record_id = #{medicalRecordId,jdbcType=VARCHAR}
-    order by a.drugs_numb,z.validity_period
-  </select>
+select a.drugs_numb,a.drugs_name,a.drugs_spec,a.count,a.total_price,a.is_pay,a.is_out,a.id,c.surplus
+    as surplus, c.validity_period as validityPeriod,c.id as mediEnterId,b.medical_record_id as
+       recordNumber,a.description as description
+from his_medication_details as a
+         left join his_medical_record as b on a.medical_record_id = b.id
+         left join his_medi_enter_details as c on a.drugs_numb = c.drugs_numb
+where is_pay = 1 and is_out = 2 and b.medical_record_id =#{medicalRecordId,jdbcType=VARCHAR} and c.surplus> 0 and c.validity_period >=CURRENT_DATE
+order by a.drugs_numb,c.validity_period
+    </select>
     <!--批量更新-->
     <update id="updateBatch" parameterType="list">
         update his_medication_details

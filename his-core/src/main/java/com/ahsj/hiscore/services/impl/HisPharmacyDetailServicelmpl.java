@@ -283,10 +283,9 @@ public class HisPharmacyDetailServicelmpl implements HisPharmacyDetailService {
         } else
             return null;
         List<HisMedicationDetails> hisMedicationDetailsList = hisMedicationDetailsMapper.listForMedicationDetailsByNumber(numberForExit);
-
-            if (EmptyUtil.Companion.isNullOrEmpty(hisMedicationDetailsList) && hisMedicationDetailsList.size() == 0)
+        if (EmptyUtil.Companion.isNullOrEmpty(hisMedicationDetailsList) && hisMedicationDetailsList.size() == 0){
             return hisMedicationDetailsList;
-
+        }
         List<HisMedicationDetails> sendDatas = new ArrayList<HisMedicationDetails>();
         int continueCounts = 0;
         Outer:
