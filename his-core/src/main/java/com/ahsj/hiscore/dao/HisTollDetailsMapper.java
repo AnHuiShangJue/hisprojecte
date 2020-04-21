@@ -117,4 +117,14 @@ public interface HisTollDetailsMapper extends BaseMapper<HisTollDetails> {
     HisTollDetails getPriceByNumber(String number) throws Exception;
 
     List<HisTollDetails> printShowThere(@Param("number") String number);
+
+    /**
+     *@Description 计算出院总费用
+     *@Params [medicalRecordId]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisTollDetails>
+     *@Author zhushixiang
+     *@Date 2020-04-21
+     *@Time 19:15
+    **/
+    List<HisTollDetails> listByNumberForLeave(String medicalRecordId);
 }

@@ -366,11 +366,11 @@ Scripts
 
     function printShow3() {
         $.ahsjajax(
-            CTX + "/api/hisTollDetails/printShowLeave/index.ahsj",
+            CTX + "/api/hisTollDetails/printShowLeave/index1.ahsj",
             {"number": number},
             function (data) {
-                var jsons = data[0];
-                $("#toll").html(jsons.toll);
+                console.log('data is',data)
+                $("#toll").html(data);
                 // $("#toll1").html(jsons.toll);
             },
             function () {

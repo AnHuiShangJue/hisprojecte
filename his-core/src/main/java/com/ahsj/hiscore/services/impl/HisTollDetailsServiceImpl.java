@@ -3,12 +3,15 @@ package com.ahsj.hiscore.services.impl;
 import com.ahsj.hiscore.common.Constants;
 import com.ahsj.hiscore.core.CodeHelper;
 import com.ahsj.hiscore.dao.HisTollDetailsMapper;
+import com.ahsj.hiscore.dao.HisTollRecordMapper;
 import com.ahsj.hiscore.entity.HisMedicineInfo;
 import com.ahsj.hiscore.entity.HisTollDetails;
+import com.ahsj.hiscore.entity.HisTollRecord;
 import com.ahsj.hiscore.entity.Translate;
 import com.ahsj.hiscore.feign.ITranslateService;
 import com.ahsj.hiscore.services.HisMedicineInfoService;
 import com.ahsj.hiscore.services.HisTollDetailsService;
+import com.ahsj.hiscore.services.HisTollRecordService;
 import core.entity.PageBean;
 import core.message.Message;
 import core.message.MessageUtil;
@@ -38,6 +41,8 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
 
     @Autowired
     HisMedicineInfoService hisMedicineInfoService;
+    @Autowired
+    HisTollRecordMapper hisTollRecordMapper;
 
     @Override
     public int insertSelective(HisTollDetails record) throws Exception {
@@ -394,5 +399,37 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
             }
         }
         return hs;
+    }
+
+    /**
+     *@Description 计算出院总费用
+     *@Params [number]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisTollDetails>
+     *@Author zhushixiang
+     *@Date 2020-04-21
+     *@Time 19:11
+    **/
+    @Override
+    @Transactional(readOnly = true)
+    public BigDecimal listByNumberForLeave(String number) {
+        HisTollRecord hisTollRecord = hisTollRecordMapper.selectByNumber(number);
+        if(EmptyUtil.Companion.isNullOrEmpty(hisTollRecord)){
+            return null;
+        }
+        BigDecimal toll = new BigDecimal(0);
+        List<HisTollDetails> hisTollDetailsList = hisTollDetailsMapper.listByNumberForLeave(hisTollRecord.getMedicalRecordId());
+        if(!EmptyUtil.Companion.isNullOrEmpty(hisTollDetailsList)){
+            for (HisTollDetails hisTollDetails : hisTollDetailsList) {
+                if(EmptyUtil.Companion.isNullOrEmpty(hisTollDetails)){
+                    continue;
+                }
+                if(hisTollDetails.getType() == 1 || hisTollDetails.getType() == 2 || hisTollDetails.getType() == 3){
+                    toll = toll.add(hisTollDetails.getMoney());
+                }else if(hisTollDetails.getType() == 4 || hisTollDetails.getType() == 5 ){
+                    toll = toll.subtract(hisTollDetails.getMoney());
+                }
+            }
+        }
+        return toll;
     }
 }

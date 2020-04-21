@@ -4,6 +4,7 @@ import com.ahsj.hiscore.entity.HisTollDetails;
 import core.entity.PageBean;
 import core.message.Message;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -146,4 +147,6 @@ public interface HisTollDetailsService {
    HisTollDetails listByNumberFor(String number) throws Exception;
 
     HisTollDetails printShowThere(String number) throws Exception;
+
+    BigDecimal listByNumberForLeave(String number);
 }

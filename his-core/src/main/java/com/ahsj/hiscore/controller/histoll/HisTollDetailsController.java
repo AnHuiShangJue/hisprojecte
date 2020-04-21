@@ -389,6 +389,14 @@ public class HisTollDetailsController extends BaseController {
      * @Date 2019/9/26
      * @Time 18:28
      **/
+    /**
+     * @Description 出院打印
+     * @Params: [number, token, hisTollDetails]
+     * @Author: dingli
+     * @Return: java.util.List<com.ahsj.hiscore.entity.HisTollDetails>
+     * @Date 2019/9/26
+     * @Time 18:28
+     **/
     @RequestMapping("printShowLeave/index.ahsj")
     @ResponseBody
     List<HisTollDetails> printShowLeave(String number, String token, HisTollDetails hisTollDetails) throws Exception {//没有明细
@@ -403,6 +411,13 @@ public class HisTollDetailsController extends BaseController {
         } else {
             list = hisTollDetailsService.listByNumberLeave(number);
         }
+        return list;
+    }
+
+    @RequestMapping("printShowLeave/index1.ahsj")
+    @ResponseBody
+    BigDecimal printShowLeave1(String number, String token, HisTollDetails hisTollDetails) throws Exception {//没有明细
+        BigDecimal list = hisTollDetailsService.listByNumberForLeave(number);
         return list;
     }
 
