@@ -2,67 +2,54 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ahsj.hiscore.dao.HisConsumablesBuyplanMapper">
     <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisConsumablesBuyplan">
-        <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="buyplan_id" property="buyplanId" jdbcType="BIGINT"/>
-        <result column="create_user_id" property="createUserId" jdbcType="BIGINT"/>
-        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
-        <result column="update_user_id" property="updateUserId" jdbcType="BIGINT"/>
-        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
-        <result column="person_in_charge" property="personInCharge" jdbcType="VARCHAR"/>
-        <result column="expected_time" property="expectedTime" jdbcType="TIMESTAMP"/>
-        <result column="budget" property="budget" jdbcType="DOUBLE"/>
-        <result column="completion" property="completion" jdbcType="INTEGER"/>
-        <result column="completion_time" property="completionTime" jdbcType="TIMESTAMP"/>
-        <result column="actual_expenditure" property="actualExpenditure" jdbcType="DOUBLE"/>
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="buyplan_code" jdbcType="VARCHAR" property="buyplanCode" />
+        <result column="person_in_charge" jdbcType="VARCHAR" property="personInCharge" />
+        <result column="expected_time" jdbcType="TIMESTAMP" property="expectedTime" />
+        <result column="budget" jdbcType="DOUBLE" property="budget" />
+        <result column="completion" jdbcType="INTEGER" property="completion" />
+        <result column="completion_time" jdbcType="TIMESTAMP" property="completionTime" />
+        <result column="actual_expenditure" jdbcType="DOUBLE" property="actualExpenditure" />
+        <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+        <result column="update_user_id" jdbcType="BIGINT" property="updateUserId" />
+        <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
     </resultMap>
     <sql id="Base_Column_List">
-    id, buyplan_id, create_user_id, create_date, update_user_id, update_date, person_in_charge, 
-    expected_time, budget, completion, completion_time, actual_expenditure
-  </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        id, buyplan_code, person_in_charge, expected_time, budget, completion, completion_time,
+        actual_expenditure, create_user_id, create_date, update_user_id, is_delete, update_date
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
+        <include refid="Base_Column_List" />
         from his_consumables_buyplan
         where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from his_consumables_buyplan
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisConsumablesBuyplan" useGeneratedKeys="true"
-            keyProperty="id">
-    insert into his_consumables_buyplan (id, buyplan_id, create_user_id, 
-      create_date, update_user_id, update_date, 
-      person_in_charge, expected_time, budget, 
-      completion, completion_time, actual_expenditure
-      )
-    values (#{id,jdbcType=BIGINT}, #{buyplanId,jdbcType=BIGINT}, #{createUserId,jdbcType=BIGINT}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, 
-      #{personInCharge,jdbcType=VARCHAR}, #{expectedTime,jdbcType=TIMESTAMP}, #{budget,jdbcType=DOUBLE},
-      #{completion,jdbcType=INTEGER}, #{completionTime,jdbcType=TIMESTAMP}, #{actualExpenditure,jdbcType=DOUBLE}
-      )
-  </insert>
-    <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisConsumablesBuyplan" useGeneratedKeys="true"
-            keyProperty="id">
+        delete from his_consumables_buyplan
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisConsumablesBuyplan" useGeneratedKeys="true" keyProperty="id">
+        insert into his_consumables_buyplan (id, buyplan_code, person_in_charge,
+                                             expected_time, budget, completion,
+                                             completion_time, actual_expenditure, create_user_id,
+                                             create_date, update_user_id, is_delete,
+                                             update_date)
+        values (#{id,jdbcType=BIGINT}, #{buyplanCode,jdbcType=VARCHAR}, #{personInCharge,jdbcType=VARCHAR},
+                #{expectedTime,jdbcType=TIMESTAMP}, #{budget,jdbcType=DOUBLE}, #{completion,jdbcType=INTEGER},
+                #{completionTime,jdbcType=TIMESTAMP}, #{actualExpenditure,jdbcType=DOUBLE}, #{createUserId,jdbcType=BIGINT},
+                #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{isDelete,jdbcType=INTEGER},
+                #{updateDate,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisConsumablesBuyplan">
         insert into his_consumables_buyplan
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
             </if>
-            <if test="buyplanId != null">
-                buyplan_id,
-            </if>
-            <if test="createUserId != null">
-                create_user_id,
-            </if>
-            <if test="createDate != null">
-                create_date,
-            </if>
-            <if test="updateUserId != null">
-                update_user_id,
-            </if>
-            <if test="updateDate != null">
-                update_date,
+            <if test="buyplanCode != null">
+                buyplan_code,
             </if>
             <if test="personInCharge != null">
                 person_in_charge,
@@ -82,25 +69,28 @@
             <if test="actualExpenditure != null">
                 actual_expenditure,
             </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="isDelete != null">
+                is_delete,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 #{id,jdbcType=BIGINT},
             </if>
-            <if test="buyplanId != null">
-                #{buyplanId,jdbcType=BIGINT},
-            </if>
-            <if test="createUserId != null">
-                #{createUserId,jdbcType=BIGINT},
-            </if>
-            <if test="createDate != null">
-                #{createDate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateUserId != null">
-                #{updateUserId,jdbcType=BIGINT},
-            </if>
-            <if test="updateDate != null">
-                #{updateDate,jdbcType=TIMESTAMP},
+            <if test="buyplanCode != null">
+                #{buyplanCode,jdbcType=VARCHAR},
             </if>
             <if test="personInCharge != null">
                 #{personInCharge,jdbcType=VARCHAR},
@@ -120,25 +110,28 @@
             <if test="actualExpenditure != null">
                 #{actualExpenditure,jdbcType=DOUBLE},
             </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,jdbcType=INTEGER},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisConsumablesBuyplan">
         update his_consumables_buyplan
         <set>
-            <if test="buyplanId != null">
-                buyplan_id = #{buyplanId,jdbcType=BIGINT},
-            </if>
-            <if test="createUserId != null">
-                create_user_id = #{createUserId,jdbcType=BIGINT},
-            </if>
-            <if test="createDate != null">
-                create_date = #{createDate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateUserId != null">
-                update_user_id = #{updateUserId,jdbcType=BIGINT},
-            </if>
-            <if test="updateDate != null">
-                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            <if test="buyplanCode != null">
+                buyplan_code = #{buyplanCode,jdbcType=VARCHAR},
             </if>
             <if test="personInCharge != null">
                 person_in_charge = #{personInCharge,jdbcType=VARCHAR},
@@ -158,24 +151,42 @@
             <if test="actualExpenditure != null">
                 actual_expenditure = #{actualExpenditure,jdbcType=DOUBLE},
             </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="isDelete != null">
+                is_delete = #{isDelete,jdbcType=INTEGER},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisConsumablesBuyplan">
-    update his_consumables_buyplan
-    set buyplan_id = #{buyplanId,jdbcType=BIGINT},
-      create_user_id = #{createUserId,jdbcType=BIGINT},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
-      update_user_id = #{updateUserId,jdbcType=BIGINT},
-      update_date = #{updateDate,jdbcType=TIMESTAMP},
-      person_in_charge = #{personInCharge,jdbcType=VARCHAR},
-      expected_time = #{expectedTime,jdbcType=TIMESTAMP},
-      budget = #{budget,jdbcType=DOUBLE},
-      completion = #{completion,jdbcType=INTEGER},
-      completion_time = #{completionTime,jdbcType=TIMESTAMP},
-      actual_expenditure = #{actualExpenditure,jdbcType=DOUBLE}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        update his_consumables_buyplan
+        set buyplan_code = #{buyplanCode,jdbcType=VARCHAR},
+            person_in_charge = #{personInCharge,jdbcType=VARCHAR},
+            expected_time = #{expectedTime,jdbcType=TIMESTAMP},
+            budget = #{budget,jdbcType=DOUBLE},
+            completion = #{completion,jdbcType=INTEGER},
+            completion_time = #{completionTime,jdbcType=TIMESTAMP},
+            actual_expenditure = #{actualExpenditure,jdbcType=DOUBLE},
+            create_user_id = #{createUserId,jdbcType=BIGINT},
+            create_date = #{createDate,jdbcType=TIMESTAMP},
+            update_user_id = #{updateUserId,jdbcType=BIGINT},
+            is_delete = #{isDelete,jdbcType=INTEGER},
+            update_date = #{updateDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+
 
 
     <!--自定义sql-->
@@ -185,7 +196,7 @@
         his_consumables_buyplan.*
         from his_consumables_buyplan
         where
-        1= 1
+        is_delete = 0
         <if test="parameter.personInCharge != null and parameter.personInCharge != ''">
             and person_in_charge like concat('%' #{parameter.personInCharge,jdbcType=VARCHAR},'%')
         </if>
@@ -212,13 +223,13 @@
 
 
     <!--根据耗材编号查找-->
-    <select id="selectByBuyplanId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="selectBybuyplanCode" parameterType="java.lang.String" resultMap="BaseResultMap">
     SELECT
       his_consumables_buyplan.*
     FROM
       his_consumables_buyplan
     where
-      buyplan_id =#{buyplanId,jdbcType=BIGINT}
+      buyplan_code =#{buyplanCode,jdbcType=VARCHAR} and  is_delete = 0
   </select>
 
     <!--批量插入list-->
@@ -227,13 +238,13 @@
             SELECT
             LAST_INSERT_ID()
         </selectKey>
-        insert into his_consumables_buyplan (id, buyplan_id, create_user_id,
+        insert into his_consumables_buyplan (id, buyplan_code, create_user_id,
         create_date, update_user_id, update_date,
         person_in_charge, expected_time, budget,
         completion, completion_time, actual_expenditure)
         values
         <foreach collection="list" item="item" index="index" separator=",">
-            #{item.id,jdbcType=BIGINT}, #{item.buyplanId,jdbcType=BIGINT}, #{item.createUserId,jdbcType=BIGINT},
+            #{item.id,jdbcType=BIGINT}, #{item.buyplanCode,jdbcType=VARCHAR}, #{item.createUserId,jdbcType=BIGINT},
             #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=BIGINT},
             #{item.updateDate,jdbcType=TIMESTAMP},
             #{item.personInCharge,jdbcType=VARCHAR}, #{item.expectedTime,jdbcType=TIMESTAMP},
@@ -254,6 +265,11 @@
     select
     <include refid="Base_Column_List"/>
      from his_consumables_buyplan
-
   </select>
+
+    <update id="updateByIsDelete" parameterType="com.ahsj.hiscore.entity.HisConsumablesBuyplan">
+        update his_consumables_buyplan
+        set is_delete = 1
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

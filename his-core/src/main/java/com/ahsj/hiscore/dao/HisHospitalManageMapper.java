@@ -219,6 +219,18 @@ public interface HisHospitalManageMapper extends BaseMapper<HisHospitalManage> {
     HisHospitalManage getHisHospitalManageByNumber(String number);
 
     /**
+     *@Description
+     *@MethodName selectByHisHospitalManageByNumber
+     *@Params [number]
+     *@return com.ahsj.hiscore.entity.HisHospitalManage
+     *@Author XJP
+     *@Date 2020/4/29
+     *@Time 15:28
+    **/
+    HisHospitalManage selectByHisHospitalManageByNumber(String number);
+
+
+    /**
      * @return com.ahsj.hiscore.entity.HisHospitalManage
      * @功能说明 查询新生儿的病床号
      * @Params []

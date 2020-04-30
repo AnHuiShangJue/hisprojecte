@@ -24,9 +24,27 @@ public interface HisConsumablesBuyplanMapper extends BaseMapper<HisConsumablesBu
 
     int updateByPrimaryKey(HisConsumablesBuyplan record);
 
+    /**
+     *@Description 
+     *@MethodName list
+     *@Params [pageBean]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisConsumablesBuyplan>
+     *@Author XJP
+     *@Date 2020/4/24
+     *@Time 12:59
+    **/
     List<HisConsumablesBuyplan> list(PageBean<HisConsumablesBuyplan> pageBean);
 
-    HisConsumablesBuyplan selectByBuyplanId(Long id);
+    /**
+     *@Description 
+     *@MethodName selectBybuyplanCode
+     *@Params [buyplanCode]
+     *@return com.ahsj.hiscore.entity.HisConsumablesBuyplan
+     *@Author XJP
+     *@Date 2020/4/24
+     *@Time 14:43
+    **/
+    HisConsumablesBuyplan selectBybuyplanCode(String buyplanCode);
 
     /**
      * @return java.util.List<com.ahsj.hiscore.entity.HisConsumablesBuyplan>
@@ -47,4 +65,15 @@ public interface HisConsumablesBuyplanMapper extends BaseMapper<HisConsumablesBu
      * @Time 20:17
      **/
     List<HisConsumablesBuyplan> queryAll();
+
+    /**
+     *@Description
+     *@MethodName updateByIsDelete
+     *@Params [hisConsumablesBuyplan]
+     *@return int
+     *@Author XJP
+     *@Date 2020/4/24
+     *@Time 15:21
+    **/
+    int updateByIsDelete(HisConsumablesBuyplan hisConsumablesBuyplan);
 }

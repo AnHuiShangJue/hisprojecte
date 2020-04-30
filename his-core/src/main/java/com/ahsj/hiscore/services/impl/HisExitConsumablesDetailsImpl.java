@@ -1,25 +1,23 @@
 package com.ahsj.hiscore.services.impl;
 
 import com.ahsj.hiscore.common.Constants;
+import com.ahsj.hiscore.common.utils.DateNumber;
 import com.ahsj.hiscore.core.CodeHelper;
-import com.ahsj.hiscore.dao.HisConsumablesDetailsMapper;
-import com.ahsj.hiscore.dao.HisEnterConsumablesDetailsMapper;
-import com.ahsj.hiscore.dao.HisExitConsumablesDetailsMapper;
-import com.ahsj.hiscore.dao.HisHospitalConsumablesDetailsMapper;
+import com.ahsj.hiscore.dao.*;
 import com.ahsj.hiscore.entity.*;
 import com.ahsj.hiscore.feign.ITranslateService;
+import com.ahsj.hiscore.services.HisConsumablesService;
 import com.ahsj.hiscore.services.HisExitConsumablesDetailsService;
 import com.ahsj.hiscore.services.HisHospitalConsumablesDetailsService;
+import com.ahsj.hiscore.services.HisRecordConsumablesService;
 import core.entity.PageBean;
 import core.message.Message;
 import core.message.MessageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import utils.EmptyUtil;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -48,11 +46,20 @@ public class HisExitConsumablesDetailsImpl implements HisExitConsumablesDetailsS
     @Autowired
     ITranslateService iTranslateService;
 
+    @Autowired
+    HisConsumablesService hisConsumablesService;
+
+    @Autowired
+    HisRecordConsumablesService hisRecordConsumablesService;
+
+    @Autowired
+    HisHospitalManageMapper hisHospitalManageMapper;
+
 
     @Override
     @Transactional(readOnly = false)
     public Message exitConsumablesSmart(Long[] ids, Integer[] numbers, String personInCharge, Date expectedTime) throws Exception {
-        //生成耗材出库记录编号
+      /*  //生成耗材出库记录编号
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
         String createdate = sdf.format(date);
@@ -83,11 +90,11 @@ public class HisExitConsumablesDetailsImpl implements HisExitConsumablesDetailsS
                     //添加数据到出库表
                     //循环出库，优先出库有效期较早的耗材
                     //取出该耗材对应的入库表的记录
-                    List<HisEnterConsumablesDetails> hisEnterConsumablesDetailsList = hisEnterConsumablesDetailsMapper.selectByConsumablesIdOrder(hisConsumablesDetails.getConsumablesId());
+                    List<HisEnterConsumablesDetails> hisEnterConsumablesDetailsList = hisEnterConsumablesDetailsMapper.selectByConsumablesIdOrder(hisConsumablesDetails.getConsumablesCode());
 
                     for (int j = 0; remain > 0; ++j) {
                         //给出库记录添加数据
-                        hisExitConsumablesDetails.setConsumablesId(hisEnterConsumablesDetailsList.get(j).getConsumablesId());
+                        hisExitConsumablesDetails.setConsumablesCode(hisEnterConsumablesDetailsList.get(j).getConsumablesCode());
                         hisExitConsumablesDetails.setName(hisEnterConsumablesDetailsList.get(j).getName());
                         hisExitConsumablesDetails.setType(hisEnterConsumablesDetailsList.get(j).getType());
                         hisExitConsumablesDetails.setSpec(hisEnterConsumablesDetailsList.get(j).getSpec());
@@ -129,10 +136,10 @@ public class HisExitConsumablesDetailsImpl implements HisExitConsumablesDetailsS
                     }
                 }
 
-            }
+            }*/
 
-            return MessageUtil.createMessage(true, "出库成功");
-        }
+        return MessageUtil.createMessage(true, "出库成功");
+        //        }
     }
 
     /**
@@ -160,34 +167,112 @@ public class HisExitConsumablesDetailsImpl implements HisExitConsumablesDetailsS
                 //根据 主键id，查找 库存表 的记录,保存在 库存对象 中
                 HisHospitalConsumablesDetails hisHospitalConsumablesDetails = hisHospitalConsumablesDetailsService.selectByPrimaryKey(ids[i]);
 
-                HisConsumablesDetails hisConsumablesDetails = hisConsumablesDetailsMapper.selectByPrimaryKey(hisHospitalConsumablesDetails.getHisConsumablesDetailsId());
+                //获取耗材基础信息数据
+                HisConsumables hisConsumables = hisConsumablesService.selectByConsumablesCode(hisHospitalConsumablesDetails.getConsumablesCode());
+
                 if (hisHospitalConsumablesDetails.getIsOutbound() == 1) {
-                    return MessageUtil.createMessage(false, "耗材名为 : " + hisConsumablesDetails.getName() + ", 已出库，请重新选择出库耗材");
+                    return MessageUtil.createMessage(false, "耗材名为 : " + hisConsumables.getName() + ", 已出库，请重新选择出库耗材");
                 }
+                HisEnterConsumablesDetails enterConsumablesDetails = hisEnterConsumablesDetailsMapper.queryByconsumablesCode(hisConsumables.getConsumablesCode());
                 //判断 要出库数量（numbers[i]) 与 当前库存量 的大小
-                if (numbers[i] > hisConsumablesDetails.getStock()) {
+                if (numbers[i] > enterConsumablesDetails.getSurplus()) {
                     //出库量 > 库存量时，出库失败
-                    return MessageUtil.createMessage(false, "耗材名为 : " + hisConsumablesDetails.getName() + ", 库存不足");
+                    return MessageUtil.createMessage(false, "耗材名为 : " + hisConsumables.getName() + ", 库存不足");
                 } else {
+
+
+
                     //库存量足够时
-                    hisConsumablesDetails.setStock(hisConsumablesDetails.getStock() - numbers[i]);
+                    Integer num = numbers[i];
+                    //查找该耗材的入库数据
+                    List<HisEnterConsumablesDetails> selectByConsumablesCode = hisEnterConsumablesDetailsMapper.selectByConsumablesCode(hisConsumables.getConsumablesCode());
+                    for (HisEnterConsumablesDetails hisEnterConsumablesDetails : selectByConsumablesCode) {
+                        hisEnterConsumablesDetails.setIsDelete(Constants.HIS_DELETE_FALSE);
+                        hisEnterConsumablesDetails.setId(null);
+                        if (hisEnterConsumablesDetails.getSurplus() < num ){
+                            hisEnterConsumablesDetails.setSurplus(0);
+                            num = num-hisEnterConsumablesDetails.getSurplus();
+                            //耗材出库记录
+                            HisExitConsumablesDetails hisExitConsumablesDetails = new HisExitConsumablesDetails();
+                            hisExitConsumablesDetails.setExpectedTime(expectedTime);
+                            hisExitConsumablesDetails.setPersonInCharge(personInCharge);
+                            hisExitConsumablesDetails.setConsumablesCode(hisConsumables.getConsumablesCode());
+                            hisExitConsumablesDetails.setSpec(hisConsumables.getSpec());
+                            hisExitConsumablesDetails.setExitNumber(DateNumber.getNumbenr(Constants.HIS_HCCKJL));
+                            hisExitConsumablesDetails.setHisHospitalManagerCode(hisHospitalConsumablesDetails.getMedicalRecordNumber());
+                            hisExitConsumablesDetails.setId(null);
+                            hisExitConsumablesDetailsMapper.insert(hisExitConsumablesDetails);
+                            continue;
+                        }else {
+                            hisEnterConsumablesDetails.setSurplus(hisEnterConsumablesDetails.getSurplus()-num );
+                            //耗材出库记录
+                            HisExitConsumablesDetails hisExitConsumablesDetails = new HisExitConsumablesDetails();
+                            hisExitConsumablesDetails.setExpectedTime(expectedTime);
+                            hisExitConsumablesDetails.setPersonInCharge(personInCharge);
+                            hisExitConsumablesDetails.setConsumablesCode(hisConsumables.getConsumablesCode());
+                            hisExitConsumablesDetails.setSpec(hisConsumables.getSpec());
+                            hisExitConsumablesDetails.setExitNumber(DateNumber.getNumbenr(Constants.HIS_HCCKJL));
+                            hisExitConsumablesDetails.setId(null);
+                            hisExitConsumablesDetails.setName(hisConsumables.getName());
+                            hisExitConsumablesDetails.setType(hisConsumables.getType());
+                            hisExitConsumablesDetails.setExitCount(hisHospitalConsumablesDetails.getComsumablesNum());
+                            hisExitConsumablesDetails.setPrice(hisConsumables.getPrice());
+                            hisExitConsumablesDetails.setExpectedTime(hisEnterConsumablesDetails.getValidityPeriod());
+                            hisExitConsumablesDetails.setHisHospitalManagerCode(hisHospitalConsumablesDetails.getMedicalRecordNumber());
+
+                            hisExitConsumablesDetailsMapper.insert(hisExitConsumablesDetails);
+                            break;
+                        }
+                    }
+                    //更新库存表的数据
+
+                    //伪删
+                    hisEnterConsumablesDetailsMapper.updateByIsDelete(hisConsumables.getConsumablesCode());
+                    //新增
+                    hisEnterConsumablesDetailsMapper.insertBatch(selectByConsumablesCode);
+
+                    hisHospitalConsumablesDetailsMapper.updateByIsDelete(ids[i]);
+                    hisHospitalConsumablesDetails.setIsOutbound(1);
+                    hisHospitalConsumablesDetails.setId(null);
+                    hisHospitalConsumablesDetails.setIsDelete(Constants.HIS_DELETE_FALSE);
+                    hisHospitalConsumablesDetailsMapper.insert(hisHospitalConsumablesDetails);
+
+                    //耗材出库收费数据
+                    HisRecordConsumables hisRecordConsumables = new HisRecordConsumables();
+                    hisRecordConsumables.setComsumablesNum(hisHospitalConsumablesDetails.getComsumablesNum());
+                    hisRecordConsumables.setConsumablesCode(hisConsumables.getConsumablesCode());
+                    hisRecordConsumables.setName(hisConsumables.getName());
+                    hisRecordConsumables.setType(hisConsumables.getType());
+                    hisRecordConsumables.setHisHospitalManagerId(hisHospitalConsumablesDetails.getHisHospitalManagerId());
+                    hisRecordConsumables.setIsPayed(Constants.BASE_TWO);
+                    hisRecordConsumables.setIsBack(Constants.HC_BACK_FALSE);
+                    hisRecordConsumables.setIsDelete(Constants.HIS_DELETE_FALSE);
+                    hisRecordConsumables.setSpec(hisConsumables.getSpec());
+                    hisRecordConsumables.setPrice(hisConsumables.getPrice());
+                    hisRecordConsumables.setMedicalRecordNumber(hisHospitalConsumablesDetails.getMedicalRecordNumber());
+                    HisHospitalManage hisHospitalManage = hisHospitalManageMapper.selectByPrimaryKey(hisHospitalConsumablesDetails.getHisHospitalManagerId());
+                    hisRecordConsumables.setHisHospitalManagerCode(hisHospitalManage.getNumber());
+                    hisRecordConsumables.setRecordConsumablesCode(DateNumber.getNumbenr(Constants.HIS_HCCKCF));
+                    hisRecordConsumablesService.insert(hisRecordConsumables);
+
+                     /*   hisConsumablesDetails.setStock(hisConsumablesDetails.getStock() - numbers[i]);
                     //更新库存表的数据
                     hisConsumablesDetailsMapper.updateByPrimaryKey(hisConsumablesDetails);
 
                     //当前要出库的数量
-                    int remain = numbers[i];
+                    int remain = numbers[i];*/
 
                     //new 一个 出库详情 对象
-                    HisExitConsumablesDetails hisExitConsumablesDetails = new HisExitConsumablesDetails();
+//                    HisExitConsumablesDetails hisExitConsumablesDetails = new HisExitConsumablesDetails();
 
                     //添加数据到出库表
                     //循环出库，优先出库有效期较早的耗材
                     //取出该耗材对应的入库表的记录
-                    List<HisEnterConsumablesDetails> hisEnterConsumablesDetailsList = hisEnterConsumablesDetailsMapper.selectByConsumablesIdOrder(hisConsumablesDetails.getConsumablesId());
+//                    List<HisEnterConsumablesDetails> hisEnterConsumablesDetailsList = hisEnterConsumablesDetailsMapper.selectByConsumablesCode(hisConsumablesDetails.getConsumablesCode());
 
-                    for (int j = 0; remain > 0; ++j) {
+                /*    for (int j = 0; remain > 0; ++j) {
                         //给出库记录添加数据
-                        hisExitConsumablesDetails.setConsumablesId(hisEnterConsumablesDetailsList.get(j).getConsumablesId());
+                        hisExitConsumablesDetails.setConsumablesCode(hisEnterConsumablesDetailsList.get(j).getConsumablesCode());
                         hisExitConsumablesDetails.setName(hisEnterConsumablesDetailsList.get(j).getName());
                         hisExitConsumablesDetails.setType(hisEnterConsumablesDetailsList.get(j).getType());
                         hisExitConsumablesDetails.setSpec(hisEnterConsumablesDetailsList.get(j).getSpec());
@@ -211,7 +296,7 @@ public class HisExitConsumablesDetailsImpl implements HisExitConsumablesDetailsS
                                 hisExitConsumablesDetails.setExpectedTime(expectedTime);
                                 hisExitConsumablesDetails.setPersonInCharge(personInCharge);
                                 hisExitConsumablesDetails.setExitNumber("CKJL" + createdate);
-                                hisExitConsumablesDetails.setHisHospitalManagerId(hisHospitalConsumablesDetails.getMedicalRecordNumber());
+                                hisExitConsumablesDetails.setHisHospitalManagerCode(hisHospitalConsumablesDetails.getMedicalRecordNumber());
                                 hisExitConsumablesDetailsMapper.insert(hisExitConsumablesDetails);
                             }
 
@@ -226,20 +311,20 @@ public class HisExitConsumablesDetailsImpl implements HisExitConsumablesDetailsS
                             hisExitConsumablesDetails.setExpectedTime(expectedTime);
                             hisExitConsumablesDetails.setPersonInCharge(personInCharge);
                             hisExitConsumablesDetails.setExitNumber("CKJL" + createdate);
-                            hisExitConsumablesDetails.setHisHospitalManagerId(hisHospitalConsumablesDetails.getMedicalRecordNumber());
+                            hisExitConsumablesDetails.setHisHospitalManagerCode(hisHospitalConsumablesDetails.getMedicalRecordNumber());
                             hisExitConsumablesDetailsMapper.insert(hisExitConsumablesDetails);
                         }
-                    }
+                    }*/
                 }
 
             }
-            List<HisHospitalConsumablesDetails> list = new ArrayList<>();
+           /* List<HisHospitalConsumablesDetails> list = new ArrayList<>();
             for (Long id : ids) {
                 HisHospitalConsumablesDetails hisHospitalConsumablesDetails = hisHospitalConsumablesDetailsMapper.selectByPrimaryKey(id);
                 list.add(hisHospitalConsumablesDetails);
             }
 
-            hisHospitalConsumablesDetailsService.updateHisHospitalConsumablesDetails(list);
+            hisHospitalConsumablesDetailsService.updateHisHospitalConsumablesDetails(list);*/
             return MessageUtil.createMessage(true, "出库成功");
         }
     }
@@ -249,7 +334,7 @@ public class HisExitConsumablesDetailsImpl implements HisExitConsumablesDetailsS
     public List<HisExitConsumablesDetails> getExitConsumabes(PageBean<HisExitConsumablesDetails> pageBean) throws Exception {
         List<HisExitConsumablesDetails> hisExitConsumablesDetailsList = hisExitConsumablesDetailsMapper.listByNumber(pageBean);
 
-        for (HisExitConsumablesDetails h : hisExitConsumablesDetailsList) {
+       /* for (HisExitConsumablesDetails h : hisExitConsumablesDetailsList) {
             Translate translate = new Translate();
             translate.setTranslateId(h.getConsumablesId());
             translate.setTranslateType(Constants.TRANSLATE_HIS_HISCONSUMABLES);
@@ -265,7 +350,7 @@ public class HisExitConsumablesDetailsImpl implements HisExitConsumablesDetailsS
                 }
             }
 
-        }
+        }*/
         return hisExitConsumablesDetailsList;
     }
 
@@ -273,7 +358,7 @@ public class HisExitConsumablesDetailsImpl implements HisExitConsumablesDetailsS
     @Override
     @Transactional(readOnly = false)
     public Message exitConsumables(Long[] ids, Integer[] numbers, Double[] prices, String personInCharge, Date expectedTime) throws Exception {
-        //生成耗材出库记录编号
+      /*  //生成耗材出库记录编号
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
         String createdate = sdf.format(date);
@@ -287,7 +372,7 @@ public class HisExitConsumablesDetailsImpl implements HisExitConsumablesDetailsS
             unitSalePrice = numbers[i] * prices[i];
             //向出库记录中设置一些从入库表中获得的基本信息
             HisExitConsumablesDetails hisExitConsumablesDetails = new HisExitConsumablesDetails();
-            hisExitConsumablesDetails.setConsumablesId(hisEnterConsumablesDetails.getConsumablesId());
+            hisExitConsumablesDetails.setConsumablesCode(hisEnterConsumablesDetails.getConsumablesCode());
             hisExitConsumablesDetails.setName(hisEnterConsumablesDetails.getName());
             hisExitConsumablesDetails.setSpec(hisEnterConsumablesDetails.getSpec());
             hisExitConsumablesDetails.setType(hisEnterConsumablesDetails.getType());
@@ -300,7 +385,7 @@ public class HisExitConsumablesDetailsImpl implements HisExitConsumablesDetailsS
             hisExitConsumablesDetails.setExitCount(numbers[i]);
             //当设置药品出库数量后，入库的余量以及药库库存需要级联更改 同时增加药库中药品的售出数目
             hisEnterConsumablesDetails.setSurplus(hisEnterConsumablesDetails.getSurplus() - numbers[i]);
-            List<HisConsumablesDetails> hisConsumablesDetailsList = hisConsumablesDetailsMapper.selectByConsumablesId(hisEnterConsumablesDetails.getConsumablesId());
+            List<HisConsumablesDetails> hisConsumablesDetailsList = hisConsumablesDetailsMapper.selectByConsumablesId(hisEnterConsumablesDetails.getConsumablesCode());
             hisConsumablesDetailsList.get(0).setStock(hisConsumablesDetailsList.get(0).getStock() - numbers[i]);
             //保存出库记录，更新入库表中本次库存剩余数目以及药库中的库存
             hisExitConsumablesDetails.setExpectedTime(expectedTime);
@@ -309,7 +394,7 @@ public class HisExitConsumablesDetailsImpl implements HisExitConsumablesDetailsS
             hisExitConsumablesDetailsMapper.insert(hisExitConsumablesDetails);
             hisEnterConsumablesDetailsMapper.updateByPrimaryKeySelective(hisEnterConsumablesDetails);
             hisConsumablesDetailsMapper.updateByPrimaryKeySelective(hisConsumablesDetailsList.get(0));
-        }
+        }*/
         return MessageUtil.createMessage(true, "药品出库成功");
     }
 

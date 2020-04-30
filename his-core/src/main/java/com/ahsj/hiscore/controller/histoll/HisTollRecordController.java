@@ -208,6 +208,7 @@ public class HisTollRecordController extends BaseController {
         modelAndView.addObject("title", "财务统计");
         modelAndView.addObject("hisTollRecord", hisTollRecordService.getHisTollRecord(number));
         modelAndView.addObject("token", token);
+        modelAndView.addObject("number", number);
         return modelAndView;
     }
 

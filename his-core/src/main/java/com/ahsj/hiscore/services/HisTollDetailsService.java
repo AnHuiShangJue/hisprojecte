@@ -149,4 +149,6 @@ public interface HisTollDetailsService {
     HisTollDetails printShowThere(String number) throws Exception;
 
     BigDecimal listByNumberForLeave(String number);
+
+    PageBean<HisTollDetails> queryByRecordConsumablesLists(PageBean<HisTollDetails> pageBean);
 }

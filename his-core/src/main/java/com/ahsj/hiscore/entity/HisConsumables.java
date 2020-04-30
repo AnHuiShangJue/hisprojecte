@@ -44,10 +44,29 @@ public class HisConsumables extends BaseEntity {
     @ExcelColumn( value = "是否可用", col = 6)
     private String enable;
 
+    private String consumablesCode;
+
+    private Integer isDelete;
+
     //字典
     private Long typeId;
     private Long enableId;
 
+    public Integer getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
+    }
+
+    public String getConsumablesCode() {
+        return consumablesCode;
+    }
+
+    public void setConsumablesCode(String consumablesCode) {
+        this.consumablesCode = consumablesCode;
+    }
 
     public Long getId() {
         return id;

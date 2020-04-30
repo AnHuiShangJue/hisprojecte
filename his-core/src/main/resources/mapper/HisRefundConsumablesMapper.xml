@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahsj.hiscore.dao.HisRefundConsumablesMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisRefundConsumables">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="record_number" jdbcType="VARCHAR" property="recordNumber"/>
+        <result column="voucher" jdbcType="VARCHAR" property="voucher"/>
+        <result column="patient_name" jdbcType="VARCHAR" property="patientName"/>
+        <result column="refund_num" jdbcType="INTEGER" property="refundNum"/>
+        <result column="record_consumables_code" jdbcType="VARCHAR" property="recordConsumablesCode"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="create_user_id" jdbcType="BIGINT" property="createUserId"/>
+        <result column="update_user_id" jdbcType="BIGINT" property="updateUserId"/>
+        <result column="application_time" jdbcType="TIMESTAMP" property="applicationTime"/>
+        <result column="is_back" jdbcType="SMALLINT" property="isBack"/>
+        <result column="remarks" jdbcType="VARCHAR" property="remarks"/>
+        <result column="is_review" jdbcType="INTEGER" property="isReview"/>
+        <result column="toll_record_number" jdbcType="VARCHAR" property="tollRecordNumber"/>
+        <result column="is_delete" jdbcType="INTEGER" property="isDelete"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        ,
+        record_number,
+        voucher,
+        patient_name,
+        refund_num,
+        record_consumables_code,
+        create_date,
+        update_date,
+        create_user_id,
+        update_user_id,
+        application_time,
+        is_back,
+        remarks,
+        is_review,
+        toll_record_number,
+        is_delete
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_refund_consumables
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from his_refund_consumables
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisRefundConsumables">
+        insert into his_refund_consumables (id, record_number, voucher,
+                                            patient_name, refund_num, record_consumables_code,
+                                            create_date, update_date, create_user_id,
+                                            update_user_id, application_time, is_back,
+                                            remarks, is_review, toll_record_number,
+                                            is_delete)
+        values (#{id,jdbcType=BIGINT}, #{recordNumber,jdbcType=VARCHAR}, #{voucher,jdbcType=VARCHAR},
+                #{patientName,jdbcType=VARCHAR}, #{refundNum,jdbcType=INTEGER},
+                #{recordConsumablesCode,jdbcType=VARCHAR},
+                #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT},
+                #{updateUserId,jdbcType=BIGINT}, #{applicationTime,jdbcType=TIMESTAMP}, #{isBack,jdbcType=SMALLINT},
+                #{remarks,jdbcType=VARCHAR}, #{isReview,jdbcType=INTEGER}, #{tollRecordNumber,jdbcType=VARCHAR},
+                #{isDelete,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisRefundConsumables">
+        insert into his_refund_consumables
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="recordNumber != null">
+                record_number,
+            </if>
+            <if test="voucher != null">
+                voucher,
+            </if>
+            <if test="patientName != null">
+                patient_name,
+            </if>
+            <if test="refundNum != null">
+                refund_num,
+            </if>
+            <if test="recordConsumablesCode != null">
+                record_consumables_code,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="applicationTime != null">
+                application_time,
+            </if>
+            <if test="isBack != null">
+                is_back,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="isReview != null">
+                is_review,
+            </if>
+            <if test="tollRecordNumber != null">
+                toll_record_number,
+            </if>
+            <if test="isDelete != null">
+                is_delete,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="recordNumber != null">
+                #{recordNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="voucher != null">
+                #{voucher,jdbcType=VARCHAR},
+            </if>
+            <if test="patientName != null">
+                #{patientName,jdbcType=VARCHAR},
+            </if>
+            <if test="refundNum != null">
+                #{refundNum,jdbcType=INTEGER},
+            </if>
+            <if test="recordConsumablesCode != null">
+                #{recordConsumablesCode,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="applicationTime != null">
+                #{applicationTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isBack != null">
+                #{isBack,jdbcType=SMALLINT},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="isReview != null">
+                #{isReview,jdbcType=INTEGER},
+            </if>
+            <if test="tollRecordNumber != null">
+                #{tollRecordNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisRefundConsumables">
+        update his_refund_consumables
+        <set>
+            <if test="recordNumber != null">
+                record_number = #{recordNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="voucher != null">
+                voucher = #{voucher,jdbcType=VARCHAR},
+            </if>
+            <if test="patientName != null">
+                patient_name = #{patientName,jdbcType=VARCHAR},
+            </if>
+            <if test="refundNum != null">
+                refund_num = #{refundNum,jdbcType=INTEGER},
+            </if>
+            <if test="recordConsumablesCode != null">
+                record_consumables_code = #{recordConsumablesCode,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="applicationTime != null">
+                application_time = #{applicationTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isBack != null">
+                is_back = #{isBack,jdbcType=SMALLINT},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="isReview != null">
+                is_review = #{isReview,jdbcType=INTEGER},
+            </if>
+            <if test="tollRecordNumber != null">
+                toll_record_number = #{tollRecordNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="isDelete != null">
+                is_delete = #{isDelete,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisRefundConsumables">
+        update his_refund_consumables
+        set record_number           = #{recordNumber,jdbcType=VARCHAR},
+            voucher                 = #{voucher,jdbcType=VARCHAR},
+            patient_name            = #{patientName,jdbcType=VARCHAR},
+            refund_num              = #{refundNum,jdbcType=INTEGER},
+            record_consumables_code = #{recordConsumablesCode,jdbcType=VARCHAR},
+            create_date             = #{createDate,jdbcType=TIMESTAMP},
+            update_date             = #{updateDate,jdbcType=TIMESTAMP},
+            create_user_id          = #{createUserId,jdbcType=BIGINT},
+            update_user_id          = #{updateUserId,jdbcType=BIGINT},
+            application_time        = #{applicationTime,jdbcType=TIMESTAMP},
+            is_back                 = #{isBack,jdbcType=SMALLINT},
+            remarks                 = #{remarks,jdbcType=VARCHAR},
+            is_review               = #{isReview,jdbcType=INTEGER},
+            toll_record_number      = #{tollRecordNumber,jdbcType=VARCHAR},
+            is_delete               = #{isDelete,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+
+    <!--自定义sql-->
+
+    <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+
+        from his_refund_consumables where is_delete = 0 and is_back = 2 /*and is_review != 1 */group by voucher
+
+
+        <if test="parameter.recordNumber != null and parameter.recordNumber != ''">
+            and record_number = #{parameter.recordNumber,jdbcType=VARCHAR}
+        </if>
+        <if test="parameter.voucher != null and parameter.voucher != ''">
+            and voucher = #{parameter.voucher,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.patientName != null and parameter.patientName != ''">
+            and patient_name = #{parameter.patientName,jdbcType=INTEGER}
+        </if>
+        <if test="parameter.consumablesDetailsCreateDate != null">
+            and application_time &lt;= #{parameter.consumablesDetailsCreateDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="parameter.consumablesDetailsCreateDates != null">
+            and application_time &gt;= #{parameter.consumablesDetailsCreateDates,jdbcType=TIMESTAMP}
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+
+    <insert id="insertList" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        insert into his_refund_consumables (id, record_number, voucher,
+        patient_name, refund_num, record_consumables_code,
+        create_date, update_date, create_user_id,
+        update_user_id, application_time, is_back,
+        remarks, is_review, toll_record_number,
+        is_delete)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id,jdbcType=BIGINT}, #{item.recordNumber,jdbcType=VARCHAR}, #{item.voucher,jdbcType=VARCHAR},
+            #{item.patientName,jdbcType=VARCHAR}, #{item.refundNum,jdbcType=INTEGER},
+            #{item.recordConsumablesCode,jdbcType=VARCHAR},
+            #{item.createDate,jdbcType=TIMESTAMP}, #{item.updateDate,jdbcType=TIMESTAMP},
+            #{item.createUserId,jdbcType=BIGINT},
+            #{item.updateUserId,jdbcType=BIGINT}, #{item.applicationTime,jdbcType=TIMESTAMP},
+            #{item.isBack,jdbcType=SMALLINT},
+            #{item.remarks,jdbcType=VARCHAR}, #{item.isReview,jdbcType=INTEGER},
+            #{item.tollRecordNumber,jdbcType=VARCHAR},
+            #{item.isDelete,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+
+    <select id="queryHisHisRefundConsumablesVoucher" parameterType="com.ahsj.hiscore.entity.HisRefundConsumables"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_refund_consumables where is_delete = 0 and is_back = 2 and is_review = 3
+        and voucher = #{voucher,jdbcType=INTEGER}
+    </select>
+
+    <select id="queryHisHisRefundConsumablesVoucherList" parameterType="com.ahsj.hiscore.entity.HisRefundConsumables"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_refund_consumables where is_delete = 0 and is_back = 2
+        and voucher = #{voucher,jdbcType=INTEGER}
+    </select>
+    <select id="queryByNotBack" parameterType="java.lang.String"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_refund_consumables where is_delete = 0 and is_back = 2  and is_review = 1  and record_number =#{recordNumber,jdbcType=VARCHAR}
+
+    </select>
+
+
+    <update id="updateByIsDelete" parameterType="java.util.List">
+        update his_refund_consumables
+        set is_delete = 1
+        where 1=1
+        <foreach collection="list" open="or" separator="or" index="index" item="item">
+            id = #{item.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+
+</mapper>

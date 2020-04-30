@@ -16,6 +16,7 @@
                      <input type="hidden" id="tollRecordIds" th:value="${hisTollRecord.id}">
                         <form id="searchForm" class="row" action="">
                             <input id="tollRecordId" type="hidden" name="tollRecordId" >
+                            <input id="number" type="hidden" name="number" th:value="${number}">
                         </form>
                         <div class="input-field col s4 l4 xl4">
                             <input  readonly="true"  type="text" th:value="${hisTollRecord.medicalRecordId}"/>

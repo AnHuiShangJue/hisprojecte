@@ -127,4 +127,6 @@ public interface HisTollDetailsMapper extends BaseMapper<HisTollDetails> {
      *@Time 19:15
     **/
     List<HisTollDetails> listByNumberForLeave(String medicalRecordId);
+
+    List<HisTollDetails> queryByRecordConsumablesLists(PageBean<HisTollDetails> pageBean);
 }

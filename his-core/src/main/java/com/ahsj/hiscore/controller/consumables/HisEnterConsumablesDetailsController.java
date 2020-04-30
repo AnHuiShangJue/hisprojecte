@@ -23,11 +23,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 耗材采购入库信息
+ */
 @Controller
-@RequestMapping("api/hisenterconsumables/")
+@RequestMapping("/api/hisenterconsumables")
 public class HisEnterConsumablesDetailsController extends BaseController {
+
     @Autowired
     HisEnterConsumablesDetailsService hisEnterConsumablesDetailsService;
+
     @Autowired
     HisConsumablesBuyplanDetailsService hisConsumablesBuyplanDetailsService;
 
@@ -40,17 +45,17 @@ public class HisEnterConsumablesDetailsController extends BaseController {
      *@Date 2019/7/5
      *@Time 21:18
     */
-    @RequestMapping(value = "mediEnter.ahsj" ,method = {RequestMethod.POST,RequestMethod.GET})
+    @RequestMapping(value = "/mediEnter.ahsj" ,method = {RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
     public Message mediEnter(Map<String, Object>model, HttpRequest request,
                              @RequestParam(value = "ids",required = true) Long[] ids,
                              @RequestParam(value = "numbers",required = true )Integer[] numbers,
                              @RequestParam(value = "prices",required = true)Double[] prices,
-                             @RequestParam(value = "buyplanId",required = true)Long buyplanId,
+                             @RequestParam(value = "buyplanCode",required = true)String buyplanCode,
                              @RequestParam(value = "validityPeriods",required = true)String[] validityPeriods) throws Exception{
         if(EmptyUtil.Companion.isNullOrEmpty(numbers) || EmptyUtil.Companion.isNullOrEmpty(prices) || EmptyUtil.Companion.isNullOrEmpty(validityPeriods))
             return MessageUtil.createMessage(false,"请将耗材入库信息填写完整");
-        return hisEnterConsumablesDetailsService.mediEnter(ids,numbers,prices,buyplanId,validityPeriods);
+        return hisEnterConsumablesDetailsService.mediEnter(ids,numbers,prices,buyplanCode,validityPeriods);
     }
 
     /**
@@ -62,8 +67,8 @@ public class HisEnterConsumablesDetailsController extends BaseController {
      *@Time 20:52
     */
     @ResponseBody
-    @RequestMapping(value = "list.ahsj", method = {RequestMethod.GET,RequestMethod.POST})
-    public PageBean<HisEnterConsumablesDetails> list (Map<String, Object> model, HttpServletRequest request, HisEnterConsumablesDetails hisEnterConsumablesDetails) throws Exception{
+    @RequestMapping(value = "/list.ahsj", method = {RequestMethod.GET,RequestMethod.POST})
+    public PageBean<HisEnterConsumablesDetails> list (HisEnterConsumablesDetails hisEnterConsumablesDetails) throws Exception{
         PageBean<HisEnterConsumablesDetails> pageBean = new PageBean<HisEnterConsumablesDetails>();
         pageBean.setParameter(hisEnterConsumablesDetails);
         return hisEnterConsumablesDetailsService.list(pageBean);
@@ -78,11 +83,11 @@ public class HisEnterConsumablesDetailsController extends BaseController {
      *@Time 10:04
     */
     @ResponseBody
-    @RequestMapping(value = "onelist.ahsj", method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/onelist.ahsj", method = {RequestMethod.GET,RequestMethod.POST})
     public PageBean<HisEnterConsumablesDetails> onelist (Map<String, Object> model, HttpServletRequest request
-            ,@RequestParam(value = "consumablesId",required = true) Long consumablesId
+            ,@RequestParam(value = "consumablesCode",required = true) String consumablesCode
     ) throws Exception{
-        return hisEnterConsumablesDetailsService.onelist(consumablesId);
+        return hisEnterConsumablesDetailsService.onelist(consumablesCode);
     }
 
 
@@ -95,7 +100,7 @@ public class HisEnterConsumablesDetailsController extends BaseController {
      *@Date 2019/6/23
      *@Time 11:13
     */
-    @RequestMapping("enterconsumables/index.ahsj")
+    @RequestMapping("/enterconsumables/index.ahsj")
     ModelAndView enterconsumablesIndex(String token){
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/consumables/enterconsumables");
         modelAndView.addObject("title","耗材入库列表");
@@ -103,9 +108,18 @@ public class HisEnterConsumablesDetailsController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping("mediEnterSure/index.ahsj")
-    ModelAndView mediEnterSure(String token,Long buyplanId)throws Exception{
-        List<HisConsumablesBuyplanDetails> hisConsumablesBuyplanDetailsList=hisConsumablesBuyplanDetailsService.selectByBuyplanforList(buyplanId);
+    /**
+     *@Description
+     *@MethodName mediEnterSure
+     *@Params [token, buyplanId]
+     *@return org.springframework.web.servlet.ModelAndView
+     *@Author XJP
+     *@Date 2020/4/24
+     *@Time 17:38
+    **/
+    @RequestMapping("/mediEnterSure/index.ahsj")
+    ModelAndView mediEnterSure(String token,Long id)throws Exception{
+        List<HisConsumablesBuyplanDetails> hisConsumablesBuyplanDetailsList = hisConsumablesBuyplanDetailsService.selectByBuyplanforList(id);
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/consumables/enterconsumablesfromplan");
         modelAndView.addObject("title","耗材入库确认");
         modelAndView.addObject("token",token);

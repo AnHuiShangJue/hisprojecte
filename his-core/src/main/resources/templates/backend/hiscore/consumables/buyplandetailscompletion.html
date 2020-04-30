@@ -47,7 +47,7 @@
                         <form id="searchForm" class="row" action="">
                             <div class="row">
                                 <div>
-                                    <input id="planDetail" type="hidden" th:value="${buyplanId}">
+                                    <input id="planDetail" type="hidden" th:value="${buyplanCode}">
                                 </div>
                                 <div class="col input-field s3 m3 l3 xl3">
                                     <input id="name" name="drugsName" type="text"/>
@@ -112,13 +112,13 @@
             loadingMessage: 'Loading...',
             dataTable: {
                 "ajax": {
-                    "url": CTX+"/api/hisconsumablesbuyplandetails/details.ahsj?token=" +TOKEN + "&buyplanId="+ $('#planDetail').val(), // ajax source
+                    "url": CTX+"/api/hisconsumablesbuyplandetails/details.ahsj?token=" +TOKEN + "&buyplanCode="+ $('#planDetail').val(), // ajax source
                 },
                 "columns": [
                     {
                         "title":"计划编号",
-                        "data":"buyplanId",
-                        "name":"buyplan_id",
+                        "data":"buyplanCode",
+                        "name":"buyplan_code"
                     },
                     {
                         "title": "耗材名称",

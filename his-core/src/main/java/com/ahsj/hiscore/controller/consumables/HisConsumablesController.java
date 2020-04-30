@@ -30,8 +30,12 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * 耗材基本信息
+ */
+
 @Controller
-@RequestMapping("api/hisconsumables/")
+@RequestMapping("/api/hisconsumables")
 public class HisConsumablesController extends BaseController {
 
     @Autowired
@@ -52,40 +56,9 @@ public class HisConsumablesController extends BaseController {
      *@Date 2019/6/19
      *@Time 14:47
     */
-    @RequestMapping(value = "saveOrUpdate.ahsj", method = {RequestMethod.POST})
+    @RequestMapping(value = "/saveOrUpdate.ahsj", method = {RequestMethod.POST})
     @ResponseBody
-    public Message saveOrUpdate (Map<String, Object> model, HttpServletRequest request
-            , @RequestParam(value="id", required=true) Long id
-            , @RequestParam(value="name", required=false) String name
-            , @RequestParam(value="type", required=false) Integer type
-            , @RequestParam(value="spec", required=false) String spec
-            , @RequestParam(value="stock", required=false) Integer stock
-            , @RequestParam(value="price", required=false) Double price
-            , @RequestParam(value="isEnable", required=false) Integer isEnable
-    ) throws Exception {
-        HisConsumables hisConsumables = new HisConsumables();
-        if(null != request.getParameter("id")){
-            hisConsumables.setId(id);
-        }
-        if(null != request.getParameter("name")){
-            hisConsumables.setName(name);
-        }
-        if(null != request.getParameter("type")){
-            hisConsumables.setType(type);
-        }
-        if(null != request.getParameter("spec")){
-            hisConsumables.setSpec(spec);
-        }
-        if(null != request.getParameter("stock")){
-            hisConsumables.setStock(stock);
-        }
-        if(null != request.getParameter("price")){
-            hisConsumables.setPrice(price);
-        }
-        if(null != request.getParameter("isEnable")){
-            hisConsumables.setIsEnable(isEnable);
-        }
-
+    public Message saveOrUpdate (HisConsumables hisConsumables) throws Exception {
         return  hisConsumablesService.saveOrUpdate(hisConsumables);
     }
 
@@ -99,7 +72,7 @@ public class HisConsumablesController extends BaseController {
      *@Time 15:01
     */
 
-    @RequestMapping(value = "delete.ahsj", method = {RequestMethod.POST})
+    @RequestMapping(value = "/delete.ahsj", method = {RequestMethod.POST})
     @ResponseBody
     public Message delete (Map<String, Object> model, HttpServletRequest request
             , @RequestParam(value="ids", required=true) Long[] ids
@@ -118,7 +91,7 @@ public class HisConsumablesController extends BaseController {
      *@Date 2019/8/7
      *@Time 18:14
     */
-    @RequestMapping(value = "setDisable.ahsj", method = {RequestMethod.POST})
+    @RequestMapping(value = "/setDisable.ahsj", method = {RequestMethod.POST})
     @ResponseBody
     public Message setDisable(Map<String, Object> model, HttpServletRequest request
             , @RequestParam(value="ids", required=true) Long[] ids
@@ -138,7 +111,7 @@ public class HisConsumablesController extends BaseController {
      *@Date 2019/6/19
      *@Time 15:10
     */
-    @RequestMapping(value = "list.ahsj", method = {RequestMethod.POST})
+    @RequestMapping(value = "/list.ahsj", method = {RequestMethod.POST})
     @ResponseBody
     public PageBean<HisConsumables> list (Map<String, Object> model, HttpServletRequest request, HisConsumables hisConsumables) throws Exception{
         PageBean<HisConsumables> pageBean = new PageBean<HisConsumables>();
@@ -155,9 +128,9 @@ public class HisConsumablesController extends BaseController {
      *@Date 2019/8/8
      *@Time 15:56
     */
-    @RequestMapping(value = "listEnable.ahsj", method = {RequestMethod.POST})
+    @RequestMapping(value = "/listEnable.ahsj", method = {RequestMethod.POST})
     @ResponseBody
-    public PageBean<HisConsumables> listEnable (Map<String, Object> model, HttpServletRequest request, HisConsumables hisConsumables) throws Exception{
+    public PageBean<HisConsumables> listEnable (HisConsumables hisConsumables) throws Exception{
         PageBean<HisConsumables> pageBean = new PageBean<HisConsumables>();
         pageBean.setParameter(hisConsumables);
         pageBean = hisConsumablesService.listEnable(pageBean);
@@ -173,7 +146,7 @@ public class HisConsumablesController extends BaseController {
      *@Time 22:48
     */
 
-    @RequestMapping("list/index.ahsj")
+    @RequestMapping("/list/index.ahsj")
     ModelAndView listIndex(String token){
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/consumables/list");
         modelAndView.addObject("title","耗材信息列表");
@@ -182,7 +155,7 @@ public class HisConsumablesController extends BaseController {
     }
 
 
-    @RequestMapping("choose/index.ahsj")
+    @RequestMapping("/choose/index.ahsj")
     ModelAndView chooseIndex(String token){
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/consumables/consumableschoose");
         modelAndView.addObject("title","选择耗材");
@@ -192,7 +165,7 @@ public class HisConsumablesController extends BaseController {
 
 
         //返回到
-    @RequestMapping(value = "backenterconsumables/index.ahsj")
+    @RequestMapping(value = "/backenterconsumables/index.ahsj")
     ModelAndView BackenterconsumablesIndex(String token,Long[] ids){
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/consumables/enterconsumables.html");
         modelAndView.addObject("token",token);
@@ -200,7 +173,16 @@ public class HisConsumablesController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping("update/index.ahsj")
+    /**
+     *@Description
+     *@MethodName updateIndex
+     *@Params [id, token]
+     *@return org.springframework.web.servlet.ModelAndView
+     *@Author XJP
+     *@Date 2020/4/26
+     *@Time 11:08
+    **/
+    @RequestMapping("/update/index.ahsj")
     ModelAndView updateIndex(Long id,String token){
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/consumables/update");
         modelAndView.addObject("title","耗材信息更新");
@@ -214,7 +196,7 @@ public class HisConsumablesController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping("setDisable/index.ahsj")
+    @RequestMapping("/setDisable/index.ahsj")
     @ResponseBody
         ModelAndView setDisableIndex(Long[] ids,String token){
         ModelAndView modelAndView = new ModelAndView();

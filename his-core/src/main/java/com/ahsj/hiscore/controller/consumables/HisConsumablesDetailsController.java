@@ -2,7 +2,9 @@ package com.ahsj.hiscore.controller.consumables;
 
 
 import com.ahsj.hiscore.entity.HisConsumablesDetails;
+import com.ahsj.hiscore.entity.HisEnterConsumablesDetails;
 import com.ahsj.hiscore.services.HisConsumablesDetailsService;
+import com.ahsj.hiscore.services.HisEnterConsumablesDetailsService;
 import core.controller.BaseController;
 import core.entity.PageBean;
 import core.message.Message;
@@ -16,11 +18,14 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
-@RequestMapping("/api/hisconsumablesdetails/")
+@RequestMapping("/api/hisconsumablesdetails")
 public class HisConsumablesDetailsController extends BaseController {
 
     @Autowired
     HisConsumablesDetailsService hisConsumablesDetailsService;
+
+    @Autowired
+    HisEnterConsumablesDetailsService hisEnterConsumablesDetailsService;
 
     /**
      * @return
@@ -30,7 +35,7 @@ public class HisConsumablesDetailsController extends BaseController {
      * @Date 2019/6/28
      * @Time 20:48
      */
-    @RequestMapping(value = "list.ahsj", method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value = "/list.ahsj", method = {RequestMethod.POST, RequestMethod.GET})
     @ResponseBody
     public PageBean<HisConsumablesDetails> list(Map<String, Object> model, HttpServletRequest request, HisConsumablesDetails hisConsumablesDetails) throws Exception {
         PageBean<HisConsumablesDetails> pageBean = new PageBean<HisConsumablesDetails>();
@@ -47,7 +52,7 @@ public class HisConsumablesDetailsController extends BaseController {
      * @Date 2019/8/14
      * @Time 9:43
      **/
-    @PostMapping("lists.ahsj")
+    @PostMapping("/lists.ahsj")
     @ResponseBody
     public PageBean<HisConsumablesDetails> lists(HisConsumablesDetails hisConsumablesDetails) throws Exception {
         PageBean<HisConsumablesDetails> pageBean = new PageBean<>();
@@ -64,7 +69,7 @@ public class HisConsumablesDetailsController extends BaseController {
      * @Date 2019/7/31
      * @Time 11:11
      */
-    @RequestMapping(value = "onelist.ahsj", method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value = "/onelist.ahsj", method = {RequestMethod.POST, RequestMethod.GET})
     @ResponseBody
     public PageBean<HisConsumablesDetails> onelist(Map<String, Object> model, HttpServletRequest request, HisConsumablesDetails hisConsumablesDetails) throws Exception {
         PageBean<HisConsumablesDetails> pageBean = new PageBean<HisConsumablesDetails>();
@@ -83,7 +88,7 @@ public class HisConsumablesDetailsController extends BaseController {
      * @Time 21:27
      */
 
-    @RequestMapping("consumablesdetails/index.ahsj")
+    @RequestMapping("/consumablesdetails/index.ahsj")
     ModelAndView enterconsumablesIndex(String token) {
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/consumables/consumablesdetails");
         modelAndView.addObject("title", "耗材库存管理");
@@ -91,12 +96,22 @@ public class HisConsumablesDetailsController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping("oneconsumablesdetails/index.ahsj")
-    ModelAndView oneEnterConsumablesIndex(String token, Long consumablesId) {
+    /**
+     *@Description 耗材库存详情页面
+     *@MethodName oneEnterConsumablesIndex
+     *@Params [token, consumablesId]
+     *@return org.springframework.web.servlet.ModelAndView
+     *@Author XJP
+     *@Date 2020/4/26
+     *@Time 15:49
+    **/
+    @RequestMapping("/oneconsumablesdetails/index.ahsj")
+    ModelAndView oneEnterConsumablesIndex(String token, Long id) throws Exception {
+        HisEnterConsumablesDetails hisEnterConsumablesDetails = hisEnterConsumablesDetailsService.selectByEnterConsumablesDetailsId(id);
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/consumables/oneconsumabledetails");
         modelAndView.addObject("title", "耗材详情");
         modelAndView.addObject("token", token);
-        modelAndView.addObject("consumablesId", consumablesId);
+        modelAndView.addObject("consumablesCode", hisEnterConsumablesDetails.getConsumablesCode());
         return modelAndView;
     }
 
@@ -125,7 +140,7 @@ public class HisConsumablesDetailsController extends BaseController {
      * @Date 2019/7/9
      * @Time 9:37
      */
-    @RequestMapping(value = "destory/index.ahsj", method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value = "/destory/index.ahsj", method = {RequestMethod.POST, RequestMethod.GET})
     ModelAndView destoryIndex(String token, Long consumablesId) {
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/consumables/destorychoose");
         modelAndView.addObject("title", "耗材报损");
@@ -142,7 +157,7 @@ public class HisConsumablesDetailsController extends BaseController {
      * @Date 2019/8/7
      * @Time 12:39
      **/
-    @PostMapping("hisConsumablesDetails/byIds.ahsj")
+    @PostMapping("/hisConsumablesDetails/byIds.ahsj")
     @ResponseBody
     public List<HisConsumablesDetails> getHisConsumablesDetailsByIds(@RequestParam("ids[]") Long[] ids) {
         List<HisConsumablesDetails> consumablesDetailsList = hisConsumablesDetailsService.getHisConsumablesDetailsByIds(ids);
@@ -158,7 +173,7 @@ public class HisConsumablesDetailsController extends BaseController {
      * @Date 2019/8/7
      * @Time 12:39
      **/
-    @PostMapping("save/hisConsumablesDetails/byIds/nums.ahsj")
+    @PostMapping("/save/hisConsumablesDetails/byIds/nums.ahsj")
     @ResponseBody
     public Message getHisConsumablesDetailsByIdsAndNum(@RequestParam("ids") Long[] ids, @RequestParam("nums") Integer[] nums, @RequestParam("medicalRecordId") String medicalRecordId) throws Exception {
         Long id = getId();
@@ -174,7 +189,7 @@ public class HisConsumablesDetailsController extends BaseController {
      * @Date 2019/8/7
      * @Time 12:39
      **/
-    @PostMapping("hisConsumablesDetails/getHisConsumablesDetailsInfo.ahsj")
+    @PostMapping("/hisConsumablesDetails/getHisConsumablesDetailsInfo.ahsj")
     @ResponseBody
     public PageBean<HisConsumablesDetails> getHisConsumablesDetailsInfo(HisConsumablesDetails hisConsumablesDetails) {
         System.out.println(hisConsumablesDetails.toString());
@@ -192,7 +207,7 @@ public class HisConsumablesDetailsController extends BaseController {
      * @Date 2019/8/15
      * @Time 20:37
      **/
-    @PostMapping("hisConsumablesDetails/getHisConsumablesDetailsInfoss.ahsj")
+    @PostMapping("/hisConsumablesDetails/getHisConsumablesDetailsInfoss.ahsj")
     @ResponseBody
     public PageBean<HisConsumablesDetails> getHisConsumablesDetailsInfos(HisConsumablesDetails hisConsumablesDetails) throws Exception {
         PageBean<HisConsumablesDetails> pageBean = new PageBean<>();
@@ -210,7 +225,7 @@ public class HisConsumablesDetailsController extends BaseController {
      * @Date 2019/8/7
      * @Time 12:39
      **/
-    @GetMapping("getHisConsumablesDetailsInfo/list.ahsj")
+    @GetMapping("/getHisConsumablesDetailsInfo/list.ahsj")
     public ModelAndView list(String token, @RequestParam("medicalRecordId") String medicalRecordId) {
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/consumablesDetails/consumableApplication");
         modelAndView.addObject("title", "耗材申请");

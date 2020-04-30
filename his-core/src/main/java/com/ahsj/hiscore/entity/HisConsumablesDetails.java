@@ -11,9 +11,11 @@ import java.util.Date;
 public class HisConsumablesDetails extends BaseEntity {
     private Long id;
 
-    private Long consumablesId;
-
     private String name;
+
+    private String consumablesCode;
+
+    private String consumablesDetailsCode;
 
     @CodeValueColumn(type = Constants.TYPE_CODE, typeKey = "consumable_type", typeName = "typeName")
     private Integer type;
@@ -32,6 +34,8 @@ public class HisConsumablesDetails extends BaseEntity {
     private Integer stockWarn;
 
     private Double price;
+
+    private Integer isDelete;
 
     //是否警告
     private Integer isWarning;
@@ -70,6 +74,29 @@ public class HisConsumablesDetails extends BaseEntity {
 
     private String consumableNumber;
 
+    public String getConsumablesDetailsCode() {
+        return consumablesDetailsCode;
+    }
+
+    public void setConsumablesDetailsCode(String consumablesDetailsCode) {
+        this.consumablesDetailsCode = consumablesDetailsCode;
+    }
+
+    public String getConsumablesCode() {
+        return consumablesCode;
+    }
+
+    public void setConsumablesCode(String consumablesCode) {
+        this.consumablesCode = consumablesCode;
+    }
+
+    public Integer getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
+    }
 
     public Date getConsumablesDetailsCreateDates() {
         return consumablesDetailsCreateDates;
@@ -143,13 +170,6 @@ public class HisConsumablesDetails extends BaseEntity {
         this.id = id;
     }
 
-    public Long getConsumablesId() {
-        return consumablesId;
-    }
-
-    public void setConsumablesId(Long consumablesId) {
-        this.consumablesId = consumablesId;
-    }
 
     public String getName() {
         return name;
@@ -259,7 +279,6 @@ public class HisConsumablesDetails extends BaseEntity {
     public String toString() {
         return "HisConsumablesDetails{" +
                 "id=" + id +
-                ", consumablesId=" + consumablesId +
                 ", name='" + name + '\'' +
                 ", type=" + type +
                 ", typeName='" + typeName + '\'' +

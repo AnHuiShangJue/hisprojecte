@@ -142,7 +142,7 @@
             loadingMessage: 'Loading...',
             dataTable: {
                 "ajax": {
-                    "url": CTX+"/"+"api/hisconsumablesdetails/list.ahsj?token="+TOKEN, // ajax source
+                    "url": CTX+"/"+"api/hisenterconsumables/list.ahsj?token="+TOKEN, // ajax source
                 },
                 "columns": [
                     {
@@ -166,18 +166,18 @@
                         "title":"规格",
                         "data":"spec",
                         "name":"spec"
-                    },{
+                  /*  },{
                         "title":"价格",
                         "data":"price",
-                        "name":"price"
-                    },{
+                        "name":"price"*/
+                 },{
                         "title":"库存",
-                        "data":"stock",
-                        "name":"stock"
-                    }, {
+                        "data":"surplus",
+                        "name":"surplus"
+                   /* }, {
                         "title":"库存量预警",
                         "data":"stockWarn",
-                        "name":"stock_warn"
+                        "name":"stock_warn"*/
                     },{
                         "title": "操作",
                         "width": "180px",
@@ -187,16 +187,16 @@
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn +
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"详情\" href='javascript:;' onclick='detail(" + row.consumablesId +");'> <i class='material-icons'>visibility</i></a>"+
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"耗材报损\" href='javascript:;' onclick='destory(" + row.consumablesId +");'> <i class='material-icons'>warning</i></a>"+
-                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"耗材出库\" onclick='exitSmart(" + row.id + ");'><i class='material-icons'>exit_to_app</i></a> ";
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"详情88\" href='javascript:;' onclick='detail(" + row.id +");'> <i class='material-icons'>visibility</i></a>"+
+                                "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"耗材报损\" href='javascript:;' onclick='destory(" + row.id +");'> <i class='material-icons'>warning</i></a>";
+                                // "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"耗材出库\" onclick='exitSmart(" + row.id + ");'><i class='material-icons'>exit_to_app</i></a> ";
                             ;
                             // 返回自定义内容
                             return rtnBtn;
                         }
                     }
                 ],
-                "order" : [ [ 5, "asc" ] ],
+                "order" : [ [ 4, "asc" ] ],
                 "rowCallback":function (row, data) {
                     if( data.stockWarn >= data.stock){
                         row.setAttribute("class"," pink lighten-5");
@@ -207,8 +207,8 @@
 
     }
 
-    function detail(consumablesId) {
-        var url = CTX+"/api/hisconsumablesdetails/oneconsumablesdetails/index.ahsj?token="+TOKEN+"&consumablesId="+consumablesId;
+    function detail(id) {
+        var url = CTX+"/api/hisconsumablesdetails/oneconsumablesdetails/index.ahsj?token="+TOKEN+"&id="+id;
         dialog.show(url, "耗材详细信息");
 
     }

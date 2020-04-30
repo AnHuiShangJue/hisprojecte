@@ -1,11 +1,13 @@
 package com.ahsj.hiscore.services.impl;
 
 
+import com.ahsj.hiscore.common.Constants;
 import com.ahsj.hiscore.core.CodeHelper;
 import com.ahsj.hiscore.dao.HisConsumablesDetailsMapper;
 import com.ahsj.hiscore.dao.HisEnterConsumablesDetailsMapper;
 import com.ahsj.hiscore.entity.HisConsumables;
 import com.ahsj.hiscore.entity.HisConsumablesDetails;
+import com.ahsj.hiscore.entity.HisEnterConsumablesDetails;
 import com.ahsj.hiscore.entity.HisHospitalConsumablesDetails;
 import com.ahsj.hiscore.feign.ITranslateService;
 import com.ahsj.hiscore.feign.IUserService;
@@ -114,7 +116,7 @@ public class HisConsumablesDetailsServiceImpl implements HisConsumablesDetailsSe
     @Override
     @Transactional(readOnly = false)
     public Message getHisConsumablesDetailsByIdsAndNum(Long[] ids, Integer[] nums, Long id, String medicalRecordId) throws Exception {
-        if (EmptyUtil.Companion.isNullOrEmpty(ids) || EmptyUtil.Companion.isNullOrEmpty(nums) || EmptyUtil.Companion.isNullOrEmpty(medicalRecordId)) {
+     if (EmptyUtil.Companion.isNullOrEmpty(ids) || EmptyUtil.Companion.isNullOrEmpty(nums) || EmptyUtil.Companion.isNullOrEmpty(medicalRecordId)) {
             log.info("申请失败 , 申请数据不能为空！");
             return MessageUtil.createMessage(false, " 申请失败 , 申请数据不能为空！");
         } else {
@@ -133,14 +135,14 @@ public class HisConsumablesDetailsServiceImpl implements HisConsumablesDetailsSe
 
                 log.info("耗材库id 值  : {}", ids[i]);
                 // HisEnterConsumablesDetails hisEnterConsumablesDetails = hisEnterConsumablesDetailsMapper.selectByPrimaryKey(ids[i]);
-                HisConsumablesDetails details = hisConsumablesDetailsMapper.selectByPrimaryKey(ids[i]);
-                log.info("查询库存 : {}", details.toString());
+                HisEnterConsumablesDetails hisEnterConsumablesDetails = hisEnterConsumablesDetailsMapper.selectByPrimaryKey(ids[i]);
+                log.info("查询库存 : {}", hisEnterConsumablesDetails.toString());
 
-                log.info("耗材库存量为 : {}", details.getStock());
-                if (details.getStock() < nums[i]) {
-                    return MessageUtil.createMessage(false, " 申请失败 , 耗材名 : " + details.getName() + "   申请数量已超过库存数 , 请重新申请！");
+                log.info("耗材库存量为 : {}", hisEnterConsumablesDetails.getSurplus());
+                if (hisEnterConsumablesDetails.getSurplus() < nums[i]) {
+                    return MessageUtil.createMessage(false, " 申请失败 , 耗材名 : " + hisEnterConsumablesDetails.getName() + "   申请数量已超过库存数 , 请重新申请！");
                 }
-                HisConsumables hisConsumables = hisConsumablesService.selectByPrimaryKey(details.getConsumablesId());
+                HisConsumables hisConsumables = hisConsumablesService.selectByConsumablesCode(hisEnterConsumablesDetails.getConsumablesCode());
                 if (hisConsumables.getIsEnable() == 2) {
                     return MessageUtil.createMessage(false, " 申请失败 , 耗材名 : " + hisConsumables.getName() + "   已停用, 无法申请 , 请重新申请！");
                 }
@@ -152,7 +154,10 @@ public class HisConsumablesDetailsServiceImpl implements HisConsumablesDetailsSe
                 hisHospitalConsumablesDetails.setApplicationTime(date);
                 hisHospitalConsumablesDetails.setConsumableNumber(consumableNumber);
                 hisHospitalConsumablesDetails.setMedicalRecordNumber(medicalRecordId);
+                hisHospitalConsumablesDetails.setConsumablesCode(hisConsumables.getConsumablesCode());
+                hisHospitalConsumablesDetails.setIsDelete(Constants.HIS_DELETE_FALSE);
                 consumablesDetailsArrayList.add(hisHospitalConsumablesDetails);
+
             }
             hisHospitalConsumablesDetailsService.insertHisHospitalConsumablesDetails(consumablesDetailsArrayList);
             log.info("提交耗材申请成功 ！！！！！");

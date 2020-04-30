@@ -47,15 +47,15 @@
                         <form id="searchForm" class="row" action="">
                             <div class="row">
                                 <div>
-                                    <input id="buyplanId"type="hidden" name="buyplanId" th:value="${buyplanId}">
+                                    <input id="buyplanId"type="hidden" name="buyplanId" th:value="${buyplanCode}">
                                 </div>
                                 <div class="col input-field s3 m3 l3">
                                     <input id="number" name="drugsNumb" type="text"/>
-                                    <label for="number">药品编号</label>
+                                    <label for="number">耗材编号</label>
                                 </div>
                                 <div class="col input-field s3 m3 l3">
                                     <input id="name" name="drugsName" type="text"/>
-                                    <label for="name">药品名称</label>
+                                    <label for="name">耗材名称</label>
                                 </div>
                             </div>
                         </form>
@@ -99,7 +99,7 @@
                 <div class="col s6 x6 l6 xl6">
                     <div class="card" style="overflow: hidden;">
                         <div class="card-content">
-                            <h4 class="card-title">待入库列表
+                            <h4 class="card-title">待入库列表88888
                             </h4>
                             <div class="row">
                                 <div class="col s2 m2 l2 xl2 offset-xl10">
@@ -340,13 +340,14 @@
             ids = gridEnterList.getIds();
             numbers = gridEnterList.gernumbers();
             prices = gridEnterList.getPrices();
-            var buyplanId = $("#buyplanId").val();
+            var buyplanCode = $("#buyplanId").val();
+
             $.ahsjajax(CTX + "/api/hisconsumablesbuyplandetails/saveDetails.ahsj",
                 {
                     "ids": ids.join(','),
                     "numbers": numbers.join(','),
                     "prices": prices.join(','),
-                    "buyplanId":buyplanId
+                    "buyplanCode":buyplanCode
                 },
                 function (msg) {
                     if (msg.success) {

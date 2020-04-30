@@ -2,11 +2,16 @@ package com.ahsj.hiscore.entity;
 
 import core.entity.BaseEntity;
 
+import java.util.Date;
+
 
 public class HisConsumablesBuyplanDetails extends BaseEntity {
+
     private Long id;
 
-    private Long consumablesId;
+    private String buyplanCode;
+
+    private String consumablesCode;
 
     private Integer enterCountPlan;
 
@@ -16,7 +21,40 @@ public class HisConsumablesBuyplanDetails extends BaseEntity {
 
     private Double price;
 
-    private Long buyplanId;
+    private Date createDate;
+
+    private Date updateDate;
+
+    private Integer isDelete;
+
+    public String getBuyplanCode() {
+        return buyplanCode;
+    }
+
+    public void setBuyplanCode(String buyplanCode) {
+        this.buyplanCode = buyplanCode;
+    }
+
+    public String getConsumablesCode() {
+        return consumablesCode;
+    }
+
+    public void setConsumablesCode(String consumablesCode) {
+        this.consumablesCode = consumablesCode;
+    }
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    private static final long serialVersionUID = 1L;
+
+    public Integer getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
+    }
 
     public Long getId() {
         return id;
@@ -26,13 +64,6 @@ public class HisConsumablesBuyplanDetails extends BaseEntity {
         this.id = id;
     }
 
-    public Long getConsumablesId() {
-        return consumablesId;
-    }
-
-    public void setConsumablesId(Long consumablesId) {
-        this.consumablesId = consumablesId;
-    }
 
     public Integer getEnterCountPlan() {
         return enterCountPlan;
@@ -67,11 +98,4 @@ public class HisConsumablesBuyplanDetails extends BaseEntity {
     }
 
 
-    public Long getBuyplanId() {
-        return buyplanId;
-    }
-
-    public void setBuyplanId(Long buyplanId) {
-        this.buyplanId = buyplanId;
-    }
 }

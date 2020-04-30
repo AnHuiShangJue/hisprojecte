@@ -36,7 +36,7 @@ public interface HisConsumablesMapper extends BaseMapper<HisConsumables> {
     int updateByPrimaryKey(HisConsumables hisConsumables);
 
 
-//    void updateStockById(Long id);
+    //    void updateStockById(Long id);
 
     List<HisConsumables> list(PageBean<HisConsumables> pageBean);
 
@@ -47,6 +47,15 @@ public interface HisConsumablesMapper extends BaseMapper<HisConsumables> {
     int updateConsumables(List<HisConsumables> hisConsumablesList);
 
 
+    /**
+     *@Description 
+     *@MethodName listEnable
+     *@Params [pageBean]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisConsumables>
+     *@Author XJP
+     *@Date 2020/4/24
+     *@Time 16:31
+    **/
     List<HisConsumables> listEnable(PageBean<HisConsumables> pageBean);
 
     Double selectPriceById(Long id);
@@ -105,5 +114,25 @@ public interface HisConsumablesMapper extends BaseMapper<HisConsumables> {
      */
     List<HisConsumables> queryListExportAndByIdsAll(List<HisConsumables> list);
 
+    /**
+     * @return int
+     * @Description
+     * @MethodName updateByIsDelete
+     * @Params [hisConsumables]
+     * @Author XJP
+     * @Date 2020/4/23
+     * @Time 16:50
+     **/
+    int updateByIsDelete(HisConsumables hisConsumables);
 
+    /**
+     *@Description
+     *@MethodName selectByHisConsumablesCode
+     *@Params [consumablesCode]
+     *@return com.ahsj.hiscore.entity.HisConsumables
+     *@Author XJP
+     *@Date 2020/4/24
+     *@Time 16:32
+    **/
+    HisConsumables selectByHisConsumablesCode(String consumablesCode);
 }

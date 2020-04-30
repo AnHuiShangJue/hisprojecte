@@ -510,6 +510,11 @@
         where m.is_discharged=1 AND  B.number =#{number,jdbcType=VARCHAR}
     </select>
 
+    <select id="selectByHisHospitalManageByNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from his_hospital_manage  where  number =#{number,jdbcType=VARCHAR}
+    </select>
+
     <select id="getHisHospitalManageBed" resultMap="BaseResultMap">
         select hm.* , b.number as bed_number from his_hospital_manage hm left join his_bed b on hm.bed_id = b.id where
             hm.is_discharged = 1 </select>

@@ -11,9 +11,9 @@ import java.util.Date;
 public class HisConsumablesDestory extends BaseEntity {
     private Long id;
 
-    private Long destoryId;
+    private String enterCdoe;
 
-    private Long consumablesId;
+    private String consumablesCode;
 
     private String name;
 
@@ -58,20 +58,20 @@ public class HisConsumablesDestory extends BaseEntity {
         this.id = id;
     }
 
-    public Long getDestoryId() {
-        return destoryId;
+    public String getEnterCdoe() {
+        return enterCdoe;
     }
 
-    public void setDestoryId(Long destoryId) {
-        this.destoryId = destoryId;
+    public void setEnterCdoe(String enterCdoe) {
+        this.enterCdoe = enterCdoe;
     }
 
-    public Long getConsumablesId() {
-        return consumablesId;
+    public String getConsumablesCode() {
+        return consumablesCode;
     }
 
-    public void setConsumablesId(Long consumablesId) {
-        this.consumablesId = consumablesId;
+    public void setConsumablesCode(String consumablesCode) {
+        this.consumablesCode = consumablesCode;
     }
 
     public String getName() {

@@ -169,9 +169,9 @@
                         "orderable": false,
                         "className": "center-align"
                     }, {
-                        "title": "计划编号",
-                        "data": "buyplanId", //实体字段
-                        "name": "buyplan_id"   //库中字段
+                        "title": "采购编号",
+                        "data": "buyplanCode", //实体字段
+                        "name": "buyplan_code"   //库中字段
                     }, {
                         "title": "负责人",
                         "data": "personInCharge",
@@ -207,12 +207,12 @@
                             var rtnBtn = "";
                             //如果获取字符串，必须在参数外反转"
                             rtnBtn = rtnBtn +
-                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看明细\" onclick='visitDetail(" + row.buyplanId + ");'> <i class='material-icons'>visibility</i></a>";
+                                "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"查看明细8888\" onclick='visitDetail(" + row.id + ");'> <i class='material-icons'>visibility</i></a>";
                             if (row.completion == 2) {
                                 rtnBtn = rtnBtn +
                                     "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"修改\" href='javascript:;' onclick='edit(" + row.id + ");'> <i class='material-icons'>edit</i></a>" +
-                                    "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"入库确认\" onclick='mediEnter(\"" + row.buyplanId + "\");'> <i class='material-icons'>input</i></a>" +
-                                    "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick='deleteInit(" + row.id + "," + row.buyplanId + ");'> <i class='material-icons'>delete</i></a>";
+                                    "<a class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"入库确认\" onclick='mediEnter(\"" + row.id + "\");'> <i class='material-icons'>input</i></a>" +
+                                    "<a  class='tooltipped' data-position=\"bottom\"  data-delay=\"50\" data-tooltip=\"删除\" onclick='deleteInit(" + row.id + ");'> <i class='material-icons'>delete</i></a>";
                             }
                             // 返回自定义内容
                             return rtnBtn;
@@ -235,23 +235,22 @@
     }
 
 
-    function visitDetail(buyplanId) {
+    function visitDetail(id) {
         //跳转到详情页面--->buyplandetails
-        var url = CTX + "/api/hisconsumablesbuyplandetails/details/index.ahsj?token=" + TOKEN + "&buyplanId=" + buyplanId;
+        var url = CTX + "/api/hisconsumablesbuyplandetails/details/index.ahsj?token=" + TOKEN + "&id=" + id;
         dialog.show(url, "采购计划详细信息");
     }
 
-    function mediEnter(buyplanId) {
-        var url = CTX + "/api/hisenterconsumables/mediEnterSure/index.ahsj?token=" + TOKEN + "&buyplanId=" + buyplanId;
+    function mediEnter(id) {
+        var url = CTX + "/api/hisenterconsumables/mediEnterSure/index.ahsj?token=" + TOKEN + "&id=" + id;
         dialog.show(url, "耗材入库确认");
     }
 
-    function deleteInit(ids,buyplanId) {
+    function deleteInit(ids) {
         dialog.confirm('确定删除?', function (index, layero) {
             $.ahsjajax(CTX + "/api/hisconsumablesbuyplan/delete.ahsj",
                 {
-                    "ids": ids,
-                    "buyplanId":buyplanId
+                    "ids": ids
                 },
                 function (msg) {
                     if (msg.success) {

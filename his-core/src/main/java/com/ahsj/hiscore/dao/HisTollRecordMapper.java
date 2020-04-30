@@ -232,4 +232,6 @@ public interface HisTollRecordMapper extends BaseMapper<HisTollRecord> {
     List<HisTollRecordDetails> selectAllInformationByHRNumber(String hrNumber);
     //根据住院号搜索出所有与此住院号相关的收费明细且实际收费大于0（即交押金的那条数据的明细）
     List<HisTollRecord> selectByHRNumberForAllDeposit(String number);
+
+    HisTollRecord queryByNumber(String number);
 }

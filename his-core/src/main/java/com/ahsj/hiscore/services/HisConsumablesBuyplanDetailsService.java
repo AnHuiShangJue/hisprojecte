@@ -9,26 +9,73 @@ import java.util.List;
 
 public interface HisConsumablesBuyplanDetailsService {
 
+
     /**
-     * @return
+     * @return core.message.Message
      * @Description 新增或更新
-     * @Params
-     * @Author jin
-     * @Date 2019/7/4
-     * @Time 12:58
-     */
-    Message saveOrUpdate(Long[] ids, Integer[] numbers, Long buyplanId, String personInCharge, String expectedTime, Double[] prices) throws Exception;
+     * @MethodName saveOrUpdate
+     * @Params [ids, numbers, personInCharge, expectedTime, prices]
+     * @Author XJP
+     * @Date 2020/4/24
+     * @Time 14:01
+     **/
+    Message saveOrUpdate(Long[] ids, Integer[] numbers, String personInCharge, String expectedTime, Double[] prices) throws Exception;
 
-    List<HisConsumablesBuyplanDetails> selectByBuyplanId(Long buyplanId) throws Exception;
+    /**
+     *@Description
+     *@MethodName selectByBuyplanId
+     *@Params [buyplanId]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisConsumablesBuyplanDetails>
+     *@Author XJP
+     *@Date 2020/4/24
+     *@Time 15:35
+    **/
+    List<HisConsumablesBuyplanDetails> selectByBuyplanCode(String buyplanId) throws Exception;
 
+    /**
+     * @return core.entity.PageBean<com.ahsj.hiscore.entity.HisConsumablesBuyplanDetails>
+     * @Description
+     * @MethodName details
+     * @Params [pageBean]
+     * @Author XJP
+     * @Date 2020/4/24
+     * @Time 15:00
+     **/
     PageBean<HisConsumablesBuyplanDetails> details(PageBean<HisConsumablesBuyplanDetails> pageBean) throws Exception;
 
-    Message saveDetails(Long[] ids, Integer[] numbers, Double[] prices, Long buyplanId) throws Exception;
+    /**
+     *@Description
+     *@MethodName saveDetails
+     *@Params [ids, numbers, prices, buyplanId]
+     *@return core.message.Message
+     *@Author XJP
+     *@Date 2020/4/24
+     *@Time 15:55
+    **/
+    Message saveDetails(Long[] ids, Integer[] numbers, Double[] prices, String buyplanCode) throws Exception;
 
+    /**
+     *@Description 
+     *@MethodName delete
+     *@Params [ids]
+     *@return core.message.Message
+     *@Author XJP
+     *@Date 2020/4/24
+     *@Time 16:58
+    **/
     Message delete(Long[] ids) throws Exception;
 
 
-    List<HisConsumablesBuyplanDetails> selectByBuyplanforList(Long buyplanId) throws Exception;
+    /**
+     *@Description 
+     *@MethodName selectByBuyplanforList
+     *@Params [id]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisConsumablesBuyplanDetails>
+     *@Author XJP
+     *@Date 2020/4/25
+     *@Time 15:48
+    **/
+    List<HisConsumablesBuyplanDetails> selectByBuyplanforList(Long id) throws Exception;
 
     Message delete(Long buyplanId) throws Exception;
 

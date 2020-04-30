@@ -9,24 +9,42 @@ import java.util.List;
 public interface HisConsumablesBuyplanService {
 
 
-    /**
-     * @return
-     * @Description
-     * @Params
-     * @Author jin
-     * @Date 2019/7/3
-     * @Time 11:24
-     */
-
+  /**
+   *@Description 
+   *@MethodName list
+   *@Params [pageBean]
+   *@return core.entity.PageBean<com.ahsj.hiscore.entity.HisConsumablesBuyplan>
+   *@Author XJP
+   *@Date 2020/4/24
+   *@Time 13:16
+  **/
     PageBean<HisConsumablesBuyplan> list(PageBean<HisConsumablesBuyplan> pageBean) throws Exception;
 
-    Message Update(HisConsumablesBuyplan hisMedicinePurchasingPlanRecord) throws Exception;
+    /**
+     *@Description
+     *@MethodName Update
+     *@Params [hisMedicinePurchasingPlanRecord]
+     *@return core.message.Message
+     *@Author XJP
+     *@Date 2020/4/24
+     *@Time 15:14
+    **/
+    Message saveOrUpdate(HisConsumablesBuyplan hisMedicinePurchasingPlanRecord) throws Exception;
 
+    /**
+     *@Description
+     *@MethodName delete
+     *@Params [ids]
+     *@return core.message.Message
+     *@Author XJP
+     *@Date 2020/4/24
+     *@Time 17:22
+    **/
     Message delete(Long[] ids) throws Exception;
 
     HisConsumablesBuyplan selectById(Long id);
 
-    HisConsumablesBuyplan selectByBuyplanId(Long buyplanId);
+    HisConsumablesBuyplan selectBybuyplanCode(String buyplanCode);
 
     /**
      * @return java.util.List<com.ahsj.hiscore.entity.HisMedicineInfo>

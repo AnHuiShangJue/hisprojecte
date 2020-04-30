@@ -29,7 +29,16 @@ public interface HisConsumablesDetailsMapper extends BaseMapper<HisConsumablesDe
 
     int stockwarnupdate(Integer stockWarn, Long consumablesId);
 
-    HisConsumablesDetails selectConsumablesId(Long id);
+    /**
+     * @return com.ahsj.hiscore.entity.HisConsumablesDetails
+     * @Description
+     * @MethodName selectConsumablesCode
+     * @Params [consumablesCode]
+     * @Author XJP
+     * @Date 2020/4/25
+     * @Time 11:31
+     **/
+    HisConsumablesDetails selectConsumablesCode(String consumablesCode);
 
     void updateAddStockById(HisEnterConsumablesDetails hisEnterConsumablesDetails);
 
@@ -55,14 +64,15 @@ public interface HisConsumablesDetailsMapper extends BaseMapper<HisConsumablesDe
      * @Time 18:04
      **/
     List<HisConsumablesDetails> getHisConsumablesDetailsInfo(PageBean<HisConsumablesDetails> pageBean);
-/**
- *@功能说明 
- *@Params [pageBean]
- *@return java.util.List<com.ahsj.hiscore.entity.HisConsumablesDetails>
- *@Author XJP
- *@Date 2019/8/15
- *@Time 20:59
-**/
+
+    /**
+     * @return java.util.List<com.ahsj.hiscore.entity.HisConsumablesDetails>
+     * @功能说明
+     * @Params [pageBean]
+     * @Author XJP
+     * @Date 2019/8/15
+     * @Time 20:59
+     **/
     List<HisConsumablesDetails> getHisConsumablesDetailsGroupBy(PageBean<HisConsumablesDetails> pageBean);
 
     /**

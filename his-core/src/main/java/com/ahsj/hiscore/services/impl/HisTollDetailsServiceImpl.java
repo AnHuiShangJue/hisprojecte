@@ -432,4 +432,11 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
         }
         return toll;
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public PageBean<HisTollDetails> queryByRecordConsumablesLists(PageBean<HisTollDetails> pageBean) {
+        pageBean.setData(CodeHelper.getInstance().setCodeValue(hisTollDetailsMapper.queryByRecordConsumablesLists(pageBean)));
+        return pageBean;
+    }
 }

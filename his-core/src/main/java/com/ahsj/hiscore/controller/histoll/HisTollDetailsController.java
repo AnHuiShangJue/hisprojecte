@@ -1,5 +1,6 @@
 package com.ahsj.hiscore.controller.histoll;
 
+import com.ahsj.hiscore.dao.HisRecordConsumablesMapper;
 import com.ahsj.hiscore.entity.*;
 import com.ahsj.hiscore.services.*;
 import core.controller.BaseController;
@@ -39,6 +40,9 @@ public class HisTollDetailsController extends BaseController {
 
     @Autowired
     HisRegisteredService hisRegisteredService;
+
+    @Autowired
+    HisRecordConsumablesMapper hisRecordConsumablesMapper;
 
 
     /**
@@ -215,6 +219,15 @@ public class HisTollDetailsController extends BaseController {
     @RequestMapping("hisTollDetails/list.ahsj")
     @ResponseBody
     public PageBean<HisTollDetails> listHisTollDetails(Long tollRecordId, HisTollDetails hisTollDetails, PageBean<HisTollDetails> pageBean) throws Exception {
+
+        HisTollRecord hisTollRecord = hisTollRecordService.queryByNumber(hisTollDetails.getNumber());
+        if (hisTollRecord.getAttenchType() == 10) {
+            hisTollDetails.setMedicalRecordNumber(hisTollRecord.getMedicalRecordId());
+            pageBean.setParameter(hisTollDetails);
+            return hisTollDetailsService.queryByRecordConsumablesLists(pageBean);
+        }
+
+
         if (!EmptyUtil.Companion.isNullOrEmpty(tollRecordId)) {
             hisTollDetails.setTollRecordId(tollRecordId);
             pageBean.setParameter(hisTollDetails);
@@ -546,7 +559,7 @@ public class HisTollDetailsController extends BaseController {
         //根据住院号搜索出所有与此住院号相关的收费明细且实际收费大于0（即交押金的那条数据的明细）
         List<HisTollRecord> hisTollRecordList = hisTollRecordService.selectByHRNumberForAllDeposit(number);
         BigDecimal allDeposit = new BigDecimal("0");
-        if(!EmptyUtil.Companion.isNullOrEmpty(hisTollRecordList)&&hisTollRecordList.size()!=0) {
+        if (!EmptyUtil.Companion.isNullOrEmpty(hisTollRecordList) && hisTollRecordList.size() != 0) {
             for (HisTollRecord hisTollRecord : hisTollRecordList) {
                 allDeposit = allDeposit.add(hisTollRecord.getActualCharge());
             }

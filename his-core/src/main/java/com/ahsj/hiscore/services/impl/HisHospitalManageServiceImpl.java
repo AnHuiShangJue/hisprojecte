@@ -784,6 +784,21 @@ public class HisHospitalManageServiceImpl implements HisHospitalManageService {
     }
 
     /**
+     *@Description
+     *@MethodName selectByHisHospitalManageByNumber
+     *@Params [number]
+     *@return com.ahsj.hiscore.entity.HisHospitalManage
+     *@Author XJP
+     *@Date 2020/4/29
+     *@Time 15:28
+    **/
+    @Override
+    @Transactional(readOnly = true)
+    public HisHospitalManage selectByHisHospitalManageByNumber(String number) throws Exception {
+        return hisHospitalManageMapper.selectByHisHospitalManageByNumber(number);
+    }
+
+    /**
      * @return com.ahsj.hiscore.entity.HisHospitalManage
      * @功能说明 查询新生儿的病床号
      * @Params []

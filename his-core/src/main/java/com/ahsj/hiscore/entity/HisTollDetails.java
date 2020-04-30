@@ -38,6 +38,15 @@ public class HisTollDetails extends BaseEntity {
     private BigDecimal toll;
 
     private String description;
+    private String medicalRecordNumber;
+
+    public String getMedicalRecordNumber() {
+        return medicalRecordNumber;
+    }
+
+    public void setMedicalRecordNumber(String medicalRecordNumber) {
+        this.medicalRecordNumber = medicalRecordNumber;
+    }
 
     private String number;
 
@@ -87,6 +96,8 @@ public class HisTollDetails extends BaseEntity {
     private String isBackName;
 
     private Double allDeposit;
+
+
 
     public BigDecimal getDrugFee() {
         return drugFee;

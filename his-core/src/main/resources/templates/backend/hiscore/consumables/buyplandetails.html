@@ -47,7 +47,7 @@
                         <form id="searchForm" class="row" action="">
                             <div class="row">
                                 <div>
-                                    <input id="planDetail" type="hidden" th:value="${buyplanId}">
+                                    <input id="planDetail" type="hidden" th:value="${buyplanCode}">
                                 </div>
                                 <div class="col input-field s3 m3 l3 xl3">
                                     <input id="name" name="name" type="text"/>
@@ -124,7 +124,7 @@
             loadingMessage: 'Loading...',
             dataTable: {
                 "ajax": {
-                    "url": CTX+"/api/hisconsumablesbuyplandetails/details.ahsj?token=" +TOKEN + "&buyplanId="+ $('#planDetail').val(), // ajax source
+                    "url": CTX+"/api/hisconsumablesbuyplandetails/details.ahsj?token=" +TOKEN + "&buyplanCode="+ $('#planDetail').val(), // ajax source
                 },
                 "columns": [
                     {
@@ -138,8 +138,8 @@
                     },
                     {
                         "title":"计划编号",
-                        "data":"buyplanId",
-                        "name":"buyplan_id",
+                        "data":"buyplanCode",
+                        "name":"buyplan_code",
                         "orderable": false//取消排序功能
                     },
                     {
@@ -175,7 +175,7 @@
                         }
                     }
                 ],
-                "order" : [ [ 2, "asc" ] ],
+                "order" : [ [ 2, "asc" ] ]
             },
         });
 
@@ -223,8 +223,8 @@
         });
         $("#btnEdit").click(function () {
             //编辑单条计划内容---->
-            var url = CTX + "/api/hisconsumablesbuyplandetails/edit/index.ahsj?token=" + TOKEN +"&buyplanId="+ $('#planDetail').val();
-            dialog.show(url, "药品采购计划详细信息编辑")
+            var url = CTX + "/api/hisconsumablesbuyplandetails/edit/index.ahsj?token=" + TOKEN +"&buyplanCode="+ $('#planDetail').val();
+            dialog.show(url, "耗材采购计划详细信息编辑")
         });
 
         $("#btnDeleteMany").click(function () {

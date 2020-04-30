@@ -23,8 +23,10 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("api/hisexitconsumables/")
+@RequestMapping("/api/hisexitconsumables")
 public class HisExitConsumablesDetailsController extends BaseController {
+
+
 
     @Autowired
     HisExitConsumablesDetailsService hisExitConsumablesDetailsService;
@@ -41,7 +43,7 @@ public class HisExitConsumablesDetailsController extends BaseController {
      *@Time 9:42
     */
     @ResponseBody
-    @RequestMapping(value = "list.ahsj", method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/list.ahsj", method = {RequestMethod.GET,RequestMethod.POST})
     public PageBean<HisExitConsumablesDetails> list (Map<String, Object> model, HttpServletRequest request, HisExitConsumablesDetails hisExitConsumablesDetails) throws Exception{
         PageBean<HisExitConsumablesDetails> pageBean = new PageBean<HisExitConsumablesDetails>();
         pageBean.setParameter(hisExitConsumablesDetails);
@@ -56,7 +58,7 @@ public class HisExitConsumablesDetailsController extends BaseController {
      *@Date 2019/6/25
      *@Time 10:49
      */
-    @RequestMapping(value = "exitConsumablesSmart.ahsj", method = {RequestMethod.POST})
+    @RequestMapping(value = "/exitConsumablesSmart.ahsj", method = {RequestMethod.POST})
     @ResponseBody
     public Message exitConsumables (Map<String, Object> model, HttpServletRequest request
             , @RequestParam(value="ids", required=true) Long[] ids
@@ -70,9 +72,11 @@ public class HisExitConsumablesDetailsController extends BaseController {
 
         String ids1 = request.getParameter("ids[]");
         if(null != request.getParameter("ids")){
-            return  hisExitConsumablesDetailsService.exitConsumablesSmart(ids,numbers,personInCharge,expectedTime);
+//            return  hisExitConsumablesDetailsService.exitConsumablesSmart(ids,numbers,personInCharge,expectedTime);
+          return   hisExitConsumablesDetailsService.exitConsumablesSmarts(ids,numbers,personInCharge,expectedTime);
         }else if(!StringUtils.isEmpty( request.getParameter("ids[]"))) {
-            return hisExitConsumablesDetailsService.exitConsumablesSmart(ids, numbers, personInCharge, expectedTime);
+//            return hisExitConsumablesDetailsService.exitConsumablesSmart(ids, numbers, personInCharge, expectedTime);
+         return    hisExitConsumablesDetailsService.exitConsumablesSmarts(ids,numbers,personInCharge,expectedTime);
         }else {
             return MessageUtil.createMessage(false,"请选择至少一条数据");
         }
@@ -86,7 +90,7 @@ public class HisExitConsumablesDetailsController extends BaseController {
      *@Date 2019/8/8
      *@Time 15:09
     **/
-    @RequestMapping(value = "exitConsumablesSmarts.ahsj", method = {RequestMethod.POST})
+    @RequestMapping(value = "/exitConsumablesSmarts.ahsj", method = {RequestMethod.POST})
     @ResponseBody
     public Message exitConsumabless (Map<String, Object> model, HttpServletRequest request
             , @RequestParam(value="ids[]", required=true) Long[] ids
@@ -118,7 +122,7 @@ public class HisExitConsumablesDetailsController extends BaseController {
      *@Time 19:39
     */
 
-    @RequestMapping(value = "exitConsumables.ahsj", method = {RequestMethod.POST})
+    @RequestMapping(value = "/exitConsumables.ahsj", method = {RequestMethod.POST})
     @ResponseBody
     public Message medicineExit (Map<String, Object> model, HttpRequest request
                                  ,@RequestParam(value = "ids",required = true) Long[] ids
@@ -138,7 +142,7 @@ public class HisExitConsumablesDetailsController extends BaseController {
      *@Date 2019/7/8
      *@Time 18:47
     */
-    @RequestMapping(value = "exitConsumables/index.ahsj", method = {RequestMethod.POST,RequestMethod.GET})
+    @RequestMapping(value = "/exitConsumables/index.ahsj", method = {RequestMethod.POST,RequestMethod.GET})
     ModelAndView exitConsumablesIndex(String token){
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/consumables/exitconsumables");
         modelAndView.addObject("title","手动出库");
@@ -154,7 +158,7 @@ public class HisExitConsumablesDetailsController extends BaseController {
      *@Date 2019/7/31
      *@Time 14:07
     */
-    @RequestMapping(value = "exitconsumables/index.ahsj")
+    @RequestMapping(value = "/exitconsumables/index.ahsj")
     ModelAndView exitRecord(String token){
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/consumables/exitconsumablesRecord");
         modelAndView.addObject("title","出库记录列表");
@@ -170,7 +174,7 @@ public class HisExitConsumablesDetailsController extends BaseController {
      *@Date 2019/8/7
      *@Time 15:50
      */
-    @RequestMapping(value = "exitForHos/index.ahsj")
+    @RequestMapping(value = "/exitForHos/index.ahsj")
     ModelAndView exitForHos(String token){
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/consumables/exitConsumablesForHos");
         modelAndView.addObject("title","耗材出库申请");
@@ -189,7 +193,7 @@ public class HisExitConsumablesDetailsController extends BaseController {
      *@Date 2019/8/17
      *@Time 14:31
     */
-    @RequestMapping(value = "exitDetails/index.ahsj")
+    @RequestMapping(value = "/exitDetails/index.ahsj")
     ModelAndView exitDetails(String token,String exitNumber){
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/consumables/exitconsumablesRecordDetails");
         modelAndView.addObject("title","耗材出库记录详情");
@@ -207,7 +211,7 @@ public class HisExitConsumablesDetailsController extends BaseController {
      *@Time 14:35
     */
     @ResponseBody
-    @RequestMapping(value = "listByNumber.ahsj", method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/listByNumber.ahsj", method = {RequestMethod.GET,RequestMethod.POST})
     public PageBean<HisExitConsumablesDetails> listByNumber (Map<String, Object> model, HttpServletRequest request, HisExitConsumablesDetails hisExitConsumablesDetails,String exitNumber) throws Exception{
         PageBean<HisExitConsumablesDetails> pageBean = new PageBean<HisExitConsumablesDetails>();
         pageBean.setParameter(hisExitConsumablesDetails);
@@ -223,7 +227,7 @@ public class HisExitConsumablesDetailsController extends BaseController {
      *@Date 2019/8/17
      *@Time 17:25
     */
-    @RequestMapping(value = "printf/index.ahsj")
+    @RequestMapping(value = "/printf/index.ahsj")
     ModelAndView printf(String token,String exitNumber,String hisHospitalManagerId){
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/consumablesDetails/materialsOutbound");
         modelAndView.addObject("title","耗材出库申请单打印");
@@ -242,7 +246,7 @@ public class HisExitConsumablesDetailsController extends BaseController {
      *@Date 2019/8/17
      *@Time 17:39
     */
-    @PostMapping(value = "getExitConsumabes.ahsj")
+    @PostMapping(value = "/getExitConsumabes.ahsj")
     @ResponseBody
     public List<HisExitConsumablesDetails> getExitConsumabes(String token,HisExitConsumablesDetails hisExitConsumablesDetails) throws Exception {
         PageBean<HisExitConsumablesDetails> pageBean = new PageBean<HisExitConsumablesDetails>();

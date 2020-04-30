@@ -1,237 +1,238 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ahsj.hiscore.dao.HisConsumablesDestoryMapper" >
-  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisConsumablesDestory" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="destory_id" property="destoryId" jdbcType="BIGINT" />
-    <result column="consumables_id" property="consumablesId" jdbcType="BIGINT" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="type" property="type" jdbcType="INTEGER" />
-    <result column="spec" property="spec" jdbcType="VARCHAR" />
-    <result column="price" property="price" jdbcType="DOUBLE" />
-    <result column="destory_number" property="destoryNumber" jdbcType="INTEGER" />
-    <result column="validity_period" property="validityPeriod" jdbcType="TIMESTAMP" />
-    <result column="destory_period" property="destoryPeriod" jdbcType="TIMESTAMP" />
-    <result column="reason" property="reason" jdbcType="VARCHAR" />
-    <result column="destory_type" property="destoryType" jdbcType="INTEGER" />
-    <result column="is_review" property="isReview" jdbcType="INTEGER" />
-    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
-    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
-    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
-    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+  <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisConsumablesDestory">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="enter_cdoe" jdbcType="VARCHAR" property="enterCdoe" />
+    <result column="consumables_code" jdbcType="VARCHAR" property="consumablesCode" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="spec" jdbcType="VARCHAR" property="spec" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="destory_number" jdbcType="INTEGER" property="destoryNumber" />
+    <result column="validity_period" jdbcType="TIMESTAMP" property="validityPeriod" />
+    <result column="destory_period" jdbcType="TIMESTAMP" property="destoryPeriod" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="destory_type" jdbcType="INTEGER" property="destoryType" />
+    <result column="is_review" jdbcType="INTEGER" property="isReview" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_user_id" jdbcType="BIGINT" property="updateUserId" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    id, destory_id, consumables_id, name, type, spec, price, destory_number, validity_period, 
-    destory_period, reason, destory_type, is_review, create_user_id, create_date, update_user_id, 
+  <sql id="Base_Column_List">
+    id, enter_cdoe, consumables_code, name, type, spec, price, destory_number, validity_period,
+    destory_period, reason, destory_type, is_review, create_user_id, create_date, update_user_id,
     update_date
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
     <include refid="Base_Column_List" />
     from his_consumables_destory
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from his_consumables_destory
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisConsumablesDestory" >
-    insert into his_consumables_destory (id, destory_id, consumables_id, 
-      name, type, spec, price, 
-      destory_number, validity_period, destory_period, 
-      reason, destory_type, is_review, 
-      create_user_id, create_date, update_user_id, 
-      update_date)
-    values (#{id,jdbcType=BIGINT}, #{destoryId,jdbcType=BIGINT}, #{consumablesId,jdbcType=BIGINT}, 
-      #{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{spec,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, 
-      #{destoryNumber,jdbcType=INTEGER}, #{validityPeriod,jdbcType=TIMESTAMP}, #{destoryPeriod,jdbcType=TIMESTAMP}, 
-      #{reason,jdbcType=VARCHAR}, #{destoryType,jdbcType=INTEGER}, #{isReview,jdbcType=INTEGER}, 
-      #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, 
-      #{updateDate,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisConsumablesDestory" keyProperty="id" useGeneratedKeys="true">
+    insert into his_consumables_destory (id, enter_cdoe, consumables_code,
+                                         name, type, spec, price,
+                                         destory_number, validity_period, destory_period,
+                                         reason, destory_type, is_review,
+                                         create_user_id, create_date, update_user_id,
+                                         update_date)
+    values (#{id,jdbcType=BIGINT}, #{enterCdoe,jdbcType=VARCHAR}, #{consumablesCode,jdbcType=VARCHAR},
+            #{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{spec,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE},
+            #{destoryNumber,jdbcType=INTEGER}, #{validityPeriod,jdbcType=TIMESTAMP}, #{destoryPeriod,jdbcType=TIMESTAMP},
+            #{reason,jdbcType=VARCHAR}, #{destoryType,jdbcType=INTEGER}, #{isReview,jdbcType=INTEGER},
+            #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT},
+            #{updateDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisConsumablesDestory" >
+  <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisConsumablesDestory">
     insert into his_consumables_destory
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="destoryId != null" >
-        destory_id,
+      <if test="enterCdoe != null">
+        enter_cdoe,
       </if>
-      <if test="consumablesId != null" >
-        consumables_id,
+      <if test="consumablesCode != null">
+        consumables_code,
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         name,
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         type,
       </if>
-      <if test="spec != null" >
+      <if test="spec != null">
         spec,
       </if>
-      <if test="price != null" >
+      <if test="price != null">
         price,
       </if>
-      <if test="destoryNumber != null" >
+      <if test="destoryNumber != null">
         destory_number,
       </if>
-      <if test="validityPeriod != null" >
+      <if test="validityPeriod != null">
         validity_period,
       </if>
-      <if test="destoryPeriod != null" >
+      <if test="destoryPeriod != null">
         destory_period,
       </if>
-      <if test="reason != null" >
+      <if test="reason != null">
         reason,
       </if>
-      <if test="destoryType != null" >
+      <if test="destoryType != null">
         destory_type,
       </if>
-      <if test="isReview != null" >
+      <if test="isReview != null">
         is_review,
       </if>
-      <if test="createUserId != null" >
+      <if test="createUserId != null">
         create_user_id,
       </if>
-      <if test="createDate != null" >
+      <if test="createDate != null">
         create_date,
       </if>
-      <if test="updateUserId != null" >
+      <if test="updateUserId != null">
         update_user_id,
       </if>
-      <if test="updateDate != null" >
+      <if test="updateDate != null">
         update_date,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="destoryId != null" >
-        #{destoryId,jdbcType=BIGINT},
+      <if test="enterCdoe != null">
+        #{enterCdoe,jdbcType=VARCHAR},
       </if>
-      <if test="consumablesId != null" >
-        #{consumablesId,jdbcType=BIGINT},
+      <if test="consumablesCode != null">
+        #{consumablesCode,jdbcType=VARCHAR},
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         #{type,jdbcType=INTEGER},
       </if>
-      <if test="spec != null" >
+      <if test="spec != null">
         #{spec,jdbcType=VARCHAR},
       </if>
-      <if test="price != null" >
+      <if test="price != null">
         #{price,jdbcType=DOUBLE},
       </if>
-      <if test="destoryNumber != null" >
+      <if test="destoryNumber != null">
         #{destoryNumber,jdbcType=INTEGER},
       </if>
-      <if test="validityPeriod != null" >
+      <if test="validityPeriod != null">
         #{validityPeriod,jdbcType=TIMESTAMP},
       </if>
-      <if test="destoryPeriod != null" >
+      <if test="destoryPeriod != null">
         #{destoryPeriod,jdbcType=TIMESTAMP},
       </if>
-      <if test="reason != null" >
+      <if test="reason != null">
         #{reason,jdbcType=VARCHAR},
       </if>
-      <if test="destoryType != null" >
+      <if test="destoryType != null">
         #{destoryType,jdbcType=INTEGER},
       </if>
-      <if test="isReview != null" >
+      <if test="isReview != null">
         #{isReview,jdbcType=INTEGER},
       </if>
-      <if test="createUserId != null" >
+      <if test="createUserId != null">
         #{createUserId,jdbcType=BIGINT},
       </if>
-      <if test="createDate != null" >
+      <if test="createDate != null">
         #{createDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateUserId != null" >
+      <if test="updateUserId != null">
         #{updateUserId,jdbcType=BIGINT},
       </if>
-      <if test="updateDate != null" >
+      <if test="updateDate != null">
         #{updateDate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisConsumablesDestory" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisConsumablesDestory">
     update his_consumables_destory
-    <set >
-      <if test="destoryId != null" >
-        destory_id = #{destoryId,jdbcType=BIGINT},
+    <set>
+      <if test="enterCdoe != null">
+        enter_cdoe = #{enterCdoe,jdbcType=VARCHAR},
       </if>
-      <if test="consumablesId != null" >
-        consumables_id = #{consumablesId,jdbcType=BIGINT},
+      <if test="consumablesCode != null">
+        consumables_code = #{consumablesCode,jdbcType=VARCHAR},
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         type = #{type,jdbcType=INTEGER},
       </if>
-      <if test="spec != null" >
+      <if test="spec != null">
         spec = #{spec,jdbcType=VARCHAR},
       </if>
-      <if test="price != null" >
+      <if test="price != null">
         price = #{price,jdbcType=DOUBLE},
       </if>
-      <if test="destoryNumber != null" >
+      <if test="destoryNumber != null">
         destory_number = #{destoryNumber,jdbcType=INTEGER},
       </if>
-      <if test="validityPeriod != null" >
+      <if test="validityPeriod != null">
         validity_period = #{validityPeriod,jdbcType=TIMESTAMP},
       </if>
-      <if test="destoryPeriod != null" >
+      <if test="destoryPeriod != null">
         destory_period = #{destoryPeriod,jdbcType=TIMESTAMP},
       </if>
-      <if test="reason != null" >
+      <if test="reason != null">
         reason = #{reason,jdbcType=VARCHAR},
       </if>
-      <if test="destoryType != null" >
+      <if test="destoryType != null">
         destory_type = #{destoryType,jdbcType=INTEGER},
       </if>
-      <if test="isReview != null" >
+      <if test="isReview != null">
         is_review = #{isReview,jdbcType=INTEGER},
       </if>
-      <if test="createUserId != null" >
+      <if test="createUserId != null">
         create_user_id = #{createUserId,jdbcType=BIGINT},
       </if>
-      <if test="createDate != null" >
+      <if test="createDate != null">
         create_date = #{createDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateUserId != null" >
+      <if test="updateUserId != null">
         update_user_id = #{updateUserId,jdbcType=BIGINT},
       </if>
-      <if test="updateDate != null" >
+      <if test="updateDate != null">
         update_date = #{updateDate,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisConsumablesDestory" >
+  <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisConsumablesDestory">
     update his_consumables_destory
-    set destory_id = #{destoryId,jdbcType=BIGINT},
-      consumables_id = #{consumablesId,jdbcType=BIGINT},
-      name = #{name,jdbcType=VARCHAR},
-      type = #{type,jdbcType=INTEGER},
-      spec = #{spec,jdbcType=VARCHAR},
-      price = #{price,jdbcType=DOUBLE},
-      destory_number = #{destoryNumber,jdbcType=INTEGER},
-      validity_period = #{validityPeriod,jdbcType=TIMESTAMP},
-      destory_period = #{destoryPeriod,jdbcType=TIMESTAMP},
-      reason = #{reason,jdbcType=VARCHAR},
-      destory_type = #{destoryType,jdbcType=INTEGER},
-      is_review = #{isReview,jdbcType=INTEGER},
-      create_user_id = #{createUserId,jdbcType=BIGINT},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
-      update_user_id = #{updateUserId,jdbcType=BIGINT},
-      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    set enter_cdoe = #{enterCdoe,jdbcType=VARCHAR},
+        consumables_code = #{consumablesCode,jdbcType=VARCHAR},
+        name = #{name,jdbcType=VARCHAR},
+        type = #{type,jdbcType=INTEGER},
+        spec = #{spec,jdbcType=VARCHAR},
+        price = #{price,jdbcType=DOUBLE},
+        destory_number = #{destoryNumber,jdbcType=INTEGER},
+        validity_period = #{validityPeriod,jdbcType=TIMESTAMP},
+        destory_period = #{destoryPeriod,jdbcType=TIMESTAMP},
+        reason = #{reason,jdbcType=VARCHAR},
+        destory_type = #{destoryType,jdbcType=INTEGER},
+        is_review = #{isReview,jdbcType=INTEGER},
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+        update_date = #{updateDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
 
 
   <!--自定义sql-->

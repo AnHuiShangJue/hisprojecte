@@ -10,10 +10,12 @@ import java.util.Date;
 
 public class HisExitConsumablesDetails extends BaseEntity {
     private Long id;
-    private String exitNumber;
-    private String hisHospitalManagerId;
 
-    private Long consumablesId;
+    private String exitNumber;
+
+    private String hisHospitalManagerCode;
+
+    private String consumablesCode;
 
     private String name;
 
@@ -24,10 +26,13 @@ public class HisExitConsumablesDetails extends BaseEntity {
     private String spec;
 
     private Double price;
+
     private Double lowPrice;
+
     private Double highPrice;
 
     private Integer stock;
+
     private Integer exitCount;
 
     @JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
@@ -36,12 +41,14 @@ public class HisExitConsumablesDetails extends BaseEntity {
 
     private Integer isBack;
 
-    private Integer isDel;
+    private Integer isDelete;
 
     @JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date createDate;
+
     private Date lowexitDate;
+
     private Date highexitDate;
 
     private String personInCharge;
@@ -49,7 +56,9 @@ public class HisExitConsumablesDetails extends BaseEntity {
     @JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date expectedTime;
+
     private Date lowexpectedTime;
+
     private Date highexpectedTime;
 
     private String patientName;
@@ -57,16 +66,20 @@ public class HisExitConsumablesDetails extends BaseEntity {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy/MM/dd ")
     private Date lowTime;//下区间
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy/MM/dd ")
     private Date upTime;//上去间
+
     private String months;
+
     private String years;
 
     private String types;
 
     //翻译字段
     private String tName;
+
     private String tSpec;
 
     public String getTypes() {
@@ -115,14 +128,6 @@ public class HisExitConsumablesDetails extends BaseEntity {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getConsumablesId() {
-        return consumablesId;
-    }
-
-    public void setConsumablesId(Long consumablesId) {
-        this.consumablesId = consumablesId;
     }
 
     public String getName() {
@@ -179,24 +184,6 @@ public class HisExitConsumablesDetails extends BaseEntity {
 
     public void setIsBack(Integer isBack) {
         this.isBack = isBack;
-    }
-
-    public Integer getIsDel() {
-        return isDel;
-    }
-
-    public void setIsDel(Integer isDel) {
-        this.isDel = isDel;
-    }
-
-    @Override
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    @Override
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
     }
 
     public Double getLowPrice() {
@@ -279,14 +266,6 @@ public class HisExitConsumablesDetails extends BaseEntity {
         this.exitNumber = exitNumber;
     }
 
-    public String getHisHospitalManagerId() {
-        return hisHospitalManagerId;
-    }
-
-    public void setHisHospitalManagerId(String hisHospitalManagerId) {
-        this.hisHospitalManagerId = hisHospitalManagerId;
-    }
-
     public String getPatientName() {
         return patientName;
     }
@@ -317,5 +296,29 @@ public class HisExitConsumablesDetails extends BaseEntity {
 
     public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    public String getHisHospitalManagerCode() {
+        return hisHospitalManagerCode;
+    }
+
+    public void setHisHospitalManagerCode(String hisHospitalManagerCode) {
+        this.hisHospitalManagerCode = hisHospitalManagerCode;
+    }
+
+    public String getConsumablesCode() {
+        return consumablesCode;
+    }
+
+    public void setConsumablesCode(String consumablesCode) {
+        this.consumablesCode = consumablesCode;
+    }
+
+    public Integer getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
     }
 }

@@ -50,14 +50,14 @@
                             <h4 class="card-title">操作台
                             </h4><label style="color:black">Console
                         </label>
-                            <div class="row">
+                            <!--<div class="row">
                                 <div class="col s2 m2 l2 xl2 offset-xl10">
                                     <a  id="btnCreate" class="btn waves-effect waves-light red">
                                         <i class="material-icons  white-text tooltipped " data-position="bottom" data-delay="50" data-tooltip="新增">add</i>
                                     </a>
 
                                 </div>
-                            </div>
+                            </div>-->
                             <!--Form Advance-->
                             <div class="row">
                                 <div id="refreshtable" class="col l12 m12 l12 xl12">
@@ -74,7 +74,7 @@
 </div>
 
 <div>
-    <input id="theid" type="hidden" th:value="${consumablesId}">
+    <input id="theid" type="hidden" th:value="${consumablesCode}">
 </div>
 
 <div th:replace="public/base_list_script :: html"></div>
@@ -99,7 +99,7 @@
             loadingMessage: 'Loading...',
             dataTable: {
                 "ajax": {
-                    "url": CTX+"/api/hisenterconsumables/onelist.ahsj?token="+TOKEN+"&consumablesId="+$('#theid').val(), // ajax source
+                    "url": CTX+"/api/hisenterconsumables/onelist.ahsj?token="+TOKEN+"&consumablesCode="+$('#theid').val(), // ajax source
                 },
                 "columns": [
                     {

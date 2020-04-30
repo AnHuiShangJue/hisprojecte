@@ -12,7 +12,7 @@ import java.util.Date;
 public class HisConsumablesBuyplan extends BaseEntity {
     private Long id;
 
-    private Long buyplanId;
+    private String buyplanCode;
 
     private String personInCharge;
 
@@ -36,6 +36,16 @@ public class HisConsumablesBuyplan extends BaseEntity {
 
     private BigDecimal actualExpenditure;
 
+    private Integer isDelete;
+
+    public Integer getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
+    }
+
     public Long getId() {
         return id;
     }
@@ -44,12 +54,12 @@ public class HisConsumablesBuyplan extends BaseEntity {
         this.id = id;
     }
 
-    public Long getBuyplanId() {
-        return buyplanId;
+    public String getBuyplanCode() {
+        return buyplanCode;
     }
 
-    public void setBuyplanId(Long buyplanId) {
-        this.buyplanId = buyplanId;
+    public void setBuyplanCode(String buyplanCode) {
+        this.buyplanCode = buyplanCode;
     }
 
     public String getPersonInCharge() {

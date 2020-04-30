@@ -94,7 +94,7 @@
                 <div class="col s6 x6 l6 xl6">
                     <div class="card" style="overflow: hidden">
                         <div class="card-content">
-                            <h4 class="card-title">申请耗材列表
+                            <h4 class="card-title">申请耗材列表8888
                             </h4><label style="color:black">Request a list of supplies
                         </label>
                             <div class="row">
@@ -186,7 +186,7 @@
             loadingMessage: 'Loading...',
             dataTable: {
                 "ajax": {
-                    "url": CTX+"/api/hisconsumablesdetails/lists.ahsj?token="+TOKEN, // ajax source
+                    "url": CTX+"/api/hisenterconsumables/list.ahsj?token="+TOKEN, // ajax source
                 },
                 "columns": [
                     {
@@ -210,8 +210,8 @@
                     },
                     {
                         "title":"库存量",
-                        "data":"stock",
-                        "name":"stock"
+                        "data":"surplus",
+                        "name":"surplus"
                     },
                     {
                         "title":"规格",
@@ -219,8 +219,8 @@
                         "name":"spec"
                     },{
                         "title":"价格",
-                        "data":"price",
-                        "name":"price"
+                        "data":"sellingPrice",
+                        "name":"selling_price"
                     },{
                         "title": "操作",
                         "width": "60px",

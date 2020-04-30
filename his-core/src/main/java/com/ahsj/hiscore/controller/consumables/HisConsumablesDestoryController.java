@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @Controller
-@RequestMapping("api/hisconsumablesdestory/")
+@RequestMapping("/api/hisconsumablesdestory")
 public class HisConsumablesDestoryController extends BaseController {
     @Autowired
     HisConsumablesDestoryService hisConsumablesDestoryService;
@@ -34,7 +34,7 @@ public class HisConsumablesDestoryController extends BaseController {
      *@Time 14:03
     */
 
-    @RequestMapping(value = "index.ahsj" ,method = {RequestMethod.POST,RequestMethod.GET})
+    @RequestMapping(value = "/index.ahsj" ,method = {RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
     public Message index(Map<String, Object> model, HttpRequest request,
                          @RequestParam(value = "ids",required = true) Long[] ids,
@@ -60,7 +60,7 @@ public class HisConsumablesDestoryController extends BaseController {
      *@Date 2019/7/10
      *@Time 9:41
     */
-    @RequestMapping(value = "list.ahsj", method = {RequestMethod.POST})
+    @RequestMapping(value = "/list.ahsj", method = {RequestMethod.POST})
     @ResponseBody
     public PageBean<HisConsumablesDestory> list (Map<String, Object> model, HttpServletRequest request, HisConsumablesDestory hisConsumablesDestory) throws Exception{
         PageBean<HisConsumablesDestory> pageBean = new PageBean<HisConsumablesDestory>();
@@ -78,7 +78,7 @@ public class HisConsumablesDestoryController extends BaseController {
      *@Date 2019/7/10
      *@Time 14:51
     */
-    @RequestMapping(value = "review.ahsj" ,method = {RequestMethod.POST,RequestMethod.GET})
+    @RequestMapping(value = "/review.ahsj" ,method = {RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
     public Message review(Map<String, Object> model, HttpRequest request,
                          @RequestParam(value = "ids",required = true) Long[] ids
@@ -97,7 +97,7 @@ public class HisConsumablesDestoryController extends BaseController {
      *@Date 2019/7/16
      *@Time 15:58
     */
-    @RequestMapping(value = "unreview.ahsj" ,method = {RequestMethod.POST,RequestMethod.GET})
+    @RequestMapping(value = "/unreview.ahsj" ,method = {RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
     public Message unreview(Map<String, Object> model, HttpRequest request,
                           @RequestParam(value = "ids",required = true) Long[] ids
@@ -118,7 +118,7 @@ public class HisConsumablesDestoryController extends BaseController {
      *@Time 9:51
     */
 
-    @RequestMapping("list/index.ahsj")
+    @RequestMapping("/list/index.ahsj")
     ModelAndView listIndex(String token){
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/consumables/destoryreview");
         modelAndView.addObject("title","耗材审核列表");
@@ -134,7 +134,7 @@ public class HisConsumablesDestoryController extends BaseController {
      *@Date 2019/7/10
      *@Time 15:36
     */
-    @RequestMapping("destorydetails/index.ahsj")
+    @RequestMapping("/destorydetails/index.ahsj")
     ModelAndView destoryIndex(String token,Long id){
         ModelAndView modelAndView = new ModelAndView("backend/hiscore/consumables/destorydetails");
         modelAndView.addObject("title","耗材审核列表");

@@ -175,6 +175,17 @@ public interface HisHospitalManageService {
      * @Time 9:34
      **/
     HisHospitalManage getHisHospitalManageByNumber(String number) throws Exception;
+    
+    /**
+     *@Description 
+     *@MethodName selectByHisHospitalManageByNumber
+     *@Params [number]
+     *@return com.ahsj.hiscore.entity.HisHospitalManage
+     *@Author XJP
+     *@Date 2020/4/29
+     *@Time 18:14
+    **/
+    HisHospitalManage selectByHisHospitalManageByNumber(String number) throws Exception;
 
     /**
      * @return com.ahsj.hiscore.entity.HisHospitalManage

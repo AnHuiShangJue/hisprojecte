@@ -42,4 +42,15 @@ public interface HisHospitalConsumablesDetailsMapper extends BaseMapper<HisHospi
     HisHospitalConsumablesDetails selectByConsumablesId(long hisConsumablesDetailsId);
 
     List<HisHospitalConsumablesDetails> getHisHospitalConsumablesDetailsConsumableNumber(String consumableNumber);
+
+    /**
+     *@Description
+     *@MethodName updateByIsDelete
+     *@Params [id]
+     *@return int
+     *@Author XJP
+     *@Date 2020/4/27
+     *@Time 9:14
+    **/
+    int updateByIsDelete(Long id);
 }

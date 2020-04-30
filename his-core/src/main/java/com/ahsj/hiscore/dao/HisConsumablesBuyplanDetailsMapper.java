@@ -24,13 +24,40 @@ public interface HisConsumablesBuyplanDetailsMapper {
 
     int updateByPrimaryKey(HisConsumablesBuyplanDetails record);
 
-    List<HisConsumablesBuyplanDetails> selectByBuyplanId(Long buyplanId);
+    /**
+     *@Description
+     *@MethodName selectByBuyplanId
+     *@Params [buyplanId]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisConsumablesBuyplanDetails>
+     *@Author XJP
+     *@Date 2020/4/24
+     *@Time 15:36
+    **/
+    List<HisConsumablesBuyplanDetails> selectByBuyplanCode(String buyplanCode);
 
+    /**
+     *@Description 
+     *@MethodName details
+     *@Params [pageBean]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisConsumablesBuyplanDetails>
+     *@Author XJP
+     *@Date 2020/4/24
+     *@Time 15:00
+    **/
     List<HisConsumablesBuyplanDetails> details(PageBean<HisConsumablesBuyplanDetails> pageBean);
 
-    List<HisConsumablesBuyplanDetails> selectByBuyplanforList(Long buyplanId);
+    /**
+     *@Description
+     *@MethodName selectByBuyplanforList
+     *@Params [buyplanId]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisConsumablesBuyplanDetails>
+     *@Author XJP
+     *@Date 2020/4/24
+     *@Time 17:41
+    **/
+    List<HisConsumablesBuyplanDetails> selectByBuyplanforList(String buyplanCode);
 
-    int deleteByBuyplanId(Long buyplanId);
+    int deleteByBuyplanCode(String buyplanCode);
 
     /**
      * @return java.util.List<com.ahsj.hiscore.entity.HisConsumablesBuyplanDetails>
@@ -51,4 +78,26 @@ public interface HisConsumablesBuyplanDetailsMapper {
      * @Time 17:02
      **/
     List<HisConsumablesBuyplanDetails> queryAll();
+
+    /**
+     *@Description
+     *@MethodName updateByIsDelete
+     *@Params [id]
+     *@return int
+     *@Author XJP
+     *@Date 2020/4/24
+     *@Time 16:41
+    **/
+    int updateByIsDelete(Long id);
+
+    /**
+     *@Description
+     *@MethodName updateByIsDeleteCode
+     *@Params [buyplanCode]
+     *@return int
+     *@Author XJP
+     *@Date 2020/4/24
+     *@Time 17:32
+    **/
+    int updateByIsDeleteCode(String buyplanCode);
 }

@@ -2,12 +2,15 @@ package com.ahsj.hiscore.services.impl;
 
 import com.ahsj.hiscore.common.Constants;
 import com.ahsj.hiscore.common.excel.JxlsUtil;
+import com.ahsj.hiscore.common.utils.DateNumber;
 import com.ahsj.hiscore.common.utils.JsonUtils;
 import com.ahsj.hiscore.controller.BaseLoginUser;
 import com.ahsj.hiscore.core.CodeHelper;
 import com.ahsj.hiscore.dao.HisConsumablesDetailsMapper;
 import com.ahsj.hiscore.dao.HisConsumablesMapper;
+import com.ahsj.hiscore.dao.HisEnterConsumablesDetailsMapper;
 import com.ahsj.hiscore.entity.HisConsumables;
+import com.ahsj.hiscore.entity.HisEnterConsumablesDetails;
 import com.ahsj.hiscore.entity.HisProject;
 import com.ahsj.hiscore.entity.Translate;
 import com.ahsj.hiscore.entity.TranslateModel.HisConsumablesTranslate;
@@ -44,15 +47,9 @@ public class HisConsumablesImpl implements HisConsumablesService {
 
     private Logger log = LoggerFactory.getLogger(HisConsumablesImpl.class.getSimpleName());
 
+    @Autowired
+    HisEnterConsumablesDetailsMapper hisEnterConsumablesDetailsMapper;
 
-    /**
-     * @Description CRUD
-     * @Params
-     * @return
-     * @Author jin
-     * @Date 2019/6/19
-     * @Time 15:18
-     */
     @Autowired
     HisConsumablesMapper hisConsumablesMapper;
 
@@ -77,6 +74,8 @@ public class HisConsumablesImpl implements HisConsumablesService {
             //检查名称规格是否相同
             if (EmptyUtil.Companion.isNullOrEmpty(check)) {
                 //是null就插入
+                hisConsumables.setIsDelete(Constants.HIS_DELETE_FALSE);
+                hisConsumables.setConsumablesCode(DateNumber.getNumbenr(Constants.HIS_HC));
                 hisConsumablesMapper.insert(hisConsumables);
                 //   log.info("--------------------耗材新增翻译发送开始--------------------------");
                 BaseLoginUser loginUser = new BaseLoginUser();
@@ -95,20 +94,40 @@ public class HisConsumablesImpl implements HisConsumablesService {
             }
         } else {
             HisConsumables check = hisConsumablesMapper.selectByPrimaryKey(hisConsumables.getId());
+            hisConsumables.setConsumablesCode(check.getConsumablesCode());
             //先检测id是否存在
             if (!EmptyUtil.Companion.isNullOrEmpty(check)) {
                 //在检测被更新的耗材名称和规格是否相同
                 HisConsumables checkForOne = hisConsumablesMapper.selectNameAndSpecById(hisConsumables);
-                if (checkForOne.getStock() != hisConsumables.getStock()) {
-                    //不相同则表示修改了该项值---同时去detail表里修改stock_warn
-                    hisConsumablesDetailsMapper.stockwarnupdate(hisConsumables.getStock(),hisConsumables.getId());
-                }
+
                 if (EmptyUtil.Companion.isNullOrEmpty(checkForOne)) {
 
+                    //伪删
+                    hisConsumablesMapper.updateByIsDelete(hisConsumables);
+                    //新增
+                    hisConsumables.setIsDelete(Constants.HIS_DELETE_FALSE);
+                    hisConsumables.setId(null);
+                    hisConsumablesMapper.insert(hisConsumables);
+
+                    List<HisEnterConsumablesDetails> hisEnterConsumablesDetailsList =  hisEnterConsumablesDetailsMapper.selectByConsumablesCode(hisConsumables.getConsumablesCode());
+
+                    if (!EmptyUtil.Companion.isNullOrEmpty(hisEnterConsumablesDetailsList)){
+                        //伪删
+                        hisEnterConsumablesDetailsMapper.updateByIsDelete(hisConsumables.getConsumablesCode());
+
+                        for (HisEnterConsumablesDetails hisEnterConsumablesDetails : hisEnterConsumablesDetailsList) {
+                            hisEnterConsumablesDetails.setSellingPrice(hisConsumables.getPrice());
+                            hisEnterConsumablesDetails.setId(null);
+                            hisEnterConsumablesDetails.setIsDelete(Constants.HIS_DELETE_FALSE);
+                        }
+
+                        //新增
+                        hisEnterConsumablesDetailsMapper.insertBatch(hisEnterConsumablesDetailsList);
+                    }
 
 
 
-                    hisConsumablesMapper.updateByPrimaryKeySelective(hisConsumables);
+
                     //  log.info("--------------------耗材修改翻译发送开始--------------------------");
                     BaseLoginUser loginUser = new BaseLoginUser();
                     TranslateModels translateModels = new TranslateModels();
@@ -121,22 +140,40 @@ public class HisConsumablesImpl implements HisConsumablesService {
                     //  log.info("--------------------耗材修改翻译发送结束--------------------------");
                     return MessageUtil.createMessage(true, "更新成功!");
                 }
-                if (EmptyUtil.Companion.isNullOrEmpty(checkForOne)) {
-                    hisConsumablesMapper.updateByPrimaryKeySelective(hisConsumables);
-                    // log.info("--------------------耗材修改翻译发送开始--------------------------");
-                    BaseLoginUser loginUser = new BaseLoginUser();
-                    TranslateModels translateModels = new TranslateModels();
-                    HisConsumablesTranslate translate = new HisConsumablesTranslate();
-                    BeanUtils.copyProperties(hisConsumables, translate);
-                    translateModels.setUserId(loginUser.getId());
-                    translateModels.setHisConsumablesTranslate(translate);
-                    amqpTemplat.convertAndSend("com.ahsj.updateHisConsumables", JsonUtils.serialize(translateModels));
-                    // log.info(JsonUtils.serialize(translateModels));
-                    //  log.info("--------------------耗材修改翻译发送结束--------------------------");
-                    return MessageUtil.createMessage(true, "更新成功!");
-                }
+
+
+                /*if (checkForOne.getStock() != hisConsumables.getStock()) {
+                    //不相同则表示修改了该项值---同时去detail表里修改stock_warn
+                    hisConsumablesDetailsMapper.stockwarnupdate(hisConsumables.getStock(), hisConsumables.getId());
+                }*/
+
                 if (checkForOne.getId() == hisConsumables.getId()) {
-                    hisConsumablesMapper.updateByPrimaryKey(hisConsumables);
+
+
+                    //伪删
+                    hisConsumablesMapper.updateByIsDelete(hisConsumables);
+                    //新增
+                    hisConsumables.setIsDelete(Constants.HIS_DELETE_FALSE);
+                    hisConsumables.setId(null);
+                    hisConsumablesMapper.insert(hisConsumables);
+
+                    List<HisEnterConsumablesDetails> hisEnterConsumablesDetailsList =  hisEnterConsumablesDetailsMapper.selectByConsumablesCode(hisConsumables.getConsumablesCode());
+
+                    if (!EmptyUtil.Companion.isNullOrEmpty(hisEnterConsumablesDetailsList)){
+                        //伪删
+                        hisEnterConsumablesDetailsMapper.updateByIsDelete(hisConsumables.getConsumablesCode());
+
+                        for (HisEnterConsumablesDetails hisEnterConsumablesDetails : hisEnterConsumablesDetailsList) {
+                            hisEnterConsumablesDetails.setSellingPrice(hisConsumables.getPrice());
+                            hisEnterConsumablesDetails.setId(null);
+                            hisEnterConsumablesDetails.setIsDelete(Constants.HIS_DELETE_FALSE);
+                        }
+
+                        //新增
+                        hisEnterConsumablesDetailsMapper.insertBatch(hisEnterConsumablesDetailsList);
+                    }
+
+
                     //  log.info("--------------------耗材修改翻译发送开始--------------------------");
                     BaseLoginUser loginUser = new BaseLoginUser();
                     TranslateModels translateModels = new TranslateModels();
@@ -225,6 +262,15 @@ public class HisConsumablesImpl implements HisConsumablesService {
         return pageBean;
     }
 
+    /**
+     *@Description
+     *@MethodName listEnable
+     *@Params [pageBean]
+     *@return core.entity.PageBean<com.ahsj.hiscore.entity.HisConsumables>
+     *@Author XJP
+     *@Date 2020/4/24
+     *@Time 11:11
+    **/
     @Override
     @Transactional(readOnly = true)
     public PageBean<HisConsumables> listEnable(PageBean<HisConsumables> pageBean) throws Exception {
@@ -233,15 +279,14 @@ public class HisConsumablesImpl implements HisConsumablesService {
     }
 
 
-
     @Override
     @Transactional(readOnly = true)
     public List<HisConsumables> queryAll() throws Exception {
-        List<HisConsumables>  hisConsumables =  hisConsumablesMapper.queryAll();
-        if (EmptyUtil.Companion.isNullOrEmpty(hisConsumables)){
+        List<HisConsumables> hisConsumables = hisConsumablesMapper.queryAll();
+        if (EmptyUtil.Companion.isNullOrEmpty(hisConsumables)) {
             // log.info("查询失败");
             return new ArrayList<>();
-        }else {
+        } else {
             return hisConsumables;
         }
     }
@@ -257,9 +302,9 @@ public class HisConsumablesImpl implements HisConsumablesService {
     public void exportExcels(Long[] ids, HttpServletRequest request, HttpServletResponse response, HttpSession session, String param) throws Exception {
         HashMap<String, Object> beans = new HashMap<String, Object>();
         String psth = null;
-        if (StringUtils.equals(param,Constants.HIS_CH)) {
-           // psth = this.getClass().getClassLoader().getResource("templates/excel/export/hisconsumables_CH.xlsx").getPath();//导出表格
-            psth =Constants.HIS_SYS_EXCEL_CONSUMABLES_CH_FILE_URL;
+        if (StringUtils.equals(param, Constants.HIS_CH)) {
+            // psth = this.getClass().getClassLoader().getResource("templates/excel/export/hisconsumables_CH.xlsx").getPath();//导出表格
+            psth = Constants.HIS_SYS_EXCEL_CONSUMABLES_CH_FILE_URL;
             if (EmptyUtil.Companion.isNullOrEmpty(ids)) {
                 List<HisConsumables> hisConsumablesList = CodeHelper.getInstance().setCodeValue(hisConsumablesMapper.queryListExportAll());
                 beans.put("hisConsumablesList", hisConsumablesList);
@@ -280,8 +325,8 @@ public class HisConsumablesImpl implements HisConsumablesService {
                 JxlsUtil.export(request, response, psth, "耗材基本信息记录", beans);
                 return;
             }
-        }else if(StringUtils.equals(param,Constants.HIS_KM)){
-           // psth = this.getClass().getClassLoader().getResource("templates/excel/export/hisconsumables_KM.xlsx").getPath();//导出表格
+        } else if (StringUtils.equals(param, Constants.HIS_KM)) {
+            // psth = this.getClass().getClassLoader().getResource("templates/excel/export/hisconsumables_KM.xlsx").getPath();//导出表格
             psth = Constants.HIS_SYS_EXCEL_CONSUMABLES_KM_FILE_URL;
             if (EmptyUtil.Companion.isNullOrEmpty(ids)) {
                 List<HisConsumables> hisConsumablesList = CodeHelper.getInstance().setCodeValue(hisConsumablesMapper.queryListExportAll());
@@ -292,7 +337,7 @@ public class HisConsumablesImpl implements HisConsumablesService {
                     translate.setTranslateType(Constants.TRANSLATE_SYS_CODE_DETAIL);
                     List<Translate> translates = iTranslateService.queryTranslate(translate);
                     for (Translate translate1 : translates) {
-                        if (StringUtils.equals(translate1.getTranslateChina(),hisConsumables.getTypeName())){
+                        if (StringUtils.equals(translate1.getTranslateChina(), hisConsumables.getTypeName())) {
                             hisConsumables.setTypeName(translate1.getTranslateKhmer());
                         }
                     }
@@ -301,7 +346,7 @@ public class HisConsumablesImpl implements HisConsumablesService {
                     translate2.setTranslateType(Constants.TRANSLATE_SYS_CODE_DETAIL);
                     List<Translate> translates1 = iTranslateService.queryTranslate(translate2);
                     for (Translate translate1 : translates1) {
-                        if (StringUtils.equals(translate1.getTranslateChina(),hisConsumables.getEnable())){
+                        if (StringUtils.equals(translate1.getTranslateChina(), hisConsumables.getEnable())) {
                             hisConsumables.setEnable(translate1.getTranslateKhmer());
                         }
                     }
@@ -312,10 +357,10 @@ public class HisConsumablesImpl implements HisConsumablesService {
                     translate.setTranslateType(Constants.TRANSLATE_HIS_HISCONSUMABLES);
                     List<Translate> translateHisMedicineInfo = iTranslateService.queryTranslate(translate);
                     for (Translate translate1 : translateHisMedicineInfo) {
-                        if (StringUtils.equals(translate1.getTranslateChina(),hisConsumables.getName())){
+                        if (StringUtils.equals(translate1.getTranslateChina(), hisConsumables.getName())) {
                             hisConsumables.setName(translate1.getTranslateKhmer());
                         }
-                        if (StringUtils.equals(translate1.getTranslateChina(),hisConsumables.getSpec())){
+                        if (StringUtils.equals(translate1.getTranslateChina(), hisConsumables.getSpec())) {
                             hisConsumables.setSpec(translate1.getTranslateKhmer());
                         }
 
@@ -341,7 +386,7 @@ public class HisConsumablesImpl implements HisConsumablesService {
                 translate.setTranslateType(Constants.TRANSLATE_SYS_CODE_DETAIL);
                 List<Translate> translates = iTranslateService.queryTranslate(translate);
                 for (Translate translate1 : translates) {
-                    if (StringUtils.equals(translate1.getTranslateChina(),hisConsumables.getTypeName())){
+                    if (StringUtils.equals(translate1.getTranslateChina(), hisConsumables.getTypeName())) {
                         hisConsumables.setTypeName(translate1.getTranslateKhmer());
                     }
                 }
@@ -350,7 +395,7 @@ public class HisConsumablesImpl implements HisConsumablesService {
                 translate2.setTranslateType(Constants.TRANSLATE_SYS_CODE_DETAIL);
                 List<Translate> translates1 = iTranslateService.queryTranslate(translate2);
                 for (Translate translate1 : translates1) {
-                    if (StringUtils.equals(translate1.getTranslateChina(),hisConsumables.getEnable())){
+                    if (StringUtils.equals(translate1.getTranslateChina(), hisConsumables.getEnable())) {
                         hisConsumables.setEnable(translate1.getTranslateKhmer());
                     }
                 }
@@ -360,10 +405,10 @@ public class HisConsumablesImpl implements HisConsumablesService {
                 translate.setTranslateType(Constants.TRANSLATE_HIS_HISCONSUMABLES);
                 List<Translate> translateHisMedicineInfo = iTranslateService.queryTranslate(translate);
                 for (Translate translate1 : translateHisMedicineInfo) {
-                    if (StringUtils.equals(translate1.getTranslateChina(),hisConsumables.getName())){
+                    if (StringUtils.equals(translate1.getTranslateChina(), hisConsumables.getName())) {
                         hisConsumables.setName(translate1.getTranslateKhmer());
                     }
-                    if (StringUtils.equals(translate1.getTranslateChina(),hisConsumables.getSpec())){
+                    if (StringUtils.equals(translate1.getTranslateChina(), hisConsumables.getSpec())) {
                         hisConsumables.setSpec(translate1.getTranslateKhmer());
                     }
 
@@ -376,9 +421,28 @@ public class HisConsumablesImpl implements HisConsumablesService {
                 JxlsUtil.export(request, response, psth, "Basic information table of consumables", beans);
                 return;
             }
-        }else if(StringUtils.equals(param,Constants.HIS_EN)){
+        } else if (StringUtils.equals(param, Constants.HIS_EN)) {
             log.info("这里是预留接口，进行翻译英文");
         }
+    }
+
+    /**
+     *@Description
+     *@MethodName selectByConsumablesCode
+     *@Params [consumablesCode]
+     *@return com.ahsj.hiscore.entity.HisConsumables
+     *@Author XJP
+     *@Date 2020/4/25
+     *@Time 15:50
+    **/
+    @Override
+    @Transactional(readOnly = true)
+    public HisConsumables selectByConsumablesCode(String consumablesCode) {
+        HisConsumables hisConsumables = hisConsumablesMapper.selectByHisConsumablesCode(consumablesCode);
+        if (!EmptyUtil.Companion.isNullOrEmpty(hisConsumables)){
+            return hisConsumables;
+        }
+        return null;
     }
 
 
@@ -387,13 +451,14 @@ public class HisConsumablesImpl implements HisConsumablesService {
      * @Description 检测耗材名称和规格是否相同
      * @Params
      * @Author jin
-     * @Date 2019/6/19
+     * @Date 2019/6/19耗材信息添加
      * @Time 16:09
      */
     private boolean noSameNameAndSepc(HisConsumables one, HisConsumables two) {
         if (!one.getName().equals(two.getName()) && !one.getSpec().equals(two.getSpec())) {
             return true;
-        } else return false;
+        } else
+            return false;
     }
 
     @Override
@@ -457,7 +522,6 @@ public class HisConsumablesImpl implements HisConsumablesService {
             hisConsumablesMapper.importConsumables(hisConsumablesArrayListInsert);
 
 
-
             TranslateModels translateModels = new TranslateModels();
             BaseLoginUser loginUser = new BaseLoginUser();
             List<HisConsumablesTranslate> infoTranslates = new ArrayList<>();
@@ -492,7 +556,7 @@ public class HisConsumablesImpl implements HisConsumablesService {
         }
 
         if (hisConsumablesArrayListUpdate != null && hisConsumablesArrayListUpdate.size() > 0) {
-            for (int i = 0; i <hisConsumablesArrayListUpdate.size() ; i++) {
+            for (int i = 0; i < hisConsumablesArrayListUpdate.size(); i++) {
                 Long hid = hisConsumablesMapper.selectNameAndSpecById(hisConsumablesArrayListUpdate.get(i)).getId();
                 //设置字典的值
                 String precriptionName = hisConsumablesArrayListUpdate.get(i).getTypeName();
@@ -572,14 +636,15 @@ public class HisConsumablesImpl implements HisConsumablesService {
         }
 
     }
-/**
- *@功能说明
- *@Params [hisConsumables]
- *@return java.util.List<com.ahsj.hiscore.entity.HisConsumables>
- *@Author XJP
- *@Date 2019/8/11
- *@Time 11:09
-**/
+
+    /**
+     * @return java.util.List<com.ahsj.hiscore.entity.HisConsumables>
+     * @功能说明
+     * @Params [hisConsumables]
+     * @Author XJP
+     * @Date 2019/8/11
+     * @Time 11:09
+     **/
     @Override
     @Transactional(readOnly = true)
     public List<HisConsumables> queryTranslateInfoByDate(HisConsumables hisConsumables) throws Exception {

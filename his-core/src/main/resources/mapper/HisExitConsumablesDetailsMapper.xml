@@ -3,9 +3,9 @@
 <mapper namespace="com.ahsj.hiscore.dao.HisExitConsumablesDetailsMapper">
   <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisExitConsumablesDetails">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="consumables_id" jdbcType="BIGINT" property="consumablesId" />
-    <result column="his_hospital_manager_id" jdbcType="VARCHAR" property="hisHospitalManagerId" />
+    <result column="his_hospital_manager_code" jdbcType="VARCHAR" property="hisHospitalManagerCode" />
     <result column="exit_number" jdbcType="VARCHAR" property="exitNumber" />
+    <result column="consumables_code" jdbcType="VARCHAR" property="consumablesCode" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="spec" jdbcType="VARCHAR" property="spec" />
@@ -13,7 +13,7 @@
     <result column="exit_count" jdbcType="INTEGER" property="exitCount" />
     <result column="validity_period" jdbcType="TIMESTAMP" property="validityPeriod" />
     <result column="is_back" jdbcType="INTEGER" property="isBack" />
-    <result column="is_del" jdbcType="INTEGER" property="isDel" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
     <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="update_user_id" jdbcType="BIGINT" property="updateUserId" />
@@ -26,12 +26,12 @@
     <result column="stock" jdbcType="INTEGER" property="stock" />
   </resultMap>
   <sql id="Base_Column_List">
-    id,his_hospital_manager_id,exit_number, consumables_id, name, type, spec, price, exit_count, validity_period, is_back,
-    is_del, create_user_id, create_date, update_user_id, update_date,person_in_charge,
-    expected_time
+    id, his_hospital_manager_code, exit_number, consumables_code, name, type, spec, price,
+    exit_count, validity_period, is_back, create_user_id, create_date, update_user_id,
+    update_date, person_in_charge, expected_time, is_delete
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from his_exit_consumables_details
     where id = #{id,jdbcType=BIGINT}
@@ -40,18 +40,21 @@
     delete from his_exit_consumables_details
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisExitConsumablesDetails">
-    insert into his_exit_consumables_details (id,exit_number,his_hospital_manager_id, consumables_id, name,
-      type, spec, price, exit_count, 
-      validity_period, is_back, is_del, 
-      create_user_id, create_date, update_user_id, 
-      update_date,person_in_charge,
-    expected_time)
-    values (#{id,jdbcType=BIGINT},#{exitNumber,jdbcType=VARCHAR},#{hisHospitalManagerId,jdbcType=VARCHAR}, #{consumablesId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR},
-      #{type,jdbcType=INTEGER}, #{spec,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, #{exitCount,jdbcType=INTEGER}, 
-      #{validityPeriod,jdbcType=TIMESTAMP}, #{isBack,jdbcType=INTEGER}, #{isDel,jdbcType=INTEGER}, 
-      #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, 
-      #{updateDate,jdbcType=TIMESTAMP},#{personInCharge,jdbcType=VARCHAR}, #{expectedTime,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisExitConsumablesDetails" useGeneratedKeys="true" keyProperty="id">
+    insert into his_exit_consumables_details (id, his_hospital_manager_code, exit_number,
+                                              consumables_code, name, type,
+                                              spec, price, exit_count,
+                                              validity_period, is_back, create_user_id,
+                                              create_date, update_user_id, update_date,
+                                              person_in_charge, expected_time, is_delete
+    )
+    values (#{id,jdbcType=BIGINT}, #{hisHospitalManagerCode,jdbcType=VARCHAR}, #{exitNumber,jdbcType=VARCHAR},
+            #{consumablesCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},
+            #{spec,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, #{exitCount,jdbcType=INTEGER},
+            #{validityPeriod,jdbcType=TIMESTAMP}, #{isBack,jdbcType=INTEGER}, #{createUserId,jdbcType=BIGINT},
+            #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP},
+            #{personInCharge,jdbcType=VARCHAR}, #{expectedTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=INTEGER}
+           )
   </insert>
   <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisExitConsumablesDetails">
     insert into his_exit_consumables_details
@@ -59,14 +62,14 @@
       <if test="id != null">
         id,
       </if>
+      <if test="hisHospitalManagerCode != null">
+        his_hospital_manager_code,
+      </if>
       <if test="exitNumber != null">
         exit_number,
       </if>
-      <if test="hisHospitalManagerId != null">
-        his_hospital_manager_id,
-      </if>
-      <if test="consumablesId != null">
-        consumables_id,
+      <if test="consumablesCode != null">
+        consumables_code,
       </if>
       <if test="name != null">
         name,
@@ -89,9 +92,6 @@
       <if test="isBack != null">
         is_back,
       </if>
-      <if test="isDel != null">
-        is_del,
-      </if>
       <if test="createUserId != null">
         create_user_id,
       </if>
@@ -104,25 +104,28 @@
       <if test="updateDate != null">
         update_date,
       </if>
-      <if test="personInCharge != null" >
+      <if test="personInCharge != null">
         person_in_charge,
       </if>
-      <if test="expectedTime != null" >
+      <if test="expectedTime != null">
         expected_time,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
+      <if test="hisHospitalManagerCode != null">
+        #{hisHospitalManagerCode,jdbcType=VARCHAR},
+      </if>
       <if test="exitNumber != null">
         #{exitNumber,jdbcType=VARCHAR},
       </if>
-      <if test="hisHospitalManagerId != null">
-        #{hisHospitalManagerId,jdbcType=VARCHAR},
-      </if>
-      <if test="consumablesId != null">
-        #{consumablesId,jdbcType=BIGINT},
+      <if test="consumablesCode != null">
+        #{consumablesCode,jdbcType=VARCHAR},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
@@ -145,9 +148,6 @@
       <if test="isBack != null">
         #{isBack,jdbcType=INTEGER},
       </if>
-      <if test="isDel != null">
-        #{isDel,jdbcType=INTEGER},
-      </if>
       <if test="createUserId != null">
         #{createUserId,jdbcType=BIGINT},
       </if>
@@ -160,25 +160,28 @@
       <if test="updateDate != null">
         #{updateDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="personInCharge != null" >
+      <if test="personInCharge != null">
         #{personInCharge,jdbcType=VARCHAR},
       </if>
-      <if test="expectedTime != null" >
+      <if test="expectedTime != null">
         #{expectedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisExitConsumablesDetails">
     update his_exit_consumables_details
     <set>
+      <if test="hisHospitalManagerCode != null">
+        his_hospital_manager_code = #{hisHospitalManagerCode,jdbcType=VARCHAR},
+      </if>
       <if test="exitNumber != null">
         exit_number = #{exitNumber,jdbcType=VARCHAR},
       </if>
-      <if test="hisHospitalManagerId != null">
-        his_hospital_manager_id = #{hisHospitalManagerId,jdbcType=VARCHAR},
-      </if>
-      <if test="consumablesId != null">
-        consumables_id = #{consumablesId,jdbcType=BIGINT},
+      <if test="consumablesCode != null">
+        consumables_code = #{consumablesCode,jdbcType=VARCHAR},
       </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
@@ -201,9 +204,6 @@
       <if test="isBack != null">
         is_back = #{isBack,jdbcType=INTEGER},
       </if>
-      <if test="isDel != null">
-        is_del = #{isDel,jdbcType=INTEGER},
-      </if>
       <if test="createUserId != null">
         create_user_id = #{createUserId,jdbcType=BIGINT},
       </if>
@@ -216,36 +216,40 @@
       <if test="updateDate != null">
         update_date = #{updateDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="personInCharge != null" >
+      <if test="personInCharge != null">
         person_in_charge = #{personInCharge,jdbcType=VARCHAR},
       </if>
-      <if test="expectedTime != null" >
+      <if test="expectedTime != null">
         expected_time = #{expectedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisExitConsumablesDetails">
     update his_exit_consumables_details
-    set consumables_id = #{consumablesId,jdbcType=BIGINT},
-      exit_number = #{exitNumber,jdbcType=VARCHAR},
-      his_hospital_manager_id = #{hisHospitalManagerId,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      type = #{type,jdbcType=INTEGER},
-      spec = #{spec,jdbcType=VARCHAR},
-      price = #{price,jdbcType=DOUBLE},
-      exit_count = #{exitCount,jdbcType=INTEGER},
-      validity_period = #{validityPeriod,jdbcType=TIMESTAMP},
-      is_back = #{isBack,jdbcType=INTEGER},
-      is_del = #{isDel,jdbcType=INTEGER},
-      create_user_id = #{createUserId,jdbcType=BIGINT},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
-      update_user_id = #{updateUserId,jdbcType=BIGINT},
-      update_date = #{updateDate,jdbcType=TIMESTAMP},
-      person_in_charge = #{personInCharge,jdbcType=VARCHAR},
-      expected_time = #{expectedTime,jdbcType=TIMESTAMP}
+    set his_hospital_manager_code = #{hisHospitalManagerCode,jdbcType=VARCHAR},
+        exit_number = #{exitNumber,jdbcType=VARCHAR},
+        consumables_code = #{consumablesCode,jdbcType=VARCHAR},
+        name = #{name,jdbcType=VARCHAR},
+        type = #{type,jdbcType=INTEGER},
+        spec = #{spec,jdbcType=VARCHAR},
+        price = #{price,jdbcType=DOUBLE},
+        exit_count = #{exitCount,jdbcType=INTEGER},
+        validity_period = #{validityPeriod,jdbcType=TIMESTAMP},
+        is_back = #{isBack,jdbcType=INTEGER},
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+        person_in_charge = #{personInCharge,jdbcType=VARCHAR},
+        expected_time = #{expectedTime,jdbcType=TIMESTAMP},
+        is_delete = #{isDelete,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
 
 
   <!--自定义sql-->
@@ -253,7 +257,7 @@
   <select id="list" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
     SELECT distinct
       his_exit_consumables_details.exit_number,
-      his_exit_consumables_details.his_hospital_manager_id,
+      his_exit_consumables_details.his_hospital_manager_code,
       his_exit_consumables_details.person_in_charge,
       his_exit_consumables_details.create_date
     FROM
@@ -287,7 +291,7 @@
     c.name as patientName
     FROM
     his_exit_consumables_details as a
-    LEFT JOIN his_medical_record as b on a.his_hospital_manager_id = b.medical_record_id
+    LEFT JOIN his_medical_record as b on a.his_hospital_manager_code = b.medical_record_id
     LEFT JOIN his_patient_info as c on b.patient_id = c.id
     where
     a.exit_number = #{parameter.exitNumber,jdbcType=VARCHAR}

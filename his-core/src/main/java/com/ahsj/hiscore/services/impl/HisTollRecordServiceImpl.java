@@ -1,5 +1,6 @@
 package com.ahsj.hiscore.services.impl;
 
+import com.ahsj.hiscore.common.Constants;
 import com.ahsj.hiscore.core.CodeHelper;
 import com.ahsj.hiscore.dao.*;
 import com.ahsj.hiscore.entity.*;
@@ -80,6 +81,12 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
     @Autowired
     HisHospitalManageService hisHospitalManageService;
 
+    @Autowired
+    HisRecordConsumablesMapper hisRecordConsumablesMapper;
+
+    @Autowired
+    HisRefundConsumablesService hisRefundConsumablesService;
+
     @Override
     @Transactional(readOnly = false)
     public Message addHisTollRecord(List<HisCharge> record, HisTollRecord hisTollRecord) throws Exception {
@@ -130,8 +137,6 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         }
         return MessageUtil.createMessage(true, "付款成功");
     }
-
-
 
 
     /**
@@ -192,7 +197,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         List<HisTollDetails> hisTollDetails = hisTollDetailsService.listByMecordIdForSave(pageBean).getData();
         BigDecimal sumPrice = new BigDecimal(0);
         if (EmptyUtil.Companion.isNullOrEmpty(hisTollDetails))
-//            return MessageUtil.createMessage(false, "无可付费信息");
+            //            return MessageUtil.createMessage(false, "无可付费信息");
             for (int i = 0; i < hisTollDetails.size(); i++) {
                 BigDecimal p = new BigDecimal(hisTollDetails.get(i).getMoney().toString());
                 sumPrice = sumPrice.add(p);
@@ -228,10 +233,11 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
 
         //处理住院交易明细
         HandleHisTollDetails(hisTollDetails, hisTollRecord.getId());
-//        if(hisTollDetails.get)
+        //        if(hisTollDetails.get)
 
         BoolMessage message = (BoolMessage) hisTollDetailsService.saveForHospi(hisTollDetails);
-        if (!message.isSuccess()) return MessageUtil.createMessage(false, "保存失败！请联系管理人员");
+        if (!message.isSuccess())
+            return MessageUtil.createMessage(false, "保存失败！请联系管理人员");
 
         //这里是存在缴费记录，则需要修改住院已付的数目
         HandleHospitalManagerData(hisHospitalManage, hisTollDetails);
@@ -240,11 +246,13 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         //修改用药明细付费状态
         List<HisMedicationDetails> hisMedicationDetails = new ArrayList<HisMedicationDetails>();
         HandleHisMedicationDetils(hisMedicationDetails, hisTollDetails);
-        if (hisMedicationDetails.size() != 0) hisMedicationDetailsMapper.setPayBatch(hisMedicationDetails);
+        if (hisMedicationDetails.size() != 0)
+            hisMedicationDetailsMapper.setPayBatch(hisMedicationDetails);
         //修改诊疗项目付费状态
         List<HisRecordProject> hisRecordProjects = new ArrayList<HisRecordProject>();
         HandleRecordProjects(hisRecordProjects, hisTollDetails);
-        if (hisRecordProjects.size() != 0) hisRecordProjectMapper.setPayBatch(hisRecordProjects);
+        if (hisRecordProjects.size() != 0)
+            hisRecordProjectMapper.setPayBatch(hisRecordProjects);
         return MessageUtil.createMessage(true, number + "收费成功！");
     }
 
@@ -360,7 +368,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
                 tmp.setId(h1.getTargetId());
                 tmp.setIsPay(1);
                 tmp.setTotalPrice(h1.getMoney());
-                    tmp.setCount(h1.getNum());
+                tmp.setCount(h1.getNum());
                 hisMedicationDetails.add(tmp);
             }
         }
@@ -424,7 +432,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         List<HisTollDetails> hisTollDetails = hisTollDetailsService.listByMecordIdForOutpatientSave(pageBean).getData();
         BigDecimal sumPrice = new BigDecimal("0");
         if (EmptyUtil.Companion.isNullOrEmpty(hisTollDetails))
-//            return MessageUtil.createMessage(false, "无可付费信息");
+            //            return MessageUtil.createMessage(false, "无可付费信息");
             for (int i = 0; i < hisTollDetails.size(); i++) {
                 BigDecimal p = new BigDecimal(hisTollDetails.get(i).getMoney().toString());
                 sumPrice = sumPrice.add(p);
@@ -453,16 +461,19 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         //处理住院交易明细
         HandleHisTollDetails(hisTollDetails, hisTollRecord.getId());
         BoolMessage message = (BoolMessage) hisTollDetailsService.saveForHospi(hisTollDetails);
-        if (!message.isSuccess()) return MessageUtil.createMessage(false, "保存失败！请联系管理人员");
+        if (!message.isSuccess())
+            return MessageUtil.createMessage(false, "保存失败！请联系管理人员");
 
         //修改用药明细付费状态
         List<HisMedicationDetails> hisMedicationDetails = new ArrayList<HisMedicationDetails>();
         HandleHisMedicationDetils(hisMedicationDetails, hisTollDetails);
-        if (hisMedicationDetails.size() != 0) hisMedicationDetailsMapper.setPayBatch(hisMedicationDetails);
+        if (hisMedicationDetails.size() != 0)
+            hisMedicationDetailsMapper.setPayBatch(hisMedicationDetails);
         //修改诊疗项目付费状态
         List<HisRecordProject> hisRecordProjects = new ArrayList<HisRecordProject>();
         HandleRecordProjects(hisRecordProjects, hisTollDetails);
-        if (hisRecordProjects.size() != 0) hisRecordProjectMapper.setPayBatch(hisRecordProjects);
+        if (hisRecordProjects.size() != 0)
+            hisRecordProjectMapper.setPayBatch(hisRecordProjects);
         return MessageUtil.createMessage(true, number + "收费成功！");
     }
 
@@ -562,7 +573,7 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             hisTollDetails.setIsSettlement(2);
             hisTollDetails.setName(h.getDrugsName());
             hisTollDetails.setTargetId(h.getId());
-//            hisTollDetails.setMoney(h.getPrice());
+            //            hisTollDetails.setMoney(h.getPrice());
             hisTollDetails.setMoney(h.getPrice().multiply(new BigDecimal(h.getReturnCount())));
             hisTollDetails.setType(4);//药品退费
             hisTollDetails.setTollRecordId(hisTollRecord.getId());
@@ -633,7 +644,8 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         HandleHisTollDetails(hisTollDetails, hisTollRecord.getId());
         if (hisTollDetails.size() != 0) {
             BoolMessage message = (BoolMessage) hisTollDetailsService.saveForHospi(hisTollDetails);
-            if (!message.isSuccess()) return MessageUtil.createMessage(false, "保存失败！请联系管理人员");
+            if (!message.isSuccess())
+                return MessageUtil.createMessage(false, "保存失败！请联系管理人员");
         }
 
         //这里是存在缴费记录，则需要修改住院已付的数目
@@ -643,11 +655,29 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         //修改用药明细付费状态
         List<HisMedicationDetails> hisMedicationDetails = new ArrayList<HisMedicationDetails>();
         HandleHisMedicationDetils(hisMedicationDetails, hisTollDetails);
-        if (hisMedicationDetails.size() != 0) hisMedicationDetailsMapper.setPayBatch(hisMedicationDetails);
+        if (hisMedicationDetails.size() != 0)
+            hisMedicationDetailsMapper.setPayBatch(hisMedicationDetails);
+
+
+        //修改耗材 明细付费状态
+        HisRecordConsumables hisRecordConsumables = new HisRecordConsumables();
+        hisRecordConsumables.setMedicalRecordNumber(hisTollRecord.getMedicalRecordId());
+        hisRecordConsumables.setIsPayed(Constants.BASE_TWO);
+        List<HisRecordConsumables> hisRecordConsumablesList = hisRecordConsumablesMapper.selectByHisRecordConsumables(hisRecordConsumables);
+        //伪删
+        hisRecordConsumablesMapper.updateByIsDelete(hisRecordConsumablesList);
+        for (HisRecordConsumables recordConsumables : hisRecordConsumablesList) {
+            recordConsumables.setIsPayed(Constants.BASE_ONE);
+            recordConsumables.setIsDelete(Constants.HIS_DELETE_FALSE);
+            recordConsumables.setId(null);
+        }
+        hisRecordConsumablesMapper.insertList(hisRecordConsumablesList);
+
         //修改诊疗项目付费状态
         List<HisRecordProject> hisRecordProjects = new ArrayList<HisRecordProject>();
         HandleRecordProjects(hisRecordProjects, hisTollDetails);
-        if (hisRecordProjects.size() != 0) hisRecordProjectMapper.setPayBatch(hisRecordProjects);
+        if (hisRecordProjects.size() != 0)
+            hisRecordProjectMapper.setPayBatch(hisRecordProjects);
         return MessageUtil.createMessage(true, number + "收费结算成功！");
     }
 
@@ -1138,5 +1168,102 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
     @Transactional(readOnly = true)
     public List<HisTollRecord> selectByHRNumberForAllDeposit(String number) {
         return hisTollRecordMapper.selectByHRNumberForAllDeposit(number);
+    }
+
+    /**
+     * @return core.message.Message
+     * @Description
+     * @MethodName saveHisRefundConsumablesInfo
+     * @Params [hisRefundConsumables]
+     * @Author XJP
+     * @Date 2020/4/30
+     * @Time 10:34
+     **/
+    @Override
+    @Transactional(readOnly = false)
+    public Message saveHisRefundConsumablesInfo(HisRefundConsumables hisRefundConsumables) throws Exception {
+        if (EmptyUtil.Companion.isNullOrEmpty(hisRefundConsumables.getRefundSumProce())) {
+            return MessageUtil.createMessage(false, "退款失败!");
+        } else {
+
+
+            String createdate = new SimpleDateFormat("yyyyMMdd").format(new Date());
+            int count = hisTollRecordMapper.selectNumbCount(createdate) + 1;
+            //编号
+            String number = createdate + String.format("%05d", count);
+            number = "HTR" + number;
+            HisTollRecord hisTollRecord = new HisTollRecord();
+            hisTollRecord.setMoney(new BigDecimal(0));
+            hisTollRecord.setActualCharge(new BigDecimal(0));
+            hisTollRecord.setRecoverTheFee(hisRefundConsumables.getRefundSumProce());
+            hisTollRecord.setAttenchType(10);//退耗材
+            hisTollRecord.setMedicalRecordId(hisRefundConsumables.getRecordNumber());
+            hisTollRecord.setIsSettlement(2);//未结算
+            hisTollRecord.setNumber(number);//交易流水号
+            hisTollRecord.setType(3);
+            hisTollRecordMapper.insert(hisTollRecord);
+
+            //明细
+
+            HisRecordConsumables recordConsumables = new HisRecordConsumables();
+            recordConsumables.setMedicalRecordNumber(hisRefundConsumables.getRecordNumber());
+            //获取待退费耗材信息数据
+            List<HisRecordConsumables> hisRecordConsumablesList = hisRecordConsumablesMapper.queryByRecordConsumablesList(recordConsumables);
+            for (HisRecordConsumables consumables : hisRecordConsumablesList) {
+                HisTollDetails hisTollDetails = new HisTollDetails();
+                hisTollDetails.setIsSettlement(2);
+                hisTollDetails.setName(consumables.getName());
+                hisTollDetails.setMoney(new BigDecimal(consumables.getPrice()).multiply(new BigDecimal(consumables.getRefundNum())));
+                hisTollDetails.setType(7);//耗材退费
+                hisTollDetails.setTollRecordId(hisTollRecord.getId());
+                hisTollDetailsService.insert(hisTollDetails);
+
+
+                //查询收费记录未退费的数据
+                List<HisRecordConsumables> recordConsumablesList = hisRecordConsumablesMapper.queryByNotBack(consumables);
+                if (!EmptyUtil.Companion.isNullOrEmpty(recordConsumablesList)){
+                    hisRecordConsumablesMapper.updateByIsDelete(recordConsumablesList);
+
+                    Integer num = consumables.getRefundNum();
+                    for (HisRecordConsumables hisRecordConsumables : recordConsumablesList) {
+                        if (hisRecordConsumables.getComsumablesNum()<num){
+                            hisRecordConsumables.setComsumablesNum(0);
+                            hisRecordConsumables.setId(null);
+                            num = num-hisRecordConsumables.getComsumablesNum();
+                            hisRecordConsumables.setIsBack(Constants.HC_BACK_TRUE);
+                            continue;
+                        }else {
+                            hisRecordConsumables.setComsumablesNum(hisRecordConsumables.getComsumablesNum()-num);
+                            hisRecordConsumables.setIsBack(Constants.HC_BACK_FALSE);
+                            hisRecordConsumables.setId(null);
+                            num= 0;
+                        }
+                    }
+                    hisRecordConsumablesMapper.insertList(recordConsumablesList);
+                }
+
+            }
+
+            //查询申请退费并审核成功的为退费的数据
+            List<HisRefundConsumables> hisRefundConsumablesList = hisRefundConsumablesService.queryByNotBack(hisRefundConsumables.getRecordNumber());
+            //伪删
+            hisRefundConsumablesService.updateByIsDelete(hisRefundConsumablesList);
+            //新增
+            for (HisRefundConsumables refundConsumables : hisRefundConsumablesList) {
+                refundConsumables.setIsBack(Constants.HC_BACK_TRUE);
+                refundConsumables.setId(null);
+            }
+            hisRefundConsumablesService.insertList(hisRefundConsumablesList);
+
+
+            return MessageUtil.createMessage(true, "退费成功！" + number);
+
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public HisTollRecord queryByNumber(String number) throws Exception {
+        return hisTollRecordMapper.queryByNumber(number);
     }
 }

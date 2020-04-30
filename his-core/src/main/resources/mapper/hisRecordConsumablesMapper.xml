@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahsj.hiscore.dao.HisRecordConsumablesMapper">
+    <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.HisRecordConsumables">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="create_user_id" jdbcType="BIGINT" property="createUserId"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="update_user_id" jdbcType="BIGINT" property="updateUserId"/>
+        <result column="consumables_code" jdbcType="VARCHAR" property="consumablesCode"/>
+        <result column="comsumables_num" jdbcType="INTEGER" property="comsumablesNum"/>
+        <result column="refund_num" jdbcType="INTEGER" property="refundNum"/>
+        <result column="price" jdbcType="DOUBLE" property="price"/>
+        <result column="is_delete" jdbcType="INTEGER" property="isDelete"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="spec" jdbcType="VARCHAR" property="spec"/>
+        <result column="is_payed" jdbcType="SMALLINT" property="isPayed"/>
+        <result column="his_hospital_manager_id" jdbcType="BIGINT" property="hisHospitalManagerId"/>
+        <result column="medical_record_number" jdbcType="VARCHAR" property="medicalRecordNumber"/>
+        <result column="record_consumables_code" jdbcType="VARCHAR" property="recordConsumablesCode"/>
+        <result column="is_back" jdbcType="SMALLINT" property="isBack"/>
+        <result column="consumables_sum_price" jdbcType="DOUBLE" property="consumablesSumPrice"/>
+        <result column="remarks" jdbcType="VARCHAR" property="remarks"/>
+        <result column="patient_name" jdbcType="VARCHAR" property="patientName"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        ,
+        create_date,
+        create_user_id,
+        update_date,
+        update_user_id,
+        consumables_code,
+        comsumables_num,
+        price,
+        is_delete,
+        name,
+        type,
+        spec,
+        is_payed,
+        his_hospital_manager_id,
+        medical_record_number,
+        his_hospital_manager_code,
+        record_consumables_code,
+        is_back
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_record_consumables
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from his_record_consumables
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.ahsj.hiscore.entity.HisRecordConsumables" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into his_record_consumables (id, create_date, create_user_id,
+                                            update_date, update_user_id, consumables_code,
+                                            comsumables_num, price, is_delete,
+                                            name, type, spec, is_payed,
+                                            his_hospital_manager_id, medical_record_number,
+                                            his_hospital_manager_code, record_consumables_code,
+                                            is_back)
+        values (#{id,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT},
+                #{updateDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{consumablesCode,jdbcType=VARCHAR},
+                #{comsumablesNum,jdbcType=INTEGER}, #{price,jdbcType=DOUBLE}, #{isDelete,jdbcType=INTEGER},
+                #{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{spec,jdbcType=VARCHAR},
+                #{isPayed,jdbcType=SMALLINT},
+                #{hisHospitalManagerId,jdbcType=BIGINT}, #{medicalRecordNumber,jdbcType=VARCHAR},
+                #{hisHospitalManagerCode,jdbcType=VARCHAR}, #{recordConsumablesCode,jdbcType=VARCHAR},
+                #{isBack,jdbcType=SMALLINT})
+    </insert>
+    <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisRecordConsumables">
+        insert into his_record_consumables
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="consumablesCode != null">
+                consumables_code,
+            </if>
+            <if test="comsumablesNum != null">
+                comsumables_num,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="isDelete != null">
+                is_delete,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="spec != null">
+                spec,
+            </if>
+            <if test="isPayed != null">
+                is_payed,
+            </if>
+            <if test="hisHospitalManagerId != null">
+                his_hospital_manager_id,
+            </if>
+            <if test="medicalRecordNumber != null">
+                medical_record_number,
+            </if>
+            <if test="hisHospitalManagerCode != null">
+                his_hospital_manager_code,
+            </if>
+            <if test="recordConsumablesCode != null">
+                record_consumables_code,
+            </if>
+            <if test="isBack != null">
+                is_back,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="consumablesCode != null">
+                #{consumablesCode,jdbcType=VARCHAR},
+            </if>
+            <if test="comsumablesNum != null">
+                #{comsumablesNum,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=DOUBLE},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="spec != null">
+                #{spec,jdbcType=VARCHAR},
+            </if>
+            <if test="isPayed != null">
+                #{isPayed,jdbcType=SMALLINT},
+            </if>
+            <if test="hisHospitalManagerId != null">
+                #{hisHospitalManagerId,jdbcType=BIGINT},
+            </if>
+            <if test="medicalRecordNumber != null">
+                #{medicalRecordNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="hisHospitalManagerCode != null">
+                #{hisHospitalManagerCode,jdbcType=VARCHAR},
+            </if>
+            <if test="recordConsumablesCode != null">
+                #{recordConsumablesCode,jdbcType=VARCHAR},
+            </if>
+            <if test="isBack != null">
+                #{isBack,jdbcType=SMALLINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ahsj.hiscore.entity.HisRecordConsumables">
+        update his_record_consumables
+        <set>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="consumablesCode != null">
+                consumables_code = #{consumablesCode,jdbcType=VARCHAR},
+            </if>
+            <if test="comsumablesNum != null">
+                comsumables_num = #{comsumablesNum,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=DOUBLE},
+            </if>
+            <if test="isDelete != null">
+                is_delete = #{isDelete,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="spec != null">
+                spec = #{spec,jdbcType=VARCHAR},
+            </if>
+            <if test="isPayed != null">
+                is_payed = #{isPayed,jdbcType=SMALLINT},
+            </if>
+            <if test="hisHospitalManagerId != null">
+                his_hospital_manager_id = #{hisHospitalManagerId,jdbcType=BIGINT},
+            </if>
+            <if test="medicalRecordNumber != null">
+                medical_record_number = #{medicalRecordNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="hisHospitalManagerCode != null">
+                his_hospital_manager_code = #{hisHospitalManagerCode,jdbcType=VARCHAR},
+            </if>
+            <if test="recordConsumablesCode != null">
+                record_consumables_code = #{recordConsumablesCode,jdbcType=VARCHAR},
+            </if>
+            <if test="isBack != null">
+                is_back = #{isBack,jdbcType=SMALLINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisRecordConsumables">
+        update his_record_consumables
+        set create_date               = #{createDate,jdbcType=TIMESTAMP},
+            create_user_id            = #{createUserId,jdbcType=BIGINT},
+            update_date               = #{updateDate,jdbcType=TIMESTAMP},
+            update_user_id            = #{updateUserId,jdbcType=BIGINT},
+            consumables_code          = #{consumablesCode,jdbcType=VARCHAR},
+            comsumables_num           = #{comsumablesNum,jdbcType=INTEGER},
+            price                     = #{price,jdbcType=DOUBLE},
+            is_delete                 = #{isDelete,jdbcType=INTEGER},
+            name                      = #{name,jdbcType=VARCHAR},
+            type                      = #{type,jdbcType=INTEGER},
+            spec                      = #{spec,jdbcType=VARCHAR},
+            is_payed                  = #{isPayed,jdbcType=SMALLINT},
+            his_hospital_manager_id   = #{hisHospitalManagerId,jdbcType=BIGINT},
+            medical_record_number     = #{medicalRecordNumber,jdbcType=VARCHAR},
+            his_hospital_manager_code = #{hisHospitalManagerCode,jdbcType=VARCHAR},
+            record_consumables_code   = #{recordConsumablesCode,jdbcType=VARCHAR},
+            is_back                   = #{isBack,jdbcType=SMALLINT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+
+    <!--自定义SQL-->
+    <select id="selectByHisRecordConsumables" parameterType="com.ahsj.hiscore.entity.HisRecordConsumables"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_record_consumables
+        where is_delete = 0 and medical_record_number = #{medicalRecordNumber,jdbcType=VARCHAR} and
+        is_payed = #{isPayed,jdbcType=SMALLINT}
+    </select>
+
+    <update id="updateByIsDelete" parameterType="java.util.List">
+        update his_record_consumables
+        set is_delete = 1
+        where 1=1
+        <foreach collection="list" open="or" separator="or" index="index" item="item">
+            id = #{item.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+
+    <insert id="insertList" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        insert into his_record_consumables (id, create_date, create_user_id,
+        update_date, update_user_id, consumables_code,
+        comsumables_num, price, is_delete,
+        name, type, spec, is_payed,
+        his_hospital_manager_id, medical_record_number,
+        his_hospital_manager_code,record_consumables_code,is_back)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id,jdbcType=BIGINT}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.createUserId,jdbcType=BIGINT},
+            #{item.updateDate,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=BIGINT},
+            #{item.consumablesCode,jdbcType=VARCHAR},
+            #{item.comsumablesNum,jdbcType=INTEGER}, #{item.price,jdbcType=DOUBLE}, #{item.isDelete,jdbcType=INTEGER},
+            #{item.name,jdbcType=VARCHAR}, #{item.type,jdbcType=INTEGER}, #{item.spec,jdbcType=VARCHAR},
+            #{item.isPayed,jdbcType=SMALLINT},
+            #{item.hisHospitalManagerId,jdbcType=BIGINT}, #{item.medicalRecordNumber,jdbcType=VARCHAR},
+            #{item.hisHospitalManagerCode,jdbcType=VARCHAR},#{item.recordConsumablesCode,jdbcType=VARCHAR},#{item.isBack,jdbcType=SMALLINT})
+        </foreach>
+    </insert>
+
+    <select id="queryByConsumablesCodeAndMedicalRecordNumber"
+            parameterType="com.ahsj.hiscore.entity.HisRecordConsumables" resultMap="BaseResultMap">
+        SELECT id,
+               consumables_code,
+               type,
+               update_date,
+               create_date,
+               name,
+               price,
+               sum(comsumables_num) as comsumables_num
+        from his_record_consumables
+        WHERE is_delete = 0
+          and
+            is_payed = 1
+          and is_back = 2
+          and medical_record_number = #{medicalRecordNumber,jdbcType=VARCHAR}
+          and consumables_code = #{consumablesCode,jdbcType=VARCHAR}
+    </select>
+
+
+    <select id="queryList" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+
+        SELECT id, consumables_code,type ,update_date ,create_date , name ,price ,sum(comsumables_num) as
+        comsumables_num from his_record_consumables WHERE is_delete = 0 and
+        is_payed = 1 and is_back = 2
+        <if test="parameter.medicalRecordNumber != null and parameter.medicalRecordNumber != ''">
+            and medical_record_number =#{parameter.medicalRecordNumber,jdbcType=VARCHAR}
+        </if>
+        GROUP BY consumables_code
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+    <select id="consumablesInfo" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        SELECT hc.consumables_code , hc.type , hc.name , hc.price, hrc.refund_num AS refund_num ,hc.price *
+        hrc.refund_num as
+        consumables_sum_price,
+        hc.create_date
+        from his_refund_consumables hrc left join his_record_consumables hc on hrc.record_consumables_code =
+        hc.record_consumables_code
+        where hrc.is_delete = 0 and hc.is_delete = 0 and hrc.voucher = #{parameter.voucher,jdbcType=VARCHAR}
+        <if test="parameter.medicalRecordNumber != null and parameter.medicalRecordNumber != ''">
+            and medical_record_number =#{parameter.medicalRecordNumber,jdbcType=VARCHAR}
+        </if>
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+
+    <select id="consumablesInfoList" parameterType="com.ahsj.hiscore.entity.HisRecordConsumables"
+            resultMap="BaseResultMap">
+        SELECT hc.consumables_code , hc.type , hc.name , hc.price, hrc.refund_num AS refund_num ,hc.price *
+        hrc.refund_num as
+        consumables_sum_price,
+        hc.create_date
+        from his_refund_consumables hrc left join his_record_consumables hc on hrc.record_consumables_code =
+        hc.record_consumables_code
+        where hrc.is_delete = 0 and hc.is_delete = 0 and hrc.voucher = #{voucher,jdbcType=VARCHAR}
+        <if test="medicalRecordNumber != null and medicalRecordNumber != ''">
+            and medical_record_number =#{medicalRecordNumber,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+
+    <select id="pageBeanList" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        SELECT hc.consumables_code , hc.type , hc.name , hc.price, sum(hrc.refund_num) AS refund_num ,hc.price *
+        refund_num as
+        consumables_sum_price, hc.medical_record_number ,hrc.remarks as remarks ,hrc.patient_name as patient_name,
+        hc.create_date
+        from his_refund_consumables hrc left join his_record_consumables hc on hrc.record_consumables_code =
+        hc.record_consumables_code
+        where hrc.is_delete = 0 and hc.is_delete = 0 and hrc.is_review = 1 and hrc.is_back = 2
+        <if test="parameter.medicalRecordNumber != null and parameter.medicalRecordNumber != ''">
+            and hc.medical_record_number =#{parameter.medicalRecordNumber,jdbcType=VARCHAR}
+        </if>
+        group by hc.consumables_code
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+
+
+    <select id="queryByRecordConsumablesList" parameterType="com.ahsj.hiscore.entity.HisRecordConsumables"
+            resultMap="BaseResultMap">
+        SELECT hc.consumables_code , hc.type , hc.name , hc.price, sum(hrc.refund_num) AS refund_num ,hc.price *
+        refund_num as
+        consumables_sum_price, hc.medical_record_number ,hrc.remarks as remarks ,hrc.patient_name as patient_name,
+        hc.create_date
+        from his_refund_consumables hrc left join his_record_consumables hc on hrc.record_consumables_code =
+        hc.record_consumables_code
+        where hrc.is_delete = 0 and hc.is_delete = 0 and hrc.is_review = 1 and hrc.is_back = 2
+        <if test="medicalRecordNumber != null and medicalRecordNumber != ''">
+            and hc.medical_record_number =#{medicalRecordNumber,jdbcType=VARCHAR}
+        </if>
+        group by hc.consumables_code
+    </select>
+
+    <select id="queryByNotBack" parameterType="com.ahsj.hiscore.entity.HisRecordConsumables"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_record_consumables where is_delete = 0 and is_back = 2 and is_payed = 1 and medical_record_number
+        =#{medicalRecordNumber,jdbcType=VARCHAR} and consumables_code =  #{consumablesCode,jdbcType=VARCHAR}
+    </select>
+
+
+
+
+
+    <select id="queryByRecordConsumablesLists" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
+        SELECT hc.consumables_code , hc.type , hc.name , hc.price, sum(hrc.refund_num) AS refund_num ,hc.price *
+        refund_num as
+        consumables_sum_price, hc.medical_record_number ,hrc.remarks as remarks ,hrc.patient_name as patient_name,
+        hc.create_date
+        from his_refund_consumables hrc left join his_record_consumables hc on hrc.record_consumables_code =
+        hc.record_consumables_code
+        where hrc.is_delete = 0 and hc.is_delete = 0 and hrc.is_review = 1 and hrc.is_back = 1
+        <if test="parameter.medicalRecordNumber != null and parameter.medicalRecordNumber != ''">
+            and hc.medical_record_number =#{parameter.medicalRecordNumber,jdbcType=VARCHAR}
+        </if>
+        group by hc.consumables_code
+        <if test="parameter.orders != null and parameter.orders != ''">
+            order by ${parameter.orders}
+        </if>
+    </select>
+</mapper>

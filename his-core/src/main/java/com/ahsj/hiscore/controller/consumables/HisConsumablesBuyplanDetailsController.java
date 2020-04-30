@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("api/hisconsumablesbuyplandetails/")
+@RequestMapping("/api/hisconsumablesbuyplandetails")
 public class HisConsumablesBuyplanDetailsController extends BaseController {
 
     @Autowired
@@ -41,12 +41,11 @@ public class HisConsumablesBuyplanDetailsController extends BaseController {
      *@Date 2019/7/5
      *@Time 9:35
     */
-    @RequestMapping(value = "save.ahsj" ,method = {RequestMethod.POST,RequestMethod.GET})
+    @RequestMapping(value = "/save.ahsj" ,method = {RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
     public Message saveOrUpdate(Map<String, Object> model, HttpRequest request,
                                 @RequestParam(value = "ids",required = true) Long[] ids,
                                 @RequestParam(value = "numbers",required = true )Integer[] numbers,
-                                @RequestParam(value = "buyplanId",required = true )Long buyplanId,
                                 @RequestParam(value = "personInCharge",required = true )String personInCharge, //负责人
                                 @RequestParam(value = "expectedTime",required = true )String expectedTime, //预期时间
                                 @RequestParam(value = "prices",required = true )Double[] prices //价格
@@ -57,23 +56,25 @@ public class HisConsumablesBuyplanDetailsController extends BaseController {
             return MessageUtil.createMessage(false,"请设置预定采购日期");
         }else {
             //存到详细表（ids，调入数目，采购计划编号）&存到采购计划记录表（负责人，预期时间，价格s）
-            hisConsumablesBuyplanDetailsService.saveOrUpdate(ids,numbers,buyplanId,personInCharge,expectedTime,prices);
+            hisConsumablesBuyplanDetailsService.saveOrUpdate(ids,numbers,personInCharge,expectedTime,prices);
             return MessageUtil.createMessage(true,"添加采购计划成功");
         }
     }
 
-    /**
-     *@Description 查找计划信息详情
-     *@Params
-     *@return
-     *@Author jin
-     *@Date 2019/7/5
-     *@Time 10:37
-    */
 
-    @RequestMapping(value = "details.ahsj", method = {RequestMethod.POST,RequestMethod.GET})
+
+    /**
+     *@Description 耗材采购详情信息数据
+     *@MethodName details
+     *@Params [hisConsumablesBuyplanDetails]
+     *@return core.entity.PageBean<com.ahsj.hiscore.entity.HisConsumablesBuyplanDetails>
+     *@Author XJP
+     *@Date 2020/4/24
+     *@Time 15:01
+    **/
+    @RequestMapping(value = "/details.ahsj", method = {RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
-    public PageBean<HisConsumablesBuyplanDetails> details (Map<String, Object> model, HttpServletRequest request, HisConsumablesBuyplanDetails hisConsumablesBuyplanDetails) throws Exception{
+    public PageBean<HisConsumablesBuyplanDetails> details (HisConsumablesBuyplanDetails hisConsumablesBuyplanDetails) throws Exception{
         PageBean<HisConsumablesBuyplanDetails> pageBean = new PageBean<HisConsumablesBuyplanDetails>();
         pageBean.setParameter(hisConsumablesBuyplanDetails);
         pageBean = hisConsumablesBuyplanDetailsService.details(pageBean);
@@ -89,17 +90,16 @@ public class HisConsumablesBuyplanDetailsController extends BaseController {
      *@Date 2019/7/5
      *@Time 14:04
     */
-    @RequestMapping(value = "saveDetails.ahsj" ,method = {RequestMethod.POST,RequestMethod.GET})
+    @RequestMapping(value = "/saveDetails.ahsj" ,method = {RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
-    public Message saveDetails(Map<String, Object>model, HttpRequest request,
-                               @RequestParam(value = "ids",required = true) Long[] ids,
+    public Message saveDetails(@RequestParam(value = "ids",required = true) Long[] ids,
                                @RequestParam(value = "numbers",required = true )Integer[] numbers,
                                @RequestParam(value = "prices",required = true)Double[] prices,
-                               @RequestParam(value = "buyplanId",required = true)Long buyplanId) throws Exception{
+                               @RequestParam(value = "buyplanCode",required = true)String buyplanCode) throws Exception{
         if(EmptyUtil.Companion.isNullOrEmpty(numbers) || EmptyUtil.Companion.isNullOrEmpty(prices)){
             return MessageUtil.createMessage(false,"请将耗材的单价和数量信息填写完整");
         }else {
-            hisConsumablesBuyplanDetailsService.saveDetails(ids,numbers,prices,buyplanId);
+            hisConsumablesBuyplanDetailsService.saveDetails(ids,numbers,prices,buyplanCode);
             return MessageUtil.createMessage(true,"修改成功");
         }
     }
@@ -113,28 +113,22 @@ public class HisConsumablesBuyplanDetailsController extends BaseController {
      *@Time 9:35
     */
 
-    @RequestMapping("details/index.ahsj")
-    ModelAndView detailsIndex(String token, Long buyplanId){
-        HisConsumablesBuyplan hisConsumablesBuyplan=hisConsumablesBuyplanService.selectByBuyplanId(buyplanId);
+    @RequestMapping("/details/index.ahsj")
+    ModelAndView detailsIndex(String token, Long id){
+        HisConsumablesBuyplan hisConsumablesBuyplan =hisConsumablesBuyplanService.selectById(id);
+        //未完成采购入库计划
         if(hisConsumablesBuyplan.getCompletion()==2) {
-            //未完成采购计划
             ModelAndView modelAndView = new ModelAndView("backend/hiscore/consumables/buyplandetails");
-//        modelAndView.addObject("name",getUserName());
             modelAndView.addObject("title", "耗材采购计划详细信息表");
             modelAndView.addObject("token", token);
-            modelAndView.addObject("buyplanId", buyplanId);
-
-//        modelAndView.addObject("roleName",getRoleName());
+            modelAndView.addObject("buyplanCode", hisConsumablesBuyplan.getBuyplanCode());
             return modelAndView;
-        }
-        else {
+        } else {
+            //完成采购入库计划
             ModelAndView modelAndView = new ModelAndView("backend/hiscore/consumables/buyplandetailscompletion");
-//        modelAndView.addObject("name",getUserName());
             modelAndView.addObject("title", "耗材采购计划详细信息表");
             modelAndView.addObject("token", token);
-            modelAndView.addObject("buyplanId", buyplanId);
-
-//        modelAndView.addObject("roleName",getRoleName());
+            modelAndView.addObject("buyplanCode", hisConsumablesBuyplan.getBuyplanCode());
             return modelAndView;
         }
     }
@@ -148,13 +142,13 @@ public class HisConsumablesBuyplanDetailsController extends BaseController {
      *@Time 13:18
     */
 
-    @RequestMapping("edit/index.ahsj")
-    ModelAndView editIndex(String token,Long buyplanId)throws Exception{
-        List<HisConsumablesBuyplanDetails> hisConsumablesBuyplanDetailsList=hisConsumablesBuyplanDetailsService.selectByBuyplanId(buyplanId);
+    @RequestMapping("/edit/index.ahsj")
+    ModelAndView editIndex(String token,String buyplanCode)throws Exception{
+        List<HisConsumablesBuyplanDetails> hisConsumablesBuyplanDetailsList = hisConsumablesBuyplanDetailsService.selectByBuyplanCode(buyplanCode);
         ModelAndView modelAndView=new ModelAndView("backend/hiscore/consumables/onebuyplanlistedit");
         modelAndView.addObject("title","耗材采购计划详细信息编辑");
         modelAndView.addObject("token", token);
-        modelAndView.addObject("buyplanId", buyplanId);
+        modelAndView.addObject("buyplanCode", buyplanCode);
         modelAndView.addObject("hisConsumablesBuyplanDetailsList",hisConsumablesBuyplanDetailsList);
         return modelAndView;
     }
@@ -168,7 +162,7 @@ public class HisConsumablesBuyplanDetailsController extends BaseController {
      *@Date 2019/8/12
      *@Time 18:11
     */
-    @RequestMapping(value = "delete.ahsj" ,method = {RequestMethod.POST,RequestMethod.GET})
+    @RequestMapping(value = "/delete.ahsj" ,method = {RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
     public Message delete(Map<String, Object>model, HttpRequest request,
                                @RequestParam(value = "ids",required = true) Long[] ids

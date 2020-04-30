@@ -6,12 +6,17 @@ import core.code.Constants;
 import core.entity.BaseEntity;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class HisEnterConsumablesDetails extends BaseEntity {
     private Long id;
 
-    private Long consumablesId;
+    private String consumablesCode;
+
+    private Double sellingPrice;
+
+    private String enterCdoe;
 
     private String name;
 
@@ -25,11 +30,38 @@ public class HisEnterConsumablesDetails extends BaseEntity {
     private Double price;
 
     private Integer enterCount;
+
     private Integer surplus;
 
     @JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date validityPeriod;
+
+    private Integer isDelete;
+
+    public Integer getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
+    }
+
+    public String getEnterCdoe() {
+        return enterCdoe;
+    }
+
+    public void setEnterCdoe(String enterCdoe) {
+        this.enterCdoe = enterCdoe;
+    }
+
+    public Double getSellingPrice() {
+        return sellingPrice;
+    }
+
+    public void setSellingPrice(Double sellingPrice) {
+        this.sellingPrice = sellingPrice;
+    }
 
     public Long getId() {
         return id;
@@ -39,12 +71,12 @@ public class HisEnterConsumablesDetails extends BaseEntity {
         this.id = id;
     }
 
-    public Long getConsumablesId() {
-        return consumablesId;
+    public String getConsumablesCode() {
+        return consumablesCode;
     }
 
-    public void setConsumablesId(Long consumablesId) {
-        this.consumablesId = consumablesId;
+    public void setConsumablesCode(String consumablesCode) {
+        this.consumablesCode = consumablesCode;
     }
 
     public String getName() {

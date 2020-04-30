@@ -53,6 +53,14 @@ public class Constants {
     public static final String HIS_HTR = "HTR"; //交易流水号 头部
     public static final String HIS_HR = "HR";  //住院编号 头部
 
+    public static final String HIS_HC = "HC";  //耗材编号 头部
+    public static final String HIS_HCCG = "HCCG";  //耗材采购编号 头部
+    public static final String HIS_HCRK = "HCRK";  //耗材入库编号 头部
+    public static final String HIS_HCRKXQ = "HCRKXQ";  //耗材入库详情编号 头部
+    public static final String HIS_HCCKJL = "HCCKJL";  //耗材出库记录编号 头部
+    public static final String HIS_HCCKCF = "HCCKCF";  //耗材出库收费记录编号 头部
+    public static final String HIS_HCSQV = "HCSQV";  //耗材申请编号 头部
+
     public static final String HIS_NAME = "HISNAME";
     public static final String HIS_IDCARD = "HISIDCARD";
 
@@ -60,6 +68,15 @@ public class Constants {
 
     public static final Integer HIS_ONE = 1;
     public static final Integer HIS_TWO = 2;
+
+    public static final Short BASE_TWO = 2;
+    public static final Short BASE_ONE = 1;
+
+    public static final Short HC_BACK_FALSE = 2;
+    public static final Short HC_BACK_TRUE = 1;
+
+    public static final Integer HIS_DELETE_TRUE = 1;
+    public static final Integer HIS_DELETE_FALSE = 0;
 
     public static final Integer HIS_DOCTOR_ONE = 1;
     public static final Integer HIS_DOCTOR_TWO = 2;

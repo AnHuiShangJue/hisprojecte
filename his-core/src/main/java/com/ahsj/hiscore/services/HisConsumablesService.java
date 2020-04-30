@@ -13,13 +13,14 @@ import java.util.Map;
 
 public interface HisConsumablesService {
     /**
-     * @return
-     * @Description
-     * @Params
-     * @Author jin
-     * @Date 2019/6/19
-     * @Time 14:49
-     */
+     *@Description 
+     *@MethodName saveOrUpdate
+     *@Params [hisConsumables]
+     *@return core.message.Message
+     *@Author XJP
+     *@Date 2020/4/24
+     *@Time 10:52
+    **/
     Message saveOrUpdate(HisConsumables hisConsumables) throws Exception;
 
     Message delete(Long[] ids) throws Exception;
@@ -55,6 +56,15 @@ public interface HisConsumablesService {
      **/
     List<HisConsumables> queryTranslateInfoByDate(HisConsumables hisConsumables) throws Exception;
 
+    /**
+     *@Description 
+     *@MethodName listEnable
+     *@Params [pageBean]
+     *@return core.entity.PageBean<com.ahsj.hiscore.entity.HisConsumables>
+     *@Author XJP
+     *@Date 2020/4/24
+     *@Time 15:18
+    **/
     PageBean<HisConsumables> listEnable(PageBean<HisConsumables> pageBean) throws Exception;
 
 
@@ -93,4 +103,14 @@ public interface HisConsumablesService {
 
     void exportExcels(Long[] ids, HttpServletRequest request, HttpServletResponse response, HttpSession session, String param)throws Exception;
 
+    /**
+     *@Description 
+     *@MethodName selectByConsumablesCode
+     *@Params [consumablesCode]
+     *@return com.ahsj.hiscore.entity.HisConsumables
+     *@Author XJP
+     *@Date 2020/4/26
+     *@Time 11:06
+    **/
+    HisConsumables selectByConsumablesCode(String consumablesCode);
 }

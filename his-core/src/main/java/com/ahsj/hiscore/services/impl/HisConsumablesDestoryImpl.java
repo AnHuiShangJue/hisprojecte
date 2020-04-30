@@ -72,8 +72,8 @@ public class HisConsumablesDestoryImpl implements HisConsumablesDestoryService {
             //判断要报损的值与库存可用量的大小
             if (numbers[i] <= hisEnterConsumablesDetails.getSurplus()){
 
-                hisConsumablesDestory.setConsumablesId(hisEnterConsumablesDetails.getConsumablesId());
-                hisConsumablesDestory.setDestoryId(hisEnterConsumablesDetails.getId());
+                hisConsumablesDestory.setConsumablesCode(hisEnterConsumablesDetails.getConsumablesCode());
+                hisConsumablesDestory.setEnterCdoe(hisEnterConsumablesDetails.getEnterCdoe());
                 hisConsumablesDestory.setName(hisEnterConsumablesDetails.getName());
                 hisConsumablesDestory.setType(hisEnterConsumablesDetails.getType());
                 hisConsumablesDestory.setSpec(hisEnterConsumablesDetails.getSpec());
@@ -141,7 +141,7 @@ public class HisConsumablesDestoryImpl implements HisConsumablesDestoryService {
             HisConsumablesDestory hisConsumablesDestory = hisConsumablesDestoryMapper.selectByPrimaryKey(ids[i]);
 
             //用destory_id（enter表的主键） 查找对应入库记录
-            HisEnterConsumablesDetails hisEnterConsumablesDetails = hisEnterConsumablesDetailsMapper.selectByPrimaryKey(hisConsumablesDestory.getDestoryId());
+            HisEnterConsumablesDetails hisEnterConsumablesDetails = hisEnterConsumablesDetailsMapper.selectByEnterConsumablesDetailsCode(hisConsumablesDestory.getEnterCdoe());
 
             if (hisConsumablesDestory.getDestoryNumber() <= hisEnterConsumablesDetails.getSurplus()){
                 //修改入库表中的可用量
@@ -161,7 +161,7 @@ public class HisConsumablesDestoryImpl implements HisConsumablesDestoryService {
             //最后一次循环时修改库存表的耗材库存
             if (i == (ids.length -1)){
             //修改库存量
-                    HisConsumablesDetails hisConsumablesDetails = hisConsumablesDetailsMapper.selectConsumablesId(hisEnterConsumablesDetails.getConsumablesId());
+                    HisConsumablesDetails hisConsumablesDetails = hisConsumablesDetailsMapper.selectConsumablesCode(hisEnterConsumablesDetails.getConsumablesCode());
                     hisConsumablesDetails.setStock(hisConsumablesDetails.getStock()-allNumber);
                     hisConsumablesDetailsMapper.updateByPrimaryKey(hisConsumablesDetails);
                 //   log.info("--------------------耗材库存修改翻译发送开始--------------------------");

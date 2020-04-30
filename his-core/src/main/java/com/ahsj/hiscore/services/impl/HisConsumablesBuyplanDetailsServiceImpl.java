@@ -1,6 +1,7 @@
 package com.ahsj.hiscore.services.impl;
 
 import com.ahsj.hiscore.common.Constants;
+import com.ahsj.hiscore.common.utils.DateNumber;
 import com.ahsj.hiscore.common.utils.JsonUtils;
 import com.ahsj.hiscore.controller.BaseLoginUser;
 import com.ahsj.hiscore.core.CodeHelper;
@@ -62,21 +63,36 @@ public class HisConsumablesBuyplanDetailsServiceImpl implements HisConsumablesBu
      */
     @Override
     @Transactional(readOnly = false)
-    public Message saveOrUpdate(Long[] ids, Integer[] numbers, Long buyplanId, String personInCharge, String expectedTime, Double[] prices) throws Exception {
+    public Message saveOrUpdate(Long[] ids, Integer[] numbers, String personInCharge, String expectedTime, Double[] prices) throws Exception {
         double allBudget = 0;
+
+        //耗材采购基础信息
+
+        HisConsumablesBuyplan hisConsumablesBuyplan = new HisConsumablesBuyplan();
+        hisConsumablesBuyplan.setBuyplanCode(DateNumber.getNumbenr(Constants.HIS_HCCG));
+        hisConsumablesBuyplan.setPersonInCharge(personInCharge);
+        //将expectedTime格式化yyyy/MM/dd日期格式
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        Date expectedDate = format.parse(expectedTime);
+        hisConsumablesBuyplan.setExpectedTime(expectedDate);
+        hisConsumablesBuyplan.setBudget(allBudget);
+        hisConsumablesBuyplan.setCompletion(2);
+        hisConsumablesBuyplan.setIsDelete(Constants.HIS_DELETE_FALSE);
+        hisConsumablesBuyplanMapper.insert(hisConsumablesBuyplan);
+
+        //耗材采购明细信息
         List<HisConsumablesBuyplanDetails> hisConsumablesBuyplanDetailsList = new ArrayList<>();
         for (int i = 0; i < ids.length; i++) {
             HisConsumables hisConsumables = hisConsumablesMapper.selectByPrimaryKey(ids[i]);
             HisConsumablesBuyplanDetails hisConsumablesBuyplanDetails = new HisConsumablesBuyplanDetails();
-
-            hisConsumablesBuyplanDetails.setConsumablesId(hisConsumables.getId());
+            hisConsumablesBuyplanDetails.setConsumablesCode(hisConsumables.getConsumablesCode());
             hisConsumablesBuyplanDetails.setEnterCountPlan(numbers[i]);
             hisConsumablesBuyplanDetails.setName(hisConsumables.getName());
             hisConsumablesBuyplanDetails.setPrice(prices[i]);
-            hisConsumablesBuyplanDetails.setBuyplanId(buyplanId);
+            hisConsumablesBuyplanDetails.setBuyplanCode(hisConsumablesBuyplan.getBuyplanCode());
             allBudget += prices[i] * numbers[i];
             hisConsumablesBuyplanDetails.setSpec(hisConsumables.getSpec());
-
+            hisConsumablesBuyplanDetails.setIsDelete(Constants.HIS_DELETE_FALSE);
             hisConsumablesBuyplanDetailsList.add(hisConsumablesBuyplanDetails);
         }
 
@@ -97,18 +113,6 @@ public class HisConsumablesBuyplanDetailsServiceImpl implements HisConsumablesBu
             // log.info("--------------------耗材采购明细新增翻译发送结束--------------------------");
         }
 
-        HisConsumablesBuyplan hisConsumablesBuyplan = new HisConsumablesBuyplan();
-        hisConsumablesBuyplan.setBuyplanId(buyplanId);
-        hisConsumablesBuyplan.setPersonInCharge(personInCharge);
-        //将expectedTime格式化yyyy/MM/dd日期格式
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-        Date expectedDate = null;
-        expectedDate = format.parse(expectedTime);
-        hisConsumablesBuyplan.setExpectedTime(expectedDate);
-        hisConsumablesBuyplan.setBudget(allBudget);
-        hisConsumablesBuyplan.setCompletion(2);
-        hisConsumablesBuyplanMapper.insert(hisConsumablesBuyplan);
-
         //  log.info("--------------------耗材采购新增翻译发送开始--------------------------");
         BaseLoginUser loginUser = new BaseLoginUser();
         TranslateModels translateModels = new TranslateModels();
@@ -124,29 +128,35 @@ public class HisConsumablesBuyplanDetailsServiceImpl implements HisConsumablesBu
 
 
     /**
-     * @return
-     * @Description 根据药品计划查找
-     * @Params
-     * @Author jin
-     * @Date 2019/7/5
-     * @Time 9:41
-     */
+     * @return java.util.List<com.ahsj.hiscore.entity.HisConsumablesBuyplanDetails>
+     * @Description
+     * @MethodName selectByBuyplanId
+     * @Params [buyplanId]
+     * @Author XJP
+     * @Date 2020/4/24
+     * @Time 15:36
+     **/
     @Override
     @Transactional(readOnly = true)
-    public List<HisConsumablesBuyplanDetails> selectByBuyplanId(Long buyplanId) throws Exception {
-        return CodeHelper.getInstance().setCodeValue(hisConsumablesBuyplanDetailsMapper.selectByBuyplanId(buyplanId));
+    public List<HisConsumablesBuyplanDetails> selectByBuyplanCode(String buyplanCode) throws Exception {
+        List<HisConsumablesBuyplanDetails> hisConsumablesBuyplanDetails = hisConsumablesBuyplanDetailsMapper.selectByBuyplanCode(buyplanCode);
+        for (HisConsumablesBuyplanDetails detail : hisConsumablesBuyplanDetails) {
+            HisConsumables hisConsumables = hisConsumablesMapper.selectByHisConsumablesCode(detail.getConsumablesCode());
+            detail.setId(hisConsumables.getId());
+        }
+        return CodeHelper.getInstance().setCodeValue(hisConsumablesBuyplanDetails);
     }
 
 
     /**
-     * @return
-     * @Description 删除
-     * @Params
-     * @Author jin
-     * @Date 2019/7/5
-     * @Time 10:42
-     */
-
+     * @return core.entity.PageBean<com.ahsj.hiscore.entity.HisConsumablesBuyplanDetails>
+     * @Description
+     * @MethodName details
+     * @Params [pageBean]
+     * @Author XJP
+     * @Date 2020/4/24
+     * @Time 14:59
+     **/
     @Override
     @Transactional(readOnly = true)
     public PageBean<HisConsumablesBuyplanDetails> details(PageBean<HisConsumablesBuyplanDetails> pageBean) throws Exception {
@@ -155,50 +165,78 @@ public class HisConsumablesBuyplanDetailsServiceImpl implements HisConsumablesBu
     }
 
 
+    /**
+     * @return core.message.Message
+     * @Description
+     * @MethodName saveDetails
+     * @Params [ids, numbers, prices, buyplanCode]
+     * @Author XJP
+     * @Date 2020/4/24
+     * @Time 16:11
+     **/
     @Override
     @Transactional(readOnly = false)
-    public Message saveDetails(Long[] ids, Integer[] numbers, Double[] prices, Long buyplanId) throws Exception {
-        hisConsumablesBuyplanDetailsMapper.deleteByBuyplanId(buyplanId);
-        TranslateDelete translateDelete = new TranslateDelete();
-        translateDelete.setId(buyplanId);
+    public Message saveDetails(Long[] ids, Integer[] numbers, Double[] prices, String buyplanCode) throws Exception {
+
+        //伪删耗材采购计划明细数据
+        hisConsumablesBuyplanDetailsMapper.deleteByBuyplanCode(buyplanCode);
+
+       /* TranslateDelete translateDelete = new TranslateDelete();
+        translateDelete.setId(buyplanCode);
         translateDelete.setModel(Constants.TRANSLATE_HIS_CONSUMABLESBUYPLANDETAILS);
-        amqpTemplat.convertAndSend(Constants.TRANSLATE_HIS_DELETE, JsonUtils.serialize(translateDelete));
-        HisConsumablesBuyplan hisConsumablesBuyplan = hisConsumablesBuyplanMapper.selectByBuyplanId(buyplanId);
+        amqpTemplat.convertAndSend(Constants.TRANSLATE_HIS_DELETE, JsonUtils.serialize(translateDelete));*/
+
+        HisConsumablesBuyplan hisConsumablesBuyplan = hisConsumablesBuyplanMapper.selectBybuyplanCode(buyplanCode);
         //allBudget：预算
         double allBudget = 0;
 
         List<HisConsumablesBuyplanDetails> hisConsumablesBuyplanDetailsList = new ArrayList<>();
 
         for (int i = 0; i < ids.length; i++) {
+            /*            HisConsumablesBuyplanDetails buyplanDetails = hisConsumablesBuyplanDetailsMapper.selectByPrimaryKey(ids[i]);*/
             HisConsumables hisConsumables = hisConsumablesMapper.selectByPrimaryKey(ids[i]);
             HisConsumablesBuyplanDetails hisConsumablesBuyplanDetails = new HisConsumablesBuyplanDetails();
-            hisConsumablesBuyplanDetails.setBuyplanId(buyplanId);
-            hisConsumablesBuyplanDetails.setConsumablesId(ids[i]);
+            hisConsumablesBuyplanDetails.setBuyplanCode(buyplanCode);
+            hisConsumablesBuyplanDetails.setConsumablesCode(hisConsumables.getConsumablesCode());
             hisConsumablesBuyplanDetails.setEnterCountPlan(numbers[i]);
             hisConsumablesBuyplanDetails.setPrice(prices[i]);
             hisConsumablesBuyplanDetails.setName(hisConsumables.getName());
+            hisConsumablesBuyplanDetails.setIsDelete(Constants.HIS_DELETE_FALSE);
             allBudget += prices[i] * numbers[i];
             hisConsumablesBuyplanDetails.setSpec(hisConsumables.getSpec());
             hisConsumablesBuyplanDetailsList.add(hisConsumablesBuyplanDetails);
-
         }
 
         hisConsumablesBuyplanDetailsMapper.insertBatch(hisConsumablesBuyplanDetailsList);
+
+
         //肖俊鹏 添加
-        for (HisConsumablesBuyplanDetails hisConsumablesBuyplanDetails : hisConsumablesBuyplanDetailsList) {
-            //  log.info("--------------------耗材采购明细新增翻译发送开始--------------------------");
-            BaseLoginUser loginUser = new BaseLoginUser();
-            TranslateModels translateModels = new TranslateModels();
-            HisConsumablesBuyplanDetailsTranslate translate = new HisConsumablesBuyplanDetailsTranslate();
-            BeanUtils.copyProperties(hisConsumablesBuyplanDetails, translate);
-            translateModels.setUserId(loginUser.getId());
-            translateModels.setHisConsumablesBuyplanDetailsTranslate(translate);
-            amqpTemplat.convertAndSend("com.ahsj.addHisConsumablesBuyplanDetails", JsonUtils.serialize(translateModels));
-            //   log.info(JsonUtils.serialize(translateModels));
-            //   log.info("--------------------耗材采购明细新增翻译发送结束--------------------------");
+        if (!EmptyUtil.Companion.isNullOrEmpty(hisConsumablesBuyplanDetailsList)) {
+
+            for (HisConsumablesBuyplanDetails hisConsumablesBuyplanDetails : hisConsumablesBuyplanDetailsList) {
+                //  log.info("--------------------耗材采购明细新增翻译发送开始--------------------------");
+                BaseLoginUser loginUser = new BaseLoginUser();
+                TranslateModels translateModels = new TranslateModels();
+                HisConsumablesBuyplanDetailsTranslate translate = new HisConsumablesBuyplanDetailsTranslate();
+                BeanUtils.copyProperties(hisConsumablesBuyplanDetails, translate);
+                translateModels.setUserId(loginUser.getId());
+                translateModels.setHisConsumablesBuyplanDetailsTranslate(translate);
+                amqpTemplat.convertAndSend("com.ahsj.addHisConsumablesBuyplanDetails", JsonUtils.serialize(translateModels));
+                //   log.info(JsonUtils.serialize(translateModels));
+                //   log.info("--------------------耗材采购明细新增翻译发送结束--------------------------");
+            }
         }
+
+
         hisConsumablesBuyplan.setBudget(allBudget);
-        hisConsumablesBuyplanMapper.updateByPrimaryKeySelective(hisConsumablesBuyplan);
+
+        //伪删
+        hisConsumablesBuyplanMapper.updateByIsDelete(hisConsumablesBuyplan);
+        //新增
+        hisConsumablesBuyplan.setIsDelete(Constants.HIS_DELETE_FALSE);
+        hisConsumablesBuyplan.setId(null);
+        hisConsumablesBuyplanMapper.insert(hisConsumablesBuyplan);
+
         //   log.info("--------------------耗材采购修改翻译发送开始--------------------------");
         BaseLoginUser loginUser = new BaseLoginUser();
         TranslateModels translateModels = new TranslateModels();
@@ -212,16 +250,25 @@ public class HisConsumablesBuyplanDetailsServiceImpl implements HisConsumablesBu
         return MessageUtil.createMessage(true, "药品采购计划更新成功");
     }
 
+    /**
+     * @return core.message.Message
+     * @Description
+     * @MethodName delete
+     * @Params [ids]
+     * @Author XJP
+     * @Date 2020/4/24
+     * @Time 16:38
+     **/
     @Override
     @Transactional(readOnly = false)
     public Message delete(Long[] ids) throws Exception {
-        if (EmptyUtil.Companion.isNullOrEmpty(ids)){
-            return MessageUtil.createMessage(false,"耗材信息错误");
-        }else {
+        if (EmptyUtil.Companion.isNullOrEmpty(ids)) {
+            return MessageUtil.createMessage(false, "耗材信息错误");
+        } else {
             for (Long id : ids) {
-                hisConsumablesBuyplanDetailsMapper.deleteByPrimaryKey(id);
+                hisConsumablesBuyplanDetailsMapper.updateByIsDelete(id);
             }
-            return MessageUtil.createMessage(true,"删除成功");
+            return MessageUtil.createMessage(true, "删除成功");
         }
     }
 
@@ -236,14 +283,21 @@ public class HisConsumablesBuyplanDetailsServiceImpl implements HisConsumablesBu
      */
     @Override
     @Transactional(readOnly = true)
-    public List<HisConsumablesBuyplanDetails> selectByBuyplanforList(Long buyplanId) throws Exception {
-        return CodeHelper.getInstance().setCodeValue(hisConsumablesBuyplanDetailsMapper.selectByBuyplanforList(buyplanId));
+    public List<HisConsumablesBuyplanDetails> selectByBuyplanforList(Long id) throws Exception {
+        HisConsumablesBuyplan consumablesBuyplan = hisConsumablesBuyplanMapper.selectByPrimaryKey(id);
+        if (!EmptyUtil.Companion.isNullOrEmpty(consumablesBuyplan)) {
+            List<HisConsumablesBuyplanDetails> hisConsumablesBuyplanDetails = hisConsumablesBuyplanDetailsMapper.selectByBuyplanforList(consumablesBuyplan.getBuyplanCode());
+            if (!EmptyUtil.Companion.isNullOrEmpty(hisConsumablesBuyplanDetails)) {
+                return CodeHelper.getInstance().setCodeValue(hisConsumablesBuyplanDetails);
+            }
+        }
+        return null;
     }
 
     @Override
     @Transactional(readOnly = false)
     public Message delete(Long buyplanId) throws Exception {
-        if (EmptyUtil.Companion.isNullOrEmpty(buyplanId)) {
+     /*   if (EmptyUtil.Companion.isNullOrEmpty(buyplanId)) {
             return MessageUtil.createMessage(false, "参数异常");
         } else {
             hisConsumablesBuyplanDetailsMapper.deleteByBuyplanId(buyplanId);
@@ -253,9 +307,9 @@ public class HisConsumablesBuyplanDetailsServiceImpl implements HisConsumablesBu
             translateDelete.setModel(Constants.TRANSLATE_HIS_CONSUMABLESBUYPLANDETAILS);
             amqpTemplat.convertAndSend(Constants.TRANSLATE_HIS_DELETE, JsonUtils.serialize(translateDelete));
             //  log.info(JsonUtils.serialize(translateDelete));
-            //  log.info("--------------------耗材采购明细删除翻译发送结束--------------------------");
-            return MessageUtil.createMessage(true, "删除成功");
-        }
+            //  log.info("--------------------耗材采购明细删除翻译发送结束--------------------------");*/
+        return MessageUtil.createMessage(true, "删除成功");
+        //        }
     }
 
     /**
@@ -273,7 +327,7 @@ public class HisConsumablesBuyplanDetailsServiceImpl implements HisConsumablesBu
             log.info("查询数据不存在 ， 无对应数据");
             return new ArrayList<>();
         } else {
-           log.info("-----------参数时间----------------"+hisConsumablesBuyplanDetails.getUpdateDate());
+            log.info("-----------参数时间----------------" + hisConsumablesBuyplanDetails.getUpdateDate());
             List<HisConsumablesBuyplanDetails> translateList = hisConsumablesBuyplanDetailsMapper.queryTranslateInfoByDate(hisConsumablesBuyplanDetails);
 
             if (EmptyUtil.Companion.isNullOrEmpty(translateList)) {
@@ -288,11 +342,11 @@ public class HisConsumablesBuyplanDetailsServiceImpl implements HisConsumablesBu
     @Override
     @Transactional(readOnly = true)
     public List<HisConsumablesBuyplanDetails> queryAll() throws Exception {
-        List<HisConsumablesBuyplanDetails>  hisConsumablesBuyplanDetails =  hisConsumablesBuyplanDetailsMapper.queryAll();
-        if (EmptyUtil.Companion.isNullOrEmpty(hisConsumablesBuyplanDetails)){
+        List<HisConsumablesBuyplanDetails> hisConsumablesBuyplanDetails = hisConsumablesBuyplanDetailsMapper.queryAll();
+        if (EmptyUtil.Companion.isNullOrEmpty(hisConsumablesBuyplanDetails)) {
             log.info("查询失败");
             return new ArrayList<>();
-        }else {
+        } else {
             return hisConsumablesBuyplanDetails;
         }
     }

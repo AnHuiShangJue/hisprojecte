@@ -21,8 +21,13 @@ import utils.EmptyUtil;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
+/**
+ * 耗材采购计划基础信息
+ */
+
+
 @Controller
-@RequestMapping("api/hisconsumablesbuyplan/")
+@RequestMapping("/api/hisconsumablesbuyplan")
 public class HisConsumablesBuyplanController{
 
     @Autowired
@@ -39,11 +44,11 @@ public class HisConsumablesBuyplanController{
      *@Date 2019/7/3
      *@Time 11:16
     */
-    @RequestMapping(value = "saveOrUpdate.ahsj")
+    @RequestMapping(value = "/saveOrUpdate.ahsj")
     @ResponseBody
-    public Message saveOrUpdate (Map<String, Object> model, HisConsumablesBuyplan hisConsumablesBuyplan) throws Exception {
+    public Message saveOrUpdate (HisConsumablesBuyplan hisConsumablesBuyplan) throws Exception {
 
-        return  hisConsumablesBuyplanService.Update(hisConsumablesBuyplan);
+        return  hisConsumablesBuyplanService.saveOrUpdate(hisConsumablesBuyplan);
     }
 
 
@@ -59,32 +64,33 @@ public class HisConsumablesBuyplanController{
     */
 
     @ResponseBody
-    @RequestMapping(value = "delete.ahsj", method = {RequestMethod.POST})
-    public Message delete (Map<String, Object> model, HttpServletRequest request
-            , @RequestParam(value="ids", required=true) Long[] ids
-            , @RequestParam(value="buyplanId", required=true) Long buyplanId
+    @RequestMapping(value = "/delete.ahsj", method = {RequestMethod.POST})
+    public Message delete (@RequestParam(value="ids", required=true) Long[] ids
     ) throws Exception {
-        if(null != request.getParameter("ids")){
+        if(!EmptyUtil.Companion.isNullOrEmpty(ids)){
             hisConsumablesBuyplanService.delete(ids);
-            hisConsumablesBuyplanDetailsService.delete(buyplanId);
             return MessageUtil.createMessage(true,"删除成功");
-        }else  return MessageUtil.createMessage(false,"参数异常");
+        }else{
+            return MessageUtil.createMessage(false,"参数异常");
+        }
     }
     
     
     
+
+
     /**
      *@Description 获取采购清单列表
-     *@Params 
-     *@return 
-     *@Author jin
-     *@Date 2019/7/4
-     *@Time 9:42
-    */
-
-    @RequestMapping(value = "list.ahsj", method = {RequestMethod.POST})
+     *@MethodName list
+     *@Params [hisConsumablesBuyplan]
+     *@return core.entity.PageBean<com.ahsj.hiscore.entity.HisConsumablesBuyplan>
+     *@Author XJP
+     *@Date 2020/4/24
+     *@Time 12:52
+    **/
+    @RequestMapping(value = "/list.ahsj", method = {RequestMethod.POST})
     @ResponseBody
-    public PageBean<HisConsumablesBuyplan> list (Map<String, Object> model, HttpServletRequest request, HisConsumablesBuyplan hisConsumablesBuyplan) throws Exception{
+    public PageBean<HisConsumablesBuyplan> list (HisConsumablesBuyplan hisConsumablesBuyplan) throws Exception{
         PageBean<HisConsumablesBuyplan> pageBean = new PageBean<HisConsumablesBuyplan>();
         pageBean.setParameter(hisConsumablesBuyplan);
         pageBean = hisConsumablesBuyplanService.list(pageBean);
@@ -119,12 +125,13 @@ public class HisConsumablesBuyplanController{
         return modelAndView;
     }
 
-    @RequestMapping("update/index.ahsj")
+    @RequestMapping("/update/index.ahsj")
     ModelAndView updateIndex(String token,HisConsumablesBuyplan hisConsumablesBuyplan){
         ModelAndView modelAndView=new ModelAndView("backend/hiscore/consumables/buyplanupdate");//采购计划编辑更新页面
 
         if(!EmptyUtil.Companion.isNullOrEmpty(hisConsumablesBuyplan.getId())){
-            modelAndView.addObject("hisConsumablesBuyplan",hisConsumablesBuyplanService.selectById(hisConsumablesBuyplan.getId()));
+             hisConsumablesBuyplan = hisConsumablesBuyplanService.selectById(hisConsumablesBuyplan.getId());
+            modelAndView.addObject("hisConsumablesBuyplan",hisConsumablesBuyplan);
         }else{
             modelAndView.addObject("hisConsumablesBuyplan",hisConsumablesBuyplan);
         }
