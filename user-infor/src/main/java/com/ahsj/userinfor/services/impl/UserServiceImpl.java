@@ -13,6 +13,7 @@ package com.ahsj.userinfor.services.impl;
 import com.ahsj.userinfor.dao.UserInfoMapper;
 import com.ahsj.userinfor.entity.UserInfo;
 import com.ahsj.userinfor.services.UserService;
+import core.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,5 +56,12 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     public UserInfo getUserId(Long id) {
         return userInfoMapper.getUserId(id);
+    }
+
+    @Override
+    @Transactional(readOnly = false)
+    public Message updateByisRestrict(Long id) {
+        userInfoMapper.updateByisRestrict(id);
+        return null;
     }
 }

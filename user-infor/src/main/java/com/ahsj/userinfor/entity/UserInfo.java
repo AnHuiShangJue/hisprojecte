@@ -76,6 +76,16 @@ public class UserInfo extends BaseEntity {
 
     private String roleIdStr;
 
+    private Integer isRestrict;
+
+    public Integer getIsRestrict() {
+        return isRestrict;
+    }
+
+    public void setIsRestrict(Integer isRestrict) {
+        this.isRestrict = isRestrict;
+    }
+
     public Long getId() {
         return id;
     }

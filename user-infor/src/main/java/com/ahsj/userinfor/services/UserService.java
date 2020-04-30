@@ -11,6 +11,7 @@
 package com.ahsj.userinfor.services;
 
 import com.ahsj.userinfor.entity.UserInfo;
+import core.message.Message;
 
 import java.util.List;
 
@@ -32,4 +33,6 @@ public interface UserService {
     UserInfo getUserLoginId(String userId);
 
     UserInfo getUserId(Long id);
+
+    Message updateByisRestrict(Long id);
 }

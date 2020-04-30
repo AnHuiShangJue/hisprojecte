@@ -31,11 +31,12 @@
     <result column="roleNameStr" property="roleNameStr" jdbcType="VARCHAR" />
     <result column="is_leader" property="isLeader" jdbcType="VARCHAR" />
     <result column="userDeptId" property="userDeptId" jdbcType="VARCHAR" />
+    <result column="is_restrict" property="isRestrict" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, type, user_id, user_name, sex, tel_phone, specialty, password, dept_id, qq, card_no, 
     agency_years, is_certificate, mail, order_no, qrcode, original_file_name, is_init_data, 
-    company_id, del_flag, create_user_id, create_date, update_user_id, update_date
+    company_id, del_flag, create_user_id, create_date, update_user_id, update_date,is_restrict
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -55,7 +56,7 @@
       is_certificate, mail, order_no, 
       qrcode, original_file_name, is_init_data, 
       company_id, del_flag, create_user_id, 
-      create_date, update_user_id, update_date
+      create_date, update_user_id, update_date,is_restrict
       )
     values (#{id,jdbcType=BIGINT}, #{type,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
       #{userName,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{telPhone,jdbcType=VARCHAR}, 
@@ -64,7 +65,7 @@
       #{isCertificate,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}, #{orderNo,jdbcType=INTEGER}, 
       #{qrcode,jdbcType=VARCHAR}, #{originalFileName,jdbcType=VARCHAR}, #{isInitData,jdbcType=VARCHAR}, 
       #{companyId,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}
+      #{createDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP},#{isRestrict,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" useGeneratedKeys="true" parameterType="com.ahsj.userinfor.entity.UserInfo" >
@@ -142,6 +143,9 @@
       <if test="updateDate != null" >
         update_date,
       </if>
+      <if test="isRestrict != null" >
+        is_restrict,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -215,6 +219,9 @@
       </if>
       <if test="updateDate != null" >
         #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isRestrict != null" >
+        #{isRestrict,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -290,6 +297,9 @@
       <if test="updateDate != null" >
         update_date = #{updateDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="isRestrict != null" >
+        is_restrict = #{isRestrict,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -317,7 +327,8 @@
       create_user_id = #{createUserId,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP},
       update_user_id = #{updateUserId,jdbcType=VARCHAR},
-      update_date = #{updateDate,jdbcType=TIMESTAMP}
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+        is_restrict = #{isRestrict,jdbcType=TIMESTAMP},
     where id = #{id,jdbcType=BIGINT}
   </update>
   <!--自定义sql-->
@@ -413,5 +424,12 @@
   <select id="getUserId" resultMap="BaseResultMap" parameterType="java.lang.Long">
     SELECT  <include refid="Base_Column_List"/> from   user_info  where  id = #{id}
   </select>
+
+  <update id="updateByisRestrict" parameterType="java.lang.Long">
+    update user_info
+    set is_restrict = 1
+    where
+      id = #{id,jdbcType=BIGINT}
+  </update>
 
 </mapper>

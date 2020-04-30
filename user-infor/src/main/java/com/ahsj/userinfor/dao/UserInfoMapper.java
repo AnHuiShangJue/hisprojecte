@@ -41,4 +41,15 @@ public interface UserInfoMapper {
     UserInfo getUserLoginId(String userId);
 
     UserInfo getUserId(Long id);
+
+    /**
+     *@Description 
+     *@MethodName updateByisRestrict
+     *@Params [id]
+     *@return int
+     *@Author XJP
+     *@Date 2020/4/30
+     *@Time 18:09
+    **/
+    int updateByisRestrict(Long id);
 }
