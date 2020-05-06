@@ -50,9 +50,23 @@
 
     </resultMap>
     <sql id="Base_Column_List">
-    id, create_user_id, create_date, update_date, update_user_id, money, actual_charge,
-    recover_the_fee, type, attench_id, attench_type, deposit, number,medical_record_id,is_settlement
-  </sql>
+        id
+        ,
+        create_user_id,
+        create_date,
+        update_date,
+        update_user_id,
+        money,
+        actual_charge,
+        recover_the_fee,
+        type,
+        attench_id,
+        attench_type,
+        deposit,
+        number,
+        medical_record_id,
+        is_settlement
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
@@ -60,21 +74,22 @@
         where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from his_toll_record
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+        delete
+        from his_toll_record
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.ahsj.hiscore.entity.HisTollRecord">
-    insert into his_toll_record (id, create_user_id, create_date,
-      update_date, update_user_id, money,
-      actual_charge, recover_the_fee, type,
-      attench_id, attench_type, deposit,
-      number,is_settlement,medical_record_id)
-    values (#{id,jdbcType=BIGINT}, #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP},
-      #{updateDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{money,jdbcType=DECIMAL},
-      #{actualCharge,jdbcType=DECIMAL}, #{recoverTheFee,jdbcType=DECIMAL}, #{type,jdbcType=INTEGER},
-      #{attenchId,jdbcType=BIGINT}, #{attenchType,jdbcType=INTEGER}, #{deposit,jdbcType=DECIMAL},
-      #{number,jdbcType=VARCHAR},#{isSettlement,jdbcType=INTEGER},#{medicalRecordId,jdbcType=VARCHAR})
-  </insert>
+        insert into his_toll_record (id, create_user_id, create_date,
+                                     update_date, update_user_id, money,
+                                     actual_charge, recover_the_fee, type,
+                                     attench_id, attench_type, deposit,
+                                     number, is_settlement, medical_record_id)
+        values (#{id,jdbcType=BIGINT}, #{createUserId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP},
+                #{updateDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{money,jdbcType=DECIMAL},
+                #{actualCharge,jdbcType=DECIMAL}, #{recoverTheFee,jdbcType=DECIMAL}, #{type,jdbcType=INTEGER},
+                #{attenchId,jdbcType=BIGINT}, #{attenchType,jdbcType=INTEGER}, #{deposit,jdbcType=DECIMAL},
+                #{number,jdbcType=VARCHAR}, #{isSettlement,jdbcType=INTEGER}, #{medicalRecordId,jdbcType=VARCHAR})
+    </insert>
     <insert id="insertSelective" parameterType="com.ahsj.hiscore.entity.HisTollRecord" useGeneratedKeys="true"
             keyProperty="id">
         insert into his_toll_record
@@ -222,23 +237,23 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.ahsj.hiscore.entity.HisTollRecord">
-    update his_toll_record
-    set create_user_id = #{createUserId,jdbcType=BIGINT},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
-      update_date = #{updateDate,jdbcType=TIMESTAMP},
-      update_user_id = #{updateUserId,jdbcType=BIGINT},
-      money = #{money,jdbcType=DECIMAL},
-      actual_charge = #{actualCharge,jdbcType=DECIMAL},
-      recover_the_fee = #{recoverTheFee,jdbcType=DECIMAL},
-      type = #{type,jdbcType=INTEGER},
-      attench_id = #{attenchId,jdbcType=BIGINT},
-      attench_type = #{attenchType,jdbcType=INTEGER},
-      deposit = #{deposit,jdbcType=DECIMAL},
-      number = #{number,jdbcType=VARCHAR},
-      is_settlement = #{isSettlement,jdbcType=INTEGER},
-      medical_record_id= #{medicalRecordId,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        update his_toll_record
+        set create_user_id   = #{createUserId,jdbcType=BIGINT},
+            create_date      = #{createDate,jdbcType=TIMESTAMP},
+            update_date      = #{updateDate,jdbcType=TIMESTAMP},
+            update_user_id   = #{updateUserId,jdbcType=BIGINT},
+            money            = #{money,jdbcType=DECIMAL},
+            actual_charge    = #{actualCharge,jdbcType=DECIMAL},
+            recover_the_fee  = #{recoverTheFee,jdbcType=DECIMAL},
+            type             = #{type,jdbcType=INTEGER},
+            attench_id       = #{attenchId,jdbcType=BIGINT},
+            attench_type     = #{attenchType,jdbcType=INTEGER},
+            deposit          = #{deposit,jdbcType=DECIMAL},
+            number           = #{number,jdbcType=VARCHAR},
+            is_settlement    = #{isSettlement,jdbcType=INTEGER},
+            medical_record_id= #{medicalRecordId,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
     <!--自定义-->
 
     <select id="selectByMeicalRecordId" resultMap="BaseResultMap" parameterType="java.lang.String">
@@ -249,11 +264,11 @@
     </select>
 
     <select id="selectNumCount" parameterType="java.lang.String" resultType="java.lang.Integer">
-     select
-      count(1)
-    from  his_toll_record
-    where number LIKE CONCAT(#{number},'%')
-  </select>
+        select
+            count(1)
+        from his_toll_record
+        where number LIKE CONCAT(#{number}, '%')
+    </select>
 
     <select id="getAllHisCharge" parameterType="core.entity.PageBean" resultMap="BaseResultMap">
         SELECT p.id as id, r.medical_record_id as medical_record_id , p.num as count, p.is_payed as is_pay,p.price as
@@ -347,204 +362,216 @@
     </resultMap>
     <select id="hospitalDetails" parameterType="java.lang.String" resultMap="HisTollRecordDetailsMapper">
         select
-               b.id as id,
-        b.patient_name as patient_name,
-        b.sex as sex,
-        f.name as departmentName,
-        g.user_name as doctorName,
-        h.name as nurseName,
-        b.rest_deposit as rest_deposit,
-        b.deposit_warning,
-        case ISNULL(j.money) when 1 then 0 when 0 then j.money end as money
+            b.id                                                       as id,
+            b.patient_name                                             as patient_name,
+            b.sex                                                      as sex,
+            f.name                                                     as departmentName,
+            g.user_name                                                as doctorName,
+            h.name                                                     as nurseName,
+            b.rest_deposit                                             as rest_deposit,
+            b.deposit_warning,
+            case ISNULL(j.money) when 1 then 0 when 0 then j.money end as money
         from
-        his_hospital_manage as b
-        left join  his_medical_record  as e on b.medical_number  = e.medical_record_id
-        left join `his-userinfo`.organization as f on b.department_id = f.id
-        left join  `his-userinfo`.user_info as g on g.id = b.doctor_id
-        left join  his_nurse as h on h.id = b.nurse_id
-        left join (
-        select
-        #{medicalRecordId,jdbcType=VARCHAR} as medical_record_id
-        ,
-        sum(a.money*a.num) as money
-        from(
-        select
-        a.name as name,
-        b.id as target_id,
-        b.price   as money,
-        b.is_payed as isPay,
-        b.num as num,
-        2 as type
-        from
-        his_project as a
-        left join
-        his_record_project as b on b.project_id = a.id
-        left join
-        his_medical_record as  c on b.record_id = c.id
-        where c.medical_record_id =#{medicalRecordId,jdbcType=VARCHAR}
-        UNION ALL
+            his_hospital_manage as b
+                left join his_medical_record as e on b.medical_number = e.medical_record_id
+                left join `his-userinfo`.organization as f on b.department_id = f.id
+                left join `his-userinfo`.user_info as g on g.id = b.doctor_id
+                left join his_nurse as h on h.id = b.nurse_id
+                left join (
+                select
+                    #{medicalRecordId,jdbcType=VARCHAR} as medical_record_id
+                        ,
+                    sum(a.money * a.num)                as money
+                from (
+                         select
+                             a.name     as name,
+                             b.id       as target_id,
+                             b.price    as money,
+                             b.is_payed as isPay,
+                             b.num      as num,
+                             2          as type
+                         from
+                             his_project as a
+                                 left join
+                                 his_record_project as b on b.project_id = a.id
+                                 left join
+                                 his_medical_record as c on b.record_id = c.id
+                         where c.medical_record_id = #{medicalRecordId,jdbcType=VARCHAR}
+                         UNION ALL
 
-        select
-        d.drugs_name as name,
-        e.id as target_id,
-        d.sale_price   as money,
-        e.is_pay as isPay,
-        e.count as num,
-        1 as type
-        from
-        his_pharmacy_detail as d
-        left join
-        his_medication_details as e on e. medication_id = d.id
-        left join
-        his_medical_record as  f on e.medical_record_id = f.id
-        where f.medical_record_id =#{medicalRecordId,jdbcType=VARCHAR}
+                         select
+                             d.drugs_name as name,
+                             e.id         as target_id,
+                             d.sale_price as money,
+                             e.is_pay     as isPay,
+                             e.count      as num,
+                             1            as type
+                         from
+                             his_pharmacy_detail as d
+                                 left join
+                                 his_medication_details as e on e.medication_id = d.id
+                                 left join
+                                 his_medical_record as f on e.medical_record_id = f.id
+                         where f.medical_record_id = #{medicalRecordId,jdbcType=VARCHAR}
 
-        UNION ALL
+                         UNION ALL
 
-        select
-            hrc.name as name,
-            hrc.id as target_id,
-            hrc.price   as money,
-            hrc.is_payed as isPay,
-            hrc.comsumables_num as num,
-            6 as type
-        from
-            his_record_consumables
-                hrc
-        where hrc.is_delete = 0 and  hrc.medical_record_number = #{medicalRecordId,jdbcType=VARCHAR}
+                         select
+                             hrc.name            as name,
+                             hrc.id              as target_id,
+                             hrc.price           as money,
+                             hrc.is_payed        as isPay,
+                             hrc.comsumables_num as num,
+                             6                   as type
+                         from
+                             his_record_consumables hrc
+                         where hrc.is_delete = 0
+                           and hrc.medical_record_number = #{medicalRecordId,jdbcType=VARCHAR}
 
 
-        UNION ALL
+                         UNION ALL
 
-        select
-        b.name as name,
-        a.id as target_id,
-        b.money as money ,
-        2 as isPay,
-        a.hospitalization_day - b.pay_days as num,
-        3 as type
-        from
-        his_hospital_manage as a
-        left join
-        (select a.id ,SUM(a.num) as pay_days,
-        a.money as money,
-        a.name
-        from
-        (
-        select
-        g.id ,
-        h.number as name,
-        h.price as money,
-        substring_index(substring_index(g.pay_hospitalization_day,',',b.help_topic_id+1),',',-1) as num ,
-        substring_index(substring_index(g.toll_details_id,',',b.help_topic_id+1),',',-1) as target_id
-        from
-        his_bed as h
-        left join his_hospital_manage as g on h.id = g.bed_id
-        left join his_medical_record as  f on g.medical_number = f.id
-        join
-        mysql.help_topic b
-        on b.help_topic_id &lt; (length(g.pay_hospitalization_day) - length(replace(g.pay_hospitalization_day,',',''))+1)
-        order by g.id
-        ) as a
-        GROUP BY a.id) as b on a.id = b.id
-        where a.medical_number =#{medicalRecordId,jdbcType=VARCHAR}
-        UNION ALL
-        select
-        k.name as name,
-        k.target_id as target_id,
-        k.money as money ,
-        k.isPay as isPay,
-        k.num as num,
-        k.type as type
+                         select
+                             b.name                             as name,
+                             a.id                               as target_id,
+                             b.money                            as money,
+                             2                                  as isPay,
+                             a.hospitalization_day - b.pay_days as num,
+                             3                                  as type
+                         from
+                             his_hospital_manage as a
+                                 left join
+                                 (select a.id,
+                                         SUM(a.num) as pay_days,
+                                         a.money    as money,
+                                         a.name
+                                  from
+                                      (
+                                          select
+                                              g.id,
+                                              h.number         as name,
+                                              h.price          as money,
+                                              substring_index(
+                                                      substring_index(g.pay_hospitalization_day, ',', b.help_topic_id + 1),
+                                                      ',', -1) as num,
+                                              substring_index(
+                                                      substring_index(g.toll_details_id, ',', b.help_topic_id + 1), ',',
+                                                      -1)      as target_id
+                                          from
+                                              his_bed as h
+                                                  left join his_hospital_manage as g on h.id = g.bed_id
+                                                  left join his_medical_record as f on g.medical_number = f.id
+                                                  join
+                                                  mysql.help_topic b
+                                                  on b.help_topic_id &lt; (length(g.pay_hospitalization_day) -
+                                                                           length(replace(g.pay_hospitalization_day, ',', '')) +
+                                                                           1)
+                                          order by g.id
+                                      ) as a
+                                  GROUP BY a.id) as b on a.id = b.id
+                         where a.medical_number = #{medicalRecordId,jdbcType=VARCHAR}
+                         UNION ALL
+                         select
+                             k.name      as name,
+                             k.target_id as target_id,
+                             k.money     as money,
+                             k.isPay     as isPay,
+                             k.num       as num,
+                             k.type      as type
 
-        from(
-        select
-        h.number as name,
-        h.price as money,
-        substring_index(substring_index(z.pay_hospitalization_day,',',b.help_topic_id+1),',',-1) as num ,
-        substring_index(substring_index(z.toll_details_id,',',b.help_topic_id+1),',',-1) as target_id,
-        1 as isPay,
-        3 as type
-        from
-        his_bed as h
-        left join his_hospital_manage as z on h.id = z.bed_id
-        left join his_medical_record as  f on z.medical_number = f.id
-        join
-        mysql.help_topic b
-        on b.help_topic_id &lt; (length(z.pay_hospitalization_day) - length(replace(z.pay_hospitalization_day,',',''))+1)
-        order by z.id  ) as k
-        ) a
-        where a.num != 0
-        and a.isPay = 2
-        ) as j on j.medical_record_id = #{medicalRecordId,jdbcType=VARCHAR}
-        WHERE b.medical_number =#{medicalRecordId,jdbcType=VARCHAR}
+                         from (
+                                  select
+                                      h.number            as name,
+                                      h.price             as money,
+                                      substring_index(
+                                              substring_index(z.pay_hospitalization_day, ',', b.help_topic_id + 1), ',',
+                                              -1)         as num,
+                                      substring_index(substring_index(z.toll_details_id, ',', b.help_topic_id + 1), ',',
+                                                      -1) as target_id,
+                                      1                   as isPay,
+                                      3                   as type
+                                  from
+                                      his_bed as h
+                                          left join his_hospital_manage as z on h.id = z.bed_id
+                                          left join his_medical_record as f on z.medical_number = f.id
+                                          join
+                                          mysql.help_topic b
+                                          on b.help_topic_id &lt; (length(z.pay_hospitalization_day) -
+                                                                   length(replace(z.pay_hospitalization_day, ',', '')) +
+                                                                   1)
+                                  order by z.id) as k
+                     ) a
+                where a.num != 0
+                    and a.isPay = 2
+            ) as j on j.medical_record_id = #{medicalRecordId,jdbcType=VARCHAR}
+        WHERE b.medical_number = #{medicalRecordId,jdbcType=VARCHAR}
     </select>
     <!--查询已经挂号的数量-->
     <select id="selectNumbCount" resultType="int" parameterType="java.lang.String">
-    select
-      count(*)
-    from his_toll_record
-    where his_toll_record.number LIKE CONCAT('%',#{number},'%')
-  </select>
+        select
+            count(*)
+        from his_toll_record
+        where his_toll_record.number LIKE CONCAT('%', #{number}, '%')
+    </select>
 
     <!--门诊费用信息查询-->
     <select id="outpatientDetails" parameterType="java.lang.String" resultMap="HisTollRecordDetailsMapper">
         select
-            b.id as id ,
-            c.name as patient_name,
-            c.sex as sex,
-            e.name as departmentName,
+            b.id        as id,
+            c.name      as patient_name,
+            c.sex       as sex,
+            e.name      as departmentName,
             f.user_name as doctorName,
-            g.name as nurseName,
-            j.money as money
+            g.name      as nurseName,
+            j.money     as money
         from
             his_medical_record as b
-                left join  his_patient_info  as c on b.patient_id  = c.id
+                left join his_patient_info as c on b.patient_id = c.id
                 left join his_registered as d on b.registered_id = d.id
                 left join `his-userinfo`.organization as e on d.department_id = e.id
-                left join  `his-userinfo`.user_info as f on f.id = b.doctor_id
-                left join  his_nurse as g on g.id = b.nurse_id
+                left join `his-userinfo`.user_info as f on f.id = b.doctor_id
+                left join his_nurse as g on g.id = b.nurse_id
                 left join (
                 select
-                    #{medicalRecordId,jdbcType=VARCHAR} as medical_record_id ,
-                    sum(a.money) as money
-                from(
-                        select
-                            c.medical_record_id ,
-                            b.name as name,
-                            a.id as target_id,
-                            a.price   as price,
-                            a.is_payed as isPay,
-                            a.num as num ,
-                            a.price * a.num as money,
-                            2 as type
-                        from
-                            his_record_project as a
-                                left join
-                                his_project as b on a.project_id = b.id
-                                left join
-                                his_medical_record as  c on a.record_id = c.id
-                        where  c.medical_record_id = #{medicalRecordId,jdbcType=VARCHAR}
-                        UNION ALL
-                        select
-                            f.medical_record_id,
-                            d.drugs_name as name,
-                            d.id as target_id,
-                            e.sale_price  as price,
-                            d.is_pay as isPay,
-                            d.count as num,
-                            e.sale_price * d.count as money,
-                            1 as type
-                        from
-                            his_medication_details as d
-                                left join
-                                his_pharmacy_detail as e on d. medication_id = e.id
-                                left join
-                                his_medical_record as  f on d.medical_record_id = f.id
-                        where  f.medical_record_id = #{medicalRecordId,jdbcType=VARCHAR}) a
+                    #{medicalRecordId,jdbcType=VARCHAR} as medical_record_id,
+                    sum(a.money)                        as money
+                from (
+                         select
+                             c.medical_record_id,
+                             b.name          as name,
+                             a.id            as target_id,
+                             a.price         as price,
+                             a.is_payed      as isPay,
+                             a.num           as num,
+                             a.price * a.num as money,
+                             2               as type
+                         from
+                             his_record_project as a
+                                 left join
+                                 his_project as b on a.project_id = b.id
+                                 left join
+                                 his_medical_record as c on a.record_id = c.id
+                         where c.medical_record_id = #{medicalRecordId,jdbcType=VARCHAR}
+                         UNION ALL
+                         select
+                             f.medical_record_id,
+                             d.drugs_name           as name,
+                             d.id                   as target_id,
+                             e.sale_price           as price,
+                             d.is_pay               as isPay,
+                             d.count                as num,
+                             e.sale_price * d.count as money,
+                             1                      as type
+                         from
+                             his_medication_details as d
+                                 left join
+                                 his_pharmacy_detail as e on d.medication_id = e.id
+                                 left join
+                                 his_medical_record as f on d.medical_record_id = f.id
+                         where f.medical_record_id = #{medicalRecordId,jdbcType=VARCHAR}) a
                 where a.isPay = 2
             ) as j on j.medical_record_id = #{medicalRecordId,jdbcType=VARCHAR}
-        WHERE b.medical_record_id =#{medicalRecordId,jdbcType=VARCHAR}
+        WHERE b.medical_record_id = #{medicalRecordId,jdbcType=VARCHAR}
     </select>
     <select id="getAllHisTollRecord" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
         select distinct t.id as id,t.number as number ,t.medical_record_id as medical_record_id, t.money as money,
@@ -597,19 +624,33 @@
         </if>
     </select>
     <select id="getHisTollRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
-       select  t.id ,t.medical_record_id as medical_record_id, t.money as money,t.is_settlement as is_settlement, t.actual_charge AS actual_charge,
-t.create_date as create_date ,t.attench_type as attench_type,t.deposit as deposit,t.recover_the_fee as recover_the_fee,
-t.number as number,t.type as type ,i.name as patient_name,n.user_name as nurse_name , c.user_name as doctor_name,
-m.current_condition as current_condition , m.past_condition as past_condition, o.user_name as user_name,
-i.idcard as idcard,
-i.phonenumber as phonenumber ,m.chief_complaint as chief_complaint
-from his_toll_record as t
-LEFT JOIN his_medical_record as m on t.medical_record_id = m.medical_record_id
-LEFT JOIN his_patient_info as i on i.id = m.patient_id
-LEFT JOIN `his-userinfo`.user_info  as n ON n.id = m.nurse_id
-LEFT JOIN `his-userinfo`.user_info as c on c.id =m.doctor_id
-LEFT JOIN `his-userinfo`.user_info as o on o.id = t.create_user_id
-where  t.number = #{number}
+        select t.id,
+               t.medical_record_id as medical_record_id,
+               t.money             as money,
+               t.is_settlement     as is_settlement,
+               t.actual_charge     AS actual_charge,
+               t.create_date       as create_date,
+               t.attench_type      as attench_type,
+               t.deposit           as deposit,
+               t.recover_the_fee   as recover_the_fee,
+               t.number            as number,
+               t.type              as type,
+               i.name              as patient_name,
+               n.user_name         as nurse_name,
+               c.user_name         as doctor_name,
+               m.current_condition as current_condition,
+               m.past_condition    as past_condition,
+               o.user_name         as user_name,
+               i.idcard            as idcard,
+               i.phonenumber       as phonenumber,
+               m.chief_complaint   as chief_complaint
+        from his_toll_record as t
+                 LEFT JOIN his_medical_record as m on t.medical_record_id = m.medical_record_id
+                 LEFT JOIN his_patient_info as i on i.id = m.patient_id
+                 LEFT JOIN `his-userinfo`.user_info as n ON n.id = m.nurse_id
+                 LEFT JOIN `his-userinfo`.user_info as c on c.id = m.doctor_id
+                 LEFT JOIN `his-userinfo`.user_info as o on o.id = t.create_user_id
+        where t.number = #{number}
     </select>
     <select id="getPrice" resultMap="BaseResultMap" parameterType="com.ahsj.hiscore.entity.HisTollRecord">
         select
@@ -656,8 +697,8 @@ where  t.number = #{number}
 
     <select id="selectByNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
         select his_toll_record.*
-from his_toll_record
-where number = #{number,jdbcType=VARCHAR}
+        from his_toll_record
+        where number = #{number,jdbcType=VARCHAR}
     </select>
     <select id="selectByTargetId" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
@@ -670,31 +711,35 @@ where number = #{number,jdbcType=VARCHAR}
     </select>
 
     <select id="selectTollRecordDataCount" resultMap="BaseResultMap" parameterType="java.util.Date">
-	SELECT
-    his_toll_record.*
-	FROM his_toll_record
-	WHERE
-        is_settlement = 1
-            and create_date &gt;= #{createDate,jdbcType=TIMESTAMP}
-            and create_date &lt; #{endDate,jdbcType=TIMESTAMP}
-            order by create_date asc
+        SELECT
+            his_toll_record.*
+        FROM his_toll_record
+        WHERE
+            is_settlement = 1
+          and create_date &gt;= #{createDate,jdbcType=TIMESTAMP}
+          and create_date &lt; #{endDate,jdbcType=TIMESTAMP}
+        order by create_date asc
     </select>
     <select id="selectByNumbers" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
-r.create_date as create_date , i.user_name as user_name,abs(r.actual_charge- r.recover_the_fee) as money, r.recover_the_fee
+            r.create_date                            as create_date,
+            i.user_name                              as user_name,
+            abs(r.actual_charge - r.recover_the_fee) as money,
+            r.recover_the_fee
         from his_toll_record as r
-			LEFT JOIN `his-userinfo`.user_info as i on i.id
-= r.create_user_id
-			where
-        number = #{number}
+                 LEFT JOIN `his-userinfo`.user_info as i on i.id
+                = r.create_user_id
+        where
+            number = #{number}
     </select>
 
     <select id="ListByNumber" resultMap="BaseResultMap" parameterType="java.lang.String">
-select r.* ,i.`name` as patient_name ,i.idcard,e.user_name as name  ,c.balance from  his_toll_record as r
-LEFT JOIN his_visit_card as c on c.number = r.medical_record_id
-LEFT JOIN his_patient_info as i  on i.id = c.patient_id
-LEFT JOIN `his-userinfo`.user_info as e on e.id  = r.create_user_id
- where r.number  = #{number}
+        select r.*,i.`name` as patient_name,i.idcard,e.user_name as name,c.balance
+        from his_toll_record as r
+                 LEFT JOIN his_visit_card as c on c.number = r.medical_record_id
+                 LEFT JOIN his_patient_info as i on i.id = c.patient_id
+                 LEFT JOIN `his-userinfo`.user_info as e on e.id = r.create_user_id
+        where r.number = #{number}
     </select>
 
     <select id="getVisitCard" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
@@ -771,12 +816,12 @@ LEFT JOIN `his-userinfo`.user_info as e on e.id  = r.create_user_id
     </select>
 
     <select id="selectVisitCard" resultMap="BaseResultMap" parameterType="java.lang.String">
-  select  t.* ,i.`name` as patient_name,i.idcard ,i.phonenumber ,o.user_name
-from  his_toll_record as t
-	LEFT JOIN his_visit_card as c on c.number = t.medical_record_id
-	LEFT JOIN his_patient_info as i on i.id = c.patient_id
-	LEFT JOIN `his-userinfo`.user_info as o on o.id = t.create_user_id
-     where  t.number = #{number}
+        select t.*,i.`name` as patient_name,i.idcard,i.phonenumber,o.user_name
+        from his_toll_record as t
+                 LEFT JOIN his_visit_card as c on c.number = t.medical_record_id
+                 LEFT JOIN his_patient_info as i on i.id = c.patient_id
+                 LEFT JOIN `his-userinfo`.user_info as o on o.id = t.create_user_id
+        where t.number = #{number}
     </select>
 
     <select id="getAllDrug" resultMap="BaseResultMap" parameterType="core.entity.PageBean">
@@ -835,7 +880,12 @@ from  his_toll_record as t
 
     <select id="selectByMedicalNumberForCommonDetails" parameterType="java.lang.String"
             resultMap="HisTollRecordDetailsMapper">
-        select b.name as patient_name,b.sex as sex,e.`name` as departmentName,d.user_name as doctorName,f.rest_deposit as rest_deposit,a.id as id
+        select b.name         as patient_name,
+               b.sex          as sex,
+               e.`name`       as departmentName,
+               d.user_name    as doctorName,
+               f.rest_deposit as rest_deposit,
+               a.id           as id
         from his_medical_record as a
                  left join his_patient_info as b on a.patient_id = b.id
                  left join his_registered as c on c.id = a.registered_id
@@ -1070,35 +1120,84 @@ from  his_toll_record as t
     </select>
 
     <select id="selectAllInformationByHRNumber" parameterType="java.lang.String" resultMap="HisTollRecordDetailsMapper">
-        select a.name,a.num,a.price,a.total,a.create_date,a.patient_name,a.is_back as isBack,a.doctorName,
-        case when a.is_back = 1 then '已退回（already back）' else '' end as isBackName,a.alreadyBack
-from(
-select c.drugs_name as name,c.count as num,(c.total_price/c.count) as price,c.total_price as total,c.create_date as create_date,a.patient_name as patient_name,c.is_back as is_back,e.return_count as alreadyBack
-,f.user_name as doctorName
-from his_hospital_manage as a
-left join his_medical_record as b on a.medical_number = b.medical_record_id
-left join his_medication_details as c on b.id = c.medical_record_id
-left join his_application_for_drug_return_details as e on c.id = e.medication_detail_id
-left join `his-userinfo`.user_info as f on a.doctor_id = f.id
-where a.number = #{hrNumber}
+        select a.name,
+               a.num,
+               a.price,
+               a.total,
+               a.create_date,
+               a.patient_name,
+               a.is_back                                                    as isBack,
+               a.doctorName,
+               case when a.is_back = 1 then '已退回（already back）' else '' end as isBackName,
+               a.alreadyBack
+        from (
+                 select c.drugs_name              as name,
+                        c.count                   as num,
+                        (c.total_price / c.count) as price,
+                        c.total_price             as total,
+                        c.create_date             as create_date,
+                        a.patient_name            as patient_name,
+                        c.is_back                 as is_back,
+                        e.return_count            as alreadyBack
+                         ,
+                        f.user_name               as doctorName
+                 from his_hospital_manage as a
+                          left join his_medical_record as b on a.medical_number = b.medical_record_id
+                          left join his_medication_details as c on b.id = c.medical_record_id
+                          left join his_application_for_drug_return_details as e on c.id = e.medication_detail_id
+                          left join `his-userinfo`.user_info as f on a.doctor_id = f.id
+                 where a.number = #{hrNumber}
 
-UNION ALL
-select  c.name as name,c.num as num,c.price as price,(c.num*c.price) as total,c.create_date as create_date,a.patient_name as patient_name,c.is_back as is_back,d.refund_num as alreadyBack,f.user_name as doctorName
-from his_hospital_manage as a
-left join his_medical_record as b on a.medical_number = b.medical_record_id
-left join his_record_project as c on b.id = c.record_id
-left join his_refund_project as d on c.id = d.record_project_id
-left join `his-userinfo`.user_info as f on a.doctor_id = f.id
-where a.number=#{hrNumber}
+                 UNION ALL
+                 select c.name            as name,
+                        c.num             as num,
+                        c.price           as price,
+                        (c.num * c.price) as total,
+                        c.create_date     as create_date,
+                        a.patient_name    as patient_name,
+                        c.is_back         as is_back,
+                        d.refund_num      as alreadyBack,
+                        f.user_name       as doctorName
+                 from his_hospital_manage as a
+                          left join his_medical_record as b on a.medical_number = b.medical_record_id
+                          left join his_record_project as c on b.id = c.record_id
+                          left join his_refund_project as d on c.id = d.record_project_id
+                          left join `his-userinfo`.user_info as f on a.doctor_id = f.id
+                 where a.number = #{hrNumber}
 
-UNION ALL
-select '住院费用' as name,a.hospitalization_day as num,b.price as price,(a.hospitalization_day*b.price)as total,a.create_date as create_date,a.patient_name as patient_name,2 as is_back,0 as alreadyBack,f.user_name as doctorName
-from his_hospital_manage as a
-left join his_bed as b on a.bed_id = b.id
-left join `his-userinfo`.user_info as f on a.doctor_id = f.id
-where a.number=#{hrNumber}
-) as a
-order by create_date,name
+                 UNION ALL
+                 select c.name            as name,
+                        c.comsumables_num             as num,
+                        c.price           as price,
+                        (c.comsumables_num * c.price) as total,
+                        c.create_date     as create_date,
+                        a.patient_name    as patient_name,
+                        c.is_back         as is_back,
+                        d.refund_num      as alreadyBack,
+                        f.user_name       as doctorName
+                 from his_hospital_manage as a
+                          left join his_medical_record as b on a.medical_number = b.medical_record_id
+                          left join his_record_consumables as c on a.medical_number = c.medical_record_number
+                          left join his_refund_consumables as d on d.record_consumables_code = c.record_consumables_code
+                          left join `his-userinfo`.user_info as f on a.doctor_id = f.id
+                 where a.number = #{hrNumber} and c.is_delete= 0
+
+                 UNION ALL
+                 select '住院费用'                            as name,
+                        a.hospitalization_day             as num,
+                        b.price                           as price,
+                        (a.hospitalization_day * b.price) as total,
+                        a.create_date                     as create_date,
+                        a.patient_name                    as patient_name,
+                        2                                 as is_back,
+                        0                                 as alreadyBack,
+                        f.user_name                       as doctorName
+                 from his_hospital_manage as a
+                          left join his_bed as b on a.bed_id = b.id
+                          left join `his-userinfo`.user_info as f on a.doctor_id = f.id
+                 where a.number = #{hrNumber}
+             ) as a
+        order by create_date,name
 
     </select>
 
@@ -1112,12 +1211,16 @@ order by create_date,name
     <select id="selectByHRNumberForAllDeposit" parameterType="java.lang.String" resultMap="BaseResultMap">
         select b.*
         from his_hospital_manage as a
-        left join his_toll_record as b on a.medical_number = b.medical_record_id
-        where a.number =#{number,jdbcType=VARCHAR} and b.actual_charge > 0 and b.attench_type = 2
+                 left join his_toll_record as b on a.medical_number = b.medical_record_id
+        where a.number = #{number,jdbcType=VARCHAR}
+          and b.actual_charge > 0
+          and b.attench_type = 2
     </select>
 
     <select id="queryByNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select <include refid="Base_Column_List"/> from his_toll_record
+        select
+        <include refid="Base_Column_List"/>
+        from his_toll_record
         where number =#{number,jdbcType=VARCHAR} and attench_type = 10
     </select>
 </mapper>

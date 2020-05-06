@@ -85,7 +85,7 @@ public class HisRefundConsumablesController extends BaseController {
 
     /**
      * @return org.springframework.web.servlet.ModelAndView
-     * @Description 进入退项目添加页面
+     * @Description 进入退耗材添加页面
      * @MethodName addIndex
      * @Params [token]
      * @Author XJP
@@ -196,7 +196,7 @@ public class HisRefundConsumablesController extends BaseController {
 
     /**
      * @return core.entity.PageBean<com.ahsj.hiscore.entity.HisRecordProject>
-     * @Description 根据就诊编号 交易流水号 住院编号 查看所就诊项目
+     * @Description 根据就诊编号 交易流水号 住院编号 查看耗材
      * @MethodName queryList
      * @Params [hisRecordProject]
      * @Author XJP
@@ -276,7 +276,7 @@ public class HisRefundConsumablesController extends BaseController {
 
 
     /**
-     *@Description 查询耗材退项目的列表记录明细
+     *@Description 查询耗材退耗材的列表记录明细
      *@MethodName projectInfo
      *@Params [hisRecordProject, token]
      *@return core.entity.PageBean<com.ahsj.hiscore.entity.HisRecordProject>

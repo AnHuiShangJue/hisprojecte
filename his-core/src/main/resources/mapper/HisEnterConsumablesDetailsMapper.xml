@@ -331,15 +331,15 @@
     </select>
 
     <!--批量插入list-->
-    <insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List" keyProperty="id">
-        insert into his_enter_consumables_details (id, consumables_code, name,
+    <insert id="insertBatch" parameterType="java.util.List" >
+        insert into his_enter_consumables_details (consumables_code, name,
         type, spec, price, selling_price , enter_cdoe,
         enter_count, surplus, validity_period,
         create_date, update_date, create_user_id,
         update_user_id,is_delete)
         values
         <foreach collection="list" item="item" index="index" separator=",">
-            (#{item.id,jdbcType=BIGINT}, #{item.consumablesCode,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR},
+            ( #{item.consumablesCode,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR},
             #{item.type,jdbcType=INTEGER}, #{item.spec,jdbcType=VARCHAR},
             #{item.price,jdbcType=DOUBLE},#{item.sellingPrice,jdbcType=DOUBLE}, #{item.enterCdoe,jdbcType=VARCHAR},
             #{item.enterCount,jdbcType=INTEGER}, #{item.surplus,jdbcType=INTEGER},

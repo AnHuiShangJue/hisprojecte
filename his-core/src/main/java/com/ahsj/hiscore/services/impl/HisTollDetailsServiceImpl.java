@@ -423,9 +423,9 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
                 if(EmptyUtil.Companion.isNullOrEmpty(hisTollDetails)){
                     continue;
                 }
-                if(hisTollDetails.getType() == 1 || hisTollDetails.getType() == 2 || hisTollDetails.getType() == 3){
+                if(hisTollDetails.getType() == 1 || hisTollDetails.getType() == 2 || hisTollDetails.getType() == 3 || hisTollDetails.getType() == 6){
                     toll = toll.add(hisTollDetails.getMoney());
-                }else if(hisTollDetails.getType() == 4 || hisTollDetails.getType() == 5 ){
+                }else if(hisTollDetails.getType() == 4 || hisTollDetails.getType() == 5 || hisTollDetails.getType() == 7){
                     toll = toll.subtract(hisTollDetails.getMoney());
                 }
             }

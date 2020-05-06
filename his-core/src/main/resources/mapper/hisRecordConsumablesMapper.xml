@@ -414,6 +414,13 @@
         from his_record_consumables where is_delete = 0 and is_back = 2 and is_payed = 1 and medical_record_number
         =#{medicalRecordNumber,jdbcType=VARCHAR} and consumables_code =  #{consumablesCode,jdbcType=VARCHAR}
     </select>
+    <select id="queryByRecordConsumablesNopayList" parameterType="java.lang.String"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from his_record_consumables where is_delete = 0 and is_back = 2 and is_payed = 2 and medical_record_number
+        =#{medicalRecordNumber,jdbcType=VARCHAR}
+    </select>
 
 
 

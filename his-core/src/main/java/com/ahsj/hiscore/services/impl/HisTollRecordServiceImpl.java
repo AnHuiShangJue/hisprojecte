@@ -243,6 +243,18 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         HandleHospitalManagerData(hisHospitalManage, hisTollDetails);
         hisHospitalManageMapper.updateByPrimaryKey(hisHospitalManage);
 
+        //耗材收费记录
+        List<HisRecordConsumables> hisRecordConsumablesList = hisRecordConsumablesMapper.queryByRecordConsumablesNopayList(hisTollRecord.getMedicalRecordId());
+        if (!EmptyUtil.Companion.isNullOrEmpty(hisRecordConsumablesList)){
+            hisRecordConsumablesMapper.updateByIsDelete(hisRecordConsumablesList);
+            for (HisRecordConsumables recordConsumables : hisRecordConsumablesList) {
+                recordConsumables.setId(null);
+                recordConsumables.setIsPayed(Constants.BASE_ONE);
+            }
+            hisRecordConsumablesMapper.insertList(hisRecordConsumablesList);
+        }
+
+
         //修改用药明细付费状态
         List<HisMedicationDetails> hisMedicationDetails = new ArrayList<HisMedicationDetails>();
         HandleHisMedicationDetils(hisMedicationDetails, hisTollDetails);
@@ -663,15 +675,19 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
         HisRecordConsumables hisRecordConsumables = new HisRecordConsumables();
         hisRecordConsumables.setMedicalRecordNumber(hisTollRecord.getMedicalRecordId());
         hisRecordConsumables.setIsPayed(Constants.BASE_TWO);
+
         List<HisRecordConsumables> hisRecordConsumablesList = hisRecordConsumablesMapper.selectByHisRecordConsumables(hisRecordConsumables);
-        //伪删
-        hisRecordConsumablesMapper.updateByIsDelete(hisRecordConsumablesList);
-        for (HisRecordConsumables recordConsumables : hisRecordConsumablesList) {
-            recordConsumables.setIsPayed(Constants.BASE_ONE);
-            recordConsumables.setIsDelete(Constants.HIS_DELETE_FALSE);
-            recordConsumables.setId(null);
+        if (!EmptyUtil.Companion.isNullOrEmpty(hisRecordConsumablesList)){
+
+            //伪删
+            hisRecordConsumablesMapper.updateByIsDelete(hisRecordConsumablesList);
+            for (HisRecordConsumables recordConsumables : hisRecordConsumablesList) {
+                recordConsumables.setIsPayed(Constants.BASE_ONE);
+                recordConsumables.setIsDelete(Constants.HIS_DELETE_FALSE);
+                recordConsumables.setId(null);
+            }
+            hisRecordConsumablesMapper.insertList(hisRecordConsumablesList);
         }
-        hisRecordConsumablesMapper.insertList(hisRecordConsumablesList);
 
         //修改诊疗项目付费状态
         List<HisRecordProject> hisRecordProjects = new ArrayList<HisRecordProject>();

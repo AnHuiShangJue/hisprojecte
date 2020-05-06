@@ -139,24 +139,51 @@
                 <td style="width: 11%"><label>中柬第一医院</label></td>
             </tr>
             <tr>
-                <td><p style="margin: 0;padding: 0;">住院号</p>
-                    <p style="margin: 0;padding: 0;">hospital number</p></td>
-                <td><label id="hospitalNumber"></label></td>
-                <td><p style="margin: 0;padding: 0;">身份证</p>
-                    <p style="margin: 0;padding: 0;">id card</p></td>
-                <td colspan="2"><label id="idcard"></label></td>
-                <td colspan="2"><p style="margin: 0;padding: 0;">本次医疗费用累计</p>
-                    <p style="margin: 0;padding: 0;">medical expense accumulates</p></td>
-                <td><label id="money"></label></td>
-                <td><p style="margin: 0;padding: 0;">入院/就诊日期</p>
-                    <p style="margin: 0;padding: 0;">date of admission/visit</p></td>
-                <td><label id="update_date"></label></td>
+                <td>
+                    <p style="margin: 0;padding: 0;">住院号</p>
+                    <p style="margin: 0;padding: 0;">hospital number</p>
+                </td>
+                <td>
+                    <label id="hospitalNumber"></label>
+                </td>
+                <td>
+                    <p style="margin: 0;padding: 0;">身份证</p>
+                    <p style="margin: 0;padding: 0;">id card</p>
+                </td>
+                <td colspan="2">
+                    <label id="idcard"></label>
+                </td>
+                <td colspan="2">
+                    <p style="margin: 0;padding: 0;">本次医疗费用累计</p>
+                    <p style="margin: 0;padding: 0;">medical expense accumulates</p>
+                </td>
+                <td>
+                    <label id="money"></label>
+                </td>
+                <td>
+                    <p style="margin: 0;padding: 0;">入院/就诊日期</p>
+                    <p style="margin: 0;padding: 0;">date of admission/visit</p>
+                </td>
+                <td>
+                    <label id="update_date"></label>
+                </td>
             </tr>
             <tr>
 
-                <td><p style="margin: 0;padding: 0;">药品费</p>
-                    <p style="margin: 0;padding: 0;">drug charge</p></td>
-                <td><label id="drugFee"></label></td>
+                <td>
+                    <p style="margin: 0;padding: 0;">药品费</p>
+                    <p style="margin: 0;padding: 0;">drug charge</p>
+                </td>
+                <td>
+                    <label id="drugFee"></label>
+                </td>
+                <td>
+                    <p style="margin: 0;padding: 0;">耗材费</p>
+                    <p style="margin: 0;padding: 0;">drug charge</p>
+                </td>
+                <td>
+                    <label id="consumables"></label>
+                </td>
                 <td><p style="margin: 0;padding: 0;">护理费</p>
                     <p style="margin: 0;padding: 0;">nurse charge</p></td>
                 <td><label id="nursingFee"></label></td>
@@ -246,10 +273,10 @@ Scripts
         var now = year + "-" + month + "-" + date + " " + h + ":" + m + ":" + s;
         //  console.log(now);
         $("#settlementDate").html = now;
-        printShow3();
+       printShow3();
         printShow();
-        printShow1();
-        printShow2();
+       printShow1();
+      printShow2();
 
 
     });
@@ -369,7 +396,7 @@ Scripts
             CTX + "/api/hisTollDetails/printShowLeave/index1.ahsj",
             {"number": number},
             function (data) {
-                console.log('data is',data)
+                console.log('data is', data)
                 $("#toll").html(data);
                 // $("#toll1").html(jsons.toll);
             },

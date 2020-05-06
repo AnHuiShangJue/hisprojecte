@@ -133,4 +133,15 @@ public interface HisRecordConsumablesMapper extends BaseMapper<HisRecordConsumab
      * @Time 12:53
      **/
     List<HisRecordConsumables> queryByNotBack(HisRecordConsumables hisRecordConsumables);
+
+    /**
+     *@Description
+     *@MethodName queryByRecordConsumablesNopayList
+     *@Params [medicalRecordId]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisRecordConsumables>
+     *@Author XJP
+     *@Date 2020/5/6
+     *@Time 17:28
+    **/
+    List<HisRecordConsumables>  queryByRecordConsumablesNopayList(String medicalRecordNumber);
 }

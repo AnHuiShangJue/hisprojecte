@@ -151,4 +151,24 @@ public class HisConsumablesBuyplan extends BaseEntity {
     public void setCompletionName(String completionName) {
         this.completionName = completionName;
     }
+
+    @Override
+    public String toString() {
+        return "HisConsumablesBuyplan{" +
+                "id=" + id +
+                ", buyplanCode='" + buyplanCode + '\'' +
+                ", personInCharge='" + personInCharge + '\'' +
+                ", expectedTime=" + expectedTime +
+                ", lowexpectedTime=" + lowexpectedTime +
+                ", highexpectedTime=" + highexpectedTime +
+                ", budget=" + budget +
+                ", lowBudget=" + lowBudget +
+                ", highBudget=" + highBudget +
+                ", completion=" + completion +
+                ", completionName='" + completionName + '\'' +
+                ", completionTime=" + completionTime +
+                ", actualExpenditure=" + actualExpenditure +
+                ", isDelete=" + isDelete +
+                '}';
+    }
 }

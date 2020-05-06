@@ -121,7 +121,7 @@ public class HisConsumablesController extends BaseController {
     }
 
     /**
-     *@Description list查询不含不可用状态的耗材
+     *@Description 查询不含不可用状态的耗材
      *@Params
      *@return
      *@Author jin

@@ -198,26 +198,26 @@ public class HisRefundConsumables  extends BaseEntity implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", recordNumber=").append(recordNumber);
-        sb.append(", voucher=").append(voucher);
-        sb.append(", patientName=").append(patientName);
-        sb.append(", refundNum=").append(refundNum);
-        sb.append(", recordConsumablesCode=").append(recordConsumablesCode);
-        sb.append(", createDate=").append(createDate);
-        sb.append(", updateDate=").append(updateDate);
-        sb.append(", applicationTime=").append(applicationTime);
-        sb.append(", isBack=").append(isBack);
-        sb.append(", remarks=").append(remarks);
-        sb.append(", isReview=").append(isReview);
-        sb.append(", tollRecordNumber=").append(tollRecordNumber);
-        sb.append(", isDelete=").append(isDelete);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "HisRefundConsumables{" +
+                "id=" + id +
+                ", recordNumber='" + recordNumber + '\'' +
+                ", voucher='" + voucher + '\'' +
+                ", patientName='" + patientName + '\'' +
+                ", refundNum=" + refundNum +
+                ", refundSumProce=" + refundSumProce +
+                ", recordConsumablesCode='" + recordConsumablesCode + '\'' +
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
+                ", applicationTime=" + applicationTime +
+                ", isBack=" + isBack +
+                ", isBackName='" + isBackName + '\'' +
+                ", remarks='" + remarks + '\'' +
+                ", isReview=" + isReview +
+                ", isReviewName='" + isReviewName + '\'' +
+                ", tollRecordNumber='" + tollRecordNumber + '\'' +
+                ", isDelete=" + isDelete +
+                ", consumablesDetailsCreateDate=" + consumablesDetailsCreateDate +
+                ", consumablesDetailsCreateDates=" + consumablesDetailsCreateDates +
+                '}';
     }
 }

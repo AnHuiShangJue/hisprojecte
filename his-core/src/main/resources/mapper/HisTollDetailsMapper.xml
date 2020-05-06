@@ -444,6 +444,25 @@
 
         UNION ALL
 
+
+        select
+        hrc.name as name,
+        hrc.id as target_id,
+        hrc.price as money,
+        hrc.is_payed as isPay,
+        hrc.comsumables_num as num,
+        6 as type,
+        hrc.create_date as create_date,
+        hrc.is_back as is_back,
+        hr.refund_num as count
+        from
+        his_record_consumables hrc left join his_refund_consumables  hr  on hrc.record_consumables_code = hr.record_consumables_code
+        where hrc.is_delete = 0  and hrc.medical_record_number = #{parameter.MedicalRecordId,jdbcType=VARCHAR}
+
+
+   UNION ALL
+
+
         select
         b.name as name,
         a.id as target_id,
