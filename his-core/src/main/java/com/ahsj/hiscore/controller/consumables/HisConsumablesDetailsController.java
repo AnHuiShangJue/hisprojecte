@@ -192,7 +192,6 @@ public class HisConsumablesDetailsController extends BaseController {
     @PostMapping("/hisConsumablesDetails/getHisConsumablesDetailsInfo.ahsj")
     @ResponseBody
     public PageBean<HisConsumablesDetails> getHisConsumablesDetailsInfo(HisConsumablesDetails hisConsumablesDetails) {
-        System.out.println(hisConsumablesDetails.toString());
         PageBean<HisConsumablesDetails> pageBean = new PageBean<HisConsumablesDetails>();
         pageBean.setParameter(hisConsumablesDetails);
         pageBean = hisConsumablesDetailsService.getHisConsumablesDetailsInfo(pageBean);

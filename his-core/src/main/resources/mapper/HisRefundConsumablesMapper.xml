@@ -245,17 +245,17 @@
         SELECT
         <include refid="Base_Column_List"/>
 
-        from his_refund_consumables where is_delete = 0 and is_back = 2 /*and is_review != 1 */group by voucher
+        from his_refund_consumables where is_delete = 0 and is_back = 2 /*and is_review != 1 */
 
 
         <if test="parameter.recordNumber != null and parameter.recordNumber != ''">
-            and record_number = #{parameter.recordNumber,jdbcType=VARCHAR}
+            and record_number like concat('%' #{parameter.recordNumber,jdbcType=VARCHAR},'%')
         </if>
         <if test="parameter.voucher != null and parameter.voucher != ''">
-            and voucher = #{parameter.voucher,jdbcType=INTEGER}
+            and voucher like concat('%' #{parameter.voucher,jdbcType=VARCHAR},'%')
         </if>
         <if test="parameter.patientName != null and parameter.patientName != ''">
-            and patient_name = #{parameter.patientName,jdbcType=INTEGER}
+            and patient_name like concat('%' #{parameter.patientName,jdbcType=VARCHAR},'%')
         </if>
         <if test="parameter.consumablesDetailsCreateDate != null">
             and application_time &lt;= #{parameter.consumablesDetailsCreateDate,jdbcType=TIMESTAMP}
@@ -263,6 +263,9 @@
         <if test="parameter.consumablesDetailsCreateDates != null">
             and application_time &gt;= #{parameter.consumablesDetailsCreateDates,jdbcType=TIMESTAMP}
         </if>
+
+        group by voucher
+
         <if test="parameter.orders != null and parameter.orders != ''">
             order by ${parameter.orders}
         </if>
@@ -296,7 +299,7 @@
         select
         <include refid="Base_Column_List"/>
         from his_refund_consumables where is_delete = 0 and is_back = 2 and is_review = 3
-        and voucher = #{voucher,jdbcType=INTEGER}
+        and voucher = #{voucher,jdbcType=VARCHAR}
     </select>
 
     <select id="queryHisHisRefundConsumablesVoucherList" parameterType="com.ahsj.hiscore.entity.HisRefundConsumables"
@@ -304,7 +307,7 @@
         select
         <include refid="Base_Column_List"/>
         from his_refund_consumables where is_delete = 0 and is_back = 2
-        and voucher = #{voucher,jdbcType=INTEGER}
+        and voucher = #{voucher,jdbcType=VARCHAR}
     </select>
     <select id="queryByNotBack" parameterType="java.lang.String"
             resultMap="BaseResultMap">
@@ -321,6 +324,24 @@
         where 1=1
         <foreach collection="list" open="or" separator="or" index="index" item="item">
             id = #{item.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+
+    <update id="updateByVoucherIsDelete" parameterType="com.ahsj.hiscore.entity.HisRefundConsumables">
+        update his_refund_consumables
+        set is_delete = 1
+        where
+            voucher = #{voucher,jdbcType=VARCHAR}
+    </update>
+
+
+
+
+
+    <update id="isDelete" parameterType="java.util.List">
+        update  his_refund_consumables    set is_delete = 1  where voucher in
+        <foreach collection="vouchers" item="voucher" separator="," open="(" close=")">
+            #{voucher}
         </foreach>
     </update>
 

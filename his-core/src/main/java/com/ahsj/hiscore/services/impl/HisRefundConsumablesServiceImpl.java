@@ -156,7 +156,8 @@ public class HisRefundConsumablesServiceImpl implements HisRefundConsumablesServ
             List<HisRefundConsumables> hisRefundConsumablesList = hisRefundConsumablesMapper.queryHisHisRefundConsumablesVoucher(hisRefundConsumables);
 
             //伪删
-            hisRefundConsumablesMapper.updateByIsDelete(hisRefundConsumablesList);
+//            hisRefundConsumablesMapper.updateByIsDelete(hisRefundConsumablesList);
+            hisRefundConsumablesMapper.updateByVoucherIsDelete(hisRefundConsumables);
             //新增
             for (HisRefundConsumables refundConsumables : hisRefundConsumablesList) {
                 refundConsumables.setIsReview(1);
@@ -184,7 +185,8 @@ public class HisRefundConsumablesServiceImpl implements HisRefundConsumablesServ
         } else {
             List<HisRefundConsumables> hisRefundConsumablesList = hisRefundConsumablesMapper.queryHisHisRefundConsumablesVoucher(hisRefundConsumables);
             //伪删
-            hisRefundConsumablesMapper.updateByIsDelete(hisRefundConsumablesList);
+            //            hisRefundConsumablesMapper.updateByIsDelete(hisRefundConsumablesList);
+            hisRefundConsumablesMapper.updateByVoucherIsDelete(hisRefundConsumables);
             //新增
             for (HisRefundConsumables refundConsumables : hisRefundConsumablesList) {
                 refundConsumables.setIsReview(2);
@@ -254,5 +256,25 @@ public class HisRefundConsumablesServiceImpl implements HisRefundConsumablesServ
     @Transactional(readOnly = false)
     public int insertList(List<HisRefundConsumables> consumablesList) throws Exception {
         return hisRefundConsumablesMapper.insertList(consumablesList);
+    }
+
+    /**
+     *@Description
+     *@MethodName delete
+     *@Params [hisRefundConsumables]
+     *@return core.message.Message
+     *@Author XJP
+     *@Date 2020/5/8
+     *@Time 10:59
+    **/
+    @Override
+    @Transactional(readOnly = false)
+    public Message delete( String[] vouchers) {
+        if (EmptyUtil.Companion.isNullOrEmpty(vouchers)) {
+            return MessageUtil.createMessage(false, "删除申请失败!");
+        } else {
+            hisRefundConsumablesMapper.isDelete(vouchers);
+            return MessageUtil.createMessage(true, "删除申请成功!");
+        }
     }
 }

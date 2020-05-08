@@ -354,5 +354,18 @@ public class HisRefundConsumablesController extends BaseController {
     public Message saveHisRefundConsumablesInfo(HisRefundConsumables hisRefundConsumables) throws Exception {
         return hisTollRecordService.saveHisRefundConsumablesInfo(hisRefundConsumables);
     }
+    /**
+     *@Description
+     *@MethodName delete
+     *@Params [hisRefundConsumables]
+     *@return core.message.Message
+     *@Author XJP
+     *@Date 2020/5/8
+     *@Time 10:57
+    **/
+    @PostMapping("refund/delete.ahsj")
+    public Message delete(@RequestParam("vouchers") String[] vouchers) throws Exception {
+        return hisRefundConsumablesService.delete(vouchers);
+    }
 
 }

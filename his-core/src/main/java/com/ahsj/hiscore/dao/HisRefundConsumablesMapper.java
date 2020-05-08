@@ -5,6 +5,7 @@ import com.ahsj.hiscore.entity.HisRefundConsumables;
 import com.ahsj.hiscore.entity.HisRefundProject;
 import core.entity.PageBean;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -78,6 +79,17 @@ public interface HisRefundConsumablesMapper extends BaseMapper<HisRefundConsumab
      *@Time 16:35
     **/
     int updateByIsDelete(List<HisRefundConsumables> hisRefundConsumablesList);
+    
+    /**
+     *@Description 
+     *@MethodName updateByVoucherIsDelete
+     *@Params [hisRefundConsumables]
+     *@return int
+     *@Author XJP
+     *@Date 2020/5/8
+     *@Time 16:55
+    **/
+    int updateByVoucherIsDelete(HisRefundConsumables hisRefundConsumables);
 
     /**
      *@Description
@@ -89,4 +101,15 @@ public interface HisRefundConsumablesMapper extends BaseMapper<HisRefundConsumab
      *@Time 12:41
     **/
     List<HisRefundConsumables> queryByNotBack(String recordNumber);
+
+    /**
+     *@Description
+     *@MethodName isDelete
+     *@Params [hisRefundConsumables]
+     *@return int
+     *@Author XJP
+     *@Date 2020/5/8
+     *@Time 11:02
+    **/
+    int isDelete(@Param("vouchers") String[] vouchers);
 }

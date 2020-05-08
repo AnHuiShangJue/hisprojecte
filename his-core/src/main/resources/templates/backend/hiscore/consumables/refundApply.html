@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:ahsj="http://www.anhuishangjue.com"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <div th:replace="public/base_list :: html"></div>
 <!--vertical-layout：垂直居中 vertical-menu-collapsible：可折叠导航菜单 page-header-light：浅色标题 data-open="click"：点击时打开你的数据-->
@@ -8,12 +9,15 @@
 
 <!--在这个地方实现查询重置类的操作-->
 <div class="row">
-    <div class="breadcrumbs-inline pt-3 pb-1" id="breadcrumbs-wrapper"><!--这个div的作用是将Home Table 以及DataTable从竖着排列变为横着排列且有一定的格式-->
+    <div class="breadcrumbs-inline pt-3 pb-1" id="breadcrumbs-wrapper">
+        <!--这个div的作用是将Home Table 以及DataTable从竖着排列变为横着排列且有一定的格式-->
         <!-- Search for small screen-->
         <div class="container"><!--container是一个容器-->
             <div class="row"><!--row代表一行 一行有12列 s代表小屏幕一般指手机 m代表平板设备 l代表桌面设备一般指电脑 xl代表大型桌面设备一般指屏幕分辨率较大的电脑，这种叫响应式布局。-->
-                <div class="col s10 m6 l6 breadcrumbs-left"><!--col s10 m6 l6 行中一定要有列col s10 m6 l6 代表在各个类型的设备所占的位置（总共位置为12）-->
-                    <h5 class="breadcrumbs-title mt-0 mb-0 display-inline hide-on-small-and-down">DataTable</h5><!--hide-on-small-and-down：隐藏小型设备（手机）以及一下屏幕的内容-->
+                <div class="col s10 m6 l6 breadcrumbs-left">
+                    <!--col s10 m6 l6 行中一定要有列col s10 m6 l6 代表在各个类型的设备所占的位置（总共位置为12）-->
+                    <h5 class="breadcrumbs-title mt-0 mb-0 display-inline hide-on-small-and-down">DataTable</h5>
+                    <!--hide-on-small-and-down：隐藏小型设备（手机）以及一下屏幕的内容-->
                     <ol class="breadcrumbs mb-0">
                         <li class="breadcrumb-item"><a href="index.html">Home</a>
                         </li>
@@ -26,11 +30,13 @@
                 <div class="col s2 m6 l6"><!--这个col s2 m6 l6与上面的对应要保证加起来一行12列被占满--><a
                         class="btn btn-floating dropdown-settings waves-effect waves-light breadcrumbs-btn right"
                         href="#!" data-target="dropdown1"><i class="material-icons">expand_more </i><i
-                        class="material-icons right">arrow_drop_down</i></a><!--dropdown下拉   material-icons按钮凸起  btn-floating按钮漂浮-->
+                        class="material-icons right">arrow_drop_down</i></a>
+                    <!--dropdown下拉   material-icons按钮凸起  btn-floating按钮漂浮-->
                     <ul class="dropdown-content" id="dropdown1" tabindex="0">
                         <li tabindex="0"><a class="grey-text text-darken-2"
                                             href="user-profile-page.html">Profile<span
-                                class="new badge red">2</span></a></li><!--badge：徽章 用于通知您有新的或未读的消息或通知 将new类添加 到徽章以为其提供背景 red标识背景为红色-->
+                                class="new badge red">2</span></a></li>
+                        <!--badge：徽章 用于通知您有新的或未读的消息或通知 将new类添加 到徽章以为其提供背景 red标识背景为红色-->
                         <li tabindex="0"><a class="grey-text text-darken-2" href="app-contacts.html">Contacts</a>
                         </li>
                         <li tabindex="0"><a class="grey-text text-darken-2" href="page-faq.html">FAQ</a></li>
@@ -50,23 +56,27 @@
                             <div class="row">
                                 <div class="col input-field s2 m2 l2 xl2">
                                     <input id="recordNumber" name="recordNumber" type="text"/>
-                                    <label for="recordNumber">就诊记录编号<span style="font-size: 12px">(Visit record number)</span></label>
+                                    <label for="recordNumber">就诊记录编号<span
+                                            style="font-size: 12px">(Visit record number)</span></label>
                                 </div>
                                 <div class="col input-field s2 m2 l2 xl2">
                                     <input id="voucher" name="voucher" type="text"/>
-                                    <label for="voucher">退耗材凭证<span style="font-size: 12px">(Return project certificate)</span></label>
+                                    <label for="voucher">退耗材凭证<span
+                                            style="font-size: 12px">(Return project certificate)</span></label>
                                 </div>
                                 <div class="col input-field s2 m2 l2 xl2">
-                                    <input id="drugsName" name="patientName" type="text"/>
-                                    <label for="drugsName">申请退耗材人姓名<span style="font-size: 12px">(Application for returnee name)</span></label>
+                                    <input id="patientName" name="patientName" type="text"/>
+                                    <label for="patientName">申请退耗材人姓名<span style="font-size: 12px">(Application for returnee name)</span></label>
                                 </div>
                                 <div class="input-field col s2">
-                                    <input type="text" id="consumablesDetailsCreateDates" class="datepicker" name="consumablesDetailsCreateDates"/>
+                                    <input type="text" id="consumablesDetailsCreateDates" class="datepicker"
+                                           name="consumablesDetailsCreateDates"/>
                                     <label for="consumablesDetailsCreateDates">申请时间下区间<span style="font-size: 12px">(Application time lower interval)</span></label>
                                 </div>
 
                                 <div class="input-field col s2">
-                                    <input type="text" id="consumablesDetailsCreateDate" class="datepicker" name="consumablesDetailsCreateDate"/>
+                                    <input type="text" id="consumablesDetailsCreateDate" class="datepicker"
+                                           name="consumablesDetailsCreateDate"/>
                                     <label for="consumablesDetailsCreateDate">申请时间上区间<span style="font-size: 12px">(Application time upper interval)</span></label>
                                 </div>
 
@@ -76,7 +86,7 @@
 
                     <div class="row">
                         <div class="col s2 m2 l2 xl2 offset-l1"><!--offset-l1代表在l屏幕内偏移一位-->
-                            <a  class="waves-effect waves-light btn" id="searchBtn"><i
+                            <a class="waves-effect waves-light btn" id="searchBtn"><i
                                     class="material-icons  white-text tooltipped " data-position="bottom"
                                     data-delay="50" data-tooltip="搜索">search</i></a>
                             <a id="resetBtn" class="waves-effect waves-light btn"><i
@@ -94,7 +104,7 @@
                             </h4><label style="color:black">Console</label>
                             <div class="row">
                                 <div class="col s3 m3 l3 xl3 offset-xl9">
-                                    <a  id="createBtn" class="btn waves-effect waves-light red"><i
+                                    <a id="createBtn" class="btn waves-effect waves-light red"><i
                                             class="material-icons  white-text tooltipped " data-position="bottom"
                                             data-delay="50" data-tooltip="耗材退回申请创建">add</i></a>
                                     <a id="btnDeleteMany"
@@ -121,6 +131,9 @@
 <div th:replace="public/base_list_script :: html"></div>
 
 <script type="text/javascript">
+
+
+
     var grid = new Datatable();
     $(document).ready(function () {
         initBtn();
@@ -152,11 +165,11 @@
                         "orderable": false,
                         "className": "center-align"/*center-align代表中心对齐*/
                     },
-                   /* {
-                        "title": "交易流水号",
-                        "data": "tollRecordNumber",
-                        "name": "toll_record_number"
-                    },*/
+                    /* {
+                         "title": "交易流水号",
+                         "data": "tollRecordNumber",
+                         "name": "toll_record_number"
+                     },*/
                     {
                         "title": "就诊编号",
                         "data": "recordNumber",
@@ -177,7 +190,7 @@
                         "data": "createDate",
                         "name": "create_date"
                     },
-                   {
+                    {
                         "title": "审核状态",
                         "data": "isReviewName",
                         "name": "is_review"
@@ -206,7 +219,7 @@
                     }
                 ],
                 "order": [
-                    [1, 'desc']
+                    [4, 'desc']
                 ]
             }
         });
@@ -218,6 +231,7 @@
         var url = CTX + "/api/returnDrug/update/index.ahsj?token=" + TOKEN + "&id=" + id;
         dialog.show(url, "修改退药申请信息");
     }
+
     function review(voucher) {
         var url = CTX + "/api/returnDrug/review/index.ahsj?token=" + TOKEN + "&voucher=" + voucher;
         dialog.show(url, "退药审核");
@@ -229,41 +243,39 @@
         dialog.show(url, "退耗材申请详细信息");
     }
 
-    function deleteInit(voucher,isReviewName) {
+    function deleteInit(voucher, isReviewName) {
 
 
-            var vouchers = [];
+        var vouchers = [];
         vouchers.push(voucher);
-            dialog.confirm('确定删除?', function (index, layero) {
-                $.ahsjajax(CTX + "/api/hisProject/refund/delete.ahsj",
-                    {"vouchers": vouchers},
-                    function (msg) {
-                        if (msg.success) {
-                            swal.close();
-                            M.toast({
-                                html: msg.message, completeCallback: function () {
-                                }
-                            });
-                            grid.search();
-                        } else {
-                            M.toast({
-                                html: msg.message, completeCallback: function () {
-                                }
-                            });
-                        }
-                    },
-                    function (data) {
+        dialog.confirm('确定删除?', function (index, layero) {
+            $.ahsjajax(CTX + "/api/hisRefundConsumables/refund/delete.ahsj",
+                {"vouchers": vouchers},
+                function (msg) {
+                    if (msg.success) {
+                        swal.close();
                         M.toast({
-                            html: "网络异常", completeCallback: function () {
+                            html: msg.message, completeCallback: function () {
+                            }
+                        });
+                        grid.search();
+                    } else {
+                        M.toast({
+                            html: msg.message, completeCallback: function () {
                             }
                         });
                     }
-                );
-            });
+                },
+                function (data) {
+                    M.toast({
+                        html: "网络异常", completeCallback: function () {
+                        }
+                    });
+                }
+            );
+        });
 
     }
-
-
 
 
     function initBtn() {
@@ -280,7 +292,6 @@
             }
             setDisable(ids.join(','));
         });
-
 
 
         $("#btnDeleteMany").click(function () {
@@ -301,7 +312,7 @@
         });
     }
 
-    $("input").change(function(){
+    $("input").change(function () {
         $(this).val($(this).val().trim());
     });
 </script>

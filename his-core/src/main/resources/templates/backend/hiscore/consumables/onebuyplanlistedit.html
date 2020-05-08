@@ -288,7 +288,8 @@
     function initBtn() {
         //批量添加按钮
         $("#btnAddtoList").click(function () {
-            var ids = grid.getSelectedRows();
+           /* var ids = grid.getSelectedRows();
+
             if (ids.length == 0) {
                 dialog.warn("请至少选择一条数据");
                 return;
@@ -312,6 +313,36 @@
                             "id": json.data[j].ids,
                             "name": json.data[j].name,
                             "spec": json.data[j].spec
+                        }
+                    }
+                }
+            }*/
+
+            var ids = grid.getSelectedRows();
+            if (ids.length == 0) {
+                dialog.warn("请至少选择一条数据");
+                return;
+            }
+            var json = grid.getDataTable().ajax.json();
+            var selectRowsIds = gridEnterList.getIds();
+            var tmps = [];
+            if (selectRowsIds.length !== 0) {
+                for (var i = 0; i < ids.length; i++) {
+                    for (var k = 0; k < selectRowsIds.length; k++) {
+                        if (ids[i] == selectRowsIds[k]) {
+                            delete(ids[i]);
+                        }
+                    }
+                }
+            }
+            for (var i = 0; i < ids.length; ++i) {
+                for (var j = 0; j < json.data.length; j++) {
+                    if (undefined !== ids[i] && '' !== ids[i] && null != ids[i] && json.data[j].id == ids[i]) {
+                        tmps[i] = {
+                            "id": json.data[j].id,
+                            "name": json.data[j].name,
+                            "spec": json.data[j].spec,
+                            "price": json.data[j].price
                         }
                     }
                 }

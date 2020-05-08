@@ -102,6 +102,9 @@ public interface HisRefundConsumablesService {
      **/
     int updateByIsDelete(List<HisRefundConsumables> hisRefundConsumablesList) throws Exception;
 
+
+
+
     /**
      *@Description
      *@MethodName insertList
@@ -112,4 +115,15 @@ public interface HisRefundConsumablesService {
      *@Time 12:48
     **/
     int insertList(List<HisRefundConsumables> consumablesList) throws Exception;
+
+    /**
+     *@Description
+     *@MethodName delete
+     *@Params [hisRefundConsumables]
+     *@return core.message.Message
+     *@Author XJP
+     *@Date 2020/5/8
+     *@Time 11:05
+    **/
+    Message delete( String[] vouchers);
 }

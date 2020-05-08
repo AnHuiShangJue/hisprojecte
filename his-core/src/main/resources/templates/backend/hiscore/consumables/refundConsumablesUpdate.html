@@ -55,8 +55,8 @@
                                     <label for="name">请输入耗材名<span style="font-size: 12px">(Please enter the project name)</span></label>
                                 </div>
                                 <div class="col input-field s3 m3 l3 xl3">
-                                    <input id="number" name="number" type="text"/>
-                                    <label for="number">请输入耗材编码<span style="font-size: 12px">(Please enter the project code)</span></label>
+                                    <input id="consumablesCode" name="consumablesCode" type="text"/>
+                                    <label for="consumablesCode">请输入耗材编码<span style="font-size: 12px">(Please enter the project code)</span></label>
                                 </div>
                             </div>
                         </form>
@@ -429,7 +429,7 @@
 
         //提交按钮
         $("#BtnMediEnter").click(function () {
-            dialog.confirm('确定申请退项目?', function (index, layero) {
+            dialog.confirm('确定申请退耗材?', function (index, layero) {
                 // var expectedTime = $('#timeForm').serialize();
                 ids = gridEnterList.getIds();
                 var nums = gridEnterList.gernums();

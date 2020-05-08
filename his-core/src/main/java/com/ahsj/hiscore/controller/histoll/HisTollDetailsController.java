@@ -112,7 +112,6 @@ public class HisTollDetailsController extends BaseController {
         if (!EmptyUtil.Companion.isNullOrEmpty(hisHospitalManage)) {
             hisTollDetails.setMedicalRecordId(hisHospitalManage.getMedicalNumber());
             hisTollDetailsPageBean.setParameter(hisTollDetails);
-            System.out.println(hisTollDetailsService.listByMecordId(hisTollDetailsPageBean));
             return hisTollDetailsService.listByMecordId(hisTollDetailsPageBean);
         } else {
             hisTollDetailsPageBean.setData(new ArrayList<HisTollDetails>());

@@ -336,6 +336,13 @@
         <if test="parameter.medicalRecordNumber != null and parameter.medicalRecordNumber != ''">
             and medical_record_number =#{parameter.medicalRecordNumber,jdbcType=VARCHAR}
         </if>
+        <if test="parameter.name != null and parameter.name != ''">
+            and name like concat('%' #{parameter.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.consumablesCode != null and parameter.consumablesCode != ''">
+            and consumables_code like concat('%' #{parameter.consumablesCode,jdbcType=VARCHAR},'%')
+        </if>
+
         GROUP BY consumables_code
         <if test="parameter.orders != null and parameter.orders != ''">
             order by ${parameter.orders}
@@ -351,7 +358,13 @@
         hc.record_consumables_code
         where hrc.is_delete = 0 and hc.is_delete = 0 and hrc.voucher = #{parameter.voucher,jdbcType=VARCHAR}
         <if test="parameter.medicalRecordNumber != null and parameter.medicalRecordNumber != ''">
-            and medical_record_number =#{parameter.medicalRecordNumber,jdbcType=VARCHAR}
+            and hc.medical_record_number =#{parameter.medicalRecordNumber,jdbcType=VARCHAR}
+        </if>
+        <if test="parameter.name != null and parameter.name != ''">
+            and hc.name like concat('%' #{parameter.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="parameter.consumablesCode != null and parameter.consumablesCode != ''">
+            and hc.consumables_code like concat('%' #{parameter.consumablesCode,jdbcType=VARCHAR},'%')
         </if>
         <if test="parameter.orders != null and parameter.orders != ''">
             order by ${parameter.orders}

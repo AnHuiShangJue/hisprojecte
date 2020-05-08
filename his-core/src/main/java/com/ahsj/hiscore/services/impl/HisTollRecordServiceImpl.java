@@ -37,6 +37,9 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
     HisTollDetailsService hisTollDetailsService;
 
     @Autowired
+    HisRefundConsumablesMapper hisRefundConsumablesMapper;
+
+    @Autowired
     HisChargeService hisChargeService;
 
     @Autowired
@@ -1263,7 +1266,11 @@ public class HisTollRecordServiceImpl implements HisTollRecordService {
             //查询申请退费并审核成功的为退费的数据
             List<HisRefundConsumables> hisRefundConsumablesList = hisRefundConsumablesService.queryByNotBack(hisRefundConsumables.getRecordNumber());
             //伪删
-            hisRefundConsumablesService.updateByIsDelete(hisRefundConsumablesList);
+            for (HisRefundConsumables refundConsumables : hisRefundConsumablesList) {
+                hisRefundConsumablesMapper.updateByVoucherIsDelete(refundConsumables);
+            }
+//            hisRefundConsumablesService.updateByIsDelete(hisRefundConsumablesList);
+
             //新增
             for (HisRefundConsumables refundConsumables : hisRefundConsumablesList) {
                 refundConsumables.setIsBack(Constants.HC_BACK_TRUE);
