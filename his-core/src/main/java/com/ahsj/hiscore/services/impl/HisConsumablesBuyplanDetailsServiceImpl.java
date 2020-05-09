@@ -286,7 +286,7 @@ public class HisConsumablesBuyplanDetailsServiceImpl implements HisConsumablesBu
     public List<HisConsumablesBuyplanDetails> selectByBuyplanforList(Long id) throws Exception {
         HisConsumablesBuyplan consumablesBuyplan = hisConsumablesBuyplanMapper.selectByPrimaryKey(id);
         if (!EmptyUtil.Companion.isNullOrEmpty(consumablesBuyplan)) {
-            List<HisConsumablesBuyplanDetails> hisConsumablesBuyplanDetails = hisConsumablesBuyplanDetailsMapper.selectByBuyplanforList(consumablesBuyplan.getBuyplanCode());
+            List<HisConsumablesBuyplanDetails> hisConsumablesBuyplanDetails = hisConsumablesBuyplanDetailsMapper.selectByBuyplanforList(consumablesBuyplan);
             if (!EmptyUtil.Companion.isNullOrEmpty(hisConsumablesBuyplanDetails)) {
                 return CodeHelper.getInstance().setCodeValue(hisConsumablesBuyplanDetails);
             }

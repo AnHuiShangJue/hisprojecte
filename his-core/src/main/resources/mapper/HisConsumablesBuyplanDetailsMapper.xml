@@ -210,13 +210,18 @@
   </select>
 
 
-  <select id="selectByBuyplanforList" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByBuyplanforList" parameterType="com.ahsj.hiscore.entity.HisConsumablesBuyplan" resultMap="BaseResultMap">
     SELECT
      <include refid="Base_Column_List"/>
     FROM
       his_consumables_buyplan_details
     where
     buyplan_code = #{buyplanCode,jdbcType=VARCHAR} AND is_delete = 0
+
+
+    <if test="name != null and name != ''">
+      and name like concat('%' #{name,jdbcType=VARCHAR},'%')
+    </if>
   </select>
 
 

@@ -1,5 +1,6 @@
 package com.ahsj.hiscore.dao;
 
+import com.ahsj.hiscore.entity.HisConsumablesBuyplan;
 import com.ahsj.hiscore.entity.HisConsumablesBuyplanDetails;
 import core.entity.PageBean;
 import org.apache.ibatis.annotations.Mapper;
@@ -55,7 +56,7 @@ public interface HisConsumablesBuyplanDetailsMapper {
      *@Date 2020/4/24
      *@Time 17:41
     **/
-    List<HisConsumablesBuyplanDetails> selectByBuyplanforList(String buyplanCode);
+    List<HisConsumablesBuyplanDetails> selectByBuyplanforList(HisConsumablesBuyplan consumablesBuyplan);
 
     int deleteByBuyplanCode(String buyplanCode);
 
