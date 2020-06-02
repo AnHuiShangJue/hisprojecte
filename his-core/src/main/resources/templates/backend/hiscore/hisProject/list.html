@@ -144,6 +144,19 @@
                                        class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
                                             class="material-icons white-text tooltipped" data-position="bottom"
                                             data-delay="50" data-tooltip="导入">file_upload</i></a>
+
+
+
+                                    <a  id="setDownloadManyBtn1"
+                                        class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
+                                            class="material-icons white-text tooltipped" data-position="bottom"
+                                            data-delay="50" data-tooltip="导出11">file_download</i></a>
+                                    <a  id="setDownloadManyBtn2"
+                                        class="btn waves-effect waves-light red offset-s1 offset-l1 offset-xl1 offset-m1"><i
+                                            class="material-icons white-text tooltipped" data-position="bottom"
+                                            data-delay="50" data-tooltip="导出22">file_download</i></a>
+
+
                                 </div>
                             </div>
                             <!--Form Advance-->
@@ -389,6 +402,76 @@
                     var param = "km";
                     var url =   CTX + "/api/hisProject/exportExcel.ahsj?token="+ TOKEN+"&pinyinCode="+pinyinCode+"&isEnable="+isEnable+"&param="+ param+"&idsData="+idsData
                         +"&name="+name+"&number="+number+"&type="+type;
+                    window.location=url;
+
+                });
+            });
+
+        $("#setDownloadManyBtn1").click(function () {
+                layer.confirm('选择导出中文还是英文(Choose to export Chinese or English)？', {
+                    btn: ['中文(Chinese)','英文(English)']
+                }, function(){
+                    var ids = grid.getSelectedRows();
+                    var idsData = ids.join(',');
+                    var hisProject = strToObj($("#searchForm").serialize());
+                    var pinyinCode =hisProject.pinyinCode;
+                    var isEnable =hisProject.isEnable;
+                    var name =hisProject.name;
+                    var number =hisProject.number;
+                    var type =hisProject.type;
+                    //var departmentId =hisProject.departmentId;
+                    var param = "ch";
+                    var url =   CTX + "/api/summary/medicationExportExcel.ahsj?token="+ TOKEN;
+
+                    window.location=url;
+
+                }, function(){
+                    var hisProject = strToObj($("#searchForm").serialize());
+                    var pinyinCode =hisProject.pinyinCode;
+                    var isEnable =hisProject.isEnable;
+                    var name =hisProject.name;
+                    var number =hisProject.number;
+                    var type =hisProject.type;
+                  //  var departmentId =hisProject.departmentId;
+                    var ids = grid.getSelectedRows();
+                    var idsData = ids.join(',');
+                    var param = "km";
+                    var url =   CTX + "/api/summary/medicationExportExcel.ahsj?token="+ TOKEN;
+                    window.location=url;
+
+                });
+            });
+
+        $("#setDownloadManyBtn2").click(function () {
+                layer.confirm('选择导出中文还是英文(Choose to export Chinese or English)？', {
+                    btn: ['中文(Chinese)','英文(English)']
+                }, function(){
+                    var ids = grid.getSelectedRows();
+                    var idsData = ids.join(',');
+                    var hisProject = strToObj($("#searchForm").serialize());
+                    var pinyinCode =hisProject.pinyinCode;
+                    var isEnable =hisProject.isEnable;
+                    var name =hisProject.name;
+                    var number =hisProject.number;
+                    var type =hisProject.type;
+                    //var departmentId =hisProject.departmentId;
+                    var param = "ch";
+                    var url =   CTX + "/api/summary/pharmacyExportExcel.ahsj?token="+ TOKEN;
+
+                    window.location=url;
+
+                }, function(){
+                    var hisProject = strToObj($("#searchForm").serialize());
+                    var pinyinCode =hisProject.pinyinCode;
+                    var isEnable =hisProject.isEnable;
+                    var name =hisProject.name;
+                    var number =hisProject.number;
+                    var type =hisProject.type;
+                  //  var departmentId =hisProject.departmentId;
+                    var ids = grid.getSelectedRows();
+                    var idsData = ids.join(',');
+                    var param = "km";
+                    var url =   CTX + "/api/summary/pharmacyExportExcel.ahsj?token="+ TOKEN;
                     window.location=url;
 
                 });

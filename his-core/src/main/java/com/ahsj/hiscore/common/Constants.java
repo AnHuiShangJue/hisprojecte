@@ -110,6 +110,10 @@ public class Constants {
     public static final String HIS_SYS_IS_ENABLE = "is_enable";
     public static final String HIS_SYS_ASSIT_PROJECT_TYPE = "assit_project_type";
 
+    //导出
+    public static final String HIS_SYS_MEDICATIONEXPORTEXCEL_FILE_URL = resourseUrl.getJarResourcesPaths() + "/templates/excel/export/medicationexportexcel.xlsx";
+    public static final String HIS_SYS_PHARMACYEXPORTEXCEL_FILE_URL = resourseUrl.getJarResourcesPaths() + "/templates/excel/export/pharmacyExportExcels.xlsx";
+
 
     //项目
     public static final String HIS_SYS_EXCEL_PROJECT_CH_FILE_URL = resourseUrl.getJarResourcesPaths() + "/templates/excel/export/hisproject_CH.xlsx";

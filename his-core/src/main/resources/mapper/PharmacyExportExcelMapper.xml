@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahsj.hiscore.dao.PharmacyExportExcelMapper">
+
+    <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.dto.PharmacyExportExcel">
+        <result column="create_time"  property="createTime"/>
+        <result column="create_user_id"  property="createUserId"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_user_id"  property="updateUserId"/>
+
+        <result column="drugs_name"  property="drugsName"/>
+        <result column="drugs_numb"  property="drugsNumb"/>
+        <result column="enter_price"  property="enterPrice"/>
+        <result column="sale_price"  property="salePrice"/>
+        <result column="stock"  property="stock"/>
+        <result column="drugs_spec"  property="drugsSpec"/>
+        <result column="large_unit"  property="largeUnit"/>
+        <result column="small_unit"  property="smallUnit"/>
+        <result column="placeOrigin"  property="placeOrigin"/>
+        <result column="price_sum"  property="priceSum"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+
+    </sql>
+
+    <select id="pharmacyExportExcel" resultMap="BaseResultMap" parameterType="com.ahsj.hiscore.entity.dto.PharmacyExportExcel">
+
+        SELECT
+            drugs_name,
+            drugs_numb,
+            enter_price * stock as price_sum,
+            sale_price,
+            drugs_spec,
+            large_unit,
+            small_unit,
+            placeOrigin,
+            stock,
+            create_time
+        FROM
+            his_pharmacy_detail GROUP BY drugs_numb ORDER BY create_time
+    </select>
+</mapper>

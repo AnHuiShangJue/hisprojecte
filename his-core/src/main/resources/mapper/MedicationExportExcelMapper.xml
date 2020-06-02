@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahsj.hiscore.dao.MedicationExportExcelMapper">
+
+    <resultMap id="BaseResultMap" type="com.ahsj.hiscore.entity.dto.MedicationExportExcel">
+        <result column="create_date"  property="createDate"/>
+        <result column="create_user_id"  property="createUserId"/>
+        <result column="update_date" property="updateDate"/>
+        <result column="update_user_id"  property="updateUserId"/>
+
+        <result column="drugs_name"  property="drugsName"/>
+        <result column="drugs_numb"  property="drugsNumb"/>
+        <result column="enter_price"  property="enterPrice"/>
+        <result column="sale_price"  property="salePrice"/>
+        <result column="drugs_numb_count"  property="drugsNumbCount"/>
+        <result column="department_id"  property="departmentId"/>
+        <result column="drugs_spec"  property="drugsSpec"/>
+        <result column="large_unit"  property="largeUnit"/>
+        <result column="small_unit"  property="smallUnit"/>
+        <result column="placeOrigin"  property="placeOrigin"/>
+        <result column="price_sum"  property="priceSum"/>
+        <result column="name"  property="departmentName"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+
+    </sql>
+
+    <select id="medicationexportexcel" resultMap="BaseResultMap" parameterType="com.ahsj.hiscore.entity.dto.MedicationExportExcel">
+
+        SELECT hmd.drugs_name as drugs_name,
+               hmd.drugs_numb as drugs_numb,
+               sum(hmd.count) as drugs_numb_count,
+               hpd.enter_price as enter_price,
+               hpd.sale_price as sale_price,
+               hpd.department_id as department_id,
+               hpd.drugs_spec as drugs_spec,
+               hpd.large_unit as large_unit,
+               hpd.small_unit as small_unit,
+               hpd.placeOrigin as placeOrigin,
+               o.name as name ,
+               sum(hmd.count)* enter_price as price_sum,
+               htd.create_date
+        from his_toll_details htd
+                 LEFT JOIN his_medication_details as hmd on htd.target_id = hmd.id
+                 LEFT JOIN his_pharmacy_detail as hpd on hpd.drugs_numb = hmd.drugs_numb
+                 LEFT JOIN `his-userinfo-xjp`.organization as o on o.id = hpd.department_id
+        WHERE htd.type = 1
+        GROUP BY hmd.drugs_numb order by  htd.create_date
+    </select>
+</mapper>
