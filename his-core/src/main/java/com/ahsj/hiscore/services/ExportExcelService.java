@@ -38,4 +38,8 @@ public interface ExportExcelService  {
      *@Time 14:33
     **/
     void pharmacyExportExcel(HttpServletRequest request, HttpServletResponse response, HttpSession session, PharmacyExportExcel pharmacyExportExcel) throws IOException;
+
+    Double medicationListSum(MedicationExportExcel medicationExportExcel);
+
+    Double pharmacyListSum(PharmacyExportExcel pharmacyExportExcel);
 }

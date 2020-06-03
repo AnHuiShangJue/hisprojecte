@@ -46,6 +46,13 @@
                  LEFT JOIN his_pharmacy_detail as hpd on hpd.drugs_numb = hmd.drugs_numb
                  LEFT JOIN `his-userinfo-xjp`.organization as o on o.id = hpd.department_id
         WHERE htd.type = 1
+
+        <if test="lowTime != null ">
+            and htd.create_date &gt;= #{lowTime}
+        </if>
+        <if test="highTime != null ">
+            and htd.create_date &lt; #{highTime}
+        </if>
         GROUP BY hmd.drugs_numb order by  htd.create_date
     </select>
 </mapper>

@@ -60,6 +60,21 @@ public class hisFinanceController extends BaseController {
         return modelAndView;
     }
 
+    @RequestMapping("hismedicine/index.ahsj")
+    ModelAndView hismedicine(String token) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/hisFinance/medicineInfo");
+        modelAndView.addObject("title", "药品销售成本明细");
+        modelAndView.addObject("token", token);
+        return modelAndView;
+    }
+    @RequestMapping("pharmacy/index.ahsj")
+    ModelAndView pharmacy(String token) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("backend/hiscore/hisFinance/pharmacyInfoDetails");
+        modelAndView.addObject("title", "药品库存明细");
+        modelAndView.addObject("token", token);
+        return modelAndView;
+    }
+
 
     /**
      * @return java.math.BigDecimal

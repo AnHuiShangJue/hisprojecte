@@ -10,6 +10,7 @@ import com.ahsj.hiscore.entity.dto.PharmacyExportExcel;
 import com.ahsj.hiscore.entity.dto.Summary;
 import com.ahsj.hiscore.entity.sys.Organization;
 import com.ahsj.hiscore.services.ExportExcelService;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 
@@ -82,6 +84,31 @@ public class ExportExcelServiceImpl implements ExportExcelService {
         beans.put("pharmacyExportExcels", pharmacyExportExcels);
         JxlsUtil.export(request, response, psth, "药品库存明细", beans);
         return;
+    }
+
+
+    @Override
+    @Transactional(readOnly = true)
+    public Double medicationListSum(MedicationExportExcel medicationExportExcel) {
+        List<MedicationExportExcel> medicationexportexcels = medicationExportExcelMapper.medicationexportexcel(medicationExportExcel);
+        BigDecimal sum = new BigDecimal("0");
+        for (MedicationExportExcel medicationexport : medicationexportexcels) {
+           sum = sum.add(medicationexport.getPriceSum());
+        }
+        double newDouble = sum.doubleValue();
+        return newDouble;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Double pharmacyListSum(PharmacyExportExcel pharmacyExportExcel) {
+        List<PharmacyExportExcel> pharmacyExportExcels = pharmacyExportExcelMapper.pharmacyExportExcel(pharmacyExportExcel);
+        BigDecimal sum = new BigDecimal("0");
+        for (PharmacyExportExcel medicationexport : pharmacyExportExcels) {
+            sum = sum.add(medicationexport.getPriceSum());
+        }
+        double newDouble = sum.doubleValue();
+        return newDouble;
     }
 
 

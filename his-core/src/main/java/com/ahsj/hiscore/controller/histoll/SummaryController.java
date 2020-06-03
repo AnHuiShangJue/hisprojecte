@@ -10,15 +10,13 @@ import core.controller.BaseController;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import utils.EmptyUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 
 /**
  * @ClassName : SummaryController
@@ -49,7 +47,7 @@ public class SummaryController extends BaseController {
     @GetMapping("/medicationExportExcel.ahsj")
     @ResponseBody
     public void medicationExportExcel(HttpServletRequest request, MedicationExportExcel medicationExportExcel,
-                                      HttpServletResponse response, HttpSession session, String token) throws Exception {
+                                      HttpServletResponse response, HttpSession session, String token, @RequestParam(value = "lowTime") Date lowTime, @RequestParam(value = "highTime") Date highTime) throws Exception {
 
         exportExcelService.medicationExportExcel(request, response, session, medicationExportExcel);
     }
@@ -66,10 +64,26 @@ public class SummaryController extends BaseController {
     @GetMapping("/pharmacyExportExcel.ahsj")
     @ResponseBody
     public void pharmacyExportExcel(HttpServletRequest request, PharmacyExportExcel pharmacyExportExcel,
-                                    HttpServletResponse response, HttpSession session, String token) throws Exception {
+                                    HttpServletResponse response, HttpSession session, String token, @RequestParam(value = "lowTime") Date lowTime, @RequestParam(value = "highTime") Date highTime) throws Exception {
 
         exportExcelService.pharmacyExportExcel(request, response, session, pharmacyExportExcel);
     }
 
+
+    @PostMapping("/medicationListSum.ahsj")
+    @ResponseBody
+    public Double medicationListSum(MedicationExportExcel medicationExportExcel) throws Exception {
+        Double aDouble = exportExcelService.medicationListSum(medicationExportExcel);
+        return aDouble;
+    }
+
+
+    @PostMapping("/pharmacyListSum.ahsj")
+    @ResponseBody
+    public Double pharmacyListSum(PharmacyExportExcel pharmacyExportExcel) throws Exception {
+
+        Double aDouble = exportExcelService.pharmacyListSum(pharmacyExportExcel);
+        return aDouble;
+    }
 
 }
