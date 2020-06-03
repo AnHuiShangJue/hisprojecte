@@ -1774,7 +1774,124 @@
         </if>
     </select>
 
+    <select id="selectByTimeCondition" parameterType="com.ahsj.hiscore.entity.dto.HisFinanceCondition" resultMap="BaseResultMap">
+        select type,sum(money) as money
+        from his_toll_details
+        where 1=1 and name != '住院押金充值'
+        and toll_record_id in (
+        select id
+        from his_toll_record
+        )
+        <if test="leftTime != null ">
+            and create_date &gt;= #{leftTime}
+        </if>
+        <if test="rightTime != null ">
+            and create_date &lt; #{rightTime}
+        </if>
+        group by type
+    </select>
+
+    <select id="getTotalByDay" parameterType="com.ahsj.hiscore.entity.dto.HisFinanceCondition" resultMap="BaseResultMap">
+        select date_format(create_date, '%Y-%m-%d') as create_date,type,sum(money) as money
+        from his_toll_details
+        where 1=1 and name != '住院押金充值'
+        and toll_record_id in (
+        select id
+        from his_toll_record
+        )
+        <if test="leftTime != null ">
+            and create_date &gt;= #{leftTime}
+        </if>
+        <if test="rightTime != null ">
+            and create_date &lt; #{rightTime}
+        </if>
+        group by date_format(create_date, '%Y-%m-%d'),type;
+    </select>
+
+    <select id="getInHospitalTotalByDay" parameterType="com.ahsj.hiscore.entity.dto.HisFinanceCondition" resultMap="BaseResultMap">
+        select date_format(create_date, '%Y-%m-%d') as create_date,type,sum(money) as money
+        from his_toll_details
+        where 1=1 and name != '住院押金充值'
+        and toll_record_id in (
+        select id
+        from his_toll_record
+        where medical_record_id in
+        (select medical_number
+        from his_hospital_manage
+        )
+        )
+        <if test="leftTime != null ">
+            and create_date &gt;= #{leftTime}
+        </if>
+        <if test="rightTime != null ">
+            and create_date &lt; #{rightTime}
+        </if>
+        group by date_format(create_date, '%Y-%m-%d'),type;
+    </select>
+
+
+    <select id="getNotInHospitalTotalByDay" parameterType="com.ahsj.hiscore.entity.dto.HisFinanceCondition" resultMap="BaseResultMap">
+        select date_format(create_date, '%Y-%m-%d') as create_date,type,sum(money) as money
+        from his_toll_details
+        where 1=1 and name != '住院押金充值'
+        and toll_record_id in (
+        select id
+        from his_toll_record
+        where medical_record_id not in
+        (select medical_number
+        from his_hospital_manage
+        )
+        )
+        <if test="leftTime != null ">
+            and create_date &gt;= #{leftTime}
+        </if>
+        <if test="rightTime != null ">
+            and create_date &lt; #{rightTime}
+        </if>
+        group by date_format(create_date, '%Y-%m-%d'),type;
+    </select>
 
 
 
+    <select id="getNotInhospitalTotal" parameterType="com.ahsj.hiscore.entity.dto.HisFinanceCondition" resultMap="BaseResultMap">
+        select type,sum(money) as money
+        from his_toll_details
+        where 1=1 and name != '住院押金充值'
+        and toll_record_id in (
+        select id
+        from his_toll_record
+        where medical_record_id not in
+        (select medical_number
+        from his_hospital_manage
+        )
+        )
+        <if test="leftTime != null ">
+            and create_date &gt;= #{leftTime}
+        </if>
+        <if test="rightTime != null ">
+            and create_date &lt; #{rightTime}
+        </if>
+        group by type
+    </select>
+
+    <select id="getInhospitalTotal" parameterType="com.ahsj.hiscore.entity.dto.HisFinanceCondition" resultMap="BaseResultMap">
+        select type,sum(money) as money
+        from his_toll_details
+        where 1=1 and name != '住院押金充值'
+        and toll_record_id in (
+        select id
+        from his_toll_record
+        where medical_record_id in
+        (select medical_number
+        from his_hospital_manage
+        )
+        )
+        <if test="leftTime != null ">
+            and create_date &gt;= #{leftTime}
+        </if>
+        <if test="rightTime != null ">
+            and create_date &lt; #{rightTime}
+        </if>
+        group by type
+    </select>
 </mapper>

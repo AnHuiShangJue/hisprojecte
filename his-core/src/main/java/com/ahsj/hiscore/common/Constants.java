@@ -159,6 +159,10 @@ public class Constants {
     public static final String HIS_SYS_EXCEL_HIS_CONSUMABLES_IMPORT_FILE_URL = resourseUrl.getJarResourcesPaths() +"/templates/excel/import/hisConsumables.xlsx";
     public static final String HIS_SYS_EXCEL_CONSUMABLES_KM_FILE_URL = resourseUrl.getJarResourcesPaths() +"/templates/excel/export/hisconsumables_EN.xlsx";
     public static final String HIS_SYS_EXCEL_CONSUMABLES_CH_FILE_URL = resourseUrl.getJarResourcesPaths() +"/templates/excel/export/hisconsumables_CH.xlsx";
+    //财务统计
+    public static final String HIS_SYS_EXCEL_GET_TOTAL_BY_DAY = resourseUrl.getJarResourcesPaths() +"/templates/excel/export/hisFinanceTotal.xlsx";
+    public static final String HIS_SYS_EXCEL_GET_INHOSPITAL_TOTAL_BY_DAY = resourseUrl.getJarResourcesPaths() +"/templates/excel/export/hisFinanceInHospitalTotal.xlsx";
+    public static final String HIS_SYS_EXCEL_GET_NOT_INHOSPITAL_TOTAL_BY_DAY = resourseUrl.getJarResourcesPaths() +"/templates/excel/export/hisFinanceNotInHospitalTotal.xlsx";
 
    //-------------------------------------------------------------------------------------------------------------------------
 

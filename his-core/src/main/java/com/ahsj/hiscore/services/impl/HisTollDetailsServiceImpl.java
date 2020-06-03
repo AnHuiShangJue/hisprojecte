@@ -8,6 +8,7 @@ import com.ahsj.hiscore.entity.HisMedicineInfo;
 import com.ahsj.hiscore.entity.HisTollDetails;
 import com.ahsj.hiscore.entity.HisTollRecord;
 import com.ahsj.hiscore.entity.Translate;
+import com.ahsj.hiscore.entity.dto.HisFinanceCondition;
 import com.ahsj.hiscore.feign.ITranslateService;
 import com.ahsj.hiscore.services.HisMedicineInfoService;
 import com.ahsj.hiscore.services.HisTollDetailsService;
@@ -438,5 +439,19 @@ public class HisTollDetailsServiceImpl implements HisTollDetailsService {
     public PageBean<HisTollDetails> queryByRecordConsumablesLists(PageBean<HisTollDetails> pageBean) {
         pageBean.setData(CodeHelper.getInstance().setCodeValue(hisTollDetailsMapper.queryByRecordConsumablesLists(pageBean)));
         return pageBean;
+    }
+
+    /**
+     *@Description  查询所有收入的费用（除挂号费）
+     *@Params [hisFinanceCondition]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisTollDetails>
+     *@Author zhushixiang
+     *@Date 2020-06-02
+     *@Time 10:03
+    **/
+    @Override
+    @Transactional(readOnly = true)
+    public List<HisTollDetails> selectByTimeCondition(HisFinanceCondition hisFinanceCondition) {
+        return hisTollDetailsMapper.selectByTimeCondition(hisFinanceCondition);
     }
 }

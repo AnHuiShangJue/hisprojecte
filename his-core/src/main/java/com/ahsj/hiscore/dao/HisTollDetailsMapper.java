@@ -3,6 +3,7 @@ package com.ahsj.hiscore.dao;
 import com.ahsj.hiscore.entity.HisHospitalManage;
 import com.ahsj.hiscore.entity.HisTollDetails;
 import com.ahsj.hiscore.entity.HisTollRecord;
+import com.ahsj.hiscore.entity.dto.HisFinanceCondition;
 import org.apache.ibatis.annotations.Mapper;
 import core.entity.PageBean;
 import org.apache.ibatis.annotations.Param;
@@ -129,4 +130,64 @@ public interface HisTollDetailsMapper extends BaseMapper<HisTollDetails> {
     List<HisTollDetails> listByNumberForLeave(String medicalRecordId);
 
     List<HisTollDetails> queryByRecordConsumablesLists(PageBean<HisTollDetails> pageBean);
+
+    /**
+     *@Description 查询所有收入的费用（除挂号费）
+     *@Params [hisFinanceCondition]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisTollDetails>
+     *@Author zhushixiang
+     *@Date 2020-06-02
+     *@Time 10:05
+    **/
+    List<HisTollDetails> selectByTimeCondition(HisFinanceCondition hisFinanceCondition);
+
+    /**
+     *@Description 根据条件按天统计费用
+     *@Params [hisFinanceCondition]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisTollDetails>
+     *@Author zhushixiang
+     *@Date 2020-06-02
+     *@Time 17:05
+    **/
+    List<HisTollDetails> getTotalByDay(HisFinanceCondition hisFinanceCondition);
+
+    /**
+     *@Description 获取指定时间段内医院住院收入总价
+     *@Params [hisFinanceCondition]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisTollDetails>
+     *@Author zhushixiang
+     *@Date 2020-06-03
+     *@Time 9:52
+    **/
+    List<HisTollDetails> getInhospitalTotal(HisFinanceCondition hisFinanceCondition);
+
+    /**
+     *@Description 获取指定时间段内医院门诊收入总价
+     *@Params [hisFinanceCondition]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisTollDetails>
+     *@Author zhushixiang
+     *@Date 2020-06-03
+     *@Time 11:23
+    **/
+    List<HisTollDetails> getNotInhospitalTotal(HisFinanceCondition hisFinanceCondition);
+
+    /**
+     *@Description 根据条件按天统计住院费用
+     *@Params [hisFinanceCondition]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisTollDetails>
+     *@Author zhushixiang
+     *@Date 2020-06-03
+     *@Time 11:29
+    **/
+    List<HisTollDetails> getInHospitalTotalByDay(HisFinanceCondition hisFinanceCondition);
+
+    /**
+     *@Description 根据条件按天统计住门诊费用
+     *@Params [hisFinanceCondition]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisTollDetails>
+     *@Author zhushixiang
+     *@Date 2020-06-03
+     *@Time 14:44
+    **/
+    List<HisTollDetails> getNotInHospitalTotalByDay(HisFinanceCondition hisFinanceCondition);
 }

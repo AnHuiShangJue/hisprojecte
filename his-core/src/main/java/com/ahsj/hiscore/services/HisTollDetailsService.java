@@ -1,6 +1,7 @@
 package com.ahsj.hiscore.services;
 
 import com.ahsj.hiscore.entity.HisTollDetails;
+import com.ahsj.hiscore.entity.dto.HisFinanceCondition;
 import core.entity.PageBean;
 import core.message.Message;
 
@@ -151,4 +152,14 @@ public interface HisTollDetailsService {
     BigDecimal listByNumberForLeave(String number);
 
     PageBean<HisTollDetails> queryByRecordConsumablesLists(PageBean<HisTollDetails> pageBean);
+
+    /**
+     *@Description 查询所有收入的费用（除挂号费）
+     *@Params [hisFinanceCondition]
+     *@return java.util.List<com.ahsj.hiscore.entity.HisTollDetails>
+     *@Author zhushixiang
+     *@Date 2020-06-02
+     *@Time 10:00
+    **/
+    List<HisTollDetails> selectByTimeCondition(HisFinanceCondition hisFinanceCondition);
 }
